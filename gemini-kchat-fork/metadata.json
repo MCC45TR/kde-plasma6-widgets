@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "kuuro.js@gmail.com",
+                "Name": "kuro"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "Quickly chat with Google's Gemini AI directly from your KDE desktop using Google AI Studio API",
+        "Icon": "internet-chat",
+        "Id": "com.github.kurojs.gemini-kchat",
+        "License": "LGPL-2.1+",
+        "Name": "Gemini-Kchat",
+        "Version": "1.2",
+        "Website": "https://github.com/kurojs/Gemini-Kchat"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

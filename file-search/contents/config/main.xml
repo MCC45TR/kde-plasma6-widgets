@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="displayMode" type="Int">
+      <default>0</default>
+      <label>Display Mode: 0=Wide, 1=Medium</label>
+    </entry>
+    <entry name="viewMode" type="Int">
+      <default>0</default>
+      <label>View Mode: 0=List, 1=Tile</label>
+    </entry>
+    <entry name="iconSize" type="Int">
+      <default>48</default>
+      <label>Tile Icon Size in pixels</label>
+    </entry>
+    <entry name="listIconSize" type="Int">
+      <default>22</default>
+      <label>List Icon Size in pixels</label>
+    </entry>
+  </group>
+</kcfg>

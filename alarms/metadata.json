@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "User",
+                "Email": "user@example.com"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "A simple Alarmlar widget",
+        "Icon": "preferences-system-windows",
+        "Id": "com.mcc45tr.alarms",
+        "Name": "Alarmlar",
+        "Version": "1.0",
+        "Website": "",
+        "License": "GPL-3.0+"
+    }
+}

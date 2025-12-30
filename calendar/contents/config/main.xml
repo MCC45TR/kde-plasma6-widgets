@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="GoogleIntegration">
+    <entry name="googleClientId" type="String">
+      <default></default>
+      <label>Google Client ID</label>
+    </entry>
+    <entry name="googleClientSecret" type="String">
+      <default></default>
+      <label>Google Client Secret</label>
+    </entry>
+    <entry name="googleApiKey" type="String">
+      <default></default>
+      <label>Google API Key</label>
+    </entry>
+    <entry name="googleCalendarId" type="String">
+      <default>primary</default>
+      <label>Google Calendar ID</label>
+    </entry>
+    <entry name="showLocalHolidays" type="Bool">
+      <default>false</default>
+      <label>Fetch local holidays from internet</label>
+    </entry>
+    <entry name="showEventsPanel" type="Bool">
+      <default>true</default>
+      <label>Show Events Panel</label>
+    </entry>
+    <entry name="showDummyEvents" type="Bool">
+      <default>false</default>
+      <label>Show Dummy Events for Testing</label>
+    </entry>
+  </group>
+</kcfg>

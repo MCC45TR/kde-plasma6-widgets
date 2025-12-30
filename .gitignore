@@ -1,14 +1,20 @@
-*.tar
-*.tar.*
-*.jar
-*.exe
-*.msi
-*.deb
-*.zip
-*.tgz
-*.log
-*.log.*
-*.sig
+# KDE / Qt build artifacts
+*.o
+*.so
+*.a
+*.moc
+*.qmlc
+*.jsc
 
-pkg/
-src/
+# CMake / build
+build/
+cmake-build-*/
+
+# Archives
+*.tar.gz
+*.zip
+
+# Editor / OS
+*.swp
+*~
+.DS_Store

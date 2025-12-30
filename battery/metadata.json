@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "User",
+                "Email": "user@example.com"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Laptop ve Bluetooth cihazlarının batarya durumunu gösterir",
+        "Icon": "battery",
+        "Id": "com.mcc45tr.battery",
+        "Name": "Batarya Durumu",
+        "Version": "1.0",
+        "Website": "",
+        "License": "GPL-3.0+"
+    }
+}
