@@ -12,9 +12,18 @@
         "Description": "A simple Sistem İzleme widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.systemmonitor",
-        "Name": "Sistem İzleme",
+        "Name": "System Monitor",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Sistem İzleyici",
+        "Name[de]": "Systemmonitor",
+        "Name[fr]": "Moniteur système",
+        "Name[ro]": "Monitor sistem",
+        "Name[cs]": "Sledování systému",
+        "Name[es]": "Monitor del sistema",
+        "Name[ru]": "Системный монитор",
+        "Name[pt]": "Monitor do sistema",
+        "Name[ja]": "システムモニター"
     }
 }

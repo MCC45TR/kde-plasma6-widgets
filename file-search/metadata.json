@@ -12,9 +12,18 @@
         "Description": "Windows 10 tarzında dosya arama widget'ı",
         "Icon": "system-search",
         "Id": "com.mcc45tr.filesearch",
-        "Name": "Dosya Bulucu",
+        "Name": "File Finder",
         "Version": "1.0.5",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Dosya Bulucu",
+        "Name[de]": "Dateisuche",
+        "Name[fr]": "Recherche de fichiers",
+        "Name[ro]": "Căutare fișiere",
+        "Name[cs]": "Hledání souborů",
+        "Name[es]": "Buscador de archivos",
+        "Name[ru]": "Поиск файлов",
+        "Name[pt]": "Localizador de arquivos",
+        "Name[ja]": "ファイル検索"
     }
 }

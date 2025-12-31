@@ -12,9 +12,11 @@
         "Description": "A simple Spotify widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.spotify",
-        "Name": "Spotify",
+        "Name": "Spotify Player",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Spotify Oynatıcı",
+        "Name[ja]": "Spotify プレーヤー"
     }
 }

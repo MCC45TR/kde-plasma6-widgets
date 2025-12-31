@@ -13,7 +13,16 @@
         "License": "GPL-3.0",
         "Name": "Advanced Reboot",
         "Version": "1.0",
-        "Website": ""
+        "Website": "",
+        "Name[tr]": "Gelişmiş Yeniden Başlatma",
+        "Name[de]": "Erweitertes Neustarten",
+        "Name[fr]": "Redémarrage avancé",
+        "Name[ro]": "Repornire avansată",
+        "Name[cs]": "Pokročilé restartování",
+        "Name[es]": "Reinicio avanzado",
+        "Name[ru]": "Расширенная перезагрузка",
+        "Name[pt]": "Reinicialização avançada",
+        "Name[ja]": "高度な再起動"
     },
     "KPackageStructure": "Plasma/Applet",
     "X-Plasma-API-Minimum-Version": "6.0"

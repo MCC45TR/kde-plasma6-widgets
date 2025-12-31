@@ -12,9 +12,18 @@
         "Description": "A simple Hava Durumu widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.weather",
-        "Name": "Hava Durumu",
+        "Name": "Weather",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Hava Durumu",
+        "Name[de]": "Wetter",
+        "Name[fr]": "Météo",
+        "Name[ro]": "Vremea",
+        "Name[cs]": "Počasí",
+        "Name[es]": "Clima",
+        "Name[ru]": "Погода",
+        "Name[pt]": "Clima",
+        "Name[ja]": "天気"
     }
 }

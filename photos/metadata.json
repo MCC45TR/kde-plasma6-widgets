@@ -12,9 +12,18 @@
         "Description": "A simple Fotoğraflar widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.photos",
-        "Name": "Fotoğraflar",
+        "Name": "Photos",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Fotoğraflar",
+        "Name[de]": "Fotos",
+        "Name[fr]": "Photos",
+        "Name[ro]": "Fotografii",
+        "Name[cs]": "Fotky",
+        "Name[es]": "Fotos",
+        "Name[ru]": "Фотографии",
+        "Name[pt]": "Fotos",
+        "Name[ja]": "写真"
     }
 }

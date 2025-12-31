@@ -12,9 +12,18 @@
         "Description": "A simple Dijital Saat widget",
         "Icon": "/icon.png",
         "Id": "com.mcc45tr.digitalclock",
-        "Name": "Dijital Saat",
+        "Name": "Digital Clock",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Dijital Saat",
+        "Name[de]": "Digitaluhr",
+        "Name[fr]": "Horloge numérique",
+        "Name[ro]": "Ceas digital",
+        "Name[cs]": "Digitální hodiny",
+        "Name[es]": "Reloj digital",
+        "Name[ru]": "Цифровые часы",
+        "Name[pt]": "Relógio digital",
+        "Name[ja]": "デジタル時計"
     }
 }

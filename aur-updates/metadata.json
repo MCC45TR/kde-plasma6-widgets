@@ -12,9 +12,18 @@
         "Description": "A simple AUR Güncellemeleri widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.aurupdates",
-        "Name": "AUR Güncellemeleri",
+        "Name": "AUR Updates",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "AUR Güncellemeleri",
+        "Name[de]": "AUR-Updates",
+        "Name[fr]": "Mises à jour AUR",
+        "Name[ro]": "Actualizări AUR",
+        "Name[cs]": "Aktualizace AUR",
+        "Name[es]": "Actualizaciones de AUR",
+        "Name[ru]": "Обновления AUR",
+        "Name[pt]": "Actualizações do AUR",
+        "Name[ja]": "AUR の更新"
     }
 }

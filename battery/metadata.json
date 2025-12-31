@@ -12,9 +12,18 @@
         "Description": "Laptop ve Bluetooth cihazlarının batarya durumunu gösterir",
         "Icon": "battery",
         "Id": "com.mcc45tr.battery",
-        "Name": "Batarya Durumu",
+        "Name": "Battery",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Pil",
+        "Name[de]": "Batterie",
+        "Name[fr]": "Batterie",
+        "Name[ro]": "Baterie",
+        "Name[cs]": "Baterie",
+        "Name[es]": "Batería",
+        "Name[ru]": "Батарея",
+        "Name[pt]": "Bateria",
+        "Name[ja]": "バッテリー"
     }
 }

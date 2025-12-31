@@ -12,9 +12,18 @@
         "Description": "A simple Takvim widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.calendar",
-        "Name": "Takvim",
+        "Name": "Calendar",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Takvim",
+        "Name[de]": "Kalender",
+        "Name[fr]": "Calendrier",
+        "Name[ro]": "Calendar",
+        "Name[cs]": "Kalendář",
+        "Name[es]": "Calendario",
+        "Name[ru]": "Календарь",
+        "Name[pt]": "Calendário",
+        "Name[ja]": "カレンダー"
     }
 }

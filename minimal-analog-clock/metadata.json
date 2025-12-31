@@ -14,6 +14,15 @@
         "Id": "com.github.mcc45tr.minimalanalogclock",
         "License": "GPL-3.0",
         "Name": "Minimal Analog Clock",
-        "Version": "1.0"
+        "Version": "1.0",
+        "Name[tr]": "Minimal Analog Saat",
+        "Name[de]": "Minimale Analoguhr",
+        "Name[fr]": "Horloge analogique minimale",
+        "Name[ro]": "Ceas analogic minimal",
+        "Name[cs]": "Minimální analogové hodiny",
+        "Name[es]": "Reloj analógico minimalista",
+        "Name[ru]": "Минималистичные аналоговые часы",
+        "Name[pt]": "Relógio analógico minimalista",
+        "Name[ja]": "ミニマルなアナログ時計"
     }
 }

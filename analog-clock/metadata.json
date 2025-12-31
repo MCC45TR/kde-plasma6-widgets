@@ -12,9 +12,18 @@
         "Description": "A simple Analog Saat widget",
         "Icon": "/icon.png",
         "Id": "com.mcc45tr.analogclock",
-        "Name": "Analog Saat",
+        "Name": "Analog Clock",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Analog Saat",
+        "Name[de]": "Analoguhr",
+        "Name[fr]": "Horloge analogique",
+        "Name[ro]": "Ceas analogic",
+        "Name[cs]": "Analogové hodiny",
+        "Name[es]": "Reloj analógico",
+        "Name[ru]": "Аналоговые часы",
+        "Name[pt]": "Relógio analógico",
+        "Name[ja]": "アナログ時計"
     }
 }

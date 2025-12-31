@@ -12,9 +12,18 @@
         "Description": "A simple Dünya Saati widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.worldclock",
-        "Name": "Dünya Saati",
+        "Name": "World Clock",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Dünya Saati",
+        "Name[de]": "Weltzeituhr",
+        "Name[fr]": "Horloge mondiale",
+        "Name[ro]": "Ceas mondial",
+        "Name[cs]": "Světový čas",
+        "Name[es]": "Reloj mundial",
+        "Name[ru]": "Мировое время",
+        "Name[pt]": "Relógio mundial",
+        "Name[ja]": "世界時計"
     }
 }

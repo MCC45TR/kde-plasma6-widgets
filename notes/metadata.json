@@ -12,9 +12,18 @@
         "Description": "A simple Notlar widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.notes",
-        "Name": "Notlar",
+        "Name": "Notes",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Notlar",
+        "Name[de]": "Notizen",
+        "Name[fr]": "Notes",
+        "Name[ro]": "Note",
+        "Name[cs]": "Poznámky",
+        "Name[es]": "Notas",
+        "Name[ru]": "Заметки",
+        "Name[pt]": "Notas",
+        "Name[ja]": "ノート"
     }
 }

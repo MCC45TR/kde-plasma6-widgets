@@ -12,9 +12,18 @@
         "Description": "A simple Etkinlikler widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.events",
-        "Name": "Etkinlikler",
+        "Name": "Events",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Etkinlikler",
+        "Name[de]": "Ereignisse",
+        "Name[fr]": "Événements",
+        "Name[ro]": "Evenimente",
+        "Name[cs]": "Události",
+        "Name[es]": "Eventos",
+        "Name[ru]": "События",
+        "Name[pt]": "Eventos",
+        "Name[ja]": "イベント"
     }
 }

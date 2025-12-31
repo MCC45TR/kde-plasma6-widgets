@@ -12,9 +12,18 @@
         "Description": "A simple Müzik widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.musicplayer",
-        "Name": "Müzik",
+        "Name": "Music Player",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Müzik Çalar",
+        "Name[de]": "Musikplayer",
+        "Name[fr]": "Lecteur de musique",
+        "Name[ro]": "Player muzical",
+        "Name[cs]": "Hudební přehrávač",
+        "Name[es]": "Reproductor de música",
+        "Name[ru]": "Музыкальный плеер",
+        "Name[pt]": "Reprodutor de música",
+        "Name[ja]": "音楽プレーヤー"
     }
 }

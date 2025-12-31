@@ -12,9 +12,18 @@
         "Description": "A simple Alarmlar widget",
         "Icon": "preferences-system-windows",
         "Id": "com.mcc45tr.alarms",
-        "Name": "Alarmlar",
+        "Name": "Alarms",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0"
+        "License": "GPL-3.0",
+        "Name[tr]": "Alarmlar",
+        "Name[de]": "Alarme",
+        "Name[fr]": "Alarmes",
+        "Name[ro]": "Alarme",
+        "Name[cs]": "Budíky",
+        "Name[es]": "Alarmas",
+        "Name[ru]": "Будильники",
+        "Name[pt]": "Alarmes",
+        "Name[ja]": "アラーム"
     }
 }
