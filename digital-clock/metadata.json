@@ -4,8 +4,8 @@
     "KPlugin": {
         "Authors": [
             {
-                "Name": "User",
-                "Email": "user@example.com"
+                "Name": "MCC45TR",
+                "Email": "mcc45tr@gmail.com"
             }
         ],
         "Category": "Utilities",
@@ -15,6 +15,6 @@
         "Name": "Dijital Saat",
         "Version": "1.0",
         "Website": "",
-        "License": "GPL-3.0+"
+        "License": "GPL-3.0"
     }
 }

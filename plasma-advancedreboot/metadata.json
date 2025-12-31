@@ -2,15 +2,15 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "info@example.com",
-                "Name": "MCC"
+                "Name": "MCC45TR",
+                "Email": "mcc45tr@gmail.com"
             }
         ],
         "Category": "System Information",
         "Description": "Advanced Reboot Options using bootctl",
         "Icon": "system-reboot",
         "Id": "com.mcc45tr.advancedreboot",
-        "License": "GPL-3.0+",
+        "License": "GPL-3.0",
         "Name": "Advanced Reboot",
         "Version": "1.0",
         "Website": ""

@@ -4,15 +4,15 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "mail@example.com",
-                "Name": "Your Name"
+                "Name": "MCC45TR",
+                "Email": "mcc45tr@gmail.com"
             }
         ],
         "Category": "Date and Time",
         "Description": "A minimal analog clock widget",
         "Icon": "preferences-system-time",
         "Id": "com.github.mcc45tr.minimalanalogclock",
-        "License": "GPL-2.0+",
+        "License": "GPL-3.0",
         "Name": "Minimal Analog Clock",
         "Version": "1.0"
     }
