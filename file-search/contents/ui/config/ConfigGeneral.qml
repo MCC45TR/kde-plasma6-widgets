@@ -20,7 +20,7 @@ Kirigami.FormLayout {
     ComboBox {
         id: modeCombo
         Kirigami.FormData.label: "Panel Görünümü:"
-        model: ["Geniş Mod (Arama çubuğu + ikon)", "Orta Mod (Sadece buton)", "Ekstra Geniş Mod (Geniş + Uzun Placeholder)"]
+        model: ["Düğme Modu (Sadece ikon)", "Orta Mod (Sadece buton)", "Geniş Mod (Arama çubuğu + ikon)", "Ekstra Geniş Mod (Geniş + Uzun Placeholder)"]
         Layout.fillWidth: true
     }
     
@@ -127,14 +127,38 @@ Kirigami.FormLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: 50
         
+        // Button Mode Preview (circular icon only)
+        Rectangle {
+            id: buttonModePreview
+            anchors.left: parent.left
+            width: 36
+            height: 36
+            radius: width / 2
+            color: Kirigami.Theme.backgroundColor
+            border.width: 1
+            border.color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
+            visible: modeCombo.currentIndex === 0
+            
+            Kirigami.Icon {
+                anchors.centerIn: parent
+                width: 18
+                height: 18
+                source: "plasma-search"
+                color: Kirigami.Theme.textColor
+            }
+        }
+        
+        // Other Modes Preview (text + icon)
         Rectangle {
             anchors.left: parent.left
-            width: modeCombo.currentIndex === 1 ? 70 : (modeCombo.currentIndex === 2 ? 260 : 180)
+            // 1=Medium (70), 2=Wide (180), 3=Extra Wide (260)
+            width: modeCombo.currentIndex === 1 ? 70 : (modeCombo.currentIndex === 3 ? 260 : 180)
             height: 36
             radius: height / 2
             color: Kirigami.Theme.backgroundColor
             border.width: 1
             border.color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
+            visible: modeCombo.currentIndex !== 0
             
             Behavior on width { NumberAnimation { duration: 200 } }
             
@@ -145,19 +169,21 @@ Kirigami.FormLayout {
                 spacing: 8
                 
                 Text {
-                    text: modeCombo.currentIndex === 1 ? "Ara" : (modeCombo.currentIndex === 2 ? "Arama yapmaya başla..." : "Arama yap...")
+                    // 1=Medium "Ara", 2=Wide "Arama yap...", 3=Extra Wide "Arama yapmaya başla..."
+                    text: modeCombo.currentIndex === 1 ? "Ara" : (modeCombo.currentIndex === 3 ? "Arama yapmaya başla..." : "Arama yap...")
                     color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
                     font.pixelSize: modeCombo.currentIndex !== 1 ? 14 : 12
                     Layout.fillWidth: true
-                    horizontalAlignment: modeCombo.currentIndex !== 1 ? Text.AlignLeft : Text.AlignHCenter
+                    horizontalAlignment: modeCombo.currentIndex === 1 ? Text.AlignHCenter : Text.AlignLeft
                 }
                 
+                // Search icon button (Wide and Extra Wide only)
                 Rectangle {
-                    Layout.preferredWidth: modeCombo.currentIndex !== 1 ? 28 : 0
+                    Layout.preferredWidth: (modeCombo.currentIndex === 2 || modeCombo.currentIndex === 3) ? 28 : 0
                     Layout.preferredHeight: 28
                     radius: 14
                     color: Kirigami.Theme.highlightColor
-                    visible: modeCombo.currentIndex !== 1
+                    visible: modeCombo.currentIndex === 2 || modeCombo.currentIndex === 3
                     
                     Behavior on Layout.preferredWidth { NumberAnimation { duration: 200 } }
                     

@@ -18,6 +18,7 @@ widgets=(
 "control-center"
 "system-monitor"
 "plasma-advancedreboot"
+"minimal-analog-clock"
 )
 
 BASE_DIR="/home/mcc45tr/Gitler/Projelerim/Plasma6Widgets"

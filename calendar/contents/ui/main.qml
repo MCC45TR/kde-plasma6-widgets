@@ -107,12 +107,12 @@ PlasmoidItem {
 
 
     fullRepresentation: Item {
-        Layout.preferredWidth: 400
-        Layout.preferredHeight: 240
-        Layout.minimumWidth: 200
-        Layout.minimumHeight: 200
+        Layout.preferredWidth: 200
+        Layout.preferredHeight: 200
+        Layout.minimumWidth: 180
+        Layout.minimumHeight: 180
         Layout.maximumWidth: 400
-        Layout.maximumHeight: 420
+        Layout.maximumHeight: 400
         
         Layout.fillWidth: true 
         Layout.fillHeight: true
@@ -162,10 +162,6 @@ PlasmoidItem {
                         
                         property var month1: root.getCalendarData(baseOffset)
                         property var month2: root.getCalendarData(baseOffset + 1)
-                        // Month 3:
-                        // Normal 2x2: offset + 2
-                        // 2x2 Events: Not shown (Events View) - but strictly speaking we don't need it.
-                        // Side Events: Not shown.
                         property var month3: root.getCalendarData(baseOffset + (background.showSecondCalendar ? 2 : 1))
                         property var month4: root.getCalendarData(baseOffset + (background.showSecondCalendar ? 3 : 2))
 
@@ -176,8 +172,8 @@ PlasmoidItem {
                             // --- 1. SATIR (Month 1 & Month 2) ---
                             RowLayout {
                                 Layout.fillWidth: true
-                                Layout.fillHeight: !background.isWideEventsMode
-                                Layout.preferredHeight: background.isWideEventsMode ? (background.extraEventsCount > 0 ? 160 : 200) : 1
+                                Layout.fillHeight: true
+                                Layout.preferredHeight: 1
                                 spacing: 10
 
                                 // Cal 1
@@ -276,7 +272,7 @@ PlasmoidItem {
 
                             // --- 2. SATIR (Month 3 & Month 4) ---
                             RowLayout {
-                                visible: background.showTwoRows && !background.isWideEventsMode
+                                visible: background.showTwoRows
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 Layout.preferredHeight: 1 // Weight 1 if visible
