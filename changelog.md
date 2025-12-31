@@ -10,6 +10,16 @@
     - Yapılandırma ekranı ve önizlemeler tamamen yenilendi ve senkron çeviri desteği eklendi.
     - Varsayılan görünüm modu "Dar" (Medium) ve varsayılan ikon boyutları (Liste: 22, Döşeme: 48) olarak güncellendi.
 
+### TR-TR
+- **Gemini KChat (Gelişmiş Destek)**:
+    - **Matematik Gösterimi**: `$$...$$` formatındaki matematiksel ifadeler için özel blok görünümü eklendi.
+    - **Model Seçimi**: Widget üzerinden anlık olarak Gemini modelleri (Flash, Pro vb.) arasında geçiş yapma özelliği getirildi.
+    - **Lokalizasyon**: Tam Türkçe dil desteği sağlandı (`localization.js`).
+    - **Dosya Ekleme**: Görsel ekleme butonu ve arayüzü eklendi (Multimodal hazırlığı).
+    - **Persona & Güvenlik**: Yapay zeka kişiliği belirleme ve güvenlik filtrelerini yönetme (Cookbook örnekli).
+    - **JSON Modu**: Çıktıyı yapılandırılmış veri olarak almak için JSON modu desteği.
+    - **Yapılandırma**: API anahtarı girişi ve özelliklerin anlatıldığı "Öğren" sekmesi eklendi.
+
 ### EN-US
 - **File Search Widget (Modularization & Improvements)**:
     - Entire UI refactored into modular QML components (`CompactView`, `ResultsListView`, `HistoryTileView`, etc.).
@@ -17,6 +27,16 @@
     - History management logic moved to a dedicated `HistoryManager.js` module.
     - Configuration screen and previews were completely revamped with synchronous translation support.
     - Updated default display mode to "Medium" (Narrow) and standardized default icon sizes (List: 22, Tile: 48).
+
+### EN-US
+- **Gemini KChat (Advanced Support)**:
+    - **Math Rendering**: Added custom block rendering for `$$...$$` mathematical expressions.
+    - **Model Selection**: Live switching between Gemini models (Flash, Pro, etc.) directly from the widget.
+    - **Localization**: Full localization support added (`localization.js`).
+    - **File Attach**: Added UI for attaching images (Multimodal prep).
+    - **Persona & Safety**: Custom system instructions and configurable safety filters.
+    - **JSON Mode**: Support for forced JSON output structure.
+    - **Configuration**: Enhanced settings with API Key input and a new "Learn" tab.
 
 ---
 

@@ -1,86 +1,73 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
     property alias cfg_apiKey: apiKeyField.text
-    property string cfg_selectedModel
+    property alias cfg_selectedModel: modelComboBox.currentText
+    // We can add panel icon config if we map it to something. 
+    // Plasma widgets usually use specific property or metadata. Main icon is in metadata.
+    // Changing metadata icon at runtime is hard, but we can change the wrapper icon in CompactRepresentation.
     
     Kirigami.FormLayout {
 
         QQC2.TextField {
             id: apiKeyField
-            Kirigami.FormData.label: i18nc("@label", "Google AI Studio API Key:")
-            placeholderText: i18nc("@info:placeholder", "Enter your API key here...")
+            Kirigami.FormData.label: "Google AI Studio API Key:"
+            placeholderText: "Enter your API key..."
             echoMode: TextInput.Password
             Layout.fillWidth: true
         }
 
         QQC2.ComboBox {
             id: modelComboBox
-            Kirigami.FormData.label: i18nc("@label", "Gemini Model:")
+            Kirigami.FormData.label: "Select Model:"
             Layout.fillWidth: true
             
-            property var modelOptions: [
-                "gemini-2.5-flash",
-                "gemini-2.5-pro", 
-                "gemini-2.5-flash-lite",
-                "gemini-2.0-flash",
-                "gemini-2.0-flash-lite"
+            textRole: "text"
+            valueRole: "value"
+            
+            model: [
+                { text: "Gemini 2.0 Flash (New)", value: "gemini-2.0-flash-exp", description: "Hız + Zeka Dengesi (Dinamik müşteri hizmetleri, gerçek zamanlı veri analizi)." },
+                { text: "Gemini 1.5 Pro", value: "gemini-1.5-pro", description: "Geniş Bağlam (2M+ Token) (Büyük döküman analizleri, tüm codebase'i anlama)." },
+                { text: "Gemini 1.5 Flash", value: "gemini-1.5-flash", description: "Düşük Maliyet & Kararlılık (Form işleme, özetleme, sınıflandırma)." },
+                { text: "Gemini 1.0 Pro", value: "gemini-1.0-pro", description: "Dengeli ve hızlı, genel kullanım için ideal." },
+                { text: "Gemma 2 (Geliştirici)", value: "gemma-2-9b-it", description: "Açık Kaynak / Hafif (Yerel denemeler ve cihaz üstü çözümler)." }
             ]
             
-            property var modelLabels: [
-                i18nc("@item:inlistbox", "Gemini 2.5 Flash (Recommended)"),
-                i18nc("@item:inlistbox", "Gemini 2.5 Pro"),
-                i18nc("@item:inlistbox", "Gemini 2.5 Flash-Lite"),
-                i18nc("@item:inlistbox", "Gemini 2.0 Flash"),
-                i18nc("@item:inlistbox", "Gemini 2.0 Flash-Lite")
-            ]
-            
-            model: modelLabels
-            
-            currentIndex: {
-                var index = modelOptions.indexOf(cfg_selectedModel);
-                return index >= 0 ? index : 0;
+            // Map current text to index
+            Component.onCompleted: {
+                for (var i = 0; i < model.length; i++) {
+                    if (model[i].value === cfg_selectedModel) {
+                        currentIndex = i;
+                        break;
+                    }
+                }
             }
             
             onActivated: {
-                if (currentIndex >= 0 && currentIndex < modelOptions.length) {
-                    cfg_selectedModel = modelOptions[currentIndex];
-                }
+                cfg_selectedModel = model[currentIndex].value
             }
         }
-
+        
         Kirigami.InlineMessage {
             Layout.fillWidth: true
             type: Kirigami.MessageType.Information
-            text: {
-                var descriptions = [
-                    i18nc("@info", "Best balance of speed and performance"),
-                    i18nc("@info", "Most advanced model with enhanced reasoning"),
-                    i18nc("@info", "Ultra-fast model optimized for cost-efficiency"),
-                    i18nc("@info", "Previous generation workhorse model"),
-                    i18nc("@info", "Previous generation lightweight model")
-                ];
-                return modelComboBox.currentIndex >= 0 && modelComboBox.currentIndex < descriptions.length 
-                    ? descriptions[modelComboBox.currentIndex] 
-                    : "";
-            }
-            visible: text.length > 0
+            text: modelComboBox.model[modelComboBox.currentIndex] ? modelComboBox.model[modelComboBox.currentIndex].description : ""
+            visible: true
         }
-
+        
         Kirigami.InlineMessage {
             Layout.fillWidth: true
             type: Kirigami.MessageType.Information
-            text: i18nc("@info", "Get your free API key from Google AI Studio")
+            text: "Get your free API key from Google AI Studio (aistudio.google.com)"
             actions: [
                 Kirigami.Action {
-                    text: i18nc("@action:button", "Open Google AI Studio")
+                    text: "Get Keys"
                     icon.name: "internet-services"
-                    onTriggered: Qt.openUrlExternally("https://makersuite.google.com/app/apikey")
+                    onTriggered: Qt.openUrlExternally("https://aistudio.google.com/app/apikey")
                 }
             ]
         }

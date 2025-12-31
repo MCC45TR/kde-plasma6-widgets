@@ -1,16 +1,20 @@
-/*
- *  SPDX-FileCopyrightText: 2020 Sora Steenvoort <sora@dillbox.me>
- *
- *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- */
-
-import QtQuick 2.0
-import org.kde.plasma.configuration 2.0
+import QtQuick
+import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-         name: i18nc("@title", "API Configuration")
-         icon: "network-connect"
-         source: "ConfigAppearance.qml"
+        name: i18n("Appearance") // TR: Görünüş
+        icon: "preferences-desktop-appearance"
+        source: "../ui/ConfigAppearance.qml"
+    }
+    ConfigCategory {
+        name: i18n("Persona & Safety")
+        icon: "actor-symbolic" // or "preferences-system-security"
+        source: "../ui/ConfigPersona.qml"
+    }
+    ConfigCategory {
+        name: i18n("Learn")
+        icon: "help-about"
+        source: "../ui/ConfigLearn.qml"
     }
 }
