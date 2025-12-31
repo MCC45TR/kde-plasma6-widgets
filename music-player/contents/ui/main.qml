@@ -20,14 +20,102 @@ PlasmoidItem {
     // Data Source
     // ---------------------------------------------------------
     Mpris.Mpris2Model { id: mpris2Model }
-    readonly property var currentPlayer: mpris2Model.currentPlayer
+    
+    // Configuration
+    readonly property string preferredPlayer: Plasmoid.configuration.preferredPlayer || ""
+    
+    // Player priority list (dedicated music players first, browsers last)
+    readonly property var playerPriority: [
+        "spotify", "elisa", "amarok", "clementine", "audacious", "rhythmbox", 
+        "lollypop", "strawberry", "cantata", "vlc", "mpv", "smplayer", 
+        "celluloid", "haruna", "totem", "kaffeine", "dragon",
+        "chromium", "chrome", "firefox", "brave", "edge", "opera", "vivaldi"
+    ]
+    
+    // Known app icons mapping
+    readonly property var appIcons: {
+        "spotify": "spotify",
+        "elisa": "elisa",
+        "vlc": "vlc",
+        "audacious": "audacious",
+        "rhythmbox": "rhythmbox",
+        "clementine": "clementine",
+        "strawberry": "strawberry",
+        "amarok": "amarok",
+        "lollypop": "lollypop",
+        "cantata": "cantata",
+        "mpv": "mpv",
+        "smplayer": "smplayer",
+        "celluloid": "celluloid",
+        "haruna": "haruna",
+        "totem": "totem",
+        "kaffeine": "kaffeine",
+        "dragonplayer": "dragonplayer",
+        "brave": "brave",
+        "firefox": "firefox",
+        "chromium": "chromium",
+        "chrome": "google-chrome",
+        "edge": "microsoft-edge",
+        "opera": "opera",
+        "vivaldi": "vivaldi"
+    }
+    
+    // Smart player selection
+    function getSmartPlayer() {
+        var playerCount = mpris2Model.rowCount()
+        if (playerCount === 0) return null
+        
+        // If user selected a specific player, try to find it
+        if (preferredPlayer !== "") {
+            for (var i = 0; i < playerCount; i++) {
+                var idx = mpris2Model.index(i, 0)
+                var player = mpris2Model.currentPlayer // We need to compare identities
+                // MPRIS2Model doesn't expose easy iteration, use currentPlayer for now
+            }
+            // If preferred player not found, return currentPlayer
+            // Note: MPRIS2Model in Plasma 6 uses currentPlayer which auto-selects
+            // We'll filter by identity match
+            var current = mpris2Model.currentPlayer
+            if (current && current.identity && current.identity.toLowerCase().includes(preferredPlayer.toLowerCase())) {
+                return current
+            }
+        }
+        
+        // For "Genel" mode or fallback, just use currentPlayer (MPRIS handles priority)
+        return mpris2Model.currentPlayer
+    }
+    
+    function getPlayerIcon(identity) {
+        if (!identity) return "multimedia-player"
+        var id = identity.toLowerCase()
+        for (var key in appIcons) {
+            if (id.includes(key)) return appIcons[key]
+        }
+        return "multimedia-player"
+    }
+    
+    // Reactively determine the smart player
+    property var currentPlayer: {
+        // If specific player is preferred
+        if (preferredPlayer !== "") {
+            var current = mpris2Model.currentPlayer
+            if (current && current.identity && current.identity.toLowerCase().includes(preferredPlayer.toLowerCase())) {
+                return current
+            }
+            return null // Preferred player not found/playing
+        }
+        
+        // General mode: Use whatever MPRIS provides as current
+        return mpris2Model.currentPlayer
+    }
     readonly property bool hasPlayer: !!currentPlayer
     readonly property bool isPlaying: currentPlayer ? currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : false
     readonly property string artUrl: currentPlayer ? currentPlayer.artUrl : ""
     readonly property bool hasArt: artUrl != ""
-    readonly property string title: currentPlayer ? currentPlayer.track : "Müzik Yok"
+    readonly property string title: currentPlayer ? currentPlayer.track : "Çalan Medya Yok"
     readonly property string artist: currentPlayer ? currentPlayer.artist : ""
     readonly property real length: currentPlayer ? currentPlayer.length : 0
+    readonly property string playerIdentity: currentPlayer ? currentPlayer.identity : preferredPlayer
     
     property real currentPosition: 0
     
@@ -51,6 +139,40 @@ PlasmoidItem {
             currentPlayer.Seek(micros - root.currentPosition)
             root.currentPosition = micros
         }
+    }
+    
+    // Desktop file mapping for app launching
+    readonly property var desktopFiles: {
+        "spotify": "spotify.desktop",
+        "elisa": "org.kde.elisa.desktop",
+        "vlc": "vlc.desktop",
+        "audacious": "audacious.desktop",
+        "rhythmbox": "org.gnome.Rhythmbox3.desktop",
+        "clementine": "clementine.desktop",
+        "strawberry": "org.strawberrymusicplayer.strawberry.desktop",
+        "amarok": "org.kde.amarok.desktop",
+        "lollypop": "org.gnome.Lollypop.desktop",
+        "cantata": "cantata.desktop",
+        "mpv": "mpv.desktop",
+        "smplayer": "smplayer.desktop",
+        "celluloid": "io.github.celluloid_player.Celluloid.desktop",
+        "haruna": "org.kde.haruna.desktop",
+        "totem": "org.gnome.Totem.desktop",
+        "kaffeine": "org.kde.kaffeine.desktop",
+        "dragonplayer": "org.kde.dragonplayer.desktop",
+        "brave": "brave-browser.desktop",
+        "firefox": "firefox.desktop",
+        "chromium": "chromium.desktop",
+        "chrome": "google-chrome.desktop",
+        "edge": "microsoft-edge.desktop",
+        "opera": "opera.desktop",
+        "vivaldi": "vivaldi-stable.desktop"
+    }
+    
+    function launchApp(appId) {
+        var desktopFile = desktopFiles[appId] || (appId + ".desktop")
+        // Use gtk-launch or kioclient5 for reliable desktop file launching
+        Qt.openUrlExternally("file:///usr/share/applications/" + desktopFile)
     }
 
     // ---------------------------------------------------------
@@ -177,6 +299,71 @@ PlasmoidItem {
                         visible: root.hasArt
                     }
                     
+                    // App Icon Badge (Top-Left)
+                    Rectangle {
+                        id: appIconBadge
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.margins: Math.max(8, parent.width * 0.04)
+                        width: Math.max(28, parent.width * 0.15)
+                        height: width
+                        radius: width / 2
+                        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.85)
+                        border.width: 2
+                        border.color: Qt.rgba(1, 1, 1, 0.2)
+                        visible: root.playerIdentity !== "" || root.hasPlayer
+                        z: 20
+                        
+                        Kirigami.Icon {
+                            anchors.centerIn: parent
+                            width: parent.width * 0.65
+                            height: width
+                            source: root.getPlayerIcon(root.playerIdentity)
+                            color: Kirigami.Theme.textColor
+                        }
+                    }
+                    
+                    // Click to launch app when no media
+                    MouseArea {
+                        anchors.fill: parent
+                        visible: !root.hasPlayer && root.preferredPlayer !== ""
+                        z: 15
+                        onClicked: {
+                            root.launchApp(root.preferredPlayer)
+                        }
+                    }
+
+                    // Empty/No Media Placeholder
+                    Item {
+                        anchors.fill: parent
+                        visible: !root.hasArt
+                        
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 10
+                            width: parent.width * 0.8
+                            
+                            Image {
+                                Layout.preferredWidth: parent.width * 0.5
+                                Layout.preferredHeight: Layout.preferredWidth
+                                Layout.alignment: Qt.AlignHCenter
+                                source: "../images/album.png"
+                                fillMode: Image.PreserveAspectFit
+                                opacity: 0.8
+                            }
+                            
+                            Text {
+                                text: "Çalan Medya Yok"
+                                font.family: "Roboto Condensed"
+                                font.bold: true
+                                font.pixelSize: 16
+                                color: Kirigami.Theme.textColor
+                                Layout.alignment: Qt.AlignHCenter
+                                visible: !fullRep.isWide && !fullRep.isLargeSq // In Wide/Large modes, title is shown in controls
+                            }
+                        }
+                    }
+                    
                     // Compact Overlays (Dimming etc)
                     Rectangle {
                         anchors.fill: parent
@@ -206,7 +393,7 @@ PlasmoidItem {
                         width: 48; height: 48
                         source: root.isPlaying ? "media-playback-pause" : "media-playback-start"
                         color: "white"
-                        visible: (!fullRep.isWide && !fullRep.isLargeSq) && (root.centerHovered || !root.isPlaying)
+                        visible: (!fullRep.isWide && !fullRep.isLargeSq) && (root.centerHovered || !root.isPlaying) && root.hasArt
                         opacity: visible ? 1 : 0
                         Behavior on opacity { NumberAnimation { duration: 200 } }
                     }

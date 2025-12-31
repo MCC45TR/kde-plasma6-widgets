@@ -1,6 +1,7 @@
 {
     "KPackageStructure": "Plasma/Applet",
     "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
     "KPlugin": {
         "Authors": [
             {
@@ -13,7 +14,7 @@
         "Icon": "multimedia-player",
         "Id": "com.mcc45tr.musicplayer",
         "Name": "Music Player",
-        "Version": "1.0",
+        "Version": "1.2",
         "Website": "",
         "License": "GPL-3.0",
         "Name[tr]": "Müzik Çalar",
@@ -25,5 +26,8 @@
         "Name[ru]": "Музыкальный плеер",
         "Name[pt]": "Reprodutor de música",
         "Name[ja]": "音楽プレーヤー"
-    }
+    },
+    "X-Plasma-Provides": [
+        "org.kde.plasma.nowplaying"
+    ]
 }

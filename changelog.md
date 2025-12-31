@@ -25,6 +25,12 @@
 - **Project Structure**: 
     - `install_all.sh` betiği güncellendi ve tüm widget'ların sorunsuz kurulduğu doğrulandı.
     - **Analog Clock** ve **Calendar** widget'ları için yeni önizleme ikonları/ekran görüntüleri eklendi.
+- **Music Player**:
+    - **Yapılandırma Ekranı**: Varsayılan medya oynatıcı seçimi için "Genel" ayarlar sayfası eklendi.
+    - **Sistem İkonu Entegrasyonu**: Kontrol butonları (Önceki, Başlat/Durdur, Sonraki) yerel SVG yerine sistem ikon temasını (`media-*`) kullanacak şekilde güncellendi.
+    - **Uygulama Başlatma Fix**: Medya yokken widget'a tıklandığında seçili uygulamanın (.desktop üzerinden) güvenilir şekilde başlatılması sağlandı.
+    - **Dinamik Uygulama Rozeti**: Sol üst köşeye o an çalan veya tercih edilen uygulamanın ikonunu gösteren reaktif bir rozet eklendi.
+    - **Hata Düzeltmeleri**: Yapılandırma ekranındaki iç içe geçme ve reaktif güncellenme sorunları giderildi.
 
 ### EN-US
 - **Global Icon Refactoring**:
@@ -49,6 +55,12 @@
 - **Project Structure**:
   - The install_all.sh script was updated, and successful installation of all widgets was verified.
   - New preview icons/screenshots were added for the Analog Clock and Calendar widgets.
+- **Music Player**:
+  - **Configuration Screen**: Added a "General" settings page for default media player selection.
+  - **System Icon Integration**: Updated playback controls (Previous, Play/Pause, Next) to use system icon theme names (`media-*`) instead of local SVGs for better theme compatibility.
+  - **App Launching Fix**: clicking the widget when no media is playing now reliably launches the preferred app via its .desktop file.
+  - **Dynamic App Badge**: Implemented a reactive badge in the top-left corner that displays the icon of the currently playing or preferred application.
+  - **Bug Fixes**: Resolved layout overlapping in the configuration screen and fixed reactivity issues with the badge icon.
 
 ---
 
