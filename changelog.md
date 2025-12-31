@@ -1,6 +1,8 @@
 # Değişiklik Günlüğü (Changelog)
 
 ## 2025-12-31
+
+### TR-TR
 - **Global Icon Refactoring**: 
     - Tüm widget'lardaki yerel önizleme ikonları (`icon.png`, `preview.png`) kaldırıldı.
     - Tüm widget'lara sistem ikon paketinden uygun ve standart ikonlar atandı (`office-calendar`, `clock`, `notifications`, `system-software-update` vb.).
@@ -24,26 +26,97 @@
     - `install_all.sh` betiği güncellendi ve tüm widget'ların sorunsuz kurulduğu doğrulandı.
     - **Analog Clock** ve **Calendar** widget'ları için yeni önizleme ikonları/ekran görüntüleri eklendi.
 
+### EN-US
+- **Global Icon Refactoring**:
+  - All local preview icons (icon.png, preview.png) were removed from every widget.
+  - Each widget was assigned appropriate and standardized icons from the system icon theme (office-calendar, clock, notifications, system-software-update, etc.).
+  - This ensured full visual consistency and seamless integration with the system theme across all widgets.
+- **Localization System**:
+  - An advanced JSON-based localization system was standardized across all widgets in the project.
+  - Full language support was added for German, French, English, Turkish, Romanian, Czech, Spanish, Russian, Portuguese, and Japanese.
+  - localization.json templates were automatically generated for all widget directories (world-clock, weather, system-monitor, spotify, plasma-advancedreboot, photos, notes, music-player, gemini-kchat-fork, events, control-center, battery, aur-updates, alarms, analog-clock, digital-clock).
+- **Calendar Widget**:
+  - Google Calendar integration and the events panel were removed, and the widget was switched to offline mode.
+  - Migration to the new JSON-based localization system was completed (tr() function integration).
+  - Month names and date formats were aligned with the system locale.
+- **File Search Widget**:
+  - The JSON-based localization system was implemented, and both the configuration interface and the main UI were localized into 10 languages.
+  - A new feature was added to launch history items directly (matchId, runnerId).
+  - An issue preventing items from being clickable in tile view was resolved.
+  - Icon size settings are now properly saved and applied.
+  - Parent directory paths are now displayed for file and folder results.
+  - Smart timestamp formatting was added for the history list.
+- **Project Structure**:
+  - The install_all.sh script was updated, and successful installation of all widgets was verified.
+  - New preview icons/screenshots were added for the Analog Clock and Calendar widgets.
+
+---
+
 ## 2025-12-30
+
+### TR-TR
 - **Minimal Analog Clock**: Proje yapısı oluşturuldu. Temel analog saat çizim mantığı (akrep, yelkovan) ve minimal tasarım uygulandı.
 - **File Search Widget**: Döşeme görünümü (Tile View) iyileştirildi, görünürlük sorunu giderildi. Ekstra Geniş Mod (Extra Wide Mode) paneli eklendi.
 - **Music Player**: Oynatma kontrol butonları için yönlü genişleme/daralma animasyonu (squeeze effect) eklendi.
 
+### EN-US
+- **Minimal Analog Clock**: The project structure was created. Basic analog clock rendering logic (hour and minute hands) and a minimal design were implemented.
+- **File Search Widget**: Tile View was improved and visibility issues were fixed. An Extra Wide Mode panel was added.
+- **Music Player**: A directional expand/collapse animation (squeeze effect) was added to the playback control buttons.
+
+---
+
 ## 2025-12-29
+
+### TR-TR
 - **Music Player**: Önceki/Sonraki butonları asimetrik yuvarlatılmış dikdörtgen formuna dönüştürüldü.
 - **Battery Widget**: Düzen esnekliği artırıldı (4 cihaza kadar). Genişleme animasyonu eklendi. "Doluyor" yazı tipi Roboto Condensed yapıldı. Şarj göstergesi boyutu büyütüldü ve ikon dinamikleştirildi. Widget arka planı opak hale getirildi ve kenar boşlukları kaldırıldı.
 
+### EN-US
+- **Music Player**: The Previous and Next buttons were redesigned with asymmetrically rounded rectangular shapes.
+- **Battery Widget**: Layout flexibility was increased (support for up to four devices). An expansion animation was added. The “Charging” label font was changed to Roboto Condensed. The charging indicator size was increased and the icon was made dynamic. The widget background was made opaque and internal padding was removed.
+
+---
+
 ## 2025-12-27
+
+### TR-TR
 - **Advanced Reboot Widget**: Özel yeniden başlatma onay arayüzü eklendi ("Yeniden Başlatılsın mı?" metni kaldırıldı). Sayfa göstergesi (page indicator) düzenlendi. Önyükleme girdilerini listeleme ve seçme (bootctl) özelliği eklendi.
 - **Analog Clock**: Akrep ve elkovan opaklığı 0.8 yapıldı.
 - **Digital Clock**: Tema entegrasyonu sağlandı. Yazı tipi `Roboto Condensed Variable` yapıldı. Saniye göstergesi fare üzerine gelince görünecek şekilde ayarlandı.
 - **Analog Clock**: Başlangıç pozisyonu ve elkovan uzunluğu dinamik hale getirildi.
 
+### EN-US
+- **Advanced Reboot Widget**: A custom reboot confirmation interface was added. The “Reboot?” text was removed. The page indicator was redesigned. Boot entry listing and selection functionality (bootctl) was implemented.
+- **Analog Clock**: Hour and minute hand opacity was set to 0.8. Initial hand position and minute hand length were made dynamic.
+- **Digital Clock**: Theme integration was completed. The font was changed to Roboto Condensed Variable. The seconds display was configured to appear on hover.
+
+---
+
 ## 2025-12-26
+
+### TR-TR
 - **Analog Clock**: Saat kolları ve tik işaretleri için görsel iyileştirmeler yapıldı. Squircle şekline uygun düzeltmeler uygulandı.
 
+### EN-US
+- **Analog Clock**: Visual improvements were applied to the clock hands and tick marks. Adjustments were made to better match the squircle shape.
+
+---
+
 ## 2025-12-20
+
+### TR-TR
 - **Calendar Widget**: Etkinlik başlıklarının kayması, dinamik yükseklik ve satır sayısı ayarları yapıldı. Seçili tarih için dairesel gösterge eklendi.
 
+### EN-US
+- **Calendar Widget**: Issues related to event title shifting were resolved. Dynamic height and line count settings were implemented. A circular indicator was added for the selected date.
+
+---
+
 ## 2025-12-06
+
+### TR-TR
 - **Notes Widget**: Liste tabanlı arayüze geçildi. Sürükle-bırak sıralama, girintileme ve tamamlama özellikleri eklendi. Karanlık mod zorunlu hale getirildi.
+
+### EN-US
+- **Notes Widget**: The interface was migrated to a list-based layout. Drag-and-drop reordering, indentation, and completion features were added. Dark mode was enforced.
