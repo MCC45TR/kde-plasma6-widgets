@@ -94,19 +94,35 @@ PlasmoidItem {
         return "multimedia-player"
     }
     
-    // Reactively determine the smart player
-    property var currentPlayer: {
-        // If specific player is preferred
-        if (preferredPlayer !== "") {
-            var current = mpris2Model.currentPlayer
-            if (current && current.identity && current.identity.toLowerCase().includes(preferredPlayer.toLowerCase())) {
-                return current
-            }
-            return null // Preferred player not found/playing
+    // Find player matching the preferred player from all available players
+    function findPreferredPlayer() {
+        if (preferredPlayer === "") {
+            return mpris2Model.currentPlayer
         }
         
-        // General mode: Use whatever MPRIS provides as current
-        return mpris2Model.currentPlayer
+        var count = mpris2Model.rowCount()
+        for (var i = 0; i < count; i++) {
+            var savedIndex = mpris2Model.currentIndex
+            mpris2Model.currentIndex = i
+            var player = mpris2Model.currentPlayer
+            mpris2Model.currentIndex = savedIndex
+            
+            if (player && player.identity && player.identity.toLowerCase().includes(preferredPlayer.toLowerCase())) {
+                return player
+            }
+        }
+        return null // Preferred player not found
+    }
+    
+    // Reactively determine the smart player
+    property var currentPlayer: findPreferredPlayer()
+    
+    // Re-evaluate when model changes
+    Connections {
+        target: mpris2Model
+        function onRowsInserted() { root.currentPlayer = Qt.binding(function() { return findPreferredPlayer() }) }
+        function onRowsRemoved() { root.currentPlayer = Qt.binding(function() { return findPreferredPlayer() }) }
+        function onDataChanged() { root.currentPlayer = Qt.binding(function() { return findPreferredPlayer() }) }
     }
     readonly property bool hasPlayer: !!currentPlayer
     readonly property bool isPlaying: currentPlayer ? currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : false
@@ -299,27 +315,83 @@ PlasmoidItem {
                         visible: root.hasArt
                     }
                     
-                    // App Icon Badge (Top-Left)
+                    // App Icon Badge (Top-Left) - Pill Shape for Wide/Large Modes
                     Rectangle {
                         id: appIconBadge
                         anchors.left: parent.left
                         anchors.top: parent.top
-                        anchors.margins: Math.max(8, parent.width * 0.04)
-                        width: Math.max(28, parent.width * 0.15)
-                        height: width
-                        radius: width / 2
-                        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.85)
-                        border.width: 2
-                        border.color: Qt.rgba(1, 1, 1, 0.2)
+                        anchors.leftMargin: 5
+                        anchors.topMargin: 5
+                        
+                        // Show pill with text in wide or large square modes
+                        property bool showPillMode: fullRep.isWide || fullRep.isLargeSq
+                        
+                        // Fixed icon size for wide/large modes (same size in both)
+                        property real iconSize: showPillMode ? 16 : Math.max(14, parent.width * 0.072)
+                        // Pill height: icon + 9 units padding
+                        height: iconSize + 9
+                        // Width responsive to text content (+ 5 units extra right padding + 4 units left padding for icon)
+                        width: showPillMode ? (badgeRow.implicitWidth + 16 + 5 + 4) : (iconSize + 9)
+                        
+                        radius: height / 2
+                        color: Kirigami.Theme.backgroundColor
+                        opacity: 1
                         visible: root.playerIdentity !== "" || root.hasPlayer
                         z: 20
                         
-                        Kirigami.Icon {
+                        Row {
+                            id: badgeRow
                             anchors.centerIn: parent
-                            width: parent.width * 0.65
-                            height: width
-                            source: root.getPlayerIcon(root.playerIdentity)
-                            color: Kirigami.Theme.textColor
+                            anchors.horizontalCenterOffset: -4 // Shift everything 4 units left
+                            height: parent.height
+                            spacing: 6
+                            
+                            Item {
+                                width: badgeIcon.width
+                                height: parent.height
+                                
+                                Kirigami.Icon {
+                                    id: badgeIcon
+                                    anchors.centerIn: parent
+                                    anchors.verticalCenterOffset: -1 // Move icon 1 unit up
+                                    width: appIconBadge.iconSize
+                                    height: width
+                                    source: root.getPlayerIcon(root.playerIdentity)
+                                    // Don't apply color to preserve original icon colors (e.g., Spotify green)
+                                }
+                            }
+                            
+                            Item {
+                                width: badgeText.implicitWidth
+                                height: parent.height
+                                visible: appIconBadge.showPillMode
+                                
+                                Text {
+                                    id: badgeText
+                                    anchors.centerIn: parent
+                                    anchors.verticalCenterOffset: -1 // Move text 1 unit up
+                                    text: root.playerIdentity || ""
+                                    color: "white"
+                                    font.pixelSize: 14 // Same as artist text size
+                                    font.bold: true
+                                }
+                            }
+                        }
+                        
+                        // Small indicator dot
+                        Rectangle {
+                            id: statusDot
+                            anchors.right: parent.right
+                            anchors.bottom: parent.bottom
+                            anchors.rightMargin: appIconBadge.showPillMode ? -2 : -1
+                            anchors.bottomMargin: -2
+                            width: 8
+                            height: 8
+                            radius: 4
+                            color: root.isPlaying ? "#1DB954" : "gray"
+                            border.width: 1
+                            border.color: "black"
+                            visible: !appIconBadge.showPillMode // Only show dot in compact mode
                         }
                     }
                     

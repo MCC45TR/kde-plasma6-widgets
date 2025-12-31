@@ -26,11 +26,16 @@
     - `install_all.sh` betiği güncellendi ve tüm widget'ların sorunsuz kurulduğu doğrulandı.
     - **Analog Clock** ve **Calendar** widget'ları için yeni önizleme ikonları/ekran görüntüleri eklendi.
 - **Music Player**:
-    - **Yapılandırma Ekranı**: Varsayılan medya oynatıcı seçimi için "Genel" ayarlar sayfası eklendi.
+    - **Yapılandırma Ekranı**: Varsayılan medya oynatıcı seçimi için "Genel" ayarlar sayfası eklendi. Sabit liste yerine şu anda aktif olan MPRIS oynatıcılarını listeleyen dinamik bir yapıya geçildi.
+    - **Gelişmiş Oynatıcı Bulma**: Tercih edilen oynatıcıyı (örn. Spotify) sadece "şu anki" değil, tüm çalışan MPRIS kaynakları arasında tarayarak bulma özelliği eklendi.
     - **Sistem İkonu Entegrasyonu**: Kontrol butonları (Önceki, Başlat/Durdur, Sonraki) yerel SVG yerine sistem ikon temasını (`media-*`) kullanacak şekilde güncellendi.
     - **Uygulama Başlatma Fix**: Medya yokken widget'a tıklandığında seçili uygulamanın (.desktop üzerinden) güvenilir şekilde başlatılması sağlandı.
-    - **Dinamik Uygulama Rozeti**: Sol üst köşeye o an çalan veya tercih edilen uygulamanın ikonunu gösteren reaktif bir rozet eklendi.
-    - **Hata Düzeltmeleri**: Yapılandırma ekranındaki iç içe geçme ve reaktif güncellenme sorunları giderildi.
+    - **Dinamik Uygulama Rozeti (Pill Badge)**:
+        - Sol üst köşeye o an çalan uygulamanın ikonunu ve ismini gösteren, sistem temasıyla uyumlu **pill (hap)** şeklinde bir rozet eklendi.
+        - Rozet genişliği uygulama ismine göre dinamik olarak ayarlanır.
+        - Yazı tipi ve boyutları (14px) sanatçı bilgileriyle uyumlu hale getirildi.
+        - Kompakt modda durum göstergesi (çalıyor/duraklatıldı noktası) eklendi.
+    - **Hata Düzeltmeleri**: Yapılandırma ekranındaki iç içe geçme, reaktif güncellenme ve hizalama sorunları giderildi.
 
 ### EN-US
 - **Global Icon Refactoring**:
@@ -56,11 +61,16 @@
   - The install_all.sh script was updated, and successful installation of all widgets was verified.
   - New preview icons/screenshots were added for the Analog Clock and Calendar widgets.
 - **Music Player**:
-  - **Configuration Screen**: Added a "General" settings page for default media player selection.
+  - **Configuration Screen**: Added a "General" settings page for default media player selection. Migrated from a static app list to a dynamic one listing currently active MPRIS players.
+  - **Advanced Player Discovery**: Implemented scanning through all active MPRIS sources to find the preferred player (e.g., Spotify), even if it's not the currently active one.
   - **System Icon Integration**: Updated playback controls (Previous, Play/Pause, Next) to use system icon theme names (`media-*`) instead of local SVGs for better theme compatibility.
   - **App Launching Fix**: clicking the widget when no media is playing now reliably launches the preferred app via its .desktop file.
-  - **Dynamic App Badge**: Implemented a reactive badge in the top-left corner that displays the icon of the currently playing or preferred application.
-  - **Bug Fixes**: Resolved layout overlapping in the configuration screen and fixed reactivity issues with the badge icon.
+  - **Dynamic App Badge (Pill Badge)**:
+    - Implemented a system-themed **pill-shaped badge** in the top-left that displays both the application icon and name.
+    - The badge width responds dynamically to the application name.
+    - Font sizes and alignment (14px) were harmonized with the artist info text.
+    - Added a status indicator dot (playing/paused) for the icon in compact mode.
+  - **Bug Fixes**: Resolved layout overlapping in the configuration screen, fixed reactivity issues, and improved overall UI alignment.
 
 ---
 
