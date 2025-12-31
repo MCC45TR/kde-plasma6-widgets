@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Takvim widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "/icon.png",
         "Id": "com.mcc45tr.calendar",
         "Name": "Calendar",
         "Version": "1.0",

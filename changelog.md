@@ -16,7 +16,9 @@
     - Simge boyutu ayarlarının kaydedilmesi ve uygulanması sağlandı. 
     - Dosya/klasör sonuçları için üst klasör yolu gösterimi eklendi. 
     - Geçmiş listesi için akıllı zaman damgası (timestamp) gösterimi eklendi.
-- **Project Structure**: `install_all.sh` betiği güncellendi ve tüm widget'ların sorunsuz kurulduğu doğrulandı.
+- **Project Structure**: 
+    - `install_all.sh` betiği güncellendi ve tüm widget'ların sorunsuz kurulduğu doğrulandı.
+    - **Analog Clock** ve **Calendar** widget'ları için yeni önizleme ikonları/ekran görüntüleri eklendi.
 
 ## 2025-12-30
 - **Minimal Analog Clock**: Proje yapısı oluşturuldu. Temel analog saat çizim mantığı (akrep, yelkovan) ve minimal tasarım uygulandı.
