@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Hava Durumu widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "weather-many-clouds",
         "Id": "com.mcc45tr.weather",
         "Name": "Weather",
         "Version": "1.0",

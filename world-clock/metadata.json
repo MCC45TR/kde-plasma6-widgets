@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Dünya Saati widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "preferences-desktop-locale",
         "Id": "com.mcc45tr.worldclock",
         "Name": "World Clock",
         "Version": "1.0",

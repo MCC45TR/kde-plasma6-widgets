@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Alarmlar widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "notifications",
         "Id": "com.mcc45tr.alarms",
         "Name": "Alarms",
         "Version": "1.0",

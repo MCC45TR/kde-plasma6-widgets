@@ -10,7 +10,7 @@
         ],
         "Category": "Date and Time",
         "Description": "A minimal analog clock widget",
-        "Icon": "preferences-system-time",
+        "Icon": "clock",
         "Id": "com.github.mcc45tr.minimalanalogclock",
         "License": "GPL-3.0",
         "Name": "Minimal Analog Clock",

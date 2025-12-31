@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Etkinlikler widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "view-calendar-upcoming-events",
         "Id": "com.mcc45tr.events",
         "Name": "Events",
         "Version": "1.0",

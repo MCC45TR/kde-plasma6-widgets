@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Fotoğraflar widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "camera-photo",
         "Id": "com.mcc45tr.photos",
         "Name": "Photos",
         "Version": "1.0",

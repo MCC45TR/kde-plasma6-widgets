@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Analog Saat widget",
-        "Icon": "/icon.png",
+        "Icon": "chronometer",
         "Id": "com.mcc45tr.analogclock",
         "Name": "Analog Clock",
         "Version": "1.0",

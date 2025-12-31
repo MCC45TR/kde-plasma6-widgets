@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Sistem İzleme widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "utilities-system-monitor",
         "Id": "com.mcc45tr.systemmonitor",
         "Name": "System Monitor",
         "Version": "1.0",

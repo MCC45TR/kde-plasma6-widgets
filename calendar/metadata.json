@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Takvim widget",
-        "Icon": "/icon.png",
+        "Icon": "office-calendar",
         "Id": "com.mcc45tr.calendar",
         "Name": "Calendar",
         "Version": "1.0",

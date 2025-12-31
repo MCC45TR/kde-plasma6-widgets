@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Kontrol Merkezi widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "preferences-system",
         "Id": "com.mcc45tr.controlcenter",
         "Name": "Control Center",
         "Version": "1.0",

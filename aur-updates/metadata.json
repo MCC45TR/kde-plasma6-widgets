@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple AUR Güncellemeleri widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "system-software-update",
         "Id": "com.mcc45tr.aurupdates",
         "Name": "AUR Updates",
         "Version": "1.0",

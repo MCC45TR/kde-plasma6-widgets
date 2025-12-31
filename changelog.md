@@ -1,6 +1,10 @@
 # Değişiklik Günlüğü (Changelog)
 
 ## 2025-12-31
+- **Global Icon Refactoring**: 
+    - Tüm widget'lardaki yerel önizleme ikonları (`icon.png`, `preview.png`) kaldırıldı.
+    - Tüm widget'lara sistem ikon paketinden uygun ve standart ikonlar atandı (`office-calendar`, `clock`, `notifications`, `system-software-update` vb.).
+    - Bu sayede widget'ların sistem temasıyla tam uyumlu ve tutarlı bir görünüm kazanması sağlandı.
 - **Localization System**: 
     - Proje genelindeki tüm widget'lar için **JSON tabanlı gelişmiş lokalizasyon sistemi** standartlaştırıldı.
     - Almanca, Fransızca, İngilizce, Türkçe, Romence, Çekçe, İspanyolca, Rusça, Portekizce ve Japonca dilleri için tam destek eklendi.

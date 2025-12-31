@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Spotify widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "multimedia-player",
         "Id": "com.mcc45tr.spotify",
         "Name": "Spotify Player",
         "Version": "1.0",

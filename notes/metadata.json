@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Notlar widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "notes",
         "Id": "com.mcc45tr.notes",
         "Name": "Notes",
         "Version": "1.0",

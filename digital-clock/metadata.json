@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Dijital Saat widget",
-        "Icon": "/icon.png",
+        "Icon": "clock",
         "Id": "com.mcc45tr.digitalclock",
         "Name": "Digital Clock",
         "Version": "1.0",

@@ -10,7 +10,7 @@
         ],
         "Category": "Utilities",
         "Description": "A simple Müzik widget",
-        "Icon": "preferences-system-windows",
+        "Icon": "multimedia-player",
         "Id": "com.mcc45tr.musicplayer",
         "Name": "Music Player",
         "Version": "1.0",
