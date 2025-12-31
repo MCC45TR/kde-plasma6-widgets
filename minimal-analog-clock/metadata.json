@@ -1,0 +1,19 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "mail@example.com",
+                "Name": "Your Name"
+            }
+        ],
+        "Category": "Date and Time",
+        "Description": "A minimal analog clock widget",
+        "Icon": "preferences-system-time",
+        "Id": "com.github.mcc45tr.minimalanalogclock",
+        "License": "GPL-2.0+",
+        "Name": "Minimal Analog Clock",
+        "Version": "1.0"
+    }
+}
