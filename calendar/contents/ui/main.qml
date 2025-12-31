@@ -36,30 +36,21 @@ PlasmoidItem {
     property var selectedDate: null // Nullable for toggle state
 
     // --- Localization Logic ---
-    property var locales: ({})
+    property var locales: {
+        "en": { "today": "Today" },
+        "tr": { "today": "Bugün" },
+        "de": { "today": "Heute" },
+        "fr": { "today": "Aujourd'hui" },
+        "ro": { "today": "Astăzi" },
+        "cs": { "today": "Dnes" },
+        "es": { "today": "Hoy" },
+        "ru": { "today": "Сегодня" },
+        "pt": { "today": "Hoje" },
+        "ja": { "today": "今日" }
+    }
     property string currentLocale: Qt.locale().name.substring(0, 2)
     
-    function loadLocales() {
-        var xhr = new XMLHttpRequest()
-        xhr.open("GET", "localization.json")
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 || xhr.status === 0) {
-                    try {
-                        locales = JSON.parse(xhr.responseText)
-                    } catch (e) {
-                        locales = {}
-                    }
-                }
-            }
-        }
-        xhr.send()
-    }
-    
-    Component.onCompleted: {
-        loadLocales()
-    }
-
+    // tr() function remains simple and synchronous
     function tr(key) {
         if (locales[currentLocale] && locales[currentLocale][key]) return locales[currentLocale][key]
         if (locales["en"] && locales["en"][key]) return locales["en"][key]

@@ -7,6 +7,50 @@ import org.kde.plasma.private.mpris as Mpris
 Kirigami.FormLayout {
     id: page
     
+    // --- Localization Logic ---
+    property var locales: ({})
+    property string currentLocale: Qt.locale().name.substring(0, 2)
+    
+    function loadLocales() {
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", Qt.resolvedUrl("../localization.json"))
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 0) {
+                    try {
+                        locales = JSON.parse(xhr.responseText)
+                        refreshPlayerList() // Refresh list to update "General" text
+                    } catch (e) {
+                        console.log("Error parsing localization.json: " + e)
+                        locales = {}
+                    }
+                }
+            }
+        }
+        xhr.send()
+    }
+    
+    function tr(key, arg1) {
+        var text = key
+        if (locales[currentLocale] && locales[currentLocale][key]) {
+            text = locales[currentLocale][key]
+        } else if (locales["en"] && locales["en"][key]) {
+            text = locales["en"][key]
+        }
+        
+        if (arg1 !== undefined) {
+            text = text.replace("%1", arg1)
+        }
+        return text
+    }
+    
+    Component.onCompleted: {
+        loadLocales()
+        // Delay to ensure MPRIS model is populated
+        Qt.callLater(refreshPlayerList)
+    }
+    // --- End Localization Logic ---
+    
     property string cfg_preferredPlayer
     
     // MPRIS2 Model to get currently active players
@@ -95,7 +139,7 @@ Kirigami.FormLayout {
         // Always add "General" option first
         appListModel.append({ 
             id: "", 
-            name: "Genel (Tümünü Takip Et)", 
+            name: page.tr("general_all"), 
             icon: "multimedia-player",
             available: true
         })
@@ -134,10 +178,7 @@ Kirigami.FormLayout {
         id: appListModel
     }
     
-    Component.onCompleted: {
-        // Delay to ensure MPRIS model is populated
-        Qt.callLater(refreshPlayerList)
-    }
+    // Component.onCompleted moved up for localization loading
     
     // Timer to refresh list periodically (in case players start/stop)
     Timer {
@@ -149,7 +190,7 @@ Kirigami.FormLayout {
     
     ComboBox {
         id: playerCombo
-        Kirigami.FormData.label: "Varsayılan Oynatıcı:"
+        Kirigami.FormData.label: page.tr("default_player") + ":"
         Layout.fillWidth: true
         model: appListModel
         textRole: "name"
@@ -228,8 +269,9 @@ Kirigami.FormLayout {
         color: Kirigami.Theme.positiveTextColor
         text: {
             var count = appListModel.count - 1 // Exclude "Genel"
-            if (count <= 0) return "⚠ Aktif oynatıcı yok"
-            return "✓ " + count + " aktif oynatıcı bulundu"
+            var count = appListModel.count - 1 // Exclude "Genel"
+            if (count <= 0) return page.tr("no_active_players")
+            return page.tr("active_players_found", count)
         }
     }
     
@@ -239,7 +281,8 @@ Kirigami.FormLayout {
         font.pixelSize: 12
         opacity: 0.7
         text: cfg_preferredPlayer === "" 
-            ? "Tüm medya kaynakları takip edilir."
-            : "Sadece \"" + cfg_preferredPlayer + "\" takip edilir."
+        text: cfg_preferredPlayer === "" 
+            ? page.tr("all_sources_tracked")
+            : page.tr("only_x_tracked", cfg_preferredPlayer)
     }
 }

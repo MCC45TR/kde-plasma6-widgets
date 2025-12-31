@@ -1,4 +1,4 @@
-{
+var data = {
     "en": {
         "search": "Search",
         "search_placeholder": "Search Here",

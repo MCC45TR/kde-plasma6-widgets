@@ -9,6 +9,43 @@ import org.kde.plasma.private.mpris as Mpris
 PlasmoidItem {
     id: root
 
+    // --- Localization Logic ---
+    property var locales: ({})
+    property string currentLocale: Qt.locale().name.substring(0, 2)
+    
+    function loadLocales() {
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", "localization.json")
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 0) {
+                    try {
+                        locales = JSON.parse(xhr.responseText)
+                    } catch (e) {
+                        console.log("Error parsing localization.json: " + e)
+                        locales = {}
+                    }
+                }
+            }
+        }
+        xhr.send()
+    }
+    
+    Component.onCompleted: {
+        loadLocales()
+    }
+
+    function tr(key) {
+        if (locales[currentLocale] && locales[currentLocale][key]) {
+            return locales[currentLocale][key]
+        }
+        if (locales["en"] && locales["en"][key]) {
+            return locales["en"][key]
+        }
+        return key
+    }
+    // --- End Localization Logic ---
+
     // Widget Size Constraints
     Layout.preferredWidth: 200
     Layout.preferredHeight: 200
@@ -128,7 +165,7 @@ PlasmoidItem {
     readonly property bool isPlaying: currentPlayer ? currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : false
     readonly property string artUrl: currentPlayer ? currentPlayer.artUrl : ""
     readonly property bool hasArt: artUrl != ""
-    readonly property string title: currentPlayer ? currentPlayer.track : "Çalan Medya Yok"
+    readonly property string title: currentPlayer ? currentPlayer.track : root.tr("no_media_playing")
     readonly property string artist: currentPlayer ? currentPlayer.artist : ""
     readonly property real length: currentPlayer ? currentPlayer.length : 0
     readonly property string playerIdentity: currentPlayer ? currentPlayer.identity : preferredPlayer
@@ -240,7 +277,7 @@ PlasmoidItem {
                     Text {
                         id: prevText
                         anchors.centerIn: parent
-                        text: "Önceki Müzik"; color: Kirigami.Theme.textColor
+                        text: root.tr("prev_track"); color: Kirigami.Theme.textColor
                         font.bold: true; font.pixelSize: 13; rotation: 270
                     }
                 }
@@ -251,7 +288,7 @@ PlasmoidItem {
                     Text {
                         id: nextText
                         anchors.centerIn: parent
-                        text: "Sonraki Müzik"; color: Kirigami.Theme.textColor
+                        text: root.tr("next_track"); color: Kirigami.Theme.textColor
                         font.bold: true; font.pixelSize: 13; rotation: 90
                     }
                 }
@@ -342,7 +379,7 @@ PlasmoidItem {
                         Row {
                             id: badgeRow
                             anchors.centerIn: parent
-                            anchors.horizontalCenterOffset: -4 // Shift everything 4 units left
+                            anchors.horizontalCenterOffset: -4 // Shift everything 1 units left
                             height: parent.height
                             spacing: 6
                             
@@ -369,29 +406,12 @@ PlasmoidItem {
                                 Text {
                                     id: badgeText
                                     anchors.centerIn: parent
-                                    anchors.verticalCenterOffset: -1 // Move text 1 unit up
                                     text: root.playerIdentity || ""
-                                    color: "white"
+                                    color: Kirigami.Theme.textColor
                                     font.pixelSize: 14 // Same as artist text size
                                     font.bold: true
                                 }
                             }
-                        }
-                        
-                        // Small indicator dot
-                        Rectangle {
-                            id: statusDot
-                            anchors.right: parent.right
-                            anchors.bottom: parent.bottom
-                            anchors.rightMargin: appIconBadge.showPillMode ? -2 : -1
-                            anchors.bottomMargin: -2
-                            width: 8
-                            height: 8
-                            radius: 4
-                            color: root.isPlaying ? "#1DB954" : "gray"
-                            border.width: 1
-                            border.color: "black"
-                            visible: !appIconBadge.showPillMode // Only show dot in compact mode
                         }
                     }
                     
@@ -425,7 +445,7 @@ PlasmoidItem {
                             }
                             
                             Text {
-                                text: "Çalan Medya Yok"
+                                text: root.tr("no_media_playing")
                                 font.family: "Roboto Condensed"
                                 font.bold: true
                                 font.pixelSize: 16

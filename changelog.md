@@ -1,5 +1,25 @@
 # Değişiklik Günlüğü (Changelog)
 
+## 2026-01-01
+
+### TR-TR
+- **File Search Widget (Modülerleştirme ve İyileştirme)**:
+    - Kullanıcı arayüzü tamamen modüler QML bileşenlerine ayrıştırıldı (`CompactView`, `ResultsListView`, `HistoryTileView` vb.).
+    - Senkron JavaScript tabanlı yerelleştirme sistemine (`localization.js`) geçilerek yükleme performans ve kararlılığı artırıldı.
+    - Geçmiş yönetimi `HistoryManager.js` modülüne taşınarak kod yapısı temizlendi.
+    - Yapılandırma ekranı ve önizlemeler tamamen yenilendi ve senkron çeviri desteği eklendi.
+    - Varsayılan görünüm modu "Dar" (Medium) ve varsayılan ikon boyutları (Liste: 22, Döşeme: 48) olarak güncellendi.
+
+### EN-US
+- **File Search Widget (Modularization & Improvements)**:
+    - Entire UI refactored into modular QML components (`CompactView`, `ResultsListView`, `HistoryTileView`, etc.).
+    - Migrated to a synchronous JavaScript-based localization system (`localization.js`) for better performance and stability.
+    - History management logic moved to a dedicated `HistoryManager.js` module.
+    - Configuration screen and previews were completely revamped with synchronous translation support.
+    - Updated default display mode to "Medium" (Narrow) and standardized default icon sizes (List: 22, Tile: 48).
+
+---
+
 ## 2025-12-31
 
 ### TR-TR

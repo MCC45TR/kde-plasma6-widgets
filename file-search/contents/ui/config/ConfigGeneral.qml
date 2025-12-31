@@ -3,6 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
+// Import localization data from parent directory
+import "../localization.js" as LocalizationData
+
 Kirigami.FormLayout {
     id: page
     
@@ -15,35 +18,8 @@ Kirigami.FormLayout {
     property int cfg_listIconSize
     
     // --- Localization Logic ---
-    property var locales: ({})
+    property var locales: LocalizationData.data
     property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function loadLocales() {
-        var xhr = new XMLHttpRequest()
-        xhr.open("GET", "../localization.json") // Search is relative to this file in config dir, need to go up to contents/ui/ or just use absolute path?
-        // Plasmoid structure: contents/ui/localization.json. 
-        // Config files are in contents/ui/config/ usually or contents/config/.
-        // Address is usually relative to the QML file location.
-        // ConfigGeneral is in contents/ui/config/. localization.json is in contents/ui/.
-        // So "../localization.json" should work.
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 || xhr.status === 0) {
-                    try {
-                        locales = JSON.parse(xhr.responseText)
-                    } catch (e) {
-                        locales = {}
-                    }
-                }
-            }
-        }
-        xhr.send()
-    }
-    
-    Component.onCompleted: {
-        loadLocales()
-        // ... existing completion logic will be appended
-    }
 
     function tr(key) {
         if (locales[currentLocale] && locales[currentLocale][key]) return locales[currentLocale][key]

@@ -1,32 +1,142 @@
 {
     "en": {
-        "example_label": "Example Text"
+        "no_media_playing": "No Media Playing",
+        "prev_track": "Previous Track",
+        "next_track": "Next Track",
+        "general_all": "General (Follow All)",
+        "default_player": "Default Media Player",
+        "inactive_players_hidden": "Inactive players are not shown.",
+        "selected_player": "Selected Player:",
+        "select_app": "Select Application",
+        "no_active_players": "⚠ No active players",
+        "active_players_found": "✓ %1 active players found",
+        "all_sources_tracked": "All media sources are tracked.",
+        "only_x_tracked": "Only \"%1\" is tracked."
     },
     "tr": {
-        "example_label": "Örnek Metin"
+        "no_media_playing": "Çalan Medya Yok",
+        "prev_track": "Önceki Müzik",
+        "next_track": "Sonraki Müzik",
+        "general_all": "Genel (Tümünü Takip Et)",
+        "default_player": "Varsayılan Medya Oynatıcı",
+        "inactive_players_hidden": "Aktif olmayan oynatıcılar gösterilmez.",
+        "selected_player": "Seçili Oynatıcı:",
+        "select_app": "Uygulama Seçin",
+        "no_active_players": "⚠ Aktif oynatıcı yok",
+        "active_players_found": "✓ %1 aktif oynatıcı bulundu",
+        "all_sources_tracked": "Tüm medya kaynakları takip edilir.",
+        "only_x_tracked": "Sadece \"%1\" takip edilir."
     },
     "de": {
-        "example_label": "Beispieltext"
+        "no_media_playing": "Keine Medienwiedergabe",
+        "prev_track": "Vorheriger Titel",
+        "next_track": "Nächster Titel",
+        "general_all": "Allgemein (Alle folgen)",
+        "default_player": "Standard-Medienplayer",
+        "inactive_players_hidden": "Inaktive Player werden nicht angezeigt.",
+        "selected_player": "Ausgewählter Player:",
+        "select_app": "Anwendung auswählen",
+        "no_active_players": "⚠ Keine aktiven Player",
+        "active_players_found": "✓ %1 aktive Player gefunden",
+        "all_sources_tracked": "Alle Medienquellen werden verfolgt.",
+        "only_x_tracked": "Nur \"%1\" wird verfolgt."
     },
     "fr": {
-        "example_label": "Exemple de texte"
+        "no_media_playing": "Aucun média en cours",
+        "prev_track": "Piste précédente",
+        "next_track": "Piste suivante",
+        "general_all": "Général (Suivre tout)",
+        "default_player": "Lecteur multimédia par défaut",
+        "inactive_players_hidden": "Les lecteurs inactifs ne sont pas affichés.",
+        "selected_player": "Lecteur sélectionné :",
+        "select_app": "Sélectionner une application",
+        "no_active_players": "⚠ Aucun lecteur actif",
+        "active_players_found": "✓ %1 lecteurs actifs trouvés",
+        "all_sources_tracked": "Toutes les sources de médias sont suivies.",
+        "only_x_tracked": "Seul \"%1\" est suivi."
     },
     "ro": {
-        "example_label": "Exemplu de text"
+        "no_media_playing": "Nu se redă niciun conținut",
+        "prev_track": "Piesa anterioară",
+        "next_track": "Piesa următoare",
+        "general_all": "General (Urmărește tot)",
+        "default_player": "Player media implicit",
+        "inactive_players_hidden": "Playerele inactive nu sunt afișate.",
+        "selected_player": "Player selectat:",
+        "select_app": "Selectați aplicația",
+        "no_active_players": "⚠ Niciun player activ",
+        "active_players_found": "✓ %1 playere active găsite",
+        "all_sources_tracked": "Toate sursele media sunt urmărite.",
+        "only_x_tracked": "Doar \"%1\" este urmărit."
     },
     "cs": {
-        "example_label": "Příklad textu"
+        "no_media_playing": "Nic se nehraje",
+        "prev_track": "Předchozí skladba",
+        "next_track": "Další skladba",
+        "general_all": "Obecné (Sledovat vše)",
+        "default_player": "Výchozí přehrávač médií",
+        "inactive_players_hidden": "Neaktivní přehrávače nejsou zobrazeny.",
+        "selected_player": "Vybraný přehrávač:",
+        "select_app": "Vybrat aplikaci",
+        "no_active_players": "⚠ Žádné aktivní přehrávače",
+        "active_players_found": "✓ Nalezeno %1 aktivních přehrávačů",
+        "all_sources_tracked": "Všechny zdroje médií jsou sledovány.",
+        "only_x_tracked": "Sledováno pouze \"%1\"."
     },
     "es": {
-        "example_label": "Texto de ejemplo"
+        "no_media_playing": "No se está reproduciendo nada",
+        "prev_track": "Pista anterior",
+        "next_track": "Pista siguiente",
+        "general_all": "General (Seguir todo)",
+        "default_player": "Reproductor multimedia predeterminado",
+        "inactive_players_hidden": "Los reproductores inactivos no se muestran.",
+        "selected_player": "Reproductor seleccionado:",
+        "select_app": "Seleccionar aplicación",
+        "no_active_players": "⚠ Ningún reproductor activo",
+        "active_players_found": "✓ %1 reproductores activos encontrados",
+        "all_sources_tracked": "Se rastrean todas las fuentes de medios.",
+        "only_x_tracked": "Solo se rastrea \"%1\"."
     },
     "ru": {
-        "example_label": "Пример текста"
+        "no_media_playing": "Нет воспроизводимого медиа",
+        "prev_track": "Предыдущий трек",
+        "next_track": "Следующий трек",
+        "general_all": "Общее (Следить за всем)",
+        "default_player": "Медиаплеер по умолчанию",
+        "inactive_players_hidden": "Неактивные плееры не отображаются.",
+        "selected_player": "Выбранный плеер:",
+        "select_app": "Выбрать приложение",
+        "no_active_players": "⚠ Нет активных плееров",
+        "active_players_found": "✓ Найдено %1 активных плееров",
+        "all_sources_tracked": "Отслеживаются все источники мультимедиа.",
+        "only_x_tracked": "Отслеживается только \"%1\"."
     },
     "pt": {
-        "example_label": "Texto de exemplo"
+        "no_media_playing": "Nenhuma mídia reproduzida",
+        "prev_track": "Faixa anterior",
+        "next_track": "Próxima faixa",
+        "general_all": "Geral (Seguir tudo)",
+        "default_player": "Reprodutor de mídia padrão",
+        "inactive_players_hidden": "Reprodutores inativos não são mostrados.",
+        "selected_player": "Reprodutor selecionado:",
+        "select_app": "Selecionar aplicativo",
+        "no_active_players": "⚠ Nenhum reprodutor ativo",
+        "active_players_found": "✓ %1 reprodutores ativos encontrados",
+        "all_sources_tracked": "Todas as fontes de mídia são rastreadas.",
+        "only_x_tracked": "Apenas \"%1\" é rastreado."
     },
     "ja": {
-        "example_label": "サンプルテキスト"
+        "no_media_playing": "再生中のメディアはありません",
+        "prev_track": "前のトラック",
+        "next_track": "次のトラック",
+        "general_all": "一般 (すべて追跡)",
+        "default_player": "デフォルトのメディアプレーヤー",
+        "inactive_players_hidden": "非アクティブなプレーヤーは表示されません。",
+        "selected_player": "選択されたプレーヤー:",
+        "select_app": "アプリケーションを選択",
+        "no_active_players": "⚠ アクティブなプレーヤーはありません",
+        "active_players_found": "✓ %1 件のアクティブなプレーヤーが見つかりました",
+        "all_sources_tracked": "すべてのメディアソースが追跡されます。",
+        "only_x_tracked": "\"%1\" のみが追跡されます。"
     }
 }

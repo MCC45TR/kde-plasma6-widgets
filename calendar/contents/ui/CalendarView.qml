@@ -25,7 +25,7 @@ ColumnLayout {
 
     property int displayYear: 0
     property int currentMonthIndex: -1
-    property date selectedDate
+    property var selectedDate
     signal dateSelected(date date)
 
     // --- HEADER ---
