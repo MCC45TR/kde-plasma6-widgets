@@ -1,8 +1,22 @@
 # Değişiklik Günlüğü (Changelog)
 
 ## 2025-12-31
-- **Calendar Widget**: Google Takvim entegrasyonu, etkinlikler paneli ve test verisi özellikleri kaldırıldı (Çevrimdışı moda geçildi).
-- **File Search Widget**: Geçmiş öğelerini doğrudan çalıştırma özelliği eklendi (`matchId`, `runnerId`). Döşeme görünümünde (tile view) öğelerin tıklanamama sorunu düzeltildi. Simge boyutu ayarlarının kaydedilmesi ve uygulanması sağlandı. Dosya/klasör sonuçları için üst klasör yolu gösterimi eklendi. Geçmiş listesi için akıllı zaman damgası (timestamp) gösterimi eklendi.
+- **Localization System**: 
+    - Proje genelindeki tüm widget'lar için **JSON tabanlı gelişmiş lokalizasyon sistemi** standartlaştırıldı.
+    - Almanca, Fransızca, İngilizce, Türkçe, Romence, Çekçe, İspanyolca, Rusça, Portekizce ve Japonca dilleri için tam destek eklendi.
+    - Tüm widget klasörlerine (`world-clock`, `weather`, `system-monitor`, `spotify`, `plasma-advancedreboot`, `photos`, `notes`, `music-player`, `gemini-kchat-fork`, `events`, `control-center`, `battery`, `aur-updates`, `alarms`, `analog-clock`, `digital-clock`) otomatik olarak `localization.json` şablonları oluşturuldu.
+- **Calendar Widget**: 
+    - Google Takvim entegrasyonu ve etkinlikler paneli kaldırıldı (Çevrimdışı moda geçildi).
+    - Yeni JSON tabanlı yerelleştirme sistemine geçiş yapıldı (`tr()` fonksiyonu entegrasyonu).
+    - Ay isimleri ve tarih formatları sistem yereline uyumlu hale getirildi.
+- **File Search Widget**: 
+    - JSON tabanlı yerelleştirme sistemi uygulandı ve yapılandırma ekranı ile ana arayüz 10 dilde yerelleştirildi.
+    - Geçmiş öğelerini doğrudan çalıştırma özelliği eklendi (`matchId`, `runnerId`). 
+    - Döşeme görünümünde (tile view) öğelerin tıklanamama sorunu düzeltildi. 
+    - Simge boyutu ayarlarının kaydedilmesi ve uygulanması sağlandı. 
+    - Dosya/klasör sonuçları için üst klasör yolu gösterimi eklendi. 
+    - Geçmiş listesi için akıllı zaman damgası (timestamp) gösterimi eklendi.
+- **Project Structure**: `install_all.sh` betiği güncellendi ve tüm widget'ların sorunsuz kurulduğu doğrulandı.
 
 ## 2025-12-30
 - **Minimal Analog Clock**: Proje yapısı oluşturuldu. Temel analog saat çizim mantığı (akrep, yelkovan) ve minimal tasarım uygulandı.

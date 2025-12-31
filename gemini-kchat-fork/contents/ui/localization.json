@@ -1,0 +1,32 @@
+{
+    "en": {
+        "example_label": "Example Text"
+    },
+    "tr": {
+        "example_label": "Örnek Metin"
+    },
+    "de": {
+        "example_label": "Beispieltext"
+    },
+    "fr": {
+        "example_label": "Exemple de texte"
+    },
+    "ro": {
+        "example_label": "Exemplu de text"
+    },
+    "cs": {
+        "example_label": "Příklad textu"
+    },
+    "es": {
+        "example_label": "Texto de ejemplo"
+    },
+    "ru": {
+        "example_label": "Пример текста"
+    },
+    "pt": {
+        "example_label": "Texto de exemplo"
+    },
+    "ja": {
+        "example_label": "サンプルテキスト"
+    }
+}

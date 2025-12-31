@@ -41,7 +41,7 @@ PlasmoidItem {
     readonly property int maxChars: isWideMode ? maxCharsWide : maxCharsMedium
     
     // Truncated text for display
-    readonly property string placeholderText: isExtraWideMode ? "Arama yapmaya başla..." : (isWideMode ? "Arama yap..." : "Ara")
+    readonly property string placeholderText: isExtraWideMode ? root.tr("start_searching") : (isWideMode ? root.tr("search_dots") : root.tr("search"))
     readonly property string rawSearchText: searchText.length > 0 ? searchText : placeholderText
     readonly property string truncatedText: rawSearchText.length > maxChars ? rawSearchText.substring(0, maxChars) + "..." : rawSearchText
     
@@ -76,9 +76,47 @@ PlasmoidItem {
     readonly property int maxHistoryItems: 20
     
     // Load history from config on startup
+    // --- Localization Logic ---
+    property var locales: ({})
+    property string currentLocale: Qt.locale().name.substring(0, 2)
+    
+    function loadLocales() {
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", "localization.json")
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 0) { // status 0 is often local file success in QML
+                    try {
+                        locales = JSON.parse(xhr.responseText)
+                        console.log("Locales loaded for: " + currentLocale)
+                    } catch (e) {
+                        console.log("Error parsing localization.json: " + e)
+                        locales = {}
+                    }
+                } else {
+                    console.log("Error loading localization.json: " + xhr.status)
+                }
+            }
+        }
+        xhr.send()
+    }
+    
     Component.onCompleted: {
         loadHistory()
+        loadLocales()
     }
+
+    // Helper to get localized string or fallback to English or Key
+    function tr(key) {
+        if (locales[currentLocale] && locales[currentLocale][key]) {
+            return locales[currentLocale][key]
+        }
+        if (locales["en"] && locales["en"][key]) {
+            return locales["en"][key]
+        }
+        return key // Fallback
+    }
+    // --- End Localization Logic ---
     
     function loadHistory() {
         try {
@@ -133,26 +171,30 @@ PlasmoidItem {
         var diffMs = now.getTime() - then.getTime()
         var diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
         
+        // Use locale for time format
+        var timeStr = then.toLocaleTimeString(Qt.locale(), Locale.ShortFormat).replace(/:\d{2}$/, "") // Strip seconds if present in short format, though normally HH:mm
+        
+        // Ensure strictly HH:mm if locale varies wildly, or trust ShortFormat. 
+        // Let's stick to the previous manual HH:mm for consistency if preferred, OR use proper locale.
+        // Better to use manual HH:mm to match the design request if it was specific, but user asked for localization.
+        // Let's use the manual HH:mm construction but safe for all locales (numbers are numbers).
         var hours = then.getHours().toString().padStart(2, '0')
         var minutes = then.getMinutes().toString().padStart(2, '0')
-        var timeStr = hours + ":" + minutes
+        timeStr = hours + ":" + minutes
         
         // Today
         if (now.toDateString() === then.toDateString()) {
-            return "Bugün " + timeStr
+            return root.tr("today") + " " + timeStr
         }
         
         // Within last 6 days
         if (diffDays < 6) {
-            var days = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"]
-            return days[then.getDay()] + " " + timeStr
+            // Use Qt.locale() for day names
+            return Qt.locale().dayName(then.getDay(), Locale.LongFormat) + " " + timeStr
         }
         
-        // Older than 6 days
-        var day = then.getDate()
-        var month = then.getMonth() + 1
-        var year = then.getFullYear()
-        return day + "." + month + "." + year + " " + timeStr
+        // Older than 6 days - Use full date from locale
+        return then.toLocaleDateString(Qt.locale(), Locale.ShortFormat) + " " + timeStr
     }
     
     function clearHistory() {
@@ -458,7 +500,7 @@ PlasmoidItem {
                 // Empty state for list (only when no history)
                 Text {
                     anchors.centerIn: parent
-                    text: mainRoot.searchText.length > 0 ? "Sonuç bulunamadı" : "Aramak için yazmaya başlayın"
+                    text: mainRoot.searchText.length > 0 ? root.tr("no_results") : root.tr("type_to_search")
                     color: Qt.rgba(popupContent.delegateTextColor.r, popupContent.delegateTextColor.g, popupContent.delegateTextColor.b, 0.5)
                     font.pixelSize: 12
                     visible: resultsList.count === 0 && !popupContent.mainRoot.isTileView && mainRoot.searchText.length > 0
@@ -491,10 +533,10 @@ PlasmoidItem {
                 
                 var result = []
                 if (apps.length > 0) {
-                    result.push({ categoryName: "Uygulamalar", items: apps })
+                    result.push({ categoryName: root.tr("applications"), items: apps })
                 }
                 if (others.length > 0) {
-                    result.push({ categoryName: "Diğer", items: others })
+                    result.push({ categoryName: root.tr("other"), items: others })
                 }
                 categorizedHistory = result
             }
@@ -516,7 +558,7 @@ PlasmoidItem {
                 height: 32
                 
                 Text {
-                    text: "Son Aramalar"
+                    text: root.tr("recent_searches")
                     font.pixelSize: 13
                     font.bold: true
                     color: Qt.rgba(popupContent.delegateTextColor.r, popupContent.delegateTextColor.g, popupContent.delegateTextColor.b, 0.7)
@@ -536,7 +578,7 @@ PlasmoidItem {
                     Text {
                         id: clearBtnText
                         anchors.centerIn: parent
-                        text: "Geçmişi Sil"
+                        text: root.tr("clear_history")
                         font.pixelSize: 11
                         color: popupContent.delegateTextColor
                     }
@@ -797,7 +839,7 @@ PlasmoidItem {
         // Empty state when no search and no history
         Text {
             anchors.centerIn: parent
-            text: "Aramak için yazmaya başlayın"
+            text: root.tr("type_to_search")
             color: Qt.rgba(popupContent.delegateTextColor.r, popupContent.delegateTextColor.g, popupContent.delegateTextColor.b, 0.5)
             font.pixelSize: 12
             visible: mainRoot.searchText.length === 0 && mainRoot.searchHistory.length === 0

@@ -14,27 +14,70 @@ Kirigami.FormLayout {
     property int cfg_iconSize
     property int cfg_listIconSize
     
+    // --- Localization Logic ---
+    property var locales: ({})
+    property string currentLocale: Qt.locale().name.substring(0, 2)
+    
+    function loadLocales() {
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", "../localization.json") // Search is relative to this file in config dir, need to go up to contents/ui/ or just use absolute path?
+        // Plasmoid structure: contents/ui/localization.json. 
+        // Config files are in contents/ui/config/ usually or contents/config/.
+        // Address is usually relative to the QML file location.
+        // ConfigGeneral is in contents/ui/config/. localization.json is in contents/ui/.
+        // So "../localization.json" should work.
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 0) {
+                    try {
+                        locales = JSON.parse(xhr.responseText)
+                    } catch (e) {
+                        locales = {}
+                    }
+                }
+            }
+        }
+        xhr.send()
+    }
+    
+    Component.onCompleted: {
+        loadLocales()
+        // ... existing completion logic will be appended
+    }
+
+    function tr(key) {
+        if (locales[currentLocale] && locales[currentLocale][key]) return locales[currentLocale][key]
+        if (locales["en"] && locales["en"][key]) return locales["en"][key]
+        return key 
+    }
+    // --- End Localization Logic ---
+    
     // Icon size options
     readonly property var iconSizeModel: [16, 22, 32, 48, 64, 128]
 
     ComboBox {
         id: modeCombo
-        Kirigami.FormData.label: "Panel Görünümü:"
-        model: ["Düğme Modu (Sadece ikon)", "Orta Mod (Sadece buton)", "Geniş Mod (Arama çubuğu + ikon)", "Ekstra Geniş Mod (Geniş + Uzun Placeholder)"]
+        Kirigami.FormData.label: page.tr("panel_view")
+        model: [
+            page.tr("button_mode"), 
+            page.tr("medium_mode"), 
+            page.tr("wide_mode"), 
+            page.tr("extra_wide_mode")
+        ]
         Layout.fillWidth: true
     }
     
     ComboBox {
         id: viewModeCombo
-        Kirigami.FormData.label: "Sonuç Görünümü:"
-        model: ["Liste Görünümü", "Döşeme Görünümü"]
+        Kirigami.FormData.label: page.tr("results_view")
+        model: [page.tr("list_view"), page.tr("tile_view")]
         Layout.fillWidth: true
     }
     
     // List Icon Size Selector
     ComboBox {
         id: listIconSizeCombo
-        Kirigami.FormData.label: "Liste İkon Boyutu:"
+        Kirigami.FormData.label: page.tr("list_icon_size")
         model: ["16", "22", "32", "48", "64", "128"]
         Layout.fillWidth: true
         enabled: viewModeCombo.currentIndex === 0
@@ -59,7 +102,7 @@ Kirigami.FormLayout {
     // Tile Icon Size Selector
     ComboBox {
         id: iconSizeCombo
-        Kirigami.FormData.label: "Döşeme İkon Boyutu:"
+        Kirigami.FormData.label: page.tr("tile_icon_size")
         model: ["16", "22", "32", "48", "64", "128"]
         Layout.fillWidth: true
         enabled: viewModeCombo.currentIndex === 1
@@ -123,7 +166,7 @@ Kirigami.FormLayout {
     
     // Panel Preview
     Item {
-        Kirigami.FormData.label: "Panel Önizleme:"
+        Kirigami.FormData.label: page.tr("panel_preview")
         Layout.fillWidth: true
         Layout.preferredHeight: 50
         
@@ -170,7 +213,7 @@ Kirigami.FormLayout {
                 
                 Text {
                     // 1=Medium "Ara", 2=Wide "Arama yap...", 3=Extra Wide "Arama yapmaya başla..."
-                    text: modeCombo.currentIndex === 1 ? "Ara" : (modeCombo.currentIndex === 3 ? "Arama yapmaya başla..." : "Arama yap...")
+                    text: modeCombo.currentIndex === 1 ? page.tr("search") : (modeCombo.currentIndex === 3 ? page.tr("start_searching") : page.tr("search_dots"))
                     color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
                     font.pixelSize: modeCombo.currentIndex !== 1 ? 14 : 12
                     Layout.fillWidth: true
@@ -201,7 +244,7 @@ Kirigami.FormLayout {
     
     // View Mode Preview
     Item {
-        Kirigami.FormData.label: "Sonuç Önizleme:"
+        Kirigami.FormData.label: page.tr("results_preview")
         Layout.fillWidth: true
         Layout.preferredHeight: viewModeCombo.currentIndex === 0 ? 100 : 180
         
@@ -222,7 +265,7 @@ Kirigami.FormLayout {
                 visible: viewModeCombo.currentIndex === 0
                 
                 Repeater {
-                    model: ["Uygulama 1", "Uygulama 2", "Dosya.txt"]
+                    model: [page.tr("application_1"), page.tr("application_2"), page.tr("file_txt")]
                     
                     Rectangle {
                         width: parent.width
@@ -364,7 +407,7 @@ Kirigami.FormLayout {
                         
                         Text {
                             width: parent.width
-                            text: "Dosya"
+                            text: page.tr("file")
                             color: Kirigami.Theme.textColor
                             font.pixelSize: 10
                             horizontalAlignment: Text.AlignHCenter

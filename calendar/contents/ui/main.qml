@@ -35,6 +35,38 @@ PlasmoidItem {
     property var today: new Date()
     property var selectedDate: null // Nullable for toggle state
 
+    // --- Localization Logic ---
+    property var locales: ({})
+    property string currentLocale: Qt.locale().name.substring(0, 2)
+    
+    function loadLocales() {
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", "localization.json")
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 0) {
+                    try {
+                        locales = JSON.parse(xhr.responseText)
+                    } catch (e) {
+                        locales = {}
+                    }
+                }
+            }
+        }
+        xhr.send()
+    }
+    
+    Component.onCompleted: {
+        loadLocales()
+    }
+
+    function tr(key) {
+        if (locales[currentLocale] && locales[currentLocale][key]) return locales[currentLocale][key]
+        if (locales["en"] && locales["en"][key]) return locales["en"][key]
+        return key 
+    }
+    // --- End Localization Logic ---
+    
     Timer {
         interval: 60000
         running: true
@@ -49,7 +81,7 @@ PlasmoidItem {
         var targetDate = new Date(today.getFullYear(), today.getMonth() + monthOffset, 1)
         var displayYear = targetDate.getFullYear()
         var displayMonth = targetDate.getMonth()
-        var label = Qt.locale().monthName(displayMonth).toUpperCase()
+        var label = Qt.locale().monthName(displayMonth).toLocaleUpperCase(Qt.locale().name)
 
         var cells = []
         var firstOfMonth = new Date(displayYear, displayMonth, 1)
@@ -379,7 +411,7 @@ PlasmoidItem {
                 Text {
                     id: todayText
                     anchors.centerIn: parent
-                    text: "BUGÜN"
+                    text: root.tr("today")
                     font.family: "Sans Serif"
                     font.pixelSize: 11
                     font.weight: Font.Bold

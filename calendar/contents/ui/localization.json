@@ -1,0 +1,32 @@
+{
+    "en": {
+        "today": "Today"
+    },
+    "tr": {
+        "today": "Bugün"
+    },
+    "de": {
+        "today": "Heute"
+    },
+    "fr": {
+        "today": "Aujourd'hui"
+    },
+    "ro": {
+        "today": "Astăzi"
+    },
+    "cs": {
+        "today": "Dnes"
+    },
+    "es": {
+        "today": "Hoy"
+    },
+    "ru": {
+        "today": "Сегодня"
+    },
+    "pt": {
+        "today": "Hoje"
+    },
+    "ja": {
+        "today": "今日"
+    }
+}
