@@ -22,7 +22,10 @@ Loader {
     }
 
     function getIcon() {
-        // Use the custom Gemini-Kchat icon
-        return "assets/gemini-kchat-icon.svg";
+        // Use the custom Gemini-Kchat icon or user selection
+        if (Plasmoid.configuration.panelIcon) {
+            return Plasmoid.configuration.panelIcon
+        }
+        return "internet-chat";
     }
 }

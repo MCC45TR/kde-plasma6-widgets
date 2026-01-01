@@ -10,6 +10,16 @@ var systemInstruction = ""; // Persona instruction
 var chatCallback = null;
 var safetySettings = [];
 var jsonMode = false;
+var activeXHR = null; // Track active request for abort
+
+function abortRequest() {
+    if (activeXHR) {
+        activeXHR.abort();
+        activeXHR = null;
+        return true;
+    }
+    return false;
+}
 
 function setApiKey(key) { apiKey = key; }
 function setModel(model) { selectedModel = model; }
@@ -80,11 +90,13 @@ function sendMessage(text, attachments, onError) {
     var url = "https://generativelanguage.googleapis.com/v1beta/models/" + selectedModel + ":generateContent?key=" + apiKey;
 
     var xhr = new XMLHttpRequest();
+    activeXHR = xhr; // Store for abort capability
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+            activeXHR = null; // Clear active reference
             if (xhr.status === 200) {
                 try {
                     var response = JSON.parse(xhr.responseText);

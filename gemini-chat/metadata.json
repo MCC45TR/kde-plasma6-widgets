@@ -10,11 +10,11 @@
         "Category": "Utilities",
         "Description": "Quickly chat with Google's Gemini AI directly from your KDE desktop using Google AI Studio API",
         "Icon": "internet-chat",
-        "Id": "com.github.kurojs.gemini-kchat",
+        "Id": "com.github.mcc45tr.gemini-chat",
         "License": "GPL-3.0",
-        "Name": "Gemini-Kchat",
-        "Version": "1.5",
-        "Website": "https://github.com/kurojs/Gemini-Kchat"
+        "Name": "Gemini Chat",
+        "Version": "2.0",
+        "Website": "https://github.com/mcc45tr/gemini-chat"
     },
     "X-Plasma-API-Minimum-Version": "6.0"
 }

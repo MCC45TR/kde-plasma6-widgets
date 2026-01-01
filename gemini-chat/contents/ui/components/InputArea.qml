@@ -10,6 +10,7 @@ Item {
     
     // Signals
     signal messageSent(string text, var attachments)
+    signal stopRequested()
     
     // Properties
     property bool isLoading: false
@@ -86,7 +87,7 @@ Item {
             
             // Attach Button
             PlasmaComponents.Button {
-                icon.name: "paper-clip"
+                icon.name: "list-add"
                 display: PlasmaComponents.AbstractButton.IconOnly
                 text: root.trFunc("attach_file")
                 enabled: !root.isLoading
@@ -122,14 +123,20 @@ Item {
                 }
             }
             
-            // Send Button
+            // Send/Stop Button
             PlasmaComponents.Button {
-                icon.name: "document-send"
+                icon.name: root.isLoading ? "process-stop" : "document-send"
                 display: PlasmaComponents.AbstractButton.IconOnly
-                text: root.trFunc("send")
-                enabled: !root.isLoading && (messageField.text.trim().length > 0 || root.attachedFile !== "")
+                text: root.isLoading ? root.trFunc("stop") : root.trFunc("send")
+                enabled: root.isLoading || (messageField.text.trim().length > 0 || root.attachedFile !== "")
                 
-                onClicked: sendMessageInternal()
+                onClicked: {
+                    if (root.isLoading) {
+                        root.stopRequested()
+                    } else {
+                        sendMessageInternal()
+                    }
+                }
                 
                 PlasmaComponents.ToolTip.text: text
                 PlasmaComponents.ToolTip.visible: hovered

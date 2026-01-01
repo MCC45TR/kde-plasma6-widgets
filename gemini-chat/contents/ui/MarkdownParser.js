@@ -3,8 +3,9 @@
 // Simple Markdown Parser for QML TextEdit
 // Handles basic markdown (bold, italic, code) and custom LaTeX-like math blocks
 
-function parse(text) {
+function parse(text, mathLabel) {
     if (!text) return "";
+    mathLabel = mathLabel || "Math Formula"; // Default fallback
 
     // 1. Escape HTML special characters mostly (but we will insert our own HTML)
     // Actually, incoming text from API is raw. We should escape < and > unless they are code.
@@ -31,7 +32,7 @@ function parse(text) {
         // We cannot render real LaTeX, but we can make it look like a "Code Block" 
         // with a specific header or style.
         return "<br><div style='background-color:#232629; border-left: 3px solid #3daee9; padding:8px; margin:4px; font-family:Monospace;'>" +
-            "<i>Math Formula:</i><br>" + math.trim() + "</div><br>";
+            "<i>" + mathLabel + ":</i><br>" + math.trim() + "</div><br>";
     });
 
     // 5. Inline Math ($ ... $)

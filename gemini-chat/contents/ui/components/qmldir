@@ -1,0 +1,3 @@
+module components
+MessageDelegate 1.0 MessageDelegate.qml
+InputArea 1.0 InputArea.qml

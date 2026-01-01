@@ -18,7 +18,11 @@
     - **Dosya Ekleme**: Görsel ekleme butonu ve arayüzü eklendi (Multimodal hazırlığı).
     - **Persona & Güvenlik**: Yapay zeka kişiliği belirleme ve güvenlik filtrelerini yönetme (Cookbook örnekli).
     - **JSON Modu**: Çıktıyı yapılandırılmış veri olarak almak için JSON modu desteği.
-    - **Yapılandırma**: API anahtarı girişi ve özelliklerin anlatıldığı "Öğren" sekmesi eklendi.
+    - **Yeniden Adlandırma**: Widget "Gemini Chat" olarak yeniden adlandırıldı ve ID'si güncellendi.
+    - **Mesaj Hizalaması**: Kullanıcı mesajları sağa, AI mesajları sola hizalanacak şekilde güncellendi.
+    - **Durdurma Butonu**: Yanıt oluşturulurken durdurma özelliği ve butonu eklendi.
+    - **Kılavuz (Guide)**: Kapsamlı API anahtarı alma kılavuzu ve eksik anahtar durumunda buton uyarısı eklendi.
+    - **Lokalizasyon**: 10 dilde tam senkron lokalizasyon desteği tamamlandı.
 
 ### EN-US
 - **File Search Widget (Modularization & Improvements)**:
@@ -36,7 +40,11 @@
     - **File Attach**: Added UI for attaching images (Multimodal prep).
     - **Persona & Safety**: Custom system instructions and configurable safety filters.
     - **JSON Mode**: Support for forced JSON output structure.
-    - **Configuration**: Enhanced settings with API Key input and a new "Learn" tab.
+    - **Renaming**: Renamed to "Gemini Chat" with updated widget ID.
+    - **Message Alignment**: User messages right-aligned, AI messages left-aligned.
+    - **Stop Button**: Added ability to abort AI responses with a stop button.
+    - **Guide**: Comprehensive API key guide tab and context-aware guide button added.
+    - **Localization**: Full 10-language synchronous localization support completed.
 
 ---
 

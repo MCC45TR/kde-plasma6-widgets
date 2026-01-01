@@ -89,13 +89,13 @@ PlasmoidItem {
     
     function onGeminiResponse(text) {
         isLoading = false
-        // The GeminiManager updates history, but we need to update our UI model?
-        // Actually GeminiManager manages a JS array history. We need to visualize it.
-        // It's better to push to ListModel when we send/receive.
         
-        // GeminiManager pushes the message to its internal history.
-        // But we need to parse markdown and update ListModel.
-        var formattedText = MarkdownParser.parse(text)
+        // Remove loading indicator if present
+        if (chatModel.count > 0 && chatModel.get(chatModel.count - 1).chatRole === "loading") {
+            chatModel.remove(chatModel.count - 1)
+        }
+
+        var formattedText = MarkdownParser.parse(text, root.tr("math_formula"))
         
         chatModel.append({
             "chatRole": "model",
@@ -116,43 +116,37 @@ PlasmoidItem {
     
         isLoading = true
         
-        // Prepare attachments for display & sending
         var imageUrl = ""
-        var attachmentData = []
-        
-        // Processing attachments
-        // Note: QML JS cannot read file content to base64 easily. 
-        // For real image upload, we'd need C++ plugin or FileReader (if available).
-        // BUT, since we claim support, we will implement a specific workaround or placeholder:
-        // We will display it locally. Sending to API requires Base64.
-        // If we can't get Base64, we can't send it to Gemini API from pure QML.
-        // ERROR: Pure QML widget cannot upload files unless we use specific KDE APIs (like reading file contents).
-        // Since we are limited, we'll assume for this iteration that we mostly DISPLAY it 
-        // and maybe try a specialized `XMLHttpRequest` hack to read it as blob? Too complex.
-        
-        // LIMITATION: We will send text only for now if image reading fails, 
-        // but UI will show "Image Attached" to simulate.
-        
-        // Display User Message
         if (attachments && attachments.length > 0) {
             imageUrl = attachments[0].url
         }
         
+        // 1. Add User Message
         chatModel.append({
             "chatRole": "user",
-            "chatText": MarkdownParser.parse(text),
+            "chatText": MarkdownParser.parse(text, root.tr("math_formula")),
             "chatImage": imageUrl
         })
         
-        // Send to Backend
-        // GeminiManager.sendMessage expects base64 for images. 
-        // We will pass empty attachments for now to avoid breaking strictly, 
-        // unless we have a way to convert.
+        // 2. Add Loading Indicator
+        chatModel.append({
+            "chatRole": "loading",
+            "chatText": "",
+            "chatImage": ""
+        })
+        
+        // 3. Send to Backend
         GeminiManager.sendMessage(text, [], onGeminiError)
     }
     
     function onGeminiError(msg) {
         isLoading = false
+        
+        // Remove loading indicator
+        if (chatModel.count > 0 && chatModel.get(chatModel.count - 1).chatRole === "loading") {
+            chatModel.remove(chatModel.count - 1)
+        }
+        
         chatModel.append({
             "chatRole": "error",
             "chatText": msg,
@@ -178,6 +172,11 @@ PlasmoidItem {
             }
         }
     ]
+
+    // Data Model
+    ListModel {
+        id: chatModel
+    }
 
     // Compact Representation
     compactRepresentation: CompactRepresentation {}
@@ -213,9 +212,39 @@ PlasmoidItem {
                 ComboBox {
                     id: modelSelector
                     Layout.fillWidth: true
-                    model: ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-1.0-pro"]
-                    currentIndex: model.indexOf(Plasmoid.configuration.selectedModel)
-                    onActivated: Plasmoid.configuration.selectedModel = currentText
+                    
+                    textRole: "text"
+                    valueRole: "value"
+                    
+                    model: [
+                        { text: "Gemini 2.0 Flash", value: "gemini-2.0-flash-exp" },
+                        { text: "Gemini 1.5 Pro", value: "gemini-1.5-pro" },
+                        { text: "Gemini 1.5 Flash", value: "gemini-1.5-flash" },
+                        { text: "Gemini 1.0 Pro", value: "gemini-1.0-pro" },
+                        { text: "Gemma 2", value: "gemma-2-9b-it" }
+                    ]
+                    
+                    // Sync with config on load and change
+                    Component.onCompleted: updateSelection()
+                    
+                    Connections {
+                        target: Plasmoid.configuration
+                        function onSelectedModelChanged() { modelSelector.updateSelection() }
+                    }
+                    
+                    function updateSelection() {
+                        for (var i = 0; i < model.length; i++) {
+                            if (model[i].value === Plasmoid.configuration.selectedModel) {
+                                currentIndex = i;
+                                return;
+                            }
+                        }
+                        currentIndex = 0; // Default fallback
+                    }
+                    
+                    onActivated: {
+                        Plasmoid.configuration.selectedModel = model[currentIndex].value
+                    }
                     
                     PlasmaComponents.ToolTip.visible: hovered
                     PlasmaComponents.ToolTip.text: root.tr("model_selection")
@@ -245,11 +274,9 @@ PlasmoidItem {
             
             ListView {
                 id: chatListView
-                model: ListModel { id: chatModel }
+                model: chatModel
                 delegate: Components.MessageDelegate {
-                    chatRole: model.chatRole
-                    chatText: model.chatText
-                    chatImage: model.chatImage
+                    width: chatListView.width
                     trFunc: root.tr
                 }
                 
@@ -262,13 +289,27 @@ PlasmoidItem {
                     })
                 }
                 
-                // Placeholder
-                Kirigami.PlaceholderMessage {
+                // Placeholder with Guide Button
+                ColumnLayout {
                     anchors.centerIn: parent
                     width: parent.width - 40
                     visible: chatListView.count === 0
-                    text: (!Plasmoid.configuration.apiKey) ? root.tr("api_key_missing") : root.tr("waiting")
-                    icon.name: "google-gemini" // or specific icon
+                    spacing: Kirigami.Units.largeSpacing
+                    
+                    Kirigami.PlaceholderMessage {
+                        Layout.fillWidth: true
+                        text: (!Plasmoid.configuration.apiKey) ? root.tr("api_key_missing") : root.tr("waiting")
+                        icon.name: "google-gemini"
+                    }
+                    
+                    // Guide Button (only visible when API key is missing)
+                    PlasmaComponents.Button {
+                        Layout.alignment: Qt.AlignHCenter
+                        visible: !Plasmoid.configuration.apiKey
+                        text: root.tr("guide")
+                        icon.name: "help-about"
+                        onClicked: Plasmoid.internalAction("configure").trigger()
+                    }
                 }
             }
         }
@@ -279,6 +320,16 @@ PlasmoidItem {
             isLoading: root.isLoading
             trFunc: root.tr
             onMessageSent: (text, attachments) => root.handleSend(text, attachments)
+            onStopRequested: root.handleStop()
+        }
+    }
+    
+    function handleStop() {
+        GeminiManager.abortRequest()
+        isLoading = false
+        // Remove loading indicator if present
+        if (chatModel.count > 0 && chatModel.get(chatModel.count - 1).chatRole === "loading") {
+            chatModel.remove(chatModel.count - 1)
         }
     }
 }
