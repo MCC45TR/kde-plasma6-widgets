@@ -96,7 +96,7 @@ ScrollView {
                             var isFileCategory = cat.indexOf("Dosya") >= 0 || cat.indexOf("Klasör") >= 0 || 
                                                 cat.indexOf("File") >= 0 || cat.indexOf("Folder") >= 0 ||
                                                 cat.indexOf("Document") >= 0 || cat.indexOf("Belge") >= 0
-                            return isFileCategory && model.url && model.url.toString().length > 0
+                            return !!(isFileCategory && model.url && model.url.toString().length > 0)
                         }
                         text: {
                             if (!model.url) return ""
@@ -123,9 +123,68 @@ ScrollView {
                 cursorShape: Qt.PointingHandCursor
                 
                 onClicked: {
-                    var matchId = model.duplicateId || model.display || ""
+                    var matchId = (model.duplicateId !== undefined ? model.duplicateId : model.display) || ""
                     var filePath = model.url || ""
                     resultsListRoot.itemClicked(index, model.display || "", model.decoration || "application-x-executable", model.category || "Diğer", matchId, filePath)
+                }
+
+                // File Preview Tooltip
+                ToolTip {
+                    id: previewTooltip
+                    visible: resultMouseArea.containsMouse && (model.url || "").length > 0 && (typeof resultsListRoot.parent.parent.previewEnabled !== 'undefined' ? resultsListRoot.parent.parent.previewEnabled : true)
+                    delay: 500
+                    timeout: 10000
+                    x: resultItem.width + 10
+                    y: (resultItem.height - height) / 2
+                    
+                    contentItem: Column {
+                        spacing: 6
+                        
+                        // Title
+                        Text {
+                            text: model.display || ""
+                            font.bold: true
+                            font.pixelSize: 12
+                            color: resultsListRoot.textColor
+                        }
+                        
+                        // Thumbnail for images
+                        Image {
+                            source: {
+                                var url = model.url || ""
+                                if (url.length === 0) return ""
+                                var ext = url.split('.').pop().toLowerCase()
+                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg"]
+                                if (imageExts.indexOf(ext) >= 0) {
+                                    return url
+                                }
+                                return ""
+                            }
+                            width: source.length > 0 ? Math.min(150, sourceSize.width) : 0
+                            height: source.length > 0 ? Math.min(100, sourceSize.height) : 0
+                            fillMode: Image.PreserveAspectFit
+                            visible: source.length > 0
+                            cache: true
+                            asynchronous: true
+                        }
+                        
+                        // Path
+                        Text {
+                            text: (model.url || "")
+                            font.pixelSize: 10
+                            color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
+                            wrapMode: Text.WrapAnywhere
+                            width: Math.min(300, implicitWidth)
+                            visible: (model.url || "").length > 0
+                        }
+                    }
+                    
+                    background: Rectangle {
+                        color: Kirigami.Theme.backgroundColor
+                        border.color: resultsListRoot.accentColor
+                        border.width: 1
+                        radius: 6
+                    }
                 }
             }
         }

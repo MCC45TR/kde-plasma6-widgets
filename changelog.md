@@ -15,6 +15,18 @@
     - **Ctrl+1/2**: Liste ve döşeme görünümü arasında hızlı geçiş.
     - **Ctrl+Space**: Dosya önizlemesini açma/kapama.
     - **Animasyonlu Focus Glow**: Seçili öğe için erişilebilirlik vurgusu.
+- **File Search Widget (Debug & Telemetry)**:
+    - `TelemetryManager.js` ve `DebugOverlay.qml` entegrasyonu tamamlandı.
+    - Gerçek zamanlı arama gecikmesi ölçümü ve istatistik takibi eklendi.
+    - Debug ve Telemetri verileri için tam Türkçe/İngilizce lokalizasyon desteği sağlandı.
+    - Debug verilerini yerel JSON dosyasına dışa aktarma (Save Dump) özelliği eklendi.
+    - JavaScript yardımcı dosyaları (`js/` klasörü) daha temiz bir yapı için organize edildi.
+- **File Search Widget (Hata Düzeltmeleri)**:
+    - Geçmişten uygulama başlatırken yaşanan yanlış sonuç açılma sorunu giderildi (Artık doğrudan uygulama adı hedefleniyor).
+    - Liste görünümünde öğelere tıklayarak açma sorunu çözüldü.
+    - QML ReferenceError ve focus metoduna dair çalışma zamanı hataları giderildi.
+- **Diğer**:
+    - `gemini-kchat-fork` (gemini-chat) projesi silindi.
 - **File Search Widget (Akıllı Arama - Smart Query)**:
     - **QueryHints Bileşeni**: KRunner prefix'lerini algılayan ipucu sistemi.
     - Desteklenen prefix'ler: `timeline:/today`, `gg:`, `dd:`, `kill`, `spell`, `#unicode`.

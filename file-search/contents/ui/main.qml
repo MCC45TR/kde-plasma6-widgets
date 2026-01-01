@@ -9,12 +9,12 @@ import org.kde.kirigami as Kirigami
 import org.kde.milou as Milou
 
 // Import localization data
-import "localization.js" as LocalizationData
+import "js/localization.js" as LocalizationData
 
 // Import utility modules
-import "utils.js" as Utils
-import "HistoryManager.js" as HistoryManager
-
+import "js/utils.js" as Utils
+import "js/HistoryManager.js" as HistoryManager
+import "js/TelemetryManager.js" as TelemetryManager
 // Import components
 import "components" as Components
 
@@ -161,6 +161,18 @@ PlasmoidItem {
         readonly property color delegateTextColor: mainRoot.textColor
         readonly property color delegateAccentColor: mainRoot.accentColor
         
+        // ===== TELEMETRY & DEBUG =====
+        property var telemetryStats: TelemetryManager.getStatsObject(Plasmoid.configuration.telemetryData || "{}")
+        property int lastSearchLatency: 0
+        property string activeBackend: "Milou"
+        property real searchStartTime: 0
+
+        function updateTelemetry(latency) {
+            var newData = TelemetryManager.recordSearch(Plasmoid.configuration.telemetryData || "{}", latency)
+            Plasmoid.configuration.telemetryData = newData
+            telemetryStats = TelemetryManager.getStatsObject(newData)
+        }
+        
         // ===== FOCUS MANAGEMENT =====
         // 0 = search input, 1 = results/tile view
         property int focusSection: 0
@@ -210,7 +222,10 @@ PlasmoidItem {
             resultCount: resultsList.count
             currentIndex: resultsList.currentIndex
             
-            onTextUpdated: (newText) => { mainRoot.searchText = newText }
+            onTextUpdated: (newText) => { 
+                popupContent.searchStartTime = new Date().getTime()
+                mainRoot.searchText = newText 
+            }
             onSearchSubmitted: (idx) => {
                 if (resultsList.count > 0) {
                     var modelIdx = resultsModel.index(idx, 0)
@@ -387,7 +402,7 @@ PlasmoidItem {
                 formatTimeFunc: mainRoot.formatHistoryTime
                 trFunc: mainRoot.tr
                 
-                onItemClicked: (item) => handleHistoryItemClick(item)
+                onItemClicked: (item) => historyContainer.handleHistoryItemClick(item)
                 onClearClicked: {
                     mainRoot.clearHistory()
                     historyContainer.categorizedHistory = []
@@ -407,7 +422,7 @@ PlasmoidItem {
                     accentColor: mainRoot.accentColor
                     trFunc: mainRoot.tr
                     
-                    onItemClicked: (item) => handleHistoryItemClick(item)
+                    onItemClicked: (item) => historyContainer.handleHistoryItemClick(item)
                     onClearClicked: {
                         mainRoot.clearHistory()
                         historyContainer.categorizedHistory = []
@@ -429,7 +444,9 @@ PlasmoidItem {
                 }
                 
                 // For apps and other items, search and run
-                var searchTerm = item.queryText || item.display || ""
+                // Use display name as search term to ensure we find the specific item again
+                // (queryText might be too broad, e.g. "c" -> "CMake" instead of "Calculator")
+                var searchTerm = item.display || item.queryText || ""
                 mainRoot.searchText = searchTerm
                 if (!mainRoot.isButtonMode) {
                     hiddenSearchInput.text = searchTerm
@@ -561,7 +578,20 @@ PlasmoidItem {
                 property var url: model.url || ""
                 property var duplicateId: model.duplicateId || ""
             }
-            onCountChanged: popupContent.refreshGroups()
+            onCountChanged: {
+                popupContent.refreshGroups()
+                
+                // Latency Measurement
+                if (popupContent.searchStartTime > 0) {
+                    var now = new Date().getTime()
+                    var latency = now - popupContent.searchStartTime
+                    if (latency > 0 && latency < 5000) {
+                        popupContent.lastSearchLatency = latency
+                        popupContent.updateTelemetry(latency)
+                        popupContent.searchStartTime = 0
+                    }
+                }
+            }
         }
         
         // ===== EMPTY STATE =====
@@ -575,8 +605,8 @@ PlasmoidItem {
         
         // ===== AUTO-FOCUS ON POPUP OPEN =====
         Component.onCompleted: {
-            if (!mainRoot.isButtonMode) {
-                hiddenSearchInput.focus()
+            if (!mainRoot.isButtonMode && hiddenSearchInput) {
+                hiddenSearchInput.forceActiveFocus()
             }
         }
         
@@ -590,6 +620,28 @@ PlasmoidItem {
                     mainRoot.searchText = ""
                 }
             }
+        }
+        
+        // ===== SEARCH LATENCY MEASUREMENT =====
+        // ===== END OF SEARCH LATENCY MEASUREMENT =====
+        
+        // ===== DEBUG OVERLAY =====
+        Components.DebugOverlay {
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: 8
+            z: 9999
+            visible: Plasmoid.configuration.debugOverlay && (Plasmoid.configuration.userProfile === 1)
+            
+            resultCount: resultsList.count
+            activeBackend: popupContent.activeBackend
+            lastLatency: popupContent.lastSearchLatency
+            viewModeName: mainRoot.isTileView ? "Tile" : "List"
+            displayModeName: mainRoot.isButtonMode ? "Button" : (mainRoot.isMediumMode ? "Medium" : (mainRoot.isWideMode ? "Wide" : "Extra Wide"))
+            
+            totalSearches: popupContent.telemetryStats.totalSearches || 0
+            avgLatency: popupContent.telemetryStats.averageLatency || 0
+            tr: mainRoot.tr
         }
     }
     

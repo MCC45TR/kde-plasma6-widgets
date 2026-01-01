@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-import "../localization.js" as LocalizationData
+import "../js/localization.js" as LocalizationData
 
 Kirigami.FormLayout {
     id: searchPage
@@ -50,10 +50,47 @@ Kirigami.FormLayout {
     }
     
     Label {
-        text: tr("search_info") || "Arama sonuçları Milou/KRunner tarafından sağlanmaktadır. Desteklenen prefix'ler: timeline:, gg:, dd:, kill, spell"
+        text: tr("search_info") || "Aşağıdaki KRunner komutlarını ve öneklerini (prefix) kullanabilirsiniz:"
         wrapMode: Text.Wrap
         Layout.fillWidth: true
-        opacity: 0.6
-        font.pixelSize: 11
+        opacity: 0.8
+    }
+
+    GridLayout {
+        columns: 2
+        rowSpacing: 5
+        columnSpacing: 10
+        Layout.fillWidth: true
+
+        // Header
+        Label { 
+            text: tr("prefix") 
+            font.bold: true 
+            color: Kirigami.Theme.highlightColor
+        }
+        Label { 
+            text: tr("description") || "Açıklama"
+            font.bold: true 
+            color: Kirigami.Theme.highlightColor
+        }
+
+        // Items
+        Label { text: "timeline:/today" ; font.family: "Monospace" }
+        Label { text: tr("prefix_timeline") || "Bugün değiştirilen dosyaları listeler" }
+
+        Label { text: "gg: [term]" ; font.family: "Monospace" }
+        Label { text: tr("prefix_google") || "Google üzerinde arama yapar" }
+
+        Label { text: "dd: [term]" ; font.family: "Monospace" }
+        Label { text: tr("prefix_ddg") || "DuckDuckGo üzerinde arama yapar" }
+
+        Label { text: "kill [pid]" ; font.family: "Monospace" }
+        Label { text: tr("prefix_kill") || "İşlemleri sonlandırır" }
+
+        Label { text: "spell [word]" ; font.family: "Monospace" }
+        Label { text: tr("prefix_spell") || "Yazım denetimi yapar" }
+
+        Label { text: "#[char]" ; font.family: "Monospace" }
+        Label { text: tr("prefix_unicode") || "Unicode karakter kodlarını arar" }
     }
 }

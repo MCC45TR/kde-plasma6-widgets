@@ -37,5 +37,9 @@
       <default>false</default>
       <label>Show debug overlay</label>
     </entry>
+    <entry name="telemetryData" type="String">
+      <default>{}</default>
+      <label>Usage statistics (local only)</label>
+    </entry>
   </group>
 </kcfg>

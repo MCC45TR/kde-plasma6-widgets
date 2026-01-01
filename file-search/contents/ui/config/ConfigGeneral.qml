@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 // Import localization data from parent directory
-import "../localization.js" as LocalizationData
+import "../js/localization.js" as LocalizationData
 
 Kirigami.FormLayout {
     id: page

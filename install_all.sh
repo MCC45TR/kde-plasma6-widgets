@@ -19,7 +19,7 @@ widgets=(
 "system-monitor"
 "plasma-advancedreboot"
 "minimal-analog-clock"
-"gemini-chat"
+"file-search"
 )
 
 BASE_DIR="/home/mcc45tr/Gitler/Projelerim/Plasma6Widgets"

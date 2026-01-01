@@ -114,13 +114,14 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [ ] Önceliklendirme
 - [ ] Özel ikon tanımı
 ### 📈 Debug & Telemetry (Opt-in)
-- [ ] Debug overlay:
+- [x] Debug overlay:
   - Aktif mod
   - Render edilen öğe sayısı
   - Index kaynağı
   - Arama gecikmesi
-- [ ] Lokal ve anonim kullanım verisi
-- [ ] **Dosya Önizleme**: Dosyaların üzerine gelince (hover) küçük bir önizleme veya detaylı bilgi pop-up'ı.
+- [x] Lokal ve anonim kullanım verisi
+- [x] **Dosya Önizleme**: Dosyaların üzerine gelince (hover) küçük bir önizleme veya detaylı bilgi pop-up'ı.
+- [x] **Debug Verilerini Kaydetme**: Debug verilerini kaydetme düğmesi eklenecek.
 
 ## 🎵 Music Player
 - [ ] **Şarkı Sözleri**: Çalan şarkının sözlerini (Lyrics) gösterecek bir panel/mod ekle (API entegrasyonu gerekebilir).
@@ -136,6 +137,7 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [ ] Tatillerin takvim görünümünde görsel olarak işaretlenmesi
 - [ ] Offline kullanım için **cache + fallback** mekanizması
 - [ ] Resmi tatiller, yerel ve harici etkinlikler için **renk kodlaması**
+
 ### ⚙️ Performans & Altyapı
 - [ ] Lazy loading ile ay bazlı veri yükleme
 - [ ] Gereksiz yeniden render’ların önlenmesi
@@ -175,14 +177,6 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [ ] **Markdown**: Kalın, italik, liste gibi basit Markdown formatlama desteği.
 - [ ] **Kategoriler**: Notları renklere veya etiketlere göre filtreleme.
 - [ ] **Dışa Aktar**: Notları `.txt` veya `.md` dosyası olarak kaydetme.
-
-##  Gemini KChat Fork
-- [x] **Kod Blokları**: Yanıtlardaki kod bloklarını renklendirme/ayırma.
-- [x] **Persona**: Sistem talimatları ile yapay zekaya kimlik kazandırma (Örn: Korsan gibi konuş).
-- [x] **Güvenlik**: Güvenlik filtrelerini (Taciz, Nefret vb.) yapılandırma.
-- [x] **JSON Modu**: Çıktıyı JSON formatına zorlama.
-- [ ] **Geçmiş**: Sohbet geçmişini kalıcı olarak diske kaydetme (şu an sadece oturum bazlı).
-- [ ] **Ses**: Sesli komut girişi (Speech-to-Text).
 
 ##  Notifications (Bildirimler)
 - [ ] **Gruplama**: Bildirimleri uygulamaya göre gruplama.
