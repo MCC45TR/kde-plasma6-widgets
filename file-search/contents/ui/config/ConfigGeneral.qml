@@ -30,6 +30,46 @@ Kirigami.FormLayout {
     
     // Icon size options
     readonly property var iconSizeModel: [16, 22, 32, 48, 64, 128]
+    
+    // Profile property
+    property alias cfg_userProfile: profileCombo.currentIndex
+    
+    // Profile Selector
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: page.tr("profile") || "Profil"
+    }
+    
+    ComboBox {
+        id: profileCombo
+        Kirigami.FormData.label: page.tr("user_profile") || "Kullanıcı Profili"
+        model: [
+            page.tr("profile_minimal") || "Minimal",
+            page.tr("profile_developer") || "Developer",
+            page.tr("profile_power_user") || "Power User"
+        ]
+        Layout.fillWidth: true
+    }
+    
+    Label {
+        text: {
+            switch(profileCombo.currentIndex) {
+                case 0: return page.tr("profile_minimal_desc") || "Basit arayüz, temel özellikler"
+                case 1: return page.tr("profile_developer_desc") || "Debug sekmesi aktif, geliştirici özellikleri"
+                case 2: return page.tr("profile_power_desc") || "Tüm özellikler aktif, gelişmiş ayarlar"
+                default: return ""
+            }
+        }
+        wrapMode: Text.Wrap
+        Layout.fillWidth: true
+        opacity: 0.7
+        font.pixelSize: 11
+    }
+    
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: page.tr("appearance") || "Görünüm"
+    }
 
     ComboBox {
         id: modeCombo

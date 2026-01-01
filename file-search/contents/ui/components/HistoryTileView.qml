@@ -45,19 +45,87 @@ FocusScope {
     
     property int totalItems: flatItemList.length
     
+    // Signals for Tab navigation
+    signal tabPressed()
+    signal shiftTabPressed()
+    signal viewModeChangeRequested(int mode)
+    
     focus: true
     
     // Keyboard handling
-    Keys.onUpPressed: moveSelection(-columnsInRow())
-    Keys.onDownPressed: moveSelection(columnsInRow())
+    Keys.onUpPressed: smartMoveVertical(-1)
+    Keys.onDownPressed: smartMoveVertical(1)
     Keys.onLeftPressed: moveSelection(-1)
     Keys.onRightPressed: moveSelection(1)
     Keys.onReturnPressed: activateCurrentItem()
     Keys.onEnterPressed: activateCurrentItem()
+    Keys.onTabPressed: (event) => {
+        if (event.modifiers & Qt.ShiftModifier) {
+            shiftTabPressed()
+        } else {
+            tabPressed()
+        }
+        event.accepted = true
+    }
+    Keys.onPressed: (event) => {
+        if (event.modifiers & Qt.ControlModifier) {
+            if (event.key === Qt.Key_1) {
+                viewModeChangeRequested(0)
+                event.accepted = true
+            } else if (event.key === Qt.Key_2) {
+                viewModeChangeRequested(1)
+                event.accepted = true
+            }
+        }
+    }
     
     function columnsInRow() {
         var itemWidth = iconSize + 48
         return Math.max(1, Math.floor(width / itemWidth))
+    }
+    
+    // Calculate current column position
+    function getCurrentColumn() {
+        if (totalItems === 0) return 0
+        var cols = columnsInRow()
+        var item = flatItemList[selectedFlatIndex]
+        if (!item) return 0
+        return item.itemIndex % cols
+    }
+    
+    // Smart vertical movement that maintains column position
+    function smartMoveVertical(direction) {
+        if (totalItems === 0) return
+        
+        var cols = columnsInRow()
+        var currentCol = getCurrentColumn()
+        var currentItem = flatItemList[selectedFlatIndex]
+        if (!currentItem) return
+        
+        var targetIndex = selectedFlatIndex + (direction * cols)
+        
+        if (targetIndex < 0) {
+            targetIndex = 0
+        } else if (targetIndex >= totalItems) {
+            targetIndex = totalItems - 1
+        }
+        
+        // Try to maintain column position
+        var targetItem = flatItemList[targetIndex]
+        if (targetItem) {
+            var targetCol = targetItem.itemIndex % cols
+            if (targetCol !== currentCol && direction !== 0) {
+                for (var i = targetIndex; i < Math.min(targetIndex + cols, totalItems) && i >= 0; i++) {
+                    var item = flatItemList[i]
+                    if (item && (item.itemIndex % cols) === currentCol) {
+                        targetIndex = i
+                        break
+                    }
+                }
+            }
+        }
+        
+        selectedFlatIndex = targetIndex
     }
     
     function moveSelection(delta) {
@@ -216,6 +284,7 @@ FocusScope {
                             property bool isSelected: historyTile.isItemSelected(histCategoryDelegate.catIdx, itemIdx)
                             
                             Rectangle {
+                                id: histTileBg
                                 anchors.fill: parent
                                 radius: 8
                                 color: {
@@ -227,6 +296,24 @@ FocusScope {
                                 }
                                 border.width: histTileDelegate.isSelected ? 2 : 0
                                 border.color: historyTile.accentColor
+                                
+                                Behavior on border.width { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
+                                Behavior on color { ColorAnimation { duration: 150 } }
+                                
+                                // Focus glow effect for accessibility
+                                Rectangle {
+                                    id: histFocusGlow
+                                    anchors.fill: parent
+                                    anchors.margins: -3
+                                    radius: parent.radius + 3
+                                    color: "transparent"
+                                    border.width: histTileDelegate.isSelected ? 2 : 0
+                                    border.color: Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.4)
+                                    visible: histTileDelegate.isSelected
+                                    opacity: visible ? 1 : 0
+                                    
+                                    Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
+                                }
                                 
                                 Column {
                                     anchors.centerIn: parent

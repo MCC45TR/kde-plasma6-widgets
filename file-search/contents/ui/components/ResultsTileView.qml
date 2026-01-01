@@ -47,25 +47,113 @@ FocusScope {
     property int totalItems: flatItemList.length
     property int selectedFlatIndex: 0
     
+    // Signals for Tab navigation
+    signal tabPressed()
+    signal shiftTabPressed()
+    signal viewModeChangeRequested(int mode)
+    
     focus: true
     
     // Keyboard handling
-    Keys.onUpPressed: moveSelection(-columnsInRow())
-    Keys.onDownPressed: moveSelection(columnsInRow())
+    Keys.onUpPressed: smartMoveVertical(-1)
+    Keys.onDownPressed: smartMoveVertical(1)
     Keys.onLeftPressed: moveSelection(-1)
     Keys.onRightPressed: moveSelection(1)
     Keys.onReturnPressed: activateCurrentItem()
     Keys.onEnterPressed: activateCurrentItem()
+    Keys.onTabPressed: (event) => {
+        if (event.modifiers & Qt.ShiftModifier) {
+            shiftTabPressed()
+        } else {
+            tabPressed()
+        }
+        event.accepted = true
+    }
+    Keys.onPressed: (event) => {
+        if (event.modifiers & Qt.ControlModifier) {
+            if (event.key === Qt.Key_1) {
+                viewModeChangeRequested(0)
+                event.accepted = true
+            } else if (event.key === Qt.Key_2) {
+                viewModeChangeRequested(1)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Space) {
+                // Toggle preview for selected item
+                previewForceVisible = !previewForceVisible
+                event.accepted = true
+            }
+        }
+    }
+    
+    // Preview visibility state
+    property bool previewForceVisible: false
     
     function columnsInRow() {
         var itemWidth = iconSize + 48
         return Math.max(1, Math.floor(width / itemWidth))
     }
     
+    // Calculate current column position
+    function getCurrentColumn() {
+        if (totalItems === 0) return 0
+        var cols = columnsInRow()
+        // Find position within current category row
+        var item = flatItemList[selectedFlatIndex]
+        if (!item) return 0
+        return item.itemIndex % cols
+    }
+    
+    // Smart vertical movement that maintains column position
+    function smartMoveVertical(direction) {
+        if (totalItems === 0) return
+        
+        var cols = columnsInRow()
+        var currentCol = getCurrentColumn()
+        var currentItem = flatItemList[selectedFlatIndex]
+        if (!currentItem) return
+        
+        // Find the next row in the same or different category
+        var targetIndex = selectedFlatIndex + (direction * cols)
+        
+        // Clamp to valid range
+        if (targetIndex < 0) {
+            targetIndex = 0
+        } else if (targetIndex >= totalItems) {
+            targetIndex = totalItems - 1
+        }
+        
+        // Try to maintain column position
+        var targetItem = flatItemList[targetIndex]
+        if (targetItem) {
+            var targetCol = targetItem.itemIndex % cols
+            // If we moved to a different column, try to find same column
+            if (targetCol !== currentCol && direction !== 0) {
+                // Look for item in same column in next row
+                for (var i = targetIndex; i < Math.min(targetIndex + cols, totalItems) && i >= 0; i++) {
+                    var item = flatItemList[i]
+                    if (item && (item.itemIndex % cols) === currentCol) {
+                        targetIndex = i
+                        break
+                    }
+                }
+            }
+        }
+        
+        selectedFlatIndex = targetIndex
+        ensureItemVisible()
+    }
+    
     function moveSelection(delta) {
         if (totalItems === 0) return
         var newIndex = Math.max(0, Math.min(totalItems - 1, selectedFlatIndex + delta))
         selectedFlatIndex = newIndex
+        ensureItemVisible()
+    }
+    
+    // Scroll to make selected item visible
+    function ensureItemVisible() {
+        // Will be handled by ListView's positionViewAtIndex if we refactor
+        // For now, the ScrollView should follow focus naturally
     }
     
     function activateCurrentItem() {
@@ -187,6 +275,24 @@ FocusScope {
                                 border.width: tileDelegate.isSelected ? 2 : 0
                                 border.color: resultsTileRoot.accentColor
                                 
+                                Behavior on border.width { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
+                                Behavior on color { ColorAnimation { duration: 150 } }
+                                
+                                // Focus glow effect for accessibility
+                                Rectangle {
+                                    id: focusGlow
+                                    anchors.fill: parent
+                                    anchors.margins: -3
+                                    radius: parent.radius + 3
+                                    color: "transparent"
+                                    border.width: tileDelegate.isSelected ? 2 : 0
+                                    border.color: Qt.rgba(resultsTileRoot.accentColor.r, resultsTileRoot.accentColor.g, resultsTileRoot.accentColor.b, 0.4)
+                                    visible: tileDelegate.isSelected
+                                    opacity: visible ? 1 : 0
+                                    
+                                    Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
+                                }
+                                
                                 Column {
                                     anchors.centerIn: parent
                                     spacing: 6
@@ -227,13 +333,16 @@ FocusScope {
                                 // File Preview Tooltip
                                 ToolTip {
                                     id: previewTooltip
-                                    visible: tileMouseArea.containsMouse && (modelData.url || "").length > 0
-                                    delay: 500
-                                    timeout: 5000
+                                    visible: (tileMouseArea.containsMouse || (tileDelegate.isSelected && resultsTileRoot.previewForceVisible)) && (modelData.url || "").length > 0
+                                    delay: tileDelegate.isSelected && resultsTileRoot.previewForceVisible ? 0 : 500
+                                    timeout: 10000
+                                    x: tileDelegate.width + 4
+                                    y: 0
                                     
                                     contentItem: Column {
-                                        spacing: 4
+                                        spacing: 6
                                         
+                                        // Title
                                         Text {
                                             text: modelData.display || ""
                                             font.bold: true
@@ -241,6 +350,28 @@ FocusScope {
                                             color: resultsTileRoot.textColor
                                         }
                                         
+                                        // Thumbnail for images
+                                        Image {
+                                            id: thumbnailImage
+                                            source: {
+                                                var url = modelData.url || ""
+                                                if (url.length === 0) return ""
+                                                var ext = url.split('.').pop().toLowerCase()
+                                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg"]
+                                                if (imageExts.indexOf(ext) >= 0) {
+                                                    return url
+                                                }
+                                                return ""
+                                            }
+                                            width: source.length > 0 ? Math.min(150, sourceSize.width) : 0
+                                            height: source.length > 0 ? Math.min(100, sourceSize.height) : 0
+                                            fillMode: Image.PreserveAspectFit
+                                            visible: source.length > 0
+                                            cache: true
+                                            asynchronous: true
+                                        }
+                                        
+                                        // Category
                                         Text {
                                             text: resultsTileRoot.trFunc("category") + ": " + (modelData.category || "")
                                             font.pixelSize: 10
@@ -248,6 +379,21 @@ FocusScope {
                                             visible: (modelData.category || "").length > 0
                                         }
                                         
+                                        // File Type (from extension)
+                                        Text {
+                                            property string fileExt: {
+                                                var url = modelData.url || ""
+                                                if (url.length === 0) return ""
+                                                var parts = url.split('.')
+                                                return parts.length > 1 ? parts.pop().toUpperCase() : ""
+                                            }
+                                            text: resultsTileRoot.trFunc("file_type") + ": " + fileExt
+                                            font.pixelSize: 10
+                                            color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                            visible: fileExt.length > 0
+                                        }
+                                        
+                                        // Path
                                         Text {
                                             text: resultsTileRoot.trFunc("path") + ": " + (modelData.url || "")
                                             font.pixelSize: 10
@@ -255,6 +401,15 @@ FocusScope {
                                             wrapMode: Text.WrapAnywhere
                                             width: Math.min(300, implicitWidth)
                                             visible: (modelData.url || "").length > 0
+                                        }
+                                        
+                                        // Shortcut hint
+                                        Text {
+                                            text: "💡 " + resultsTileRoot.trFunc("preview_shortcut")
+                                            font.pixelSize: 9
+                                            font.italic: true
+                                            color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
+                                            visible: !resultsTileRoot.previewForceVisible
                                         }
                                     }
                                     

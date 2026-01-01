@@ -23,6 +23,9 @@ Rectangle {
     signal escapePressed()
     signal upPressed()
     signal downPressed()
+    signal tabPressedSignal()
+    signal shiftTabPressedSignal()
+    signal viewModeChangeRequested(int mode)
     
     height: 56
     color: Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.95)
@@ -78,6 +81,27 @@ Rectangle {
             
             Keys.onUpPressed: {
                 root.upPressed()
+            }
+            
+            Keys.onTabPressed: (event) => {
+                if (event.modifiers & Qt.ShiftModifier) {
+                    root.shiftTabPressedSignal()
+                } else {
+                    root.tabPressedSignal()
+                }
+                event.accepted = true
+            }
+            
+            Keys.onPressed: (event) => {
+                if (event.modifiers & Qt.ControlModifier) {
+                    if (event.key === Qt.Key_1) {
+                        root.viewModeChangeRequested(0)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_2) {
+                        root.viewModeChangeRequested(1)
+                        event.accepted = true
+                    }
+                }
             }
         }
         

@@ -11,6 +11,9 @@ TextField {
     signal escapePressed()
     signal upPressed()
     signal downPressed()
+    signal tabPressedSignal()
+    signal shiftTabPressedSignal()
+    signal viewModeChangeRequested(int mode)
     
     // For referencing result count
     property int resultCount: 0
@@ -42,6 +45,27 @@ TextField {
     
     Keys.onUpPressed: {
         hiddenInput.upPressed()
+    }
+    
+    Keys.onTabPressed: (event) => {
+        if (event.modifiers & Qt.ShiftModifier) {
+            hiddenInput.shiftTabPressedSignal()
+        } else {
+            hiddenInput.tabPressedSignal()
+        }
+        event.accepted = true
+    }
+    
+    Keys.onPressed: (event) => {
+        if (event.modifiers & Qt.ControlModifier) {
+            if (event.key === Qt.Key_1) {
+                hiddenInput.viewModeChangeRequested(0)
+                event.accepted = true
+            } else if (event.key === Qt.Key_2) {
+                hiddenInput.viewModeChangeRequested(1)
+                event.accepted = true
+            }
+        }
     }
     
     // Force focus

@@ -161,6 +161,41 @@ PlasmoidItem {
         readonly property color delegateTextColor: mainRoot.textColor
         readonly property color delegateAccentColor: mainRoot.accentColor
         
+        // ===== FOCUS MANAGEMENT =====
+        // 0 = search input, 1 = results/tile view
+        property int focusSection: 0
+        
+        function cycleFocusSection(forward) {
+            if (forward) {
+                if (focusSection === 0) {
+                    // From input to results
+                    focusSection = 1
+                    if (mainRoot.isTileView && mainRoot.searchText.length > 0 && tileResultsLoader.item) {
+                        tileResultsLoader.item.forceActiveFocus()
+                    } else if (mainRoot.searchText.length === 0 && mainRoot.searchHistory.length > 0) {
+                        // Focus history
+                        if (mainRoot.isTileView && historyTileLoader.item) {
+                            historyTileLoader.item.forceActiveFocus()
+                        }
+                    }
+                }
+            } else {
+                if (focusSection === 1) {
+                    // From results back to input
+                    focusSection = 0
+                    if (mainRoot.isButtonMode) {
+                        buttonModeSearchInput.focusInput()
+                    } else {
+                        hiddenSearchInput.forceActiveFocus()
+                    }
+                }
+            }
+        }
+        
+        function changeViewMode(mode) {
+            Plasmoid.configuration.viewMode = mode
+        }
+        
         // ===== SEARCH MODELS =====
         Milou.ResultsModel {
             id: resultsModel
@@ -196,6 +231,9 @@ PlasmoidItem {
             }
             onUpPressed: resultsList.moveUp()
             onDownPressed: resultsList.moveDown()
+            onTabPressedSignal: popupContent.cycleFocusSection(true)
+            onShiftTabPressedSignal: popupContent.cycleFocusSection(false)
+            onViewModeChangeRequested: (mode) => popupContent.changeViewMode(mode)
         }
         
         // ===== BUTTON MODE SEARCH INPUT =====
@@ -240,6 +278,9 @@ PlasmoidItem {
             }
             onUpPressed: resultsList.moveUp()
             onDownPressed: resultsList.moveDown()
+            onTabPressedSignal: popupContent.cycleFocusSection(true)
+            onShiftTabPressedSignal: popupContent.cycleFocusSection(false)
+            onViewModeChangeRequested: (mode) => popupContent.changeViewMode(mode)
             
             Connections {
                 target: mainRoot
@@ -274,11 +315,28 @@ PlasmoidItem {
             }
         }
         
+        // ===== QUERY HINTS (KRunner Syntax) =====
+        Components.QueryHints {
+            id: queryHints
+            anchors.top: primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top
+            anchors.topMargin: 8
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: 12
+            anchors.rightMargin: 12
+            
+            searchText: mainRoot.searchText
+            textColor: mainRoot.textColor
+            accentColor: mainRoot.accentColor
+            bgColor: mainRoot.bgColor
+            trFunc: mainRoot.tr
+        }
+        
         // ===== RESULTS LIST VIEW =====
         Components.ResultsListView {
             id: resultsList
-            anchors.top: primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top
-            anchors.topMargin: primaryResultPreview.visible ? 8 : 12
+            anchors.top: queryHints.visible ? queryHints.bottom : (primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top)
+            anchors.topMargin: (queryHints.visible || primaryResultPreview.visible) ? 8 : 12
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: mainRoot.isButtonMode ? buttonModeSearchInput.top : parent.bottom
@@ -336,21 +394,28 @@ PlasmoidItem {
                 }
             }
             
-            // History Tile View
-            Components.HistoryTileView {
+            // History Tile View - LAZY LOADED
+            Loader {
+                id: historyTileLoader
                 anchors.fill: parent
-                visible: mainRoot.isTileView
+                active: mainRoot.isTileView
                 
-                categorizedHistory: historyContainer.categorizedHistory
-                iconSize: mainRoot.iconSize
-                textColor: mainRoot.textColor
-                accentColor: mainRoot.accentColor
-                trFunc: mainRoot.tr
-                
-                onItemClicked: (item) => handleHistoryItemClick(item)
-                onClearClicked: {
-                    mainRoot.clearHistory()
-                    historyContainer.categorizedHistory = []
+                sourceComponent: Components.HistoryTileView {
+                    categorizedHistory: historyContainer.categorizedHistory
+                    iconSize: mainRoot.iconSize
+                    textColor: mainRoot.textColor
+                    accentColor: mainRoot.accentColor
+                    trFunc: mainRoot.tr
+                    
+                    onItemClicked: (item) => handleHistoryItemClick(item)
+                    onClearClicked: {
+                        mainRoot.clearHistory()
+                        historyContainer.categorizedHistory = []
+                    }
+                    
+                    onTabPressed: popupContent.cycleFocusSection(true)
+                    onShiftTabPressed: popupContent.cycleFocusSection(false)
+                    onViewModeChangeRequested: (mode) => popupContent.changeViewMode(mode)
                 }
             }
             
@@ -390,25 +455,34 @@ PlasmoidItem {
         }
         
         // ===== TILE VIEW FOR RESULTS =====
-        Components.ResultsTileView {
-            id: tileResults
+        // ===== TILE VIEW - LAZY LOADED =====
+        Loader {
+            id: tileResultsLoader
             anchors.fill: parent
             anchors.margins: 12
-            visible: mainRoot.isTileView && mainRoot.searchText.length > 0
+            active: mainRoot.isTileView && mainRoot.searchText.length > 0
             
-            categorizedData: popupContent.categorizedData
-            iconSize: mainRoot.iconSize
-            textColor: mainRoot.textColor
-            accentColor: mainRoot.accentColor
-            trFunc: mainRoot.tr
-            searchText: mainRoot.searchText
-            
-            onItemClicked: (index, display, decoration, category, matchId, filePath) => {
-                mainRoot.addToHistory(display, decoration, category, matchId, filePath, null, mainRoot.searchText)
-                var idx = resultsModel.index(index, 0)
-                resultsModel.run(idx)
-                mainRoot.searchText = ""
-                mainRoot.expanded = false
+            sourceComponent: Components.ResultsTileView {
+                id: tileResults
+                
+                categorizedData: popupContent.categorizedData
+                iconSize: mainRoot.iconSize
+                textColor: mainRoot.textColor
+                accentColor: mainRoot.accentColor
+                trFunc: mainRoot.tr
+                searchText: mainRoot.searchText
+                
+                onItemClicked: (index, display, decoration, category, matchId, filePath) => {
+                    mainRoot.addToHistory(display, decoration, category, matchId, filePath, null, mainRoot.searchText)
+                    var idx = resultsModel.index(index, 0)
+                    resultsModel.run(idx)
+                    mainRoot.searchText = ""
+                    mainRoot.expanded = false
+                }
+                
+                onTabPressed: popupContent.cycleFocusSection(true)
+                onShiftTabPressed: popupContent.cycleFocusSection(false)
+                onViewModeChangeRequested: (mode) => popupContent.changeViewMode(mode)
             }
         }
         

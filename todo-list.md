@@ -9,6 +9,36 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [ ] **Modülerleştirme**: Büyük `main.qml` dosyalarını küçük, yönetilebilir bileşenlere (`components/` klasörü altına) ayır.
 - [ ] **Versiyonlama**: Tüm `metadata.json` dosyalarındaki versiyonları 1.1.0 standardına çek.
 - [ ] **Kod Temizliği**: Kullanılmayan `i18n` çağrılarını ve gereksiz importları temizle.
+### 📦 Yapılandırma & Ayarlar
+- [ ] **Unified Config Schema**: Tüm `config.qml` dosyaları ortak şema kullansın.
+- [ ] **Backward Compatibility**: Eski config’ler otomatik migrate edilsin.
+- [ ] **Reset-to-default**: Her widget için tek tuşla fabrika ayarları.
+- [ ] **Per-Widget Debug Toggle**: Ayarlardan debug overlay aç/kapat.
+### 🔐 Güvenlik & Sağlamlık
+- [ ] **Input Sanitization**: Kullanıcı girdileri normalize edilsin.
+- [ ] **Fail-Safe Defaults**: Hata durumunda safe mode.
+- [ ] **Exception Guard**: JS hataları UI’yi kilitlememeli.
+- [ ] **Permission Awareness**: Dosya / servis erişimlerinde açık hata mesajları.
+### 📄 Dokümantasyon & Bakım
+- [ ] **Widget README Template**: Her widget için standart README.
+- [ ] **Architecture Notes**: Mimari kararların dokümantasyonu.
+- [ ] **Changelog Discipline**: breaking / feature / fix ayrımı.
+- [ ] **Deprecation Policy**: Kaldırılacak API’lerin önceden işaretlenmesi.
+### 🧪 Geliştirici Deneyimi
+- [ ] **Global Debug Mode**: Ortak `DEBUG` flag (focus, bounds, timing overlay).
+- [ ] **Logging Utility**: Seviyeli logger (`info / warn / error`).
+- [ ] **Mock Data Providers**: İzole testler için sahte veri kaynakları.
+- [ ] **Dev-only Shortcuts**: Reload, layout inspect, state dump kısayolları.
+### 🌐 Lokalizasyon & Metin Yönetimi
+- [ ] **Key Naming Convention**: `widget.section.action.label` formatı.
+- [ ] **Missing Translation Detector**: Eksik çeviri varsa dev modda uyarı.
+- [ ] **RTL Readiness**: RTL diller için layout testleri.
+- [ ] **Plural Rules Audit**: Çoğul kurallarının doğrulanması.
+### ⚙️ Performans & Stabilite
+- [ ] **Lazy Initialization**: Görünmeyen bileşenler `Loader` ile gecikmeli yüklensin.
+- [ ] **Binding Audit**: Aşırı re-evaluate olan binding’ler refactor edilsin.
+- [ ] **Animation Budget**: Aynı anda çalışan animasyon sayısı sınırlandırılsın.
+- [ ] **Memory Watchpoints**: Image cache ve model lifecycle kontrolü.
 
 ## 🔍 File Finder (File Search)
 - [x] UI Modülerleştirmesi (CompactView, ResultsListView vb.)
@@ -16,18 +46,16 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [x] Geçmiş Yönetimi Modülü
 - [x] Kategori Filtreleme (kategori başlığına tıklayarak gizle/göster)
 - [x] Klavye Navigasyonu (temel destek)
-- [ ] Döşeme görünümünde ok tuşları ile **tam yönlü gezinme**
-- [ ] Focus state senkronizasyonu (Tile / List / Compact)
-- [ ] `Tab / Shift+Tab` ile bölümler arası geçiş
-- [ ] `Ctrl + 1 / 2 / 3` ile görünüm modu değiştirme
-- [ ] Aktif öğe için erişilebilirlik vurgusu (focus highlight)
+- [x] Döşeme görünümünde ok tuşları ile **tam yönlü gezinme**
+- [x] Focus state senkronizasyonu (Tile / List / Compact)
+- [x] `Tab / Shift+Tab` ile bölümler arası geçiş
+- [x] `Ctrl + 1 / 2` ile görünüm modu değiştirme
+- [x] Aktif öğe için erişilebilirlik vurgusu (focus highlight)
 ### 🔎 Akıllı Arama Girişi (Smart Query)
-- [ ] Gelişmiş sözdizimi:
-  - `type:pdf`
-  - `size>10MB`
-  - `date:last7days`
-- [ ] KRunner uyumlu query parsing
-- [ ] Hatalı sözdizimi için inline uyarı mesajları
+- [x] Gelişmiş sözdizimi:
+  - KRunner native: `timeline:/today`, `gg:`, `dd:`, `kill`, `spell`, `#unicode`
+- [x] KRunner uyumlu query parsing
+- [x] Hatalı sözdizimi için inline uyarı mesajları
 ### 📊 Sonuç Önceliklendirme
 - [ ] Skor bazlı sıralama:
   - Son kullanılan
@@ -50,31 +78,37 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
   - Yol kopyala
   - Etiketle
 ### 👁️ Hover / Focus Önizleme
-- [ ] Hover ile küçük bilgi pop-up’ı:
+- [x] Hover ile küçük bilgi pop-up’ı:
   - Dosya türü
   - Boyut
   - Son değiştirilme tarihi
   - Varsayılan uygulama
-- [ ] Görseller için thumbnail cache
-- [ ] Klavye ile tetikleme (`Space`)
+- [x] Görseller için thumbnail cache
+- [x] Klavye ile tetikleme (`Ctrl+Space`)
 ### 🚀 Performans İyileştirmeleri
-- [ ] Lazy loading
-- [ ] Virtualized list rendering
-- [ ] Büyük sonuç setleri için incremental render
+- [x] Lazy loading (Loader ile)
+- [x] Virtualized list rendering (ListView yerleşik)
+- [x] Büyük sonuç setleri için incremental render
 ### 🗂️ Arama Backend Yönetimi
 - [ ] Baloo entegrasyonu
 - [ ] Fallback filesystem search
 - [ ] Ayarlar üzerinden backend seçimi
 - [ ] Index yoksa graceful degrade
 ### 🎨 Görünüm Profilleri
-- [ ] Profil setleri:
+- [x] Ayarlar üzerinden profil seçimi (Genel sekemsi adı "Görünüm" olarak değiştirilecek)
+- [x] Ayarlar'a "Arama" sekmesi eklenecek (arama sekmesi altında arama algotiması ve sonuç listesi ayarları yer alacak)
+- [x] Profil setleri:
   - Minimal
-  - Developer
+  - Developer 
+   - Developer mod seçildiğinde ayarlar'da debug sekmesi açılacak ve özellikleri kullanıcı tarafından ayarlanabilecektir.
+   - Debug verilerini $HOME dizinine DUMP'et düğmesi bu sekme altında görünecektir.
   - Power User
-- [ ] Profil bazlı:
+- [x] Profil bazlı:
   - Varsayılan filtreler
   - Önizleme açık/kapalı
   - Tile yoğunluğu
+  - Ayarlada kalvuz sekmesi
+   - Vidgetin tüm özellikleri lokalizasyonla kullanıcıya açıklanacak
 ### 🧷 Kategori Bazlı Ayarlar
 - [ ] Kategori özel görünürlük
 - [ ] Önceliklendirme
@@ -95,9 +129,18 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [ ] **Seek Bar**: İlerleme çubuğunda tıklanan yere tam saniyesinde atlama hassasiyeti artırılmalı.
 
 ## 🗓️ Calendar (Takvim)
-- [ ] **Resmi Tatiller**: Yerel bir JSON dosyasından veya API'den resmi tatilleri çekip takvimde işaretle.
-- [ ] **Etkinlik Yönetimi**: Widget üzerinden basit etkinlik/hatırlatıcı ekleme arayüzü (yerel depolama ile).
-- [ ] **Dış Servisler**: İsteğe bağlı (opsiyonel) Google Calendar veya iCal aboneliği desteği (Sadece okuma).
+### 📅 Resmi Tatiller
+- [ ] Yerel **JSON tabanlı tatil veri kaynağı** desteği
+- [ ] Opsiyonel **uzak API** üzerinden resmi tatil çekme
+- [ ] Ülke / bölge bazlı tatil seti seçimi
+- [ ] Tatillerin takvim görünümünde görsel olarak işaretlenmesi
+- [ ] Offline kullanım için **cache + fallback** mekanizması
+- [ ] Resmi tatiller, yerel ve harici etkinlikler için **renk kodlaması**
+### ⚙️ Performans & Altyapı
+- [ ] Lazy loading ile ay bazlı veri yükleme
+- [ ] Gereksiz yeniden render’ların önlenmesi
+- [ ] Büyük etkinlik listeleri için optimized model yapısı
+- [ ] Tatil / etkinlik veri kaynağı test modu
 
 ## 🔋 Battery (Pil)
 - [ ] **Çevre Birimleri**: Bluetooth kulaklık, mouse, klavye gibi cihazların pil seviyelerini de listede göster.

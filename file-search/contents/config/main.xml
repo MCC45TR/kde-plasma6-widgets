@@ -25,5 +25,17 @@
       <default>22</default>
       <label>List Icon Size in pixels</label>
     </entry>
+    <entry name="userProfile" type="Int">
+      <default>0</default>
+      <label>User Profile: 0=Minimal, 1=Developer, 2=Power User</label>
+    </entry>
+    <entry name="previewEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable file preview on hover</label>
+    </entry>
+    <entry name="debugOverlay" type="Bool">
+      <default>false</default>
+      <label>Show debug overlay</label>
+    </entry>
   </group>
 </kcfg>

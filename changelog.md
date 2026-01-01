@@ -9,26 +9,56 @@
     - Geçmiş yönetimi `HistoryManager.js` modülüne taşınarak kod yapısı temizlendi.
     - Yapılandırma ekranı ve önizlemeler tamamen yenilendi ve senkron çeviri desteği eklendi.
     - Varsayılan görünüm modu "Dar" (Medium) ve varsayılan ikon boyutları (Liste: 22, Döşeme: 48) olarak güncellendi.
+- **File Search Widget (Gelişmiş Klavye Navigasyonu)**:
+    - **Akıllı Tile Gezinme**: Döşeme görünümünde ↑↓←→ tuşlarıyla sütun pozisyonunu koruyarak gezinme.
+    - **Tab/Shift+Tab**: Arama girişi ile sonuçlar arasında geçiş.
+    - **Ctrl+1/2**: Liste ve döşeme görünümü arasında hızlı geçiş.
+    - **Ctrl+Space**: Dosya önizlemesini açma/kapama.
+    - **Animasyonlu Focus Glow**: Seçili öğe için erişilebilirlik vurgusu.
+- **File Search Widget (Akıllı Arama - Smart Query)**:
+    - **QueryHints Bileşeni**: KRunner prefix'lerini algılayan ipucu sistemi.
+    - Desteklenen prefix'ler: `timeline:/today`, `gg:`, `dd:`, `kill`, `spell`, `#unicode`.
+    - Bilinmeyen prefix'ler için uyarı mesajı.
+- **File Search Widget (Hover Önizleme)**:
+    - Dosya üzerine hover ile gelişmiş tooltip (dosya türü, yol, thumbnail).
+    - Görsel dosyalar için thumbnail önizleme (PNG/JPG/GIF/WebP).
+    - Ctrl+Space ile klavye tetiklemeli önizleme.
+- **File Search Widget (Performans İyileştirmeleri)**:
+    - Tile view'lar için `Loader` ile lazy loading.
+    - ListView yerleşik virtualization desteği.
+    - Milou limit=50 ile incremental render.
+- **File Search Widget (Görünüm Profilleri)**:
+    - **Profil Sistemi**: Minimal / Developer / Power User profilleri.
+    - **Yeni Config Sekmeleri**: Görünüm, Arama, Debug, Kılavuz.
+    - **Debug Sekmesi**: Debug overlay toggle, debug verilerini kaydetme düğmesi (Developer modunda aktif).
+    - **Kılavuz Sekmesi**: Tüm klavye kısayolları, arama prefix'leri ve profil açıklamaları.
+    - 30+ yeni lokalizasyon key'i (EN/TR/DE/FR ve diğer 6 dil).
 
-### TR-TR
-- **Gemini Chat (Gelişmiş Destek)**:
-    - **Matematik Gösterimi**: `$$...$$` formatındaki matematiksel ifadeler için özel blok görünümü eklendi.
-    - **Model Seçimi**: Widget üzerinden anlık olarak Gemini modelleri (Flash, Pro vb.) arasında geçiş yapma özelliği getirildi.
-    - **Lokalizasyon**: Tam Türkçe dil desteği sağlandı (`localization.js`).
-    - **Dosya Ekleme**: Görsel ekleme butonu ve arayüzü eklendi (Multimodal hazırlığı).
-    - **Persona & Güvenlik**: Yapay zeka kişiliği belirleme ve güvenlik filtrelerini yönetme (Cookbook örnekli).
-    - **JSON Modu**: Çıktıyı yapılandırılmış veri olarak almak için JSON modu desteği.
-    - **Yeniden Adlandırma**: Widget "Gemini Chat" olarak yeniden adlandırıldı ve ID'si güncellendi.
-    - **Mesaj Hizalaması**: Kullanıcı mesajları sağa, AI mesajları sola hizalanacak şekilde güncellendi.
-    - **Durdurma Butonu**: Yanıt oluşturulurken durdurma özelliği ve butonu eklendi.
-    - **Kılavuz (Guide)**: Kapsamlı API anahtarı alma kılavuzu ve eksik anahtar durumunda buton uyarısı eklendi.
-    - **Lokalizasyon**: 10 dilde tam senkron lokalizasyon desteği tamamlandı.
-- **File Search Widget (İleri Düzey İyileştirmeler)**:
-    - **Klavye Navigasyonu**: Döşeme görünümünde ok tuşlarıyla gezinme (↑ ↓ ← →) ve Enter ile açma.
-    - **Kategori Daraltma/Genişletme**: Kategori başlıklarına tıklayarak gizleme/gösterme özelliği eklendi.
-    - **Dosya Önizleme Tooltip**: Döşeme öğelerinin üzerine gelindiğinde dosya adı, kategori ve yol bilgisi gösteriliyor.
-    - **Görsel İyileştirmeler**: Seçili öğe vurgusu, kategori ok ikonları ve öğe sayacı eklendi.
-    - **Lokalizasyon**: "category" ve "path" anahtarları 10 dile çevrildi.
+### EN-US
+- **File Search Widget (Advanced Keyboard Navigation)**:
+    - **Smart Tile Navigation**: Arrow key navigation (↑↓←→) maintaining column position in tile view.
+    - **Tab/Shift+Tab**: Section cycling between search input and results.
+    - **Ctrl+1/2**: Quick view mode switching between List and Tile.
+    - **Ctrl+Space**: Toggle file preview for selected item.
+    - **Animated Focus Glow**: Accessibility highlight for selected items.
+- **File Search Widget (Smart Query)**:
+    - **QueryHints Component**: Hint system detecting KRunner prefixes.
+    - Supported prefixes: `timeline:/today`, `gg:`, `dd:`, `kill`, `spell`, `#unicode`.
+    - Warning message for unknown prefixes.
+- **File Search Widget (Hover Preview)**:
+    - Enhanced tooltip on hover (file type, path, thumbnail).
+    - Image thumbnail preview for visual files (PNG/JPG/GIF/WebP).
+    - Ctrl+Space keyboard-triggered preview.
+- **File Search Widget (Performance Improvements)**:
+    - Lazy loading with `Loader` for tile views.
+    - Built-in ListView virtualization support.
+    - Incremental rendering with Milou limit=50.
+- **File Search Widget (View Profiles)**:
+    - **Profile System**: Minimal / Developer / Power User profiles.
+    - **New Config Tabs**: Appearance, Search, Debug, Help.
+    - **Debug Tab**: Debug overlay toggle, save debug data button (active in Developer mode).
+    - **Help Tab**: All keyboard shortcuts, search prefixes, and profile descriptions.
+    - 30+ new localization keys (EN/TR/DE/FR and 6 other languages).
 
 ### EN-US
 - **File Search Widget (Modularization & Improvements)**:

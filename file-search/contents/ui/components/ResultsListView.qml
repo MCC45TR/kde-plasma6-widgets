@@ -91,6 +91,7 @@ ScrollView {
                     // Parent folder for files
                     Text {
                         visible: {
+                            if (!model) return false
                             var cat = model.category || ""
                             var isFileCategory = cat.indexOf("Dosya") >= 0 || cat.indexOf("Klasör") >= 0 || 
                                                 cat.indexOf("File") >= 0 || cat.indexOf("Folder") >= 0 ||
