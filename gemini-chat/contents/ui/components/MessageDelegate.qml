@@ -10,10 +10,16 @@ Item {
     id: root
     
     // Bind directly to model to ensure data is received
-    property string chatRole: model.chatRole || "error"
-    property string chatText: model.chatText || ""
-    property var chatImage: model.chatImage || null
+    property string chatRole: model.chatRole !== undefined ? model.chatRole : "error"
+    property string chatText: model.chatText !== undefined ? model.chatText : ""
+    property var chatImage: model.chatImage !== undefined ? model.chatImage : null
     property var trFunc: function(k) { return k; }
+    
+    readonly property bool hovered: hoverHandler.hovered
+    
+    HoverHandler {
+        id: hoverHandler
+    }
 
     // Width management for ListView
     width: ListView.view ? ListView.view.width : parent.width
@@ -42,7 +48,8 @@ Item {
         
         // Border for AI/Standard messages to separate from background
         border.width: root.chatRole === "user" ? 0 : 1
-        border.color: Kirigami.Theme.separatorColor
+        border.color: Kirigami.Theme.textColor
+        opacity: root.chatRole === "user" ? 1.0 : 0.8 // Fade AI bubble border slightly via opacity instead of complex rgba
         
         ColumnLayout {
             id: contentLayout

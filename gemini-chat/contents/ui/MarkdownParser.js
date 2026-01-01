@@ -19,20 +19,15 @@ function parse(text, mathLabel) {
     // 2. Code Blocks (```code```)
     // Replace ```language ... ``` with a pre styled block
     output = output.replace(/```(\w*)\n([\s\S]*?)```/g, function (match, lang, code) {
-        return "<br><pre style='background-color:#31363b; color:#eff0f1; padding:10px; border-radius:4px;'>" +
-            code.trim() + "</pre><br>";
+        return "<br><pre>" + code.trim() + "</pre><br>";
     });
 
     // 3. Inline Code (`code`)
     output = output.replace(/`([^`]+)`/g, "<code style='background-color:#31363b; color:#eff0f1; padding:2px;'>$1</code>");
 
     // 4. Math Blocks ($$ ... $$) - Custom handling
-    // We format this as a distinct block of text, maybe colored differently to imply "math"
     output = output.replace(/\$\$([\s\S]*?)\$\$/g, function (match, math) {
-        // We cannot render real LaTeX, but we can make it look like a "Code Block" 
-        // with a specific header or style.
-        return "<br><div style='background-color:#232629; border-left: 3px solid #3daee9; padding:8px; margin:4px; font-family:Monospace;'>" +
-            "<i>" + mathLabel + ":</i><br>" + math.trim() + "</div><br>";
+        return "<br><b>" + mathLabel + ":</b><br><i>" + math.trim() + "</i><br>";
     });
 
     // 5. Inline Math ($ ... $)

@@ -4,7 +4,8 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 // History Tile View - Displays search history in tile/grid format
-Item {
+// Features: Keyboard navigation, Category collapse/expand
+FocusScope {
     id: historyTile
     
     // Required properties
@@ -19,6 +20,71 @@ Item {
     
     // Localization function
     property var trFunc: function(key) { return key }
+    
+    // Navigation state
+    property var collapsedCategories: ({})
+    property int selectedFlatIndex: 0
+    
+    // Computed flat list for keyboard navigation
+    property var flatItemList: {
+        var list = []
+        for (var i = 0; i < categorizedHistory.length; i++) {
+            var cat = categorizedHistory[i]
+            if (collapsedCategories[cat.categoryName]) continue
+            for (var j = 0; j < cat.items.length; j++) {
+                list.push({
+                    catIndex: i,
+                    itemIndex: j,
+                    globalIndex: list.length,
+                    data: cat.items[j]
+                })
+            }
+        }
+        return list
+    }
+    
+    property int totalItems: flatItemList.length
+    
+    focus: true
+    
+    // Keyboard handling
+    Keys.onUpPressed: moveSelection(-columnsInRow())
+    Keys.onDownPressed: moveSelection(columnsInRow())
+    Keys.onLeftPressed: moveSelection(-1)
+    Keys.onRightPressed: moveSelection(1)
+    Keys.onReturnPressed: activateCurrentItem()
+    Keys.onEnterPressed: activateCurrentItem()
+    
+    function columnsInRow() {
+        var itemWidth = iconSize + 48
+        return Math.max(1, Math.floor(width / itemWidth))
+    }
+    
+    function moveSelection(delta) {
+        if (totalItems === 0) return
+        var newIndex = Math.max(0, Math.min(totalItems - 1, selectedFlatIndex + delta))
+        selectedFlatIndex = newIndex
+    }
+    
+    function activateCurrentItem() {
+        if (totalItems === 0) return
+        var item = flatItemList[selectedFlatIndex]
+        if (item) {
+            historyTile.itemClicked(item.data)
+        }
+    }
+    
+    function toggleCategory(categoryName) {
+        var newCollapsed = Object.assign({}, collapsedCategories)
+        newCollapsed[categoryName] = !newCollapsed[categoryName]
+        collapsedCategories = newCollapsed
+    }
+    
+    function isItemSelected(catIdx, itemIdx) {
+        if (totalItems === 0) return false
+        var item = flatItemList[selectedFlatIndex]
+        return item && item.catIndex === catIdx && item.itemIndex === itemIdx
+    }
     
     // Header with title and clear button
     RowLayout {
@@ -72,7 +138,7 @@ Item {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         clip: true
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+        ScrollBar.vertical.policy: ScrollBar.AsNeeded
         
         ListView {
             id: tileView
@@ -81,25 +147,54 @@ Item {
             interactive: false
             
             delegate: Column {
+                id: histCategoryDelegate
                 width: tileView.width
                 spacing: 8
                 
-                // Category Header
-                RowLayout {
+                property int catIdx: index
+                property bool isCollapsed: historyTile.collapsedCategories[modelData.categoryName] || false
+                
+                // Category Header (Clickable)
+                Rectangle {
                     width: parent.width
-                    spacing: 8
+                    height: 28
+                    color: histCategoryHeaderMouse.containsMouse ? Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.1) : "transparent"
+                    radius: 4
                     
-                    Text {
-                        text: modelData.categoryName
-                        font.pixelSize: 13
-                        font.bold: true
-                        color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.6)
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.leftMargin: 4
+                        anchors.rightMargin: 4
+                        spacing: 8
+                        
+                        Kirigami.Icon {
+                            source: histCategoryDelegate.isCollapsed ? "arrow-right" : "arrow-down"
+                            Layout.preferredWidth: 16
+                            Layout.preferredHeight: 16
+                            color: historyTile.textColor
+                            opacity: 0.6
+                        }
+                        
+                        Text {
+                            text: modelData.categoryName + " (" + modelData.items.length + ")"
+                            font.pixelSize: 13
+                            font.bold: true
+                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.6)
+                        }
+                        
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 1
+                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.2)
+                        }
                     }
                     
-                    Rectangle {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 1
-                        color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.2)
+                    MouseArea {
+                        id: histCategoryHeaderMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: historyTile.toggleCategory(modelData.categoryName)
                     }
                 }
                 
@@ -107,18 +202,31 @@ Item {
                 Flow {
                     width: parent.width
                     spacing: 8
+                    visible: !histCategoryDelegate.isCollapsed
                     
                     Repeater {
                         model: modelData.items
                         
                         Item {
+                            id: histTileDelegate
                             width: historyTile.iconSize + 40
                             height: historyTile.iconSize + 50
+                            
+                            property int itemIdx: index
+                            property bool isSelected: historyTile.isItemSelected(histCategoryDelegate.catIdx, itemIdx)
                             
                             Rectangle {
                                 anchors.fill: parent
                                 radius: 8
-                                color: tileMouseArea.containsMouse ? Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.15) : "transparent"
+                                color: {
+                                    if (histTileDelegate.isSelected)
+                                        return Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.3)
+                                    if (histTileMouseArea.containsMouse) 
+                                        return Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.15)
+                                    return "transparent"
+                                }
+                                border.width: histTileDelegate.isSelected ? 2 : 0
+                                border.color: historyTile.accentColor
                                 
                                 Column {
                                     anchors.centerIn: parent
@@ -145,7 +253,7 @@ Item {
                                 }
                                 
                                 MouseArea {
-                                    id: tileMouseArea
+                                    id: histTileMouseArea
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
@@ -157,5 +265,10 @@ Item {
                 }
             }
         }
+    }
+    
+    // Reset selection when data changes
+    onCategorizedHistoryChanged: {
+        selectedFlatIndex = 0
     }
 }

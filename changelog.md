@@ -11,7 +11,7 @@
     - Varsayılan görünüm modu "Dar" (Medium) ve varsayılan ikon boyutları (Liste: 22, Döşeme: 48) olarak güncellendi.
 
 ### TR-TR
-- **Gemini KChat (Gelişmiş Destek)**:
+- **Gemini Chat (Gelişmiş Destek)**:
     - **Matematik Gösterimi**: `$$...$$` formatındaki matematiksel ifadeler için özel blok görünümü eklendi.
     - **Model Seçimi**: Widget üzerinden anlık olarak Gemini modelleri (Flash, Pro vb.) arasında geçiş yapma özelliği getirildi.
     - **Lokalizasyon**: Tam Türkçe dil desteği sağlandı (`localization.js`).
@@ -23,6 +23,12 @@
     - **Durdurma Butonu**: Yanıt oluşturulurken durdurma özelliği ve butonu eklendi.
     - **Kılavuz (Guide)**: Kapsamlı API anahtarı alma kılavuzu ve eksik anahtar durumunda buton uyarısı eklendi.
     - **Lokalizasyon**: 10 dilde tam senkron lokalizasyon desteği tamamlandı.
+- **File Search Widget (İleri Düzey İyileştirmeler)**:
+    - **Klavye Navigasyonu**: Döşeme görünümünde ok tuşlarıyla gezinme (↑ ↓ ← →) ve Enter ile açma.
+    - **Kategori Daraltma/Genişletme**: Kategori başlıklarına tıklayarak gizleme/gösterme özelliği eklendi.
+    - **Dosya Önizleme Tooltip**: Döşeme öğelerinin üzerine gelindiğinde dosya adı, kategori ve yol bilgisi gösteriliyor.
+    - **Görsel İyileştirmeler**: Seçili öğe vurgusu, kategori ok ikonları ve öğe sayacı eklendi.
+    - **Lokalizasyon**: "category" ve "path" anahtarları 10 dile çevrildi.
 
 ### EN-US
 - **File Search Widget (Modularization & Improvements)**:
@@ -45,6 +51,12 @@
     - **Stop Button**: Added ability to abort AI responses with a stop button.
     - **Guide**: Comprehensive API key guide tab and context-aware guide button added.
     - **Localization**: Full 10-language synchronous localization support completed.
+- **File Search Widget (Advanced Improvements)**:
+    - **Keyboard Navigation**: Arrow key navigation (↑ ↓ ← →) in tile view with Enter to activate.
+    - **Category Collapse/Expand**: Click category headers to hide/show items within.
+    - **File Preview Tooltip**: Hover over tile items to see file name, category, and path.
+    - **Visual Enhancements**: Added focus highlight, category arrow icons, and item count badges.
+    - **Localization**: Added "category" and "path" keys to all 10 languages.
 
 ---
 

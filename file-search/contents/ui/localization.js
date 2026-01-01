@@ -27,6 +27,8 @@ var data = {
         "application_2": "Application 2",
         "file_txt": "File.txt",
         "file": "File",
+        "category": "Category",
+        "path": "Path",
         "general": "General"
     },
     "tr": {
@@ -57,6 +59,8 @@ var data = {
         "application_2": "Uygulama 2",
         "file_txt": "Dosya.txt",
         "file": "Dosya",
+        "category": "Kategori",
+        "path": "Yol",
         "general": "Genel"
     },
     "de": {
@@ -87,6 +91,8 @@ var data = {
         "application_2": "Anwendung 2",
         "file_txt": "Datei.txt",
         "file": "Datei",
+        "category": "Kategorie",
+        "path": "Pfad",
         "general": "Allgemein"
     },
     "fr": {
@@ -117,6 +123,8 @@ var data = {
         "application_2": "Application 2",
         "file_txt": "Fichier.txt",
         "file": "Fichier",
+        "category": "Catégorie",
+        "path": "Chemin",
         "general": "Général"
     },
     "ro": {
@@ -147,6 +155,8 @@ var data = {
         "application_2": "Aplicația 2",
         "file_txt": "Fișier.txt",
         "file": "Fișier",
+        "category": "Categorie",
+        "path": "Cale",
         "general": "General"
     },
     "cs": {
@@ -177,6 +187,8 @@ var data = {
         "application_2": "Aplikace 2",
         "file_txt": "Soubor.txt",
         "file": "Soubor",
+        "category": "Kategorie",
+        "path": "Cesta",
         "general": "Obecné"
     },
     "es": {
@@ -207,6 +219,8 @@ var data = {
         "application_2": "Aplicación 2",
         "file_txt": "Archivo.txt",
         "file": "Archivo",
+        "category": "Categoría",
+        "path": "Ruta",
         "general": "General"
     },
     "ru": {
@@ -237,6 +251,8 @@ var data = {
         "application_2": "Приложение 2",
         "file_txt": "Файл.txt",
         "file": "Файл",
+        "category": "Категория",
+        "path": "Путь",
         "general": "Общее"
     },
     "pt": {
@@ -267,6 +283,8 @@ var data = {
         "application_2": "Aplicação 2",
         "file_txt": "Arquivo.txt",
         "file": "Arquivo",
+        "category": "Categoria",
+        "path": "Caminho",
         "general": "Geral"
     },
     "ja": {
@@ -297,6 +315,8 @@ var data = {
         "application_2": "アプリケーション 2",
         "file_txt": "ファイル.txt",
         "file": "ファイル",
+        "category": "カテゴリ",
+        "path": "パス",
         "general": "一般"
     }
 }

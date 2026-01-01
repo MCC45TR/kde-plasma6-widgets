@@ -12,10 +12,80 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 
 ## 🔍 File Finder (File Search)
 - [x] UI Modülerleştirmesi (CompactView, ResultsListView vb.)
-- [x] Senkron Lokalizasyon sistemi
-- [x] Geçmiş Yönetimi modülü
-- [ ] **Klavye Navigasyonu**: Döşeme (Tile) görünümünde ok tuşlarıyla gezinme tam olarak çalışmıyor.
-- [ ] **Kategori Filtreleme**: Kategori başlıklarına tıklayarak o kategoriyi gizleme/gösterme özelliği.
+- [x] Senkron Lokalizasyon Sistemi
+- [x] Geçmiş Yönetimi Modülü
+- [x] Kategori Filtreleme (kategori başlığına tıklayarak gizle/göster)
+- [x] Klavye Navigasyonu (temel destek)
+- [ ] Döşeme görünümünde ok tuşları ile **tam yönlü gezinme**
+- [ ] Focus state senkronizasyonu (Tile / List / Compact)
+- [ ] `Tab / Shift+Tab` ile bölümler arası geçiş
+- [ ] `Ctrl + 1 / 2 / 3` ile görünüm modu değiştirme
+- [ ] Aktif öğe için erişilebilirlik vurgusu (focus highlight)
+### 🔎 Akıllı Arama Girişi (Smart Query)
+- [ ] Gelişmiş sözdizimi:
+  - `type:pdf`
+  - `size>10MB`
+  - `date:last7days`
+- [ ] KRunner uyumlu query parsing
+- [ ] Hatalı sözdizimi için inline uyarı mesajları
+### 📊 Sonuç Önceliklendirme
+- [ ] Skor bazlı sıralama:
+  - Son kullanılan
+  - En sık açılan
+  - Kategori eşleşmesi
+- [ ] “Bu sonuç neden üstte?” tooltip açıklaması
+### 📌 Sabitlenmiş (Pinned) Öğeler
+- [ ] Dosya / klasör pinleme
+- [ ] Aramadan bağımsız üstte gösterim
+- [ ] Activity-aware pinleme
+### 🕓 Arama Oturumu Snapshot
+- [ ] Aramayı kaydetme (history’den bağımsız)
+- [ ] Donmuş sonuç seti
+- [ ] Snapshot yeniden açma
+### 🧩 Çoklu Seçim & Toplu İşlemler
+- [ ] Shift / Ctrl ile çoklu seçim
+- [ ] Toplu işlemler:
+  - Aç
+  - Konuma git
+  - Yol kopyala
+  - Etiketle
+### 👁️ Hover / Focus Önizleme
+- [ ] Hover ile küçük bilgi pop-up’ı:
+  - Dosya türü
+  - Boyut
+  - Son değiştirilme tarihi
+  - Varsayılan uygulama
+- [ ] Görseller için thumbnail cache
+- [ ] Klavye ile tetikleme (`Space`)
+### 🚀 Performans İyileştirmeleri
+- [ ] Lazy loading
+- [ ] Virtualized list rendering
+- [ ] Büyük sonuç setleri için incremental render
+### 🗂️ Arama Backend Yönetimi
+- [ ] Baloo entegrasyonu
+- [ ] Fallback filesystem search
+- [ ] Ayarlar üzerinden backend seçimi
+- [ ] Index yoksa graceful degrade
+### 🎨 Görünüm Profilleri
+- [ ] Profil setleri:
+  - Minimal
+  - Developer
+  - Power User
+- [ ] Profil bazlı:
+  - Varsayılan filtreler
+  - Önizleme açık/kapalı
+  - Tile yoğunluğu
+### 🧷 Kategori Bazlı Ayarlar
+- [ ] Kategori özel görünürlük
+- [ ] Önceliklendirme
+- [ ] Özel ikon tanımı
+### 📈 Debug & Telemetry (Opt-in)
+- [ ] Debug overlay:
+  - Aktif mod
+  - Render edilen öğe sayısı
+  - Index kaynağı
+  - Arama gecikmesi
+- [ ] Lokal ve anonim kullanım verisi
 - [ ] **Dosya Önizleme**: Dosyaların üzerine gelince (hover) küçük bir önizleme veya detaylı bilgi pop-up'ı.
 
 ## 🎵 Music Player

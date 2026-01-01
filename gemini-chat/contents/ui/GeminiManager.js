@@ -87,7 +87,7 @@ function sendMessage(text, attachments, onError) {
     var contents = chatHistory.slice();
     contents.push(newMessage);
 
-    var url = "https://generativelanguage.googleapis.com/v1beta/models/" + selectedModel + ":generateContent?key=" + apiKey;
+    var url = "https://generativelanguage.googleapis.com/v1beta/models/" + encodeURIComponent(selectedModel) + ":generateContent?key=" + encodeURIComponent(apiKey);
 
     var xhr = new XMLHttpRequest();
     activeXHR = xhr; // Store for abort capability

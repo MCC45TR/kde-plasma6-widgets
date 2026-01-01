@@ -24,11 +24,11 @@ KCM.SimpleKCM {
     // Plasma widgets usually use specific property or metadata. Main icon is in metadata.
     // Changing metadata icon at runtime is hard, but we can change the wrapper icon in CompactRepresentation.
     
-    property alias cfg_panelIcon: iconButton.currentIconName
+    property alias cfg_panelIcon: iconButton.iconName
     
     IconThemes.IconDialog {
         id: iconDialog
-        onIconNameChanged: iconButton.currentIconName = iconName
+        onIconNameChanged: iconButton.iconName = iconName
     }
 
     Kirigami.FormLayout {
@@ -37,10 +37,10 @@ KCM.SimpleKCM {
             id: iconButton
             Kirigami.FormData.label: root.tr("config_launcher_icon")
             
-            property string currentIconName: cfg_panelIcon || "internet-chat"
+            property string iconName: "internet-chat"
             
-            text: currentIconName
-            icon.name: currentIconName
+            text: iconName
+            icon.name: iconName || "internet-chat"
             
             onClicked: iconMenu.open()
             
@@ -56,13 +56,13 @@ KCM.SimpleKCM {
                 QQC2.MenuItem {
                     text: root.tr("config_reset_icon")
                     icon.name: "edit-undo"
-                    onTriggered: iconButton.currentIconName = "internet-chat"
+                    onTriggered: iconButton.iconName = "internet-chat"
                 }
                 
                 QQC2.MenuItem {
                     text: root.tr("config_remove_icon")
                     icon.name: "edit-delete"
-                    onTriggered: iconButton.currentIconName = ""
+                    onTriggered: iconButton.iconName = ""
                 }
             }
         }
