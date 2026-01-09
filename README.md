@@ -15,12 +15,13 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 ## 📦 Widget Catalog
 
 ### 🔍 File Finder (File Search)
-A powerful Spotlight-like search widget.
-*   **Smart Query**: Support for KRunner prefixes (`timeline:/today`, `gg:`, `kill`, `#unicode`).
-*   **View Profiles**: Switch between *Minimal*, *Developer* (with debug overlay), and *Power User* modes.
+A powerful Spotlight/Raycast alternative for Plasma.
+*   **Architecture**: Built on a modular QML system with a custom synchronous localization engine and virtualized rendering for maximum performance.
+*   **Smart Query**: Natively understands KRunner prefixes (`timeline:/today`, `gg:`, `kill`, `units`).
+*   **View Profiles**: Switch between *Minimal*, *Developer* (with live telemetry & debug overlay), and *Power User* modes.
 *   **Advanced Navigation**: Full arrow key navigation in tile view, tab cycling, and keyboard shortcuts (`Ctrl+1/2` for view modes).
-*   **Previews**: Hover previews for files and images with thumbnail caching.
-*   **History**: Smart history tracking with direct execution support.
+*   **Rich Previews**: Instant hover previews for files and images with async thumbnail caching.
+*   *[Read the detailed technical documentation here](./file-search/README.md)*
 
 ### 🎵 Music Player
 A dynamic media controller that adapts to your workflow.
