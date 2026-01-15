@@ -2,9 +2,10 @@
 .pragma library
 
 // OpenWeatherMap condition codes to icon mapping
-function mapOpenWeatherIcon(code, iconCode) {
+function mapOpenWeatherIcon(code, iconCode, isDarkTheme) {
     // iconCode format: "01d", "01n" (d=day, n=night)
-    var isNight = iconCode && iconCode.endsWith("n")
+    // In dark theme, use night icons for better visibility
+    var isNight = isDarkTheme || (iconCode && iconCode.endsWith("n"))
 
     // Thunderstorm (200-232)
     if (code >= 200 && code < 300) {
@@ -67,9 +68,11 @@ function mapOpenWeatherIcon(code, iconCode) {
 }
 
 // WeatherAPI.com condition codes to icon mapping
-function mapWeatherAPIIcon(code) {
+function mapWeatherAPIIcon(code, isDarkTheme) {
     // Note: WeatherAPI has different codes
     // Reference: https://www.weatherapi.com/docs/weather_conditions.json
+    // In dark theme, use day icons (lighter)
+    var suffix = isDarkTheme ? "_day.svg" : "_day.svg" // Both use day for now
 
     if (code === 1000) return "clear_day.svg" // Sunny
     if (code === 1003) return "partly_cloudy_day.svg" // Partly cloudy
@@ -106,13 +109,15 @@ function mapWeatherAPIIcon(code) {
 }
 
 // Open-Meteo WMO Weather codes to icon mapping
-function mapOpenMeteoIcon(code) {
+function mapOpenMeteoIcon(code, isDarkTheme) {
     // WMO Weather interpretation codes (0-99)
     // Reference: https://open-meteo.com/en/docs
+    // In dark theme, use night/dark variants for better contrast
+    var isNight = isDarkTheme
 
-    if (code === 0) return "clear_day.svg" // Clear sky
-    if (code === 1) return "mostly_clear_day.svg" // Mainly clear
-    if (code === 2) return "partly_cloudy_day.svg" // Partly cloudy
+    if (code === 0) return isNight ? "clear_night.svg" : "clear_day.svg" // Clear sky
+    if (code === 1) return isNight ? "mostly_clear_night.svg" : "mostly_clear_day.svg" // Mainly clear
+    if (code === 2) return isNight ? "partly_cloudy_night.svg" : "partly_cloudy_day.svg" // Partly cloudy
     if (code === 3) return "cloudy.svg" // Overcast
     if (code === 45 || code === 48) return "haze_fog_dust_smoke.svg" // Fog
     if (code === 51 || code === 53 || code === 55) return "drizzle.svg" // Drizzle
@@ -134,19 +139,19 @@ function mapOpenMeteoIcon(code) {
 }
 
 // Main mapping function
-function getWeatherIcon(code, iconCode, provider) {
+function getWeatherIcon(code, iconCode, provider, isDarkTheme) {
     if (provider === "weatherapi") {
-        return mapWeatherAPIIcon(code)
+        return mapWeatherAPIIcon(code, isDarkTheme)
     } else if (provider === "openmeteo") {
-        return mapOpenMeteoIcon(code)
+        return mapOpenMeteoIcon(code, isDarkTheme)
     } else {
         // Default to OpenWeatherMap mapping
-        return mapOpenWeatherIcon(code, iconCode)
+        return mapOpenWeatherIcon(code, iconCode, isDarkTheme)
     }
 }
 
 // Get icon path
-function getIconPath(code, iconCode, provider) {
-    var iconFile = getWeatherIcon(code, iconCode, provider)
+function getIconPath(code, iconCode, provider, isDarkTheme) {
+    var iconFile = getWeatherIcon(code, iconCode, provider, isDarkTheme)
     return "../images/" + iconFile
 }

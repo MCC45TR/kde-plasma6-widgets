@@ -30,5 +30,15 @@
       <default>30</default>
       <label>Update Interval (minutes)</label>
     </entry>
+    
+    <entry name="cachedWeather" type="String">
+      <default></default>
+      <label>Cached Weather Data</label>
+    </entry>
+    
+    <entry name="lastUpdate" type="Double">
+      <default>0</default>
+      <label>Last Update Timestamp</label>
+    </entry>
   </group>
 </kcfg>

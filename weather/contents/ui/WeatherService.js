@@ -132,13 +132,13 @@ function fetchOpenMeteo(location, units, callback) {
                     var lon = place.longitude
                     var locationName = place.name + (place.country ? ", " + place.country : "")
 
-                    // Step 2: Fetch weather data
+                    // Step 2: Fetch weather data (10 days forecast)
                     var tempUnit = units === "imperial" ? "&temperature_unit=fahrenheit" : "&temperature_unit=celsius"
                     var weatherUrl = "https://api.open-meteo.com/v1/forecast?" +
                         "latitude=" + lat + "&longitude=" + lon +
                         "&current_weather=true" +
-                        "&daily=temperature_2m_max,temperature_2m_min,weathercode" +
-                        "&hourly=temperature_2m,weathercode" +
+                        "&daily=temperature_2m_max,temperature_2m_min,weathercode&forecast_days=10" +
+                        "&hourly=temperature_2m,weathercode&forecast_hours=48" +
                         "&timezone=auto" +
                         tempUnit
 
@@ -261,7 +261,7 @@ function parseForecastOpenWeather(data) {
         var dayKey = date.toDateString()
 
         // Hourly forecast (next 24 hours, every 3 hours)
-        if (hourly.length < 8) {
+        if (hourly.length < 24) {
             hourly.push({
                 time: date.getHours() + ":00",
                 temp: Math.round(item.main.temp),
@@ -272,7 +272,7 @@ function parseForecastOpenWeather(data) {
         }
 
         // Daily forecast (one per day, use noon/midday data)
-        if (!seenDays[dayKey] && daily.length < 7) {
+        if (!seenDays[dayKey] && daily.length < 10) {
             var hours = date.getHours()
             if (hours >= 11 && hours <= 14) { // Use midday data
                 seenDays[dayKey] = true
@@ -335,8 +335,8 @@ function parseForecastOpenMeteo(data) {
     var daily = []
     var hourly = []
 
-    // Daily forecast (next 7 days)
-    for (var i = 0; i < data.daily.time.length && i < 7; i++) {
+    // Daily forecast (next 10 days)
+    for (var i = 0; i < data.daily.time.length && i < 10; i++) {
         var date = new Date(data.daily.time[i])
         daily.push({
             day: getDayName(date.getDay()),
@@ -349,9 +349,9 @@ function parseForecastOpenMeteo(data) {
         })
     }
 
-    // Hourly forecast (next 24 hours, every 3 hours)
+    // Hourly forecast (next 24 hours)
     var currentHour = new Date().getHours()
-    for (var h = 0; h < data.hourly.time.length && hourly.length < 8; h += 3) {
+    for (var h = 0; h < data.hourly.time.length && hourly.length < 24; h++) {
         var hourDate = new Date(data.hourly.time[h])
         if (hourDate > new Date()) { // Only future hours
             hourly.push({

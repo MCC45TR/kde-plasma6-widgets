@@ -26,7 +26,7 @@ PlasmoidItem {
     }
 
     // Renkler - Kirigami Theme entegrasyonu (NoBackground modunda doğru çalışır)
-    property color bgColor: Qt.alpha(Kirigami.Theme.backgroundColor, 0.85)
+    property color bgColor: Kirigami.Theme.backgroundColor
     property color textColor: Kirigami.Theme.textColor
     property color accentColor: Kirigami.Theme.highlightColor
     property color completedColor: Qt.alpha(Kirigami.Theme.textColor, 0.5)
