@@ -5,12 +5,17 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mpris as Mpris
+import Qt5Compat.GraphicalEffects
 
 PlasmoidItem {
     id: root
 
     // --- Localization Logic ---
-    property var locales: ({})
+    // Inline fallback for instant display (before JSON loads)
+    property var locales: {
+        "en": { "no_media_playing": "No Media Playing", "prev_track": "Previous", "next_track": "Next" },
+        "tr": { "no_media_playing": "Çalan Medya Yok", "prev_track": "Önceki", "next_track": "Sonraki" }
+    }
     property string currentLocale: Qt.locale().name.substring(0, 2)
     
     function loadLocales() {
@@ -341,9 +346,20 @@ PlasmoidItem {
                 Rectangle {
                     id: bgRect
                     anchors.fill: parent
-                    radius: 10
+                    // Radius: 20 in compact mode (matches mainRect), 10 in wide/large modes
+                    radius: (!fullRep.isWide && !fullRep.isLargeSq) ? 20 : 10
                     color: root.hasArt ? "#2a2a2a" : Kirigami.Theme.backgroundColor
-                    clip: true
+                    layer.enabled: true
+                    layer.effect: OpacityMask {
+                        maskSource: maskRect
+                    }
+                    
+                    Rectangle {
+                        id: maskRect
+                        anchors.fill: parent
+                        radius: bgRect.radius // Bind to bgRect radius
+                        visible: false
+                    }
                     
                     Image {
                         anchors.fill: parent
@@ -408,7 +424,7 @@ PlasmoidItem {
                                     anchors.centerIn: parent
                                     text: root.playerIdentity || ""
                                     color: Kirigami.Theme.textColor
-                                    font.pixelSize: 14 // Same as artist text size
+                                    font.pixelSize: Math.min(14, mainRect.width * 0.035) // Same formula as artist text
                                     font.bold: true
                                 }
                             }
@@ -848,7 +864,7 @@ PlasmoidItem {
                                 Text { 
                                     text: root.artist
                                     font.family: "Roboto Condensed"
-                                    font.pixelSize: 13
+                                    font.pixelSize: 14 // Match badge text size
                                     color: Kirigami.Theme.textColor
                                     opacity: 0.7
                                     elide: Text.ElideRight

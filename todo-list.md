@@ -63,9 +63,9 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
   - Kategori eşleşmesi
 - [ ] “Bu sonuç neden üstte?” tooltip açıklaması
 ### 📌 Sabitlenmiş (Pinned) Öğeler
-- [ ] Dosya / klasör pinleme
-- [ ] Aramadan bağımsız üstte gösterim
-- [ ] Activity-aware pinleme
+- [x] Dosya / klasör pinleme
+- [x] Aramadan bağımsız üstte gösterim
+- [x] Activity-aware pinleme
 ### 🕓 Arama Oturumu Snapshot
 - [ ] Aramayı kaydetme (history’den bağımsız)
 - [ ] Donmuş sonuç seti
@@ -110,9 +110,9 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
   - Ayarlada kalvuz sekmesi
    - Vidgetin tüm özellikleri lokalizasyonla kullanıcıya açıklanacak
 ### 🧷 Kategori Bazlı Ayarlar
-- [ ] Kategori özel görünürlük
-- [ ] Önceliklendirme
-- [ ] Özel ikon tanımı
+- [x] Kategori özel görünürlük
+- [x] Önceliklendirme
+- [x] Özel ikon tanımı
 ### 📈 Debug & Telemetry (Opt-in)
 - [x] Debug overlay:
   - Aktif mod

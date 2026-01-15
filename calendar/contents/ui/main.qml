@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
 
 PlasmoidItem {
     id: root
@@ -24,12 +25,31 @@ PlasmoidItem {
         source: "../fonts/roboto.ttf"
     }
 
-    // Renkler - KDE Plasma Theme entegrasyonu
-    property color bgColor: PlasmaCore.Theme.backgroundColor
-    property color textColor: PlasmaCore.Theme.textColor
-    property color accentColor: PlasmaCore.Theme.highlightColor
-    property color completedColor: Qt.alpha(PlasmaCore.Theme.textColor, 0.5)
-    property color separatorColor: Qt.alpha(PlasmaCore.Theme.textColor, 0.2)
+    // Renkler - Kirigami Theme entegrasyonu (NoBackground modunda doğru çalışır)
+    property color bgColor: Qt.alpha(Kirigami.Theme.backgroundColor, 0.85)
+    property color textColor: Kirigami.Theme.textColor
+    property color accentColor: Kirigami.Theme.highlightColor
+    property color completedColor: Qt.alpha(Kirigami.Theme.textColor, 0.5)
+    property color separatorColor: Qt.alpha(Kirigami.Theme.textColor, 0.2)
+    
+    // Weekday labels - bir kez hesaplanır, CalendarView'lara iletilir
+    property var weekdayLabels: {
+        var labels = []
+        var firstDay = Qt.locale().firstDayOfWeek
+        for (var i = 0; i < 7; ++i) {
+            labels.push(Qt.locale().dayName((firstDay + i) % 7, 2))
+        }
+        return labels
+    }
+    
+    // Tarih seçimi toggle fonksiyonu
+    function toggleDateSelection(date) {
+        if (selectedDate && date.getTime() === selectedDate.getTime()) {
+            selectedDate = null
+        } else {
+            selectedDate = date
+        }
+    }
     
     // Takvim Verileri Helpers
     property var today: new Date()
@@ -146,7 +166,6 @@ PlasmoidItem {
             radius: 20
             anchors.margins: 10
             color: root.bgColor
-            opacity: 1
             
             // Görünüm Modunu Belirle
             readonly property bool showTwoColumns: width >= 380
@@ -211,17 +230,12 @@ PlasmoidItem {
                                     displayYear: pageItem.month1.year
                                     currentMonthIndex: pageItem.month1.monthIndex
                                     calendarCells: pageItem.month1.cells
+                                    weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
-                                    onDateSelected: (date) => {
-                                        if (root.selectedDate && date.getTime() === root.selectedDate.getTime()) {
-                                            root.selectedDate = null
-                                        } else {
-                                            root.selectedDate = date
-                                        }
-                                    }
+                                    onDateSelected: (date) => root.toggleDateSelection(date)
                                 }
 
                                 // Dikey Ayırıcı (Calendar 1 ile Calendar 2 arasında)
@@ -245,17 +259,12 @@ PlasmoidItem {
                                     displayYear: pageItem.month2.year
                                     currentMonthIndex: pageItem.month2.monthIndex
                                     calendarCells: pageItem.month2.cells
+                                    weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
-                                    onDateSelected: (date) => {
-                                        if (root.selectedDate && date.getTime() === root.selectedDate.getTime()) {
-                                            root.selectedDate = null
-                                        } else {
-                                            root.selectedDate = date
-                                        }
-                                    }
+                                    onDateSelected: (date) => root.toggleDateSelection(date)
                                 }
                             }
 
@@ -313,17 +322,12 @@ PlasmoidItem {
                                     displayYear: pageItem.month3.year
                                     currentMonthIndex: pageItem.month3.monthIndex
                                     calendarCells: pageItem.month3.cells
+                                    weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
-                                    onDateSelected: (date) => {
-                                        if (root.selectedDate && date.getTime() === root.selectedDate.getTime()) {
-                                            root.selectedDate = null
-                                        } else {
-                                            root.selectedDate = date
-                                        }
-                                    }
+                                    onDateSelected: (date) => root.toggleDateSelection(date)
                                 }
 
                                 // Dikey Ayırıcı 2
@@ -347,17 +351,12 @@ PlasmoidItem {
                                     displayYear: pageItem.month4.year
                                     currentMonthIndex: pageItem.month4.monthIndex
                                     calendarCells: pageItem.month4.cells
+                                    weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
-                                    onDateSelected: (date) => {
-                                        if (root.selectedDate && date.getTime() === root.selectedDate.getTime()) {
-                                            root.selectedDate = null
-                                        } else {
-                                            root.selectedDate = date
-                                        }
-                                    }
+                                    onDateSelected: (date) => root.toggleDateSelection(date)
                                 }
                             }
                         }

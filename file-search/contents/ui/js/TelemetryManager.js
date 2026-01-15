@@ -1,4 +1,3 @@
-
 // TelemetryManager.js
 
 // Default structure

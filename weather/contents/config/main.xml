@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="apiKey" type="String">
+      <default></default>
+      <label>OpenWeatherMap API Key</label>
+    </entry>
+    
+    <entry name="apiKey2" type="String">
+      <default></default>
+      <label>WeatherAPI.com API Key (Fallback)</label>
+    </entry>
+    
+    <entry name="location" type="String">
+      <default>Ankara</default>
+      <label>Location</label>
+    </entry>
+    
+    <entry name="units" type="String">
+      <default>metric</default>
+      <label>Units</label>
+    </entry>
+    
+    <entry name="updateInterval" type="Int">
+      <default>30</default>
+      <label>Update Interval (minutes)</label>
+    </entry>
+  </group>
+</kcfg>

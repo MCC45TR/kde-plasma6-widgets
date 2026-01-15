@@ -1,32 +1,106 @@
 {
     "en": {
-        "example_label": "Example Text"
+        "loading": "Loading weather data...",
+        "error_network": "Network error. Check your internet connection.",
+        "error_no_api_key": "No API key configured. Please add one in settings.",
+        "error_invalid_location": "Location not found. Please check the city name.",
+        "refresh": "Refresh Weather",
+        "change_location": "Change Location",
+        "daily_forecast": "Daily Forecast",
+        "hourly_forecast": "Hourly Forecast",
+        "feels_like": "Feels like",
+        "humidity": "Humidity",
+        "wind": "Wind"
     },
     "tr": {
-        "example_label": "Örnek Metin"
+        "loading": "Hava durumu yükleniyor...",
+        "error_network": "Ağ hatası. İnternet bağlantınızı kontrol edin.",
+        "error_no_api_key": "API anahtarı ayarlanmadı. Lütfen ayarlarda ekleyin.",
+        "error_invalid_location": "Konum bulunamadı. Şehir adını kontrol edin.",
+        "refresh": "Hava Durumunu Yenile",
+        "change_location": "Konumu Değiştir",
+        "daily_forecast": "Günlük Tahmin",
+        "hourly_forecast": "Saatlik Tahmin",
+        "feels_like": "Hissedilen",
+        "humidity": "Nem",
+        "wind": "Rüzgar"
     },
     "de": {
-        "example_label": "Beispieltext"
+        "loading": "Wetterdaten werden geladen...",
+        "error_network": "Netzwerkfehler. Überprüfen Sie Ihre Internetverbindung.",
+        "error_no_api_key": "Kein API-Schlüssel konfiguriert. Bitte fügen Sie einen in den Einstellungen hinzu.",
+        "error_invalid_location": "Standort nicht gefunden. Bitte überprüfen Sie den Stadtnamen.",
+        "refresh": "Wetter aktualisieren",
+        "change_location": "Standort ändern",
+        "daily_forecast": "Tägliche Vorhersage",
+        "hourly_forecast": "Stündliche Vorhersage",
+        "feels_like": "Gefühlt",
+        "humidity": "Luftfeuchtigkeit",
+        "wind": "Wind"
     },
     "fr": {
-        "example_label": "Exemple de texte"
-    },
-    "ro": {
-        "example_label": "Exemplu de text"
-    },
-    "cs": {
-        "example_label": "Příklad textu"
+        "loading": "Chargement des données météo...",
+        "error_network": "Erreur réseau. Vérifiez votre connexion Internet.",
+        "error_no_api_key": "Aucune clé API configurée. Veuillez en ajouter une dans les paramètres.",
+        "error_invalid_location": "Emplacement introuvable. Veuillez vérifier le nom de la ville.",
+        "refresh": "Actualiser la météo",
+        "change_location": "Changer l'emplacement",
+        "daily_forecast": "Prévisions quotidiennes",
+        "hourly_forecast": "Prévisions horaires",
+        "feels_like": "Ressenti",
+        "humidity": "Humidité",
+        "wind": "Vent"
     },
     "es": {
-        "example_label": "Texto de ejemplo"
+        "loading": "Cargando datos meteorológicos...",
+        "error_network": "Error de red. Verifique su conexión a Internet.",
+        "error_no_api_key": "No se ha configurado ninguna clave API. Agregue una en la configuración.",
+        "error_invalid_location": "Ubicación no encontrada. Verifique el nombre de la ciudad.",
+        "refresh": "Actualizar el clima",
+        "change_location": "Cambiar ubicación",
+        "daily_forecast": "Pronóstico diario",
+        "hourly_forecast": "Pronóstico por hora",
+        "feels_like": "Sensación térmica",
+        "humidity": "Humedad",
+        "wind": "Viento"
     },
     "ru": {
-        "example_label": "Пример текста"
+        "loading": "Загрузка данных о погоде...",
+        "error_network": "Ошибка сети. Проверьте подключение к Интернету.",
+        "error_no_api_key": "API-ключ не настроен. Пожалуйста, добавьте его в настройках.",
+        "error_invalid_location": "Местоположение не найдено. Проверьте название города.",
+        "refresh": "Обновить погоду",
+        "change_location": "Изменить местоположение",
+        "daily_forecast": "Ежедневный прогноз",
+        "hourly_forecast": "Почасовой прогноз",
+        "feels_like": "Ощущается как",
+        "humidity": "Влажность",
+        "wind": "Ветер"
     },
     "pt": {
-        "example_label": "Texto de exemplo"
+        "loading": "Carregando dados meteorológicos...",
+        "error_network": "Erro de rede. Verifique sua conexão com a Internet.",
+        "error_no_api_key": "Nenhuma chave API configurada. Adicione uma nas configurações.",
+        "error_invalid_location": "Localização não encontrada. Verifique o nome da cidade.",
+        "refresh": "Atualizar o tempo",
+        "change_location": "Alterar localização",
+        "daily_forecast": "Previsão diária",
+        "hourly_forecast": "Previsão horária",
+        "feels_like": "Sensação térmica",
+        "humidity": "Umidade",
+        "wind": "Vento"
     },
     "ja": {
-        "example_label": "サンプルテキスト"
+        "loading": "天気データを読み込んでいます...",
+        "error_network": "ネットワークエラー。インターネット接続を確認してください。",
+        "error_no_api_key": "APIキーが設定されていません。設定で追加してください。",
+        "error_invalid_location": "場所が見つかりません。都市名を確認してください。",
+        "refresh": "天気を更新",
+        "change_location": "場所を変更",
+        "daily_forecast": "毎日の予報",
+        "hourly_forecast": "時間ごとの予報",
+        "feels_like": "体感",
+        "humidity": "湿度",
+        "wind": "風"
     }
 }

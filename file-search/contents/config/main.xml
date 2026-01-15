@@ -41,5 +41,13 @@
       <default>{}</default>
       <label>Usage statistics (local only)</label>
     </entry>
+    <entry name="pinnedItems" type="String">
+      <default>[]</default>
+      <label>Pinned items (JSON array with activity support)</label>
+    </entry>
+    <entry name="categorySettings" type="String">
+      <default>{}</default>
+      <label>Category settings (visibility, priority, custom icons)</label>
+    </entry>
   </group>
 </kcfg>

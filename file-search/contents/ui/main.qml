@@ -15,6 +15,8 @@ import "js/localization.js" as LocalizationData
 import "js/utils.js" as Utils
 import "js/HistoryManager.js" as HistoryManager
 import "js/TelemetryManager.js" as TelemetryManager
+import "js/PinnedManager.js" as PinnedManager
+import "js/CategoryManager.js" as CategoryManager
 // Import components
 import "components" as Components
 
@@ -81,6 +83,13 @@ PlasmoidItem {
     // ===== HISTORY MANAGEMENT =====
     property var searchHistory: []
     readonly property int maxHistoryItems: 20
+    
+    // ===== PINNED ITEMS MANAGEMENT =====
+    property var pinnedItems: []
+    property string currentActivityId: "global" // Can be connected to KActivities later
+    
+    // ===== CATEGORY SETTINGS =====
+    property var categorySettings: {}
 
 
     // ===== LOCALIZATION =====
@@ -122,10 +131,61 @@ PlasmoidItem {
         searchHistory = HistoryManager.clearHistory()
         saveHistory()
     }
+    
+    // ===== PINNED FUNCTIONS (delegated to PinnedManager) =====
+    function loadPinned() {
+        pinnedItems = PinnedManager.loadPinned(Plasmoid.configuration.pinnedItems)
+    }
+    
+    function savePinned() {
+        Plasmoid.configuration.pinnedItems = PinnedManager.savePinned(pinnedItems)
+    }
+    
+    function pinItem(item) {
+        pinnedItems = PinnedManager.pinItem(pinnedItems, item, currentActivityId)
+        savePinned()
+    }
+    
+    function unpinItem(matchId) {
+        pinnedItems = PinnedManager.unpinItem(pinnedItems, matchId, currentActivityId)
+        savePinned()
+    }
+    
+    function isPinned(matchId) {
+        return PinnedManager.isPinned(pinnedItems, matchId, currentActivityId)
+    }
+    
+    function togglePin(item) {
+        pinnedItems = PinnedManager.togglePin(pinnedItems, item, currentActivityId)
+        savePinned()
+    }
+    
+    function getVisiblePinnedItems() {
+        return PinnedManager.getPinnedForActivity(pinnedItems, currentActivityId)
+    }
+    
+    // ===== CATEGORY SETTINGS FUNCTIONS (delegated to CategoryManager) =====
+    function loadCategorySettings() {
+        categorySettings = CategoryManager.loadCategorySettings(Plasmoid.configuration.categorySettings)
+    }
+    
+    function processCategories(categories) {
+        return CategoryManager.processCategories(categories, categorySettings)
+    }
+    
+    function isCategoryVisible(categoryName) {
+        return CategoryManager.isCategoryVisible(categorySettings, categoryName)
+    }
+    
+    function getEffectiveIcon(categoryName, defaultIcon) {
+        return CategoryManager.getEffectiveIcon(categorySettings, categoryName, defaultIcon)
+    }
 
     // ===== INITIALIZATION =====
     Component.onCompleted: {
         loadHistory()
+        loadPinned()
+        loadCategorySettings()
         // Locale data is now synchronously loaded via import
     }
 
@@ -347,11 +407,56 @@ PlasmoidItem {
             trFunc: mainRoot.tr
         }
         
+        // ===== PINNED SECTION =====
+        Components.PinnedSection {
+            id: pinnedSection
+            anchors.top: queryHints.visible ? queryHints.bottom : (primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top)
+            anchors.topMargin: 8
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: 12
+            anchors.rightMargin: 12
+            
+            visible: mainRoot.getVisiblePinnedItems().length > 0
+            pinnedItems: mainRoot.getVisiblePinnedItems()
+            textColor: mainRoot.textColor
+            accentColor: mainRoot.accentColor
+            iconSize: mainRoot.iconSize
+            isTileView: mainRoot.isTileView
+            trFunc: mainRoot.tr
+            
+            onItemClicked: (item) => {
+                // Open pinned item
+                if (item.filePath && item.filePath.length > 0) {
+                    Qt.openUrlExternally(item.filePath)
+                } else {
+                    // Search and run
+                    mainRoot.searchText = item.display
+                    if (!mainRoot.isButtonMode) {
+                        hiddenSearchInput.text = item.display
+                    } else {
+                        buttonModeSearchInput.setText(item.display)
+                    }
+                    Qt.callLater(function() {
+                        if (resultsList.count > 0) {
+                            var idx = resultsModel.index(0, 0)
+                            resultsModel.run(idx)
+                        }
+                    })
+                }
+                mainRoot.expanded = false
+            }
+            
+            onUnpinClicked: (matchId) => {
+                mainRoot.unpinItem(matchId)
+            }
+        }
+        
         // ===== RESULTS LIST VIEW =====
         Components.ResultsListView {
             id: resultsList
-            anchors.top: queryHints.visible ? queryHints.bottom : (primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top)
-            anchors.topMargin: (queryHints.visible || primaryResultPreview.visible) ? 8 : 12
+            anchors.top: pinnedSection.visible ? pinnedSection.bottom : (queryHints.visible ? queryHints.bottom : (primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top))
+            anchors.topMargin: pinnedSection.visible ? 8 : ((queryHints.visible || primaryResultPreview.visible) ? 8 : 12)
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: mainRoot.isButtonMode ? buttonModeSearchInput.top : parent.bottom
@@ -367,6 +472,10 @@ PlasmoidItem {
             accentColor: mainRoot.accentColor
             trFunc: mainRoot.tr
             searchText: mainRoot.searchText
+            
+            // Pin support
+            property var isPinnedFunc: mainRoot.isPinned
+            property var togglePinFunc: mainRoot.togglePin
             
             onItemClicked: (index, display, decoration, category, matchId, filePath) => {
                 mainRoot.addToHistory(display, decoration, category, matchId, filePath, null, mainRoot.searchText)
@@ -566,6 +675,13 @@ PlasmoidItem {
             categorizedData = result;
         }
 
+        // Debounce timer for refreshGroups to prevent excessive updates
+        Timer {
+            id: refreshDebouncer
+            interval: 50
+            onTriggered: popupContent.refreshGroups()
+        }
+
         Repeater {
             id: rawDataProxy
             model: resultsModel
@@ -579,7 +695,7 @@ PlasmoidItem {
                 property var duplicateId: model.duplicateId || ""
             }
             onCountChanged: {
-                popupContent.refreshGroups()
+                refreshDebouncer.restart()
                 
                 // Latency Measurement
                 if (popupContent.searchStartTime > 0) {
@@ -621,9 +737,6 @@ PlasmoidItem {
                 }
             }
         }
-        
-        // ===== SEARCH LATENCY MEASUREMENT =====
-        // ===== END OF SEARCH LATENCY MEASUREMENT =====
         
         // ===== DEBUG OVERLAY =====
         Components.DebugOverlay {

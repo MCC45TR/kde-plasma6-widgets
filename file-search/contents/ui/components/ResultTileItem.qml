@@ -3,6 +3,8 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 // Single tile item delegate for tile/grid view
+// NOTE: This component is currently NOT USED. ResultsTileView uses inline delegate.
+// Consider integrating this component for better modularity or remove in future cleanup.
 Item {
     id: root
     

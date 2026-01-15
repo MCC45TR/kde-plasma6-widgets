@@ -23,6 +23,10 @@ ScrollView {
     property var trFunc: function(key) { return key }
     property string searchText: ""
     
+    // Pin support
+    property var isPinnedFunc: function(matchId) { return false }
+    property var togglePinFunc: function(item) { }
+    
     clip: true
     ScrollBar.vertical.policy: ScrollBar.AlwaysOff
     
@@ -112,6 +116,35 @@ ScrollView {
                         font.pixelSize: 10
                         elide: Text.ElideMiddle
                         width: parent.width
+                    }
+                }
+                
+                // Pin button
+                Item {
+                    Layout.preferredWidth: 28
+                    Layout.preferredHeight: 28
+                    visible: resultMouseArea.containsMouse
+                    
+                    PinButton {
+                        anchors.centerIn: parent
+                        isPinned: {
+                            var matchId = (model.duplicateId !== undefined ? model.duplicateId : model.display) || ""
+                            return resultsListRoot.isPinnedFunc(matchId)
+                        }
+                        accentColor: resultsListRoot.accentColor
+                        textColor: resultsListRoot.textColor
+                        trFunc: resultsListRoot.trFunc
+                        
+                        onToggled: (pinned) => {
+                            var matchId = (model.duplicateId !== undefined ? model.duplicateId : model.display) || ""
+                            resultsListRoot.togglePinFunc({
+                                display: model.display || "",
+                                decoration: model.decoration || "application-x-executable",
+                                category: model.category || "Diğer",
+                                matchId: matchId,
+                                filePath: model.url || ""
+                            })
+                        }
                     }
                 }
             }

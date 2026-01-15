@@ -6,14 +6,7 @@ ColumnLayout {
     
     property string monthLabel
     property var calendarCells: []
-    property var weekdayLabels: {
-        var labels = []
-        var firstDay = Qt.locale().firstDayOfWeek
-        for (var i = 0; i < 7; ++i) {
-            labels.push(Qt.locale().dayName((firstDay + i) % 7, 2))
-        }
-        return labels
-    }
+    property var weekdayLabels: []
     
     // Parent'tan alınacak renkler
     property color textColor: "#ffffff"
@@ -42,7 +35,6 @@ ColumnLayout {
             font.weight: Font.Bold
             font.letterSpacing: 2
             color: calendarLayout.accentColor
-            opacity: 1 // Mat görünüm için
         }
 
         Text {
@@ -55,7 +47,6 @@ ColumnLayout {
             font.italic: true
             font.letterSpacing: 1
             color: calendarLayout.accentColor
-            opacity: 1
             visible: currentMonthIndex === 0 || currentMonthIndex === 11
         }
     }
@@ -105,7 +96,6 @@ ColumnLayout {
                     
                     color: calendarLayout.accentColor
                     visible: cellData.isToday
-                    opacity: 1 // Mat görünüm için
                 }
 
                 // --- SELECTION RECTANGLE ---

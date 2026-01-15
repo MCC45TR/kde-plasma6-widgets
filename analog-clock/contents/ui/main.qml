@@ -100,7 +100,6 @@ PlasmoidItem {
         anchors.fill: parent
         color: Kirigami.Theme.backgroundColor
         radius: 20
-        opacity: 1
         anchors.margins: 10
     }
 

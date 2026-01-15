@@ -9,7 +9,7 @@
             }
         ],
         "Category": "Utilities",
-        "Description": "A simple Hava Durumu widget",
+        "Description": "Modern weather widget with Google Weather icons, daily/hourly forecasts, and auto-refresh",
         "Icon": "weather-many-clouds",
         "Id": "com.mcc45tr.weather",
         "Name": "Weather",

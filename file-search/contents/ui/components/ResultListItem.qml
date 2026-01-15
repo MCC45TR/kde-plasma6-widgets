@@ -3,6 +3,8 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 // Single result item delegate for list view
+// NOTE: This component is currently NOT USED. ResultsListView uses inline delegate.
+// Consider integrating this component for better modularity or remove in future cleanup.
 Rectangle {
     id: root
     

@@ -1,7 +1,11 @@
 // HistoryManager.js - History management functions for File Search Widget
 // Self-contained module with inline utility functions
+//
+// NOTE: generateUUID and detectSourceType are duplicated from utils.js.
+// This is intentional - QML does not support imports between JS modules.
+// If updating these functions, also update utils.js.
 
-// UUID Generator
+// UUID Generator (duplicated from utils.js)
 function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -9,7 +13,7 @@ function generateUUID() {
     });
 }
 
-// Detect source type from category
+// Detect source type from category (duplicated from utils.js)
 function detectSourceType(category, isApp, filePath) {
     if (isApp) {
         return "app"
