@@ -58,6 +58,12 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 ### 🌦️ Weather
 > A responsive, multi-provider weather dashboard with stunning animations.
 
+<p align="center">
+  <img src="./.Samples/MWeather-Small.png" height="150" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Large.png" height="150" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Big.png" height="150" style="margin: 5px;">
+</p>
+
 - **Adaptive Layouts**: Morphs between Small, Wide (Card), and Large (Grid) modes
 - **Morphing Details**: Unique overlay that expands smoothly from UI elements
 - **Zero Config**: Works out-of-the-box with Open-Meteo (no API key required)
@@ -86,6 +92,11 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 ### ⏰ Clocks
 > Analog & Digital clock widgets.
 
+<p align="center">
+  <img src="./.Samples/MAnalog-Clock-Small.png" width="150" style="margin: 5px;">
+  <img src="./.Samples/MAnalog-Clock-Large.png" width="150" style="margin: 5px;">
+</p>
+
 - **Analog**: Minimalist design with dynamic opacity and hand smoothing
 - **Digital**: Configurable fonts (Roboto Condensed Variable) and hover-reveal seconds
 
@@ -109,7 +120,9 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 | **Events** | Event reminder widget |
 | **Alarms** | Alarm clock widget |
 
+
 ---
+
 
 ## 🚀 Installation
 
