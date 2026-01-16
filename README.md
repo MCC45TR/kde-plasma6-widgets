@@ -59,9 +59,9 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 > A responsive, multi-provider weather dashboard with stunning animations.
 
 <p align="center">
-  <img src="./.Samples/MWeather-Small.png" height="150" style="margin: 5px;">
-  <img src="./.Samples/MWeather-Large.png" height="150" style="margin: 5px;">
-  <img src="./.Samples/MWeather-Big.png" height="150" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Small.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Large.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Big.png" height="225" style="margin: 5px;">
 </p>
 
 - **Adaptive Layouts**: Morphs between Small, Wide (Card), and Large (Grid) modes
@@ -80,10 +80,10 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 > A clean, offline-focused calendar widget.
 
 <p align="center">
-  <img src="./.Samples/MCalendar-Small.png" width="150" style="margin: 5px;">
-  <img src="./.Samples/MCalendar-Large.png" width="150" style="margin: 5px;">
-  <img src="./.Samples/MCalendar-Tall.png" height="200" style="margin: 5px;">
-  <img src="./.Samples/MCalendar-Big.png" width="200" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Small.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Large.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Tall.png" height="300" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Big.png" height="300" style="margin: 5px;">
 </p>
 
 - **Privacy-First**: No external dependencies for a fast, local experience
@@ -101,8 +101,8 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 > Analog & Digital clock widgets.
 
 <p align="center">
-  <img src="./.Samples/MAnalog-Clock-Small.png" width="150" style="margin: 5px;">
-  <img src="./.Samples/MAnalog-Clock-Large.png" width="150" style="margin: 5px;">
+  <img src="./.Samples/MAnalog-Clock-Small.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MAnalog-Clock-Large.png" height="225" style="margin: 5px;">
 </p>
 
 - **Analog**: Minimalist design with dynamic opacity and hand smoothing
