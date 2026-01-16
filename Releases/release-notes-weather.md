@@ -2,7 +2,22 @@
 
 ---
 
-## 🚀 MWeather v1.1.4 - Rebranding & Discover Support
+## � MWeather v1.1.5 - Small Mode UI Fix
+*Released on January 16, 2026*
+
+A quick hotfix to improve text readability in compact layouts.
+
+### 🔧 Fixes
+*   **Small Mode Text Wrap**: Fixed an issue where long weather descriptions (e.g., "Partly Cloudy") would get cut off or overlap with the weather icon. The text now intelligently wraps to a second line.
+
+### 📦 Installation
+```bash
+kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.mweather-v1.1.5.plasmoid
+```
+
+---
+
+## �🚀 MWeather v1.1.4 - Rebranding & Discover Support
 *Released on January 16, 2026*
 
 This release introduces the new **MWeather** identity and includes technical enhancements for better integration with KDE Discover.

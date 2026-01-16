@@ -13,7 +13,7 @@
         "Icon": "weather-many-clouds",
         "Id": "com.mcc45tr.mweather",
         "Name": "MWeather",
-        "Version": "1.1.4",
+        "Version": "1.1.5",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/weather",
         "License": "GPL-3.0",
         "Name[tr]": "MHava Durumu",

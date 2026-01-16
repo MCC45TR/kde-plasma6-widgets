@@ -27,6 +27,8 @@ Item {
             color: Kirigami.Theme.textColor
             font.family: "Roboto Condensed"
             font.pixelSize: Math.max(16, Math.min(24, smallLayout.height * 0.12))
+            wrapMode: Text.WordWrap
+            maximumLineCount: 2
             elide: Text.ElideRight
             Layout.fillWidth: true
         }

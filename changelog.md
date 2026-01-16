@@ -3,6 +3,9 @@
 ## 2026-01-16
 
 ### TR-TR
+- **MWeather Widget v1.1.5 (Small Mode Fix)**:
+    - **UI Düzeltmesi**: Küçük modda (Small Mode) uzun hava durumu açıklamalarının (örn. "Parçalı Bulutlu") ikon ile çakışması ve kesilmesi sorunu düzeltildi. Metin artık gerektiğinde alt satıra geçiyor (Word Wrap).
+
 - **MWeather Widget v1.1.4 (Rebranding & Discover Support)**:
     - **Marka Yenileme (Rebranding)**: Uygulama adı **MWeather** olarak güncellendi ve Latin dillerinde "M" ön eki eklendi.
     - **KDE Discover Desteği**: `metainfo.xml` (AppStream) eklenerek KDE Discover ve mağaza entegrasyonu güçlendirildi.
@@ -17,6 +20,9 @@
     - **Hata Düzeltmeleri**: Ermenice (`hy`) çevirilerdeki bozulmalar giderildi. Büyük moddaki binding loop ve null referans hataları çözüldü.
 
 ### EN-US
+- **MWeather Widget v1.1.5 (Small Mode Fix)**:
+    - **UI Fix**: Resolved text truncation and icon overlap issues for long weather descriptions in Small Mode. Text now automatically wraps to a second line when needed.
+
 - **MWeather Widget v1.1.4 (Rebranding & Discover Support)**:
     - **Rebranding**: Renamed the widget to **MWeather** and added "M" prefix for Latin-based languages.
     - **Discover Integration**: Added `metainfo.xml` (AppStream) for ultimate visibility in KDE Discover and stores.
