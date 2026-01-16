@@ -1,4 +1,27 @@
 ### Release Tag
+v1.1.2
+
+### Release Title
+Weather v1.1.2 - Layout Polish & JS Localization
+
+### Release Notes
+This update finalizes the layout adjustments and solves the localization loading issue permanently.
+
+### 🚀 Improvements
+*   **Localization Fix**: Switched from JSON/XHR to a pure **JS-based localization** (`localization.js`) method. This bypasses browser/QML file access restrictions, ensuring translations load reliably on all systems.
+*   **Layout Polish**: Added a subtle spacing (4px) between the header buttons (Details/Daily) and the forecast grid in Large Mode for better visual separation.
+*   **Code Cleanup**: Removed obsolete inline fallback logic in favor of the robust JS import method.
+
+### 📦 Installation
+1.  Download **`com.mcc45tr.weather-v1.1.2.plasmoid`**.
+2.  Install via terminal:
+    ```bash
+    kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.weather-v1.1.2.plasmoid
+    ```
+
+---
+
+### Release Tag
 v1.1.1
 
 ### Release Title
