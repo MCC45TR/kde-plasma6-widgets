@@ -76,7 +76,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Smart Discovery**: Scans all active MPRIS services
 - **Visual Polish**: Squeeze animations, dynamic pill-shaped badge, themed icons
 
-### 🗓️ Calendar
+### 🗓️ MCalendar
 > A clean, offline-focused calendar widget.
 
 <p align="center">
@@ -89,6 +89,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Privacy-First**: No external dependencies for a fast, local experience
 - **System Integration**: Uses system locale for date formats
 - **Modern UI**: Fluid animations and improved event markers
+- 📄 *[Read detailed documentation →](./calendar/README.md)*
 
 ### 🔋 Battery
 > A multi-device power monitor.
