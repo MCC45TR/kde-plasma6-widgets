@@ -269,7 +269,6 @@ Kirigami.FormLayout {
         color: Kirigami.Theme.positiveTextColor
         text: {
             var count = appListModel.count - 1 // Exclude "Genel"
-            var count = appListModel.count - 1 // Exclude "Genel"
             if (count <= 0) return page.tr("no_active_players")
             return page.tr("active_players_found", count)
         }
@@ -280,7 +279,6 @@ Kirigami.FormLayout {
         wrapMode: Text.Wrap
         font.pixelSize: 12
         opacity: 0.7
-        text: cfg_preferredPlayer === "" 
         text: cfg_preferredPlayer === "" 
             ? page.tr("all_sources_tracked")
             : page.tr("only_x_tracked", cfg_preferredPlayer)

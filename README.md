@@ -80,6 +80,13 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 ### 🎵 Music Player
 > A dynamic media controller that adapts to your workflow.
 
+<p align="center">
+  <img src="./.Samples/MMusic-Player-Small.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MMusic-Player-Large.png" height="225" style="margin: 5px;">
+  <br>
+  <img src="./.Samples/MMusic-Player-Big.png" height="350" style="margin: 5px;">
+</p>
+
 - **Universal Control**: Automatically finds active media players (Spotify, VLC, browser, etc.)
 - **Smart Discovery**: Scans all active MPRIS services
 - **Visual Polish**: Squeeze animations, dynamic pill-shaped badge, themed icons
