@@ -53,7 +53,14 @@ kpackagetool6 --type Plasma/Applet --upgrade .
 
 ## 🤝 Contribution
 
-Localized strings are stored in `contents/ui/localization.json`. If you'd like to improve a translation, simple edit the JSON file and submit a Pull Request!
+Localized strings are stored in `contents/ui/localization.js`. If you'd like to improve a translation, simple edit the JS file (following the existing format) and submit a Pull Request!
+
+## 📜 Credits & License
+
+This widget uses **Google Weather Icons** (v1, v2, and v3) to provide a premium visual experience.
+*   **Icon Designs**: All rights belong to **Google**.
+*   **Collection Source**: Icons sourced and optimized from the [google-weather-icons](https://github.com/mrdarrengriffin/google-weather-icons) repository by **Darren Griffin**.
+*   **License**: This project is distributed under the **GPL-3.0 License**. The weather icons are used under fair use/brand assett guidelines for personal desktop customization.
 
 ---
 *Part of the [Plasma6Widgets](../README.md) Collection.*
