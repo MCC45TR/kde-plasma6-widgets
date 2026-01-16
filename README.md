@@ -90,6 +90,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Universal Control**: Automatically finds active media players (Spotify, VLC, browser, etc.)
 - **Smart Discovery**: Scans all active MPRIS services
 - **Visual Polish**: Squeeze animations, dynamic pill-shaped badge, themed icons
+- 📄 *[Read detailed documentation →](./music-player/README.md)*
 
 ### 🗓️ MCalendar
 > A clean, offline-focused calendar widget.

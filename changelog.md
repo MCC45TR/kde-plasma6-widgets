@@ -3,6 +3,12 @@
 ## 2026-01-16
 
 ### TR-TR
+- **MMusic Player Widget v1.2.1 (Rebranding & Multi-language Support)**:
+    - **Marka Yenileme (Rebranding)**: Widget adı **MMusic Player** olarak güncellendi ve Latin dilli yerelleştirmelere "M" ön eki eklendi.
+    - **Genişletilmiş Lokalizasyon**: Toplam 20 dil desteğine ulaşıldı. İtalyanca, Yunanca, Azerice, Çince, Ermenice, Hintçe, Bengalce, Urduca, Endonezyaca ve Farsça dilleri eklendi.
+    - **Yapılandırma Düzeltmesi**: Genel ayarlar sekmesinde yaşanan görsel kaybolma ve syntax hataları giderildi.
+    - **Dökümantasyon**: Widget klasörü içine detaylı `README.md` eklendi ve GitHub URL'si güncellendi.
+
 - **MWeather Widget v1.1.5 (Small Mode Fix)**:
     - **UI Düzeltmesi**: Küçük modda (Small Mode) uzun hava durumu açıklamalarının (örn. "Parçalı Bulutlu") ikon ile çakışması ve kesilmesi sorunu düzeltildi. Metin artık gerektiğinde alt satıra geçiyor (Word Wrap).
 
@@ -20,6 +26,12 @@
     - **Hata Düzeltmeleri**: Ermenice (`hy`) çevirilerdeki bozulmalar giderildi. Büyük moddaki binding loop ve null referans hataları çözüldü.
 
 ### EN-US
+- **MMusic Player Widget v1.2.1 (Rebranding & Multi-language Support)**:
+    - **Rebranding**: Renamed to **MMusic Player** and added "M" prefix for Latin-based languages.
+    - **Extended Localization**: Now supports 20 languages. Added Italian, Greek, Azerbaijani, Chinese, Armenian, Hindi, Bengali, Urdu, Indonesian, and Persian.
+    - **Config Fix**: Fixed the "General" settings tab visibility issue caused by QML syntax errors.
+    - **Documentation**: Added a detailed `README.md` within the widget directory and updated the repository URL.
+
 - **MWeather Widget v1.1.5 (Small Mode Fix)**:
     - **UI Fix**: Resolved text truncation and icon overlap issues for long weather descriptions in Small Mode. Text now automatically wraps to a second line when needed.
 
