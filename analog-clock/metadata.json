@@ -9,7 +9,7 @@
             }
         ],
         "Category": "Utilities",
-        "Description": "A simple Analog Saat widget",
+        "Description": "A sophisticated minimal Analog Clock with adaptive squircle layout and interactive morphing animations.",
         "Icon": "chronometer",
         "Id": "com.mcc45tr.analogclock",
         "Name": "Analog Clock",
