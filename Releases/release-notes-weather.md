@@ -2,6 +2,23 @@
 
 ---
 
+## 🚀 MWeather v1.1.4 - Rebranding & Discover Support
+*Released on January 16, 2026*
+
+This release introduces the new **MWeather** identity and includes technical enhancements for better integration with KDE Discover.
+
+### ✨ What's New
+*   **Rebranding**: The widget has been officially renamed to **MWeather**. Names now include an "M" prefix for Latin-based languages (e.g., MHava Durumu, MWetter).
+*   **AppStream Integration**: Added `metainfo.xml` support to ensure the widget displays beautifully in KDE Discover with screenshots and detailed descriptions.
+*   **Global ID Update**: Technical Plugin ID updated to `com.mcc45tr.mweather` for better consistency.
+
+### 📦 Installation
+```bash
+kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.mweather-v1.1.4.plasmoid
+```
+
+---
+
 ## 🚀 MWeather v1.1.3 - Optimization & Cleanup
 *Released on January 16, 2026*
 

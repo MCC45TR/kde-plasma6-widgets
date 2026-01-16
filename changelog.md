@@ -3,8 +3,11 @@
 ## 2026-01-16
 
 ### TR-TR
-- **MWeather Widget (Lokalizasyon Devrimi ve Modernizasyon)**:
-    - **Senkron Lokalizasyon**: Lokalizasyon sistemi `XMLHttpRequest` tabanlı JSON dosyasından, senkron JavaScript modülüne (`localization.js`) taşındı. Bu sayede yerel dosya erişim kısıtlamaları (CORS) aşıldı ve çevirilerin anında yüklenmesi sağlandı.
+- **MWeather Widget v1.1.4 (Rebranding & Discover Support)**:
+    - **Marka Yenileme (Rebranding)**: Uygulama adı **MWeather** olarak güncellendi ve Latin dillerinde "M" ön eki eklendi.
+    - **KDE Discover Desteği**: `metainfo.xml` (AppStream) eklenerek KDE Discover ve mağaza entegrasyonu güçlendirildi.
+    - **Teknik Kimlik**: Plugin ID `com.mcc45tr.mweather` olarak güncellendi.
+    - **Senkron Lokalizasyon**: Lokalizasyon sistemi `XMLHttpRequest` tabanlı JSON dosyasından, senkron JavaScript modülüne (`localization.js`) taşındı.
     - **Modüler Mimari**: `main.qml` dosyası parçalanarak `SmallModeLayout`, `WideModeLayout` ve `LargeModeLayout` bileşenlerine ayrıldı. Kod okunabilirliği ve bakım kolaylığı artırıldı.
     - **Gelişmiş Animasyonlar**: Büyük Mod (Large Mode) için "Morphing Details" animasyonu eklendi. Detaylar butonu tam ekran cam efektli panele yumuşak bir geçişle genişliyor.
     - **Görsel İyileştirmeler**:
@@ -14,8 +17,11 @@
     - **Hata Düzeltmeleri**: Ermenice (`hy`) çevirilerdeki bozulmalar giderildi. Büyük moddaki binding loop ve null referans hataları çözüldü.
 
 ### EN-US
-- **MWeather Widget (Localization Revolution & Modernization)**:
-    - **Synchronous Localization**: Migrated the localization system from `XMLHttpRequest` based JSON to a synchronous JavaScript module (`localization.js`). This bypasses local file access restrictions (CORS) and ensures instant translation loading.
+- **MWeather Widget v1.1.4 (Rebranding & Discover Support)**:
+    - **Rebranding**: Renamed the widget to **MWeather** and added "M" prefix for Latin-based languages.
+    - **Discover Integration**: Added `metainfo.xml` (AppStream) for ultimate visibility in KDE Discover and stores.
+    - **Technical ID**: Updated Plugin ID to `com.mcc45tr.mweather`.
+    - **Synchronous Localization**: Migrated the localization system from `XMLHttpRequest` based JSON to a synchronous JavaScript module.
     - **Modular Architecture**: Refactored `main.qml` into modular components: `SmallModeLayout`, `WideModeLayout`, and `LargeModeLayout`. Improved code maintainability and performance.
     - **Advanced Animations**: Introduced "Morphing Details" animation for Large Mode. The details button smoothly expands into a full-glass details panel using `InOutQuad` easing.
     - **Visual Enhancements**:
