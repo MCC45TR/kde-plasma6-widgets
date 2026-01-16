@@ -79,6 +79,13 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 ### 🗓️ Calendar
 > A clean, offline-focused calendar widget.
 
+<p align="center">
+  <img src="./.Samples/MCalendar-Small.png" width="150" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Large.png" width="150" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Tall.png" height="200" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Big.png" width="200" style="margin: 5px;">
+</p>
+
 - **Privacy-First**: No external dependencies for a fast, local experience
 - **System Integration**: Uses system locale for date formats
 - **Modern UI**: Fluid animations and improved event markers
