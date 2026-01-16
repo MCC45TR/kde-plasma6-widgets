@@ -126,8 +126,21 @@ PlasmoidItem {
     // Widget Size Constraints
     Layout.preferredWidth: 400
     Layout.preferredHeight: 200
-    Layout.minimumWidth: 250
-    Layout.minimumHeight: 150
+    Layout.minimumWidth: 200
+    Layout.minimumHeight: 200
+
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: root.tr("refresh")
+            icon.name: "view-refresh"
+            onTriggered: root.fetchWeatherData()
+        },
+        PlasmaCore.Action {
+            text: root.forecastMode ? root.tr("daily_forecast") : root.tr("hourly_forecast")
+            icon.name: root.forecastMode ? "view-calendar-month" : "view-calendar-day"
+            onTriggered: root.forecastMode = !root.forecastMode
+        }
+    ]
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     // Configuration
@@ -138,6 +151,18 @@ PlasmoidItem {
     property int lastFetchMinute: -1
 
     // Timer for Auto-Refresh (Every 00 and 30 minutes)
+    
+    // Layout Logic - Threshold Based
+    // Wide Mode: Width > 350 AND Height <= 350
+    readonly property bool isWideMode: root.width > 350 && root.height <= 350
+    
+    // Large Mode: Width > 350 AND Height > 350
+    readonly property bool isLargeMode: root.width > 350 && root.height > 350
+    
+    // Small Mode: Everything else (Width <= 350 OR Height <= 350, assuming fallback for vertical strips)
+    // User definition: "Küçük Mod = Genişlik ve Yükseklik 350 den küçük" implies W<=350 AND H<=350.
+    // We treat anything NOT Large and NOT Wide as Small (includes narrow-tall strips).
+    readonly property bool isSmallMode: !isWideMode && !isLargeMode
     Timer {
         interval: 10000 // Check every 10 seconds
         running: true
@@ -308,7 +333,7 @@ PlasmoidItem {
                 anchors.fill: parent
                 anchors.margins: 8
                 spacing: 8
-                visible: !root.isLoading && root.errorMessage === "" && root.currentWeather
+                visible: !root.isLoading && root.errorMessage === "" && root.currentWeather && root.isWideMode
                 
                 // Left Section: Current Weather (Expandable)
                 Rectangle {
@@ -882,9 +907,8 @@ PlasmoidItem {
                 ColumnLayout {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.preferredWidth: root.width * 0.55 // Ensure it takes up space
+                    Layout.preferredWidth: root.width * 0.55
                     Layout.minimumWidth: 150
-                    // Removed maximumWidth constraint to allow full expansion
                     spacing: 4
                     clip: true
 
@@ -904,7 +928,7 @@ PlasmoidItem {
                             Layout.fillWidth: true
                         }
 
-                        // Toggle Button (Integrated into header)
+                        // Toggle Button
                         Rectangle {
                             Layout.alignment: Qt.AlignRight | Qt.AlignTop
                             Layout.preferredWidth: toggleText.implicitWidth + 24
@@ -922,24 +946,24 @@ PlasmoidItem {
                             }
 
                             MouseArea {
+                                id: toggleMouseArea
                                 anchors.fill: parent
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: root.forecastMode = !root.forecastMode
+                                hoverEnabled: true
                             }
                             
-                            // Hover effect
                             Rectangle {
                                 anchors.fill: parent
                                 color: Kirigami.Theme.highlightColor
-                                opacity: parent.children[2].containsMouse ? 0.1 : 0
+                                opacity: toggleMouseArea.containsMouse ? 0.1 : 0
                                 radius: parent.radius
                                 Behavior on opacity { NumberAnimation { duration: 150 } }
                             }
                         }
                     }
 
-
-                    // Forecast Grid (fixed card width, wraps to multiple rows)
+                    // Forecast Grid
                     GridView {
                         id: forecastGrid
                         Layout.fillWidth: true
@@ -947,23 +971,28 @@ PlasmoidItem {
                         Layout.minimumHeight: 80
                         clip: true
                         
-                        // Dynamic card width: minimum 70px, expands to fill available width
+                        // Dynamic card sizing
                         readonly property real minCardWidth: 70
+                        readonly property real minCardHeight: 100
+                        
                         readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
-                        // Actual width = available width divided equally among cards in row
+                        readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
+                        
                         readonly property real actualCardWidth: width / cardsPerRow
-                        readonly property int rowCount: Math.ceil(count / cardsPerRow)
+                        readonly property real actualCardHeight: height / visibleRows
                         
                         cellWidth: actualCardWidth
-                        cellHeight: 100  // Fixed card height
+                        cellHeight: actualCardHeight
                         
-                        // No leftMargin needed since cards fill the entire width
+                        // Snapping behavior
+                        snapMode: GridView.SnapToRow
+                        boundsBehavior: Flickable.StopAtBounds
+                        
                         leftMargin: 0
-                        
                         flow: GridView.FlowLeftToRight
                         
                         model: root.forecastMode ? root.forecastHourly : root.forecastDaily
-
+                        
                         delegate: ForecastItem {
                             required property var modelData
                             required property int index
@@ -971,63 +1000,325 @@ PlasmoidItem {
                             width: forecastGrid.cellWidth - 4
                             height: forecastGrid.cellHeight - 4
                             
-                            // Visual properties
                             label: root.forecastMode ? modelData.time : modelData.day
                             iconPath: root.getWeatherIcon(modelData)
                             temp: modelData.temp
                             isHourly: root.forecastMode
                             
                             // Radius Logic
-                            // Stronger contrast as per user feedback
                             readonly property real fullR: 24
-                            readonly property real halfR: 6 // 50% of the previous ~12. But user said "half of radius", if radius was 24, half is 12. 
-                            // Let's stick to visible difference. 8 is a good "inner" radius.
-                            
-                            // Robust Grid position helpers
-                            // Recalculate cols locally to ensure binding updates with width
                             readonly property int gridWidth: forecastGrid.width
                             readonly property int cw: forecastGrid.cellWidth
                             readonly property int cols: Math.max(1, Math.floor(gridWidth / cw))
-                            
                             readonly property int row: Math.floor(index / cols)
                             readonly property int col: index % cols
                             readonly property int totalRows: Math.ceil(forecastGrid.count / cols)
+                            readonly property bool isTop: row % forecastGrid.visibleRows === 0 // Visually top of the 'page'
+                            readonly property bool isBottom: (row + 1) % forecastGrid.visibleRows === 0 // Bottom of the 'page'
+                            // Note regarding radius: If we are scrolling 'stage by stage', 
+                            // maybe we want rounded corners on the *visible* block?
+                            // But usually GridView items are individual. 
+                            // Keeping the existing logic for now but adapting 'isTop' if needed.
+                            // The user didn't ask to change radius logic, just scrolling.
+                            // However, 'isTop' logic: row === 0 applies only to the very first row of dataset.
+                            // If we want it to look like a 'block' per page, we might need to adjust.
+                            // But usually simple per-item radius is safer.
+                            // Let's stick to existing corner logic for now to avoid regression, 
+                            // unless 'isTop' depends on View visibility.
                             
-                            readonly property bool isTop: row === 0
-                            readonly property bool isBottom: row === totalRows - 1
+                            // Re-using the same radius logic from before
+                            readonly property bool isFirstRow: row === 0
+                            readonly property bool isLastRow: row === totalRows - 1
                             readonly property bool isLeft: col === 0
-                            
-                            // Right Logic: Explicitly check column index or if it's the last item
-                            // But for "Top Right Corner", we specifically mean the visual rightmost item of the top row.
-                            // If top row is full: col == cols-1.
-                            // If top row is NOT full (rare but possible count < cols): index == count-1.
                             readonly property bool isRight: col === cols - 1 || index === forecastGrid.count - 1
                             
-                            // Specific corners:
-                            // Top Left Corner of the Grid
-                            radiusTL: (isTop && isLeft) ? fullR : 10
-                            
-                            // Top Right Corner of the Grid
-                            radiusTR: (isTop && isRight) ? fullR : 10
-                            
-                            // Bottom Left Corner of the Grid
-                            radiusBL: (isBottom && isLeft) ? fullR : 10
-                            
-                            // Bottom Right Corner of the Grid
-                            radiusBR: (isBottom && isRight) ? fullR : 10
+                            radiusTL: (isFirstRow && isLeft) ? fullR : 10
+                            radiusTR: (isFirstRow && isRight) ? fullR : 10
+                            radiusBL: (isLastRow && isLeft) ? fullR : 10
+                            radiusBR: (isLastRow && isRight) ? fullR : 10
                         }
                     }
-
-                    Item { Layout.fillHeight: true } // Spacer
                 }
             }
+            
+            // SMALL MODE LAYOUT (Square-ish / Narrow)
+            Item {
+                id: smallModeLayout
+                anchors.fill: parent
+                anchors.margins: 10
+                visible: !root.isLoading && root.errorMessage === "" && root.currentWeather && root.isSmallMode
+                
+                // 1. Top Left: Condition & Location
+                ColumnLayout {
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    spacing: 0
+                    width: parent.width * 0.6 // Save space for icon
+                    
+                    Text {
+                        text: root.currentWeather ? root.tr("condition_" + root.currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
+                        color: Kirigami.Theme.textColor
+                        font.family: "Roboto Condensed"
+                        font.pixelSize: Math.max(16, Math.min(24, root.height * 0.12))
+                        font.bold: false
+                        elide: Text.ElideRight
+                        Layout.fillWidth: true
+                    }
+                    Text {
+                        text: root.currentWeather ? root.currentWeather.location : root.location
+                        color: Kirigami.Theme.textColor
+                        font.family: "Roboto Condensed"
+                        font.pixelSize: Math.max(14, Math.min(20, root.height * 0.1))
+                        font.bold: true
+                        elide: Text.ElideRight
+                        Layout.fillWidth: true
+                    }
+                }
+                
+                // 2. Top Right: Big Icon
+                Image {
+                    source: root.getWeatherIcon(root.currentWeather)
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.topMargin: -5
+                    width: parent.width * 0.5
+                    height: width
+                    sourceSize.width: width * 2
+                    sourceSize.height: height * 2
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                }
+                
+                // 3. Bottom Left: Big Temperature
+                Text {
+                    id: smallTemp
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: -10 // Pull it down a bit to fit tight
+                    text: root.currentWeather ? root.currentWeather.temp : "--"
+                    color: Kirigami.Theme.textColor
+                    font.family: "Roboto Condensed"
+                    font.pixelSize: root.height * 0.45
+                    font.bold: true
+                    lineHeight: 0.8
+                }
+                
+                // 4. Bottom Middle: High/Low Stats (Next to Temp)
+                ColumnLayout {
+                    anchors.left: smallTemp.right
+                    anchors.leftMargin: 5
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 10
+                    spacing: 2
+                    
+                    // Degree Symbol (Big)
+                    Text {
+                        text: "°"
+                        color: Kirigami.Theme.textColor
+                        font.pixelSize: root.height * 0.2
+                        font.bold: true
+                        Layout.alignment: Qt.AlignHCenter
+                    }
+                    
+                    // High
+                    RowLayout {
+                        spacing: 2
+                        Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: Math.max(12, root.height * 0.08); font.bold: true }
+                        Text { 
+                            text: root.currentWeather ? root.currentWeather.temp_max + "°" : "--"
+                            color: Kirigami.Theme.textColor; font.pixelSize: Math.max(12, root.height * 0.08); font.bold: true 
+                        }
+                    }
+                    
+                    // Low
+                    RowLayout {
+                        spacing: 2
+                        Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: Math.max(12, root.height * 0.08); font.bold: true }
+                        Text { 
+                            text: root.currentWeather ? root.currentWeather.temp_min + "°" : "--"
+                            color: Kirigami.Theme.textColor; font.pixelSize: Math.max(12, root.height * 0.08); font.bold: true 
+                        }
+                    }
+                }
+            } // End Small Mode Logic
+
+            // LARGE MODE LAYOUT (Width > 350 && Height > 350)
+            Item {
+                id: largeModeLayout
+                anchors.fill: parent
+                anchors.margins: 20
+                visible: !root.isLoading && root.errorMessage === "" && root.currentWeather && root.isLargeMode
+                
+                ColumnLayout {
+                    anchors.fill: parent
+                    spacing: 0
+                    
+                    // HEADER AREA
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: root.height * 0.4
+                        Layout.minimumHeight: 150
+                        
+                        // Left Column: Condition, Location, Temp
+                        Column {
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            width: parent.width * 0.6
+                            spacing: 0
+                            
+                            // Condition
+                            Text {
+                                text: root.currentWeather ? root.tr("condition_" + root.currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
+                                color: Kirigami.Theme.textColor
+                                font.family: "Roboto Condensed"
+                                font.pixelSize: Math.min(36, root.height * 0.09) // Responsive but large
+                                font.bold: true
+                                elide: Text.ElideRight
+                                width: parent.width
+                                lineHeight: 0.9
+                            }
+                            
+                            // Location
+                            Text {
+                                text: root.currentWeather ? root.currentWeather.location : root.location
+                                color: Kirigami.Theme.textColor
+                                font.family: "Roboto Condensed"
+                                font.pixelSize: Math.min(24, root.height * 0.06)
+                                font.bold: true
+                                opacity: 0.8
+                                elide: Text.ElideRight
+                                width: parent.width
+                                topPadding: 4
+                            }
+                            
+                            
+                            // Temperature (Huge)
+                            Text {
+                                text: root.currentWeather ? root.currentWeather.temp + "°" : "--"
+                                color: Kirigami.Theme.textColor
+                                font.family: "Roboto Condensed"
+                                font.pixelSize: Math.min(110, root.height * 0.25)
+                                font.bold: true
+                                lineHeight: 0.8
+                            }
+                        }
+                        
+                        // Right Icon
+                        Image {
+                            anchors.right: parent.right
+                            anchors.top: parent.top
+                            width: parent.width * 0.35
+                            height: width
+                            source: root.getWeatherIcon(root.currentWeather)
+                            sourceSize.width: width * 2
+                            sourceSize.height: height * 2
+                            fillMode: Image.PreserveAspectFit
+                            smooth: true
+                        }
+
+                        // Toggle Button (Bottom-Right of Header)
+                        Rectangle {
+                            anchors.right: parent.right
+                            anchors.bottom: parent.bottom
+                            anchors.bottomMargin: 5
+                            width: toggleTextLarge.implicitWidth + 24
+                            height: 28
+                            radius: 14
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+
+                            Text {
+                                id: toggleTextLarge
+                                anchors.centerIn: parent
+                                text: root.forecastMode ? root.tr("hourly_forecast") : root.tr("daily_forecast")
+                                color: Kirigami.Theme.textColor
+                                font.family: "Roboto Condensed"
+                                font.pixelSize: 12
+                                font.bold: true
+                            }
+
+                            MouseArea {
+                                id: toggleMouseAreaLarge
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: root.forecastMode = !root.forecastMode
+                                hoverEnabled: true
+                            }
+                            
+                            Rectangle {
+                                anchors.fill: parent
+                                color: Kirigami.Theme.highlightColor
+                                opacity: toggleMouseAreaLarge.containsMouse ? 0.1 : 0
+                                radius: parent.radius
+                                Behavior on opacity { NumberAnimation { duration: 150 } }
+                            }
+                        }
+                    }
+                    
+                    // FORECAST GRID
+                    GridView {
+                        id: largeForecastGrid
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        clip: true
+                        
+                        // Responsive Grid Config
+                        readonly property real minCardHeight: 100
+                        readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
+                        cellHeight: height / visibleRows
+                        
+                        readonly property real minCardWidth: 70
+                        readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
+                        cellWidth: width / cardsPerRow
+                        
+                        snapMode: GridView.SnapToRow
+                        boundsBehavior: Flickable.StopAtBounds
+                        
+                        leftMargin: 0
+                        flow: GridView.FlowLeftToRight
+                        
+                        // User requested Visuals:
+                        // Show DAILY or HOURLY? 
+                        // The existing Wide mode uses a toggle.
+                        // The user ASCII art shows "PZT, SAL, CAR..." (Days).
+                        // So let's default to DAILY model for this view to match "Large Mode" concept usually showing overview.
+                        // However, we can use the same `root.forecastMode` property to keep state consistent.
+                        // User ASCII checks: "PZT" (Mon), "SAL" (Tue). This is Daily.
+                        // Let's stick to `root.forecastMode` logic but default to daily if the user prefers.
+                        // Or just bind to the existing toggle.
+                        model: root.forecastMode ? root.forecastHourly : root.forecastDaily
+                        
+                        delegate: ForecastItem {
+                            required property var modelData
+                            required property int index
+                             
+                            width: largeForecastGrid.cellWidth - 4
+                            height: largeForecastGrid.cellHeight - 4
+                            
+                            // Reuse existing logic
+                            label: root.forecastMode ? modelData.time : modelData.day
+                            iconPath: root.getWeatherIcon(modelData)
+                            temp: modelData.temp
+                            isHourly: root.forecastMode
+                            
+                            // Rounded corners for all
+                            radiusTL: 12
+                            radiusTR: 12
+                            radiusBL: 12
+                            radiusBR: 12
+                        }
+                    }
+                }
+            }
+            
+
 
             // Click to Refresh (subtle)
             MouseArea {
                 anchors.fill: parent
-                acceptedButtons: Qt.MiddleButton | Qt.RightButton
+                acceptedButtons: Qt.MiddleButton
                 onClicked: (mouse) => {
-                    if (mouse.button === Qt.MiddleButton || mouse.button === Qt.RightButton) {
+                    if (mouse.button === Qt.MiddleButton) {
                         root.fetchWeatherData()
                     }
                 }

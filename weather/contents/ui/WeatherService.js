@@ -42,7 +42,7 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
                         description: data.weather[0].description,
                         icon: data.weather[0].icon,
                         code: data.weather[0].id,
-                        location: data.name + ", " + data.sys.country,
+                        location: data.name,
                         coord: { lat: data.coord.lat, lon: data.coord.lon },
                         timestamp: Date.now()
                     }
@@ -101,7 +101,7 @@ function fetchWeatherAPI(apiKey, location, callback) {
                         description: data.current.condition.text,
                         icon: "",
                         code: data.current.condition.code,
-                        location: data.location.name + ", " + data.location.country,
+                        location: data.location.name,
                         timestamp: Date.now()
                     }
 
@@ -140,7 +140,7 @@ function fetchOpenMeteo(location, units, callback) {
                     var place = geoData.results[0]
                     var lat = place.latitude
                     var lon = place.longitude
-                    var locationName = place.name + (place.country ? ", " + place.country : "")
+                    var locationName = place.name
 
                     // Step 2: Fetch weather data (10 days forecast) with extended current data
                     var tempUnit = units === "imperial" ? "&temperature_unit=fahrenheit&wind_speed_unit=mph" : "&temperature_unit=celsius&wind_speed_unit=kmh"
@@ -209,19 +209,49 @@ function fetchOpenMeteo(location, units, callback) {
     xhr.send()
 }
 
-// Main fetch function with fallback
-function fetchWeather(config, callback) {
-    var now = Date.now()
-
-    // Return cached data if still valid
-    if (cache.current && cache.forecast && (now - cache.timestamp) < cache.ttl) {
-        callback({ success: true, current: cache.current, forecast: cache.forecast, fromCache: true })
-        return
+// Fetch location from IP (ipinfo.io)
+function fetchIpAndWeather(config, callback) {
+    var xhr = new XMLHttpRequest()
+    var url = "https://ipinfo.io/json"
+    xhr.open("GET", url)
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                try {
+                    var data = JSON.parse(xhr.responseText)
+                    if (data.city) {
+                        console.log("Detected location from IP: " + data.city)
+                        // Create a new config with the detected city
+                        var newConfig = {
+                            apiKey: config.apiKey,
+                            apiKey2: config.apiKey2,
+                            location: data.city,
+                            units: config.units
+                        }
+                        // Proceed to fetch weather with detected city
+                        fetchWeatherInternal(newConfig, callback)
+                    } else {
+                        console.log("Could not detect city from IP, falling back to default.")
+                        fetchWeatherInternal(config, callback)
+                    }
+                } catch (e) {
+                    console.log("Failed to parse IP info: " + e)
+                    fetchWeatherInternal(config, callback)
+                }
+            } else {
+                console.log("IP detection failed: " + xhr.status)
+                fetchWeatherInternal(config, callback)
+            }
+        }
     }
+    xhr.send()
+}
 
+// Internal function to maintain original fetch logic
+function fetchWeatherInternal(config, callback) {
     var apiKey = config.apiKey || ""
     var apiKey2 = config.apiKey2 || ""
-    var location = config.location || "Ankara"
+    var location = config.location || ""
     var units = config.units || "metric"
 
     // If no API keys, use Open-Meteo (free, no key required)
@@ -268,6 +298,31 @@ function fetchWeather(config, callback) {
     } else if (apiKey2) {
         // Only WeatherAPI key available
         fetchWeatherAPI(apiKey2, location, callback)
+    }
+}
+
+// Main fetch function with fallback
+function fetchWeather(config, callback) {
+    var now = Date.now()
+
+    // Setup cache invalidation if needed
+    // If the cache contains country name in location, we consider it invalid for the new display requirement
+    var forceRefresh = false
+    if (cache.current && cache.current.location && cache.current.location.indexOf(",") !== -1) {
+        forceRefresh = true
+    }
+
+    // Return cached data if still valid and we don't need to force refresh
+    if (!forceRefresh && cache.current && cache.forecast && (now - cache.timestamp) < cache.ttl) {
+        callback({ success: true, current: cache.current, forecast: cache.forecast, fromCache: true })
+        return
+    }
+
+    // If location is the default "Ankara" or empty, try auto-detection
+    if (!config.location || config.location === "Ankara") {
+        fetchIpAndWeather(config, callback)
+    } else {
+        fetchWeatherInternal(config, callback)
     }
 }
 
