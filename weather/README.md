@@ -1,4 +1,4 @@
-# 🌦️ Weather Widget (Plasma 6)
+# 🌦️ MWeather Widget (Plasma 6)
 
 A stunning, responsive weather widget designed for KDE Plasma 6, featuring smooth animations, multiple provider support, and a detail-rich expandable interface.
 
@@ -55,12 +55,14 @@ kpackagetool6 --type Plasma/Applet --upgrade .
 
 Localized strings are stored in `contents/ui/localization.js`. If you'd like to improve a translation, simple edit the JS file (following the existing format) and submit a Pull Request!
 
-## 📜 Credits & License
+## 📜 Credits
 
-This widget uses **Google Weather Icons** (v1, v2, and v3) to provide a premium visual experience.
-*   **Icon Designs**: All rights belong to **Google**.
-*   **Collection Source**: Icons sourced and optimized from the [google-weather-icons](https://github.com/mrdarrengriffin/google-weather-icons) repository by **Darren Griffin**.
-*   **License**: This project is distributed under the **GPL-3.0 License**. The weather icons are used under fair use/brand assett guidelines for personal desktop customization.
+This widget uses **Google Weather Icons** (v1, v2, v3) to provide a premium visual experience.
+
+*   **Icon Designs**: Original artwork and copyrights belong to **Google LLC**.
+*   **Icon Collection & Optimization**: Special thanks to **[Darren Griffin](https://github.com/mrdarrengriffin/google-weather-icons)** for the comprehensive collection and SVG/PNG optimizations of these assets.
+*   **License Notice**: The icons are included for personal desktop customization under fair use. For any further redistribution, please adhere to the attribution and licensing terms provided in the source repository.
+*   **License**: This project is distributed under the **GPL-3.0 License**.
 
 ---
 *Part of the [Plasma6Widgets](../README.md) Collection.*

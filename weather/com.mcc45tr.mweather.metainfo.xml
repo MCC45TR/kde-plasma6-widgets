@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>com.mcc45tr.mweather</id>
+  <extends>org.kde.plasmashell</extends>
+  <name>MWeather</name>
+  <summary>Modern weather widget with Google icons and detailed forecasts</summary>
+  <description>
+    <p>A stunning, responsive weather widget designed for KDE Plasma 6. It features smooth morphing animations, multiple data providers (Open-Meteo, OpenWeatherMap, WeatherAPI), and a detail-rich expandable interface.</p>
+    <ul>
+      <li>Adaptive layout: Small, Wide, and Large modes.</li>
+      <li>Morphing details animation for an immersive experience.</li>
+      <li>Includes 3 variations of Google Weather style icon packs.</li>
+      <li>Supports 20+ languages with reliable localization.</li>
+      <li>Cached data for optimized performance.</li>
+    </ul>
+  </description>
+  <url type="homepage">https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/weather</url>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer_name>MCC45TR</developer_name>
+  <screenshots>
+    <screenshot type="default">
+      <caption>The Large Mode dashboard with detailed forecast</caption>
+      <image>https://raw.githubusercontent.com/MCC45TR/kde-plasma6-widgets/main/weather/preview.png</image>
+    </screenshot>
+  </screenshots>
+  <provides>
+    <id>com.mcc45tr.mweather</id>
+  </provides>
+</component>

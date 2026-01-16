@@ -2,7 +2,7 @@
 
 ---
 
-## 🚀 Weather v1.1.3 - Optimization & Cleanup
+## 🚀 MWeather v1.1.3 - Optimization & Cleanup
 *Released on January 16, 2026*
 
 Internal cleanup and final transition to JS-based localization for ultimate reliability.
@@ -13,12 +13,12 @@ Internal cleanup and final transition to JS-based localization for ultimate reli
 
 ### 📦 Installation
 ```bash
-kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.weather-v1.1.3.plasmoid
+kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.mweather-v1.1.3.plasmoid
 ```
 
 ---
 
-## 🎨 Weather v1.1.2 - Layout Polish & JS Localization
+## 🎨 MWeather v1.1.2 - Layout Polish & JS Localization
 *Released on January 16, 2026*
 
 This update finalizes layout adjustments and solves localization loading issues permanently.
@@ -30,12 +30,12 @@ This update finalizes layout adjustments and solves localization loading issues 
 
 ### 📦 Installation
 ```bash
-kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.weather-v1.1.2.plasmoid
+kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.mweather-v1.1.2.plasmoid
 ```
 
 ---
 
-## 🛠️ Weather v1.1.1 - UI Polish & Fixes
+## 🛠️ MWeather v1.1.1 - UI Polish & Fixes
 *Released on January 16, 2026*
 
 A minor polish update focusing on header alignment and initial refactoring stabilization.
@@ -49,12 +49,12 @@ A minor polish update focusing on header alignment and initial refactoring stabi
 
 ### 📦 Installation
 ```bash
-kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.weather-v1.1.1.plasmoid
+kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.mweather-v1.1.1.plasmoid
 ```
 
 ---
 
-## 🌟 Weather v1.1.0 - Morphing Details & UI Overhaul
+## 🌟 MWeather v1.1.0 - Morphing Details & UI Overhaul
 *Released on January 16, 2026*
 
 The **"Polish & Animation"** Update. This update introduces major UI refinements and a high-end interaction model for Large Mode.
@@ -74,7 +74,7 @@ The **"Polish & Animation"** Update. This update introduces major UI refinements
 
 ### 📦 Installation
 ```bash
-kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.weather-v1.1.0.plasmoid
+kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.mweather-v1.1.0.plasmoid
 ```
 
 ---

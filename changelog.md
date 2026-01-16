@@ -3,7 +3,7 @@
 ## 2026-01-16
 
 ### TR-TR
-- **Weather Widget (Lokalizasyon Devrimi ve Modernizasyon)**:
+- **MWeather Widget (Lokalizasyon Devrimi ve Modernizasyon)**:
     - **Senkron Lokalizasyon**: Lokalizasyon sistemi `XMLHttpRequest` tabanlı JSON dosyasından, senkron JavaScript modülüne (`localization.js`) taşındı. Bu sayede yerel dosya erişim kısıtlamaları (CORS) aşıldı ve çevirilerin anında yüklenmesi sağlandı.
     - **Modüler Mimari**: `main.qml` dosyası parçalanarak `SmallModeLayout`, `WideModeLayout` ve `LargeModeLayout` bileşenlerine ayrıldı. Kod okunabilirliği ve bakım kolaylığı artırıldı.
     - **Gelişmiş Animasyonlar**: Büyük Mod (Large Mode) için "Morphing Details" animasyonu eklendi. Detaylar butonu tam ekran cam efektli panele yumuşak bir geçişle genişliyor.
@@ -14,7 +14,7 @@
     - **Hata Düzeltmeleri**: Ermenice (`hy`) çevirilerdeki bozulmalar giderildi. Büyük moddaki binding loop ve null referans hataları çözüldü.
 
 ### EN-US
-- **Weather Widget (Localization Revolution & Modernization)**:
+- **MWeather Widget (Localization Revolution & Modernization)**:
     - **Synchronous Localization**: Migrated the localization system from `XMLHttpRequest` based JSON to a synchronous JavaScript module (`localization.js`). This bypasses local file access restrictions (CORS) and ensures instant translation loading.
     - **Modular Architecture**: Refactored `main.qml` into modular components: `SmallModeLayout`, `WideModeLayout`, and `LargeModeLayout`. Improved code maintainability and performance.
     - **Advanced Animations**: Introduced "Morphing Details" animation for Large Mode. The details button smoothly expands into a full-glass details panel using `InOutQuad` easing.
