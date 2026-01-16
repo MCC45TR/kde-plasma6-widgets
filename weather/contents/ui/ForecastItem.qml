@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Shapes
 import org.kde.kirigami as Kirigami
 
 // ForecastItem.qml - Responsive Forecast Card Component
@@ -24,20 +25,60 @@ Item {
     implicitWidth: calculatedWidth
     implicitHeight: parent ? parent.height : 120
     
-    // Card Background - Simple uniform radius (no patch approach)
-    Rectangle {
+    // Corner Radii properties
+    property real radiusTL: 10
+    property real radiusTR: 10
+    property real radiusBL: 10
+    property real radiusBR: 10
+
+    // Card Background - Using Shape for individual corner radii
+    Shape {
         anchors.fill: parent
-        anchors.margins: 1  // Slight margin to prevent edge clipping
-        radius: Math.min(25, width * 0.25)  // Responsive radius
-        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+        // Enable multisampling for smoother edges if supported/needed
+        layer.enabled: true
+        layer.samples: 4
+
+        ShapePath {
+            strokeWidth: 0
+            strokeColor: "transparent"
+            fillColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+
+            PathRectangle {
+                x: 0; y: 0
+                width: itemRoot.width
+                height: itemRoot.height
+                topLeftRadius: itemRoot.radiusTL
+                topRightRadius: itemRoot.radiusTR
+                bottomLeftRadius: itemRoot.radiusBL
+                bottomRightRadius: itemRoot.radiusBR
+            }
+        }
+    }
+
+    // Hover effect overlay
+    Shape {
+        anchors.fill: parent
+        visible: opacity > 0
+        opacity: mouseArea.containsMouse ? 0.15 : 0
+        Behavior on opacity { NumberAnimation { duration: 150 } }
         
-        // Hover effect
-        Rectangle {
-            anchors.fill: parent
-            radius: parent.radius
-            color: Kirigami.Theme.highlightColor
-            opacity: mouseArea.containsMouse ? 0.15 : 0
-            Behavior on opacity { NumberAnimation { duration: 150 } }
+        layer.enabled: true
+        layer.samples: 4
+
+        ShapePath {
+            strokeWidth: 0
+            strokeColor: "transparent"
+            fillColor: Kirigami.Theme.highlightColor
+
+            PathRectangle {
+                x: 0; y: 0
+                width: itemRoot.width
+                height: itemRoot.height
+                topLeftRadius: itemRoot.radiusTL
+                topRightRadius: itemRoot.radiusTR
+                bottomLeftRadius: itemRoot.radiusBL
+                bottomRightRadius: itemRoot.radiusBR
+            }
         }
     }
     
@@ -47,11 +88,11 @@ Item {
         width: parent.width - 8
         spacing: 4
         
-        // Weather Icon (scales with card size)
+        // Weather Icon (fixed size based on 70px min width)
         Image {
             source: itemRoot.iconPath
-            Layout.preferredWidth: Math.min(itemRoot.width * 0.5, 60)
-            Layout.preferredHeight: Layout.preferredWidth
+            Layout.preferredWidth: 35  // 70 * 0.5 = 35
+            Layout.preferredHeight: 35
             Layout.alignment: Qt.AlignHCenter
             sourceSize.width: 120
             sourceSize.height: 120
@@ -60,25 +101,25 @@ Item {
             antialiasing: true
         }
         
-        // Day/Time Label
+        // Day/Time Label (fixed size based on 70px min width)
         Text {
             text: itemRoot.label
             color: Kirigami.Theme.textColor
             font.family: "Roboto Condensed"
             font.bold: true
-            font.pixelSize: Math.max(10, Math.min(16, itemRoot.width * 0.18))
+            font.pixelSize: 13  // 70 * 0.18 ≈ 12.6
             Layout.alignment: Qt.AlignHCenter
             elide: Text.ElideRight
             Layout.maximumWidth: parent.width - 8
         }
         
-        // Temperature
+        // Temperature (fixed size based on 70px min width)
         Text {
             text: itemRoot.temp + "°"
             color: Kirigami.Theme.textColor
             font.family: "Roboto Condensed"
             font.bold: true
-            font.pixelSize: Math.max(12, Math.min(22, itemRoot.width * 0.25))
+            font.pixelSize: 18  // 70 * 0.25 = 17.5
             Layout.alignment: Qt.AlignHCenter
         }
     }

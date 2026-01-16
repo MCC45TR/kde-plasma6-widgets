@@ -1,5 +1,5 @@
-// WeatherService.js - Weather data fetching with OpenWeatherMap + WeatherAPI fallback
 .pragma library
+// WeatherService.js - Weather data fetching with OpenWeatherMap + WeatherAPI fallback
 
 var cache = {
     current: null,
@@ -29,11 +29,21 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
                         feels_like: Math.round(data.main.feels_like),
                         temp_min: Math.round(data.main.temp_min),
                         temp_max: Math.round(data.main.temp_max),
+                        humidity: data.main.humidity,
+                        pressure: data.main.pressure,
+                        visibility: data.visibility ? Math.round(data.visibility / 1000) : null, // km
+                        wind_speed: data.wind ? Math.round(data.wind.speed * 3.6) : null, // m/s to km/h
+                        wind_deg: data.wind ? data.wind.deg : null,
+                        wind_gust: data.wind && data.wind.gust ? Math.round(data.wind.gust * 3.6) : null,
+                        clouds: data.clouds ? data.clouds.all : null, // %
+                        sunrise: data.sys ? data.sys.sunrise : null,
+                        sunset: data.sys ? data.sys.sunset : null,
                         condition: data.weather[0].main,
                         description: data.weather[0].description,
                         icon: data.weather[0].icon,
                         code: data.weather[0].id,
                         location: data.name + ", " + data.sys.country,
+                        coord: { lat: data.coord.lat, lon: data.coord.lon },
                         timestamp: Date.now()
                     }
 
@@ -132,13 +142,14 @@ function fetchOpenMeteo(location, units, callback) {
                     var lon = place.longitude
                     var locationName = place.name + (place.country ? ", " + place.country : "")
 
-                    // Step 2: Fetch weather data (10 days forecast)
-                    var tempUnit = units === "imperial" ? "&temperature_unit=fahrenheit" : "&temperature_unit=celsius"
+                    // Step 2: Fetch weather data (10 days forecast) with extended current data
+                    var tempUnit = units === "imperial" ? "&temperature_unit=fahrenheit&wind_speed_unit=mph" : "&temperature_unit=celsius&wind_speed_unit=kmh"
                     var weatherUrl = "https://api.open-meteo.com/v1/forecast?" +
                         "latitude=" + lat + "&longitude=" + lon +
-                        "&current_weather=true" +
-                        "&daily=temperature_2m_max,temperature_2m_min,weathercode&forecast_days=10" +
-                        "&hourly=temperature_2m,weathercode&forecast_hours=48" +
+                        "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m" +
+                        "&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum" +
+                        "&forecast_days=10" +
+                        "&hourly=temperature_2m,weather_code&forecast_hours=48" +
                         "&timezone=auto" +
                         tempUnit
 
@@ -150,17 +161,28 @@ function fetchOpenMeteo(location, units, callback) {
                                 try {
                                     var data = JSON.parse(xhr2.responseText)
 
-                                    // Current weather
+                                    // Current weather with extended data
                                     var current = {
-                                        temp: Math.round(data.current_weather.temperature),
-                                        feels_like: Math.round(data.current_weather.temperature), // Open-Meteo doesn't have feels_like
+                                        temp: Math.round(data.current.temperature_2m),
+                                        feels_like: Math.round(data.current.apparent_temperature),
                                         temp_min: Math.round(data.daily.temperature_2m_min[0]),
                                         temp_max: Math.round(data.daily.temperature_2m_max[0]),
-                                        condition: getOpenMeteoCondition(data.current_weather.weathercode),
-                                        description: getOpenMeteoCondition(data.current_weather.weathercode),
+                                        humidity: data.current.relative_humidity_2m,
+                                        pressure: Math.round(data.current.pressure_msl),
+                                        clouds: data.current.cloud_cover,
+                                        wind_speed: Math.round(data.current.wind_speed_10m),
+                                        wind_deg: data.current.wind_direction_10m,
+                                        wind_gust: data.current.wind_gusts_10m ? Math.round(data.current.wind_gusts_10m) : null,
+                                        precipitation: data.current.precipitation,
+                                        uv_index: data.daily.uv_index_max ? Math.round(data.daily.uv_index_max[0]) : null,
+                                        sunrise: data.daily.sunrise ? data.daily.sunrise[0] : null,
+                                        sunset: data.daily.sunset ? data.daily.sunset[0] : null,
+                                        condition: getOpenMeteoCondition(data.current.weather_code),
+                                        description: getOpenMeteoCondition(data.current.weather_code),
                                         icon: "",
-                                        code: data.current_weather.weathercode,
+                                        code: data.current.weather_code,
                                         location: locationName,
+                                        coord: { lat: lat, lon: lon },
                                         timestamp: Date.now()
                                     }
 
@@ -336,31 +358,34 @@ function parseForecastOpenMeteo(data) {
     var hourly = []
 
     // Daily forecast (next 10 days)
-    for (var i = 0; i < data.daily.time.length && i < 10; i++) {
-        var date = new Date(data.daily.time[i])
-        daily.push({
-            day: getDayName(date.getDay()),
-            temp: Math.round((data.daily.temperature_2m_max[i] + data.daily.temperature_2m_min[i]) / 2),
-            temp_min: Math.round(data.daily.temperature_2m_min[i]),
-            temp_max: Math.round(data.daily.temperature_2m_max[i]),
-            code: data.daily.weathercode[i],
-            condition: getOpenMeteoCondition(data.daily.weathercode[i]),
-            icon: ""
-        })
+    if (data.daily && data.daily.time) {
+        for (var i = 0; i < data.daily.time.length && i < 10; i++) {
+            var date = new Date(data.daily.time[i])
+            daily.push({
+                day: getDayName(date.getDay()),
+                temp: Math.round((data.daily.temperature_2m_max[i] + data.daily.temperature_2m_min[i]) / 2),
+                temp_min: Math.round(data.daily.temperature_2m_min[i]),
+                temp_max: Math.round(data.daily.temperature_2m_max[i]),
+                code: data.daily.weather_code ? data.daily.weather_code[i] : 0,
+                condition: getOpenMeteoCondition(data.daily.weather_code ? data.daily.weather_code[i] : 0),
+                icon: ""
+            })
+        }
     }
 
     // Hourly forecast (next 24 hours)
-    var currentHour = new Date().getHours()
-    for (var h = 0; h < data.hourly.time.length && hourly.length < 24; h++) {
-        var hourDate = new Date(data.hourly.time[h])
-        if (hourDate > new Date()) { // Only future hours
-            hourly.push({
-                time: hourDate.getHours() + ":00",
-                temp: Math.round(data.hourly.temperature_2m[h]),
-                code: data.hourly.weathercode[h],
-                condition: getOpenMeteoCondition(data.hourly.weathercode[h]),
-                icon: ""
-            })
+    if (data.hourly && data.hourly.time) {
+        for (var h = 0; h < data.hourly.time.length && hourly.length < 24; h++) {
+            var hourDate = new Date(data.hourly.time[h])
+            if (hourDate > new Date()) { // Only future hours
+                hourly.push({
+                    time: hourDate.getHours() + ":00",
+                    temp: Math.round(data.hourly.temperature_2m[h]),
+                    code: data.hourly.weather_code ? data.hourly.weather_code[h] : 0,
+                    condition: getOpenMeteoCondition(data.hourly.weather_code ? data.hourly.weather_code[h] : 0),
+                    icon: ""
+                })
+            }
         }
     }
 

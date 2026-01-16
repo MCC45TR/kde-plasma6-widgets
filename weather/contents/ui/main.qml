@@ -11,22 +11,25 @@ import "IconMapper.js" as IconMapper
 PlasmoidItem {
     id: root
 
-    // --- Localization Logic ---
-    // Inline fallback for instant display
-    // Inline fallback for instant display and XHR failure
-    property var locales: {
+    // Localization - inline for reliability (XHR local file access is disabled)
+    property var locales: ({
         "en": {
             "loading": "Loading weather data...",
             "error_network": "Network error. Check your internet connection.",
-            "error_no_api_key": "No API key configured. Please add one in settings.",
-            "error_invalid_location": "Location not found. Please check the city name.",
+            "error_no_api_key": "No API key configured.",
+            "error_invalid_location": "Location not found.",
             "refresh": "Refresh Weather",
-            "change_location": "Change Location",
             "daily_forecast": "Daily Forecast",
             "hourly_forecast": "Hourly Forecast",
-            "feels_like": "Feels like",
+            "feels_like": "Feels Like",
             "humidity": "Humidity",
             "wind": "Wind",
+            "pressure": "Pressure",
+            "clouds": "Clouds",
+            "uv_index": "UV",
+            "visibility": "Visibility",
+            "wind_direction": "Direction",
+            "close_hint": "Click to close",
             "condition_clear": "Clear",
             "condition_clouds": "Cloudy",
             "condition_rain": "Rain",
@@ -50,15 +53,20 @@ PlasmoidItem {
         "tr": {
             "loading": "Hava durumu yükleniyor...",
             "error_network": "Ağ hatası. İnternet bağlantınızı kontrol edin.",
-            "error_no_api_key": "API anahtarı ayarlanmadı. Lütfen ayarlarda ekleyin.",
-            "error_invalid_location": "Konum bulunamadı. Şehir adını kontrol edin.",
+            "error_no_api_key": "API anahtarı ayarlanmadı.",
+            "error_invalid_location": "Konum bulunamadı.",
             "refresh": "Hava Durumunu Yenile",
-            "change_location": "Konumu Değiştir",
             "daily_forecast": "Günlük Tahmin",
             "hourly_forecast": "Saatlik Tahmin",
             "feels_like": "Hissedilen",
             "humidity": "Nem",
             "wind": "Rüzgar",
+            "pressure": "Basınç",
+            "clouds": "Bulut",
+            "uv_index": "UV",
+            "visibility": "Görüş",
+            "wind_direction": "Yön",
+            "close_hint": "Kapatmak için tıklayın",
             "condition_clear": "Açık",
             "condition_clouds": "Bulutlu",
             "condition_rain": "Yağmurlu",
@@ -79,32 +87,8 @@ PlasmoidItem {
             "condition_thunderstorm_with_hail": "Dolu ile Fırtına",
             "condition_unknown": "Bilinmeyen"
         }
-    }
+    })
     property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function loadLocales() {
-        var xhr = new XMLHttpRequest()
-        xhr.open("GET", "localization.json")
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 || xhr.status === 0) {
-                    try {
-                        var loaded = JSON.parse(xhr.responseText)
-                        // Merge with inline fallback
-                        for (var locale in loaded) {
-                            if (!locales[locale]) locales[locale] = {}
-                            for (var key in loaded[locale]) {
-                                locales[locale][key] = loaded[locale][key]
-                            }
-                        }
-                    } catch (e) {
-                        console.log("Error parsing localization.json: " + e)
-                    }
-                }
-            }
-        }
-        xhr.send()
-    }
     
    Component.onCompleted: {
         loadLocales()
@@ -190,6 +174,36 @@ PlasmoidItem {
         } else {
             errorMessage = result.error || "Unknown error"
         }
+    }
+
+    // Load localization from JSON file
+    function loadLocales() {
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", Qt.resolvedUrl("localization.json"))
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    try {
+                        var json = JSON.parse(xhr.responseText)
+                        var newLocales = locales
+                        // Merge loaded locales into the existing property
+                        for (var lang in json) {
+                            if (!newLocales[lang]) newLocales[lang] = {}
+                            for (var key in json[lang]) {
+                                newLocales[lang][key] = json[lang][key]
+                            }
+                        }
+                        locales = newLocales
+                        console.log("Localization loaded successfully")
+                    } catch (e) {
+                        console.log("Failed to parse localization.json: " + e)
+                    }
+                } else {
+                    console.log("Failed to load localization.json (Status: " + xhr.status + ") - using built-in defaults")
+                }
+            }
+        }
+        xhr.send()
     }
 
     // Fetch weather data
@@ -289,35 +303,112 @@ PlasmoidItem {
             }
 
             // Main Weather Display
-            // Main Weather Display
             RowLayout {
                 id: mainLayout
                 anchors.fill: parent
-                anchors.margins: 15
+                anchors.margins: 8
                 spacing: 8
                 visible: !root.isLoading && root.errorMessage === "" && root.currentWeather
                 
-                // Left Section: Current Weather
+                // Left Section: Current Weather (Expandable)
                 Rectangle {
                     id: currentSection
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: contentLayout.implicitWidth + 40 // Increased Padding
                     
-                    radius: 20
+                    // Expansion state
+                    property bool isExpanded: false
+                    
+                    // Normal state values
+                    readonly property real normalWidth: contentLayout.implicitWidth + 20
+                    readonly property real normalHeight: mainLayout.height
+                    readonly property real normalRadius: 10
+                    
+                    // Expanded state values (fill parent mainRect)
+                    readonly property real expandedWidth: mainRect.width - 16
+                    readonly property real expandedHeight: mainRect.height - 16
+                    readonly property real expandedRadius: 15
+                    
+                    Layout.fillHeight: !isExpanded
+                    Layout.preferredWidth: isExpanded ? expandedWidth : normalWidth
+                    Layout.preferredHeight: isExpanded ? expandedHeight : -1
+                    
+                    // Z-index to appear above other elements when expanded
+                    z: isExpanded ? 100 : 0
+                    
+                    radius: isExpanded ? expandedRadius : normalRadius
                     color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
 
+                    // Auto-close timer (5 seconds)
+                    Timer {
+                        id: autoCloseTimer
+                        interval: 5000
+                        running: false
+                        repeat: false
+                        onTriggered: {
+                            if (currentSection.isExpanded) {
+                                currentSection.isExpanded = false
+                            }
+                        }
+                    }
+
+                    // Animations
+                    Behavior on Layout.preferredWidth {
+                        NumberAnimation { 
+                            duration: 200
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                    Behavior on radius {
+                        NumberAnimation { 
+                            duration: 200
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+
+                    // Click and hover handler
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onClicked: {
+                            currentSection.isExpanded = !currentSection.isExpanded
+                            if (currentSection.isExpanded) {
+                                autoCloseTimer.restart()
+                            } else {
+                                autoCloseTimer.stop()
+                            }
+                        }
+                        onEntered: {
+                            if (currentSection.isExpanded) {
+                                autoCloseTimer.stop()
+                            }
+                        }
+                        onExited: {
+                            if (currentSection.isExpanded) {
+                                autoCloseTimer.restart()
+                            }
+                        }
+                        cursorShape: Qt.PointingHandCursor
+                    }
+
+                    // Normal content (visible when not expanded)
                     ColumnLayout {
                         id: contentLayout
                         anchors.fill: parent
-                        spacing: 0 // Tighter spacing for card look
+                        anchors.margins: 10
+                        spacing: 2
+                        visible: !currentSection.isExpanded
+                        opacity: currentSection.isExpanded ? 0 : 1
+                        
+                        Behavior on opacity {
+                            NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+                        }
 
                         Item { Layout.fillHeight: true } // Top Spacer
 
-                        // Current Weather Icon
+                        // 1. Current Weather Icon
                         Image {
                             id: currentIcon
                             source: root.getWeatherIcon(root.currentWeather)
-                            Layout.preferredHeight: root.height * 0.375
+                            Layout.preferredHeight: root.height * 0.25
                             Layout.preferredWidth: Layout.preferredHeight
                             
                             Layout.alignment: Qt.AlignHCenter
@@ -329,52 +420,80 @@ PlasmoidItem {
                             antialiasing: true
                         }
 
-                        // Current Temperature
+                        // 2. Weather Condition Text
                         Text {
-                            id: currentTemp
-                            text: root.currentWeather ? root.currentWeather.temp + "°" : "--"
+                            text: root.currentWeather ? root.tr("condition_" + root.currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
                             color: Kirigami.Theme.textColor
+                            opacity: 0.8
                             font.family: "Roboto Condensed"
-                            font.bold: true
-                            font.pixelSize: root.height * 0.25
+                            font.pixelSize: Math.max(10, Math.min(14, root.height * 0.08))
                             Layout.alignment: Qt.AlignHCenter
-                            Layout.topMargin: -5
+                            wrapMode: Text.Wrap
+                            Layout.maximumWidth: parent.width - 10
+                            maximumLineCount: 1
+                            elide: Text.ElideRight
                         }
 
-                        // High/Low Temperatures
+                        // 3. Current Temperature with Degree Symbol
                         RowLayout {
                             Layout.alignment: Qt.AlignHCenter
-                            spacing: 12
+                            spacing: 0
+                            
+                            Text {
+                                id: currentTemp
+                                text: root.currentWeather ? root.currentWeather.temp : "--"
+                                color: Kirigami.Theme.textColor
+                                font.family: "Roboto Condensed"
+                                font.bold: true
+                                font.pixelSize: root.height * 0.25
+                            }
+                            
+                            Text {
+                                text: "°"
+                                color: Kirigami.Theme.textColor
+                                font.family: "Roboto Condensed"
+                                font.bold: true
+                                font.pixelSize: root.height * 0.18
+                                Layout.alignment: Qt.AlignTop
+                                Layout.topMargin: root.height * 0.01
+                            }
+                        }
 
+                        // 4. High/Low Horizontal Row
+                        RowLayout {
+                            Layout.alignment: Qt.AlignHCenter
+                            spacing: 8
+                            
+                            // High Temperature
                             RowLayout {
-                                spacing: 2
+                                spacing: 1
                                 Text {
                                     text: "▲"
                                     color: Kirigami.Theme.positiveTextColor
-                                    font.pixelSize: 16
+                                    font.pixelSize: Math.max(9, Math.min(12, root.height * 0.07))
                                     font.bold: true
                                 }
                                 Text {
                                     text: root.currentWeather ? root.currentWeather.temp_max + "°" : "--"
                                     color: Kirigami.Theme.textColor
-                                    font.pixelSize: 16
+                                    font.pixelSize: Math.max(9, Math.min(12, root.height * 0.07))
                                     font.bold: true
                                 }
                             }
-
+                            
+                            // Low Temperature
                             RowLayout {
-                                spacing: 2
+                                spacing: 1
                                 Text {
                                     text: "▼"
-                                    // Use negative text color (Red) as requested in image
                                     color: Kirigami.Theme.negativeTextColor
-                                    font.pixelSize: 16
+                                    font.pixelSize: Math.max(9, Math.min(12, root.height * 0.07))
                                     font.bold: true
                                 }
                                 Text {
                                     text: root.currentWeather ? root.currentWeather.temp_min + "°" : "--"
                                     color: Kirigami.Theme.textColor
-                                    font.pixelSize: 16
+                                    font.pixelSize: Math.max(9, Math.min(12, root.height * 0.07))
                                     font.bold: true
                                 }
                             }
@@ -382,9 +501,382 @@ PlasmoidItem {
 
                         Item { Layout.fillHeight: true } // Bottom Spacer
                     }
+                    
+                    // Expanded content (visible when expanded) - Scrollable
+                    Flickable {
+                        id: expandedFlickable
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        visible: currentSection.isExpanded
+                        opacity: currentSection.isExpanded ? 1 : 0
+                        
+                        contentWidth: width
+                        contentHeight: expandedContent.height
+                        clip: true
+                        flickableDirection: Flickable.VerticalFlick
+                        boundsBehavior: Flickable.StopAtBounds
+                        interactive: true
+                        
+                        Behavior on opacity {
+                            NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+                        }
+                        
+                        // Enable mouse wheel scrolling
+                        ScrollBar.vertical: ScrollBar {
+                            id: expandedScrollBar
+                            policy: expandedContent.height > expandedFlickable.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
+                            width: 6
+                        }
+                        
+                        WheelHandler {
+                            target: expandedFlickable
+                            orientation: Qt.Vertical
+                            acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+                            onWheel: function(wheel) {
+                                expandedFlickable.contentY -= wheel.angleDelta.y * 0.5
+                                expandedFlickable.contentY = Math.max(0, Math.min(expandedFlickable.contentY, expandedFlickable.contentHeight - expandedFlickable.height))
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            propagateComposedEvents: true
+                            onClicked: {
+                                currentSection.isExpanded = false
+                                autoCloseTimer.stop()
+                            }
+                        }
+                        
+                        ColumnLayout {
+                            id: expandedContent
+                            width: expandedFlickable.width
+                            spacing: 8
+                            
+                            // Header Row - Compact
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 10
+                                
+                                // Icon
+                                Image {
+                                    source: root.getWeatherIcon(root.currentWeather)
+                                    Layout.preferredHeight: 50
+                                    Layout.preferredWidth: 50
+                                    sourceSize.width: 100
+                                    sourceSize.height: 100
+                                    fillMode: Image.PreserveAspectFit
+                                }
+                                
+                                // Location & Condition
+                                ColumnLayout {
+                                    Layout.fillWidth: true
+                                    spacing: 0
+                                    
+                                    Text {
+                                        text: root.currentWeather ? root.currentWeather.location : root.location
+                                        color: Kirigami.Theme.textColor
+                                        font.family: "Roboto Condensed"
+                                        font.bold: true
+                                        font.pixelSize: 16
+                                        elide: Text.ElideRight
+                                        Layout.fillWidth: true
+                                    }
+                                    
+                                    Text {
+                                        text: root.currentWeather ? root.tr("condition_" + root.currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
+                                        color: Kirigami.Theme.textColor
+                                        opacity: 0.7
+                                        font.pixelSize: 12
+                                    }
+                                }
+                                
+                                // Temperature Block
+                                ColumnLayout {
+                                    spacing: 0
+                                    
+                                    RowLayout {
+                                        spacing: 0
+                                        Text {
+                                            text: root.currentWeather ? root.currentWeather.temp : "--"
+                                            color: Kirigami.Theme.textColor
+                                            font.family: "Roboto Condensed"
+                                            font.bold: true
+                                            font.pixelSize: 36
+                                        }
+                                        Text {
+                                            text: "°"
+                                            color: Kirigami.Theme.textColor
+                                            font.family: "Roboto Condensed"
+                                            font.bold: true
+                                            font.pixelSize: 22
+                                            Layout.alignment: Qt.AlignTop
+                                        }
+                                    }
+                                    
+                                    // High/Low inline
+                                    RowLayout {
+                                        spacing: 8
+                                        Layout.alignment: Qt.AlignHCenter
+                                        RowLayout {
+                                            spacing: 2
+                                            Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: 11 }
+                                            Text { text: root.currentWeather ? root.currentWeather.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                                        }
+                                        RowLayout {
+                                            spacing: 2
+                                            Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: 11 }
+                                            Text { text: root.currentWeather ? root.currentWeather.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // Stats Cards Row 1
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 6
+                                
+                                // Card: Feels Like
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.feels_like !== undefined
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: root.tr("feels_like"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: (root.currentWeather && root.currentWeather.feels_like !== undefined) ? root.currentWeather.feels_like + "°" : "--"
+                                            color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                                
+                                // Card: Humidity
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.humidity !== undefined
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: "💧 " + root.tr("humidity"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: (root.currentWeather && root.currentWeather.humidity !== undefined) ? root.currentWeather.humidity + "%" : "--"
+                                            color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                                
+                                // Card: Wind
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.wind_speed !== undefined
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: "💨 " + root.tr("wind"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: (root.currentWeather && root.currentWeather.wind_speed !== undefined) ? root.currentWeather.wind_speed + " km/h" : "--"
+                                            color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                                
+                                // Card: Pressure
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.pressure !== undefined && root.currentWeather.pressure !== null
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: root.tr("pressure"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: (root.currentWeather && root.currentWeather.pressure !== undefined && root.currentWeather.pressure !== null) ? root.currentWeather.pressure + " hPa" : "--"
+                                            color: Kirigami.Theme.textColor; font.pixelSize: 11; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // Stats Cards Row 2
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 6
+                                visible: {
+                                    // Only show this row if at least one card has data
+                                    var hasData = root.currentWeather && (
+                                        root.currentWeather.clouds !== undefined ||
+                                        root.currentWeather.uv_index !== undefined ||
+                                        root.currentWeather.visibility !== undefined ||
+                                        root.currentWeather.wind_deg !== undefined
+                                    )
+                                    return hasData
+                                }
+                                
+                                // Card: Clouds
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.clouds !== undefined
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: "☁️ " + root.tr("clouds"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: (root.currentWeather && root.currentWeather.clouds !== undefined) ? root.currentWeather.clouds + "%" : "--"
+                                            color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                                
+                                // Card: UV Index
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.uv_index !== undefined
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: "☀️ " + root.tr("uv_index"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: (root.currentWeather && root.currentWeather.uv_index !== undefined && root.currentWeather.uv_index !== null) ? root.currentWeather.uv_index.toString() : "--"
+                                            color: {
+                                                var uv = (root.currentWeather && root.currentWeather.uv_index !== undefined) ? root.currentWeather.uv_index : 0
+                                                if (uv >= 11) return "#8B3FC7"
+                                                if (uv >= 8) return "#D90011"
+                                                if (uv >= 6) return "#F95901"
+                                                if (uv >= 3) return "#F7E400"
+                                                return Kirigami.Theme.textColor
+                                            }
+                                            font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                                
+                                // Card: Visibility
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.visibility !== undefined && root.currentWeather.visibility !== null
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: "👁️ " + root.tr("visibility"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: (root.currentWeather && root.currentWeather.visibility !== undefined && root.currentWeather.visibility !== null) ? root.currentWeather.visibility + " km" : "--"
+                                            color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                                
+                                // Card: Wind Direction
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 45
+                                    radius: 8
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+                                    visible: root.currentWeather && root.currentWeather.wind_deg !== undefined
+                                    
+                                    ColumnLayout {
+                                        anchors.centerIn: parent
+                                        spacing: 1
+                                        Text { text: "🧭 " + root.tr("wind_direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                                        Text { 
+                                            text: {
+                                                if (!root.currentWeather || root.currentWeather.wind_deg === undefined) return "--"
+                                                var deg = root.currentWeather.wind_deg
+                                                var dirs = ["K", "KD", "D", "GD", "G", "GB", "B", "KB"]
+                                                return dirs[Math.round(deg / 45) % 8]
+                                            }
+                                            color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // Sunrise/Sunset Row
+                            RowLayout {
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignHCenter
+                                spacing: 20
+                                visible: root.currentWeather && (root.currentWeather.sunrise !== undefined || root.currentWeather.sunset !== undefined)
+                                RowLayout {
+                                    spacing: 6
+                                    Text { text: "🌅"; font.pixelSize: 14 }
+                                    Text { 
+                                        text: {
+                                            if (!root.currentWeather || !root.currentWeather.sunrise) return "--"
+                                            var sr = root.currentWeather.sunrise
+                                            if (typeof sr === "number") {
+                                                var d = new Date(sr * 1000)
+                                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
+                                            } else if (typeof sr === "string") {
+                                                var d2 = new Date(sr)
+                                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
+                                            }
+                                            return "--"
+                                        }
+                                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true 
+                                    }
+                                }
+                                
+                                RowLayout {
+                                    spacing: 6
+                                    Text { text: "🌇"; font.pixelSize: 14 }
+                                    Text { 
+                                        text: {
+                                            if (!root.currentWeather || !root.currentWeather.sunset) return "--"
+                                            var ss = root.currentWeather.sunset
+                                            if (typeof ss === "number") {
+                                                var d = new Date(ss * 1000)
+                                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
+                                            } else if (typeof ss === "string") {
+                                                var d2 = new Date(ss)
+                                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
+                                            }
+                                            return "--"
+                                        }
+                                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true 
+                                    }
+                                }
+                            }
+                            
+                            // Close hint
+                            Text {
+                                text: root.tr("close_hint")
+                                color: Kirigami.Theme.textColor
+                                opacity: 0.4
+                                font.pixelSize: 10
+                                Layout.alignment: Qt.AlignHCenter
+                                Layout.topMargin: 5
+                            }
+                        }
+                    }
                 }
-
-
 
                 // Right Section: Location, Condition, Forecast
                 ColumnLayout {
@@ -446,16 +938,6 @@ PlasmoidItem {
                         }
                     }
 
-                    // Condition Text (localized)
-                    Text {
-                        text: root.currentWeather ? root.tr("condition_" + root.currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
-                        color: Kirigami.Theme.textColor
-                        opacity: 0.7
-                        font.pixelSize: 14
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: parent.width
-                        elide: Text.ElideRight
-                    }
 
                     // Forecast Grid (fixed card width, wraps to multiple rows)
                     GridView {
@@ -465,16 +947,18 @@ PlasmoidItem {
                         Layout.minimumHeight: 80
                         clip: true
                         
-                        // Fixed card width, dynamic rows
-                        readonly property real cardWidth: 70
-                        readonly property int cardsPerRow: Math.max(1, Math.floor(width / cardWidth))
+                        // Dynamic card width: minimum 70px, expands to fill available width
+                        readonly property real minCardWidth: 70
+                        readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
+                        // Actual width = available width divided equally among cards in row
+                        readonly property real actualCardWidth: width / cardsPerRow
                         readonly property int rowCount: Math.ceil(count / cardsPerRow)
                         
-                        cellWidth: cardWidth
+                        cellWidth: actualCardWidth
                         cellHeight: 100  // Fixed card height
                         
-                        // Center the content by adding left margin equal to half the remaining space
-                        leftMargin: Math.max(0, (width - (cardsPerRow * cardWidth)) / 2)
+                        // No leftMargin needed since cards fill the entire width
+                        leftMargin: 0
                         
                         flow: GridView.FlowLeftToRight
                         
@@ -487,15 +971,50 @@ PlasmoidItem {
                             width: forecastGrid.cellWidth - 4
                             height: forecastGrid.cellHeight - 4
                             
-                            // Pass responsive sizing info
-                            availableWidth: forecastGrid.width
-                            cardCount: forecastGrid.count
-                            cardSpacing: 4
-                            
+                            // Visual properties
                             label: root.forecastMode ? modelData.time : modelData.day
                             iconPath: root.getWeatherIcon(modelData)
                             temp: modelData.temp
                             isHourly: root.forecastMode
+                            
+                            // Radius Logic
+                            // Stronger contrast as per user feedback
+                            readonly property real fullR: 24
+                            readonly property real halfR: 6 // 50% of the previous ~12. But user said "half of radius", if radius was 24, half is 12. 
+                            // Let's stick to visible difference. 8 is a good "inner" radius.
+                            
+                            // Robust Grid position helpers
+                            // Recalculate cols locally to ensure binding updates with width
+                            readonly property int gridWidth: forecastGrid.width
+                            readonly property int cw: forecastGrid.cellWidth
+                            readonly property int cols: Math.max(1, Math.floor(gridWidth / cw))
+                            
+                            readonly property int row: Math.floor(index / cols)
+                            readonly property int col: index % cols
+                            readonly property int totalRows: Math.ceil(forecastGrid.count / cols)
+                            
+                            readonly property bool isTop: row === 0
+                            readonly property bool isBottom: row === totalRows - 1
+                            readonly property bool isLeft: col === 0
+                            
+                            // Right Logic: Explicitly check column index or if it's the last item
+                            // But for "Top Right Corner", we specifically mean the visual rightmost item of the top row.
+                            // If top row is full: col == cols-1.
+                            // If top row is NOT full (rare but possible count < cols): index == count-1.
+                            readonly property bool isRight: col === cols - 1 || index === forecastGrid.count - 1
+                            
+                            // Specific corners:
+                            // Top Left Corner of the Grid
+                            radiusTL: (isTop && isLeft) ? fullR : 10
+                            
+                            // Top Right Corner of the Grid
+                            radiusTR: (isTop && isRight) ? fullR : 10
+                            
+                            // Bottom Left Corner of the Grid
+                            radiusBL: (isBottom && isLeft) ? fullR : 10
+                            
+                            // Bottom Right Corner of the Grid
+                            radiusBR: (isBottom && isRight) ? fullR : 10
                         }
                     }
 
