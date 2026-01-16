@@ -6,6 +6,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import "WeatherService.js" as WeatherService
 import "IconMapper.js" as IconMapper
+import "localization.js" as LocalizationData
 
 PlasmoidItem {
     id: root
@@ -87,20 +88,7 @@ PlasmoidItem {
         }
     }
 
-    Component.onCompleted: {
-        loadLocales()
-        var cached = Plasmoid.configuration.cachedWeather
-        if (cached && cached.length > 0) {
-            try {
-                processWeatherData(JSON.parse(cached))
-                isLoading = false
-            } catch (e) {
-                fetchWeatherData()
-            }
-        } else {
-            fetchWeatherData()
-        }
-    }
+
 
     function detectSystemUnits() {
         var imperialLocales = ["en_US", "en_LR", "en_MM"]
@@ -124,32 +112,37 @@ PlasmoidItem {
         }
     }
 
-    function loadLocales() {
-        var xhr = new XMLHttpRequest()
-        xhr.open("GET", Qt.resolvedUrl("localization.json"))
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                try {
-                    var json = JSON.parse(xhr.responseText)
-                    var newLocales = {}
-                    for (var key in json) {
-                        var translations = json[key]
-                        for (var lang in translations) {
-                            if (!newLocales[lang]) newLocales[lang] = {}
-                            newLocales[lang][key] = translations[lang]
-                        }
-                    }
-                    locales = newLocales
-                    localesLoaded = true
-                    console.log("Localization loaded successfully from JSON")
-                } catch (e) {
-                    console.log("Failed to parse localization.json: " + e)
+
+
+    Component.onCompleted: {
+        // Load and transform localization data synchronously
+        try {
+            var json = LocalizationData.data
+            var newLocales = {}
+            for (var key in json) {
+                var translations = json[key]
+                for (var lang in translations) {
+                    if (!newLocales[lang]) newLocales[lang] = {}
+                    newLocales[lang][key] = translations[lang]
                 }
-            } else if (xhr.readyState === XMLHttpRequest.DONE) {
-                console.log("Localization JSON not available (status: " + xhr.status + ")")
             }
+            locales = newLocales
+            console.log("Localization loaded via JS import")
+        } catch(e) {
+            console.log("Error processing localization data: " + e)
         }
-        xhr.send()
+
+        var cached = Plasmoid.configuration.cachedWeather
+        if (cached && cached.length > 0) {
+            try {
+                processWeatherData(JSON.parse(cached))
+                isLoading = false
+            } catch (e) {
+                fetchWeatherData()
+            }
+        } else {
+            fetchWeatherData()
+        }
     }
 
     function fetchWeatherData() {
