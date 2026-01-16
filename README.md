@@ -50,6 +50,14 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 ### 🔍 File Finder
 > A powerful **Spotlight/Raycast** alternative for Plasma.
 
+<p align="center">
+  <img src="./.Samples/MFile-Search-Small.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MFile-Search-Large.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MFile-Search-Larger.png" height="225" style="margin: 5px;">
+  <br>
+  <img src="./.Samples/MFile-Search-Searching.png" height="450" style="margin: 5px;">
+</p>
+
 - **Smart Query**: Understands KRunner prefixes (`timeline:/today`, `gg:`, `kill`, `units`)
 - **View Profiles**: Minimal, Developer (with live telemetry), and Power User modes
 - **Rich Previews**: Instant hover previews with async thumbnail caching
