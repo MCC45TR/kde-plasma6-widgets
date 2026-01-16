@@ -9,8 +9,8 @@ Item {
     property string cfg_iconPack
     
     // Model for icon packs
-    property var iconPacksModel: ["default", "flat", "realistic"]
-    property var iconPacksLabels: ["Default (Colorful)", "Flat", "Realistic"]
+    property var iconPacksModel: ["default", "google_v3", "google_v2", "google_v1"]
+    property var iconPacksLabels: ["Default (Colorful SVG)", "Google Weather v3 (Flat SVG)", "Google Weather v2 (Realistic PNG)", "Google Weather v1 (Classic PNG)"]
     
     // Load config
     onCfg_iconPackChanged: {
@@ -48,9 +48,13 @@ Item {
                 }
                 
                 Label {
-                    text: "Select the visual style for weather icons."
+                    text: iconPackCombo.currentIndex > 1 ? 
+                          "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)" : 
+                          "Select the visual style for weather icons."
                     font.pixelSize: 10
                     opacity: 0.7
+                    wrapMode: Text.WordWrap // Enable multiline
+                    Layout.fillWidth: true
                 }
             }
         }

@@ -150,8 +150,98 @@ function getWeatherIcon(code, iconCode, provider, isDarkTheme) {
     }
 }
 
+// Helper to map standard filenames to v1 (Classic) filenames
+function mapToV1(filename) {
+    if (filename === "heavy_rain.svg") return "rain_heavy.png"
+    if (filename === "heavy_snow.svg") return "snow_heavy.png"
+    if (filename === "partly_cloudy_day.svg") return "sunny_s_cloudy.png"
+    if (filename === "partly_cloudy_night.svg") return "cloudy.png" // Fallback
+    if (filename === "scattered_showers_day.svg") return "rain_s_sunny.png"
+    if (filename === "scattered_showers_night.svg") return "rain_light.png"
+    if (filename === "clear_day.svg") return "sunny.png"
+    if (filename === "clear_night.svg") return "sunny.png" // v1 has no night specific?
+    if (filename.startsWith("isolated_scattered_thunderstorms")) return "thunderstorms.png"
+    if (filename === "cloudy.svg") return "cloudy.png"
+    if (filename === "drizzle.svg") return "rain_light.png"
+
+    // Generic extension swap for others, hoping for best
+    return filename.replace(".svg", ".png").replace("haze_fog_dust_smoke", "fog")
+}
+
+// Helper to map standard filenames to v3 (Flat SVG) filenames
+function mapToV3(filename) {
+    // Clear / Sunny
+    if (filename === "clear_day.svg") return "sunny.svg"
+    if (filename === "clear_night.svg") return "clear.svg"
+
+    // Partly Cloudy
+    if (filename === "partly_cloudy_day.svg") return "partly_cloudy.svg"
+    if (filename === "partly_cloudy_night.svg") return "partly_clear.svg"
+
+    // Mostly Clear / Mostly Cloudy
+    if (filename === "mostly_clear_day.svg") return "mostly_sunny.svg"
+    if (filename === "mostly_clear_night.svg") return "mostly_clear.svg"
+    if (filename === "mostly_cloudy_day.svg") return "mostly_cloudy.svg"
+    if (filename === "mostly_cloudy_night.svg") return "mostly_cloudy_night.svg"
+
+    // Rain
+    if (filename === "scattered_showers_day.svg" || filename === "scattered_showers_night.svg") return "scattered_showers.svg"
+    if (filename === "showers_rain.svg") return "showers.svg"
+    if (filename === "heavy_rain.svg") return "showers.svg" // v3 has no heavy_rain
+
+    // Snow
+    if (filename === "scattered_snow_showers_day.svg" || filename === "scattered_snow_showers_night.svg") return "scattered_snow.svg"
+    if (filename === "showers_snow.svg") return "snow_showers.svg"
+    if (filename === "blowing_snow.svg") return "blowing_snow.svg"
+    if (filename === "heavy_snow.svg") return "heavy_snow.svg"
+
+    // Mixed / Sleet
+    if (filename === "sleet_hail.svg") return "sleet_hail.svg"
+    if (filename === "mixed_rain_snow.svg") return "wintry_mix.svg"
+
+    // Fog / Haze
+    if (filename === "haze_fog_dust_smoke.svg") return "fog.svg"
+
+    // Thunderstorms
+    if (filename === "isolated_thunderstorms.svg") return "isolated_tstorms.svg"
+    if (filename.startsWith("isolated_scattered_thunderstorms")) return "isolated_tstorms.svg"
+    if (filename === "strong_thunderstorms.svg") return "strong_tstorms.svg"
+
+    // Other
+    if (filename === "windy.svg") return "wind.svg"
+    if (filename === "tornado.svg") return "tornado.svg"
+    if (filename === "cloudy.svg") return "cloudy.svg"
+    if (filename === "drizzle.svg") return "drizzle.svg"
+
+    // Fallback: return as-is
+    return filename
+}
+
 // Get icon path
-function getIconPath(code, iconCode, provider, isDarkTheme) {
+function getIconPath(code, iconCode, provider, isDarkTheme, iconPack) {
     var iconFile = getWeatherIcon(code, iconCode, provider, isDarkTheme)
+
+    // Default / System Pack
+    if (!iconPack || iconPack === "default") {
+        return "../images/" + iconFile
+    }
+
+    // Google v3 (SVG, different naming)
+    if (iconPack === "google_v3") {
+        var v3File = mapToV3(iconFile)
+        return "../images/google_v3/" + v3File
+    }
+
+    // Google v2 (PNG, matches standard naming mostly)
+    if (iconPack === "google_v2") {
+        return "../images/google_v2/" + iconFile.replace(".svg", ".png")
+    }
+
+    // Google v1 (PNG, different naming)
+    if (iconPack === "google_v1") {
+        var v1File = mapToV1(iconFile)
+        return "../images/google_v1/" + v1File
+    }
+
     return "../images/" + iconFile
 }

@@ -21,14 +21,34 @@
       <label>Weather Provider</label>
     </entry>
     
+    <entry name="locationMode" type="String">
+      <default>auto</default>
+      <label>Location Mode (auto or manual)</label>
+    </entry>
+    
     <entry name="location" type="String">
-      <default>Ankara</default>
-      <label>Location</label>
+      <default></default>
+      <label>Location 1</label>
+    </entry>
+    
+    <entry name="location2" type="String">
+      <default></default>
+      <label>Location 2</label>
+    </entry>
+    
+    <entry name="location3" type="String">
+      <default></default>
+      <label>Location 3</label>
     </entry>
     
     <entry name="units" type="String">
       <default>metric</default>
       <label>Units</label>
+    </entry>
+    
+    <entry name="useSystemUnits" type="Bool">
+      <default>false</default>
+      <label>Use System Units</label>
     </entry>
     
     <entry name="updateInterval" type="Int">

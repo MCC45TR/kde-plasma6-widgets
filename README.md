@@ -1,135 +1,219 @@
-# KDE Plasma 6 Widget Collection
+<p align="center">
+  <img src="https://kde.org/stuff/clipart/logo/kde-logo-white-blue-rounded-source.svg" alt="KDE Logo" width="80"/>
+</p>
 
-A modern, highly customizable, and unified collection of widgets designed specifically for **KDE Plasma 6**.
+<h1 align="center">KDE Plasma 6 Widget Collection</h1>
 
-This repository contains a suite of plasmoids ranging from advanced system tools (File Search, System Monitor) to essential desk utilities (Clock, Calendar, Notes), all re-engineered for performance, visual consistency, and ease of use.
+<p align="center">
+  <b>A modern, highly customizable, and unified collection of widgets for KDE Plasma 6.</b>
+</p>
+
+<p align="center">
+  <a href="#-installation"><img src="https://img.shields.io/badge/Platform-KDE_Plasma_6-1d99f3?style=for-the-badge&logo=kde" alt="Platform"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="License"></a>
+  <a href="#-widget-catalog"><img src="https://img.shields.io/badge/Widgets-18+-success?style=for-the-badge" alt="Widgets"></a>
+  <a href="#-key-features"><img src="https://img.shields.io/badge/Languages-20-orange?style=for-the-badge" alt="Languages"></a>
+</p>
+
+<p align="center">
+  <a href="#-key-features">Features</a> •
+  <a href="#-widget-catalog">Widgets</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#%EF%B8%8F-configuration">Configuration</a> •
+  <a href="#-contribution">Contribute</a>
+</p>
+
+---
+
+## 📖 Overview
+
+This repository contains a suite of plasmoids ranging from advanced system tools (**File Search**, **System Monitor**) to essential desktop utilities (**Clock**, **Calendar**, **Notes**), all re-engineered for **performance**, **visual consistency**, and **ease of use**.
+
+> ⭐ **If you find this collection useful, please consider starring the repository!**
+
+---
 
 ## ✨ Key Features
 
-*   **Plasma 6 Native**: Built fully on Qt6 and QML, optimized for the latest KDE Plasma desktop.
-*   **Unified Design Language**: All widgets share a consistent look and feel, using system theme icons (`breeze-icons`) and standard metrics. No more mismatched custom icons.
-*   **Global Localization**: Advanced synchronous JSON-based localization system supporting **10 languages** (English, Turkish, German, French, Spanish, Russian, Portuguese, Italian, Japanese, Czech).
-*   **Modular Architecture**: Clean code structure with reusable components and logic separated into JavaScript modules.
-*   **Feature-Rich**: "Power User" features like "Smart Query" in File Finder, dynamic MPRIS discovery in Music Player, and offline-first Calendar.
+| Feature | Description |
+|---------|-------------|
+| 🎨 **Plasma 6 Native** | Built fully on Qt6 and QML, optimized for the latest KDE Plasma desktop. |
+| 🎯 **Unified Design** | All widgets share a consistent look using system theme icons (`breeze-icons`). |
+| 🌍 **20 Languages** | Advanced JSON-based localization supporting English, Turkish, German, French, Spanish, Russian, Portuguese, Italian, Japanese, Czech, Greek, Azerbaijani, Armenian, Romanian, Hindi, Bengali, Urdu, Indonesian, Persian, and Chinese. |
+| 🧩 **Modular Architecture** | Clean code with reusable components and logic separated into JavaScript modules. |
+| ⚡ **Power User Features** | Smart Query in File Finder, dynamic MPRIS discovery, offline-first Calendar, and more. |
+
+---
 
 ## 📦 Widget Catalog
 
-### 🔍 File Finder (File Search)
-A powerful Spotlight/Raycast alternative for Plasma.
-*   **Architecture**: Built on a modular QML system with a custom synchronous localization engine and virtualized rendering for maximum performance.
-*   **Smart Query**: Natively understands KRunner prefixes (`timeline:/today`, `gg:`, `kill`, `units`).
-*   **View Profiles**: Switch between *Minimal*, *Developer* (with live telemetry & debug overlay), and *Power User* modes.
-*   **Advanced Navigation**: Full arrow key navigation in tile view, tab cycling, and keyboard shortcuts (`Ctrl+1/2` for view modes).
-*   **Rich Previews**: Instant hover previews for files and images with async thumbnail caching.
-*   *[Read the detailed technical documentation here](./file-search/README.md)*
+### 🔍 File Finder
+> A powerful **Spotlight/Raycast** alternative for Plasma.
+
+- **Smart Query**: Understands KRunner prefixes (`timeline:/today`, `gg:`, `kill`, `units`)
+- **View Profiles**: Minimal, Developer (with live telemetry), and Power User modes
+- **Rich Previews**: Instant hover previews with async thumbnail caching
+- 📄 *[Read detailed documentation →](./file-search/README.md)*
+
+### 🌦️ Weather
+> A responsive, multi-provider weather dashboard with stunning animations.
+
+- **Adaptive Layouts**: Morphs between Small, Wide (Card), and Large (Grid) modes
+- **Morphing Details**: Unique overlay that expands smoothly from UI elements
+- **Zero Config**: Works out-of-the-box with Open-Meteo (no API key required)
+- 📄 *[Read detailed documentation →](./weather/README.md)*
 
 ### 🎵 Music Player
-A dynamic media controller that adapts to your workflow.
-*   **Universal Control**: Automatically finds and controls the active media player (Spotify, VLC, browser, etc.).
-*   **Smart Discovery**: Scans all active MPRIS services to lock onto your preferred player.
-*   **Visual Polish**: "Squeeze" animations on buttons, dynamic pill-shaped app badge, and system-themed playback icons.
+> A dynamic media controller that adapts to your workflow.
+
+- **Universal Control**: Automatically finds active media players (Spotify, VLC, browser, etc.)
+- **Smart Discovery**: Scans all active MPRIS services
+- **Visual Polish**: Squeeze animations, dynamic pill-shaped badge, themed icons
 
 ### 🗓️ Calendar
-A clean, offline-focused calendar widget.
-*   **Privacy-First**: Removed external dependencies (Google Calendar) for a fast, local experience.
-*   **System Integration**: Uses system locale for date formats and month names.
-*   **Modern UI**: Fluid animations and improved event markers.
+> A clean, offline-focused calendar widget.
+
+- **Privacy-First**: No external dependencies for a fast, local experience
+- **System Integration**: Uses system locale for date formats
+- **Modern UI**: Fluid animations and improved event markers
 
 ### 🔋 Battery
-A multi-device power monitor.
-*   **Peripheral Support**: Layout expands to support up to 4 devices (Mouse, Keyboard, Headphones, etc.).
-*   **Dynamic UI**: Charging indicators and text adapt to the available space using Roboto Condensed.
+> A multi-device power monitor.
+
+- **Peripheral Support**: Up to 4 devices (Mouse, Keyboard, Headphones, etc.)
+- **Dynamic UI**: Charging indicators adapt to available space
+
+### ⏰ Clocks
+> Analog & Digital clock widgets.
+
+- **Analog**: Minimalist design with dynamic opacity and hand smoothing
+- **Digital**: Configurable fonts (Roboto Condensed Variable) and hover-reveal seconds
 
 ### 🔄 Advanced Reboot
-Power management with granular control.
-*   **Boot Options**: List and select UEFI/BIOS boot entries directly (requires `bootctl`).
-*   **Safe UI**: Custom confirmation interface to prevent accidental shutdowns.
+> Power management with granular control.
 
-### ⏰ Clocks (Analog & Digital)
-*   **Analog**: Minimalist design with dynamic opacity and hand smoothing.
-*   **Digital**: Configurable font support (Roboto Condensed Variable) and hover-reveal seconds.
+- **Boot Options**: List and select UEFI/BIOS entries directly (requires `bootctl`)
+- **Safe UI**: Confirmation interface to prevent accidental actions
 
 ### 🛠️ Other Utilities
-*   **System Monitor**: CPU, RAM, and Disk visualization.
-*   **Notes**: List-based note taking with drag-and-drop reordering.
-*   **Weather**: OpenMeteo based weather forecasts.
-*   **Control Center**: Quick toggles for system settings.
-*   **AUR Updates**: (Arch Linux) Update monitoring widget.
+
+| Widget | Description |
+|--------|-------------|
+| **System Monitor** | CPU, RAM, and Disk visualization |
+| **Notes** | List-based notes with drag-and-drop reordering |
+| **Control Center** | Quick toggles for system settings |
+| **AUR Updates** | (Arch Linux) Update monitoring |
+| **World Clock** | Multiple timezone display |
+| **Photos** | Photo frame widget |
+| **Spotify** | Dedicated Spotify controller |
+| **Events** | Event reminder widget |
+| **Alarms** | Alarm clock widget |
+
+---
 
 ## 🚀 Installation
 
 ### Prerequisites
-Ensure you have the Plasma 6 development tools installed:
-*   `kpackagetool6`
-*   `plasmawindowed` (for testing)
-*   Python 3 (for the installation script)
-
-### Automatic Installation (Recommended)
-You can install all widgets at once using the provided script.
-
-1.  Open a terminal in the project root.
-2.  Make the script executable:
-    ```bash
-    chmod +x install_all.sh
-    ```
-3.  Run the script:
-    ```bash
-    ./install_all.sh
-    ```
-    *This will remove old versions and install the fresh ones to `~/.local/share/plasma/plasmoids/`.*
-
-### Single Widget Installation & Testing
-To install and immediately test a specific widget (e.g., `file-search`):
 
 ```bash
-./install_all.sh file-search
+# Required packages
+kpackagetool6      # Plasma widget installer
+plasmawindowed     # For standalone testing (optional)
 ```
-*This command installs the widget and opens it in a standalone window for testing.*
+
+### Quick Install (Recommended)
+
+```bash
+# Clone the repository
+git clone https://github.com/MCC45TR/Plasma6Widgets.git
+cd Plasma6Widgets
+
+# Install all widgets
+chmod +x install_all.sh
+./install_all.sh
+```
+
+### Install Single Widget
+
+```bash
+# Install and test a specific widget
+./install_all.sh weather
+```
 
 ### Manual Installation
-You can also use the standard KDE tool:
 
 ```bash
 cd widget-directory-name
 kpackagetool6 --type Plasma/Applet --install .
-# If updating:
+
+# To update an existing widget:
 kpackagetool6 --type Plasma/Applet --upgrade .
 ```
 
+---
+
 ## ⚙️ Configuration
 
-Most widgets come with a rich configuration panel accessible via **Right Click > Configure**.
+Most widgets have a rich configuration panel accessible via **Right Click → Configure**.
 
-*   **File Search**: Go to settings to choose your "View Profile" (Minimal, Developer, Power User) or manage Search History.
-*   **Music Player**: Select your preferred default player in the "General" tab.
+| Widget | Configuration Options |
+|--------|----------------------|
+| **File Search** | View Profile (Minimal/Developer/Power User), Search History |
+| **Music Player** | Default player selection |
+| **Weather** | Provider selection, Location, Units, Icon Pack |
+| **Clocks** | Font, Size, Format options |
+
+---
 
 ## 🐛 Troubleshooting
 
-**Widget not showing up after install?**
-You may need to restart the Plasma shell:
+<details>
+<summary><b>Widget not showing after install?</b></summary>
+
+Restart the Plasma shell:
 ```bash
 systemctl --user restart plasma-plasmashell
 ```
-*Or simply log out and log back in.*
+Or log out and log back in.
+</details>
 
-**"Error loading QML"?**
-Check the logs using the Developer profile in widgets that support it, or run:
+<details>
+<summary><b>"Error loading QML"?</b></summary>
+
+Check real-time logs:
 ```bash
 journalctl --user -f -g plasmashell
 ```
-to see real-time errors.
+</details>
 
-**Missing Icons?**
-Ensure you have the `breeze-icon-theme` or a compatible system icon theme installed, as widgets rely on standard icon names.
+<details>
+<summary><b>Missing Icons?</b></summary>
+
+Ensure you have `breeze-icon-theme` or a compatible system icon theme installed.
+</details>
+
+---
 
 ## 🤝 Contribution
 
 Contributions are welcome! Please follow these guidelines:
-1.  **Localization**: Add new strings to `localization.json` in the widget's root.
-2.  **Icons**: Do **not** use local asset icons unless absolutely necessary; prefer system icons.
-3.  **Versioning**: Update `metadata.json` version when making changes.
+
+1. **Localization**: Add new strings to `localization.json` in the widget's `contents/ui/` folder
+2. **Icons**: Prefer system icons over local assets
+3. **Versioning**: Update `metadata.json` version when making changes
 
 ---
-*Maintained by MCC45TR*
 
-<small>Note: AI tools were used in the development of this project.</small>
+## 📄 License
+
+This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LICENSE) file for details.
+
+---
+
+<p align="center">
+  <b>Maintained with ❤️ by <a href="https://github.com/MCC45TR">MCC45TR</a></b>
+</p>
+
+<p align="center">
+  <sub>Note: AI tools were used in the development of this project.</sub>
+</p>

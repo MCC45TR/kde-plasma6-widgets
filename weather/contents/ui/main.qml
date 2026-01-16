@@ -146,11 +146,30 @@ PlasmoidItem {
     // Configuration
     readonly property string apiKey: Plasmoid.configuration.apiKey || ""
     readonly property string apiKey2: Plasmoid.configuration.apiKey2 || ""
-    readonly property string location: Plasmoid.configuration.location || "Ankara"
-    readonly property string units: Plasmoid.configuration.units || "metric"
+    readonly property string locationMode: Plasmoid.configuration.locationMode || "auto"
+    readonly property string location: Plasmoid.configuration.location || ""
+    readonly property string location2: Plasmoid.configuration.location2 || ""
+    readonly property string location3: Plasmoid.configuration.location3 || ""
+    readonly property bool useSystemUnits: Plasmoid.configuration.useSystemUnits || false
+    readonly property string configuredUnits: Plasmoid.configuration.units || "metric"
+    readonly property string units: useSystemUnits ? detectSystemUnits() : configuredUnits
     readonly property string weatherProvider: Plasmoid.configuration.weatherProvider || "openmeteo"
     readonly property string iconPack: Plasmoid.configuration.iconPack || "default"
+    readonly property int updateInterval: Plasmoid.configuration.updateInterval || 30
     property int lastFetchMinute: -1
+    
+    // Detect system units based on locale
+    function detectSystemUnits() {
+        var locale = Qt.locale().name // e.g., "en_US", "tr_TR"
+        var imperialLocales = ["en_US", "en_LR", "en_MM"] // US, Liberia, Myanmar use imperial
+        return imperialLocales.indexOf(locale) >= 0 ? "imperial" : "metric"
+    }
+    
+    // Get the location to use for weather fetching
+    function getActiveLocation() {
+        if (locationMode === "auto") return "" // WeatherService handles IP detection
+        return location || location2 || location3 || ""
+    }
 
     // Timer for Auto-Refresh (Every 00 and 30 minutes)
     
@@ -189,6 +208,7 @@ PlasmoidItem {
     property bool isLoading: true
     property string errorMessage: ""
     property bool forecastMode: false // false = daily, true = hourly
+    property bool largeDetailsOpen: false // State for Large Mode details overlay
 
     // Process data helper
     function processWeatherData(result) {
@@ -213,11 +233,12 @@ PlasmoidItem {
                     try {
                         var json = JSON.parse(xhr.responseText)
                         var newLocales = locales
-                        // Merge loaded locales into the existing property
-                        for (var lang in json) {
-                            if (!newLocales[lang]) newLocales[lang] = {}
-                            for (var key in json[lang]) {
-                                newLocales[lang][key] = json[lang][key]
+                        // Pivot data: JSON is {key: {lang: val}} -> Locales is {lang: {key: val}}
+                        for (var tokenKey in json) {
+                            var translations = json[tokenKey]
+                            for (var langCode in translations) {
+                                if (!newLocales[langCode]) newLocales[langCode] = {}
+                                newLocales[langCode][tokenKey] = translations[langCode]
                             }
                         }
                         locales = newLocales
@@ -238,12 +259,14 @@ PlasmoidItem {
         isLoading = true 
         // Don't clear errorMessage immediately to keep UI stable if cache exists
         
+        var activeLocation = getActiveLocation()
         WeatherService.fetchWeather({
             apiKey: apiKey,
             apiKey2: apiKey2,
-            location: location,
+            location: activeLocation,
             units: units,
-            provider: weatherProvider
+            provider: weatherProvider,
+            autoDetect: locationMode === "auto"
         }, function(result) {
             isLoading = false
             if (result.success) {
@@ -266,7 +289,14 @@ PlasmoidItem {
         if (!item) return "../images/clear_day.svg"
         // Detect dark theme by background luminance (dark < 0.5)
         var isDarkTheme = ((Kirigami.Theme.backgroundColor.r + Kirigami.Theme.backgroundColor.g + Kirigami.Theme.backgroundColor.b) / 3) < 0.5
-        return IconMapper.getIconPath(item.code, item.icon, apiProvider, isDarkTheme)
+        return IconMapper.getIconPath(item.code, item.icon, weatherProvider, isDarkTheme, iconPack)
+    }
+    
+    // Localized day names helper
+    function getLocalizedDay(dayKey) {
+        if (!dayKey) return ""
+        // dayKey is like "fri", tr() returns specialized string or key if missing
+        return tr(dayKey.toLowerCase()).toUpperCase()
     }
 
     preferredRepresentation: fullRepresentation
@@ -580,333 +610,10 @@ PlasmoidItem {
                             }
                         }
                         
-                        ColumnLayout {
+                        WeatherDetailsView {
                             id: expandedContent
                             width: expandedFlickable.width
-                            spacing: 8
-                            
-                            // Header Row - Compact
-                            RowLayout {
-                                Layout.fillWidth: true
-                                spacing: 10
-                                
-                                // Icon
-                                Image {
-                                    source: root.getWeatherIcon(root.currentWeather)
-                                    Layout.preferredHeight: 50
-                                    Layout.preferredWidth: 50
-                                    sourceSize.width: 100
-                                    sourceSize.height: 100
-                                    fillMode: Image.PreserveAspectFit
-                                }
-                                
-                                // Location & Condition
-                                ColumnLayout {
-                                    Layout.fillWidth: true
-                                    spacing: 0
-                                    
-                                    Text {
-                                        text: root.currentWeather ? root.currentWeather.location : root.location
-                                        color: Kirigami.Theme.textColor
-                                        font.family: "Roboto Condensed"
-                                        font.bold: true
-                                        font.pixelSize: 16
-                                        elide: Text.ElideRight
-                                        Layout.fillWidth: true
-                                    }
-                                    
-                                    Text {
-                                        text: root.currentWeather ? root.tr("condition_" + root.currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
-                                        color: Kirigami.Theme.textColor
-                                        opacity: 0.7
-                                        font.pixelSize: 12
-                                    }
-                                }
-                                
-                                // Temperature Block
-                                ColumnLayout {
-                                    spacing: 0
-                                    
-                                    RowLayout {
-                                        spacing: 0
-                                        Text {
-                                            text: root.currentWeather ? root.currentWeather.temp : "--"
-                                            color: Kirigami.Theme.textColor
-                                            font.family: "Roboto Condensed"
-                                            font.bold: true
-                                            font.pixelSize: 36
-                                        }
-                                        Text {
-                                            text: "°"
-                                            color: Kirigami.Theme.textColor
-                                            font.family: "Roboto Condensed"
-                                            font.bold: true
-                                            font.pixelSize: 22
-                                            Layout.alignment: Qt.AlignTop
-                                        }
-                                    }
-                                    
-                                    // High/Low inline
-                                    RowLayout {
-                                        spacing: 8
-                                        Layout.alignment: Qt.AlignHCenter
-                                        RowLayout {
-                                            spacing: 2
-                                            Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: 11 }
-                                            Text { text: root.currentWeather ? root.currentWeather.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
-                                        }
-                                        RowLayout {
-                                            spacing: 2
-                                            Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: 11 }
-                                            Text { text: root.currentWeather ? root.currentWeather.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            // Stats Cards Row 1
-                            RowLayout {
-                                Layout.fillWidth: true
-                                spacing: 6
-                                
-                                // Card: Feels Like
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.feels_like !== undefined
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: root.tr("feels_like"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: (root.currentWeather && root.currentWeather.feels_like !== undefined) ? root.currentWeather.feels_like + "°" : "--"
-                                            color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                                
-                                // Card: Humidity
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.humidity !== undefined
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: "💧 " + root.tr("humidity"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: (root.currentWeather && root.currentWeather.humidity !== undefined) ? root.currentWeather.humidity + "%" : "--"
-                                            color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                                
-                                // Card: Wind
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.wind_speed !== undefined
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: "💨 " + root.tr("wind"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: (root.currentWeather && root.currentWeather.wind_speed !== undefined) ? root.currentWeather.wind_speed + " km/h" : "--"
-                                            color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                                
-                                // Card: Pressure
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.pressure !== undefined && root.currentWeather.pressure !== null
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: root.tr("pressure"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: (root.currentWeather && root.currentWeather.pressure !== undefined && root.currentWeather.pressure !== null) ? root.currentWeather.pressure + " hPa" : "--"
-                                            color: Kirigami.Theme.textColor; font.pixelSize: 11; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            // Stats Cards Row 2
-                            RowLayout {
-                                Layout.fillWidth: true
-                                spacing: 6
-                                visible: {
-                                    // Only show this row if at least one card has data
-                                    var hasData = root.currentWeather && (
-                                        root.currentWeather.clouds !== undefined ||
-                                        root.currentWeather.uv_index !== undefined ||
-                                        root.currentWeather.visibility !== undefined ||
-                                        root.currentWeather.wind_deg !== undefined
-                                    )
-                                    return hasData
-                                }
-                                
-                                // Card: Clouds
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.clouds !== undefined
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: "☁️ " + root.tr("clouds"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: (root.currentWeather && root.currentWeather.clouds !== undefined) ? root.currentWeather.clouds + "%" : "--"
-                                            color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                                
-                                // Card: UV Index
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.uv_index !== undefined
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: "☀️ " + root.tr("uv_index"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: (root.currentWeather && root.currentWeather.uv_index !== undefined && root.currentWeather.uv_index !== null) ? root.currentWeather.uv_index.toString() : "--"
-                                            color: {
-                                                var uv = (root.currentWeather && root.currentWeather.uv_index !== undefined) ? root.currentWeather.uv_index : 0
-                                                if (uv >= 11) return "#8B3FC7"
-                                                if (uv >= 8) return "#D90011"
-                                                if (uv >= 6) return "#F95901"
-                                                if (uv >= 3) return "#F7E400"
-                                                return Kirigami.Theme.textColor
-                                            }
-                                            font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                                
-                                // Card: Visibility
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.visibility !== undefined && root.currentWeather.visibility !== null
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: "👁️ " + root.tr("visibility"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: (root.currentWeather && root.currentWeather.visibility !== undefined && root.currentWeather.visibility !== null) ? root.currentWeather.visibility + " km" : "--"
-                                            color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                                
-                                // Card: Wind Direction
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 45
-                                    radius: 8
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
-                                    visible: root.currentWeather && root.currentWeather.wind_deg !== undefined
-                                    
-                                    ColumnLayout {
-                                        anchors.centerIn: parent
-                                        spacing: 1
-                                        Text { text: "🧭 " + root.tr("wind_direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                                        Text { 
-                                            text: {
-                                                if (!root.currentWeather || root.currentWeather.wind_deg === undefined) return "--"
-                                                var deg = root.currentWeather.wind_deg
-                                                var dirs = ["K", "KD", "D", "GD", "G", "GB", "B", "KB"]
-                                                return dirs[Math.round(deg / 45) % 8]
-                                            }
-                                            color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            // Sunrise/Sunset Row
-                            RowLayout {
-                                Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignHCenter
-                                spacing: 20
-                                visible: root.currentWeather && (root.currentWeather.sunrise !== undefined || root.currentWeather.sunset !== undefined)
-                                RowLayout {
-                                    spacing: 6
-                                    Text { text: "🌅"; font.pixelSize: 14 }
-                                    Text { 
-                                        text: {
-                                            if (!root.currentWeather || !root.currentWeather.sunrise) return "--"
-                                            var sr = root.currentWeather.sunrise
-                                            if (typeof sr === "number") {
-                                                var d = new Date(sr * 1000)
-                                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
-                                            } else if (typeof sr === "string") {
-                                                var d2 = new Date(sr)
-                                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
-                                            }
-                                            return "--"
-                                        }
-                                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true 
-                                    }
-                                }
-                                
-                                RowLayout {
-                                    spacing: 6
-                                    Text { text: "🌇"; font.pixelSize: 14 }
-                                    Text { 
-                                        text: {
-                                            if (!root.currentWeather || !root.currentWeather.sunset) return "--"
-                                            var ss = root.currentWeather.sunset
-                                            if (typeof ss === "number") {
-                                                var d = new Date(ss * 1000)
-                                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
-                                            } else if (typeof ss === "string") {
-                                                var d2 = new Date(ss)
-                                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
-                                            }
-                                            return "--"
-                                        }
-                                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true 
-                                    }
-                                }
-                            }
-                            
-                            // Close hint
-                            Text {
-                                text: root.tr("close_hint")
-                                color: Kirigami.Theme.textColor
-                                opacity: 0.4
-                                font.pixelSize: 10
-                                Layout.alignment: Qt.AlignHCenter
-                                Layout.topMargin: 5
-                            }
+                            weatherRoot: root
                         }
                     }
                 }
@@ -1008,7 +715,7 @@ PlasmoidItem {
                             width: forecastGrid.cellWidth - 4
                             height: forecastGrid.cellHeight - 4
                             
-                            label: root.forecastMode ? modelData.time : modelData.day
+                            label: root.forecastMode ? modelData.time : root.getLocalizedDay(modelData.day)
                             iconPath: root.getWeatherIcon(modelData)
                             temp: modelData.temp
                             isHourly: root.forecastMode
@@ -1157,6 +864,9 @@ PlasmoidItem {
                 anchors.margins: 20
                 visible: !root.isLoading && root.errorMessage === "" && root.currentWeather && root.isLargeMode
                 
+                opacity: root.largeDetailsOpen ? 0 : 1
+                Behavior on opacity { NumberAnimation { duration: 200 } }
+                
                 ColumnLayout {
                     anchors.fill: parent
                     spacing: 0
@@ -1225,40 +935,85 @@ PlasmoidItem {
                             smooth: true
                         }
 
-                        // Toggle Button (Bottom-Right of Header)
-                        Rectangle {
+                        // Header Buttons: Toggle Forecast & Details
+                        Row {
                             anchors.right: parent.right
                             anchors.bottom: parent.bottom
                             anchors.bottomMargin: 5
-                            width: toggleTextLarge.implicitWidth + 24
-                            height: 28
-                            radius: 14
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
-
-                            Text {
-                                id: toggleTextLarge
-                                anchors.centerIn: parent
-                                text: root.forecastMode ? root.tr("hourly_forecast") : root.tr("daily_forecast")
-                                color: Kirigami.Theme.textColor
-                                font.family: "Roboto Condensed"
-                                font.pixelSize: 12
-                                font.bold: true
-                            }
-
-                            MouseArea {
-                                id: toggleMouseAreaLarge
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: root.forecastMode = !root.forecastMode
-                                hoverEnabled: true
+                            spacing: 4
+                            
+                            // Details Button
+                            Rectangle {
+                                id: detailsButton
+                                width: detailsText.implicitWidth + 20
+                                height: 28
+                                radius: 14
+                                topRightRadius: 5
+                                bottomRightRadius: 5
+                                color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                                
+                                Text {
+                                    id: detailsText
+                                    anchors.centerIn: parent
+                                    text: root.tr("details")
+                                    color: Kirigami.Theme.textColor
+                                    font.family: "Roboto Condensed"
+                                    font.pixelSize: 12
+                                    font.bold: true
+                                }
+                                MouseArea {
+                                    id: detailsMouseArea
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: root.largeDetailsOpen = true
+                                    hoverEnabled: true
+                                }
+                                Rectangle {
+                                    anchors.fill: parent
+                                    color: Kirigami.Theme.highlightColor
+                                    opacity: detailsMouseArea.containsMouse ? 0.1 : 0
+                                    radius: 14
+                                    topRightRadius: 5
+                                    bottomRightRadius: 5
+                                    Behavior on opacity { NumberAnimation { duration: 150 } }
+                                }
                             }
                             
+                            // Forecast Toggle Button
                             Rectangle {
-                                anchors.fill: parent
-                                color: Kirigami.Theme.highlightColor
-                                opacity: toggleMouseAreaLarge.containsMouse ? 0.1 : 0
-                                radius: parent.radius
-                                Behavior on opacity { NumberAnimation { duration: 150 } }
+                                width: toggleTextLarge.implicitWidth + 24
+                                height: 28
+                                radius: 14
+                                topLeftRadius: 5
+                                bottomLeftRadius: 5
+                                color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                                
+                                Text {
+                                    id: toggleTextLarge
+                                    anchors.centerIn: parent
+                                    text: root.forecastMode ? root.tr("hourly_forecast") : root.tr("daily_forecast")
+                                    color: Kirigami.Theme.textColor
+                                    font.family: "Roboto Condensed"
+                                    font.pixelSize: 12
+                                    font.bold: true
+                                }
+                                MouseArea {
+                                    id: toggleMouseAreaLarge
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: root.forecastMode = !root.forecastMode
+                                    hoverEnabled: true
+                                }
+                                
+                                Rectangle {
+                                    anchors.fill: parent
+                                    color: Kirigami.Theme.highlightColor
+                                    opacity: toggleMouseAreaLarge.containsMouse ? 0.1 : 0
+                                    radius: 14
+                                    topLeftRadius: 5
+                                    bottomLeftRadius: 5
+                                    Behavior on opacity { NumberAnimation { duration: 150 } }
+                                }
                             }
                         }
                     }
@@ -1304,7 +1059,7 @@ PlasmoidItem {
                             height: largeForecastGrid.cellHeight - 4
                             
                             // Reuse existing logic
-                            label: root.forecastMode ? modelData.time : modelData.day
+                            label: root.forecastMode ? modelData.time : root.getLocalizedDay(modelData.day)
                             iconPath: root.getWeatherIcon(modelData)
                             temp: modelData.temp
                             isHourly: root.forecastMode
@@ -1319,7 +1074,102 @@ PlasmoidItem {
                 }
             }
             
+            // Details Overlay for Large Mode
+            Rectangle {
+                id: largeDetailsOverlay
+                // No anchors.fill - we animate geometry manually
+                visible: false // Hidden by default
+                
+                property var closedGeometry: Qt.rect(0,0,0,0)
 
+                Connections {
+                    target: root
+                    function onLargeDetailsOpenChanged() {
+                        if (root.largeDetailsOpen) {
+                            // OPENING TRANSITION
+                            // 1. Capture button geometry relatively to mainRect
+                            var p = detailsButton.mapToItem(mainRect, 0, 0)
+                            largeDetailsOverlay.closedGeometry = Qt.rect(p.x, p.y, detailsButton.width, detailsButton.height)
+                            
+                            // 2. Setup initial state (matching button)
+                            largeDetailsOverlay.x = largeDetailsOverlay.closedGeometry.x
+                            largeDetailsOverlay.y = largeDetailsOverlay.closedGeometry.y
+                            largeDetailsOverlay.width = largeDetailsOverlay.closedGeometry.width
+                            largeDetailsOverlay.height = largeDetailsOverlay.closedGeometry.height
+                            
+                            // Match Button radii
+                            largeDetailsOverlay.radius = 14
+                            largeDetailsOverlay.topLeftRadius = 14
+                            largeDetailsOverlay.bottomLeftRadius = 14
+                            largeDetailsOverlay.topRightRadius = 5
+                            largeDetailsOverlay.bottomRightRadius = 5
+                            
+                            largeDetailsOverlay.color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                            largeDetailsOverlay.visible = true
+                            
+                            // 3. Start Expand Animation
+                            expandAnim.start()
+                        } else {
+                            // CLOSING TRANSITION
+                            collapseAnim.start()
+                        }
+                    }
+                }
+
+                ParallelAnimation {
+                    id: expandAnim
+                    NumberAnimation { target: largeDetailsOverlay; property: "x"; to: 0; duration: 200; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: largeDetailsOverlay; property: "y"; to: 0; duration: 200; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: largeDetailsOverlay; property: "width"; to: mainRect.width; duration: 200; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: largeDetailsOverlay; property: "height"; to: mainRect.height; duration: 200; easing.type: Easing.InOutQuad }
+                    // Animate all corners to 20
+                    NumberAnimation { target: largeDetailsOverlay; properties: "radius,topLeftRadius,bottomLeftRadius,topRightRadius,bottomRightRadius"; to: 20; duration: 200; easing.type: Easing.InOutQuad }
+                    
+                    SequentialAnimation {
+                        PauseAnimation { duration: 50 }
+                        NumberAnimation { target: overlayFlickable; property: "opacity"; from: 0; to: 1; duration: 150 }
+                    }
+                }
+
+                ParallelAnimation {
+                    id: collapseAnim
+                    NumberAnimation { target: largeDetailsOverlay; property: "x"; to: largeDetailsOverlay.closedGeometry.x; duration: 200; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: largeDetailsOverlay; property: "y"; to: largeDetailsOverlay.closedGeometry.y; duration: 200; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: largeDetailsOverlay; property: "width"; to: largeDetailsOverlay.closedGeometry.width; duration: 200; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: largeDetailsOverlay; property: "height"; to: largeDetailsOverlay.closedGeometry.height; duration: 200; easing.type: Easing.InOutQuad }
+                    
+                    // Animate corners back to button state
+                    NumberAnimation { target: largeDetailsOverlay; properties: "radius,topLeftRadius,bottomLeftRadius"; to: 14; duration: 200; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: largeDetailsOverlay; properties: "topRightRadius,bottomRightRadius"; to: 5; duration: 200; easing.type: Easing.InOutQuad }
+                    
+                    NumberAnimation { target: overlayFlickable; property: "opacity"; to: 0; duration: 150 }
+                    onFinished: largeDetailsOverlay.visible = false
+                }
+                
+                Flickable {
+                    id: overlayFlickable
+                    anchors.fill: parent
+                    anchors.margins: 12
+                    contentHeight: overlayContent.height
+                    contentWidth: width
+                    clip: true
+                    opacity: 0 // Start hidden until expanded
+                    
+                    ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 6 }
+                    
+                    // Tap content to close
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: root.largeDetailsOpen = false
+                    }
+                    
+                    WeatherDetailsView {
+                        id: overlayContent
+                        width: parent.width
+                        weatherRoot: root
+                    }
+                }
+            }
 
             // Click to Refresh (subtle)
             MouseArea {

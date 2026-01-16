@@ -3,12 +3,12 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-        name: "Hava Durumu"
+        name: i18n("Weather")
         icon: "weather-clear"
         source: "config/ConfigGeneral.qml"
     }
     ConfigCategory {
-        name: "Görünüm"
+        name: i18n("Appearance")
         icon: "preferences-desktop-theme"
         source: "config/ConfigAppearance.qml"
     }
