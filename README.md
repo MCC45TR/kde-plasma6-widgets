@@ -131,3 +131,5 @@ Contributions are welcome! Please follow these guidelines:
 
 ---
 *Maintained by MCC45TR*
+
+<small>Note: AI tools were used in the development of this project.</small>
