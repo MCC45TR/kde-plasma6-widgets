@@ -16,6 +16,11 @@
       <label>WeatherAPI.com API Key (Fallback)</label>
     </entry>
     
+    <entry name="weatherProvider" type="String">
+      <default>openmeteo</default>
+      <label>Weather Provider</label>
+    </entry>
+    
     <entry name="location" type="String">
       <default>Ankara</default>
       <label>Location</label>
@@ -39,6 +44,11 @@
     <entry name="lastUpdate" type="Double">
       <default>0</default>
       <label>Last Update Timestamp</label>
+    </entry>
+    
+    <entry name="iconPack" type="String">
+      <default>default</default>
+      <label>Icon Pack</label>
     </entry>
   </group>
 </kcfg>

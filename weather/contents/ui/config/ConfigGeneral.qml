@@ -2,9 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-Item {
-    id: configRoot
-    
+    property string cfg_weatherProvider
     property alias cfg_apiKey: apiKeyField.text
     property alias cfg_apiKey2: apiKey2Field.text
     property alias cfg_location: locationField.text
@@ -13,6 +11,15 @@ Item {
     
     // Units mapping
     property var unitsModel: ["metric", "imperial"]
+    property var providersModel: ["openmeteo", "openweathermap", "weatherapi"]
+    
+    // When config loads, update UI
+    onCfg_weatherProviderChanged: {
+        var idx = providersModel.indexOf(cfg_weatherProvider)
+        if (idx >= 0 && idx !== providerCombo.currentIndex) {
+            providerCombo.currentIndex = idx
+        }
+    }
     
     Component.onCompleted: {
         // Set units combo index from config
@@ -24,63 +31,73 @@ Item {
         anchors.fill: parent
         spacing: 15
         
-        // API Keys Section
+        // Provider Section
         GroupBox {
-            title: "API Keys"
+            title: "Hava Durumu Sağlayıcısı"
             Layout.fillWidth: true
             
             ColumnLayout {
                 anchors.fill: parent
                 spacing: 10
                 
+                ComboBox {
+                    id: providerCombo
+                    Layout.fillWidth: true
+                    model: ["Open-Meteo (Ücretsiz, Anahtar Gerekmez)", "OpenWeatherMap (Anahtar Gerekli)", "WeatherAPI.com (Anahtar Gerekli)"]
+                    
+                    onCurrentIndexChanged: {
+                        configRoot.cfg_weatherProvider = configRoot.providersModel[currentIndex]
+                    }
+                }
+                
                 Label {
-                    text: "OpenWeatherMap API Key (Primary):"
+                    text: providerCombo.currentIndex === 0 ? "En iyi ücretsiz seçenek. API anahtarı gerektirmez." :
+                          providerCombo.currentIndex === 1 ? "Standart sağlayıcı. Aşağıda API anahtarı girilmelidir." : "Alternatif sağlayıcı. Aşağıda API anahtarı girilmelidir."
+                    font.pixelSize: 10
+                    opacity: 0.7
+                }
+            }
+        }
+
+        // API Keys Section
+        GroupBox {
+            title: "API Anahtarları"
+            Layout.fillWidth: true
+            visible: providerCombo.currentIndex !== 0 // Hide if Open-Meteo is selected
+            
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 10
+                
+                Label {
+                    text: "OpenWeatherMap API Anahtarı:"
                     font.bold: true
+                    visible: providerCombo.currentIndex === 1
                 }
                 TextField {
                     id: apiKeyField
                     Layout.fillWidth: true
-                    placeholderText: "Enter your OpenWeatherMap API key"
+                    placeholderText: "OpenWeatherMap API anahtarınızı girin"
+                    visible: providerCombo.currentIndex === 1
                 }
                 
                 Label {
-                    text: "Get your free API key at: https://openweathermap.org/api"
-                    font.pixelSize: 10
-                    opacity: 0.7
-                    wrapMode: Text.WordWrap
-                    Layout.fillWidth: true
-                }
-                
-                Rectangle {
-                    Layout.fillWidth: true
-                    height: 1
-                    color: "gray"
-                    opacity: 0.3
-                }
-                
-                Label {
-                    text: "WeatherAPI.com API Key (Fallback):"
+                    text: "WeatherAPI.com API Anahtarı:"
                     font.bold: true
+                    visible: providerCombo.currentIndex === 2
                 }
                 TextField {
                     id: apiKey2Field
                     Layout.fillWidth: true
-                    placeholderText: "Optional: WeatherAPI.com key for fallback"
-                }
-                
-                Label {
-                    text: "Get your free API key at: https://www.weatherapi.com/"
-                    font.pixelSize: 10
-                    opacity: 0.7
-                    wrapMode: Text.WordWrap
-                    Layout.fillWidth: true
+                    placeholderText: "WeatherAPI.com anahtarınızı girin"
+                    visible: providerCombo.currentIndex === 2
                 }
             }
         }
         
         // Location Section
         GroupBox {
-            title: "Location"
+            title: "Konum"
             Layout.fillWidth: true
             
             ColumnLayout {
@@ -88,17 +105,17 @@ Item {
                 spacing: 10
                 
                 Label {
-                    text: "City Name:"
+                    text: "Şehir İsmi:"
                     font.bold: true
                 }
                 TextField {
                     id: locationField
                     Layout.fillWidth: true
-                    placeholderText: "e.g., Ankara, Istanbul, London"
+                    placeholderText: "Örn: Ankara, Istanbul, London"
                 }
                 
                 Label {
-                    text: "You can use: City name, City,Country code, or ZIP code"
+                    text: "Şehir ismi, 'Şehir,Ülke Kodu' veya Posta Kodu kullanabilirsiniz."
                     font.pixelSize: 10
                     opacity: 0.7
                     wrapMode: Text.WordWrap
@@ -109,7 +126,7 @@ Item {
         
         // Units Section
         GroupBox {
-            title: "Settings"
+            title: "Ayarlar"
             Layout.fillWidth: true
             
             GridLayout {
@@ -119,13 +136,13 @@ Item {
                 columnSpacing: 10
                 
                 Label {
-                    text: "Units:"
+                    text: "Birimler:"
                     font.bold: true
                 }
                 ComboBox {
                     id: unitsCombo
                     Layout.fillWidth: true
-                    model: ["Metric (°C)", "Imperial (°F)"]
+                    model: ["Metrik (°C)", "Emperyal (°F)"]
                     
                     onCurrentIndexChanged: {
                         plasmoid.configuration.units = configRoot.unitsModel[currentIndex]
@@ -133,7 +150,7 @@ Item {
                 }
                 
                 Label {
-                    text: "Update Interval:"
+                    text: "Yenileme Sıklığı:"
                     font.bold: true
                 }
                 RowLayout {
@@ -146,7 +163,7 @@ Item {
                         value: 30
                     }
                     Label {
-                        text: "minutes"
+                        text: "dakika"
                     }
                 }
             }

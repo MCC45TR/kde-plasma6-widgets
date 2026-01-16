@@ -18,3 +18,14 @@ cmake-build-*/
 *.swp
 *~
 .DS_Store
+
+# AI / Agent Files
+.agent/
+.gemini/
+.gemini*/
+*_todo.md
+walkthrough.md
+KDE_Widget_Configuration.md
+README_*.md
+.idea/
+.vscode/

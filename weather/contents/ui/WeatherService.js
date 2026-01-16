@@ -253,52 +253,55 @@ function fetchWeatherInternal(config, callback) {
     var apiKey2 = config.apiKey2 || ""
     var location = config.location || ""
     var units = config.units || "metric"
+    var provider = config.provider || "openmeteo"
 
-    // If no API keys, use Open-Meteo (free, no key required)
-    if (!apiKey && !apiKey2) {
-        console.log("No API keys configured, using Open-Meteo (free)")
-        fetchOpenMeteo(location, units, function (result) {
-            if (result.success) {
-                cache.current = result.current
-                cache.forecast = result.forecast
-                cache.timestamp = Date.now()
-            }
-            callback(result)
-        })
+    console.log("Fetching weather using provider: " + provider)
+
+    if (provider === "openweathermap") {
+        if (apiKey) {
+            fetchOpenWeatherMap(apiKey, location, units, function (result) {
+                if (result.success) {
+                    cache.current = result.current
+                    cache.forecast = result.forecast
+                    cache.timestamp = Date.now()
+                    callback(result)
+                } else {
+                    callback(result)
+                }
+            })
+        } else {
+            callback({ success: false, error: "OpenWeatherMap API Key missing" })
+        }
         return
     }
 
-    // Try primary provider (OpenWeatherMap)
-    if (apiKey) {
-        fetchOpenWeatherMap(apiKey, location, units, function (result) {
-            if (result.success) {
-                cache.current = result.current
-                cache.forecast = result.forecast
-                cache.timestamp = Date.now()
-                callback(result)
-            } else {
-                // Fallback to WeatherAPI if OpenWeatherMap fails
-                if (apiKey2) {
-                    console.log("OpenWeatherMap failed, trying WeatherAPI fallback...")
-                    fetchWeatherAPI(apiKey2, location, function (result2) {
-                        if (result2.success) {
-                            cache.current = result2.current
-                            cache.forecast = result2.forecast
-                            cache.timestamp = Date.now()
-                            callback(result2)
-                        } else {
-                            callback(result2) // Return fallback error
-                        }
-                    })
+    if (provider === "weatherapi") {
+        if (apiKey2) {
+            fetchWeatherAPI(apiKey2, location, function (result) {
+                if (result.success) {
+                    cache.current = result.current
+                    cache.forecast = result.forecast
+                    cache.timestamp = Date.now()
+                    callback(result)
                 } else {
-                    callback(result) // Return primary error
+                    callback(result)
                 }
-            }
-        })
-    } else if (apiKey2) {
-        // Only WeatherAPI key available
-        fetchWeatherAPI(apiKey2, location, callback)
+            })
+        } else {
+            callback({ success: false, error: "WeatherAPI.com API Key missing" })
+        }
+        return
     }
+
+    // Default: Open-Meteo (openmeteo) or fallback
+    fetchOpenMeteo(location, units, function (result) {
+        if (result.success) {
+            cache.current = result.current
+            cache.forecast = result.forecast
+            cache.timestamp = Date.now()
+        }
+        callback(result)
+    })
 }
 
 // Main fetch function with fallback

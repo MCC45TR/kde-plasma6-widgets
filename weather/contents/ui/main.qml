@@ -148,6 +148,8 @@ PlasmoidItem {
     readonly property string apiKey2: Plasmoid.configuration.apiKey2 || ""
     readonly property string location: Plasmoid.configuration.location || "Ankara"
     readonly property string units: Plasmoid.configuration.units || "metric"
+    readonly property string weatherProvider: Plasmoid.configuration.weatherProvider || "openmeteo"
+    readonly property string iconPack: Plasmoid.configuration.iconPack || "default"
     property int lastFetchMinute: -1
 
     // Timer for Auto-Refresh (Every 00 and 30 minutes)
@@ -240,7 +242,8 @@ PlasmoidItem {
             apiKey: apiKey,
             apiKey2: apiKey2,
             location: location,
-            units: units
+            units: units,
+            provider: weatherProvider
         }, function(result) {
             isLoading = false
             if (result.success) {
@@ -433,7 +436,9 @@ PlasmoidItem {
                         Image {
                             id: currentIcon
                             source: root.getWeatherIcon(root.currentWeather)
-                            Layout.preferredHeight: root.height * 0.25
+                            // Responsive sizing: Shrink if text takes more space
+                            readonly property real availableHeight: parent.height
+                            Layout.preferredHeight: conditionText.lineCount > 1 ? availableHeight * 0.2 : availableHeight * 0.25
                             Layout.preferredWidth: Layout.preferredHeight
                             
                             Layout.alignment: Qt.AlignHCenter
@@ -447,15 +452,17 @@ PlasmoidItem {
 
                         // 2. Weather Condition Text
                         Text {
+                            id: conditionText
                             text: root.currentWeather ? root.tr("condition_" + root.currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
                             color: Kirigami.Theme.textColor
                             opacity: 0.8
                             font.family: "Roboto Condensed"
                             font.pixelSize: Math.max(10, Math.min(14, root.height * 0.08))
                             Layout.alignment: Qt.AlignHCenter
-                            wrapMode: Text.Wrap
+                            wrapMode: Text.WordWrap // Enable WordWrap
                             Layout.maximumWidth: parent.width - 10
-                            maximumLineCount: 1
+                            horizontalAlignment: Text.AlignHCenter
+                            maximumLineCount: 2 // Allow 2 lines
                             elide: Text.ElideRight
                         }
 
@@ -470,7 +477,8 @@ PlasmoidItem {
                                 color: Kirigami.Theme.textColor
                                 font.family: "Roboto Condensed"
                                 font.bold: true
-                                font.pixelSize: root.height * 0.25
+                                // Shrink font if text wraps
+                                font.pixelSize: conditionText.lineCount > 1 ? root.height * 0.2 : root.height * 0.25
                             }
                             
                             Text {
@@ -478,7 +486,7 @@ PlasmoidItem {
                                 color: Kirigami.Theme.textColor
                                 font.family: "Roboto Condensed"
                                 font.bold: true
-                                font.pixelSize: root.height * 0.18
+                                font.pixelSize: conditionText.lineCount > 1 ? root.height * 0.15 : root.height * 0.18
                                 Layout.alignment: Qt.AlignTop
                                 Layout.topMargin: root.height * 0.01
                             }
