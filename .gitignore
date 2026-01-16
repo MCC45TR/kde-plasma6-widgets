@@ -28,3 +28,6 @@ KDE_Widget_Configuration.md
 README_*.md
 .idea/
 .vscode/
+
+# Release Artifacts
+Releases/
