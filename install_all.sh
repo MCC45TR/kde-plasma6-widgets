@@ -20,6 +20,7 @@ widgets=(
 "plasma-advancedreboot"
 "minimal-analog-clock"
 "file-search"
+"browser-search"
 )
 
 BASE_DIR="/home/mcc45tr/Gitler/Projelerim/Plasma6Widgets"

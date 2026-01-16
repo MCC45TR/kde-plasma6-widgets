@@ -1,0 +1,190 @@
+{
+    "en": {
+        "search_placeholder": "Search the web...",
+        "incognito": "Open Incognito Window",
+        "new_tab": "Open New Tab",
+        "history": "Open History",
+        "dino_game": "Play Dino Game",
+        "downloads": "Open Downloads",
+        "extensions": "Manage Extensions",
+        "bookmarks": "Open Bookmarks",
+        "settings": "Browser Settings",
+        "search_engine": "Search Engine",
+        "custom_url": "Custom Search URL"
+    },
+    "tr": {
+        "search_placeholder": "Web'de ara...",
+        "incognito": "Gizli Pencere Aç",
+        "new_tab": "Yeni Sekme Aç",
+        "history": "Geçmişi Aç",
+        "dino_game": "Dinazor Oyunu Oyna",
+        "downloads": "İndirilenleri Aç",
+        "extensions": "Eklentileri Yönet",
+        "bookmarks": "Yer İmlerini Aç",
+        "settings": "Tarayıcı Ayarları",
+        "search_engine": "Arama Motoru",
+        "custom_url": "Özel Arama URL'si"
+    },
+    "de": {
+        "search_placeholder": "Im Web suchen...",
+        "incognito": "Inkognito-Fenster öffnen",
+        "new_tab": "Neuer Tab öffnen",
+        "history": "Verlauf öffnen",
+        "search_engine": "Suchmaschine",
+        "custom_url": "Benutzerdefinierte Such-URL",
+        "settings": "Einstellungen"
+    },
+    "fr": {
+        "search_placeholder": "Rechercher sur le web...",
+        "incognito": "Ouvrir une fenêtre privée",
+        "new_tab": "Ouvrir un nouvel onglet",
+        "history": "Ouvrir l'historique",
+        "search_engine": "Moteur de recherche",
+        "custom_url": "URL de recherche personnalisée",
+        "settings": "Paramètres"
+    },
+    "it": {
+        "search_placeholder": "Cerca nel web...",
+        "incognito": "Apri finestra in incognito",
+        "new_tab": "Apri nuova scheda",
+        "history": "Apri cronologia",
+        "search_engine": "Motore di ricerca",
+        "custom_url": "URL di ricerca personalizzato",
+        "settings": "Impostazioni"
+    },
+    "es": {
+        "search_placeholder": "Buscar en la web...",
+        "incognito": "Abrir ventana de incógnito",
+        "new_tab": "Abrir nueva pestaña",
+        "history": "Abrir historial",
+        "search_engine": "Motor de búsqueda",
+        "custom_url": "URL de búsqueda personalizada",
+        "settings": "Configuración"
+    },
+    "pt": {
+        "search_placeholder": "Pesquisar na web...",
+        "incognito": "Abrir janela anônima",
+        "new_tab": "Abrir nova aba",
+        "history": "Abrir histórico",
+        "search_engine": "Motor de busca",
+        "custom_url": "URL de pesquisa personalizada",
+        "settings": "Configurações"
+    },
+    "ru": {
+        "search_placeholder": "Поиск в интернете...",
+        "incognito": "Открыть инкогнито",
+        "new_tab": "Открыть новую вкладку",
+        "history": "Открыть историю",
+        "search_engine": "Поисковая система",
+        "custom_url": "Пользовательский URL поиска",
+        "settings": "Настройки"
+    },
+    "ja": {
+        "search_placeholder": "ウェブを検索...",
+        "incognito": "シークレットウィンドウを開く",
+        "new_tab": "新しいタブを開く",
+        "history": "履歴を開く",
+        "search_engine": "検索エンジン",
+        "custom_url": "カスタム検索URL",
+        "settings": "設定"
+    },
+    "zh": {
+        "search_placeholder": "搜索网络...",
+        "incognito": "打开隐身窗口",
+        "new_tab": "打开新标签页",
+        "history": "打开历史记录",
+        "search_engine": "搜索引擎",
+        "custom_url": "自定义搜索网址",
+        "settings": "设置"
+    },
+    "el": {
+        "search_placeholder": "Αναζήτηση στο διαδίκτυο...",
+        "incognito": "Άνοιγμα ανώνυμου παραθύρου",
+        "new_tab": "Άνοιγμα νέας καρτέλας",
+        "history": "Άνοιγμα ιστορικού",
+        "search_engine": "Μηχανή αναζήτησης",
+        "custom_url": "Προσαρμοσμένο URL αναζήτησης",
+        "settings": "Ρυθμίσεις"
+    },
+    "az": {
+        "search_placeholder": "Vebdə axtar...",
+        "incognito": "Gizli pəncərə aç",
+        "new_tab": "Yeni tab aç",
+        "history": "Tarixçəni aç",
+        "search_engine": "Axtarış motoru",
+        "custom_url": "Xüsusi axtarış URL-i",
+        "settings": "Parametrlər"
+    },
+    "hy": {
+        "search_placeholder": "Որdelays delays համdelays...",
+        "incognito": "Բdelays delays delays",
+        "new_tab": "Բdelays delays delays",
+        "history": "Բdelays պdelays",
+        "search_engine": "Որdelays delays",
+        "custom_url": "Հdelays delays URL",
+        "settings": "Կdelays"
+    },
+    "ro": {
+        "search_placeholder": "Caută pe web...",
+        "incognito": "Deschide fereastră privată",
+        "new_tab": "Deschide tab nou",
+        "history": "Deschide istoricul",
+        "search_engine": "Motor de căutare",
+        "custom_url": "URL de căutare personalizat",
+        "settings": "Setări"
+    },
+    "cs": {
+        "search_placeholder": "Hledat na webu...",
+        "incognito": "Otevřít anonymní okno",
+        "new_tab": "Otevřít novou kartu",
+        "history": "Otevřít historii",
+        "search_engine": "Vyhledávač",
+        "custom_url": "Vlastní URL pro vyhledávání",
+        "settings": "Nastavení"
+    },
+    "hi": {
+        "search_placeholder": "वेब पर खोजें...",
+        "incognito": "गुप्त विंडो खोलें",
+        "new_tab": "नया टैब खोलें",
+        "history": "इतिहास खोलें",
+        "search_engine": "खोज इंजन",
+        "custom_url": "कस्टम खोज URL",
+        "settings": "सेटिंग्स"
+    },
+    "bn": {
+        "search_placeholder": "ওয়েবে অনুসন্ধান করুন...",
+        "incognito": "গোপন উইন্ডো খুলুন",
+        "new_tab": "নতুন ট্যাব খুলুন",
+        "history": "ইতিহাস খুলুন",
+        "search_engine": "সার্চ ইঞ্জিন",
+        "custom_url": "কাস্টম অনুসন্ধান URL",
+        "settings": "সেটিংস"
+    },
+    "ur": {
+        "search_placeholder": "ویب پر تلاش کریں...",
+        "incognito": "پوشیدہ ونڈو کھولیں",
+        "new_tab": "نیا ٹیب کھولیں",
+        "history": "تاریخ کھولیں",
+        "search_engine": "سرچ انجن",
+        "custom_url": "کسٹم سرچ URL",
+        "settings": "ترتیبات"
+    },
+    "id": {
+        "search_placeholder": "Cari di web...",
+        "incognito": "Buka jendela penyamaran",
+        "new_tab": "Buka tab baru",
+        "history": "Buka riwayat",
+        "search_engine": "Mesin pencari",
+        "custom_url": "URL pencarian kustom",
+        "settings": "Pengaturan"
+    },
+    "fa": {
+        "search_placeholder": "جستجو در وب...",
+        "incognito": "باز کردن پنجره ناشناس",
+        "new_tab": "باز کردن تب جدید",
+        "history": "باز کردن تاریخچه",
+        "search_engine": "موتور جستجو",
+        "custom_url": "URL جستجوی سفارشی",
+        "settings": "تنظیمات"
+    }
+}

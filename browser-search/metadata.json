@@ -1,0 +1,43 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "MCC45TR",
+                "Email": "mcc45tr@gmail.com"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "Quick browser search bar with incognito, new tab and history buttons",
+        "Icon": "internet-web-browser",
+        "Id": "com.mcc45tr.browsersearch",
+        "Name": "MBrowser Search",
+        "Version": "1.0.0",
+        "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/Browser-Search",
+        "License": "GPL-3.0",
+        "Name[tr]": "MTarayıcı Arama",
+        "Name[de]": "MBrowser-Suche",
+        "Name[fr]": "MRecherche Navigateur",
+        "Name[it]": "MRicerca Browser",
+        "Name[es]": "MBúsqueda del Navegador",
+        "Name[pt]": "MPesquisa do Navegador",
+        "Name[ro]": "MCăutare Browser",
+        "Name[cs]": "MVyhledávání v prohlížeči",
+        "Name[id]": "MPencarian Browser",
+        "Name[az]": "MBrauzer Axtarışı",
+        "Name[ru]": "Поиск в браузере",
+        "Name[ja]": "ブラウザ検索",
+        "Name[zh]": "浏览器搜索",
+        "Name[el]": "Αναζήτηση προγράμματος περιήγησης",
+        "Name[hy]": "Զննարկիdelays որdelays",
+        "Name[hi]": "ब्राउज़र खोज",
+        "Name[bn]": "ব্রাউজার অনুসন্ধান",
+        "Name[ur]": "براؤزر تلاش",
+        "Name[fa]": "جستجوی مرورگر",
+        "Description[tr]": "Gizli pencere, yeni sekme ve geçmiş butonları ile hızlı tarayıcı arama çubuğu",
+        "Description[de]": "Schnelle Browser-Suchleiste mit Incognito-, Neuer Tab- und Verlaufsschaltflächen",
+        "Description[fr]": "Barre de recherche rapide avec boutons incognito, nouvel onglet et historique"
+    }
+}
