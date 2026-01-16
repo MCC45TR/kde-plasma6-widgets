@@ -1,5 +1,29 @@
 # Değişiklik Günlüğü (Changelog)
 
+## 2026-01-16
+
+### TR-TR
+- **Weather Widget (Lokalizasyon Devrimi ve Modernizasyon)**:
+    - **Senkron Lokalizasyon**: Lokalizasyon sistemi `XMLHttpRequest` tabanlı JSON dosyasından, senkron JavaScript modülüne (`localization.js`) taşındı. Bu sayede yerel dosya erişim kısıtlamaları (CORS) aşıldı ve çevirilerin anında yüklenmesi sağlandı.
+    - **Modüler Mimari**: `main.qml` dosyası parçalanarak `SmallModeLayout`, `WideModeLayout` ve `LargeModeLayout` bileşenlerine ayrıldı. Kod okunabilirliği ve bakım kolaylığı artırıldı.
+    - **Gelişmiş Animasyonlar**: Büyük Mod (Large Mode) için "Morphing Details" animasyonu eklendi. Detaylar butonu tam ekran cam efektli panele yumuşak bir geçişle genişliyor.
+    - **Görsel İyileştirmeler**:
+        - Google Hava Durumu tarzı 3 yeni ikon paketi (V1, V2, V3) eklendi.
+        - Büyük modda sıcaklık göstergesi tahmin kartlarının üstüne alındı ve ikon boyutları optimize edildi.
+        - Butonlar ve içerik arasında 4px boşluk (margin) eklenerek görsel denge sağlandı.
+    - **Hata Düzeltmeleri**: Ermenice (`hy`) çevirilerdeki bozulmalar giderildi. Büyük moddaki binding loop ve null referans hataları çözüldü.
+
+### EN-US
+- **Weather Widget (Localization Revolution & Modernization)**:
+    - **Synchronous Localization**: Migrated the localization system from `XMLHttpRequest` based JSON to a synchronous JavaScript module (`localization.js`). This bypasses local file access restrictions (CORS) and ensures instant translation loading.
+    - **Modular Architecture**: Refactored `main.qml` into modular components: `SmallModeLayout`, `WideModeLayout`, and `LargeModeLayout`. Improved code maintainability and performance.
+    - **Advanced Animations**: Introduced "Morphing Details" animation for Large Mode. The details button smoothly expands into a full-glass details panel using `InOutQuad` easing.
+    - **Visual Enhancements**:
+        - Added 3 new Google Weather style icon packs (V1, V2, V3).
+        - Repositioned temperature display above forecast cards in Large Mode and optimized weather icon scaling.
+        - Added 4px bottom margin to header buttons for better visual separation.
+    - **Bug Fixes**: Corrected corrupted Armenian (`hy`) translations. Resolved binding loops and null reference errors in Large Mode layouts.
+
 ## 2026-01-01
 
 ### TR-TR
