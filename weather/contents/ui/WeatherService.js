@@ -471,7 +471,7 @@ function getOpenMeteoCondition(code) {
 }
 
 function getDayName(dayIndex) {
-    // Return lowercase keys that match localization.json
+    // Return lowercase keys that match localization.js
     var days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
     return days[dayIndex]
 }

@@ -1,4 +1,26 @@
 ### Release Tag
+v1.1.3
+
+### Release Title
+Weather v1.1.3 - Optimization & Cleanup
+
+### Release Notes
+Internal cleanup and final transition to JS localization.
+
+### 🚀 Improvements
+*   **Asset Optimization**: Removed the obsolete `localization.json` file. All translations are now exclusively served via `localization.js`.
+*   **Maintenance**: Updated internal references and documentation to reflect the new localization structure.
+
+### 📦 Installation
+1.  Download **`com.mcc45tr.weather-v1.1.3.plasmoid`**.
+2.  Install via terminal:
+    ```bash
+    kpackagetool6 -t Plasma/Applet --upgrade com.mcc45tr.weather-v1.1.3.plasmoid
+    ```
+
+---
+
+### Release Tag
 v1.1.2
 
 ### Release Title
