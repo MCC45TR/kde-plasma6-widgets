@@ -109,6 +109,7 @@ Item {
                     id: headerButtons
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 4
                     spacing: 4
 
                     Rectangle {
