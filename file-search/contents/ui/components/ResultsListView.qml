@@ -92,26 +92,29 @@ ScrollView {
                         width: parent.width
                     }
                     
-                    // Parent folder for files
+                    // Parent folder for files or subtext for apps
                     Text {
-                        visible: {
-                            if (!model) return false
-                            var cat = model.category || ""
-                            var isFileCategory = cat.indexOf("Dosya") >= 0 || cat.indexOf("Klasör") >= 0 || 
-                                                cat.indexOf("File") >= 0 || cat.indexOf("Folder") >= 0 ||
-                                                cat.indexOf("Document") >= 0 || cat.indexOf("Belge") >= 0
-                            return !!(isFileCategory && model.url && model.url.toString().length > 0)
-                        }
                         text: {
-                            if (!model.url) return ""
-                            var path = model.url.toString()
-                            if (path.startsWith("file://")) path = path.substring(7)
-                            var lastSlash = path.lastIndexOf("/")
-                            if (lastSlash > 0) {
-                                return path.substring(0, lastSlash)
+                            var cat = model.category || ""
+                            var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings");
+                            if (isApp) return model.subtext || "";
+
+                            var path = (model.url && model.url.toString) ? model.url.toString() : "";
+                            
+                            // Fallback to subtext if it looks like a path
+                            if (!path && model.subtext && model.subtext.toString().indexOf("/") === 0) {
+                                path = "file://" + model.subtext;
                             }
-                            return ""
+                            
+                            if (path && path.length > 0) {
+                                path = path.replace("file://", "");
+                                // Remove /home/user/ prefix using regex
+                                path = path.replace(/^\/home\/[^\/]+\//, "");
+                                return path;
+                            }
+                            return model.subtext || "";
                         }
+                        visible: text.length > 0
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
                         font.pixelSize: 10
                         elide: Text.ElideMiddle
@@ -215,7 +218,16 @@ ScrollView {
                         
                         // Path
                         Text {
-                            text: (model.url || "")
+                            text: {
+                                var path = (model.url && model.url.toString) ? model.url.toString() : "";
+                                if (path && path.length > 0) {
+                                    path = path.replace("file://", "");
+                                    // Remove /home/user/ prefix using regex
+                                    path = path.replace(/^\/home\/[^\/]+\//, "");
+                                    return path;
+                                }
+                                return model.url || "";
+                            }
                             font.pixelSize: 10
                             color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                             wrapMode: Text.WrapAnywhere

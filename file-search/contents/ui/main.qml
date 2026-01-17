@@ -7,7 +7,6 @@ import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 import org.kde.milou as Milou
-import org.kde.plasma.plasma5support as Plasma5Support
 
 // Import localization data
 import "js/localization.js" as LocalizationData
@@ -136,7 +135,7 @@ PlasmoidItem {
     
     Timer {
         id: iconCheckTimer
-        interval: 500
+        interval: 1000
         repeat: false
         property string uuid
         property string filePath
@@ -148,11 +147,11 @@ PlasmoidItem {
             
             // Only check if it has a file path
             if (filePath && filePath.toString().indexOf("file://") === 0) {
-                // Milou returns QIcon object which renders as "QIcon()" string in QML.
-                // We cannot extract the icon name from it directly.
-                // So we fallback to checking .directory file for custom folder icons.
+                // If decoration is broken (QIcon()) or missing
                 if (decoration === "QIcon()" || decoration === "") {
                     // Set default folder icon temporarily if it's likely a folder
+                    var isFolder = (category === "Yerler" || category === "Places" || category === "Klasörler");
+                    
                     if (isFolder) {
                         HistoryManager.updateItemIcon(searchHistory, uuid, "folder");
                         saveHistory();
@@ -160,62 +159,50 @@ PlasmoidItem {
                     }
                     
                     // Try to fetch custom icon from .directory file
-                    // Pass 'root' (id:root) as explicit context if needed, but functions in root scope see it.
-                    fetchDirectoryIcon(filePath, uuid);
+                    // Pass 'parent' (mainRoot) as explicit context
+                    fetchDirectoryIcon(filePath, uuid, parent);
                 }
             }
         }
     }
 
-    // Map to store pending icon requests: command -> uuid
-    property var pendingIconRequests: ({})
-
-    Plasma5Support.DataSource {
-        id: executableDataSource
-        engine: "executable"
-        connectedSources: []
-        onNewData: (sourceName, data) => {
-            console.log("FileSearch [Icon]: Data received for command:", sourceName)
-            var uuid = root.pendingIconRequests[sourceName]
-            if (uuid) {
-                var output = data["stdout"]
-                var exitCode = data["exit code"]
-                
-                if (output && output.toString().trim().length > 0) {
-                    var iconName = output.toString().trim()
-                    console.log("FileSearch [Icon]: Found custom icon via kreadconfig:", iconName, "for UUID:", uuid)
-                    
-                    if (HistoryManager.updateItemIcon(root.searchHistory, uuid, iconName)) {
-                        root.saveHistory()
-                        root.historyForceUpdate()
-                    }
-                } else {
-                    console.log("FileSearch [Icon]: No icon found or empty output. Exit code:", exitCode)
-                }
-                
-                disconnectSource(sourceName)
-                delete root.pendingIconRequests[sourceName]
-            }
-        }
-    }
-
-    function fetchDirectoryIcon(folderPath, uuid) {
+    function fetchDirectoryIcon(folderPath, uuid, rootObject) {
          if (!folderPath || folderPath.toString().indexOf("file://") !== 0) return;
          
-         var path = folderPath.toString().substring(7); // Remove file://
-         // Remove trailing slash if exists
-         if (path.length > 1 && path.slice(-1) === "/") path = path.slice(0, -1);
+         // Use provided root object or try to capture mainRoot (fallback)
+         var rootRef = rootObject || mainRoot; 
          
-         // Command to read Icon key from Desktop Entry group in .directory file
-         // kreadconfig6 --file "/path/to/.directory" --group "Desktop Entry" --key Icon
-         var configFile = path + "/.directory"
-         var cmd = "kreadconfig6 --file '" + configFile + "' --group 'Desktop Entry' --key Icon"
+         var request = new XMLHttpRequest();
+         // Add .directory to path. Ensure no double slash if path ends with /
+         var path = folderPath.toString();
+         if (path.slice(-1) === "/") path = path.slice(0, -1);
+         var url = path + "/.directory";
          
-         console.log("FileSearch [Icon]: Fetching icon for", path, "UUID:", uuid)
-         console.log("FileSearch [Icon]: Command:", cmd)
-         
-         root.pendingIconRequests[cmd] = uuid
-         executableDataSource.connectSource(cmd)
+         request.open("GET", url);
+         request.onreadystatechange = function() {
+             if (request.readyState === XMLHttpRequest.DONE) {
+                 if (request.status === 200 || request.status === 0) {
+                     var content = request.responseText;
+                     // Look for Icon=...
+                     var lines = content.split('\n');
+                     for (var i = 0; i < lines.length; i++) {
+                         var line = lines[i].trim();
+                         if (line.indexOf("Icon=") === 0) {
+                             var iconName = line.substring(5).trim();
+                             if (iconName.length > 0) {
+                                 console.log("FileSearch [Icon]: Found custom icon:", iconName);
+                                 if (HistoryManager.updateItemIcon(rootRef.searchHistory, uuid, iconName)) {
+                                     rootRef.saveHistory();
+                                     rootRef.historyForceUpdate();
+                                 }
+                                 return;
+                             }
+                         }
+                     }
+                 }
+             }
+         };
+         request.send();
     }
     
     function formatHistoryTime(timestamp) {
@@ -438,16 +425,22 @@ PlasmoidItem {
                         else if (subtext.indexOf("file://") === 0) rawUrl = subtext
                     }
                     
-                    root.addToHistory(display, decoration, category, matchId, rawUrl, null, root.searchText)
+                    mainRoot.addToHistory(display, decoration, category, matchId, rawUrl, null, mainRoot.searchText)
                     
-                    if (rawUrl.length > 0) {
+                    var isApp = (category === "Uygulamalar" || category === "Applications") || (rawUrl && rawUrl.toString().indexOf(".desktop") > 0);
+                    
+                    if (isApp) {
+                        console.log("FileSearch: Running app via model:", display)
+                        resultsModel.run(modelIdx)
+                    } else if (rawUrl.length > 0) {
+                        console.log("FileSearch: Opening external url:", rawUrl)
                         Qt.openUrlExternally(rawUrl)
                     } else {
-                        console.log("FileSearch: Running resultsModel for index:", modelIdx)
+                        console.log("FileSearch: Running resultsModel fallback:", modelIdx)
                         resultsModel.run(modelIdx)
                     }
-                    root.searchText = ""
-                    root.expanded = false
+                    mainRoot.searchText = ""
+                    mainRoot.expanded = false
                 }
             }
             onEscapePressed: {
@@ -510,17 +503,23 @@ PlasmoidItem {
                         else if (subtext.indexOf("file://") === 0) rawUrl = subtext
                     }
                     
-                    root.addToHistory(display, decoration, category, matchId, rawUrl, null, root.searchText)
+                    mainRoot.addToHistory(display, decoration, category, matchId, rawUrl, null, mainRoot.searchText)
                     
-                    if (rawUrl.length > 0) {
+                    var isApp = (category === "Uygulamalar" || category === "Applications") || (rawUrl && rawUrl.toString().indexOf(".desktop") > 0);
+                    
+                    if (isApp) {
+                        console.log("FileSearch: Running app via model:", display)
+                        resultsModel.run(idx)
+                    } else if (rawUrl.length > 0) {
+                        console.log("FileSearch: Opening external url:", rawUrl)
                         Qt.openUrlExternally(rawUrl)
                     } else {
-                        console.log("FileSearch: Running resultsModel for index:", idx)
+                        console.log("FileSearch: Running resultsModel fallback:", idx)
                         resultsModel.run(idx)
                     }
-                    root.searchText = ""
+                    mainRoot.searchText = ""
                     buttonModeSearchInput.clear()
-                    root.expanded = false
+                    mainRoot.expanded = false
                 }
             }
             onEscapePressed: {
@@ -665,17 +664,23 @@ PlasmoidItem {
                      // Try to fetch from model custom roles if needed (omitted for clean code as we rely on UI Logic)
                 }
 
-                root.addToHistory(display, decoration, category, matchId, filePath, null, root.searchText)
+                mainRoot.addToHistory(display, decoration, category, matchId, filePath, null, mainRoot.searchText)
                 
-                if (filePath && filePath.length > 0) {
+                var isApp = (category === "Uygulamalar" || category === "Applications") || (filePath && filePath.toString().indexOf(".desktop") > 0);
+                var idx = resultsModel.index(index, 0)
+
+                if (isApp) {
+                    console.log("FileSearch: Running app via model:", display)
+                    resultsModel.run(idx)
+                } else if (filePath && filePath.length > 0) {
+                    console.log("FileSearch: Opening external url:", filePath)
                     Qt.openUrlExternally(filePath)
                 } else {
-                    var idx = resultsModel.index(index, 0)
-                    console.log("FileSearch: Running resultsModel for index:", idx)
+                    console.log("FileSearch: Running resultsModel fallback:", idx)
                     resultsModel.run(idx)
                 }
-                root.searchText = ""
-                root.expanded = false
+                mainRoot.searchText = ""
+                mainRoot.expanded = false
             }
         }
         
@@ -693,7 +698,7 @@ PlasmoidItem {
             property var categorizedHistory: []
             
             Connections {
-                target: root
+                target: mainRoot
                 function onSearchHistoryChanged() {
                     historyContainer.updateHistory()
                 }
@@ -810,17 +815,23 @@ PlasmoidItem {
                 
                 onItemClicked: (index, display, decoration, category, matchId, filePath) => {
                     console.log("FileSearch [ResultsTile]: Item clicked at index:", index, "Display:", display)
-                    root.addToHistory(display, decoration, category, matchId, filePath, null, root.searchText)
+                    mainRoot.addToHistory(display, decoration, category, matchId, filePath, null, mainRoot.searchText)
                     
-                    if (filePath && filePath.length > 0) {
+                    var isApp = (category === "Uygulamalar" || category === "Applications") || (filePath && filePath.toString().indexOf(".desktop") > 0);
+                    var idx = resultsModel.index(index, 0)
+                    
+                    if (isApp) {
+                        console.log("FileSearch: Running app via model:", display)
+                        resultsModel.run(idx)
+                    } else if (filePath && filePath.length > 0) {
+                        console.log("FileSearch: Opening external url:", filePath)
                         Qt.openUrlExternally(filePath)
                     } else {
-                        var idx = resultsModel.index(index, 0)
-                        console.log("FileSearch: Running resultsModel for index:", idx)
+                        console.log("FileSearch: Running resultsModel fallback:", idx)
                         resultsModel.run(idx)
                     }
-                    root.searchText = ""
-                    root.expanded = false
+                    mainRoot.searchText = ""
+                    mainRoot.expanded = false
                 }
                 
                 onTabPressed: popupContent.cycleFocusSection(true)

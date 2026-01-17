@@ -128,24 +128,22 @@ Item {
                                     width: parent.width
                                 }
                                 
-                                // Parent folder for files
+                                // Parent folder logic matching ResultsListView
                                 Text {
-                                    visible: modelData.filePath && modelData.filePath.length > 0 && !modelData.isApplication
                                     text: {
-                                        if (!modelData.filePath) return ""
-                                        var path = modelData.filePath.toString()
-                                        if (path.startsWith("file://")) path = path.substring(7)
-                                        var lastSlash = path.lastIndexOf("/")
-                                        if (lastSlash > 0) {
-                                            var parentPath = path.substring(0, lastSlash)
-                                            var parentSlash = parentPath.lastIndexOf("/")
-                                            if (parentSlash >= 0) {
-                                                return parentPath.substring(parentSlash + 1)
-                                            }
-                                            return parentPath
+                                        if (modelData.isApplication) return "";
+
+                                        var path = modelData.filePath ? modelData.filePath.toString() : "";
+                                        
+                                        if (path && path.length > 0) {
+                                            path = path.replace("file://", "");
+                                            // Remove /home/user/ prefix using regex
+                                            path = path.replace(/^\/home\/[^\/]+\//, "");
+                                            return path;
                                         }
-                                        return ""
+                                        return "";
                                     }
+                                    visible: text.length > 0
                                     color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
                                     font.pixelSize: 11
                                     elide: Text.ElideMiddle

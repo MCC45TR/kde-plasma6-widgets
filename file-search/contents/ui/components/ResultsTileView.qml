@@ -327,6 +327,38 @@ FocusScope {
                                         maximumLineCount: 2
                                         wrapMode: Text.Wrap
                                     }
+                                    
+                                    // Subtext (Grid mode: Parent dir only)
+                                    Text {
+                                        width: parent.width - 8
+                                        text: {
+                                            var cat = modelData.category || ""
+                                            var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings");
+                                            if (isApp) return modelData.subtext || "";
+                                            
+                                            // Extract parent folder name
+                                            var path = (modelData.url && modelData.url.toString) ? modelData.url.toString() : "";
+                                            if (!path && modelData.subtext && modelData.subtext.toString().indexOf("/") === 0) {
+                                                 path = "file://" + modelData.subtext;
+                                            }
+                                             
+                                            if (path && path.length > 0) {
+                                                path = path.replace("file://", "");
+                                                if (path.slice(-1) === "/") path = path.slice(0, -1);
+                                                var parts = path.split("/");
+                                                if (parts.length > 1) {
+                                                    // Return parent folder name
+                                                    return parts[parts.length - 2];
+                                                }
+                                            }
+                                            return modelData.subtext || "";
+                                        }
+                                        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.6)
+                                        font.pixelSize: 9
+                                        horizontalAlignment: Text.AlignHCenter
+                                        elide: Text.ElideMiddle
+                                        visible: text.length > 0
+                                    }
                                 }
                                 
                                 MouseArea {

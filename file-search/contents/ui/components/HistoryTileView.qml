@@ -337,6 +337,31 @@ FocusScope {
                                         maximumLineCount: 2
                                         wrapMode: Text.Wrap
                                     }
+                                    
+                                    // Parent folder name (Grid mode)
+                                    Text {
+                                        width: historyTile.iconSize + 32
+                                        text: {
+                                            if (modelData.isApplication) return "";
+                                            
+                                            var path = modelData.filePath ? modelData.filePath.toString() : "";
+                                            if (path && path.length > 0) {
+                                                path = path.replace("file://", "");
+                                                if (path.endsWith("/")) path = path.slice(0, -1);
+                                                var parts = path.split("/");
+                                                if (parts.length > 1) {
+                                                    // Return parent folder name
+                                                    return parts[parts.length - 2];
+                                                }
+                                            }
+                                            return "";
+                                        }
+                                        color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.6)
+                                        font.pixelSize: 9
+                                        horizontalAlignment: Text.AlignHCenter
+                                        elide: Text.ElideMiddle
+                                        visible: text.length > 0
+                                    }
                                 }
                                 
                                 MouseArea {
