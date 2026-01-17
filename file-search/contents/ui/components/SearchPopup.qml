@@ -128,12 +128,21 @@ Item {
     }
     
     function handleHistoryClick(item) {
-        // If it's likely an application (.desktop), DO NOT openUrlExternally, but treat as search/run
-        if (item.filePath && item.filePath.toString().length > 0 && item.filePath.toString().indexOf(".desktop") === -1) {
-            Qt.openUrlExternally(item.filePath);
-            requestExpandChange(false);
-            return;
+        // If it's a known file or application path, open/run it directly and instantly
+        if (item.filePath && item.filePath.toString().length > 0) {
+             if (item.filePath.toString().indexOf(".desktop") !== -1) {
+                  // Direct application launch via kioclient
+                  logic.runShellCommand("kioclient exec '" + item.filePath + "'");
+             } else {
+                  // Standard file open
+                  Qt.openUrlExternally(item.filePath);
+             }
+             requestExpandChange(false);
+             requestSearchTextUpdate("");
+             return;
         }
+
+        // Only fall back to search-run-timer for pure search strings (without stored paths)
         var searchTerm = item.display || item.queryText || "";
         requestSearchTextUpdate(searchTerm);
         
