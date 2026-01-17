@@ -158,6 +158,9 @@ PlasmoidItem {
         accentColor: root.accentColor
         bgColor: root.bgColor
         
+        // Pass panel status for styling decisions
+        isInPanel: root.isInPanel
+        
         trFunc: root.tr
         
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1

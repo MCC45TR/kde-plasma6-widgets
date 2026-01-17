@@ -45,16 +45,19 @@ Item {
         
         RowLayout {
             anchors.centerIn: parent
+            width: parent.width * 0.9 // Limit aggregate width
             spacing: root.height * 0.05
             
             // Big Time - Scaled to fill height
             Text {
                 text: root.timeStr
-                // Scale based on height (roughly 40% of widget height)
-                font.pixelSize: Math.min(root.height * 0.45, root.width * 0.3)
+                // Reduced width multiplier from 0.3 to 0.2 to prevent overflow
+                font.pixelSize: Math.min(root.height * 0.45, root.width * 0.2)
                 font.weight: Font.Medium
                 font.family: barlowMedium.name
                 color: root.textColor
+                horizontalAlignment: Text.AlignRight
+                Layout.alignment: Qt.AlignVCenter
             }
             
             // Vertical Separator
@@ -67,10 +70,11 @@ Item {
             // Date Info
             ColumnLayout {
                 spacing: -root.height * 0.02
+                Layout.alignment: Qt.AlignVCenter
                 
                 Text {
                     text: root.dayStr
-                    font.pixelSize: Math.min(root.height * 0.15, root.width * 0.1)
+                    font.pixelSize: Math.min(root.height * 0.15, root.width * 0.08)
                     font.weight: Font.Medium
                     font.family: barlowMedium.name
                     color: root.textColor
@@ -80,14 +84,14 @@ Item {
                     spacing: root.height * 0.02
                     Text {
                         text: root.datePartStr
-                        font.pixelSize: Math.min(root.height * 0.08, root.width * 0.06)
+                        font.pixelSize: Math.min(root.height * 0.08, root.width * 0.05)
                         font.weight: Font.Light
                         font.family: barlowLight.name
                         color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.7)
                     }
                     Text {
                         text: root.yearStr
-                        font.pixelSize: Math.min(root.height * 0.08, root.width * 0.06)
+                        font.pixelSize: Math.min(root.height * 0.08, root.width * 0.05)
                         font.weight: Font.Light
                         font.italic: true
                         font.family: barlowLightItalic.name

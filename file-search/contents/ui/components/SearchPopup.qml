@@ -14,6 +14,7 @@ Item {
     // Properties synced with main
     property string searchText: ""
     property bool expanded: false
+    property bool isInPanel: true // Default to true, overridden by Main
     
     onExpandedChanged: {
         if (expanded) {
@@ -92,6 +93,22 @@ Item {
     }
     
     // ===== FUNCTIONS =====
+    
+    // Background for Desktop Mode (Matte)
+    Rectangle {
+        anchors.fill: parent
+        // Extend slightly to cover margins if needed, or fill parent
+        z: -100
+        color: popupRoot.bgColor
+        radius: 12
+        visible: !popupRoot.isInPanel
+        opacity: 0.95 // Almost solid matte
+        
+        // Add a subtle border or shadow if needed for contrast
+        border.color: Qt.rgba(textColor.r, textColor.g, textColor.b, 0.1)
+        border.width: 1
+    }
+
     function cycleFocusSection(forward) {
         if (forward) {
             if (focusSection === 0) {
