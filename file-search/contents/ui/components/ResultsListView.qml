@@ -157,7 +157,19 @@ ScrollView {
                 
                 onClicked: {
                     var matchId = (model.duplicateId !== undefined ? model.duplicateId : model.display) || ""
-                    var filePath = model.url || ""
+                    var filePath = (model.url && model.url.toString) ? model.url.toString() : (model.url || "")
+                    var subtext = model.subtext || ""
+                    var urls = model.urls || []
+                    
+                    if (filePath === "" && urls.length > 0) {
+                        filePath = urls[0].toString()
+                    }
+                    
+                    if (filePath === "") {
+                        if (subtext.indexOf("/") === 0) filePath = "file://" + subtext
+                        else if (subtext.indexOf("file://") === 0) filePath = subtext
+                    }
+                    
                     resultsListRoot.itemClicked(index, model.display || "", model.decoration || "application-x-executable", model.category || "Diğer", matchId, filePath)
                 }
 

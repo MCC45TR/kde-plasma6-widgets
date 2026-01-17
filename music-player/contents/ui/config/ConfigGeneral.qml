@@ -11,6 +11,22 @@ Kirigami.FormLayout {
     property var locales: ({})
     property string currentLocale: Qt.locale().name.substring(0, 2)
     
+    // Fallback dictionary in case JSON fails to load
+    readonly property var fallbackLocales: {
+        "no_media_playing": "No Media Playing",
+        "prev_track": "Previous Track",
+        "next_track": "Next Track",
+        "general_all": "General (Follow All)",
+        "default_player": "Default Media Player",
+        "inactive_players_hidden": "Inactive players are not shown.",
+        "selected_player": "Selected Player:",
+        "select_app": "Select Application",
+        "no_active_players": "⚠ No active players",
+        "active_players_found": "✓ %1 active players found",
+        "all_sources_tracked": "All media sources are tracked.",
+        "only_x_tracked": "Only \"%1\" is tracked."
+    }
+    
     function loadLocales() {
         var xhr = new XMLHttpRequest()
         xhr.open("GET", Qt.resolvedUrl("../localization.json"))
@@ -22,7 +38,6 @@ Kirigami.FormLayout {
                         refreshPlayerList() // Refresh list to update "General" text
                     } catch (e) {
                         console.log("Error parsing localization.json: " + e)
-                        locales = {}
                     }
                 }
             }
@@ -31,7 +46,8 @@ Kirigami.FormLayout {
     }
     
     function tr(key, arg1) {
-        var text = key
+        var text = fallbackLocales[key] || key.replace(/_/g, " ") // Use fallback or readable key
+        
         if (locales[currentLocale] && locales[currentLocale][key]) {
             text = locales[currentLocale][key]
         } else if (locales["en"] && locales["en"][key]) {
@@ -169,7 +185,7 @@ Kirigami.FormLayout {
                 return
             }
         }
-        // If preferred player not found in active list, reset to "Genel"
+        // If preferred player not found in active list, reset to "General"
         playerCombo.currentIndex = 0
         cfg_preferredPlayer = ""
     }
@@ -178,8 +194,6 @@ Kirigami.FormLayout {
         id: appListModel
     }
     
-    // Component.onCompleted moved up for localization loading
-    
     // Timer to refresh list periodically (in case players start/stop)
     Timer {
         interval: 2000
@@ -187,6 +201,8 @@ Kirigami.FormLayout {
         repeat: true
         onTriggered: refreshPlayerList()
     }
+    
+    // --- UI Elements ---
     
     ComboBox {
         id: playerCombo
@@ -197,44 +213,37 @@ Kirigami.FormLayout {
         
         delegate: ItemDelegate {
             width: playerCombo.width
-            height: 40
-            enabled: model.available === true
-            
             contentItem: RowLayout {
-                spacing: 12
+                spacing: 10
                 opacity: model.available ? 1.0 : 0.4
                 
                 Kirigami.Icon {
-                    source: model.icon ? model.icon : "application-x-executable"
-                    Layout.preferredWidth: 24
-                    Layout.preferredHeight: 24
+                    source: model.icon || "application-x-executable"
+                    Layout.preferredWidth: 22
+                    Layout.preferredHeight: 22
                 }
                 
                 Label {
                     text: model.name
-                    font.pixelSize: 14
                     Layout.fillWidth: true
                     elide: Text.ElideRight
+                    verticalAlignment: Text.AlignVCenter
                 }
             }
-            
             highlighted: playerCombo.highlightedIndex === index
         }
         
-        // Custom contentItem to display selected icon and text properly
+        // Simplified content item without nested layouts causing issues
         contentItem: Item {
-            width: parent.width
-            height: parent.height
-            
             RowLayout {
                 anchors.fill: parent
                 anchors.leftMargin: 10
-                anchors.rightMargin: 30 // Space for drop-down arrow
-                spacing: 12
+                anchors.rightMargin: 30
+                spacing: 10
                 
                 Kirigami.Icon {
-                    source: playerCombo.currentIndex >= 0 && appListModel.count > 0 
-                        ? (appListModel.get(playerCombo.currentIndex) ? appListModel.get(playerCombo.currentIndex).icon : "multimedia-player")
+                    source: playerCombo.currentIndex >= 0 && appListModel.count > playerCombo.currentIndex
+                        ? (appListModel.get(playerCombo.currentIndex).icon || "multimedia-player")
                         : "multimedia-player"
                     Layout.preferredWidth: 22
                     Layout.preferredHeight: 22
@@ -242,7 +251,6 @@ Kirigami.FormLayout {
                 
                 Label {
                     text: playerCombo.displayText
-                    font.pixelSize: 14
                     Layout.fillWidth: true
                     elide: Text.ElideRight
                     verticalAlignment: Text.AlignVCenter
@@ -260,27 +268,38 @@ Kirigami.FormLayout {
         }
     }
     
-    // Show active player count
-    Label {
+    // Status Information
+    Item {
+        Kirigami.FormData.label: page.tr("selected_player")
+        Kirigami.FormData.isSection: false
         Layout.fillWidth: true
-        wrapMode: Text.Wrap
-        font.pixelSize: 12
-        font.bold: true
-        color: Kirigami.Theme.positiveTextColor
-        text: {
-            var count = appListModel.count - 1 // Exclude "Genel"
-            if (count <= 0) return page.tr("no_active_players")
-            return page.tr("active_players_found", count)
+        Layout.preferredHeight: statusColumn.implicitHeight
+        
+        ColumnLayout {
+            id: statusColumn
+            anchors.fill: parent
+            spacing: 5
+            
+            Label {
+                Layout.fillWidth: true
+                wrapMode: Text.Wrap
+                font.bold: true
+                color: Kirigami.Theme.positiveTextColor
+                text: {
+                    var count = Math.max(0, appListModel.count - 1) // Exclude "General"
+                    if (count <= 0) return page.tr("no_active_players")
+                    return page.tr("active_players_found", count)
+                }
+            }
+            
+            Label {
+                Layout.fillWidth: true
+                wrapMode: Text.Wrap
+                opacity: 0.7
+                text: cfg_preferredPlayer === "" 
+                    ? page.tr("all_sources_tracked")
+                    : page.tr("only_x_tracked", cfg_preferredPlayer)
+            }
         }
-    }
-    
-    Label {
-        Layout.fillWidth: true
-        wrapMode: Text.Wrap
-        font.pixelSize: 12
-        opacity: 0.7
-        text: cfg_preferredPlayer === "" 
-            ? page.tr("all_sources_tracked")
-            : page.tr("only_x_tracked", cfg_preferredPlayer)
     }
 }

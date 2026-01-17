@@ -7,6 +7,7 @@ import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 import org.kde.milou as Milou
+import org.kde.plasma.plasma5support as Plasma5Support
 
 // Import localization data
 import "js/localization.js" as LocalizationData
@@ -75,6 +76,9 @@ PlasmoidItem {
     readonly property int iconSize: Math.max(16, Plasmoid.configuration.iconSize || 48)
     readonly property int listIconSize: Math.max(16, Plasmoid.configuration.listIconSize || 22)
     
+    // Signals
+    signal historyForceUpdate()
+    
     // ===== THEME COLORS =====
     readonly property color bgColor: Kirigami.Theme.backgroundColor
     readonly property color textColor: Kirigami.Theme.textColor
@@ -108,6 +112,7 @@ PlasmoidItem {
 
     // ===== HISTORY FUNCTIONS (delegated to HistoryManager) =====
     function loadHistory() {
+        console.log("FileSearch [History]: Loading history...")
         searchHistory = HistoryManager.loadHistory(Plasmoid.configuration.searchHistory)
     }
     
@@ -116,11 +121,101 @@ PlasmoidItem {
     }
     
     function addToHistory(display, decoration, category, matchId, filePath, sourceType, queryText) {
-        searchHistory = HistoryManager.addToHistory(
-            searchHistory, display, decoration, category, 
-            matchId, filePath, sourceType, queryText, maxHistoryItems
-        )
+        searchHistory = HistoryManager.addToHistory(searchHistory, display, decoration, category, matchId, filePath, sourceType, queryText, Plasmoid.configuration.maxHistoryItems)
         saveHistory()
+        
+        // Schedule delayed icon check (1s)
+        if (searchHistory.length > 0) {
+            iconCheckTimer.uuid = searchHistory[0].uuid
+            iconCheckTimer.filePath = filePath
+            iconCheckTimer.decoration = decoration
+            iconCheckTimer.category = category
+            iconCheckTimer.restart()
+        }
+    }
+    
+    Timer {
+        id: iconCheckTimer
+        interval: 500
+        repeat: false
+        property string uuid
+        property string filePath
+        property string decoration
+        property string category
+        
+        onTriggered: {
+            if (!uuid) return
+            
+            // Only check if it has a file path
+            if (filePath && filePath.toString().indexOf("file://") === 0) {
+                // Milou returns QIcon object which renders as "QIcon()" string in QML.
+                // We cannot extract the icon name from it directly.
+                // So we fallback to checking .directory file for custom folder icons.
+                if (decoration === "QIcon()" || decoration === "") {
+                    // Set default folder icon temporarily if it's likely a folder
+                    if (isFolder) {
+                        HistoryManager.updateItemIcon(searchHistory, uuid, "folder");
+                        saveHistory();
+                        historyForceUpdate();
+                    }
+                    
+                    // Try to fetch custom icon from .directory file
+                    // Pass 'root' (id:root) as explicit context if needed, but functions in root scope see it.
+                    fetchDirectoryIcon(filePath, uuid);
+                }
+            }
+        }
+    }
+
+    // Map to store pending icon requests: command -> uuid
+    property var pendingIconRequests: ({})
+
+    Plasma5Support.DataSource {
+        id: executableDataSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: (sourceName, data) => {
+            console.log("FileSearch [Icon]: Data received for command:", sourceName)
+            var uuid = root.pendingIconRequests[sourceName]
+            if (uuid) {
+                var output = data["stdout"]
+                var exitCode = data["exit code"]
+                
+                if (output && output.toString().trim().length > 0) {
+                    var iconName = output.toString().trim()
+                    console.log("FileSearch [Icon]: Found custom icon via kreadconfig:", iconName, "for UUID:", uuid)
+                    
+                    if (HistoryManager.updateItemIcon(root.searchHistory, uuid, iconName)) {
+                        root.saveHistory()
+                        root.historyForceUpdate()
+                    }
+                } else {
+                    console.log("FileSearch [Icon]: No icon found or empty output. Exit code:", exitCode)
+                }
+                
+                disconnectSource(sourceName)
+                delete root.pendingIconRequests[sourceName]
+            }
+        }
+    }
+
+    function fetchDirectoryIcon(folderPath, uuid) {
+         if (!folderPath || folderPath.toString().indexOf("file://") !== 0) return;
+         
+         var path = folderPath.toString().substring(7); // Remove file://
+         // Remove trailing slash if exists
+         if (path.length > 1 && path.slice(-1) === "/") path = path.slice(0, -1);
+         
+         // Command to read Icon key from Desktop Entry group in .directory file
+         // kreadconfig6 --file "/path/to/.directory" --group "Desktop Entry" --key Icon
+         var configFile = path + "/.directory"
+         var cmd = "kreadconfig6 --file '" + configFile + "' --group 'Desktop Entry' --key Icon"
+         
+         console.log("FileSearch [Icon]: Fetching icon for", path, "UUID:", uuid)
+         console.log("FileSearch [Icon]: Command:", cmd)
+         
+         root.pendingIconRequests[cmd] = uuid
+         executableDataSource.connectSource(cmd)
     }
     
     function formatHistoryTime(timestamp) {
@@ -134,6 +229,7 @@ PlasmoidItem {
     
     // ===== PINNED FUNCTIONS (delegated to PinnedManager) =====
     function loadPinned() {
+        console.log("FileSearch [Pinned]: Loading pinned items...")
         pinnedItems = PinnedManager.loadPinned(Plasmoid.configuration.pinnedItems)
     }
     
@@ -166,6 +262,7 @@ PlasmoidItem {
     
     // ===== CATEGORY SETTINGS FUNCTIONS (delegated to CategoryManager) =====
     function loadCategorySettings() {
+        console.log("FileSearch [Category]: Loading category settings...")
         categorySettings = CategoryManager.loadCategorySettings(Plasmoid.configuration.categorySettings)
     }
     
@@ -188,6 +285,34 @@ PlasmoidItem {
         loadCategorySettings()
         // Locale data is now synchronously loaded via import
     }
+
+    // ===== CONTEXTUAL ACTIONS (Right-Click Menu) =====
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: root.tr("button_mode")
+            checkable: true
+            checked: root.displayMode === 0
+            onTriggered: Plasmoid.configuration.displayMode = 0
+        },
+        PlasmaCore.Action {
+            text: root.tr("medium_mode")
+            checkable: true
+            checked: root.displayMode === 1
+            onTriggered: Plasmoid.configuration.displayMode = 1
+        },
+        PlasmaCore.Action {
+            text: root.tr("wide_mode")
+            checkable: true
+            checked: root.displayMode === 2
+            onTriggered: Plasmoid.configuration.displayMode = 2
+        },
+        PlasmaCore.Action {
+            text: root.tr("extra_wide_mode")
+            checkable: true
+            checked: root.displayMode === 3
+            onTriggered: Plasmoid.configuration.displayMode = 3
+        }
+    ]
 
     // ===== COMPACT REPRESENTATION (Panel Widget) =====
     compactRepresentation: Components.CompactView {
@@ -283,20 +408,46 @@ PlasmoidItem {
             currentIndex: resultsList.currentIndex
             
             onTextUpdated: (newText) => { 
+                console.log("FileSearch [HiddenInput]: Text updated to:", newText)
                 popupContent.searchStartTime = new Date().getTime()
                 mainRoot.searchText = newText 
             }
             onSearchSubmitted: (idx) => {
+                console.log("FileSearch [HiddenInput]: Search submitted for index:", idx)
                 if (resultsList.count > 0) {
                     var modelIdx = resultsModel.index(idx, 0)
                     var display = resultsModel.data(modelIdx, Qt.DisplayRole) || ""
                     var decoration = resultsModel.data(modelIdx, Qt.DecorationRole) || "application-x-executable"
                     var category = resultsModel.data(modelIdx, resultsModel.CategoryRole) || "Diğer"
                     var matchId = resultsModel.data(modelIdx, resultsModel.DuplicateRole) || display
-                    mainRoot.addToHistory(display, decoration, category, matchId, "", null, mainRoot.searchText)
-                    resultsModel.run(modelIdx)
-                    mainRoot.searchText = ""
-                    mainRoot.expanded = false
+                    
+                    // Fetch URL from proxy
+                    var proxyItem = rawDataProxy.itemAt(idx)
+                    var rawUrl = proxyItem ? ((proxyItem.url && proxyItem.url.toString) ? proxyItem.url.toString() : (proxyItem.url || "")) : ""
+                    var subtext = proxyItem ? ((proxyItem.subtext && proxyItem.subtext.toString) ? proxyItem.subtext.toString() : "") : ""
+                    var urls = proxyItem ? (proxyItem.urls || []) : []
+
+                    // Fallback to urls list if url is empty
+                    if (rawUrl === "" && urls.length > 0) {
+                        rawUrl = urls[0].toString()
+                    }
+                    
+                    // Fallback to subtext if url is empty and subtext looks like path
+                    if (rawUrl === "") {
+                        if (subtext.indexOf("/") === 0) rawUrl = "file://" + subtext
+                        else if (subtext.indexOf("file://") === 0) rawUrl = subtext
+                    }
+                    
+                    root.addToHistory(display, decoration, category, matchId, rawUrl, null, root.searchText)
+                    
+                    if (rawUrl.length > 0) {
+                        Qt.openUrlExternally(rawUrl)
+                    } else {
+                        console.log("FileSearch: Running resultsModel for index:", modelIdx)
+                        resultsModel.run(modelIdx)
+                    }
+                    root.searchText = ""
+                    root.expanded = false
                 }
             }
             onEscapePressed: {
@@ -334,17 +485,42 @@ PlasmoidItem {
                 value: buttonModeSearchInput.searchText
             }
             onSearchSubmitted: (text, selectedIndex) => {
+                console.log("FileSearch [ButtonInput]: Search submitted for text:", text, "index:", selectedIndex)
                 if (resultsList.count > 0) {
                     var idx = resultsModel.index(selectedIndex, 0)
                     var display = resultsModel.data(idx, Qt.DisplayRole) || ""
                     var decoration = resultsModel.data(idx, Qt.DecorationRole) || "application-x-executable"
                     var category = resultsModel.data(idx, resultsModel.CategoryRole) || "Diğer"
                     var matchId = resultsModel.data(idx, resultsModel.DuplicateRole) || display
-                    mainRoot.addToHistory(display, decoration, category, matchId, "", null, mainRoot.searchText)
-                    resultsModel.run(idx)
-                    mainRoot.searchText = ""
+                    
+                    // Fetch URL from proxy
+                    var proxyItem = rawDataProxy.itemAt(selectedIndex)
+                    var rawUrl = proxyItem ? ((proxyItem.url && proxyItem.url.toString) ? proxyItem.url.toString() : (proxyItem.url || "")) : ""
+                    var subtext = proxyItem ? ((proxyItem.subtext && proxyItem.subtext.toString) ? proxyItem.subtext.toString() : "") : ""
+                    var urls = proxyItem ? (proxyItem.urls || []) : []
+
+                    // Fallback to urls list if url is empty
+                    if (rawUrl === "" && urls.length > 0) {
+                        rawUrl = urls[0].toString()
+                    }
+                    
+                    // Fallback to subtext
+                    if (rawUrl === "") {
+                        if (subtext.indexOf("/") === 0) rawUrl = "file://" + subtext
+                        else if (subtext.indexOf("file://") === 0) rawUrl = subtext
+                    }
+                    
+                    root.addToHistory(display, decoration, category, matchId, rawUrl, null, root.searchText)
+                    
+                    if (rawUrl.length > 0) {
+                        Qt.openUrlExternally(rawUrl)
+                    } else {
+                        console.log("FileSearch: Running resultsModel for index:", idx)
+                        resultsModel.run(idx)
+                    }
+                    root.searchText = ""
                     buttonModeSearchInput.clear()
-                    mainRoot.expanded = false
+                    root.expanded = false
                 }
             }
             onEscapePressed: {
@@ -383,6 +559,7 @@ PlasmoidItem {
             textColor: mainRoot.textColor
             
             onResultClicked: (idx, display, decoration, category) => {
+                console.log("FileSearch [PrimaryPreview]: Result clicked, running index:", idx)
                 mainRoot.addToHistory(display, decoration, category, display, "", "calculator", mainRoot.searchText)
                 resultsModel.run(idx)
                 mainRoot.searchText = ""
@@ -426,6 +603,7 @@ PlasmoidItem {
             trFunc: mainRoot.tr
             
             onItemClicked: (item) => {
+                console.log("FileSearch [Pinned]: Item clicked:", item.display)
                 // Open pinned item
                 if (item.filePath && item.filePath.length > 0) {
                     Qt.openUrlExternally(item.filePath)
@@ -440,6 +618,7 @@ PlasmoidItem {
                     Qt.callLater(function() {
                         if (resultsList.count > 0) {
                             var idx = resultsModel.index(0, 0)
+                            console.log("FileSearch [Pinned]: Running resultsModel for index 0")
                             resultsModel.run(idx)
                         }
                     })
@@ -478,11 +657,25 @@ PlasmoidItem {
             property var togglePinFunc: mainRoot.togglePin
             
             onItemClicked: (index, display, decoration, category, matchId, filePath) => {
-                mainRoot.addToHistory(display, decoration, category, matchId, filePath, null, mainRoot.searchText)
-                var idx = resultsModel.index(index, 0)
-                resultsModel.run(idx)
-                mainRoot.searchText = ""
-                mainRoot.expanded = false
+                console.log("FileSearch [ResultsList]: Item clicked at index:", index, "Display:", display)
+                
+                // Fallback inside Handler if UI didn't catch it
+                if (!filePath || filePath === "") {
+                     var mIdx = resultsModel.index(index, 0)
+                     // Try to fetch from model custom roles if needed (omitted for clean code as we rely on UI Logic)
+                }
+
+                root.addToHistory(display, decoration, category, matchId, filePath, null, root.searchText)
+                
+                if (filePath && filePath.length > 0) {
+                    Qt.openUrlExternally(filePath)
+                } else {
+                    var idx = resultsModel.index(index, 0)
+                    console.log("FileSearch: Running resultsModel for index:", idx)
+                    resultsModel.run(idx)
+                }
+                root.searchText = ""
+                root.expanded = false
             }
         }
         
@@ -497,7 +690,23 @@ PlasmoidItem {
             anchors.bottomMargin: mainRoot.isButtonMode ? 6 : 12
             visible: mainRoot.searchText.length === 0 && mainRoot.searchHistory.length > 0
             
-            property var categorizedHistory: HistoryManager.categorizeHistory(mainRoot.searchHistory, mainRoot.tr("applications"), mainRoot.tr("other"))
+            property var categorizedHistory: []
+            
+            Connections {
+                target: root
+                function onSearchHistoryChanged() {
+                    historyContainer.updateHistory()
+                }
+                function onHistoryForceUpdate() {
+                    historyContainer.updateHistory()
+                }
+            }
+            
+            function updateHistory() {
+                categorizedHistory = HistoryManager.categorizeHistory(mainRoot.searchHistory, mainRoot.tr("applications"), mainRoot.tr("other"))
+            }
+            
+            Component.onCompleted: updateHistory()
             
             // History List View
             Components.HistoryListView {
@@ -572,6 +781,7 @@ PlasmoidItem {
                 onTriggered: {
                     if (resultsList.count > 0) {
                         var idx = resultsModel.index(0, 0)
+                        console.log("FileSearch [HistoryTimer]: Running resultsModel for index 0")
                         resultsModel.run(idx)
                         mainRoot.searchText = ""
                         mainRoot.expanded = false
@@ -599,11 +809,18 @@ PlasmoidItem {
                 searchText: mainRoot.searchText
                 
                 onItemClicked: (index, display, decoration, category, matchId, filePath) => {
-                    mainRoot.addToHistory(display, decoration, category, matchId, filePath, null, mainRoot.searchText)
-                    var idx = resultsModel.index(index, 0)
-                    resultsModel.run(idx)
-                    mainRoot.searchText = ""
-                    mainRoot.expanded = false
+                    console.log("FileSearch [ResultsTile]: Item clicked at index:", index, "Display:", display)
+                    root.addToHistory(display, decoration, category, matchId, filePath, null, root.searchText)
+                    
+                    if (filePath && filePath.length > 0) {
+                        Qt.openUrlExternally(filePath)
+                    } else {
+                        var idx = resultsModel.index(index, 0)
+                        console.log("FileSearch: Running resultsModel for index:", idx)
+                        resultsModel.run(idx)
+                    }
+                    root.searchText = ""
+                    root.expanded = false
                 }
                 
                 onTabPressed: popupContent.cycleFocusSection(true)
@@ -633,7 +850,9 @@ PlasmoidItem {
                     display: item.display || "",
                     decoration: item.decoration || "",
                     category: cat,
-                    url: item.url || "",
+                    url: item.url || "", 
+                    urls: item.urls || [],
+                    subtext: item.subtext || "",
                     duplicateId: item.duplicateId || "",
                     index: item.itemIndex
                 });
@@ -692,9 +911,12 @@ PlasmoidItem {
                 property var display: model.display || ""
                 property var decoration: model.decoration || ""
                 property var url: model.url || ""
+                property var urls: model.urls || []
+                property var subtext: model.subtext || ""
                 property var duplicateId: model.duplicateId || ""
             }
             onCountChanged: {
+                console.log("FileSearch [Repeater]: Result count changed to:", count)
                 refreshDebouncer.restart()
                 
                 // Latency Measurement

@@ -162,7 +162,19 @@ FocusScope {
         if (item) {
             var data = item.data
             var matchId = data.duplicateId || data.display || ""
-            var filePath = data.url || ""
+            var filePath = (data.url && data.url.toString) ? data.url.toString() : (data.url || "")
+            var subtext = data.subtext || ""
+            var urls = data.urls || []
+            
+            if (filePath === "" && urls.length > 0) {
+                filePath = urls[0].toString()
+            }
+            
+            if (filePath === "") {
+                if (subtext.indexOf("/") === 0) filePath = "file://" + subtext
+                else if (subtext.indexOf("file://") === 0) filePath = subtext
+            }
+            
             itemClicked(data.index, data.display || "", data.decoration || "application-x-executable", data.category || "Diğer", matchId, filePath)
         }
     }
@@ -325,7 +337,19 @@ FocusScope {
                                     
                                     onClicked: {
                                         var matchId = modelData.duplicateId || modelData.display || ""
-                                        var filePath = modelData.url || ""
+                                        var filePath = (modelData.url && modelData.url.toString) ? modelData.url.toString() : (modelData.url || "")
+                                        var subtext = modelData.subtext || ""
+                                        var urls = modelData.urls || []
+                                        
+                                        if (filePath === "" && urls.length > 0) {
+                                            filePath = urls[0].toString()
+                                        }
+                                        
+                                        if (filePath === "") {
+                                            if (subtext.indexOf("/") === 0) filePath = "file://" + subtext
+                                            else if (subtext.indexOf("file://") === 0) filePath = subtext
+                                        }
+                                        
                                         resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Diğer", matchId, filePath)
                                     }
                                 }

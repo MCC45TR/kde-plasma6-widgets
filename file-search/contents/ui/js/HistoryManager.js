@@ -52,16 +52,23 @@ function loadHistory(configValue) {
 
 // Add item to history with deduplication
 function addToHistory(historyArray, display, decoration, category, matchId, filePath, sourceType, queryText, maxItems) {
+    // Clone array to trigger Update
+    var newHistory = historyArray.slice(0)
+
     // Deduplication: Check if already exists (by matchId or display)
-    for (var i = 0; i < historyArray.length; i++) {
-        var existing = historyArray[i]
+    for (var i = 0; i < newHistory.length; i++) {
+        var existing = newHistory[i]
         if ((matchId && existing.matchId === matchId) || existing.display === display) {
             // Move to top and update timestamp
-            var item = historyArray.splice(i, 1)[0]
+            var item = newHistory.splice(i, 1)[0]
             item.timestamp = Date.now()
             item.queryText = queryText || item.queryText || display
-            historyArray.unshift(item)
-            return historyArray
+            if (filePath) item.filePath = filePath // Update path if provided
+
+            console.log("FileSearch [History]: Updated Item ->", JSON.stringify(item, null, 2))
+
+            newHistory.unshift(item)
+            return newHistory
         }
     }
 
@@ -71,8 +78,8 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
     // Determine source type
     var detectedSourceType = sourceType || detectSourceType(category, isApp, filePath)
 
-    // Add new item
-    historyArray.unshift({
+    // Create new item object
+    var newItem = {
         uuid: generateUUID(),
         display: display,
         decoration: decoration || "application-x-executable",
@@ -83,14 +90,19 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
         sourceType: detectedSourceType,
         queryText: queryText || display,
         timestamp: Date.now()
-    })
-
-    // Limit to max items
-    if (historyArray.length > maxItems) {
-        historyArray = historyArray.slice(0, maxItems)
     }
 
-    return historyArray
+    console.log("FileSearch [History]: Added New Item ->", JSON.stringify(newItem, null, 2))
+
+    // Add new item
+    newHistory.unshift(newItem)
+
+    // Limit to max items
+    if (newHistory.length > maxItems) {
+        newHistory = newHistory.slice(0, maxItems)
+    }
+
+    return newHistory
 }
 
 // Categorize history items into groups
@@ -115,6 +127,17 @@ function categorizeHistory(historyArray, appLabel, otherLabel) {
         result.push({ categoryName: otherLabel, items: others })
     }
     return result
+}
+
+// Update icon of an item by UUID
+function updateItemIcon(historyArray, uuid, newIcon) {
+    for (var i = 0; i < historyArray.length; i++) {
+        if (historyArray[i].uuid === uuid) {
+            historyArray[i].decoration = newIcon;
+            return true;
+        }
+    }
+    return false;
 }
 
 // Clear all history
