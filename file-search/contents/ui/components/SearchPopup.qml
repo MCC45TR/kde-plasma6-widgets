@@ -251,39 +251,43 @@ Item {
         onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
     }
 
-    // Primary Preview
-    PrimaryResultPreview {
-        id: primaryResultPreview
+    // Primary Preview (Loader)
+    Loader {
+        id: primaryResultPreviewLoader
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 12
+        asynchronous: true
+        active: popupRoot.expanded && popupRoot.searchText.length > 0 && !isTileView
         
-        resultsModel: resultsModel
-        resultCount: tileData.resultCount
-        searchText: popupRoot.searchText
-        accentColor: popupRoot.accentColor
-        textColor: popupRoot.textColor
-        
-        onResultClicked: (idx, display, decoration, category) => {
-            logic.addToHistory(display, decoration, category, display, "", "calculator", popupRoot.searchText);
-            resultsModel.run(resultsModel.index(idx, 0));
-            requestSearchTextUpdate("");
-            requestExpandChange(false);
+        sourceComponent: PrimaryResultPreview {
+            resultsModel: popupRoot.resultsModel
+            resultCount: tileData.resultCount
+            searchText: popupRoot.searchText
+            accentColor: popupRoot.accentColor
+            textColor: popupRoot.textColor
+            
+            onResultClicked: (idx, display, decoration, category) => {
+                logic.addToHistory(display, decoration, category, display, "", "calculator", popupRoot.searchText);
+                resultsModel.run(resultsModel.index(idx, 0));
+                requestSearchTextUpdate("");
+                requestExpandChange(false);
+            }
         }
     }
 
     // Query Hints (Loader)
     Loader {
         id: queryHintsLoader
-        anchors.top: primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top
-        anchors.topMargin: primaryResultPreview.visible ? 8 : 0
+        anchors.top: primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready ? primaryResultPreviewLoader.bottom : parent.top
+        anchors.topMargin: (primaryResultPreviewLoader.active) ? 8 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        
-        active: true // Light component, keep active?
+        asynchronous: true
+        active: popupRoot.expanded && popupRoot.searchText.length > 0
         sourceComponent: QueryHints {
             searchText: popupRoot.searchText
             textColor: popupRoot.textColor
@@ -302,6 +306,7 @@ Item {
         anchors.right: parent.right
         anchors.leftMargin: 12
         anchors.rightMargin: 12
+        asynchronous: true
         
         property var items: logic.getVisiblePinnedItems()
         active: items.length > 0
@@ -339,6 +344,7 @@ Item {
         anchors.bottom: parent.bottom // Anchor to parent bottom
         anchors.leftMargin: 12
         anchors.rightMargin: 12
+        asynchronous: true
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
         anchors.bottomMargin: isButtonMode ? (buttonModeSearchInput.height + 12) : 12
         
@@ -364,7 +370,8 @@ Item {
         id: tileResultsLoader
         anchors.fill: parent
         anchors.margins: 12
-        active: isTileView && searchText.length > 0
+        asynchronous: true
+        active: popupRoot.expanded && isTileView && searchText.length > 0
         
         sourceComponent: ResultsTileView {
              categorizedData: tileData.categorizedData
@@ -391,10 +398,11 @@ Item {
          anchors.right: parent.right
          anchors.bottom: parent.bottom // Anchor to parent bottom
          anchors.margins: 12
+         asynchronous: true
          // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
          anchors.bottomMargin: isButtonMode ? (buttonModeSearchInput.height + 12) : 12
          
-         active: searchText.length === 0 && logic.searchHistory.length > 0
+         active: popupRoot.expanded && searchText.length === 0 && logic.searchHistory.length > 0
          
          property var categorizedHistory: []
          onActiveChanged: if(active) categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, trFunc("applications"), trFunc("other"))
@@ -444,22 +452,26 @@ Item {
          }
     }
     
-    // Debug Overlay
-    DebugOverlay {
+    // Debug Overlay (Loader)
+    Loader {
+         id: debugOverlayLoader
          anchors.top: parent.top
          anchors.right: parent.right
          anchors.margins: 8
          z: 9999
-         visible: parent.showDebug
-         // ... bind to tileData stats ...
-         resultCount: tileData.resultCount
-         activeBackend: popupRoot.activeBackend
-         lastLatency: tileData.lastLatency
-         viewModeName: isTileView ? "Tile" : "List"
-         displayModeName: isButtonMode ? "Button" : "Mode"
-         totalSearches: logic.telemetryStats.totalSearches || 0
-         avgLatency: logic.telemetryStats.averageLatency || 0
-         tr: popupRoot.trFunc
+         asynchronous: true
+         active: popupRoot.expanded && popupRoot.showDebug
+         
+         sourceComponent: DebugOverlay {
+              resultCount: tileData.resultCount
+              activeBackend: popupRoot.activeBackend
+              lastLatency: tileData.lastLatency
+              viewModeName: isTileView ? "Tile" : "List"
+              displayModeName: isButtonMode ? "Button" : "Mode"
+              totalSearches: logic.telemetryStats.totalSearches || 0
+              avgLatency: logic.telemetryStats.averageLatency || 0
+              tr: popupRoot.trFunc
+         }
     }
 
     Component.onCompleted: {
