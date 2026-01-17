@@ -13,6 +13,8 @@ TextField {
     signal downPressed()
     signal tabPressedSignal()
     signal shiftTabPressedSignal()
+    signal leftPressed()
+    signal rightPressed()
     signal viewModeChangeRequested(int mode)
     
     // For referencing result count
@@ -45,6 +47,14 @@ TextField {
     
     Keys.onUpPressed: {
         hiddenInput.upPressed()
+    }
+    
+    Keys.onLeftPressed: {
+        hiddenInput.leftPressed()
+    }
+    
+    Keys.onRightPressed: {
+        hiddenInput.rightPressed()
     }
     
     Keys.onTabPressed: (event) => {

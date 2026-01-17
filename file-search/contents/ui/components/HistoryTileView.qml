@@ -57,8 +57,14 @@ FocusScope {
     Keys.onDownPressed: smartMoveVertical(1)
     Keys.onLeftPressed: moveSelection(-1)
     Keys.onRightPressed: moveSelection(1)
-    Keys.onReturnPressed: activateCurrentItem()
-    Keys.onEnterPressed: activateCurrentItem()
+    Keys.onReturnPressed: (event) => {
+        activateCurrentItem()
+        event.accepted = true
+    }
+    Keys.onEnterPressed: (event) => {
+        activateCurrentItem()
+        event.accepted = true
+    }
     Keys.onTabPressed: (event) => {
         if (event.modifiers & Qt.ShiftModifier) {
             shiftTabPressed()
@@ -93,39 +99,109 @@ FocusScope {
         return item.itemIndex % cols
     }
     
+    // Navigation methods
+    function moveUp() { smartMoveVertical(-1) }
+    function moveDown() { smartMoveVertical(1) }
+    function moveLeft() { moveSelection(-1) }
+    function moveRight() { moveSelection(1) }
+    function movePrev() { moveSelection(-1) }
+    function moveNext() { moveSelection(1) }
+
     // Smart vertical movement that maintains column position
     function smartMoveVertical(direction) {
         if (totalItems === 0) return
         
         var cols = columnsInRow()
-        var currentCol = getCurrentColumn()
         var currentItem = flatItemList[selectedFlatIndex]
         if (!currentItem) return
         
-        var targetIndex = selectedFlatIndex + (direction * cols)
+        var currentCatIdx = currentItem.catIndex
+        var currentItemIdx = currentItem.itemIndex
+        var currentCol = currentItemIdx % cols
         
-        if (targetIndex < 0) {
-            targetIndex = 0
-        } else if (targetIndex >= totalItems) {
-            targetIndex = totalItems - 1
-        }
+        var targetGlobalIndex = -1
         
-        // Try to maintain column position
-        var targetItem = flatItemList[targetIndex]
-        if (targetItem) {
-            var targetCol = targetItem.itemIndex % cols
-            if (targetCol !== currentCol && direction !== 0) {
-                for (var i = targetIndex; i < Math.min(targetIndex + cols, totalItems) && i >= 0; i++) {
-                    var item = flatItemList[i]
-                    if (item && (item.itemIndex % cols) === currentCol) {
-                        targetIndex = i
+        if (direction === 1) { // Down
+             var nextRowIndex = currentItemIdx + cols
+             
+             // Scan for target
+             for (var i = selectedFlatIndex + 1; i < totalItems; i++) {
+                 var nextItem = flatItemList[i]
+                 
+                 // Case 1: Same category
+                 if (nextItem.catIndex === currentCatIdx) {
+                    if (nextItem.itemIndex === nextRowIndex) {
+                        targetGlobalIndex = i
                         break
                     }
-                }
-            }
+                 } 
+                 // Case 2: Changed category (Found start of next category)
+                 else {
+                     // We hit the next category. Find item in row 0 matching currentCol.
+                     var newCatIdx = nextItem.catIndex
+                     var bestMatch = i // default to first item
+                     
+                     for (var j = i; j < totalItems; j++) {
+                         var cand = flatItemList[j]
+                         if (cand.catIndex !== newCatIdx) break; 
+                         if (cand.itemIndex >= cols) break; // Went past first row
+                         
+                         if ((cand.itemIndex % cols) === currentCol) {
+                             targetGlobalIndex = j
+                             break
+                         }
+                         bestMatch = j
+                     }
+                     if (targetGlobalIndex === -1) targetGlobalIndex = bestMatch
+                     break;
+                 }
+             }
+        } else { // Up
+             var prevRowIndex = currentItemIdx - cols
+             
+             if (prevRowIndex >= 0) {
+                 // Scan backwards for same cat
+                 for (var i = selectedFlatIndex - 1; i >= 0; i--) {
+                     var prevItem = flatItemList[i]
+                     if (prevItem.catIndex === currentCatIdx && prevItem.itemIndex === prevRowIndex) {
+                         targetGlobalIndex = i
+                         break
+                     }
+                     if (prevItem.catIndex !== currentCatIdx) break; 
+                 }
+             } else {
+                 // Fell off top of category. Find last row of previous category.
+                 for (var i = selectedFlatIndex - 1; i >= 0; i--) {
+                     var prevItem = flatItemList[i]
+                     if (prevItem.catIndex !== currentCatIdx) {
+                         var prevCatIdx = prevItem.catIndex
+                         // prevItem is the last item of prev category. 
+                         var endpointRow = Math.floor(prevItem.itemIndex / cols)
+                         var desiredIndex = endpointRow * cols + currentCol
+                         
+                         if (desiredIndex > prevItem.itemIndex) {
+                             // Column doesn't exist in last row, pick last item
+                             targetGlobalIndex = i
+                         } else {
+                             // Find exact match
+                             for (var j = i; j >= 0; j--) {
+                                 var cand = flatItemList[j]
+                                 if (cand.catIndex !== prevCatIdx) break 
+                                 if (cand.itemIndex === desiredIndex) {
+                                     targetGlobalIndex = j
+                                     break
+                                 }
+                             }
+                         }
+                         break
+                     }
+                 }
+             }
         }
         
-        selectedFlatIndex = targetIndex
+        if (targetGlobalIndex !== -1) {
+            selectedFlatIndex = targetGlobalIndex
+        }
     }
     
     function moveSelection(delta) {

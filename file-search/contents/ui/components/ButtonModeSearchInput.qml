@@ -25,6 +25,8 @@ Rectangle {
     signal downPressed()
     signal tabPressedSignal()
     signal shiftTabPressedSignal()
+    signal leftPressed()
+    signal rightPressed()
     signal viewModeChangeRequested(int mode)
     
     height: 56
@@ -81,6 +83,24 @@ Rectangle {
             
             Keys.onUpPressed: {
                 root.upPressed()
+            }
+            
+            Keys.onLeftPressed: (event) => {
+                if (cursorPosition === 0) {
+                    root.leftPressed()
+                    event.accepted = true
+                } else {
+                    event.accepted = false
+                }
+            }
+            
+            Keys.onRightPressed: (event) => {
+                if (cursorPosition === text.length) {
+                    root.rightPressed()
+                    event.accepted = true
+                } else {
+                    event.accepted = false
+                }
             }
             
             Keys.onTabPressed: (event) => {

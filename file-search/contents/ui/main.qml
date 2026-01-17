@@ -15,13 +15,21 @@ PlasmoidItem {
     // Responsive font size based on height (40% of panel height)
     readonly property int responsiveFontSize: Math.max(10, Math.round(height * 0.4))
     
+    // ===== PANEL DETECTION =====
+    // Check if widget is in a panel (horizontal or vertical)
+    // FormFactor: 0=Planar (Desktop), 1=Horizontal, 2=Vertical, 3=Application
+    readonly property bool isInPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || 
+                                       Plasmoid.formFactor === PlasmaCore.Types.Vertical
+    
     // ===== DISPLAY MODE CONFIGURATION =====
     // 0 = Button, 1 = Medium, 2 = Wide, 3 = Extra Wide
-    readonly property int displayMode: Plasmoid.configuration.displayMode
-    readonly property bool isButtonMode: displayMode === 0
-    readonly property bool isMediumMode: displayMode === 1
-    readonly property bool isWideMode: displayMode === 2
-    readonly property bool isExtraWideMode: displayMode === 3
+    // If not in panel, force button mode
+    readonly property int configDisplayMode: Plasmoid.configuration.displayMode
+    readonly property int displayMode: isInPanel ? configDisplayMode : 0
+    readonly property bool isButtonMode: displayMode === 0 || !isInPanel
+    readonly property bool isMediumMode: isInPanel && displayMode === 1
+    readonly property bool isWideMode: isInPanel && displayMode === 2
+    readonly property bool isExtraWideMode: isInPanel && displayMode === 3
 
     // ===== LAYOUT CALCULATIONS =====
     readonly property real textContentWidth: isButtonMode ? 0 : (textMetrics.width + ((isWideMode || isExtraWideMode) ? (height + 30) : 20))
@@ -153,6 +161,7 @@ PlasmoidItem {
         trFunc: root.tr
         
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
+        previewEnabled: Plasmoid.configuration.previewEnabled
 
         // Signal handlers
         onRequestSearchTextUpdate: (text) => root.searchText = text

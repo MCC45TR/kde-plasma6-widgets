@@ -16,6 +16,7 @@ FocusScope {
     
     // Signals
     signal itemClicked(int index, string display, string decoration, string category, string matchId, string filePath)
+    signal itemRightClicked(var item, real x, real y)
     
     // Localization
     property var trFunc: function(key) { return key }
@@ -59,8 +60,14 @@ FocusScope {
     Keys.onDownPressed: smartMoveVertical(1)
     Keys.onLeftPressed: moveSelection(-1)
     Keys.onRightPressed: moveSelection(1)
-    Keys.onReturnPressed: activateCurrentItem()
-    Keys.onEnterPressed: activateCurrentItem()
+    Keys.onReturnPressed: (event) => {
+        activateCurrentItem()
+        event.accepted = true
+    }
+    Keys.onEnterPressed: (event) => {
+        activateCurrentItem()
+        event.accepted = true
+    }
     Keys.onTabPressed: (event) => {
         if (event.modifiers & Qt.ShiftModifier) {
             shiftTabPressed()
@@ -103,44 +110,109 @@ FocusScope {
         return item.itemIndex % cols
     }
     
+    function moveUp() { smartMoveVertical(-1) }
+    function moveDown() { smartMoveVertical(1) }
+    function moveLeft() { moveSelection(-1) }
+    function moveRight() { moveSelection(1) }
+    function movePrev() { moveSelection(-1) }
+    function moveNext() { moveSelection(1) }
+
     // Smart vertical movement that maintains column position
     function smartMoveVertical(direction) {
         if (totalItems === 0) return
         
         var cols = columnsInRow()
-        var currentCol = getCurrentColumn()
         var currentItem = flatItemList[selectedFlatIndex]
         if (!currentItem) return
         
-        // Find the next row in the same or different category
-        var targetIndex = selectedFlatIndex + (direction * cols)
+        var currentCatIdx = currentItem.catIndex
+        var currentItemIdx = currentItem.itemIndex
+        var currentCol = currentItemIdx % cols
         
-        // Clamp to valid range
-        if (targetIndex < 0) {
-            targetIndex = 0
-        } else if (targetIndex >= totalItems) {
-            targetIndex = totalItems - 1
-        }
+        var targetGlobalIndex = -1
         
-        // Try to maintain column position
-        var targetItem = flatItemList[targetIndex]
-        if (targetItem) {
-            var targetCol = targetItem.itemIndex % cols
-            // If we moved to a different column, try to find same column
-            if (targetCol !== currentCol && direction !== 0) {
-                // Look for item in same column in next row
-                for (var i = targetIndex; i < Math.min(targetIndex + cols, totalItems) && i >= 0; i++) {
-                    var item = flatItemList[i]
-                    if (item && (item.itemIndex % cols) === currentCol) {
-                        targetIndex = i
+        if (direction === 1) { // Down
+             var nextRowIndex = currentItemIdx + cols
+             
+             // Scan for target
+             for (var i = selectedFlatIndex + 1; i < totalItems; i++) {
+                 var nextItem = flatItemList[i]
+                 
+                 // Case 1: Same category
+                 if (nextItem.catIndex === currentCatIdx) {
+                    if (nextItem.itemIndex === nextRowIndex) {
+                        targetGlobalIndex = i
                         break
                     }
-                }
-            }
+                 } 
+                 // Case 2: Changed category (Found start of next category)
+                 else {
+                     // We hit the next category. Find item in row 0 matching currentCol.
+                     var newCatIdx = nextItem.catIndex
+                     var bestMatch = i // default to first item
+                     
+                     for (var j = i; j < totalItems; j++) {
+                         var cand = flatItemList[j]
+                         if (cand.catIndex !== newCatIdx) break; 
+                         if (cand.itemIndex >= cols) break; // Went past first row
+                         
+                         if ((cand.itemIndex % cols) === currentCol) {
+                             targetGlobalIndex = j
+                             break
+                         }
+                         bestMatch = j
+                     }
+                     if (targetGlobalIndex === -1) targetGlobalIndex = bestMatch
+                     break;
+                 }
+             }
+        } else { // Up
+             var prevRowIndex = currentItemIdx - cols
+             
+             if (prevRowIndex >= 0) {
+                 // Scan backwards for same cat
+                 for (var i = selectedFlatIndex - 1; i >= 0; i--) {
+                     var prevItem = flatItemList[i]
+                     if (prevItem.catIndex === currentCatIdx && prevItem.itemIndex === prevRowIndex) {
+                         targetGlobalIndex = i
+                         break
+                     }
+                     if (prevItem.catIndex !== currentCatIdx) break; 
+                 }
+             } else {
+                 // Fell off top of category. Find last row of previous category.
+                 for (var i = selectedFlatIndex - 1; i >= 0; i--) {
+                     var prevItem = flatItemList[i]
+                     if (prevItem.catIndex !== currentCatIdx) {
+                         var prevCatIdx = prevItem.catIndex
+                         // prevItem is the last item of prev category. 
+                         var endpointRow = Math.floor(prevItem.itemIndex / cols)
+                         var desiredIndex = endpointRow * cols + currentCol
+                         
+                         if (desiredIndex > prevItem.itemIndex) {
+                             // Column doesn't exist in last row, pick last item
+                             targetGlobalIndex = i
+                         } else {
+                             // Find exact match
+                             for (var j = i; j >= 0; j--) {
+                                 var cand = flatItemList[j]
+                                 if (cand.catIndex !== prevCatIdx) break 
+                                 if (cand.itemIndex === desiredIndex) {
+                                     targetGlobalIndex = j
+                                     break
+                                 }
+                             }
+                         }
+                         break
+                     }
+                 }
+             }
         }
         
-        selectedFlatIndex = targetIndex
-        ensureItemVisible()
+        if (targetGlobalIndex !== -1) {
+            selectedFlatIndex = targetGlobalIndex
+            ensureItemVisible()
+        }
     }
     
     function moveSelection(delta) {
@@ -191,6 +263,18 @@ FocusScope {
         return item && item.catIndex === catIdx && item.itemIndex === itemIdx
     }
     
+    function isWideCategory(cat) {
+        if (!cat) return false;
+        var c = cat.toLowerCase();
+        return c.includes("date") || c.includes("tarih") ||
+               c.includes("calculator") || c.includes("hesap") ||
+               c.includes("dictionary") || c.includes("sözlük") ||
+               c.includes("shell") || c.includes("komut") ||
+               c.includes("man page") || c.includes("kılavuz") ||
+               c.includes("unit") || c.includes("birim") ||
+               c.includes("power") || c.includes("güç");
+    }
+
     ScrollView {
         anchors.fill: parent
         clip: true
@@ -210,6 +294,7 @@ FocusScope {
                 
                 property int catIdx: index
                 property bool isCollapsed: resultsTileRoot.collapsedCategories[modelData.categoryName] || false
+                property bool isWide: resultsTileRoot.isWideCategory(modelData.categoryName)
                 
                 // Category Header (Clickable to collapse/expand)
                 Rectangle {
@@ -267,11 +352,41 @@ FocusScope {
                         
                         delegate: Item {
                             id: tileDelegate
-                            width: resultsTileRoot.iconSize + 40
-                            height: resultsTileRoot.iconSize + 50
+                            // Wide vs Grid sizing
+                            width: categoryDelegate.isWide ? parent.width : (resultsTileRoot.iconSize + 40)
+                            height: categoryDelegate.isWide ? Math.max(50, resultsTileRoot.iconSize + 16) : (resultsTileRoot.iconSize + 50)
                             
                             property int itemIdx: index
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
+                            
+                            // Staggered fade-in animation
+                            opacity: 0
+                            
+                            Timer {
+                                id: tileFadeInTrigger
+                                interval: (categoryDelegate.catIdx * 10 + itemIdx) * 10  // 10ms stagger
+                                running: true
+                                onTriggered: tileFadeInAnim.start()
+                            }
+                            
+                            NumberAnimation {
+                                id: tileFadeInAnim
+                                target: tileDelegate
+                                property: "opacity"
+                                from: 0
+                                to: 1
+                                duration: 100
+                                easing.type: Easing.OutQuad
+                            }
+                            
+                            // Reset animation when data changes
+                            Connections {
+                                target: resultsTileRoot
+                                function onSearchTextChanged() {
+                                    tileDelegate.opacity = 0
+                                    tileFadeInTrigger.restart()
+                                }
+                            }
                             
                             Rectangle {
                                 id: tileBg
@@ -305,69 +420,115 @@ FocusScope {
                                     Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
                                 }
                                 
-                                Column {
-                                    anchors.centerIn: parent
-                                    spacing: 6
-                                    
-                                    Kirigami.Icon {
-                                        width: resultsTileRoot.iconSize
-                                        height: resultsTileRoot.iconSize
-                                        anchors.horizontalCenter: parent.horizontalCenter
-                                        source: modelData.decoration || "application-x-executable"
-                                        color: resultsTileRoot.textColor
-                                    }
-                                    
-                                    Text {
-                                        width: parent.width - 8
-                                        text: modelData.display || ""
-                                        color: resultsTileRoot.textColor
-                                        font.pixelSize: resultsTileRoot.iconSize > 32 ? 11 : 9
-                                        horizontalAlignment: Text.AlignHCenter
-                                        elide: Text.ElideMiddle
-                                        maximumLineCount: 2
-                                        wrapMode: Text.Wrap
-                                    }
-                                    
-                                    // Subtext (Grid mode: Parent dir only)
-                                    Text {
-                                        width: parent.width - 8
-                                        text: {
-                                            var cat = modelData.category || ""
-                                            var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings");
-                                            if (isApp) return modelData.subtext || "";
-                                            
-                                            // Extract parent folder name
-                                            var path = (modelData.url && modelData.url.toString) ? modelData.url.toString() : "";
-                                            if (!path && modelData.subtext && modelData.subtext.toString().indexOf("/") === 0) {
-                                                 path = "file://" + modelData.subtext;
-                                            }
-                                             
-                                            if (path && path.length > 0) {
-                                                path = path.replace("file://", "");
-                                                if (path.slice(-1) === "/") path = path.slice(0, -1);
-                                                var parts = path.split("/");
-                                                if (parts.length > 1) {
-                                                    // Return parent folder name
-                                                    return parts[parts.length - 2];
-                                                }
-                                            }
-                                            return modelData.subtext || "";
+                                // Content Loader (Grid vs Horizontal Layout)
+                                Loader {
+                                    anchors.fill: parent
+                                    anchors.margins: 6
+                                    sourceComponent: categoryDelegate.isWide ? wideLayoutComp : gridLayoutComp
+                                }
+                                
+                                Component {
+                                    id: gridLayoutComp
+                                    Column {
+                                        spacing: 6
+                                        anchors.centerIn: parent
+                                        
+                                        Kirigami.Icon {
+                                            width: resultsTileRoot.iconSize
+                                            height: resultsTileRoot.iconSize
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            source: modelData.decoration || "application-x-executable"
+                                            color: resultsTileRoot.textColor
                                         }
-                                        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.6)
-                                        font.pixelSize: 9
-                                        horizontalAlignment: Text.AlignHCenter
-                                        elide: Text.ElideMiddle
-                                        visible: text.length > 0
+                                        
+                                        Text {
+                                            width: tileDelegate.width - 16
+                                            text: modelData.display || ""
+                                            color: resultsTileRoot.textColor
+                                            font.pixelSize: resultsTileRoot.iconSize > 32 ? 11 : 9
+                                            horizontalAlignment: Text.AlignHCenter
+                                            elide: Text.ElideMiddle
+                                            maximumLineCount: 2
+                                            wrapMode: Text.Wrap
+                                        }
+                                        
+                                        Text {
+                                            width: tileDelegate.width - 16
+                                            text: {
+                                                var cat = modelData.category || ""
+                                                var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings");
+                                                if (isApp) return modelData.subtext || "";
+                                                
+                                                var path = (modelData.url && modelData.url.toString) ? modelData.url.toString() : "";
+                                                if (!path && modelData.subtext && modelData.subtext.toString().indexOf("/") === 0) {
+                                                     path = "file://" + modelData.subtext;
+                                                }
+                                                 
+                                                if (path && path.length > 0) {
+                                                    path = path.replace("file://", "");
+                                                    if (path.slice(-1) === "/") path = path.slice(0, -1);
+                                                    var parts = path.split("/");
+                                                    if (parts.length > 1) {
+                                                        return parts[parts.length - 2];
+                                                    }
+                                                }
+                                                return modelData.subtext || "";
+                                            }
+                                            color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.6)
+                                            font.pixelSize: 9
+                                            horizontalAlignment: Text.AlignHCenter
+                                            elide: Text.ElideMiddle
+                                            visible: text.length > 0
+                                        }
+                                    }
+                                }
+                                
+                                Component {
+                                    id: wideLayoutComp
+                                    RowLayout {
+                                        spacing: 12
+                                        
+                                        Kirigami.Icon {
+                                            source: modelData.decoration || "application-x-executable"
+                                            Layout.preferredWidth: resultsTileRoot.iconSize
+                                            Layout.preferredHeight: resultsTileRoot.iconSize
+                                            color: resultsTileRoot.textColor
+                                        }
+                                        
+                                        ColumnLayout {
+                                            Layout.fillWidth: true
+                                            spacing: 2
+                                            
+                                            Text {
+                                                text: modelData.display || ""
+                                                font.pixelSize: 14 // Larger font for wide cards
+                                                font.bold: true
+                                                color: resultsTileRoot.textColor
+                                                Layout.fillWidth: true
+                                                elide: Text.ElideRight
+                                            }
+                                            
+                                            Text {
+                                                text: modelData.subtext || ""
+                                                font.pixelSize: 11
+                                                color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                                Layout.fillWidth: true
+                                                elide: Text.ElideRight
+                                                visible: text.length > 0
+                                            }
+                                        }
                                     }
                                 }
                                 
                                 MouseArea {
                                     id: tileMouseArea
                                     anchors.fill: parent
+
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
+                                    acceptedButtons: Qt.LeftButton | Qt.RightButton
                                     
-                                    onClicked: {
+                                    onClicked: (mouse) => {
                                         var matchId = modelData.duplicateId || modelData.display || ""
                                         var filePath = (modelData.url && modelData.url.toString) ? modelData.url.toString() : (modelData.url || "")
                                         var subtext = modelData.subtext || ""
@@ -382,7 +543,22 @@ FocusScope {
                                             else if (subtext.indexOf("file://") === 0) filePath = subtext
                                         }
                                         
-                                        resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Diğer", matchId, filePath)
+                                        if (mouse.button === Qt.RightButton) {
+                                            var cat = modelData.category || ""
+                                            var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings")
+                                            
+                                            resultsTileRoot.itemRightClicked({
+                                                display: modelData.display || "",
+                                                decoration: modelData.decoration || "application-x-executable",
+                                                category: cat,
+                                                matchId: matchId,
+                                                filePath: filePath,
+                                                isApplication: isApp,
+                                                uuid: matchId
+                                            }, mouse.x + tileDelegate.x, mouse.y + tileDelegate.y)
+                                        } else {
+                                            resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Diğer", matchId, filePath)
+                                        }
                                     }
                                 }
                                 

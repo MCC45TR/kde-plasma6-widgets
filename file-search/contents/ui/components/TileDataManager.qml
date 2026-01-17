@@ -1,5 +1,7 @@
 import QtQuick
 import org.kde.milou as Milou
+import "../js/CategoryManager.js" as CategoryManager
+import "../js/SimilarityUtils.js" as SimilarityUtils
 
 Item {
     id: dataManager
@@ -7,7 +9,11 @@ Item {
     required property var resultsModel
     required property var logic
     
+    // Search text for similarity scoring
+    property string searchText: ""
+    
     property var categorizedData: []
+    property var flatSortedData: []
     property int resultCount: 0
     property int lastLatency: 0
     
@@ -21,18 +27,21 @@ Item {
     function refreshGroups() {
         var groups = {};
         var displayOrder = [];
+        var categorySettings = logic.categorySettings || {};
         
+        // Step 1: Collect raw items and filter hidden categories
+        var rawItems = [];
         for (var i = 0; i < rawDataProxy.count; i++) {
             var item = rawDataProxy.itemAt(i);
             if (!item) continue;
             var cat = item.category || "Diğer";
             
-            if (!groups[cat]) {
-                groups[cat] = [];
-                displayOrder.push(cat);
+            // Filter hidden categories
+            if (!CategoryManager.isCategoryVisible(categorySettings, cat)) {
+                continue;
             }
             
-            groups[cat].push({
+            rawItems.push({
                 display: item.display || "",
                 decoration: item.decoration || "",
                 category: cat,
@@ -44,7 +53,33 @@ Item {
             });
         }
         
-        // Consolidate sparse categories
+        // Step 2: Sort by priority and similarity
+        if (searchText && searchText.length > 0) {
+            rawItems = SimilarityUtils.sortByPriorityAndSimilarity(
+                rawItems,
+                searchText,
+                categorySettings,
+                CategoryManager.getCategoryPriority
+            );
+        } else {
+            // Sort by priority only
+            rawItems = CategoryManager.applyPriorityToResults(rawItems, categorySettings);
+        }
+        
+        // Step 3: Group by category (maintaining sorted order)
+        for (var j = 0; j < rawItems.length; j++) {
+            var sortedItem = rawItems[j];
+            var sortedCat = sortedItem.category;
+            
+            if (!groups[sortedCat]) {
+                groups[sortedCat] = [];
+                displayOrder.push(sortedCat);
+            }
+            
+            groups[sortedCat].push(sortedItem);
+        }
+        
+        // Step 4: Consolidate sparse categories
         var otherItems = [];
         var finalOrder = [];
         
@@ -54,19 +89,22 @@ Item {
             var isAppCategory = (catName === "Uygulamalar" || catName === "Applications");
             
             if (items.length <= 1 && !isAppCategory) {
-                for (var j = 0; j < items.length; j++) {
-                    otherItems.push(items[j]);
+                for (var m = 0; m < items.length; m++) {
+                    otherItems.push(items[m]);
                 }
             } else {
                 finalOrder.push(catName);
             }
         }
         
+        // Step 5: Sort final categories by priority
+        finalOrder = CategoryManager.getSortedCategoryNames(categorySettings, finalOrder);
+        
         var result = [];
-        for (var m = 0; m < finalOrder.length; m++) {
+        for (var n = 0; n < finalOrder.length; n++) {
             result.push({
-                categoryName: finalOrder[m],
-                items: groups[finalOrder[m]]
+                categoryName: finalOrder[n],
+                items: groups[finalOrder[n]]
             });
         }
         
@@ -78,6 +116,20 @@ Item {
         }
         
         categorizedData = result;
+        
+        // Step 6: Create flat sorted list matchin the categorized structure
+        var flatList = [];
+        for (var i = 0; i < result.length; i++) {
+            var catName = result[i].categoryName;
+            var catItems = result[i].items;
+            for (var j = 0; j < catItems.length; j++) {
+                var item = catItems[j];
+                // Ensure item has the final category name for section grouping
+                item.category = catName;
+                flatList.push(item);
+            }
+        }
+        flatSortedData = flatList;
     }
 
     // Debounce timer for refreshGroups to prevent excessive updates
@@ -118,3 +170,4 @@ Item {
         }
     }
 }
+

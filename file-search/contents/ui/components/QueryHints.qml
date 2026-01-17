@@ -11,6 +11,7 @@ Rectangle {
     required property color textColor
     required property color accentColor
     required property color bgColor
+    required property var logic // Access to LogicController for dependency checks (manInstalled)
     
     // Localization function
     property var trFunc: function(key) { return key }
@@ -21,7 +22,7 @@ Rectangle {
     // Visibility - show when there's a relevant hint
     visible: currentHint.show && searchText.length > 0
     
-    height: visible ? hintContent.implicitHeight + 12 : 0
+    height: visible ? (hintContent.implicitHeight + 12) * 2 : 0
     color: Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.8)
     radius: 6
     border.width: 1
@@ -38,14 +39,23 @@ Rectangle {
         { prefix: "timeline:/thisweek", hint: "hint_timeline_week", icon: "view-calendar-week" },
         { prefix: "timeline:/thismonth", hint: "hint_timeline_month", icon: "view-calendar-month" },
         { prefix: "timeline:/", hint: "hint_timeline", icon: "view-calendar" },
+        { prefix: "file:/", hint: "hint_file_path", icon: "folder" },
+        { prefix: "man:/", hint: "hint_man_page", icon: "help-contents" },
         { prefix: "gg:", hint: "hint_google", icon: "google" },
         { prefix: "dd:", hint: "hint_duckduckgo", icon: "internet-web-browser" },
         { prefix: "wp:", hint: "hint_wikipedia", icon: "wikipedia" },
         { prefix: "kill ", hint: "hint_kill", icon: "process-stop" },
         { prefix: "spell ", hint: "hint_spell", icon: "tools-check-spelling" },
         { prefix: "#", hint: "hint_unicode", icon: "character-set" },
-        { prefix: "file:/", hint: "hint_file_path", icon: "folder" },
-        { prefix: "man:/", hint: "hint_man_page", icon: "help-contents" }
+        { prefix: "app:", hint: "hint_applications", icon: "applications-all" },
+        { prefix: "shell:", hint: "hint_shell", icon: "utilities-terminal" },
+        { prefix: "b:", hint: "hint_bookmarks", icon: "bookmarks" },
+        { prefix: "power:", hint: "hint_power", icon: "system-shutdown" },
+        { prefix: "services:", hint: "hint_services", icon: "preferences-system" },
+        { prefix: "date", hint: "hint_datetime", icon: "alarm-clock" },
+        { prefix: "define:", hint: "hint_define", icon: "accessories-dictionary" },
+        { prefix: "unit:", hint: "hint_unit", icon: "accessories-calculator" },
+        { prefix: "help:", hint: "hint_help", icon: "help-about" }
     ]
     
     function detectHint(query) {
@@ -59,6 +69,18 @@ Rectangle {
         for (var i = 0; i < knownPrefixes.length; i++) {
             var p = knownPrefixes[i]
             if (lowerQuery.startsWith(p.prefix.toLowerCase())) {
+                
+                // Special check for man pages availability
+                if (p.prefix === "man:/" && logic && !logic.manInstalled) {
+                     return {
+                        show: true,
+                        text: trFunc("man_not_installed"),
+                        icon: "dialog-error",
+                        isError: true,
+                        prefix: p.prefix
+                     }
+                }
+
                 return {
                     show: true,
                     text: trFunc(p.hint) || p.hint,
@@ -114,6 +136,7 @@ Rectangle {
             source: queryHints.currentHint.icon || "dialog-information"
             Layout.preferredWidth: 16
             Layout.preferredHeight: 16
+            Layout.alignment: Qt.AlignVCenter
             color: queryHints.currentHint.isError 
                 ? "#ff6666" 
                 : queryHints.textColor
@@ -126,6 +149,7 @@ Rectangle {
                 : Qt.rgba(queryHints.textColor.r, queryHints.textColor.g, queryHints.textColor.b, 0.8)
             font.pixelSize: 11
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter
             elide: Text.ElideRight
         }
     }

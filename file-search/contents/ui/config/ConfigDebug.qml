@@ -146,6 +146,25 @@ Kirigami.FormLayout {
             }
             font.family: "Monospace" 
         }
+        
+        // Reset Stats Button
+        Button {
+            text: tr("reset_stats") || "İstatistikleri Sıfırla"
+            icon.name: "edit-clear-all"
+            Layout.columnSpan: 2
+            Layout.topMargin: 8
+            enabled: cfg_userProfile === 1
+            
+            onClicked: {
+                Plasmoid.configuration.telemetryData = JSON.stringify({
+                    totalSearches: 0,
+                    averageLatency: 0,
+                    totalLatencySum: 0,
+                    lastReset: new Date().toISOString(),
+                    backend: "Milou/KRunner"
+                })
+            }
+        }
     }
     
     Kirigami.Separator {

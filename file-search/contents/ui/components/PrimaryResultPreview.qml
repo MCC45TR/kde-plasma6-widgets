@@ -27,7 +27,7 @@ Rectangle {
     Behavior on height { NumberAnimation { duration: 150 } }
     
     property bool isPrimaryResult: {
-        if (resultCount === 0) return false
+        if (resultCount === 0 || !resultsModel) return false
         var firstCat = resultsModel.data(resultsModel.index(0, 0), resultsModel.CategoryRole) || ""
         // Detect calculator, unit converter, currency converter categories
         return firstCat.indexOf("Calculate") >= 0 || 
@@ -66,7 +66,7 @@ Rectangle {
             spacing: 2
             
             Text {
-                text: root.resultCount > 0 ? 
+                text: (root.resultCount > 0 && root.resultsModel) ? 
                       root.resultsModel.data(root.resultsModel.index(0, 0), Qt.DisplayRole) || "" : ""
                 font.pixelSize: 22
                 font.bold: true

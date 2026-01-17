@@ -28,23 +28,37 @@ KCM.SimpleKCM {
     // Category settings from config
     property var categorySettings: CategoryManager.loadCategorySettings(Plasmoid.configuration.categorySettings || "{}")
     
-    // Known categories (static list for config)
-    property var knownCategories: [
+    // Known categories (static list for config) - unique items only
+    property var uniqueCategories: [
         { name: "Applications", nameKey: "applications", icon: "applications-all" },
-        { name: "Uygulamalar", nameKey: "applications", icon: "applications-all" },
         { name: "Files", nameKey: "files", icon: "folder-documents" },
-        { name: "Dosyalar", nameKey: "files", icon: "folder-documents" },
         { name: "Documents", nameKey: "documents", icon: "x-office-document" },
-        { name: "Belgeler", nameKey: "documents", icon: "x-office-document" },
         { name: "Folders", nameKey: "folders", icon: "folder" },
-        { name: "Klasörler", nameKey: "folders", icon: "folder" },
         { name: "Web", nameKey: "web", icon: "internet-web-browser" },
-        { name: "Calculator", nameKey: "calculator", icon: "accessories-calculator" },
-        { name: "Hesap Makinesi", nameKey: "calculator", icon: "accessories-calculator" }
+        { name: "Calculator", nameKey: "calculator", icon: "accessories-calculator" }
     ]
+    
+    // Sorted category list model
+    property var sortedCategories: {
+        var cats = uniqueCategories.slice()
+        return cats.sort(function(a, b) {
+            var prioA = CategoryManager.getCategoryPriority(categorySettings, a.name)
+            var prioB = CategoryManager.getCategoryPriority(categorySettings, b.name)
+            return prioA - prioB
+        })
+    }
     
     function saveSettings() {
         Plasmoid.configuration.categorySettings = CategoryManager.saveCategorySettings(categorySettings)
+    }
+    
+    function refreshSortedCategories() {
+        var cats = uniqueCategories.slice()
+        sortedCategories = cats.sort(function(a, b) {
+            var prioA = CategoryManager.getCategoryPriority(categorySettings, a.name)
+            var prioB = CategoryManager.getCategoryPriority(categorySettings, b.name)
+            return prioA - prioB
+        })
     }
     
     ColumnLayout {
@@ -66,32 +80,112 @@ KCM.SimpleKCM {
             Layout.fillWidth: true
         }
         
-        // Category list
-        Kirigami.FormLayout {
+        // Column headers
+        RowLayout {
             Layout.fillWidth: true
+            spacing: 12
+            Layout.leftMargin: 8
             
-            Repeater {
-                model: configCategories.knownCategories.filter(function(cat, idx, arr) {
-                    // Remove duplicates (keep only first occurrence based on nameKey)
-                    for (var i = 0; i < idx; i++) {
-                        if (arr[i].nameKey === cat.nameKey) return false
-                    }
-                    return true
-                })
+            Label {
+                text: tr("category_visibility")
+                font.bold: true
+                Layout.preferredWidth: 30
+            }
+            
+            Label {
+                text: ""
+                Layout.preferredWidth: 22
+            }
+            
+            Label {
+                text: tr("category")
+                font.bold: true
+                Layout.fillWidth: true
+            }
+            
+            Label {
+                text: tr("category_priority")
+                font.bold: true
+                Layout.preferredWidth: 80
+            }
+            
+            Label {
+                text: ""
+                Layout.preferredWidth: 100
+            }
+        }
+        
+        // Category list with drag-and-drop support
+        ListView {
+            id: categoryListView
+            Layout.fillWidth: true
+            Layout.preferredHeight: contentHeight + 20
+            Layout.maximumHeight: 400
+            clip: true
+            spacing: 4
+            
+            model: ListModel {
+                id: categoryModel
+            }
+            
+            Component.onCompleted: rebuildModel()
+            
+            function rebuildModel() {
+                categoryModel.clear()
+                var sorted = configCategories.sortedCategories
+                for (var i = 0; i < sorted.length; i++) {
+                    categoryModel.append({
+                        "catName": sorted[i].name,
+                        "catNameKey": sorted[i].nameKey,
+                        "catIcon": sorted[i].icon,
+                        "catIndex": i
+                    })
+                }
+            }
+            
+            moveDisplaced: Transition {
+                NumberAnimation { properties: "y"; duration: 200; easing.type: Easing.OutQuad }
+            }
+            
+            delegate: Rectangle {
+                id: dragDelegate
+                width: categoryListView.width
+                height: 44
+                color: dragArea.drag.active ? Kirigami.Theme.highlightColor : (dragArea.containsMouse ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1) : "transparent")
+                radius: 4
+                border.color: dragArea.drag.active ? Kirigami.Theme.highlightColor : "transparent"
+                border.width: 1
                 
-                delegate: RowLayout {
-                    Layout.fillWidth: true
+                property int visualIndex: index
+                
+                Drag.active: dragArea.drag.active
+                Drag.source: dragDelegate
+                Drag.hotSpot.x: width / 2
+                Drag.hotSpot.y: height / 2
+                
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.leftMargin: 8
+                    anchors.rightMargin: 8
                     spacing: 12
+                    
+                    // Drag handle
+                    Kirigami.Icon {
+                        source: "handle-sort"
+                        Layout.preferredWidth: 16
+                        Layout.preferredHeight: 16
+                        opacity: 0.5
+                    }
                     
                     // Visibility checkbox
                     CheckBox {
                         id: visibilityCheck
-                        checked: CategoryManager.isCategoryVisible(configCategories.categorySettings, modelData.name)
+                        checked: CategoryManager.isCategoryVisible(configCategories.categorySettings, model.catName)
                         
                         onCheckedChanged: {
                             configCategories.categorySettings = CategoryManager.setCategoryVisibility(
                                 configCategories.categorySettings, 
-                                modelData.name, 
+                                model.catName, 
                                 checked
                             )
                             configCategories.saveSettings()
@@ -100,104 +194,24 @@ KCM.SimpleKCM {
                     
                     // Category icon
                     Kirigami.Icon {
-                        source: CategoryManager.getEffectiveIcon(configCategories.categorySettings, modelData.name, modelData.icon)
+                        source: CategoryManager.getEffectiveIcon(configCategories.categorySettings, model.catName, model.catIcon)
                         Layout.preferredWidth: 22
                         Layout.preferredHeight: 22
                     }
                     
                     // Category name
                     Label {
-                        text: tr(modelData.nameKey) || modelData.name
+                        text: configCategories.tr(model.catNameKey) || model.catName
                         Layout.fillWidth: true
                     }
                     
-                    // Priority spinbox
-                    SpinBox {
-                        from: 1
-                        to: 100
-                        value: CategoryManager.getCategoryPriority(configCategories.categorySettings, modelData.name)
-                        
-                        onValueModified: {
-                            configCategories.categorySettings = CategoryManager.setCategoryPriority(
-                                configCategories.categorySettings,
-                                modelData.name,
-                                value
-                            )
-                            configCategories.saveSettings()
-                        }
-                        
-                        ToolTip.visible: hovered
-                        ToolTip.text: tr("priority_tooltip")
-                    }
-                    
-                    // Custom icon button
-                    Button {
-                        icon.name: "preferences-desktop-icons"
-                        flat: true
-                        
-                        onClicked: iconDialog.open()
-                        
-                        ToolTip.visible: hovered
-                        ToolTip.text: tr("custom_icon")
-                        
-                        Dialog {
-                            id: iconDialog
-                            title: tr("select_icon")
-                            modal: true
-                            standardButtons: Dialog.Ok | Dialog.Cancel
-                            
-                            property string selectedIcon: ""
-                            
-                            GridLayout {
-                                columns: 6
-                                rowSpacing: 8
-                                columnSpacing: 8
-                                
-                                Repeater {
-                                    model: [
-                                        "applications-all", "folder", "folder-documents",
-                                        "folder-download", "folder-music", "folder-pictures",
-                                        "folder-videos", "x-office-document", "text-x-generic",
-                                        "image-x-generic", "video-x-generic", "audio-x-generic",
-                                        "internet-web-browser", "accessories-calculator", "utilities-terminal",
-                                        "preferences-system", "help-contents", "star-shape"
-                                    ]
-                                    
-                                    delegate: Button {
-                                        Layout.preferredWidth: 48
-                                        Layout.preferredHeight: 48
-                                        flat: true
-                                        
-                                        Kirigami.Icon {
-                                            anchors.centerIn: parent
-                                            source: modelData
-                                            width: 32
-                                            height: 32
-                                        }
-                                        
-                                        background: Rectangle {
-                                            color: iconDialog.selectedIcon === modelData 
-                                                ? Kirigami.Theme.highlightColor 
-                                                : (parent.hovered ? Kirigami.Theme.hoverColor : "transparent")
-                                            radius: 4
-                                        }
-                                        
-                                        onClicked: iconDialog.selectedIcon = modelData
-                                    }
-                                }
-                            }
-                            
-                            onAccepted: {
-                                if (selectedIcon.length > 0) {
-                                    configCategories.categorySettings = CategoryManager.setCategoryIcon(
-                                        configCategories.categorySettings,
-                                        modelData.name,
-                                        selectedIcon
-                                    )
-                                    configCategories.saveSettings()
-                                }
-                            }
-                        }
+                    // Priority display
+                    Label {
+                        text: "#" + (index + 1)
+                        font.bold: true
+                        opacity: 0.6
+                        Layout.preferredWidth: 40
+                        horizontalAlignment: Text.AlignCenter
                     }
                     
                     // Move up button
@@ -205,15 +219,14 @@ KCM.SimpleKCM {
                         icon.name: "arrow-up"
                         flat: true
                         enabled: index > 0
+                        Layout.preferredWidth: 32
+                        Layout.preferredHeight: 32
                         
                         onClicked: {
-                            var allCats = configCategories.knownCategories.map(function(c) { return c.name })
-                            configCategories.categorySettings = CategoryManager.moveCategoryUp(
-                                configCategories.categorySettings,
-                                modelData.name,
-                                allCats
-                            )
-                            configCategories.saveSettings()
+                            if (index > 0) {
+                                categoryModel.move(index, index - 1, 1)
+                                applyNewOrder()
+                            }
                         }
                     }
                     
@@ -221,19 +234,58 @@ KCM.SimpleKCM {
                     Button {
                         icon.name: "arrow-down"
                         flat: true
-                        enabled: index < configCategories.knownCategories.length - 1
+                        enabled: index < categoryModel.count - 1
+                        Layout.preferredWidth: 32
+                        Layout.preferredHeight: 32
                         
                         onClicked: {
-                            var allCats = configCategories.knownCategories.map(function(c) { return c.name })
-                            configCategories.categorySettings = CategoryManager.moveCategoryDown(
-                                configCategories.categorySettings,
-                                modelData.name,
-                                allCats
-                            )
-                            configCategories.saveSettings()
+                            if (index < categoryModel.count - 1) {
+                                categoryModel.move(index, index + 1, 1)
+                                applyNewOrder()
+                            }
                         }
                     }
                 }
+                
+                MouseArea {
+                    id: dragArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    drag.target: dragDelegate
+                    drag.axis: Drag.YAxis
+                    
+                    onReleased: {
+                        if (drag.active) {
+                            applyNewOrder()
+                        }
+                        dragDelegate.Drag.drop()
+                    }
+                }
+                
+                DropArea {
+                    anchors.fill: parent
+                    
+                    onEntered: (drag) => {
+                        var sourceVisualIndex = drag.source.visualIndex
+                        var targetVisualIndex = dragDelegate.visualIndex
+                        
+                        if (sourceVisualIndex !== targetVisualIndex) {
+                            categoryModel.move(sourceVisualIndex, targetVisualIndex, 1)
+                        }
+                    }
+                }
+            }
+            
+            function applyNewOrder() {
+                var orderedNames = []
+                for (var i = 0; i < categoryModel.count; i++) {
+                    orderedNames.push(categoryModel.get(i).catName)
+                }
+                configCategories.categorySettings = CategoryManager.reorderCategories(
+                    configCategories.categorySettings, 
+                    orderedNames
+                )
+                configCategories.saveSettings()
             }
         }
         
@@ -243,8 +295,7 @@ KCM.SimpleKCM {
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: infoColumn.implicitHeight + 16
-            color: Kirigami.Theme.highlightColor
-            opacity: 0.1
+            color: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1)
             radius: 8
             
             ColumnLayout {
@@ -259,7 +310,7 @@ KCM.SimpleKCM {
                 }
                 
                 Label {
-                    text: tr("category_info_desc")
+                    text: tr("category_info_desc") + "\n\n" + tr("priority_tooltip")
                     opacity: 0.8
                     wrapMode: Text.WordWrap
                     Layout.fillWidth: true

@@ -13,11 +13,18 @@ ScrollView {
     required property color textColor
     required property color accentColor
     
+    // Preview control - bound from config
+    property bool previewEnabled: true
+    
+    // Logic controller for context menu actions
+    property var logic: null
+    
     // Current selection index
     property int currentIndex: 0
     
     // Signals
     signal itemClicked(int index, string display, string decoration, string category, string matchId, string filePath)
+    signal itemRightClicked(var item, real x, real y)
     
     // Localization
     property var trFunc: function(key) { return key }
@@ -30,9 +37,13 @@ ScrollView {
     clip: true
     ScrollBar.vertical.policy: ScrollBar.AlwaysOff
     
+    // Use flat sorted data (JS Array) instead of raw model for consistency
+    property var flatSortedData: [] 
+    
     ListView {
         id: resultsList
-        model: resultsListRoot.resultsModel
+        width: parent.width
+        model: resultsListRoot.flatSortedData
         spacing: 2
         currentIndex: resultsListRoot.currentIndex
         
@@ -58,12 +69,20 @@ ScrollView {
             }
         }
         
+        add: Transition {
+            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 150 }
+            NumberAnimation { property: "scale"; from: 0.96; to: 1.0; duration: 150 }
+        }
+        
         delegate: Rectangle {
             id: resultItem
             width: resultsList.width
             height: Math.max(44, resultsListRoot.listIconSize + 18)
             color: resultMouseArea.containsMouse ? Qt.rgba(resultsListRoot.accentColor.r, resultsListRoot.accentColor.g, resultsListRoot.accentColor.b, 0.15) : "transparent"
             radius: 4
+            
+            // Ensure visible initially
+            opacity: 1 
             
             RowLayout {
                 anchors.fill: parent
@@ -73,7 +92,7 @@ ScrollView {
                 
                 // Icon
                 Kirigami.Icon {
-                    source: model.decoration || "application-x-executable"
+                    source: modelData.decoration || "application-x-executable"
                     Layout.preferredWidth: resultsListRoot.listIconSize
                     Layout.preferredHeight: resultsListRoot.listIconSize
                     color: resultsListRoot.textColor
@@ -85,7 +104,7 @@ ScrollView {
                     spacing: 1
                     
                     Text {
-                        text: model.display || ""
+                        text: modelData.display || ""
                         color: resultsListRoot.textColor
                         font.pixelSize: 14
                         elide: Text.ElideRight
@@ -95,15 +114,15 @@ ScrollView {
                     // Parent folder for files or subtext for apps
                     Text {
                         text: {
-                            var cat = model.category || ""
+                            var cat = modelData.category || ""
                             var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings");
-                            if (isApp) return model.subtext || "";
+                            if (isApp) return modelData.subtext || "";
 
-                            var path = (model.url && model.url.toString) ? model.url.toString() : "";
+                            var path = (modelData.url && modelData.url.toString) ? modelData.url.toString() : "";
                             
                             // Fallback to subtext if it looks like a path
-                            if (!path && model.subtext && model.subtext.toString().indexOf("/") === 0) {
-                                path = "file://" + model.subtext;
+                            if (!path && modelData.subtext && modelData.subtext.toString().indexOf("/") === 0) {
+                                path = "file://" + modelData.subtext;
                             }
                             
                             if (path && path.length > 0) {
@@ -112,7 +131,7 @@ ScrollView {
                                 path = path.replace(/^\/home\/[^\/]+\//, "");
                                 return path;
                             }
-                            return model.subtext || "";
+                            return modelData.subtext || "";
                         }
                         visible: text.length > 0
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
@@ -131,7 +150,7 @@ ScrollView {
                     PinButton {
                         anchors.centerIn: parent
                         isPinned: {
-                            var matchId = (model.duplicateId !== undefined ? model.duplicateId : model.display) || ""
+                            var matchId = (modelData.duplicateId !== undefined ? modelData.duplicateId : modelData.display) || ""
                             return resultsListRoot.isPinnedFunc(matchId)
                         }
                         accentColor: resultsListRoot.accentColor
@@ -139,13 +158,13 @@ ScrollView {
                         trFunc: resultsListRoot.trFunc
                         
                         onToggled: (pinned) => {
-                            var matchId = (model.duplicateId !== undefined ? model.duplicateId : model.display) || ""
+                            var matchId = (modelData.duplicateId !== undefined ? modelData.duplicateId : modelData.display) || ""
                             resultsListRoot.togglePinFunc({
-                                display: model.display || "",
-                                decoration: model.decoration || "application-x-executable",
-                                category: model.category || "Diğer",
+                                display: modelData.display || "",
+                                decoration: modelData.decoration || "application-x-executable",
+                                category: modelData.category || "Diğer",
                                 matchId: matchId,
-                                filePath: model.url || ""
+                                filePath: modelData.url || ""
                             })
                         }
                     }
@@ -157,12 +176,14 @@ ScrollView {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
                 
-                onClicked: {
-                    var matchId = (model.duplicateId !== undefined ? model.duplicateId : model.display) || ""
-                    var filePath = (model.url && model.url.toString) ? model.url.toString() : (model.url || "")
-                    var subtext = model.subtext || ""
-                    var urls = model.urls || []
+                onClicked: (mouse) => {
+                    var matchId = (modelData.duplicateId !== undefined ? modelData.duplicateId : modelData.display) || ""
+                    var filePath = (modelData.url && modelData.url.toString) ? modelData.url.toString() : (modelData.url || "")
+                    var subtext = modelData.subtext || ""
+                    // Handle urls array if present
+                    var urls = modelData.urls || []
                     
                     if (filePath === "" && urls.length > 0) {
                         filePath = urls[0].toString()
@@ -173,13 +194,30 @@ ScrollView {
                         else if (subtext.indexOf("file://") === 0) filePath = subtext
                     }
                     
-                    resultsListRoot.itemClicked(index, model.display || "", model.decoration || "application-x-executable", model.category || "Diğer", matchId, filePath)
+                    if (mouse.button === Qt.RightButton) {
+                        // Right-click: show context menu
+                        var cat = modelData.category || ""
+                        var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings")
+                        
+                        resultsListRoot.itemRightClicked({
+                            display: modelData.display || "",
+                            decoration: modelData.decoration || "application-x-executable",
+                            category: cat,
+                            matchId: matchId,
+                            filePath: filePath,
+                            isApplication: isApp,
+                            uuid: matchId // For compatibility with HistoryContextMenu
+                        }, mouse.x + resultItem.x, mouse.y + resultItem.y)
+                    } else {
+                        // Left-click: open item
+                        resultsListRoot.itemClicked(index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Diğer", matchId, filePath)
+                    }
                 }
 
                 // File Preview Tooltip
                 ToolTip {
                     id: previewTooltip
-                    visible: resultMouseArea.containsMouse && (model.url || "").length > 0 && (typeof resultsListRoot.parent.parent.previewEnabled !== 'undefined' ? resultsListRoot.parent.parent.previewEnabled : true)
+                    visible: resultMouseArea.containsMouse && (modelData.url || "").length > 0 && resultsListRoot.previewEnabled
                     delay: 500
                     timeout: 10000
                     x: resultItem.width + 10
@@ -190,7 +228,7 @@ ScrollView {
                         
                         // Title
                         Text {
-                            text: model.display || ""
+                            text: modelData.display || ""
                             font.bold: true
                             font.pixelSize: 12
                             color: resultsListRoot.textColor
@@ -199,7 +237,7 @@ ScrollView {
                         // Thumbnail for images
                         Image {
                             source: {
-                                var url = model.url || ""
+                                var url = modelData.url || ""
                                 if (url.length === 0) return ""
                                 var ext = url.split('.').pop().toLowerCase()
                                 var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg"]
@@ -219,20 +257,20 @@ ScrollView {
                         // Path
                         Text {
                             text: {
-                                var path = (model.url && model.url.toString) ? model.url.toString() : "";
+                                var path = (modelData.url && modelData.url.toString) ? modelData.url.toString() : "";
                                 if (path && path.length > 0) {
                                     path = path.replace("file://", "");
                                     // Remove /home/user/ prefix using regex
                                     path = path.replace(/^\/home\/[^\/]+\//, "");
                                     return path;
                                 }
-                                return model.url || "";
+                                return modelData.url || "";
                             }
                             font.pixelSize: 10
                             color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                             wrapMode: Text.WrapAnywhere
                             width: Math.min(300, implicitWidth)
-                            visible: (model.url || "").length > 0
+                            visible: (modelData.url || "").length > 0
                         }
                     }
                     

@@ -42,6 +42,7 @@ Item {
     property color bgColor
     
     property bool showDebug: false
+    property bool previewEnabled: true
 
     property var trFunc
     
@@ -72,11 +73,18 @@ Item {
         z: -1
     }
     
+    // Context Menu for Results
+    HistoryContextMenu {
+        id: resultsContextMenu
+        logic: popupRoot.logic
+    }
+    
     // ===== DATA MANAGER =====
     TileDataManager {
         id: tileData
         resultsModel: resultsModel
         logic: popupRoot.logic
+        searchText: popupRoot.searchText
         
         onCategorizedDataChanged: {
              // propagated automatically to bindings
@@ -166,6 +174,56 @@ Item {
         }
     }
 
+    // Navigation Helpers
+    // Navigation Helpers
+    function moveSelectionUp() {
+        if (searchText.length === 0) {
+            if (historyLoader.item) historyLoader.item.moveUp();
+            return;
+        }
+
+        if (isTileView && tileResultsLoader.item) {
+             tileResultsLoader.item.moveUp(); // Spatial Up
+        } else if (resultsListLoader.item) {
+             resultsListLoader.item.moveUp();
+        }
+    }
+
+    function moveSelectionDown() {
+        if (searchText.length === 0) {
+            if (historyLoader.item) historyLoader.item.moveDown();
+            return;
+        }
+
+        if (isTileView && tileResultsLoader.item) {
+             tileResultsLoader.item.moveDown(); // Spatial Down
+        } else if (resultsListLoader.item) {
+             resultsListLoader.item.moveDown();
+        }
+    }
+    
+    function moveSelectionLeft() {
+        if (searchText.length === 0) {
+            if (historyLoader.item) historyLoader.item.moveLeft();
+            return;
+        }
+
+        if (isTileView && tileResultsLoader.item) {
+             tileResultsLoader.item.moveLeft();
+        }
+    }
+    
+    function moveSelectionRight() {
+        if (searchText.length === 0) {
+            if (historyLoader.item) historyLoader.item.moveRight();
+            return;
+        }
+
+        if (isTileView && tileResultsLoader.item) {
+             tileResultsLoader.item.moveRight();
+        }
+    }
+
     // ===== UI COMPONENTS =====
     
     // Hidden Input - Active in NON-BUTTON modes
@@ -180,6 +238,22 @@ Item {
             requestSearchTextUpdate(newText);
         }
         onSearchSubmitted: (idx) => {
+             // Dispatch based on view mode
+             if (isTileView && tileResultsLoader.item) {
+                 tileResultsLoader.item.activateCurrentItem();
+                 return;
+             } else if (searchText.length === 0 && historyLoader.item && isTileView) {
+                 // History Tile View activation
+                 if (historyLoader.item.activateCurrentItem) { // If exposed
+                     historyLoader.item.activateCurrentItem();
+                     return;
+                 }
+                 // Actually historyLoader wrapper doesn't have activateCurrentItem, 
+                 // but we can add it or access inner.
+                 // Let's rely on focus being there OR add helper.
+                 // For now let's handle Results Tile View explicitly here.
+             }
+
              if (tileData.resultCount > 0) {
                  var modelIdx = resultsModel.index(idx, 0);
                  var display = resultsModel.data(modelIdx, Qt.DisplayRole) || "";
@@ -195,8 +269,10 @@ Item {
              requestSearchTextUpdate("");
              requestExpandChange(false);
         }
-        onUpPressed: if (resultsListLoader.item) resultsListLoader.item.moveUp()
-        onDownPressed: if (resultsListLoader.item) resultsListLoader.item.moveDown()
+        onUpPressed: moveSelectionUp()
+        onDownPressed: moveSelectionDown()
+        onLeftPressed: moveSelectionLeft()
+        onRightPressed: moveSelectionRight()
         onTabPressedSignal: cycleFocusSection(true)
         onShiftTabPressedSignal: cycleFocusSection(false)
         onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
@@ -253,8 +329,10 @@ Item {
              requestSearchTextUpdate("");
              requestExpandChange(false);
         }
-        onUpPressed: if (resultsListLoader.item) resultsListLoader.item.moveUp()
-        onDownPressed: if (resultsListLoader.item) resultsListLoader.item.moveDown()
+        onUpPressed: moveSelectionUp()
+        onDownPressed: moveSelectionDown()
+        onLeftPressed: moveSelectionLeft()
+        onRightPressed: moveSelectionRight()
         onTabPressedSignal: cycleFocusSection(true)
         onShiftTabPressedSignal: cycleFocusSection(false)
         onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
@@ -361,30 +439,44 @@ Item {
         
         sourceComponent: ResultsListView {
              resultsModel: resultsModel
+             flatSortedData: tileData.flatSortedData
              listIconSize: popupRoot.listIconSize
              textColor: popupRoot.textColor
              accentColor: popupRoot.accentColor
              trFunc: popupRoot.trFunc
              searchText: popupRoot.searchText
+             previewEnabled: popupRoot.previewEnabled
+             logic: popupRoot.logic
              
              isPinnedFunc: logic.isPinned
              togglePinFunc: logic.togglePin
              
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
+             
+             onItemRightClicked: (item, x, y) => {
+                 resultsContextMenu.historyItem = item
+                 resultsContextMenu.popup()
+             }
         }
     }
     
     // Result Tile View (Loader)
     Loader {
         id: tileResultsLoader
-        anchors.fill: parent
-        anchors.margins: 12
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? 12 : 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
+        anchors.bottomMargin: 12 // Standard bottom margin
+
         asynchronous: true
         active: popupRoot.expanded && isTileView && searchText.length > 0
         
         sourceComponent: ResultsTileView {
              categorizedData: tileData.categorizedData
-             // ... other props
              iconSize: popupRoot.iconSize
              textColor: popupRoot.textColor
              accentColor: popupRoot.accentColor
@@ -392,6 +484,11 @@ Item {
              searchText: popupRoot.searchText
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
+             
+             onItemRightClicked: (item, x, y) => {
+                 resultsContextMenu.historyItem = item
+                 resultsContextMenu.popup()
+             }
              
              onTabPressed: cycleFocusSection(true)
              onShiftTabPressed: cycleFocusSection(false)
@@ -426,8 +523,26 @@ Item {
          }
          
          sourceComponent: Item {
+             // Helper to route navigation
+             function moveUp() { 
+                 if (isTileView) histTileView.moveUp();
+             }
+             function moveDown() { 
+                 if (isTileView) histTileView.moveDown();
+             }
+             function moveLeft() { 
+                 if (isTileView) histTileView.moveLeft();
+             }
+             function moveRight() { 
+                 if (isTileView) histTileView.moveRight();
+             }
+             function activateCurrentItem() {
+                 if (isTileView) histTileView.activateCurrentItem();
+             }
+
              // History List
              HistoryListView {
+                 id: histListView
                  anchors.fill: parent
                  visible: !isTileView
                  categorizedHistory: historyLoader.categorizedHistory
@@ -443,6 +558,7 @@ Item {
              
              // History Tile
              HistoryTileView {
+                 id: histTileView
                  anchors.fill: parent
                  visible: isTileView
                  categorizedHistory: historyLoader.categorizedHistory

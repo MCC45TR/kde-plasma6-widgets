@@ -159,3 +159,35 @@ function moveCategoryDown(settings, categoryName, allCategories) {
     }
     return settings
 }
+
+// Apply priority sorting to individual results (not categories)
+// Use this for sorting raw search results before display
+function applyPriorityToResults(results, settings) {
+    if (!results || results.length === 0) return results
+
+    return results.slice().sort(function (a, b) {
+        var catA = a.category || a.type || "Other"
+        var catB = b.category || b.type || "Other"
+
+        var prioA = getCategoryPriority(settings, catA)
+        var prioB = getCategoryPriority(settings, catB)
+
+        return prioA - prioB
+    })
+}
+
+// Reorder categories based on new order (for drag-and-drop UI)
+// Assigns new priority values based on position in array
+function reorderCategories(settings, orderedCategoryNames) {
+    for (var i = 0; i < orderedCategoryNames.length; i++) {
+        settings = setCategoryPriority(settings, orderedCategoryNames[i], i + 1)
+    }
+    return settings
+}
+
+// Get sorted category names based on current priorities
+function getSortedCategoryNames(settings, categoryNames) {
+    return categoryNames.slice().sort(function (a, b) {
+        return getCategoryPriority(settings, a) - getCategoryPriority(settings, b)
+    })
+}

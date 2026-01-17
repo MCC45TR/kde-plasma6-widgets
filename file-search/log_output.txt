@@ -1,0 +1,22 @@
+ba0ad2d | 2026-01-17 | Add TODO list for FileSearch widget
+c01ed4a | 2026-01-17 | Optimize History Clicking: Directly launch applications via kioclient exec for instant response
+400f03a | 2026-01-17 | Fix syntax errors in History views: restoring missing onClicked handlers
+a78854a | 2026-01-17 | Optimize FileSearch: Resource simplification for ContextMenu and LogicController
+e878fe3 | 2026-01-17 | Optimize FileSearch: Implement asynchronous lazy loading for minimum resource footprint
+4296f7b | 2026-01-17 | Enhance FileSearch: Add History Context Menu, Fix Anchors, and Improve UI Aesthetics
+b8e12f7 | 2026-01-17 | Refactor File Search: Split main.qml into LogicController, TileDataManager and SearchPopup components with lazy loading
+744b54d | 2026-01-17 | Fix file search history path, icons, and opening logic
+a38d594 | 2026-01-17 | Enhance file-search history: Custom folder icons, strict filePath capture, and improved opening logic
+d1e025e | 2026-01-16 | feat: update file-search to v1.1.1-alpha with 20 languages and update README screenshots
+451e643 | 2026-01-15 | Widget improvements: calendar/analog-clock fixes, music-player enhancements, weather widget implementation
+c514eeb | 2026-01-10 | docs: update READMEs for Plasma 6 widgets
+0cff49f | 2026-01-01 | hata düzelmerli ve gemini-kchat-fork siindi
+cc7137f | 2026-01-01 | File Search: Advanced keyboard navigation, Smart Query, View Profiles
+41f214e | 2026-01-01 | File Search: Keyboard nav, category collapse, file preview tooltip
+ca96b68 | 2026-01-01 | feat(gemini-chat): rename widget, add guide, stop button, and complete localization
+76effb9 | 2026-01-01 | Refactor(file-search): Full modularization, sync localization and configuration improvements (v1.1.0)
+e9d29d8 | 2025-12-31 | feat: localize widget names in metadata.json files for 10 languages
+2fa9dad | 2025-12-31 | docs: update license and author information in metadata.json files
+d61c862 | 2025-12-31 | feat: implement standardized JSON-based localization system and update widgets
+5c0d426 | 2025-12-31 | Update widgets, remove calendar online features, and add minimal analog clock
+c6ff265 | 2025-12-30 | Initial commit: Plasma 6 widgets collection

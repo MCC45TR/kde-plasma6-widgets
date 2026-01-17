@@ -5,6 +5,7 @@ import "../js/HistoryManager.js" as HistoryManager
 import "../js/PinnedManager.js" as PinnedManager
 import "../js/CategoryManager.js" as CategoryManager
 import "../js/TelemetryManager.js" as TelemetryManager
+import "../js/ConfigManager.js" as ConfigManager
 import "../js/utils.js" as Utils
 
 Item {
@@ -17,9 +18,41 @@ Item {
     // Signals
     signal historyForceUpdate()
     
+    // ===== CONFIGURATION MANAGEMENT =====
+    readonly property int userProfile: plasmoidConfig.userProfile || 0
+    readonly property var profileDefaults: ConfigManager.getProfileDefaults(userProfile)
+    readonly property int maxHistoryItems: ConfigManager.getMaxHistoryItems(userProfile)
+    
+    // Feature flags based on profile
+    readonly property bool debugEnabled: ConfigManager.isFeatureEnabled(userProfile, "debug")
+    readonly property bool previewEnabled: ConfigManager.isFeatureEnabled(userProfile, "preview")
+    readonly property bool advancedSearchEnabled: ConfigManager.isFeatureEnabled(userProfile, "advancedSearch")
+    readonly property bool telemetryEnabled: ConfigManager.isFeatureEnabled(userProfile, "telemetry")
+    readonly property bool categoryPriorityEnabled: ConfigManager.isFeatureEnabled(userProfile, "categoryPriority")
+    readonly property bool activityPinningEnabled: ConfigManager.isFeatureEnabled(userProfile, "activityPinning")
+    
+    // Config validation
+    function validateConfig() {
+        return ConfigManager.sanitizeConfig({
+            displayMode: plasmoidConfig.displayMode,
+            viewMode: plasmoidConfig.viewMode,
+            iconSize: plasmoidConfig.iconSize,
+            listIconSize: plasmoidConfig.listIconSize,
+            previewEnabled: plasmoidConfig.previewEnabled,
+            debugOverlay: plasmoidConfig.debugOverlay,
+            userProfile: plasmoidConfig.userProfile
+        })
+    }
+    
+    function getRecommendedIconSize() {
+        return ConfigManager.getRecommendedIconSize(
+            plasmoidConfig.displayMode,
+            plasmoidConfig.viewMode
+        )
+    }
+    
     // ===== HISTORY MANAGEMENT =====
     property var searchHistory: []
-    readonly property int maxHistoryItems: 20
     
     // ===== PINNED ITEMS MANAGEMENT =====
     property var pinnedItems: []
@@ -33,7 +66,7 @@ Item {
     
     // ===== HISTORY FUNCTIONS =====
     function loadHistory() {
-        console.log("FileSearch [History]: Loading history...")
+        // Debug: console.log("FileSearch [History]: Loading history...")
         searchHistory = HistoryManager.loadHistory(plasmoidConfig.searchHistory)
     }
     
@@ -145,7 +178,7 @@ Item {
                          if (line.indexOf("Icon=") === 0) {
                              var iconName = line.substring(5).trim();
                              if (iconName.length > 0) {
-                                 console.log("FileSearch [Icon]: Found custom icon:", iconName);
+                                 // Debug: console.log("FileSearch [Icon]: Found custom icon:", iconName);
                                  if (HistoryManager.updateItemIcon(logicRoot.searchHistory, uuid, iconName)) {
                                      logicRoot.saveHistory();
                                      logicRoot.historyForceUpdate();
@@ -162,7 +195,7 @@ Item {
     
     // ===== PINNED FUNCTIONS =====
     function loadPinned() {
-        console.log("FileSearch [Pinned]: Loading pinned items...")
+        // Debug: console.log("FileSearch [Pinned]: Loading pinned items...")
         pinnedItems = PinnedManager.loadPinned(plasmoidConfig.pinnedItems)
     }
     
@@ -193,9 +226,25 @@ Item {
         return PinnedManager.getPinnedForActivity(pinnedItems, currentActivityId)
     }
     
+    function getPinInfo(matchId) {
+        return PinnedManager.getPinInfo(pinnedItems, matchId, currentActivityId)
+    }
+    
+    // Activity management
+    readonly property string currentActivityName: currentActivityId === "global" ? "Global" : currentActivityId
+    
+    function setActivity(activityId) {
+        currentActivityId = activityId || "global"
+    }
+    
+    function pinItemToActivity(item, activityId) {
+        pinnedItems = PinnedManager.pinItem(pinnedItems, item, activityId || "global")
+        savePinned()
+    }
+    
     // ===== CATEGORY SETTINGS FUNCTIONS =====
     function loadCategorySettings() {
-        console.log("FileSearch [Category]: Loading category settings...")
+        // Debug: console.log("FileSearch [Category]: Loading category settings...")
         categorySettings = CategoryManager.loadCategorySettings(plasmoidConfig.categorySettings)
     }
     
@@ -217,10 +266,30 @@ Item {
         telemetryStats = TelemetryManager.getStatsObject(newData)
     }
 
+    // ===== DEPENDENCY CHECKS =====
+    property bool manInstalled: true
+    
+    Plasma5Support.DataSource {
+        id: manCheckSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: (source, data) => {
+            if (data["exit code"] !== undefined) {
+                logicRoot.manInstalled = (data["exit code"] === 0)
+                disconnectSource(source)
+            }
+        }
+    }
+
+    function checkManAvailability() {
+         manCheckSource.connectedSources = ["command -v man"]
+    }
+
     // ===== INITIALIZATION =====
     Component.onCompleted: {
         loadHistory()
         loadPinned()
         loadCategorySettings()
+        checkManAvailability()
     }
 }
