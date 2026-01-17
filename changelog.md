@@ -6,6 +6,23 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 
 ## 🔍 MFile Finder (`file-search`)
 
+### v1.1.5-beta (2026-01-17)
+**TR:**
+- **Sabitlenmiş Öğeler UI:** Arka plan, yuvarlatılmış köşeler ve animasyonlu daralma/genişleme özelliği eklendi. Boşluklar dengelendi.
+- **Özel "date:" Görünümü:** Arama çubuğuna `date:` yazıldığında çıkan devasa saat ve tarih ekranı eklendi.
+- **Özel "help:" Görünümü:** Tüm prefixleri ve açıklamalarını listeleyen yardım ekranı eklendi.
+- **Barlow Condensed Yazı Tipi:** Saat ve tarih ekranı için font widget'a gömüldü.
+- **Prefix İyileştirmeleri:** `gg:`, `dd:`, `wp:` gibi komutlarda arama metninin ipucunda görünmesi sağlandı ve Enter ile çalışma hataları giderildi.
+- **Kategori Ayarları:** "Smart Limit" etkinken limit girişlerinin pasifleşmesi sağlandı ve kategori listesindeki görsel kaymalar düzeltildi.
+
+**EN:**
+- **Pinned Items UI:** Added background, rounded corners, and animated collapse/expand. Balanced spacing.
+- **Special "date:" View:** Added a massive clock and date screen when searching for `date:`.
+- **Special "help:" View:** Added a help screen listing all available prefixes and their descriptions.
+- **Barlow Condensed Font:** Embedded the font for the date/time view.
+- **Prefix Enhancements:** Dynamic query hints for `gg:`, `dd:`, `wp:`, etc., and fixed Enter execution bugs.
+- **Category Settings:** Disabled limit inputs when "Smart Limit" is active and fixed UI overlaps in the category list.
+
 ### v1.1.4-beta (2026-01-17)
 **TR:**
 - **KRunner Prefix Desteği:** 
@@ -129,6 +146,13 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 ---
 
 ## 🎵 MMusic Player (`music-player`)
+
+### v1.2.2 (2026-01-17)
+**TR-TR:**
+- **Hata Düzeltmeleri:** Genel kararlılık iyileştirmeleri ve sürüm güncellemesi.
+
+**EN-US:**
+- **Bug Fixes:** General stability improvements and version bump.
 
 ### v1.2.1 (2026-01-16)
 **TR-TR:**

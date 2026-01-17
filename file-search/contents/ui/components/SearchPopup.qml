@@ -116,7 +116,11 @@ Item {
         var isApp = (category === "Uygulamalar" || category === "Applications") || (filePath && filePath.toString().indexOf(".desktop") > 0);
         var idx = resultsModel.index(index, 0);
         
-        if (isApp) {
+        // FORCE RUN for command queries (gg:, help:, etc.) to avoid treating them as files
+        if (isCommandOnlyQuery(popupRoot.searchText)) {
+             resultsModel.run(idx);
+        } 
+        else if (isApp) {
              resultsModel.run(idx);
         } else if (filePath && filePath.length > 0) {
              Qt.openUrlExternally(filePath);

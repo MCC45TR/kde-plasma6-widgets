@@ -14,7 +14,7 @@
         "Icon": "multimedia-player",
         "Id": "com.mcc45tr.musicplayer",
         "Name": "MMusic Player",
-        "Version": "1.2.1",
+        "Version": "1.2.2",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/music-player",
         "License": "GPL-3.0",
         "Name[tr]": "MMüzik Çalar",
