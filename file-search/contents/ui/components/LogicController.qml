@@ -1,5 +1,6 @@
 import QtQuick
 import org.kde.plasma.plasmoid
+import org.kde.plasma.plasma5support as Plasma5Support
 import "../js/HistoryManager.js" as HistoryManager
 import "../js/PinnedManager.js" as PinnedManager
 import "../js/CategoryManager.js" as CategoryManager
@@ -77,14 +78,17 @@ Item {
     }
     
     // Global DataSource for shell commands
-    property var shellSource: null 
+    Plasma5Support.DataSource {
+        id: globalShellSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: (source, data) => {
+            disconnectSource(source)
+        }
+    }
     
     function runShellCommand(cmd) {
-         if (shellSource) {
-             shellSource.connectedSources = [cmd]
-         } else {
-             console.warn("Shell source not registered!")
-         }
+        globalShellSource.connectedSources = [cmd]
     }
     
     // ===== ICON CHECK TIMER =====

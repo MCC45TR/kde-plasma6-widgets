@@ -376,10 +376,9 @@ FocusScope {
                                     hoverEnabled: true
                                     acceptedButtons: Qt.LeftButton | Qt.RightButton
                                     cursorShape: Qt.PointingHandCursor
-                                    onClicked: (mouse) => {
                                         if (mouse.button === Qt.RightButton) {
                                             contextMenu.historyItem = modelData
-                                            contextMenu.popup(histTileMouseArea)
+                                            contextMenu.popup()
                                         } else {
                                             historyTile.itemClicked(modelData)
                                         }
