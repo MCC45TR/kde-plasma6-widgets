@@ -21,6 +21,7 @@ Item {
     property string prevText: "Previous"
     property string nextText: "Next"
     property string noMediaText: "No Media"
+    property bool showPlayerBadge: true
     
     // Callbacks
     property var onPrevious: function() {}
@@ -105,6 +106,7 @@ Item {
             hasPlayer: compactMode.hasPlayer
             preferredPlayer: compactMode.preferredPlayer
             onLaunchApp: compactMode.onLaunchApp
+            showPlayerBadge: compactMode.showPlayerBadge
             
             pillMode: false
             showNoMediaText: true

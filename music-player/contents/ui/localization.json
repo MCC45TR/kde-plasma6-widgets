@@ -11,7 +11,8 @@
         "no_active_players": "⚠ No active players",
         "active_players_found": "✓ %1 active players found",
         "all_sources_tracked": "All media sources are tracked.",
-        "only_x_tracked": "Only \"%1\" is tracked."
+        "only_x_tracked": "Only \"%1\" is tracked.",
+        "show_player_badge": "Show media player badge"
     },
     "tr": {
         "no_media_playing": "Çalan Medya Yok",
@@ -25,7 +26,8 @@
         "no_active_players": "⚠ Aktif oynatıcı yok",
         "active_players_found": "✓ %1 aktif oynatıcı bulundu",
         "all_sources_tracked": "Tüm medya kaynakları takip edilir.",
-        "only_x_tracked": "Sadece \"%1\" takip edilir."
+        "only_x_tracked": "Sadece \"%1\" takip edilir.",
+        "show_player_badge": "Medya oynatıcı rozetini göster"
     },
     "de": {
         "no_media_playing": "Keine Medienwiedergabe",
@@ -39,7 +41,8 @@
         "no_active_players": "⚠ Keine aktiven Player",
         "active_players_found": "✓ %1 aktive Player gefunden",
         "all_sources_tracked": "Alle Medienquellen werden verfolgt.",
-        "only_x_tracked": "Nur \"%1\" wird verfolgt."
+        "only_x_tracked": "Nur \"%1\" wird verfolgt.",
+        "show_player_badge": "Medienplayer-Abzeichen anzeigen"
     },
     "fr": {
         "no_media_playing": "Aucun média en cours",
@@ -53,7 +56,8 @@
         "no_active_players": "⚠ Aucun lecteur actif",
         "active_players_found": "✓ %1 lecteurs actifs trouvés",
         "all_sources_tracked": "Toutes les sources de médias sont suivies.",
-        "only_x_tracked": "Seul \"%1\" est suivi."
+        "only_x_tracked": "Seul \"%1\" est suivi.",
+        "show_player_badge": "Afficher le badge du lecteur multimédia"
     },
     "it": {
         "no_media_playing": "Nessun supporto in riproduzione",
@@ -67,7 +71,8 @@
         "no_active_players": "⚠ Nessun lettore attivo",
         "active_players_found": "✓ %1 lettori attivi trovati",
         "all_sources_tracked": "Tutte le fonti multimediali sono tracciate.",
-        "only_x_tracked": "Solo \"%1\" è tracciato."
+        "only_x_tracked": "Solo \"%1\" è tracciato.",
+        "show_player_badge": "Mostra badge del lettore multimediale"
     },
     "es": {
         "no_media_playing": "No se está reproduciendo nada",
@@ -81,7 +86,8 @@
         "no_active_players": "⚠ Ningún reproductor activo",
         "active_players_found": "✓ %1 reproductores activos encontrados",
         "all_sources_tracked": "Se rastrean todas las fuentes de medios.",
-        "only_x_tracked": "Solo se rastrea \"%1\"."
+        "only_x_tracked": "Solo se rastrea \"%1\".",
+        "show_player_badge": "Mostrar insignia del reproductor"
     },
     "pt": {
         "no_media_playing": "Nenhuma mídia reproduzida",
@@ -95,7 +101,8 @@
         "no_active_players": "⚠ Nenhum reprodutor ativo",
         "active_players_found": "✓ %1 reprodutores ativos encontrados",
         "all_sources_tracked": "Todas as fontes de mídia são rastreadas.",
-        "only_x_tracked": "Apenas \"%1\" é rastreado."
+        "only_x_tracked": "Apenas \"%1\" é rastreado.",
+        "show_player_badge": "Mostrar emblema do reprodutor"
     },
     "ru": {
         "no_media_playing": "Нет воспроизводимого медиа",
@@ -109,7 +116,8 @@
         "no_active_players": "⚠ Нет активных плееров",
         "active_players_found": "✓ Найдено %1 активных плееров",
         "all_sources_tracked": "Отслеживаются все источники мультимедиа.",
-        "only_x_tracked": "Отслеживается только \"%1\"."
+        "only_x_tracked": "Отслеживается только \"%1\".",
+        "show_player_badge": "Показать значок плеера"
     },
     "ja": {
         "no_media_playing": "再生中のメディアはありません",
@@ -123,7 +131,8 @@
         "no_active_players": "⚠ アクティブなプレーヤーはありません",
         "active_players_found": "✓ %1 件のアクティブなプレーヤーが見つかりました",
         "all_sources_tracked": "すべてのメディアソースが追跡されます。",
-        "only_x_tracked": "\"%1\" のみが追跡されます。"
+        "only_x_tracked": "\"%1\" のみが追跡されます。",
+        "show_player_badge": "プレーヤーバッジを表示"
     },
     "zh": {
         "no_media_playing": "没有播放中的媒体",
@@ -137,7 +146,8 @@
         "no_active_players": "⚠ 无活跃播放器",
         "active_players_found": "✓ 找到 %1 个活跃播放器",
         "all_sources_tracked": "正在跟踪所有媒体源。",
-        "only_x_tracked": "仅跟踪 \"%1\"。"
+        "only_x_tracked": "仅跟踪 \"%1\"。",
+        "show_player_badge": "显示播放器徽章"
     },
     "el": {
         "no_media_playing": "Δεν αναπαράγεται πολυμέσο",
@@ -151,7 +161,8 @@
         "no_active_players": "⚠ Δεν υπάρχουν ενεργά προγράμματα αναπαραγωγής",
         "active_players_found": "✓ Βρέθηκαν %1 ενεργά προγράμματα αναπαραγωγής",
         "all_sources_tracked": "Παρακολουθούνται όλες οι πηγές πολυμέσων.",
-        "only_x_tracked": "Παρακολουθείται μόνο το \"%1\"."
+        "only_x_tracked": "Παρακολουθείται μόνο το \"%1\".",
+        "show_player_badge": "Εμφάνιση σήματος προγράμματος αναπαραγωγής"
     },
     "az": {
         "no_media_playing": "Heç bir media oxunmur",
@@ -165,7 +176,8 @@
         "no_active_players": "⚠ Aktiv pleyer yoxdur",
         "active_players_found": "✓ %1 aktiv pleyer tapıldı",
         "all_sources_tracked": "Bütün media mənbələri izlənilir.",
-        "only_x_tracked": "Yalnız \"%1\" izlənilir."
+        "only_x_tracked": "Yalnız \"%1\" izlənilir.",
+        "show_player_badge": "Pleyer nişanını göstər"
     },
     "hy": {
         "no_media_playing": "Մեդիա չի նվագարկվում",
@@ -179,7 +191,8 @@
         "no_active_players": "⚠ Ակտիվ նվագարկիչներ չկան",
         "active_players_found": "✓ Գտնվել է %1 ակտիվ նվագարկիչ",
         "all_sources_tracked": "Բոլոր մեդիա աղբյուրները հետևվում են:",
-        "only_x_tracked": "Հետևվում է միայն «%1»-ը:"
+        "only_x_tracked": "Հետևվում է միայն «%1»-ը:",
+        "show_player_badge": "Ցույց տալ նվագարկիչի նշանը"
     },
     "ro": {
         "no_media_playing": "Nu se redă niciun conținut",
@@ -193,7 +206,8 @@
         "no_active_players": "⚠ Niciun player activ",
         "active_players_found": "✓ %1 playere active găsite",
         "all_sources_tracked": "Toate sursele media sunt urmărite.",
-        "only_x_tracked": "Doar \"%1\" este urmărit."
+        "only_x_tracked": "Doar \"%1\" este urmărit.",
+        "show_player_badge": "Afișați insigna playerului"
     },
     "cs": {
         "no_media_playing": "Nic se nehraje",
@@ -207,7 +221,8 @@
         "no_active_players": "⚠ Žádné aktivní přehrávače",
         "active_players_found": "✓ Nalezeno %1 aktivních přehrávačů",
         "all_sources_tracked": "Všechny zdroje médií jsou sledovány.",
-        "only_x_tracked": "Sledováno pouze \"%1\"."
+        "only_x_tracked": "Sledováno pouze \"%1\".",
+        "show_player_badge": "Zobrazit odznak přehrávače"
     },
     "hi": {
         "no_media_playing": "कोई मीडिया नहीं चल रहा है",
@@ -221,7 +236,8 @@
         "no_active_players": "⚠ कोई सक्रिय प्लेयर नहीं",
         "active_players_found": "✓ %1 सक्रिय प्लेयर मिले",
         "all_sources_tracked": "सभी मीडिया स्रोतों को ट्रैक किया जा रहा है।",
-        "only_x_tracked": "केवल \"%1\" ट्रैक किया जा रहा है।"
+        "only_x_tracked": "केवल \"%1\" ट्रैक किया जा रहा है।",
+        "show_player_badge": "प्लेयर बैज दिखाएं"
     },
     "bn": {
         "no_media_playing": "কোন মিডিয়া চলছে না",
@@ -235,7 +251,8 @@
         "no_active_players": "⚠ কোন সক্রিয় প্লেয়ার নেই",
         "active_players_found": "✓ %1 সক্রিয় প্লেয়ার পাওয়া গেছে",
         "all_sources_tracked": "সব মিডিয়া উৎস ট্র্যাক করা হচ্ছে।",
-        "only_x_tracked": "শুধুমাত্র \"%1\" ট্র্যাক করা হচ্ছে।"
+        "only_x_tracked": "শুধুমাত্র \"%1\" ট্র্যাক করা হচ্ছে।",
+        "show_player_badge": "প্লেয়ার ব্যাজ দেখান"
     },
     "ur": {
         "no_media_playing": "کوئی میڈیا نہیں چل رہا",
@@ -249,7 +266,8 @@
         "no_active_players": "⚠ کوئی فعال پلیئر نہیں",
         "active_players_found": "✓ %1 فعال پلیئرز ملے",
         "all_sources_tracked": "تمام میڈیا ذرائع کو ٹریک کیا جا رہا ہے۔",
-        "only_x_tracked": "صرف \"%1\" کو ٹریک کیا جا रहा ہے۔"
+        "only_x_tracked": "صرف \"%1\" کو ٹریک کیا جا رہا ہے۔",
+        "show_player_badge": "پلیئر بیج دکھائیں"
     },
     "id": {
         "no_media_playing": "Tidak ada media yang diputar",
@@ -263,7 +281,8 @@
         "no_active_players": "⚠ Tidak ada pemutar aktif",
         "active_players_found": "✓ %1 pemutar aktif ditemukan",
         "all_sources_tracked": "Semua sumber media dilacak.",
-        "only_x_tracked": "Hanya \"%1\" yang dilacak."
+        "only_x_tracked": "Hanya \"%1\" yang dilacak.",
+        "show_player_badge": "Tampilkan lencana pemutar"
     },
     "fa": {
         "no_media_playing": "رسانه‌ای در حال پخش نیست",
@@ -277,6 +296,7 @@
         "no_active_players": "⚠ هیچ پخش‌کننده فعالی وجود ندارد",
         "active_players_found": "✓ %1 پخش‌کننده فعال پیدا شد",
         "all_sources_tracked": "همه منابع رسانه‌ای ردیابی می‌شوند.",
-        "only_x_tracked": "فقط «%1» ردیابی می‌شود."
+        "only_x_tracked": "فقط «%1» ردیابی می‌شود.",
+        "show_player_badge": "نشان پخش‌کننده را نشان بده"
     }
 }

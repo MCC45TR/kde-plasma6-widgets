@@ -242,10 +242,31 @@ Rectangle {
              if (bestMatch.prefix === "man:/" && logic && !logic.manInstalled) {
                  return { show: true, text: trFunc("man_not_installed"), icon: "dialog-error", isError: true, prefix: bestMatch.prefix }
              }
+             var baseHint = trFunc(bestMatch.hint) || bestMatch.hint;
+             var queryPart = "";
+
+             // Check if user has typed something after the prefix
+             if (query.length > bestMatch.prefix.length) {
+                 var rawQuery = query.substring(bestMatch.prefix.length).trim();
+                 if (rawQuery.length > 0) {
+                     queryPart = ' "' + rawQuery + '"';
+                 }
+             }
+
+             // If queryPart exists, append it to baseHint? 
+             // "Google Search" + " \"x.com\"" -> "Google Search \"x.com\""
+             // Or better: localized "Search Google for..."
+             
+             // For now, let's just append it if present for specific searchable types
+             if (queryPart.length > 0) {
+                 if (bestMatch.prefix === "gg:" || bestMatch.prefix === "dd:" || bestMatch.prefix === "wp:" || bestMatch.prefix === "define:") {
+                      baseHint = baseHint + queryPart;
+                 }
+             }
              
              return {
                 show: true,
-                text: trFunc(bestMatch.hint) || bestMatch.hint,
+                text: baseHint,
                 icon: bestMatch.icon,
                 isError: false,
                 prefix: bestMatch.prefix,
@@ -293,6 +314,9 @@ Rectangle {
         anchors.margins: 6
         spacing: 8
         
+        // Spacer Left (Only for Text mode - Center alignment)
+        Item { Layout.fillWidth: true; visible: !queryHints.currentHint.options }
+
         // Icon
         Kirigami.Icon {
             source: queryHints.currentHint.icon || "dialog-information"
@@ -312,10 +336,14 @@ Rectangle {
                 ? "#ff6666" 
                 : Qt.rgba(queryHints.textColor.r, queryHints.textColor.g, queryHints.textColor.b, 0.8)
             font.pixelSize: 11
-            Layout.fillWidth: true
+            // Removed Layout.fillWidth: true to allow centering with spacers
+            // Layout.fillWidth: true 
             Layout.alignment: Qt.AlignVCenter
             elide: Text.ElideRight
         }
+        
+        // Spacer Right (Only for Text mode - Center alignment)
+        Item { Layout.fillWidth: true; visible: !queryHints.currentHint.options }
         
         // Result Limit Controls (Specific for this user request - buttons)
         RowLayout {

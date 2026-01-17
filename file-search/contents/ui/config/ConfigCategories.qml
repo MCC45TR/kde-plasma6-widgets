@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
-import org.kde.kcmutils as KCM
 
 // Import localization
 import "../js/localization.js" as LocalizationData
@@ -99,10 +98,68 @@ Item {
     }
     
     function saveSettings() {
-        // Update the Config Property which Plasma saves
-        cfg_categorySettings = CategoryManager.saveCategorySettings(categorySettings)
-        refreshLists() // Refresh visualization
+        // Execute in next tick to avoid crashes when the delegate triggering this is destroyed
+        Qt.callLater(() => {
+            // Update the Config Property which Plasma saves
+            cfg_categorySettings = CategoryManager.saveCategorySettings(categorySettings)
+            refreshLists() // Refresh visualization
+        })
     }
+    
+    // Dragging state (moved from ColumnLayout to root)
+    property bool draggingCategory: false
+    property bool draggingIsMerged: false
+    
+    // Model rebuild function (moved from ColumnLayout to root)
+    function rebuildModels() {
+        separateModel.clear()
+        for (var i = 0; i < separateCategories.length; i++) {
+            separateModel.append({
+                "catName": separateCategories[i].name,
+                "catNameKey": separateCategories[i].nameKey,
+                "catIcon": separateCategories[i].icon,
+                "isMerged": false
+            })
+        }
+        
+        combinedModel.clear()
+        for (var j = 0; j < combinedCategories.length; j++) {
+            combinedModel.append({
+                "catName": combinedCategories[j].name,
+                "catNameKey": combinedCategories[j].nameKey,
+                "catIcon": combinedCategories[j].icon,
+                "isMerged": true
+            })
+        }
+    }
+    
+    function moveToCombined(name) {
+        configCategories.categorySettings = CategoryManager.setCategoryMerged(configCategories.categorySettings, name, true)
+        saveSettings()
+    }
+    
+    function moveToSeparate(name) {
+        configCategories.categorySettings = CategoryManager.setCategoryMerged(configCategories.categorySettings, name, false)
+        saveSettings()
+    }
+    
+    function moveItem(name, direction) {
+        // Find current list info
+        var list = CategoryManager.isCategoryMerged(categorySettings, name) ? combinedCategories : separateCategories
+        
+        // This simple move logic assumes 'list' matches the visual order which is sort-by-priority
+        // We need to swap priorities using CategoryManager logic
+        if (direction === -1) {
+            configCategories.categorySettings = CategoryManager.moveCategoryUp(configCategories.categorySettings, name, list.map(c => c.name))
+        } else {
+            configCategories.categorySettings = CategoryManager.moveCategoryDown(configCategories.categorySettings, name, list.map(c => c.name))
+        }
+        saveSettings()
+    }
+    
+    // ListModels defined at root level for accessibility
+    ListModel { id: separateModel }
+    ListModel { id: combinedModel }
 
     ColumnLayout {
         anchors.fill: parent
@@ -154,6 +211,8 @@ Item {
                 }
                 RowLayout {
                     spacing: 8
+                    enabled: !configCategories.cfg_smartResultLimit
+                    opacity: enabled ? 1.0 : 0.5
                     
                     Label { text: tr("min_results") }
                     SpinBox {
@@ -232,7 +291,7 @@ Item {
                         Layout.preferredHeight: contentHeight
                         interactive: false // Let outer ScrollView handle scrolling
                         
-                        model: ListModel { id: separateModel }
+                        model: separateModel
                         
                         delegate: categoryDelegate
                     }
@@ -245,7 +304,6 @@ Item {
                         radius: 4
                         border.width: 1
                         border.color: Qt.rgba(1,1,1,0.1)
-                        border.style: Text.DashLine
                         visible: configCategories.draggingCategory && configCategories.draggingIsMerged
                         
                         Label {
@@ -290,7 +348,6 @@ Item {
                         radius: 4
                         border.width: 1
                         border.color: Qt.rgba(1,1,1,0.1)
-                        border.style: Text.DashLine
                         visible: configCategories.draggingCategory && !configCategories.draggingIsMerged
                         
                         Label {
@@ -314,16 +371,13 @@ Item {
                         Layout.preferredHeight: contentHeight
                         interactive: false
                         
-                        model: ListModel { id: combinedModel }
+                        model: combinedModel
                         
                         delegate: categoryDelegate
                     }
                 }
             }
         }
-        
-        property bool draggingCategory: false
-        property bool draggingIsMerged: false
         
         // SHARED DELEGATE
         Component {
@@ -349,6 +403,37 @@ Item {
                 // We need z-index high when dragging
                 z: dragArea.drag.active ? 100 : 1
 
+                
+                // BACK LEVEL MOUSE AREA FOR DRAGGING
+                // Moved before the main content so it doesn't block interaction with buttons/checkboxes
+                MouseArea {
+                    id: dragArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    drag.target: dragDelegate
+                    drag.axis: Drag.YAxis
+                    
+                    // Allow buttons and checkboxes to get events
+                    propagateComposedEvents: true
+                    
+                    onPressed: (mouse) => {
+                        configCategories.draggingCategory = true
+                        configCategories.draggingIsMerged = model.isMerged
+                        // Pass event to items below (like our RowLayout which is now above in Z-order since we moved this MouseArea back)
+                        // Actually, if we move it to the back, we don't need propagateComposedEvents: true for everything, 
+                        // but it's safer.
+                        mouse.accepted = false 
+                    }
+                    
+                    onReleased: (mouse) => {
+                        configCategories.draggingCategory = false
+                        if (drag.active) {
+                            dragDelegate.Drag.drop()
+                        }
+                        mouse.accepted = false
+                    }
+                }
+
                 RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: 8
@@ -368,7 +453,7 @@ Item {
                         id: visibilityCheck
                         checked: CategoryManager.isCategoryVisible(configCategories.categorySettings, model.catName)
                         
-                        onCheckedChanged: {
+                        onToggled: {
                             configCategories.categorySettings = CategoryManager.setCategoryVisibility(
                                 configCategories.categorySettings, 
                                 model.catName, 
@@ -389,6 +474,8 @@ Item {
                     Label {
                         text: configCategories.tr(model.catNameKey) || model.catName
                         Layout.fillWidth: true
+                        Layout.shrink: 1
+                        elide: Text.ElideRight
                     }
                     
                     // Priority display (only meaningful for separate lists sorting)
@@ -397,6 +484,7 @@ Item {
                         font.bold: true
                         opacity: 0.6
                         Layout.preferredWidth: 40
+                        Layout.shrink: 0
                         horizontalAlignment: Text.AlignCenter
                     }
                     
@@ -408,6 +496,7 @@ Item {
                         enabled: index > 0
                         Layout.preferredWidth: 32
                         Layout.preferredHeight: 32
+                        Layout.shrink: 0
                         onClicked: moveItem(model.catName, -1)
                     }
                     
@@ -418,6 +507,7 @@ Item {
                         enabled: index < (isMerged ? combinedModel.count : separateModel.count) - 1
                         Layout.preferredWidth: 32
                         Layout.preferredHeight: 32
+                        Layout.shrink: 0
                         onClicked: moveItem(model.catName, 1)
                     }
                     
@@ -425,85 +515,18 @@ Item {
                     Button {
                         icon.name: isMerged ? "arrow-up-double" : "arrow-down-double"
                         flat: true
-                        tooltip: isMerged ? "Move to Separate" : "Move to Combined"
+                        ToolTip.text: isMerged ? "Move to Separate" : "Move to Combined"
+                        ToolTip.visible: hovered
                         Layout.preferredWidth: 32
                         Layout.preferredHeight: 32
+                        Layout.shrink: 0
                         onClicked: {
                             if (isMerged) moveToSeparate(model.catName);
                             else moveToCombined(model.catName);
                         }
                     }
                 }
-                
-                MouseArea {
-                    id: dragArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    drag.target: dragDelegate
-                    drag.axis: Drag.YAxis
-                    
-                    onPressed: {
-                        configCategories.draggingCategory = true
-                        configCategories.draggingIsMerged = model.isMerged
-                    }
-                    
-                    onReleased: {
-                        configCategories.draggingCategory = false
-                        if (drag.active) {
-                            dragDelegate.Drag.drop()
-                            // Reorder within own list if dropped there
-                             // Logic for reordering is tricky with just OnReleased. 
-                             // We rely on DropArea in the list or the move buttons for standard reorder.
-                        }
-                    }
-                }
             }
-        }
-        
-        function rebuildModels() {
-            separateModel.clear()
-            for (var i = 0; i < separateCategories.length; i++) {
-                separateModel.append({
-                    "catName": separateCategories[i].name,
-                    "catNameKey": separateCategories[i].nameKey,
-                    "catIcon": separateCategories[i].icon,
-                    "isMerged": false
-                })
-            }
-            
-            combinedModel.clear()
-            for (var j = 0; j < combinedCategories.length; j++) {
-                combinedModel.append({
-                    "catName": combinedCategories[j].name,
-                    "catNameKey": combinedCategories[j].nameKey,
-                    "catIcon": combinedCategories[j].icon,
-                    "isMerged": true
-                })
-            }
-        }
-        
-        function moveToCombined(name) {
-            configCategories.categorySettings = CategoryManager.setCategoryMerged(configCategories.categorySettings, name, true)
-            saveSettings()
-        }
-        
-        function moveToSeparate(name) {
-            configCategories.categorySettings = CategoryManager.setCategoryMerged(configCategories.categorySettings, name, false)
-            saveSettings()
-        }
-        
-        function moveItem(name, direction) {
-            // Find current list info
-             var list = CategoryManager.isCategoryMerged(categorySettings, name) ? combinedCategories : separateCategories
-             
-             // This simple move logic assumes 'list' matches the visual order which is sort-by-priority
-             // We need to swap priorities using CategoryManager logic
-             if (direction === -1) {
-                 configCategories.categorySettings = CategoryManager.moveCategoryUp(configCategories.categorySettings, name, list.map(c => c.name))
-             } else {
-                configCategories.categorySettings = CategoryManager.moveCategoryDown(configCategories.categorySettings, name, list.map(c => c.name))
-             }
-             saveSettings()
         }
 
         Item { Layout.fillHeight: true }

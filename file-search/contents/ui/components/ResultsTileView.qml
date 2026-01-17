@@ -22,6 +22,9 @@ FocusScope {
     property var trFunc: function(key) { return key }
     property string searchText: ""
     
+    // Preview settings from config
+    property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
+    
     // Navigation state
     property int currentCategoryIndex: 0
     property int currentItemIndex: 0
@@ -586,6 +589,9 @@ FocusScope {
                                         Image {
                                             id: thumbnailImage
                                             source: {
+                                                // Check if image previews are enabled
+                                                if (!resultsTileRoot.previewSettings.images) return ""
+                                                
                                                 var url = modelData.url || ""
                                                 if (url.length === 0) return ""
                                                 var ext = url.split('.').pop().toLowerCase()

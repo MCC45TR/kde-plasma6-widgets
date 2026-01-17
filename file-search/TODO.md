@@ -23,3 +23,5 @@
     - Implemented in `ConfigCategories.qml` with `ListView`, `DragHandler`, and `DropArea`
     - Visual priority indicators (#1, #2, etc.)
     - Move up/down buttons as alternative
+    - [x] Fixed crash when clicking categories by using `Qt.callLater` for model updates.
+    - [x] Fixed Z-order issue preventing button clicks in the categories list.

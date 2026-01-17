@@ -61,6 +61,7 @@ PlasmoidItem {
     
     // Configuration
     readonly property string preferredPlayer: Plasmoid.configuration.preferredPlayer || ""
+    readonly property bool showPlayerBadge: Plasmoid.configuration.showPlayerBadge !== undefined ? Plasmoid.configuration.showPlayerBadge : true
     
     // Find player matching the preferred player from all available players
     function findPreferredPlayer() {
@@ -217,6 +218,11 @@ PlasmoidItem {
                         item.currentPosition = Qt.binding(function() { return root.currentPosition })
                         item.length = Qt.binding(function() { return root.length })
                         item.noMediaText = Qt.binding(function() { return root.tr("no_media_playing") })
+                        
+                        // Show player badge setting
+                        if (item.hasOwnProperty("showPlayerBadge")) {
+                            item.showPlayerBadge = Qt.binding(function() { return root.showPlayerBadge })
+                        }
                         
                         // Artist (Wide and LargeSquare modes)
                         if (item.hasOwnProperty("artist")) {

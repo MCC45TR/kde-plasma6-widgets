@@ -39,8 +39,8 @@ QQC.Menu {
     
     // ===== PIN / UNPIN =====
     QQC.Action {
-        text: logic && logic.isPinned(matchId) ? tr("unpin") : tr("pin_to_top")
-        icon.name: logic && logic.isPinned(matchId) ? "window-pin" : "pin"
+        text: logic && logic.isPinned(matchId) ? tr("unpin_item") : tr("pin_item")
+        icon.name: logic && logic.isPinned(matchId) ? "window-unpin" : "pin"
         enabled: historyItem
         onTriggered: {
             if (historyItem) {

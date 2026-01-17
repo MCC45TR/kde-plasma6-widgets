@@ -9,5 +9,9 @@
       <default></default>
       <label>Preferred media player identity</label>
     </entry>
+    <entry name="showPlayerBadge" type="Bool">
+      <default>true</default>
+      <label>Show media player icon badge</label>
+    </entry>
   </group>
 </kcfg>

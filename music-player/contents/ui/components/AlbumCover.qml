@@ -20,6 +20,7 @@ Rectangle {
     // Mode flags
     property bool pillMode: false
     property bool showNoMediaText: true
+    property bool showPlayerBadge: true
     
     // Overlay properties
     property bool showDimOverlay: false
@@ -62,7 +63,7 @@ Rectangle {
         iconSize: pillMode ? 16 : Math.max(16, parent.width * 0.09)
         playerIdentity: albumCover.playerIdentity
         iconSource: albumCover.playerIcon
-        visible: albumCover.playerIdentity !== "" || albumCover.hasPlayer
+        visible: albumCover.showPlayerBadge && (albumCover.playerIdentity !== "" || albumCover.hasPlayer)
     }
     
     // Click to launch app when no media

@@ -43,6 +43,7 @@ Item {
     
     property bool showDebug: false
     property bool previewEnabled: true
+    property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
 
     property var trFunc
     
@@ -64,14 +65,6 @@ Item {
     // internal state
     property int focusSection: 0
     property string activeBackend: "Milou"
-    
-    // Mat Background
-    Rectangle {
-        anchors.fill: parent
-        color: Kirigami.Theme.backgroundColor
-        radius: 12
-        z: -1
-    }
     
     // Context Menu for Results
     HistoryContextMenu {
@@ -222,6 +215,21 @@ Item {
         if (isTileView && tileResultsLoader.item) {
              tileResultsLoader.item.moveRight();
         }
+    }
+    
+    // Command Query Helper
+    function isCommandOnlyQuery(text) {
+        if (!text) return false;
+        var t = text.toLowerCase();
+        // date: and help: are exact match views
+        if (t === "date:" || t === "help:") return true;
+        
+        // Others are single-action runners that we show hints for
+        return t.startsWith("gg:") || 
+               t.startsWith("dd:") || 
+               t.startsWith("wp:") || 
+               t.startsWith("define:") || 
+               t.startsWith("unit:");
     }
 
     // ===== UI COMPONENTS =====
@@ -405,6 +413,14 @@ Item {
         property var items: logic.getVisiblePinnedItems()
         active: items.length > 0
         
+        // Reactively update when pins change
+        Connections {
+            target: logic
+            function onPinnedItemsChanged() {
+                pinnedLoader.items = logic.getVisiblePinnedItems()
+            }
+        }
+        
         sourceComponent: PinnedSection {
             pinnedItems: pinnedLoader.items
             textColor: popupRoot.textColor
@@ -442,7 +458,7 @@ Item {
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
         anchors.bottomMargin: isButtonMode ? (buttonModeSearchInput.height + 12) : 12
         
-        active: !isTileView && searchText.length > 0
+        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
         
         sourceComponent: ResultsListView {
              resultsModel: resultsModel
@@ -480,7 +496,7 @@ Item {
         anchors.bottomMargin: 12 // Standard bottom margin
 
         asynchronous: true
-        active: popupRoot.expanded && isTileView && searchText.length > 0
+        active: popupRoot.expanded && isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
         
         sourceComponent: ResultsTileView {
              categorizedData: tileData.categorizedData
@@ -489,6 +505,7 @@ Item {
              accentColor: popupRoot.accentColor
              trFunc: popupRoot.trFunc
              searchText: popupRoot.searchText
+             previewSettings: popupRoot.previewSettings
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
              
@@ -502,11 +519,56 @@ Item {
              onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
         }
     }
+
+    // Date/Clock View (Special "date:" query)
+    Loader {
+        id: dateViewLoader
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? 12 : 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom // Anchor to parent bottom
+        anchors.margins: 12
+        anchors.bottomMargin: 12
+        
+        active: popupRoot.expanded && searchText === "date:"
+        
+        sourceComponent: DateView {
+            textColor: popupRoot.textColor
+        }
+    }
+
+    // Help View ("help:" query)
+    Loader {
+        id: helpViewLoader
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? 12 : 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 12
+        anchors.bottomMargin: 12
+        
+        active: popupRoot.expanded && searchText === "help:"
+        
+        sourceComponent: HelpView {
+            textColor: popupRoot.textColor
+            accentColor: popupRoot.accentColor
+            trFunc: popupRoot.trFunc
+            
+            onAidSelected: (prefix) => {
+                requestSearchTextUpdate(prefix)
+                if (!isButtonMode) hiddenSearchInput.text = prefix
+                else buttonModeSearchInput.setText(prefix)
+                // Focus input?
+            }
+        }
+    }
     
     // History Container (Loader) - Show when no search text
     Loader {
          id: historyLoader
-         anchors.top: parent.top
+         anchors.top: pinnedLoader.active ? pinnedLoader.bottom : parent.top
          anchors.left: parent.left
          anchors.right: parent.right
          anchors.bottom: parent.bottom // Anchor to parent bottom

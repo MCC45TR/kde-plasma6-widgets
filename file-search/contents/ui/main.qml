@@ -162,6 +162,13 @@ PlasmoidItem {
         
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
         previewEnabled: Plasmoid.configuration.previewEnabled
+        previewSettings: {
+            try {
+                return JSON.parse(Plasmoid.configuration.previewSettings || '{"images": true, "videos": false, "text": false, "documents": false}')
+            } catch (e) {
+                return {"images": true, "videos": false, "text": false, "documents": false}
+            }
+        }
 
         // Signal handlers
         onRequestSearchTextUpdate: (text) => root.searchText = text

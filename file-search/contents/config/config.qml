@@ -30,6 +30,11 @@ ConfigModel {
         source: "../ui/config/ConfigSearch.qml"
     }
     ConfigCategory {
+        name: tr("config_preview")
+        icon: "view-preview"
+        source: "../ui/config/ConfigPreview.qml"
+    }
+    ConfigCategory {
         name: tr("config_categories")
         icon: "view-list-icons"
         source: "../ui/config/ConfigCategories.qml"

@@ -20,6 +20,7 @@ Item {
     property real currentPosition: 0
     property real length: 0
     property string noMediaText: "No Media"
+    property bool showPlayerBadge: true
     
     // Callbacks
     property var onPrevious: function() {}
@@ -52,6 +53,7 @@ Item {
             hasPlayer: wideMode.hasPlayer
             preferredPlayer: wideMode.preferredPlayer
             onLaunchApp: wideMode.onLaunchApp
+            showPlayerBadge: wideMode.showPlayerBadge
             
             pillMode: true
             showNoMediaText: false

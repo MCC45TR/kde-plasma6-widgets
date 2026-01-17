@@ -65,5 +65,9 @@
       <default>true</default>
       <label>Smartly limit results based on relevance score</label>
     </entry>
+    <entry name="previewSettings" type="String">
+      <default>{"images": true, "videos": false, "text": false, "documents": false}</default>
+      <label>Preview settings for different file types (JSON)</label>
+    </entry>
   </group>
 </kcfg>

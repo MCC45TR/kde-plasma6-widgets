@@ -24,7 +24,8 @@ Kirigami.FormLayout {
         "no_active_players": "⚠ No active players",
         "active_players_found": "✓ %1 active players found",
         "all_sources_tracked": "All media sources are tracked.",
-        "only_x_tracked": "Only \"%1\" is tracked."
+        "only_x_tracked": "Only \"%1\" is tracked.",
+        "show_player_badge": "Show media player badge"
     }
     
     function loadLocales() {
@@ -68,6 +69,7 @@ Kirigami.FormLayout {
     // --- End Localization Logic ---
     
     property string cfg_preferredPlayer
+    property bool cfg_showPlayerBadge
     
     // MPRIS2 Model to get currently active players
     Mpris.Mpris2Model { 
@@ -301,5 +303,13 @@ Kirigami.FormLayout {
                     : page.tr("only_x_tracked", cfg_preferredPlayer)
             }
         }
+    }
+    
+    // Show Player Badge Checkbox
+    CheckBox {
+        id: showBadgeCheckbox
+        Kirigami.FormData.label: page.tr("show_player_badge") + ":"
+        checked: cfg_showPlayerBadge
+        onCheckedChanged: cfg_showPlayerBadge = checked
     }
 }
