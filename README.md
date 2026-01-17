@@ -58,7 +58,9 @@ This repository contains a suite of plasmoids ranging from advanced system tools
   <img src="./.Samples/MFile-Search-Searching.png" height="450" style="margin: 5px;">
 </p>
 
-- **Smart Query**: Understands KRunner prefixes (`timeline:/today`, `gg:`, `kill`, `units`)
+- **Smart Query**: Understands KRunner prefixes (`timeline:/`, `gg:`) with **interactive hint buttons**
+- **Pinned Items**: Pin favorite apps or files to the top for instant access
+- **Localized**: Full support for 20 languages including interactive prefix suggestions
 - **View Profiles**: Minimal, Developer (with live telemetry), and Power User modes
 - **Rich Previews**: Instant hover previews with async thumbnail caching
 - 📄 *[Read detailed documentation →](./file-search/README.md)*
@@ -170,11 +172,14 @@ chmod +x install_all.sh
 ./install_all.sh
 ```
 
-### Install Single Widget
+### Install & Test Single Widget
 
 ```bash
-# Install and test a specific widget
+# Install only a specific widget
 ./install_all.sh weather
+
+# Install AND launch test window immediately
+./install_all.sh -t weather
 ```
 
 ### Manual Installation

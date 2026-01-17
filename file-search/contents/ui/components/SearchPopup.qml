@@ -381,6 +381,13 @@ Item {
             accentColor: popupRoot.accentColor
             bgColor: popupRoot.bgColor
             trFunc: popupRoot.trFunc
+            logic: popupRoot.logic
+            
+            onHintSelected: (text) => {
+                requestSearchTextUpdate(text)
+                if (!isButtonMode) hiddenSearchInput.text = text
+                else buttonModeSearchInput.setText(text)
+            }
         }
     }
     

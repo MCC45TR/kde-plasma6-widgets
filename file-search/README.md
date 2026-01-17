@@ -6,12 +6,15 @@ Advanced, keyboard-centric file search and launcher widget for KDE Plasma 6. Des
 
 ## 🚀 Key Capabilities
 
-### 🧠 Smart Query System
-The widget goes beyond simple text matching. It understands context and KRunner query syntax:
-*   **Direct Runner Access**: Use standard prefixes like `timeline:/today` (for recent files) or `#unicode` (for characters).
-*   **Calculations & Unit Conv**: Queries starting with `=` or standard unit conversions are handled natively.
-*   **System Commands**: Commands like `kill`, `sleep`, or `gg:` (web shortcuts) are recognized.
-*   **Syntax Hinting**: The UI detects known prefixes and displays helpful inline hints to guide the user (e.g., showing available flags).
+### 🌍 Localized Interaction (20 Languages)
+Fully localized UI including search hints, button labels, and configuration menus. Supported languages: `en`, `tr`, `de`, `fr`, `es`, `it`, `nl`, `pl`, `pt`, `ru`, `ja`, `zh`, `ko`, `uk`, `hi`, `ar`, `sv`, `da`, `fi`, `no`.
+
+### 🧠 Smart Query System & Interactive Hints
+The widget goes beyond simple text matching. It understands context and provides interactive feedback:
+*   **Interactive Prefix Buttons**: Typing prefixes like `timeline:/` dynamically reveals actionable buttons (e.g., "Today", "This Week") for quick filtering.
+*   **Direct Runner Access**: Use standard prefixes like `timeline:/today`, `file:/`, `man:/` (checks installation).
+*   **Syntax Hinting**: The UI detects known prefixes and displays helpful inline hints or warnings (e.g., if `man` is missing).
+*   **Calculations & Commands**: Natively handles `=` calculations and system commands (`kill`, `sleep`, `gg:`).
 
 ### ⌨️ Advanced Keyboard Navigation
 Designed for "Hands on Keyboard" workflow:
@@ -22,13 +25,11 @@ Designed for "Hands on Keyboard" workflow:
     *   `Ctrl + 2`: Switch to Tile View.
     *   `Ctrl + Space`: Toggle Instant Preview for the selected item.
     *   `Ctrl + Return`: Execute default action (e.g., open file).
-*   **Focus Management**: Custom focus handling ensures the UI never loses focus state during async reloads.
 
-### 👁️ Rich Previews
-Enhance your search without opening files:
+### 👁️ Rich Previews & Pinning
+*   **Pinning System**: Right-click to pin favorite files or apps to the top of the list. Pinned items persist across sessions.
 *   **Hover Tooltips**: Mouse over any file to see metadata (Type, Size, Modified Date, Parent Path).
-*   **Visual Thumbnails**: Cached, high-performance thumbnail generation for images (PNG, JPG, WEBP, etc.).
-*   **Expandable Text**: Long descriptions or paths are intelligently truncated but revealed on interaction.
+*   **Visual Thumbnails**: Cached, high-performance thumbnail generation.
 
 ### 🎨 Adaptive View Profiles
 The widget adapts to different user types via the "Profiles" system in Settings:
@@ -46,25 +47,24 @@ This widget represents a significant engineering effort to overcome standard QML
 Unlike monolithic widgets, File Search is broken down into isolated, reusable components:
 *   `ResultsListView.qml`: Virtualized list rendering logic.
 *   `ResultsTileView.qml`: Grid logic with custom keyboard navigation handlers.
-*   `CompactView.qml`: Minimal launcher mode.
-*   `PreviewPopup.qml`: Isolated overlay logic.
-*   `QueryHints.qml`: Regex-based syntax analyzer.
+*   `PinnedSection.qml`: Manages pinned favorite items.
+*   `ConfigCategories.qml`: Drag-and-drop category management with merged groups.
+*   `QueryHints.qml`: Interactive regex-based syntax analyzer with signals.
 
 ### 2. Synchronous Localization (Legacy-Free)
 We abandoned the old `i18n()` calls in favor of a robust, synchronous JavaScript module (`localization.js`):
 *   **Zero Latency**: Translations are loaded instantly on init.
 *   **Hot-Swapping**: Language changes apply immediately without reloading the plasmoid.
-*   **JSON Backend**: All 10 supported languages are stored in a structured JSON file, decoupled from QML logic.
+*   **JSON Backend**: All 20 supported languages are stored in a structured JSON object.
 
 ### 3. Performance & Rendering
-*   **Incremental Rendering**: Utilizes `Milou` with a limit of 50 items initially, but handles pagination internally to keep the UI fluid.
-*   **Virtualization**: Both List and Tile views use QML's `ListView` and `GridView` virtualization. Only visible delegates are rendered.
-*   **Lazy Loading**: Heavy components (like the Settings window or detailed Previews) are completely unloaded (`Loader` sourceComponent: null) when not in use to save memory.
+*   **Incremental Rendering**: Utilizes `Milou` with pagination handling.
+*   **Virtualization**: Both List and Tile views use QML's `ListView` and `GridView` virtualization.
+*   **Lazy Loading**: Heavy components (Settings, detailed Previews) are unloaded when not in use.
 
-### 4. Custom History Manager
-A dedicated `HistoryManager.js` handles state persistence:
-*   **Smart Scoring**: History isn't just FIFO. It remembers `matchId` and `runnerId` to prioritize exact matches you've launched before.
-*   **Storage**: Persists data to standard config but serializes complex objects safely.
+### 4. Custom History & Category Manager
+*   **Category Logic**: Custom `CategoryManager.js` allows "Merging" categories (showing them together) while keeping others "Separate" and prioritized.
+*   **Smart Scoring**: History remembers `matchId` and `runnerId` to prioritize exact matches.
 
 ---
 
@@ -75,7 +75,8 @@ The widget exposes a comprehensive configuration schema:
 | Tab | Settings |
 | :--- | :--- |
 | **Appearance** | View Profile (Minimal/Power/Dev), Icon Sizes, Grid Density. |
-| **Search** | Algorithm tuning, History limits, Default Runners. |
+| **Search** | Default Runners (check/uncheck). |
+| **Categories** | **New**: Drag-and-drop ordering. Group categories into "Prioritized" (top) or "Merged" (bottom). Toggle visibility per category. Search Algorithm (Fuzzy/Exact/StartsWith) and Result Limits. |
 | **Debug** | (Visible in Dev Profile) Toggle Overlays, Dump State to JSON. |
 | **Help** | Built-in guide listing all shortcuts and features (Localized). |
 

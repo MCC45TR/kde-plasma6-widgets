@@ -49,5 +49,21 @@
       <default>{}</default>
       <label>Category settings (visibility, priority, custom icons)</label>
     </entry>
+    <entry name="searchAlgorithm" type="Int">
+      <default>0</default>
+      <label>Search Algorithm: 0=Fuzzy, 1=Exact, 2=StartsWith</label>
+    </entry>
+    <entry name="minResults" type="Int">
+      <default>3</default>
+      <label>Minimum number of results to display</label>
+    </entry>
+    <entry name="maxResults" type="Int">
+      <default>20</default>
+      <label>Maximum number of results to display</label>
+    </entry>
+    <entry name="smartResultLimit" type="Bool">
+      <default>true</default>
+      <label>Smartly limit results based on relevance score</label>
+    </entry>
   </group>
 </kcfg>

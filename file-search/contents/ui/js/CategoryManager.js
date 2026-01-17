@@ -61,6 +61,21 @@ function isCategoryVisible(settings, categoryName) {
     return settings[categoryName].visible !== false
 }
 
+// Set category merged status (for "Show Together" feature)
+function setCategoryMerged(settings, categoryName, merged) {
+    settings = ensureCategoryExists(settings, categoryName)
+    settings[categoryName].merged = merged
+    return settings
+}
+
+// Get category merged status
+function isCategoryMerged(settings, categoryName) {
+    if (!settings[categoryName]) {
+        return false // Default not merged
+    }
+    return settings[categoryName].merged === true
+}
+
 // Set category priority (lower number = higher priority)
 function setCategoryPriority(settings, categoryName, priority) {
     settings = ensureCategoryExists(settings, categoryName)
