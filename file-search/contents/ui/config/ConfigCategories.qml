@@ -8,8 +8,11 @@ import org.kde.kcmutils as KCM
 import "../js/localization.js" as LocalizationData
 import "../js/CategoryManager.js" as CategoryManager
 
-KCM.SimpleKCM {
+// KCM.SimpleKCM removed, replaced with Item for ConfigModel compatibility
+Item {
     id: configCategories
+    implicitWidth: 600
+    implicitHeight: 600
     
     // Localization
     property var locales: LocalizationData.data
@@ -137,7 +140,7 @@ KCM.SimpleKCM {
                 }
                 ComboBox {
                     model: [tr("alg_fuzzy"), tr("alg_exact"), tr("alg_starts_with")]
-                    currentIndex: configCategories.cfg_searchAlgorithm
+                    currentIndex: configCategories.cfg_searchAlgorithm ?? 0
                     onActivated: {
                         configCategories.cfg_searchAlgorithm = currentIndex
                     }
@@ -155,7 +158,7 @@ KCM.SimpleKCM {
                     Label { text: tr("min_results") }
                     SpinBox {
                         from: 1; to: 20
-                        value: configCategories.cfg_minResults
+                        value: configCategories.cfg_minResults ?? 3
                         onValueModified: configCategories.cfg_minResults = value
                     }
                     
@@ -164,7 +167,7 @@ KCM.SimpleKCM {
                     Label { text: tr("max_results") }
                     SpinBox {
                         from: 5; to: 100
-                        value: configCategories.cfg_maxResults
+                        value: configCategories.cfg_maxResults ?? 20
                         onValueModified: configCategories.cfg_maxResults = value
                     }
                 }
@@ -176,7 +179,7 @@ KCM.SimpleKCM {
                 }
                 CheckBox {
                     text: tr("smart_limit_desc")
-                    checked: configCategories.cfg_smartResultLimit
+                    checked: configCategories.cfg_smartResultLimit ?? true
                     onCheckedChanged: configCategories.cfg_smartResultLimit = checked
                 }
             }
@@ -412,7 +415,7 @@ KCM.SimpleKCM {
                         icon.name: "arrow-down"
                         flat: true
                         visible: !isMerged
-                        enabled: index < ListView.view.count - 1
+                        enabled: index < (isMerged ? combinedModel.count : separateModel.count) - 1
                         Layout.preferredWidth: 32
                         Layout.preferredHeight: 32
                         onClicked: moveItem(model.catName, 1)

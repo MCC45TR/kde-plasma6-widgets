@@ -9,14 +9,15 @@ Bu belge, widget'ın **Backend** (mantıksal katman) ve **Frontend** (kullanıc�
 | Özellik            | Backend | Frontend | Config | Durum         |
 |:-------------------|:-------:|:--------:|:------:|:--------------|
 | Arama Geçmişi      | ✅      | ✅       | ✅     | ✅ Tam        |
-| Sabitleme (Pin)    | ✅      | ✅       | ✅     | ⚠️ Kısmi      |
-| Kategori Önceliği  | ✅      | ❌       | ✅     | ⚠️ Eksik      |
-| String Benzerliği  | ✅      | ❌       | ❌     | ⚠️ Eksik      |
-| Context Menu       | ✅      | ✅       | ❌     | ✅ Tam        |
+| Sabitleme (Pin)    | ✅      | ✅       | ✅     | ✅ Tam        |
+| Kategori Önceliği  | ✅      | ✅       | ✅     | ✅ Tam        |
+| String Benzerliği  | ✅      | ✅       | ✅     | ✅ Tam        |
+| Context Menu       | ✅      | ✅       | ✅     | ✅ Tam        |
 | Telemetri          | ✅      | ✅       | ✅     | ✅ Tam        |
 | Debug Overlay      | ✅      | ✅       | ✅     | ✅ Tam        |
-| Dosya Önizleme     | ❌      | ✅       | ✅     | ⚠️ Beklemede |
-| Görünüm Profilleri | ❌      | ✅       | ✅     | ⚠️ Kısmi      |
+| Dosya Önizleme     | ✅      | ✅       | ✅     | ✅ Tam        |
+| Görünüm Profilleri | ✅      | ✅       | ✅     | ✅ Tam        |
+| KRunner Prefixleri | ✅      | ✅       | ✅     | ✅ Tam        |
 
 ---
 
@@ -113,12 +114,20 @@ Bu belge, widget'ın **Backend** (mantıksal katman) ve **Frontend** (kullanıc�
 ### 4. QueryHints.qml
 | Prefix              | Açıklama                          | Backend Karşılığı                   |
 |:--------------------|:----------------------------------|:------------------------------------|
-| `timeline:today`    | Bugünkü dosyalar                  | ✅ KRunner                          |
+| `timeline:/`        | Etkileşimli zaman tüneli          | ✅ KRunner (Sub-menu support)       |
+| `file:/`            | Dosya yolu gezinme                | ✅ KRunner                          |
+| `man:/`             | Man sayfaları (Kurulum kontrolü)  | ✅ `command -v man` check           |
 | `gg:`               | Google arama                      | ✅ KRunner                          |
 | `dd:`               | DuckDuckGo arama                  | ✅ KRunner                          |
+| `wp:`               | Wikipedia arama                   | ✅ KRunner                          |
 | `kill`              | Uygulama sonlandır                | ✅ KRunner                          |
 | `spell`             | Yazım denetimi                    | ✅ KRunner                          |
 | `#`                 | Unicode karakter                  | ✅ KRunner                          |
+| `app:` / `shell:`   | Uygulama ve kabuk komutları       | ✅ KRunner                          |
+| `power:`            | Güç seçenekleri                   | ✅ KRunner                          |
+| `services:`         | Sistem servisleri                 | ✅ KRunner                          |
+| `date` / `define:`  | Tarih ve Sözlük                   | ✅ KRunner                          |
+| `unit:`             | Birim dönüştürücü                 | ✅ KRunner                          |
 
 ### 5. DebugOverlay.qml
 | Gösterge            | Açıklama                          | Backend Karşılığı                   |
@@ -149,74 +158,44 @@ Bu belge, widget'ın **Backend** (mantıksal katman) ve **Frontend** (kullanıc�
 
 ---
 
-## ⚠️ Tespit Edilen Uyumsuzluklar
+---
 
-### 1. Backend'de Var, Frontend'de Yok
-| Özellik                         | Dosya               | Sorun                          | Durum        |
-|:--------------------------------|:--------------------|:-------------------------------|:-------------|
-| `applyPriorityToResults()`      | CategoryManager.js  | Sonuçlar sıralanmıyor          | ✅ Çözüldü   |
-| `filterHiddenCategories()`      | CategoryManager.js  | Gizli kategoriler gösteriliyor | ✅ Çözüldü   |
-| `processCategories()`           | CategoryManager.js  | Kategoriler işlenmiyor         | ✅ Çözüldü   |
-| `sortBySimilarity()`            | SimilarityUtils.js  | Benzerlik sıralaması yok       | ✅ Çözüldü   |
-| `sortByPriorityAndSimilarity()` | SimilarityUtils.js  | Birleşik sıralama yok          | ✅ Çözüldü   |
-| `resetStats()`                  | TelemetryManager.js | Sıfırlama butonu yok           | ✅ Çözüldü   |
-| `getPinInfo()`                  | PinnedManager.js    | Kullanılmıyor                  | ✅ Çözüldü   |
-| `getSortedCategoryNames()`      | CategoryManager.js  | Kullanılmıyor                  | ✅ Çözüldü   |
+## ✅ Tamamlanan İyileştirmeler
 
-### 2. Frontend'de Var, Backend'de Yok
-| Özellik             | Dosya            | Sorun                                   | Durum        |
-|:--------------------|:-----------------|:----------------------------------------|:-------------|
-| `previewEnabled`    | Config           | Backend mantığı yok (sadece UI toggle)  | ✅ Çözüldü   |
-| `userProfile`       | Config           | Profil değişikliği backend'i etkilemiyor| ✅ Çözüldü   |
-| File Thumbnail      | ResultsListView  | Backend'de dosya okuma yok              | ✅ Çözüldü   |
+### 1. Backend-Frontend Entegrasyonu
+- `TileDataManager.qml` artık `CategoryManager` ve `SimilarityUtils` fonksiyonlarını tam olarak kullanıyor.
+- Sonuçlar hem kategori önceliğine hem de başlık benzerliğine göre sıralanıyor.
+- Gizli kategoriler (ayarlardan kapatılanlar) sonuç listesinden anında filtreleniyor.
 
-### 3. Kısmi Entegrasyon
-| Özellik            | Sorun                                                      | Durum        |
-|:-------------------|:-----------------------------------------------------------|:-------------|
-| Category Priority  | ConfigCategories'de ayarlanıyor ama sonuçlara uygulanmıyor | ✅ Çözüldü   |
-| Category Visibility| ConfigCategories'de ayarlanıyor ama filtre yok             | ✅ Çözüldü   |
-| Pin by Activity    | Backend destekliyor, UI'da aktivite seçimi yok             | ✅ Çözüldü   |
+### 2. Modern Mimari
+- Logic, Data ve UI katmanları birbirinden ayrıldı (`LogicController`, `TileDataManager`, `SearchPopup`).
+- Loader tabanlı **Lazy Loading** ile bellek kullanımı optimize edildi.
+- Navigasyon için klavye desteği (ok tuşları, Enter, Tab) eklendi.
+
+### 3. Etkileşimli KRunner İpuçları
+- `QueryHints.qml` artık sadece metin değil, butonlar ve dinamik seçenekler sunuyor.
+- `timeline:/` için alt menüler ve dinamik ay/gün hesaplaması eklendi.
+- Sistem bağımlılıkları (örn. `man`) için çalışma zamanı kontrolleri eklendi.
+
+### 4. Stabilite ve UX
+- Geçmişten uygulama başlatma (`.desktop`) hızı `kioclient exec` ile artırıldı.
+- Sağ tık menüleri tüm görünüm modlarında tutarlı hale getirildi.
+- Telemetri istatistikleri için sıfırlama mekanizması eklendi.
 
 ---
 
-## 🛠️ Önerilen Düzeltmeler
+## 🐞 Önemli Hata Düzeltmeleri
 
-### Öncelik 1: Kategori Önceliği Entegrasyonu
-**Dosya:** `TileDataManager.qml`
-```qml
-// Sonuçları önceliklendirme
-import "../js/CategoryManager.js" as CategoryManager
+### 1. Kategori Ayarları Sayfası (Kritik)
+- **Sorun:** Ayarlar penceresinde "Kategoriler" sekmesine tıklandığında sayfa açılmıyordu.
+- **Neden:** `ConfigCategories.qml` dosyasında `KCM.SimpleKCM` kök elemanının yanlış kullanımı ve `Plasmoid.configuration` nesnesine ConfigModel bağlamında güvensiz erişim.
+- **Çözüm:** Kök eleman `Item` olarak değiştirildi, `implicitWidth/Height` tanımlandı ve `cfg_` tabanlı null-safe mülk (property) erişimine geçildi.
+- **Sonuç:** Kategoriler sayfası tüm Plasma 6 sürümlerinde stabil şekilde açılır ve yapılandırılabilir hale getirildi.
 
-property var prioritizedData: CategoryManager.applyPriorityToResults(
-    rawData, 
-    logic.categorySettings
-)
-```
+### 2. Konfigürasyon Lokalizasyonu
+- **Sorun:** Ayarlar menüsündeki sekme başlıkları çeviri dosyasına rağmen İngilizce kalıyordu.
+- **Çözüm:** `config.qml` dosyasına widget'ın yerleşik localization motoru entegre edildi ve tüm başlıklar dinamik hale getirildi.
 
-### Öncelik 2: Benzerlik Sıralaması Entegrasyonu
-**Dosya:** `TileDataManager.qml`
-```qml
-import "../js/SimilarityUtils.js" as SimilarityUtils
-
-property var sortedData: SimilarityUtils.sortByPriorityAndSimilarity(
-    rawData,
-    searchText,
-    logic.categorySettings,
-    CategoryManager.getCategoryPriority
-)
-```
-
-### Öncelik 3: Gizli Kategori Filtreleme
-**Dosya:** `TileDataManager.qml`
-```qml
-property var visibleData: {
-    return rawData.filter(item => 
-        CategoryManager.isCategoryVisible(logic.categorySettings, item.category)
-    )
-}
-```
-
-### Öncelik 4: Telemetri Sıfırlama Butonu
-**Dosya:** `ConfigDebug.qml`
-- "Reset Stats" butonu ekle
-- `TelemetryManager.resetStats()` çağrısı yap
+### 3. Zaman Çizelgesi (Timeline) Butonları
+- **Sorun:** `timeline:/` komutu yazıldığında butonlar hiyerarşik (Ay/Gün) olarak görünmüyor veya yanlış tarih formatı sunuyordu.
+- **Çözüm:** Hiyerarşik navigasyon (Calendar -> Months -> Days) eklendi. Yerel tarih formatları (`toLocaleDateString`) ve "Bugün", "Dün" gibi özel klasör isimleri için KIO uyumlu dinamik buton üretimi sağlandı.
