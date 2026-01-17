@@ -152,6 +152,8 @@ PlasmoidItem {
         
         trFunc: root.tr
         
+        showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
+
         // Signal handlers
         onRequestSearchTextUpdate: (text) => root.searchText = text
         onRequestExpandChange: (exp) => root.expanded = exp

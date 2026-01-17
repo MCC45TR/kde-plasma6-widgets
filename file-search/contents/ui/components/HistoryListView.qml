@@ -65,6 +65,12 @@ Item {
         }
     }
     
+    // Context Menu
+    HistoryContextMenu {
+        id: contextMenu
+        logic: popupRoot.logic
+    }
+
     // History List
     ScrollView {
         anchors.top: historyHeader.bottom
@@ -99,7 +105,7 @@ Item {
                     Rectangle {
                         width: listView.width
                         height: Math.max(42, historyList.listIconSize + 16)
-                        color: itemMouseArea.containsMouse ? Qt.rgba(historyList.accentColor.r, historyList.accentColor.g, historyList.accentColor.b, 0.15) : "transparent"
+                        color: itemMouseArea.containsMouse || (contextMenu.visible && contextMenu.historyItem === modelData) ? Qt.rgba(historyList.accentColor.r, historyList.accentColor.g, historyList.accentColor.b, 0.15) : "transparent"
                         radius: 4
                         
                         RowLayout {
@@ -164,8 +170,16 @@ Item {
                             id: itemMouseArea
                             anchors.fill: parent
                             hoverEnabled: true
+                            acceptedButtons: Qt.LeftButton | Qt.RightButton
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: historyList.itemClicked(modelData)
+                            onClicked: (mouse) => {
+                                if (mouse.button === Qt.RightButton) {
+                                    contextMenu.historyItem = modelData
+                                    contextMenu.popup(itemMouseArea)
+                                } else {
+                                    historyList.itemClicked(modelData)
+                                }
+                            }
                         }
                     }
                 }

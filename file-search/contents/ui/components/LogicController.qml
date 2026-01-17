@@ -62,6 +62,30 @@ Item {
         searchHistory = HistoryManager.clearHistory()
         saveHistory()
     }
+
+    function removeFromHistory(uuid) {
+        searchHistory = HistoryManager.removeFromHistory(searchHistory, uuid)
+        saveHistory()
+    }
+    
+    function executeCommand(command) {
+        // Use the debug overlay's datasource pattern or similar mechanism if available
+        // Since we don't have a global DataSource, we need to expose one here or usage site.
+        // But for "Open With", "Trash", "Open Location", we need shell commands.
+        // We will assume the view creates a DataSource for this purpose.
+        // Or we can add one here.
+    }
+    
+    // Global DataSource for shell commands
+    property var shellSource: null 
+    
+    function runShellCommand(cmd) {
+         if (shellSource) {
+             shellSource.connectedSources = [cmd]
+         } else {
+             console.warn("Shell source not registered!")
+         }
+    }
     
     // ===== ICON CHECK TIMER =====
     Timer {

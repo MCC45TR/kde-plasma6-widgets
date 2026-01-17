@@ -198,6 +198,12 @@ FocusScope {
         }
     }
     
+    // Context Menu
+    HistoryContextMenu {
+        id: contextMenu
+        logic: popupRoot.logic
+    }
+
     // Tile Grid
     ScrollView {
         anchors.top: historyHeader.bottom
@@ -290,7 +296,7 @@ FocusScope {
                                 color: {
                                     if (histTileDelegate.isSelected)
                                         return Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.3)
-                                    if (histTileMouseArea.containsMouse) 
+                                    if (histTileMouseArea.containsMouse || (contextMenu.visible && contextMenu.historyItem === modelData)) 
                                         return Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.15)
                                     return "transparent"
                                 }
@@ -368,8 +374,16 @@ FocusScope {
                                     id: histTileMouseArea
                                     anchors.fill: parent
                                     hoverEnabled: true
+                                    acceptedButtons: Qt.LeftButton | Qt.RightButton
                                     cursorShape: Qt.PointingHandCursor
-                                    onClicked: historyTile.itemClicked(modelData)
+                                    onClicked: (mouse) => {
+                                        if (mouse.button === Qt.RightButton) {
+                                            contextMenu.historyItem = modelData
+                                            contextMenu.popup(histTileMouseArea)
+                                        } else {
+                                            historyTile.itemClicked(modelData)
+                                        }
+                                    }
                                 }
                             }
                         }

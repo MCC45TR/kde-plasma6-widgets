@@ -144,3 +144,10 @@ function updateItemIcon(historyArray, uuid, newIcon) {
 function clearHistory() {
     return []
 }
+
+// Remove single item by UUID
+function removeFromHistory(historyArray, uuid) {
+    return historyArray.filter(function (item) {
+        return item.uuid !== uuid
+    })
+}

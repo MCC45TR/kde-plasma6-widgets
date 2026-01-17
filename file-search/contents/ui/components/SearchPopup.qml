@@ -15,6 +15,22 @@ Item {
     property string searchText: ""
     property bool expanded: false
     
+    onExpandedChanged: {
+        if (expanded) {
+            // Force focus when popup opens
+            if (isButtonMode) {
+                buttonModeSearchInput.focusInput()
+            } else {
+                hiddenSearchInput.forceActiveFocus()
+            }
+        } else {
+            // Clear search text when popup closes
+            requestSearchTextUpdate("")
+            buttonModeSearchInput.clear()
+            hiddenSearchInput.text = ""
+        }
+    }
+    
     // Configuration
     property int displayMode: 0
     property int viewMode: 0
@@ -25,6 +41,8 @@ Item {
     property color accentColor
     property color bgColor
     
+    property bool showDebug: false
+
     property var trFunc
     
     // Signals to Main
@@ -45,6 +63,14 @@ Item {
     // internal state
     property int focusSection: 0
     property string activeBackend: "Milou"
+    
+    // Mat Background
+    Rectangle {
+        anchors.fill: parent
+        color: Kirigami.Theme.backgroundColor
+        radius: 12
+        z: -1
+    }
     
     // ===== DATA MANAGER =====
     TileDataManager {
@@ -78,8 +104,7 @@ Item {
         } else {
             if (focusSection === 1) {
                 focusSection = 0;
-                if (isButtonMode) buttonModeSearchInput.focusInput();
-                else hiddenSearchInput.forceActiveFocus();
+                hiddenSearchInput.forceActiveFocus();
             }
         }
     }
@@ -103,7 +128,8 @@ Item {
     }
     
     function handleHistoryClick(item) {
-        if (item.filePath && item.filePath.toString().length > 0) {
+        // If it's likely an application (.desktop), DO NOT openUrlExternally, but treat as search/run
+        if (item.filePath && item.filePath.toString().length > 0 && item.filePath.toString().indexOf(".desktop") === -1) {
             Qt.openUrlExternally(item.filePath);
             requestExpandChange(false);
             return;
@@ -122,7 +148,7 @@ Item {
         interval: 400
         repeat: false
         onTriggered: {
-            if (resultsModel.rowCount() > 0) {
+            if (tileData.resultCount > 0) {
                 var idx = resultsModel.index(0, 0);
                 resultsModel.run(idx);
                 requestSearchTextUpdate("");
@@ -133,11 +159,11 @@ Item {
 
     // ===== UI COMPONENTS =====
     
-    // Hidden Input
+    // Hidden Input - Active in NON-BUTTON modes
     HiddenSearchInput {
         id: hiddenSearchInput
         visible: !isButtonMode
-        resultCount: resultsListLoader.active ? resultsListLoader.item.count : 0
+        resultCount: tileData.resultCount
         currentIndex: resultsListLoader.active ? resultsListLoader.item.currentIndex : 0 // approximate
         
         onTextUpdated: (newText) => {
@@ -145,35 +171,17 @@ Item {
             requestSearchTextUpdate(newText);
         }
         onSearchSubmitted: (idx) => {
-             // Logic to find item at idx and run it
-             // Simplified: use handleResultClick logic but need data
-             if (resultsModel.rowCount() > 0) {
+             if (tileData.resultCount > 0) {
                  var modelIdx = resultsModel.index(idx, 0);
                  var display = resultsModel.data(modelIdx, Qt.DisplayRole) || "";
                  var decoration = resultsModel.data(modelIdx, Qt.DecorationRole) || "";
                  var category = resultsModel.data(modelIdx, resultsModel.CategoryRole) || "";
                  var matchId = resultsModel.data(modelIdx, resultsModel.DuplicateRole) || display;
-                 
-                 // Proxy lookup tricky here as Repeater is inside TileDataManager.
-                 // We can use resultsModel directly or helper.
-                 // For now, let's assume direct URL role or standard Milou run behavior + history
-                 
-                 // We need distinct logic for URL resolution if possible.
-                 // Ideally TileDataManager could expose a helper but it's internal.
-                 // Let's rely on standard model run for simplicity OR move URL resolution logic to LogicController helper?
-                 // For now, standard run:
-                 
-                 // Capture URL logic locally
                  var url = resultsModel.data(modelIdx, resultsModel.UrlRole) || ""; 
-                 // (Milou UrlRole might differ, check main.qml used Proxy).
-                 // main.qml used Proxy to get specific 'url', 'urls', 'subtext'.
-                 // We can't access TileDataManager's internal repeater easily.
-                 // BUT hiddenSearchInput is mainly for list view or direct typing.
-                 // List View logic works.
                  
                  handleResultClick(idx, display, decoration, category, matchId, url);
              }
-        }
+         }
         onEscapePressed: {
              requestSearchTextUpdate("");
              requestExpandChange(false);
@@ -198,7 +206,7 @@ Item {
         textColor: popupRoot.textColor
         accentColor: popupRoot.accentColor
         placeholderText: trFunc("search_placeholder") || "Arama Yapın"
-        resultCount: resultsModel.rowCount()
+        resultCount: tileData.resultCount
         resultsModel: resultsModel
         
         // Manual binding for text (Popup -> Input)
@@ -222,12 +230,9 @@ Item {
 
         onSearchSubmitted: (text, idx) => {
              // Just run index 0 or selected
-             if (resultsModel.rowCount() > 0) {
+             if (tileData.resultCount > 0) {
                  var modelIdx = resultsModel.index(idx, 0);
                  var display = resultsModel.data(modelIdx, Qt.DisplayRole);
-                 // ... simplify
-                 handleResultClick(idx, display, "", "", "", ""); // URL fallback handled inside? No.
-                 // We should ideally fix URL resolution. For now, basic run.
                  resultsModel.run(modelIdx);
                  requestSearchTextUpdate("");
                  buttonModeSearchInput.clear();
@@ -255,7 +260,7 @@ Item {
         anchors.margins: 12
         
         resultsModel: resultsModel
-        resultCount: resultsModel.rowCount()
+        resultCount: tileData.resultCount
         searchText: popupRoot.searchText
         accentColor: popupRoot.accentColor
         textColor: popupRoot.textColor
@@ -272,7 +277,7 @@ Item {
     Loader {
         id: queryHintsLoader
         anchors.top: primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top
-        anchors.topMargin: 8
+        anchors.topMargin: primaryResultPreview.visible ? 8 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
@@ -291,11 +296,12 @@ Item {
     // Pinned Section (Loader)
     Loader {
         id: pinnedLoader
-        anchors.top: queryHintsLoader.item ? queryHintsLoader.item.bottom : (primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top)
-        anchors.topMargin: 8
+        anchors.top: queryHintsLoader.bottom
+        anchors.topMargin: active ? 8 : 0
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: 12
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
         
         property var items: logic.getVisiblePinnedItems()
         active: items.length > 0
@@ -314,7 +320,7 @@ Item {
                     requestSearchTextUpdate(item.display);
                     // delayed run...
                     Qt.callLater(() => {
-                        if (resultsModel.rowCount() > 0) resultsModel.run(resultsModel.index(0, 0));
+                        if (tileData.resultCount > 0) resultsModel.run(resultsModel.index(0, 0));
                     });
                 }
                 requestExpandChange(false);
@@ -326,13 +332,15 @@ Item {
     // Result List View (Loader)
     Loader {
         id: resultsListLoader
-        anchors.top: pinnedLoader.item ? pinnedLoader.item.bottom : (queryHintsLoader.item ? queryHintsLoader.item.bottom : (primaryResultPreview.visible ? primaryResultPreview.bottom : parent.top))
-        anchors.topMargin: 12
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: isButtonMode ? buttonModeSearchInput.top : parent.bottom
-        anchors.margins: 12
-        anchors.bottomMargin: isButtonMode ? 6 : 12
+        anchors.bottom: parent.bottom // Anchor to parent bottom
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
+        // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
+        anchors.bottomMargin: isButtonMode ? (buttonModeSearchInput.height + 12) : 12
         
         active: !isTileView && searchText.length > 0
         
@@ -381,9 +389,10 @@ Item {
          anchors.top: parent.top
          anchors.left: parent.left
          anchors.right: parent.right
-         anchors.bottom: isButtonMode ? buttonModeSearchInput.top : parent.bottom
+         anchors.bottom: parent.bottom // Anchor to parent bottom
          anchors.margins: 12
-         anchors.bottomMargin: isButtonMode ? 6 : 12
+         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
+         anchors.bottomMargin: isButtonMode ? (buttonModeSearchInput.height + 12) : 12
          
          active: searchText.length === 0 && logic.searchHistory.length > 0
          
@@ -441,6 +450,7 @@ Item {
          anchors.right: parent.right
          anchors.margins: 8
          z: 9999
+         visible: parent.showDebug
          // ... bind to tileData stats ...
          resultCount: tileData.resultCount
          activeBackend: popupRoot.activeBackend
@@ -453,8 +463,8 @@ Item {
     }
 
     Component.onCompleted: {
-        if (!isButtonMode && hiddenSearchInput) {
-             hiddenSearchInput.forceActiveFocus();
-        }
+         if (!isButtonMode && hiddenSearchInput) {
+            hiddenSearchInput.forceActiveFocus();
+         }
     }
 }
