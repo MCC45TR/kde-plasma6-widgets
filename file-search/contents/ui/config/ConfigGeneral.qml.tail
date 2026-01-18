@@ -1,0 +1,10 @@
+                        Label {
+                            text: i18n("Convert units (requires KRunner)")
+                            Layout.fillWidth: true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

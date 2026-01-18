@@ -7,7 +7,7 @@ import "../js/CategoryManager.js" as CategoryManager
 Kirigami.FormLayout {
     id: configCategories
     
-    property string title: i18n("Categories")
+    property string title: i18n("Search")
     
     // KCM Configuration Properties (must match main.xml)
     property string cfg_categorySettings
@@ -15,6 +15,48 @@ Kirigami.FormLayout {
     property int cfg_minResults
     property int cfg_maxResults
     property bool cfg_smartResultLimit
+    
+    // Missing Config Properties (Added to silence warnings)
+    property int cfg_searchAlgorithmDefault
+    property int cfg_minResultsDefault
+    property int cfg_maxResultsDefault
+    property bool cfg_smartResultLimitDefault
+    property string cfg_categorySettingsDefault
+
+    property string cfg_pinnedItems
+    property string cfg_pinnedItemsDefault
+    property bool cfg_prefixDateShowClock
+    property bool cfg_prefixDateShowClockDefault
+    property bool cfg_prefixDateShowEvents
+    property bool cfg_prefixDateShowEventsDefault
+    property bool cfg_prefixPowerShowHibernate
+    property bool cfg_prefixPowerShowHibernateDefault
+    property bool cfg_prefixPowerShowSleep
+    property bool cfg_prefixPowerShowSleepDefault
+    property bool cfg_previewEnabled
+    property bool cfg_previewEnabledDefault
+    property string cfg_previewSettings
+    property string cfg_previewSettingsDefault
+    property string cfg_searchHistory
+    property string cfg_searchHistoryDefault
+    property bool cfg_showBootOptions
+    property bool cfg_showBootOptionsDefault
+    property bool cfg_showPinnedBar
+    property bool cfg_showPinnedBarDefault
+    property string cfg_telemetryData
+    property string cfg_telemetryDataDefault
+    property int cfg_userProfile
+    property int cfg_userProfileDefault
+    property int cfg_viewMode
+    property int cfg_viewModeDefault
+    property int cfg_iconSize
+    property int cfg_iconSizeDefault
+    property int cfg_listIconSize
+    property int cfg_listIconSizeDefault
+    property bool cfg_debugOverlay
+    property bool cfg_debugOverlayDefault
+    property int cfg_displayMode
+    property int cfg_displayModeDefault
     
     // Internal state management
     property var categorySettings: ({})
@@ -328,18 +370,19 @@ Kirigami.FormLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: Math.max(combinedListColumn.implicitHeight + 20, 60)
         
+        // Empty state
+        Label {
+            visible: combinedModel.count === 0
+            text: i18n("No combined categories")
+            opacity: 0.5
+            anchors.centerIn: parent
+            z: 1 // Ensure it's on top if needed, though column is transparent usually
+        }
+
         Column {
             id: combinedListColumn
             anchors.fill: parent
             spacing: 4
-            
-            // Empty state
-            Label {
-                visible: combinedModel.count === 0
-                text: i18n("No combined categories")
-                opacity: 0.5
-                anchors.centerIn: parent
-            }
             
             Repeater {
                 model: combinedModel

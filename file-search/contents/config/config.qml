@@ -7,7 +7,11 @@ ConfigModel {
         icon: "preferences-desktop-display-color"
         source: "config/ConfigGeneral.qml"
     }
-
+    ConfigCategory {
+        name: i18n("Search")
+        icon: "search"
+        source: "config/ConfigCategories.qml"
+    }
     ConfigCategory {
         name: i18n("Debug")
         icon: "tools-report-bug"

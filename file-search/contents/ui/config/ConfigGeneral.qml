@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
-import "../js/CategoryManager.js" as CategoryManager
+
 
 Item {
     id: configGeneral
@@ -23,9 +23,9 @@ Item {
     property alias cfg_viewMode: viewModeCombo.currentIndex
     property int cfg_iconSize
     property int cfg_listIconSize
-    property alias cfg_minResults: minResultsSpin.value
-    property alias cfg_maxResults: maxResultsSpin.value
-    property alias cfg_smartResultLimit: smartLimitSwitch.checked
+    property int cfg_minResults
+    property int cfg_maxResults
+    property bool cfg_smartResultLimit
     property alias cfg_showPinnedBar: showPinnedBarCheck.checked
     property int cfg_searchAlgorithm 
     
@@ -53,104 +53,7 @@ Item {
     property var previewSettings: ({})
     readonly property var iconSizeModel: [16, 22, 32, 48, 64, 128]
 
-    // --- Category Logic ---
-    property var categorySettings: ({})
-    
-    property var uniqueCategories: [
-        { name: "Applications", nameKey: "applications", icon: "applications-all" },
-        { name: "Files", nameKey: "files", icon: "folder-documents" },
-        { name: "Documents", nameKey: "documents", icon: "x-office-document" },
-        { name: "Folders", nameKey: "folders", icon: "folder" },
-        { name: "Web", nameKey: "web", icon: "internet-web-browser" },
-        { name: "Calculator", nameKey: "calculator", icon: "accessories-calculator" }
-    ]
-    
-    property var separateCategories: []
-    property var combinedCategories: []
-    
-    onCfg_categorySettingsChanged: {
-        categorySettings = CategoryManager.loadCategorySettings(cfg_categorySettings || "{}")
-        refreshLists()
-    }
 
-    function refreshLists() {
-        var cats = uniqueCategories.slice()
-        var separate = []
-        var combined = []
-        var currentSettings = categorySettings || {}
-        
-        for(var i=0; i<cats.length; i++) {
-            if (CategoryManager.isCategoryMerged(currentSettings, cats[i].name)) {
-                combined.push(cats[i])
-            } else {
-                separate.push(cats[i])
-            }
-        }
-        
-        separate.sort(function(a, b) {
-            return CategoryManager.getCategoryPriority(currentSettings, a.name) - CategoryManager.getCategoryPriority(currentSettings, b.name)
-        })
-        
-        combined.sort(function(a, b) {
-            return CategoryManager.getCategoryPriority(currentSettings, a.name) - CategoryManager.getCategoryPriority(currentSettings, b.name)
-        })
-        
-        separateCategories = separate
-        combinedCategories = combined
-        rebuildModels()
-    }
-    
-    function saveCategorySettings() {
-        Qt.callLater(() => {
-            cfg_categorySettings = CategoryManager.saveCategorySettings(categorySettings)
-            refreshLists()
-        })
-    }
-    
-    function rebuildModels() {
-        separateModel.clear()
-        for (var i = 0; i < separateCategories.length; i++) {
-            separateModel.append({
-                "catName": separateCategories[i].name,
-                "catNameKey": separateCategories[i].nameKey,
-                "catIcon": separateCategories[i].icon,
-                "isMerged": false
-            })
-        }
-        combinedModel.clear()
-        for (var j = 0; j < combinedCategories.length; j++) {
-            combinedModel.append({
-                "catName": combinedCategories[j].name,
-                "catNameKey": combinedCategories[j].nameKey,
-                "catIcon": combinedCategories[j].icon,
-                "isMerged": true
-            })
-        }
-    }
-    
-    function moveToCombined(name) {
-        categorySettings = CategoryManager.setCategoryMerged(categorySettings, name, true)
-        saveCategorySettings()
-    }
-    
-    function moveToSeparate(name) {
-        categorySettings = CategoryManager.setCategoryMerged(categorySettings, name, false)
-        saveCategorySettings()
-    }
-    
-    function moveItem(name, direction) {
-        var list = CategoryManager.isCategoryMerged(categorySettings, name) ? combinedCategories : separateCategories
-        if (direction === -1) {
-            categorySettings = CategoryManager.moveCategoryUp(categorySettings, name, list.map(c => c.name))
-        } else {
-            categorySettings = CategoryManager.moveCategoryDown(categorySettings, name, list.map(c => c.name))
-        }
-        saveCategorySettings()
-    }
-
-    ListModel { id: separateModel }
-    ListModel { id: combinedModel }
-    // --- End Category Logic ---
 
     // Init Logic
     Component.onCompleted: {
@@ -159,10 +62,6 @@ Item {
         } catch (e) {
             previewSettings = {"images": true, "videos": false, "text": false, "documents": false}
         }
-        
-        // Init Categories
-        categorySettings = CategoryManager.loadCategorySettings(cfg_categorySettings || "{}")
-        refreshLists()
     }
     
     // Save Logic for Previews
@@ -189,10 +88,7 @@ Item {
                 text: i18n("Popup")
                 icon.name: "window-new"
             }
-            TabButton {
-                text: i18n("Search")
-                icon.name: "search"
-            }
+
             TabButton {
                 text: i18n("Preview")
                 icon.name: "view-preview"
@@ -201,10 +97,7 @@ Item {
                 text: i18n("Prefixes")
                 icon.name: "code-context"
             }
-            TabButton {
-                text: i18n("Placeholder")
-                icon.name: "edit-entry"
-            }
+
         }
         
         Frame {
@@ -456,236 +349,7 @@ Item {
                     }
                 }
 
-                // TAB 3: SEARCH
-                Kirigami.FormLayout {
-                    // Result Count Section
-                    Kirigami.Separator {
-                         Kirigami.FormData.label: i18n("Result Count")
-                         Kirigami.FormData.isSection: true
-                    }
-                    
-                    SpinBox {
-                        id: minResultsSpin
-                        Kirigami.FormData.label: i18n("Min Results")
-                        from: 1
-                        to: 10
-                    }
-                    
-                    SpinBox {
-                        id: maxResultsSpin
-                        Kirigami.FormData.label: i18n("Max Results")
-                        from: 5
-                        to: 50
-                    }
-                    
-                    CheckBox {
-                        id: smartLimitSwitch
-                        text: i18n("Smartly limit results based on relevance")
-                        Kirigami.FormData.label: i18n("Dynamic Limit")
-                    }
-                    
-                    // Priority Ranking Section
-                    Kirigami.Separator {
-                        Kirigami.FormData.isSection: true
-                        Kirigami.FormData.label: i18n("Priority Ranking")
-                    }
-                    
-                    Label {
-                        text: i18n("Use buttons to reorder categories or move between sections. Lower number = higher priority.")
-                        font.pixelSize: 11
-                        opacity: 0.6
-                        wrapMode: Text.WordWrap
-                        Layout.fillWidth: true
-                    }
-                    
-                    // Separate Categories List
-                    Item {
-                        Kirigami.FormData.label: i18n("Priority")
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: separateListColumn.implicitHeight + 20
-                        
-                        Column {
-                            id: separateListColumn
-                            anchors.fill: parent
-                            spacing: 4
-                            
-                            Repeater {
-                                model: separateModel
-                                
-                                delegate: Rectangle {
-                                    width: parent.width
-                                    height: 44
-                                    color: delegateMouse.containsMouse ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1) : "transparent"
-                                    radius: 4
-                                    
-                                    MouseArea {
-                                        id: delegateMouse
-                                        anchors.fill: parent
-                                        hoverEnabled: true
-                                    }
-                                    
-                                    RowLayout {
-                                        anchors.fill: parent
-                                        anchors.leftMargin: 8
-                                        anchors.rightMargin: 8
-                                        spacing: 12
-                                        
-                                        // Visibility checkbox
-                                        CheckBox {
-                                            id: visCheckSep
-                                            checked: CategoryManager.isCategoryVisible(categorySettings, model.catName)
-                                            
-                                            onToggled: {
-                                                categorySettings = CategoryManager.setCategoryVisibility(categorySettings, model.catName, checked)
-                                                saveCategorySettings()
-                                            }
-                                        }
-                                        
-                                        // Category icon
-                                        Kirigami.Icon {
-                                            source: CategoryManager.getEffectiveIcon(categorySettings, model.catName, model.catIcon)
-                                            Layout.preferredWidth: 22
-                                            Layout.preferredHeight: 22
-                                        }
-                                        
-                                        Label {
-                                            text: i18n(model.catName) || model.catName
-                                            Layout.fillWidth: true
-                                            elide: Text.ElideRight
-                                        }
-                                        
-                                        // Priority display
-                                        Label {
-                                            text: "#" + (index + 1)
-                                            font.bold: true
-                                            opacity: 0.6
-                                            Layout.preferredWidth: 30
-                                            horizontalAlignment: Text.AlignCenter
-                                        }
-                                        
-                                        // Move up button
-                                        Button {
-                                            icon.name: "arrow-up"
-                                            flat: true
-                                            enabled: index > 0
-                                            Layout.preferredWidth: 30
-                                            Layout.preferredHeight: 30
-                                            onClicked: moveItem(model.catName, -1)
-                                        }
-                                        
-                                        // Move down button
-                                        Button {
-                                            icon.name: "arrow-down"
-                                            flat: true
-                                            enabled: index < separateModel.count - 1
-                                            Layout.preferredWidth: 30
-                                            Layout.preferredHeight: 30
-                                            onClicked: moveItem(model.catName, 1)
-                                        }
-                                        
-                                        // Move to combined button
-                                        Button {
-                                            icon.name: "arrow-down-double"
-                                            flat: true
-                                            ToolTip.text: i18n("Move to Combined")
-                                            ToolTip.visible: hovered
-                                            Layout.preferredWidth: 30
-                                            Layout.preferredHeight: 30
-                                            onClicked: moveToCombined(model.catName)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
 
-                    // Combined Section
-                    Kirigami.Separator {
-                        Kirigami.FormData.isSection: true
-                        Kirigami.FormData.label: i18n("Show Together")
-                    }
-                    
-                    // Combined Categories List
-                    Item {
-                        Kirigami.FormData.label: " "
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: Math.max(combinedListColumn.implicitHeight + 20, 60)
-                        
-                        Column {
-                            id: combinedListColumn
-                            anchors.fill: parent
-                            spacing: 4
-                            
-                            // Empty state
-                            Label {
-                                visible: combinedModel.count === 0
-                                text: i18n("No combined categories")
-                                opacity: 0.5
-                                anchors.centerIn: parent
-                            }
-                            
-                            Repeater {
-                                model: combinedModel
-                                
-                                delegate: Rectangle {
-                                    width: parent.width
-                                    height: 44
-                                    color: combinedDelegateMouse.containsMouse ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1) : "transparent"
-                                    radius: 4
-                                    
-                                    MouseArea {
-                                        id: combinedDelegateMouse
-                                        anchors.fill: parent
-                                        hoverEnabled: true
-                                    }
-                                    
-                                    RowLayout {
-                                        anchors.fill: parent
-                                        anchors.leftMargin: 8
-                                        anchors.rightMargin: 8
-                                        spacing: 12
-                                        
-                                        // Visibility checkbox
-                                        CheckBox {
-                                            id: visCheckComb
-                                            checked: CategoryManager.isCategoryVisible(categorySettings, model.catName)
-                                            
-                                            onToggled: {
-                                                categorySettings = CategoryManager.setCategoryVisibility(categorySettings, model.catName, checked)
-                                                saveCategorySettings()
-                                            }
-                                        }
-                                        
-                                        // Category icon
-                                        Kirigami.Icon {
-                                            source: CategoryManager.getEffectiveIcon(categorySettings, model.catName, model.catIcon)
-                                            Layout.preferredWidth: 22
-                                            Layout.preferredHeight: 22
-                                        }
-                                        
-                                        // Category name
-                                        Label {
-                                            text: i18n(model.catName) || model.catName
-                                            Layout.fillWidth: true
-                                            elide: Text.ElideRight
-                                        }
-                                        
-                                        // Move to separate button
-                                        Button {
-                                            icon.name: "arrow-up-double"
-                                            flat: true
-                                            ToolTip.text: i18n("Move to Separate")
-                                            ToolTip.visible: hovered
-                                            Layout.preferredWidth: 32
-                                            Layout.preferredHeight: 32
-                                            onClicked: moveToSeparate(model.catName)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
                 
                 // TAB 4: PREVIEW
                 Kirigami.FormLayout {
@@ -1032,23 +696,8 @@ Item {
                             Layout.fillWidth: true
                         }
                     }
-                }
-                
-                
-                // TAB 5: PLACEHOLDER (Search Settings)
-                Kirigami.FormLayout {
-                     Kirigami.Separator {
-                        Kirigami.FormData.label: i18n("Search Settings")
-                        Kirigami.FormData.isSection: true
-                    }
-                     ComboBox {
-                         Kirigami.FormData.label: i18n("Search Algorithm")
-                         model: [i18n("Fuzzy"), i18n("Exact"), i18n("Starts With")]
-                         currentIndex: cfg_searchAlgorithm
-                         onActivated: cfg_searchAlgorithm = currentIndex
-                     }
-                }
+                }       
             }
         }
     }
-
+}
