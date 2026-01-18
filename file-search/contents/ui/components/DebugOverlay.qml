@@ -14,7 +14,8 @@ Rectangle {
     property string displayModeName: "Button"
     
     // Localization
-    property var tr: function(k) { return k }
+    // Localization removed
+    // Use standard i18n()
     
     // Telemetry data
     property int totalSearches: 0
@@ -36,7 +37,7 @@ Rectangle {
         connectedSources: []
         onNewData: (sourceName, data) => {
             disconnectSource(sourceName)
-            saveBtn.text = root.tr("saved")
+            saveBtn.text = i18n("Saved!")
             saveBtnTimer.start()
         }
     }
@@ -44,7 +45,7 @@ Rectangle {
     Timer {
         id: saveBtnTimer
         interval: 2000
-        onTriggered: saveBtn.text = root.tr("save_dump")
+        onTriggered: saveBtn.text = i18n("Save Dump")
     }
     
     ColumnLayout {
@@ -53,7 +54,7 @@ Rectangle {
         spacing: 4
         
         Label {
-            text: root.tr("debug_overlay_title")
+            text: i18n("Debug Overlay")
             font.bold: true
             font.pixelSize: 10
             color: Kirigami.Theme.highlightColor
@@ -73,33 +74,33 @@ Rectangle {
             columnSpacing: 10
             
             // Current Session
-            Label { text: root.tr("backend") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18n("Backend") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.activeBackend; color: "#00ff00"; font.pixelSize: 10; font.bold: true }
             
-            Label { text: root.tr("items") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18n("Items") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.resultCount.toString(); color: "white"; font.pixelSize: 10 }
             
-            Label { text: root.tr("latency") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18n("Latency") + ":"; color: "white"; font.pixelSize: 10 }
             Label { 
                 text: root.lastLatency + " ms"; 
                 color: root.lastLatency > 150 ? "red" : (root.lastLatency > 50 ? "yellow" : "#00ff00"); 
                 font.pixelSize: 10 
             }
             
-            Label { text: root.tr("view") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18n("View") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.viewModeName; color: "white"; font.pixelSize: 10 }
             
-            Label { text: root.tr("display") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18n("Display") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.displayModeName; color: "white"; font.pixelSize: 10 }
 
             // Divider
             Item { Layout.columnSpan: 2; height: 4; width: 1 }
 
             // Telemetry (Persistent)
-            Label { text: root.tr("total") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
+            Label { text: i18n("Total Searches") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
             Label { text: root.totalSearches.toString(); color: "#aaaaaa"; font.pixelSize: 9 }
 
-            Label { text: root.tr("avg_lat") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
+            Label { text: i18n("Avg Latency") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
             Label { text: root.avgLatency + " ms"; color: "#aaaaaa"; font.pixelSize: 9 }
         }
         
@@ -114,7 +115,7 @@ Rectangle {
         // Save Button
         Button {
             id: saveBtn
-            text: root.tr("save_dump")
+            text: i18n("Save Dump")
             Layout.fillWidth: true
             Layout.preferredHeight: 24
             font.pixelSize: 10

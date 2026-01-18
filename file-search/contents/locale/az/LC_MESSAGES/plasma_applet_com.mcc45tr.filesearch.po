@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: az\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Axtar"
+
+msgid "Search Here"
+msgstr "Burada axtar"
+
+msgid "Start searching..."
+msgstr "Axtarışa başla..."
+
+msgid "No results found"
+msgstr "Nəticə tapılmadı"
+
+msgid "Type to start searching"
+msgstr "Axtarmaq üçün yazın"
+
+msgid "Recent Searches"
+msgstr "Son axtarışlar"
+
+msgid "Clear History"
+msgstr "Tarixçəni təmizlə"
+
+msgid "Applications"
+msgstr "Tətbiqlər"
+
+msgid "Other"
+msgstr "Digər"
+
+msgid "Today"
+msgstr "Bu gün"
+
+msgid "List View"
+msgstr "Siyahı görünüşü"
+
+msgid "Tile View"
+msgstr "Plitə görünüşü"
+
+msgid "General"
+msgstr "Ümumi"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Appearance"
+msgstr "Görünüş"
+
+msgid "Pinned Items"
+msgstr "Sabitlənmişlər"
+
+msgid "Pin"
+msgstr "Sabitlə"
+
+msgid "Unpin"
+msgstr "Sabitləməni qaldır"
+
+msgid "Category Settings"
+msgstr "Kateqoriya Tənzimləmələri"
+
+msgid "Files"
+msgstr "Fayllar"
+
+msgid "Documents"
+msgstr "Sənədlər"
+
+msgid "Folders"
+msgstr "Qovluqlar"
+
+msgid "Web"
+msgstr "Veb"
+
+msgid "Open"
+msgstr "Aç"
+
+msgid "Copy Path"
+msgstr "Yolu kopyala"
+
+msgid "Open in Terminal"
+msgstr "Terminalda aç"
+
+msgid "Move to Trash"
+msgstr "Zibil qutusuna daşı"
+
+msgid "Open Containing Folder"
+msgstr "Qovluğu aç"
+
+msgid "Properties"
+msgstr "Xüsusiyyətlər"
+
+msgid "Manage Application"
+msgstr "Tətbiqi idarə et"
+
+msgid "Remove from History"
+msgstr "Tarixçədən sil"
+
+msgid "Reset Statistics"
+msgstr "Statistikanı sıfırla"
+
+msgid "Run Command"
+msgstr "Əmr icra et"
+
+msgid "Bookmarks"
+msgstr "Əlfəcinlər"
+
+msgid "Power Management"
+msgstr "Güc idarəetməsi"
+
+msgid "System Settings"
+msgstr "Sistem tənzimləmələri"
+
+msgid "Date & Time"
+msgstr "Tarix və Saat"
+
+msgid "Dictionary Definition"
+msgstr "Lüğət tərifi"
+
+msgid "Unit Converter"
+msgstr "Vahid çevirici"
+
+msgid "Help & Shortcuts"
+msgstr "Kömək və Qısayollar"
+
+msgid "Man package is not installed"
+msgstr "Man paketi quraşdırılmayıb"
+

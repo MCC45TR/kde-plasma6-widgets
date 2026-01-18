@@ -3,27 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-// Import localization
-import "../js/localization.js" as LocalizationData
-
-Item {
-    id: configPreview
-    implicitWidth: 600
-    implicitHeight: 400
-    
-    // Localization
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
+    // Localization removed
+    // Use standard i18n()
     
     // KCM Configuration Properties
     property string cfg_previewSettings
@@ -67,13 +48,13 @@ Item {
         
         // Header
         Label {
-            text: tr("config_preview")
+            text: i18n("Preview Settings")
             font.bold: true
             font.pixelSize: 16
         }
         
         Label {
-            text: tr("preview_settings_desc")
+            text: i18n("Enable or disable file previews for different file types.")
             opacity: 0.7
             font.pixelSize: 12
             wrapMode: Text.WordWrap
@@ -82,7 +63,7 @@ Item {
         
         // Master Preview Toggle
         GroupBox {
-            title: tr("enable_preview")
+            title: i18n("Enable File Previews")
             Layout.fillWidth: true
             
             RowLayout {
@@ -96,7 +77,7 @@ Item {
                 }
                 
                 Label {
-                    text: masterPreviewSwitch.checked ? tr("preview_enabled") : tr("preview_disabled")
+                    text: masterPreviewSwitch.checked ? i18n("Enabled") : i18n("Disabled")
                     opacity: 0.7
                 }
             }
@@ -104,7 +85,7 @@ Item {
         
         // Preview Types
         GroupBox {
-            title: tr("preview_types")
+            title: i18n("Preview Types")
             Layout.fillWidth: true
             enabled: masterPreviewSwitch.checked
             opacity: enabled ? 1.0 : 0.5
@@ -129,7 +110,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: tr("preview_images")
+                            text: i18n("Images")
                             font.bold: true
                         }
                         Label {
@@ -167,7 +148,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: tr("preview_videos")
+                            text: i18n("Videos")
                             font.bold: true
                         }
                         Label {
@@ -205,7 +186,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: tr("preview_text")
+                            text: i18n("Text Files")
                             font.bold: true
                         }
                         Label {
@@ -243,7 +224,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: tr("preview_documents")
+                            text: i18n("Documents")
                             font.bold: true
                         }
                         Label {
@@ -277,12 +258,12 @@ Item {
                 spacing: 4
                 
                 Label {
-                    text: "ℹ️ " + tr("preview_info_title")
+                    text: "ℹ️ " + i18n("Performance Information")
                     font.bold: true
                 }
                 
                 Label {
-                    text: tr("preview_info_desc")
+                    text: i18n("Video and document previews may increase memory usage.")
                     opacity: 0.8
                     wrapMode: Text.WordWrap
                     Layout.fillWidth: true

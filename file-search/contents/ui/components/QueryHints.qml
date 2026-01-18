@@ -17,9 +17,6 @@ Rectangle {
     // Signals
     signal hintSelected(string text)
     
-    // Localization function
-    property var trFunc: function(key) { return key }
-    
     // Computed hint based on search text
     property var currentHint: detectHint(searchText)
     
@@ -40,39 +37,39 @@ Rectangle {
     readonly property var knownPrefixes: [
         { 
             prefix: "timeline:/", 
-            hint: "hint_timeline", 
+            hint: i18n("Timeline View"), 
             icon: "view-calendar",
             options: [
-                { label: "Calendar", labelKey: "btn_calendar", value: "timeline:/calendar/" },
-                { label: "Today", labelKey: "btn_today", value: "timeline:/today" },
-                { label: "Yesterday", labelKey: "btn_yesterday", value: "timeline:/yesterday" },
-                { label: "This Week", labelKey: "btn_thisweek", value: "timeline:/thisweek" },
-                { label: "This Month", labelKey: "btn_thismonth", value: "timeline:/thismonth" }
+                { label: i18n("Calendar"), value: "timeline:/calendar/" },
+                { label: i18n("Today"), value: "timeline:/today" },
+                { label: i18n("Yesterday"), value: "timeline:/yesterday" },
+                { label: i18n("This Week"), value: "timeline:/thisweek" },
+                { label: i18n("This Month"), value: "timeline:/thismonth" }
             ]
         },
         // Specific timeline shortcuts (still needed for direct hits)
-        { prefix: "timeline:/today", hint: "hint_timeline_today", icon: "view-calendar-day" },
-        { prefix: "timeline:/yesterday", hint: "hint_timeline_yesterday", icon: "view-calendar-day" },
-        { prefix: "timeline:/thisweek", hint: "hint_timeline_week", icon: "view-calendar-week" },
-        { prefix: "timeline:/thismonth", hint: "hint_timeline_month", icon: "view-calendar-month" },
+        { prefix: "timeline:/today", hint: i18n("Files modified today"), icon: "view-calendar-day" },
+        { prefix: "timeline:/yesterday", hint: i18n("Files modified yesterday"), icon: "view-calendar-day" },
+        { prefix: "timeline:/thisweek", hint: i18n("Files modified this week"), icon: "view-calendar-week" },
+        { prefix: "timeline:/thismonth", hint: i18n("Files modified this month"), icon: "view-calendar-month" },
         
-        { prefix: "file:/", hint: "hint_file_path", icon: "folder", key: "file" },
-        { prefix: "man:/", hint: "hint_man_page", icon: "help-contents", key: "man" },
-        { prefix: "gg:", hint: "hint_google", icon: "google", key: "google" },
-        { prefix: "dd:", hint: "hint_duckduckgo", icon: "internet-web-browser", key: "ddg" },
-        { prefix: "wp:", hint: "hint_wikipedia", icon: "wikipedia", key: "wikipedia" },
-        { prefix: "kill ", hint: "hint_kill", icon: "process-stop", key: "kill" },
-        { prefix: "spell ", hint: "hint_spell", icon: "tools-check-spelling", key: "spell" },
-        { prefix: "#", hint: "hint_unicode", icon: "character-set", key: "unicode" },
-        { prefix: "app:", hint: "hint_applications", icon: "applications-all", key: "app" },
-        { prefix: "shell:", hint: "hint_shell", icon: "utilities-terminal", key: "shell" },
-        { prefix: "b:", hint: "hint_bookmarks", icon: "bookmarks", key: "bookmarks" },
-        { prefix: "power:", hint: "hint_power", icon: "system-shutdown", key: "power" },
-        { prefix: "services:", hint: "hint_services", icon: "preferences-system", key: "services" },
-        { prefix: "date", hint: "hint_datetime", icon: "alarm-clock", key: "date" },
-        { prefix: "define:", hint: "hint_define", icon: "accessories-dictionary", key: "define" },
-        { prefix: "unit:", hint: "hint_unit", icon: "accessories-calculator", key: "unit" },
-        { prefix: "help:", hint: "hint_help", icon: "help-about", key: "help" }
+        { prefix: "file:/", hint: i18n("File Path Search"), icon: "folder", localeBase: "file" },
+        { prefix: "man:/", hint: i18n("Man Pages"), icon: "help-contents", localeBase: "man" },
+        { prefix: "gg:", hint: i18n("Google Search"), icon: "google", localeBase: "google" },
+        { prefix: "dd:", hint: i18n("DuckDuckGo Search"), icon: "internet-web-browser", localeBase: "ddg" },
+        { prefix: "wp:", hint: i18n("Wikipedia Search"), icon: "wikipedia", localeBase: "wikipedia" },
+        { prefix: "kill ", hint: i18n("Kill Process"), icon: "process-stop", localeBase: "kill" },
+        { prefix: "spell ", hint: i18n("Spell Check"), icon: "tools-check-spelling", localeBase: "spell" },
+        { prefix: "#", hint: i18n("Unicode Characters"), icon: "character-set", localeBase: "unicode" },
+        { prefix: "app:", hint: i18n("Applications"), icon: "applications-all", localeBase: "app" },
+        { prefix: "shell:", hint: i18n("Shell Commands"), icon: "utilities-terminal", localeBase: "shell" },
+        { prefix: "b:", hint: i18n("Bookmarks"), icon: "bookmarks", localeBase: "bookmarks" },
+        { prefix: "power:", hint: i18n("Power Management"), icon: "system-shutdown", localeBase: "power" },
+        { prefix: "services:", hint: i18n("System Services"), icon: "preferences-system", localeBase: "services" },
+        { prefix: "date", hint: i18n("Date and Time"), icon: "alarm-clock", localeBase: "date" },
+        { prefix: "define:", hint: i18n("Dictionary Definition"), icon: "accessories-dictionary", localeBase: "define" },
+        { prefix: "unit:", hint: i18n("Unit Converter"), icon: "accessories-calculator", localeBase: "unit" },
+        { prefix: "help:", hint: i18n("Help & Shortcuts"), icon: "help-about", localeBase: "help" }
     ]
     
     // Helper for date formatting
@@ -94,8 +91,7 @@ Rectangle {
             
             options.push({ 
                 label: monthName, 
-                value: val, 
-                labelKey: "" 
+                value: val
             });
         }
         return options;
@@ -104,11 +100,6 @@ Rectangle {
     function getTimelineDayOptions(baseQuery) {
         var options = [];
         var today = new Date();
-        
-        // We assume we are showing days for the "Current Month" context mostly,
-        // or just generic recent days if we can't parse the month from baseQuery.
-        // For simplicity, let's list the last 31 days with their localized names.
-        // The path will be constructed as baseQuery + DayName.
         
         // If baseQuery doesn't end with /, add it
         if (!baseQuery.endsWith("/")) baseQuery += "/";
@@ -123,38 +114,26 @@ Rectangle {
             var val = baseQuery + dayName;
             
             var label = "";
-            var labelKey = "";
             
             if (i === 0) {
                 label = ""; 
-                labelKey = "btn_today";
             } else if (i === 1) {
                 label = ""; 
-                labelKey = "btn_yesterday";
             } else if (i === 2) {
                 label = ""; 
-                labelKey = "btn_two_days_ago";
             } else {
                 label = dayName;
             }
             
-            // For special labels, we still want the full dayName in the tooltip or hint?
-            // The Button will show the label/key.
-            // The Value is what matters for the search.
-            
-            // Special handling: The "value" must be correct. 
-            // If the user's KIO uses "Bugün" as a folder name, we should use that?
-            // Screenshot #2 showed folders "Bugün", "Dün", "İki gün önce".
-            // So for i=0, 1, 2, the actual folder name MIGHT be the localized relative string.
-            
-            if (i === 0) val = baseQuery + (trFunc("btn_today") || "Today");
-            else if (i === 1) val = baseQuery + (trFunc("btn_yesterday") || "Yesterday");
-            else if (i === 2) val = baseQuery + (trFunc("btn_two_days_ago") || "Two days ago");
+            if (i === 0) val = baseQuery + i18n("Today");
+            else if (i === 1) val = baseQuery + i18n("Yesterday");
+            else if (i === 2) val = baseQuery + i18n("Two days ago");
              
             options.push({ 
                 label: label, 
-                value: val, 
-                labelKey: labelKey 
+                value: val,
+                // These are used for button labels
+                displayLabel: (i===0 ? i18n("Today") : (i===1 ? i18n("Yesterday") : (i===2 ? i18n("Two days ago") : dayName)))
             });
         }
         return options;
@@ -170,7 +149,7 @@ Rectangle {
         // 1. Check for known prefixes (both English keys and Localized keys)
         var bestMatch = null;
         var bestLen = -1;
-        var matchedPrefix = ""; // The actual string matched (could be "date:" or "tarih:")
+        var matchedPrefix = ""; 
         
         for (var i = 0; i < knownPrefixes.length; i++) {
              var p = knownPrefixes[i]
@@ -178,11 +157,13 @@ Rectangle {
              // Check standard prefix
              var standardP = p.prefix.toLowerCase();
              
-             // Check localized prefix (if key exists)
+             // Check localized prefix (simple approximation using i18n of the localeBase)
+             // This assumes the translated "file" corresponds to the prefix.
+             // e.g. i18n("file") -> "dosya". user types "dosya:/"
              var localizedP = "";
-             if (p.key) {
-                 var locKeyVal = trFunc("prefix_" + p.key);
-                 if (locKeyVal) {
+             if (p.localeBase) {
+                 var locKeyVal = i18n(p.localeBase); // e.g. "dosya"
+                 if (locKeyVal && locKeyVal !== p.localeBase) {
                       // Reconstruct suffix style
                       var suffix = "";
                       if (p.prefix.endsWith(":")) suffix = ":";
@@ -198,7 +179,7 @@ Rectangle {
                  if (standardP.length > bestLen) {
                      bestMatch = p;
                      bestLen = standardP.length;
-                     matchedPrefix = p.prefix; // use standard for logic but maybe we need effective?
+                     matchedPrefix = p.prefix; 
                  }
              }
              
@@ -207,52 +188,43 @@ Rectangle {
                  if (localizedP.length > bestLen) {
                      bestMatch = p;
                      bestLen = localizedP.length;
-                     matchedPrefix = localizedP; // Keep track of what we typed
+                     matchedPrefix = localizedP;
                  }
              }
         }
         
-        // Special Timeline sub-logic (needs to handle timeline:/ and localized equivalent)
-        // If we matched timeline, we might need to return specific calendar options
+        // Special Timeline sub-logic
         if (bestMatch && bestMatch.prefix === "timeline:/") {
-             // ... Logic for timeline sub-paths ...
-             
              // Basic timeline:/ match
              if (lowerQuery === matchedPrefix.toLowerCase() || lowerQuery === matchedPrefix.toLowerCase().replace("/", "")) {
                   return {
                     show: true,
-                    text: trFunc(bestMatch.hint),
+                    text: bestMatch.hint,
                     icon: bestMatch.icon,
                     isError: false,
                     prefix: matchedPrefix,
-                    options: getTimelineMonthOptions() // We assume standard timeline actions work even with localized prefix? Only if we map it back. 
-                    // Actually SearchPopup maps it back. 
-                    // But here options.value must differ? 
-                    // getTimelineMonthOptions returns "timeline:/calendar/..." -> Standard.
-                    // This is fine, clicking an option will replace text with Standard path.
+                    options: getTimelineMonthOptions()
                  }
              }
              
-             // Check calendar sub-path (approximate check)
-             // If we are deeper than just the prefix...
-             // timeline:/calendar/
+             // Check calendar sub-path
              if (lowerQuery.indexOf("/calendar/") !== -1) {
                   // If slashes count >= 3, show days
                   var slashes = (query.match(/\//g) || []).length;
                   if (slashes >= 3) {
                        return {
                             show: true,
-                            text: trFunc("hint_timeline_calendar"),
+                            text: i18n("Browse calendar"),
                             icon: "view-calendar-day",
                             isError: false,
-                            prefix: query, // current query
+                            prefix: query, 
                             options: getTimelineDayOptions(query)
                        }
                   }
                   
                    return {
                         show: true,
-                        text: trFunc("hint_timeline_calendar"),
+                        text: i18n("Browse calendar"),
                         icon: "view-calendar-month",
                         isError: false,
                         prefix: matchedPrefix,
@@ -266,10 +238,10 @@ Rectangle {
              
              // Check for Man page installation
              if (bestMatch.prefix === "man:/" && logic && !logic.manInstalled) {
-                 return { show: true, text: trFunc("man_not_installed"), icon: "dialog-error", isError: true, prefix: matchedPrefix }
+                 return { show: true, text: i18n("Man pages not installed"), icon: "dialog-error", isError: true, prefix: matchedPrefix }
              }
              
-             var baseHint = trFunc(bestMatch.hint) || bestMatch.hint;
+             var baseHint = bestMatch.hint;
              var queryPart = "";
 
              // Check if user has typed something after the prefix
@@ -296,26 +268,23 @@ Rectangle {
              }
         }
         
-        // Partial matches (Suggestions)
-        // We skip this for now to keep it simple or implement similar dual-check loop
-        
         // Unknown prefix detection
         var colonIndex = query.indexOf(":")
         if (colonIndex > 0 && colonIndex < 10) {
             var potentialPrefix = query.substring(0, colonIndex + 1).toLowerCase()
-            
-            // Re-verify if this potential prefix is actually a known localized one
-            // We iterate again or use the fact that bestMatch was null
             
             var isKnown = false;
             for (var k = 0; k < knownPrefixes.length; k++) {
                  var kp = knownPrefixes[k];
                  if (kp.prefix.toLowerCase().startsWith(potentialPrefix)) isKnown = true;
                  
-                 if (kp.key) {
-                     var locK = trFunc("prefix_" + kp.key);
-                     if (locK && (locK + ":").toLowerCase().startsWith(potentialPrefix)) isKnown = true;
-                     if (locK && (locK + " ").toLowerCase().startsWith(potentialPrefix)) isKnown = true;
+                 if (kp.localeBase) {
+                     var locK = i18n(kp.localeBase);
+                     if (locK) {
+                        var safeLocK = locK.toLowerCase();
+                        if ((safeLocK + ":").startsWith(potentialPrefix)) isKnown = true;
+                        if ((safeLocK + " ").startsWith(potentialPrefix)) isKnown = true;
+                     }
                  }
                  if (isKnown) break;
             }
@@ -323,7 +292,7 @@ Rectangle {
             if (!isKnown && potentialPrefix !== "file:" && potentialPrefix !== "http:" && potentialPrefix !== "https:") {
                 return {
                     show: true,
-                    text: trFunc("hint_unknown_prefix") + ": " + potentialPrefix + " (" + trFunc("hint_try") + " 'help:')",
+                    text: i18n("Unknown prefix") + ": " + potentialPrefix + " (" + i18n("try") + " 'help:')",
                     icon: "dialog-warning",
                     isError: true
                 }
@@ -340,7 +309,7 @@ Rectangle {
         anchors.margins: 6
         spacing: 8
         
-        // Spacer Left (Only for Text mode - Center alignment)
+        // Spacer Left
         Item { Layout.fillWidth: true; visible: !queryHints.currentHint.options }
 
         // Icon
@@ -354,7 +323,7 @@ Rectangle {
                 : queryHints.textColor
         }
         
-        // Standard Text (Hide if options available)
+        // Standard Text
         Text {
             visible: !queryHints.currentHint.options
             text: queryHints.currentHint.text || ""
@@ -362,16 +331,14 @@ Rectangle {
                 ? "#ff6666" 
                 : Qt.rgba(queryHints.textColor.r, queryHints.textColor.g, queryHints.textColor.b, 0.8)
             font.pixelSize: 11
-            // Removed Layout.fillWidth: true to allow centering with spacers
-            // Layout.fillWidth: true 
             Layout.alignment: Qt.AlignVCenter
             elide: Text.ElideRight
         }
         
-        // Spacer Right (Only for Text mode - Center alignment)
+        // Spacer Right
         Item { Layout.fillWidth: true; visible: !queryHints.currentHint.options }
         
-        // Result Limit Controls (Specific for this user request - buttons)
+        // Result Limit Controls
         RowLayout {
             visible: !!queryHints.currentHint.options
             spacing: 6
@@ -381,7 +348,8 @@ Rectangle {
                 model: queryHints.currentHint.options || []
                 
                 Button {
-                    text: trFunc(modelData.labelKey) || modelData.label
+                    // Use displayLabel if available (for days), otherwise label
+                    text: modelData.displayLabel || modelData.label
                     Layout.preferredHeight: 22
                     font.pixelSize: 11
                     flat: false

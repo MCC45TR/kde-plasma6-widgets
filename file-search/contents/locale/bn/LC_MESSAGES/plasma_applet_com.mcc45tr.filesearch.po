@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: bn\n"
+"Language: bn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "অনুসন্ধান"
+
+msgid "Search Here"
+msgstr "এখানে অনুসন্ধান করুন"
+
+msgid "Start searching..."
+msgstr "অনুসন্ধান শুরু করুন..."
+
+msgid "No results found"
+msgstr "কোন ফলাফল পাওয়া যায়নি"
+
+msgid "Type to start searching"
+msgstr "অনুসন্ধান করতে টাইপ করুন"
+
+msgid "Recent Searches"
+msgstr "সাম্প্রতিক অনুসন্ধান"
+
+msgid "Clear History"
+msgstr "ইতিহাস মুছুন"
+
+msgid "Applications"
+msgstr "অ্যাপ্লিকেশন"
+
+msgid "Other"
+msgstr "অন্যান্য"
+
+msgid "Today"
+msgstr "আজ"
+
+msgid "List View"
+msgstr "তালিকা ভিউ"
+
+msgid "Tile View"
+msgstr "টাইল ভিউ"
+
+msgid "General"
+msgstr "সাধারণ"
+
+msgid "Profile"
+msgstr "প্রোফাইল"
+
+msgid "Appearance"
+msgstr "চেহারা"
+
+msgid "Pinned Items"
+msgstr "পিন করা আইটেম"
+
+msgid "Pin"
+msgstr "পিন করুন"
+
+msgid "Unpin"
+msgstr "আনপিন করুন"
+
+msgid "Category Settings"
+msgstr "বিভাগ সেটিংস"
+
+msgid "Files"
+msgstr "ফাইল"
+
+msgid "Documents"
+msgstr "নথি"
+
+msgid "Folders"
+msgstr "ফোল্ডার"
+
+msgid "Web"
+msgstr "ওয়েব"
+
+msgid "Open"
+msgstr "খুলুন"
+
+msgid "Copy Path"
+msgstr "পাথ কপি করুন"
+
+msgid "Open in Terminal"
+msgstr "টার্মিনালে খুলুন"
+
+msgid "Move to Trash"
+msgstr "ট্র্যাশে সরান"
+
+msgid "Open Containing Folder"
+msgstr "ফোল্ডার খুলুন"
+
+msgid "Properties"
+msgstr "বৈশিষ্ট্য"
+
+msgid "Manage Application"
+msgstr "অ্যাপ্লিকেশন পরিচালনা করুন"
+
+msgid "Remove from History"
+msgstr "ইতিহাস থেকে সরান"
+
+msgid "Reset Statistics"
+msgstr "পরিসংখ্যান পুনরায় সেট করুন"
+
+msgid "Run Command"
+msgstr "কমান্ড চালান"
+
+msgid "Bookmarks"
+msgstr "বুকমার্কস"
+
+msgid "Power Management"
+msgstr "পাওয়ার ম্যানেজমেন্ট"
+
+msgid "System Settings"
+msgstr "সিস্টেম সেটিংস"
+
+msgid "Date & Time"
+msgstr "তারিখ এবং সময়"
+
+msgid "Dictionary Definition"
+msgstr "অভিধান সংজ্ঞা"
+
+msgid "Unit Converter"
+msgstr "ইউনিট কনভার্টার"
+
+msgid "Help & Shortcuts"
+msgstr "সহায়তা এবং শর্টকাটস"
+
+msgid "Man package is not installed"
+msgstr "Man প্যাকেজ ইনস্টল করা নেই"
+

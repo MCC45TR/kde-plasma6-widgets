@@ -3,8 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-// Import localization data from parent directory
-import "../js/localization.js" as LocalizationData
+
 
 Kirigami.FormLayout {
     id: page
@@ -63,15 +62,8 @@ Kirigami.FormLayout {
     property int cfg_maxResultsDefault: 20
     property bool cfg_smartResultLimitDefault: true
     
-    // --- Localization Logic ---
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) return locales[currentLocale][key]
-        if (locales["en"] && locales["en"][key]) return locales["en"][key]
-        return key 
-    }
+    // --- Localization removed
+    // Use standard i18n()
     // --- End Localization Logic ---
     
     // Icon size options
@@ -80,16 +72,16 @@ Kirigami.FormLayout {
     // Profile Selector
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: page.tr("profile") || "Profil"
+        Kirigami.FormData.label: i18n("General Settings")
     }
     
     ComboBox {
         id: profileCombo
-        Kirigami.FormData.label: page.tr("user_profile") || "Kullanıcı Profili"
+        Kirigami.FormData.label: i18n("User Profile")
         model: [
-            page.tr("profile_minimal") || "Minimal",
-            page.tr("profile_developer") || "Developer",
-            page.tr("profile_power_user") || "Power User"
+            i18n("Minimal"),
+            i18n("Developer"),
+            i18n("Power User")
         ]
         Layout.fillWidth: true
     }
@@ -97,9 +89,9 @@ Kirigami.FormLayout {
     Label {
         text: {
             switch(profileCombo.currentIndex) {
-                case 0: return page.tr("profile_minimal_desc") || "Basit arayüz, temel özellikler"
-                case 1: return page.tr("profile_developer_desc") || "Debug sekmesi aktif, geliştirici özellikleri"
-                case 2: return page.tr("profile_power_desc") || "Tüm özellikler aktif, gelişmiş ayarlar"
+                case 0: return i18n("A simplified interface with essential features.")
+                case 1: return i18n("Debug tab active, developer features enabled.")
+                case 2: return i18n("All features active, advanced settings available.")
                 default: return ""
             }
         }
@@ -111,32 +103,32 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: page.tr("appearance") || "Görünüm"
+        Kirigami.FormData.label: i18n("Appearance")
     }
 
     ComboBox {
         id: modeCombo
-        Kirigami.FormData.label: page.tr("panel_view")
+        Kirigami.FormData.label: i18n("Panel View")
         model: [
-            page.tr("button_mode"), 
-            page.tr("medium_mode"), 
-            page.tr("wide_mode"), 
-            page.tr("extra_wide_mode")
+            i18n("Button Mode"), 
+            i18n("Medium Mode"), 
+            i18n("Wide Mode"), 
+            i18n("Extra Wide Mode")
         ]
         Layout.fillWidth: true
     }
     
     ComboBox {
         id: viewModeCombo
-        Kirigami.FormData.label: page.tr("results_view")
-        model: [page.tr("list_view"), page.tr("tile_view")]
+        Kirigami.FormData.label: i18n("Results View")
+        model: [i18n("List View"), i18n("Tile View")]
         Layout.fillWidth: true
     }
     
     // List Icon Size Selector
     ComboBox {
         id: listIconSizeCombo
-        Kirigami.FormData.label: page.tr("list_icon_size")
+        Kirigami.FormData.label: i18n("List Icon Size")
         model: ["16", "22", "32", "48", "64", "128"]
         Layout.fillWidth: true
         enabled: viewModeCombo.currentIndex === 0
@@ -161,7 +153,7 @@ Kirigami.FormLayout {
     // Tile Icon Size Selector
     ComboBox {
         id: iconSizeCombo
-        Kirigami.FormData.label: page.tr("tile_icon_size")
+        Kirigami.FormData.label: i18n("Tile Icon Size")
         model: ["16", "22", "32", "48", "64", "128"]
         Layout.fillWidth: true
         enabled: viewModeCombo.currentIndex === 1
@@ -225,7 +217,7 @@ Kirigami.FormLayout {
     
     // Panel Preview
     Item {
-        Kirigami.FormData.label: page.tr("panel_preview")
+        Kirigami.FormData.label: i18n("Panel Preview")
         Layout.fillWidth: true
         Layout.preferredHeight: 50
         
@@ -272,7 +264,7 @@ Kirigami.FormLayout {
                 
                 Text {
                     // 1=Medium "Ara", 2=Wide "Arama yap...", 3=Extra Wide "Arama yapmaya başla..."
-                    text: modeCombo.currentIndex === 1 ? page.tr("search") : (modeCombo.currentIndex === 3 ? page.tr("start_searching") : page.tr("search_dots"))
+                    text: modeCombo.currentIndex === 1 ? i18n("Search") : (modeCombo.currentIndex === 3 ? i18n("Start searching...") : i18n("Search..."))
                     color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
                     font.pixelSize: modeCombo.currentIndex !== 1 ? 14 : 12
                     Layout.fillWidth: true
@@ -303,7 +295,7 @@ Kirigami.FormLayout {
     
     // View Mode Preview
     Item {
-        Kirigami.FormData.label: page.tr("results_preview")
+        Kirigami.FormData.label: i18n("Results Preview")
         Layout.fillWidth: true
         Layout.preferredHeight: viewModeCombo.currentIndex === 0 ? 100 : 180
         
@@ -324,7 +316,7 @@ Kirigami.FormLayout {
                 visible: viewModeCombo.currentIndex === 0
                 
                 Repeater {
-                    model: [page.tr("application_1"), page.tr("application_2"), page.tr("file_txt")]
+                    model: ["App 1", "App 2", "File.txt"]
                     
                     Rectangle {
                         width: parent.width
@@ -466,7 +458,7 @@ Kirigami.FormLayout {
                         
                         Text {
                             width: parent.width
-                            text: page.tr("file")
+                            text: "File"
                             color: Kirigami.Theme.textColor
                             font.pixelSize: 10
                             horizontalAlignment: Text.AlignHCenter

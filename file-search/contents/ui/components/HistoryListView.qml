@@ -19,8 +19,8 @@ Item {
     signal itemClicked(var item)
     signal clearClicked()
     
-    // Localization function
-    property var trFunc: function(key) { return key }
+    // Localization removed
+    // Use standard i18n()
     
     // Header with title and clear button
     RowLayout {
@@ -31,7 +31,7 @@ Item {
         height: 32
         
         Text {
-            text: historyList.trFunc("recent_searches")
+            text: i18n("Recent Searches")
             font.pixelSize: 13
             font.bold: true
             color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
@@ -51,7 +51,7 @@ Item {
             Text {
                 id: clearBtnText
                 anchors.centerIn: parent
-                text: historyList.trFunc("clear_history")
+                text: i18n("Clear History")
                 font.pixelSize: 11
                 color: historyList.textColor
             }

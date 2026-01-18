@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
-import "../js/localization.js" as LocalizationData
 
 QQC.Menu {
     id: root
@@ -9,20 +8,6 @@ QQC.Menu {
     // Dependencies
     property var historyItem: null
     property var logic: null
-    
-    // Localization
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
 
     // Helper: Check if item is a folder
     readonly property bool isFolder: {
@@ -39,7 +24,7 @@ QQC.Menu {
     
     // ===== PIN / UNPIN =====
     QQC.Action {
-        text: logic && logic.isPinned(matchId) ? tr("unpin_item") : tr("pin_item")
+        text: logic && logic.isPinned(matchId) ? i18n("Unpin") : i18n("Pin")
         icon.name: logic && logic.isPinned(matchId) ? "window-unpin" : "pin"
         enabled: historyItem
         onTriggered: {
@@ -64,7 +49,7 @@ QQC.Menu {
 
     // ===== OPEN (Standard) =====
     QQC.Action {
-        text: tr("open")
+        text: i18n("Open")
         icon.name: "document-open"
         onTriggered: {
             if (historyItem && historyItem.filePath) {
@@ -81,7 +66,7 @@ QQC.Menu {
     
     // ===== COPY PATH =====
     QQC.Action {
-        text: tr("copy_path")
+        text: i18n("Copy Location")
         icon.name: "edit-copy"
         enabled: historyItem && historyItem.filePath
         onTriggered: {
@@ -97,7 +82,7 @@ QQC.Menu {
     
     // ===== OPEN IN TERMINAL =====
     QQC.Action {
-        text: tr("open_in_terminal")
+        text: i18n("Open in Terminal")
         icon.name: "utilities-terminal"
         enabled: historyItem && !historyItem.isApplication && root.isFolder
         onTriggered: {
@@ -113,7 +98,7 @@ QQC.Menu {
     
     // ===== OPEN CONTAINING FOLDER =====
     QQC.Action {
-        text: tr("open_location")
+        text: i18n("Open Containing Folder")
         icon.name: "folder-open"
         enabled: historyItem && !historyItem.isApplication && historyItem.filePath && !root.isFolder
         onTriggered: logic.runShellCommand("dolphin --select '" + historyItem.filePath + "'")
@@ -123,7 +108,7 @@ QQC.Menu {
     
     // ===== MOVE TO TRASH =====
     QQC.Action {
-        text: tr("move_to_trash")
+        text: i18n("Move to Trash")
         icon.name: "user-trash"
         enabled: historyItem && !historyItem.isApplication && historyItem.filePath
         onTriggered: {
@@ -136,7 +121,7 @@ QQC.Menu {
     
     // ===== SHOW PROPERTIES =====
     QQC.Action {
-        text: tr("show_properties")
+        text: i18n("Properties")
         icon.name: "document-properties"
         enabled: historyItem && !historyItem.isApplication && historyItem.filePath
         onTriggered: logic.runShellCommand("kioclient openProperties '" + historyItem.filePath + "'")
@@ -146,7 +131,7 @@ QQC.Menu {
 
     // ===== MANAGE APP =====
     QQC.Action {
-        text: tr("manage_app")
+        text: i18n("Edit Application...")
         icon.name: "configure"
         enabled: historyItem && historyItem.isApplication && historyItem.filePath
         onTriggered: logic.runShellCommand("kioclient openProperties '" + historyItem.filePath + "'")
@@ -156,7 +141,7 @@ QQC.Menu {
     
     // ===== REMOVE FROM HISTORY =====
     QQC.Action {
-        text: tr("remove_from_history")
+        text: i18n("Remove from History")
         icon.name: "edit-delete"
         onTriggered: {
             if (historyItem && historyItem.uuid) {

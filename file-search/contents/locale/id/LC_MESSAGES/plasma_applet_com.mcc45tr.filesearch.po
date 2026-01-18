@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: id\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Cari"
+
+msgid "Search Here"
+msgstr "Cari di sini"
+
+msgid "Start searching..."
+msgstr "Mulai mencari..."
+
+msgid "No results found"
+msgstr "Tidak ada hasil"
+
+msgid "Type to start searching"
+msgstr "Ketik untuk mencari"
+
+msgid "Recent Searches"
+msgstr "Pencarian Terbaru"
+
+msgid "Clear History"
+msgstr "Hapus Riwayat"
+
+msgid "Applications"
+msgstr "Aplikasi"
+
+msgid "Other"
+msgstr "Lainnya"
+
+msgid "Today"
+msgstr "Hari ini"
+
+msgid "List View"
+msgstr "Tampilan Daftar"
+
+msgid "Tile View"
+msgstr "Tampilan Grid"
+
+msgid "General"
+msgstr "Umum"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Appearance"
+msgstr "Tampilan"
+
+msgid "Pinned Items"
+msgstr "Item Tersemat"
+
+msgid "Pin"
+msgstr "Sematkan"
+
+msgid "Unpin"
+msgstr "Lepaskan"
+
+msgid "Category Settings"
+msgstr "Pengaturan Kategori"
+
+msgid "Files"
+msgstr "Berkas"
+
+msgid "Documents"
+msgstr "Dokumen"
+
+msgid "Folders"
+msgstr "Folder"
+
+msgid "Web"
+msgstr "Web"
+
+msgid "Open"
+msgstr "Buka"
+
+msgid "Copy Path"
+msgstr "Salin Jalur"
+
+msgid "Open in Terminal"
+msgstr "Buka di Terminal"
+
+msgid "Move to Trash"
+msgstr "Pindahkan ke Sampah"
+
+msgid "Open Containing Folder"
+msgstr "Buka Folder Berisi"
+
+msgid "Properties"
+msgstr "Properti"
+
+msgid "Manage Application"
+msgstr "Kelola Aplikasi"
+
+msgid "Remove from History"
+msgstr "Hapus dari Riwayat"
+
+msgid "Reset Statistics"
+msgstr "Atur Ulang Statistik"
+
+msgid "Run Command"
+msgstr "Jalankan Perintah"
+
+msgid "Bookmarks"
+msgstr "Penanda"
+
+msgid "Power Management"
+msgstr "Manajemen Daya"
+
+msgid "System Settings"
+msgstr "Pengaturan Sistem"
+
+msgid "Date & Time"
+msgstr "Tanggal & Waktu"
+
+msgid "Dictionary Definition"
+msgstr "Definisi Kamus"
+
+msgid "Unit Converter"
+msgstr "Konverter Unit"
+
+msgid "Help & Shortcuts"
+msgstr "Bantuan & Pintasan"
+
+msgid "Man package is not installed"
+msgstr "Paket Man tidak terinstal"
+

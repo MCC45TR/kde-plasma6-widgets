@@ -1,0 +1,203 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: de\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Suche"
+
+msgid "Search Here"
+msgstr "Hier suchen"
+
+msgid "Start searching..."
+msgstr "Suche starten..."
+
+msgid "Search..."
+msgstr "Suchen..."
+
+msgid "No results found"
+msgstr "Keine Ergebnisse gefunden"
+
+msgid "Type to start searching"
+msgstr "Tippen um zu suchen"
+
+msgid "Recent Searches"
+msgstr "Letzte Suchanfragen"
+
+msgid "Clear History"
+msgstr "Verlauf löschen"
+
+msgid "Applications"
+msgstr "Anwendungen"
+
+msgid "Other"
+msgstr "Andere"
+
+msgid "Today"
+msgstr "Heute"
+
+msgid "Panel View"
+msgstr "Panelansicht"
+
+msgid "Results View"
+msgstr "Ergebnisansicht"
+
+msgid "Button Mode (Icon only)"
+msgstr "Tastenmodus (Nur Symbol)"
+
+msgid "Medium Mode (Button only)"
+msgstr "Mittlerer Modus (Nur Taste)"
+
+msgid "Wide Mode (Search bar + icon)"
+msgstr "Breiter Modus (Suchleiste + Symbol)"
+
+msgid "Extra Wide Mode (Wide + Long Placeholder)"
+msgstr "Extra breiter Modus (Breit + Platzhalter)"
+
+msgid "List View"
+msgstr "Listenansicht"
+
+msgid "Tile View"
+msgstr "Kachelansicht"
+
+msgid "List Icon Size"
+msgstr "Listensymbolgröße"
+
+msgid "Tile Icon Size"
+msgstr "Kachelsymbolgröße"
+
+msgid "Panel Preview"
+msgstr "Panelvorschau"
+
+msgid "Results Preview"
+msgstr "Ergebnisvorschau"
+
+msgid "Application 1"
+msgstr "Anwendung 1"
+
+msgid "Application 2"
+msgstr "Anwendung 2"
+
+msgid "File.txt"
+msgstr "Datei.txt"
+
+msgid "File"
+msgstr "Datei"
+
+msgid "Category"
+msgstr "Kategorie"
+
+msgid "Path"
+msgstr "Pfad"
+
+msgid "General"
+msgstr "Allgemein"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "User Profile"
+msgstr "Benutzerprofil"
+
+msgid "Minimal"
+msgstr "Minimal"
+
+msgid "Developer"
+msgstr "Entwickler"
+
+msgid "Power User"
+msgstr "Power-Benutzer"
+
+msgid "Simple interface, basic features"
+msgstr "Einfache Oberfläche, grundlegende Funktionen"
+
+msgid "Debug tab active, developer features"
+msgstr "Debug-Tab aktiv, Entwicklerfunktionen"
+
+msgid "All features active, advanced settings"
+msgstr "Alle Funktionen aktiv, erweiterte Einstellungen"
+
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+msgid "Search Settings"
+msgstr "Sucheinstellungen"
+
+msgid "File Preview"
+msgstr "Dateivorschau"
+
+msgid "Debug Overlay"
+msgstr "Debug-Overlay"
+
+msgid "Keyboard Shortcuts"
+msgstr "Tastenkombinationen"
+
+msgid "Search Prefixes"
+msgstr "Suchpräfixe"
+
+msgid "Profiles"
+msgstr "Profile"
+
+msgid "Open"
+msgstr "Öffnen"
+
+msgid "Copy Path"
+msgstr "Pfad kopieren"
+
+msgid "Open in Terminal"
+msgstr "Im Terminal öffnen"
+
+msgid "Move to Trash"
+msgstr "In den Papierkorb verschieben"
+
+msgid "Open Containing Folder"
+msgstr "Übergeordneten Ordner öffnen"
+
+msgid "Properties"
+msgstr "Eigenschaften"
+
+msgid "Manage Application"
+msgstr "Anwendung verwalten"
+
+msgid "Remove from History"
+msgstr "Aus Verlauf entfernen"
+
+msgid "Reset Statistics"
+msgstr "Statistiken zurücksetzen"
+
+msgid "Run Command"
+msgstr "Befehl ausführen"
+
+msgid "Bookmarks"
+msgstr "Lesezeichen"
+
+msgid "Power Management"
+msgstr "Energieverwaltung"
+
+msgid "System Settings"
+msgstr "Systemeinstellungen"
+
+msgid "Date & Time"
+msgstr "Datum & Zeit"
+
+msgid "Dictionary Definition"
+msgstr "Wörterbuchdefinition"
+
+msgid "Unit Converter"
+msgstr "Einheitenumrechner"
+
+msgid "Help & Shortcuts"
+msgstr "Hilfe & Kurzbefehle"
+
+msgid "Man package is not installed"
+msgstr "Man-Paket ist nicht installiert"
+

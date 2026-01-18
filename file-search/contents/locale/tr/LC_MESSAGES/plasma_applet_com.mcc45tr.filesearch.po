@@ -1,0 +1,689 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: tr\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Ara"
+
+msgid "Search Here"
+msgstr "Arama Yapın"
+
+msgid "Start searching..."
+msgstr "Arama yapmaya başla..."
+
+msgid "Search..."
+msgstr "Arama yap..."
+
+msgid "No results found"
+msgstr "Sonuç bulunamadı"
+
+msgid "Type to start searching"
+msgstr "Aramak için yazmaya başlayın"
+
+msgid "Recent Searches"
+msgstr "Son Aramalar"
+
+msgid "Clear History"
+msgstr "Geçmişi Sil"
+
+msgid "Applications"
+msgstr "Uygulamalar"
+
+msgid "Other"
+msgstr "Diğer"
+
+msgid "Today"
+msgstr "Bugün"
+
+msgid "Panel View"
+msgstr "Panel Görünümü"
+
+msgid "Results View"
+msgstr "Sonuç Görünümü"
+
+msgid "Button Mode (Icon only)"
+msgstr "Düğme Modu (Sadece ikon)"
+
+msgid "Medium Mode (Button only)"
+msgstr "Orta Mod (Sadece buton)"
+
+msgid "Wide Mode (Search bar + icon)"
+msgstr "Geniş Mod (Arama çubuğu + ikon)"
+
+msgid "Extra Wide Mode (Wide + Long Placeholder)"
+msgstr "Ekstra Geniş Mod (Geniş + Uzun Placeholder)"
+
+msgid "List View"
+msgstr "Liste Görünümü"
+
+msgid "Tile View"
+msgstr "Döşeme Görünümü"
+
+msgid "List Icon Size"
+msgstr "Liste İkon Boyutu"
+
+msgid "Tile Icon Size"
+msgstr "Döşeme İkon Boyutu"
+
+msgid "Panel Preview"
+msgstr "Panel Önizleme"
+
+msgid "Results Preview"
+msgstr "Sonuç Önizleme"
+
+msgid "Application 1"
+msgstr "Uygulama 1"
+
+msgid "Application 2"
+msgstr "Uygulama 2"
+
+msgid "File.txt"
+msgstr "Dosya.txt"
+
+msgid "File"
+msgstr "Dosya"
+
+msgid "Category"
+msgstr "Kategori"
+
+msgid "Path"
+msgstr "Yol"
+
+msgid "General"
+msgstr "Genel"
+
+msgid "Files modified today"
+msgstr "Bugün değiştirilen dosyalar"
+
+msgid "Files modified yesterday"
+msgstr "Dün değiştirilen dosyalar"
+
+msgid "Files modified this week"
+msgstr "Bu hafta değiştirilen dosyalar"
+
+msgid "Files modified this month"
+msgstr "Bu ay değiştirilen dosyalar"
+
+msgid "Timeline search"
+msgstr "Zaman çizelgesi araması"
+
+msgid "Google search"
+msgstr "Google araması"
+
+msgid "DuckDuckGo search"
+msgstr "DuckDuckGo araması"
+
+msgid "Wikipedia search"
+msgstr "Wikipedia araması"
+
+msgid "Terminate application"
+msgstr "Uygulamayı sonlandır"
+
+msgid "Spell check"
+msgstr "Yazım kontrolü"
+
+msgid "Unicode character"
+msgstr "Unicode karakter"
+
+msgid "File path"
+msgstr "Dosya yolu"
+
+msgid "Manual page"
+msgstr "Kılavuz sayfası"
+
+msgid "Try"
+msgstr "Deneyin"
+
+msgid "Unknown prefix"
+msgstr "Bilinmeyen önek"
+
+msgid "Run Command"
+msgstr "Komut Çalıştır"
+
+msgid "Bookmarks"
+msgstr "Yer İmleri"
+
+msgid "Power Management"
+msgstr "Güç Yönetimi"
+
+msgid "System Settings"
+msgstr "Sistem Ayarları"
+
+msgid "Date & Time"
+msgstr "Tarih ve Saat"
+
+msgid "Dictionary Definition"
+msgstr "Sözlük Tanımı"
+
+msgid "Unit Converter"
+msgstr "Birim Çevirici"
+
+msgid "Man package is not installed"
+msgstr "Man paketi yüklü değil"
+
+msgid "Algorithm Settings"
+msgstr "Algoritma Ayarları"
+
+msgid "Search Algorithm"
+msgstr "Arama Algoritması"
+
+msgid "Fuzzy Match"
+msgstr "Bulanık Eşleşme (Fuzzy)"
+
+msgid "Exact Match"
+msgstr "Tam Eşleşme"
+
+msgid "Starts With"
+msgstr "İle Başlayan"
+
+msgid "Result Limits"
+msgstr "Sonuç Sınırları"
+
+msgid "Min Results"
+msgstr "Min Sonuç"
+
+msgid "Max Results"
+msgstr "Max Sonuç"
+
+msgid "Dynamic Result Count"
+msgstr "Dinamik Sonuç Sayısı"
+
+msgid "Automatically limit displayed results based on relevance score"
+msgstr "Sonuçları alaka düzeyine göre otomatik sınırla"
+
+msgid "Show Together (Merged)"
+msgstr "Birlikte Göster (Birleşik)"
+
+msgid "Categories in this section will be grouped together"
+msgstr "Bu bölümdeki kategoriler tek bir grup altında birleştirilir"
+
+msgid "Prioritized Categories"
+msgstr "Öncelikli Kategoriler"
+
+msgid "Use buttons to reorder categories or move between sections"
+msgstr ""
+"Kategorileri yeniden sıralamak veya bölümler arası taşımak için butonları "
+"kullanın"
+
+msgid "No combined categories"
+msgstr "Birleştirilmiş kategori yok"
+
+msgid "Move to Combined"
+msgstr "Birleşik'e Taşı"
+
+msgid "Move to Separate"
+msgstr "Ayrık'a Taşı"
+
+msgid "Yesterday"
+msgstr "Dün"
+
+msgid "This Week"
+msgstr "Bu Hafta"
+
+msgid "This Month"
+msgstr "Bu Ay"
+
+msgid "Select a specific date"
+msgstr "Belirli bir tarih seçin"
+
+msgid "Appearance"
+msgstr "Görünüm"
+
+msgid "Categories"
+msgstr "Kategoriler"
+
+msgid "Debug"
+msgstr "Hata Ayıklama"
+
+msgid "Help"
+msgstr "Yardım"
+
+msgid "Calendar"
+msgstr "Takvim"
+
+msgid "Two days ago"
+msgstr "İki gün önce"
+
+msgid "Previews"
+msgstr "Önizlemeler"
+
+msgid "Configure which file types show thumbnail previews when hovering"
+msgstr ""
+"Üzerine gelindiğinde hangi dosya türlerinin küçük resim önizlemesini "
+"göstereceğini yapılandırın"
+
+msgid "Preview Types"
+msgstr "Önizleme Türleri"
+
+msgid "Images"
+msgstr "Resimler"
+
+msgid "Videos"
+msgstr "Videolar"
+
+msgid "Text Files"
+msgstr "Metin Dosyaları"
+
+msgid "Documents"
+msgstr "Belgeler"
+
+msgid "Previews enabled"
+msgstr "Önizlemeler aktif"
+
+msgid "Previews disabled"
+msgstr "Önizlemeler devre dışı"
+
+msgid "Preview Information"
+msgstr "Önizleme Bilgisi"
+
+msgid ""
+"Image previews show thumbnails on hover. Video and text previews are "
+"experimental."
+msgstr ""
+"Resim önizlemeleri üzerine gelindiğinde küçük resim gösterir. Video ve metin "
+"önizlemeleri deneyseldir."
+
+msgid "Size"
+msgstr "Boyut"
+
+msgid "Modified"
+msgstr "Değiştirilme"
+
+msgid "Type"
+msgstr "Tür"
+
+msgid "Open with"
+msgstr "Birlikte aç"
+
+msgid "Ctrl+Space for preview"
+msgstr "Önizleme için Ctrl+Space"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "User Profile"
+msgstr "Kullanıcı Profili"
+
+msgid "Minimal"
+msgstr "Minimal"
+
+msgid "Developer"
+msgstr "Geliştirici"
+
+msgid "Power User"
+msgstr "Güçlü Kullanıcı"
+
+msgid "Simple interface, basic features"
+msgstr "Basit arayüz, temel özellikler"
+
+msgid "Debug tab active, developer features"
+msgstr "Debug sekmesi aktif, geliştirici özellikleri"
+
+msgid "All features active, advanced settings"
+msgstr "Tüm özellikler aktif, gelişmiş ayarlar"
+
+msgid "gg"
+msgstr "gg"
+
+msgid "dd"
+msgstr "dd"
+
+msgid "kill"
+msgstr "sonlandır"
+
+msgid "spell"
+msgstr "yazım"
+
+msgid "Search Settings"
+msgstr "Arama Ayarları"
+
+msgid "File Preview"
+msgstr "Dosya Önizlemesi"
+
+msgid "Show file info on hover (also triggered by Ctrl+Space)"
+msgstr "Hover ile dosya bilgisi göster (Ctrl+Space ile de tetiklenebilir)"
+
+msgid "Search Behavior"
+msgstr "Arama Davranışı"
+
+msgid ""
+"Search results provided by Milou/KRunner. Supported prefixes: timeline:, "
+"gg:, dd:, kill, spell"
+msgstr ""
+"Arama sonuçları Milou/KRunner tarafından sağlanmaktadır. Desteklenen "
+"prefix'ler: timeline:, gg:, dd:, kill, spell"
+
+msgid "Debug Settings"
+msgstr "Debug Ayarları"
+
+#, fuzzy
+msgid "Debug Overlay"
+msgstr ""
+"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
+"#-#\n"
+"Debug Overlay\n"
+"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
+"#-#\n"
+"Hata Ayıklama Katmanı"
+
+msgid "Show debug info on widget (active mode, item count, index source)"
+msgstr ""
+"Widget üzerinde debug bilgilerini göster (aktif mod, öğe sayısı, index "
+"kaynağı)"
+
+msgid "Debug Actions"
+msgstr "Debug İşlemleri"
+
+msgid "Save Debug Data"
+msgstr "Debug Verilerini Kaydet"
+
+msgid "Save debug data to $HOME directory"
+msgstr "Debug verilerini $HOME dizinine kaydeder"
+
+msgid ""
+"This tab only active in Developer mode. Change profile in Appearance tab."
+msgstr ""
+"Bu sekme sadece Geliştirici modunda aktif olur. Profili Görünüm sekmesinden "
+"değiştirin."
+
+msgid "Keyboard Shortcuts"
+msgstr "Klavye Kısayolları"
+
+msgid "Navigate between results"
+msgstr "Sonuçlar arasında gezin"
+
+msgid "Switch between sections"
+msgstr "Bölümler arası geçiş"
+
+msgid "List / Tile view"
+msgstr "Liste / Döşeme görünümü"
+
+msgid "Toggle file preview"
+msgstr "Dosya önizlemesini aç/kapat"
+
+msgid "Open selected item"
+msgstr "Seçili öğeyi aç"
+
+msgid "Close widget"
+msgstr "Widget'ı kapat"
+
+msgid "Search Prefixes"
+msgstr "Arama Prefix'leri"
+
+msgid "Profiles"
+msgstr "Profiller"
+
+msgid "DEBUG OVERLAY"
+msgstr "DEBUG OVERLAY"
+
+msgid "Backend"
+msgstr "Arama Motoru"
+
+msgid "Items"
+msgstr "Öğeler"
+
+msgid "Latency"
+msgstr "Gecikme"
+
+msgid "View"
+msgstr "Görünüm"
+
+msgid "Display"
+msgstr "Ekran"
+
+msgid "TOTAL"
+msgstr "TOPLAM"
+
+msgid "AVG LAT"
+msgstr "ORT GEC"
+
+msgid "Total Searches"
+msgstr "Toplam Arama"
+
+msgid "Avg Latency"
+msgstr "Ortalama Gecikme"
+
+msgid "Save Dump"
+msgstr "Verileri Kaydet"
+
+msgid "Saved!"
+msgstr "Kaydedildi!"
+
+msgid "Timestamp"
+msgstr "Zaman Damgası"
+
+msgid "Locale"
+msgstr "Yerel"
+
+msgid "Display Mode"
+msgstr "Ekran Modu"
+
+msgid "View Mode"
+msgstr "Görünüm Modu"
+
+msgid "History Count"
+msgstr "Geçmiş Sayısı"
+
+msgid "Telemetry"
+msgstr "Telemetri"
+
+msgid "History Sample"
+msgstr "Geçmiş Örnekleri"
+
+msgid "No history"
+msgstr "Geçmiş boş"
+
+msgid ""
+"Privacy Notice: All collected debug and telemetry data is stored strictly "
+"LOCALLY (~/.config/plasma-org.kde.plasma.desktop-appletsrc). No data is sent "
+"over the internet."
+msgstr ""
+"Gizlilik Bildirimi: Toplanan tüm debug ve telemetri verileri SADECE yerel "
+"olarak saklanır (~/.config/plasma-org.kde.plasma.desktop-appletsrc). "
+"İnternete hiçbir veri gönderilmez."
+
+msgid "Debug Data"
+msgstr "Debug Verileri"
+
+msgid "Prefix"
+msgstr "Önek"
+
+msgid "Description"
+msgstr "Açıklama"
+
+msgid "Pinned Items"
+msgstr "Sabitlenmiş Öğeler"
+
+msgid "Pin"
+msgstr "Sabitle"
+
+msgid "Unpin"
+msgstr "Sabitlemeyi Kaldır"
+
+msgid "Right-click to unpin"
+msgstr "Kaldırmak için sağ tıklayın"
+
+msgid "Drag to reorder"
+msgstr "Sıralamak için sürükleyin"
+
+msgid "Category Settings"
+msgstr "Kategori Ayarları"
+
+msgid "Configure visibility, priority, and icons for each category"
+msgstr "Her kategori için görünürlük, öncelik ve ikon ayarlarını yapılandırın"
+
+msgid "Visibility"
+msgstr "Görünürlük"
+
+msgid "Priority"
+msgstr "Öncelik"
+
+msgid "Custom Icon"
+msgstr "Özel İkon"
+
+msgid "Select Icon"
+msgstr "İkon Seç"
+
+msgid "Lower number = higher priority"
+msgstr "Düşük sayı = yüksek öncelik"
+
+msgid "Category Settings Information"
+msgstr "Kategori Ayarları Bilgisi"
+
+msgid ""
+"Changes are applied immediately. Hidden categories will not appear in search "
+"results. Priority determines display order."
+msgstr ""
+"Değişiklikler anında uygulanır. Gizlenen kategoriler arama sonuçlarında "
+"görünmez. Öncelik, görüntüleme sırasını belirler."
+
+msgid "Files"
+msgstr "Dosyalar"
+
+msgid "Folders"
+msgstr "Klasörler"
+
+msgid "Calculator"
+msgstr "Hesap Makinesi"
+
+msgid "Web"
+msgstr "Web"
+
+msgid "Open"
+msgstr "Aç"
+
+msgid "Copy Path"
+msgstr "Yolu Kopyala"
+
+msgid "Open in Terminal"
+msgstr "Terminalde Aç"
+
+msgid "Move to Trash"
+msgstr "Çöp Kutusuna Taşı"
+
+msgid "Open Containing Folder"
+msgstr "Bulunduğu Klasörü Aç"
+
+msgid "Properties"
+msgstr "Özellikler"
+
+msgid "Manage Application"
+msgstr "Uygulamayı Yönet"
+
+msgid "Remove from History"
+msgstr "Geçmişten Kaldır"
+
+msgid "Reset Statistics"
+msgstr "İstatistikleri Sıfırla"
+
+msgid "unit"
+msgstr "birim"
+
+msgid "date"
+msgstr "tarih"
+
+msgid "shell"
+msgstr "komut"
+
+msgid "power"
+msgstr "güç"
+
+msgid "services"
+msgstr "servisler"
+
+msgid "help"
+msgstr "yardım"
+
+msgid "wp"
+msgstr "wp"
+
+msgid "app"
+msgstr "uyg"
+
+msgid "b"
+msgstr "yerim"
+
+msgid "define"
+msgstr "tanımla"
+
+msgid "file"
+msgstr "dosya"
+
+msgid "man"
+msgstr "man"
+
+msgid "Timeline View"
+msgstr "Zaman Çizelgesi"
+
+msgid "File Path Search"
+msgstr "Dosya Yolu Arama"
+
+msgid "Google Search"
+msgstr "Google Arama"
+
+msgid "DuckDuckGo Search"
+msgstr "DuckDuckGo Arama"
+
+msgid "Wikipedia Search"
+msgstr "Wikipedia Arama"
+
+msgid "Man Pages"
+msgstr "Kılavuz Sayfaları (Man)"
+
+msgid "Kill Process"
+msgstr "İşlemi Sonlandır"
+
+msgid "kill firefox -> 🚫 Stop Process"
+msgstr "sonlandır firefox -> 🚫 İşlemi Durdur"
+
+msgid "Spell Check"
+msgstr "Yazım Denetimi"
+
+msgid "spell hello -> ✅ Correct"
+msgstr "yazım hello -> ✅ Doğru"
+
+msgid "Unicode Characters"
+msgstr "Unicode Karakterler"
+
+msgid "Help & Shortcuts"
+msgstr "Yardım ve Kısayollar"
+
+msgid "System Services"
+msgstr "Sistem Servisleri"
+
+msgid "Date and Time"
+msgstr "Tarih ve Saat"
+
+msgid "Copy Location"
+msgstr "Konumu Kopyala"
+
+msgid "Edit Application..."
+msgstr "Uygulamayı Düzenle..."
+
+msgid "define:kernel -> 📕 Definition"
+msgstr "tanımla:kernel -> 📕 Tanım"
+
+msgid "Shell Commands"
+msgstr "Kabuk Komutları"
+
+msgid "app:Code -> VS Code"
+msgstr "uyg:Code -> VS Code"
+
+msgid "b:kde -> 🔖 KDE.org"
+msgstr "yerim:kde -> 🔖 KDE.org"
+
+msgid "file:/home -> 📂"
+msgstr "dosya:/home -> 📂"
+
+msgid "man:ls -> 📄 ls(1)"
+msgstr "man:ls -> 📄 ls(1)"

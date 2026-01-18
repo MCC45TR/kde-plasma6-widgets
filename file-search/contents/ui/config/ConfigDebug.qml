@@ -3,38 +3,13 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-import "../js/localization.js" as LocalizationData
-
-Kirigami.FormLayout {
-    id: debugPage
-    
-    property alias cfg_debugOverlay: debugOverlayToggle.checked
-    property int cfg_userProfile: 0
-    property int cfg_displayMode: 1
-    property int cfg_viewMode: 0
-    property int cfg_iconSize: 48
-    property int cfg_listIconSize: 22
-    property bool cfg_previewEnabled: true
-    property string cfg_searchHistory: ""
-    
-    // Localization
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.split("_")[0]
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
+    // Localization removed
+    // Use standard i18n()
     
     // Warning if not in Developer mode
     Label {
         visible: cfg_userProfile !== 1
-        text: "⚠️ " + (tr("debug_warning") || "Bu sekme sadece Developer modunda aktif olur. Görünüm sekmesinden profili değiştirin.")
+        text: "⚠️ " + i18n("This tab is only active in Developer mode. Change profile in Appearance settings.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         color: Kirigami.Theme.negativeTextColor
@@ -43,19 +18,19 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("debug_settings") || "Debug Ayarları"
+        Kirigami.FormData.label: i18n("Debug Settings")
     }
     
     // Debug Overlay Toggle
     Switch {
         id: debugOverlayToggle
-        Kirigami.FormData.label: tr("debug_overlay") || "Debug Overlay"
+        Kirigami.FormData.label: i18n("Debug Overlay")
         checked: false
         enabled: cfg_userProfile === 1
     }
     
     Label {
-        text: tr("debug_overlay_desc") || "Widget üzerinde debug bilgilerini göster (aktif mod, öğe sayısı, index kaynağı)"
+        text: i18n("Show debug info on widget (active mode, item count, index source)")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         opacity: 0.7
@@ -64,7 +39,7 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("debug_data") || "Debug Verileri"
+        Kirigami.FormData.label: i18n("Debug Data")
     }
     
     // Debug Data Display
@@ -74,58 +49,58 @@ Kirigami.FormLayout {
         columnSpacing: 12
         Layout.fillWidth: true
         
-        Label { text: tr("timestamp") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Timestamp") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: new Date().toISOString(); font.family: "Monospace" }
         
-        Label { text: tr("locale") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Locale") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: debugPage.currentLocale; font.family: "Monospace" }
         
-        Label { text: tr("user_profile") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("User Profile") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: cfg_userProfile === 0 ? "Minimal (0)" : (cfg_userProfile === 1 ? "Developer (1)" : "Power User (2)")
             font.family: "Monospace" 
         }
         
-        Label { text: tr("display_mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Display Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: cfg_displayMode === 0 ? "Button (0)" : (cfg_displayMode === 1 ? "Medium (1)" : (cfg_displayMode === 2 ? "Wide (2)" : "Extra Wide (3)"))
             font.family: "Monospace" 
         }
         
-        Label { text: tr("view_mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("View Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: cfg_viewMode === 0 ? "List (0)" : "Tile (1)"
             font.family: "Monospace" 
         }
         
-        Label { text: tr("tile_icon_size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Tile Icon Size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_iconSize + " px"; font.family: "Monospace" }
         
-        Label { text: tr("list_icon_size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("List Icon Size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_listIconSize + " px"; font.family: "Monospace" }
         
-        Label { text: tr("enable_preview") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Enable Preview") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_previewEnabled ? "true" : "false"; font.family: "Monospace" }
         
-        Label { text: tr("debug_overlay") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Debug Overlay") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_debugOverlay ? "true" : "false"; font.family: "Monospace" }
         
-        Label { text: tr("history_count") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("History Count") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             id: historyCountLabel
             text: {
                 try {
                     var hist = JSON.parse(cfg_searchHistory || "[]")
-                    return hist.length + " " + tr("items")
+                    return hist.length + " " + i18n("items")
                 } catch(e) {
                     return "Error: " + e.message
                 }
             }
             font.family: "Monospace" 
         }
-        Label { text: tr("telemetry") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor; Layout.columnSpan: 2 }
+        Label { text: i18n("Telemetry") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor; Layout.columnSpan: 2 }
         
-        Label { text: tr("total_searches") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Total Searches") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: {
                 try {
@@ -136,7 +111,7 @@ Kirigami.FormLayout {
             font.family: "Monospace" 
         }
         
-        Label { text: tr("avg_latency") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18n("Avg Latency") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: {
                 try {
@@ -149,7 +124,7 @@ Kirigami.FormLayout {
         
         // Reset Stats Button
         Button {
-            text: tr("reset_stats") || "İstatistikleri Sıfırla"
+            text: i18n("Reset Statistics")
             icon.name: "edit-clear-all"
             Layout.columnSpan: 2
             Layout.topMargin: 8
@@ -169,14 +144,14 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("history_sample") || "Geçmiş Örnekleri"
+        Kirigami.FormData.label: i18n("History Sample")
     }
     
     // Privacy Notice
     Kirigami.InlineMessage {
         Layout.fillWidth: true
         type: Kirigami.MessageType.Information
-        text: tr("telemetry_privacy_notice") || "Gizlilik Bildirimi: Toplanan tüm debug ve telemetri verileri SADECE yerel olarak saklanır (~/.config/plasma-org.kde.plasma.desktop-appletsrc). İnternete hiçbir veri gönderilmez."
+        text: i18n("Privacy Notice: All debug and telemetry data is stored LOCALLY only (~/.config/plasma-org.kde.plasma.desktop-appletsrc). No data is sent to the internet.")
         visible: true
     }
     
@@ -244,7 +219,7 @@ Kirigami.FormLayout {
                     return true
                 }
             }
-            text: tr("no_history") || "Geçmiş boş"
+            text: i18n("History is empty")
             opacity: 0.5
             font.italic: true
         }

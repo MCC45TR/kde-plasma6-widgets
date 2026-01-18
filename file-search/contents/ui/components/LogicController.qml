@@ -13,7 +13,7 @@ Item {
     
     // Required dependencies
     required property var plasmoidConfig
-    required property var trFunc
+    // trFunc property removed
     
     // Signals
     // Signals
@@ -92,7 +92,7 @@ Item {
     }
     
     function formatHistoryTime(timestamp) {
-        return Utils.formatHistoryTime(timestamp, trFunc)
+        return Utils.formatHistoryTime(timestamp, i18n)
     }
     
     function clearHistory() {

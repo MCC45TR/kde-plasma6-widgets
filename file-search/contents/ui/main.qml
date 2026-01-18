@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
-import "js/localization.js" as LocalizationData
+// localized import removed
 import "components" as Components
 
 PlasmoidItem {
@@ -46,7 +46,7 @@ PlasmoidItem {
     readonly property int maxChars: isWideMode ? maxCharsWide : maxCharsMedium
     
     // Truncated text for display
-    readonly property string placeholderText: isExtraWideMode ? root.tr("start_searching") : (isWideMode ? root.tr("search_dots") : root.tr("search"))
+    readonly property string placeholderText: isExtraWideMode ? i18n("Start searching...") : (isWideMode ? i18n("Search...") : i18n("Search"))
     readonly property string rawSearchText: searchText.length > 0 ? searchText : placeholderText
     readonly property string truncatedText: rawSearchText.length > maxChars ? rawSearchText.substring(0, maxChars) + "..." : rawSearchText
     
@@ -77,45 +77,35 @@ PlasmoidItem {
     Components.LogicController {
         id: controller
         plasmoidConfig: Plasmoid.configuration
-        trFunc: root.tr
+        // trFunc removed
     }
     
     // ===== LOCALIZATION =====
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
+    // Localization removed
+    // Use standard i18n()
     
     // ===== CONTEXTUAL ACTIONS (Right-Click Menu) =====
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            text: root.tr("button_mode")
+            text: i18n("Button Mode (Icon only)")
             checkable: true
             checked: root.displayMode === 0
             onTriggered: Plasmoid.configuration.displayMode = 0
         },
         PlasmaCore.Action {
-            text: root.tr("medium_mode")
+            text: i18n("Medium Mode (Button only)")
             checkable: true
             checked: root.displayMode === 1
             onTriggered: Plasmoid.configuration.displayMode = 1
         },
         PlasmaCore.Action {
-            text: root.tr("wide_mode")
+            text: i18n("Wide Mode (Search bar + icon)")
             checkable: true
             checked: root.displayMode === 2
             onTriggered: Plasmoid.configuration.displayMode = 2
         },
         PlasmaCore.Action {
-            text: root.tr("extra_wide_mode")
+            text: i18n("Extra Wide Mode (Wide + Long Placeholder)")
             checkable: true
             checked: root.displayMode === 3
             onTriggered: Plasmoid.configuration.displayMode = 3
@@ -161,7 +151,7 @@ PlasmoidItem {
         // Pass panel status for styling decisions
         isInPanel: root.isInPanel
         
-        trFunc: root.tr
+        // trFunc removed
         
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
         previewEnabled: Plasmoid.configuration.previewEnabled

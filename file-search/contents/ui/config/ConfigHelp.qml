@@ -3,120 +3,104 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-import "../js/localization.js" as LocalizationData
-
-Kirigami.FormLayout {
-    id: helpPage
-    
-    // Localization
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.split("_")[0]
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
+    // Localization removed
+    // Use standard i18n()
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("keyboard_shortcuts") || "Klavye Kısayolları"
+        Kirigami.FormData.label: i18n("Keyboard Shortcuts")
     }
     
     Label {
-        text: "• ↑↓←→ - " + (tr("help_navigation") || "Sonuçlar arasında gezin")
+        text: "• ↑↓←→ - " + i18n("Navigate between results")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Tab / Shift+Tab - " + (tr("help_section_nav") || "Bölümler arası geçiş")
+        text: "• Tab / Shift+Tab - " + i18n("Navigate between sections")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Ctrl+1 / Ctrl+2 - " + (tr("help_view_mode") || "Liste / Döşeme görünümü")
+        text: "• Ctrl+1 / Ctrl+2 - " + i18n("List / Tile view")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Ctrl+Space - " + (tr("help_preview") || "Dosya önizlemesini aç/kapat")
+        text: "• Ctrl+Space - " + i18n("Toggle file preview")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Enter - " + (tr("help_activate") || "Seçili öğeyi aç")
+        text: "• Enter - " + i18n("Open selected item")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Esc - " + (tr("help_close") || "Widget'ı kapat")
+        text: "• Esc - " + i18n("Close widget")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("search_prefixes") || "Arama Prefix'leri"
+        Kirigami.FormData.label: i18n("Search Prefixes")
     }
     
     Label {
-        text: "• timeline:/today - " + (tr("hint_timeline_today") || "Bugün değiştirilen dosyalar")
+        text: "• timeline:/today - " + i18n("List files modified today")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• gg:arama - " + (tr("hint_google") || "Google araması")
+        text: "• gg:arama - " + i18n("Search on Google")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• dd:arama - " + (tr("hint_duckduckgo") || "DuckDuckGo araması")
+        text: "• dd:arama - " + i18n("Search on DuckDuckGo")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• kill uygulama - " + (tr("hint_kill") || "Uygulamayı sonlandır")
+        text: "• kill uygulama - " + i18n("Terminate processes")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• spell kelime - " + (tr("hint_spell") || "Yazım kontrolü")
+        text: "• spell kelime - " + i18n("Check spelling")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("profiles") || "Profiller"
+        Kirigami.FormData.label: i18n("User Profiles")
     }
     
     Label {
-        text: "• Minimal - " + (tr("profile_minimal_desc") || "Basit arayüz, temel özellikler")
+        text: "• Minimal - " + i18n("A simplified interface with essential features.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Developer - " + (tr("profile_developer_desc") || "Debug sekmesi açılır, geliştirici özellikleri")
+        text: "• Developer - " + i18n("Debug tab active, developer features enabled.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Power User - " + (tr("profile_power_desc") || "Tüm özellikler aktif, gelişmiş ayarlar")
+        text: "• Power User - " + i18n("All features active, advanced settings available.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }

@@ -1,51 +1,36 @@
 import QtQuick
 import org.kde.plasma.configuration
 
-import "../ui/js/localization.js" as LocalizationData
-
-ConfigModel {
-    
-    // Localization Logic
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
+    // Localization removed
+    // Use standard i18n()
 
     ConfigCategory {
-        name: tr("config_appearance")
+        name: i18n("General")
         icon: "preferences-desktop-display"
         source: "../ui/config/ConfigGeneral.qml"
     }
     ConfigCategory {
-        name: tr("config_search")
+        name: i18n("Search")
         icon: "preferences-system-search"
         source: "../ui/config/ConfigSearch.qml"
     }
     ConfigCategory {
-        name: tr("config_preview")
+        name: i18n("Preview")
         icon: "view-preview"
         source: "../ui/config/ConfigPreview.qml"
     }
     ConfigCategory {
-        name: tr("config_categories")
+        name: i18n("Categories")
         icon: "view-list-icons"
         source: "../ui/config/ConfigCategories.qml"
     }
     ConfigCategory {
-        name: tr("config_debug")
+        name: i18n("Debug")
         icon: "tools-report-bug"
         source: "../ui/config/ConfigDebug.qml"
     }
     ConfigCategory {
-        name: tr("config_help")
+        name: i18n("Help")
         icon: "help-contents"
         source: "../ui/config/ConfigHelp.qml"
     }

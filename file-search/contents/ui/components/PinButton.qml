@@ -15,7 +15,7 @@ Item {
     property color textColor: Kirigami.Theme.textColor
     
     // Localization function
-    property var trFunc: function(key) { return key }
+    // Localization function property removed
     
     // Signals
     signal toggled(bool pinned)
@@ -65,7 +65,7 @@ Item {
     
     ToolTip {
         visible: mouseArea.containsMouse
-        text: pinButton.isPinned ? pinButton.trFunc("unpin_item") : pinButton.trFunc("pin_item")
+        text: pinButton.isPinned ? i18n("Unpin") : i18n("Pin")
         delay: 500
     }
 }

@@ -28,7 +28,7 @@ ScrollView {
     signal itemRightClicked(var item, real x, real y)
     
     // Localization
-    property var trFunc: function(key) { return key }
+    // trFunc property removed
     property string searchText: ""
     
     // Pin support
@@ -180,7 +180,7 @@ ScrollView {
                         }
                         accentColor: resultsListRoot.accentColor
                         textColor: resultsListRoot.textColor
-                        trFunc: resultsListRoot.trFunc
+                        // trFunc removed
                         
                         onToggled: (pinned) => {
                             var matchId = (modelData.duplicateId !== undefined ? modelData.duplicateId : modelData.display) || ""
@@ -327,7 +327,7 @@ ScrollView {
         // Empty state
         Text {
             anchors.centerIn: parent
-            text: resultsListRoot.searchText.length > 0 ? resultsListRoot.trFunc("no_results") : resultsListRoot.trFunc("type_to_search")
+            text: resultsListRoot.searchText.length > 0 ? i18n("No results found") : i18n("Type to start searching")
             color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
             font.pixelSize: 12
             visible: resultsList.count === 0 && resultsListRoot.searchText.length > 0

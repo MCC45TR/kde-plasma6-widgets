@@ -1,0 +1,182 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: ro\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Căutare"
+
+msgid "Search Here"
+msgstr "Caută aici"
+
+msgid "Start searching..."
+msgstr "Începe căutarea..."
+
+msgid "Search..."
+msgstr "Caută..."
+
+msgid "No results found"
+msgstr "Niciun rezultat găsit"
+
+msgid "Type to start searching"
+msgstr "Tastați pentru a căuta"
+
+msgid "Recent Searches"
+msgstr "Căutări recente"
+
+msgid "Clear History"
+msgstr "Șterge istoricul"
+
+msgid "Applications"
+msgstr "Aplicații"
+
+msgid "Other"
+msgstr "Altele"
+
+msgid "Today"
+msgstr "Astăzi"
+
+msgid "Panel View"
+msgstr "Vizualizare panou"
+
+msgid "Results View"
+msgstr "Vizualizare rezultate"
+
+msgid "Button Mode (Icon only)"
+msgstr "Mod buton (Doar pictogramă)"
+
+msgid "Medium Mode (Button only)"
+msgstr "Mod mediu (Doar buton)"
+
+msgid "Wide Mode (Search bar + icon)"
+msgstr "Mod lat (Bară de căutare + pictogramă)"
+
+msgid "Extra Wide Mode (Wide + Long Placeholder)"
+msgstr "Mod extra lat (Lat + Substituent)"
+
+msgid "List View"
+msgstr "Vizualizare listă"
+
+msgid "Tile View"
+msgstr "Vizualizare dale"
+
+msgid "List Icon Size"
+msgstr "Dimensiune pictograme listă"
+
+msgid "Tile Icon Size"
+msgstr "Dimensiune pictograme dale"
+
+msgid "Panel Preview"
+msgstr "Previzualizare panou"
+
+msgid "Results Preview"
+msgstr "Previzualizare rezultate"
+
+msgid "Application 1"
+msgstr "Aplicația 1"
+
+msgid "Application 2"
+msgstr "Aplicația 2"
+
+msgid "File.txt"
+msgstr "Fișier.txt"
+
+msgid "File"
+msgstr "Fișier"
+
+msgid "Category"
+msgstr "Categorie"
+
+msgid "Path"
+msgstr "Cale"
+
+msgid "General"
+msgstr "General"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "User Profile"
+msgstr "Profil utilizator"
+
+msgid "Minimal"
+msgstr "Minimal"
+
+msgid "Developer"
+msgstr "Dezvoltator"
+
+msgid "Power User"
+msgstr "Utilizator avansat"
+
+msgid "Appearance"
+msgstr "Aspect"
+
+msgid "Keyboard Shortcuts"
+msgstr "Comenzi rapide"
+
+msgid "Profiles"
+msgstr "Profiluri"
+
+msgid "Open"
+msgstr "Deschide"
+
+msgid "Copy Path"
+msgstr "Copiază calea"
+
+msgid "Open in Terminal"
+msgstr "Deschide în terminal"
+
+msgid "Move to Trash"
+msgstr "Mută la coșul de gunoi"
+
+msgid "Open Containing Folder"
+msgstr "Deschide dosarul conținător"
+
+msgid "Properties"
+msgstr "Proprietăți"
+
+msgid "Manage Application"
+msgstr "Gestionează aplicația"
+
+msgid "Remove from History"
+msgstr "Elimină din istoric"
+
+msgid "Reset Statistics"
+msgstr "Resetează statisticile"
+
+msgid "Run Command"
+msgstr "Execută comandă"
+
+msgid "Bookmarks"
+msgstr "Marcaje"
+
+msgid "Power Management"
+msgstr "Gestionare energie"
+
+msgid "System Settings"
+msgstr "Setări sistem"
+
+msgid "Date & Time"
+msgstr "Dată și oră"
+
+msgid "Dictionary Definition"
+msgstr "Definiție dicționar"
+
+msgid "Unit Converter"
+msgstr "Convertor unități"
+
+msgid "Help & Shortcuts"
+msgstr "Ajutor și scurtături"
+
+msgid "Man package is not installed"
+msgstr "Pachetul Man nu este instalat"
+

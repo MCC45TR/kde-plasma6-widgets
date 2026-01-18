@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: fa\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search Here"
+msgstr "اینجا جستجو کنید"
+
+msgid "Start searching..."
+msgstr "شروع جستجو..."
+
+msgid "No results found"
+msgstr "نتیجه‌ای یافت نشد"
+
+msgid "Type to start searching"
+msgstr "برای جستجو تایپ کنید"
+
+msgid "Recent Searches"
+msgstr "جستجوهای اخیر"
+
+msgid "Clear History"
+msgstr "پاک کردن تاریخچه"
+
+msgid "Applications"
+msgstr "برنامه‌ها"
+
+msgid "Other"
+msgstr "دیگر"
+
+msgid "Today"
+msgstr "امروز"
+
+msgid "List View"
+msgstr "نمای لیست"
+
+msgid "Tile View"
+msgstr "نمای کاشی"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "Profile"
+msgstr "پروفایل"
+
+msgid "Appearance"
+msgstr "ظاهر"
+
+msgid "Pinned Items"
+msgstr "موارد سنجاق شده"
+
+msgid "Pin"
+msgstr "سنجاق کردن"
+
+msgid "Unpin"
+msgstr "برداشتن سنجاق"
+
+msgid "Category Settings"
+msgstr "تنظیمات دسته‌بندی"
+
+msgid "Files"
+msgstr "فایل‌ها"
+
+msgid "Documents"
+msgstr "اسناد"
+
+msgid "Folders"
+msgstr "پوشه‌ها"
+
+msgid "Web"
+msgstr "وب"
+
+msgid "Open"
+msgstr "باز کردن"
+
+msgid "Copy Path"
+msgstr "کپی مسیر"
+
+msgid "Open in Terminal"
+msgstr "باز کردن در ترمینال"
+
+msgid "Move to Trash"
+msgstr "انتقال به زباله‌دان"
+
+msgid "Open Containing Folder"
+msgstr "باز کردن پوشه"
+
+msgid "Properties"
+msgstr "ویژگی‌ها"
+
+msgid "Manage Application"
+msgstr "مدیریت برنامه"
+
+msgid "Remove from History"
+msgstr "حذف از تاریخچه"
+
+msgid "Reset Statistics"
+msgstr "بازنشانی آمار"
+
+msgid "Run Command"
+msgstr "اجرای دستور"
+
+msgid "Bookmarks"
+msgstr "نشانک‌ها"
+
+msgid "Power Management"
+msgstr "مدیریت انرژی"
+
+msgid "System Settings"
+msgstr "تنظیمات سیستم"
+
+msgid "Date & Time"
+msgstr "تاریخ و زمان"
+
+msgid "Dictionary Definition"
+msgstr "تعریف فرهنگ لغت"
+
+msgid "Unit Converter"
+msgstr "مبدل واحد"
+
+msgid "Help & Shortcuts"
+msgstr "راهنما و میانبرها"
+
+msgid "Man package is not installed"
+msgstr "بسته Man نصب نشده است"
+

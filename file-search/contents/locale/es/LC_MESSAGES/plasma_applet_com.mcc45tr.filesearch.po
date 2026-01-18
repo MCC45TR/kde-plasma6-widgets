@@ -1,0 +1,173 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: es\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Search Here"
+msgstr "Buscar aquí"
+
+msgid "Start searching..."
+msgstr "Empezar a buscar..."
+
+msgid "Search..."
+msgstr "Buscar..."
+
+msgid "No results found"
+msgstr "No se encontraron resultados"
+
+msgid "Type to start searching"
+msgstr "Escriba para buscar"
+
+msgid "Recent Searches"
+msgstr "Búsquedas recientes"
+
+msgid "Clear History"
+msgstr "Borrar historial"
+
+msgid "Applications"
+msgstr "Aplicaciones"
+
+msgid "Other"
+msgstr "Otros"
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "Panel View"
+msgstr "Vista del panel"
+
+msgid "Results View"
+msgstr "Vista de resultados"
+
+msgid "Button Mode (Icon only)"
+msgstr "Modo botón (Solo icono)"
+
+msgid "Medium Mode (Button only)"
+msgstr "Modo medio (Solo botón)"
+
+msgid "Wide Mode (Search bar + icon)"
+msgstr "Modo ancho (Barra de búsqueda + icono)"
+
+msgid "Extra Wide Mode (Wide + Long Placeholder)"
+msgstr "Modo extra ancho (Ancho + Marcador de posición)"
+
+msgid "List View"
+msgstr "Vista de lista"
+
+msgid "Tile View"
+msgstr "Vista de mosaico"
+
+msgid "List Icon Size"
+msgstr "Tamaño de iconos de lista"
+
+msgid "Tile Icon Size"
+msgstr "Tamaño de iconos de mosaico"
+
+msgid "Panel Preview"
+msgstr "Previsualización del panel"
+
+msgid "Results Preview"
+msgstr "Previsualización de resultados"
+
+msgid "Application 1"
+msgstr "Aplicación 1"
+
+msgid "Application 2"
+msgstr "Aplicación 2"
+
+msgid "File.txt"
+msgstr "Archivo.txt"
+
+msgid "File"
+msgstr "Archivo"
+
+msgid "Category"
+msgstr "Categoría"
+
+msgid "Path"
+msgstr "Ruta"
+
+msgid "General"
+msgstr "General"
+
+msgid "Profile"
+msgstr "Perfil"
+
+msgid "Minimal"
+msgstr "Mínimo"
+
+msgid "Developer"
+msgstr "Desarrollador"
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Keyboard Shortcuts"
+msgstr "Atajos de teclado"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Copy Path"
+msgstr "Copiar ruta"
+
+msgid "Open in Terminal"
+msgstr "Abrir en terminal"
+
+msgid "Move to Trash"
+msgstr "Mover a la papelera"
+
+msgid "Open Containing Folder"
+msgstr "Abrir carpeta contenedora"
+
+msgid "Properties"
+msgstr "Propiedades"
+
+msgid "Manage Application"
+msgstr "Gestionar aplicación"
+
+msgid "Remove from History"
+msgstr "Eliminar del historial"
+
+msgid "Reset Statistics"
+msgstr "Restablecer estadísticas"
+
+msgid "Run Command"
+msgstr "Ejecutar comando"
+
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+msgid "Power Management"
+msgstr "Gestión de energía"
+
+msgid "System Settings"
+msgstr "Configuración del sistema"
+
+msgid "Date & Time"
+msgstr "Fecha y hora"
+
+msgid "Dictionary Definition"
+msgstr "Definición de diccionario"
+
+msgid "Unit Converter"
+msgstr "Conversor de unidades"
+
+msgid "Help & Shortcuts"
+msgstr "Ayuda y atajos"
+
+msgid "Man package is not installed"
+msgstr "El paquete Man no está instalado"
+

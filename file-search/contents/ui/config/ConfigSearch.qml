@@ -3,41 +3,23 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-import "../js/localization.js" as LocalizationData
-
-Kirigami.FormLayout {
-    id: searchPage
-    
-    property alias cfg_previewEnabled: previewToggle.checked
-    
-    // Localization
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.split("_")[0]
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
+    // Localization removed
+    // Use standard i18n()
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("search_settings") || "Arama Ayarları"
+        Kirigami.FormData.label: i18n("Search Settings")
     }
     
     // Preview Toggle
     Switch {
         id: previewToggle
-        Kirigami.FormData.label: tr("enable_preview") || "Dosya Önizlemesi"
+        Kirigami.FormData.label: i18n("Enable File Previews")
         checked: true
     }
     
     Label {
-        text: tr("preview_description") || "Hover ile dosya bilgisi göster (Ctrl+Space ile de tetiklenebilir)"
+        text: i18n("Show file previews on hover (can also be triggered with Ctrl+Space)")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         opacity: 0.7
@@ -46,11 +28,11 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("search_behavior") || "Arama Davranışı"
+        Kirigami.FormData.label: i18n("Search Behavior")
     }
     
     Label {
-        text: tr("search_info") || "Aşağıdaki KRunner komutlarını ve öneklerini (prefix) kullanabilirsiniz:"
+        text: i18n("You can use the following KRunner commands and prefixes:")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         opacity: 0.8
@@ -64,33 +46,33 @@ Kirigami.FormLayout {
 
         // Header
         Label { 
-            text: tr("prefix") 
+            text: i18n("Prefix") 
             font.bold: true 
             color: Kirigami.Theme.highlightColor
         }
         Label { 
-            text: tr("description") || "Açıklama"
+            text: i18n("Description")
             font.bold: true 
             color: Kirigami.Theme.highlightColor
         }
 
         // Items
         Label { text: "timeline:/today" ; font.family: "Monospace" }
-        Label { text: tr("prefix_timeline") || "Bugün değiştirilen dosyaları listeler" }
+        Label { text: i18n("List files modified today") }
 
         Label { text: "gg: [term]" ; font.family: "Monospace" }
-        Label { text: tr("prefix_google") || "Google üzerinde arama yapar" }
+        Label { text: i18n("Search on Google") }
 
         Label { text: "dd: [term]" ; font.family: "Monospace" }
-        Label { text: tr("prefix_ddg") || "DuckDuckGo üzerinde arama yapar" }
+        Label { text: i18n("Search on DuckDuckGo") }
 
         Label { text: "kill [pid]" ; font.family: "Monospace" }
-        Label { text: tr("prefix_kill") || "İşlemleri sonlandırır" }
+        Label { text: i18n("Terminate processes") }
 
         Label { text: "spell [word]" ; font.family: "Monospace" }
-        Label { text: tr("prefix_spell") || "Yazım denetimi yapar" }
+        Label { text: i18n("Check spelling") }
 
         Label { text: "#[char]" ; font.family: "Monospace" }
-        Label { text: tr("prefix_unicode") || "Unicode karakter kodlarını arar" }
+        Label { text: i18n("Search Unicode characters") }
     }
 }

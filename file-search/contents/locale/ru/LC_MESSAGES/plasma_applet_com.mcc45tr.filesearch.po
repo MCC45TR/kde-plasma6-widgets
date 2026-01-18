@@ -1,0 +1,197 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: ru\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search Here"
+msgstr "Искать здесь"
+
+msgid "Start searching..."
+msgstr "Начать поиск..."
+
+msgid "Search..."
+msgstr "Поиск..."
+
+msgid "No results found"
+msgstr "Результатов не найдено"
+
+msgid "Type to start searching"
+msgstr "Введите для поиска"
+
+msgid "Recent Searches"
+msgstr "Недавние поиски"
+
+msgid "Clear History"
+msgstr "Очистить историю"
+
+msgid "Applications"
+msgstr "Приложения"
+
+msgid "Other"
+msgstr "Другое"
+
+msgid "Today"
+msgstr "Сегодня"
+
+msgid "Panel View"
+msgstr "Вид панели"
+
+msgid "Results View"
+msgstr "Вид результатов"
+
+msgid "Button Mode (Icon only)"
+msgstr "Режим кнопки (Только иконка)"
+
+msgid "Medium Mode (Button only)"
+msgstr "Средний режим (Только кнопка)"
+
+msgid "Wide Mode (Search bar + icon)"
+msgstr "Широкий режим (Строка поиска + иконка)"
+
+msgid "Extra Wide Mode (Wide + Long Placeholder)"
+msgstr "Экстра широкий режим (Широкий + Заполнитель)"
+
+msgid "List View"
+msgstr "Вид списка"
+
+msgid "Tile View"
+msgstr "Вид плитки"
+
+msgid "List Icon Size"
+msgstr "Размер иконок списка"
+
+msgid "Tile Icon Size"
+msgstr "Размер иконок плитки"
+
+msgid "Panel Preview"
+msgstr "Предпросмотр панели"
+
+msgid "Results Preview"
+msgstr "Предпросмотр результатов"
+
+msgid "Application 1"
+msgstr "Приложение 1"
+
+msgid "Application 2"
+msgstr "Приложение 2"
+
+msgid "File.txt"
+msgstr "Файл.txt"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Category"
+msgstr "Категория"
+
+msgid "Path"
+msgstr "Путь"
+
+msgid "General"
+msgstr "Общее"
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "Minimal"
+msgstr "Минимальный"
+
+msgid "Developer"
+msgstr "Разработчик"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "Keyboard Shortcuts"
+msgstr "Горячие клавиши"
+
+msgid "Open"
+msgstr "Открыть"
+
+msgid "Copy Path"
+msgstr "Копировать путь"
+
+msgid "Open in Terminal"
+msgstr "Открыть в терминале"
+
+msgid "Move to Trash"
+msgstr "Удалить в корзину"
+
+msgid "Open Containing Folder"
+msgstr "Открыть папку с файлом"
+
+msgid "Properties"
+msgstr "Свойства"
+
+msgid "Manage Application"
+msgstr "Управление приложением"
+
+msgid "Remove from History"
+msgstr "Удалить из истории"
+
+msgid "Reset Statistics"
+msgstr "Сбросить статистику"
+
+msgid "Run Command"
+msgstr "Выполнить команду"
+
+msgid "Bookmarks"
+msgstr "Закладки"
+
+msgid "Power Management"
+msgstr "Управление питанием"
+
+msgid "System Settings"
+msgstr "Настройки системы"
+
+msgid "Date & Time"
+msgstr "Дата и время"
+
+msgid "Dictionary Definition"
+msgstr "Определение слова"
+
+msgid "Unit Converter"
+msgstr "Конвертер величин"
+
+msgid "Help & Shortcuts"
+msgstr "Помощь и ярлыки"
+
+msgid "Man package is not installed"
+msgstr "Пакет Man не установлен"
+
+msgid "unit"
+msgstr "unit"
+
+msgid "date"
+msgstr "date"
+
+msgid "kill"
+msgstr "kill"
+
+msgid "spell"
+msgstr "spell"
+
+msgid "shell"
+msgstr "shell"
+
+msgid "power"
+msgstr "power"
+
+msgid "services"
+msgstr "services"
+
+msgid "help"
+msgstr "help"
+

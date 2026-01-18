@@ -19,8 +19,8 @@ FocusScope {
     signal itemClicked(var item)
     signal clearClicked()
     
-    // Localization function
-    property var trFunc: function(key) { return key }
+    // Localization removed
+    // Use standard i18n()
     
     // Navigation state
     property var collapsedCategories: ({})
@@ -240,7 +240,7 @@ FocusScope {
         height: 32
         
         Text {
-            text: historyTile.trFunc("recent_searches")
+            text: i18n("Recent Searches")
             font.pixelSize: 13
             font.bold: true
             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
@@ -260,7 +260,7 @@ FocusScope {
             Text {
                 id: clearBtnText
                 anchors.centerIn: parent
-                text: historyTile.trFunc("clear_history")
+                text: i18n("Clear History")
                 font.pixelSize: 11
                 color: historyTile.textColor
             }

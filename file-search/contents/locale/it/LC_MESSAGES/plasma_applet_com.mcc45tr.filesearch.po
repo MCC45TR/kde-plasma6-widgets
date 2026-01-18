@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: it\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Cerca"
+
+msgid "Search Here"
+msgstr "Cerca qui"
+
+msgid "Start searching..."
+msgstr "Inizia la ricerca..."
+
+msgid "No results found"
+msgstr "Nessun risultato"
+
+msgid "Type to start searching"
+msgstr "Digita per cercare"
+
+msgid "Recent Searches"
+msgstr "Ricerche recenti"
+
+msgid "Clear History"
+msgstr "Cancella cronologia"
+
+msgid "Applications"
+msgstr "Applicazioni"
+
+msgid "Other"
+msgstr "Altro"
+
+msgid "Today"
+msgstr "Oggi"
+
+msgid "List View"
+msgstr "Vista Elenco"
+
+msgid "Tile View"
+msgstr "Vista Griglia"
+
+msgid "General"
+msgstr "Generale"
+
+msgid "Profile"
+msgstr "Profilo"
+
+msgid "Appearance"
+msgstr "Aspetto"
+
+msgid "Pinned Items"
+msgstr "Elementi Fissati"
+
+msgid "Pin"
+msgstr "Fissa"
+
+msgid "Unpin"
+msgstr "Rimuovi"
+
+msgid "Category Settings"
+msgstr "Impostazioni Categoria"
+
+msgid "Files"
+msgstr "File"
+
+msgid "Documents"
+msgstr "Documenti"
+
+msgid "Folders"
+msgstr "Cartelle"
+
+msgid "Web"
+msgstr "Web"
+
+msgid "Open"
+msgstr "Apri"
+
+msgid "Copy Path"
+msgstr "Copia Percorso"
+
+msgid "Open in Terminal"
+msgstr "Apri nel Terminale"
+
+msgid "Move to Trash"
+msgstr "Sposta nel Cestino"
+
+msgid "Open Containing Folder"
+msgstr "Apri Cartella Contenente"
+
+msgid "Properties"
+msgstr "Proprietà"
+
+msgid "Manage Application"
+msgstr "Gestisci Applicazione"
+
+msgid "Remove from History"
+msgstr "Rimuovi dalla Cronologia"
+
+msgid "Reset Statistics"
+msgstr "Reimposta Statistiche"
+
+msgid "Run Command"
+msgstr "Esegui comando"
+
+msgid "Bookmarks"
+msgstr "Segnalibri"
+
+msgid "Power Management"
+msgstr "Gestione Alimentazione"
+
+msgid "System Settings"
+msgstr "Impostazioni di Sistema"
+
+msgid "Date & Time"
+msgstr "Data e Ora"
+
+msgid "Dictionary Definition"
+msgstr "Definizione Dizionario"
+
+msgid "Unit Converter"
+msgstr "Convertitore Unità"
+
+msgid "Help & Shortcuts"
+msgstr "Aiuto e Scorciatoie"
+
+msgid "Man package is not installed"
+msgstr "Il pacchetto Man non è installato"
+

@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: zh\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search Here"
+msgstr "在此搜索"
+
+msgid "Start searching..."
+msgstr "开始搜索..."
+
+msgid "No results found"
+msgstr "未找到结果"
+
+msgid "Type to start searching"
+msgstr "输入以搜索"
+
+msgid "Recent Searches"
+msgstr "最近搜索"
+
+msgid "Clear History"
+msgstr "清除历史"
+
+msgid "Applications"
+msgstr "应用程序"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Today"
+msgstr "今天"
+
+msgid "List View"
+msgstr "列表视图"
+
+msgid "Tile View"
+msgstr "平铺视图"
+
+msgid "General"
+msgstr "常规"
+
+msgid "Profile"
+msgstr "配置文件"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Pinned Items"
+msgstr "固定项目"
+
+msgid "Pin"
+msgstr "固定"
+
+msgid "Unpin"
+msgstr "取消固定"
+
+msgid "Category Settings"
+msgstr "类别设置"
+
+msgid "Files"
+msgstr "文件"
+
+msgid "Documents"
+msgstr "文档"
+
+msgid "Folders"
+msgstr "文件夹"
+
+msgid "Web"
+msgstr "网络"
+
+msgid "Open"
+msgstr "打开"
+
+msgid "Copy Path"
+msgstr "复制路径"
+
+msgid "Open in Terminal"
+msgstr "在终端打开"
+
+msgid "Move to Trash"
+msgstr "移至回收站"
+
+msgid "Open Containing Folder"
+msgstr "打开所在文件夹"
+
+msgid "Properties"
+msgstr "属性"
+
+msgid "Manage Application"
+msgstr "管理应用程序"
+
+msgid "Remove from History"
+msgstr "从历史记录移除"
+
+msgid "Reset Statistics"
+msgstr "重置统计"
+
+msgid "Run Command"
+msgstr "运行命令"
+
+msgid "Bookmarks"
+msgstr "书签"
+
+msgid "Power Management"
+msgstr "电源管理"
+
+msgid "System Settings"
+msgstr "系统设置"
+
+msgid "Date & Time"
+msgstr "日期和时间"
+
+msgid "Dictionary Definition"
+msgstr "字典定义"
+
+msgid "Unit Converter"
+msgstr "单位转换器"
+
+msgid "Help & Shortcuts"
+msgstr "帮助与快捷键"
+
+msgid "Man package is not installed"
+msgstr "未安装 Man 包"
+

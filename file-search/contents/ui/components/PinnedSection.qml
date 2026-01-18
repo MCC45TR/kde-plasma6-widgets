@@ -18,8 +18,7 @@ Item {
     // Collapsed state
     property bool isExpanded: true
     
-    // Localization function
-    property var trFunc: function(key) { return key }
+    // Localization function removed (using global i18n)
     
     // Signals
     signal itemClicked(var item)
@@ -69,7 +68,7 @@ Item {
                 }
                 
                 Text {
-                    text: pinnedSectionRoot.trFunc("pinned_items")
+                    text: i18n("Pinned Items")
                     font.pixelSize: 12
                     font.bold: true
                     color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.7)
@@ -161,7 +160,7 @@ Item {
                                         isPinned: true
                                         accentColor: pinnedSectionRoot.accentColor
                                         textColor: pinnedSectionRoot.textColor
-                                        trFunc: pinnedSectionRoot.trFunc
+                                        // trFunc removed
                                         
                                         onToggled: {
                                             pinnedSectionRoot.unpinClicked(modelData.matchId)
@@ -321,7 +320,7 @@ Item {
                                 
                                 ToolTip {
                                     visible: tileMouse.containsMouse && !tileMouse.drag.active
-                                    text: modelData.display + "\n" + pinnedSectionRoot.trFunc("drag_to_reorder")
+                                    text: modelData.display + "\n" + i18n("Drag to reorder")
                                     delay: 500
                                 }
                             }
@@ -340,7 +339,7 @@ Item {
         property int selectedIndex: -1
         
         MenuItem {
-            text: pinnedSectionRoot.trFunc("open")
+            text: i18n("Open")
             icon.name: "document-open"
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {
@@ -350,7 +349,7 @@ Item {
         }
         
         MenuItem {
-            text: pinnedSectionRoot.trFunc("copy_path")
+            text: i18n("Copy Path")
             icon.name: "edit-copy"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
             onTriggered: {
@@ -361,7 +360,7 @@ Item {
         }
         
         MenuItem {
-            text: pinnedSectionRoot.trFunc("open_location")
+            text: i18n("Open Containing Folder")
             icon.name: "folder-open"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
             onTriggered: {
@@ -374,7 +373,7 @@ Item {
         MenuSeparator {}
         
         MenuItem {
-            text: pinnedSectionRoot.trFunc("unpin_item")
+            text: i18n("Unpin")
             icon.name: "window-unpin"
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {

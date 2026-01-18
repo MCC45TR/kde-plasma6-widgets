@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: hi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "खोजें"
+
+msgid "Search Here"
+msgstr "यहाँ खोजें"
+
+msgid "Start searching..."
+msgstr "खोजना शुरू करें..."
+
+msgid "No results found"
+msgstr "कोई परिणाम नहीं मिला"
+
+msgid "Type to start searching"
+msgstr "खोजने के लिए टाइप करें"
+
+msgid "Recent Searches"
+msgstr "हाल की खोजें"
+
+msgid "Clear History"
+msgstr "इतिहास मिटाएं"
+
+msgid "Applications"
+msgstr "अनुप्रयोग"
+
+msgid "Other"
+msgstr "अन्य"
+
+msgid "Today"
+msgstr "आज"
+
+msgid "List View"
+msgstr "सूची दृश्य"
+
+msgid "Tile View"
+msgstr "टाइल्स दृश्य"
+
+msgid "General"
+msgstr "सामान्य"
+
+msgid "Profile"
+msgstr "प्रोफ़ाइल"
+
+msgid "Appearance"
+msgstr "दिखावट"
+
+msgid "Pinned Items"
+msgstr "पिन की गई वस्तुएं"
+
+msgid "Pin"
+msgstr "पिन करें"
+
+msgid "Unpin"
+msgstr "अनपिन करें"
+
+msgid "Category Settings"
+msgstr "श्रेणी सेटिंग्स"
+
+msgid "Files"
+msgstr "फ़ाइलें"
+
+msgid "Documents"
+msgstr "दस्तावेज़"
+
+msgid "Folders"
+msgstr "फ़ोल्डर्स"
+
+msgid "Web"
+msgstr "वेब"
+
+msgid "Open"
+msgstr "खोलें"
+
+msgid "Copy Path"
+msgstr "पथ कॉपी करें"
+
+msgid "Open in Terminal"
+msgstr "टर्मिनल में खोलें"
+
+msgid "Move to Trash"
+msgstr "ट्रैश में ले जाएं"
+
+msgid "Open Containing Folder"
+msgstr "फ़ोल्डर खोलें"
+
+msgid "Properties"
+msgstr "गुण"
+
+msgid "Manage Application"
+msgstr "एप्लिकेशन प्रबंधित करें"
+
+msgid "Remove from History"
+msgstr "इतिहास से हटाएं"
+
+msgid "Reset Statistics"
+msgstr "आंकड़े रीसेट करें"
+
+msgid "Run Command"
+msgstr "कमांड चलाएं"
+
+msgid "Bookmarks"
+msgstr "बुकमार्क"
+
+msgid "Power Management"
+msgstr "पावर प्रबंधन"
+
+msgid "System Settings"
+msgstr "सिस्टम सेटिंग्स"
+
+msgid "Date & Time"
+msgstr "दिनांक और समय"
+
+msgid "Dictionary Definition"
+msgstr "शब्दकोश परिभाषा"
+
+msgid "Unit Converter"
+msgstr "इकाई परिवर्तक"
+
+msgid "Help & Shortcuts"
+msgstr "सहायता और शॉर्टकट"
+
+msgid "Man package is not installed"
+msgstr "Man पैकेज स्थापित नहीं है"
+

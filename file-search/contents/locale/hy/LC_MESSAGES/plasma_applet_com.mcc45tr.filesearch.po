@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: hy\n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "Որոնել"
+
+msgid "Search Here"
+msgstr "Որոնել այստեղ"
+
+msgid "Start searching..."
+msgstr "Սկսել որոնումը..."
+
+msgid "No results found"
+msgstr "Արդյունքներ չեն գտնվել"
+
+msgid "Type to start searching"
+msgstr "Մուտքագրեք որոնման համար"
+
+msgid "Recent Searches"
+msgstr "Վերջին որոնումները"
+
+msgid "Clear History"
+msgstr "Մաքրել պատմությունը"
+
+msgid "Applications"
+msgstr "Ծրագրեր"
+
+msgid "Other"
+msgstr "Այլ"
+
+msgid "Today"
+msgstr "Այսօր"
+
+msgid "List View"
+msgstr "Ցուցակի տեսք"
+
+msgid "Tile View"
+msgstr "Սալիկների տեսք"
+
+msgid "General"
+msgstr "Ընդհանուր"
+
+msgid "Profile"
+msgstr "Պրոֆիլ"
+
+msgid "Appearance"
+msgstr "Տեսք"
+
+msgid "Pinned Items"
+msgstr "Ամրացվածներ"
+
+msgid "Pin"
+msgstr "Ամրացնել"
+
+msgid "Unpin"
+msgstr "Ապամրացնել"
+
+msgid "Category Settings"
+msgstr "Կատեգորիայի կարգավորումներ"
+
+msgid "Files"
+msgstr "Ֆայլեր"
+
+msgid "Documents"
+msgstr "Փաստաթղթեր"
+
+msgid "Folders"
+msgstr "Պանակներ"
+
+msgid "Web"
+msgstr "Վեբ"
+
+msgid "Open"
+msgstr "Բացել"
+
+msgid "Copy Path"
+msgstr "Պատճենել ուղին"
+
+msgid "Open in Terminal"
+msgstr "Բացել տերմինալում"
+
+msgid "Move to Trash"
+msgstr "Տեղափոխել աղբարկղ"
+
+msgid "Open Containing Folder"
+msgstr "Բացել պանակը"
+
+msgid "Properties"
+msgstr "Հատկություններ"
+
+msgid "Manage Application"
+msgstr "Կառավարել ծրագիրը"
+
+msgid "Remove from History"
+msgstr "Հեռացնել պատմությունից"
+
+msgid "Reset Statistics"
+msgstr "Վերականգնել վիճակագրությունը"
+
+msgid "Run Command"
+msgstr "Կատարել հրաման"
+
+msgid "Bookmarks"
+msgstr "Էջանիշներ"
+
+msgid "Power Management"
+msgstr "Սնուցման կառավարում"
+
+msgid "System Settings"
+msgstr "Համակարգի կարգավորումներ"
+
+msgid "Date & Time"
+msgstr "Ամսաթիվ և ժամ"
+
+msgid "Dictionary Definition"
+msgstr "Բառարանի սահմանում"
+
+msgid "Unit Converter"
+msgstr "Միավորների փոխարկիչ"
+
+msgid "Help & Shortcuts"
+msgstr "Օգնություն և դյուրանցումներ"
+
+msgid "Man package is not installed"
+msgstr "Man փաթեթը տեղադրված չէ"
+

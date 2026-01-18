@@ -4,26 +4,8 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 // Import localization
-import "../js/localization.js" as LocalizationData
-import "../js/CategoryManager.js" as CategoryManager
-
-// Use Kirigami.FormLayout for Plasma 6 config compatibility
-Kirigami.FormLayout {
-    id: configCategories
-    
-    // Localization
-    property var locales: LocalizationData.data
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
+    // Localization removed
+    // Use standard i18n()
     
     // KCM Configuration Properties (must match main.xml)
     property string cfg_categorySettings
@@ -158,13 +140,13 @@ Kirigami.FormLayout {
     // --- Algorithm Settings Section ---
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("algorithm_settings")
+        Kirigami.FormData.label: i18n("Algorithm Settings")
     }
     
     ComboBox {
         id: algorithmCombo
-        Kirigami.FormData.label: tr("search_algorithm")
-        model: [tr("alg_fuzzy"), tr("alg_exact"), tr("alg_starts_with")]
+        Kirigami.FormData.label: i18n("Search Algorithm")
+        model: [i18n("Fuzzy Match"), i18n("Exact Match"), i18n("Starts With")]
         currentIndex: configCategories.cfg_searchAlgorithm
         onActivated: {
             configCategories.cfg_searchAlgorithm = currentIndex
@@ -175,20 +157,20 @@ Kirigami.FormLayout {
     // Smart Limit Checkbox
     CheckBox {
         id: smartLimitCheck
-        Kirigami.FormData.label: tr("smart_limit_toggle")
-        text: tr("smart_limit_desc")
+        Kirigami.FormData.label: i18n("Dynamic Result Count")
+        text: i18n("Automatically limit displayed results based on relevance score")
         checked: configCategories.cfg_smartResultLimit
         onCheckedChanged: configCategories.cfg_smartResultLimit = checked
     }
     
     // Min/Max Results (only when smart limit is off)
     RowLayout {
-        Kirigami.FormData.label: tr("result_limits")
+        Kirigami.FormData.label: i18n("Result Limits")
         enabled: !configCategories.cfg_smartResultLimit
         opacity: enabled ? 1.0 : 0.5
         spacing: 12
         
-        Label { text: tr("min_results") }
+        Label { text: i18n("Min Results") }
         SpinBox {
             from: 1; to: 20
             value: configCategories.cfg_minResults || 3
@@ -197,7 +179,7 @@ Kirigami.FormLayout {
         
         Item { width: 10 }
         
-        Label { text: tr("max_results") }
+        Label { text: i18n("Max Results") }
         SpinBox {
             from: 5; to: 100
             value: configCategories.cfg_maxResults || 20
@@ -208,11 +190,11 @@ Kirigami.FormLayout {
     // --- Category Order Section ---
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("separate_section")
+        Kirigami.FormData.label: i18n("Prioritized Categories")
     }
     
     Label {
-        text: tr("drag_instruction")
+        text: i18n("Use buttons to reorder categories or move between sections")
         font.pixelSize: 11
         opacity: 0.6
         wrapMode: Text.WordWrap
@@ -221,7 +203,7 @@ Kirigami.FormLayout {
     
     // Separate Categories List
     Item {
-        Kirigami.FormData.label: tr("category_priority")
+        Kirigami.FormData.label: i18n("Priority")
         Layout.fillWidth: true
         Layout.preferredHeight: separateListColumn.implicitHeight + 20
         
@@ -273,9 +255,8 @@ Kirigami.FormLayout {
                             Layout.preferredHeight: 22
                         }
                         
-                        // Category name
                         Label {
-                            text: configCategories.tr(model.catNameKey) || model.catName
+                            text: i18n(model.catName) || model.catName
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                         }
@@ -313,7 +294,7 @@ Kirigami.FormLayout {
                         Button {
                             icon.name: "arrow-down-double"
                             flat: true
-                            ToolTip.text: tr("move_to_combined")
+                            ToolTip.text: i18n("Move to Combined")
                             ToolTip.visible: hovered
                             Layout.preferredWidth: 32
                             Layout.preferredHeight: 32
@@ -328,11 +309,11 @@ Kirigami.FormLayout {
     // --- Combined Section ---
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("combined_section")
+        Kirigami.FormData.label: i18n("Show Together (Merged)")
     }
     
     Label {
-        text: tr("combined_desc")
+        text: i18n("Categories in this section will be grouped together")
         font.pixelSize: 11
         opacity: 0.6
         wrapMode: Text.WordWrap
@@ -353,7 +334,7 @@ Kirigami.FormLayout {
             // Empty state
             Label {
                 visible: combinedModel.count === 0
-                text: tr("no_combined_categories")
+                text: i18n("No combined categories")
                 opacity: 0.5
                 anchors.centerIn: parent
             }
@@ -403,7 +384,7 @@ Kirigami.FormLayout {
                         
                         // Category name
                         Label {
-                            text: configCategories.tr(model.catNameKey) || model.catName
+                            text: i18n(model.catName) || model.catName
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                         }
@@ -412,7 +393,7 @@ Kirigami.FormLayout {
                         Button {
                             icon.name: "arrow-up-double"
                             flat: true
-                            ToolTip.text: tr("move_to_separate")
+                            ToolTip.text: i18n("Move to Separate")
                             ToolTip.visible: hovered
                             Layout.preferredWidth: 32
                             Layout.preferredHeight: 32
@@ -427,11 +408,11 @@ Kirigami.FormLayout {
     // Info box
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: tr("category_info_title")
+        Kirigami.FormData.label: i18n("Category Settings Information")
     }
     
     Label {
-        text: tr("category_info_desc") + "\n\n" + tr("priority_tooltip")
+        text: i18n("Changes are applied immediately. Hidden categories will not appear in search results. Priority determines display order.") + "\n\n" + i18n("Lower number = higher priority")
         opacity: 0.8
         wrapMode: Text.WordWrap
         Layout.fillWidth: true

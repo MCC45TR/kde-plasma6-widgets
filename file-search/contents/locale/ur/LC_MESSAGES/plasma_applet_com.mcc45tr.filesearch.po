@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-01-18 16:42\n"
+"Last-Translator: Auto Generator <auto@bot>\n"
+"Language-Team: ur\n"
+"Language: ur\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Search"
+msgstr "تلاش"
+
+msgid "Search Here"
+msgstr "یہاں تلاش کریں"
+
+msgid "Start searching..."
+msgstr "تلاش شروع کریں..."
+
+msgid "No results found"
+msgstr "کوئی نتائج نہیں ملے"
+
+msgid "Type to start searching"
+msgstr "تلاش کرنے کے لئے لکھیں"
+
+msgid "Recent Searches"
+msgstr "حالیہ تلاشیں"
+
+msgid "Clear History"
+msgstr "تاریخ صاف کریں"
+
+msgid "Applications"
+msgstr "ایپلی کیشنز"
+
+msgid "Other"
+msgstr "دیگر"
+
+msgid "Today"
+msgstr "آج"
+
+msgid "List View"
+msgstr "فہرست کا منظر"
+
+msgid "Tile View"
+msgstr "ٹائل کا منظر"
+
+msgid "General"
+msgstr "عام"
+
+msgid "Profile"
+msgstr "پروفائل"
+
+msgid "Appearance"
+msgstr "ظاہری شکل"
+
+msgid "Pinned Items"
+msgstr "پِن شدہ اشیاء"
+
+msgid "Pin"
+msgstr "پِن کریں"
+
+msgid "Unpin"
+msgstr "ان پِن کریں"
+
+msgid "Category Settings"
+msgstr "زمرہ کی ترتیبات"
+
+msgid "Files"
+msgstr "فائلیں"
+
+msgid "Documents"
+msgstr "دستاویزات"
+
+msgid "Folders"
+msgstr "فولڈرز"
+
+msgid "Web"
+msgstr "ویب"
+
+msgid "Open"
+msgstr "کھولیں"
+
+msgid "Copy Path"
+msgstr "راستہ کاپی کریں"
+
+msgid "Open in Terminal"
+msgstr "ٹرمینل میں کھولیں"
+
+msgid "Move to Trash"
+msgstr "ردی کی ٹوکری میں منتقل کریں"
+
+msgid "Open Containing Folder"
+msgstr "فولڈر کھولیں"
+
+msgid "Properties"
+msgstr "خصوصیات"
+
+msgid "Manage Application"
+msgstr "ایپلیکیشن کا انتظام کریں"
+
+msgid "Remove from History"
+msgstr "تاریخ سے ہٹائیں"
+
+msgid "Reset Statistics"
+msgstr "اعداد و شمار کو دوبارہ ترتیب دیں"
+
+msgid "Run Command"
+msgstr "کمانڈ چلائیں"
+
+msgid "Bookmarks"
+msgstr "بُک مارکس"
+
+msgid "Power Management"
+msgstr "پاور مینجمنٹ"
+
+msgid "System Settings"
+msgstr "سسٹم کی ترتیبات"
+
+msgid "Date & Time"
+msgstr "تاريخ اور وقت"
+
+msgid "Dictionary Definition"
+msgstr "لغت کی تعریف"
+
+msgid "Unit Converter"
+msgstr "یونٹ کنورٹر"
+
+msgid "Help & Shortcuts"
+msgstr "مدد اور شارٹ کٹس"
+
+msgid "Man package is not installed"
+msgstr "Man پیکیج انسٹال نہیں ہے"
+

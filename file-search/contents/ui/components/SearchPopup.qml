@@ -46,7 +46,7 @@ Item {
     property bool previewEnabled: true
     property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
 
-    property var trFunc
+    // property var trFunc removed
     
     // Signals to Main
     signal requestSearchTextUpdate(string text)
@@ -243,7 +243,7 @@ Item {
         if (!text) return false;
         var t = text.toLowerCase();
         // Only specific full-view modes hide the results list
-        return t === "date:" || t === "help:" || t === trFunc("prefix_date") + ":" || t === trFunc("prefix_help") + ":";
+        return t === "date:" || t === "clock:" || t === "help:" || t === i18n("date") + ":" || t === i18n("clock") + ":" || t === i18n("help") + ":";
     }
 
     function getEffectiveQuery(text) {
@@ -252,32 +252,36 @@ Item {
         
         // Map localized prefixes back to internal English prefixes or strip them
         
-        // 1. Check for "unit:" / "birim:" -> STRIP custom prefix for KRunner
-        // English: unit:
+        // 1. Check for "unit:"
         if (t.toLowerCase().startsWith("unit:")) return t.substring(5).trim()
         // Localized
-        var locUnit = trFunc("prefix_unit")
+        var locUnit = i18n("unit")
         if (locUnit && t.toLowerCase().startsWith(locUnit + ":")) return t.substring(locUnit.length + 1).trim()
         
-        // 2. Check for "date:" / "tarih:" -> Map to "date:" for internal view loader
-        var locDate = trFunc("prefix_date")
-        if (locDate && t.toLowerCase() === locDate + ":") return "date:"
+        // 2. Check for "date:" or "clock:"
+        var locDate = i18n("date")
+        var locClock = i18n("clock")
         
-        // 3. Check for "help:" / "yardım:" -> Map to "help:" for internal view loader
-        var locHelp = trFunc("prefix_help")
+        // Check for "clock:"
+        if (t.toLowerCase() === "clock:" || (locClock && t.toLowerCase() === locClock + ":")) return "clock:"
+        
+        // Check for "date:"
+        if (t.toLowerCase() === "date:" || (locDate && t.toLowerCase() === locDate + ":")) return "date:"
+        
+        // 3. Check for "help:"
+        var locHelp = i18n("help")
         if (locHelp && t.toLowerCase() === locHelp + ":") return "help:"
 
-        // 4. Check for "kill" / "sonlandır" -> Map to "kill"
-        var locKill = trFunc("prefix_kill")
+        // 4. Check for "kill"
+        var locKill = i18n("kill")
         if (locKill && t.toLowerCase().startsWith(locKill + " ")) return "kill " + t.substring(locKill.length + 1)
 
-        // 5. Check for "spell" / "yazım" -> Map to "spell"
-        var locSpell = trFunc("prefix_spell")
+        // 5. Check for "spell"
+        var locSpell = i18n("spell")
         if (locSpell && t.toLowerCase().startsWith(locSpell + " ")) return "spell " + t.substring(locSpell.length + 1)
         
-        // 6. Check for "shell:" / "komut:" -> Map to "shell:" (or strip if plugin needs?)
-        // Usually shell runner needs "shell:".
-        var locShell = trFunc("prefix_shell")
+        // 6. Check for "shell:"
+        var locShell = i18n("shell")
         if (locShell && t.toLowerCase().startsWith(locShell + ":")) return "shell:" + t.substring(locShell.length + 1)
 
         return t
@@ -349,7 +353,7 @@ Item {
         bgColor: popupRoot.bgColor
         textColor: popupRoot.textColor
         accentColor: popupRoot.accentColor
-        placeholderText: trFunc("search_placeholder") || "Arama Yapın"
+        placeholderText: i18n("Search Here")
         resultCount: tileData.resultCount
         resultsModel: resultsModel
         
@@ -439,7 +443,7 @@ Item {
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
             bgColor: popupRoot.bgColor
-            trFunc: popupRoot.trFunc
+            // trFunc removed
             logic: popupRoot.logic
             
             onHintSelected: (text) => {
@@ -478,7 +482,7 @@ Item {
             accentColor: popupRoot.accentColor
             iconSize: popupRoot.iconSize
             isTileView: popupRoot.isTileView
-            trFunc: popupRoot.trFunc
+            // trFunc removed
             
             onItemClicked: (item) => {
                 if (item.filePath) {
@@ -537,7 +541,7 @@ Item {
         anchors.rightMargin: 12
         asynchronous: true
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
-        anchors.bottomMargin: isButtonMode ? (buttonModeSearchInput.height + 12) : 12
+        anchors.bottomMargin: isButtonMode ? 80 : 12
         
         active: popupRoot.expanded && !isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
         
@@ -547,7 +551,7 @@ Item {
              listIconSize: popupRoot.listIconSize
              textColor: popupRoot.textColor
              accentColor: popupRoot.accentColor
-             trFunc: popupRoot.trFunc
+            // trFunc removed
              searchText: popupRoot.searchText
              previewEnabled: popupRoot.previewEnabled
              previewSettings: popupRoot.previewSettings
@@ -575,7 +579,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        anchors.bottomMargin: 12 // Standard bottom margin
+        anchors.bottomMargin: isButtonMode ? 80 : 12
 
         asynchronous: true
         active: popupRoot.expanded && isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
@@ -585,7 +589,7 @@ Item {
              iconSize: popupRoot.iconSize
              textColor: popupRoot.textColor
              accentColor: popupRoot.accentColor
-             trFunc: popupRoot.trFunc
+             // trFunc removed
              searchText: popupRoot.searchText
              previewSettings: popupRoot.previewSettings
 
@@ -613,10 +617,11 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && getEffectiveQuery(searchText) === "date:"
+        active: popupRoot.expanded && (getEffectiveQuery(searchText) === "date:" || getEffectiveQuery(searchText) === "clock:")
         
         sourceComponent: DateView {
             textColor: popupRoot.textColor
+            viewMode: getEffectiveQuery(popupRoot.searchText) === "clock:" ? "clock" : "date"
         }
     }
 
@@ -636,7 +641,7 @@ Item {
         sourceComponent: HelpView {
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
-            trFunc: popupRoot.trFunc
+            // trFunc removed
             
             onAidSelected: (prefix) => {
                 // When selecting from Help, we put the LOCALIZED prefix in the box if possible?
@@ -661,18 +666,18 @@ Item {
          anchors.margins: 12
          asynchronous: true
          // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
-         anchors.bottomMargin: isButtonMode ? (buttonModeSearchInput.height + 12) : 12
+         anchors.bottomMargin: isButtonMode ? 80 : 12
          
          active: popupRoot.expanded && searchText.length === 0 && logic.searchHistory.length > 0
          
          property var categorizedHistory: []
-         onActiveChanged: if(active) categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, trFunc("applications"), trFunc("other"))
+         onActiveChanged: if(active) categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18n("Applications"), i18n("Other"))
          
          Connections {
              target: logic
              function onHistoryForceUpdate() {
                  if (historyLoader.status === Loader.Ready) {
-                      historyLoader.categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, trFunc("applications"), trFunc("other"))
+                      historyLoader.categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18n("Applications"), i18n("Other"))
                  }
              }
          }
@@ -705,7 +710,7 @@ Item {
                  textColor: popupRoot.textColor
                  accentColor: popupRoot.accentColor
                  formatTimeFunc: logic.formatHistoryTime
-                 trFunc: popupRoot.trFunc
+                 // trFunc removed
                  previewSettings: popupRoot.previewSettings
                  
                  onItemClicked: (item) => handleHistoryClick(item)
@@ -721,7 +726,7 @@ Item {
                  iconSize: popupRoot.iconSize
                  textColor: popupRoot.textColor
                  accentColor: popupRoot.accentColor
-                 trFunc: popupRoot.trFunc
+                 // trFunc removed
                  previewSettings: popupRoot.previewSettings
                  
                  onItemClicked: (item) => handleHistoryClick(item)
@@ -752,7 +757,7 @@ Item {
               displayModeName: isButtonMode ? "Button" : "Mode"
               totalSearches: logic.telemetryStats.totalSearches || 0
               avgLatency: logic.telemetryStats.averageLatency || 0
-              tr: popupRoot.trFunc
+              // trFunc removed
          }
     }
 
