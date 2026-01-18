@@ -13,7 +13,7 @@
         "Icon": "system-search",
         "Id": "com.mcc45tr.filesearch",
         "Name": "MFile Finder",
-        "Version": "1.1.5-beta",
+        "Version": "1.1.6-beta",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/file-search",
         "License": "GPL-3.0",
         "Name[tr]": "MDosya Bulucu",
@@ -45,5 +45,10 @@
         "Description[ur]": "ونڈوز 10 اسٹائل فائل سرچ ویجیٹ",
         "Description[id]": "Widget pencarian berkas gaya Windows 10",
         "Description[fa]": "ویجت جستجوی فایل به سبک ویندوز ۱۰"
-    }
+    },
+    "X-Plasma-Provides": [
+        "org.kde.plasma.search"
+    ],
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-KDE-ConfigModule": "ui/config/config.qml"
 }

@@ -154,6 +154,7 @@ PlasmoidItem {
         // trFunc removed
         
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
+        showBootOptions: Plasmoid.configuration.showBootOptions
         previewEnabled: Plasmoid.configuration.previewEnabled
         previewSettings: {
             try {

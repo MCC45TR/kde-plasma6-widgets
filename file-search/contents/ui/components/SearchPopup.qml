@@ -43,6 +43,7 @@ Item {
     property color bgColor
     
     property bool showDebug: false
+    property bool showBootOptions: false
     property bool previewEnabled: true
     property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
 
@@ -243,7 +244,7 @@ Item {
         if (!text) return false;
         var t = text.toLowerCase();
         // Only specific full-view modes hide the results list
-        return t === "date:" || t === "clock:" || t === "help:" || t === i18n("date") + ":" || t === i18n("clock") + ":" || t === i18n("help") + ":";
+        return t === "date:" || t === "clock:" || t === "power:" || t === "help:" || t === i18n("date") + ":" || t === i18n("clock") + ":" || t === i18n("power") + ":" || t === i18n("help") + ":";
     }
 
     function getEffectiveQuery(text) {
@@ -283,6 +284,10 @@ Item {
         // 6. Check for "shell:"
         var locShell = i18n("shell")
         if (locShell && t.toLowerCase().startsWith(locShell + ":")) return "shell:" + t.substring(locShell.length + 1)
+        
+        // 7. Check for "power:"
+        var locPower = i18n("power")
+        if (t.toLowerCase() === "power:" || (locPower && t.toLowerCase() === locPower + ":")) return "power:"
 
         return t
     }
@@ -653,6 +658,27 @@ Item {
                 else buttonModeSearchInput.setText(prefix)
                 // Focus input?
             }
+        }
+    }
+    
+    // Power View ("power:" query)
+    Loader {
+        id: powerViewLoader
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? 12 : 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 12
+        anchors.bottomMargin: 12
+        
+        active: popupRoot.expanded && getEffectiveQuery(searchText) === "power:"
+        
+        sourceComponent: PowerView {
+            textColor: popupRoot.textColor
+            accentColor: popupRoot.accentColor
+            bgColor: popupRoot.bgColor
+            showBootOptions: popupRoot.showBootOptions
         }
     }
     

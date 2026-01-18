@@ -687,3 +687,36 @@ msgstr "dosya:/home -> 📂"
 
 msgid "man:ls -> 📄 ls(1)"
 msgstr "man:ls -> 📄 ls(1)"
+
+msgid "Hibernate"
+msgstr "Derin Uyut"
+
+msgid "Sleep"
+msgstr "Uyut"
+
+msgid "Reboot"
+msgstr "Yeniden Başlat"
+
+msgid "Shutdown"
+msgstr "Kapat"
+
+msgid "Lock Screen"
+msgstr "Ekranı Kilitle"
+
+msgid "Log Out"
+msgstr "Oturumu Kapat"
+
+msgid "Switch User"
+msgstr "Kullanıcı Değiştir"
+
+msgid "Save Session"
+msgstr "Oturumu Kaydet"
+
+msgid "Authorize to list entries"
+msgstr "Listelemek için yetki ver"
+
+msgid "clock"
+msgstr "saat"
+
+msgid "BIOS"
+msgstr "BIOS"
