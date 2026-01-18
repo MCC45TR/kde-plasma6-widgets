@@ -43,9 +43,46 @@ Item {
         spacing: 8
         
         // Section header
-        RowLayout {
+        Item {
             Layout.fillWidth: true
-            spacing: 8
+            Layout.preferredHeight: headerRow.implicitHeight
+            
+            RowLayout {
+                id: headerRow
+                anchors.fill: parent
+                spacing: 8
+                
+                Kirigami.Icon {
+                    source: pinnedSectionRoot.isExpanded ? "arrow-down" : "arrow-right"
+                    Layout.preferredWidth: 16
+                    Layout.preferredHeight: 16
+                    color: pinnedSectionRoot.accentColor
+                    
+                    Behavior on rotation { NumberAnimation { duration: 200 } }
+                }
+                
+                Kirigami.Icon {
+                    source: "pin"
+                    Layout.preferredWidth: 16
+                    Layout.preferredHeight: 16
+                    color: pinnedSectionRoot.accentColor
+                }
+                
+                Text {
+                    text: pinnedSectionRoot.trFunc("pinned_items")
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.7)
+                }
+                
+                Item { Layout.fillWidth: true }
+                
+                Text {
+                    text: pinnedSectionRoot.pinnedItems.length
+                    font.pixelSize: 10
+                    color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.5)
+                }
+            }
             
             MouseArea {
                 id: headerMouse
@@ -53,37 +90,6 @@ Item {
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onClicked: pinnedSectionRoot.isExpanded = !pinnedSectionRoot.isExpanded
-            }
-            
-            Kirigami.Icon {
-                source: pinnedSectionRoot.isExpanded ? "arrow-down" : "arrow-right"
-                Layout.preferredWidth: 16
-                Layout.preferredHeight: 16
-                color: pinnedSectionRoot.accentColor
-                
-                Behavior on rotation { NumberAnimation { duration: 200 } }
-            }
-            
-            Kirigami.Icon {
-                source: "pin"
-                Layout.preferredWidth: 16
-                Layout.preferredHeight: 16
-                color: pinnedSectionRoot.accentColor
-            }
-            
-            Text {
-                text: pinnedSectionRoot.trFunc("pinned_items")
-                font.pixelSize: 12
-                font.bold: true
-                color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.7)
-            }
-            
-            Item { Layout.fillWidth: true }
-            
-            Text {
-                text: pinnedSectionRoot.pinnedItems.length
-                font.pixelSize: 10
-                color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.5)
             }
         }
         
@@ -286,8 +292,10 @@ Item {
                                         }
                                         pinnedSectionRoot.draggedIndex = -1
                                         pinnedSectionRoot.dropTargetIndex = -1
-                                        tileContent.x = 0
-                                        tileContent.y = 0
+                                        if (tileContent) {
+                                            tileContent.x = 0
+                                            tileContent.y = 0
+                                        }
                                     }
                                     
                                     onPositionChanged: (mouse) => {

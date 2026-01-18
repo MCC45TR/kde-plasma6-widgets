@@ -9,13 +9,59 @@ import "../js/localization.js" as LocalizationData
 Kirigami.FormLayout {
     id: page
     
-    // Bind to configuration
+    // ===== Configuration Properties (mapped from main.xml) =====
+    // Display and View
     property alias cfg_displayMode: modeCombo.currentIndex
     property alias cfg_viewMode: viewModeCombo.currentIndex
-    
-    // Mapped properties for icon sizes (handled manually to map index <-> value)
     property int cfg_iconSize
     property int cfg_listIconSize
+    property alias cfg_userProfile: profileCombo.currentIndex
+    
+    // Preview Settings
+    property bool cfg_previewEnabled: true
+    property string cfg_previewSettings: "{}"
+    
+    // Debug and Telemetry
+    property bool cfg_debugOverlay: false
+    property string cfg_telemetryData: "{}"
+    
+    // Data Storage (not editable in General, but needed for property injection)
+    property string cfg_searchHistory: ""
+    property string cfg_pinnedItems: "[]"
+    property string cfg_categorySettings: "{}"
+    
+    // Search Settings
+    property int cfg_searchAlgorithm: 0
+    property int cfg_minResults: 3
+    property int cfg_maxResults: 20
+    property bool cfg_smartResultLimit: true
+    
+    // ===== Default Values (mapped from main.xml for Reset functionality) =====
+    // Display and View
+    property int cfg_displayModeDefault: 1
+    property int cfg_viewModeDefault: 0
+    property int cfg_iconSizeDefault: 48
+    property int cfg_listIconSizeDefault: 22
+    property int cfg_userProfileDefault: 0
+    
+    // Preview Settings
+    property bool cfg_previewEnabledDefault: true
+    property string cfg_previewSettingsDefault: "{\"images\": true, \"videos\": false, \"text\": false, \"documents\": false}"
+    
+    // Debug and Telemetry
+    property bool cfg_debugOverlayDefault: false
+    property string cfg_telemetryDataDefault: "{}"
+    
+    // Data Storage
+    property string cfg_searchHistoryDefault: ""
+    property string cfg_pinnedItemsDefault: "[]"
+    property string cfg_categorySettingsDefault: "{}"
+    
+    // Search Settings
+    property int cfg_searchAlgorithmDefault: 0
+    property int cfg_minResultsDefault: 3
+    property int cfg_maxResultsDefault: 20
+    property bool cfg_smartResultLimitDefault: true
     
     // --- Localization Logic ---
     property var locales: LocalizationData.data
@@ -30,9 +76,6 @@ Kirigami.FormLayout {
     
     // Icon size options
     readonly property var iconSizeModel: [16, 22, 32, 48, 64, 128]
-    
-    // Profile property
-    property alias cfg_userProfile: profileCombo.currentIndex
     
     // Profile Selector
     Kirigami.Separator {

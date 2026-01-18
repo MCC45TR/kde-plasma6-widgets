@@ -79,7 +79,7 @@ TextField {
     }
     
     // Force focus
-    function focus() {
+    function focusInput() {
         forceActiveFocus()
     }
     
