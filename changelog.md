@@ -6,6 +6,37 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 
 ## 🔍 MFile Finder (`file-search`)
 
+### v1.2.0-beta (2026-01-18)
+**TR:**
+- **Yapılandırma Penceresi Onarımı:**
+    - Eksik sekmeler düzeltildi ve yeniden yapılandırıldı (`General`, `Search`, `Preview`, `Categories`, `Debug`, `Help`).
+    - **Prefixes (Önekler)** sekmesi eklendi; mevcut arama komutları (`gg:`, `date:`, `power:` vb.) listelendi.
+    - QML sözdizimi hataları ve eksik özellik uyarıları giderildi.
+- **Power View İyileştirmeleri:**
+    - "Oturumu Kapat" ve "Kullanıcı Değiştir" butonlarına **çift tıklama onayı** (Double-click Confirmation) eklendi.
+    - Buton yerleşimleri ve aralıklar optimize edildi.
+- **UI & UX Düzeltmeleri:**
+    - **Buton Modu:** Popup açılırken içeriğin panel düğmesinin arkasında kalmaması için **üst boşluk (top margin)** eklendi.
+    - **Arama Çubuğu:** Buton modunda arama çubuğu ile liste arasındaki gereksiz boşluk kaldırıldı.
+- **Teknik Düzeltmeler:**
+    - `ConfigCategories.qml` dosyasının `CategoryManager` import hatası giderildi.
+    - `metadata.json` yapılandırma yolu (`contents/config/config.qml`) standartlara uygun hale getirildi.
+
+**EN:**
+- **Configuration Window Repair:**
+    - Fixed missing tabs and restructured config components (`General`, `Search`, `Preview`, `Categories`, `Debug`, `Help`).
+    - Added **Prefixes** tab listing available search commands (`gg:`, `date:`, `power:`, etc.).
+    - Resolved QML syntax errors and missing property definitions.
+- **Power View Improvements:**
+    - Added **double-click confirmation** for "Log Out" and "Switch User" buttons to prevent accidental clicks.
+    - Optimized layout spacing and alignment.
+- **UI & UX Fixes:**
+    - **Button Mode:** Added **top margin** (50px) to popup content to prevent overlapping with the panel button when opening upwards.
+    - **Search Bar:** Removed extra gap between the search bar and results list in Button Mode.
+- **Technical Fixes:**
+    - Fixed `CategoryManager` import in `ConfigCategories.qml`.
+    - Corrected configuration module path in `metadata.json`.
+
 ### v1.1.5-beta (2026-01-17)
 **TR:**
 - **Sabitlenmiş Öğeler UI:** Arka plan, yuvarlatılmış köşeler ve animasyonlu daralma/genişleme özelliği eklendi. Boşluklar dengelendi.

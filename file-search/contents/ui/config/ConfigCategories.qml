@@ -2,10 +2,12 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "../js/CategoryManager.js" as CategoryManager
 
-// Import localization
-    // Localization removed
-    // Use standard i18n()
+Kirigami.FormLayout {
+    id: configCategories
+    
+    property string title: i18n("Categories")
     
     // KCM Configuration Properties (must match main.xml)
     property string cfg_categorySettings

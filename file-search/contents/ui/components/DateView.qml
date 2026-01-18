@@ -11,6 +11,8 @@ Item {
     property color completedColor: Qt.alpha(root.textColor, 0.5)
     
     property string viewMode: "date" // "date" = Calendar Only, "clock" = Clock Only
+    property bool showClock: true
+    property bool showEvents: true
     
     // Timer to update time
     Timer {

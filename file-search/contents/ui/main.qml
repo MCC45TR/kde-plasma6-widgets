@@ -155,6 +155,7 @@ PlasmoidItem {
         
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
         showBootOptions: Plasmoid.configuration.showBootOptions
+        showPinnedBar: Plasmoid.configuration.showPinnedBar
         previewEnabled: Plasmoid.configuration.previewEnabled
         previewSettings: {
             try {

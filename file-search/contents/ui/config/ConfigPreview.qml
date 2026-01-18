@@ -3,12 +3,58 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-    // Localization removed
-    // Use standard i18n()
+Item {
+    id: configPreview
     
-    // KCM Configuration Properties
+    property string title: i18n("Preview")
+    
+    // KCM Configuration Properties (Preview specific)
     property string cfg_previewSettings
+    property string cfg_previewSettingsDefault
     property bool cfg_previewEnabled
+    property bool cfg_previewEnabledDefault
+
+    // Other Config Properties (to silence warnings)
+    property int cfg_displayMode
+    property int cfg_displayModeDefault
+    property int cfg_viewMode
+    property int cfg_viewModeDefault
+    property int cfg_iconSize
+    property int cfg_iconSizeDefault
+    property int cfg_listIconSize
+    property int cfg_listIconSizeDefault
+    property int cfg_userProfile
+    property int cfg_userProfileDefault
+    
+    property bool cfg_debugOverlay
+    property bool cfg_debugOverlayDefault
+    property string cfg_telemetryData
+    property string cfg_telemetryDataDefault
+    property string cfg_pinnedItems
+    property string cfg_pinnedItemsDefault
+    property string cfg_categorySettings
+    property string cfg_categorySettingsDefault
+    property int cfg_searchAlgorithm
+    property int cfg_searchAlgorithmDefault
+    property int cfg_minResults
+    property int cfg_minResultsDefault
+    property int cfg_maxResults
+    property int cfg_maxResultsDefault
+    property bool cfg_smartResultLimit
+    property bool cfg_smartResultLimitDefault
+    property string cfg_searchHistory
+    property string cfg_searchHistoryDefault
+    property bool cfg_showBootOptions
+    property bool cfg_showBootOptionsDefault
+    
+    property bool cfg_prefixDateShowClock
+    property bool cfg_prefixDateShowClockDefault
+    property bool cfg_prefixDateShowEvents
+    property bool cfg_prefixDateShowEventsDefault
+    property bool cfg_prefixPowerShowHibernate
+    property bool cfg_prefixPowerShowHibernateDefault
+    property bool cfg_prefixPowerShowSleep
+    property bool cfg_prefixPowerShowSleepDefault
     
     // Internal state
     property var previewSettings: ({})

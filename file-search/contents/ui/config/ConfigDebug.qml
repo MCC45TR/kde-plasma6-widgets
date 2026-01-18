@@ -3,13 +3,69 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-    // Localization removed
-    // Use standard i18n()
+Kirigami.FormLayout {
+    id: debugPage
+    
+    property string title: i18n("Debug")
+    
+    // =========================================================================
+    // CONFIGURATION PROPERTIES (Injectibles)
+    // =========================================================================
+    // We define all properties here to avoid "Property not found" warnings from Plasma
+    
+    // Display & View
+    property int cfg_displayMode: 1
+    property int cfg_displayModeDefault: 1
+    property int cfg_viewMode: 0
+    property int cfg_viewModeDefault: 0
+    property int cfg_iconSize: 48
+    property int cfg_iconSizeDefault: 48
+    property int cfg_listIconSize: 22
+    property int cfg_listIconSizeDefault: 22
+    property int cfg_userProfile: 0
+    property int cfg_userProfileDefault: 0
+    
+    // Preview
+    property bool cfg_previewEnabled: true
+    property bool cfg_previewEnabledDefault: true
+    property string cfg_previewSettings: "{}"
+    property string cfg_previewSettingsDefault: "{}"
+    
+    // Debug & Telemetry
+    property bool cfg_debugOverlay: false
+    property bool cfg_debugOverlayDefault: false
+    property string cfg_telemetryData: "{}"
+    property string cfg_telemetryDataDefault: "{}"
+    
+    // Data
+    property string cfg_searchHistory: ""
+    property string cfg_searchHistoryDefault: ""
+    property string cfg_pinnedItems: "[]"
+    property string cfg_pinnedItemsDefault: "[]"
+    property string cfg_categorySettings: "{}"
+    property string cfg_categorySettingsDefault: "{}"
+    
+    // Search
+    property int cfg_searchAlgorithm: 0
+    property int cfg_searchAlgorithmDefault: 0
+    property int cfg_minResults: 3
+    property int cfg_minResultsDefault: 3
+    property int cfg_maxResults: 20
+    property int cfg_maxResultsDefault: 20
+    property bool cfg_smartResultLimit: true
+    property bool cfg_smartResultLimitDefault: true
+    property bool cfg_showBootOptions: false
+    property bool cfg_showBootOptionsDefault: false
+
+    // =========================================================================
+    
+    // Helper property
+    property string currentLocale: Qt.locale().name
     
     // Warning if not in Developer mode
     Label {
         visible: cfg_userProfile !== 1
-        text: "⚠️ " + i18n("This tab is only active in Developer mode. Change profile in Appearance settings.")
+        text: "⚠️ " + i18n("This tab is only active in Developer mode. Change profile in General settings.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         color: Kirigami.Theme.negativeTextColor
@@ -25,8 +81,9 @@ import org.kde.kirigami as Kirigami
     Switch {
         id: debugOverlayToggle
         Kirigami.FormData.label: i18n("Debug Overlay")
-        checked: false
+        checked: debugPage.cfg_debugOverlay
         enabled: cfg_userProfile === 1
+        onToggled: debugPage.cfg_debugOverlay = checked
     }
     
     Label {
@@ -98,14 +155,25 @@ import org.kde.kirigami as Kirigami
             }
             font.family: "Monospace" 
         }
-        Label { text: i18n("Telemetry") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor; Layout.columnSpan: 2 }
+    }
+    
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18n("Telemetry")
+    }
+    
+    GridLayout {
+        columns: 2
+        rowSpacing: 6
+        columnSpacing: 12
+        Layout.fillWidth: true
         
         Label { text: i18n("Total Searches") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: {
                 try {
-                    var stats = JSON.parse(Plasmoid.configuration.telemetryData || "{}")
-                    return (stats.totalSearches || 0)
+                    var stats = JSON.parse(cfg_telemetryData || "{}")
+                    return (stats.totalSearches || 0).toString()
                 } catch(e) { return "0" }
             }
             font.family: "Monospace" 
@@ -115,30 +183,11 @@ import org.kde.kirigami as Kirigami
         Label { 
             text: {
                 try {
-                    var stats = JSON.parse(Plasmoid.configuration.telemetryData || "{}")
+                    var stats = JSON.parse(cfg_telemetryData || "{}")
                     return (stats.averageLatency || 0) + " ms"
                 } catch(e) { return "0 ms" }
             }
             font.family: "Monospace" 
-        }
-        
-        // Reset Stats Button
-        Button {
-            text: i18n("Reset Statistics")
-            icon.name: "edit-clear-all"
-            Layout.columnSpan: 2
-            Layout.topMargin: 8
-            enabled: cfg_userProfile === 1
-            
-            onClicked: {
-                Plasmoid.configuration.telemetryData = JSON.stringify({
-                    totalSearches: 0,
-                    averageLatency: 0,
-                    totalLatencySum: 0,
-                    lastReset: new Date().toISOString(),
-                    backend: "Milou/KRunner"
-                })
-            }
         }
     }
     
@@ -151,77 +200,84 @@ import org.kde.kirigami as Kirigami
     Kirigami.InlineMessage {
         Layout.fillWidth: true
         type: Kirigami.MessageType.Information
-        text: i18n("Privacy Notice: All debug and telemetry data is stored LOCALLY only (~/.config/plasma-org.kde.plasma.desktop-appletsrc). No data is sent to the internet.")
+        text: i18n("Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data is sent to the internet.")
         visible: true
     }
     
     // History Sample
-    ColumnLayout {
+    Item {
+        Kirigami.FormData.label: " "
         Layout.fillWidth: true
-        spacing: 4
+        Layout.preferredHeight: historyColumn.implicitHeight + 10
         
-        Repeater {
-            model: {
-                try {
-                    var hist = JSON.parse(cfg_searchHistory || "[]")
-                    return hist.slice(0, 5) // Show first 5 items
-                } catch(e) {
-                    return []
+        ColumnLayout {
+            id: historyColumn
+            anchors.fill: parent
+            spacing: 4
+            
+            Repeater {
+                model: {
+                    try {
+                        var hist = JSON.parse(cfg_searchHistory || "[]")
+                        return hist.slice(0, 5) // Show first 5 items
+                    } catch(e) {
+                        return []
+                    }
+                }
+                
+                delegate: Rectangle {
+                    Layout.fillWidth: true
+                    height: 40
+                    color: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1)
+                    radius: 4
+                    
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.margins: 6
+                        spacing: 8
+                        
+                        Kirigami.Icon {
+                            source: modelData.decoration || "application-x-executable"
+                            Layout.preferredWidth: 24
+                            Layout.preferredHeight: 24
+                        }
+                        
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 2
+                            
+                            Label {
+                                text: modelData.display || "Unknown"
+                                font.pixelSize: 12
+                                elide: Text.ElideRight
+                                Layout.fillWidth: true
+                            }
+                            
+                            Label {
+                                text: modelData.category || ""
+                                font.pixelSize: 10
+                                opacity: 0.6
+                                elide: Text.ElideRight
+                                Layout.fillWidth: true
+                            }
+                        }
+                    }
                 }
             }
             
-            delegate: Rectangle {
-                Layout.fillWidth: true
-                height: 40
-                color: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1)
-                radius: 4
-                
-                RowLayout {
-                    anchors.fill: parent
-                    anchors.margins: 6
-                    spacing: 8
-                    
-                    Kirigami.Icon {
-                        source: modelData.decoration || "application-x-executable"
-                        Layout.preferredWidth: 24
-                        Layout.preferredHeight: 24
-                    }
-                    
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        spacing: 2
-                        
-                        Label {
-                            text: modelData.display || "Unknown"
-                            font.pixelSize: 12
-                            elide: Text.ElideRight
-                            Layout.fillWidth: true
-                        }
-                        
-                        Label {
-                            text: modelData.category || ""
-                            font.pixelSize: 10
-                            opacity: 0.6
-                            elide: Text.ElideRight
-                            Layout.fillWidth: true
-                        }
+            Label {
+                visible: {
+                    try {
+                        var hist = JSON.parse(cfg_searchHistory || "[]")
+                        return hist.length === 0
+                    } catch(e) {
+                        return true
                     }
                 }
+                text: i18n("History is empty")
+                opacity: 0.5
+                font.italic: true
             }
-        }
-        
-        Label {
-            visible: {
-                try {
-                    var hist = JSON.parse(cfg_searchHistory || "[]")
-                    return hist.length === 0
-                } catch(e) {
-                    return true
-                }
-            }
-            text: i18n("History is empty")
-            opacity: 0.5
-            font.italic: true
         }
     }
 }

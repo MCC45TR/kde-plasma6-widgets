@@ -3,8 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-    // Localization removed
-    // Use standard i18n()
+Kirigami.FormLayout {
+    id: configSearch
+    
+    property string title: i18n("Search")
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true

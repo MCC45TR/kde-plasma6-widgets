@@ -3,8 +3,58 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-    // Localization removed
-    // Use standard i18n()
+Kirigami.FormLayout {
+    id: configHelp
+    
+    property string title: i18n("Help")
+    
+    // Define all config properties to avoid "Setting initial properties failed" warnings
+    property int cfg_displayMode: 1
+    property int cfg_displayModeDefault: 1
+    property int cfg_viewMode: 0
+    property int cfg_viewModeDefault: 0
+    property int cfg_iconSize: 48
+    property int cfg_iconSizeDefault: 48
+    property int cfg_listIconSize: 22
+    property int cfg_listIconSizeDefault: 22
+    property int cfg_userProfile: 0
+    property int cfg_userProfileDefault: 0
+    property bool cfg_previewEnabled: true
+    property bool cfg_previewEnabledDefault: true
+    property string cfg_previewSettings: "{}"
+    property string cfg_previewSettingsDefault: "{}"
+    property bool cfg_debugOverlay: false
+    property bool cfg_debugOverlayDefault: false
+    property string cfg_telemetryData: "{}"
+    property string cfg_telemetryDataDefault: "{}"
+    property string cfg_searchHistory: ""
+    property string cfg_searchHistoryDefault: ""
+    property string cfg_pinnedItems: "[]"
+    property string cfg_pinnedItemsDefault: "[]"
+    property string cfg_categorySettings: "{}"
+    property string cfg_categorySettingsDefault: "{}"
+    property int cfg_searchAlgorithm: 0
+    property int cfg_searchAlgorithmDefault: 0
+    property int cfg_minResults: 3
+    property int cfg_minResultsDefault: 3
+    property int cfg_maxResults: 20
+    property int cfg_maxResultsDefault: 20
+    property bool cfg_smartResultLimit: true
+    property bool cfg_smartResultLimitDefault: true
+    property bool cfg_showBootOptions: false
+    property bool cfg_showBootOptionsDefault: false
+    
+    // Missing properties that were causing warnings
+    property bool cfg_prefixDateShowClock: true
+    property bool cfg_prefixDateShowClockDefault: true
+    property bool cfg_prefixDateShowEvents: true
+    property bool cfg_prefixDateShowEventsDefault: true
+    property bool cfg_prefixPowerShowHibernate: false
+    property bool cfg_prefixPowerShowHibernateDefault: false
+    property bool cfg_prefixPowerShowSleep: true
+    property bool cfg_prefixPowerShowSleepDefault: true
+    property bool cfg_showPinnedBar: true
+    property bool cfg_showPinnedBarDefault: true
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
@@ -59,25 +109,25 @@ import org.kde.kirigami as Kirigami
     }
     
     Label {
-        text: "• gg:arama - " + i18n("Search on Google")
+        text: "• gg:search - " + i18n("Search on Google")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• dd:arama - " + i18n("Search on DuckDuckGo")
+        text: "• dd:search - " + i18n("Search on DuckDuckGo")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• kill uygulama - " + i18n("Terminate processes")
+        text: "• kill app - " + i18n("Terminate processes")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• spell kelime - " + i18n("Check spelling")
+        text: "• spell word - " + i18n("Check spelling")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }

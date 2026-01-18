@@ -46,6 +46,13 @@ Item {
     property bool showBootOptions: false
     property bool previewEnabled: true
     property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
+    
+    // Prefix Settings
+    property bool prefixDateShowClock: true
+    property bool prefixDateShowEvents: true
+    property bool prefixPowerShowHibernate: false
+    property bool prefixPowerShowSleep: true
+    property bool showPinnedBar: true
 
     // property var trFunc removed
     
@@ -436,7 +443,8 @@ Item {
     Loader {
         id: queryHintsLoader
         anchors.top: primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready ? primaryResultPreviewLoader.bottom : parent.top
-        anchors.topMargin: (primaryResultPreviewLoader.active) ? 8 : 0
+        // Add extra top margin in button mode to prevent content from being hidden behind panel button
+        anchors.topMargin: primaryResultPreviewLoader.active ? 8 : (isButtonMode ? 50 : 0)
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
@@ -471,7 +479,7 @@ Item {
         asynchronous: true
         
         property var items: logic.getVisiblePinnedItems()
-        active: items.length > 0
+        active: items.length > 0 && showPinnedBar
         
         // Reactively update when pins change
         Connections {
@@ -546,7 +554,7 @@ Item {
         anchors.rightMargin: 12
         asynchronous: true
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
-        anchors.bottomMargin: isButtonMode ? 80 : 12
+        anchors.bottomMargin: isButtonMode ? 56 : 12
         
         active: popupRoot.expanded && !isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
         
@@ -584,7 +592,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        anchors.bottomMargin: isButtonMode ? 80 : 12
+        anchors.bottomMargin: isButtonMode ? 56 : 12
 
         asynchronous: true
         active: popupRoot.expanded && isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
@@ -627,6 +635,8 @@ Item {
         sourceComponent: DateView {
             textColor: popupRoot.textColor
             viewMode: getEffectiveQuery(popupRoot.searchText) === "clock:" ? "clock" : "date"
+            showClock: popupRoot.prefixDateShowClock
+            showEvents: popupRoot.prefixDateShowEvents
         }
     }
 
@@ -677,6 +687,8 @@ Item {
         sourceComponent: PowerView {
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
+            showHibernate: popupRoot.prefixPowerShowHibernate
+            showSleep: popupRoot.prefixPowerShowSleep
             bgColor: popupRoot.bgColor
             showBootOptions: popupRoot.showBootOptions
         }
@@ -689,10 +701,13 @@ Item {
          anchors.left: parent.left
          anchors.right: parent.right
          anchors.bottom: parent.bottom // Anchor to parent bottom
-         anchors.margins: 12
+         anchors.leftMargin: 12
+         anchors.rightMargin: 12
+         // Add extra top margin in button mode to prevent content from being hidden behind panel button
+         anchors.topMargin: isButtonMode ? 50 : 12
          asynchronous: true
          // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
-         anchors.bottomMargin: isButtonMode ? 80 : 12
+         anchors.bottomMargin: isButtonMode ? 56 : 12
          
          active: popupRoot.expanded && searchText.length === 0 && logic.searchHistory.length > 0
          

@@ -16,6 +16,8 @@ Item {
     property bool canHibernate: false
     property bool isBootctlInstalled: false
     property bool showBootOptions: false
+    property bool showHibernate: false
+    property bool showSleep: true
     
     // Data Source for executing commands
     Plasma5Support.DataSource {
@@ -127,7 +129,7 @@ Item {
                 
                 // Hibernate (Derin Uyut) - Only if supported
                 PowerButton {
-                    visible: root.canHibernate
+                    visible: root.canHibernate && root.showHibernate
                     text: i18n("Hibernate")
                     iconName: "system-suspend-hibernate"
                     doubleClickRequired: true
@@ -140,6 +142,7 @@ Item {
                 
                 // Suspend (Uyut)
                 PowerButton {
+                    visible: root.showSleep
                     text: i18n("Sleep")
                     iconName: "system-suspend"
                     doubleClickRequired: true
@@ -305,7 +308,9 @@ Item {
                 PowerButton {
                     text: i18n("Log Out")
                     iconName: "system-log-out"
-                    doubleClickRequired: false
+                    doubleClickRequired: true
+                    confirmColor: Kirigami.Theme.negativeTextColor // Use distinct color if wanted, or highlight
+                    confirmMessage: i18n("(Press again to log out)")
                     onTriggered: root.executeCommand("qdbus org.kde.ksmserver /KSMServer logout 0 0 0")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
@@ -315,7 +320,9 @@ Item {
                 PowerButton {
                     text: i18n("Switch User")
                     iconName: "system-switch-user"
-                    doubleClickRequired: false
+                    doubleClickRequired: true
+                    confirmColor: Kirigami.Theme.highlightColor
+                    confirmMessage: i18n("(Press again to switch)")
                     onTriggered: root.executeCommand("dm-tool switch-to-greeter")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120

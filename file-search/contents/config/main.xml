@@ -3,16 +3,27 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+      
   <kcfgfile name=""/>
-  <group name="General">
+
+  <!-- Tab 1: Panel Appearance -->
+  <group name="Panel">
     <entry name="displayMode" type="Int">
       <default>1</default>
       <label>Display Mode: 0=Button, 1=Medium, 2=Wide, 3=Extra Wide</label>
     </entry>
-    <entry name="searchHistory" type="String">
-      <default></default>
-      <label>Recent search history (JSON)</label>
+    <entry name="showBootOptions" type="Bool">
+      <default>false</default>
+      <label>Show boot options in Reboot button</label>
     </entry>
+    <entry name="userProfile" type="Int">
+      <default>0</default>
+      <label>User Profile: 0=Minimal, 1=Developer, 2=Power User</label>
+    </entry>
+  </group>
+
+  <!-- Tab 2: Popup & View Settings -->
+  <group name="Popup">
     <entry name="viewMode" type="Int">
       <default>0</default>
       <label>View Mode: 0=List, 1=Tile</label>
@@ -24,34 +35,6 @@
     <entry name="listIconSize" type="Int">
       <default>22</default>
       <label>List Icon Size in pixels</label>
-    </entry>
-    <entry name="userProfile" type="Int">
-      <default>0</default>
-      <label>User Profile: 0=Minimal, 1=Developer, 2=Power User</label>
-    </entry>
-    <entry name="previewEnabled" type="Bool">
-      <default>true</default>
-      <label>Enable file preview on hover</label>
-    </entry>
-    <entry name="debugOverlay" type="Bool">
-      <default>false</default>
-      <label>Show debug overlay</label>
-    </entry>
-    <entry name="telemetryData" type="String">
-      <default>{}</default>
-      <label>Usage statistics (local only)</label>
-    </entry>
-    <entry name="pinnedItems" type="String">
-      <default>[]</default>
-      <label>Pinned items (JSON array with activity support)</label>
-    </entry>
-    <entry name="categorySettings" type="String">
-      <default>{}</default>
-      <label>Category settings (visibility, priority, custom icons)</label>
-    </entry>
-    <entry name="searchAlgorithm" type="Int">
-      <default>0</default>
-      <label>Search Algorithm: 0=Fuzzy, 1=Exact, 2=StartsWith</label>
     </entry>
     <entry name="minResults" type="Int">
       <default>3</default>
@@ -65,13 +48,77 @@
       <default>true</default>
       <label>Smartly limit results based on relevance score</label>
     </entry>
+    <entry name="showPinnedBar" type="Bool">
+      <default>true</default>
+      <label>Show pinned items bar in search results</label>
+    </entry>
+  </group>
+
+  <!-- Tab 3: Preview Settings -->
+  <group name="Preview">
+    <entry name="previewEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable file preview on hover</label>
+    </entry>
     <entry name="previewSettings" type="String">
       <default>{"images": true, "videos": false, "text": false, "documents": false}</default>
       <label>Preview settings for different file types (JSON)</label>
     </entry>
-    <entry name="showBootOptions" type="Bool">
+  </group>
+
+  <!-- Tab 4: Prefix Settings -->
+  <group name="Prefix">
+    <entry name="prefixDateShowClock" type="Bool">
+      <default>true</default>
+      <label>Date View: Show large clock</label>
+    </entry>
+    <entry name="prefixDateShowEvents" type="Bool">
+      <default>true</default>
+      <label>Date View: Show calendar events</label>
+    </entry>
+    <entry name="prefixPowerShowHibernate" type="Bool">
       <default>false</default>
-      <label>Show boot options in Reboot button</label>
+      <label>Power View: Show Hibernate button</label>
+    </entry>
+    <entry name="prefixPowerShowSleep" type="Bool">
+      <default>true</default>
+      <label>Power View: Show Sleep button</label>
     </entry>
   </group>
+
+  <!-- Tab 5: Placeholder (Search Settings) -->
+  <group name="Placeholder">
+    <entry name="searchAlgorithm" type="Int">
+      <default>0</default>
+      <label>Search Algorithm: 0=Fuzzy, 1=Exact, 2=StartsWith</label>
+    </entry>
+    <entry name="searchHistory" type="String">
+      <default></default>
+      <label>Recent search history (JSON)</label>
+    </entry>
+  </group>
+
+  <!-- Separate Config Categories -->
+  <group name="Categories">
+    <entry name="categorySettings" type="String">
+      <default>{}</default>
+      <label>Category settings (visibility, priority, custom icons)</label>
+    </entry>
+    <entry name="pinnedItems" type="String">
+      <default>[]</default>
+      <label>Pinned items (JSON array with activity support)</label>
+    </entry>
+  </group>
+
+  <group name="Debug">
+    <entry name="debugOverlay" type="Bool">
+      <default>false</default>
+      <label>Show debug overlay</label>
+    </entry>
+    <entry name="telemetryData" type="String">
+      <default>{}</default>
+      <label>Usage statistics (local only)</label>
+    </entry>
+  </group>
+
 </kcfg>
