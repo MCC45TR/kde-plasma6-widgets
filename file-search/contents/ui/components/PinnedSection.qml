@@ -303,7 +303,7 @@ Item {
                                     onClicked: (mouse) => {
                                         if (mouse.button === Qt.RightButton) {
                                             pinnedContextMenu.currentItem = modelData
-                                            pinnedContextMenu.currentIndex = index
+                                            pinnedContextMenu.selectedIndex = index
                                             pinnedContextMenu.popup()
                                         } else if (!drag.active) {
                                             pinnedSectionRoot.itemClicked(modelData)
@@ -329,7 +329,7 @@ Item {
         id: pinnedContextMenu
         
         property var currentItem: null
-        property int currentIndex: -1
+        property int selectedIndex: -1
         
         MenuItem {
             text: pinnedSectionRoot.trFunc("open")
