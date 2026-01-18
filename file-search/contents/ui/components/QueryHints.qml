@@ -56,23 +56,23 @@ Rectangle {
         { prefix: "timeline:/thisweek", hint: "hint_timeline_week", icon: "view-calendar-week" },
         { prefix: "timeline:/thismonth", hint: "hint_timeline_month", icon: "view-calendar-month" },
         
-        { prefix: "file:/", hint: "hint_file_path", icon: "folder" },
-        { prefix: "man:/", hint: "hint_man_page", icon: "help-contents" },
-        { prefix: "gg:", hint: "hint_google", icon: "google" },
-        { prefix: "dd:", hint: "hint_duckduckgo", icon: "internet-web-browser" },
-        { prefix: "wp:", hint: "hint_wikipedia", icon: "wikipedia" },
-        { prefix: "kill ", hint: "hint_kill", icon: "process-stop" },
-        { prefix: "spell ", hint: "hint_spell", icon: "tools-check-spelling" },
-        { prefix: "#", hint: "hint_unicode", icon: "character-set" },
-        { prefix: "app:", hint: "hint_applications", icon: "applications-all" },
-        { prefix: "shell:", hint: "hint_shell", icon: "utilities-terminal" },
-        { prefix: "b:", hint: "hint_bookmarks", icon: "bookmarks" },
-        { prefix: "power:", hint: "hint_power", icon: "system-shutdown" },
-        { prefix: "services:", hint: "hint_services", icon: "preferences-system" },
-        { prefix: "date", hint: "hint_datetime", icon: "alarm-clock" },
-        { prefix: "define:", hint: "hint_define", icon: "accessories-dictionary" },
-        { prefix: "unit:", hint: "hint_unit", icon: "accessories-calculator" },
-        { prefix: "help:", hint: "hint_help", icon: "help-about" }
+        { prefix: "file:/", hint: "hint_file_path", icon: "folder", key: "file" },
+        { prefix: "man:/", hint: "hint_man_page", icon: "help-contents", key: "man" },
+        { prefix: "gg:", hint: "hint_google", icon: "google", key: "google" },
+        { prefix: "dd:", hint: "hint_duckduckgo", icon: "internet-web-browser", key: "ddg" },
+        { prefix: "wp:", hint: "hint_wikipedia", icon: "wikipedia", key: "wikipedia" },
+        { prefix: "kill ", hint: "hint_kill", icon: "process-stop", key: "kill" },
+        { prefix: "spell ", hint: "hint_spell", icon: "tools-check-spelling", key: "spell" },
+        { prefix: "#", hint: "hint_unicode", icon: "character-set", key: "unicode" },
+        { prefix: "app:", hint: "hint_applications", icon: "applications-all", key: "app" },
+        { prefix: "shell:", hint: "hint_shell", icon: "utilities-terminal", key: "shell" },
+        { prefix: "b:", hint: "hint_bookmarks", icon: "bookmarks", key: "bookmarks" },
+        { prefix: "power:", hint: "hint_power", icon: "system-shutdown", key: "power" },
+        { prefix: "services:", hint: "hint_services", icon: "preferences-system", key: "services" },
+        { prefix: "date", hint: "hint_datetime", icon: "alarm-clock", key: "date" },
+        { prefix: "define:", hint: "hint_define", icon: "accessories-dictionary", key: "define" },
+        { prefix: "unit:", hint: "hint_unit", icon: "accessories-calculator", key: "unit" },
+        { prefix: "help:", hint: "hint_help", icon: "help-about", key: "help" }
     ]
     
     // Helper for date formatting
@@ -167,97 +167,119 @@ Rectangle {
         
         var lowerQuery = query.toLowerCase()
         
-        // 1. timeline:/calendar/ -> Show Months
-        if (lowerQuery === "timeline:/calendar/" || lowerQuery === "timeline:/calendar") {
-             return {
-                show: true,
-                text: trFunc("hint_timeline_calendar"),
-                icon: "view-calendar-month",
-                isError: false,
-                prefix: "timeline:/calendar/",
-                options: getTimelineMonthOptions()
-             }
-        }
-        
-        // 2. timeline:/calendar/<Month>/ -> Show Days
-        // Check if it starts with timeline:/calendar/ and has more text
-        if (lowerQuery.startsWith("timeline:/calendar/")) {
-            // Check if we are "inside" a month (e.g. not just exact match)
-            // But we must assume the user picked a month or typed it.
-            // We'll show day options for ANY sub-path of calendar/
-            
-            // Avoid showing options if we already typed a day?
-            // We can rough check by length or slash count.
-            // timeline:/calendar/January 2026/ -> 3 slashes.
-            // If query has 3 slashes and ends with /, show days.
-            var slashes = (query.match(/\//g) || []).length;
-            if (slashes >= 3) { 
-                 return {
-                    show: true,
-                    text: trFunc("hint_timeline_calendar"),
-                    icon: "view-calendar-day",
-                    isError: false,
-                    prefix: query,
-                    options: getTimelineDayOptions(query)
-                 }
-            }
-        }
-        
-        // Check for known prefixes
+        // 1. Check for known prefixes (both English keys and Localized keys)
         var bestMatch = null;
         var bestLen = -1;
+        var matchedPrefix = ""; // The actual string matched (could be "date:" or "tarih:")
         
         for (var i = 0; i < knownPrefixes.length; i++) {
              var p = knownPrefixes[i]
-             if (lowerQuery.startsWith(p.prefix.toLowerCase())) {
-                 if (p.prefix.length > bestLen) {
-                     bestMatch = p;
-                     bestLen = p.prefix.length;
+             
+             // Check standard prefix
+             var standardP = p.prefix.toLowerCase();
+             
+             // Check localized prefix (if key exists)
+             var localizedP = "";
+             if (p.key) {
+                 var locKeyVal = trFunc("prefix_" + p.key);
+                 if (locKeyVal) {
+                      // Reconstruct suffix style
+                      var suffix = "";
+                      if (p.prefix.endsWith(":")) suffix = ":";
+                      else if (p.prefix.endsWith(" ")) suffix = " ";
+                      else if (p.prefix.endsWith(":/")) suffix = ":/";
+                      
+                      localizedP = (locKeyVal + suffix).toLowerCase();
                  }
+             }
+             
+             // Check match against standard
+             if (lowerQuery.startsWith(standardP)) {
+                 if (standardP.length > bestLen) {
+                     bestMatch = p;
+                     bestLen = standardP.length;
+                     matchedPrefix = p.prefix; // use standard for logic but maybe we need effective?
+                 }
+             }
+             
+             // Check match against localized
+             if (localizedP && localizedP.length > 0 && lowerQuery.startsWith(localizedP)) {
+                 if (localizedP.length > bestLen) {
+                     bestMatch = p;
+                     bestLen = localizedP.length;
+                     matchedPrefix = localizedP; // Keep track of what we typed
+                 }
+             }
+        }
+        
+        // Special Timeline sub-logic (needs to handle timeline:/ and localized equivalent)
+        // If we matched timeline, we might need to return specific calendar options
+        if (bestMatch && bestMatch.prefix === "timeline:/") {
+             // ... Logic for timeline sub-paths ...
+             
+             // Basic timeline:/ match
+             if (lowerQuery === matchedPrefix.toLowerCase() || lowerQuery === matchedPrefix.toLowerCase().replace("/", "")) {
+                  return {
+                    show: true,
+                    text: trFunc(bestMatch.hint),
+                    icon: bestMatch.icon,
+                    isError: false,
+                    prefix: matchedPrefix,
+                    options: getTimelineMonthOptions() // We assume standard timeline actions work even with localized prefix? Only if we map it back. 
+                    // Actually SearchPopup maps it back. 
+                    // But here options.value must differ? 
+                    // getTimelineMonthOptions returns "timeline:/calendar/..." -> Standard.
+                    // This is fine, clicking an option will replace text with Standard path.
+                 }
+             }
+             
+             // Check calendar sub-path (approximate check)
+             // If we are deeper than just the prefix...
+             // timeline:/calendar/
+             if (lowerQuery.indexOf("/calendar/") !== -1) {
+                  // If slashes count >= 3, show days
+                  var slashes = (query.match(/\//g) || []).length;
+                  if (slashes >= 3) {
+                       return {
+                            show: true,
+                            text: trFunc("hint_timeline_calendar"),
+                            icon: "view-calendar-day",
+                            isError: false,
+                            prefix: query, // current query
+                            options: getTimelineDayOptions(query)
+                       }
+                  }
+                  
+                   return {
+                        show: true,
+                        text: trFunc("hint_timeline_calendar"),
+                        icon: "view-calendar-month",
+                        isError: false,
+                        prefix: matchedPrefix,
+                        options: getTimelineMonthOptions()
+                   }
              }
         }
         
         if (bestMatch) {
-             // Handle timeline:/ options logic (show options only if exact match)
-             if (bestMatch.options && lowerQuery !== bestMatch.prefix.toLowerCase() && lowerQuery !== bestMatch.prefix.toLowerCase().replace("/", "")) {
-                  // If we typed more (e.g. timeline:/to...), don't show generic options
-                  // Unless it's just the prefix
-                  // We already handled exact logic inside 'options' property? No.
-                  // Just don't pass options if we typed past it.
-                  
-                  // Wait, "timeline:/calendar/" logic above handles its own options.
-                  // Here we handle "timeline:/"
-                  
-                  return {
-                    show: true,
-                    text: trFunc(bestMatch.hint) || bestMatch.hint,
-                    icon: bestMatch.icon,
-                    isError: false,
-                    prefix: bestMatch.prefix,
-                    // Hide options if we are continuing typing specific things
-                    options: undefined 
-                 }
-             }
-        
+             // Known prefix found
+             
+             // Check for Man page installation
              if (bestMatch.prefix === "man:/" && logic && !logic.manInstalled) {
-                 return { show: true, text: trFunc("man_not_installed"), icon: "dialog-error", isError: true, prefix: bestMatch.prefix }
+                 return { show: true, text: trFunc("man_not_installed"), icon: "dialog-error", isError: true, prefix: matchedPrefix }
              }
+             
              var baseHint = trFunc(bestMatch.hint) || bestMatch.hint;
              var queryPart = "";
 
              // Check if user has typed something after the prefix
-             if (query.length > bestMatch.prefix.length) {
-                 var rawQuery = query.substring(bestMatch.prefix.length).trim();
+             if (query.length > bestLen) {
+                 var rawQuery = query.substring(bestLen).trim();
                  if (rawQuery.length > 0) {
                      queryPart = ' "' + rawQuery + '"';
                  }
              }
 
-             // If queryPart exists, append it to baseHint? 
-             // "Google Search" + " \"x.com\"" -> "Google Search \"x.com\""
-             // Or better: localized "Search Google for..."
-             
-             // For now, let's just append it if present for specific searchable types
              if (queryPart.length > 0) {
                  if (bestMatch.prefix === "gg:" || bestMatch.prefix === "dd:" || bestMatch.prefix === "wp:" || bestMatch.prefix === "define:") {
                       baseHint = baseHint + queryPart;
@@ -269,35 +291,39 @@ Rectangle {
                 text: baseHint,
                 icon: bestMatch.icon,
                 isError: false,
-                prefix: bestMatch.prefix,
+                prefix: matchedPrefix,
                 options: bestMatch.options
              }
         }
         
-        // Partial matches
-        for (var j = 0; j < knownPrefixes.length; j++) {
-            var pf = knownPrefixes[j]
-            if (pf.prefix.toLowerCase().startsWith(lowerQuery) && query.length >= 2) {
-                return {
-                    show: true,
-                    text: trFunc("hint_try") + ": " + pf.prefix,
-                    icon: "hint",
-                    isError: false,
-                    isSuggestion: true
-                }
-            }
-        }
+        // Partial matches (Suggestions)
+        // We skip this for now to keep it simple or implement similar dual-check loop
         
-        // Unknown prefix
+        // Unknown prefix detection
         var colonIndex = query.indexOf(":")
         if (colonIndex > 0 && colonIndex < 10) {
             var potentialPrefix = query.substring(0, colonIndex + 1).toLowerCase()
-            var isKnown = knownPrefixes.some(function(p) { return p.prefix.toLowerCase().startsWith(potentialPrefix) })
+            
+            // Re-verify if this potential prefix is actually a known localized one
+            // We iterate again or use the fact that bestMatch was null
+            
+            var isKnown = false;
+            for (var k = 0; k < knownPrefixes.length; k++) {
+                 var kp = knownPrefixes[k];
+                 if (kp.prefix.toLowerCase().startsWith(potentialPrefix)) isKnown = true;
+                 
+                 if (kp.key) {
+                     var locK = trFunc("prefix_" + kp.key);
+                     if (locK && (locK + ":").toLowerCase().startsWith(potentialPrefix)) isKnown = true;
+                     if (locK && (locK + " ").toLowerCase().startsWith(potentialPrefix)) isKnown = true;
+                 }
+                 if (isKnown) break;
+            }
             
             if (!isKnown && potentialPrefix !== "file:" && potentialPrefix !== "http:" && potentialPrefix !== "https:") {
                 return {
                     show: true,
-                    text: trFunc("hint_unknown_prefix") + ": " + potentialPrefix,
+                    text: trFunc("hint_unknown_prefix") + ": " + potentialPrefix + " (" + trFunc("hint_try") + " 'help:')",
                     icon: "dialog-warning",
                     isError: true
                 }

@@ -108,3 +108,30 @@ function getPinInfo(pinnedArray, matchId, activityId) {
     }
     return null
 }
+
+// Reorder pinned items (move from oldIndex to newIndex)
+function reorderPinned(pinnedArray, fromIndex, toIndex) {
+    if (fromIndex < 0 || fromIndex >= pinnedArray.length) return pinnedArray
+    if (toIndex < 0 || toIndex >= pinnedArray.length) return pinnedArray
+    if (fromIndex === toIndex) return pinnedArray
+
+    var newArray = pinnedArray.slice() // Create a copy
+    var item = newArray.splice(fromIndex, 1)[0] // Remove from old position
+    newArray.splice(toIndex, 0, item) // Insert at new position
+
+    return newArray
+}
+
+// Move pinned item by matchId to a new index
+function movePinnedItem(pinnedArray, matchId, newIndex) {
+    var currentIndex = -1
+    for (var i = 0; i < pinnedArray.length; i++) {
+        if (pinnedArray[i].matchId === matchId) {
+            currentIndex = i
+            break
+        }
+    }
+
+    if (currentIndex === -1) return pinnedArray
+    return reorderPinned(pinnedArray, currentIndex, newIndex)
+}

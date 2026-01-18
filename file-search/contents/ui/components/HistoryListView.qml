@@ -13,6 +13,7 @@ Item {
     required property color textColor
     required property color accentColor
     required property var formatTimeFunc
+    required property var previewSettings
     
     // Signals
     signal itemClicked(var item)
@@ -115,7 +116,34 @@ Item {
                             spacing: 10
                             
                             Kirigami.Icon {
-                                source: modelData.decoration || "application-x-executable"
+                                source: {
+                                    if (historyList.listIconSize <= 22) return modelData.decoration || "application-x-executable";
+                                    
+                                    var url = (modelData.filePath || "").toString();
+                                    // Fallback
+                                    if (!url) url = (modelData.url || "").toString();
+
+                                    if (!url) return modelData.decoration || "application-x-executable";
+                                    
+                                    var ext = url.split('.').pop().toLowerCase();
+                                    
+                                    if (historyList.previewSettings.images) {
+                                        var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                        if (imageExts.indexOf(ext) >= 0) return url
+                                    }
+                                    
+                                    if (historyList.previewSettings.videos) {
+                                        var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                        if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                    }
+                                    
+                                    if (historyList.previewSettings.documents) {
+                                        var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                        if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                    }
+                                    
+                                    return modelData.decoration || "application-x-executable"
+                                }
                                 Layout.preferredWidth: historyList.listIconSize
                                 Layout.preferredHeight: historyList.listIconSize
                                 color: historyList.textColor

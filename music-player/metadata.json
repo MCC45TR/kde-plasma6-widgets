@@ -1,22 +1,20 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "X-Plasma-API-Minimum-Version": "6.0",
-    "X-Plasma-MainScript": "ui/main.qml",
     "KPlugin": {
+        "Id": "com.mcc45tr.musicplayer",
+        "Name": "MMusic Player",
+        "Version": "1.2.2",
+        "Category": "Multimedia",
+        "Description": "A modern music player widget for KDE Plasma 6",
+        "Icon": "multimedia-player",
+        "License": "GPL-3.0",
+        "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/music-player",
         "Authors": [
             {
                 "Name": "MCC45TR",
                 "Email": "mcc45tr@gmail.com"
             }
         ],
-        "Category": "Utilities",
-        "Description": "A simple Müzik widget",
-        "Icon": "multimedia-player",
-        "Id": "com.mcc45tr.musicplayer",
-        "Name": "MMusic Player",
-        "Version": "1.2.2",
-        "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/music-player",
-        "License": "GPL-3.0",
         "Name[tr]": "MMüzik Çalar",
         "Name[de]": "MMusikplayer",
         "Name[fr]": "MLecteur de musique",
@@ -38,9 +36,22 @@
         "Name[fa]": "پخش‌کننده موسیقی",
         "Description[tr]": "KDE Plasma 6 için modern bir müzik çalar widget'ı",
         "Description[de]": "Ein modernes Musikplayer-Widget für KDE Plasma 6",
-        "Description[fr]": "Un widget de lecteur de musique moderne pour KDE Plasma 6"
-    },
-    "X-Plasma-Provides": [
-        "org.kde.plasma.nowplaying"
-    ]
+        "Description[fr]": "Un widget de lecteur de musique moderne pour KDE Plasma 6",
+        "Description[it]": "Un widget moderno di lettore musicale per KDE Plasma 6",
+        "Description[ro]": "Un widget modern de redare muzică pentru KDE Plasma 6",
+        "Description[cs]": "Moderní widget hudebního přehrávače pro KDE Plasma 6",
+        "Description[es]": "Un widget de reproductor de música moderno para KDE Plasma 6",
+        "Description[pt]": "Um widget de reprodutor de música moderno para o KDE Plasma 6",
+        "Description[id]": "Widget pemutar musik modern untuk KDE Plasma 6",
+        "Description[az]": "KDE Plasma 6 üçün müasir musiqi pleyeri vidceti",
+        "Description[ru]": "Современный виджет музыкального плеера для KDE Plasma 6",
+        "Description[ja]": "KDE Plasma 6 用のモダンな音楽プレーヤーウィジェット",
+        "Description[zh]": "KDE Plasma 6 的现代音乐播放器小部件",
+        "Description[el]": "Ένα σύγχρονο widget αναπαραγωγής μουσικής για το KDE Plasma 6",
+        "Description[hy]": "Ժամանակակից երաժշտական նվագարկիչի վիջեթ KDE Plasma 6-ի համար",
+        "Description[hi]": "KDE Plasma 6 के लिए एक आधुनिक संगीत प्लेयर विजेट",
+        "Description[bn]": "KDE Plasma 6 এর জন্য একটি আধুনিক মিউজিক প্লেয়ার উইজেট",
+        "Description[ur]": "KDE Plasma 6 کے لئے ایک جدید موسیقی پلیئر ویجیٹ",
+        "Description[fa]": "یک ویجت پخش‌کننده موسیقی مدرن برای KDE Plasma 6"
+    }
 }

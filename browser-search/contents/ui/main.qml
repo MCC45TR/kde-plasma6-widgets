@@ -6,34 +6,17 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.plasma5support as Plasma5Support
+import "localization.js" as LocalizationData
 
 PlasmoidItem {
     id: root
     
-    // --- Search text property accessible from root ---
+    // --- Search text property ---
     property string searchText: ""
     
     // --- Localization ---
     property var locales: ({})
     property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    function loadLocales() {
-        var xhr = new XMLHttpRequest()
-        xhr.open("GET", Qt.resolvedUrl("localization.json"))
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 || xhr.status === 0) {
-                    try {
-                        locales = JSON.parse(xhr.responseText)
-                    } catch (e) {
-                        console.log("Error parsing localization.json: " + e)
-                        locales = {}
-                    }
-                }
-            }
-        }
-        xhr.send()
-    }
     
     function tr(key) {
         if (locales[currentLocale] && locales[currentLocale][key]) {
@@ -45,17 +28,23 @@ PlasmoidItem {
     }
     
     Component.onCompleted: {
-        loadLocales()
+        // Load localization from JS import (like weather widget)
+        try {
+            locales = LocalizationData.data
+            console.log("Localization loaded via JS import")
+        } catch(e) {
+            console.log("Error loading localization: " + e)
+        }
         detectDefaultBrowser()
     }
     
-    // --- Browser Detection (values updated dynamically by detectDefaultBrowser) ---
+    // --- Browser Detection ---
     property string detectedBrowser: "xdg-open"
-    property string browserType: "other" // chromium, firefox, other
-    property string browserIcon: "internet-web-browser" // System icon for detected browser
-    property string browserScheme: "https" // URL scheme: chrome, brave, edge, vivaldi, opera
+    property string browserType: "other"
+    property string browserIcon: "internet-web-browser"
+    property string browserScheme: "https"
+    property string browserDisplayName: "Browser"
     
-    // DataSource for running executable commands
     Plasma5Support.DataSource {
         id: executable
         engine: "executable"
@@ -66,52 +55,56 @@ PlasmoidItem {
             stdout = stdout.trim().toLowerCase()
             
             if (source === "xdg-settings get default-web-browser") {
-                console.log("Default browser detected: " + stdout)
-                
                 if (stdout.includes("firefox")) {
                     root.detectedBrowser = "firefox"
                     root.browserType = "firefox"
                     root.browserIcon = "firefox"
                     root.browserScheme = "about"
+                    root.browserDisplayName = "Firefox"
                 } else if (stdout.includes("brave")) {
                     root.detectedBrowser = "brave"
                     root.browserType = "chromium"
                     root.browserIcon = "brave"
                     root.browserScheme = "brave"
+                    root.browserDisplayName = "Brave"
                 } else if (stdout.includes("chromium")) {
                     root.detectedBrowser = "chromium"
                     root.browserType = "chromium"
                     root.browserIcon = "chromium"
                     root.browserScheme = "chrome"
+                    root.browserDisplayName = "Chromium"
                 } else if (stdout.includes("google-chrome") || stdout.includes("chrome")) {
                     root.detectedBrowser = "google-chrome"
                     root.browserType = "chromium"
                     root.browserIcon = "google-chrome"
                     root.browserScheme = "chrome"
+                    root.browserDisplayName = "Chrome"
                 } else if (stdout.includes("vivaldi")) {
                     root.detectedBrowser = "vivaldi"
                     root.browserType = "chromium"
                     root.browserIcon = "vivaldi"
                     root.browserScheme = "vivaldi"
+                    root.browserDisplayName = "Vivaldi"
                 } else if (stdout.includes("opera")) {
                     root.detectedBrowser = "opera"
                     root.browserType = "chromium"
                     root.browserIcon = "opera"
                     root.browserScheme = "opera"
+                    root.browserDisplayName = "Opera"
                 } else if (stdout.includes("edge")) {
                     root.detectedBrowser = "microsoft-edge"
                     root.browserType = "chromium"
                     root.browserIcon = "microsoft-edge"
                     root.browserScheme = "edge"
+                    root.browserDisplayName = "Edge"
                 } else {
                     root.detectedBrowser = "xdg-open"
                     root.browserType = "other"
                     root.browserIcon = "internet-web-browser"
                     root.browserScheme = "https"
+                    root.browserDisplayName = root.tr("browser_name")
                 }
             }
-            
-            // Disconnect after receiving data
             disconnectSource(source)
         }
     }
@@ -121,7 +114,6 @@ PlasmoidItem {
     }
     
     function runCommand(cmd) {
-        console.log("Running command: " + cmd)
         executable.connectSource(cmd)
     }
     
@@ -175,17 +167,11 @@ PlasmoidItem {
         }
     }
     
-    function openDinoGame() {
-        if (browserType === "chromium") {
-            runCommand(detectedBrowser + ' "' + browserScheme + '://dino"')
-        }
-    }
-    
     function openDownloads() {
         if (browserType === "chromium") {
             runCommand(detectedBrowser + ' "' + browserScheme + '://downloads"')
         } else if (browserType === "firefox") {
-             runCommand(detectedBrowser + ' "about:downloads"')
+            runCommand(detectedBrowser + ' "about:downloads"')
         }
     }
     
@@ -193,16 +179,7 @@ PlasmoidItem {
         if (browserType === "chromium") {
             runCommand(detectedBrowser + ' "' + browserScheme + '://extensions"')
         } else if (browserType === "firefox") {
-             runCommand(detectedBrowser + ' "about:addons"')
-        }
-    }
-    
-    function openBookmarks() {
-        if (browserType === "chromium") {
-            runCommand(detectedBrowser + ' "' + browserScheme + '://bookmarks"')
-        } else if (browserType === "firefox") {
-             // Firefox uses library for bookmarks
-             runCommand(detectedBrowser + " about:logins") 
+            runCommand(detectedBrowser + ' "about:addons"')
         }
     }
     
@@ -210,230 +187,272 @@ PlasmoidItem {
         if (browserType === "chromium") {
             runCommand(detectedBrowser + ' "' + browserScheme + '://settings"')
         } else if (browserType === "firefox") {
-             runCommand(detectedBrowser + ' "about:preferences"')
+            runCommand(detectedBrowser + ' "about:preferences"')
         }
     }
     
-    // --- Layout ---
+    // --- Layout Mode Detection (like weather widget) ---
+    readonly property bool isWideMode: root.width > 280 && root.height <= 150
+    readonly property bool isLargeMode: root.width > 200 && root.height > 200
+    readonly property bool isSmallMode: !isWideMode && !isLargeMode
+    
+    // --- Widget Size Constraints ---
+    Layout.preferredWidth: 300
+    Layout.preferredHeight: 80
+    Layout.minimumWidth: 150
+    Layout.minimumHeight: 60
+    
+    // --- No Background (like weather widget) ---
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
+    
     preferredRepresentation: fullRepresentation
     
-    property bool isCompact: width < 250
-    
     fullRepresentation: Item {
-        id: mainItem
-        
-        Layout.minimumWidth: 150
-        Layout.minimumHeight: 40
-        Layout.preferredWidth: 400
-        Layout.preferredHeight: 48
+        id: fullRep
+        anchors.fill: parent
         
         Rectangle {
+            id: mainRect
             anchors.fill: parent
-            anchors.margins: 4
-            radius: 8
+            anchors.margins: 10
             color: Kirigami.Theme.backgroundColor
-            border.color: searchInput.activeFocus ? Kirigami.Theme.highlightColor : "transparent"
-            border.width: searchInput.activeFocus ? 2 : 0
+            radius: 20
+            clip: true
             
-            RowLayout {
+            ColumnLayout {
                 anchors.fill: parent
-                anchors.margins: 6
-                spacing: 8
+                anchors.margins: 12
+                spacing: 10
                 
-                // Browser Icon (shows detected browser icon)
-                Kirigami.Icon {
-                    source: root.browserIcon
-                    Layout.preferredWidth: 22
-                    Layout.preferredHeight: 22
-                }
-                
-                // Search Input
-                TextField {
-                    id: searchInput
-                    Layout.fillWidth: true
-                    placeholderText: root.tr("search_placeholder")
-                    font.pixelSize: 14
-                    background: Item {}
-                    text: root.searchText
-                    
-                    onTextChanged: root.searchText = text
-                    
-                    onAccepted: root.doSearch()
-                    
-                    Keys.onEscapePressed: {
-                        text = ""
-                        focus = false
-                    }
-                }
-                
-                // Separator
+                // Search Bar - Always visible
                 Rectangle {
-                    visible: !root.isCompact
-                    width: 1
-                    Layout.fillHeight: true
-                    Layout.topMargin: 6
-                    Layout.bottomMargin: 6
-                    color: Kirigami.Theme.textColor
-                    opacity: 0.2
-                }
-                
-                // Incognito Button
-                ToolButton {
-                    id: incognitoBtn
-                    icon.name: "view-private"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
+                    id: searchBar
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 48
+                    radius: 14
+                    color: Qt.rgba(
+                        Kirigami.Theme.textColor.r,
+                        Kirigami.Theme.textColor.g,
+                        Kirigami.Theme.textColor.b,
+                        0.08
+                    )
                     
-                    ToolTip.text: root.tr("incognito")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
-                    
-                    onClicked: root.openIncognito()
-                }
-                
-                // New Tab Button
-                ToolButton {
-                    id: newTabBtn
-                    icon.name: "tab-new"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
-                    
-                    ToolTip.text: root.tr("new_tab")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
-                    
-                    onClicked: root.openNewTab()
-                }
-                
-                // History Button
-                ToolButton {
-                    id: historyBtn
-                    icon.name: "view-history"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
-                    
-                    ToolTip.text: root.tr("history")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
-                    
-                    onClicked: root.openHistory()
-                }
-                
-                // Dino Game Button
-                ToolButton {
-                    id: dinoBtn
-                    visible: root.browserType === "chromium"
-                    icon.name: "application-x-executable"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
-                    
-                    ToolTip.text: root.tr("dino_game")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
-                    
-                    onClicked: root.openDinoGame()
-                    
-                    // Dino emoji as text fallback
-                    Label {
-                        anchors.centerIn: parent
-                        text: "🦖"
-                        font.pixelSize: 18
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.leftMargin: 16
+                        anchors.rightMargin: 12
+                        spacing: 8
+                        
+                        TextField {
+                            id: searchInput
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
+                            
+                            placeholderText: root.tr("search_placeholder")
+                            placeholderTextColor: Qt.rgba(
+                                Kirigami.Theme.textColor.r,
+                                Kirigami.Theme.textColor.g,
+                                Kirigami.Theme.textColor.b,
+                                0.5
+                            )
+                            
+                            font.pixelSize: 15
+                            font.weight: Font.Normal
+                            color: Kirigami.Theme.textColor
+                            
+                            background: Item {}
+                            
+                            text: root.searchText
+                            onTextChanged: root.searchText = text
+                            onAccepted: root.doSearch()
+                            
+                            Keys.onEscapePressed: {
+                                text = ""
+                                focus = false
+                            }
+                        }
+                        
+                        // Search Icon
+                        Kirigami.Icon {
+                            source: "search"
+                            Layout.preferredWidth: 22
+                            Layout.preferredHeight: 22
+                            color: Kirigami.Theme.textColor
+                            
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: root.doSearch()
+                            }
+                        }
                     }
                 }
                 
-                // Downloads Button
-                ToolButton {
-                    visible: !root.isCompact
-                    icon.name: "download"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
+                // Wide Mode: Horizontal buttons centered
+                Item {
+                    visible: root.isWideMode
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 56
                     
-                    ToolTip.text: root.tr("downloads")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
-                    
-                    onClicked: root.openDownloads()
+                    RowLayout {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: parent.height
+                        spacing: 8
+                        
+                        Repeater {
+                            model: [
+                                { icon: "view-history", action: "history", tooltip: "history" },
+                                { icon: "tab-new", action: "newTab", tooltip: "new_tab" },
+                                { icon: "download", action: "downloads", tooltip: "downloads" },
+                                { icon: "application-x-addon", action: "extensions", tooltip: "extensions" },
+                                { icon: "configure", action: "settings", tooltip: "settings" }
+                            ]
+                            
+                            delegate: Rectangle {
+                                width: 50
+                                height: 50
+                                radius: 25
+                                color: wideButtonMouseArea.containsMouse 
+                                    ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.12)
+                                    : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.06)
+                                
+                                Behavior on color {
+                                    ColorAnimation { duration: 150 }
+                                }
+                                
+                                Kirigami.Icon {
+                                    anchors.centerIn: parent
+                                    source: modelData.icon
+                                    width: 22
+                                    height: 22
+                                    color: Kirigami.Theme.textColor
+                                }
+                                
+                                MouseArea {
+                                    id: wideButtonMouseArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
+                                    
+                                    ToolTip.text: root.tr(modelData.tooltip)
+                                    ToolTip.visible: containsMouse
+                                    ToolTip.delay: 500
+                                    
+                                    onClicked: {
+                                        switch(modelData.action) {
+                                            case "history": root.openHistory(); break
+                                            case "newTab": root.openNewTab(); break
+                                            case "downloads": root.openDownloads(); break
+                                            case "extensions": root.openExtensions(); break
+                                            case "settings": root.openSettings(); break
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 
-                // Extensions Button
-                ToolButton {
-                    visible: !root.isCompact
-                    icon.name: "application-x-addon"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
+                // Wide Mode: Browser label
+                Row {
+                    visible: root.isWideMode
+                    Layout.alignment: Qt.AlignHCenter
+                    spacing: 6
                     
-                    ToolTip.text: root.tr("extensions")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
+                    Kirigami.Icon {
+                        source: root.browserIcon
+                        width: 18
+                        height: 18
+                    }
                     
-                    onClicked: root.openExtensions()
+                    Text {
+                        text: root.browserDisplayName
+                        font.pixelSize: 13
+                        font.weight: Font.Medium
+                        color: Kirigami.Theme.textColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
                 
-                // Bookmarks Button
-                ToolButton {
-                    visible: !root.isCompact
-                    icon.name: "bookmarks"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
+                // Large Mode: 2x2 Grid buttons
+                GridLayout {
+                    visible: root.isLargeMode
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    columns: 2
+                    rows: 2
+                    rowSpacing: 10
+                    columnSpacing: 10
                     
-                    ToolTip.text: root.tr("bookmarks")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
-                    
-                    onClicked: root.openBookmarks()
+                    Repeater {
+                        model: [
+                            { icon: "view-history", action: "history", tooltip: "history" },
+                            { icon: "download", action: "downloads", tooltip: "downloads" },
+                            { icon: "application-x-addon", action: "extensions", tooltip: "extensions" },
+                            { icon: "configure", action: "settings", tooltip: "settings" }
+                        ]
+                        
+                        delegate: Rectangle {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            radius: 14
+                            color: largeButtonMouseArea.containsMouse 
+                                ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.12)
+                                : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.06)
+                            
+                            Behavior on color {
+                                ColorAnimation { duration: 150 }
+                            }
+                            
+                            Kirigami.Icon {
+                                anchors.centerIn: parent
+                                source: modelData.icon
+                                width: 32
+                                height: 32
+                                color: Kirigami.Theme.textColor
+                            }
+                            
+                            MouseArea {
+                                id: largeButtonMouseArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                
+                                ToolTip.text: root.tr(modelData.tooltip)
+                                ToolTip.visible: containsMouse
+                                ToolTip.delay: 500
+                                
+                                onClicked: {
+                                    switch(modelData.action) {
+                                        case "history": root.openHistory(); break
+                                        case "downloads": root.openDownloads(); break
+                                        case "extensions": root.openExtensions(); break
+                                        case "settings": root.openSettings(); break
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 
-                // Settings Button
-                ToolButton {
-                    visible: !root.isCompact
-                    icon.name: "configure"
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
-                    
-                    ToolTip.text: root.tr("settings")
-                    ToolTip.visible: hovered
-                    ToolTip.delay: 500
-                    
-                    onClicked: root.openSettings()
+                // Small Mode: No extra elements, only search bar
+                Item {
+                    visible: root.isSmallMode
+                    Layout.fillHeight: true
                 }
             }
         }
     }
     
     compactRepresentation: Item {
-        Layout.preferredWidth: 120
+        Layout.preferredWidth: 32
         Layout.preferredHeight: 32
         
-        RowLayout {
+        Kirigami.Icon {
             anchors.centerIn: parent
-            spacing: 4
-            
-            Kirigami.Icon {
-                source: root.browserIcon
-                Layout.preferredWidth: 22
-                Layout.preferredHeight: 22
-            }
-            
-            ToolButton {
-                icon.name: "view-private"
-                Layout.preferredWidth: 24
-                Layout.preferredHeight: 24
-                onClicked: root.openIncognito()
-            }
-            
-            ToolButton {
-                icon.name: "tab-new"
-                Layout.preferredWidth: 24
-                Layout.preferredHeight: 24
-                onClicked: root.openNewTab()
-            }
-            
-            ToolButton {
-                icon.name: "view-history"
-                Layout.preferredWidth: 24
-                Layout.preferredHeight: 24
-                onClicked: root.openHistory()
-            }
+            source: root.browserIcon
+            width: 24
+            height: 24
         }
         
         MouseArea {

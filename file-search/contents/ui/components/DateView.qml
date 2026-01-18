@@ -43,61 +43,71 @@ Item {
         color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1)
         radius: 12
         
-        RowLayout {
-            anchors.centerIn: parent
-            width: parent.width * 0.9 // Limit aggregate width
-            spacing: root.height * 0.05
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.margins: root.height * 0.05 // Dynamic margins
+            spacing: 0
             
-            // Big Time - Scaled to fill height
+            // Time Area - Takes remaining space
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Text {
+                    anchors.fill: parent
+                    text: root.timeStr
+
+                    // Fit to width/height automatically
+                    fontSizeMode: Text.Fit
+                    minimumPixelSize: 20
+                    font.pixelSize: 1000 // Arbitrary max
+
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignBottom // Push text down to reduce gap with Day text
+
+                    font.weight: Font.Light
+                    font.italic: true
+                    font.family: barlowLightItalic.name
+                    color: root.textColor
+                }
+            }
+
+            // Day
             Text {
-                text: root.timeStr
-                // Reduced width multiplier from 0.3 to 0.2 to prevent overflow
-                font.pixelSize: Math.min(root.height * 0.45, root.width * 0.2)
+                Layout.preferredWidth: parent.width * 0.5
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Text.AlignHCenter
+
+                text: root.dayStr
+
+                // Fit to 50% width
+                fontSizeMode: Text.Fit
+                minimumPixelSize: 10
+                // Relative max size to prevent exploding on short text
+                font.pixelSize: root.height * 0.25
+
                 font.weight: Font.Medium
                 font.family: barlowMedium.name
                 color: root.textColor
-                horizontalAlignment: Text.AlignRight
-                Layout.alignment: Qt.AlignVCenter
             }
-            
-            // Vertical Separator
-            Rectangle {
-                Layout.preferredWidth: 2
-                Layout.preferredHeight: root.height * 0.35
-                color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.3)
-            }
-            
-            // Date Info
-            ColumnLayout {
-                spacing: -root.height * 0.02
-                Layout.alignment: Qt.AlignVCenter
-                
-                Text {
-                    text: root.dayStr
-                    font.pixelSize: Math.min(root.height * 0.15, root.width * 0.08)
-                    font.weight: Font.Medium
-                    font.family: barlowMedium.name
-                    color: root.textColor
-                }
-                
-                RowLayout {
-                    spacing: root.height * 0.02
-                    Text {
-                        text: root.datePartStr
-                        font.pixelSize: Math.min(root.height * 0.08, root.width * 0.05)
-                        font.weight: Font.Light
-                        font.family: barlowLight.name
-                        color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.7)
-                    }
-                    Text {
-                        text: root.yearStr
-                        font.pixelSize: Math.min(root.height * 0.08, root.width * 0.05)
-                        font.weight: Font.Light
-                        font.italic: true
-                        font.family: barlowLightItalic.name
-                        color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.7)
-                    }
-                }
+
+            // Date + Year
+            Text {
+                Layout.preferredWidth: parent.width * 0.5
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Text.AlignHCenter
+
+                text: root.datePartStr + " " + root.yearStr
+
+                // Fit to 50% width
+                fontSizeMode: Text.Fit
+                minimumPixelSize: 10
+                // Relative max size
+                font.pixelSize: root.height * 0.15
+
+                font.weight: Font.Light
+                font.family: barlowLight.name
+                color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.85)
             }
         }
     }

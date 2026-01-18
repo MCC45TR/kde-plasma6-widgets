@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 // PinnedSection - Displays pinned items at the top of results
+// Supports drag-and-drop reordering and context menu
 Item {
     id: pinnedSectionRoot
     
@@ -23,6 +24,14 @@ Item {
     // Signals
     signal itemClicked(var item)
     signal unpinClicked(string matchId)
+    signal reorderRequested(int fromIndex, int toIndex)
+    signal openRequested(var item)
+    signal copyPathRequested(var item)
+    signal openLocationRequested(var item)
+    
+    // Drag state
+    property int draggedIndex: -1
+    property int dropTargetIndex: -1
     
     // Height calculation
     implicitHeight: pinnedItems.length > 0 ? contentColumn.implicitHeight : 0
@@ -81,11 +90,10 @@ Item {
         // Pinned Container
         Rectangle {
             Layout.fillWidth: true
-            // Reduced padding to 4px top/bottom (Total +8)
             Layout.preferredHeight: pinnedSectionRoot.isExpanded ? (pinnedContent.implicitHeight + 8) : 0
             radius: 10
             color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.05)
-            clip: true // Important for animation
+            clip: true
             
             Behavior on Layout.preferredHeight {
                 NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
@@ -158,7 +166,7 @@ Item {
                                 MouseArea {
                                     id: itemMouse
                                     anchors.fill: parent
-                                    anchors.rightMargin: 30 // Leave space for pin button
+                                    anchors.rightMargin: 30
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
                                     
@@ -171,81 +179,86 @@ Item {
                     }
                 }
                 
-                // Pinned items - Tile view
+                // Pinned items - Tile view with drag-drop support
                 Loader {
                     Layout.fillWidth: true
                     Layout.preferredHeight: item ? item.implicitHeight : 0
                     active: pinnedSectionRoot.isTileView && pinnedSectionRoot.pinnedItems.length > 0
                     
                     sourceComponent: Flow {
+                        id: tileFlow
                         spacing: 8
                         
                         Repeater {
+                            id: tileRepeater
                             model: pinnedSectionRoot.pinnedItems
                             
-                            delegate: Rectangle {
+                            delegate: Item {
+                                id: tileDelegate
                                 width: pinnedSectionRoot.iconSize + 16
                                 height: pinnedSectionRoot.iconSize + 36
-                                color: tileMouse.containsMouse 
-                                    ? Qt.rgba(pinnedSectionRoot.accentColor.r, pinnedSectionRoot.accentColor.g, pinnedSectionRoot.accentColor.b, 0.15)
-                                    : "transparent"
-                                radius: 6
                                 
-                                Column {
-                                    anchors.centerIn: parent
-                                    spacing: 4
+                                property int visualIndex: index
+                                property bool isDragging: pinnedSectionRoot.draggedIndex === index
+                                
+                                // Drop indicator
+                                Rectangle {
+                                    visible: pinnedSectionRoot.dropTargetIndex === index && pinnedSectionRoot.draggedIndex !== index
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: 3
+                                    height: parent.height - 8
+                                    radius: 1.5
+                                    color: pinnedSectionRoot.accentColor
+                                }
+                                
+                                Rectangle {
+                                    id: tileContent
+                                    anchors.fill: parent
+                                    color: tileMouse.containsMouse || isDragging
+                                        ? Qt.rgba(pinnedSectionRoot.accentColor.r, pinnedSectionRoot.accentColor.g, pinnedSectionRoot.accentColor.b, 0.15)
+                                        : "transparent"
+                                    radius: 6
+                                    opacity: isDragging ? 0.6 : 1.0
                                     
-                                    Item {
-                                        width: pinnedSectionRoot.iconSize
-                                        height: pinnedSectionRoot.iconSize
-                                        anchors.horizontalCenter: parent.horizontalCenter
+                                    Behavior on opacity { NumberAnimation { duration: 100 } }
+                                    
+                                    Column {
+                                        anchors.centerIn: parent
+                                        spacing: 4
                                         
-                                        Kirigami.Icon {
-                                            anchors.fill: parent
-                                            source: modelData.decoration || "application-x-executable"
-                                            color: pinnedSectionRoot.textColor
-                                        }
-                                        
-                                        // Small pin indicator
-                                        Rectangle {
-                                            anchors.top: parent.top
-                                            anchors.right: parent.right
-                                            anchors.margins: -4
-                                            width: 14
-                                            height: 14
-                                            radius: 7
-                                            color: pinnedSectionRoot.accentColor
-                                            visible: false // Hidden in container mode as per design
+                                        Item {
+                                            width: pinnedSectionRoot.iconSize
+                                            height: pinnedSectionRoot.iconSize
+                                            anchors.horizontalCenter: parent.horizontalCenter
                                             
                                             Kirigami.Icon {
-                                                anchors.centerIn: parent
-                                                width: 10
-                                                height: 10
+                                                anchors.fill: parent
+                                                source: modelData.decoration || "application-x-executable"
+                                                color: pinnedSectionRoot.textColor
+                                            }
+                                            
+                                            // Pin indicator
+                                            Kirigami.Icon {
                                                 source: "pin"
-                                                color: "white"
+                                                width: 12
+                                                height: 12
+                                                anchors.top: parent.top
+                                                anchors.right: parent.right
+                                                anchors.margins: -2
+                                                color: pinnedSectionRoot.accentColor
+                                                visible: true
                                             }
                                         }
                                         
-                                        // Use corner badge icon if preferred style
-                                        Kirigami.Icon {
-                                            source: "pin"
-                                            width: 12
-                                            height: 12
-                                            anchors.top: parent.top
-                                            anchors.right: parent.right
-                                            anchors.margins: -2
-                                            color: pinnedSectionRoot.accentColor
-                                            visible: true
+                                        Text {
+                                            text: modelData.display || ""
+                                            width: pinnedSectionRoot.iconSize + 8
+                                            horizontalAlignment: Text.AlignHCenter
+                                            color: pinnedSectionRoot.textColor
+                                            font.pixelSize: 10
+                                            elide: Text.ElideMiddle
                                         }
-                                    }
-                                    
-                                    Text {
-                                        text: modelData.display || ""
-                                        width: pinnedSectionRoot.iconSize + 8
-                                        horizontalAlignment: Text.AlignHCenter
-                                        color: pinnedSectionRoot.textColor
-                                        font.pixelSize: 10
-                                        elide: Text.ElideMiddle
                                     }
                                 }
                                 
@@ -253,26 +266,111 @@ Item {
                                     id: tileMouse
                                     anchors.fill: parent
                                     hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
+                                    cursorShape: drag.active ? Qt.ClosedHandCursor : Qt.PointingHandCursor
                                     acceptedButtons: Qt.LeftButton | Qt.RightButton
+                                    
+                                    drag.target: tileContent
+                                    drag.axis: Drag.XAxis
+                                    
+                                    onPressed: (mouse) => {
+                                        if (mouse.button === Qt.LeftButton) {
+                                            pinnedSectionRoot.draggedIndex = index
+                                        }
+                                    }
+                                    
+                                    onReleased: (mouse) => {
+                                        if (pinnedSectionRoot.draggedIndex !== -1 && pinnedSectionRoot.dropTargetIndex !== -1) {
+                                            if (pinnedSectionRoot.draggedIndex !== pinnedSectionRoot.dropTargetIndex) {
+                                                pinnedSectionRoot.reorderRequested(pinnedSectionRoot.draggedIndex, pinnedSectionRoot.dropTargetIndex)
+                                            }
+                                        }
+                                        pinnedSectionRoot.draggedIndex = -1
+                                        pinnedSectionRoot.dropTargetIndex = -1
+                                        tileContent.x = 0
+                                        tileContent.y = 0
+                                    }
+                                    
+                                    onPositionChanged: (mouse) => {
+                                        if (drag.active) {
+                                            // Calculate drop target based on mouse position
+                                            var globalPos = mapToItem(tileFlow, mouse.x, mouse.y)
+                                            var targetIndex = Math.floor(globalPos.x / (pinnedSectionRoot.iconSize + 24))
+                                            targetIndex = Math.max(0, Math.min(targetIndex, pinnedSectionRoot.pinnedItems.length - 1))
+                                            pinnedSectionRoot.dropTargetIndex = targetIndex
+                                        }
+                                    }
                                     
                                     onClicked: (mouse) => {
                                         if (mouse.button === Qt.RightButton) {
-                                            pinnedSectionRoot.unpinClicked(modelData.matchId)
-                                        } else {
+                                            pinnedContextMenu.currentItem = modelData
+                                            pinnedContextMenu.currentIndex = index
+                                            pinnedContextMenu.popup()
+                                        } else if (!drag.active) {
                                             pinnedSectionRoot.itemClicked(modelData)
                                         }
                                     }
                                 }
                                 
                                 ToolTip {
-                                    visible: tileMouse.containsMouse
-                                    text: modelData.display + "\n" + pinnedSectionRoot.trFunc("right_click_unpin")
+                                    visible: tileMouse.containsMouse && !tileMouse.drag.active
+                                    text: modelData.display + "\n" + pinnedSectionRoot.trFunc("drag_to_reorder")
                                     delay: 500
                                 }
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    // Context Menu for pinned items
+    Menu {
+        id: pinnedContextMenu
+        
+        property var currentItem: null
+        property int currentIndex: -1
+        
+        MenuItem {
+            text: pinnedSectionRoot.trFunc("open")
+            icon.name: "document-open"
+            onTriggered: {
+                if (pinnedContextMenu.currentItem) {
+                    pinnedSectionRoot.itemClicked(pinnedContextMenu.currentItem)
+                }
+            }
+        }
+        
+        MenuItem {
+            text: pinnedSectionRoot.trFunc("copy_path")
+            icon.name: "edit-copy"
+            visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
+            onTriggered: {
+                if (pinnedContextMenu.currentItem) {
+                    pinnedSectionRoot.copyPathRequested(pinnedContextMenu.currentItem)
+                }
+            }
+        }
+        
+        MenuItem {
+            text: pinnedSectionRoot.trFunc("open_location")
+            icon.name: "folder-open"
+            visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
+            onTriggered: {
+                if (pinnedContextMenu.currentItem) {
+                    pinnedSectionRoot.openLocationRequested(pinnedContextMenu.currentItem)
+                }
+            }
+        }
+        
+        MenuSeparator {}
+        
+        MenuItem {
+            text: pinnedSectionRoot.trFunc("unpin_item")
+            icon.name: "window-unpin"
+            onTriggered: {
+                if (pinnedContextMenu.currentItem) {
+                    pinnedSectionRoot.unpinClicked(pinnedContextMenu.currentItem.matchId)
                 }
             }
         }

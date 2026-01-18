@@ -7,11 +7,9 @@ import org.kde.kirigami as Kirigami
 import "../js/localization.js" as LocalizationData
 import "../js/CategoryManager.js" as CategoryManager
 
-// KCM.SimpleKCM removed, replaced with Item for ConfigModel compatibility
-Item {
+// Use Kirigami.FormLayout for Plasma 6 config compatibility
+Kirigami.FormLayout {
     id: configCategories
-    implicitWidth: 600
-    implicitHeight: 600
     
     // Localization
     property var locales: LocalizationData.data
@@ -35,7 +33,7 @@ Item {
     property bool cfg_smartResultLimit
     
     // Internal state management
-    property var categorySettings
+    property var categorySettings: ({})
     
     // Load settings when config property changes or init
     onCfg_categorySettingsChanged: {
@@ -106,11 +104,7 @@ Item {
         })
     }
     
-    // Dragging state (moved from ColumnLayout to root)
-    property bool draggingCategory: false
-    property bool draggingIsMerged: false
-    
-    // Model rebuild function (moved from ColumnLayout to root)
+    // Model rebuild function
     function rebuildModels() {
         separateModel.clear()
         for (var i = 0; i < separateCategories.length; i++) {
@@ -161,401 +155,285 @@ Item {
     ListModel { id: separateModel }
     ListModel { id: combinedModel }
 
-    ColumnLayout {
-        anchors.fill: parent
-        spacing: 16
+    // --- Algorithm Settings Section ---
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: tr("algorithm_settings")
+    }
+    
+    ComboBox {
+        id: algorithmCombo
+        Kirigami.FormData.label: tr("search_algorithm")
+        model: [tr("alg_fuzzy"), tr("alg_exact"), tr("alg_starts_with")]
+        currentIndex: configCategories.cfg_searchAlgorithm
+        onActivated: {
+            configCategories.cfg_searchAlgorithm = currentIndex
+        }
+        Layout.fillWidth: true
+    }
+    
+    // Smart Limit Checkbox
+    CheckBox {
+        id: smartLimitCheck
+        Kirigami.FormData.label: tr("smart_limit_toggle")
+        text: tr("smart_limit_desc")
+        checked: configCategories.cfg_smartResultLimit
+        onCheckedChanged: configCategories.cfg_smartResultLimit = checked
+    }
+    
+    // Min/Max Results (only when smart limit is off)
+    RowLayout {
+        Kirigami.FormData.label: tr("result_limits")
+        enabled: !configCategories.cfg_smartResultLimit
+        opacity: enabled ? 1.0 : 0.5
+        spacing: 12
         
-        // Header
-        Label {
-            text: tr("category_settings")
-            font.bold: true
-            font.pixelSize: 16
+        Label { text: tr("min_results") }
+        SpinBox {
+            from: 1; to: 20
+            value: configCategories.cfg_minResults || 3
+            onValueModified: configCategories.cfg_minResults = value
         }
         
-        Label {
-            text: tr("category_settings_desc")
-            opacity: 0.7
-            font.pixelSize: 12
-            wrapMode: Text.WordWrap
-            Layout.fillWidth: true
+        Item { width: 10 }
+        
+        Label { text: tr("max_results") }
+        SpinBox {
+            from: 5; to: 100
+            value: configCategories.cfg_maxResults || 20
+            onValueModified: configCategories.cfg_maxResults = value
         }
+    }
 
-        // Algorithm & Limits Settings
-        GroupBox {
-            title: tr("algorithm_settings")
-            Layout.fillWidth: true
-            
-            GridLayout {
-                columns: 2
-                rowSpacing: 10
-                columnSpacing: 12
-                
-                // Search Algorithm
-                Label { 
-                    text: tr("search_algorithm") + ":" 
-                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                }
-                ComboBox {
-                    model: [tr("alg_fuzzy"), tr("alg_exact"), tr("alg_starts_with")]
-                    currentIndex: configCategories.cfg_searchAlgorithm ?? 0
-                    onActivated: {
-                        configCategories.cfg_searchAlgorithm = currentIndex
-                    }
-                    Layout.fillWidth: true
-                }
-                
-                // Result Limits
-                Label { 
-                    text: tr("result_limits") + ":" 
-                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                }
-                RowLayout {
-                    spacing: 8
-                    enabled: !configCategories.cfg_smartResultLimit
-                    opacity: enabled ? 1.0 : 0.5
-                    
-                    Label { text: tr("min_results") }
-                    SpinBox {
-                        from: 1; to: 20
-                        value: configCategories.cfg_minResults ?? 3
-                        onValueModified: configCategories.cfg_minResults = value
-                    }
-                    
-                    Item { width: 10 } // Spacer
-                    
-                    Label { text: tr("max_results") }
-                    SpinBox {
-                        from: 5; to: 100
-                        value: configCategories.cfg_maxResults ?? 20
-                        onValueModified: configCategories.cfg_maxResults = value
-                    }
-                }
-                
-                // Smart Limit
-                Label { 
-                    text: tr("smart_limit_toggle") + ":" 
-                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                }
-                CheckBox {
-                    text: tr("smart_limit_desc")
-                    checked: configCategories.cfg_smartResultLimit ?? true
-                    onCheckedChanged: configCategories.cfg_smartResultLimit = checked
-                }
-            }
-        }
+    // --- Category Order Section ---
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: tr("separate_section")
+    }
+    
+    Label {
+        text: tr("drag_instruction")
+        font.pixelSize: 11
+        opacity: 0.6
+        wrapMode: Text.WordWrap
+        Layout.fillWidth: true
+    }
+    
+    // Separate Categories List
+    Item {
+        Kirigami.FormData.label: tr("category_priority")
+        Layout.fillWidth: true
+        Layout.preferredHeight: separateListColumn.implicitHeight + 20
         
-        // Main Content Area with ScrollView
-        ScrollView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            clip: true
+        Column {
+            id: separateListColumn
+            anchors.fill: parent
+            spacing: 4
             
-            ColumnLayout {
-                width: parent.width
-                spacing: 20
+            Repeater {
+                model: separateModel
                 
-                // --- SEPARATE SECTION ---
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: 4
+                delegate: Rectangle {
+                    width: parent.width
+                    height: 44
+                    color: delegateMouse.containsMouse ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1) : "transparent"
+                    radius: 4
                     
-                    Label {
-                        text: tr("separate_section")
-                        font.bold: true
-                        color: Kirigami.Theme.highlightColor
+                    MouseArea {
+                        id: delegateMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
                     }
                     
-                    Label {
-                        text: tr("drag_instruction")
-                        font.pixelSize: 11
-                        opacity: 0.6
-                        Layout.bottomMargin: 4
-                    }
-
-                    // Headers
                     RowLayout {
-                        Layout.fillWidth: true
+                        anchors.fill: parent
+                        anchors.leftMargin: 8
+                        anchors.rightMargin: 8
                         spacing: 12
-                        Layout.leftMargin: 8
                         
-                        Label { text: tr("category_visibility"); font.bold: true; Layout.preferredWidth: 30 }
-                        Label { text: ""; Layout.preferredWidth: 22 }
-                        Label { text: tr("category"); font.bold: true; Layout.fillWidth: true }
-                        Label { text: tr("category_priority"); font.bold: true; Layout.preferredWidth: 80 }
-                        Label { text: ""; Layout.preferredWidth: 64 }
-                    }
-
-                    ListView {
-                        id: separateListView
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: contentHeight
-                        interactive: false // Let outer ScrollView handle scrolling
-                        
-                        model: separateModel
-                        
-                        delegate: categoryDelegate
-                    }
-                
-                    // Drop Area for returning from Combined
-                    Rectangle {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 40
-                        color: dropAreaSeparate.containsDrag ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2) : "transparent"
-                        radius: 4
-                        border.width: 1
-                        border.color: Qt.rgba(1,1,1,0.1)
-                        visible: configCategories.draggingCategory && configCategories.draggingIsMerged
-                        
-                        Label {
-                            anchors.centerIn: parent
-                            text: "Move back to Separate"
-                            opacity: 0.7
-                        }
-                        
-                        DropArea {
-                            id: dropAreaSeparate
-                            anchors.fill: parent
-                            onDropped: (drag) => {
-                                moveToSeparate(drag.source.catName)
+                        // Visibility checkbox
+                        CheckBox {
+                            id: visCheckSep
+                            checked: CategoryManager.isCategoryVisible(configCategories.categorySettings, model.catName)
+                            
+                            onToggled: {
+                                configCategories.categorySettings = CategoryManager.setCategoryVisibility(
+                                    configCategories.categorySettings, 
+                                    model.catName, 
+                                    checked
+                                )
+                                configCategories.saveSettings()
                             }
                         }
-                    }
-                }
-                
-                // --- COMBINED SECTION ---
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: 4
-                    
-                    Label {
-                        text: tr("combined_section")
-                        font.bold: true
-                        color: Kirigami.Theme.activeTextColor
-                    }
-                    
-                    Label {
-                        text: tr("combined_desc")
-                        font.pixelSize: 11
-                        opacity: 0.6
-                        Layout.bottomMargin: 4
-                    }
-                    
-                    // Drop Area for moving to Combined
-                    Rectangle {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 40
-                        color: dropAreaCombined.containsDrag ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2) : "transparent"
-                        radius: 4
-                        border.width: 1
-                        border.color: Qt.rgba(1,1,1,0.1)
-                        visible: configCategories.draggingCategory && !configCategories.draggingIsMerged
                         
+                        // Category icon
+                        Kirigami.Icon {
+                            source: CategoryManager.getEffectiveIcon(configCategories.categorySettings, model.catName, model.catIcon)
+                            Layout.preferredWidth: 22
+                            Layout.preferredHeight: 22
+                        }
+                        
+                        // Category name
                         Label {
-                            anchors.centerIn: parent
-                            text: "Drop here to Combine"
-                            opacity: 0.7
+                            text: configCategories.tr(model.catNameKey) || model.catName
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
                         }
                         
-                        DropArea {
-                            id: dropAreaCombined
-                            anchors.fill: parent
-                            onDropped: (drag) => {
-                                moveToCombined(drag.source.catName)
-                            }
+                        // Priority display
+                        Label {
+                            text: "#" + (index + 1)
+                            font.bold: true
+                            opacity: 0.6
+                            Layout.preferredWidth: 40
+                            horizontalAlignment: Text.AlignCenter
                         }
-                    }
-
-                    ListView {
-                        id: combinedListView
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: contentHeight
-                        interactive: false
                         
-                        model: combinedModel
-                        
-                        delegate: categoryDelegate
-                    }
-                }
-            }
-        }
-        
-        // SHARED DELEGATE
-        Component {
-            id: categoryDelegate
-            Rectangle {
-                id: dragDelegate
-                width: ListView.view.width
-                height: 44
-                color: dragArea.drag.active ? Kirigami.Theme.highlightColor : (dragArea.containsMouse ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1) : "transparent")
-                radius: 4
-                border.color: dragArea.drag.active ? Kirigami.Theme.highlightColor : "transparent"
-                border.width: 1
-                
-                property string catName: model.catName
-                property bool isMerged: model.isMerged
-                property int listIndex: index // Store index to avoid binding issues
-                
-                Drag.active: dragArea.drag.active
-                Drag.source: dragDelegate
-                Drag.hotSpot.x: width / 2
-                Drag.hotSpot.y: height / 2
-                
-                // We need z-index high when dragging
-                z: dragArea.drag.active ? 100 : 1
-
-                
-                // BACK LEVEL MOUSE AREA FOR DRAGGING
-                // Moved before the main content so it doesn't block interaction with buttons/checkboxes
-                MouseArea {
-                    id: dragArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    drag.target: dragDelegate
-                    drag.axis: Drag.YAxis
-                    
-                    // Allow buttons and checkboxes to get events
-                    propagateComposedEvents: true
-                    
-                    onPressed: (mouse) => {
-                        configCategories.draggingCategory = true
-                        configCategories.draggingIsMerged = model.isMerged
-                        // Pass event to items below (like our RowLayout which is now above in Z-order since we moved this MouseArea back)
-                        // Actually, if we move it to the back, we don't need propagateComposedEvents: true for everything, 
-                        // but it's safer.
-                        mouse.accepted = false 
-                    }
-                    
-                    onReleased: (mouse) => {
-                        configCategories.draggingCategory = false
-                        if (drag.active) {
-                            dragDelegate.Drag.drop()
+                        // Move up button
+                        Button {
+                            icon.name: "arrow-up"
+                            flat: true
+                            enabled: index > 0
+                            Layout.preferredWidth: 32
+                            Layout.preferredHeight: 32
+                            onClicked: moveItem(model.catName, -1)
                         }
-                        mouse.accepted = false
-                    }
-                }
-
-                RowLayout {
-                    anchors.fill: parent
-                    anchors.leftMargin: 8
-                    anchors.rightMargin: 8
-                    spacing: 12
-                    
-                    // Drag handle
-                    Kirigami.Icon {
-                        source: "handle-sort"
-                        Layout.preferredWidth: 16
-                        Layout.preferredHeight: 16
-                        opacity: 0.5
-                    }
-                    
-                    // Visibility checkbox
-                    CheckBox {
-                        id: visibilityCheck
-                        checked: CategoryManager.isCategoryVisible(configCategories.categorySettings, model.catName)
                         
-                        onToggled: {
-                            configCategories.categorySettings = CategoryManager.setCategoryVisibility(
-                                configCategories.categorySettings, 
-                                model.catName, 
-                                checked
-                            )
-                            configCategories.saveSettings()
+                        // Move down button
+                        Button {
+                            icon.name: "arrow-down"
+                            flat: true
+                            enabled: index < separateModel.count - 1
+                            Layout.preferredWidth: 32
+                            Layout.preferredHeight: 32
+                            onClicked: moveItem(model.catName, 1)
                         }
-                    }
-                    
-                    // Category icon
-                    Kirigami.Icon {
-                        source: CategoryManager.getEffectiveIcon(configCategories.categorySettings, model.catName, model.catIcon)
-                        Layout.preferredWidth: 22
-                        Layout.preferredHeight: 22
-                    }
-                    
-                    // Category name
-                    Label {
-                        text: configCategories.tr(model.catNameKey) || model.catName
-                        Layout.fillWidth: true
-                        Layout.shrink: 1
-                        elide: Text.ElideRight
-                    }
-                    
-                    // Priority display (only meaningful for separate lists sorting)
-                    Label {
-                        text: isMerged ? "-" : "#" + (index + 1)
-                        font.bold: true
-                        opacity: 0.6
-                        Layout.preferredWidth: 40
-                        Layout.shrink: 0
-                        horizontalAlignment: Text.AlignCenter
-                    }
-                    
-                    // Move buttons (only within own list)
-                    Button {
-                        icon.name: "arrow-up"
-                        flat: true
-                        visible: !isMerged // Sorting mainly for top list
-                        enabled: index > 0
-                        Layout.preferredWidth: 32
-                        Layout.preferredHeight: 32
-                        Layout.shrink: 0
-                        onClicked: moveItem(model.catName, -1)
-                    }
-                    
-                    Button {
-                        icon.name: "arrow-down"
-                        flat: true
-                        visible: !isMerged
-                        enabled: index < (isMerged ? combinedModel.count : separateModel.count) - 1
-                        Layout.preferredWidth: 32
-                        Layout.preferredHeight: 32
-                        Layout.shrink: 0
-                        onClicked: moveItem(model.catName, 1)
-                    }
-                    
-                    // Move to other section button
-                    Button {
-                        icon.name: isMerged ? "arrow-up-double" : "arrow-down-double"
-                        flat: true
-                        ToolTip.text: isMerged ? "Move to Separate" : "Move to Combined"
-                        ToolTip.visible: hovered
-                        Layout.preferredWidth: 32
-                        Layout.preferredHeight: 32
-                        Layout.shrink: 0
-                        onClicked: {
-                            if (isMerged) moveToSeparate(model.catName);
-                            else moveToCombined(model.catName);
+                        
+                        // Move to combined button
+                        Button {
+                            icon.name: "arrow-down-double"
+                            flat: true
+                            ToolTip.text: tr("move_to_combined")
+                            ToolTip.visible: hovered
+                            Layout.preferredWidth: 32
+                            Layout.preferredHeight: 32
+                            onClicked: moveToCombined(model.catName)
                         }
                     }
                 }
             }
         }
+    }
 
-        Item { Layout.fillHeight: true }
+    // --- Combined Section ---
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: tr("combined_section")
+    }
+    
+    Label {
+        text: tr("combined_desc")
+        font.pixelSize: 11
+        opacity: 0.6
+        wrapMode: Text.WordWrap
+        Layout.fillWidth: true
+    }
+    
+    // Combined Categories List
+    Item {
+        Kirigami.FormData.label: " "
+        Layout.fillWidth: true
+        Layout.preferredHeight: Math.max(combinedListColumn.implicitHeight + 20, 60)
         
-        // Info box
-        Rectangle {
-            Layout.fillWidth: true
-            Layout.preferredHeight: infoColumn.implicitHeight + 16
-            color: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1)
-            radius: 8
+        Column {
+            id: combinedListColumn
+            anchors.fill: parent
+            spacing: 4
             
-            ColumnLayout {
-                id: infoColumn
-                anchors.fill: parent
-                anchors.margins: 8
-                spacing: 4
+            // Empty state
+            Label {
+                visible: combinedModel.count === 0
+                text: tr("no_combined_categories")
+                opacity: 0.5
+                anchors.centerIn: parent
+            }
+            
+            Repeater {
+                model: combinedModel
                 
-                Label {
-                    text: "ℹ️ " + tr("category_info_title")
-                    font.bold: true
-                }
-                
-                Label {
-                    text: tr("category_info_desc") + "\n\n" + tr("priority_tooltip")
-                    opacity: 0.8
-                    wrapMode: Text.WordWrap
-                    Layout.fillWidth: true
+                delegate: Rectangle {
+                    width: parent.width
+                    height: 44
+                    color: combinedDelegateMouse.containsMouse ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.1) : "transparent"
+                    radius: 4
+                    
+                    MouseArea {
+                        id: combinedDelegateMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                    }
+                    
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.leftMargin: 8
+                        anchors.rightMargin: 8
+                        spacing: 12
+                        
+                        // Visibility checkbox
+                        CheckBox {
+                            id: visCheckComb
+                            checked: CategoryManager.isCategoryVisible(configCategories.categorySettings, model.catName)
+                            
+                            onToggled: {
+                                configCategories.categorySettings = CategoryManager.setCategoryVisibility(
+                                    configCategories.categorySettings, 
+                                    model.catName, 
+                                    checked
+                                )
+                                configCategories.saveSettings()
+                            }
+                        }
+                        
+                        // Category icon
+                        Kirigami.Icon {
+                            source: CategoryManager.getEffectiveIcon(configCategories.categorySettings, model.catName, model.catIcon)
+                            Layout.preferredWidth: 22
+                            Layout.preferredHeight: 22
+                        }
+                        
+                        // Category name
+                        Label {
+                            text: configCategories.tr(model.catNameKey) || model.catName
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
+                        }
+                        
+                        // Move to separate button
+                        Button {
+                            icon.name: "arrow-up-double"
+                            flat: true
+                            ToolTip.text: tr("move_to_separate")
+                            ToolTip.visible: hovered
+                            Layout.preferredWidth: 32
+                            Layout.preferredHeight: 32
+                            onClicked: moveToSeparate(model.catName)
+                        }
+                    }
                 }
             }
         }
+    }
+    
+    // Info box
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: tr("category_info_title")
+    }
+    
+    Label {
+        text: tr("category_info_desc") + "\n\n" + tr("priority_tooltip")
+        opacity: 0.8
+        wrapMode: Text.WordWrap
+        Layout.fillWidth: true
     }
 }

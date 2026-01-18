@@ -88,7 +88,7 @@ Item {
     // ===== SEARCH MODEL =====
     Milou.ResultsModel {
         id: resultsModel
-        queryString: popupRoot.searchText
+        queryString: getEffectiveQuery(popupRoot.searchText)
         limit: 50
     }
     
@@ -242,15 +242,45 @@ Item {
     function isCommandOnlyQuery(text) {
         if (!text) return false;
         var t = text.toLowerCase();
-        // date: and help: are exact match views
-        if (t === "date:" || t === "help:") return true;
+        // Only specific full-view modes hide the results list
+        return t === "date:" || t === "help:" || t === trFunc("prefix_date") + ":" || t === trFunc("prefix_help") + ":";
+    }
+
+    function getEffectiveQuery(text) {
+        if (!text) return ""
+        var t = text
         
-        // Others are single-action runners that we show hints for
-        return t.startsWith("gg:") || 
-               t.startsWith("dd:") || 
-               t.startsWith("wp:") || 
-               t.startsWith("define:") || 
-               t.startsWith("unit:");
+        // Map localized prefixes back to internal English prefixes or strip them
+        
+        // 1. Check for "unit:" / "birim:" -> STRIP custom prefix for KRunner
+        // English: unit:
+        if (t.toLowerCase().startsWith("unit:")) return t.substring(5).trim()
+        // Localized
+        var locUnit = trFunc("prefix_unit")
+        if (locUnit && t.toLowerCase().startsWith(locUnit + ":")) return t.substring(locUnit.length + 1).trim()
+        
+        // 2. Check for "date:" / "tarih:" -> Map to "date:" for internal view loader
+        var locDate = trFunc("prefix_date")
+        if (locDate && t.toLowerCase() === locDate + ":") return "date:"
+        
+        // 3. Check for "help:" / "yardım:" -> Map to "help:" for internal view loader
+        var locHelp = trFunc("prefix_help")
+        if (locHelp && t.toLowerCase() === locHelp + ":") return "help:"
+
+        // 4. Check for "kill" / "sonlandır" -> Map to "kill"
+        var locKill = trFunc("prefix_kill")
+        if (locKill && t.toLowerCase().startsWith(locKill + " ")) return "kill " + t.substring(locKill.length + 1)
+
+        // 5. Check for "spell" / "yazım" -> Map to "spell"
+        var locSpell = trFunc("prefix_spell")
+        if (locSpell && t.toLowerCase().startsWith(locSpell + " ")) return "spell " + t.substring(locSpell.length + 1)
+        
+        // 6. Check for "shell:" / "komut:" -> Map to "shell:" (or strip if plugin needs?)
+        // Usually shell runner needs "shell:".
+        var locShell = trFunc("prefix_shell")
+        if (locShell && t.toLowerCase().startsWith(locShell + ":")) return "shell:" + t.substring(locShell.length + 1)
+
+        return t
     }
 
     // ===== UI COMPONENTS =====
@@ -451,8 +481,13 @@ Item {
             trFunc: popupRoot.trFunc
             
             onItemClicked: (item) => {
-                if (item.filePath) Qt.openUrlExternally(item.filePath);
-                else {
+                if (item.filePath) {
+                     if (item.filePath.toString().indexOf(".desktop") !== -1) {
+                          logic.runShellCommand("kioclient exec '" + item.filePath + "'");
+                     } else {
+                          Qt.openUrlExternally(item.filePath);
+                     }
+                } else {
                     requestSearchTextUpdate(item.display);
                     // delayed run...
                     Qt.callLater(() => {
@@ -462,6 +497,31 @@ Item {
                 requestExpandChange(false);
             }
             onUnpinClicked: (matchId) => logic.unpinItem(matchId)
+            
+            // Drag-drop reorder
+            onReorderRequested: (fromIndex, toIndex) => {
+                logic.reorderPinnedItems(fromIndex, toIndex)
+            }
+            
+            // Context menu actions
+            onCopyPathRequested: (item) => {
+                if (item.filePath) {
+                    var path = item.filePath.toString().replace("file://", "")
+                    logic.runShellCommand("echo -n '" + path + "' | xclip -selection clipboard")
+                }
+            }
+            
+            onOpenLocationRequested: (item) => {
+                if (item.filePath) {
+                    var path = item.filePath.toString()
+                    // Get parent directory
+                    var lastSlash = path.lastIndexOf("/")
+                    if (lastSlash > 0) {
+                        var parentDir = path.substring(0, lastSlash)
+                        Qt.openUrlExternally(parentDir)
+                    }
+                }
+            }
         }
     }
 
@@ -490,6 +550,7 @@ Item {
              trFunc: popupRoot.trFunc
              searchText: popupRoot.searchText
              previewEnabled: popupRoot.previewEnabled
+             previewSettings: popupRoot.previewSettings
              logic: popupRoot.logic
              
              isPinnedFunc: logic.isPinned
@@ -552,7 +613,7 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && searchText === "date:"
+        active: popupRoot.expanded && getEffectiveQuery(searchText) === "date:"
         
         sourceComponent: DateView {
             textColor: popupRoot.textColor
@@ -570,7 +631,7 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && searchText === "help:"
+        active: popupRoot.expanded && getEffectiveQuery(searchText) === "help:"
         
         sourceComponent: HelpView {
             textColor: popupRoot.textColor
@@ -578,6 +639,10 @@ Item {
             trFunc: popupRoot.trFunc
             
             onAidSelected: (prefix) => {
+                // When selecting from Help, we put the LOCALIZED prefix in the box if possible?
+                // Or just the standard one? 
+                // Let's use standard for now or what comes from HelpView (which we will update to be localized?)
+                // If HelpView sends "birim:", we put "birim:".
                 requestSearchTextUpdate(prefix)
                 if (!isButtonMode) hiddenSearchInput.text = prefix
                 else buttonModeSearchInput.setText(prefix)
@@ -631,7 +696,7 @@ Item {
              }
 
              // History List
-             HistoryListView {
+                             HistoryListView {
                  id: histListView
                  anchors.fill: parent
                  visible: !isTileView
@@ -641,6 +706,7 @@ Item {
                  accentColor: popupRoot.accentColor
                  formatTimeFunc: logic.formatHistoryTime
                  trFunc: popupRoot.trFunc
+                 previewSettings: popupRoot.previewSettings
                  
                  onItemClicked: (item) => handleHistoryClick(item)
                  onClearClicked: logic.clearHistory()
@@ -656,6 +722,7 @@ Item {
                  textColor: popupRoot.textColor
                  accentColor: popupRoot.accentColor
                  trFunc: popupRoot.trFunc
+                 previewSettings: popupRoot.previewSettings
                  
                  onItemClicked: (item) => handleHistoryClick(item)
                  onClearClicked: logic.clearHistory()

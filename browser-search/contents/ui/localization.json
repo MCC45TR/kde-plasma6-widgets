@@ -10,10 +10,11 @@
         "bookmarks": "Open Bookmarks",
         "settings": "Browser Settings",
         "search_engine": "Search Engine",
-        "custom_url": "Custom Search URL"
+        "custom_url": "Custom Search URL",
+        "browser_name": "Browser"
     },
     "tr": {
-        "search_placeholder": "Web'de ara...",
+        "search_placeholder": "Arama_Yapmak_İçin_Yazın",
         "incognito": "Gizli Pencere Aç",
         "new_tab": "Yeni Sekme Aç",
         "history": "Geçmişi Aç",
@@ -23,7 +24,8 @@
         "bookmarks": "Yer İmlerini Aç",
         "settings": "Tarayıcı Ayarları",
         "search_engine": "Arama Motoru",
-        "custom_url": "Özel Arama URL'si"
+        "custom_url": "Özel Arama URL'si",
+        "browser_name": "Tarayıcı_Adı"
     },
     "de": {
         "search_placeholder": "Im Web suchen...",

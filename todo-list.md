@@ -129,6 +129,9 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [ ] **Spotify Gelişmiş Kontrol**: Sadece MPRIS değil, Spotify API kullanarak çalma listelerine erişim.
 - [ ] **Seek Bar**: İlerleme çubuğunda tıklanan yere tam saniyesinde atlama hassasiyeti artırılmalı.
 
+## 📝 Todo List (Yapılacaklar)
+- [ ] **Hatırlatıcı (Reminder)**: Todo listesine hatırlatıcı ekleme özelliği.
+
 ## 🗓️ Calendar (Takvim)
 ### 📅 Resmi Tatiller
 - [ ] Yerel **JSON tabanlı tatil veri kaynağı** desteği

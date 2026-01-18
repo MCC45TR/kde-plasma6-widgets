@@ -16,24 +16,24 @@ Item {
     signal aidSelected(string prefix)
     
     readonly property var helpItems: [
-        { prefix: "timeline:/", desc: "hint_timeline", icon: "view-calendar" },
-        { prefix: "app:", desc: "hint_applications", icon: "applications-all" },
-        { prefix: "file:/", desc: "hint_file_path", icon: "folder" },
-        { prefix: "gg:", desc: "hint_google", icon: "google" },
-        { prefix: "dd:", desc: "hint_duckduckgo", icon: "internet-web-browser" },
-        { prefix: "wp:", desc: "hint_wikipedia", icon: "wikipedia" },
-        { prefix: "b:", desc: "hint_bookmarks", icon: "bookmarks" },
-        { prefix: "man:/", desc: "hint_man_page", icon: "help-contents" },
-        { prefix: "kill ", desc: "hint_kill", icon: "process-stop" },
-        { prefix: "spell ", desc: "hint_spell", icon: "tools-check-spelling" },
-        { prefix: "define:", desc: "hint_define", icon: "accessories-dictionary" },
-        { prefix: "unit:", desc: "hint_unit", icon: "accessories-calculator" },
-        { prefix: "shell:", desc: "hint_shell", icon: "utilities-terminal" },
-        { prefix: "power:", desc: "hint_power", icon: "system-shutdown" },
-        { prefix: "services:", desc: "hint_services", icon: "preferences-system" },
-        { prefix: "#", desc: "hint_unicode", icon: "character-set" },
-        { prefix: "date", desc: "hint_datetime", icon: "alarm-clock" },
-        { prefix: "help:", desc: "hint_help", icon: "help-about" }
+        { prefix: "timeline:/", desc: "hint_timeline", icon: "view-calendar", example: "timeline:/today -> 📅", key: "timeline" },
+        { prefix: "app:", desc: "hint_applications", icon: "applications-all", example: "app:Code -> VS Code" },
+        { prefix: "file:/", desc: "hint_file_path", icon: "folder", example: "file:/home -> 📂" },
+        { prefix: "gg:", desc: "hint_google", icon: "google", example: "gg:kde -> 🔍 Google" },
+        { prefix: "dd:", desc: "hint_duckduckgo", icon: "internet-web-browser", example: "dd:linux -> 🦆 DuckDuckGo" },
+        { prefix: "wp:", desc: "hint_wikipedia", icon: "wikipedia", example: "wp:plasma -> 📖 Wikipedia" },
+        { prefix: "b:", desc: "hint_bookmarks", icon: "bookmarks", example: "b:kde -> 🔖 KDE.org" },
+        { prefix: "man:/", desc: "hint_man_page", icon: "help-contents", example: "man:ls -> 📄 ls(1)" },
+        { prefix: "kill ", desc: "hint_kill", icon: "process-stop", example: "kill firefox -> 🚫 Stop Process", key: "kill" },
+        { prefix: "spell ", desc: "hint_spell", icon: "tools-check-spelling", example: "spell hello -> ✅ Correct", key: "spell" },
+        { prefix: "define:", desc: "hint_define", icon: "accessories-dictionary", example: "define:kernel -> 📕 Definition" },
+        { prefix: "unit:", desc: "hint_unit", icon: "accessories-calculator", example: "10m to cm -> 1000 cm", key: "unit" },
+        { prefix: "shell:", desc: "hint_shell", icon: "utilities-terminal", example: "echo hi -> hi", key: "shell" },
+        { prefix: "power:", desc: "hint_power", icon: "system-shutdown", key: "power" },
+        { prefix: "services:", desc: "hint_services", icon: "preferences-system", key: "services" },
+        { prefix: "#", desc: "hint_unicode", icon: "character-set", example: "#happy -> 😀" },
+        { prefix: "date", desc: "hint_datetime", icon: "alarm-clock", example: "date -> 18.01.2026", key: "date" },
+        { prefix: "help:", desc: "hint_help", icon: "help-about", key: "help" }
     ]
 
     Rectangle {
@@ -61,6 +61,26 @@ Item {
                 color: model.index % 2 === 0 ? "transparent" : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.03)
                 radius: 6
                 
+                property string displayPrefix: {
+                    if (modelData.key) {
+                        var loc = root.trFunc("prefix_" + modelData.key)
+                        if (loc) {
+                            // If original prefix had suffix (like : or space), append it
+                            // Except for 'date' which has no suffix in array but 'date:' in usage
+                            // 'kill ' has space.
+                            // 'unit:' has colon.
+                            
+                            var suffix = ""
+                            if (modelData.prefix.endsWith(":")) suffix = ":"
+                            if (modelData.prefix.endsWith(" ")) suffix = " "
+                            if (modelData.prefix.endsWith(":/")) suffix = ":/"
+                            
+                            return loc + suffix
+                        }
+                    }
+                    return modelData.prefix
+                }
+
                 RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: 12
@@ -75,7 +95,7 @@ Item {
                     }
                     
                     Text {
-                        text: modelData.prefix
+                        text: displayPrefix
                         font.bold: true
                         font.pixelSize: 14
                         font.family: "Barlow Condensed" // Consistent with DateView
@@ -88,7 +108,17 @@ Item {
                         font.italic: true
                         font.family: "Barlow Condensed"
                         color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.6)
+                        elide: Text.ElideRight
+                    }
+                    
+                    Text {
+                        text: modelData.example ? modelData.example : ""
+                        visible: !!modelData.example
+                        font.pixelSize: 13
+                        font.family: "Barlow Condensed"
+                        color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.4)
                         Layout.fillWidth: true
+                        horizontalAlignment: Text.AlignRight
                         elide: Text.ElideRight
                     }
                 }
@@ -99,7 +129,7 @@ Item {
                     hoverEnabled: true
                     onEntered: parent.color = Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.1)
                     onExited: parent.color = model.index % 2 === 0 ? "transparent" : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.03)
-                    onClicked: root.aidSelected(modelData.prefix)
+                    onClicked: root.aidSelected(displayPrefix)
                 }
             }
         }

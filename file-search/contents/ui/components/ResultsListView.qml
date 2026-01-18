@@ -15,6 +15,7 @@ ScrollView {
     
     // Preview control - bound from config
     property bool previewEnabled: true
+    property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
     
     // Logic controller for context menu actions
     property var logic: null
@@ -92,7 +93,31 @@ ScrollView {
                 
                 // Icon
                 Kirigami.Icon {
-                    source: modelData.decoration || "application-x-executable"
+                    source: {
+                        if (resultsListRoot.listIconSize <= 22) return modelData.decoration || "application-x-executable";
+                        
+                        var url = (modelData.url || "").toString();
+                        if (!url) return modelData.decoration || "application-x-executable";
+                        
+                        var ext = url.split('.').pop().toLowerCase();
+                        
+                        if (resultsListRoot.previewSettings.images) {
+                            var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                            if (imageExts.indexOf(ext) >= 0) return url
+                        }
+                        
+                        if (resultsListRoot.previewSettings.videos) {
+                            var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                            if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                        }
+                        
+                        if (resultsListRoot.previewSettings.documents) {
+                            var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                            if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
+                        }
+                        
+                        return modelData.decoration || "application-x-executable"
+                    }
                     Layout.preferredWidth: resultsListRoot.listIconSize
                     Layout.preferredHeight: resultsListRoot.listIconSize
                     color: resultsListRoot.textColor
@@ -240,10 +265,25 @@ ScrollView {
                                 var url = modelData.url || ""
                                 if (url.length === 0) return ""
                                 var ext = url.split('.').pop().toLowerCase()
-                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg"]
-                                if (imageExts.indexOf(ext) >= 0) {
-                                    return url
+                                
+                                // 1. Images
+                                if (resultsListRoot.previewSettings.images) {
+                                    var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                    if (imageExts.indexOf(ext) >= 0) return url
                                 }
+                                
+                                // 2. Videos
+                                if (resultsListRoot.previewSettings.videos) {
+                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                }
+                                
+                                // 3. Documents
+                                if (resultsListRoot.previewSettings.documents) {
+                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                }
+                                
                                 return ""
                             }
                             width: source.length > 0 ? Math.min(150, sourceSize.width) : 0

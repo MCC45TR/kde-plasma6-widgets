@@ -440,7 +440,32 @@ FocusScope {
                                             width: resultsTileRoot.iconSize
                                             height: resultsTileRoot.iconSize
                                             anchors.horizontalCenter: parent.horizontalCenter
-                                            source: modelData.decoration || "application-x-executable"
+                                            source: {
+                                                // standard icon if small
+                                                if (resultsTileRoot.iconSize <= 22) return modelData.decoration || "application-x-executable";
+                                                
+                                                var url = (modelData.url || "").toString();
+                                                if (!url) return modelData.decoration || "application-x-executable";
+                                                
+                                                var ext = url.split('.').pop().toLowerCase();
+                                                
+                                                if (resultsTileRoot.previewSettings.images) {
+                                                    var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                                    if (imageExts.indexOf(ext) >= 0) return url
+                                                }
+                                                
+                                                if (resultsTileRoot.previewSettings.videos) {
+                                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                                }
+                                                
+                                                if (resultsTileRoot.previewSettings.documents) {
+                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                                }
+                                                
+                                                return modelData.decoration || "application-x-executable"
+                                            }
                                             color: resultsTileRoot.textColor
                                         }
                                         
@@ -589,16 +614,28 @@ FocusScope {
                                         Image {
                                             id: thumbnailImage
                                             source: {
-                                                // Check if image previews are enabled
-                                                if (!resultsTileRoot.previewSettings.images) return ""
-                                                
                                                 var url = modelData.url || ""
                                                 if (url.length === 0) return ""
                                                 var ext = url.split('.').pop().toLowerCase()
-                                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg"]
-                                                if (imageExts.indexOf(ext) >= 0) {
-                                                    return url
+                                                
+                                                // 1. Images
+                                                if (resultsTileRoot.previewSettings.images) {
+                                                    var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                                    if (imageExts.indexOf(ext) >= 0) return url
                                                 }
+                                                
+                                                // 2. Videos
+                                                if (resultsTileRoot.previewSettings.videos) {
+                                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                                }
+                                                
+                                                // 3. Documents
+                                                if (resultsTileRoot.previewSettings.documents) {
+                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                                }
+                                                
                                                 return ""
                                             }
                                             width: source.length > 0 ? Math.min(150, sourceSize.width) : 0

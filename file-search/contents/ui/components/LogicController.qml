@@ -236,6 +236,12 @@ Item {
         return PinnedManager.getPinInfo(pinnedItems, matchId, currentActivityId)
     }
     
+    function reorderPinnedItems(fromIndex, toIndex) {
+        pinnedItems = PinnedManager.reorderPinned(pinnedItems, fromIndex, toIndex)
+        savePinned()
+        pinnedItemsChanged()
+    }
+    
     // Activity management
     readonly property string currentActivityName: currentActivityId === "global" ? "Global" : currentActivityId
     

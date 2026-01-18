@@ -2,6 +2,7 @@ import QtQuick
 import org.kde.milou as Milou
 import "../js/CategoryManager.js" as CategoryManager
 import "../js/SimilarityUtils.js" as SimilarityUtils
+import "../js/IconMapper.js" as IconMapper
 
 Item {
     id: dataManager
@@ -31,6 +32,8 @@ Item {
         
         // Step 1: Collect raw items and filter hidden categories
         var rawItems = [];
+        var isFileOnlyMode = searchText.toLowerCase().startsWith("file:/");
+        
         for (var i = 0; i < rawDataProxy.count; i++) {
             var item = rawDataProxy.itemAt(i);
             if (!item) continue;
@@ -41,9 +44,28 @@ Item {
                 continue;
             }
             
+            // FILE ONLY MODE FILTER
+            if (isFileOnlyMode) {
+                 // Check if category implies file/folder (Folders, Documents, Audio, Video, Files, Yerler, Klasörler, Dosyalar... etc)
+                 // Or we can check if it is NOT "Applications", "System Settings"...
+                 // A simple inclusive check:
+                 var allowedCats = ["Files", "Dosyalar", "Folders", "Klasörler", "Documents", "Belgeler", 
+                                    "Images", "Resimler", "Audio", "Ses", "Video", "Videolar", "Places", "Yerler"];
+                 
+                 // Also handle "Diğer" / "Other" if it points to path?
+                 // Milou might return file paths as "Diğer" sometimes?
+                 // Safer to check item.url?
+                 var isFileUrl = item.url && item.url.toString().startsWith("file://");
+                 
+                 // If item IS NOT a file url AND category IS NOT in allowed list, skip it.
+                 var isAllowed = isFileUrl || allowedCats.indexOf(cat) !== -1;
+                 
+                 if (!isAllowed) continue;
+            }
+            
             rawItems.push({
                 display: item.display || "",
-                decoration: item.decoration || "",
+                decoration: IconMapper.getIconForUrl(item.url || "", item.decoration || "", cat),
                 category: cat,
                 url: item.url || "", 
                 urls: item.urls || [],

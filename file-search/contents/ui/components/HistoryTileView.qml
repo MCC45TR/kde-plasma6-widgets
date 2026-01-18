@@ -13,6 +13,7 @@ FocusScope {
     required property int iconSize
     required property color textColor
     required property color accentColor
+    required property var previewSettings
     
     // Signals
     signal itemClicked(var item)
@@ -405,7 +406,35 @@ FocusScope {
                                         width: historyTile.iconSize
                                         height: historyTile.iconSize
                                         anchors.horizontalCenter: parent.horizontalCenter
-                                        source: modelData.decoration || "application-x-executable"
+                                        source: {
+                                            // standard icon if small
+                                            if (historyTile.iconSize <= 22) return modelData.decoration || "application-x-executable";
+                                            
+                                            var url = (modelData.filePath || "").toString();
+                                            // Fallback to url property if filePath is missing (some history items might have different structure)
+                                            if (!url) url = (modelData.url || "").toString();
+                                            
+                                            if (!url) return modelData.decoration || "application-x-executable";
+                                            
+                                            var ext = url.split('.').pop().toLowerCase();
+                                            
+                                            if (historyTile.previewSettings.images) {
+                                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                                if (imageExts.indexOf(ext) >= 0) return url
+                                            }
+                                            
+                                            if (historyTile.previewSettings.videos) {
+                                                var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                                if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                            }
+                                            
+                                            if (historyTile.previewSettings.documents) {
+                                                var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                                if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                            }
+                                            
+                                            return modelData.decoration || "application-x-executable"
+                                        }
                                         color: historyTile.textColor
                                     }
                                     
