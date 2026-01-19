@@ -1,11 +1,25 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as PlasmaSupport
 
 
 Item {
     id: configGeneral
+    
+    // Power Management Source
+    PlasmaSupport.DataSource {
+        id: pmSource
+        engine: "powermanagement"
+        connectedSources: ["PowerManagement"]
+    }
+    
+    readonly property bool canHibernate: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanHibernate"] : false
+    readonly property bool canReboot: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanReboot"] : true
     
     // Appearance Title
     property string title: i18n("Appearance")
@@ -16,6 +30,8 @@ Item {
     
     // Panel (General + Power)
     property alias cfg_displayMode: displayModeCombo.currentIndex
+    property alias cfg_panelRadius: panelRadiusCombo.currentIndex
+
     property alias cfg_showBootOptions: showBootOptionsSearch.checked
     property int cfg_userProfile
     
@@ -37,7 +53,7 @@ Item {
     // Prefix
     property alias cfg_prefixDateShowClock: prefixDateClock.checked
     property alias cfg_prefixDateShowEvents: prefixDateEvents.checked
-    property alias cfg_prefixPowerShowHibernate: prefixPowerHibernate.checked
+
     property alias cfg_prefixPowerShowSleep: prefixPowerSleep.checked
     
     // Placeholder (Search History & Others)
@@ -128,6 +144,19 @@ Item {
                         ]
                         Layout.fillWidth: true
                     }
+
+                    ComboBox {
+                        id: panelRadiusCombo
+                        Kirigami.FormData.label: i18n("Edge Appearance")
+                        enabled: displayModeCombo.currentIndex !== 0
+                        model: [
+                            i18n("Round corners"),
+                            i18n("Slightly round"),
+                            i18n("Less round"),
+                            i18n("Square corners")
+                        ]
+                        Layout.fillWidth: true
+                    }
                     
                     // Panel Preview
                     Item {
@@ -140,7 +169,7 @@ Item {
                             anchors.left: parent.left
                             width: 36
                             height: 36
-                            radius: width / 2
+                            radius: panelRadiusCombo.currentIndex === 0 ? width / 2 : (panelRadiusCombo.currentIndex === 1 ? 12 : (panelRadiusCombo.currentIndex === 2 ? 6 : 0))
                             color: Kirigami.Theme.backgroundColor
                             border.width: 1
                             border.color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
@@ -160,7 +189,7 @@ Item {
                             anchors.left: parent.left
                             width: displayModeCombo.currentIndex === 1 ? 70 : (displayModeCombo.currentIndex === 3 ? 260 : 180)
                             height: 36
-                            radius: height / 2
+                            radius: panelRadiusCombo.currentIndex === 0 ? height / 2 : (panelRadiusCombo.currentIndex === 1 ? 12 : (panelRadiusCombo.currentIndex === 2 ? 6 : 0))
                             color: Kirigami.Theme.backgroundColor
                             border.width: 1
                             border.color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
@@ -181,32 +210,25 @@ Item {
                                     Layout.fillWidth: true
                                     horizontalAlignment: displayModeCombo.currentIndex === 1 ? Text.AlignHCenter : Text.AlignLeft
                                 }
-                                
-                                Rectangle {
-                                    Layout.preferredWidth: (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3) ? 28 : 0
-                                    Layout.preferredHeight: 28
-                                    radius: 14
-                                    color: Kirigami.Theme.highlightColor
-                                    visible: displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3
-                                    
-                                    Kirigami.Icon {
-                                        anchors.centerIn: parent
-                                        width: 16
-                                        height: 16
-                                        source: "search"
-                                        color: "#ffffff"
-                                    }
-                                }
-                            }
+                                                                Rectangle {
+                                        Layout.preferredWidth: (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3) ? 28 : 0
+                                        Layout.preferredHeight: 28
+                                        radius: panelRadiusCombo.currentIndex === 0 ? height / 2 : (panelRadiusCombo.currentIndex === 1 ? 8 : (panelRadiusCombo.currentIndex === 2 ? 4 : 0))
+                                        color: Kirigami.Theme.highlightColor
+                                        visible: displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3
+                                        
+                                        Kirigami.Icon {
+                                            anchors.centerIn: parent
+                                            width: 16
+                                            height: 16
+                                            source: "search"
+                                            color: "#ffffff"
+                                        }
+                                    }                          }
                         }
                     }
 
-                    CheckBox {
-                        id: showBootOptionsSearch
-                        Kirigami.FormData.label: i18n("Power Options")
-                        text: i18n("Show boot options in Reboot button")
-                        checked: cfg_showBootOptions
-                    }
+
                 }
                 
                 // TAB 2: POPUP
@@ -353,10 +375,10 @@ Item {
                 
                 // TAB 4: PREVIEW
                 Kirigami.FormLayout {
-                     CheckBox {
+                     Switch {
                         id: masterPreviewSwitch
                         text: i18n("Enable File Previews")
-                        Kirigami.FormData.label: i18n("Master Switch")
+                        Kirigami.FormData.label: i18n("Show/Hide Previews")
                         onCheckedChanged: cfg_previewEnabled = checked
                      }
                      
@@ -529,8 +551,36 @@ Item {
                         text: i18n("Show Sleep Button")
                     }
                     CheckBox {
-                        id: prefixPowerHibernate
+                        id: showHibernateCheck
                         text: i18n("Show Hibernate Button")
+                        enabled: canHibernate
+                        opacity: enabled ? 1.0 : 0.5
+                    }
+                    
+                    Label {
+                        padding: 0
+                        leftPadding: 30
+                        visible: !canHibernate
+                        text: i18n("(Swap partition size is smaller than RAM or no swap found)")
+                        color: Kirigami.Theme.disabledTextColor
+                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                        Layout.fillWidth: true
+                    }
+                    
+                    CheckBox {
+                        id: showBootOptionsSearch
+                        text: i18n("Show boot options in Reboot button")
+                        enabled: canReboot
+                        opacity: enabled ? 1.0 : 0.5
+                    }
+                    
+                    Label {
+                        padding: 0
+                        leftPadding: 30
+                        text: i18n("Note: Systemd boot is required for this feature")
+                        color: Kirigami.Theme.disabledTextColor
+                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                        Layout.fillWidth: true
                     }
 
                     Kirigami.Separator {

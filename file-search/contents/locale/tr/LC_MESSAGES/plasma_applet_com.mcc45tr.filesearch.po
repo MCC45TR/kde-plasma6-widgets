@@ -52,10 +52,8 @@ msgstr "Prefixler"
 msgid "Placeholder"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml:114
-#, fuzzy
 msgid "Panel Appearance"
-msgstr "Görünüm"
+msgstr "Panel Görünümü"
 
 #: contents/ui/config/ConfigGeneral.qml:120
 #: contents/ui/config/ConfigDebug.qml:123
@@ -63,22 +61,24 @@ msgid "Display Mode"
 msgstr "Ekran Modu"
 
 #: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
+#, fuzzy
 msgid "Button Mode (Icon only)"
-msgstr "Düğme Modu (Sadece ikon)"
-
-#: contents/ui/config/ConfigGeneral.qml:123
-#, fuzzy
-msgid "Medium Mode (Text)"
-msgstr "Orta Mod (Sadece buton)"
-
-#: contents/ui/config/ConfigGeneral.qml:124
-#, fuzzy
-msgid "Wide Mode (Search Bar)"
-msgstr "Geniş Mod (Arama çubuğu + ikon)"
-
-#: contents/ui/config/ConfigGeneral.qml:125
-msgid "Extra Wide Mode"
 msgstr ""
+"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
+"#-#\n"
+"Düğme Modu (Sadece ikon)\n"
+"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
+"#-#\n"
+"Buton Modu (Sadece İkon)"
+
+msgid "Medium Mode (Text)"
+msgstr "Orta Mod (Metin)"
+
+msgid "Wide Mode (Search Bar)"
+msgstr "Geniş Mod (Arama Çubuğu)"
+
+msgid "Extra Wide Mode"
+msgstr "Ekstra Geniş Mod"
 
 #: contents/ui/config/ConfigGeneral.qml:132
 msgid "Panel Preview"
@@ -102,9 +102,8 @@ msgstr "Arama yap..."
 msgid "Power Options"
 msgstr "Güçlü Kullanıcı"
 
-#: contents/ui/config/ConfigGeneral.qml:205
 msgid "Show boot options in Reboot button"
-msgstr ""
+msgstr "Yeniden Başlat butonunda boot seçeneklerini göster"
 
 #: contents/ui/config/ConfigGeneral.qml:213
 msgid "Results View"
@@ -157,16 +156,11 @@ msgstr "Sonuçları alaka düzeyine göre otomatik sınırla"
 msgid "Dynamic Limit"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml:272
-#: contents/ui/config/ConfigSearch.qml:19
-#: contents/ui/config/ConfigPreview.qml:112
-#, fuzzy
 msgid "Enable File Previews"
-msgstr "Dosya Önizlemesi"
+msgstr "Dosya Önizlemelerini Etkinleştir"
 
-#: contents/ui/config/ConfigGeneral.qml:273
 msgid "Master Switch"
-msgstr ""
+msgstr "Ana Anahtar"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 #: contents/ui/config/ConfigPreview.qml:134
@@ -1007,6 +1001,57 @@ msgstr "Geniş Mod (Arama çubuğu + ikon)"
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
 msgstr "Ekstra Geniş Mod (Geniş + Uzun Placeholder)"
 
+msgid "Show pinned items bar"
+msgstr "Sabitlenmiş öğeler çubuğunu göster"
+
+msgid "Result Count"
+msgstr "Sonuç Sayısı"
+
+msgid "Priority Ranking"
+msgstr "Öncelik Sıralaması"
+
+msgid "Show Together"
+msgstr "Birlikte Göster"
+
+msgid "Corner Roundness"
+msgstr "Köşe Yuvarlaklığı"
+
+msgid "Square"
+msgstr "Kare"
+
+msgid "Slightly Rounded"
+msgstr "Hafif Yuvarlak"
+
+msgid "Moderately Rounded"
+msgstr "Yumuşak"
+
+msgid "Fully Rounded"
+msgstr "Tam Yuvarlak"
+
+msgid "Edge Appearance"
+msgstr "Kenar Görünümü"
+
+msgid "Round corners"
+msgstr "Yuvarlak kenarlar"
+
+msgid "Slightly round"
+msgstr "Az yuvarlak"
+
+msgid "Less round"
+msgstr "Daha az yuvarlak"
+
+msgid "Square corners"
+msgstr "Kare kenarlar"
+
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(Swap birimi boyutu RAM boyutundan düşük veya swap birimi yok)"
+
+msgid "Note: Systemd boot is required for this feature"
+msgstr "Not: Bu özellik için Systemd Boot gereklidir"
+
+msgid "Show/Hide Previews"
+msgstr "Önizlemeleri göster/kapat"
+
 #~ msgid "Results Preview"
 #~ msgstr "Sonuç Önizleme"
 
@@ -1230,15 +1275,3 @@ msgstr "Ekstra Geniş Mod (Geniş + Uzun Placeholder)"
 
 #~ msgid "BIOS"
 #~ msgstr "BIOS"
-
-msgid "Show pinned items bar"
-msgstr "Sabitlenmiş öğeler çubuğunu göster"
-
-msgid "Result Count"
-msgstr "Sonuç Sayısı"
-
-msgid "Priority Ranking"
-msgstr "Öncelik Sıralaması"
-
-msgid "Show Together"
-msgstr "Birlikte Göster"

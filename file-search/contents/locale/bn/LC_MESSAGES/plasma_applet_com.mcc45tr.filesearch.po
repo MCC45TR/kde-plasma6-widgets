@@ -980,6 +980,30 @@ msgstr ""
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
 msgstr ""
 
+msgid "Show/Hide Previews"
+msgstr ""
+
+msgid "Edge Appearance"
+msgstr ""
+
+msgid "Round corners"
+msgstr ""
+
+msgid "Slightly round"
+msgstr ""
+
+msgid "Less round"
+msgstr ""
+
+msgid "Square corners"
+msgstr ""
+
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr ""
+
+msgid "Note: Systemd boot is required for this feature"
+msgstr ""
+
 #~ msgid "General"
 #~ msgstr "সাধারণ"
 

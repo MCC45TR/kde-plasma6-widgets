@@ -12,13 +12,14 @@
       <default>1</default>
       <label>Display Mode: 0=Button, 1=Medium, 2=Wide, 3=Extra Wide</label>
     </entry>
-    <entry name="showBootOptions" type="Bool">
-      <default>false</default>
-      <label>Show boot options in Reboot button</label>
-    </entry>
+
     <entry name="userProfile" type="Int">
       <default>0</default>
       <label>User Profile: 0=Minimal, 1=Developer, 2=Power User</label>
+    </entry>
+    <entry name="panelRadius" type="Int">
+      <default>0</default>
+      <label>Panel Radius: 0=Round, 1=12px, 2=6px, 3=Square</label>
     </entry>
   </group>
 
@@ -83,6 +84,10 @@
     <entry name="prefixPowerShowSleep" type="Bool">
       <default>true</default>
       <label>Power View: Show Sleep button</label>
+    </entry>
+    <entry name="showBootOptions" type="Bool">
+      <default>false</default>
+      <label>Show boot options in Reboot button</label>
     </entry>
   </group>
 

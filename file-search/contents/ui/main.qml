@@ -126,6 +126,7 @@ PlasmoidItem {
         textColor: root.textColor
         accentColor: root.accentColor
         searchTextLength: root.searchText.length
+        panelRadius: Plasmoid.configuration.panelRadius
         
         onToggleExpanded: root.expanded = !root.expanded
     }

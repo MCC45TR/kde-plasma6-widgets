@@ -17,6 +17,7 @@ Item {
     required property color textColor
     required property color accentColor
     required property int searchTextLength
+    required property int panelRadius
     
     // Signals
     signal toggleExpanded()
@@ -49,7 +50,7 @@ Item {
         id: mainButton
         anchors.fill: parent
         anchors.margins: 0
-        radius: height / 2
+        radius: compactRoot.panelRadius === 0 ? height / 2 : (compactRoot.panelRadius === 1 ? 12 : (compactRoot.panelRadius === 2 ? 6 : 0))
         color: Qt.rgba(compactRoot.bgColor.r, compactRoot.bgColor.g, compactRoot.bgColor.b, 0.95)
         visible: !compactRoot.isButtonMode
         
@@ -83,7 +84,7 @@ Item {
                 Layout.preferredWidth: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? (mainButton.height - 6) : 0
                 Layout.preferredHeight: mainButton.height - 6
                 Layout.alignment: Qt.AlignVCenter
-                radius: width / 2
+                radius: compactRoot.panelRadius === 0 ? width / 2 : (compactRoot.panelRadius === 1 ? 8 : (compactRoot.panelRadius === 2 ? 4 : 0))
                 color: compactRoot.accentColor
                 visible: compactRoot.isWideMode || compactRoot.isExtraWideMode
                 

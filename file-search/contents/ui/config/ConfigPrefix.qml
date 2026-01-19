@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as PlasmaSupport
 
 Kirigami.FormLayout {
     id: configPrefix
@@ -13,6 +14,16 @@ Kirigami.FormLayout {
     property bool cfg_prefixDateShowEvents: true
     property bool cfg_prefixPowerShowHibernate: false
     property bool cfg_prefixPowerShowSleep: true
+    property bool cfg_showBootOptions: false
+    
+    // Power Management Source
+    PlasmaSupport.DataSource {
+        id: pmSource
+        engine: "powermanagement"
+        connectedSources: ["PowerManagement"]
+    }
+    
+    readonly property bool canHibernate: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanHibernate"] : false
     
     // Extra properties to prevent warnings
     property int cfg_searchAlgorithm: 0
@@ -65,6 +76,38 @@ Kirigami.FormLayout {
         text: i18n("Show Hibernate Button")
         checked: cfg_prefixPowerShowHibernate
         onToggled: cfg_prefixPowerShowHibernate = checked
+        enabled: canHibernate
+        opacity: enabled ? 1.0 : 0.5
+    }
+    
+    Label {
+        padding: 0
+        leftPadding: 30 // Indent to align with checkbox text roughly
+        visible: !canHibernate
+        text: i18n("(Swap partition size is smaller than RAM or no swap found)")
+        color: Kirigami.Theme.disabledTextColor
+        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+        Layout.fillWidth: true
+    }
+
+    readonly property bool canReboot: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanReboot"] : true
+
+    CheckBox {
+        id: showBootOptionsSearch
+        text: i18n("Show boot options in Reboot button")
+        checked: cfg_showBootOptions
+        onToggled: cfg_showBootOptions = checked
+        enabled: canReboot
+        opacity: enabled ? 1.0 : 0.5
+    }
+    
+    Label {
+        padding: 0
+        leftPadding: 30
+        text: i18n("Note: Systemd boot is required for this feature")
+        color: Kirigami.Theme.disabledTextColor
+        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+        Layout.fillWidth: true
     }
     
     Kirigami.Separator {
