@@ -1052,6 +1052,12 @@ msgstr "Not: Bu özellik için Systemd Boot gereklidir"
 msgid "Show/Hide Previews"
 msgstr "Önizlemeleri göster/kapat"
 
+msgid "Scan for boot entries"
+msgstr "Boot girdilerini tara"
+
+msgid "Refresh boot entries"
+msgstr "Boot girdilerini yenile"
+
 #~ msgid "Results Preview"
 #~ msgstr "Sonuç Önizleme"
 

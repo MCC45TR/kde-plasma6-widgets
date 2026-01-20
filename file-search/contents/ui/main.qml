@@ -60,6 +60,10 @@ PlasmoidItem {
     // No background - transparent
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     
+    // Prevent closing when interacting with external dialogs (like auth)
+    property bool preventClosing: false
+    hideOnWindowDeactivate: !preventClosing
+    
     // ===== VIEW MODE CONFIGURATION =====
     readonly property int viewMode: Plasmoid.configuration.viewMode
     readonly property bool isTileView: viewMode === 1
@@ -170,5 +174,6 @@ PlasmoidItem {
         onRequestSearchTextUpdate: (text) => root.searchText = text
         onRequestExpandChange: (exp) => root.expanded = exp
         onRequestViewModeChange: (mode) => Plasmoid.configuration.viewMode = mode
+        onRequestPreventClosing: (prevent) => root.preventClosing = prevent
     }
 }

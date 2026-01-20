@@ -4,6 +4,7 @@ import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import org.kde.milou as Milou
 import "../js/HistoryManager.js" as HistoryManager
+import org.kde.plasma.plasmoid
 
 Item {
     id: popupRoot
@@ -60,6 +61,11 @@ Item {
     signal requestSearchTextUpdate(string text)
     signal requestExpandChange(bool expanded)
     signal requestViewModeChange(int mode)
+    signal requestPreventClosing(bool prevent)
+    
+    // Prevent closing logic for popup
+    property bool preventClosing: false
+    // Plasmoid.hideOnWindowDeactivate assignment removed due to "non-existent property" error
     
     // Read-only helpers
     readonly property bool isButtonMode: displayMode === 0
@@ -691,6 +697,11 @@ Item {
             showSleep: popupRoot.prefixPowerShowSleep
             bgColor: popupRoot.bgColor
             showBootOptions: popupRoot.showBootOptions
+            
+            onRequestPreventClosing: (prevent) => {
+                popupRoot.preventClosing = prevent
+                popupRoot.requestPreventClosing(prevent) // Forward to main just in case
+            }
         }
     }
     

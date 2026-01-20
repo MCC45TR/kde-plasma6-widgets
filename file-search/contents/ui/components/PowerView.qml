@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as Plasma5Support
+import Qt.labs.platform as Platform
 
 Item {
     id: root
@@ -18,60 +19,168 @@ Item {
     property bool showBootOptions: false
     property bool showHibernate: false
     property bool showSleep: true
+    property bool isLoading: false
     
+    // Cache File Path - Robust handling
+    // Removes file:// prefix if present
+    property string cacheFile: {
+        var path = Platform.StandardPaths.writableLocation(Platform.StandardPaths.CacheLocation)
+        return String(path).replace("file://", "") + "/plasma_com_mcc45tr_filesearch_bootentries.json"
+    }
+    
+    // Buffer for accumulating data
+    property var cmdDataBuffer: ({})
+
     // Data Source for executing commands
     Plasma5Support.DataSource {
         id: execSource
         engine: "executable"
         onNewData: (sourceName, data) => {
-            if (sourceName.indexOf("bootctl list") !== -1 && data["stdout"]) {
+            if (data["stdout"]) {
+                if (!root.cmdDataBuffer[sourceName]) root.cmdDataBuffer[sourceName] = ""
+                root.cmdDataBuffer[sourceName] += data["stdout"]
+            }
+            
+            // We try to process immediately, assuming small JSON comes fast or in one chunk.
+            var fullData = root.cmdDataBuffer[sourceName]
+            
+            if (sourceName.indexOf("bootctl list") !== -1) {
+                // Auth successful
+                root.requestPreventClosing(false)
+                authSafetyTimer.stop()
                 try {
-                    var entries = JSON.parse(data["stdout"])
-                    // Customize text for BIOS/Firmware
-                    for (var k = 0; k < entries.length; k++) {
-                        if (entries[k].id === "auto-reboot-to-firmware-setup" || 
-                            entries[k].title === "Reboot Into Firmware Interface" || 
-                            entries[k].title === "reboot into firmware interface") {
-                            entries[k].title = "BIOS"
-                            entries[k].iconName = "configure"
-                        } else {
-                            // Assign icons based on ID/Title
-                            var t = (entries[k].title || "").toLowerCase()
-                            var i = (entries[k].id || "").toLowerCase()
-                            if (t.includes("arch") || i.includes("arch")) entries[k].iconName = "distributor-logo-archlinux"
-                            else if (t.includes("windows") || i.includes("windows")) entries[k].iconName = "distributor-logo-windows"
-                            else if (t.includes("ubuntu")) entries[k].iconName = "distributor-logo-ubuntu"
-                            else if (t.includes("fedora")) entries[k].iconName = "distributor-logo-fedora"
-                            else entries[k].iconName = "system-run"
-                        }
+                    console.log("[PowerView] Captured Boot Entries (Sudo): " + fullData)
+                    var entries = JSON.parse(fullData)
+                    root.processEntries(entries)
+                    root.isLoading = false
+                    
+                    if (sourceName.indexOf("pkexec") !== -1) {
+                         console.log("[PowerView] Saving to cache...")
+                         root.saveCache(entries)
                     }
-                    root.bootEntries = entries
+                    execSource.disconnectSource(sourceName)
+                    delete root.cmdDataBuffer[sourceName]
                 } catch(e) {
-                    console.error("Error parsing bootctl JSON: " + e)
+                    // Incomplete JSON, wait for more? 
                 }
+            } else if (sourceName.indexOf("cat_cache") !== -1) {
+                try {
+                    if (fullData.indexOf("CACHE_MISS") !== -1) {
+                         console.log("[PowerView] Cache MISS")
+                         root.isLoading = false
+                         execSource.disconnectSource(sourceName)
+                         delete root.cmdDataBuffer[sourceName]
+                    } else if (fullData.trim().length > 0) {
+                        console.log("[PowerView] Loaded from Cache: " + fullData)
+                        var entries = JSON.parse(fullData)
+                        root.processEntries(entries)
+                        root.isLoading = false
+                        execSource.disconnectSource(sourceName)
+                        delete root.cmdDataBuffer[sourceName]
+                    }
+                } catch(e) {
+                     console.error("[PowerView] JSON Parse Error (Cache): " + e)
+                }
+            } else if (fullData.indexOf("CACHE_SAVED") !== -1) {
+                console.log("[PowerView] Database functionality: Cache successfully saved.")
                 execSource.disconnectSource(sourceName)
+                delete root.cmdDataBuffer[sourceName]
+            } else if (fullData.indexOf("CACHE_SAVE_FAILED") !== -1) {
+                console.error("[PowerView] Database functionality: Cache SAVE FAILED.")
+                execSource.disconnectSource(sourceName)
+                delete root.cmdDataBuffer[sourceName]
             } else if (sourceName.indexOf("CanHibernate") !== -1 && data["stdout"]) {
                 var res = data["stdout"].trim()
                 root.canHibernate = (res === "yes")
                 execSource.disconnectSource(sourceName)
             } else if (sourceName.indexOf("checkBootctl") !== -1) {
-                // If we get checkBootctl output, assuming if it returns a path it is installed
                 if(data["stdout"] && data["stdout"].trim().length > 0) {
                      root.isBootctlInstalled = true
-                } else {
-                     root.isBootctlInstalled = false
                 }
                 execSource.disconnectSource(sourceName)
             }
         }
     }
     
+    // Signal to main window to prevent closing during auth
+    signal requestPreventClosing(bool prevent)
+    
+    // Safety timer to ensure we don't lock the popup open forever if something goes wrong
+    Timer {
+         id: authSafetyTimer
+         interval: 10000 // Reduced to 10s for loading timeout
+         repeat: false
+         onTriggered: {
+             if (root.isLoading) {
+                 console.warn("Loading timed out")
+                 root.isLoading = false
+             }
+             root.requestPreventClosing(false)
+         }
+    }
+    
     function loadEntries() {
-        execSource.connectSource("bootctl list --json=short")
+        root.isLoading = true
+        // Start safety timer for cache load too, just in case
+        authSafetyTimer.start()
+        loadCache()
     }
 
     function loadEntriesWithAuth() {
+        root.isLoading = true
+        root.requestPreventClosing(true)
+        authSafetyTimer.start()
+        // Reset buffer
+        root.cmdDataBuffer = {} 
         execSource.connectSource("pkexec bootctl list --json=short")
+    }
+    
+    function loadCache() {
+        root.cmdDataBuffer = {}
+        // Use bash to check file existence. If exists, cat it. If not, echo CACHE_MISS.
+        var cmd = "bash -c 'if [ -f \"" + root.cacheFile + "\" ]; then cat \"" + root.cacheFile + "\"; else echo \"CACHE_MISS\"; fi' # cat_cache"
+        execSource.connectSource(cmd)
+    }
+    
+    function saveCache(data) {
+        var jsonStr = JSON.stringify(data)
+        // Escape single quotes: ' -> '\''
+        var escapedJson = jsonStr.replace(/'/g, "'\\''")
+        var path = root.cacheFile
+        
+        // Command: Create dir, write file, check success
+        var cmd = "bash -c \"mkdir -p \\\"$(dirname \\\"" + path + "\\\")\\\" && echo '" + escapedJson + "' > \\\"" + path + "\\\" && echo CACHE_SAVED || echo CACHE_SAVE_FAILED\""
+        
+        console.log("[PowerView] Executing Save Command for: " + path)
+        execSource.connectSource(cmd)
+    }
+    
+    // Auto-load if visible and empty (fail-safe)
+    onVisibleChanged: {
+        if (visible && root.bootEntries.length === 0) {
+            loadEntries()
+        }
+    }
+
+    function processEntries(entries) {
+        // Customize text for BIOS/Firmware and assign icons
+        for (var k = 0; k < entries.length; k++) {
+            if (entries[k].id === "auto-reboot-to-firmware-setup" || 
+                entries[k].title === "Reboot Into Firmware Interface" || 
+                entries[k].title === "reboot into firmware interface") {
+                entries[k].title = "BIOS"
+                entries[k].iconName = "configure"
+            } else {
+                var t = (entries[k].title || "").toLowerCase()
+                var i = (entries[k].id || "").toLowerCase()
+                if (t.includes("arch") || i.includes("arch")) entries[k].iconName = "distributor-logo-archlinux"
+                else if (t.includes("windows") || i.includes("windows")) entries[k].iconName = "distributor-logo-windows"
+                else if (t.includes("ubuntu")) entries[k].iconName = "distributor-logo-ubuntu"
+                else if (t.includes("fedora")) entries[k].iconName = "distributor-logo-fedora"
+                else entries[k].iconName = "system-run"
+            }
+        }
+        root.bootEntries = entries
     }
     
     function checkHibernate() {
@@ -83,9 +192,15 @@ Item {
     }
     
     Component.onCompleted: {
+        // loadEntries() // Called by onVisibleChanged or manually if needed, but let's call it here too?
+        // Actually, if we rely on onVisibleChanged, it might be better, but main.qml loads this always?
         loadEntries()
         checkHibernate()
         checkBootctl()
+    }
+    
+    Component.onDestruction: {
+        root.requestPreventClosing(false)
     }
     
     function executeCommand(cmd) {
@@ -133,7 +248,7 @@ Item {
                     text: i18n("Hibernate")
                     iconName: "system-suspend-hibernate"
                     doubleClickRequired: true
-                    confirmColor: Kirigami.Theme.neutralColor // Purple/Neutral
+                    confirmColor: Kirigami.Theme.neutralTextColor // Purple/Neutral
                     confirmMessage: i18n("(Press again to hibernate)")
                     onTriggered: root.executeCommand("systemctl hibernate")
                     Layout.fillWidth: true
@@ -161,11 +276,13 @@ Item {
                     confirmColor: Kirigami.Theme.positiveTextColor // Green
                     confirmMessage: i18n("(Press again to reboot)")
                     
-                    // Single Click toggles boot entries if not executing logic
+                    // Single Click toggles boot entries if enabled in settings
                     onSingleClicked: {
-                        // Check if bootctl is installed AND configured to show
-                        if (root.showBootOptions && root.isBootctlInstalled) {
-                            if (root.bootEntries.length === 0) root.loadEntries()
+                        // Trust the user setting provided in config
+                        if (root.showBootOptions) {
+                            if (root.bootEntries.length === 0) {
+                                root.loadEntries()
+                            }
                             root.bootEntriesVisible = !root.bootEntriesVisible
                         }
                     }
@@ -193,7 +310,7 @@ Item {
                 Layout.fillWidth: true
                 visible: implicitHeight > 0
                 // Animation for height
-                implicitHeight: root.bootEntriesVisible ? bootFlow.implicitHeight + 20 : 0
+                implicitHeight: root.bootEntriesVisible ? (Math.max(bootFlow.implicitHeight, 40) + 20) : 0
                 Behavior on implicitHeight { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
                 clip: true
 
@@ -207,17 +324,62 @@ Item {
                     radius: 8
                 }
                 
+                // Refresh Button (Top Right)
+                Kirigami.Icon {
+                    source: "view-refresh"
+                    width: 16
+                    height: 16
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.margins: 6
+                    // Visible if entries exist OR if we have processed entries (even if empty, but usually we want refresh if user suspects new ones)
+                    // Let's make it visible if boot options are visible
+                    visible: root.bootEntriesVisible && !root.isLoading && root.bootEntries.length > 0
+                    color: refreshMouse.containsMouse ? root.accentColor : Qt.alpha(root.textColor, 0.5)
+                    
+                    MouseArea {
+                        id: refreshMouse
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: {
+                            // Force refresh
+                            root.bootEntries = []
+                            root.loadEntriesWithAuth()
+                        }
+                    }
+                    
+                    ToolTip.visible: refreshMouse.containsMouse
+                    ToolTip.text: i18n("Refresh boot entries")
+                }
+                
+                // Loading Indicator
+                BusyIndicator {
+                    running: root.isLoading
+                    visible: root.isLoading && root.bootEntriesVisible
+                    anchors.centerIn: parent
+                    width: 32
+                    height: 32
+                    z: 10
+                }
+
                 Flow {
                     id: bootFlow
                     width: parent.width - 20
                     anchors.centerIn: parent
                     spacing: 8 // Unified spacing
                     padding: 6
+                    opacity: root.isLoading ? 0.3 : 1.0 // Dim content when loading
+                    
+                    // Dynamic Width Calculation
+                    property int minTileWidth: 140
+                    property int columns: Math.max(1, Math.floor((width - 2 * padding) / minTileWidth))
+                    property real tileWidth: ((width - 2 * padding) - (columns - 1) * spacing) / columns
                     
                     Repeater {
                         model: root.bootEntries
                         delegate: Rectangle {
-                            width: (bootFlow.width - 24) / 4 // 4 columns approx
+                            width: bootFlow.tileWidth
                             height: 80
                             color: entryMouse.containsMouse ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.15) : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1)
                             radius: 6
@@ -248,8 +410,9 @@ Item {
                                     font.bold: true
                                     color: root.textColor
                                     elide: Text.ElideRight
-                                    Layout.maximumWidth: parent.width
+                                    Layout.fillWidth: true
                                     horizontalAlignment: Text.AlignHCenter
+                                    Layout.alignment: Qt.AlignHCenter
                                 }
                                 
                                 Text {
@@ -258,30 +421,45 @@ Item {
                                     font.pixelSize: 11
                                     color: Qt.alpha(root.textColor, 0.7)
                                     elide: Text.ElideRight
-                                    Layout.maximumWidth: parent.width
+                                    Layout.fillWidth: true
                                     horizontalAlignment: Text.AlignHCenter
+                                    Layout.alignment: Qt.AlignHCenter
                                 }
                             }
                         }
                     }
                     
-                    // Auth Button if no entries
+                    // Scan Button - Only visible if NO entries and NOT loading
                     Rectangle {
-                        visible: root.bootEntries.length === 0
-                        width: 200
+                        visible: root.bootEntries.length === 0 && !root.isLoading
+                        width: bootFlow.width - 12
                         height: 40
-                        color: "transparent"
+                        color: scanMouse.containsMouse ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1) : "transparent"
                         border.color: Qt.alpha(root.textColor, 0.3)
                         radius: 4
-                        Text {
-                            anchors.centerIn: parent
-                            text: i18n("Authorize to list entries")
-                            color: root.textColor
+                        
+                        RowLayout {
+                             anchors.centerIn: parent
+                             spacing: 8
+                             Kirigami.Icon {
+                                 source: "system-search"
+                                 Layout.preferredWidth: 16
+                                 Layout.preferredHeight: 16
+                                 color: root.textColor
+                             }
+                             Text {
+                                text: i18n("Scan for boot entries")
+                                color: root.textColor
+                                font.bold: true
+                             }
                         }
+
                         MouseArea {
+                            id: scanMouse
                             anchors.fill: parent
                             onClicked: root.loadEntriesWithAuth()
                             cursorShape: Qt.PointingHandCursor
+                            hoverEnabled: true
                         }
                     }
                 }
@@ -309,7 +487,7 @@ Item {
                     text: i18n("Log Out")
                     iconName: "system-log-out"
                     doubleClickRequired: true
-                    confirmColor: Kirigami.Theme.negativeTextColor // Use distinct color if wanted, or highlight
+                    confirmColor: Kirigami.Theme.negativeTextColor
                     confirmMessage: i18n("(Press again to log out)")
                     onTriggered: root.executeCommand("qdbus org.kde.ksmserver /KSMServer logout 0 0 0")
                     Layout.fillWidth: true
@@ -331,7 +509,7 @@ Item {
                 // Save Session (Oturumu Kaydet)
                 PowerButton {
                     text: i18n("Save Session")
-                    iconName: "system-save-session" // or document-save
+                    iconName: "system-save-session"
                     doubleClickRequired: false
                     onTriggered: root.executeCommand("qdbus org.kde.ksmserver /KSMServer saveCurrentSession")
                     Layout.fillWidth: true
@@ -378,19 +556,17 @@ Item {
         }
         
         color: targetColor
-        
         Behavior on color { ColorAnimation { duration: 200 } }
         
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: 4 // Tighter spacing
+            spacing: 4 
             width: parent.width - 10
             
-            // Icon
             Kirigami.Icon {
                 id: iconItem
                 Layout.alignment: Qt.AlignHCenter
-                Layout.preferredHeight: btn.height * 0.4 // Slightly smaller
+                Layout.preferredHeight: btn.height * 0.4
                 Layout.preferredWidth: btn.height * 0.4
                 source: btn.iconName
             }
@@ -406,7 +582,6 @@ Item {
                 wrapMode: Text.Wrap
             }
             
-            // Confirmation Text (Small, in parentheses)
             Text {
                 visible: btn.pendingConfirmation
                 opacity: visible ? 1.0 : 0.0

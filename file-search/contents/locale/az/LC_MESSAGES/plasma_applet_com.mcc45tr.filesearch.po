@@ -1004,6 +1004,33 @@ msgstr ""
 msgid "Note: Systemd boot is required for this feature"
 msgstr ""
 
+msgid "Scan for boot entries"
+msgstr ""
+
+msgid "Result Count"
+msgstr ""
+
+msgid "Priority Ranking"
+msgstr ""
+
+msgid "Show Together"
+msgstr ""
+
+msgid "Corner Roundness"
+msgstr ""
+
+msgid "Square"
+msgstr ""
+
+msgid "Slightly Rounded"
+msgstr ""
+
+msgid "Moderately Rounded"
+msgstr ""
+
+msgid "Fully Rounded"
+msgstr ""
+
 #~ msgid "General"
 #~ msgstr "Ümumi"
 
