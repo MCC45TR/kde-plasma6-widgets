@@ -54,6 +54,9 @@ Item {
     // Prefix
     property alias cfg_prefixDateShowClock: prefixDateClock.checked
     property alias cfg_prefixDateShowEvents: prefixDateEvents.checked
+    property alias cfg_weatherEnabled: weatherEnabledCheck.checked
+    property alias cfg_weatherUseSystemUnits: useSystemUnitsCheck.checked
+    property int cfg_weatherRefreshInterval
 
     property alias cfg_prefixPowerShowSleep: prefixPowerSleep.checked
     
@@ -554,7 +557,73 @@ Item {
                         id: prefixDateEvents
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Calendar Events")
                     }
-                     Kirigami.Separator {
+
+                    // Weather View Settings
+                    Kirigami.Separator {
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather View (weather:)")
+                        Kirigami.FormData.isSection: true
+                    }
+
+                    CheckBox {
+                        id: weatherEnabledCheck
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Weather Prefix")
+                        checked: cfg_weatherEnabled
+                        onToggled: cfg_weatherEnabled = checked
+                    }
+
+                    // Group enabled state based on master toggle
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        enabled: cfg_weatherEnabled
+                        opacity: enabled ? 1.0 : 0.5
+                    
+                        CheckBox {
+                            id: useSystemUnitsCheck
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Use System Units")
+                            checked: cfg_weatherUseSystemUnits
+                            onToggled: cfg_weatherUseSystemUnits = checked
+                        }
+                        
+                        RowLayout {
+                            Layout.fillWidth: true
+                            
+                            Label { 
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh Interval:") 
+                            }
+                            
+                            ComboBox {
+                                id: refreshIntervalCombo
+                                model: [
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Every Search"), 
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "15 Minutes"), 
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "30 Minutes"), 
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "1 Hour")
+                                ]
+                                
+                                Component.onCompleted: {
+                                    if (cfg_weatherRefreshInterval === 0) currentIndex = 0
+                                    else if (cfg_weatherRefreshInterval === 15) currentIndex = 1
+                                    else if (cfg_weatherRefreshInterval === 30) currentIndex = 2
+                                    else if (cfg_weatherRefreshInterval === 60) currentIndex = 3
+                                    else currentIndex = 1 // default 15
+                                }
+                                
+                                onActivated: {
+                                    if (index === 0) cfg_weatherRefreshInterval = 0
+                                    else if (index === 1) cfg_weatherRefreshInterval = 15
+                                    else if (index === 2) cfg_weatherRefreshInterval = 30
+                                    else if (index === 3) cfg_weatherRefreshInterval = 60
+                                }
+                            }
+                            
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "(If time since last update > interval)")
+                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                color: Kirigami.Theme.disabledTextColor
+                            }
+                        }
+                    } // End ColumnLayout
+                    Kirigami.Separator {
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Power View (power:)")
                         Kirigami.FormData.isSection: true
                     }

@@ -259,7 +259,8 @@ Item {
         if (!text) return false;
         var t = text.toLowerCase();
         var canShowWeather = plasmoidConfig && plasmoidConfig.weatherEnabled
-        var isWeather = canShowWeather && (t === "weather:" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "weather") + ":")
+        var locWeather = i18nd("plasma_applet_com.mcc45tr.filesearch", "weather")
+        var isWeather = canShowWeather && (t === "weather:" || (locWeather && t === locWeather + ":"))
         
         // Only specific full-view modes hide the results list
         return isWeather || t === "date:" || t === "clock:" || t === "power:" || t === "help:" || 

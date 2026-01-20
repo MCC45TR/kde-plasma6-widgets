@@ -12,6 +12,8 @@ ConfigModel {
         icon: "search"
         source: "config/ConfigCategories.qml"
     }
+
+
     ConfigCategory {
         name: i18n("Debug")
         icon: "tools-report-bug"
