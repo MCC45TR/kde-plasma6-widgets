@@ -1048,6 +1048,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "天気予報 (天気:)"
+
+msgid "Use System Units"
+msgstr "システム単位を使用"
+
+msgid "Refresh Interval:"
+msgstr "更新間隔:"
+
+msgid "Every Search"
+msgstr "検索ごと"
+
+msgid "15 Minutes"
+msgstr "15分"
+
+msgid "30 Minutes"
+msgstr "30分"
+
+msgid "1 Hour"
+msgstr "1時間"
+
+msgid "(If time since last update > interval)"
+msgstr "(前回の更新からの時間 > 間隔の場合)"
+
+msgid "Enable Weather Prefix"
+msgstr "天気プレフィックスを有効にする"
+
 #~ msgid "Results Preview"
 #~ msgstr "結果プレビュー"
 

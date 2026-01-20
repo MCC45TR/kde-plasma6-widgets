@@ -1046,6 +1046,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "Hava Görünüşü (hava:)"
+
+msgid "Use System Units"
+msgstr "Sistem Vahidlərindən İstifadə Et"
+
+msgid "Refresh Interval:"
+msgstr "Yeniləmə Aralığı:"
+
+msgid "Every Search"
+msgstr "Hər Axtarışda"
+
+msgid "15 Minutes"
+msgstr "15 Dəqiqə"
+
+msgid "30 Minutes"
+msgstr "30 Dəqiqə"
+
+msgid "1 Hour"
+msgstr "1 Saat"
+
+msgid "(If time since last update > interval)"
+msgstr "(Əgər son yenilənmədən keçən vaxt > interval)"
+
+msgid "Enable Weather Prefix"
+msgstr "Hava Prefiksini Aktivləşdir"
+
 #~ msgid "General"
 #~ msgstr "Ümumi"
 

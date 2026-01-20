@@ -11,6 +11,7 @@ Item {
     
     // Dependencies
     required property var logic    
+    property var plasmoidConfig // injected from main
     
     // Properties synced with main
     property string searchText: ""
@@ -257,8 +258,15 @@ Item {
     function isCommandOnlyQuery(text) {
         if (!text) return false;
         var t = text.toLowerCase();
+        var canShowWeather = plasmoidConfig && plasmoidConfig.weatherEnabled
+        var isWeather = canShowWeather && (t === "weather:" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "weather") + ":")
+        
         // Only specific full-view modes hide the results list
-        return t === "date:" || t === "clock:" || t === "power:" || t === "help:" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "date") + ":" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "clock") + ":" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "power") + ":" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "help") + ":";
+        return isWeather || t === "date:" || t === "clock:" || t === "power:" || t === "help:" || 
+               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "date") + ":" || 
+               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "clock") + ":" || 
+               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "power") + ":" || 
+               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "help") + ":";
     }
 
     function getEffectiveQuery(text) {
@@ -282,6 +290,11 @@ Item {
         
         // Check for "date:"
         if (t.toLowerCase() === "date:" || (locDate && t.toLowerCase() === locDate + ":")) return "date:"
+        
+        // Check for "weather:"
+        var canShowWeather = plasmoidConfig && plasmoidConfig.weatherEnabled
+        var locWeather = i18nd("plasma_applet_com.mcc45tr.filesearch", "weather")
+        if (canShowWeather && (t.toLowerCase() === "weather:" || (locWeather && t.toLowerCase() === locWeather + ":"))) return "weather:"
         
         // 3. Check for "help:"
         var locHelp = i18nd("plasma_applet_com.mcc45tr.filesearch", "help")
@@ -465,6 +478,7 @@ Item {
             bgColor: popupRoot.bgColor
             // trFunc removed
             logic: popupRoot.logic
+            plasmoidConfig: popupRoot.plasmoidConfig
             
             onHintSelected: (text) => {
                 requestSearchTextUpdate(text)
@@ -688,6 +702,25 @@ Item {
         }
     }
     
+    // Weather View ("weather:" query)
+    Loader {
+        id: weatherViewLoader
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? 12 : 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 12
+        anchors.bottomMargin: 12
+        
+        active: popupRoot.expanded && getEffectiveQuery(searchText) === "weather:"
+        
+        sourceComponent: WeatherView {
+            // WeatherView handles its own fetching on visible
+            plasmoidConfig: popupRoot.plasmoidConfig
+        }
+    }
+
     // Power View ("power:" query)
     Loader {
         id: powerViewLoader

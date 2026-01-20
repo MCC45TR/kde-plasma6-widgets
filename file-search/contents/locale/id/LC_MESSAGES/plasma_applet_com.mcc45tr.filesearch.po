@@ -1046,6 +1046,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "Tampilan Cuaca (cuaca:)"
+
+msgid "Use System Units"
+msgstr "Gunakan Satuan Sistem"
+
+msgid "Refresh Interval:"
+msgstr "Interval Penyegaran:"
+
+msgid "Every Search"
+msgstr "Setiap Pencarian"
+
+msgid "15 Minutes"
+msgstr "15 Menit"
+
+msgid "30 Minutes"
+msgstr "30 Menit"
+
+msgid "1 Hour"
+msgstr "1 Jam"
+
+msgid "(If time since last update > interval)"
+msgstr "(Jika waktu sejak pembaruan terakhir > interval)"
+
+msgid "Enable Weather Prefix"
+msgstr "Aktifkan Awalan Cuaca"
+
 #~ msgid "General"
 #~ msgstr "Umum"
 

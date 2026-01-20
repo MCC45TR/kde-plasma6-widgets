@@ -1046,6 +1046,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "Եղանակի տեսք (եղանակ:)"
+
+msgid "Use System Units"
+msgstr "Օգտագործել համակարգի միավորները"
+
+msgid "Refresh Interval:"
+msgstr "Թարմացման ինտերվալ:"
+
+msgid "Every Search"
+msgstr "Յուրաքանչյուր որոնում"
+
+msgid "15 Minutes"
+msgstr "15 րոպե"
+
+msgid "30 Minutes"
+msgstr "30 րոպե"
+
+msgid "1 Hour"
+msgstr "1 ժամ"
+
+msgid "(If time since last update > interval)"
+msgstr "(Եթե վերջին թարմացումից անցած ժամանակը > ինտերվալ)"
+
+msgid "Enable Weather Prefix"
+msgstr "Միացնել եղանակի նախածանցը"
+
 #~ msgid "General"
 #~ msgstr "Ընդհանուր"
 

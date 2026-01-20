@@ -1046,6 +1046,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "天气视图 (天气:)"
+
+msgid "Use System Units"
+msgstr "使用系统单位"
+
+msgid "Refresh Interval:"
+msgstr "刷新间隔："
+
+msgid "Every Search"
+msgstr "每次搜索"
+
+msgid "15 Minutes"
+msgstr "15 分钟"
+
+msgid "30 Minutes"
+msgstr "30 分钟"
+
+msgid "1 Hour"
+msgstr "1 小时"
+
+msgid "(If time since last update > interval)"
+msgstr "（如果自上次更新以来的时间 > 间隔）"
+
+msgid "Enable Weather Prefix"
+msgstr "启用天气前缀"
+
 #~ msgid "General"
 #~ msgstr "常规"
 

@@ -41,7 +41,16 @@ keys_to_add = [
     "Square",
     "Slightly Rounded",
     "Moderately Rounded",
-    "Fully Rounded"
+    "Fully Rounded",
+    "Weather View (weather:)",
+    "Enable Weather Prefix",
+    "Use System Units",
+    "Refresh Interval:",
+    "Every Search",
+    "15 Minutes",
+    "30 Minutes",
+    "1 Hour",
+    "(If time since last update > interval)"
 ]
 
 # We will update ALL languages including TR to ensure consistency, 

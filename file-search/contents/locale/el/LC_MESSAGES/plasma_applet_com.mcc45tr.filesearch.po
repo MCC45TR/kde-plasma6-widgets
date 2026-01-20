@@ -1046,6 +1046,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "Προβολή Καιρού (καιρός:)"
+
+msgid "Use System Units"
+msgstr "Χρήση Μονάδων Συστήματος"
+
+msgid "Refresh Interval:"
+msgstr "Διάστημα Ανανέωσης:"
+
+msgid "Every Search"
+msgstr "Σε Κάθε Αναζήτηση"
+
+msgid "15 Minutes"
+msgstr "15 Λεπτά"
+
+msgid "30 Minutes"
+msgstr "30 Λεπτά"
+
+msgid "1 Hour"
+msgstr "1 Ώρα"
+
+msgid "(If time since last update > interval)"
+msgstr "(Εάν ο χρόνος από την τελευταία ενημέρωση > διάστημα)"
+
+msgid "Enable Weather Prefix"
+msgstr "Ενεργοποίηση Προθέματος Καιρού"
+
 #~ msgid "General"
 #~ msgstr "Γενικά"
 

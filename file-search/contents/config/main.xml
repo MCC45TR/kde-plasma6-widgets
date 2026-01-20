@@ -95,6 +95,33 @@
     </entry>
   </group>
 
+  <group name="Weather">
+    <entry name="weatherEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable Weather Prefix</label>
+    </entry>
+    <entry name="weatherUnits" type="String">
+      <default>metric</default>
+      <label>Weather Units: metric, imperial, or system</label>
+    </entry>
+    <entry name="weatherUseSystemUnits" type="Bool">
+      <default>true</default>
+      <label>Use system locale units</label>
+    </entry>
+    <entry name="weatherRefreshInterval" type="Int">
+      <default>15</default>
+      <label>Refresh interval in minutes</label>
+    </entry>
+    <entry name="weatherLastUpdate" type="Double">
+      <default>0</default>
+      <label>Timestamp of last weather update</label>
+    </entry>
+    <entry name="weatherCache" type="String">
+      <default>{}</default>
+      <label>Cached weather data (JSON)</label>
+    </entry>
+  </group>
+
   <!-- Tab 5: Placeholder (Search Settings) -->
   <group name="Placeholder">
     <entry name="searchAlgorithm" type="Int">

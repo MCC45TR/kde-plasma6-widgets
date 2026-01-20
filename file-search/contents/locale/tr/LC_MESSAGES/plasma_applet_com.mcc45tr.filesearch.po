@@ -1066,6 +1066,39 @@ msgstr "Ayarlar"
 msgid "Docs"
 msgstr "Belgeler"
 
+msgid "weather"
+msgstr "hava"
+
+msgid "Show current weather"
+msgstr "Hava durumunu göster"
+
+msgid "Weather View (weather:)"
+msgstr "Hava Durumu Görünümü (hava:)"
+
+msgid "Use System Units"
+msgstr "Sistem Birimlerini Kullan"
+
+msgid "Refresh Interval:"
+msgstr "Yenileme Sıklığı:"
+
+msgid "Every Search"
+msgstr "Her Aramada"
+
+msgid "15 Minutes"
+msgstr "15 Dakika"
+
+msgid "30 Minutes"
+msgstr "30 Dakika"
+
+msgid "1 Hour"
+msgstr "1 Saat"
+
+msgid "(If time since last update > interval)"
+msgstr "(Eğer son güncellemeden geçen süre > aralık)"
+
+msgid "Enable Weather Prefix"
+msgstr "Hava Durumu Önekini Etkinleştir"
+
 #~ msgid "Results Preview"
 #~ msgstr "Sonuç Önizleme"
 

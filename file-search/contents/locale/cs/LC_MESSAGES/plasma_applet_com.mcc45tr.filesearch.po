@@ -1048,6 +1048,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "Zobrazení počasí (počasí:)"
+
+msgid "Use System Units"
+msgstr "Použít systémové jednotky"
+
+msgid "Refresh Interval:"
+msgstr "Interval obnovení:"
+
+msgid "Every Search"
+msgstr "Při každém hledání"
+
+msgid "15 Minutes"
+msgstr "15 minut"
+
+msgid "30 Minutes"
+msgstr "30 minut"
+
+msgid "1 Hour"
+msgstr "1 hodina"
+
+msgid "(If time since last update > interval)"
+msgstr "(Pokud čas od poslední aktualizace > interval)"
+
+msgid "Enable Weather Prefix"
+msgstr "Povolit prefix počasí"
+
 #~ msgid "Results Preview"
 #~ msgstr "Náhled výsledků"
 

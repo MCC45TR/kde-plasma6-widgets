@@ -15,9 +15,81 @@ Kirigami.FormLayout {
     property bool cfg_prefixPowerShowHibernate: false
     property bool cfg_prefixPowerShowSleep: true
     property bool cfg_showBootOptions: false
+    // Weather properties
+    property bool cfg_weatherEnabled: true
+    property string cfg_weatherUnits: "metric"
+    property bool cfg_weatherUseSystemUnits: true
+    property int cfg_weatherRefreshInterval: 15
+
+    // ... (existing content) ...
+
+    // Weather View Settings
+    Label {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather View (weather:)")
+        font.bold: true
+        Layout.fillWidth: true
+        Layout.topMargin: 10
+    }
+
+    CheckBox {
+        id: weatherEnabledCheck
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Weather Prefix")
+        checked: cfg_weatherEnabled
+        onToggled: cfg_weatherEnabled = checked
+    }
     
-    // Power Management Source
-    PlasmaSupport.DataSource {
+    // Group enabled state based on master toggle
+    ColumnLayout {
+        Layout.fillWidth: true
+        enabled: cfg_weatherEnabled
+        opacity: enabled ? 1.0 : 0.5
+    
+    CheckBox {
+        id: useSystemUnitsCheck
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Use System Units")
+        checked: cfg_weatherUseSystemUnits
+        onToggled: cfg_weatherUseSystemUnits = checked
+    }
+    
+    RowLayout {
+        Layout.fillWidth: true
+        
+        Label { 
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh Interval:") 
+        }
+        
+        ComboBox {
+            id: refreshIntervalCombo
+            model: [
+                i18nd("plasma_applet_com.mcc45tr.filesearch", "Every Search"), 
+                i18nd("plasma_applet_com.mcc45tr.filesearch", "15 Minutes"), 
+                i18nd("plasma_applet_com.mcc45tr.filesearch", "30 Minutes"), 
+                i18nd("plasma_applet_com.mcc45tr.filesearch", "1 Hour")
+            ]
+            
+            Component.onCompleted: {
+                if (cfg_weatherRefreshInterval === 0) currentIndex = 0
+                else if (cfg_weatherRefreshInterval === 15) currentIndex = 1
+                else if (cfg_weatherRefreshInterval === 30) currentIndex = 2
+                else if (cfg_weatherRefreshInterval === 60) currentIndex = 3
+                else currentIndex = 1 // default 15
+            }
+            
+            onActivated: {
+                if (index === 0) cfg_weatherRefreshInterval = 0
+                else if (index === 1) cfg_weatherRefreshInterval = 15
+                else if (index === 2) cfg_weatherRefreshInterval = 30
+                else if (index === 3) cfg_weatherRefreshInterval = 60
+            }
+        }
+        
+        Label {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "(If time since last update > interval)")
+            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+            color: Kirigami.Theme.disabledTextColor
+        }
+    }
+    } // End ColumnLayout
         id: pmSource
         engine: "powermanagement"
         connectedSources: ["PowerManagement"]
@@ -202,6 +274,18 @@ Kirigami.FormLayout {
             Layout.fillWidth: true
         }
         
+        // weather:
+        Label { 
+            text: "weather:"
+            font.family: "Monospace"
+            font.bold: true
+            color: Kirigami.Theme.highlightColor
+        }
+        Label {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show current weather")
+            Layout.fillWidth: true
+        }
+
         // help:
         Label { 
             text: "help:"

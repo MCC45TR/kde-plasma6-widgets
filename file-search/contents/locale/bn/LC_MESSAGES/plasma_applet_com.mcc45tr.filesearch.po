@@ -1046,6 +1046,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "আবহাওয়া দৃশ্য (আবহাওয়া:)"
+
+msgid "Use System Units"
+msgstr "সিস্টem ইউনিট ব্যবহার করুন"
+
+msgid "Refresh Interval:"
+msgstr "রিফ্রেশ বিরতি:"
+
+msgid "Every Search"
+msgstr "প্রতি অনুসন্ধানে"
+
+msgid "15 Minutes"
+msgstr "১৫ মিনিট"
+
+msgid "30 Minutes"
+msgstr "৩০ মিনিট"
+
+msgid "1 Hour"
+msgstr "১ ঘণ্টা"
+
+msgid "(If time since last update > interval)"
+msgstr "(যদি শেষ আপডেটের পর থেকে সময় > বিরতি)"
+
+msgid "Enable Weather Prefix"
+msgstr "আবহাওয়া উপসর্গ सक्षम করুন"
+
 #~ msgid "General"
 #~ msgstr "সাধারণ"
 

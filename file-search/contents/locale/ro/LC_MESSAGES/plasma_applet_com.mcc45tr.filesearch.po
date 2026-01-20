@@ -1048,6 +1048,33 @@ msgstr ""
 msgid "Power User - All features active, advanced settings available."
 msgstr ""
 
+msgid "Weather View (weather:)"
+msgstr "Vizualizare Meteo (vreme:)"
+
+msgid "Use System Units"
+msgstr "Utilizați unitățile de sistem"
+
+msgid "Refresh Interval:"
+msgstr "Interval de actualizare:"
+
+msgid "Every Search"
+msgstr "La fiecare căutare"
+
+msgid "15 Minutes"
+msgstr "15 minute"
+
+msgid "30 Minutes"
+msgstr "30 minute"
+
+msgid "1 Hour"
+msgstr "1 oră"
+
+msgid "(If time since last update > interval)"
+msgstr "(Dacă timpul de la ultima actualizare > interval)"
+
+msgid "Enable Weather Prefix"
+msgstr "Activează Prefixul Meteo"
+
 #~ msgid "Results Preview"
 #~ msgstr "Previzualizare rezultate"
 

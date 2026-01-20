@@ -12,7 +12,8 @@ Rectangle {
     required property color textColor
     required property color accentColor
     required property color bgColor
-    required property var logic // Access to LogicController for dependency checks (manInstalled)
+    required property var logic
+    property var plasmoidConfig // injected from SearchPopup
     
     // Signals
     signal hintSelected(string text)
@@ -66,6 +67,7 @@ Rectangle {
         { prefix: "b:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Bookmarks"), icon: "bookmarks", localeBase: "bookmarks" },
         { prefix: "power:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show power management options"), icon: "system-shutdown", localeBase: "power" },
         { prefix: "services:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "System Services"), icon: "preferences-system", localeBase: "services" },
+        { prefix: "weather:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show current weather"), icon: "weather-clear", localeBase: "weather" },
         { prefix: "date", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar and date information"), icon: "alarm-clock", localeBase: "date" },
         { prefix: "define:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Dictionary Definition"), icon: "accessories-dictionary", localeBase: "define" },
         { prefix: "unit:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Convert units (requires KRunner)"), icon: "accessories-calculator", localeBase: "unit" },
@@ -153,6 +155,11 @@ Rectangle {
         
         for (var i = 0; i < knownPrefixes.length; i++) {
              var p = knownPrefixes[i]
+             
+             // Check if disabled by config (weather)
+             if (p.prefix === "weather:" && plasmoidConfig && !plasmoidConfig.weatherEnabled) {
+                 continue;
+             }
              
              // Check standard prefix
              var standardP = p.prefix.toLowerCase();

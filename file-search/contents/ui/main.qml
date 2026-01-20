@@ -139,6 +139,7 @@ PlasmoidItem {
     fullRepresentation: Components.SearchPopup {
         id: popup
         logic: controller
+        plasmoidConfig: Plasmoid.configuration
         
         // Data binding
         searchText: root.searchText
