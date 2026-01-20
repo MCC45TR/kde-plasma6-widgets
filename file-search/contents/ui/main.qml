@@ -46,7 +46,7 @@ PlasmoidItem {
     readonly property int maxChars: isWideMode ? maxCharsWide : maxCharsMedium
     
     // Truncated text for display
-    readonly property string placeholderText: isExtraWideMode ? i18n("Start searching...") : (isWideMode ? i18n("Search...") : i18n("Search"))
+    readonly property string placeholderText: isExtraWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : (isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
     readonly property string rawSearchText: searchText.length > 0 ? searchText : placeholderText
     readonly property string truncatedText: rawSearchText.length > maxChars ? rawSearchText.substring(0, maxChars) + "..." : rawSearchText
     
@@ -86,30 +86,30 @@ PlasmoidItem {
     
     // ===== LOCALIZATION =====
     // Localization removed
-    // Use standard i18n()
+    // Use standard i18nd("plasma_applet_com.mcc45tr.filesearch", )
     
     // ===== CONTEXTUAL ACTIONS (Right-Click Menu) =====
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            text: i18n("Button Mode (Icon only)")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Button Mode (Icon only)")
             checkable: true
             checked: root.displayMode === 0
             onTriggered: Plasmoid.configuration.displayMode = 0
         },
         PlasmaCore.Action {
-            text: i18n("Medium Mode (Button only)")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium Mode (Button only)")
             checkable: true
             checked: root.displayMode === 1
             onTriggered: Plasmoid.configuration.displayMode = 1
         },
         PlasmaCore.Action {
-            text: i18n("Wide Mode (Search bar + icon)")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Wide Mode (Search bar + icon)")
             checkable: true
             checked: root.displayMode === 2
             onTriggered: Plasmoid.configuration.displayMode = 2
         },
         PlasmaCore.Action {
-            text: i18n("Extra Wide Mode (Wide + Long Placeholder)")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Extra Wide Mode (Wide + Long Placeholder)")
             checkable: true
             checked: root.displayMode === 3
             onTriggered: Plasmoid.configuration.displayMode = 3
@@ -161,6 +161,7 @@ PlasmoidItem {
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
         showBootOptions: Plasmoid.configuration.showBootOptions
         showPinnedBar: Plasmoid.configuration.showPinnedBar
+        autoMinimizePinned: Plasmoid.configuration.autoMinimizePinned
         previewEnabled: Plasmoid.configuration.previewEnabled
         previewSettings: {
             try {

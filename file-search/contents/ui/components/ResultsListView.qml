@@ -327,7 +327,7 @@ ScrollView {
         // Empty state
         Text {
             anchors.centerIn: parent
-            text: resultsListRoot.searchText.length > 0 ? i18n("No results found") : i18n("Type to start searching")
+            text: resultsListRoot.searchText.length > 0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to start searching")
             color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
             font.pixelSize: 12
             visible: resultsList.count === 0 && resultsListRoot.searchText.length > 0

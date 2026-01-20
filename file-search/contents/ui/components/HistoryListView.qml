@@ -20,7 +20,7 @@ Item {
     signal clearClicked()
     
     // Localization removed
-    // Use standard i18n()
+    // Use standard i18nd("plasma_applet_com.mcc45tr.filesearch", )
     
     // Header with title and clear button
     RowLayout {
@@ -31,7 +31,7 @@ Item {
         height: 32
         
         Text {
-            text: i18n("Recent Searches")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Recent Searches")
             font.pixelSize: 13
             font.bold: true
             color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
@@ -51,7 +51,7 @@ Item {
             Text {
                 id: clearBtnText
                 anchors.centerIn: parent
-                text: i18n("Clear History")
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Clear History")
                 font.pixelSize: 11
                 color: historyList.textColor
             }

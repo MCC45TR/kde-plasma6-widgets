@@ -22,7 +22,7 @@ Item {
     readonly property bool canReboot: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanReboot"] : true
     
     // Appearance Title
-    property string title: i18n("Appearance")
+    property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Appearance")
     
     // =========================================================================
     // CONFIGURATION PROPERTIES
@@ -43,6 +43,7 @@ Item {
     property int cfg_maxResults
     property bool cfg_smartResultLimit
     property alias cfg_showPinnedBar: showPinnedBarCheck.checked
+    property alias cfg_autoMinimizePinned: autoMinimizePinnedCheck.checked
     property int cfg_searchAlgorithm 
     
     // Preview
@@ -97,20 +98,20 @@ Item {
             Layout.fillWidth: true
             
             TabButton {
-                text: i18n("Panel")
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel")
                 icon.name: "dashboard-show"
             }
             TabButton {
-                text: i18n("Popup")
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Popup")
                 icon.name: "window-new"
             }
 
             TabButton {
-                text: i18n("Preview")
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview")
                 icon.name: "view-preview"
             }
             TabButton {
-                text: i18n("Prefixes")
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Prefixes")
                 icon.name: "code-context"
             }
 
@@ -129,38 +130,38 @@ Item {
                 // TAB 1: PANEL
                 Kirigami.FormLayout {
                     Kirigami.Separator {
-                        Kirigami.FormData.label: i18n("Panel Appearance")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Appearance")
                         Kirigami.FormData.isSection: true
                     }
                     
                     ComboBox {
                         id: displayModeCombo
-                        Kirigami.FormData.label: i18n("Display Mode")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Display Mode")
                         model: [
-                            i18n("Button Mode (Icon only)"), 
-                            i18n("Medium Mode (Text)"), 
-                            i18n("Wide Mode (Search Bar)"), 
-                            i18n("Extra Wide Mode")
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Button Mode (Icon only)"), 
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium Mode (Text)"), 
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Wide Mode (Search Bar)"), 
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Extra Wide Mode")
                         ]
                         Layout.fillWidth: true
                     }
 
                     ComboBox {
                         id: panelRadiusCombo
-                        Kirigami.FormData.label: i18n("Edge Appearance")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Edge Appearance")
                         enabled: displayModeCombo.currentIndex !== 0
                         model: [
-                            i18n("Round corners"),
-                            i18n("Slightly round"),
-                            i18n("Less round"),
-                            i18n("Square corners")
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Round corners"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Slightly round"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Less round"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Square corners")
                         ]
                         Layout.fillWidth: true
                     }
                     
                     // Panel Preview
                     Item {
-                        Kirigami.FormData.label: i18n("Panel Preview")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Preview")
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         
@@ -204,7 +205,7 @@ Item {
                                 spacing: 8
                                 
                                 Text {
-                                    text: displayModeCombo.currentIndex === 1 ? i18n("Search") : (displayModeCombo.currentIndex === 3 ? i18n("Start searching...") : i18n("Search..."))
+                                    text: displayModeCombo.currentIndex === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search") : (displayModeCombo.currentIndex === 3 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search..."))
                                     color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
                                     font.pixelSize: displayModeCombo.currentIndex !== 1 ? 14 : 12
                                     Layout.fillWidth: true
@@ -234,21 +235,21 @@ Item {
                 // TAB 2: POPUP
                 Kirigami.FormLayout {
                      Kirigami.Separator {
-                        Kirigami.FormData.label: i18n("Results View")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Results View")
                         Kirigami.FormData.isSection: true
                     }
                     
                     ComboBox {
                         id: viewModeCombo
-                        Kirigami.FormData.label: i18n("View Mode")
-                        model: [i18n("List View"), i18n("Tile View")]
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "View Mode")
+                        model: [i18nd("plasma_applet_com.mcc45tr.filesearch", "List View"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Tile View")]
                         Layout.fillWidth: true
                     }
                     
                     // Icon Size Logic
                     ComboBox {
                         id: listIconSizeCombo
-                        Kirigami.FormData.label: i18n("List Icon Size")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "List Icon Size")
                         model: ["16", "22", "32", "48", "64", "128"]
                         visible: viewModeCombo.currentIndex === 0
                         onActivated: cfg_listIconSize = parseInt(currentText)
@@ -256,23 +257,34 @@ Item {
                     }
                      ComboBox {
                         id: tileIconSizeCombo
-                        Kirigami.FormData.label: i18n("Tile Icon Size")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Tile Icon Size")
                         model: ["16", "22", "32", "48", "64", "128"]
                         visible: viewModeCombo.currentIndex === 1
                         onActivated: cfg_iconSize = parseInt(currentText)
                         Component.onCompleted: currentIndex = model.indexOf(String(cfg_iconSize))
                     }
                     
-                    CheckBox {
-                        id: showPinnedBarCheck
-                        Kirigami.FormData.label: i18n("Pinned Items")
-                        text: i18n("Show pinned items bar")
-                        checked: cfg_showPinnedBar
+                    ColumnLayout {
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Pinned Items")
+                        spacing: Kirigami.Units.smallSpacing
+                        
+                        CheckBox {
+                            id: showPinnedBarCheck
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show pinned items bar")
+                            checked: cfg_showPinnedBar
+                        }
+                        
+                        CheckBox {
+                            id: autoMinimizePinnedCheck
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Minimize automatically when searching")
+                            checked: cfg_autoMinimizePinned
+                            enabled: showPinnedBarCheck.checked
+                        }
                     }
                     
                     // Popup Preview
                     Item {
-                        Kirigami.FormData.label: i18n("Preview")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview")
                         Layout.fillWidth: true
                         implicitHeight: 150
                         Layout.minimumHeight: 150
@@ -301,7 +313,7 @@ Item {
                                         Layout.preferredHeight: cfg_listIconSize
                                     }
                                     Label { 
-                                        text: i18n("System Settings")
+                                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "System Settings")
                                         Layout.fillWidth: true 
                                         font.bold: true 
                                         color: Kirigami.Theme.textColor
@@ -322,7 +334,7 @@ Item {
                                         Layout.preferredHeight: cfg_listIconSize
                                     }
                                     Label { 
-                                        text: i18n("Documents")
+                                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Documents")
                                         Layout.fillWidth: true 
                                         font.bold: true 
                                         color: Kirigami.Theme.textColor
@@ -345,7 +357,7 @@ Item {
                                         Layout.alignment: Qt.AlignHCenter
                                     }
                                     Label { 
-                                        text: i18n("Settings")
+                                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Settings")
                                         font.pixelSize: 12
                                         Layout.alignment: Qt.AlignHCenter 
                                         color: Kirigami.Theme.textColor
@@ -360,7 +372,7 @@ Item {
                                         Layout.alignment: Qt.AlignHCenter
                                     }
                                     Label { 
-                                        text: i18n("Docs")
+                                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Docs")
                                         font.pixelSize: 12
                                         Layout.alignment: Qt.AlignHCenter 
                                         color: Kirigami.Theme.textColor
@@ -377,13 +389,13 @@ Item {
                 Kirigami.FormLayout {
                      Switch {
                         id: masterPreviewSwitch
-                        text: i18n("Enable File Previews")
-                        Kirigami.FormData.label: i18n("Show/Hide Previews")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable File Previews")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show/Hide Previews")
                         onCheckedChanged: cfg_previewEnabled = checked
                      }
                      
                     Kirigami.Separator {
-                        Kirigami.FormData.label: i18n("Preview Types")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview Types")
                         Kirigami.FormData.isSection: true
                     }
                     
@@ -401,7 +413,7 @@ Item {
                         ColumnLayout {
                             spacing: 0
                             CheckBox {
-                                text: i18n("Images")
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Images")
                                 checked: previewSettings.images || false
                                 onToggled: updatePreviewSetting("images", checked)
                                 enabled: masterPreviewSwitch.checked
@@ -438,7 +450,7 @@ Item {
                         ColumnLayout {
                             spacing: 0
                             CheckBox {
-                                text: i18n("Videos")
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Videos")
                                 checked: previewSettings.videos || false
                                 onToggled: updatePreviewSetting("videos", checked)
                                 enabled: masterPreviewSwitch.checked
@@ -475,7 +487,7 @@ Item {
                         ColumnLayout {
                             spacing: 0
                             CheckBox {
-                                text: i18n("Text Files")
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Text Files")
                                 checked: previewSettings.text || false
                                 onToggled: updatePreviewSetting("text", checked)
                                 enabled: masterPreviewSwitch.checked
@@ -512,7 +524,7 @@ Item {
                         ColumnLayout {
                             spacing: 0
                             CheckBox {
-                                text: i18n("Documents")
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Documents")
                                 checked: previewSettings.documents || false
                                 onToggled: updatePreviewSetting("documents", checked)
                                 enabled: masterPreviewSwitch.checked
@@ -531,28 +543,28 @@ Item {
                 // TAB 4: PREFIXES
                 Kirigami.FormLayout {
                     Kirigami.Separator {
-                        Kirigami.FormData.label: i18n("Date View (date:)")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date View (date:)")
                         Kirigami.FormData.isSection: true
                     }
                     CheckBox {
                         id: prefixDateClock
-                        text: i18n("Show Large Clock")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Large Clock")
                     }
                     CheckBox {
                         id: prefixDateEvents
-                        text: i18n("Show Calendar Events")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Calendar Events")
                     }
                      Kirigami.Separator {
-                        Kirigami.FormData.label: i18n("Power View (power:)")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Power View (power:)")
                         Kirigami.FormData.isSection: true
                     }
                     CheckBox {
                         id: prefixPowerSleep
-                        text: i18n("Show Sleep Button")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Sleep Button")
                     }
                     CheckBox {
                         id: showHibernateCheck
-                        text: i18n("Show Hibernate Button")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Hibernate Button")
                         enabled: canHibernate
                         opacity: enabled ? 1.0 : 0.5
                     }
@@ -561,7 +573,7 @@ Item {
                         padding: 0
                         leftPadding: 30
                         visible: !canHibernate
-                        text: i18n("(Swap partition size is smaller than RAM or no swap found)")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Swap partition size is smaller than RAM or no swap found)")
                         color: Kirigami.Theme.disabledTextColor
                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         Layout.fillWidth: true
@@ -569,7 +581,7 @@ Item {
                     
                     CheckBox {
                         id: showBootOptionsSearch
-                        text: i18n("Show boot options in Reboot button")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show boot options in Reboot button")
                         enabled: canReboot
                         opacity: enabled ? 1.0 : 0.5
                     }
@@ -577,7 +589,7 @@ Item {
                     Label {
                         padding: 0
                         leftPadding: 30
-                        text: i18n("Note: Systemd boot is required for this feature")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Note: Systemd boot is required for this feature")
                         color: Kirigami.Theme.disabledTextColor
                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         Layout.fillWidth: true
@@ -585,11 +597,11 @@ Item {
 
                     Kirigami.Separator {
                         Kirigami.FormData.isSection: true
-                        Kirigami.FormData.label: i18n("Available Prefixes Reference")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Available Prefixes Reference")
                     }
                     
                     Label {
-                        text: i18n("These prefixes can be used to perform specific actions directly from the search bar.")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "These prefixes can be used to perform specific actions directly from the search bar.")
                         wrapMode: Text.Wrap
                         Layout.fillWidth: true
                         opacity: 0.7
@@ -612,7 +624,7 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("List files modified today")
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "List files modified today")
                             Layout.fillWidth: true
                         }
                 
@@ -625,9 +637,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Search on Google")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on Google")
+                                    Layout.fillWidth: true
+                                }
                         
                         // dd:
                         Kirigami.Icon { source: "edit-find"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -638,9 +650,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Search on DuckDuckGo")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on DuckDuckGo")
+                                    Layout.fillWidth: true
+                                }
                         
                         // date:
                         Kirigami.Icon { source: "view-calendar-day"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -651,9 +663,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Show calendar and date information")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar and date information")
+                                    Layout.fillWidth: true
+                                }
                         
                         // clock:
                         Kirigami.Icon { source: "preferences-system-time"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -664,9 +676,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Show large clock")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show large clock")
+                                    Layout.fillWidth: true
+                                }
                         
                         // power:
                         Kirigami.Icon { source: "system-log-out"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -677,9 +689,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Show power management options")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show power management options")
+                                    Layout.fillWidth: true
+                                }
                         
                         // help:
                         Kirigami.Icon { source: "help-contents"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -690,9 +702,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Show this help screen")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show this help screen")
+                                    Layout.fillWidth: true
+                                }
                         
                         // kill
                         Kirigami.Icon { source: "process-stop"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -703,9 +715,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Terminate running processes")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Terminate running processes")
+                                    Layout.fillWidth: true
+                                }
                         
                         // spell
                         Kirigami.Icon { source: "tools-check-spelling"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -716,9 +728,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Check spelling of a word")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Check spelling of a word")
+                                    Layout.fillWidth: true
+                                }
                         
                         // shell:
                         Kirigami.Icon { source: "utilities-terminal"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -729,9 +741,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Execute shell commands")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Execute shell commands")
+                                    Layout.fillWidth: true
+                                }
                 
                         // unit:
                         Kirigami.Icon { source: "accessories-calculator"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
@@ -742,9 +754,9 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                            text: i18n("Convert units (requires KRunner)")
-                            Layout.fillWidth: true
-                        }
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Convert units (requires KRunner)")
+                                    Layout.fillWidth: true
+                                }
                     }
                 }       
             }

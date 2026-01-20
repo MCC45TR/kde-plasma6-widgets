@@ -7,7 +7,7 @@ import "../js/CategoryManager.js" as CategoryManager
 Kirigami.FormLayout {
     id: configCategories
     
-    property string title: i18n("Search")
+    property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search")
     
     // KCM Configuration Properties (must match main.xml)
     property string cfg_categorySettings
@@ -184,13 +184,13 @@ Kirigami.FormLayout {
     // --- Algorithm Settings Section ---
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Algorithm Settings")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Algorithm Settings")
     }
     
     ComboBox {
         id: algorithmCombo
-        Kirigami.FormData.label: i18n("Search Algorithm")
-        model: [i18n("Fuzzy Match"), i18n("Exact Match"), i18n("Starts With")]
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Algorithm")
+        model: [i18nd("plasma_applet_com.mcc45tr.filesearch", "Fuzzy Match"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Exact Match"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Starts With")]
         currentIndex: configCategories.cfg_searchAlgorithm
         onActivated: {
             configCategories.cfg_searchAlgorithm = currentIndex
@@ -201,20 +201,20 @@ Kirigami.FormLayout {
     // Smart Limit Checkbox
     CheckBox {
         id: smartLimitCheck
-        Kirigami.FormData.label: i18n("Dynamic Result Count")
-        text: i18n("Automatically limit displayed results based on relevance score")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Dynamic Result Count")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Automatically limit displayed results based on relevance score")
         checked: configCategories.cfg_smartResultLimit
         onCheckedChanged: configCategories.cfg_smartResultLimit = checked
     }
     
     // Min/Max Results (only when smart limit is off)
     RowLayout {
-        Kirigami.FormData.label: i18n("Result Limits")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Result Limits")
         enabled: !configCategories.cfg_smartResultLimit
         opacity: enabled ? 1.0 : 0.5
         spacing: 12
         
-        Label { text: i18n("Min Results") }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Min Results") }
         SpinBox {
             from: 1; to: 20
             value: configCategories.cfg_minResults || 3
@@ -223,7 +223,7 @@ Kirigami.FormLayout {
         
         Item { width: 10 }
         
-        Label { text: i18n("Max Results") }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Max Results") }
         SpinBox {
             from: 5; to: 100
             value: configCategories.cfg_maxResults || 20
@@ -234,11 +234,11 @@ Kirigami.FormLayout {
     // --- Category Order Section ---
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Prioritized Categories")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Prioritized Categories")
     }
     
     Label {
-        text: i18n("Use buttons to reorder categories or move between sections")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Use buttons to reorder categories or move between sections")
         font.pixelSize: 11
         opacity: 0.6
         wrapMode: Text.WordWrap
@@ -247,7 +247,7 @@ Kirigami.FormLayout {
     
     // Separate Categories List
     Item {
-        Kirigami.FormData.label: i18n("Priority")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Priority")
         Layout.fillWidth: true
         Layout.preferredHeight: separateListColumn.implicitHeight + 20
         
@@ -300,7 +300,7 @@ Kirigami.FormLayout {
                         }
                         
                         Label {
-                            text: i18n(model.catName) || model.catName
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", model.catName) || model.catName
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                         }
@@ -338,7 +338,7 @@ Kirigami.FormLayout {
                         Button {
                             icon.name: "arrow-down-double"
                             flat: true
-                            ToolTip.text: i18n("Move to Combined")
+                            ToolTip.text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move to Combined")
                             ToolTip.visible: hovered
                             Layout.preferredWidth: 32
                             Layout.preferredHeight: 32
@@ -353,11 +353,11 @@ Kirigami.FormLayout {
     // --- Combined Section ---
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Show Together (Merged)")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Together (Merged)")
     }
     
     Label {
-        text: i18n("Categories in this section will be grouped together")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Categories in this section will be grouped together")
         font.pixelSize: 11
         opacity: 0.6
         wrapMode: Text.WordWrap
@@ -373,7 +373,7 @@ Kirigami.FormLayout {
         // Empty state
         Label {
             visible: combinedModel.count === 0
-            text: i18n("No combined categories")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "No combined categories")
             opacity: 0.5
             anchors.centerIn: parent
             z: 1 // Ensure it's on top if needed, though column is transparent usually
@@ -429,7 +429,7 @@ Kirigami.FormLayout {
                         
                         // Category name
                         Label {
-                            text: i18n(model.catName) || model.catName
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", model.catName) || model.catName
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                         }
@@ -438,7 +438,7 @@ Kirigami.FormLayout {
                         Button {
                             icon.name: "arrow-up-double"
                             flat: true
-                            ToolTip.text: i18n("Move to Separate")
+                            ToolTip.text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move to Separate")
                             ToolTip.visible: hovered
                             Layout.preferredWidth: 32
                             Layout.preferredHeight: 32
@@ -453,11 +453,11 @@ Kirigami.FormLayout {
     // Info box
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Category Settings Information")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category Settings Information")
     }
     
     Label {
-        text: i18n("Changes are applied immediately. Hidden categories will not appear in search results. Priority determines display order.") + "\n\n" + i18n("Lower number = higher priority")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Changes are applied immediately. Hidden categories will not appear in search results. Priority determines display order.") + "\n\n" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Lower number = higher priority")
         opacity: 0.8
         wrapMode: Text.WordWrap
         Layout.fillWidth: true

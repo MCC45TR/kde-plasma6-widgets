@@ -53,6 +53,10 @@
       <default>true</default>
       <label>Show pinned items bar in search results</label>
     </entry>
+    <entry name="autoMinimizePinned" type="Bool">
+      <default>false</default>
+      <label>Automatically minimize pinned items when searching</label>
+    </entry>
   </group>
 
   <!-- Tab 3: Preview Settings -->

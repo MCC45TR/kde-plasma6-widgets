@@ -6,7 +6,7 @@ import org.kde.kirigami as Kirigami
 Item {
     id: configPreview
     
-    property string title: i18n("Preview")
+    property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview")
     
     // KCM Configuration Properties (Preview specific)
     property string cfg_previewSettings
@@ -94,13 +94,13 @@ Item {
         
         // Header
         Label {
-            text: i18n("Preview Settings")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview Settings")
             font.bold: true
             font.pixelSize: 16
         }
         
         Label {
-            text: i18n("Enable or disable file previews for different file types.")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable or disable file previews for different file types.")
             opacity: 0.7
             font.pixelSize: 12
             wrapMode: Text.WordWrap
@@ -109,7 +109,7 @@ Item {
         
         // Master Preview Toggle
         GroupBox {
-            title: i18n("Enable File Previews")
+            title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable File Previews")
             Layout.fillWidth: true
             
             RowLayout {
@@ -123,7 +123,7 @@ Item {
                 }
                 
                 Label {
-                    text: masterPreviewSwitch.checked ? i18n("Enabled") : i18n("Disabled")
+                    text: masterPreviewSwitch.checked ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Enabled") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Disabled")
                     opacity: 0.7
                 }
             }
@@ -131,7 +131,7 @@ Item {
         
         // Preview Types
         GroupBox {
-            title: i18n("Preview Types")
+            title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview Types")
             Layout.fillWidth: true
             enabled: masterPreviewSwitch.checked
             opacity: enabled ? 1.0 : 0.5
@@ -156,7 +156,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: i18n("Images")
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Images")
                             font.bold: true
                         }
                         Label {
@@ -194,7 +194,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: i18n("Videos")
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Videos")
                             font.bold: true
                         }
                         Label {
@@ -232,7 +232,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: i18n("Text Files")
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Text Files")
                             font.bold: true
                         }
                         Label {
@@ -270,7 +270,7 @@ Item {
                         spacing: 2
                         
                         Label {
-                            text: i18n("Documents")
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Documents")
                             font.bold: true
                         }
                         Label {
@@ -304,12 +304,12 @@ Item {
                 spacing: 4
                 
                 Label {
-                    text: "ℹ️ " + i18n("Performance Information")
+                    text: "ℹ️ " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Performance Information")
                     font.bold: true
                 }
                 
                 Label {
-                    text: i18n("Video and document previews may increase memory usage.")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Video and document previews may increase memory usage.")
                     opacity: 0.8
                     wrapMode: Text.WordWrap
                     Layout.fillWidth: true

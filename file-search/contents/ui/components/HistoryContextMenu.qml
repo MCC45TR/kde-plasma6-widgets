@@ -24,7 +24,7 @@ QQC.Menu {
     
     // ===== PIN / UNPIN =====
     QQC.Action {
-        text: logic && logic.isPinned(matchId) ? i18n("Unpin") : i18n("Pin")
+        text: logic && logic.isPinned(matchId) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Unpin") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Pin")
         icon.name: logic && logic.isPinned(matchId) ? "window-unpin" : "pin"
         enabled: historyItem
         onTriggered: {
@@ -49,7 +49,7 @@ QQC.Menu {
 
     // ===== OPEN (Standard) =====
     QQC.Action {
-        text: i18n("Open")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open")
         icon.name: "document-open"
         onTriggered: {
             if (historyItem && historyItem.filePath) {
@@ -66,7 +66,7 @@ QQC.Menu {
     
     // ===== COPY PATH =====
     QQC.Action {
-        text: i18n("Copy Location")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Location")
         icon.name: "edit-copy"
         enabled: historyItem && historyItem.filePath
         onTriggered: {
@@ -82,7 +82,7 @@ QQC.Menu {
     
     // ===== OPEN IN TERMINAL =====
     QQC.Action {
-        text: i18n("Open in Terminal")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open in Terminal")
         icon.name: "utilities-terminal"
         enabled: historyItem && !historyItem.isApplication && root.isFolder
         onTriggered: {
@@ -98,7 +98,7 @@ QQC.Menu {
     
     // ===== OPEN CONTAINING FOLDER =====
     QQC.Action {
-        text: i18n("Open Containing Folder")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Containing Folder")
         icon.name: "folder-open"
         enabled: historyItem && !historyItem.isApplication && historyItem.filePath && !root.isFolder
         onTriggered: logic.runShellCommand("dolphin --select '" + historyItem.filePath + "'")
@@ -108,7 +108,7 @@ QQC.Menu {
     
     // ===== MOVE TO TRASH =====
     QQC.Action {
-        text: i18n("Move to Trash")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move to Trash")
         icon.name: "user-trash"
         enabled: historyItem && !historyItem.isApplication && historyItem.filePath
         onTriggered: {
@@ -121,7 +121,7 @@ QQC.Menu {
     
     // ===== SHOW PROPERTIES =====
     QQC.Action {
-        text: i18n("Properties")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Properties")
         icon.name: "document-properties"
         enabled: historyItem && !historyItem.isApplication && historyItem.filePath
         onTriggered: logic.runShellCommand("kioclient openProperties '" + historyItem.filePath + "'")
@@ -131,7 +131,7 @@ QQC.Menu {
 
     // ===== MANAGE APP =====
     QQC.Action {
-        text: i18n("Edit Application...")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Edit Application...")
         icon.name: "configure"
         enabled: historyItem && historyItem.isApplication && historyItem.filePath
         onTriggered: logic.runShellCommand("kioclient openProperties '" + historyItem.filePath + "'")
@@ -141,7 +141,7 @@ QQC.Menu {
     
     // ===== REMOVE FROM HISTORY =====
     QQC.Action {
-        text: i18n("Remove from History")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Remove from History")
         icon.name: "edit-delete"
         onTriggered: {
             if (historyItem && historyItem.uuid) {

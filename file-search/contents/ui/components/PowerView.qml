@@ -245,11 +245,11 @@ Item {
                 // Hibernate (Derin Uyut) - Only if supported
                 PowerButton {
                     visible: root.canHibernate && root.showHibernate
-                    text: i18n("Hibernate")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Hibernate")
                     iconName: "system-suspend-hibernate"
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.neutralTextColor // Purple/Neutral
-                    confirmMessage: i18n("(Press again to hibernate)")
+                    confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to hibernate)")
                     onTriggered: root.executeCommand("systemctl hibernate")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
@@ -258,11 +258,11 @@ Item {
                 // Suspend (Uyut)
                 PowerButton {
                     visible: root.showSleep
-                    text: i18n("Sleep")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Sleep")
                     iconName: "system-suspend"
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.highlightColor // Blue/Highlight
-                    confirmMessage: i18n("(Press again to sleep)")
+                    confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to sleep)")
                     onTriggered: root.executeCommand("systemctl suspend")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
@@ -270,11 +270,11 @@ Item {
                 
                 // Reboot (Yeniden Başlat) - Special Logic
                 PowerButton {
-                    text: i18n("Reboot")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Reboot")
                     iconName: "system-reboot"
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.positiveTextColor // Green
-                    confirmMessage: i18n("(Press again to reboot)")
+                    confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to reboot)")
                     
                     // Single Click toggles boot entries if enabled in settings
                     onSingleClicked: {
@@ -294,11 +294,11 @@ Item {
                 
                 // Shutdown (Kapat)
                 PowerButton {
-                    text: i18n("Shutdown")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Shutdown")
                     iconName: "system-shutdown"
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.negativeTextColor // Red
-                    confirmMessage: i18n("(Press again to shutdown)")
+                    confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to shutdown)")
                     onTriggered: root.executeCommand("systemctl poweroff")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
@@ -350,7 +350,7 @@ Item {
                     }
                     
                     ToolTip.visible: refreshMouse.containsMouse
-                    ToolTip.text: i18n("Refresh boot entries")
+                    ToolTip.text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh boot entries")
                 }
                 
                 // Loading Indicator
@@ -448,7 +448,7 @@ Item {
                                  color: root.textColor
                              }
                              Text {
-                                text: i18n("Scan for boot entries")
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Scan for boot entries")
                                 color: root.textColor
                                 font.bold: true
                              }
@@ -474,7 +474,7 @@ Item {
                 
                 // Lock (Ekranı Kilitle)
                 PowerButton {
-                    text: i18n("Lock Screen")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Lock Screen")
                     iconName: "system-lock-screen"
                     doubleClickRequired: false
                     onTriggered: root.executeCommand("loginctl lock-session")
@@ -484,11 +484,11 @@ Item {
                 
                 // Logout (Oturumu Kapat)
                 PowerButton {
-                    text: i18n("Log Out")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Log Out")
                     iconName: "system-log-out"
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.negativeTextColor
-                    confirmMessage: i18n("(Press again to log out)")
+                    confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to log out)")
                     onTriggered: root.executeCommand("qdbus org.kde.ksmserver /KSMServer logout 0 0 0")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
@@ -496,11 +496,11 @@ Item {
                 
                 // Switch User (Kullanıcı Değiştir)
                 PowerButton {
-                    text: i18n("Switch User")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Switch User")
                     iconName: "system-switch-user"
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.highlightColor
-                    confirmMessage: i18n("(Press again to switch)")
+                    confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to switch)")
                     onTriggered: root.executeCommand("dm-tool switch-to-greeter")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
@@ -508,7 +508,7 @@ Item {
                 
                 // Save Session (Oturumu Kaydet)
                 PowerButton {
-                    text: i18n("Save Session")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Save Session")
                     iconName: "system-save-session"
                     doubleClickRequired: false
                     onTriggered: root.executeCommand("qdbus org.kde.ksmserver /KSMServer saveCurrentSession")
@@ -527,7 +527,7 @@ Item {
         property string iconName
         property bool doubleClickRequired: false
         property color confirmColor: Kirigami.Theme.highlightColor
-        property string confirmMessage: i18n("(Press again)")
+        property string confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again)")
         property bool pendingConfirmation: false
         
         signal triggered()

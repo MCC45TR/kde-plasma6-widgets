@@ -7,7 +7,7 @@ import org.kde.plasma.plasma5support as PlasmaSupport
 Kirigami.FormLayout {
     id: configPrefix
     
-    property string title: i18n("Prefixes")
+    property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Prefixes")
     
     // Properties from main.xml
     property bool cfg_prefixDateShowClock: true
@@ -32,33 +32,33 @@ Kirigami.FormLayout {
     // Header
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Prefix View Settings")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Prefix View Settings")
     }
     
     // Date View Settings
     Label {
-        text: i18n("Date View (date:)")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date View (date:)")
         font.bold: true
         Layout.fillWidth: true
     }
     
     CheckBox {
         id: showClockCheck
-        text: i18n("Show Large Clock")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Large Clock")
         checked: cfg_prefixDateShowClock
         onToggled: cfg_prefixDateShowClock = checked
     }
     
     CheckBox {
         id: showEventsCheck
-        text: i18n("Show Calendar Events")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Calendar Events")
         checked: cfg_prefixDateShowEvents
         onToggled: cfg_prefixDateShowEvents = checked
     }
     
     // Power View Settings
     Label {
-        text: i18n("Power View (power:)")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Power View (power:)")
         font.bold: true
         Layout.fillWidth: true
         Layout.topMargin: 10
@@ -66,14 +66,14 @@ Kirigami.FormLayout {
     
     CheckBox {
         id: showSleepCheck
-        text: i18n("Show Sleep Button")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Sleep Button")
         checked: cfg_prefixPowerShowSleep
         onToggled: cfg_prefixPowerShowSleep = checked
     }
     
     CheckBox {
         id: showHibernateCheck
-        text: i18n("Show Hibernate Button")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show Hibernate Button")
         checked: cfg_prefixPowerShowHibernate
         onToggled: cfg_prefixPowerShowHibernate = checked
         enabled: canHibernate
@@ -84,7 +84,7 @@ Kirigami.FormLayout {
         padding: 0
         leftPadding: 30 // Indent to align with checkbox text roughly
         visible: !canHibernate
-        text: i18n("(Swap partition size is smaller than RAM or no swap found)")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Swap partition size is smaller than RAM or no swap found)")
         color: Kirigami.Theme.disabledTextColor
         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
         Layout.fillWidth: true
@@ -94,7 +94,7 @@ Kirigami.FormLayout {
 
     CheckBox {
         id: showBootOptionsSearch
-        text: i18n("Show boot options in Reboot button")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show boot options in Reboot button")
         checked: cfg_showBootOptions
         onToggled: cfg_showBootOptions = checked
         enabled: canReboot
@@ -104,7 +104,7 @@ Kirigami.FormLayout {
     Label {
         padding: 0
         leftPadding: 30
-        text: i18n("Note: Systemd boot is required for this feature")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Note: Systemd boot is required for this feature")
         color: Kirigami.Theme.disabledTextColor
         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
         Layout.fillWidth: true
@@ -112,11 +112,11 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Available Prefixes Reference")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Available Prefixes Reference")
     }
     
     Label {
-        text: i18n("These prefixes can be used to perform specific actions directly from the search bar.")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "These prefixes can be used to perform specific actions directly from the search bar.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         opacity: 0.7
@@ -138,7 +138,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("List files modified today")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "List files modified today")
             Layout.fillWidth: true
         }
 
@@ -150,7 +150,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Search on Google")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on Google")
             Layout.fillWidth: true
         }
         
@@ -162,7 +162,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Search on DuckDuckGo")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on DuckDuckGo")
             Layout.fillWidth: true
         }
         
@@ -174,7 +174,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Show calendar and date information")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar and date information")
             Layout.fillWidth: true
         }
         
@@ -186,7 +186,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Show large clock")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show large clock")
             Layout.fillWidth: true
         }
         
@@ -198,7 +198,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Show power management options (Shutdown, Reboot, etc.)")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show power management options (Shutdown, Reboot, etc.)")
             Layout.fillWidth: true
         }
         
@@ -210,7 +210,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Show this help screen")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show this help screen")
             Layout.fillWidth: true
         }
         
@@ -222,7 +222,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Terminate running processes")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Terminate running processes")
             Layout.fillWidth: true
         }
         
@@ -234,7 +234,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Check spelling of a word")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Check spelling of a word")
             Layout.fillWidth: true
         }
         
@@ -246,7 +246,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Execute shell commands")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Execute shell commands")
             Layout.fillWidth: true
         }
 
@@ -258,7 +258,7 @@ Kirigami.FormLayout {
             color: Kirigami.Theme.highlightColor
         }
         Label {
-            text: i18n("Convert units (requires KRunner installed)")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Convert units (requires KRunner installed)")
             Layout.fillWidth: true
         }
     }
@@ -268,7 +268,7 @@ Kirigami.FormLayout {
     Kirigami.InlineMessage {
         Layout.fillWidth: true
         type: Kirigami.MessageType.Information
-        text: i18n("Note: Some prefixes (like unit conversion) depend on installed KRunner runners.")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Note: Some prefixes (like unit conversion) depend on installed KRunner runners.")
         visible: true
     }
 }

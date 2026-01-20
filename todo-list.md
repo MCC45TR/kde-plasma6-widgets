@@ -42,7 +42,7 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 
 ## 🔍 File Finder (File Search)
 - [x] UI Modülerleştirmesi (CompactView, ResultsListView vb.)
-- [x] Senkron Lokalizasyon Sistemi
+- [x] Senkron Lokalizasyon Sistemi ve eksik çevirilerin tamamlanması (v1.2.1)
 - [x] Geçmiş Yönetimi Modülü
 - [x] Kategori Filtreleme (kategori başlığına tıklayarak gizle/göster)
 - [x] Klavye Navigasyonu (temel destek)
@@ -66,6 +66,7 @@ Bu dosya, Plasma 6 Widget projesindeki her bir bileşen için potansiyel iyileş
 - [x] Dosya / klasör pinleme
 - [x] Aramadan bağımsız üstte gösterim
 - [x] Activity-aware pinleme
+- [x] Arama yapıldığında pinlenmiş ögeleri otomatik olarak minimize etmeyi sağlayan ayar
 ### 🕓 Arama Oturumu Snapshot
 - [ ] Aramayı kaydetme (history’den bağımsız)
 - [ ] Donmuş sonuç seti

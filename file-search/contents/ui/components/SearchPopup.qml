@@ -54,6 +54,7 @@ Item {
     property bool prefixPowerShowHibernate: false
     property bool prefixPowerShowSleep: true
     property bool showPinnedBar: true
+    property bool autoMinimizePinned: false
 
     // property var trFunc removed
     
@@ -257,7 +258,7 @@ Item {
         if (!text) return false;
         var t = text.toLowerCase();
         // Only specific full-view modes hide the results list
-        return t === "date:" || t === "clock:" || t === "power:" || t === "help:" || t === i18n("date") + ":" || t === i18n("clock") + ":" || t === i18n("power") + ":" || t === i18n("help") + ":";
+        return t === "date:" || t === "clock:" || t === "power:" || t === "help:" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "date") + ":" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "clock") + ":" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "power") + ":" || t === i18nd("plasma_applet_com.mcc45tr.filesearch", "help") + ":";
     }
 
     function getEffectiveQuery(text) {
@@ -269,12 +270,12 @@ Item {
         // 1. Check for "unit:"
         if (t.toLowerCase().startsWith("unit:")) return t.substring(5).trim()
         // Localized
-        var locUnit = i18n("unit")
+        var locUnit = i18nd("plasma_applet_com.mcc45tr.filesearch", "unit")
         if (locUnit && t.toLowerCase().startsWith(locUnit + ":")) return t.substring(locUnit.length + 1).trim()
         
         // 2. Check for "date:" or "clock:"
-        var locDate = i18n("date")
-        var locClock = i18n("clock")
+        var locDate = i18nd("plasma_applet_com.mcc45tr.filesearch", "date")
+        var locClock = i18nd("plasma_applet_com.mcc45tr.filesearch", "clock")
         
         // Check for "clock:"
         if (t.toLowerCase() === "clock:" || (locClock && t.toLowerCase() === locClock + ":")) return "clock:"
@@ -283,23 +284,23 @@ Item {
         if (t.toLowerCase() === "date:" || (locDate && t.toLowerCase() === locDate + ":")) return "date:"
         
         // 3. Check for "help:"
-        var locHelp = i18n("help")
+        var locHelp = i18nd("plasma_applet_com.mcc45tr.filesearch", "help")
         if (locHelp && t.toLowerCase() === locHelp + ":") return "help:"
 
         // 4. Check for "kill"
-        var locKill = i18n("kill")
+        var locKill = i18nd("plasma_applet_com.mcc45tr.filesearch", "kill")
         if (locKill && t.toLowerCase().startsWith(locKill + " ")) return "kill " + t.substring(locKill.length + 1)
 
         // 5. Check for "spell"
-        var locSpell = i18n("spell")
+        var locSpell = i18nd("plasma_applet_com.mcc45tr.filesearch", "spell")
         if (locSpell && t.toLowerCase().startsWith(locSpell + " ")) return "spell " + t.substring(locSpell.length + 1)
         
         // 6. Check for "shell:"
-        var locShell = i18n("shell")
+        var locShell = i18nd("plasma_applet_com.mcc45tr.filesearch", "shell")
         if (locShell && t.toLowerCase().startsWith(locShell + ":")) return "shell:" + t.substring(locShell.length + 1)
         
         // 7. Check for "power:"
-        var locPower = i18n("power")
+        var locPower = i18nd("plasma_applet_com.mcc45tr.filesearch", "power")
         if (t.toLowerCase() === "power:" || (locPower && t.toLowerCase() === locPower + ":")) return "power:"
 
         return t
@@ -371,7 +372,7 @@ Item {
         bgColor: popupRoot.bgColor
         textColor: popupRoot.textColor
         accentColor: popupRoot.accentColor
-        placeholderText: i18n("Search Here")
+        placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Here")
         resultCount: tileData.resultCount
         resultsModel: resultsModel
         
@@ -404,7 +405,7 @@ Item {
                  buttonModeSearchInput.clear();
                  requestExpandChange(false);
              }
-        }
+         }
         
         onEscapePressed: {
              requestSearchTextUpdate("");
@@ -473,6 +474,16 @@ Item {
         }
     }
     
+    onSearchTextChanged: {
+        if (autoMinimizePinned && pinnedLoader.item) {
+            if (searchText.length > 0) {
+                pinnedLoader.item.isExpanded = false
+            } else {
+                pinnedLoader.item.isExpanded = true
+            }
+        }
+    }
+
     // Pinned Section (Loader)
     Loader {
         id: pinnedLoader
@@ -723,13 +734,13 @@ Item {
          active: popupRoot.expanded && searchText.length === 0 && logic.searchHistory.length > 0
          
          property var categorizedHistory: []
-         onActiveChanged: if(active) categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18n("Applications"), i18n("Other"))
+         onActiveChanged: if(active) categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other"))
          
          Connections {
              target: logic
              function onHistoryForceUpdate() {
                  if (historyLoader.status === Loader.Ready) {
-                      historyLoader.categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18n("Applications"), i18n("Other"))
+                      historyLoader.categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other"))
                  }
              }
          }

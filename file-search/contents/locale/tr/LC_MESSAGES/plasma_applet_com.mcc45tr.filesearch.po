@@ -234,21 +234,20 @@ msgstr ""
 #: contents/ui/config/ConfigGeneral.qml:363
 #: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
 #: contents/ui/config/ConfigPrefix.qml:98
-#, fuzzy
 msgid "List files modified today"
-msgstr "Bugün değiştirilen dosyalar"
+msgstr "Bugün değiştirilen dosyaları listele"
 
 #: contents/ui/config/ConfigGeneral.qml:375
 #: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
 #: contents/ui/config/ConfigPrefix.qml:110
 msgid "Search on Google"
-msgstr ""
+msgstr "Google'da Ara"
 
 #: contents/ui/config/ConfigGeneral.qml:387
 #: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
 #: contents/ui/config/ConfigPrefix.qml:122
 msgid "Search on DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo'da Ara"
 
 #: contents/ui/config/ConfigGeneral.qml:399
 #: contents/ui/config/ConfigPrefix.qml:134
@@ -261,9 +260,8 @@ msgid "Show large clock"
 msgstr "Büyük saati göster"
 
 #: contents/ui/config/ConfigGeneral.qml:423
-#, fuzzy
 msgid "Show power management options"
-msgstr "Güç yönetimi seçeneklerini göster (Kapat, Yeniden Başlat vb.)"
+msgstr "Güç yönetimi seçeneklerini göster"
 
 #: contents/ui/config/ConfigGeneral.qml:435
 #: contents/ui/config/ConfigPrefix.qml:170
@@ -286,7 +284,6 @@ msgid "Execute shell commands"
 msgstr "Kabuk komutlarını çalıştır"
 
 #: contents/ui/config/ConfigGeneral.qml:483
-#, fuzzy
 msgid "Convert units (requires KRunner)"
 msgstr "Birimleri dönüştür (KRunner gereklidir)"
 
@@ -337,27 +334,23 @@ msgid "Description"
 msgstr "Açıklama"
 
 #: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
-#, fuzzy
 msgid "Terminate processes"
-msgstr "Çalışan işlemleri sonlandır"
+msgstr "İşlemleri sonlandır"
 
 #: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
-#, fuzzy
 msgid "Check spelling"
-msgstr "Kelimelerin yazımını kontrol et"
+msgstr "Yazım denetimi yap"
 
 #: contents/ui/config/ConfigSearch.qml:78
 #, fuzzy
 msgid "Search Unicode characters"
 msgstr "Unicode karakter"
 
-#: contents/ui/config/ConfigDebug.qml:68
-#, fuzzy
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
 msgstr ""
-"Bu sekme sadece Geliştirici modunda aktif olur. Profili Görünüm sekmesinden "
+"Bu sekme sadece Geliştirici modunda etkindir. Profili Genel ayarlarından "
 "değiştirin."
 
 #: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
@@ -432,15 +425,12 @@ msgstr "Ortalama Gecikme"
 msgid "History Sample"
 msgstr "Geçmiş Örnekleri"
 
-#: contents/ui/config/ConfigDebug.qml:207
-#, fuzzy
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
 msgstr ""
-"Gizlilik Bildirimi: Toplanan tüm debug ve telemetri verileri SADECE yerel "
-"olarak saklanır (~/.config/plasma-org.kde.plasma.desktop-appletsrc). "
-"İnternete hiçbir veri gönderilmez."
+"Gizlilik Bildirimi: Tüm hata ayıklama ve telemetri verileri SADECE yerel "
+"olarak saklanır. İnternete hiçbir veri gönderilmez."
 
 #: contents/ui/config/ConfigDebug.qml:281
 #, fuzzy
@@ -481,24 +471,20 @@ msgid "Search Prefixes"
 msgstr "Arama Prefix'leri"
 
 #: contents/ui/config/ConfigHelp.qml:125
-#, fuzzy
 msgid "User Profiles"
-msgstr "Kullanıcı Profili"
+msgstr "Kullanıcı Profilleri"
 
 #: contents/ui/config/ConfigHelp.qml:129
-#, fuzzy
 msgid "A simplified interface with essential features."
-msgstr "Basit arayüz, temel özellikler"
+msgstr "Temel özelliklere sahip basitleştirilmiş bir arayüz."
 
 #: contents/ui/config/ConfigHelp.qml:135
-#, fuzzy
 msgid "Debug tab active, developer features enabled."
-msgstr "Debug sekmesi aktif, geliştirici özellikleri"
+msgstr "Hata ayıklama sekmesi aktif, geliştirici özellikleri etkin."
 
 #: contents/ui/config/ConfigHelp.qml:141
-#, fuzzy
 msgid "All features active, advanced settings available."
-msgstr "Tüm özellikler aktif, gelişmiş ayarlar"
+msgstr "Tüm özellikler etkin, gelişmiş ayarlar mevcut."
 
 #: contents/ui/config/ConfigCategories.qml:145
 msgid "Algorithm Settings"
@@ -1057,6 +1043,28 @@ msgstr "Boot girdilerini tara"
 
 msgid "Refresh boot entries"
 msgstr "Boot girdilerini yenile"
+
+msgid "Minimize automatically when searching"
+msgstr "Arama yapıldığında otomatik olarak küçült"
+
+msgid "Search on Wikipedia"
+msgstr "Wikipedia'da Ara"
+
+msgid "Minimal - A simplified interface with essential features."
+msgstr "Minimal - Temel özelliklere sahip basitleştirilmiş bir arayüz."
+
+msgid "Developer - Debug tab active, developer features enabled."
+msgstr ""
+"Geliştirici - Hata ayıklama sekmesi aktif, geliştirici özellikleri etkin."
+
+msgid "Power User - All features active, advanced settings available."
+msgstr "Power User - Tüm özellikler etkin, gelişmiş ayarlar mevcut."
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "Docs"
+msgstr "Belgeler"
 
 #~ msgid "Results Preview"
 #~ msgstr "Sonuç Önizleme"

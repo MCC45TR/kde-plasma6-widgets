@@ -6,7 +6,7 @@ import org.kde.kirigami as Kirigami
 Kirigami.FormLayout {
     id: configHelp
     
-    property string title: i18n("Help")
+    property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help")
     
     // Define all config properties to avoid "Setting initial properties failed" warnings
     property int cfg_displayMode: 1
@@ -58,99 +58,99 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Keyboard Shortcuts")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Keyboard Shortcuts")
     }
     
     Label {
-        text: "• ↑↓←→ - " + i18n("Navigate between results")
+        text: "• ↑↓←→ - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Navigate between results")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Tab / Shift+Tab - " + i18n("Navigate between sections")
+        text: "• Tab / Shift+Tab - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Navigate between sections")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Ctrl+1 / Ctrl+2 - " + i18n("List / Tile view")
+        text: "• Ctrl+1 / Ctrl+2 - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "List / Tile view")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Ctrl+Space - " + i18n("Toggle file preview")
+        text: "• Ctrl+Space - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Toggle file preview")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Enter - " + i18n("Open selected item")
+        text: "• Enter - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Open selected item")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Esc - " + i18n("Close widget")
-        wrapMode: Text.Wrap
-        Layout.fillWidth: true
-    }
-    
-    Kirigami.Separator {
-        Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Search Prefixes")
-    }
-    
-    Label {
-        text: "• timeline:/today - " + i18n("List files modified today")
-        wrapMode: Text.Wrap
-        Layout.fillWidth: true
-    }
-    
-    Label {
-        text: "• gg:search - " + i18n("Search on Google")
-        wrapMode: Text.Wrap
-        Layout.fillWidth: true
-    }
-    
-    Label {
-        text: "• dd:search - " + i18n("Search on DuckDuckGo")
-        wrapMode: Text.Wrap
-        Layout.fillWidth: true
-    }
-    
-    Label {
-        text: "• kill app - " + i18n("Terminate processes")
-        wrapMode: Text.Wrap
-        Layout.fillWidth: true
-    }
-    
-    Label {
-        text: "• spell word - " + i18n("Check spelling")
+        text: "• Esc - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Close widget")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("User Profiles")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Prefixes")
     }
     
     Label {
-        text: "• Minimal - " + i18n("A simplified interface with essential features.")
+        text: "• timeline:/today - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "List files modified today")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Developer - " + i18n("Debug tab active, developer features enabled.")
+        text: "• gg:search - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on Google")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }
     
     Label {
-        text: "• Power User - " + i18n("All features active, advanced settings available.")
+        text: "• dd:search - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on DuckDuckGo")
+        wrapMode: Text.Wrap
+        Layout.fillWidth: true
+    }
+    
+    Label {
+        text: "• kill app - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Terminate processes")
+        wrapMode: Text.Wrap
+        Layout.fillWidth: true
+    }
+    
+    Label {
+        text: "• spell word - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Check spelling")
+        wrapMode: Text.Wrap
+        Layout.fillWidth: true
+    }
+    
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "User Profiles")
+    }
+    
+    Label {
+        text: "• Minimal - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "A simplified interface with essential features.")
+        wrapMode: Text.Wrap
+        Layout.fillWidth: true
+    }
+    
+    Label {
+        text: "• Developer - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Debug tab active, developer features enabled.")
+        wrapMode: Text.Wrap
+        Layout.fillWidth: true
+    }
+    
+    Label {
+        text: "• Power User - " + i18nd("plasma_applet_com.mcc45tr.filesearch", "All features active, advanced settings available.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
     }

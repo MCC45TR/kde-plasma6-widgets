@@ -20,7 +20,7 @@ FocusScope {
     signal clearClicked()
     
     // Localization removed
-    // Use standard i18n()
+    // Use standard i18nd("plasma_applet_com.mcc45tr.filesearch", )
     
     // Navigation state
     property var collapsedCategories: ({})
@@ -240,7 +240,7 @@ FocusScope {
         height: 32
         
         Text {
-            text: i18n("Recent Searches")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Recent Searches")
             font.pixelSize: 13
             font.bold: true
             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
@@ -260,7 +260,7 @@ FocusScope {
             Text {
                 id: clearBtnText
                 anchors.centerIn: parent
-                text: i18n("Clear History")
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Clear History")
                 font.pixelSize: 11
                 color: historyTile.textColor
             }

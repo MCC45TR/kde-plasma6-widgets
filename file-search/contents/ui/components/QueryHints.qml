@@ -37,39 +37,39 @@ Rectangle {
     readonly property var knownPrefixes: [
         { 
             prefix: "timeline:/", 
-            hint: i18n("Timeline View"), 
+            hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Timeline View"), 
             icon: "view-calendar",
             options: [
-                { label: i18n("Calendar"), value: "timeline:/calendar/" },
-                { label: i18n("Today"), value: "timeline:/today" },
-                { label: i18n("Yesterday"), value: "timeline:/yesterday" },
-                { label: i18n("This Week"), value: "timeline:/thisweek" },
-                { label: i18n("This Month"), value: "timeline:/thismonth" }
+                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Calendar"), value: "timeline:/calendar/" },
+                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Today"), value: "timeline:/today" },
+                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Yesterday"), value: "timeline:/yesterday" },
+                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "This Week"), value: "timeline:/thisweek" },
+                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "This Month"), value: "timeline:/thismonth" }
             ]
         },
         // Specific timeline shortcuts (still needed for direct hits)
-        { prefix: "timeline:/today", hint: i18n("Files modified today"), icon: "view-calendar-day" },
-        { prefix: "timeline:/yesterday", hint: i18n("Files modified yesterday"), icon: "view-calendar-day" },
-        { prefix: "timeline:/thisweek", hint: i18n("Files modified this week"), icon: "view-calendar-week" },
-        { prefix: "timeline:/thismonth", hint: i18n("Files modified this month"), icon: "view-calendar-month" },
+        { prefix: "timeline:/today", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Files modified today"), icon: "view-calendar-day" },
+        { prefix: "timeline:/yesterday", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Files modified yesterday"), icon: "view-calendar-day" },
+        { prefix: "timeline:/thisweek", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Files modified this week"), icon: "view-calendar-week" },
+        { prefix: "timeline:/thismonth", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Files modified this month"), icon: "view-calendar-month" },
         
-        { prefix: "file:/", hint: i18n("File Path Search"), icon: "folder", localeBase: "file" },
-        { prefix: "man:/", hint: i18n("Man Pages"), icon: "help-contents", localeBase: "man" },
-        { prefix: "gg:", hint: i18n("Google Search"), icon: "google", localeBase: "google" },
-        { prefix: "dd:", hint: i18n("DuckDuckGo Search"), icon: "internet-web-browser", localeBase: "ddg" },
-        { prefix: "wp:", hint: i18n("Wikipedia Search"), icon: "wikipedia", localeBase: "wikipedia" },
-        { prefix: "kill ", hint: i18n("Kill Process"), icon: "process-stop", localeBase: "kill" },
-        { prefix: "spell ", hint: i18n("Spell Check"), icon: "tools-check-spelling", localeBase: "spell" },
-        { prefix: "#", hint: i18n("Unicode Characters"), icon: "character-set", localeBase: "unicode" },
-        { prefix: "app:", hint: i18n("Applications"), icon: "applications-all", localeBase: "app" },
-        { prefix: "shell:", hint: i18n("Shell Commands"), icon: "utilities-terminal", localeBase: "shell" },
-        { prefix: "b:", hint: i18n("Bookmarks"), icon: "bookmarks", localeBase: "bookmarks" },
-        { prefix: "power:", hint: i18n("Power Management"), icon: "system-shutdown", localeBase: "power" },
-        { prefix: "services:", hint: i18n("System Services"), icon: "preferences-system", localeBase: "services" },
-        { prefix: "date", hint: i18n("Date and Time"), icon: "alarm-clock", localeBase: "date" },
-        { prefix: "define:", hint: i18n("Dictionary Definition"), icon: "accessories-dictionary", localeBase: "define" },
-        { prefix: "unit:", hint: i18n("Unit Converter"), icon: "accessories-calculator", localeBase: "unit" },
-        { prefix: "help:", hint: i18n("Help & Shortcuts"), icon: "help-about", localeBase: "help" }
+        { prefix: "file:/", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Path Search"), icon: "folder", localeBase: "file" },
+        { prefix: "man:/", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Man Pages"), icon: "help-contents", localeBase: "man" },
+        { prefix: "gg:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on Google"), icon: "google", localeBase: "google" },
+        { prefix: "dd:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on DuckDuckGo"), icon: "internet-web-browser", localeBase: "ddg" },
+        { prefix: "wp:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search on Wikipedia"), icon: "wikipedia", localeBase: "wikipedia" },
+        { prefix: "kill ", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Terminate processes"), icon: "process-stop", localeBase: "kill" },
+        { prefix: "spell ", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Check spelling"), icon: "tools-check-spelling", localeBase: "spell" },
+        { prefix: "#", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unicode Characters"), icon: "character-set", localeBase: "unicode" },
+        { prefix: "app:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), icon: "applications-all", localeBase: "app" },
+        { prefix: "shell:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Shell Commands"), icon: "utilities-terminal", localeBase: "shell" },
+        { prefix: "b:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Bookmarks"), icon: "bookmarks", localeBase: "bookmarks" },
+        { prefix: "power:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show power management options"), icon: "system-shutdown", localeBase: "power" },
+        { prefix: "services:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "System Services"), icon: "preferences-system", localeBase: "services" },
+        { prefix: "date", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar and date information"), icon: "alarm-clock", localeBase: "date" },
+        { prefix: "define:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Dictionary Definition"), icon: "accessories-dictionary", localeBase: "define" },
+        { prefix: "unit:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Convert units (requires KRunner)"), icon: "accessories-calculator", localeBase: "unit" },
+        { prefix: "help:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show this help screen"), icon: "help-about", localeBase: "help" }
     ]
     
     // Helper for date formatting
@@ -125,15 +125,15 @@ Rectangle {
                 label = dayName;
             }
             
-            if (i === 0) val = baseQuery + i18n("Today");
-            else if (i === 1) val = baseQuery + i18n("Yesterday");
-            else if (i === 2) val = baseQuery + i18n("Two days ago");
+            if (i === 0) val = baseQuery + i18nd("plasma_applet_com.mcc45tr.filesearch", "Today");
+            else if (i === 1) val = baseQuery + i18nd("plasma_applet_com.mcc45tr.filesearch", "Yesterday");
+            else if (i === 2) val = baseQuery + i18nd("plasma_applet_com.mcc45tr.filesearch", "Two days ago");
              
             options.push({ 
                 label: label, 
                 value: val,
                 // These are used for button labels
-                displayLabel: (i===0 ? i18n("Today") : (i===1 ? i18n("Yesterday") : (i===2 ? i18n("Two days ago") : dayName)))
+                displayLabel: (i===0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Today") : (i===1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Yesterday") : (i===2 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Two days ago") : dayName)))
             });
         }
         return options;
@@ -159,10 +159,10 @@ Rectangle {
              
              // Check localized prefix (simple approximation using i18n of the localeBase)
              // This assumes the translated "file" corresponds to the prefix.
-             // e.g. i18n("file") -> "dosya". user types "dosya:/"
+             // e.g. i18nd("plasma_applet_com.mcc45tr.filesearch", "file") -> "dosya". user types "dosya:/"
              var localizedP = "";
              if (p.localeBase) {
-                 var locKeyVal = i18n(p.localeBase); // e.g. "dosya"
+                 var locKeyVal = i18nd("plasma_applet_com.mcc45tr.filesearch", p.localeBase); // e.g. "dosya"
                  if (locKeyVal && locKeyVal !== p.localeBase) {
                       // Reconstruct suffix style
                       var suffix = "";
@@ -214,7 +214,7 @@ Rectangle {
                   if (slashes >= 3) {
                        return {
                             show: true,
-                            text: i18n("Browse calendar"),
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Browse calendar"),
                             icon: "view-calendar-day",
                             isError: false,
                             prefix: query, 
@@ -224,7 +224,7 @@ Rectangle {
                   
                    return {
                         show: true,
-                        text: i18n("Browse calendar"),
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Browse calendar"),
                         icon: "view-calendar-month",
                         isError: false,
                         prefix: matchedPrefix,
@@ -238,7 +238,7 @@ Rectangle {
              
              // Check for Man page installation
              if (bestMatch.prefix === "man:/" && logic && !logic.manInstalled) {
-                 return { show: true, text: i18n("Man pages not installed"), icon: "dialog-error", isError: true, prefix: matchedPrefix }
+                 return { show: true, text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Man pages not installed"), icon: "dialog-error", isError: true, prefix: matchedPrefix }
              }
              
              var baseHint = bestMatch.hint;
@@ -279,7 +279,7 @@ Rectangle {
                  if (kp.prefix.toLowerCase().startsWith(potentialPrefix)) isKnown = true;
                  
                  if (kp.localeBase) {
-                     var locK = i18n(kp.localeBase);
+                     var locK = i18nd("plasma_applet_com.mcc45tr.filesearch", kp.localeBase);
                      if (locK) {
                         var safeLocK = locK.toLowerCase();
                         if ((safeLocK + ":").startsWith(potentialPrefix)) isKnown = true;
@@ -292,7 +292,7 @@ Rectangle {
             if (!isKnown && potentialPrefix !== "file:" && potentialPrefix !== "http:" && potentialPrefix !== "https:") {
                 return {
                     show: true,
-                    text: i18n("Unknown prefix") + ": " + potentialPrefix + " (" + i18n("try") + " 'help:')",
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unknown prefix") + ": " + potentialPrefix + " (" + i18nd("plasma_applet_com.mcc45tr.filesearch", "try") + " 'help:')",
                     icon: "dialog-warning",
                     isError: true
                 }

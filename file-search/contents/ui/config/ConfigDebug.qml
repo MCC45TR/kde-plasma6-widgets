@@ -6,7 +6,7 @@ import org.kde.kirigami as Kirigami
 Kirigami.FormLayout {
     id: debugPage
     
-    property string title: i18n("Debug")
+    property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Debug")
     
     // =========================================================================
     // CONFIGURATION PROPERTIES (Injectibles)
@@ -65,7 +65,7 @@ Kirigami.FormLayout {
     // Warning if not in Developer mode
     Label {
         visible: cfg_userProfile !== 1
-        text: "⚠️ " + i18n("This tab is only active in Developer mode. Change profile in General settings.")
+        text: "⚠️ " + i18nd("plasma_applet_com.mcc45tr.filesearch", "This tab is only active in Developer mode. Change profile in General settings.")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         color: Kirigami.Theme.negativeTextColor
@@ -74,20 +74,20 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Debug Settings")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Debug Settings")
     }
     
     // Debug Overlay Toggle
     Switch {
         id: debugOverlayToggle
-        Kirigami.FormData.label: i18n("Debug Overlay")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Debug Overlay")
         checked: debugPage.cfg_debugOverlay
         enabled: cfg_userProfile === 1
         onToggled: debugPage.cfg_debugOverlay = checked
     }
     
     Label {
-        text: i18n("Show debug info on widget (active mode, item count, index source)")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show debug info on widget (active mode, item count, index source)")
         wrapMode: Text.Wrap
         Layout.fillWidth: true
         opacity: 0.7
@@ -96,7 +96,7 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Debug Data")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Debug Data")
     }
     
     // Debug Data Display
@@ -106,49 +106,49 @@ Kirigami.FormLayout {
         columnSpacing: 12
         Layout.fillWidth: true
         
-        Label { text: i18n("Timestamp") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Timestamp") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: new Date().toISOString(); font.family: "Monospace" }
         
-        Label { text: i18n("Locale") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Locale") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: debugPage.currentLocale; font.family: "Monospace" }
         
-        Label { text: i18n("User Profile") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "User Profile") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: cfg_userProfile === 0 ? "Minimal (0)" : (cfg_userProfile === 1 ? "Developer (1)" : "Power User (2)")
             font.family: "Monospace" 
         }
         
-        Label { text: i18n("Display Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Display Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: cfg_displayMode === 0 ? "Button (0)" : (cfg_displayMode === 1 ? "Medium (1)" : (cfg_displayMode === 2 ? "Wide (2)" : "Extra Wide (3)"))
             font.family: "Monospace" 
         }
         
-        Label { text: i18n("View Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "View Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: cfg_viewMode === 0 ? "List (0)" : "Tile (1)"
             font.family: "Monospace" 
         }
         
-        Label { text: i18n("Tile Icon Size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Tile Icon Size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_iconSize + " px"; font.family: "Monospace" }
         
-        Label { text: i18n("List Icon Size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "List Icon Size") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_listIconSize + " px"; font.family: "Monospace" }
         
-        Label { text: i18n("Enable Preview") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Preview") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_previewEnabled ? "true" : "false"; font.family: "Monospace" }
         
-        Label { text: i18n("Debug Overlay") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Debug Overlay") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { text: cfg_debugOverlay ? "true" : "false"; font.family: "Monospace" }
         
-        Label { text: i18n("History Count") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "History Count") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             id: historyCountLabel
             text: {
                 try {
                     var hist = JSON.parse(cfg_searchHistory || "[]")
-                    return hist.length + " " + i18n("items")
+                    return hist.length + " " + i18nd("plasma_applet_com.mcc45tr.filesearch", "items")
                 } catch(e) {
                     return "Error: " + e.message
                 }
@@ -159,7 +159,7 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Telemetry")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Telemetry")
     }
     
     GridLayout {
@@ -168,7 +168,7 @@ Kirigami.FormLayout {
         columnSpacing: 12
         Layout.fillWidth: true
         
-        Label { text: i18n("Total Searches") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Total Searches") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: {
                 try {
@@ -179,7 +179,7 @@ Kirigami.FormLayout {
             font.family: "Monospace" 
         }
         
-        Label { text: i18n("Avg Latency") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
+        Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Avg Latency") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
             text: {
                 try {
@@ -193,14 +193,14 @@ Kirigami.FormLayout {
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("History Sample")
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "History Sample")
     }
     
     // Privacy Notice
     Kirigami.InlineMessage {
         Layout.fillWidth: true
         type: Kirigami.MessageType.Information
-        text: i18n("Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data is sent to the internet.")
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data is sent to the internet.")
         visible: true
     }
     
@@ -274,7 +274,7 @@ Kirigami.FormLayout {
                         return true
                     }
                 }
-                text: i18n("History is empty")
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "History is empty")
                 opacity: 0.5
                 font.italic: true
             }

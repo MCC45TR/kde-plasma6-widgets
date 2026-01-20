@@ -68,7 +68,7 @@ Item {
                 }
                 
                 Text {
-                    text: i18n("Pinned Items")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Pinned Items")
                     font.pixelSize: 12
                     font.bold: true
                     color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.7)
@@ -320,7 +320,7 @@ Item {
                                 
                                 ToolTip {
                                     visible: tileMouse.containsMouse && !tileMouse.drag.active
-                                    text: modelData.display + "\n" + i18n("Drag to reorder")
+                                    text: modelData.display + "\n" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Drag to reorder")
                                     delay: 500
                                 }
                             }
@@ -339,7 +339,7 @@ Item {
         property int selectedIndex: -1
         
         MenuItem {
-            text: i18n("Open")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open")
             icon.name: "document-open"
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {
@@ -349,7 +349,7 @@ Item {
         }
         
         MenuItem {
-            text: i18n("Copy Path")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
             icon.name: "edit-copy"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
             onTriggered: {
@@ -360,7 +360,7 @@ Item {
         }
         
         MenuItem {
-            text: i18n("Open Containing Folder")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Containing Folder")
             icon.name: "folder-open"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
             onTriggered: {
@@ -373,7 +373,7 @@ Item {
         MenuSeparator {}
         
         MenuItem {
-            text: i18n("Unpin")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unpin")
             icon.name: "window-unpin"
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {

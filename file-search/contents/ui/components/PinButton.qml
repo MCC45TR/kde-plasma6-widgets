@@ -65,7 +65,7 @@ Item {
     
     ToolTip {
         visible: mouseArea.containsMouse
-        text: pinButton.isPinned ? i18n("Unpin") : i18n("Pin")
+        text: pinButton.isPinned ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Unpin") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Pin")
         delay: 500
     }
 }

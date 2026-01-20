@@ -1,5 +1,5 @@
                         Label {
-                            text: i18n("Convert units (requires KRunner)")
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Convert units (requires KRunner)")
                             Layout.fillWidth: true
                         }
                     }

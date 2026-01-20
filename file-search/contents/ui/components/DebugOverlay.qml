@@ -15,7 +15,7 @@ Rectangle {
     
     // Localization
     // Localization removed
-    // Use standard i18n()
+    // Use standard i18nd("plasma_applet_com.mcc45tr.filesearch", )
     
     // Telemetry data
     property int totalSearches: 0
@@ -37,7 +37,7 @@ Rectangle {
         connectedSources: []
         onNewData: (sourceName, data) => {
             disconnectSource(sourceName)
-            saveBtn.text = i18n("Saved!")
+            saveBtn.text = i18nd("plasma_applet_com.mcc45tr.filesearch", "Saved!")
             saveBtnTimer.start()
         }
     }
@@ -45,7 +45,7 @@ Rectangle {
     Timer {
         id: saveBtnTimer
         interval: 2000
-        onTriggered: saveBtn.text = i18n("Save Dump")
+        onTriggered: saveBtn.text = i18nd("plasma_applet_com.mcc45tr.filesearch", "Save Dump")
     }
     
     ColumnLayout {
@@ -54,7 +54,7 @@ Rectangle {
         spacing: 4
         
         Label {
-            text: i18n("Debug Overlay")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Debug Overlay")
             font.bold: true
             font.pixelSize: 10
             color: Kirigami.Theme.highlightColor
@@ -74,33 +74,33 @@ Rectangle {
             columnSpacing: 10
             
             // Current Session
-            Label { text: i18n("Backend") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Backend") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.activeBackend; color: "#00ff00"; font.pixelSize: 10; font.bold: true }
             
-            Label { text: i18n("Items") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Items") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.resultCount.toString(); color: "white"; font.pixelSize: 10 }
             
-            Label { text: i18n("Latency") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Latency") + ":"; color: "white"; font.pixelSize: 10 }
             Label { 
                 text: root.lastLatency + " ms"; 
                 color: root.lastLatency > 150 ? "red" : (root.lastLatency > 50 ? "yellow" : "#00ff00"); 
                 font.pixelSize: 10 
             }
             
-            Label { text: i18n("View") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "View") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.viewModeName; color: "white"; font.pixelSize: 10 }
             
-            Label { text: i18n("Display") + ":"; color: "white"; font.pixelSize: 10 }
+            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Display") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.displayModeName; color: "white"; font.pixelSize: 10 }
 
             // Divider
             Item { Layout.columnSpan: 2; height: 4; width: 1 }
 
             // Telemetry (Persistent)
-            Label { text: i18n("Total Searches") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
+            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Total Searches") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
             Label { text: root.totalSearches.toString(); color: "#aaaaaa"; font.pixelSize: 9 }
 
-            Label { text: i18n("Avg Latency") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
+            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Avg Latency") + ":"; color: "#aaaaaa"; font.pixelSize: 9 }
             Label { text: root.avgLatency + " ms"; color: "#aaaaaa"; font.pixelSize: 9 }
         }
         
@@ -115,7 +115,7 @@ Rectangle {
         // Save Button
         Button {
             id: saveBtn
-            text: i18n("Save Dump")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Save Dump")
             Layout.fillWidth: true
             Layout.preferredHeight: 24
             font.pixelSize: 10

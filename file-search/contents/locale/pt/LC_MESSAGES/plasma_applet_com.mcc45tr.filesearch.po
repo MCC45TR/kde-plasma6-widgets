@@ -1033,6 +1033,21 @@ msgstr ""
 msgid "Fully Rounded"
 msgstr ""
 
+msgid "Minimize automatically when searching"
+msgstr ""
+
+msgid "Search on Wikipedia"
+msgstr ""
+
+msgid "Minimal - A simplified interface with essential features."
+msgstr ""
+
+msgid "Developer - Debug tab active, developer features enabled."
+msgstr ""
+
+msgid "Power User - All features active, advanced settings available."
+msgstr ""
+
 #~ msgid "Results Preview"
 #~ msgstr "Pré-visualização de resultados"
 
