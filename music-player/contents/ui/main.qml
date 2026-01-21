@@ -194,7 +194,7 @@ PlasmoidItem {
         Rectangle {
             id: mainRect
             anchors.fill: parent
-            anchors.margins: 10
+            anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
             color: Kirigami.Theme.backgroundColor
             radius: 20
             clip: true

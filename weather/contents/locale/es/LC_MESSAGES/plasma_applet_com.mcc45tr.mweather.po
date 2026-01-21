@@ -2,12 +2,13 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 
 msgid "Settings"
-msgstr "Configuración"
+msgstr "Ajustes"
 
 msgid "Weather Provider"
-msgstr "Proveedor meteorológico"
+msgstr "Proveedor Meteorológico"
 
 msgid "Location"
 msgstr "Ubicación"
@@ -21,6 +22,9 @@ msgstr "Introducir manualmente"
 msgid "Units"
 msgstr "Unidades"
 
+msgid "Units:"
+msgstr "Unidades:"
+
 msgid "Use system units"
 msgstr "Usar unidades del sistema"
 
@@ -33,6 +37,9 @@ msgstr "Imperial (°F)"
 msgid "Refresh Interval"
 msgstr "Intervalo de actualización"
 
+msgid "Refresh Interval:"
+msgstr "Intervalo de actualización:"
+
 msgid "Appearance"
 msgstr "Apariencia"
 
@@ -43,7 +50,7 @@ msgid "Daily Forecast"
 msgstr "Pronóstico diario"
 
 msgid "Hourly Forecast"
-msgstr "Pronóstico por hora"
+msgstr "Pronóstico por horas"
 
 msgid "Refresh"
 msgstr "Actualizar"
@@ -67,31 +74,31 @@ msgid "Today"
 msgstr "Hoy"
 
 msgid "Mon"
-msgstr "Lun"
+msgstr "lun"
 
 msgid "Tue"
-msgstr "Mar"
+msgstr "mar"
 
 msgid "Wed"
-msgstr "Mié"
+msgstr "mié"
 
 msgid "Thu"
-msgstr "Jue"
+msgstr "jue"
 
 msgid "Fri"
-msgstr "Vie"
+msgstr "vie"
 
 msgid "Sat"
-msgstr "Sáb"
+msgstr "sáb"
 
 msgid "Sun"
-msgstr "Dom"
+msgstr "dom"
 
 msgid "Loading weather data..."
-msgstr "Cargando datos del clima..."
+msgstr "Cargando datos meteorológicos..."
 
 msgid "Network error. Check your internet connection."
-msgstr "Error de red. Compruebe su conexión a Internet."
+msgstr "Error de red. Comprueba tu conexión a internet."
 
 msgid "No API key configured."
 msgstr "No hay clave API configurada."
@@ -112,7 +119,7 @@ msgid "Visibility"
 msgstr "Visibilidad"
 
 msgid "Click to close"
-msgstr "Clic para cerrar"
+msgstr "Haz clic para cerrar"
 
 msgid "Clear"
 msgstr "Despejado"
@@ -157,7 +164,7 @@ msgid "Freezing Rain"
 msgstr "Lluvia helada"
 
 msgid "Snow Grains"
-msgstr "Granizo de nieve"
+msgstr "Cinarra"
 
 msgid "Rain Showers"
 msgstr "Chubascos"
@@ -170,3 +177,198 @@ msgstr "Tormenta con granizo"
 
 msgid "Unknown"
 msgstr "Desconocido"
+
+msgid "Simple Panel"
+msgstr "Panel simple"
+
+msgid "Detailed Panel"
+msgstr "Panel detallado"
+
+msgid "Representation:"
+msgstr "Representación:"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "Tamaño de icono (0 = Auto):"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Tamaño de fuente (0 = Auto):"
+
+msgid "Note: Background is always transparent in Panel."
+msgstr "Nota: El fondo es siempre transparente en el panel."
+
+msgid "System Theme"
+msgstr "Tema del sistema"
+
+msgid "Background Settings"
+msgstr "Ajustes de fondo"
+
+msgid "Background Opacity:"
+msgstr "Opacidad del fondo:"
+
+msgid "Font Settings"
+msgstr "Ajustes de fuente"
+
+msgid "Use Default System Font"
+msgstr "Usar fuente predeterminada del sistema"
+
+msgid "Custom Font Family:"
+msgstr "Familia de fuentes personalizada:"
+
+msgid "Automatic"
+msgstr "Automático"
+
+msgid "Small"
+msgstr "Pequeño"
+
+msgid "Wide"
+msgstr "Ancho"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Layout Mode:"
+msgstr "Modo de diseño:"
+
+msgid "Default (Colorful SVG)"
+msgstr "Predeterminado (SVG colorido)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Weather v3 (SVG plano)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Weather v2 (PNG realista)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Weather v1 (PNG clásico)"
+
+msgid "Icon Pack:"
+msgstr "Paquete de iconos:"
+
+msgid "Best free option. No API key required."
+msgstr "Mejor opción gratuita. No se requiere clave API."
+
+msgid "Standard provider. API key required below."
+msgstr "Proveedor estándar. Se requiere clave API abajo."
+
+msgid "Alternative provider. API key required below."
+msgstr "Proveedor alternativo. Se requiere clave API abajo."
+
+msgid "API Keys"
+msgstr "Claves API"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Clave API de OpenWeatherMap:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Introduce tu clave API de OpenWeatherMap"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Clave API de WeatherAPI.com:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Introduce tu clave de WeatherAPI.com"
+
+msgid "City 1:"
+msgstr "Ciudad 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Eje: Madrid, Barcelona, Londres"
+
+msgid "City 2:"
+msgstr "Ciudad 2:"
+
+msgid "Second city (optional)"
+msgstr "Segunda ciudad (opcional)"
+
+msgid "City 3:"
+msgstr "Ciudad 3:"
+
+msgid "Third city (optional)"
+msgstr "Tercera ciudad (opcional)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "Puedes usar el nombre de la ciudad, 'Ciudad,Código de País' o código postal."
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "La ubicación se detectará automáticamente según tu dirección IP."
+
+msgid "15 minutes"
+msgstr "15 minutos"
+
+msgid "30 minutes"
+msgstr "30 minutos"
+
+msgid "45 minutes"
+msgstr "45 minutos"
+
+msgid "1 hour"
+msgstr "1 hora"
+
+msgid "2 hours"
+msgstr "2 horas"
+
+msgid "3 hours"
+msgstr "3 horas"
+
+msgid "4 hours"
+msgstr "4 horas"
+
+msgid "6 hours"
+msgstr "6 horas"
+
+msgid "8 hours"
+msgstr "8 horas"
+
+msgid "12 hours"
+msgstr "12 horas"
+
+msgid "1 day"
+msgstr "1 día"
+
+msgid "Select the visual style for weather icons."
+msgstr "Selecciona el estilo visual para los iconos meteorológicos."
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "Selecciona el estilo visual de los iconos meteorológicos. (Nota: los paquetes más antiguos como v1/v2 pueden carecer de iconos para algunas condiciones)"
+
+msgid "Panel Settings"
+msgstr "Ajustes del panel"
+
+msgid "Forecast Days:"
+msgstr "Días de pronóstico:"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratis, sin clave)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Requiere clave)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Requiere clave)"
+
+msgid "Wind Direction"
+msgstr "Dirección del viento"
+
+msgid "N"
+msgstr "N"
+
+msgid "NE"
+msgstr "NE"
+
+msgid "E"
+msgstr "E"
+
+msgid "SE"
+msgstr "SE"
+
+msgid "S"
+msgstr "S"
+
+msgid "SW"
+msgstr "SO"
+
+msgid "W"
+msgstr "O"
+
+msgid "NW"
+msgstr "NO"

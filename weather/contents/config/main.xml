@@ -110,5 +110,10 @@
       <default>12</default>
       <label>Number of days to show in forecast</label>
     </entry>
+
+    <entry name="edgeMargin" type="Int">
+      <default>10</default>
+      <label>Widget Edge Margin</label>
+    </entry>
   </group>
 </kcfg>

@@ -16,6 +16,7 @@ Item {
     property string cfg_layoutMode
     property int cfg_panelFontSize
     property int cfg_panelIconSize
+    property int cfg_edgeMargin
 
 
 
@@ -54,6 +55,7 @@ Item {
     property string cfg_layoutModeDefault
     property int cfg_panelFontSizeDefault
     property int cfg_panelIconSizeDefault
+    property int cfg_edgeMarginDefault
     
     // Model for icon packs
     property var iconPacksModel: ["default", "system", "google_v3", "google_v2", "google_v1"]
@@ -123,6 +125,23 @@ Item {
                     opacity: 0.7
                     wrapMode: Text.WordWrap // Enable multiline
                     Layout.fillWidth: true
+                }
+                
+                Label {
+                    text: i18n("Widget Margin:")
+                    font.bold: true
+                }
+                
+                ComboBox {
+                    id: edgeMarginCombo
+                    Layout.fillWidth: true
+                    model: [i18n("Normal (10px)"), i18n("Less (5px)"), i18n("None (0px)")]
+                    
+                    onCurrentIndexChanged: {
+                        if (currentIndex === 0) configAppearance.cfg_edgeMargin = 10
+                        else if (currentIndex === 1) configAppearance.cfg_edgeMargin = 5
+                        else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
+                    }
                 }
 
             }
@@ -302,5 +321,12 @@ Item {
 
          // Initialize Icon Size
          iconSizeSpin.value = plasmoid.configuration.panelIconSize !== undefined ? plasmoid.configuration.panelIconSize : 0
+         
+         // Initialize Edge Margin
+         var margin = plasmoid.configuration.edgeMargin !== undefined ? plasmoid.configuration.edgeMargin : 10
+         if (margin === 10) edgeMarginCombo.currentIndex = 0
+         else if (margin === 5) edgeMarginCombo.currentIndex = 1
+         else if (margin === 0) edgeMarginCombo.currentIndex = 2
+         else edgeMarginCombo.currentIndex = 0
     }
 }

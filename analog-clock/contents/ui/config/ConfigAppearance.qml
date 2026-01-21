@@ -17,6 +17,7 @@ Kirigami.FormLayout {
     property int cfg_fixedWeight
     property int cfg_fixedWidth
     property int cfg_verticalSpacingRatio
+    property int cfg_edgeMargin
 
     CheckBox {
         id: showDigitalCheck
@@ -44,6 +45,18 @@ Kirigami.FormLayout {
             if (currentIndex >= 0 && currentIndex < opacityValues.length) {
                 page.cfg_backgroundOpacity = opacityValues[currentIndex]
             }
+        }
+    }
+
+    ComboBox {
+        id: edgeMarginCombo
+        Kirigami.FormData.label: i18n("Widget Margin:")
+        model: [i18n("Normal (10px)"), i18n("Less (5px)"), i18n("None (0px)")]
+        
+        onActivated: {
+            if (currentIndex === 0) page.cfg_edgeMargin = 10
+            else if (currentIndex === 1) page.cfg_edgeMargin = 5
+            else if (currentIndex === 2) page.cfg_edgeMargin = 0
         }
     }
     
@@ -146,6 +159,13 @@ Kirigami.FormLayout {
                  }
              }
              opacityCombo.currentIndex = closestIdx
+             
+             // Initialize Edge Margin
+             var margin = page.cfg_edgeMargin !== undefined ? page.cfg_edgeMargin : 10
+             if (margin === 10) edgeMarginCombo.currentIndex = 0
+             else if (margin === 5) edgeMarginCombo.currentIndex = 1
+             else if (margin === 0) edgeMarginCombo.currentIndex = 2
+             else edgeMarginCombo.currentIndex = 0
              
              if (page.cfg_customFontFamily) {
                  var fIdx = fontCombo.find(page.cfg_customFontFamily)

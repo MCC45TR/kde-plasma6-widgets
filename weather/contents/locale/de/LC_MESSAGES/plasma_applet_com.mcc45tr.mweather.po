@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 
 msgid "Settings"
 msgstr "Einstellungen"
@@ -21,6 +22,9 @@ msgstr "Manuell eingeben"
 msgid "Units"
 msgstr "Einheiten"
 
+msgid "Units:"
+msgstr "Einheiten:"
+
 msgid "Use system units"
 msgstr "Systemeinheiten verwenden"
 
@@ -32,6 +36,9 @@ msgstr "Imperial (°F)"
 
 msgid "Refresh Interval"
 msgstr "Aktualisierungsintervall"
+
+msgid "Refresh Interval:"
+msgstr "Aktualisierungsintervall:"
 
 msgid "Appearance"
 msgstr "Erscheinungsbild"
@@ -170,3 +177,198 @@ msgstr "Gewitter mit Hagel"
 
 msgid "Unknown"
 msgstr "Unbekannt"
+
+msgid "Simple Panel"
+msgstr "Einfaches Panel"
+
+msgid "Detailed Panel"
+msgstr "Detailliertes Panel"
+
+msgid "Representation:"
+msgstr "Darstellung:"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "Symbolgröße (0 = Auto):"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Schriftgröße (0 = Auto):"
+
+msgid "Note: Background is always transparent in Panel."
+msgstr "Hinweis: Der Hintergrund ist im Panel immer transparent."
+
+msgid "System Theme"
+msgstr "System-Theme"
+
+msgid "Background Settings"
+msgstr "Hintergrund-Einstellungen"
+
+msgid "Background Opacity:"
+msgstr "Hintergrund-Deckkraft:"
+
+msgid "Font Settings"
+msgstr "Schrift-Einstellungen"
+
+msgid "Use Default System Font"
+msgstr "System-Standardschrift verwenden"
+
+msgid "Custom Font Family:"
+msgstr "Benutzerdefinierte Schriftfamilie:"
+
+msgid "Automatic"
+msgstr "Automatisch"
+
+msgid "Small"
+msgstr "Klein"
+
+msgid "Wide"
+msgstr "Breit"
+
+msgid "Large"
+msgstr "Groß"
+
+msgid "Layout Mode:"
+msgstr "Layout-Modus:"
+
+msgid "Default (Colorful SVG)"
+msgstr "Standard (Farbiges SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Weather v3 (Flaches SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Weather v2 (Realistisches PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Weather v1 (Klassisches PNG)"
+
+msgid "Icon Pack:"
+msgstr "Symbolpaket:"
+
+msgid "Best free option. No API key required."
+msgstr "Beste kostenlose Option. Kein API-Schlüssel erforderlich."
+
+msgid "Standard provider. API key required below."
+msgstr "Standardanbieter. API-Schlüssel unten erforderlich."
+
+msgid "Alternative provider. API key required below."
+msgstr "Alternativer Anbieter. API-Schlüssel unten erforderlich."
+
+msgid "API Keys"
+msgstr "API-Schlüssel"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API-Schlüssel:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Geben Sie Ihren OpenWeatherMap API-Schlüssel ein"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API-Schlüssel:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Geben Sie Ihren WeatherAPI.com-Schlüssel ein"
+
+msgid "City 1:"
+msgstr "Stadt 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Bsp: Berlin, München, London"
+
+msgid "City 2:"
+msgstr "Stadt 2:"
+
+msgid "Second city (optional)"
+msgstr "Zweite Stadt (optional)"
+
+msgid "City 3:"
+msgstr "Stadt 3:"
+
+msgid "Third city (optional)"
+msgstr "Dritte Stadt (optional)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "Sie können den Stadtnamen, 'Stadt,Ländercode' oder die Postleitzahl verwenden."
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Der Standort wird basierend auf Ihrer IP-Adresse automatisch erkannt."
+
+msgid "15 minutes"
+msgstr "15 Minuten"
+
+msgid "30 minutes"
+msgstr "30 Minuten"
+
+msgid "45 minutes"
+msgstr "45 Minuten"
+
+msgid "1 hour"
+msgstr "1 Stunde"
+
+msgid "2 hours"
+msgstr "2 Stunden"
+
+msgid "3 hours"
+msgstr "3 Stunden"
+
+msgid "4 hours"
+msgstr "4 Stunden"
+
+msgid "6 hours"
+msgstr "6 Stunden"
+
+msgid "8 hours"
+msgstr "8 Stunden"
+
+msgid "12 hours"
+msgstr "12 Stunden"
+
+msgid "1 day"
+msgstr "1 Tag"
+
+msgid "Select the visual style for weather icons."
+msgstr "Wählen Sie den visuellen Stil für Wetter-Symbole."
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "Wählen Sie den visuellen Stil für Wetter-Symbole aus. (Hinweis: Bei älteren Paketen wie v1/v2 fehlen möglicherweise Symbole für einige Bedingungen)"
+
+msgid "Panel Settings"
+msgstr "Panel-Einstellungen"
+
+msgid "Forecast Days:"
+msgstr "Vorhersagetage:"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Kostenlos, kein Schlüssel erforderlich)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Schlüssel erforderlich)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Schlüssel erforderlich)"
+
+msgid "Wind Direction"
+msgstr "Windrichtung"
+
+msgid "N"
+msgstr "N"
+
+msgid "NE"
+msgstr "NO"
+
+msgid "E"
+msgstr "O"
+
+msgid "SE"
+msgstr "SO"
+
+msgid "S"
+msgstr "S"
+
+msgid "SW"
+msgstr "SW"
+
+msgid "W"
+msgstr "W"
+
+msgid "NW"
+msgstr "NW"

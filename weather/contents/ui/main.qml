@@ -36,6 +36,7 @@ PlasmoidItem {
     readonly property int panelIconSize: Plasmoid.configuration.panelIconSize || 0
     readonly property string layoutMode: Plasmoid.configuration.layoutMode || "auto"
     readonly property int forecastDays: Plasmoid.configuration.forecastDays || 5
+    readonly property int edgeMargin: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
 
     // Layout Mode Detection
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
@@ -263,7 +264,7 @@ PlasmoidItem {
         Rectangle {
             id: mainRect
             anchors.fill: parent
-            anchors.margins: (Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical) ? 0 : 5
+            anchors.margins: (Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical) ? 0 : root.edgeMargin
             color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, root.backgroundOpacity)
             radius: 20
             clip: true

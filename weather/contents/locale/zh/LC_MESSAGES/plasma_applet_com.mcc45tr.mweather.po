@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
 
 msgid "Settings"
 msgstr "设置"
@@ -13,13 +14,16 @@ msgid "Location"
 msgstr "位置"
 
 msgid "Auto-detect from IP"
-msgstr "从IP自动检测"
+msgstr "通过 IP 自动检测"
 
 msgid "Enter manually"
 msgstr "手动输入"
 
 msgid "Units"
 msgstr "单位"
+
+msgid "Units:"
+msgstr "单位："
 
 msgid "Use system units"
 msgstr "使用系统单位"
@@ -31,7 +35,10 @@ msgid "Imperial (°F)"
 msgstr "英制 (°F)"
 
 msgid "Refresh Interval"
-msgstr "刷新间隔"
+msgstr "更新间隔"
+
+msgid "Refresh Interval:"
+msgstr "更新间隔："
 
 msgid "Appearance"
 msgstr "外观"
@@ -43,7 +50,7 @@ msgid "Daily Forecast"
 msgstr "每日预报"
 
 msgid "Hourly Forecast"
-msgstr "每小时预报"
+msgstr "逐小时预报"
 
 msgid "Refresh"
 msgstr "刷新"
@@ -58,7 +65,7 @@ msgid "Humidity"
 msgstr "湿度"
 
 msgid "Wind"
-msgstr "风"
+msgstr "风速"
 
 msgid "Feels like"
 msgstr "体感温度"
@@ -97,7 +104,7 @@ msgid "No API key configured."
 msgstr "未配置 API 密钥。"
 
 msgid "Location not found."
-msgstr "未找到位置。"
+msgstr "找不到位置。"
 
 msgid "Pressure"
 msgstr "气压"
@@ -106,7 +113,7 @@ msgid "Clouds"
 msgstr "云量"
 
 msgid "UV"
-msgstr "紫外线"
+msgstr "紫外线指数"
 
 msgid "Visibility"
 msgstr "能见度"
@@ -115,7 +122,7 @@ msgid "Click to close"
 msgstr "点击关闭"
 
 msgid "Clear"
-msgstr "晴"
+msgstr "晴朗"
 
 msgid "Cloudy"
 msgstr "多云"
@@ -145,10 +152,10 @@ msgid "Overcast"
 msgstr "阴天"
 
 msgid "Mainly Clear"
-msgstr "晴间多云"
+msgstr "大部晴朗"
 
 msgid "Partly Cloudy"
-msgstr "局部有云"
+msgstr "局部多云"
 
 msgid "Freezing Drizzle"
 msgstr "冻毛毛雨"
@@ -166,7 +173,202 @@ msgid "Snow Showers"
 msgstr "阵雪"
 
 msgid "Thunderstorm with Hail"
-msgstr "雷暴伴有冰雹"
+msgstr "雷雨伴有冰雹"
 
 msgid "Unknown"
 msgstr "未知"
+
+msgid "Simple Panel"
+msgstr "简单面板"
+
+msgid "Detailed Panel"
+msgstr "详细面板"
+
+msgid "Representation:"
+msgstr "表现形式："
+
+msgid "Icon Size (0 = Auto):"
+msgstr "图标大小 (0 = 自动)："
+
+msgid "Font Size (0 = Auto):"
+msgstr "字体大小 (0 = 自动)："
+
+msgid "Note: Background is always transparent in Panel."
+msgstr "注意：面板中的背景始终透明。"
+
+msgid "System Theme"
+msgstr "系统主题"
+
+msgid "Background Settings"
+msgstr "背景设置"
+
+msgid "Background Opacity:"
+msgstr "背景不透明度："
+
+msgid "Font Settings"
+msgstr "字体设置"
+
+msgid "Use Default System Font"
+msgstr "使用系统默认字体"
+
+msgid "Custom Font Family:"
+msgstr "自定义字体族："
+
+msgid "Automatic"
+msgstr "自动"
+
+msgid "Small"
+msgstr "小"
+
+msgid "Wide"
+msgstr "宽"
+
+msgid "Large"
+msgstr "大"
+
+msgid "Layout Mode:"
+msgstr "布局模式："
+
+msgid "Default (Colorful SVG)"
+msgstr "默认 (彩色 SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Weather v3 (扁平 SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Weather v2 (写实 PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Weather v1 (经典 PNG)"
+
+msgid "Icon Pack:"
+msgstr "图标包："
+
+msgid "Best free option. No API key required."
+msgstr "最佳免费选项。不需要 API 密钥。"
+
+msgid "Standard provider. API key required below."
+msgstr "标准提供商。下方需要 API 密钥。"
+
+msgid "Alternative provider. API key required below."
+msgstr "备选提供商。下方需要 API 密钥。"
+
+msgid "API Keys"
+msgstr "API 密钥"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API 密钥："
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "输入您的 OpenWeatherMap API 密钥"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API 密钥："
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "输入您的 WeatherAPI.com 密钥"
+
+msgid "City 1:"
+msgstr "城市 1："
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "例如：北京, 上海, 伦敦"
+
+msgid "City 2:"
+msgstr "城市 2："
+
+msgid "Second city (optional)"
+msgstr "第二城市 (可选)"
+
+msgid "City 3:"
+msgstr "城市 3："
+
+msgid "Third city (optional)"
+msgstr "第三城市 (可选)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "您可以使用城市名称、'城市,国家代码' 或邮政编码。"
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "位置将根据您的 IP 地址自动检测。"
+
+msgid "15 minutes"
+msgstr "15 分钟"
+
+msgid "30 minutes"
+msgstr "30 分钟"
+
+msgid "45 minutes"
+msgstr "45 分钟"
+
+msgid "1 hour"
+msgstr "1 小时"
+
+msgid "2 hours"
+msgstr "2 小时"
+
+msgid "3 hours"
+msgstr "3 小时"
+
+msgid "4 hours"
+msgstr "4 小时"
+
+msgid "6 hours"
+msgstr "6 小时"
+
+msgid "8 hours"
+msgstr "8 小时"
+
+msgid "12 hours"
+msgstr "12 小时"
+
+msgid "1 day"
+msgstr "1 天"
+
+msgid "Select the visual style for weather icons."
+msgstr "选择天气图标的视觉风格。"
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "选择天气图标的视觉风格。(注意：像 v1/v2 这样旧的包可能会缺少某些条件的图标)"
+
+msgid "Panel Settings"
+msgstr "面板设置"
+
+msgid "Forecast Days:"
+msgstr "预报天数："
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (免费, 无需密钥)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (需要密钥)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (需要密钥)"
+
+msgid "Wind Direction"
+msgstr "风向"
+
+msgid "N"
+msgstr "北"
+
+msgid "NE"
+msgstr "东北"
+
+msgid "E"
+msgstr "东"
+
+msgid "SE"
+msgstr "东南"
+
+msgid "S"
+msgstr "南"
+
+msgid "SW"
+msgstr "西南"
+
+msgid "W"
+msgstr "西"
+
+msgid "NW"
+msgstr "西北"

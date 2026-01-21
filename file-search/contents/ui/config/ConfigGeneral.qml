@@ -29,6 +29,7 @@ Item {
     // Panel (General + Power)
     property alias cfg_displayMode: displayModeCombo.currentIndex
     property alias cfg_panelRadius: panelRadiusCombo.currentIndex
+    property int cfg_panelHeight
 
     property alias cfg_showBootOptions: showBootOptionsSearch.checked
     property int cfg_userProfile
@@ -158,6 +159,55 @@ Item {
                             i18nd("plasma_applet_com.mcc45tr.filesearch", "Square corners")
                         ]
                         Layout.fillWidth: true
+                    }
+
+                    RowLayout {
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Height")
+                        Layout.fillWidth: true
+                        
+                        CheckBox {
+                            id: autoHeightCheck
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Automatic")
+                            checked: cfg_panelHeight === 0
+                            onToggled: {
+                                if (checked) {
+                                    cfg_panelHeight = 0
+                                } else {
+                                    cfg_panelHeight = panelHeightSpin.value
+                                }
+                            }
+                        }
+                        
+                        SpinBox {
+                            id: panelHeightSpin
+                            from: 18
+                            to: 96
+                            stepSize: 1
+                            editable: true
+                            enabled: !autoHeightCheck.checked
+                            Layout.fillWidth: true
+                            
+                            Component.onCompleted: {
+                                if (cfg_panelHeight > 0) {
+                                    value = cfg_panelHeight
+                                } else {
+                                    value = 32 // Default fallback
+                                }
+                            }
+                            
+                            onValueModified: {
+                                if (!autoHeightCheck.checked) {
+                                    cfg_panelHeight = value
+                                }
+                            }
+                            
+                            textFromValue: function(value, locale) {
+                                return value + " px"
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text.replace(" px", ""))
+                            }
+                        }
                     }
                     
                     // Panel Preview

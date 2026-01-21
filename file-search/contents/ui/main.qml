@@ -36,9 +36,9 @@ PlasmoidItem {
     readonly property real baseWidth: isButtonMode ? height : (isExtraWideMode ? (height * 6) : ((isWideMode) ? (height * 4) : 70))
     
     Layout.preferredWidth: Math.max(baseWidth, textContentWidth)
-    Layout.preferredHeight: 38
+    Layout.preferredHeight: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 38
     Layout.minimumWidth: 50
-    Layout.minimumHeight: 34
+    Layout.minimumHeight: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 34
     
     // Character limits
     readonly property int maxCharsWide: 65
@@ -131,6 +131,7 @@ PlasmoidItem {
         accentColor: root.accentColor
         searchTextLength: root.searchText.length
         panelRadius: Plasmoid.configuration.panelRadius
+        panelHeight: Plasmoid.configuration.panelHeight
         
         onToggleExpanded: root.expanded = !root.expanded
     }

@@ -2,24 +2,28 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
 
 msgid "Settings"
 msgstr "Настройки"
 
 msgid "Weather Provider"
-msgstr "Погодный провайдер"
+msgstr "Поставщик погоды"
 
 msgid "Location"
 msgstr "Местоположение"
 
 msgid "Auto-detect from IP"
-msgstr "Автоопределение по IP"
+msgstr "Определять автоматически по IP"
 
 msgid "Enter manually"
 msgstr "Ввести вручную"
 
 msgid "Units"
-msgstr "Единицы"
+msgstr "Единицы измерения"
+
+msgid "Units:"
+msgstr "Единицы измерения:"
 
 msgid "Use system units"
 msgstr "Использовать системные единицы"
@@ -33,6 +37,9 @@ msgstr "Имперская (°F)"
 msgid "Refresh Interval"
 msgstr "Интервал обновления"
 
+msgid "Refresh Interval:"
+msgstr "Интервал обновления:"
+
 msgid "Appearance"
 msgstr "Внешний вид"
 
@@ -40,7 +47,7 @@ msgid "Icon Pack"
 msgstr "Набор иконок"
 
 msgid "Daily Forecast"
-msgstr "Ежедневный прогноз"
+msgstr "Прогноз на день"
 
 msgid "Hourly Forecast"
 msgstr "Почасовой прогноз"
@@ -91,7 +98,7 @@ msgid "Loading weather data..."
 msgstr "Загрузка данных о погоде..."
 
 msgid "Network error. Check your internet connection."
-msgstr "Ошибка сети. Проверьте подключение к Интернету."
+msgstr "Ошибка сети. Проверьте интернет-соединение."
 
 msgid "No API key configured."
 msgstr "API-ключ не настроен."
@@ -106,7 +113,7 @@ msgid "Clouds"
 msgstr "Облачность"
 
 msgid "UV"
-msgstr "УФ"
+msgstr "УФ-индекс"
 
 msgid "Visibility"
 msgstr "Видимость"
@@ -133,13 +140,13 @@ msgid "Snow"
 msgstr "Снег"
 
 msgid "Mist"
-msgstr "Туман"
+msgstr "Дымка"
 
 msgid "Fog"
 msgstr "Туман"
 
 msgid "Haze"
-msgstr "Дымка"
+msgstr "Мгла"
 
 msgid "Overcast"
 msgstr "Пасмурно"
@@ -170,3 +177,198 @@ msgstr "Гроза с градом"
 
 msgid "Unknown"
 msgstr "Неизвестно"
+
+msgid "Simple Panel"
+msgstr "Простая панель"
+
+msgid "Detailed Panel"
+msgstr "Подробная панель"
+
+msgid "Representation:"
+msgstr "Представление:"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "Размер иконок (0 = авто):"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Размер шрифта (0 = авто):"
+
+msgid "Note: Background is always transparent in Panel."
+msgstr "Примечание: фон в панели всегда прозрачный."
+
+msgid "System Theme"
+msgstr "Системная тема"
+
+msgid "Background Settings"
+msgstr "Настройки фона"
+
+msgid "Background Opacity:"
+msgstr "Прозрачность фона:"
+
+msgid "Font Settings"
+msgstr "Настройки шрифта"
+
+msgid "Use Default System Font"
+msgstr "Использовать системный шрифт"
+
+msgid "Custom Font Family:"
+msgstr "Свой шрифт:"
+
+msgid "Automatic"
+msgstr "Автоматически"
+
+msgid "Small"
+msgstr "Маленький"
+
+msgid "Wide"
+msgstr "Широкий"
+
+msgid "Large"
+msgstr "Большой"
+
+msgid "Layout Mode:"
+msgstr "Режим компоновки:"
+
+msgid "Default (Colorful SVG)"
+msgstr "Стандартный (цветной SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Weather v3 (плоский SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Weather v2 (реалистичный PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Weather v1 (классический PNG)"
+
+msgid "Icon Pack:"
+msgstr "Набор иконок:"
+
+msgid "Best free option. No API key required."
+msgstr "Лучший бесплатный вариант. Ключ не требуется."
+
+msgid "Standard provider. API key required below."
+msgstr "Стандартный поставщик. Требуется API-ключ."
+
+msgid "Alternative provider. API key required below."
+msgstr "Альтернативный поставщик. Требуется API-ключ."
+
+msgid "API Keys"
+msgstr "API-ключи"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Ключ OpenWeatherMap:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Введите ваш ключ OpenWeatherMap"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Ключ WeatherAPI.com:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Введите ваш ключ WeatherAPI.com"
+
+msgid "City 1:"
+msgstr "Город 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Прим: Москва, Санкт-Петербург, Лондон"
+
+msgid "City 2:"
+msgstr "Город 2:"
+
+msgid "Second city (optional)"
+msgstr "Второй город (необязательно)"
+
+msgid "City 3:"
+msgstr "Город 3:"
+
+msgid "Third city (optional)"
+msgstr "Третий город (необязательно)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "Можно использовать название города, 'Город, код страны' или почтовый индекс."
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Местоположение будет определено автоматически по вашему IP."
+
+msgid "15 minutes"
+msgstr "15 минут"
+
+msgid "30 minutes"
+msgstr "30 минут"
+
+msgid "45 minutes"
+msgstr "45 минут"
+
+msgid "1 hour"
+msgstr "1 час"
+
+msgid "2 hours"
+msgstr "2 часа"
+
+msgid "3 hours"
+msgstr "3 часа"
+
+msgid "4 hours"
+msgstr "4 часа"
+
+msgid "6 hours"
+msgstr "6 часов"
+
+msgid "8 hours"
+msgstr "8 часов"
+
+msgid "12 hours"
+msgstr "12 часов"
+
+msgid "1 day"
+msgstr "1 день"
+
+msgid "Select the visual style for weather icons."
+msgstr "Выберите визуальный стиль иконок погоды."
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "Выберите визуальный стиль иконок погоды. (Примечание: в старых наборах v1/v2 могут отсутствовать иконки для некоторых условий)"
+
+msgid "Panel Settings"
+msgstr "Настройки панели"
+
+msgid "Forecast Days:"
+msgstr "Дней прогноза:"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (бесплатно, ключ не нужен)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (нужен ключ)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (нужен ключ)"
+
+msgid "Wind Direction"
+msgstr "Направление ветра"
+
+msgid "N"
+msgstr "С"
+
+msgid "NE"
+msgstr "СВ"
+
+msgid "E"
+msgstr "В"
+
+msgid "SE"
+msgstr "ЮВ"
+
+msgid "S"
+msgstr "Ю"
+
+msgid "SW"
+msgstr "ЮЗ"
+
+msgid "W"
+msgstr "З"
+
+msgid "NW"
+msgstr "СЗ"

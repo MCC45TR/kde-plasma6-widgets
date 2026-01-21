@@ -144,7 +144,7 @@ PlasmoidItem {
             id: background
             anchors.fill: parent
             radius: 20
-            anchors.margins: 10
+            anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
             color: root.bgColor
             
             // Görünüm Modunu Belirle

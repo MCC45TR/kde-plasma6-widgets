@@ -2,24 +2,28 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
 
 msgid "Settings"
 msgstr "Configurações"
 
 msgid "Weather Provider"
-msgstr "Provedor de clima"
+msgstr "Provedor de Meteorologia"
 
 msgid "Location"
 msgstr "Localização"
 
 msgid "Auto-detect from IP"
-msgstr "Detectar automaticamente por IP"
+msgstr "Auto-detetar pelo IP"
 
 msgid "Enter manually"
-msgstr "Inserir manualmente"
+msgstr "Introduzir manualmente"
 
 msgid "Units"
 msgstr "Unidades"
+
+msgid "Units:"
+msgstr "Unidades:"
 
 msgid "Use system units"
 msgstr "Usar unidades do sistema"
@@ -31,19 +35,22 @@ msgid "Imperial (°F)"
 msgstr "Imperial (°F)"
 
 msgid "Refresh Interval"
-msgstr "Intervalo de atualização"
+msgstr "Intervalo de Atualização"
+
+msgid "Refresh Interval:"
+msgstr "Intervalo de Atualização:"
 
 msgid "Appearance"
 msgstr "Aparência"
 
 msgid "Icon Pack"
-msgstr "Pacote de ícones"
+msgstr "Pacote de Ícones"
 
 msgid "Daily Forecast"
-msgstr "Previsão diária"
+msgstr "Previsão Diária"
 
 msgid "Hourly Forecast"
-msgstr "Previsão de hora em hora"
+msgstr "Previsão Horária"
 
 msgid "Refresh"
 msgstr "Atualizar"
@@ -55,7 +62,7 @@ msgid "City"
 msgstr "Cidade"
 
 msgid "Humidity"
-msgstr "Umidade"
+msgstr "Humidade"
 
 msgid "Wind"
 msgstr "Vento"
@@ -88,10 +95,10 @@ msgid "Sun"
 msgstr "Dom"
 
 msgid "Loading weather data..."
-msgstr "Carregando dados meteorológicos..."
+msgstr "A carregar dados meteorológicos..."
 
 msgid "Network error. Check your internet connection."
-msgstr "Erro de rede. Verifique sua conexão com a internet."
+msgstr "Erro de rede. Verifique a sua ligação à internet."
 
 msgid "No API key configured."
 msgstr "Nenhuma chave API configurada."
@@ -127,7 +134,7 @@ msgid "Drizzle"
 msgstr "Chuvisco"
 
 msgid "Thunderstorm"
-msgstr "Tempestade"
+msgstr "Trovoada"
 
 msgid "Snow"
 msgstr "Neve"
@@ -139,34 +146,229 @@ msgid "Fog"
 msgstr "Nevoeiro"
 
 msgid "Haze"
-msgstr "Névoa seca"
+msgstr "Bruma"
 
 msgid "Overcast"
 msgstr "Encoberto"
 
 msgid "Mainly Clear"
-msgstr "Predominantemente limpo"
+msgstr "Principalmente Limpo"
 
 msgid "Partly Cloudy"
-msgstr "Parcialmente nublado"
+msgstr "Parcialmente Nublado"
 
 msgid "Freezing Drizzle"
-msgstr "Chuvisco congelante"
+msgstr "Chuvisco Congelante"
 
 msgid "Freezing Rain"
-msgstr "Chuva congelante"
+msgstr "Chuva Congelante"
 
 msgid "Snow Grains"
-msgstr "Grãos de neve"
+msgstr "Neve Granulada"
 
 msgid "Rain Showers"
-msgstr "Pancadas de chuva"
+msgstr "Aguaceiros"
 
 msgid "Snow Showers"
-msgstr "Pancadas de neve"
+msgstr "Aguaceiros de Neve"
 
 msgid "Thunderstorm with Hail"
-msgstr "Tempestade com granizo"
+msgstr "Trovoada com Granizo"
 
 msgid "Unknown"
 msgstr "Desconhecido"
+
+msgid "Simple Panel"
+msgstr "Painel Simples"
+
+msgid "Detailed Panel"
+msgstr "Painel Detalhado"
+
+msgid "Representation:"
+msgstr "Representação:"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "Tamanho do Ícone (0 = Auto):"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Tamanho da Fonte (0 = Auto):"
+
+msgid "Note: Background is always transparent in Panel."
+msgstr "Nota: O fundo é sempre transparente no Painel."
+
+msgid "System Theme"
+msgstr "Tema do Sistema"
+
+msgid "Background Settings"
+msgstr "Definições de Fundo"
+
+msgid "Background Opacity:"
+msgstr "Opacidade do Fundo:"
+
+msgid "Font Settings"
+msgstr "Definições de Fonte"
+
+msgid "Use Default System Font"
+msgstr "Usar Fonte Padrão do Sistema"
+
+msgid "Custom Font Family:"
+msgstr "Família de Fonte Personalizada:"
+
+msgid "Automatic"
+msgstr "Automático"
+
+msgid "Small"
+msgstr "Pequeno"
+
+msgid "Wide"
+msgstr "Largo"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Layout Mode:"
+msgstr "Modo de Layout:"
+
+msgid "Default (Colorful SVG)"
+msgstr "Padrão (SVG Colorido)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Weather v3 (SVG Plano)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Weather v2 (PNG Realista)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Weather v1 (PNG Clássico)"
+
+msgid "Icon Pack:"
+msgstr "Pacote de Ícones:"
+
+msgid "Best free option. No API key required."
+msgstr "Melhor opção gratuita. Nenhuma chave API necessária."
+
+msgid "Standard provider. API key required below."
+msgstr "Provedor padrão. Chave API necessária abaixo."
+
+msgid "Alternative provider. API key required below."
+msgstr "Provedor alternativo. Chave API necessária abaixo."
+
+msgid "API Keys"
+msgstr "Chaves API"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Chave API OpenWeatherMap:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Introduza a sua chave API OpenWeatherMap"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Chave API WeatherAPI.com:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Introduza a sua chave WeatherAPI.com"
+
+msgid "City 1:"
+msgstr "Cidade 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Ex: Lisboa, Porto, Londres"
+
+msgid "City 2:"
+msgstr "Cidade 2:"
+
+msgid "Second city (optional)"
+msgstr "Segunda cidade (opcional)"
+
+msgid "City 3:"
+msgstr "Cidade 3:"
+
+msgid "Third city (optional)"
+msgstr "Terceira cidade (opcional)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "Pode usar o nome da Cidade, 'Cidade,Código do País' ou Código Postal."
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "A localização será auto-detetada com base no seu endereço IP."
+
+msgid "15 minutes"
+msgstr "15 minutos"
+
+msgid "30 minutes"
+msgstr "30 minutos"
+
+msgid "45 minutes"
+msgstr "45 minutos"
+
+msgid "1 hour"
+msgstr "1 hora"
+
+msgid "2 hours"
+msgstr "2 horas"
+
+msgid "3 hours"
+msgstr "3 horas"
+
+msgid "4 hours"
+msgstr "4 horas"
+
+msgid "6 hours"
+msgstr "6 horas"
+
+msgid "8 hours"
+msgstr "8 horas"
+
+msgid "12 hours"
+msgstr "12 horas"
+
+msgid "1 day"
+msgstr "1 dia"
+
+msgid "Select the visual style for weather icons."
+msgstr "Selecione o estilo visual para os ícones meteorológicos."
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "Selecione o estilo visual dos ícones meteorológicos. (Nota: pacotes mais antigos como v1/v2 podem ter ícones em falta para algumas condições)"
+
+msgid "Panel Settings"
+msgstr "Definições do Painel"
+
+msgid "Forecast Days:"
+msgstr "Dias de Previsão:"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Grátis, Sem Chave)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Chave Necessária)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Chave Necessária)"
+
+msgid "Wind Direction"
+msgstr "Direção do Vento"
+
+msgid "N"
+msgstr "N"
+
+msgid "NE"
+msgstr "NE"
+
+msgid "E"
+msgstr "E"
+
+msgid "SE"
+msgstr "SE"
+
+msgid "S"
+msgstr "S"
+
+msgid "SW"
+msgstr "SO"
+
+msgid "W"
+msgstr "O"
+
+msgid "NW"
+msgstr "NO"

@@ -21,6 +21,10 @@
       <default>0</default>
       <label>Panel Radius: 0=Round, 1=12px, 2=6px, 3=Square</label>
     </entry>
+    <entry name="panelHeight" type="Int">
+      <default>0</default>
+      <label>Custom Panel Height in pixels (0=Automatic)</label>
+    </entry>
   </group>
 
   <!-- Tab 2: Popup & View Settings -->

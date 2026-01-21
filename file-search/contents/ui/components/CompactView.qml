@@ -18,6 +18,7 @@ Item {
     required property color accentColor
     required property int searchTextLength
     required property int panelRadius
+    required property int panelHeight
     
     // Signals
     signal toggleExpanded()
@@ -48,8 +49,10 @@ Item {
     // Main Button Container (for non-button modes)
     Rectangle {
         id: mainButton
-        anchors.fill: parent
-        anchors.margins: 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        height: compactRoot.panelHeight > 0 ? compactRoot.panelHeight : parent.height
         radius: compactRoot.panelRadius === 0 ? height / 2 : (compactRoot.panelRadius === 1 ? 12 : (compactRoot.panelRadius === 2 ? 6 : 0))
         color: Qt.rgba(compactRoot.bgColor.r, compactRoot.bgColor.g, compactRoot.bgColor.b, 0.95)
         visible: !compactRoot.isButtonMode

@@ -13,5 +13,9 @@
       <default></default>
       <label>Custom search URL (use %s for query placeholder)</label>
     </entry>
+    <entry name="edgeMargin" type="Int">
+      <default>10</default>
+      <label>Widget Edge Margin</label>
+    </entry>
   </group>
 </kcfg>

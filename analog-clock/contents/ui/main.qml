@@ -101,7 +101,7 @@ PlasmoidItem {
         anchors.fill: parent
         color: Kirigami.Theme.backgroundColor
         radius: 20
-        anchors.margins: 10
+        anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
         // Use configured opacity
         opacity: (Plasmoid.configuration.backgroundOpacity !== undefined) ? Plasmoid.configuration.backgroundOpacity : 1.0
     }
@@ -110,7 +110,7 @@ PlasmoidItem {
     Item {
         id: clockFace
         anchors.fill: parent
-        anchors.margins: 10 // Match background margins
+        anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10 // Match background margins
 
         // Center Point (Pivot)
 
