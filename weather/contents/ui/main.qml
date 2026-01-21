@@ -6,22 +6,10 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import "WeatherService.js" as WeatherService
 import "IconMapper.js" as IconMapper
-import "localization.js" as LocalizationData
+
 
 PlasmoidItem {
     id: root
-
-    // Localization (loaded from JSON at runtime)
-    property var locales: ({})
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-    property bool localesLoaded: false
-
-    // Localization function
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) return locales[currentLocale][key]
-        if (locales["en"] && locales["en"][key]) return locales["en"][key]
-        return key
-    }
 
     // Widget Size Constraints
     Layout.preferredWidth: 400
@@ -62,12 +50,12 @@ PlasmoidItem {
     // Context Menu Actions
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            text: root.tr("refresh")
+            text: i18n("Refresh")
             icon.name: "view-refresh"
             onTriggered: root.fetchWeatherData()
         },
         PlasmaCore.Action {
-            text: root.forecastMode ? root.tr("daily_forecast") : root.tr("hourly_forecast")
+            text: root.forecastMode ? i18n("Daily Forecast") : i18n("Hourly Forecast")
             icon.name: root.forecastMode ? "view-calendar-month" : "view-calendar-day"
             onTriggered: root.forecastMode = !root.forecastMode
         }
@@ -116,21 +104,7 @@ PlasmoidItem {
 
     Component.onCompleted: {
         // Load and transform localization data synchronously
-        try {
-            var json = LocalizationData.data
-            var newLocales = {}
-            for (var key in json) {
-                var translations = json[key]
-                for (var lang in translations) {
-                    if (!newLocales[lang]) newLocales[lang] = {}
-                    newLocales[lang][key] = translations[lang]
-                }
-            }
-            locales = newLocales
-            console.log("Localization loaded via JS import")
-        } catch(e) {
-            console.log("Error processing localization data: " + e)
-        }
+
 
         var cached = Plasmoid.configuration.cachedWeather
         if (cached && cached.length > 0) {
@@ -174,7 +148,7 @@ PlasmoidItem {
 
     function getLocalizedDay(dayKey) {
         if (!dayKey) return ""
-        return tr(dayKey.toLowerCase()).toUpperCase()
+        return i18n(dayKey)
     }
 
     preferredRepresentation: fullRepresentation
@@ -197,7 +171,7 @@ PlasmoidItem {
                 visible: root.isLoading
                 spacing: 10
                 BusyIndicator { running: root.isLoading; Layout.alignment: Qt.AlignHCenter }
-                Text { text: root.tr("loading"); color: Kirigami.Theme.textColor; font.pixelSize: 14; Layout.alignment: Qt.AlignHCenter }
+                Text { text: i18n("Loading weather data..."); color: Kirigami.Theme.textColor; font.pixelSize: 14; Layout.alignment: Qt.AlignHCenter }
             }
 
             // Error State
@@ -208,7 +182,7 @@ PlasmoidItem {
                 width: parent.width * 0.8
                 Kirigami.Icon { source: "dialog-error"; Layout.preferredWidth: 48; Layout.preferredHeight: 48; Layout.alignment: Qt.AlignHCenter }
                 Text { text: root.errorMessage; color: Kirigami.Theme.textColor; font.pixelSize: 13; Layout.alignment: Qt.AlignHCenter; horizontalAlignment: Text.AlignHCenter; wrapMode: Text.Wrap; Layout.fillWidth: true }
-                Button { text: root.tr("refresh"); Layout.alignment: Qt.AlignHCenter; onClicked: root.fetchWeatherData() }
+                Button { text: i18n("Refresh"); Layout.alignment: Qt.AlignHCenter; onClicked: root.fetchWeatherData() }
             }
 
             // Lazy-loaded Mode Layouts

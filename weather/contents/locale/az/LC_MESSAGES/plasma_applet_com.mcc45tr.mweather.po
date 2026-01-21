@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "Parametrlər"
+
+msgid "Weather Provider"
+msgstr "Hava provayderi"
+
+msgid "Location"
+msgstr "Məkan"
+
+msgid "Auto-detect from IP"
+msgstr "IP-dən avtomatik aşkarla"
+
+msgid "Enter manually"
+msgstr "Əl ilə daxil edin"
+
+msgid "Units"
+msgstr "Vahidlər"
+
+msgid "Use system units"
+msgstr "Sistem vahidlərini istifadə edin"
+
+msgid "Metric (°C)"
+msgstr "Metrik (°C)"
+
+msgid "Imperial (°F)"
+msgstr "İmperial (°F)"
+
+msgid "Refresh Interval"
+msgstr "Yeniləmə intervalı"
+
+msgid "Appearance"
+msgstr "Görünüş"
+
+msgid "Icon Pack"
+msgstr "İkon paketi"
+
+msgid "Daily Forecast"
+msgstr "Gündəlik proqnoz"
+
+msgid "Hourly Forecast"
+msgstr "Saatlıq proqnoz"
+
+msgid "Refresh"
+msgstr "Yenilə"
+
+msgid "Details"
+msgstr "Ətraflı"
+
+msgid "City"
+msgstr "Şəhər"
+
+msgid "Humidity"
+msgstr "Rütubət"
+
+msgid "Wind"
+msgstr "Külək"
+
+msgid "Feels like"
+msgstr "Hiss olunan"
+
+msgid "Today"
+msgstr "Bu gün"
+
+msgid "Mon"
+msgstr "Be"
+
+msgid "Tue"
+msgstr "Çə"
+
+msgid "Wed"
+msgstr "Çr"
+
+msgid "Thu"
+msgstr "Cü"
+
+msgid "Fri"
+msgstr "Cm"
+
+msgid "Sat"
+msgstr "Şn"
+
+msgid "Sun"
+msgstr "Bz"
+
+msgid "Loading weather data..."
+msgstr "Hava məlumatları yüklənir..."
+
+msgid "Network error. Check your internet connection."
+msgstr "Şəbəkə xətası. İnternet bağlantınızı yoxlayın."
+
+msgid "No API key configured."
+msgstr "API açarı tənzimlənməyib."
+
+msgid "Location not found."
+msgstr "Məkan tapılmadı."
+
+msgid "Pressure"
+msgstr "Təzyiq"
+
+msgid "Clouds"
+msgstr "Buludlar"
+
+msgid "UV"
+msgstr "UV"
+
+msgid "Visibility"
+msgstr "Görünüş"
+
+msgid "Click to close"
+msgstr "Bağlamaq üçün klikləyin"
+
+msgid "Clear"
+msgstr "Açıq"
+
+msgid "Cloudy"
+msgstr "Buludlu"
+
+msgid "Rain"
+msgstr "Yağışlı"
+
+msgid "Drizzle"
+msgstr "Çiskinli"
+
+msgid "Thunderstorm"
+msgstr "İldırımlı fırtına"
+
+msgid "Snow"
+msgstr "Qarlı"
+
+msgid "Mist"
+msgstr "Dumanlı"
+
+msgid "Fog"
+msgstr "Duman"
+
+msgid "Haze"
+msgstr "Pus"
+
+msgid "Overcast"
+msgstr "Tutqun"
+
+msgid "Mainly Clear"
+msgstr "Əsasən açıq"
+
+msgid "Partly Cloudy"
+msgstr "Qismən buludlu"
+
+msgid "Freezing Drizzle"
+msgstr "Donan çiskin"
+
+msgid "Freezing Rain"
+msgstr "Donan yağış"
+
+msgid "Snow Grains"
+msgstr "Qar dənələri"
+
+msgid "Rain Showers"
+msgstr "Yağış leysanı"
+
+msgid "Snow Showers"
+msgstr "Qar leysanı"
+
+msgid "Thunderstorm with Hail"
+msgstr "Dolu ilə ildırımlı fırtına"
+
+msgid "Unknown"
+msgstr "Naməlum"

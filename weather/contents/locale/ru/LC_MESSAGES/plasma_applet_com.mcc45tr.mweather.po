@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Weather Provider"
+msgstr "Погодный провайдер"
+
+msgid "Location"
+msgstr "Местоположение"
+
+msgid "Auto-detect from IP"
+msgstr "Автоопределение по IP"
+
+msgid "Enter manually"
+msgstr "Ввести вручную"
+
+msgid "Units"
+msgstr "Единицы"
+
+msgid "Use system units"
+msgstr "Использовать системные единицы"
+
+msgid "Metric (°C)"
+msgstr "Метрическая (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Имперская (°F)"
+
+msgid "Refresh Interval"
+msgstr "Интервал обновления"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "Icon Pack"
+msgstr "Набор иконок"
+
+msgid "Daily Forecast"
+msgstr "Ежедневный прогноз"
+
+msgid "Hourly Forecast"
+msgstr "Почасовой прогноз"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Details"
+msgstr "Подробности"
+
+msgid "City"
+msgstr "Город"
+
+msgid "Humidity"
+msgstr "Влажность"
+
+msgid "Wind"
+msgstr "Ветер"
+
+msgid "Feels like"
+msgstr "Ощущается как"
+
+msgid "Today"
+msgstr "Сегодня"
+
+msgid "Mon"
+msgstr "Пн"
+
+msgid "Tue"
+msgstr "Вт"
+
+msgid "Wed"
+msgstr "Ср"
+
+msgid "Thu"
+msgstr "Чт"
+
+msgid "Fri"
+msgstr "Пт"
+
+msgid "Sat"
+msgstr "Сб"
+
+msgid "Sun"
+msgstr "Вс"
+
+msgid "Loading weather data..."
+msgstr "Загрузка данных о погоде..."
+
+msgid "Network error. Check your internet connection."
+msgstr "Ошибка сети. Проверьте подключение к Интернету."
+
+msgid "No API key configured."
+msgstr "API-ключ не настроен."
+
+msgid "Location not found."
+msgstr "Местоположение не найдено."
+
+msgid "Pressure"
+msgstr "Давление"
+
+msgid "Clouds"
+msgstr "Облачность"
+
+msgid "UV"
+msgstr "УФ"
+
+msgid "Visibility"
+msgstr "Видимость"
+
+msgid "Click to close"
+msgstr "Нажмите, чтобы закрыть"
+
+msgid "Clear"
+msgstr "Ясно"
+
+msgid "Cloudy"
+msgstr "Облачно"
+
+msgid "Rain"
+msgstr "Дождь"
+
+msgid "Drizzle"
+msgstr "Морось"
+
+msgid "Thunderstorm"
+msgstr "Гроза"
+
+msgid "Snow"
+msgstr "Снег"
+
+msgid "Mist"
+msgstr "Туман"
+
+msgid "Fog"
+msgstr "Туман"
+
+msgid "Haze"
+msgstr "Дымка"
+
+msgid "Overcast"
+msgstr "Пасмурно"
+
+msgid "Mainly Clear"
+msgstr "Преимущественно ясно"
+
+msgid "Partly Cloudy"
+msgstr "Переменная облачность"
+
+msgid "Freezing Drizzle"
+msgstr "Ледяная морось"
+
+msgid "Freezing Rain"
+msgstr "Ледяной дождь"
+
+msgid "Snow Grains"
+msgstr "Снежная крупа"
+
+msgid "Rain Showers"
+msgstr "Ливень"
+
+msgid "Snow Showers"
+msgstr "Снегопад"
+
+msgid "Thunderstorm with Hail"
+msgstr "Гроза с градом"
+
+msgid "Unknown"
+msgstr "Неизвестно"

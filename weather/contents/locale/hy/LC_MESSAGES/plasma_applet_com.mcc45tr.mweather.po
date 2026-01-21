@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "Կարգdelays"
+
+msgid "Weather Provider"
+msgstr "Եdelays պdelays"
+
+msgid "Location"
+msgstr "Տdelays"
+
+msgid "Auto-detect from IP"
+msgstr "Ավdelays որոdelays"
+
+msgid "Enter manually"
+msgstr " Delays delays"
+
+msgid "Units"
+msgstr "Միавորdelays"
+
+msgid "Use system units"
+msgstr "Օdelays ունdelays"
+
+msgid "Metric (°C)"
+msgstr "Մdelays (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Իdelays (°F)"
+
+msgid "Refresh Interval"
+msgstr "Թarmutyun"
+
+msgid "Appearance"
+msgstr "Արdelays"
+
+msgid "Icon Pack"
+msgstr "Պdelays"
+
+msgid "Daily Forecast"
+msgstr "Օdelays delays"
+
+msgid "Hourly Forecast"
+msgstr " Delays ժamayo"
+
+msgid "Refresh"
+msgstr "Թarmav"
+
+msgid "Details"
+msgstr "Մանրամասներ"
+
+msgid "City"
+msgstr "Քdelays"
+
+msgid "Humidity"
+msgstr "Խdelays"
+
+msgid "Wind"
+msgstr "Քam"
+
+msgid "Feels like"
+msgstr "Զgayutyun"
+
+msgid "Today"
+msgstr "Այdelays"
+
+msgid "Mon"
+msgstr "Երdelays"
+
+msgid "Tue"
+msgstr "Երdelays"
+
+msgid "Wed"
+msgstr "Չdelays"
+
+msgid "Thu"
+msgstr "Հdelays"
+
+msgid "Fri"
+msgstr "Ուdelays"
+
+msgid "Sat"
+msgstr "Շdelays"
+
+msgid "Sun"
+msgstr "Կ"
+
+msgid "Loading weather data..."
+msgstr "Եղանակային տվյալները բեռնվում են..."
+
+msgid "Network error. Check your internet connection."
+msgstr "Ցանցային սխալ: Ստուգեք ձեր ինտերնետ կապը:"
+
+msgid "No API key configured."
+msgstr "API բանալին կազմաձևված չէ:"
+
+msgid "Location not found."
+msgstr "Տեղադրությունը չի գտնվել:"
+
+msgid "Pressure"
+msgstr "Ճնշում"
+
+msgid "Clouds"
+msgstr "Ամպեր"
+
+msgid "UV"
+msgstr "ՈՒՄ"
+
+msgid "Visibility"
+msgstr "Տեսանելիություն"
+
+msgid "Click to close"
+msgstr "Կտտացրեք փակելու համար"
+
+msgid "Clear"
+msgstr "Պարզ"
+
+msgid "Cloudy"
+msgstr "Ամպամած"
+
+msgid "Rain"
+msgstr "Անձրև"
+
+msgid "Drizzle"
+msgstr "Մաղող անձրև"
+
+msgid "Thunderstorm"
+msgstr "Ամպրոպ"
+
+msgid "Snow"
+msgstr "Ձյուն"
+
+msgid "Mist"
+msgstr "Մշուշ"
+
+msgid "Fog"
+msgstr "Մառախուղ"
+
+msgid "Haze"
+msgstr "Մշուշապատ"
+
+msgid "Overcast"
+msgstr "Ամպամած"
+
+msgid "Mainly Clear"
+msgstr "Հիմնականում պարզ"
+
+msgid "Partly Cloudy"
+msgstr "Մասնակի ամպամած"
+
+msgid "Freezing Drizzle"
+msgstr "Սառչող մաղող անձրև"
+
+msgid "Freezing Rain"
+msgstr "Սառչող անձրև"
+
+msgid "Snow Grains"
+msgstr "Ձյան հատիկներ"
+
+msgid "Rain Showers"
+msgstr "Տեղատարափ անձրև"
+
+msgid "Snow Showers"
+msgstr "Տեղատարափ ձյուն"
+
+msgid "Thunderstorm with Hail"
+msgstr "Ամպրոպ կարկուտով"
+
+msgid "Unknown"
+msgstr "Անհայտ"

@@ -21,7 +21,7 @@ Item {
     property bool largeDetailsOpen: weatherRoot.largeDetailsOpen
     property string location: weatherRoot.location
     
-    function tr(key) { return weatherRoot.tr(key) }
+
     function getWeatherIcon(item) { return weatherRoot.getWeatherIcon(item) }
     function getLocalizedDay(day) { return weatherRoot.getLocalizedDay(day) }
 
@@ -55,7 +55,7 @@ Item {
                     spacing: 2
 
                     Text {
-                        text: currentWeather ? tr("condition_" + currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
+                        text: currentWeather ? i18n(currentWeather.condition) : ""
                         color: Kirigami.Theme.textColor
                         font.family: "Roboto Condensed"
                         font.pixelSize: Math.min(32, largeLayout.height * 0.08)
@@ -124,7 +124,7 @@ Item {
                         Text {
                             id: detailsText
                             anchors.centerIn: parent
-                            text: tr("details")
+                            text: i18n("Details")
                             color: Kirigami.Theme.textColor
                             font.family: "Roboto Condensed"
                             font.pixelSize: 12
@@ -161,7 +161,7 @@ Item {
                         Text {
                             id: toggleTextLarge
                             anchors.centerIn: parent
-                            text: forecastMode ? tr("hourly_forecast") : tr("daily_forecast")
+                            text: forecastMode ? i18n("Hourly Forecast") : i18n("Daily Forecast")
                             color: Kirigami.Theme.textColor
                             font.family: "Roboto Condensed"
                             font.pixelSize: 12

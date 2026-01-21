@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Weather Provider"
+msgstr "天気プロバイダー"
+
+msgid "Location"
+msgstr "場所"
+
+msgid "Auto-detect from IP"
+msgstr "IPから自動検出"
+
+msgid "Enter manually"
+msgstr "手動で入力"
+
+msgid "Units"
+msgstr "単位"
+
+msgid "Use system units"
+msgstr "システム単位を使用"
+
+msgid "Metric (°C)"
+msgstr "メトリック (°C)"
+
+msgid "Imperial (°F)"
+msgstr "ヤード・ポンド法 (°F)"
+
+msgid "Refresh Interval"
+msgstr "更新間隔"
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Icon Pack"
+msgstr "アイコンパック"
+
+msgid "Daily Forecast"
+msgstr "日次予報"
+
+msgid "Hourly Forecast"
+msgstr "1時間ごとの予報"
+
+msgid "Refresh"
+msgstr "更新"
+
+msgid "Details"
+msgstr "詳細"
+
+msgid "City"
+msgstr "都市"
+
+msgid "Humidity"
+msgstr "湿度"
+
+msgid "Wind"
+msgstr "風"
+
+msgid "Feels like"
+msgstr "体感温度"
+
+msgid "Today"
+msgstr "今日"
+
+msgid "Mon"
+msgstr "月"
+
+msgid "Tue"
+msgstr "火"
+
+msgid "Wed"
+msgstr "水"
+
+msgid "Thu"
+msgstr "木"
+
+msgid "Fri"
+msgstr "金"
+
+msgid "Sat"
+msgstr "土"
+
+msgid "Sun"
+msgstr "日"
+
+msgid "Loading weather data..."
+msgstr "天気情報を読み込み中..."
+
+msgid "Network error. Check your internet connection."
+msgstr "ネットワークエラー。インターネット接続を確認してください。"
+
+msgid "No API key configured."
+msgstr "APIキーが設定されていません。"
+
+msgid "Location not found."
+msgstr "場所が見つかりません。"
+
+msgid "Pressure"
+msgstr "気圧"
+
+msgid "Clouds"
+msgstr "雲量"
+
+msgid "UV"
+msgstr "紫外線"
+
+msgid "Visibility"
+msgstr "視程"
+
+msgid "Click to close"
+msgstr "クリックして閉じる"
+
+msgid "Clear"
+msgstr "晴れ"
+
+msgid "Cloudy"
+msgstr "曇り"
+
+msgid "Rain"
+msgstr "雨"
+
+msgid "Drizzle"
+msgstr "霧雨"
+
+msgid "Thunderstorm"
+msgstr "雷雨"
+
+msgid "Snow"
+msgstr "雪"
+
+msgid "Mist"
+msgstr "霧"
+
+msgid "Fog"
+msgstr "濃霧"
+
+msgid "Haze"
+msgstr "靄"
+
+msgid "Overcast"
+msgstr "曇天"
+
+msgid "Mainly Clear"
+msgstr " おおむね晴れ"
+
+msgid "Partly Cloudy"
+msgstr "晴れ時々曇り"
+
+msgid "Freezing Drizzle"
+msgstr "着氷性の霧雨"
+
+msgid "Freezing Rain"
+msgstr "着氷性の雨"
+
+msgid "Snow Grains"
+msgstr "霧雪"
+
+msgid "Rain Showers"
+msgstr "にわか雨"
+
+msgid "Snow Showers"
+msgstr "にわか雪"
+
+msgid "Thunderstorm with Hail"
+msgstr "雹を伴う雷雨"
+
+msgid "Unknown"
+msgstr "不明"

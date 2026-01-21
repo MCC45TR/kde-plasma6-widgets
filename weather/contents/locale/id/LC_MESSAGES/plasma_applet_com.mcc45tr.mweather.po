@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "Weather Provider"
+msgstr "Penyedia cuaca"
+
+msgid "Location"
+msgstr "Lokasi"
+
+msgid "Auto-detect from IP"
+msgstr "Deteksi otomatis dari IP"
+
+msgid "Enter manually"
+msgstr "Masukkan secara manual"
+
+msgid "Units"
+msgstr "Satuan"
+
+msgid "Use system units"
+msgstr "Gunakan satuan sistem"
+
+msgid "Metric (°C)"
+msgstr "Metrik (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Imperial (°F)"
+
+msgid "Refresh Interval"
+msgstr "Interval penyegaran"
+
+msgid "Appearance"
+msgstr "Tampilan"
+
+msgid "Icon Pack"
+msgstr "Paket ikon"
+
+msgid "Daily Forecast"
+msgstr "Prakiraan harian"
+
+msgid "Hourly Forecast"
+msgstr "Prakiraan per jam"
+
+msgid "Refresh"
+msgstr "Segarkan"
+
+msgid "Details"
+msgstr "Rincian"
+
+msgid "City"
+msgstr "Kota"
+
+msgid "Humidity"
+msgstr "Kelembapan"
+
+msgid "Wind"
+msgstr "Angin"
+
+msgid "Feels like"
+msgstr "Terasa seperti"
+
+msgid "Today"
+msgstr "Hari ini"
+
+msgid "Mon"
+msgstr "Sen"
+
+msgid "Tue"
+msgstr "Sel"
+
+msgid "Wed"
+msgstr "Rab"
+
+msgid "Thu"
+msgstr "Kam"
+
+msgid "Fri"
+msgstr "Jum"
+
+msgid "Sat"
+msgstr "Sab"
+
+msgid "Sun"
+msgstr "Min"
+
+msgid "Loading weather data..."
+msgstr "Memuat data cuaca..."
+
+msgid "Network error. Check your internet connection."
+msgstr "Kesalahan jaringan. Periksa koneksi internet Anda."
+
+msgid "No API key configured."
+msgstr "Kunci API tidak dikonfigurasi."
+
+msgid "Location not found."
+msgstr "Lokasi tidak ditemukan."
+
+msgid "Pressure"
+msgstr "Tekanan"
+
+msgid "Clouds"
+msgstr "Awan"
+
+msgid "UV"
+msgstr "UV"
+
+msgid "Visibility"
+msgstr "Jarak pandang"
+
+msgid "Click to close"
+msgstr "Klik untuk menutup"
+
+msgid "Clear"
+msgstr "Cerah"
+
+msgid "Cloudy"
+msgstr "Berawan"
+
+msgid "Rain"
+msgstr "Hujan"
+
+msgid "Drizzle"
+msgstr "Gerimis"
+
+msgid "Thunderstorm"
+msgstr "Badai petir"
+
+msgid "Snow"
+msgstr "Salju"
+
+msgid "Mist"
+msgstr "Kabut tipis"
+
+msgid "Fog"
+msgstr "Kabut"
+
+msgid "Haze"
+msgstr "Udara kabur"
+
+msgid "Overcast"
+msgstr "Mendung"
+
+msgid "Mainly Clear"
+msgstr "Sebagian besar cerah"
+
+msgid "Partly Cloudy"
+msgstr "Berawan sebagian"
+
+msgid "Freezing Drizzle"
+msgstr "Gerimis membeku"
+
+msgid "Freezing Rain"
+msgstr "Hujan membeku"
+
+msgid "Snow Grains"
+msgstr "Butiran salju"
+
+msgid "Rain Showers"
+msgstr "Hujan petir"
+
+msgid "Snow Showers"
+msgstr "Hujan salju"
+
+msgid "Thunderstorm with Hail"
+msgstr "Badai petir dengan hujan es"
+
+msgid "Unknown"
+msgstr "Tidak diketahui"

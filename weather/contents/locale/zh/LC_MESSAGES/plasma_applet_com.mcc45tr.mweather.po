@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Weather Provider"
+msgstr "天气提供商"
+
+msgid "Location"
+msgstr "位置"
+
+msgid "Auto-detect from IP"
+msgstr "从IP自动检测"
+
+msgid "Enter manually"
+msgstr "手动输入"
+
+msgid "Units"
+msgstr "单位"
+
+msgid "Use system units"
+msgstr "使用系统单位"
+
+msgid "Metric (°C)"
+msgstr "公制 (°C)"
+
+msgid "Imperial (°F)"
+msgstr "英制 (°F)"
+
+msgid "Refresh Interval"
+msgstr "刷新间隔"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Icon Pack"
+msgstr "图标包"
+
+msgid "Daily Forecast"
+msgstr "每日预报"
+
+msgid "Hourly Forecast"
+msgstr "每小时预报"
+
+msgid "Refresh"
+msgstr "刷新"
+
+msgid "Details"
+msgstr "详情"
+
+msgid "City"
+msgstr "城市"
+
+msgid "Humidity"
+msgstr "湿度"
+
+msgid "Wind"
+msgstr "风"
+
+msgid "Feels like"
+msgstr "体感温度"
+
+msgid "Today"
+msgstr "今天"
+
+msgid "Mon"
+msgstr "周一"
+
+msgid "Tue"
+msgstr "周二"
+
+msgid "Wed"
+msgstr "周三"
+
+msgid "Thu"
+msgstr "周四"
+
+msgid "Fri"
+msgstr "周五"
+
+msgid "Sat"
+msgstr "周六"
+
+msgid "Sun"
+msgstr "周日"
+
+msgid "Loading weather data..."
+msgstr "正在加载天气数据..."
+
+msgid "Network error. Check your internet connection."
+msgstr "网络错误。请检查您的互联网连接。"
+
+msgid "No API key configured."
+msgstr "未配置 API 密钥。"
+
+msgid "Location not found."
+msgstr "未找到位置。"
+
+msgid "Pressure"
+msgstr "气压"
+
+msgid "Clouds"
+msgstr "云量"
+
+msgid "UV"
+msgstr "紫外线"
+
+msgid "Visibility"
+msgstr "能见度"
+
+msgid "Click to close"
+msgstr "点击关闭"
+
+msgid "Clear"
+msgstr "晴"
+
+msgid "Cloudy"
+msgstr "多云"
+
+msgid "Rain"
+msgstr "雨"
+
+msgid "Drizzle"
+msgstr "毛毛雨"
+
+msgid "Thunderstorm"
+msgstr "雷暴"
+
+msgid "Snow"
+msgstr "雪"
+
+msgid "Mist"
+msgstr "薄雾"
+
+msgid "Fog"
+msgstr "雾"
+
+msgid "Haze"
+msgstr "霾"
+
+msgid "Overcast"
+msgstr "阴天"
+
+msgid "Mainly Clear"
+msgstr "晴间多云"
+
+msgid "Partly Cloudy"
+msgstr "局部有云"
+
+msgid "Freezing Drizzle"
+msgstr "冻毛毛雨"
+
+msgid "Freezing Rain"
+msgstr "冻雨"
+
+msgid "Snow Grains"
+msgstr "米雪"
+
+msgid "Rain Showers"
+msgstr "阵雨"
+
+msgid "Snow Showers"
+msgstr "阵雪"
+
+msgid "Thunderstorm with Hail"
+msgstr "雷暴伴有冰雹"
+
+msgid "Unknown"
+msgstr "未知"

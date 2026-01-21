@@ -58,7 +58,11 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
     // Determine naturally if it's an application based on category or file path
     var catLower = (category || "").toString().toLowerCase()
     var isApp = catLower === "uygulamalar" || catLower === "applications" || catLower === "apps" ||
-        catLower === "sistem ayarları" || catLower === "system settings" ||
+        catLower === "sistem ayarları" || catLower === "system settings" || catLower === "settings" || catLower === "ayarlar" ||
+        catLower === "games" || catLower === "oyunlar" || catLower === "office" || catLower === "ofis" || 
+        catLower === "internet" || catLower === "graphics" || catLower === "grafik" || catLower === "development" || catLower === "geliştirme" ||
+        catLower === "multimedia" || catLower === "çoklu ortam" || catLower === "education" || catLower === "eğitim" ||
+        catLower === "utilities" || catLower === "araçlar" || catLower === "system" || catLower === "sistem" ||
         (filePath && filePath.toString().indexOf(".desktop") !== -1) ||
         (matchId && matchId.toString().indexOf(".desktop") !== -1)
 

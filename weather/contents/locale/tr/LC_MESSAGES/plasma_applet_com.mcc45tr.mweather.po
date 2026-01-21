@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "Weather Provider"
+msgstr "Hava Durumu Sağlayıcısı"
+
+msgid "Location"
+msgstr "Konum"
+
+msgid "Auto-detect from IP"
+msgstr "IP adresinden otomatik algıla"
+
+msgid "Enter manually"
+msgstr "Elle gir"
+
+msgid "Units"
+msgstr "Birimler"
+
+msgid "Use system units"
+msgstr "Sistem birimlerini kullan"
+
+msgid "Metric (°C)"
+msgstr "Metrik (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Emperyal (°F)"
+
+msgid "Refresh Interval"
+msgstr "Yenileme Sıklığı"
+
+msgid "Appearance"
+msgstr "Görünüm"
+
+msgid "Icon Pack"
+msgstr "İkon Paketi"
+
+msgid "Daily Forecast"
+msgstr "Günlük Tahmin"
+
+msgid "Hourly Forecast"
+msgstr "Saatlik Tahmin"
+
+msgid "Refresh"
+msgstr "Yenile"
+
+msgid "Details"
+msgstr "Detay"
+
+msgid "City"
+msgstr "Şehir"
+
+msgid "Humidity"
+msgstr "Nem"
+
+msgid "Wind"
+msgstr "Rüzgar"
+
+msgid "Feels like"
+msgstr "Hissedilen"
+
+msgid "Today"
+msgstr "Bugün"
+
+msgid "Mon"
+msgstr "Pzt"
+
+msgid "Tue"
+msgstr "Sal"
+
+msgid "Wed"
+msgstr "Çar"
+
+msgid "Thu"
+msgstr "Per"
+
+msgid "Fri"
+msgstr "Cum"
+
+msgid "Sat"
+msgstr "Cts"
+
+msgid "Sun"
+msgstr "Paz"
+
+msgid "Loading weather data..."
+msgstr "Hava durumu yükleniyor..."
+
+msgid "Network error. Check your internet connection."
+msgstr "Ağ hatası. İnternet bağlantınızı kontrol edin."
+
+msgid "No API key configured."
+msgstr "API anahtarı ayarlanmadı."
+
+msgid "Location not found."
+msgstr "Konum bulunamadı."
+
+msgid "Pressure"
+msgstr "Basınç"
+
+msgid "Clouds"
+msgstr "Bulut"
+
+msgid "UV"
+msgstr "UV"
+
+msgid "Visibility"
+msgstr "Görüş"
+
+msgid "Click to close"
+msgstr "Kapatmak için tıklayın"
+
+msgid "Clear"
+msgstr "Açık"
+
+msgid "Cloudy"
+msgstr "Bulutlu"
+
+msgid "Rain"
+msgstr "Yağmurlu"
+
+msgid "Drizzle"
+msgstr "Çiseliyor"
+
+msgid "Thunderstorm"
+msgstr "Gök Gürültülü Fırtına"
+
+msgid "Snow"
+msgstr "Karlı"
+
+msgid "Mist"
+msgstr "Sisli"
+
+msgid "Fog"
+msgstr "Sisli"
+
+msgid "Haze"
+msgstr "Puslu"
+
+msgid "Overcast"
+msgstr "Kapalı"
+
+msgid "Mainly Clear"
+msgstr "Genelde Açık"
+
+msgid "Partly Cloudy"
+msgstr "Parçalı Bulutlu"
+
+msgid "Freezing Drizzle"
+msgstr "Dondurucu Çisinti"
+
+msgid "Freezing Rain"
+msgstr "Dondurucu Yağmur"
+
+msgid "Snow Grains"
+msgstr "Kar Taneleri"
+
+msgid "Rain Showers"
+msgstr "Sağanak Yağmur"
+
+msgid "Snow Showers"
+msgstr "Sağanak Kar"
+
+msgid "Thunderstorm with Hail"
+msgstr "Dolu ile Fırtına"
+
+msgid "Unknown"
+msgstr "Bilinmeyen"

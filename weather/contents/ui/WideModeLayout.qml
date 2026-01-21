@@ -17,7 +17,7 @@ RowLayout {
     property bool forecastMode: weatherRoot.forecastMode
     property string location: weatherRoot.location
     
-    function tr(key) { return weatherRoot.tr(key) }
+
     function getWeatherIcon(item) { return weatherRoot.getWeatherIcon(item) }
     function getLocalizedDay(day) { return weatherRoot.getLocalizedDay(day) }
 
@@ -85,7 +85,7 @@ RowLayout {
 
             Text {
                 id: conditionText
-                text: currentWeather ? tr("condition_" + currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
+                text: currentWeather ? i18n(currentWeather.condition) : ""
                 color: Kirigami.Theme.textColor
                 opacity: 0.8
                 font.family: "Roboto Condensed"
@@ -210,7 +210,7 @@ RowLayout {
                 Text {
                     id: toggleText
                     anchors.centerIn: parent
-                    text: forecastMode ? tr("hourly_forecast") : tr("daily_forecast")
+                    text: forecastMode ? i18n("Hourly Forecast") : i18n("Daily Forecast")
                     color: Kirigami.Theme.textColor
                     font.pixelSize: 11
                     font.bold: true

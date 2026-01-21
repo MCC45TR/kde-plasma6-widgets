@@ -12,7 +12,7 @@ Item {
     property var currentWeather: weatherRoot.currentWeather
     property string location: weatherRoot.location
     
-    function tr(key) { return weatherRoot.tr(key) }
+
     function getWeatherIcon(item) { return weatherRoot.getWeatherIcon(item) }
 
     // 1. Top Left: Condition & Location
@@ -23,7 +23,7 @@ Item {
         width: parent.width * 0.6
 
         Text {
-            text: currentWeather ? tr("condition_" + currentWeather.condition.toLowerCase().replace(/ /g, "_")) : ""
+            text: currentWeather ? i18n(currentWeather.condition) : ""
             color: Kirigami.Theme.textColor
             font.family: "Roboto Condensed"
             font.pixelSize: Math.max(16, Math.min(24, smallLayout.height * 0.12))

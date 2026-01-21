@@ -510,16 +510,10 @@ Item {
         anchors.rightMargin: 12
         asynchronous: true
         
-        property var items: logic.getVisiblePinnedItems()
+        property var items: logic.visiblePinnedItems
         active: items.length > 0 && showPinnedBar
         
-        // Reactively update when pins change
-        Connections {
-            target: logic
-            function onPinnedItemsChanged() {
-                pinnedLoader.items = logic.getVisiblePinnedItems()
-            }
-        }
+        // Connections removed as binding handles updates now
         
         sourceComponent: PinnedSection {
             pinnedItems: pinnedLoader.items
@@ -765,21 +759,12 @@ Item {
          // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
          anchors.bottomMargin: isButtonMode ? 56 : 12
          
-         active: popupRoot.expanded && searchText.length === 0 && logic.searchHistory.length > 0
+         active: popupRoot.expanded && searchText.length === 0
          
-         property var categorizedHistory: []
-         onActiveChanged: if(active) categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other"))
-         
-         Connections {
-             target: logic
-             function onHistoryForceUpdate() {
-                 if (historyLoader.status === Loader.Ready) {
-                      historyLoader.categorizedHistory = HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other"))
-                 }
-             }
-         }
+         property var categorizedHistory: (logic.historyVersion >= 0 && logic.searchHistory.length > 0) ? HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other")) : []
          
          sourceComponent: Item {
+             anchors.fill: parent
              // Helper to route navigation
              function moveUp() { 
                  if (isTileView) histTileView.moveUp();

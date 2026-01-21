@@ -74,6 +74,7 @@ Item {
 
     // History List
     ScrollView {
+        visible: historyList.categorizedHistory.length > 0
         anchors.top: historyHeader.bottom
         anchors.topMargin: 8
         anchors.left: parent.left
@@ -212,6 +213,28 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    // Empty State
+    ColumnLayout {
+        anchors.centerIn: parent
+        visible: historyList.categorizedHistory.length === 0
+        spacing: 16
+
+        Kirigami.Icon {
+            source: "search"
+            Layout.preferredWidth: 64
+            Layout.preferredHeight: 64
+            Layout.alignment: Qt.AlignHCenter
+            color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.3)
+        }
+
+        Text {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
+            color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
+            font.pixelSize: 16
+            Layout.alignment: Qt.AlignHCenter
         }
     }
 }

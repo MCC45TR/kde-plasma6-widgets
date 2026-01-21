@@ -54,7 +54,7 @@ Item {
         
         // Provider Section
         GroupBox {
-            title: "Hava Durumu Sağlayıcısı"
+            title: i18n("Weather Provider")
             Layout.fillWidth: true
             
             ColumnLayout {
@@ -64,7 +64,7 @@ Item {
                 ComboBox {
                     id: providerCombo
                     Layout.fillWidth: true
-                    model: ["Open-Meteo (Ücretsiz, Anahtar Gerekmez)", "OpenWeatherMap (Anahtar Gerekli)", "WeatherAPI.com (Anahtar Gerekli)"]
+                    model: [i18n("Open-Meteo (Free, No Key Required)"), i18n("OpenWeatherMap (Key Required)"), i18n("WeatherAPI.com (Key Required)")]
                     
                     onCurrentIndexChanged: {
                         configRoot.cfg_weatherProvider = configRoot.providersModel[currentIndex]
@@ -72,8 +72,8 @@ Item {
                 }
                 
                 Label {
-                    text: providerCombo.currentIndex === 0 ? "En iyi ücretsiz seçenek. API anahtarı gerektirmez." :
-                          providerCombo.currentIndex === 1 ? "Standart sağlayıcı. Aşağıda API anahtarı girilmelidir." : "Alternatif sağlayıcı. Aşağıda API anahtarı girilmelidir."
+                    text: providerCombo.currentIndex === 0 ? i18n("Best free option. No API key required.") :
+                          providerCombo.currentIndex === 1 ? i18n("Standard provider. API key required below.") : i18n("Alternative provider. API key required below.")
                     font.pixelSize: 10
                     opacity: 0.7
                 }
@@ -82,7 +82,7 @@ Item {
 
         // API Keys Section
         GroupBox {
-            title: "API Anahtarları"
+            title: i18n("API Keys")
             Layout.fillWidth: true
             visible: providerCombo.currentIndex !== 0 // Hide if Open-Meteo is selected
             
@@ -91,26 +91,26 @@ Item {
                 spacing: 10
                 
                 Label {
-                    text: "OpenWeatherMap API Anahtarı:"
+                    text: i18n("OpenWeatherMap API Key:")
                     font.bold: true
                     visible: providerCombo.currentIndex === 1
                 }
                 TextField {
                     id: apiKeyField
                     Layout.fillWidth: true
-                    placeholderText: "OpenWeatherMap API anahtarınızı girin"
+                    placeholderText: i18n("Enter your OpenWeatherMap API key")
                     visible: providerCombo.currentIndex === 1
                 }
                 
                 Label {
-                    text: "WeatherAPI.com API Anahtarı:"
+                    text: i18n("WeatherAPI.com API Key:")
                     font.bold: true
                     visible: providerCombo.currentIndex === 2
                 }
                 TextField {
                     id: apiKey2Field
                     Layout.fillWidth: true
-                    placeholderText: "WeatherAPI.com anahtarınızı girin"
+                    placeholderText: i18n("Enter your WeatherAPI.com key")
                     visible: providerCombo.currentIndex === 2
                 }
             }
@@ -118,7 +118,7 @@ Item {
         
         // Location Section
         GroupBox {
-            title: "Konum"
+            title: i18n("Location")
             Layout.fillWidth: true
             
             ColumnLayout {
@@ -132,7 +132,7 @@ Item {
                     
                     RadioButton {
                         id: autoModeRadio
-                        text: "IP adresinden otomatik algıla"
+                        text: i18n("Auto-detect from IP")
                         checked: configRoot.cfg_locationMode === "auto"
                         onCheckedChanged: {
                             if (checked) configRoot.cfg_locationMode = "auto"
@@ -140,7 +140,7 @@ Item {
                     }
                     RadioButton {
                         id: manualModeRadio
-                        text: "Elle gir"
+                        text: i18n("Enter manually")
                         checked: configRoot.cfg_locationMode === "manual"
                         onCheckedChanged: {
                             if (checked) configRoot.cfg_locationMode = "manual"
@@ -155,37 +155,37 @@ Item {
                     visible: manualModeRadio.checked
                     
                     Label {
-                        text: "Şehir 1:"
+                        text: i18n("City 1:")
                         font.bold: true
                     }
                     TextField {
                         id: locationField
                         Layout.fillWidth: true
-                        placeholderText: "Örn: Ankara, Istanbul, London"
+                        placeholderText: i18n("Ex: Ankara, Istanbul, London")
                     }
                     
                     Label {
-                        text: "Şehir 2:"
+                        text: i18n("City 2:")
                         font.bold: true
                     }
                     TextField {
                         id: location2Field
                         Layout.fillWidth: true
-                        placeholderText: "İkinci şehir (opsiyonel)"
+                        placeholderText: i18n("Second city (optional)")
                     }
                     
                     Label {
-                        text: "Şehir 3:"
+                        text: i18n("City 3:")
                         font.bold: true
                     }
                     TextField {
                         id: location3Field
                         Layout.fillWidth: true
-                        placeholderText: "Üçüncü şehir (opsiyonel)"
+                        placeholderText: i18n("Third city (optional)")
                     }
                     
                     Label {
-                        text: "Şehir ismi, 'Şehir,Ülke Kodu' veya Posta Kodu kullanabilirsiniz."
+                        text: i18n("You can use City name, 'City,Country Code' or Zip Code.")
                         font.pixelSize: 10
                         opacity: 0.7
                         wrapMode: Text.WordWrap
@@ -196,7 +196,7 @@ Item {
                 // Auto mode info
                 Label {
                     visible: autoModeRadio.checked
-                    text: "Konum, IP adresinize göre otomatik olarak algılanacaktır."
+                    text: i18n("Location will be auto-detected based on your IP address.")
                     font.pixelSize: 10
                     opacity: 0.7
                     wrapMode: Text.WordWrap
@@ -207,7 +207,7 @@ Item {
         
         // Units Section
         GroupBox {
-            title: "Ayarlar"
+            title: i18n("Settings")
             Layout.fillWidth: true
             
             GridLayout {
@@ -217,7 +217,7 @@ Item {
                 columnSpacing: 10
                 
                 Label {
-                    text: "Birimler:"
+                    text: i18n("Units:")
                     font.bold: true
                 }
                 RowLayout {
@@ -225,7 +225,7 @@ Item {
                     
                     CheckBox {
                         id: useSystemUnitsCheck
-                        text: "Sistem birimlerini kullan"
+                        text: i18n("Use system units")
                         checked: configRoot.cfg_useSystemUnits
                         onCheckedChanged: configRoot.cfg_useSystemUnits = checked
                     }
@@ -238,7 +238,7 @@ Item {
                 ComboBox {
                     id: unitsCombo
                     Layout.fillWidth: true
-                    model: ["Metrik (°C)", "Emperyal (°F)"]
+                    model: [i18n("Metric (°C)"), i18n("Imperial (°F)")]
                     visible: !useSystemUnitsCheck.checked
                     enabled: !useSystemUnitsCheck.checked
                     
@@ -250,13 +250,13 @@ Item {
                 }
                 
                 Label {
-                    text: "Yenileme Sıklığı:"
+                    text: i18n("Refresh Interval:")
                     font.bold: true
                 }
                 ComboBox {
                     id: intervalCombo
                     Layout.fillWidth: true
-                    model: ["15 dakika", "30 dakika", "45 dakika", "1 saat", "2 saat", "3 saat", "4 saat", "6 saat", "8 saat", "12 saat", "1 gün"]
+                    model: [i18n("15 minutes"), i18n("30 minutes"), i18n("45 minutes"), i18n("1 hour"), i18n("2 hours"), i18n("3 hours"), i18n("4 hours"), i18n("6 hours"), i18n("8 hours"), i18n("12 hours"), i18n("1 day")]
                     
                     property var intervalValues: [15, 30, 45, 60, 120, 180, 240, 360, 480, 720, 1440]
                     

@@ -283,6 +283,7 @@ FocusScope {
 
     // Tile Grid
     ScrollView {
+        visible: historyTile.categorizedHistory.length > 0
         anchors.top: historyHeader.bottom
         anchors.topMargin: 8
         anchors.left: parent.left
@@ -501,5 +502,27 @@ FocusScope {
     // Reset selection when data changes
     onCategorizedHistoryChanged: {
         selectedFlatIndex = 0
+    }
+
+    // Empty State
+    ColumnLayout {
+        anchors.centerIn: parent
+        visible: historyTile.categorizedHistory.length === 0
+        spacing: 16
+
+        Kirigami.Icon {
+            source: "search"
+            Layout.preferredWidth: 64
+            Layout.preferredHeight: 64
+            Layout.alignment: Qt.AlignHCenter
+            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.3)
+        }
+
+        Text {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
+            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.5)
+            font.pixelSize: 16
+            Layout.alignment: Qt.AlignHCenter
+        }
     }
 }

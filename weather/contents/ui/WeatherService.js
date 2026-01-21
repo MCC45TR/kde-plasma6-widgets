@@ -38,7 +38,7 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
                         clouds: data.clouds ? data.clouds.all : null, // %
                         sunrise: data.sys ? data.sys.sunrise : null,
                         sunset: data.sys ? data.sys.sunset : null,
-                        condition: data.weather[0].main,
+                        condition: normalizeCondition(data.weather[0].main),
                         description: data.weather[0].description,
                         icon: data.weather[0].icon,
                         code: data.weather[0].id,
@@ -97,7 +97,7 @@ function fetchWeatherAPI(apiKey, location, callback) {
                         feels_like: Math.round(data.current.feelslike_c),
                         temp_min: Math.round(data.forecast.forecastday[0].day.mintemp_c),
                         temp_max: Math.round(data.forecast.forecastday[0].day.maxtemp_c),
-                        condition: data.current.condition.text,
+                        condition: normalizeCondition(data.current.condition.text),
                         description: data.current.condition.text,
                         icon: "",
                         code: data.current.condition.code,
@@ -346,7 +346,7 @@ function parseForecastOpenWeather(data) {
                 time: date.getHours() + ":00",
                 temp: Math.round(item.main.temp),
                 code: item.weather[0].id,
-                condition: item.weather[0].main,
+                condition: normalizeCondition(item.weather[0].main),
                 icon: item.weather[0].icon
             })
         }
@@ -362,7 +362,7 @@ function parseForecastOpenWeather(data) {
                     temp_min: Math.round(item.main.temp_min),
                     temp_max: Math.round(item.main.temp_max),
                     code: item.weather[0].id,
-                    condition: item.weather[0].main,
+                    condition: normalizeCondition(item.weather[0].main),
                     icon: item.weather[0].icon
                 })
             }
@@ -387,7 +387,7 @@ function parseForecastWeatherAPI(forecastDays) {
             temp_min: Math.round(day.day.mintemp_c),
             temp_max: Math.round(day.day.maxtemp_c),
             code: day.day.condition.code,
-            condition: day.day.condition.text,
+            condition: normalizeCondition(day.day.condition.text),
             icon: ""
         })
 
@@ -400,7 +400,7 @@ function parseForecastWeatherAPI(forecastDays) {
                     time: hourDate.getHours() + ":00",
                     temp: Math.round(hour.temp_c),
                     code: hour.condition.code,
-                    condition: hour.condition.text,
+                    condition: normalizeCondition(hour.condition.text),
                     icon: ""
                 })
             }
@@ -470,9 +470,18 @@ function getOpenMeteoCondition(code) {
     return "Unknown"
 }
 
+// Helper to normalize condition text to align with available translations
+function normalizeCondition(text) {
+    if (!text) return ""
+    var t = text.trim()
+    if (t === "Clouds") return "Cloudy"
+    // Add more mappings if needed to match PO msgids
+    return t
+}
+
 function getDayName(dayIndex) {
-    // Return lowercase keys that match localization.js
-    var days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
+    // Return Title Case to match PO msgids like "Sun", "Mon"
+    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     return days[dayIndex]
 }
 

@@ -25,7 +25,7 @@ Item {
         spacing: 15
         
         GroupBox {
-            title: "Görünüm (Appearance)"
+            title: i18n("Appearance")
             Layout.fillWidth: true
             
             ColumnLayout {
@@ -33,7 +33,7 @@ Item {
                 spacing: 10
                 
                 Label {
-                    text: "İkon Paketi (Icon Pack):"
+                    text: i18n("Icon Pack:")
                     font.bold: true
                 }
                 
@@ -49,8 +49,8 @@ Item {
                 
                 Label {
                     text: iconPackCombo.currentIndex > 1 ? 
-                          "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)" : 
-                          "Select the visual style for weather icons."
+                          i18n("Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)") : 
+                          i18n("Select the visual style for weather icons.")
                     font.pixelSize: 10
                     opacity: 0.7
                     wrapMode: Text.WordWrap // Enable multiline

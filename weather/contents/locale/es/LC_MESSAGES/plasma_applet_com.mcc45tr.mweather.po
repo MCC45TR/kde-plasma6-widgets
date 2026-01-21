@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Settings"
+msgstr "Configuración"
+
+msgid "Weather Provider"
+msgstr "Proveedor meteorológico"
+
+msgid "Location"
+msgstr "Ubicación"
+
+msgid "Auto-detect from IP"
+msgstr "Detectar automáticamente por IP"
+
+msgid "Enter manually"
+msgstr "Introducir manualmente"
+
+msgid "Units"
+msgstr "Unidades"
+
+msgid "Use system units"
+msgstr "Usar unidades del sistema"
+
+msgid "Metric (°C)"
+msgstr "Métrico (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Imperial (°F)"
+
+msgid "Refresh Interval"
+msgstr "Intervalo de actualización"
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Icon Pack"
+msgstr "Paquete de iconos"
+
+msgid "Daily Forecast"
+msgstr "Pronóstico diario"
+
+msgid "Hourly Forecast"
+msgstr "Pronóstico por hora"
+
+msgid "Refresh"
+msgstr "Actualizar"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "City"
+msgstr "Ciudad"
+
+msgid "Humidity"
+msgstr "Humedad"
+
+msgid "Wind"
+msgstr "Viento"
+
+msgid "Feels like"
+msgstr "Sensación térmica"
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Wed"
+msgstr "Mié"
+
+msgid "Thu"
+msgstr "Jue"
+
+msgid "Fri"
+msgstr "Vie"
+
+msgid "Sat"
+msgstr "Sáb"
+
+msgid "Sun"
+msgstr "Dom"
+
+msgid "Loading weather data..."
+msgstr "Cargando datos del clima..."
+
+msgid "Network error. Check your internet connection."
+msgstr "Error de red. Compruebe su conexión a Internet."
+
+msgid "No API key configured."
+msgstr "No hay clave API configurada."
+
+msgid "Location not found."
+msgstr "Ubicación no encontrada."
+
+msgid "Pressure"
+msgstr "Presión"
+
+msgid "Clouds"
+msgstr "Nubes"
+
+msgid "UV"
+msgstr "UV"
+
+msgid "Visibility"
+msgstr "Visibilidad"
+
+msgid "Click to close"
+msgstr "Clic para cerrar"
+
+msgid "Clear"
+msgstr "Despejado"
+
+msgid "Cloudy"
+msgstr "Nublado"
+
+msgid "Rain"
+msgstr "Lluvia"
+
+msgid "Drizzle"
+msgstr "Llovizna"
+
+msgid "Thunderstorm"
+msgstr "Tormenta"
+
+msgid "Snow"
+msgstr "Nieve"
+
+msgid "Mist"
+msgstr "Neblina"
+
+msgid "Fog"
+msgstr "Niebla"
+
+msgid "Haze"
+msgstr "Calima"
+
+msgid "Overcast"
+msgstr "Cubierto"
+
+msgid "Mainly Clear"
+msgstr "Mayormente despejado"
+
+msgid "Partly Cloudy"
+msgstr "Parcialmente nublado"
+
+msgid "Freezing Drizzle"
+msgstr "Llovizna helada"
+
+msgid "Freezing Rain"
+msgstr "Lluvia helada"
+
+msgid "Snow Grains"
+msgstr "Granizo de nieve"
+
+msgid "Rain Showers"
+msgstr "Chubascos"
+
+msgid "Snow Showers"
+msgstr "Chubascos de nieve"
+
+msgid "Thunderstorm with Hail"
+msgstr "Tormenta con granizo"
+
+msgid "Unknown"
+msgstr "Desconocido"
