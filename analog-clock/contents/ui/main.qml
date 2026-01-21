@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
@@ -101,6 +102,8 @@ PlasmoidItem {
         color: Kirigami.Theme.backgroundColor
         radius: 20
         anchors.margins: 10
+        // Use configured opacity
+        opacity: (Plasmoid.configuration.backgroundOpacity !== undefined) ? Plasmoid.configuration.backgroundOpacity : 1.0
     }
 
     // Clock Face Container (Fills the widget)
@@ -132,11 +135,18 @@ PlasmoidItem {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            onEntered: clockFace.isHovered = true
-            onExited: clockFace.isHovered = false
+            onEntered: clockFace.hoverState = true
+            onExited: clockFace.hoverState = false
         }
         
-        property bool isHovered: false
+        property bool hoverState: false
+        property int style: Plasmoid.configuration.clockStyle !== undefined ? Plasmoid.configuration.clockStyle : 0 // 0=Auto, 1=Classic, 2=Modern
+        
+        // Classic (1) -> Always show detailed face (isHovered = true)
+        // Modern (2) -> Never show detailed face (isHovered = false)
+        // Auto (0) -> Show on hover
+        
+        property bool isHovered: style === 1 ? true : (style === 2 ? false : hoverState)
         
         // Radius for the circular arrangement of numbers
         readonly property real numberRadius: (Math.min(clockFace.width, clockFace.height) - 20) / 2 - 20
@@ -243,14 +253,16 @@ PlasmoidItem {
                         }
                     }
                     
+                    property bool isCurrentHour: (index === (root.currentTime.getHours() % 12))
+                    
                     font.family: numberFont.name
-                    font.bold: true
                     font.pixelSize: 16
                     color: Kirigami.Theme.textColor
                     
-                    // Small rotation to match the face curve?
-                    // rotation: numberItem.angleDeg 
-                    // Let's NOT rotate text for now.
+                    font.variableAxes: {
+                        "wdth": isCurrentHour ? 151 : 100,
+                        "wght": isCurrentHour ? 1000 : 500
+                    }
                 }
             }
         }
@@ -259,6 +271,7 @@ PlasmoidItem {
         // Hour Hand
         Item {
             id: hourHand
+            z: 10 // Above digital clock
             width: clockFace.isHovered ? clockFace.secondThick : 10
             Behavior on width { NumberAnimation { duration: 300 } }
             
@@ -298,6 +311,7 @@ PlasmoidItem {
         // Minute Hand
         Item {
             id: minuteHand
+            z: 10 // Above digital clock
             // Width Logic: Use hourHand width (10) when hovered, otherwise 3
             width: clockFace.isHovered ? hourHand.width : 3
             Behavior on width { NumberAnimation { duration: 300 } }
@@ -378,6 +392,175 @@ PlasmoidItem {
             color: Kirigami.Theme.textColor
             
             Behavior on width { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
+        }
+
+        // Digital Clock
+        Item {
+            id: digitalClock
+            z: 0 // Below hands
+            anchors.centerIn: parent
+            width: parent.width * 0.6 // Approximate inner area
+            height: parent.height * 0.6
+            
+            // Configuration
+            property int style: Plasmoid.configuration.clockStyle !== undefined ? Plasmoid.configuration.clockStyle : 0 // 0=Auto, 1=Classic, 2=Modern
+            
+            // Logic for Small Square (Only Hour)
+            // Ratio approx 1.0 (between 0.9 and 1.1) AND width is small (< 180)
+            property bool isSmallSquare: (root.width / root.height > 0.9 && root.width / root.height < 1.1) && (root.width < 180)
+            
+            // Show condition: 
+            // 1. Config says showDigitalClock is TRUE
+            // 2. AND we are NOT in Classic Mode (Style 1 forces analog-only look usually, but let's respect the digital clock toggle too)
+            //    Actually, let's say Classic Mode HIDES the central digital clock generally to look like a real clock.
+            //    Unless user explicitly wants it. Let's keep existing logic: showDigitalClock controls it.
+            //    BUT, if style is Classic, we might prefer hiding it. 
+            //    Let's stick to the toggle: if 'showDigitalClock' is true, we show it.
+            
+            property bool show: (Plasmoid.configuration.showDigitalClock !== undefined ? Plasmoid.configuration.showDigitalClock : true) && (style !== 1)
+            
+            visible: show
+            
+            // Interaction Logic: Hide when hovered (switching to detailed analog mode), UNLESS style is modern?
+            // If Style is Classic (1), we are always in "detailed analog mode" so digital is hidden anyway (logic above).
+            // If Style is Modern (2), we likely want digital clock to persist even on hover? Or maybe not.
+            // Let's keep the boolean isHovered logic for standard Auto mode.
+            
+            readonly property bool isHovered: clockFace.isHovered
+            
+            opacity: (show && !isHovered) ? 1.0 : 0.0
+            scale: (show && !isHovered) ? 1.0 : 0.0
+            
+            Behavior on opacity { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
+            Behavior on scale { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
+            
+            // Layout Logic: Vertical if height is > 10% larger than width
+            property bool isVertical: root.height > (root.width * 1.1)
+            
+            // Time Components
+            property string hourText: Qt.formatTime(root.currentTime, "HH")
+            property string minText: Qt.formatTime(root.currentTime, "mm")
+            
+            // Font Settings
+            property bool useCustom: Plasmoid.configuration.useCustomFont || false
+            property string customFamily: Plasmoid.configuration.customFontFamily || ""
+            property string effectiveFont: useCustom && customFamily ? customFamily : numberFont.name
+
+            // Global Digital Clock Config
+            property bool fontAutoAdjust: Plasmoid.configuration.fontAutoAdjust !== undefined ? Plasmoid.configuration.fontAutoAdjust : true
+            property int fixedWeight: Plasmoid.configuration.fixedWeight !== undefined ? Plasmoid.configuration.fixedWeight : 400
+            property int fixedWidth: Plasmoid.configuration.fixedWidth !== undefined ? Plasmoid.configuration.fixedWidth : 100
+            
+            // Vertical Spacing (percentage: 10 means 0.1)
+            property real verticalSpacing: (Plasmoid.configuration.verticalSpacingRatio !== undefined ? Plasmoid.configuration.verticalSpacingRatio : 10) / 100.0
+
+            ColumnLayout {
+                anchors.centerIn: parent
+                spacing: digitalClock.height * digitalClock.verticalSpacing // Dynamic spacing from config
+                visible: digitalClock.isVertical
+                
+                // Vertical Layout Text
+                Text {
+                    text: digitalClock.hourText
+                    font.family: digitalClock.effectiveFont
+                    
+                    // Dynamic Font Fitting for Vertical Mode
+                    property real fitHeight: digitalClock.height * 0.45
+                    
+                    font.pixelSize: fitHeight
+                    
+                    // Auto Logic: Vertical mode always most condensed (wdth 25), weight 400
+                    property int autoWdth: 25
+                    property int autoWght: 400
+                    
+                    font.variableAxes: {
+                        "wdth": digitalClock.fontAutoAdjust ? autoWdth : digitalClock.fixedWidth,
+                        "wght": digitalClock.fontAutoAdjust ? autoWght : digitalClock.fixedWeight
+                    }
+                    
+                    color: Kirigami.Theme.textColor
+                    Layout.alignment: Qt.AlignHCenter
+                }
+                Text {
+                    text: digitalClock.minText
+                    font.family: digitalClock.effectiveFont
+                    
+                    property real fitHeight: digitalClock.height * 0.45
+                    font.pixelSize: fitHeight
+                    
+                    property int autoWdth: 25
+                    property int autoWght: 400
+                    
+                    font.variableAxes: {
+                        "wdth": digitalClock.fontAutoAdjust ? autoWdth : digitalClock.fixedWidth,
+                        "wght": digitalClock.fontAutoAdjust ? autoWght : digitalClock.fixedWeight
+                    }
+                    
+                    color: Kirigami.Theme.textColor
+                    Layout.alignment: Qt.AlignHCenter
+                }
+            }
+            
+            // Horizontal Layout (Standard)
+            Text {
+                anchors.centerIn: parent
+                visible: !digitalClock.isVertical && !digitalClock.isSmallSquare
+                text: digitalClock.hourText + ":" + digitalClock.minText
+                font.family: digitalClock.effectiveFont
+                
+                // Horizontal Fitting
+                // 5 chars (HH:MM) approx 3.0em width
+                property real maxH: parent.height * 0.6
+                property real maxW: parent.width
+                
+                // Base pixel size on height first
+                font.pixelSize: maxH
+                
+                // Calculate width compression needed
+                // 5 chars * 0.6 = 3.0 aspect
+                property real requiredWdth: (maxW / (maxH * 2.8)) * 100
+                property real clampedWdth: Math.min(151, Math.max(25, requiredWdth))
+                
+                // Keep weight dynamic in horizontal mode for best fit
+                property real autoWeight: Math.min(1000, Math.max(100, clampedWdth * 5))
+                property int autoWidth: clampedWdth
+                
+                font.variableAxes: {
+                    "wdth": digitalClock.fontAutoAdjust ? autoWidth : digitalClock.fixedWidth,
+                    "wght": digitalClock.fontAutoAdjust ? autoWeight : digitalClock.fixedWeight
+                }
+
+                color: Kirigami.Theme.textColor
+            }
+            
+            // Small Square Layout (ONLY HOUR)
+            Text {
+                anchors.centerIn: parent
+                visible: !digitalClock.isVertical && digitalClock.isSmallSquare
+                text: digitalClock.hourText
+                font.family: digitalClock.effectiveFont
+
+                // Max out available space
+                property real maxH: parent.height * 0.85
+                property real maxW: parent.width * 0.85
+                
+                font.pixelSize: maxH
+                
+                // 2 chars (HH) approx 1.2 aspect
+                property real requiredWdth: (maxW / (maxH * 1.2)) * 100
+                property real clampedWdth: Math.min(151, Math.max(25, requiredWdth))
+                
+                // Auto Logic: Prefer bold/wide for single hour
+                property int autoWdth: clampedWdth
+                property int autoWght: 800
+                
+                font.variableAxes: {
+                    "wdth": digitalClock.fontAutoAdjust ? autoWdth : digitalClock.fixedWidth,
+                    "wght": digitalClock.fontAutoAdjust ? autoWght : digitalClock.fixedWeight
+                }
+
+                color: Kirigami.Theme.textColor
+            }
         }
     }
 }

@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "Aucun média en cours"
+
+msgid "Previous Track"
+msgstr "Piste précédente"
+
+msgid "Next Track"
+msgstr "Piste suivante"
+
+msgid "General (Follow All)"
+msgstr "Général (Suivre tout)"
+
+msgid "Default Media Player"
+msgstr "Lecteur multimédia par défaut"
+
+msgid "Inactive players are not shown."
+msgstr "Les lecteurs inactifs ne sont pas affichés."
+
+msgid "Selected Player:"
+msgstr "Lecteur sélectionné :"
+
+msgid "Select Application"
+msgstr "Sélectionner une application"
+
+msgid "⚠ No active players"
+msgstr "⚠ Aucun lecteur actif"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 lecteurs actifs trouvés"
+
+msgid "All media sources are tracked."
+msgstr "Toutes les sources de médias sont suivies."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Seul \"%1\" est suivi."
+
+msgid "Show media player badge"
+msgstr "Afficher le badge du lecteur multimédia"
+
+
+msgid "General"
+msgstr "Général"

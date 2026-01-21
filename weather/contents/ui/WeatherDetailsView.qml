@@ -267,7 +267,7 @@ ColumnLayout {
                     text: {
                         if (!weatherRoot.currentWeather || weatherRoot.currentWeather.wind_deg === undefined) return "--"
                         var deg = weatherRoot.currentWeather.wind_deg
-                        var dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+                        var dirs = [i18n("N"), i18n("NE"), i18n("E"), i18n("SE"), i18n("S"), i18n("SW"), i18n("W"), i18n("NW")]
                         return dirs[Math.round(deg / 45) % 8]
                     }
                     color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 

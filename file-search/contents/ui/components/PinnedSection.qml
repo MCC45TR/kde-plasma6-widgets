@@ -201,7 +201,7 @@ Item {
                             delegate: Item {
                                 id: tileDelegate
                                 width: pinnedSectionRoot.iconSize + 16
-                                height: pinnedSectionRoot.iconSize + 36
+                                height: pinnedSectionRoot.iconSize + 48
                                 
                                 property int visualIndex: index
                                 property bool isDragging: pinnedSectionRoot.draggedIndex === index
@@ -262,7 +262,9 @@ Item {
                                             horizontalAlignment: Text.AlignHCenter
                                             color: pinnedSectionRoot.textColor
                                             font.pixelSize: 10
-                                            elide: Text.ElideMiddle
+                                            wrapMode: Text.Wrap
+                                            maximumLineCount: 2
+                                            elide: Text.ElideRight
                                         }
                                     }
                                 }

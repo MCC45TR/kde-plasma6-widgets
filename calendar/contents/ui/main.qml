@@ -29,6 +29,7 @@ PlasmoidItem {
     property color bgColor: Kirigami.Theme.backgroundColor
     property color textColor: Kirigami.Theme.textColor
     property color accentColor: Kirigami.Theme.highlightColor
+    property color highlightedTextColor: Kirigami.Theme.highlightedTextColor
     property color completedColor: Qt.alpha(Kirigami.Theme.textColor, 0.5)
     property color separatorColor: Qt.alpha(Kirigami.Theme.textColor, 0.2)
     
@@ -55,28 +56,7 @@ PlasmoidItem {
     property var today: new Date()
     property var selectedDate: null // Nullable for toggle state
 
-    // --- Localization Logic ---
-    property var locales: {
-        "en": { "today": "Today" },
-        "tr": { "today": "Bugün" },
-        "de": { "today": "Heute" },
-        "fr": { "today": "Aujourd'hui" },
-        "ro": { "today": "Astăzi" },
-        "cs": { "today": "Dnes" },
-        "es": { "today": "Hoy" },
-        "ru": { "today": "Сегодня" },
-        "pt": { "today": "Hoje" },
-        "ja": { "today": "今日" }
-    }
-    property string currentLocale: Qt.locale().name.substring(0, 2)
-    
-    // tr() function remains simple and synchronous
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) return locales[currentLocale][key]
-        if (locales["en"] && locales["en"][key]) return locales["en"][key]
-        return key 
-    }
-    // --- End Localization Logic ---
+
     
     Timer {
         interval: 60000
@@ -233,6 +213,7 @@ PlasmoidItem {
                                     weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
+                                    highlightedTextColor: root.highlightedTextColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
                                     onDateSelected: (date) => root.toggleDateSelection(date)
@@ -262,6 +243,7 @@ PlasmoidItem {
                                     weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
+                                    highlightedTextColor: root.highlightedTextColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
                                     onDateSelected: (date) => root.toggleDateSelection(date)
@@ -325,6 +307,7 @@ PlasmoidItem {
                                     weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
+                                    highlightedTextColor: root.highlightedTextColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
                                     onDateSelected: (date) => root.toggleDateSelection(date)
@@ -354,6 +337,7 @@ PlasmoidItem {
                                     weekdayLabels: root.weekdayLabels
                                     textColor: root.textColor
                                     accentColor: root.accentColor
+                                    highlightedTextColor: root.highlightedTextColor
                                     completedColor: root.completedColor
                                     selectedDate: root.selectedDate
                                     onDateSelected: (date) => root.toggleDateSelection(date)
@@ -401,11 +385,11 @@ PlasmoidItem {
                 Text {
                     id: todayText
                     anchors.centerIn: parent
-                    text: root.tr("today")
+                    text: i18n("Today")
                     font.family: "Sans Serif"
                     font.pixelSize: 11
                     font.weight: Font.Bold
-                    color: root.textColor
+                    color: root.highlightedTextColor
                 }
 
                 MouseArea {

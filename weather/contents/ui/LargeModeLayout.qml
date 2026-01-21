@@ -77,7 +77,8 @@ Item {
                 }
 
                 // Right side: Weather Icon (bounded size)
-                Image {
+                // Right side: Weather Icon (bounded size)
+                Kirigami.Icon {
                     id: weatherIcon
                     anchors.right: parent.right
                     anchors.top: parent.top
@@ -85,9 +86,7 @@ Item {
                     width: Math.min(headerArea.iconMaxSize, parent.width * 0.45)
                     height: width
                     source: getWeatherIcon(currentWeather)
-                    sourceSize.width: width * 2
-                    sourceSize.height: height * 2
-                    fillMode: Image.PreserveAspectFit
+                    isMask: false
                     smooth: true
                 }
 
@@ -197,16 +196,17 @@ Item {
                 clip: true
 
                 readonly property real minCardHeight: 100
-                readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
-                cellHeight: height / visibleRows
-
+                cellHeight: height
+                
                 readonly property real minCardWidth: 70
-                readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
-                cellWidth: width / cardsPerRow
-
+                // Attempt to fit items in available width, but enforce minimum width
+                readonly property int itemCount: largeForecastGrid.count || 1
+                cellWidth: Math.max(minCardWidth, width / Math.max(4, Math.min(itemCount, 5))) 
+                // Using 5 as 'standard' visible count to avoid huge cards if only 2 days selected
+                
                 snapMode: GridView.SnapToRow
                 boundsBehavior: Flickable.StopAtBounds
-                flow: GridView.FlowLeftToRight
+                flow: GridView.FlowTopToBottom // Horizontal scrolling layout
 
                 model: forecastMode ? forecastHourly : forecastDaily
 

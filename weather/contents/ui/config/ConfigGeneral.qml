@@ -5,6 +5,8 @@ import QtQuick.Layouts
 Item {
     id: configRoot
     
+    property var title // To silence "does not have a property called title" error
+    
     property string cfg_weatherProvider
     property string cfg_locationMode
     property alias cfg_apiKey: apiKeyField.text
@@ -15,6 +17,33 @@ Item {
     property string cfg_units
     property bool cfg_useSystemUnits
     property int cfg_updateInterval
+    property string cfg_cachedWeather
+    property double cfg_lastUpdate
+    property string cfg_iconPack
+    property bool cfg_useCustomFont
+    property string cfg_customFontFamily
+    property double cfg_backgroundOpacity
+    property int cfg_forecastDays
+    property bool initialized: false
+    
+    // Default values (Required for 'Defaults' button)
+    property string cfg_apiKeyDefault
+    property string cfg_apiKey2Default
+    property string cfg_weatherProviderDefault
+    property string cfg_locationModeDefault
+    property string cfg_locationDefault
+    property string cfg_location2Default
+    property string cfg_location3Default
+    property string cfg_unitsDefault
+    property bool cfg_useSystemUnitsDefault
+    property int cfg_updateIntervalDefault
+    property string cfg_cachedWeatherDefault
+    property double cfg_lastUpdateDefault
+    property string cfg_iconPackDefault
+    property bool cfg_useCustomFontDefault
+    property string cfg_customFontFamilyDefault
+    property double cfg_backgroundOpacityDefault
+    property int cfg_forecastDaysDefault
     
     // Units mapping
     property var unitsModel: ["metric", "imperial"]
@@ -46,6 +75,13 @@ Item {
         var intervalValue = cfg_updateInterval || 30
         var intervalIdx = intervalCombo.intervalValues.indexOf(intervalValue)
         if (intervalIdx >= 0) intervalCombo.currentIndex = intervalIdx
+
+        // Initialize Forecast Days
+        var days = cfg_forecastDays || 5
+        var daysIdx = forecastDaysCombo.model.indexOf(String(days))
+        if (daysIdx >= 0) forecastDaysCombo.currentIndex = daysIdx
+        
+        initialized = true
     }
     
     ColumnLayout {
@@ -261,7 +297,23 @@ Item {
                     property var intervalValues: [15, 30, 45, 60, 120, 180, 240, 360, 480, 720, 1440]
                     
                     onCurrentIndexChanged: {
+                        if (!configRoot.initialized) return
                         configRoot.cfg_updateInterval = intervalValues[currentIndex]
+                    }
+                }
+                
+                Label {
+                    text: i18n("Forecast Days:")
+                    font.bold: true
+                }
+                ComboBox {
+                    id: forecastDaysCombo
+                    Layout.fillWidth: true
+                    model: ["4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
+                    
+                    onCurrentIndexChanged: {
+                         if (!configRoot.initialized) return
+                         configRoot.cfg_forecastDays = parseInt(model[currentIndex])
                     }
                 }
             }

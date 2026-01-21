@@ -11,6 +11,7 @@ ColumnLayout {
     // Parent'tan alınacak renkler
     property color textColor: "#ffffff"
     property color accentColor: "#d71921"
+    property color highlightedTextColor: "#ffffff"
     property color completedColor: "#808080"
     property string titleFont: "Sans Serif"
 
@@ -131,7 +132,7 @@ ColumnLayout {
                     font.family: "Roboto Condensed"
                     font.pixelSize: 11
                     font.weight: cellData.isToday ? Font.Bold : Font.Normal
-                    color: cellData.isToday ? calendarLayout.textColor : Qt.alpha(calendarLayout.textColor, 0.7)
+                    color: cellData.isToday ? calendarLayout.highlightedTextColor : Qt.alpha(calendarLayout.textColor, 0.7)
                     opacity: cellData.currentMonth ? 1 : 0.2
                 }
             }

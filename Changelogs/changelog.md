@@ -267,6 +267,12 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 - **2025-12-27**: `Roboto Condensed Variable` yazı tipi, tema entegrasyonu ve saniye göstergesi hover efekti eklendi.
 
 ### Analog Clock (`analog-clock` / `minimal-analog-clock`)
+- **2026-01-21 (v1.1)**: **Büyük Tasarım ve Yapılandırma Güncellemesi**.
+    - **Variable Font & Dinamik Ölçeklendirme**: Roboto Flex değişken yazı tipi desteği ile dijital saatin ağırlığı ve genişliği widget boyutuna göre (dikey/yatay) otomatik uyarlanır.
+    - **Yeni Saat Stilleri**: "Otomatik", "Klasik (Daire)" ve "Modern (Squircle)" modları eklendi.
+    - **Küçük Kare Görünümü**: Sadece saati (HH) gösteren şık, büyük fontlu mod eklendi.
+    - **Gelişmiş Özelleştirme**: Kullanıcı el ile font kalınlığı, genişliği ve dikey rakam boşluğunu sürgülerle ayarlayabilir.
+    - **Lokalizasyon & UI**: 20+ dil desteği (.po) ve tamamen yenilenmiş ayar kategorileri.
 - **2025-12-30**: **Minimal Analog Clock** projesi oluşturuldu (Temel tasarım ve akrep/yelkovan mantığı).
 - **2025-12-27**: Dinamik elkovan uzunluğu ve başlangıç pozisyonu iyileştirmeleri.
 - **2025-12-26**: Squircle şekline uygun görsel iyileştirmeler.

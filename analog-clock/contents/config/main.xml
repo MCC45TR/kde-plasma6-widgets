@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="backgroundOpacity" type="Double">
+      <default>1.0</default>
+      <label>Background Opacity</label>
+    </entry>
+    <entry name="showDigitalClock" type="Bool">
+      <default>true</default>
+      <label>Show Digital Clock</label>
+    </entry>
+    <entry name="useCustomFont" type="Bool">
+      <default>false</default>
+      <label>Use Custom Font</label>
+    </entry>
+    <entry name="customFontFamily" type="String">
+      <default></default>
+      <label>Custom Font Family</label>
+    </entry>
+    <entry name="clockStyle" type="Enum">
+      <label>Clock Style</label>
+      <choices>
+        <choice name="Automatic"/>
+        <choice name="Classic"/>
+        <choice name="Modern"/>
+      </choices>
+      <default>Automatic</default>
+    </entry>
+    <entry name="fontAutoAdjust" type="Bool">
+      <default>true</default>
+      <label>Automatically Adjust Font</label>
+    </entry>
+    <entry name="fixedWeight" type="Int">
+      <default>400</default>
+      <label>Fixed Font Weight</label>
+      <min>100</min>
+      <max>1000</max>
+    </entry>
+    <entry name="fixedWidth" type="Int">
+      <default>100</default>
+      <label>Fixed Font Width</label>
+      <min>25</min>
+      <max>151</max>
+    </entry>
+    <entry name="verticalSpacingRatio" type="Int">
+      <default>10</default>
+      <label>Vertical Spacing Ratio</label>
+      <min>-20</min>
+      <max>50</max>
+    </entry>
+  </group>
+</kcfg>

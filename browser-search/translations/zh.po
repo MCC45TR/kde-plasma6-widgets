@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+
+msgid "Search the web..."
+msgstr "搜索网络..."
+
+msgid "Open Incognito Window"
+msgstr "打开隐身窗口"
+
+msgid "Open New Tab"
+msgstr "打开新标签页"
+
+msgid "Open History"
+msgstr "打开历史记录"
+
+msgid "Play Dino Game"
+msgstr ""
+
+msgid "Open Downloads"
+msgstr ""
+
+msgid "Manage Extensions"
+msgstr ""
+
+msgid "Open Bookmarks"
+msgstr ""
+
+msgid "Browser Settings"
+msgstr "设置"
+
+msgid "Search Engine"
+msgstr "搜索引擎"
+
+msgid "Custom Search URL"
+msgstr "自定义搜索网址"
+
+msgid "Browser"
+msgstr ""
+

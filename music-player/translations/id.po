@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "Tidak ada media yang diputar"
+
+msgid "Previous Track"
+msgstr "Lagu sebelumnya"
+
+msgid "Next Track"
+msgstr "Lagu berikutnya"
+
+msgid "General (Follow All)"
+msgstr "Umum (Ikuti semua)"
+
+msgid "Default Media Player"
+msgstr "Pemutar media default"
+
+msgid "Inactive players are not shown."
+msgstr "Pemutar yang tidak aktif tidak ditampilkan."
+
+msgid "Selected Player:"
+msgstr "Pemutar terpilih:"
+
+msgid "Select Application"
+msgstr "Pilih aplikasi"
+
+msgid "⚠ No active players"
+msgstr "⚠ Tidak ada pemutar aktif"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 pemutar aktif ditemukan"
+
+msgid "All media sources are tracked."
+msgstr "Semua sumber media dilacak."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Hanya \"%1\" yang dilacak."
+
+msgid "Show media player badge"
+msgstr "Tampilkan lencana pemutar"
+
+
+msgid "General"
+msgstr "Umum"

@@ -148,7 +148,7 @@ function fetchOpenMeteo(location, units, callback) {
                         "latitude=" + lat + "&longitude=" + lon +
                         "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m" +
                         "&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum" +
-                        "&forecast_days=10" +
+                        "&forecast_days=" + (16) +
                         "&hourly=temperature_2m,weather_code&forecast_hours=48" +
                         "&timezone=auto" +
                         tempUnit
@@ -253,9 +253,11 @@ function fetchWeatherInternal(config, callback) {
     var apiKey2 = config.apiKey2 || ""
     var location = config.location || ""
     var units = config.units || "metric"
+    var units = config.units || "metric"
     var provider = config.provider || "openmeteo"
+    var forecastDays = config.forecastDays || 5
 
-    console.log("Fetching weather using provider: " + provider)
+    console.log("Fetching weather using provider: " + provider + ", days: " + forecastDays)
 
     if (provider === "openweathermap") {
         if (apiKey) {
@@ -296,11 +298,30 @@ function fetchWeatherInternal(config, callback) {
     // Default: Open-Meteo (openmeteo) or fallback
     fetchOpenMeteo(location, units, function (result) {
         if (result.success) {
-            cache.current = result.current
-            cache.forecast = result.forecast
+            // Do NOT slice here before caching. Cache full result.
+            // Slicing happens in fetchWeather before callback.
+            // if (result.forecast && result.forecast.daily) {
+            //     result.forecast.daily = result.forecast.daily.slice(0, forecastDays)
+            // }
             cache.timestamp = Date.now()
         }
-        callback(result)
+
+        // Return result (slice if needed for the callback, but keeping cache full)
+        if (result.success && result.forecast && result.forecast.daily) {
+            // We need to return a COPY with sliced data, so we don't mutate the cached object if it refers to it
+            var finalResult = {
+                success: result.success,
+                current: result.current,
+                forecast: {
+                    daily: result.forecast.daily.slice(0, forecastDays),
+                    hourly: result.forecast.hourly
+                },
+                provider: result.provider
+            }
+            callback(finalResult)
+        } else {
+            callback(result)
+        }
     })
 }
 
@@ -317,8 +338,23 @@ function fetchWeather(config, callback) {
 
     // Return cached data if still valid and we don't need to force refresh
     if (!forceRefresh && cache.current && cache.forecast && (now - cache.timestamp) < cache.ttl) {
-        callback({ success: true, current: cache.current, forecast: cache.forecast, fromCache: true })
-        return
+        var requestedDays = config.forecastDays || 5
+
+        // If we have enough cached days, use cache
+        if (cache.forecast.daily && cache.forecast.daily.length >= requestedDays) {
+            var result = {
+                success: true,
+                current: cache.current,
+                forecast: {
+                    daily: cache.forecast.daily.slice(0, requestedDays),
+                    hourly: cache.forecast.hourly
+                },
+                fromCache: true
+            }
+            callback(result)
+            return
+        }
+        // If insufficient days in cache (e.g. cached 5, requested 12), proceed to fetch fresh data
     }
 
     // If location is the default "Ankara" or empty, try auto-detection
@@ -415,9 +451,9 @@ function parseForecastOpenMeteo(data) {
     var daily = []
     var hourly = []
 
-    // Daily forecast (next 10 days)
+    // Daily forecast (up to 16 days from API default)
     if (data.daily && data.daily.time) {
-        for (var i = 0; i < data.daily.time.length && i < 10; i++) {
+        for (var i = 0; i < data.daily.time.length; i++) {
             var date = new Date(data.daily.time[i])
             daily.push({
                 day: getDayName(date.getDay()),

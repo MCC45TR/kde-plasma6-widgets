@@ -47,7 +47,7 @@
     </entry>
     
     <entry name="useSystemUnits" type="Bool">
-      <default>false</default>
+      <default>true</default>
       <label>Use System Units</label>
     </entry>
     
@@ -69,6 +69,46 @@
     <entry name="iconPack" type="String">
       <default>default</default>
       <label>Icon Pack</label>
+    </entry>
+
+    <entry name="useCustomFont" type="Bool">
+      <default>false</default>
+      <label>Use Custom Font</label>
+    </entry>
+
+    <entry name="customFontFamily" type="String">
+      <default></default>
+      <label>Custom Font Family</label>
+    </entry>
+
+    <entry name="backgroundOpacity" type="Double">
+      <default>1.0</default>
+      <label>Background Opacity</label>
+    </entry>
+
+    <entry name="panelMode" type="String">
+      <default>simple</default>
+      <label>Panel Representation Mode</label>
+    </entry>
+
+    <entry name="layoutMode" type="String">
+      <default>auto</default>
+      <label>Widget Layout Mode (auto, small, wide, large)</label>
+    </entry>
+
+    <entry name="panelFontSize" type="Int">
+      <default>0</default>
+      <label>Panel Font Size (0 for auto)</label>
+    </entry>
+
+    <entry name="panelIconSize" type="Int">
+      <default>0</default>
+      <label>Panel Icon Size (0 for auto)</label>
+    </entry>
+
+    <entry name="forecastDays" type="Int">
+      <default>12</default>
+      <label>Number of days to show in forecast</label>
     </entry>
   </group>
 </kcfg>

@@ -132,7 +132,7 @@ Item {
         
         if (otherItems.length > 0) {
             result.push({
-                categoryName: "Diğer Sonuçlar",
+                categoryName: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results"),
                 items: otherItems
             });
         }

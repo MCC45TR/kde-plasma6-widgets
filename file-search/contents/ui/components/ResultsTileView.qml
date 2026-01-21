@@ -19,7 +19,6 @@ FocusScope {
     signal itemRightClicked(var item, real x, real y)
     
     // Localization
-    property var trFunc: function(key) { return key }
     property string searchText: ""
     
     // Preview settings from config
@@ -648,7 +647,7 @@ FocusScope {
                                         
                                         // Category
                                         Text {
-                                            text: resultsTileRoot.trFunc("category") + ": " + (modelData.category || "")
+                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             visible: (modelData.category || "").length > 0
@@ -662,7 +661,7 @@ FocusScope {
                                                 var parts = url.split('.')
                                                 return parts.length > 1 ? parts.pop().toUpperCase() : ""
                                             }
-                                            text: resultsTileRoot.trFunc("file_type") + ": " + fileExt
+                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + fileExt
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             visible: fileExt.length > 0
@@ -670,7 +669,7 @@ FocusScope {
                                         
                                         // Path
                                         Text {
-                                            text: resultsTileRoot.trFunc("path") + ": " + (modelData.url || "")
+                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + (modelData.url || "")
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             wrapMode: Text.WrapAnywhere
@@ -680,7 +679,7 @@ FocusScope {
                                         
                                         // Shortcut hint
                                         Text {
-                                            text: "💡 " + resultsTileRoot.trFunc("preview_shortcut")
+                                            text: "💡 " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Space to preview")
                                             font.pixelSize: 9
                                             font.italic: true
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
@@ -706,7 +705,7 @@ FocusScope {
     // Empty state
     Text {
         anchors.centerIn: parent
-        text: resultsTileRoot.searchText.length > 0 ? resultsTileRoot.trFunc("no_results") : resultsTileRoot.trFunc("type_to_search")
+        text: resultsTileRoot.searchText.length > 0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
         color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
         font.pixelSize: 12
         visible: resultsTileRoot.categorizedData.length === 0

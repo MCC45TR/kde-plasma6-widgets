@@ -30,11 +30,19 @@ PlasmoidItem {
     readonly property string weatherProvider: Plasmoid.configuration.weatherProvider || "openmeteo"
     readonly property string iconPack: Plasmoid.configuration.iconPack || "default"
     readonly property int updateInterval: Plasmoid.configuration.updateInterval || 30
+    readonly property double backgroundOpacity: isPanel ? 0.0 : ((Plasmoid.configuration.backgroundOpacity !== undefined) ? Plasmoid.configuration.backgroundOpacity : 0.9)
+    readonly property string panelMode: Plasmoid.configuration.panelMode || "simple"
+    readonly property int panelFontSize: Plasmoid.configuration.panelFontSize || 0
+    readonly property int panelIconSize: Plasmoid.configuration.panelIconSize || 0
+    readonly property string layoutMode: Plasmoid.configuration.layoutMode || "auto"
+    readonly property int forecastDays: Plasmoid.configuration.forecastDays || 5
+    onForecastDaysChanged: fetchWeatherData()
 
     // Layout Mode Detection
-    readonly property bool isWideMode: root.width > 350 && root.height <= 350
-    readonly property bool isLargeMode: root.width > 350 && root.height > 350
-    readonly property bool isSmallMode: !isWideMode && !isLargeMode
+    readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
+    readonly property bool isWideMode: layoutMode === "wide" || (layoutMode === "auto" && root.width > 350 && root.height <= 350)
+    readonly property bool isLargeMode: layoutMode === "large" || (layoutMode === "auto" && root.width > 350 && root.height > 350)
+    readonly property bool isSmallMode: layoutMode === "small" || (layoutMode === "auto" && !isWideMode && !isLargeMode)
 
     // Weather Data State
     property var currentWeather: null
@@ -124,10 +132,10 @@ PlasmoidItem {
         WeatherService.fetchWeather({
             apiKey: apiKey,
             apiKey2: apiKey2,
-            location: getActiveLocation(),
             units: units,
             provider: weatherProvider,
-            autoDetect: locationMode === "auto"
+            autoDetect: locationMode === "auto",
+            forecastDays: forecastDays
         }, function(result) {
             isLoading = false
             if (result.success) {
@@ -141,9 +149,17 @@ PlasmoidItem {
     }
 
     function getWeatherIcon(item) {
-        if (!item) return "../images/clear_day.svg"
+        if (!item) return Qt.resolvedUrl("../images/clear_day.svg")
         var isDark = ((Kirigami.Theme.backgroundColor.r + Kirigami.Theme.backgroundColor.g + Kirigami.Theme.backgroundColor.b) / 3) < 0.5
-        return IconMapper.getIconPath(item.code, item.icon, weatherProvider, isDark, iconPack)
+        var iconPath = IconMapper.getIconPath(item.code, item.icon, weatherProvider, isDark, iconPack)
+        
+        // If it is a relative path (local file), resolve it to a full URL
+        if (iconPath.indexOf("/") !== -1) {
+            return Qt.resolvedUrl(iconPath)
+        }
+        
+        // Otherwise, return as is (system icon name)
+        return iconPath
     }
 
     function getLocalizedDay(dayKey) {
@@ -151,7 +167,94 @@ PlasmoidItem {
         return i18n(dayKey)
     }
 
-    preferredRepresentation: fullRepresentation
+    compactRepresentation: Item {
+        id: compactRep
+        // Determine layout based on panelMode
+        readonly property bool detailed: root.panelMode === "detailed"
+        
+        Layout.minimumWidth: detailed ? detailedLayout.implicitWidth : simpleLayout.implicitWidth
+        Layout.preferredWidth: detailed ? detailedLayout.implicitWidth : simpleLayout.implicitWidth
+        
+        MouseArea {
+            anchors.fill: parent
+            onClicked: root.expanded = !root.expanded
+        }
+
+        // Simple View (Icon + Temp)
+        RowLayout {
+            id: simpleLayout
+            anchors.centerIn: parent
+            spacing: 0
+            visible: !compactRep.detailed
+            
+            // Removed spacers to allow auto-sizing
+            
+            Kirigami.Icon {
+                source: root.getWeatherIcon(root.currentWeather)
+                Layout.preferredHeight: root.panelIconSize > 0 ? root.panelIconSize : compactRep.height * 0.8
+                Layout.preferredWidth: height
+                isMask: false
+                smooth: true
+                Layout.alignment: Qt.AlignVCenter
+            }
+            Text {
+                text: root.currentWeather ? Math.round(root.currentWeather.temp) + "°" : "--"
+                color: Kirigami.Theme.textColor
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize : compactRep.height * 0.5
+                font.bold: true
+                Layout.alignment: Qt.AlignVCenter
+                leftPadding: 4
+            }
+        }
+
+        // Detailed View (Icon + Temp + Condition)
+        RowLayout {
+            id: detailedLayout
+            anchors.centerIn: parent
+            spacing: 6
+            visible: compactRep.detailed
+            
+            // Removed spacers
+            
+            Kirigami.Icon {
+                source: root.getWeatherIcon(root.currentWeather)
+                Layout.preferredHeight: root.panelIconSize > 0 ? root.panelIconSize : compactRep.height * 0.8
+                Layout.preferredWidth: height
+                isMask: false
+                smooth: true
+                Layout.alignment: Qt.AlignVCenter
+            }
+            
+            ColumnLayout {
+                Layout.alignment: Qt.AlignVCenter
+                spacing: 0
+                
+                Text {
+                    text: root.currentWeather ? Math.round(root.currentWeather.temp) + "°C" : "--"
+                    color: Kirigami.Theme.textColor
+                    font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize : compactRep.height * 0.4
+                    font.bold: true
+                    lineHeight: 0.8
+                }
+                
+                Text {
+                    text: root.currentWeather ? i18n(root.currentWeather.condition) : ""
+                    color: Kirigami.Theme.textColor
+                    font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize * 0.6 : compactRep.height * 0.25
+                    opacity: 0.8
+                    elide: Text.ElideRight
+                    lineHeight: 0.8
+                }
+            }
+        }
+    }
+
+    preferredRepresentation: (Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical) ? compactRepresentation : fullRepresentation
+
+    readonly property bool useCustomFont: Plasmoid.configuration.useCustomFont || false
+    readonly property string customFontFamily: Plasmoid.configuration.customFontFamily || ""
+    readonly property font activeFont: useCustomFont && customFontFamily !== "" ? Qt.font({ family: customFontFamily }) : Kirigami.Theme.defaultFont
 
     fullRepresentation: Item {
         id: fullRep
@@ -160,10 +263,24 @@ PlasmoidItem {
         Rectangle {
             id: mainRect
             anchors.fill: parent
-            anchors.margins: 10
-            color: Kirigami.Theme.backgroundColor
+            anchors.margins: (Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical) ? 0 : 5
+            color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, root.backgroundOpacity)
             radius: 20
             clip: true
+            
+            // Set default font for all children
+            // Note: Some complex children might override this if they don't inherit explicitly
+            // But usually this works for standard QtQuick types
+            property font font: root.activeFont
+            // Force application to children text items that inherit
+            // Not standard prop in Rectangle but we can alias or use it as attached if needed, 
+            // but for QML inheritance, just having it here might not be enough if children bind to theme.
+            // Let's bind 'Font.family' to it for the context of this Rect.
+            
+            // Actually, best way is to set it on the specific Text elements or override the system font locally.
+            // But since this is a widget, we can't easily globally override.
+            // We'll pass 'activeFont' down to the Loaders as a property.
+
 
             // Loading State
             ColumnLayout {

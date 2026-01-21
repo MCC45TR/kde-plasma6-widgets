@@ -21,6 +21,9 @@ msgstr "Elle gir"
 msgid "Units"
 msgstr "Birimler"
 
+msgid "Units:"
+msgstr "Birimler:"
+
 msgid "Use system units"
 msgstr "Sistem birimlerini kullan"
 
@@ -32,6 +35,9 @@ msgstr "Emperyal (°F)"
 
 msgid "Refresh Interval"
 msgstr "Yenileme Sıklığı"
+
+msgid "Refresh Interval:"
+msgstr "Yenileme Sıklığı:"
 
 msgid "Appearance"
 msgstr "Görünüm"
@@ -169,4 +175,199 @@ msgid "Thunderstorm with Hail"
 msgstr "Dolu ile Fırtına"
 
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr "Bilinmiyor"
+
+msgid "Simple Panel"
+msgstr "Sade Panel"
+
+msgid "Detailed Panel"
+msgstr "Detaylı Panel"
+
+msgid "Representation:"
+msgstr "Görünüm Türü:"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "İkon Boyutu (0 = Otomatik):"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Yazı Boyutu (0 = Otomatik):"
+
+msgid "Note: Background is always transparent in Panel."
+msgstr "Not: Panel modunda arkaplan her zaman şeffaftır."
+
+msgid "System Theme"
+msgstr "Sistem Teması"
+
+msgid "Background Settings"
+msgstr "Arkaplan Ayarları"
+
+msgid "Background Opacity:"
+msgstr "Arkaplan Opaklığı:"
+
+msgid "Font Settings"
+msgstr "Yazı Tipi Ayarları"
+
+msgid "Use Default System Font"
+msgstr "Varsayılan Sistem Yazı Tipini Kullan"
+
+msgid "Custom Font Family:"
+msgstr "Özel Yazı Tipi Ailesi:"
+
+msgid "Automatic"
+msgstr "Otomatik"
+
+msgid "Small"
+msgstr "Küçük"
+
+msgid "Wide"
+msgstr "Geniş"
+
+msgid "Large"
+msgstr "Büyük"
+
+msgid "Layout Mode:"
+msgstr "Yerleşim Modu:"
+
+msgid "Default (Colorful SVG)"
+msgstr "Varsayılan (Renkli SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Weather v3 (Düz SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Weather v2 (Gerçekçi PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Weather v1 (Klasik PNG)"
+
+msgid "Icon Pack:"
+msgstr "İkon Paketi:"
+
+msgid "Best free option. No API key required."
+msgstr "En iyi ücretsiz seçenek. API anahtarı gerekmez."
+
+msgid "Standard provider. API key required below."
+msgstr "Standart sağlayıcı. API anahtarı gerekir."
+
+msgid "Alternative provider. API key required below."
+msgstr "Alternatif sağlayıcı. API anahtarı gerekir."
+
+msgid "API Keys"
+msgstr "API Anahtarları"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API Anahtarı:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMap API anahtarınızı girin"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API Anahtarı:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.com anahtarınızı girin"
+
+msgid "City 1:"
+msgstr "Şehir 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Örn: Ankara, İstanbul, Londra"
+
+msgid "City 2:"
+msgstr "Şehir 2:"
+
+msgid "Second city (optional)"
+msgstr "İkinci şehir (isteğe bağlı)"
+
+msgid "City 3:"
+msgstr "Şehir 3:"
+
+msgid "Third city (optional)"
+msgstr "Üçüncü şehir (isteğe bağlı)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "Şehir adı, 'Şehir,Ülke Kodu' veya Posta Kodu kullanabilirsiniz."
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Konum IP adresine göre otomatik algılanacak."
+
+msgid "15 minutes"
+msgstr "15 dakika"
+
+msgid "30 minutes"
+msgstr "30 dakika"
+
+msgid "45 minutes"
+msgstr "45 dakika"
+
+msgid "1 hour"
+msgstr "1 saat"
+
+msgid "2 hours"
+msgstr "2 saat"
+
+msgid "3 hours"
+msgstr "3 saat"
+
+msgid "4 hours"
+msgstr "4 saat"
+
+msgid "6 hours"
+msgstr "6 saat"
+
+msgid "8 hours"
+msgstr "8 saat"
+
+msgid "12 hours"
+msgstr "12 saat"
+
+msgid "1 day"
+msgstr "1 gün"
+
+msgid "Select the visual style for weather icons."
+msgstr "Hava durumu ikonları için görsel stili seçin."
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "Hava durumu ikonları için görsel stili seçin. (Not: v1/v2 gibi eski paketlerde bazı durumlar için ikon eksik olabilir)"
+
+msgid "Panel Settings"
+msgstr "Panel Ayarları"
+
+msgid "Forecast Days:"
+msgstr "Tahmin Gün Sayısı:"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Ücretsiz, Anahtar Gerekmez)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Anahtar Gerekli)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Anahtar Gerekli)"
+
+msgid "Wind Direction"
+msgstr "Rüzgar Yönü"
+
+msgid "N"
+msgstr "K"
+
+msgid "NE"
+msgstr "KD"
+
+msgid "E"
+msgstr "D"
+
+msgid "SE"
+msgstr "GD"
+
+msgid "S"
+msgstr "G"
+
+msgid "SW"
+msgstr "GB"
+
+msgid "W"
+msgstr "B"
+
+msgid "NW"
+msgstr "KB"

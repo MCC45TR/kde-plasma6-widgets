@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bn\n"
+
+msgid "Search the web..."
+msgstr "ওয়েবে অনুসন্ধান করুন..."
+
+msgid "Open Incognito Window"
+msgstr "গোপন উইন্ডো খুলুন"
+
+msgid "Open New Tab"
+msgstr "নতুন ট্যাব খুলুন"
+
+msgid "Open History"
+msgstr "ইতিহাস খুলুন"
+
+msgid "Play Dino Game"
+msgstr ""
+
+msgid "Open Downloads"
+msgstr ""
+
+msgid "Manage Extensions"
+msgstr ""
+
+msgid "Open Bookmarks"
+msgstr ""
+
+msgid "Browser Settings"
+msgstr "সেটিংস"
+
+msgid "Search Engine"
+msgstr "সার্চ ইঞ্জিন"
+
+msgid "Custom Search URL"
+msgstr "কাস্টম অনুসন্ধান URL"
+
+msgid "Browser"
+msgstr ""
+

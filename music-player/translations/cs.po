@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "Nic se nehraje"
+
+msgid "Previous Track"
+msgstr "Předchozí skladba"
+
+msgid "Next Track"
+msgstr "Další skladba"
+
+msgid "General (Follow All)"
+msgstr "Obecné (Sledovat vše)"
+
+msgid "Default Media Player"
+msgstr "Výchozí přehrávač médií"
+
+msgid "Inactive players are not shown."
+msgstr "Neaktivní přehrávače nejsou zobrazeny."
+
+msgid "Selected Player:"
+msgstr "Vybraný přehrávač:"
+
+msgid "Select Application"
+msgstr "Vybrat aplikaci"
+
+msgid "⚠ No active players"
+msgstr "⚠ Žádné aktivní přehrávače"
+
+msgid "✓ %1 active players found"
+msgstr "✓ Nalezeno %1 aktivních přehrávačů"
+
+msgid "All media sources are tracked."
+msgstr "Všechny zdroje médií jsou sledovány."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Sledováno pouze \"%1\"."
+
+msgid "Show media player badge"
+msgstr "Zobrazit odznak přehrávače"
+
+
+msgid "General"
+msgstr "Obecné"

@@ -89,16 +89,14 @@ Item {
         spacing: 4
         
         // Weather Icon (fixed size based on 70px min width)
-        Image {
+        // Weather Icon (fixed size based on 70px min width)
+        Kirigami.Icon {
             source: itemRoot.iconPath
             Layout.preferredWidth: 35  // 70 * 0.5 = 35
             Layout.preferredHeight: 35
             Layout.alignment: Qt.AlignHCenter
-            sourceSize.width: 120
-            sourceSize.height: 120
-            fillMode: Image.PreserveAspectFit
+            isMask: false
             smooth: true
-            antialiasing: true
         }
         
         // Day/Time Label (fixed size based on 70px min width)

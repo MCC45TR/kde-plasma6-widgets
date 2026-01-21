@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
+
+msgid "Search the web..."
+msgstr "Cari di web..."
+
+msgid "Open Incognito Window"
+msgstr "Buka jendela penyamaran"
+
+msgid "Open New Tab"
+msgstr "Buka tab baru"
+
+msgid "Open History"
+msgstr "Buka riwayat"
+
+msgid "Play Dino Game"
+msgstr ""
+
+msgid "Open Downloads"
+msgstr ""
+
+msgid "Manage Extensions"
+msgstr ""
+
+msgid "Open Bookmarks"
+msgstr ""
+
+msgid "Browser Settings"
+msgstr "Pengaturan"
+
+msgid "Search Engine"
+msgstr "Mesin pencari"
+
+msgid "Custom Search URL"
+msgstr "URL pencarian kustom"
+
+msgid "Browser"
+msgstr ""
+

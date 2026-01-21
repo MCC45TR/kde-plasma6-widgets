@@ -1,0 +1,270 @@
+# Translation of MWeather in $__LANGUAGE__$
+# Copyright (C) 2026 MCC45TR
+# This file is distributed under the same license as the MWeather package.
+# MCC45TR <mcc45tr@gmail.com>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-21 00:38+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: contents/config/config.qml
+msgid "Weather"
+msgstr ""
+
+#: contents/config/config.qml contents/ui/config/ConfigAppearance.qml
+msgid "Appearance"
+msgstr ""
+
+#: contents/ui/LargeModeLayout.qml
+msgid "Details"
+msgstr ""
+
+#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml contents/ui/main.qml
+msgid "Hourly Forecast"
+msgstr ""
+
+#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml contents/ui/main.qml
+msgid "Daily Forecast"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Feels like"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Humidity"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Wind"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Pressure"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Clouds"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "UV"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Visibility"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Wind Direction"
+msgstr ""
+
+#: contents/ui/WeatherDetailsView.qml
+msgid "Click to close"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml
+msgid "Default (Colorful SVG)"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml
+msgid "Google Weather v3 (Flat SVG)"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml
+msgid "Google Weather v1 (Classic PNG)"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml
+msgid "Icon Pack:"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr ""
+
+#: contents/ui/config/ConfigAppearance.qml
+msgid "Select the visual style for weather icons."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Weather Provider"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "OpenWeatherMap (Key Required)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "WeatherAPI.com (Key Required)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Best free option. No API key required."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Standard provider. API key required below."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Alternative provider. API key required below."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "API Keys"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "OpenWeatherMap API Key:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Enter your OpenWeatherMap API key"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "WeatherAPI.com API Key:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Enter your WeatherAPI.com key"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Location"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Auto-detect from IP"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Enter manually"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "City 1:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Ex: Ankara, Istanbul, London"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "City 2:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Second city (optional)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "City 3:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Third city (optional)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Location will be auto-detected based on your IP address."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Settings"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Units:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Use system units"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Metric (°C)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Imperial (°F)"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Refresh Interval:"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "15 minutes"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "30 minutes"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "45 minutes"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "1 hour"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "2 hours"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "3 hours"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "4 hours"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "6 hours"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "8 hours"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "12 hours"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "1 day"
+msgstr ""
+
+#: contents/ui/main.qml
+msgid "Refresh"
+msgstr ""
+
+#: contents/ui/main.qml
+msgid "Loading weather data..."
+msgstr ""

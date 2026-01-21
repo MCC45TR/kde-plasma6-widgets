@@ -12,41 +12,8 @@ PlasmoidItem {
     id: root
 
     // --- Localization Logic ---
-    property var locales: {
-        "en": { "no_media_playing": "No Media Playing", "prev_track": "Previous", "next_track": "Next" },
-        "tr": { "no_media_playing": "Çalan Medya Yok", "prev_track": "Önceki", "next_track": "Sonraki" }
-    }
-    property string currentLocale: Qt.locale().name.substring(0, 2)
+    // Standard Plasma i18n is used now.
     
-    function loadLocales() {
-        var xhr = new XMLHttpRequest()
-        xhr.open("GET", "localization.json")
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 || xhr.status === 0) {
-                    try {
-                        locales = JSON.parse(xhr.responseText)
-                    } catch (e) {
-                        console.log("Error parsing localization.json: " + e)
-                    }
-                }
-            }
-        }
-        xhr.send()
-    }
-    
-    Component.onCompleted: loadLocales()
-
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        }
-        if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
-
     // Widget Size Constraints
     Layout.preferredWidth: 200
     Layout.preferredHeight: 200
@@ -63,35 +30,85 @@ PlasmoidItem {
     readonly property string preferredPlayer: Plasmoid.configuration.preferredPlayer || ""
     readonly property bool showPlayerBadge: Plasmoid.configuration.showPlayerBadge !== undefined ? Plasmoid.configuration.showPlayerBadge : true
     
-    // Find player matching the preferred player from all available players
-    function findPreferredPlayer() {
-        if (preferredPlayer === "") {
-            return mpris2Model.currentPlayer
+    // Secondary model for probing without affecting the main one's state
+    Mpris.Mpris2Model { id: probeModel }
+
+    // Smartly find the best player to show
+    function findSmartPlayer() {
+        // If a specific player is pinned, look for it
+        if (preferredPlayer !== "") {
+            var count = probeModel.rowCount()
+            for (var i = 0; i < count; i++) {
+                probeModel.currentIndex = i
+                var player = probeModel.currentPlayer
+                
+                if (player && player.identity && player.identity.toLowerCase().includes(preferredPlayer.toLowerCase())) {
+                    return player
+                }
+            }
+            return null
         }
         
-        var count = mpris2Model.rowCount()
+        // "General" Mode: Prioritize Playing players
+        var count = probeModel.rowCount()
+        var bestCandidate = null
+        
         for (var i = 0; i < count; i++) {
-            var savedIndex = mpris2Model.currentIndex
-            mpris2Model.currentIndex = i
-            var player = mpris2Model.currentPlayer
-            mpris2Model.currentIndex = savedIndex
+            probeModel.currentIndex = i
+            var player = probeModel.currentPlayer
             
-            if (player && player.identity && player.identity.toLowerCase().includes(preferredPlayer.toLowerCase())) {
-                return player
+            if (player) {
+                // If we find a playing one, return it immediately (or prioritize it)
+                if (player.playbackStatus === Mpris.PlaybackStatus.Playing) {
+                    return player
+                }
+                // Keep the "current" one as a fallback if no one is playing
+                if (mpris2Model.currentPlayer && player.identity === mpris2Model.currentPlayer.identity) {
+                    bestCandidate = player
+                }
             }
         }
-        return null
+        
+        // Fallback to system default if no one is playing
+        return bestCandidate || mpris2Model.currentPlayer
     }
     
     // Reactively determine the smart player
-    property var currentPlayer: findPreferredPlayer()
+    property var currentPlayer: null
     
-    // Re-evaluate when model changes
+    function updateCurrentPlayer() {
+        // Use the probe model logic
+        currentPlayer = findSmartPlayer()
+    }
+    
+    // Watch for players appearing/disappearing
     Connections {
         target: mpris2Model
-        function onRowsInserted() { root.currentPlayer = Qt.binding(function() { return findPreferredPlayer() }) }
-        function onRowsRemoved() { root.currentPlayer = Qt.binding(function() { return findPreferredPlayer() }) }
-        function onDataChanged() { root.currentPlayer = Qt.binding(function() { return findPreferredPlayer() }) }
+        function onRowsInserted() { root.updateCurrentPlayer() }
+        function onRowsRemoved() { root.updateCurrentPlayer() }
+        function onModelReset() { root.updateCurrentPlayer() }
+    }
+    
+    // Also watch for playback status changes to switch to the playing one dynamically
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            // Periodically check if we should switch focus (e.g. if another player started playing)
+            if (preferredPlayer === "") {
+                var smart = findSmartPlayer()
+                if (smart !== currentPlayer) {
+                    currentPlayer = smart
+                }
+            }
+        }
+    }
+    
+    onPreferredPlayerChanged: updateCurrentPlayer()
+    
+    Component.onCompleted: {
+        updateCurrentPlayer()
     }
     
     // Player state properties
@@ -99,7 +116,7 @@ PlasmoidItem {
     readonly property bool isPlaying: currentPlayer ? currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : false
     readonly property string artUrl: currentPlayer ? currentPlayer.artUrl : ""
     readonly property bool hasArt: artUrl != ""
-    readonly property string title: currentPlayer ? currentPlayer.track : root.tr("no_media_playing")
+    readonly property string title: currentPlayer ? currentPlayer.track : i18n("No Media Playing")
     readonly property string artist: currentPlayer ? currentPlayer.artist : ""
     readonly property real length: currentPlayer ? currentPlayer.length : 0
     readonly property string playerIdentity: currentPlayer ? currentPlayer.identity : preferredPlayer
@@ -217,7 +234,7 @@ PlasmoidItem {
                         item.isPlaying = Qt.binding(function() { return root.isPlaying })
                         item.currentPosition = Qt.binding(function() { return root.currentPosition })
                         item.length = Qt.binding(function() { return root.length })
-                        item.noMediaText = Qt.binding(function() { return root.tr("no_media_playing") })
+                        item.noMediaText = Qt.binding(function() { return i18n("No Media Playing") })
                         
                         // Show player badge setting
                         if (item.hasOwnProperty("showPlayerBadge")) {
@@ -231,10 +248,10 @@ PlasmoidItem {
                         
                         // Compact mode specific
                         if (item.hasOwnProperty("prevText")) {
-                            item.prevText = Qt.binding(function() { return root.tr("prev_track") })
+                            item.prevText = Qt.binding(function() { return i18n("Previous Track") })
                         }
                         if (item.hasOwnProperty("nextText")) {
-                            item.nextText = Qt.binding(function() { return root.tr("next_track") })
+                            item.nextText = Qt.binding(function() { return i18n("Next Track") })
                         }
                         
                         // Callbacks

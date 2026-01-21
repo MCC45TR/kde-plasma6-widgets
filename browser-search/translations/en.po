@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+msgid "Search the web..."
+msgstr "Search the web..."
+
+msgid "Open Incognito Window"
+msgstr "Open Incognito Window"
+
+msgid "Open New Tab"
+msgstr "Open New Tab"
+
+msgid "Open History"
+msgstr "Open History"
+
+msgid "Play Dino Game"
+msgstr "Play Dino Game"
+
+msgid "Open Downloads"
+msgstr "Open Downloads"
+
+msgid "Manage Extensions"
+msgstr "Manage Extensions"
+
+msgid "Open Bookmarks"
+msgstr "Open Bookmarks"
+
+msgid "Browser Settings"
+msgstr "Browser Settings"
+
+msgid "Search Engine"
+msgstr "Search Engine"
+
+msgid "Custom Search URL"
+msgstr "Custom Search URL"
+
+msgid "Browser"
+msgstr "Browser"
+

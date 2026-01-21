@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+
+msgid "Search the web..."
+msgstr "ウェブを検索..."
+
+msgid "Open Incognito Window"
+msgstr "シークレットウィンドウを開く"
+
+msgid "Open New Tab"
+msgstr "新しいタブを開く"
+
+msgid "Open History"
+msgstr "履歴を開く"
+
+msgid "Play Dino Game"
+msgstr ""
+
+msgid "Open Downloads"
+msgstr ""
+
+msgid "Manage Extensions"
+msgstr ""
+
+msgid "Open Bookmarks"
+msgstr ""
+
+msgid "Browser Settings"
+msgstr "設定"
+
+msgid "Search Engine"
+msgstr "検索エンジン"
+
+msgid "Custom Search URL"
+msgstr "カスタム検索URL"
+
+msgid "Browser"
+msgstr ""
+

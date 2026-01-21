@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+
+msgid "Search the web..."
+msgstr "Arama_Yapmak_İçin_Yazın"
+
+msgid "Open Incognito Window"
+msgstr "Gizli Pencere Aç"
+
+msgid "Open New Tab"
+msgstr "Yeni Sekme Aç"
+
+msgid "Open History"
+msgstr "Geçmişi Aç"
+
+msgid "Play Dino Game"
+msgstr "Dinazor Oyunu Oyna"
+
+msgid "Open Downloads"
+msgstr "İndirilenleri Aç"
+
+msgid "Manage Extensions"
+msgstr "Eklentileri Yönet"
+
+msgid "Open Bookmarks"
+msgstr "Yer İmlerini Aç"
+
+msgid "Browser Settings"
+msgstr "Tarayıcı Ayarları"
+
+msgid "Search Engine"
+msgstr "Arama Motoru"
+
+msgid "Custom Search URL"
+msgstr "Özel Arama URL'si"
+
+msgid "Browser"
+msgstr "Tarayıcı_Adı"
+

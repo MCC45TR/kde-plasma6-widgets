@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "कोई मीडिया नहीं चल रहा है"
+
+msgid "Previous Track"
+msgstr "पिछला ट्रैक"
+
+msgid "Next Track"
+msgstr "अगला ट्रैक"
+
+msgid "General (Follow All)"
+msgstr "सामान्य (सभी का पालन करें)"
+
+msgid "Default Media Player"
+msgstr "डिफ़ॉल्ट मीडिया प्लेयर"
+
+msgid "Inactive players are not shown."
+msgstr "निष्क्रिय प्लेयर नहीं दिखाए गए हैं।"
+
+msgid "Selected Player:"
+msgstr "चयनित प्लेयर:"
+
+msgid "Select Application"
+msgstr "एप्लिकेशन चुनें"
+
+msgid "⚠ No active players"
+msgstr "⚠ कोई सक्रिय प्लेयर नहीं"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 सक्रिय प्लेयर मिले"
+
+msgid "All media sources are tracked."
+msgstr "सभी मीडिया स्रोतों को ट्रैक किया जा रहा है।"
+
+msgid "Only \"%1\" is tracked."
+msgstr "केवल \"%1\" ट्रैक किया जा रहा है।"
+
+msgid "Show media player badge"
+msgstr "प्लेयर बैज दिखाएं"
+
+
+msgid "General"
+msgstr "सामान्य"

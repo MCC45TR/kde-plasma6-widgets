@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "Մեդիա չի նվագարկվում"
+
+msgid "Previous Track"
+msgstr "Նախորդ երգը"
+
+msgid "Next Track"
+msgstr "Հաջորդ երգը"
+
+msgid "General (Follow All)"
+msgstr "Ընդհանուր (Հետևել բոլորին)"
+
+msgid "Default Media Player"
+msgstr "Լռելյայն մեդիա նվագարկիչ"
+
+msgid "Inactive players are not shown."
+msgstr "Ոչ ակտիվ նվագարկիչները չեն ցուցադրվում:"
+
+msgid "Selected Player:"
+msgstr "Ընտրված նվագարկիչ:"
+
+msgid "Select Application"
+msgstr "Ընտրել հավելվածը"
+
+msgid "⚠ No active players"
+msgstr "⚠ Ակտիվ նվագարկիչներ չկան"
+
+msgid "✓ %1 active players found"
+msgstr "✓ Գտնվել է %1 ակտիվ նվագարկիչ"
+
+msgid "All media sources are tracked."
+msgstr "Բոլոր մեդիա աղբյուրները հետևվում են:"
+
+msgid "Only \"%1\" is tracked."
+msgstr "Հետևվում է միայն «%1»-ը:"
+
+msgid "Show media player badge"
+msgstr "Ցույց տալ նվագարկիչի նշանը"
+
+
+msgid "General"
+msgstr "Ընդհանուր"

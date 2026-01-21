@@ -6,7 +6,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.plasma5support as Plasma5Support
-import "localization.js" as LocalizationData
+
 
 PlasmoidItem {
     id: root
@@ -15,26 +15,9 @@ PlasmoidItem {
     property string searchText: ""
     
     // --- Localization ---
-    property var locales: ({})
     property string currentLocale: Qt.locale().name.substring(0, 2)
     
-    function tr(key) {
-        if (locales[currentLocale] && locales[currentLocale][key]) {
-            return locales[currentLocale][key]
-        } else if (locales["en"] && locales["en"][key]) {
-            return locales["en"][key]
-        }
-        return key
-    }
-    
     Component.onCompleted: {
-        // Load localization from JS import (like weather widget)
-        try {
-            locales = LocalizationData.data
-            console.log("Localization loaded via JS import")
-        } catch(e) {
-            console.log("Error loading localization: " + e)
-        }
         detectDefaultBrowser()
     }
     
@@ -102,7 +85,7 @@ PlasmoidItem {
                     root.browserType = "other"
                     root.browserIcon = "internet-web-browser"
                     root.browserScheme = "https"
-                    root.browserDisplayName = root.tr("browser_name")
+                    root.browserDisplayName = i18n("Browser")
                 }
             }
             disconnectSource(source)
@@ -192,9 +175,10 @@ PlasmoidItem {
     }
     
     // --- Layout Mode Detection (like weather widget) ---
-    readonly property bool isWideMode: root.width > 280 && root.height <= 150
+    readonly property bool only_search_bar: root.height < 150
     readonly property bool isLargeMode: root.width > 200 && root.height > 200
-    readonly property bool isSmallMode: !isWideMode && !isLargeMode
+    readonly property bool isWideMode: root.width > 280 && !only_search_bar && !isLargeMode
+    readonly property bool isSmallMode: !isWideMode && !isLargeMode && !only_search_bar
     
     // --- Widget Size Constraints ---
     Layout.preferredWidth: 300
@@ -248,7 +232,7 @@ PlasmoidItem {
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignVCenter
                             
-                            placeholderText: root.tr("search_placeholder")
+                            placeholderText: i18n("Search the web...")
                             placeholderTextColor: Qt.rgba(
                                 Kirigami.Theme.textColor.r,
                                 Kirigami.Theme.textColor.g,
@@ -301,11 +285,11 @@ PlasmoidItem {
                         
                         Repeater {
                             model: [
-                                { icon: "view-history", action: "history", tooltip: "history" },
-                                { icon: "tab-new", action: "newTab", tooltip: "new_tab" },
-                                { icon: "download", action: "downloads", tooltip: "downloads" },
-                                { icon: "application-x-addon", action: "extensions", tooltip: "extensions" },
-                                { icon: "configure", action: "settings", tooltip: "settings" }
+                                { icon: "view-history", action: "history", tooltip: i18n("Open History") },
+                                { icon: "tab-new", action: "newTab", tooltip: i18n("Open New Tab") },
+                                { icon: "download", action: "downloads", tooltip: i18n("Open Downloads") },
+                                { icon: "application-x-addon", action: "extensions", tooltip: i18n("Manage Extensions") },
+                                { icon: "configure", action: "settings", tooltip: i18n("Browser Settings") }
                             ]
                             
                             delegate: Rectangle {
@@ -334,7 +318,7 @@ PlasmoidItem {
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
                                     
-                                    ToolTip.text: root.tr(modelData.tooltip)
+                                    ToolTip.text: modelData.tooltip
                                     ToolTip.visible: containsMouse
                                     ToolTip.delay: 500
                                     
@@ -386,10 +370,10 @@ PlasmoidItem {
                     
                     Repeater {
                         model: [
-                            { icon: "view-history", action: "history", tooltip: "history" },
-                            { icon: "download", action: "downloads", tooltip: "downloads" },
-                            { icon: "application-x-addon", action: "extensions", tooltip: "extensions" },
-                            { icon: "configure", action: "settings", tooltip: "settings" }
+                            { icon: "view-history", action: "history", tooltip: i18n("Open History") },
+                            { icon: "download", action: "downloads", tooltip: i18n("Open Downloads") },
+                            { icon: "application-x-addon", action: "extensions", tooltip: i18n("Manage Extensions") },
+                            { icon: "configure", action: "settings", tooltip: i18n("Browser Settings") }
                         ]
                         
                         delegate: Rectangle {
@@ -418,7 +402,7 @@ PlasmoidItem {
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 
-                                ToolTip.text: root.tr(modelData.tooltip)
+                                ToolTip.text: modelData.tooltip
                                 ToolTip.visible: containsMouse
                                 ToolTip.delay: 500
                                 

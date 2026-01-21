@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "Heç bir media oxunmur"
+
+msgid "Previous Track"
+msgstr "Əvvəlki trek"
+
+msgid "Next Track"
+msgstr "Növbəti trek"
+
+msgid "General (Follow All)"
+msgstr "Ümumi (Hamısını izlə)"
+
+msgid "Default Media Player"
+msgstr "Defolt media pleyeri"
+
+msgid "Inactive players are not shown."
+msgstr "Aktiv olmayan pleyerlər göstərilmir."
+
+msgid "Selected Player:"
+msgstr "Seçilmiş pleyer:"
+
+msgid "Select Application"
+msgstr "Tətbiqi seçin"
+
+msgid "⚠ No active players"
+msgstr "⚠ Aktiv pleyer yoxdur"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 aktiv pleyer tapıldı"
+
+msgid "All media sources are tracked."
+msgstr "Bütün media mənbələri izlənilir."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Yalnız \"%1\" izlənilir."
+
+msgid "Show media player badge"
+msgstr "Pleyer nişanını göstər"
+
+
+msgid "General"
+msgstr "Ümumi"

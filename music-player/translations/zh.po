@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "没有播放中的媒体"
+
+msgid "Previous Track"
+msgstr "上一曲"
+
+msgid "Next Track"
+msgstr "下一曲"
+
+msgid "General (Follow All)"
+msgstr "常规 (跟随所有)"
+
+msgid "Default Media Player"
+msgstr "默认媒体播放器"
+
+msgid "Inactive players are not shown."
+msgstr "不显示未激活的播放器。"
+
+msgid "Selected Player:"
+msgstr "已选播放器:"
+
+msgid "Select Application"
+msgstr "选择应用程序"
+
+msgid "⚠ No active players"
+msgstr "⚠ 无活跃播放器"
+
+msgid "✓ %1 active players found"
+msgstr "✓ 找到 %1 个活跃播放器"
+
+msgid "All media sources are tracked."
+msgstr "正在跟踪所有媒体源。"
+
+msgid "Only \"%1\" is tracked."
+msgstr "仅跟踪 \"%1\"。"
+
+msgid "Show media player badge"
+msgstr "显示播放器徽章"
+
+
+msgid "General"
+msgstr "常规"

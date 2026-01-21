@@ -60,8 +60,8 @@ Item {
         
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: 10
-            anchors.rightMargin: 4
+            anchors.leftMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? 10 : 0
+            anchors.rightMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? 4 : 0
             spacing: 6
             
             // Display text (not editable - shows placeholder or search text)

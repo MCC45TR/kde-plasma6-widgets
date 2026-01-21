@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "رسانه‌ای در حال پخش نیست"
+
+msgid "Previous Track"
+msgstr "آهنگ قبلی"
+
+msgid "Next Track"
+msgstr "آهنگ بعدی"
+
+msgid "General (Follow All)"
+msgstr "عمومی (دنبال کردن همه)"
+
+msgid "Default Media Player"
+msgstr "پخش‌کننده رسانه پیش‌فرض"
+
+msgid "Inactive players are not shown."
+msgstr "پخش‌کننده‌های غیرفعال نشان داده نمی‌شوند."
+
+msgid "Selected Player:"
+msgstr "پخش‌کننده انتخاب شده:"
+
+msgid "Select Application"
+msgstr "انتخاب برنامه"
+
+msgid "⚠ No active players"
+msgstr "⚠ هیچ پخش‌کننده فعالی وجود ندارد"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 پخش‌کننده فعال پیدا شد"
+
+msgid "All media sources are tracked."
+msgstr "همه منابع رسانه‌ای ردیابی می‌شوند."
+
+msgid "Only \"%1\" is tracked."
+msgstr "فقط «%1» ردیابی می‌شود."
+
+msgid "Show media player badge"
+msgstr "نشان پخش‌کننده را نشان بده"
+
+
+msgid "General"
+msgstr "عمومی"

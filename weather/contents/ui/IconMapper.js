@@ -217,6 +217,45 @@ function mapToV3(filename) {
     return filename
 }
 
+// Helper to map standard filenames to System Icon Names
+function mapToSystem(filename) {
+    if (filename === "clear_day.svg") return "weather-clear"
+    if (filename === "clear_night.svg") return "weather-clear-night"
+
+    if (filename === "partly_cloudy_day.svg") return "weather-few-clouds"
+    if (filename === "partly_cloudy_night.svg") return "weather-few-clouds-night"
+
+    if (filename === "mostly_cloudy_day.svg") return "weather-clouds"
+    if (filename === "mostly_cloudy_night.svg") return "weather-clouds-night"
+
+    if (filename === "cloudy.svg") return "weather-overcast"
+
+    if (filename === "haze_fog_dust_smoke.svg") return "weather-fog"
+
+    if (filename === "scattered_showers_day.svg") return "weather-showers-scattered"
+    if (filename === "scattered_showers_night.svg") return "weather-showers-scattered-night"
+
+    if (filename === "showers_rain.svg") return "weather-showers"
+    if (filename === "heavy_rain.svg") return "weather-storm"
+
+    if (filename === "drizzle.svg") return "weather-showers-scattered" // approximation
+
+    if (filename === "sleet_hail.svg") return "weather-snow-rain"
+
+    if (filename === "scattered_snow_showers_day.svg") return "weather-snow-scattered"
+    if (filename === "scattered_snow_showers_night.svg") return "weather-snow-scattered-night"
+    if (filename === "showers_snow.svg") return "weather-snow"
+    if (filename === "heavy_snow.svg") return "weather-snow"
+
+    if (filename === "isolated_thunderstorms.svg" || filename.startsWith("isolated_scattered_thunderstorms")) return "weather-storm"
+    if (filename === "strong_thunderstorms.svg") return "weather-storm"
+
+    if (filename === "windy.svg") return "weather-windy"
+    if (filename === "tornado.svg") return "weather-tornado"
+
+    return "weather-clear"
+}
+
 // Get icon path
 function getIconPath(code, iconCode, provider, isDarkTheme, iconPack) {
     var iconFile = getWeatherIcon(code, iconCode, provider, isDarkTheme)
@@ -224,6 +263,11 @@ function getIconPath(code, iconCode, provider, isDarkTheme, iconPack) {
     // Default / System Pack
     if (!iconPack || iconPack === "default") {
         return "../images/" + iconFile
+    }
+
+    // System Theme (returns icon NAME, not path, requires special handling in QML or image://theme/)
+    if (iconPack === "system") {
+        return mapToSystem(iconFile)
     }
 
     // Google v3 (SVG, different naming)

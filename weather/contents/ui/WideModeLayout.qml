@@ -71,15 +71,13 @@ RowLayout {
 
             Item { Layout.fillHeight: true }
 
-            Image {
+            Kirigami.Icon {
                 source: getWeatherIcon(currentWeather)
                 readonly property real availableHeight: parent.height
                 Layout.preferredHeight: conditionText.lineCount > 1 ? availableHeight * 0.2 : availableHeight * 0.25
                 Layout.preferredWidth: Layout.preferredHeight
                 Layout.alignment: Qt.AlignHCenter
-                sourceSize.width: Layout.preferredWidth * 2
-                sourceSize.height: Layout.preferredHeight * 2
-                fillMode: Image.PreserveAspectFit
+                isMask: false
                 smooth: true
             }
 
@@ -88,7 +86,7 @@ RowLayout {
                 text: currentWeather ? i18n(currentWeather.condition) : ""
                 color: Kirigami.Theme.textColor
                 opacity: 0.8
-                font.family: "Roboto Condensed"
+                font.family: weatherRoot.activeFont.family
                 font.pixelSize: Math.max(10, Math.min(14, wideLayout.height * 0.08))
                 Layout.alignment: Qt.AlignHCenter
                 wrapMode: Text.WordWrap
@@ -104,14 +102,14 @@ RowLayout {
                 Text {
                     text: currentWeather ? currentWeather.temp : "--"
                     color: Kirigami.Theme.textColor
-                    font.family: "Roboto Condensed"
+                    font.family: weatherRoot.activeFont.family
                     font.bold: true
                     font.pixelSize: conditionText.lineCount > 1 ? wideLayout.height * 0.2 : wideLayout.height * 0.25
                 }
                 Text {
                     text: "°"
                     color: Kirigami.Theme.textColor
-                    font.family: "Roboto Condensed"
+                    font.family: weatherRoot.activeFont.family
                     font.bold: true
                     font.pixelSize: conditionText.lineCount > 1 ? wideLayout.height * 0.15 : wideLayout.height * 0.18
                     Layout.alignment: Qt.AlignTop
@@ -193,7 +191,7 @@ RowLayout {
             Text {
                 text: currentWeather ? currentWeather.location : location
                 color: Kirigami.Theme.textColor
-                font.family: "Roboto Condensed"
+                font.family: weatherRoot.activeFont.family
                 font.bold: true
                 font.pixelSize: Math.min(22, wideLayout.width * 0.09)
                 elide: Text.ElideRight
@@ -242,17 +240,16 @@ RowLayout {
             clip: true
 
             readonly property real minCardWidth: 70
-            readonly property real minCardHeight: 100
-            readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
-            readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
-            readonly property real actualCardWidth: width / cardsPerRow
-            readonly property real actualCardHeight: height / visibleRows
+            readonly property real minCardHeight: 50
+            readonly property int visibleRows: 1
+            readonly property real actualCardWidth: Math.max(minCardWidth, width / Math.max(4, Math.min(forecastGrid.count, 6)))
+            readonly property real actualCardHeight: height
 
             cellWidth: actualCardWidth
             cellHeight: actualCardHeight
             snapMode: GridView.SnapToRow
             boundsBehavior: Flickable.StopAtBounds
-            flow: GridView.FlowLeftToRight
+            flow: GridView.FlowTopToBottom
 
             model: forecastMode ? forecastHourly : forecastDaily
 

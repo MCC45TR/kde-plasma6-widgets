@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "No Media Playing"
+msgstr "Δεν αναπαράγεται πολυμέσο"
+
+msgid "Previous Track"
+msgstr "Προηγούμενο κομμάτι"
+
+msgid "Next Track"
+msgstr "Επόμενο κομμάti"
+
+msgid "General (Follow All)"
+msgstr "Γενικά (Ακολουθήστε όλα)"
+
+msgid "Default Media Player"
+msgstr "Προεπιλεγμένο πρόγραμμα αναπαραγωγής"
+
+msgid "Inactive players are not shown."
+msgstr "Τα ανενεργά προγράμματα αναπαραγωγής δεν εμφανίζονται."
+
+msgid "Selected Player:"
+msgstr "Επιλεγμένο πρόγραμμα αναπαραγωγής:"
+
+msgid "Select Application"
+msgstr "Επιλογή εφαρμογής"
+
+msgid "⚠ No active players"
+msgstr "⚠ Δεν υπάρχουν ενεργά προγράμματα αναπαραγωγής"
+
+msgid "✓ %1 active players found"
+msgstr "✓ Βρέθηκαν %1 ενεργά προγράμματα αναπαραγωγής"
+
+msgid "All media sources are tracked."
+msgstr "Παρακολουθούνται όλες οι πηγές πολυμέσων."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Παρακολουθείται μόνο το \"%1\"."
+
+msgid "Show media player badge"
+msgstr "Εμφάνιση σήματος προγράμματος αναπαραγωγής"
+
+
+msgid "General"
+msgstr "Γενικά"
