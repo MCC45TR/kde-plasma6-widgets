@@ -14,7 +14,7 @@
         "Icon": "internet-web-browser",
         "Id": "com.mcc45tr.browsersearch",
         "Name": "MBrowser Search",
-        "Version": "1.0.0",
+        "Version": "1.1.0",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/Browser-Search",
         "License": "GPL-3.0",
         "Name[tr]": "MTarayıcı Arama",

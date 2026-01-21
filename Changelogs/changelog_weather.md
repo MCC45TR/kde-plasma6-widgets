@@ -1,5 +1,12 @@
 # 🌤️ MWeather (`weather`)
 
+### v1.1.8 (2026-01-22)
+**TR-TR:**
+- **Yeni Özellik**: Widget kenar boşluğu (Normal, Az, Yok) seçeneği eklendi.
+
+**EN-US:**
+- **New Feature**: Added "Widget Edge Margin" (Normal, Less, None) configuration.
+
 ### v1.1.5 (2026-01-16)
 **TR-TR:**
 - **UI Düzeltmesi**: Küçük modda uzun hava durumu açıklamalarının (örn. "Parçalı Bulutlu") kesilmesi sorunu metin kaydırma (Word Wrap) ile düzeltildi.

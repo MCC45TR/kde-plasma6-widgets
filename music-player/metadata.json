@@ -3,7 +3,7 @@
     "KPlugin": {
         "Id": "com.mcc45tr.musicplayer",
         "Name": "MMusic Player",
-        "Version": "1.2.3",
+        "Version": "1.3.0",
         "Category": "Multimedia",
         "Description": "A modern music player widget for KDE Plasma 6",
         "Icon": "multimedia-player",

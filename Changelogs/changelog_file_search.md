@@ -1,5 +1,16 @@
 # 🔍 MFile Finder (`file-search`)
 
+### v1.2.1 (2026-01-22)
+**TR:**
+- **Panel Yüksekliği Özelleştirmesi:**
+    - Panel yüksekliği için manuel ayar (18-96px) ve "Otomatik" seçeneği eklendi.
+    - `CompactView` bileşeni seçilen yüksekliğe göre dinamik olarak ölçeklenecek şekilde güncellendi.
+
+**EN:**
+- **Panel Height Customization:**
+    - Added manual Panel Height configuration (18-96px) with an "Automatic" option.
+    - Updated `CompactView` to dynamically scale based on the configured height.
+
 ### v1.2.0-beta (2026-01-18)
 **TR:**
 - **Yapılandırma Penceresi Onarımı:**

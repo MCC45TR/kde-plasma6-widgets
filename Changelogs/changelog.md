@@ -6,7 +6,13 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 
 ## 🔍 MFile Finder (`file-search`)
 
-### v1.2.0-beta (2026-01-18)
+### v1.2.1 (2026-01-22)
+**TR:**
+- **Panel Yüksekliği Özelleştirmesi:** Manuel ayar (18-96px) ve "Otomatik" seçeneği eklendi.
+**EN:**
+- **Panel Height Customization:** Added manual height configuration with an "Automatic" option.
+
+### v1.2.0 (2026-01-18)
 **TR:**
 - **Yapılandırma Penceresi Onarımı:**
     - Eksik sekmeler düzeltildi ve yeniden yapılandırıldı (`General`, `Search`, `Preview`, `Categories`, `Debug`, `Help`).
@@ -176,7 +182,26 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 
 ---
 
+## 🌐 MBrowser Search (`browser-search`)
+
+### v1.1.0 (2026-01-22)
+**TR:**
+- **Kenar Boşluğu Ayarı:** "Widget Margin" seçeneği (Normal, Az, Yok) eklendi.
+**EN:**
+- **Edge Margin Setting:** Added "Widget Margin" configuration (Normal, Less, None).
+
+### v1.0.0 (2025-12-30)
+- İlk sürüm; hızlı arama ve tarayıcı kısayolları.
+
+---
+
 ## 🎵 MMusic Player (`music-player`)
+
+### v1.3.0 (2026-01-22)
+**TR:**
+- **Kenar Boşluğu Ayarı:** "Widget Margin" seçeneği (Normal, Az, Yok) eklendi.
+**EN:**
+- **Edge Margin Setting:** Added "Widget Margin" configuration (Normal, Less, None).
 
 ### v1.2.2 (2026-01-17)
 **TR-TR:**
@@ -217,6 +242,12 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 ---
 
 ## 🌤️ MWeather (`weather`)
+
+### v1.1.8 (2026-01-22)
+**TR:**
+- **Kenar Boşluğu Ayarı:** "Widget Margin" seçeneği (Normal, Az, Yok) eklendi.
+**EN:**
+- **Edge Margin Setting:** Added "Widget Margin" configuration (Normal, Less, None).
 
 ### v1.1.5 (2026-01-16)
 **TR-TR:**
@@ -267,6 +298,7 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 - **2025-12-27**: `Roboto Condensed Variable` yazı tipi, tema entegrasyonu ve saniye göstergesi hover efekti eklendi.
 
 ### Analog Clock (`analog-clock` / `minimal-analog-clock`)
+- **2026-01-22 (v1.2)**: "Widget Margin" ayarı (Normal, Az, Yok) eklendi.
 - **2026-01-21 (v1.1)**: **Büyük Tasarım ve Yapılandırma Güncellemesi**.
     - **Variable Font & Dinamik Ölçeklendirme**: Roboto Flex değişken yazı tipi desteği ile dijital saatin ağırlığı ve genişliği widget boyutuna göre (dikey/yatay) otomatik uyarlanır.
     - **Yeni Saat Stilleri**: "Otomatik", "Klasik (Daire)" ve "Modern (Squircle)" modları eklendi.
@@ -281,6 +313,7 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 
 ## 📅 Calendar (`events` / `calendar`)
 
+- **2026-01-22 (v1.6)**: "Widget Margin" ayarı (Normal, Az, Yok) eklendi.
 - **2025-12-31**: Google Takvim entegrasyonu kaldırılarak tam çevrimdışı moda geçildi. Yeni yerelleştirme sistemine entegre edildi.
 - **2025-12-20**: Dairesel tarih göstergesi, dinamik yükseklik ve etkinlik başlığı kayma düzeltmeleri.
 

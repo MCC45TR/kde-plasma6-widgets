@@ -1,5 +1,12 @@
 # 🎵 MMusic Player (`music-player`)
 
+### v1.3.0 (2026-01-22)
+**TR-TR:**
+- **Yeni Özellik**: Widget kenar boşluğu (Normal, Az, Yok) seçeneği eklendi.
+
+**EN-US:**
+- **New Feature**: Added "Widget Edge Margin" (Normal, Less, None) configuration.
+
 ### v1.2.2 (2026-01-17)
 **TR-TR:**
 - **Hata Düzeltmeleri:** Genel kararlılık iyileştirmeleri ve sürüm güncellemesi.

@@ -13,7 +13,7 @@
         "Icon": "office-calendar",
         "Id": "com.mcc45tr.mcalendar",
         "Name": "MCalendar",
-        "Version": "1.5",
+        "Version": "1.6",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/calendar",
         "License": "GPL-3.0",
         "Name[tr]": "MTakvim",
