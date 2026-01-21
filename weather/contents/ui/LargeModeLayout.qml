@@ -196,17 +196,16 @@ Item {
                 clip: true
 
                 readonly property real minCardHeight: 100
-                cellHeight: height
-                
+                readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
+                cellHeight: height / visibleRows
+
                 readonly property real minCardWidth: 70
-                // Attempt to fit items in available width, but enforce minimum width
-                readonly property int itemCount: largeForecastGrid.count || 1
-                cellWidth: Math.max(minCardWidth, width / Math.max(4, Math.min(itemCount, 5))) 
-                // Using 5 as 'standard' visible count to avoid huge cards if only 2 days selected
-                
+                readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
+                cellWidth: width / cardsPerRow
+
                 snapMode: GridView.SnapToRow
                 boundsBehavior: Flickable.StopAtBounds
-                flow: GridView.FlowTopToBottom // Horizontal scrolling layout
+                flow: GridView.FlowLeftToRight
 
                 model: forecastMode ? forecastHourly : forecastDaily
 

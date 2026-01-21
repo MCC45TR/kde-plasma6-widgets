@@ -247,15 +247,13 @@ function fetchIpAndWeather(config, callback) {
     xhr.send()
 }
 
-// Internal function to maintain original fetch logic
 function fetchWeatherInternal(config, callback) {
     var apiKey = config.apiKey || ""
     var apiKey2 = config.apiKey2 || ""
     var location = config.location || ""
     var units = config.units || "metric"
-    var units = config.units || "metric"
     var provider = config.provider || "openmeteo"
-    var forecastDays = config.forecastDays || 5
+    var forecastDays = config.forecastDays || 12
 
     console.log("Fetching weather using provider: " + provider + ", days: " + forecastDays)
 
@@ -298,11 +296,9 @@ function fetchWeatherInternal(config, callback) {
     // Default: Open-Meteo (openmeteo) or fallback
     fetchOpenMeteo(location, units, function (result) {
         if (result.success) {
-            // Do NOT slice here before caching. Cache full result.
-            // Slicing happens in fetchWeather before callback.
-            // if (result.forecast && result.forecast.daily) {
-            //     result.forecast.daily = result.forecast.daily.slice(0, forecastDays)
-            // }
+            // Cache the FULL result (all days from API)
+            cache.current = result.current
+            cache.forecast = result.forecast
             cache.timestamp = Date.now()
         }
 

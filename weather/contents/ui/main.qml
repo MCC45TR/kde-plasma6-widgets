@@ -36,7 +36,6 @@ PlasmoidItem {
     readonly property int panelIconSize: Plasmoid.configuration.panelIconSize || 0
     readonly property string layoutMode: Plasmoid.configuration.layoutMode || "auto"
     readonly property int forecastDays: Plasmoid.configuration.forecastDays || 5
-    onForecastDaysChanged: fetchWeatherData()
 
     // Layout Mode Detection
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
@@ -132,6 +131,7 @@ PlasmoidItem {
         WeatherService.fetchWeather({
             apiKey: apiKey,
             apiKey2: apiKey2,
+            location: getActiveLocation(),
             units: units,
             provider: weatherProvider,
             autoDetect: locationMode === "auto",

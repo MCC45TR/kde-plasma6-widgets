@@ -240,16 +240,17 @@ RowLayout {
             clip: true
 
             readonly property real minCardWidth: 70
-            readonly property real minCardHeight: 50
-            readonly property int visibleRows: 1
-            readonly property real actualCardWidth: Math.max(minCardWidth, width / Math.max(4, Math.min(forecastGrid.count, 6)))
-            readonly property real actualCardHeight: height
+            readonly property real minCardHeight: 100
+            readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
+            readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
+            readonly property real actualCardWidth: width / cardsPerRow
+            readonly property real actualCardHeight: height / visibleRows
 
             cellWidth: actualCardWidth
             cellHeight: actualCardHeight
             snapMode: GridView.SnapToRow
             boundsBehavior: Flickable.StopAtBounds
-            flow: GridView.FlowTopToBottom
+            flow: GridView.FlowLeftToRight
 
             model: forecastMode ? forecastHourly : forecastDaily
 
