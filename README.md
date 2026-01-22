@@ -47,51 +47,61 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 
 ## 📦 Widget Catalog
 
-### 🔍 File Finder
+### 🔍 MFile Search
 > A powerful **Spotlight/Raycast** alternative for Plasma.
 
 <p align="center">
-  <img src="./.Samples/MFile-Search-Short-LessRound.png" height="225" style="margin: 2px;">
-  <img src="./.Samples/MFile-Search-Large-LessRound.png" height="225" style="margin: 2px;">
-  <img src="./.Samples/MFile-Search-Larger-LessRound.png" height="225" style="margin: 2px;">
-  <img src="./.Samples/MFile-Search-Larger-MidRound.png" height="225" style="margin: 2px;">
-  <img src="./.Samples/MFile-Search-Larger-Round.png" height="225" style="margin: 2px;">
-  <img src="./.Samples/MFile-Search-Larger-Square.png" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Short-LessRound.png" alt="MFile Search Short" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Large-LessRound.png" alt="MFile Search Large" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-LessRound.png" alt="MFile Search Larger Less Round" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-MidRound.png" alt="MFile Search Larger Mid Round" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-Round.png" alt="MFile Search Larger Round" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-Square.png" alt="MFile Search Larger Square" height="225" style="margin: 2px;">
   <br>
-  <img src="./.Samples/MFile-Search-Searching.png" height="700" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Searching.png" alt="MFile Search Results" height="700" style="margin: 2px;">
 </p>
 
 - **Smart Query**: Understands KRunner prefixes (`timeline:/`, `gg:`) with **interactive hint buttons**
 - **Pinned Items**: Pin favorite apps or files to the top for instant access
+- **Customizable Appearance**: Select corner radius (Square to Round) and adjust panel height (18-96px)
 - **Localized**: Full support for 20 languages including interactive prefix suggestions
 - **View Profiles**: Minimal, Developer (with live telemetry), and Power User modes
 - **Rich Previews**: Instant hover previews with async thumbnail caching
 - 📄 *[Read detailed documentation →](./file-search/README.md)*
 
-### 🌦️ Weather
+### 🌦️ MWeather
 > A responsive, multi-provider weather dashboard with stunning animations.
 
 <p align="center">
-  <img src="./.Samples/MWeather-Small.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MWeather-Large.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MWeather-Large-Expanded.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MWeather-LLarge.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MWeather-Big.png" height="450" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Small.png" alt="MWeather Small" height="225" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Large.png" alt="MWeather Large" height="225" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Large-Expanded.png" alt="MWeather Detailed" height="225" style="margin: 5px;">
+  <img src="./.Samples/MWeather-LLarge.png" alt="MWeather Grid" height="225" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Big.png" alt="MWeather Full" height="450" style="margin: 5px;">
 </p>
 
 - **Adaptive Layouts**: Morphs between Small, Wide (Card), and Large (Grid) modes
 - **Morphing Details**: Unique overlay that expands smoothly from UI elements
+- **Widget Edge Margin**: Customizable margins (Normal, Less, None) for better panel integration
 - **Zero Config**: Works out-of-the-box with Open-Meteo (no API key required)
 - 📄 *[Read detailed documentation →](./weather/README.md)*
 
-### 🎵 Music Player
+### � MBrowser Search
+> A minimalist browser search bar with quick access to history and settings.
+
+- **Multi-Engine**: Support for Google, DuckDuckGo, Bing, and more
+- **Quick Access**: Dedicated buttons for browser history and settings
+- **Widget Edge Margin**: Adjustable spacing for a perfect panel fit
+- 📄 *[Read detailed documentation →](./browser-search/README.md)*
+
+### �🎵 Music Player
 > A dynamic media controller that adapts to your workflow.
 
 <p align="center">
-  <img src="./.Samples/MMusic-Player-Small.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MMusic-Player-Large.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MMusic-Player-Small.png" alt="MMusic Player Small" height="225" style="margin: 5px;">
+  <img src="./.Samples/MMusic-Player-Large.png" alt="MMusic Player Wide" height="225" style="margin: 5px;">
   <br>
-  <img src="./.Samples/MMusic-Player-Big.png" height="350" style="margin: 5px;">
+  <img src="./.Samples/MMusic-Player-Big.png" alt="MMusic Player Large" height="350" style="margin: 5px;">
 </p>
 
 - **Universal Control**: Automatically finds active media players (Spotify, VLC, browser, etc.)
@@ -103,10 +113,10 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 > A clean, offline-focused calendar widget.
 
 <p align="center">
-  <img src="./.Samples/MCalendar-Small.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MCalendar-Large.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MCalendar-Tall.png" height="300" style="margin: 5px;">
-  <img src="./.Samples/MCalendar-Big.png" height="300" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Small.png" alt="MCalendar Small" height="225" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Large.png" alt="MCalendar Wide" height="225" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Tall.png" alt="MCalendar Tall" height="300" style="margin: 5px;">
+  <img src="./.Samples/MCalendar-Big.png" alt="MCalendar Large" height="300" style="margin: 5px;">
 </p>
 
 - **Privacy-First**: No external dependencies for a fast, local experience
@@ -124,8 +134,8 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 > Analog & Digital clock widgets.
 
 <p align="center">
-  <img src="./.Samples/MAnalog-Clock-Small.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MAnalog-Clock-Large.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MAnalog-Clock-Small.png" alt="MAnalog Clock Small" height="225" style="margin: 5px;">
+  <img src="./.Samples/MAnalog-Clock-Large.png" alt="MAnalog Clock Large" height="225" style="margin: 5px;">
 </p>
 
 - **Analog**: Minimalist design with dynamic opacity and hand smoothing
@@ -141,6 +151,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 
 | Widget | Description |
 |--------|-------------|
+| **Browser Search** | Multi-engine search bar with history access |
 | **System Monitor** | CPU, RAM, and Disk visualization |
 | **Notes** | List-based notes with drag-and-drop reordering |
 | **Control Center** | Quick toggles for system settings |
