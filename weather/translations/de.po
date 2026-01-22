@@ -1,14 +1,9 @@
-# Translation of MWeather in de
-# Copyright (C) 2026 MCC45TR
-# This file is distributed under the same license as the MWeather package.
-# MCC45TR <mcc45tr@gmail.com>, 2026.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: MWeather 1.1.5\n"
+"Project-Id-Version: MWeather 1.1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-21 00:38+0300\n"
-"PO-Revision-Date: 2026-01-21 00:38+0300\n"
+"POT-Creation-Date: 2026-01-22 03:00+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -17,258 +12,365 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contents/config/config.qml
 msgid "Weather"
-msgstr ""
+msgstr "Wetter"
 
-#: contents/config/config.qml contents/ui/config/ConfigAppearance.qml
 msgid "Appearance"
-msgstr ""
+msgstr "Aussehen"
 
-#: contents/ui/LargeModeLayout.qml
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
-#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
-#: contents/ui/main.qml
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Stündliche Vorhersage"
 
-#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
-#: contents/ui/main.qml
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Tägliche Vorhersage"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Feels like"
-msgstr ""
+msgstr "Gefühlt"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Humidity"
-msgstr ""
+msgstr "Feuchtigkeit"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Wind"
-msgstr ""
+msgstr "Wind"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Pressure"
-msgstr ""
+msgstr "Luftdruck"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Clouds"
-msgstr ""
+msgstr "Bewölkung"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "UV"
-msgstr ""
+msgstr "UV-Index"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Visibility"
-msgstr ""
+msgstr "Sichtweite"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Wind Direction"
-msgstr ""
+msgstr "Windrichtung"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Click to close"
-msgstr ""
+msgstr "Zum Schließen klicken"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Standard (Farbiges SVG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Wetter v3 (Flaches SVG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Wetter v2 (Realistisches PNG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Wetter v1 (Klassisches PNG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Symbolpaket:"
 
-#: contents/ui/config/ConfigAppearance.qml
-msgid ""
-"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
-"have missing icons for some conditions)"
-msgstr ""
-
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Wählen Sie den visuellen Stil für Wettersymbole."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Weather Provider"
-msgstr ""
+msgstr "Wetteranbieter"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Kostenlos, kein Schlüssel erforderlich)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Schlüssel erforderlich)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Schlüssel erforderlich)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Beste kostenlose Option. Kein API-Schlüssel erforderlich."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Standard provider. API key required below."
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Alternative provider. API key required below."
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "API Keys"
-msgstr ""
+msgstr "API-Schlüssel"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap API Key:"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your OpenWeatherMap API key"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com API Key:"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your WeatherAPI.com key"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Location"
-msgstr ""
+msgstr "Standort"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Automatisch über IP erkennen"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter manually"
-msgstr ""
+msgstr "Manuell eingeben"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "City 1:"
-msgstr ""
+msgstr "Stadt 1:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Bsp: Ankara, Istanbul, London"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "City 2:"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Second city (optional)"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "City 3:"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Third city (optional)"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "You can use City name, 'City,Country Code' or Zip Code."
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Location will be auto-detected based on your IP address."
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Units:"
-msgstr ""
+msgstr "Einheiten:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Use system units"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Metrisch (°C)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Imperial (°F)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Aktualisierungsintervall:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "15 minutes"
-msgstr ""
+msgstr "15 Minuten"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "30 minutes"
-msgstr ""
+msgstr "30 Minuten"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "45 minutes"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "1 hour"
-msgstr ""
+msgstr "1 Stunde"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "2 hours"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "3 hours"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "4 hours"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "6 hours"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "8 hours"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "12 hours"
 msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "1 day"
 msgstr ""
 
-#: contents/ui/main.qml
 msgid "Refresh"
+msgstr "Aktualisieren"
+
+msgid "Loading weather data..."
+msgstr "Wetterdaten werden geladen..."
+
+msgid "Clear"
+msgstr "Klar"
+
+msgid "Mainly Clear"
+msgstr "Überwiegend klar"
+
+msgid "Partly Cloudy"
+msgstr "Teilweise bewölkt"
+
+msgid "Overcast"
+msgstr "Bedeckt"
+
+msgid "Fog"
+msgstr "Nebel"
+
+msgid "Mist"
 msgstr ""
 
-#: contents/ui/main.qml
-msgid "Loading weather data..."
+msgid "Haze"
+msgstr ""
+
+msgid "Smoke"
+msgstr ""
+
+msgid "Dust"
+msgstr ""
+
+msgid "Drizzle"
+msgstr ""
+
+msgid "Freezing Drizzle"
+msgstr ""
+
+msgid "Rain"
+msgstr "Regen"
+
+msgid "Light Rain"
+msgstr ""
+
+msgid "Freezing Rain"
+msgstr ""
+
+msgid "Snow"
+msgstr "Schnee"
+
+msgid "Light Snow"
+msgstr ""
+
+msgid "Snow Grains"
+msgstr ""
+
+msgid "Rain Showers"
+msgstr ""
+
+msgid "Snow Showers"
+msgstr ""
+
+msgid "Thunderstorm"
+msgstr "Gewitter"
+
+msgid "Thunderstorm with Hail"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Cloudy"
+msgstr ""
+
+msgid "Sun"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
+msgid "Font Settings"
+msgstr ""
+
+msgid "Use Default System Font"
+msgstr ""
+
+msgid "Custom Font Family:"
+msgstr ""
+
+msgid "Background Opacity:"
+msgstr ""
+
+msgid "100%"
+msgstr ""
+
+msgid "75%"
+msgstr ""
+
+msgid "50%"
+msgstr ""
+
+msgid "25%"
+msgstr ""
+
+msgid "10%"
+msgstr ""
+
+msgid "5%"
+msgstr ""
+
+msgid "0%"
+msgstr ""
+
+msgid "Background Settings"
+msgstr ""
+
+msgid "Widget Margin:"
+msgstr "Widget-Abstand:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Weniger (5px)"
+
+msgid "None (0px)"
+msgstr "Keiner (0px)"
+
+msgid "Layout Mode:"
+msgstr ""
+
+msgid "Automatic"
+msgstr "Automatisch"
+
+msgid "Small"
+msgstr "Klein"
+
+msgid "Wide"
+msgstr "Breit"
+
+msgid "Large"
+msgstr "Groß"
+
+msgid "Representation:"
+msgstr ""
+
+msgid "Simple Panel"
+msgstr "Einfaches Panel"
+
+msgid "Detailed Panel"
+msgstr "Detailliertes Panel"
+
+msgid "Font Size (0 = Auto):"
+msgstr ""
+
+msgid "Icon Size (0 = Auto):"
+msgstr ""
+
+msgid "Forecast Days:"
+msgstr ""
+
+msgid "NW"
+msgstr ""
+
+msgid "Panel Settings"
 msgstr ""

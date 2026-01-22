@@ -1,273 +1,379 @@
-# Translation of MWeather in az
-# Copyright (C) 2026 MCC45TR
-# This file is distributed under the same license as the MWeather package.
-# MCC45TR <mcc45tr@gmail.com>, 2026.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: MWeather 1.1.5\n"
+"Project-Id-Version: MWeather 1.1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-21 00:38+0300\n"
-"PO-Revision-Date: 2026-01-21 00:38+0300\n"
+"POT-Creation-Date: 2026-01-22 03:00+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contents/config/config.qml
 msgid "Weather"
-msgstr ""
+msgstr "Hava Vəziyyəti"
 
-#: contents/config/config.qml contents/ui/config/ConfigAppearance.qml
 msgid "Appearance"
-msgstr ""
+msgstr "Görünüş"
 
-#: contents/ui/LargeModeLayout.qml
 msgid "Details"
-msgstr ""
+msgstr "Detallar"
 
-#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
-#: contents/ui/main.qml
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Saatlıq Təxmin"
 
-#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
-#: contents/ui/main.qml
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Günlük Təxmin"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Feels like"
-msgstr ""
+msgstr "Hiss edilən"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Humidity"
-msgstr ""
+msgstr "Rütubət"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Wind"
-msgstr ""
+msgstr "Külək"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Pressure"
-msgstr ""
+msgstr "Təzyiq"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Clouds"
-msgstr ""
+msgstr "Buludluluq"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "UV"
-msgstr ""
+msgstr "UV İndeksi"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Visibility"
-msgstr ""
+msgstr "Görmə Məsafəsi"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Wind Direction"
-msgstr ""
+msgstr "Küləyin İstiqaməti"
 
-#: contents/ui/WeatherDetailsView.qml
 msgid "Click to close"
-msgstr ""
+msgstr "Bağlamaq üçün tıkla"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Standart (Rəngli SVG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Hava Vəziyyəti v3 (Düz SVG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Hava Vəziyyəti v2 (Realist PNG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Hava Vəziyyəti v1 (Klassik PNG)"
 
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Icon Pack:"
-msgstr ""
+msgstr "İkon Paketi:"
 
-#: contents/ui/config/ConfigAppearance.qml
-msgid ""
-"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
-"have missing icons for some conditions)"
-msgstr ""
-
-#: contents/ui/config/ConfigAppearance.qml
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Hava vəziyyəti nişanları üçün vizual stili seçin."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Weather Provider"
-msgstr ""
+msgstr "Hava Məlumatı Provayderi"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Pulsuz, Açar Lazım deyil)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Açar Lazımdır)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Açar Lazımdır)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Ən yaxşı pulsuz seçim. API açarı lazım deyil."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Standart provayder. Aşağıda API açarı tələb edir."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Alternatif provayder. Aşağıda API açarı tələb edir."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "API Keys"
-msgstr ""
+msgstr "API Açarları"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API Açarı:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "OpenWeatherMap API açarınızı daxil edin"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API Açarı:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "WeatherAPI.com açarınızı daxil edin"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Location"
-msgstr ""
+msgstr "Məkan"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "IP-dən avtomatik aşkarla"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter manually"
-msgstr ""
+msgstr "Əllə daxil et"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "City 1:"
-msgstr ""
+msgstr "Şəhər 1:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Məs: Ankara, İstanbul, London"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "City 2:"
-msgstr ""
+msgstr "Şəhər 2:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Second city (optional)"
-msgstr ""
+msgstr "İkinci şəhər (istəyə bağlı)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "City 3:"
-msgstr ""
+msgstr "Şəhər 3:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Üçüncü şəhər (istəyə bağlı)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Şəhər adı, 'Şəhər,Ölkə Kodu' və ya Poçt İndeksi istifadə edə bilərsiniz."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Məkan IP ünvanınıza əsasən avtomatik aşkar ediləcək."
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Units:"
-msgstr ""
+msgstr "Vahidlər:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Use system units"
-msgstr ""
+msgstr "Sistem vahidlərini istifadə et"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Metrik (°C)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "İmperial (°F)"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Yenilənmə Sıklığı:"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "15 minutes"
-msgstr ""
+msgstr "15 dəqiqə"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "30 minutes"
-msgstr ""
+msgstr "30 dəqiqə"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "45 minutes"
-msgstr ""
+msgstr "45 dəqiqə"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "1 hour"
-msgstr ""
+msgstr "1 saat"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "2 hours"
-msgstr ""
+msgstr "2 saat"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "3 hours"
-msgstr ""
+msgstr "3 saat"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "4 hours"
-msgstr ""
+msgstr "4 saat"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "6 hours"
-msgstr ""
+msgstr "6 saat"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "8 hours"
-msgstr ""
+msgstr "8 saat"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "12 hours"
-msgstr ""
+msgstr "12 saat"
 
-#: contents/ui/config/ConfigGeneral.qml
 msgid "1 day"
-msgstr ""
+msgstr "1 gün"
 
-#: contents/ui/main.qml
 msgid "Refresh"
-msgstr ""
+msgstr "Yenilə"
 
-#: contents/ui/main.qml
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Hava məlumatları yüklənir..."
+
+msgid "Clear"
+msgstr "Açıq"
+
+msgid "Mainly Clear"
+msgstr "Əsasən Açıq"
+
+msgid "Partly Cloudy"
+msgstr "Az Buludlu"
+
+msgid "Overcast"
+msgstr "Tutqun"
+
+msgid "Fog"
+msgstr "Dumanlı"
+
+msgid "Mist"
+msgstr "Çiskinli"
+
+msgid "Haze"
+msgstr "Puslu"
+
+msgid "Smoke"
+msgstr "Tüstülü"
+
+msgid "Dust"
+msgstr "Tozlu"
+
+msgid "Drizzle"
+msgstr "Çisinti"
+
+msgid "Freezing Drizzle"
+msgstr "Dondurucu Çisinti"
+
+msgid "Rain"
+msgstr "Yağışlı"
+
+msgid "Light Rain"
+msgstr "Yüngül Yağış"
+
+msgid "Freezing Rain"
+msgstr "Dondurucu Yağış"
+
+msgid "Snow"
+msgstr "Qarlı"
+
+msgid "Light Snow"
+msgstr "Yüngül Qar"
+
+msgid "Snow Grains"
+msgstr "Qar Dənələri"
+
+msgid "Rain Showers"
+msgstr "Leysan"
+
+msgid "Snow Showers"
+msgstr "Qar Leysanı"
+
+msgid "Thunderstorm"
+msgstr "İldırımlı Hava"
+
+msgid "Thunderstorm with Hail"
+msgstr "Dolu ilə İldırım"
+
+msgid "Unknown"
+msgstr "Naməlum"
+
+msgid "Cloudy"
+msgstr "Buludlu"
+
+msgid "Sun"
+msgstr "Baz"
+
+msgid "Mon"
+msgstr "B.E"
+
+msgid "Tue"
+msgstr "Ç.A"
+
+msgid "Wed"
+msgstr "Çər"
+
+msgid "Thu"
+msgstr "C.A"
+
+msgid "Fri"
+msgstr "Cüm"
+
+msgid "Sat"
+msgstr "Şən"
+
+msgid "Font Settings"
+msgstr "Şrift Ayarları"
+
+msgid "Use Default System Font"
+msgstr "Sistemin Standart Şriftini İstifadə Et"
+
+msgid "Custom Font Family:"
+msgstr "Xüsusi Şrift Ailəsi:"
+
+msgid "Background Opacity:"
+msgstr "Arxa Fon Şəffaflığı:"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "0%"
+msgstr "0%"
+
+msgid "Background Settings"
+msgstr "Arxa Fon Ayarları"
+
+msgid "Widget Margin:"
+msgstr "Vidcet Kenar Boşluğu:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Az (5px)"
+
+msgid "None (0px)"
+msgstr "Yox (0px)"
+
+msgid "Layout Mode:"
+msgstr "Düzən Modu:"
+
+msgid "Automatic"
+msgstr "Avtomatik"
+
+msgid "Small"
+msgstr "Kiçik"
+
+msgid "Wide"
+msgstr "Geniş"
+
+msgid "Large"
+msgstr "Böyük"
+
+msgid "Representation:"
+msgstr "Təqdimat:"
+
+msgid "Simple Panel"
+msgstr "Sadə Panel"
+
+msgid "Detailed Panel"
+msgstr "Ətraflı Panel"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Şrift Ölçüsü (0 = Avto):"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "İkon Ölçüsü (0 = Avto):"
+
+msgid "Forecast Days:"
+msgstr "Proqnoz Günləri:"
+
+msgid "NW"
+msgstr "Ş-Q"
+
+msgid "Panel Settings"
+msgstr "Panel Ayarları"
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "Hava vəziyyəti nişanları üçün vizual stili seçin. (Qeyd: v1/v2 kimi köhnə paketlərdə bəzi hallar üçün ikon çatışmazlığı ola bilər)"
