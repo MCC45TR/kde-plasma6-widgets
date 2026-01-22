@@ -13,6 +13,8 @@
       <default>false</default>
       <label>Show media player icon badge</label>
     </entry>
+  </group>
+  <group name="Appearance">
     <entry name="edgeMargin" type="Int">
       <default>10</default>
       <label>Widget Edge Margin</label>

@@ -24,6 +24,11 @@ Item {
     property string cfg_customFontFamily
     property double cfg_backgroundOpacity
     property int cfg_forecastDays
+    property int cfg_edgeMargin
+    property string cfg_layoutMode
+    property int cfg_panelFontSize
+    property int cfg_panelIconSize
+    property string cfg_panelMode
     property bool initialized: false
     
     // Default values (Required for 'Defaults' button)
@@ -44,6 +49,11 @@ Item {
     property string cfg_customFontFamilyDefault
     property double cfg_backgroundOpacityDefault
     property int cfg_forecastDaysDefault
+    property int cfg_edgeMarginDefault
+    property string cfg_layoutModeDefault
+    property int cfg_panelFontSizeDefault
+    property int cfg_panelIconSizeDefault
+    property string cfg_panelModeDefault
     
     // Units mapping
     property var unitsModel: ["metric", "imperial"]

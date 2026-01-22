@@ -1,5 +1,8 @@
 {
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
     "KPlugin": {
         "Id": "com.mcc45tr.musicplayer",
         "Name": "MMusic Player",

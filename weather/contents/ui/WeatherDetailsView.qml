@@ -16,13 +16,12 @@ ColumnLayout {
         spacing: 10
         
         // Icon
-        Image {
+        // Icon
+        Kirigami.Icon {
             source: weatherRoot.getWeatherIcon(weatherRoot.currentWeather)
             Layout.preferredHeight: 50
             Layout.preferredWidth: 50
-            sourceSize.width: 100
-            sourceSize.height: 100
-            fillMode: Image.PreserveAspectFit
+            smooth: true
         }
         
         // Location & Condition

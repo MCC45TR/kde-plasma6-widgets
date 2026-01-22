@@ -1,21 +1,23 @@
 {
     "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
     "KPlugin": {
+        "Id": "com.mcc45tr.mweather",
+        "Name": "MWeather",
+        "Version": "1.1.8",
+        "Category": "Utilities",
+        "Description": "Modern weather widget with Google Weather icons, daily/hourly forecasts, and auto-refresh",
+        "Icon": "weather-many-clouds",
+        "License": "GPL-3.0",
+        "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/weather",
         "Authors": [
             {
                 "Name": "MCC45TR",
                 "Email": "mcc45tr@gmail.com"
             }
         ],
-        "Category": "Utilities",
-        "Description": "Modern weather widget with Google Weather icons, daily/hourly forecasts, and auto-refresh",
-        "Icon": "weather-many-clouds",
-        "Id": "com.mcc45tr.mweather",
-        "Name": "MWeather",
-        "Version": "1.1.8",
-        "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/weather",
-        "License": "GPL-3.0",
         "Name[tr]": "MHava Durumu",
         "Name[de]": "MWetter",
         "Name[fr]": "MMétéo",
