@@ -51,14 +51,14 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 > A powerful **Spotlight/Raycast** alternative for Plasma.
 
 <p align="center">
-  <img src="./.Samples/MFile-Search-Short-LessRound.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MFile-Search-Large-LessRound.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MFile-Search-Larger-LessRound.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MFile-Search-Larger-MidRound.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MFile-Search-Larger-Round.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MFile-Search-Larger-Square.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MFile-Search-Short-LessRound.png" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Large-LessRound.png" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-LessRound.png" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-MidRound.png" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-Round.png" height="225" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Larger-Square.png" height="225" style="margin: 2px;">
   <br>
-  <img src="./.Samples/MFile-Search-Searching.png" height="450" style="margin: 5px;">
+  <img src="./.Samples/MFile-Search-Searching.png" height="450" style="margin: 2px;">
 </p>
 
 - **Smart Query**: Understands KRunner prefixes (`timeline:/`, `gg:`) with **interactive hint buttons**
@@ -76,7 +76,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
   <img src="./.Samples/MWeather-Large.png" height="225" style="margin: 5px;">
   <img src="./.Samples/MWeather-Large-Expanded.png" height="225" style="margin: 5px;">
   <img src="./.Samples/MWeather-LLarge.png" height="225" style="margin: 5px;">
-  <img src="./.Samples/MWeather-Big.png" height="225" style="margin: 5px;">
+  <img src="./.Samples/MWeather-Big.png" height="450" style="margin: 5px;">
 </p>
 
 - **Adaptive Layouts**: Morphs between Small, Wide (Card), and Large (Grid) modes
