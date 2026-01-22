@@ -58,7 +58,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
   <img src="./.Samples/MFile-Search-Larger-Round.png" height="225" style="margin: 2px;">
   <img src="./.Samples/MFile-Search-Larger-Square.png" height="225" style="margin: 2px;">
   <br>
-  <img src="./.Samples/MFile-Search-Searching.png" height="450" style="margin: 2px;">
+  <img src="./.Samples/MFile-Search-Searching.png" height="700" style="margin: 2px;">
 </p>
 
 - **Smart Query**: Understands KRunner prefixes (`timeline:/`, `gg:`) with **interactive hint buttons**
