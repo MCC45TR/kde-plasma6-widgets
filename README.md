@@ -39,7 +39,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 |---------|-------------|
 | 🎨 **Plasma 6 Native** | Built fully on Qt6 and QML, optimized for the latest KDE Plasma desktop. |
 | 🎯 **Unified Design** | All widgets share a consistent look using system theme icons (`breeze-icons`). |
-| 🌍 **20 Languages** | Advanced JSON-based localization supporting English, Turkish, German, French, Spanish, Russian, Portuguese, Italian, Japanese, Czech, Greek, Azerbaijani, Armenian, Romanian, Hindi, Bengali, Urdu, Indonesian, Persian, and Chinese. |
+| 🌍 **20+ Languages** | Standard Gettext-based localization (.po/.mo) supporting 20+ languages including English, Turkish, German, French, Spanish, Russian, Portuguese, Italian, and more. |
 | 🧩 **Modular Architecture** | Clean code with reusable components and logic separated into JavaScript modules. |
 | ⚡ **Power User Features** | Smart Query in File Finder, dynamic MPRIS discovery, offline-first Calendar, and more. |
 
@@ -256,7 +256,7 @@ Ensure you have `breeze-icon-theme` or a compatible system icon theme installed.
 
 Contributions are welcome! Please follow these guidelines:
 
-1. **Localization**: Add new strings to `localization.json` in the widget's `contents/ui/` folder
+1. **Localization**: Add new strings to `template.pot` or relevant `.po` files in the widget's `translations/` folder using Gettext
 2. **Icons**: Prefer system icons over local assets
 3. **Versioning**: Update `metadata.json` version when making changes
 
