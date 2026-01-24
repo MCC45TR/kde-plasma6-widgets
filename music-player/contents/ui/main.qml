@@ -49,28 +49,36 @@ PlasmoidItem {
             return null
         }
         
-        // "General" Mode: Prioritize Playing players
+        // "General" Mode: Prioritize Playing > Paused > Any
         var count = probeModel.rowCount()
-        var bestCandidate = null
+        var pausedCandidate = null
+        var anyCandidate = null
         
         for (var i = 0; i < count; i++) {
             probeModel.currentIndex = i
             var player = probeModel.currentPlayer
             
             if (player) {
-                // If we find a playing one, return it immediately (or prioritize it)
+                // Priority 1: Playing
                 if (player.playbackStatus === Mpris.PlaybackStatus.Playing) {
                     return player
                 }
-                // Keep the "current" one as a fallback if no one is playing
-                if (mpris2Model.currentPlayer && player.identity === mpris2Model.currentPlayer.identity) {
-                    bestCandidate = player
+                // Priority 2: Paused
+                if (player.playbackStatus === Mpris.PlaybackStatus.Paused) {
+                    // If we have multiple paused players, prefer the one that matches system selection
+                    if (!pausedCandidate || (mpris2Model.currentPlayer && player.identity === mpris2Model.currentPlayer.identity)) {
+                        pausedCandidate = player
+                    }
+                }
+                // Priority 3: Any (Stopped/Unknown)
+                if (!anyCandidate) {
+                     anyCandidate = player
                 }
             }
         }
         
-        // Fallback to system default if no one is playing
-        return bestCandidate || mpris2Model.currentPlayer
+        // Return best match
+        return pausedCandidate || anyCandidate || mpris2Model.currentPlayer
     }
     
     // Reactively determine the smart player
@@ -83,7 +91,7 @@ PlasmoidItem {
     
     // Watch for players appearing/disappearing
     Connections {
-        target: mpris2Model
+        target: probeModel
         function onRowsInserted() { root.updateCurrentPlayer() }
         function onRowsRemoved() { root.updateCurrentPlayer() }
         function onModelReset() { root.updateCurrentPlayer() }
@@ -170,7 +178,72 @@ PlasmoidItem {
         return PlayerData.getPlayerIcon(identity)
     }
 
-    preferredRepresentation: fullRepresentation
+    readonly property bool showPanelControls: Plasmoid.configuration.showPanelControls !== undefined ? Plasmoid.configuration.showPanelControls : true
+    readonly property bool cfg_panelShowTitle: Plasmoid.configuration.panelShowTitle !== undefined ? Plasmoid.configuration.panelShowTitle : true
+    readonly property bool cfg_panelShowArtist: Plasmoid.configuration.panelShowArtist !== undefined ? Plasmoid.configuration.panelShowArtist : true
+    readonly property bool cfg_panelAutoFontSize: Plasmoid.configuration.panelAutoFontSize !== undefined ? Plasmoid.configuration.panelAutoFontSize : true
+    readonly property bool cfg_panelScrollingText: Plasmoid.configuration.panelScrollingText !== undefined ? Plasmoid.configuration.panelScrollingText : true
+    readonly property int cfg_panelMaxWidth: Plasmoid.configuration.panelMaxWidth !== undefined ? Plasmoid.configuration.panelMaxWidth : 350
+    readonly property int cfg_panelScrollingSpeed: Plasmoid.configuration.panelScrollingSpeed !== undefined ? Plasmoid.configuration.panelScrollingSpeed : 0
+    readonly property int cfg_panelFontSize: Plasmoid.configuration.panelFontSize !== undefined ? Plasmoid.configuration.panelFontSize : 12
+    readonly property int cfg_panelLayoutMode: Plasmoid.configuration.panelLayoutMode !== undefined ? Plasmoid.configuration.panelLayoutMode : 0
+    readonly property int cfg_popupLayoutMode: Plasmoid.configuration.popupLayoutMode !== undefined ? Plasmoid.configuration.popupLayoutMode : 0
+    readonly property double cfg_backgroundOpacity: Plasmoid.configuration.backgroundOpacity !== undefined ? Plasmoid.configuration.backgroundOpacity : 0.8
+    
+    // Panel Detection
+    readonly property bool isInPanel: (Plasmoid.formFactor == PlasmaCore.Types.Horizontal || Plasmoid.formFactor == PlasmaCore.Types.Vertical)
+
+    preferredRepresentation: isInPanel ? compactRepresentation : fullRepresentation
+    
+    compactRepresentation: Item {
+        id: compactRep
+        
+        // Use PanelMode from separate file
+        Loader {
+            anchors.fill: parent
+            source: "modes/PanelMode.qml"
+            onLoaded: {
+                if (item) {
+                     item.hasArt = Qt.binding(function() { return root.hasArt })
+                     item.artUrl = Qt.binding(function() { return root.artUrl })
+                     item.title = Qt.binding(function() { return root.title })
+                     item.artist = Qt.binding(function() { return root.artist })
+                     item.playerIdentity = Qt.binding(function() { return root.playerIdentity })
+                     item.hasPlayer = Qt.binding(function() { return root.hasPlayer })
+                     item.preferredPlayer = Qt.binding(function() { return root.preferredPlayer })
+                     item.isPlaying = Qt.binding(function() { return root.isPlaying })
+                     item.currentPosition = Qt.binding(function() { return root.currentPosition })
+                     item.length = Qt.binding(function() { return root.length })
+                     
+                     item.showPanelControls = Qt.binding(function() { return root.showPanelControls })
+                     
+                     // New Config Bindings
+                     item.showTitle = Qt.binding(function() { return root.cfg_panelShowTitle })
+                     item.showArtist = Qt.binding(function() { return root.cfg_panelShowArtist })
+                     item.autoFontSize = Qt.binding(function() { return root.cfg_panelAutoFontSize })
+                     item.scrollingText = Qt.binding(function() { return root.cfg_panelScrollingText })
+                     item.maxWidth = Qt.binding(function() { return root.cfg_panelMaxWidth })
+                     item.scrollingSpeed = Qt.binding(function() { return root.cfg_panelScrollingSpeed })
+                     item.manualFontSize = Qt.binding(function() { return root.cfg_panelFontSize })
+                     item.layoutMode = Qt.binding(function() { return root.cfg_panelLayoutMode })
+                     
+                     item.onPrevious = root.previous
+                     item.onPlayPause = root.togglePlayPause
+                     item.onNext = root.next
+                     item.onSeek = root.seek
+                     item.onExpand = function() { root.expanded = true }
+                     item.onLaunchApp = function() { root.launchApp(root.preferredPlayer) }
+                }
+            }
+        }
+        
+        // Ensure popup opens on click (if not handled by buttons)
+        MouseArea {
+            anchors.fill: parent
+            z: -1
+            onClicked: root.expanded = true
+        }
+    }
     
     fullRepresentation: Item {
         id: fullRep
@@ -186,6 +259,19 @@ PlasmoidItem {
         
         // Current mode for loader
         readonly property string currentMode: {
+            // View Mode Mapping: 
+            // 0: Auto, 1: Small (Compact), 2: Wide, 3: Large
+            
+            if (cfg_popupLayoutMode === 1) return "compact"
+            if (cfg_popupLayoutMode === 2) return "wide"
+            if (cfg_popupLayoutMode === 3) return "largeSquare"
+            
+            // Auto Mode (0)
+            
+            // If in panel (popup mode), default to LargeSquare
+            if (root.isInPanel) return "largeSquare"
+
+            // Fallback to responsive logic (Desktop Auto)
             if (isLargeSq) return "largeSquare"
             if (isWide) return "wide"
             return "compact"
@@ -195,7 +281,8 @@ PlasmoidItem {
             id: mainRect
             anchors.fill: parent
             anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
-            color: Kirigami.Theme.backgroundColor
+            color: root.isInPanel ? "transparent" : Kirigami.Theme.backgroundColor
+            opacity: root.isInPanel ? 1 : root.cfg_backgroundOpacity
             radius: 20
             clip: true
             
@@ -208,9 +295,10 @@ PlasmoidItem {
                 // Source based on current mode
                 source: {
                     switch (fullRep.currentMode) {
+                        case "compact": return "modes/CompactMode.qml"
                         case "wide": return "modes/WideMode.qml"
                         case "largeSquare": return "modes/LargeSquareMode.qml"
-                        default: return "modes/CompactMode.qml"
+                        default: return "modes/LargeSquareMode.qml" 
                     }
                 }
                 

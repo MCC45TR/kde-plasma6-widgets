@@ -115,5 +115,10 @@
       <default>10</default>
       <label>Widget Edge Margin</label>
     </entry>
+
+    <entry name="showForecastUnits" type="Bool">
+      <default>true</default>
+      <label>Show Units in Forecast</label>
+    </entry>
   </group>
 </kcfg>

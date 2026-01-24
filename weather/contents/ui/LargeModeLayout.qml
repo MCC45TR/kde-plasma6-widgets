@@ -220,6 +220,8 @@ Item {
                     iconPath: getWeatherIcon(modelData)
                     temp: modelData.temp
                     isHourly: forecastMode
+                    units: weatherRoot.units
+                    showUnits: weatherRoot.showForecastUnits
 
                     radiusTL: 12
                     radiusTR: 12

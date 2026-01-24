@@ -197,6 +197,14 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 
 ## 🎵 MMusic Player (`music-player`)
 
+### v1.2.4 (2026-01-24)
+**TR:**
+- **İyileştirme**: Widget kenar boşlukları artık ayarlanabiliyor ve bu ayar kalıcı olarak kaydediliyor.
+- **Hata Düzeltmesi**: Ayarın her oturumda sıfırlanma sorunu giderildi.
+**EN:**
+- **Improvement**: Widget edge margins are now adjustable and settings are saved permanently.
+- **Bug Fix**: Fixed the issue where the margin setting was resetting to default on every session.
+
 ### v1.3.0 (2026-01-22)
 **TR:**
 - **Kenar Boşluğu Ayarı:** "Widget Margin" seçeneği (Normal, Az, Yok) eklendi.

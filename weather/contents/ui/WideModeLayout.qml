@@ -265,6 +265,8 @@ RowLayout {
                 iconPath: getWeatherIcon(modelData)
                 temp: modelData.temp
                 isHourly: forecastMode
+                units: weatherRoot.units
+                showUnits: weatherRoot.showForecastUnits
 
                 readonly property int cols: Math.max(1, Math.floor(forecastGrid.width / forecastGrid.cellWidth))
                 readonly property int row: Math.floor(index / cols)

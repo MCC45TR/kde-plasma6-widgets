@@ -84,6 +84,7 @@ Rectangle {
             spacing: 10
             width: parent.width * 0.8
             
+            // Default Placeholder (No Player)
             Image {
                 Layout.preferredWidth: parent.width * 0.5
                 Layout.preferredHeight: Layout.preferredWidth
@@ -91,6 +92,20 @@ Rectangle {
                 source: "../../images/album.png"
                 fillMode: Image.PreserveAspectFit
                 opacity: 0.8
+                visible: !albumCover.hasPlayer
+            }
+
+            // Player Icon (Player Active, No Art)
+            Kirigami.Icon {
+                Layout.preferredWidth: parent.width * 0.5
+                Layout.preferredHeight: Layout.preferredWidth
+                Layout.alignment: Qt.AlignHCenter
+                source: albumCover.playerIcon
+                visible: albumCover.hasPlayer
+                
+                // Fade out when play/pause icon is visible to prevent overlap
+                opacity: albumCover.showCenterPlayIcon ? 0 : 1
+                Behavior on opacity { NumberAnimation { duration: 100 } }
             }
             
             Text {
@@ -100,7 +115,7 @@ Rectangle {
                 font.pixelSize: 16
                 color: Kirigami.Theme.textColor
                 Layout.alignment: Qt.AlignHCenter
-                visible: albumCover.showNoMediaText
+                visible: albumCover.showNoMediaText && !albumCover.hasPlayer
             }
         }
     }
@@ -111,7 +126,7 @@ Rectangle {
         color: "black"
         opacity: albumCover.showDimOverlay ? 0.4 : 0.1
         Behavior on opacity { NumberAnimation { duration: 200 } }
-        visible: albumCover.hasArt
+        visible: albumCover.hasArt || albumCover.hasPlayer
     }
     
     // Bottom Gradient
@@ -136,7 +151,7 @@ Rectangle {
         height: 48
         source: albumCover.isPlaying ? "media-playback-pause" : "media-playback-start"
         color: "white"
-        visible: albumCover.showCenterPlayIcon && albumCover.hasArt
+        visible: albumCover.showCenterPlayIcon && (albumCover.hasArt || albumCover.hasPlayer)
         opacity: visible ? 1 : 0
         Behavior on opacity { NumberAnimation { duration: 200 } }
     }

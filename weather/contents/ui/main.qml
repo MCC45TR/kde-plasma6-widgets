@@ -37,6 +37,7 @@ PlasmoidItem {
     readonly property string layoutMode: Plasmoid.configuration.layoutMode || "auto"
     readonly property int forecastDays: Plasmoid.configuration.forecastDays || 5
     readonly property int edgeMargin: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
+    readonly property bool showForecastUnits: Plasmoid.configuration.showForecastUnits !== undefined ? Plasmoid.configuration.showForecastUnits : true
 
     // Layout Mode Detection
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical

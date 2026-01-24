@@ -12,6 +12,33 @@ Kirigami.FormLayout {
     property string cfg_preferredPlayerDefault: ""
     property bool cfg_showPlayerBadge
     property bool cfg_showPlayerBadgeDefault: false
+    
+    // Appearance config (to silence property warnings - these are handled by ConfigAppearance)
+    property int cfg_edgeMargin
+    property int cfg_edgeMarginDefault: 10
+    property double cfg_backgroundOpacity
+    property double cfg_backgroundOpacityDefault: 1.0
+    property bool cfg_showPanelControls
+    property bool cfg_showPanelControlsDefault: true
+    property bool cfg_panelShowTitle
+    property bool cfg_panelShowTitleDefault: true
+    property bool cfg_panelShowArtist
+    property bool cfg_panelShowArtistDefault: true
+    property bool cfg_panelAutoFontSize
+    property bool cfg_panelAutoFontSizeDefault: true
+    property bool cfg_panelScrollingText
+    property bool cfg_panelScrollingTextDefault: true
+    property int cfg_panelMaxWidth
+    property int cfg_panelMaxWidthDefault: 350
+    property int cfg_panelScrollingSpeed
+    property int cfg_panelScrollingSpeedDefault: 0
+    property int cfg_panelFontSize
+    property int cfg_panelFontSizeDefault: 12
+    property int cfg_panelLayoutMode
+    property int cfg_panelLayoutModeDefault: 0
+    property int cfg_popupLayoutMode
+    property int cfg_popupLayoutModeDefault: 0
+    
     property string title: i18n("General")
     Mpris.Mpris2Model { 
         id: mpris2Model

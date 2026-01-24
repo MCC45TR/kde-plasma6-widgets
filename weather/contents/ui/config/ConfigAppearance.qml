@@ -17,6 +17,7 @@ Item {
     property int cfg_panelFontSize
     property int cfg_panelIconSize
     property int cfg_edgeMargin
+    property bool cfg_showForecastUnits
 
 
 
@@ -56,6 +57,7 @@ Item {
     property int cfg_panelFontSizeDefault
     property int cfg_panelIconSizeDefault
     property int cfg_edgeMarginDefault
+    property bool cfg_showForecastUnitsDefault
     
     // Model for icon packs
     property var iconPacksModel: ["default", "system", "google_v3", "google_v2", "google_v1"]
@@ -145,6 +147,15 @@ Item {
                 }
 
             }
+            
+            CheckBox {
+                text: i18n("Show Units in Forecast")
+                checked: configAppearance.cfg_showForecastUnits
+                onCheckedChanged: {
+                    configAppearance.cfg_showForecastUnits = checked
+                }
+            }
+
         }
 
         GroupBox {

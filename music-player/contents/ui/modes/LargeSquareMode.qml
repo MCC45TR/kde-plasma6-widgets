@@ -154,6 +154,7 @@ Item {
                     // Time & Artist Row
                     RowLayout {
                         Layout.fillWidth: true
+                        spacing: 8
                         
                         Text {
                             text: PlayerData.formatTime(largeSquareMode.currentPosition)
@@ -161,7 +162,7 @@ Item {
                             color: Kirigami.Theme.textColor
                             opacity: 0.7
                         }
-                        Item { Layout.fillWidth: true }
+                        
                         Text {
                             text: largeSquareMode.artist
                             font.family: "Roboto Condensed"
@@ -169,9 +170,10 @@ Item {
                             color: Kirigami.Theme.textColor
                             opacity: 0.7
                             elide: Text.ElideRight
-                            Layout.maximumWidth: parent.width * 0.4
+                            horizontalAlignment: Text.AlignHCenter
+                            Layout.fillWidth: true
                         }
-                        Item { Layout.fillWidth: true }
+                        
                         Text {
                             text: PlayerData.formatTime(largeSquareMode.length)
                             font.pixelSize: 11

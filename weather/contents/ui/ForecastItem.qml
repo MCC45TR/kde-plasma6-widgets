@@ -12,6 +12,8 @@ Item {
     required property string iconPath
     required property int temp
     required property bool isHourly
+    property string units: "metric"
+    property bool showUnits: true
     
     // Responsive sizing properties
     property real availableWidth: 300  // Total ListView width
@@ -113,7 +115,7 @@ Item {
         
         // Temperature (fixed size based on 70px min width)
         Text {
-            text: itemRoot.temp + "°"
+            text: itemRoot.temp + "°" + (itemRoot.showUnits ? (itemRoot.units === "imperial" ? "F" : "C") : "")
             color: Kirigami.Theme.textColor
             font.family: "Roboto Condensed"
             font.bold: true

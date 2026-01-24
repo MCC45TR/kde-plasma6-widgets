@@ -19,5 +19,49 @@
       <default>10</default>
       <label>Widget Edge Margin</label>
     </entry>
+    <entry name="backgroundOpacity" type="Double">
+      <default>1.0</default>
+      <label>Background Opacity</label>
+    </entry>
+    <entry name="showPanelControls" type="Bool">
+      <default>true</default>
+      <label>Show Controls in Panel</label>
+    </entry>
+    <entry name="panelShowTitle" type="Bool">
+      <default>true</default>
+      <label>Show Title in Panel</label>
+    </entry>
+    <entry name="panelShowArtist" type="Bool">
+      <default>true</default>
+      <label>Show Artist in Panel</label>
+    </entry>
+    <entry name="panelAutoFontSize" type="Bool">
+      <default>true</default>
+      <label>Auto Font Size in Panel</label>
+    </entry>
+    <entry name="panelScrollingText" type="Bool">
+      <default>true</default>
+      <label>Scroll Text in Panel if truncated</label>
+    </entry>
+    <entry name="panelMaxWidth" type="Int">
+      <default>350</default>
+      <label>Max Panel Width (px)</label>
+    </entry>
+    <entry name="panelScrollingSpeed" type="Int">
+      <default>0</default>
+      <label>Panel Scrolling Speed (0: Fast, 1: Medium, 2: Slow)</label>
+    </entry>
+    <entry name="panelFontSize" type="Int">
+      <default>12</default>
+      <label>Manual Font Size in Panel</label>
+    </entry>
+    <entry name="panelLayoutMode" type="Int">
+      <default>0</default>
+      <label>Panel Layout Mode (0: Left, 1: Right, 2: Center)</label>
+    </entry>
+    <entry name="popupLayoutMode" type="Int">
+      <default>0</default>
+      <label>Popup Layout Mode (0: Auto/Large, 1: Wide)</label>
+    </entry>
   </group>
 </kcfg>
