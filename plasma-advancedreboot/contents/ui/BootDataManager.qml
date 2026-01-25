@@ -162,7 +162,8 @@ Item {
 
     function rebootToEntry(id) {
         console.log("BootDataManager: Rebooting to " + id)
-        execSource.connectSource("pkexec sh -c 'bootctl set-oneshot \"" + id + "\" && reboot'")
+        // Attempt to use systemctl to avoid explicit password prompt if polkit allows it
+        execSource.connectSource("systemctl reboot --boot-loader-entry=\"" + id + "\"")
     }
     
     Timer {

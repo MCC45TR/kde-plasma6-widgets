@@ -168,7 +168,7 @@ Item {
                         visible: !root.isExtraSmall // Hide text in small mode
                         Text {
                             text: { 
-                                if (clickState === 2) return i18n("Rebooting in %1...", countdown)
+                                if (clickState === 2) return i18n("Rebooting in %1...", Math.max(0, countdown))
                                 if (clickState === 1) return i18n("Press again to reboot")
                                 return modelData.title || modelData.id
                             }
