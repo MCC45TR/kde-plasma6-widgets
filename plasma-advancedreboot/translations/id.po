@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / Firmware"
+
+msgid "UEFI Settings"
+msgstr "Pengaturan UEFI"
+
+msgid "Update Boot Entries"
+msgstr "Perbarui Entri Boot"
+
+msgid "No boot entries found"
+msgstr "Tidak ada entri boot ditemukan"
+
+msgid "Authorize & Refresh"
+msgstr "Otorisasi & Segarkan"
+
+msgid "Rebooting in %1s..."
+msgstr "Mulai ulang dalam %1s..."
+
+msgid "Press again to reboot"
+msgstr "Tekan lagi untuk mulai ulang"
+
+msgid "Click again to cancel"
+msgstr "Klik lagi untuk membatalkan"
+
+msgid "Appearance"
+msgstr "Tampilan"
+
+msgid "Success! Entries updated."
+msgstr "Sukses! Entri diperbarui."
+
+msgid "Error parsing output."
+msgstr "Kesalahan mengurai output."
+
+msgid "Display Mode:"
+msgstr "Mode Tampilan:"
+
+msgid "Single Card (Large)"
+msgstr "Kartu Tunggal (Besar)"
+
+msgid "Standard List (Compact)"
+msgstr "Daftar Standar (Kompak)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Mode Kartu Tunggal memungkinkan membalik entri satu per satu."
+
+msgid "Visual Adjustments"
+msgstr "Penyesuaian Visual"
+
+msgid "Background Opacity:"
+msgstr "Opasitas Latar Belakang:"
+
+msgid "Widget Margin:"
+msgstr "Margin Widget:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Kurang (5px)"
+
+msgid "None (0px)"
+msgstr "Tidak Ada (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "Pemecahan Masalah & Data"
+
+msgid "Reset Cache"
+msgstr "Atur Ulang Cache"
+
+msgid "Cache cleared."
+msgstr "Cache dibersihkan."
+
+msgid "Reload with Sudo"
+msgstr "Muat Ulang dengan Sudo"
+
+msgid "Requesting permissions..."
+msgstr "Meminta izin..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "Mode Besar (Segera Hadir)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "Mode Lebar (Segera Hadir)"

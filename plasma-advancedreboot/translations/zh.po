@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / 固件"
+
+msgid "UEFI Settings"
+msgstr "UEFI 设置"
+
+msgid "Update Boot Entries"
+msgstr "更新启动项"
+
+msgid "No boot entries found"
+msgstr "未找到启动项"
+
+msgid "Authorize & Refresh"
+msgstr "授权并刷新"
+
+msgid "Rebooting in %1s..."
+msgstr "%1s 秒后重启..."
+
+msgid "Press again to reboot"
+msgstr "再按一次以重启"
+
+msgid "Click again to cancel"
+msgstr "再次点击以取消"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Success! Entries updated."
+msgstr "成功！条目已更新。"
+
+msgid "Error parsing output."
+msgstr "解析输出错误。"
+
+msgid "Display Mode:"
+msgstr "显示模式："
+
+msgid "Single Card (Large)"
+msgstr "单卡片（大）"
+
+msgid "Standard List (Compact)"
+msgstr "标准列表（紧凑）"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "单卡片模式允许逐个翻页查看条目。"
+
+msgid "Visual Adjustments"
+msgstr "视觉调整"
+
+msgid "Background Opacity:"
+msgstr "背景不透明度："
+
+msgid "Widget Margin:"
+msgstr "挂件边距："
+
+msgid "Normal (10px)"
+msgstr "正常 (10px)"
+
+msgid "Less (5px)"
+msgstr "较少 (5px)"
+
+msgid "None (0px)"
+msgstr "无 (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "故障排除与数据"
+
+msgid "Reset Cache"
+msgstr "重置缓存"
+
+msgid "Cache cleared."
+msgstr "缓存已清除。"
+
+msgid "Reload with Sudo"
+msgstr "使用 Sudo 重新加载"
+
+msgid "Requesting permissions..."
+msgstr "正在请求权限..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "大模式（即将推出）"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "宽模式（即将推出）"

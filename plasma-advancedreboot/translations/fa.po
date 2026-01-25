@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "بایوس / فیرم‌ور"
+
+msgid "UEFI Settings"
+msgstr "تنظیمات UEFI"
+
+msgid "Update Boot Entries"
+msgstr "به‌روزرسانی ورودی‌های بوت"
+
+msgid "No boot entries found"
+msgstr "هیچ ورودی بوتی یافت نشد"
+
+msgid "Authorize & Refresh"
+msgstr "مجاز سازی و تازه‌سازی"
+
+msgid "Rebooting in %1s..."
+msgstr "راه‌اندازی مجدد در %1s..."
+
+msgid "Press again to reboot"
+msgstr "برای راه‌اندازی مجدد دوباره فشار دهید"
+
+msgid "Click again to cancel"
+msgstr "برای لغو دوباره کلیک کنید"
+
+msgid "Appearance"
+msgstr "ظاهر"
+
+msgid "Success! Entries updated."
+msgstr "موفقیت! ورودی‌ها به‌روز شدند."
+
+msgid "Error parsing output."
+msgstr "خطا در تجزیه خروجی."
+
+msgid "Display Mode:"
+msgstr "حالت نمایش:"
+
+msgid "Single Card (Large)"
+msgstr "کارت تکی (بزرگ)"
+
+msgid "Standard List (Compact)"
+msgstr "لیست استاندارد (فشرده)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "حالت کارت تکی اجازه می‌دهد ورودی‌ها را یکی‌یکی ورق بزنید."
+
+msgid "Visual Adjustments"
+msgstr "تنظیمات بصری"
+
+msgid "Background Opacity:"
+msgstr "شفافیت پس‌زمینه:"
+
+msgid "Widget Margin:"
+msgstr "حاشیه ویجت:"
+
+msgid "Normal (10px)"
+msgstr "عادی (10px)"
+
+msgid "Less (5px)"
+msgstr "کم (5px)"
+
+msgid "None (0px)"
+msgstr "هیچ (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "عیب‌یابی و داده‌ها"
+
+msgid "Reset Cache"
+msgstr "بازنشانی حافظه پنهان"
+
+msgid "Cache cleared."
+msgstr "حافظه پنهان پاک شد."
+
+msgid "Reload with Sudo"
+msgstr "بارگذاری مجدد با Sudo"
+
+msgid "Requesting permissions..."
+msgstr "درخواست مجوزها..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "حالت بزرگ (به‌زودی)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "حالت عریض (به‌زودی)"

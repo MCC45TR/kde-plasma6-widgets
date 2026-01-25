@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / Прошивка"
+
+msgid "UEFI Settings"
+msgstr "Настройки UEFI"
+
+msgid "Update Boot Entries"
+msgstr "Обновить записи загрузки"
+
+msgid "No boot entries found"
+msgstr "Записи загрузки не найдены"
+
+msgid "Authorize & Refresh"
+msgstr "Авторизация и обновление"
+
+msgid "Rebooting in %1s..."
+msgstr "Перезагрузка через %1s..."
+
+msgid "Press again to reboot"
+msgstr "Нажмите снова для перезагрузки"
+
+msgid "Click again to cancel"
+msgstr "Нажмите снова для отмены"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "Success! Entries updated."
+msgstr "Успех! Записи обновлены."
+
+msgid "Error parsing output."
+msgstr "Ошибка разбора вывода."
+
+msgid "Display Mode:"
+msgstr "Режим отображения:"
+
+msgid "Single Card (Large)"
+msgstr "Одиночная карта (Крупно)"
+
+msgid "Standard List (Compact)"
+msgstr "Стандартный список (Компактно)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Режим одиночной карты позволяет пролистывать записи по одной."
+
+msgid "Visual Adjustments"
+msgstr "Визуальные настройки"
+
+msgid "Background Opacity:"
+msgstr "Прозрачность фона:"
+
+msgid "Widget Margin:"
+msgstr "Отступ виджета:"
+
+msgid "Normal (10px)"
+msgstr "Нормальный (10px)"
+
+msgid "Less (5px)"
+msgstr "Меньше (5px)"
+
+msgid "None (0px)"
+msgstr "Нет (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "Устранение неполадок и данные"
+
+msgid "Reset Cache"
+msgstr "Сбросить кэш"
+
+msgid "Cache cleared."
+msgstr "Кэш очищен."
+
+msgid "Reload with Sudo"
+msgstr "Перезагрузить с Sudo"
+
+msgid "Requesting permissions..."
+msgstr "Запрос разрешений..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "Крупный режим (Скоро)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "Широкий режим (Скоро)"

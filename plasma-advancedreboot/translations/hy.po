@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / Որոնվածը"
+
+msgid "UEFI Settings"
+msgstr "UEFI Կարգավորումներ"
+
+msgid "Update Boot Entries"
+msgstr "Թարմացնել Boot գրառումները"
+
+msgid "No boot entries found"
+msgstr "Boot գրառումներ չեն գտնվել"
+
+msgid "Authorize & Refresh"
+msgstr "Թույլատրել և թարմացնել"
+
+msgid "Rebooting in %1s..."
+msgstr "Վերագործարկվում է %1s..."
+
+msgid "Press again to reboot"
+msgstr "Սեղմեք կրկին վերագործարկելու համար"
+
+msgid "Click again to cancel"
+msgstr "Սեղմեք կրկին չեղարկելու համար"
+
+msgid "Appearance"
+msgstr "Տեսքը"
+
+msgid "Success! Entries updated."
+msgstr "Հաջողություն! Գրառումները թարմացվել են:"
+
+msgid "Error parsing output."
+msgstr "Սխալ ելքային տվյալների վերլուծության ժամանակ:"
+
+msgid "Display Mode:"
+msgstr "Ցուցադրման ռեժիմ:"
+
+msgid "Single Card (Large)"
+msgstr "Մեկ քարտ (Մեծ)"
+
+msgid "Standard List (Compact)"
+msgstr "Ստանդարտ ցուցակ (Կոմպակտ)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Մեկ քարտի ռեժիմը թույլ է տալիս թերթել գրառումները մեկ առ մեկ:"
+
+msgid "Visual Adjustments"
+msgstr "Տեսողական կարգավորումներ"
+
+msgid "Background Opacity:"
+msgstr "Ֆոնի թափանցիկություն:"
+
+msgid "Widget Margin:"
+msgstr "Վիջեթի լուսանցք:"
+
+msgid "Normal (10px)"
+msgstr "Նորմալ (10px)"
+
+msgid "Less (5px)"
+msgstr "Քիչ (5px)"
+
+msgid "None (0px)"
+msgstr "Ոչ մի (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "Խնդիրների լուծում և տվյալներ"
+
+msgid "Reset Cache"
+msgstr "Վերականգնել քեշը"
+
+msgid "Cache cleared."
+msgstr "Քեշը մաքրված է:"
+
+msgid "Reload with Sudo"
+msgstr "Վերբեռնել Sudo-ով"
+
+msgid "Requesting permissions..."
+msgstr "Թույլտվությունների հարցում..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "Մեծ ռեժիմ (Շուտով)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "Լայն ռեժիմ (Շուտով)"

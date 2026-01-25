@@ -95,8 +95,8 @@ Item {
                          if (parts.length >= 3) {
                             var build = parseInt(parts[2])
                             if (!isNaN(build)) {
-                                if (build >= 19041) formattedTitle = "Windows 10" // Simplified
-                                if (build >= 22000) formattedTitle = "Windows 11"
+                                if (build >= 19041) formattedTitle = i18n("Windows 10") // Simplified
+                                if (build >= 22000) formattedTitle = i18n("Windows 11")
                             }
                          }
                      } catch(err) {}
@@ -162,7 +162,7 @@ Item {
 
     function rebootToEntry(id) {
         console.log("BootDataManager: Rebooting to " + id)
-        execSource.connectSource("pkexec bootctl set-oneshot " + id + " && pkexec reboot")
+        execSource.connectSource("pkexec sh -c 'bootctl set-oneshot \"" + id + "\" && reboot'")
     }
     
     Timer {

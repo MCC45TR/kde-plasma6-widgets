@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / Firmware"
+
+msgid "UEFI Settings"
+msgstr "Impostazioni UEFI"
+
+msgid "Update Boot Entries"
+msgstr "Aggiorna voci di avvio"
+
+msgid "No boot entries found"
+msgstr "Nessuna voce di avvio trovata"
+
+msgid "Authorize & Refresh"
+msgstr "Autorizza e aggiorna"
+
+msgid "Rebooting in %1s..."
+msgstr "Riavvio in %1s..."
+
+msgid "Press again to reboot"
+msgstr "Premi di nuovo per riavviare"
+
+msgid "Click again to cancel"
+msgstr "Clicca di nuovo per annullare"
+
+msgid "Appearance"
+msgstr "Aspetto"
+
+msgid "Success! Entries updated."
+msgstr "Successo! Voci aggiornate."
+
+msgid "Error parsing output."
+msgstr "Errore durante l'analisi dell'output."
+
+msgid "Display Mode:"
+msgstr "Modalità di visualizzazione:"
+
+msgid "Single Card (Large)"
+msgstr "Scheda singola (Grande)"
+
+msgid "Standard List (Compact)"
+msgstr "Elenco standard (Compatto)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "La modalità Scheda singola consente di scorrere le voci una per una."
+
+msgid "Visual Adjustments"
+msgstr "Regolazioni visive"
+
+msgid "Background Opacity:"
+msgstr "Opacità sfondo:"
+
+msgid "Widget Margin:"
+msgstr "Margine widget:"
+
+msgid "Normal (10px)"
+msgstr "Normale (10px)"
+
+msgid "Less (5px)"
+msgstr "Meno (5px)"
+
+msgid "None (0px)"
+msgstr "Nessuno (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "Risoluzione problemi e dati"
+
+msgid "Reset Cache"
+msgstr "Reimposta cache"
+
+msgid "Cache cleared."
+msgstr "Cache svuotata."
+
+msgid "Reload with Sudo"
+msgstr "Ricarica con Sudo"
+
+msgid "Requesting permissions..."
+msgstr "Richiesta permessi..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "Modalità Grande (In arrivo)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "Modalità Ampia (In arrivo)"

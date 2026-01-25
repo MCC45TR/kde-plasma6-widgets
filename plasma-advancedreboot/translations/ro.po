@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / Firmware"
+
+msgid "UEFI Settings"
+msgstr "Setări UEFI"
+
+msgid "Update Boot Entries"
+msgstr "Actualizare intrări boot"
+
+msgid "No boot entries found"
+msgstr "Nu s-au găsit intrări de boot"
+
+msgid "Authorize & Refresh"
+msgstr "Autorizare și reîmprospătare"
+
+msgid "Rebooting in %1s..."
+msgstr "Repornire în %1s..."
+
+msgid "Press again to reboot"
+msgstr "Apăsați din nou pentru a reporni"
+
+msgid "Click again to cancel"
+msgstr "Faceți clic din nou pentru a anula"
+
+msgid "Appearance"
+msgstr "Aspect"
+
+msgid "Success! Entries updated."
+msgstr "Succes! Intrări actualizate."
+
+msgid "Error parsing output."
+msgstr "Eroare la analizarea ieșirii."
+
+msgid "Display Mode:"
+msgstr "Mod afișare:"
+
+msgid "Single Card (Large)"
+msgstr "Card unic (Mare)"
+
+msgid "Standard List (Compact)"
+msgstr "Listă standard (Compact)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Modul Card unic permite parcurgerea intrărilor una câte una."
+
+msgid "Visual Adjustments"
+msgstr "Ajustări vizuale"
+
+msgid "Background Opacity:"
+msgstr "Opacitate fundal:"
+
+msgid "Widget Margin:"
+msgstr "Margine widget:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Mai puțin (5px)"
+
+msgid "None (0px)"
+msgstr "Deloc (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "Depanare și date"
+
+msgid "Reset Cache"
+msgstr "Resetare cache"
+
+msgid "Cache cleared."
+msgstr "Cache golit."
+
+msgid "Reload with Sudo"
+msgstr "Reîncărcare cu Sudo"
+
+msgid "Requesting permissions..."
+msgstr "Se solicită permisiuni..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "Mod Mare (În curând)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "Mod Lat (În curând)"

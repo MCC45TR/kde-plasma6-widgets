@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / Υλικολογισμικό"
+
+msgid "UEFI Settings"
+msgstr "Ρυθμίσεις UEFI"
+
+msgid "Update Boot Entries"
+msgstr "Ενημέρωση Καταχωρήσεων Εκκίνησης"
+
+msgid "No boot entries found"
+msgstr "Δεν βρέθηκαν καταχωρήσεις εκκίνησης"
+
+msgid "Authorize & Refresh"
+msgstr "Εξουσιοδότηση & Ανανέωση"
+
+msgid "Rebooting in %1s..."
+msgstr "Επανεκκίνηση σε %1s..."
+
+msgid "Press again to reboot"
+msgstr "Πατήστε ξανά για επανεκκίνηση"
+
+msgid "Click again to cancel"
+msgstr "Κάντε κλικ ξανά για ακύρωση"
+
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+msgid "Success! Entries updated."
+msgstr "Επιτυχία! Οι καταχωρήσεις ενημερώθηκαν."
+
+msgid "Error parsing output."
+msgstr "Σφάλμα ανάλυσης εξόδου."
+
+msgid "Display Mode:"
+msgstr "Λειτουργία Εμφάνισης:"
+
+msgid "Single Card (Large)"
+msgstr "Μονή Κάρτα (Μεγάλη)"
+
+msgid "Standard List (Compact)"
+msgstr "Τυπική Λίστα (Συμπαγής)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Η λειτουργία Μονής Κάρτας επιτρέπει σελιδοποίηση των καταχωρήσεων μία προς μία."
+
+msgid "Visual Adjustments"
+msgstr "Οπτικές Προσαρμογές"
+
+msgid "Background Opacity:"
+msgstr "Αδιαφάνεια Φόντου:"
+
+msgid "Widget Margin:"
+msgstr "Περιθώριο Widget:"
+
+msgid "Normal (10px)"
+msgstr "Κανονικό (10px)"
+
+msgid "Less (5px)"
+msgstr "Λιγότερο (5px)"
+
+msgid "None (0px)"
+msgstr "Καθόλου (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "Αντιμετώπιση Προβλημάτων & Δεδομένα"
+
+msgid "Reset Cache"
+msgstr "Επαναφορά Κρυφής Μνήμης"
+
+msgid "Cache cleared."
+msgstr "Η κρυφή μνήμη καθαρίστηκε."
+
+msgid "Reload with Sudo"
+msgstr "Επαναφόρτωση με Sudo"
+
+msgid "Requesting permissions..."
+msgstr "Αίτημα δικαιωμάτων..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "Μεγάλη Λειτουργία (Σύντομα)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "Ευρεία Λειτουργία (Σύντομα)"

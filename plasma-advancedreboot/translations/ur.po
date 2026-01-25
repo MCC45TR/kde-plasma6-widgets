@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / فرم ویئر"
+
+msgid "UEFI Settings"
+msgstr "UEFI کی ترتیبات"
+
+msgid "Update Boot Entries"
+msgstr "بوٹ اندراجات کو اپ ڈیٹ کریں"
+
+msgid "No boot entries found"
+msgstr "کوئی بوٹ اندراجات نہیں ملے"
+
+msgid "Authorize & Refresh"
+msgstr "اجازت دیں اور تازہ کریں"
+
+msgid "Rebooting in %1s..."
+msgstr "%1s میں ری بوٹ ہو رہا ہے..."
+
+msgid "Press again to reboot"
+msgstr "ری بوٹ کرنے کے لیے دوبارہ دبائیں"
+
+msgid "Click again to cancel"
+msgstr "منسوخ کرنے کے لیے دوبارہ کلیک کریں"
+
+msgid "Appearance"
+msgstr "ظاہری شکل"
+
+msgid "Success! Entries updated."
+msgstr "کامیابی! اندراجات کو اپ ڈیٹ کر دیا گیا۔"
+
+msgid "Error parsing output."
+msgstr "آؤٹ پٹ کو پارس کرنے میں خرابی۔"
+
+msgid "Display Mode:"
+msgstr "ڈسپلے موڈ:"
+
+msgid "Single Card (Large)"
+msgstr "سنگل کارڈ (بڑا)"
+
+msgid "Standard List (Compact)"
+msgstr "معیاری فہرست (کومپیکٹ)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "سنگل کارڈ موڈ اندراجات کو ایک ایک کرکے دیکھنے کی اجازت دیتا ہے۔"
+
+msgid "Visual Adjustments"
+msgstr "بصری ایڈجسٹمنٹ"
+
+msgid "Background Opacity:"
+msgstr "پس منظر کی دھندلاہٹ:"
+
+msgid "Widget Margin:"
+msgstr "ویجیٹ مارجن:"
+
+msgid "Normal (10px)"
+msgstr "عام (10px)"
+
+msgid "Less (5px)"
+msgstr "کم (5px)"
+
+msgid "None (0px)"
+msgstr "کچھ نہیں (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "خرابیوں کا سراغ لگانا اور ڈیٹا"
+
+msgid "Reset Cache"
+msgstr "کیش ری سیٹ کریں"
+
+msgid "Cache cleared."
+msgstr "کیش صاف ہو گیا۔"
+
+msgid "Reload with Sudo"
+msgstr "Sudo کے ساتھ دوبارہ لوڈ کریں"
+
+msgid "Requesting permissions..."
+msgstr "اجازت طلب کی جا رہی ہے..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "بڑا موڈ (جلد آرہا ہے)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "وسیع موڈ (جلد آرہا ہے)"

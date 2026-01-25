@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / Firmware"
+
+msgid "UEFI Settings"
+msgstr "Nastavení UEFI"
+
+msgid "Update Boot Entries"
+msgstr "Aktualizovat záznamy"
+
+msgid "No boot entries found"
+msgstr "Nebyly nalezeny žádné záznamy"
+
+msgid "Authorize & Refresh"
+msgstr "Autorizovat a obnovit"
+
+msgid "Rebooting in %1s..."
+msgstr "Restart za %1s..."
+
+msgid "Press again to reboot"
+msgstr "Stiskněte znovu pro restart"
+
+msgid "Click again to cancel"
+msgstr "Klikněte znovu pro zrušení"
+
+msgid "Appearance"
+msgstr "Vzhled"
+
+msgid "Success! Entries updated."
+msgstr "Úspěch! Záznamy aktualizovány."
+
+msgid "Error parsing output."
+msgstr "Chyba při zpracování výstupu."
+
+msgid "Display Mode:"
+msgstr "Režim zobrazení:"
+
+msgid "Single Card (Large)"
+msgstr "Jedna karta (Velká)"
+
+msgid "Standard List (Compact)"
+msgstr "Standardní seznam (Kompaktní)"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Režim jedné karty umožňuje listovat záznamy po jednom."
+
+msgid "Visual Adjustments"
+msgstr "Vizuální úpravy"
+
+msgid "Background Opacity:"
+msgstr "Průhlednost pozadí:"
+
+msgid "Widget Margin:"
+msgstr "Okraj widgetu:"
+
+msgid "Normal (10px)"
+msgstr "Normální (10px)"
+
+msgid "Less (5px)"
+msgstr "Méně (5px)"
+
+msgid "None (0px)"
+msgstr "Žádný (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "Řešení potíží a data"
+
+msgid "Reset Cache"
+msgstr "Obnovit mezipaměť"
+
+msgid "Cache cleared."
+msgstr "Mezipaměť vymazána."
+
+msgid "Reload with Sudo"
+msgstr "Obnovit pomocí Sudo"
+
+msgid "Requesting permissions..."
+msgstr "Žádost o oprávnění..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "Velký režim (Brzy)"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "Široký režim (Brzy)"

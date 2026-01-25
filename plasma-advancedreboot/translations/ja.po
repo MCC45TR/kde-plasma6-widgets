@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POCreator\n"
+
+msgid "BIOS / Firmware"
+msgstr "BIOS / ファームウェア"
+
+msgid "UEFI Settings"
+msgstr "UEFI設定"
+
+msgid "Update Boot Entries"
+msgstr "ブートエントリを更新"
+
+msgid "No boot entries found"
+msgstr "ブートエントリが見つかりません"
+
+msgid "Authorize & Refresh"
+msgstr "認証して更新"
+
+msgid "Rebooting in %1s..."
+msgstr "%1s秒後に再起動..."
+
+msgid "Press again to reboot"
+msgstr "再起動するにはもう一度押してください"
+
+msgid "Click again to cancel"
+msgstr "キャンセルするにはもう一度クリックしてください"
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Success! Entries updated."
+msgstr "成功！エントリが更新されました。"
+
+msgid "Error parsing output."
+msgstr "出力の解析エラー。"
+
+msgid "Display Mode:"
+msgstr "表示モード:"
+
+msgid "Single Card (Large)"
+msgstr "シングルカード（大）"
+
+msgid "Standard List (Compact)"
+msgstr "標準リスト（コンパクト）"
+
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "シングルカードモードでは、エントリを1つずつページ送りできます。"
+
+msgid "Visual Adjustments"
+msgstr "表示調整"
+
+msgid "Background Opacity:"
+msgstr "背景の不透明度:"
+
+msgid "Widget Margin:"
+msgstr "ウィジェットのマージン:"
+
+msgid "Normal (10px)"
+msgstr "通常 (10px)"
+
+msgid "Less (5px)"
+msgstr "少なめ (5px)"
+
+msgid "None (0px)"
+msgstr "なし (0px)"
+
+msgid "Troubleshooting & Data"
+msgstr "トラブルシューティングとデータ"
+
+msgid "Reset Cache"
+msgstr "キャッシュをリセット"
+
+msgid "Cache cleared."
+msgstr "キャッシュがクリアされました。"
+
+msgid "Reload with Sudo"
+msgstr "Sudoで再読み込み"
+
+msgid "Requesting permissions..."
+msgstr "権限を要求中..."
+
+msgid "Large Mode (Coming Soon)"
+msgstr "ラージモード（近日公開）"
+
+msgid "Wide Mode (Coming Soon)"
+msgstr "ワイドモード（近日公開）"
