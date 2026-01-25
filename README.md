@@ -268,6 +268,32 @@ This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LIC
 
 ---
 
+## 📊 Development Status
+
+| Widget | Status |
+| :--- | :---: |
+| **Analog Clock** | ✅ |
+| **Calendar** | ✅ |
+| **Music Player** | ✅ |
+| **Weather** | ✅ |
+| **Browser Search** | 🚧 |
+| **File Search** | 🚧 |
+| **Plasma Advanced Reboot** | 🚧 |
+| **Alarms** | ❌ |
+| **AUR Updates** | ❌ |
+| **Battery** | ❌ |
+| **Control Center** | ❌ |
+| **Digital Clock** | ❌ |
+| **Events** | ❌ |
+| **Minimal Analog Clock** | ❌ |
+| **Notes** | ❌ |
+| **Photos** | ❌ |
+| **Spotify** | ❌ |
+| **System Monitor** | ❌ |
+| **World Clock** | ❌ |
+
+---
+
 <p align="center">
   <b>Maintained with ❤️ by <a href="https://github.com/MCC45TR">MCC45TR</a></b>
 </p>

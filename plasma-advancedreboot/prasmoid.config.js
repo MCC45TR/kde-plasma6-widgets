@@ -2,7 +2,7 @@
 /** @type {PrasmoidConfig} */
 const config = {
     "commands": {
-        "dir": ".prasmoid/commands",
+        "dir": "/translations",
         "ignore": null
     },
     "i18n": {

@@ -28,6 +28,7 @@ BASE_DIR="/home/mcc45tr/Gitler/Projelerim/Plasma6Widgets"
 # Arrays to hold targets
 install_targets=()
 test_target=""
+use_prasmoid_build=false
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -42,6 +43,10 @@ while [[ $# -gt 0 ]]; do
                 echo "Error: -t requires a widget directory name."
                 exit 1
             fi
+            ;;
+        --prasmoid)
+            use_prasmoid_build=true
+            shift
             ;;
         *)
             install_targets+=("$1")
@@ -73,6 +78,11 @@ for widget in "${install_targets[@]}"; do
     
     echo "Processing $widget..."
     cd "$TARGET_DIR" || continue
+
+    if [ "$use_prasmoid_build" = true ]; then
+        echo "  -> Running prasmoid build..."
+        prasmoid build
+    fi
     
     # Extract Plugin ID from metadata.json
     PLUGIN_ID=""
