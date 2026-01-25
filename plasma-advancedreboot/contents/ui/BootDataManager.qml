@@ -52,6 +52,13 @@ Item {
         
         onNewData: (sourceName, data) => {
             console.log("BootDataManager: New Data from " + sourceName)
+            console.log("BootDataManager: Data keys: " + Object.keys(data).join(", "))
+            
+            if (data["exit code"] !== undefined && data["exit code"] > 0) {
+                 console.error("BootDataManager: Command failed with exit code: " + data["exit code"])
+                 if (data["stderr"]) console.error("BootDataManager: Stderr: " + data["stderr"])
+            }
+
             if (sourceName.indexOf("bootctl list") !== -1 && data["stdout"]) {
                 console.log("BootDataManager: Received bootctl output (length: " + data["stdout"].length + ")")
                 try {
@@ -65,10 +72,12 @@ Item {
                     
                     checkForWindowsVersion()
                     root.isLoading = false
+                    loadingTimer.stop() // Stop timer on success
                     entriesLoaded(entries)
                     console.log("BootDataManager: Loading finished successfully")
                 } catch(e) {
                     console.error("BootDataManager: Error parsing bootctl JSON: " + e)
+                    // Don't set isLoading false yet if we want to retry or debugging, but here it's fatal for this attempt
                     root.isLoading = false
                 }
                 execSource.disconnectSource(sourceName)
@@ -138,9 +147,27 @@ Item {
         }
     }
     
+    function checkForWindowsVersion() {
+        if (root.cmdWindowsVer !== "") {
+             execSource.connectSource(root.cmdWindowsVer)
+        }
+    }
+
+    function loadEntriesWithAuth() {
+        console.log("BootDataManager: Requesting entries with Auth...")
+        root.isLoading = true
+        loadingTimer.restart()
+        execSource.connectSource("pkexec bootctl list --json=short") 
+    }
+
+    function rebootToEntry(id) {
+        console.log("BootDataManager: Rebooting to " + id)
+        execSource.connectSource("pkexec bootctl set-oneshot " + id + " && pkexec reboot")
+    }
+    
     Timer {
         id: loadingTimer
-        interval: 2000
+        interval: 30000
         repeat: false
         onTriggered: {
             console.log("BootDataManager: Timer triggered. IsLoading: " + root.isLoading)

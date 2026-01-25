@@ -9,7 +9,11 @@ Item {
     
     // Configuration properties (automatically synced)
     property alias cfg_viewMode: viewModeCombo.currentIndex
+    property alias cfg_viewModeDefault: viewModeCombo.currentIndex
+    
     property string cfg_cachedBootEntries: ""
+    property string cfg_cachedBootEntriesDefault: ""
+    
     property double cfg_backgroundOpacity
     property int cfg_edgeMargin
     
