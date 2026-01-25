@@ -5,6 +5,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 Item {
     id: root
+    anchors.fill: parent
     property var bootManager
     property var bootEntries: [] // Required for model
     property int activeIndex: -1
@@ -30,6 +31,8 @@ Item {
             readonly property bool isActive: index === root.activeIndex
             property int clickState: 0 // 0: Idle, 1: Green, 2: Red
             
+            property int countdown: 2
+
             // Reset state if another item is clicked
             Connections {
                 target: root
@@ -37,19 +40,32 @@ Item {
                     if (!isActive) {
                         clickState = 0
                         rebootTimer.stop()
+                        resetTimer.stop()
+                        countdown = 2
                     }
                 }
             }
             
             Timer {
                 id: rebootTimer
-                interval: 2000
-                repeat: false
+                interval: 1000
+                repeat: true
                 onTriggered: {
-                     if (root.bootManager) {
-                         root.bootManager.rebootToEntry(modelData.id)
+                     countdown--
+                     if (countdown < 0) {
+                         rebootTimer.stop()
+                         if (root.bootManager) {
+                             root.bootManager.rebootToEntry(modelData.id)
+                         }
                      }
                 }
+            }
+            
+            Timer {
+                id: resetTimer
+                interval: 2000
+                repeat: false
+                onTriggered: clickState = 0
             }
 
             Rectangle {
@@ -57,11 +73,11 @@ Item {
                 anchors.fill: parent
                 // Background color logic
                 color: {
-                    if (clickState === 1) return Qt.rgba(0, 0.5, 0, 0.5) // Green tint
+                    if (clickState === 1) return Qt.rgba(0, 0.5, 0, 0.2) // Green tint (0.2 opacity)
                     if (clickState === 2) return Qt.rgba(0.5, 0, 0, 0.5) // Red tint
                     return "transparent"
                 }
-                radius: 10
+                radius: 20
                 Behavior on color { ColorAnimation { duration: 200 } }
 
                 MouseArea {
@@ -70,14 +86,17 @@ Item {
                         root.activeIndex = index
                         if (clickState === 0) {
                             clickState = 1
+                            resetTimer.start()
                         } else if (clickState === 1) {
+                            resetTimer.stop()
                             clickState = 2
+                            countdown = 2
                             rebootTimer.start()
-                        } else {
-                            // Already in red state (waiting), maybe cancel? 
-                            // User request didn't specify cancellation, but clicking again usually confirms or does nothing.
-                            // Let's leave it running or maybe restart timer?
-                            // For safety, let's just let the timer run.
+                        } else if (clickState === 2) {
+                            // Cancel reboot
+                            rebootTimer.stop()
+                            clickState = 0
+                            countdown = 2
                         }
                     }
                 }
@@ -138,7 +157,7 @@ Item {
                                 
                                 return "system-run" 
                             }
-                            color: "white" // Icon should be white on colored background
+                            color: clickState === 0 ? Kirigami.Theme.textColor : "white"
                         }
                     }
                     ColumnLayout {
@@ -146,13 +165,13 @@ Item {
                         spacing: 2
                         Text {
                             text: { 
-                                if (clickState === 2) return i18n("Rebooting in 2s...")
+                                if (clickState === 2) return i18n("Rebooting in %1s...", countdown)
                                 if (clickState === 1) return i18n("Press again to reboot")
                                 return modelData.title || modelData.id
                             }
                             font.pixelSize: 18
                             font.weight: Font.Light
-                            color: "white" // Text should be white on colored background
+                            color: clickState === 0 ? Kirigami.Theme.textColor : "white"
                             horizontalAlignment: Text.AlignHCenter
                             Layout.fillWidth: true
                             elide: Text.ElideRight
@@ -160,8 +179,11 @@ Item {
                             maximumLineCount: 3
                         }
                         Text {
-                            text: modelData.version ? modelData.version : (modelData.isFirmware ? i18n("UEFI Settings") : "")
-                            visible: text !== "" && clickState === 0
+                            text: {
+                                if (clickState === 2) return i18n("Click again to cancel")
+                                return modelData.version ? modelData.version : (modelData.isFirmware ? i18n("UEFI Settings") : "")
+                            }
+                            visible: text !== "" && (clickState === 0 || clickState === 2)
                             font.pixelSize: 12
                             color: Qt.rgba(1,1,1,0.7)
                             horizontalAlignment: Text.AlignHCenter
@@ -174,20 +196,39 @@ Item {
         }
     }
     Item {
-        id: scrollBarContainer
-        width: 6
+        id: pagerContainer
+        width: 16
         anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.verticalCenter: parent.verticalCenter
+        height: Math.min(parent.height * 0.8, pagerCol.implicitHeight)
         visible: root.bootEntries.length > 1
-        Rectangle {
-            id: scrollThumb
-            width: 6
-            height: root.scrollBarHeight 
-            y: root.scrollBarY 
-            radius: 3
-            color: Kirigami.Theme.highlightColor
-            Behavior on y { NumberAnimation { duration: 100 } }
+        
+        Column {
+            id: pagerCol
+            anchors.centerIn: parent
+            spacing: 8
+            
+            Repeater {
+                model: root.bootEntries.length
+                
+                Rectangle {
+                    width: 8
+                    height: 8
+                    radius: 4
+                    
+                    readonly property bool isActive: index === listView.currentIndex
+                    
+                    color: isActive ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
+                    
+                    Behavior on color { ColorAnimation { duration: 200 } }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        anchors.margins: -4 // Increase hit area
+                        onClicked: listView.currentIndex = index
+                    }
+                }
+            }
         }
     }
 }

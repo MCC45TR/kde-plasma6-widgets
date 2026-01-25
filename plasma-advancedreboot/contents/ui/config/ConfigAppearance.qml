@@ -7,6 +7,8 @@ import org.kde.plasma.plasma5support as Plasma5Support
 Item {
     id: page
     
+    property string title: i18n("Appearance")
+    
     // Configuration properties (automatically synced)
     property alias cfg_viewMode: viewModeCombo.currentIndex
     property alias cfg_viewModeDefault: viewModeCombo.currentIndex
