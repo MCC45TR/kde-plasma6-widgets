@@ -11,8 +11,7 @@ Item {
     property int activeIndex: -1
     
     readonly property int itemHeight: height 
-    property real scrollBarHeight: (bootEntries.length > 0) ? (height / bootEntries.length) : 0
-    property real scrollBarY: (bootEntries.length > 0) ? (listView.contentY / listView.contentHeight) * height : 0
+    readonly property bool isExtraSmall: width < 170 && height < 170
 
     ListView {
         id: listView
@@ -103,19 +102,22 @@ Item {
 
                 ColumnLayout {
                     anchors.centerIn: parent
-                    spacing: root.itemHeight * 0.04
-                    width: parent.width - 32
+                    spacing: root.isExtraSmall ? 0 : root.itemHeight * 0.04
+                    width: root.isExtraSmall ? parent.width : parent.width - 32
 
                     // Large Centered Icon (No background)
                     Item {
                         Layout.alignment: Qt.AlignHCenter
-                        Layout.preferredWidth: 96
-                        Layout.preferredHeight: 96
+                        
+                        readonly property real iconSize: root.isExtraSmall ? Math.min(root.width, root.height) * 0.9 : 96
+                        
+                        Layout.preferredWidth: iconSize
+                        Layout.preferredHeight: iconSize
                         
                         Kirigami.Icon {
                             anchors.centerIn: parent
-                            width: 96
-                            height: 96
+                            width: parent.iconSize
+                            height: parent.iconSize
                             source: {
                                 var t = (modelData.title || "").toLowerCase()
                                 var i = (modelData.id || "").toLowerCase()
@@ -163,6 +165,7 @@ Item {
                     ColumnLayout {
                         Layout.fillWidth: true
                         spacing: 2
+                        visible: !root.isExtraSmall // Hide text in small mode
                         Text {
                             text: { 
                                 if (clickState === 2) return i18n("Rebooting in %1s...", countdown)
@@ -197,7 +200,7 @@ Item {
     }
     Item {
         id: pagerContainer
-        width: 16
+        width: root.isExtraSmall ? 8 : 16
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         height: Math.min(parent.height * 0.8, pagerCol.implicitHeight)
@@ -206,15 +209,15 @@ Item {
         Column {
             id: pagerCol
             anchors.centerIn: parent
-            spacing: 8
+            spacing: root.isExtraSmall ? 3 : 8
             
             Repeater {
                 model: root.bootEntries.length
                 
                 Rectangle {
-                    width: 8
-                    height: 8
-                    radius: 4
+                    width: root.isExtraSmall ? 4 : 8
+                    height: root.isExtraSmall ? 4 : 8
+                    radius: width / 2
                     
                     readonly property bool isActive: index === listView.currentIndex
                     

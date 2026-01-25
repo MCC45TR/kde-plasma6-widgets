@@ -15,10 +15,18 @@ PlasmoidItem {
     id: root
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     preferredRepresentation: fullRepresentation
-    Layout.preferredWidth: 250
-    Layout.preferredHeight: 250
-    Layout.minimumWidth: 100
-    Layout.minimumHeight: 100
+    Layout.preferredWidth: 200
+    Layout.preferredHeight: 200
+    Layout.minimumWidth: 80
+    Layout.minimumHeight: 80
+    
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18n("Update Boot Entries")
+            icon.name: "view-refresh"
+            onTriggered: bootManager.loadEntriesWithAuth()
+        }
+    ]
     BootDataManager {
         id: bootManager
     }
@@ -86,10 +94,36 @@ PlasmoidItem {
                 z: 1 
                 ColumnLayout {
                     anchors.centerIn: parent
-                    spacing: 15
-                    Kirigami.Icon { source: "dialog-error-symbolic"; Layout.preferredWidth: 48; Layout.preferredHeight: 48; Layout.alignment: Qt.AlignHCenter; color: Kirigami.Theme.disabledTextColor }
-                    Text { text: i18n("No boot entries found"); color: Kirigami.Theme.disabledTextColor; font.pixelSize: 14; Layout.alignment: Qt.AlignHCenter }
-                    Button { text: i18n("Authorize & Refresh"); icon.name: "lock"; Layout.alignment: Qt.AlignHCenter; Layout.topMargin: 10; onClicked: bootManager.loadEntriesWithAuth() }
+                    property bool isCompact: root.width < 170 || root.height < 170
+                    spacing: isCompact ? 0 : 15
+                    
+                    Kirigami.Icon { 
+                        source: "dialog-error-symbolic"
+                        Layout.preferredWidth: 48
+                        Layout.preferredHeight: 48 
+                        Layout.alignment: Qt.AlignHCenter 
+                        color: Kirigami.Theme.disabledTextColor
+                        visible: !parent.isCompact 
+                    }
+                    
+                    Text { 
+                        text: i18n("No boot entries found")
+                        color: Kirigami.Theme.disabledTextColor
+                        font.pixelSize: 14
+                        Layout.alignment: Qt.AlignHCenter
+                        visible: !parent.isCompact
+                    }
+                    
+                    Button { 
+                        text: i18n("Authorize & Refresh")
+                        icon.name: "lock"
+                        display: parent.isCompact ? AbstractButton.IconOnly : AbstractButton.TextBesideIcon
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.preferredWidth: parent.isCompact ? 64 : implicitWidth
+                        Layout.preferredHeight: parent.isCompact ? 64 : implicitHeight
+                        Layout.topMargin: parent.isCompact ? 0 : 10
+                        onClicked: bootManager.loadEntriesWithAuth()
+                    }
                 }
             }
             
