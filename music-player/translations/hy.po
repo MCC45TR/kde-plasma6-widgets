@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Ընդհանուր"
 
 msgid "No Media"
-msgstr ""
+msgstr "Մեդիա չկա"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Արտաքին տեսք"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Վիդջեթի լուսանցք:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Սովորական (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Քիչ (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Չկա (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Ֆոնի թափանցիկություն:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Ցույց տալ կառավարումը վահանակում"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Վահանակի կարգավորումներ"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Դասավորության ռեժիմ:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Ձախից հավասարեցված"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Աջից հավասարեցված"
 
 msgid "Centered"
-msgstr ""
+msgstr "Կենտրոնացված"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Կոճակի չափը:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Ավտոմատ չափ՝ կախված վահանակի բարձրությունից"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Չափը (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Ոլորել տեքստը, եթե կրճատված է"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Դինամիկ լայնություն (ավտոմատ ընդլայնում՝ տեքստին համապատասխան)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Առավելագույն լայնություն (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Արագություն:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Արագ"
 
 msgid "Medium"
-msgstr ""
+msgstr "Միջին"
 
 msgid "Slow"
-msgstr ""
+msgstr "Դանդաղ"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Ցուցադրվող տեղեկատվություն:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Ցույց տալ վերնագիրը"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Ցույց տալ կատարողին"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Տառատեսակի չափը:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Տեսքի կարգավորումներ"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Տեսքի ռեժիմ:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Ավտոմատ"
 
 msgid "Small"
-msgstr ""
+msgstr "Փոքր"
 
 msgid "Wide"
-msgstr ""
+msgstr "Լայն"
 
 msgid "Large"
-msgstr ""
+msgstr "Մեծ"

@@ -20,7 +20,7 @@ msgid "Default Media Player"
 msgstr "ডিফল্ট মিডিয়া প্লেয়ার"
 
 msgid "Inactive players are not shown."
-msgstr "নিষ্ক্রিয় প্লেয়ার প্রদর্শিত হয় না।"
+msgstr "নিষ্ক্রিয় প্লেয়ার প্রদর্শit হয় না।"
 
 msgid "Selected Player:"
 msgstr "নির্বাচিত প্লেয়ার:"
@@ -48,100 +48,100 @@ msgid "General"
 msgstr "সাধারণ"
 
 msgid "No Media"
-msgstr ""
+msgstr "মিডিয়া নেই"
 
 msgid "Appearance"
-msgstr ""
+msgstr "চেহারা"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "উইজেট মার্জিন"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "সাধারণ (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "কম (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "কোনোটিই নয় (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "ব্যাকগ্রাউন্ড অপাসিটি"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "প্যানেলে কন্ট্রোল দেখান"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "প্যানেল সেটিংস"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "লেআউট মোড"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "বাম প্রান্তিক"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "ডান প্রান্তিক"
 
 msgid "Centered"
-msgstr ""
+msgstr "কেন্দ্রিক"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "বাটন সাইজ"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "প্যানেল হাইট অনুযায়ী অটো সাইজ"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "সাইজ (px)"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "টেক্সট বড় হলে স্ক্রল করুন"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "ডায়নামিক প্রস্থ (টেক্সট অনুযায়ী অটো প্রসারিত)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "সর্বোচ্চ প্রস্থ (px)"
 
 msgid "Speed:"
-msgstr ""
+msgstr "গতি"
 
 msgid "Fast"
-msgstr ""
+msgstr "দ্রুত"
 
 msgid "Medium"
-msgstr ""
+msgstr "মাঝারি"
 
 msgid "Slow"
-msgstr ""
+msgstr "ধীর"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "প্রদর্শিত তথ্য"
 
 msgid "Show Title"
-msgstr ""
+msgstr "শিরোনাম দেখান"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "শিল্পী দেখান"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "ফন্ট সাইজ"
 
 msgid "View Settings"
-msgstr ""
+msgstr "ভিউ সেটিংস"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "ভিউ মোড"
 
 msgid "Automatic"
-msgstr ""
+msgstr "স্বয়ংক্রিয়"
 
 msgid "Small"
-msgstr ""
+msgstr "ছোট"
 
 msgid "Wide"
-msgstr ""
+msgstr "প্রশস্ত"
 
 msgid "Large"
-msgstr ""
+msgstr "বড়"

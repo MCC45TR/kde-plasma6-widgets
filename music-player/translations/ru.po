@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Общее"
 
 msgid "No Media"
-msgstr ""
+msgstr "Нет медиа"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Внешний вид"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Отступы виджета:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Нормальный (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Меньше (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Нет (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Прозрачность фона:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Показать управление в панели"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Настройки панели"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Режим компоновки:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "По левому краю"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "По правому краю"
 
 msgid "Centered"
-msgstr ""
+msgstr "По центру"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Размер кнопок:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Авторазмер по высоте панели"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Размер (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Прокручивать текст, если он обрезан"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Динамическая ширина (авторасширение под текст)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Макс. ширина (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Скорость:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Быстро"
 
 msgid "Medium"
-msgstr ""
+msgstr "Средне"
 
 msgid "Slow"
-msgstr ""
+msgstr "Медленно"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Отображаемая информация:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Показать название"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Показать исполнителя"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Размер шрифта:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Настройки вида"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Режим вида:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Автоматический"
 
 msgid "Small"
-msgstr ""
+msgstr "Маленький"
 
 msgid "Wide"
-msgstr ""
+msgstr "Широкий"
 
 msgid "Large"
-msgstr ""
+msgstr "Большой"

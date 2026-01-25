@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Γενικά"
 
 msgid "No Media"
-msgstr ""
+msgstr "Δεν υπάρχουν πολυμέσα"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Εμφάνιση"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Περιθώριο γραφικού στοιχείου:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Κανονικό (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Λιγότερο (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Κανένα (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Διαφάνεια φόντου:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Εμφάνιση στοιχείων ελέγχου στον πίνακα"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Ρυθμίσεις πίνακα"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Λειτουργία διάταξης:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Στοίχιση αριστερά"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Στοίχιση δεξιά"
 
 msgid "Centered"
-msgstr ""
+msgstr "Στο κέντρο"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Μέγεθος κουμπιού:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Αυτόματο μέγεθος βάσει ύψους πίνακα"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Μέγεθος (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Κύλιση κειμένου εάν είναι κομμένο"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Δυναμικό πλάτος (αυτόματη επέκταση για προσαρμογή κειμένου)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Μέγιστο πλάτος (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Ταχύτητα:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Γρήγορα"
 
 msgid "Medium"
-msgstr ""
+msgstr "Μέτρια"
 
 msgid "Slow"
-msgstr ""
+msgstr "Αργά"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Εμφανιζόμενες πληροφορίες:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Εμφάνιση τίτλου"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Εμφάνιση καλλιτέχνη"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Μέγεθος γραμματοσειράς:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Ρυθμίσεις προβολής"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Λειτουργία προβολής:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Αυτόματο"
 
 msgid "Small"
-msgstr ""
+msgstr "Μικρό"
 
 msgid "Wide"
-msgstr ""
+msgstr "Ευρύ"
 
 msgid "Large"
-msgstr ""
+msgstr "Μεγάλο"

@@ -48,100 +48,100 @@ msgid "General"
 msgstr "General"
 
 msgid "No Media"
-msgstr ""
+msgstr "Niciun conținut media"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Aspect"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Marginea widgetului:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normală (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Mai mică (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Niciuna (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacitatea fundalului:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Afișează comenzile în panou"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Setări panou"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Mod aspect:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Aliniat la stânga"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Aliniat la dreapta"
 
 msgid "Centered"
-msgstr ""
+msgstr "Centrat"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Dimensiunea butoanelor:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Dimensiune auto în funcție de înălțimea panoului"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Dimensiune (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Derulează textul dacă este trunchiat"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Lățime dinamică (extindere auto pentru a se potrivi textului)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Lățime maximă (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Viteză:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Rapidă"
 
 msgid "Medium"
-msgstr ""
+msgstr "Medie"
 
 msgid "Slow"
-msgstr ""
+msgstr "Lentă"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Informații afișate:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Afișează titlul"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Afișează artistul"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Dimensiunea fontului:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Setări vizualizare"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Mod vizualizare:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automat"
 
 msgid "Small"
-msgstr ""
+msgstr "Mic"
 
 msgid "Wide"
-msgstr ""
+msgstr "Lat"
 
 msgid "Large"
-msgstr ""
+msgstr "Mare"

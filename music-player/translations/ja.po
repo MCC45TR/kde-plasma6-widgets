@@ -48,100 +48,100 @@ msgid "General"
 msgstr "一般"
 
 msgid "No Media"
-msgstr ""
+msgstr "メディアなし"
 
 msgid "Appearance"
-msgstr ""
+msgstr "外観"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "ウィジェットのマージン:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "標準 (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "狭い (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "なし (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "背景の不透明度:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "パネルにコントロールを表示"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "パネル設定"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "レイアウトモード:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "左揃え"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "右揃え"
 
 msgid "Centered"
-msgstr ""
+msgstr "中央揃え"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "ボタンのサイズ:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "パネルの高さに合わせて自動調整"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "サイズ (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "テキストが長い場合にスクロールする"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "動的な幅 (テキストに合わせて自動拡張)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "最大の幅 (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "速度:"
 
 msgid "Fast"
-msgstr ""
+msgstr "速い"
 
 msgid "Medium"
-msgstr ""
+msgstr "普通"
 
 msgid "Slow"
-msgstr ""
+msgstr "遅い"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "表示情報:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "タイトルを表示"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "アーティストを表示"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "フォントサイズ:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "表示設定"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "表示モード:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "自動"
 
 msgid "Small"
-msgstr ""
+msgstr "スモール"
 
 msgid "Wide"
-msgstr ""
+msgstr "ワイド"
 
 msgid "Large"
-msgstr ""
+msgstr "ラージ"

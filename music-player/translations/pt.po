@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Geral"
 
 msgid "No Media"
-msgstr ""
+msgstr "Sem mídia"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Margem do widget:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normal (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Menos (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Nenhuma (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacidade do fundo:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Mostrar controlos no painel"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Definições do painel"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Modo de disposição:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Alinhado à esquerda"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Alinhado à direita"
 
 msgid "Centered"
-msgstr ""
+msgstr "Centrado"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Tamanho dos botões:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Tamanho automático baseado na altura do painel"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Tamanho (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Deslocar texto se truncado"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Largura dinâmica (auto-expansão para ajustar ao texto)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Largura máxima (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Velocidade:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Rápido"
 
 msgid "Medium"
-msgstr ""
+msgstr "Médio"
 
 msgid "Slow"
-msgstr ""
+msgstr "Lento"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Informação apresentada:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Mostrar título"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Mostrar artista"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Tamanho da letra:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Definições de visualização:"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Modo de visualização:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 msgid "Wide"
-msgstr ""
+msgstr "Largo"
 
 msgid "Large"
-msgstr ""
+msgstr "Grande"

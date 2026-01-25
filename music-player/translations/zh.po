@@ -48,100 +48,100 @@ msgid "General"
 msgstr "常规"
 
 msgid "No Media"
-msgstr ""
+msgstr "无媒体"
 
 msgid "Appearance"
-msgstr ""
+msgstr "外观"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "部件边距:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "正常 (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "较小 (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "无 (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "背景透明度:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "在面板中显示控制按钮"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "面板设置"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "布局模式:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "左对齐"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "右对齐"
 
 msgid "Centered"
-msgstr ""
+msgstr "居中"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "按钮大小:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "根据面板高度自动调整大小"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "大小 (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "如果文字被截断则滚动"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "动态宽度 (根据文字自动展开)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "最大宽度 (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "速度:"
 
 msgid "Fast"
-msgstr ""
+msgstr "快"
 
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 msgid "Slow"
-msgstr ""
+msgstr "慢"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "显示的信息:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "显示标题"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "显示艺术家"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "字体大小:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "视图设置"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "视图模式:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "自动"
 
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 msgid "Wide"
-msgstr ""
+msgstr "宽"
 
 msgid "Large"
-msgstr ""
+msgstr "大"

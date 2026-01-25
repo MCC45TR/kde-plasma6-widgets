@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Ümumi"
 
 msgid "No Media"
-msgstr ""
+msgstr "Media yoxdur"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Görünüş"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Vidcet kənar boşluğu:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normal (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Az (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Yoxdur (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Arxa fonun qeyri-şəffaflığı:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Paneldə idarəetmə düymələrini göstər"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Panel tənzimləmələri"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Düzülüş rejimi:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Sola söykənmiş"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Sağa söykənmiş"
 
 msgid "Centered"
-msgstr ""
+msgstr "Mərkəzləşdirilmiş"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Düymə ölçüsü:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Panel hündürlüyünə uyğun avtomatik ölçü"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Ölçü (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Kəsilmişsə mətni sürüşdür"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Dinamik en (mətnə uyğun avtomatik genişlənmə)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Maksimum en (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Sürət:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Sürətli"
 
 msgid "Medium"
-msgstr ""
+msgstr "Orta"
 
 msgid "Slow"
-msgstr ""
+msgstr "Yavaş"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Göstərilən məlumatlar:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Başlığı göstər"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "İfaçını göstər"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Şrift ölçüsü:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Görünüş tənzimləmələri"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Görünüş rejimi:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Avtomatik"
 
 msgid "Small"
-msgstr ""
+msgstr "Kiçik"
 
 msgid "Wide"
-msgstr ""
+msgstr "Geniş"
 
 msgid "Large"
-msgstr ""
+msgstr "Böyük"

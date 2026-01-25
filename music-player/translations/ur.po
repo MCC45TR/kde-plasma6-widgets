@@ -48,100 +48,100 @@ msgid "General"
 msgstr "عام"
 
 msgid "No Media"
-msgstr ""
+msgstr "کوئی میڈیا نہیں"
 
 msgid "Appearance"
-msgstr ""
+msgstr "ظاہری شکل"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "وجیٹ کا مارجن:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "نارمل (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "کم (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "کوئی نہیں (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "پس منظر کی دھندلاہٹ:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "پینل میں کنٹرول دکھائیں"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "پینل کی ترتیبات"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "لے آؤٹ موڈ:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "بائیں طرف"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "دائیں طرف"
 
 msgid "Centered"
-msgstr ""
+msgstr "درمیان میں"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "بٹن کا سائز:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "پینل کی اونچائی کی بنیاد پر آٹو سائز"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "سائز (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "اگر متن بڑا ہو تو سکرول کریں"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "ڈائنامک چوڑائی (متن کے مطابق آٹو پھیلاؤ)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "زیادہ سے زیادہ چوڑائی (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "رفتار:"
 
 msgid "Fast"
-msgstr ""
+msgstr "تیز"
 
 msgid "Medium"
-msgstr ""
+msgstr "درمیانہ"
 
 msgid "Slow"
-msgstr ""
+msgstr "آہستہ"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "دکھائی گئی معلومات:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "عنوان دکھائیں"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "آرٹسٹ دکھائیں"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "فونٹ کا سائز:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "منظر کی ترتیبات"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "منظر کا موڈ:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "خودکار"
 
 msgid "Small"
-msgstr ""
+msgstr "چھوٹا"
 
 msgid "Wide"
-msgstr ""
+msgstr "کشادہ"
 
 msgid "Large"
-msgstr ""
+msgstr "بڑا"

@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Obecné"
 
 msgid "No Media"
-msgstr ""
+msgstr "Žádná média"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Vzhled"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Okraje widgetu:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normální (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Menší (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Žádné (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Průhlednost pozadí:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Zobrazit ovládání v panelu"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Nastavení panelu"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Režim rozvržení:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Zarovnáno vlevo"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Zarovnáno vpravo"
 
 msgid "Centered"
-msgstr ""
+msgstr "Na střed"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Velikost tlačítek:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Automatická velikost podle výšky panelu"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Velikost (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Posouvat text, pokud je zkrácen"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Dynamická šířka (automatické rozbalení podle textu)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Maximální šířka (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Rychlost:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Rychle"
 
 msgid "Medium"
-msgstr ""
+msgstr "Středně"
 
 msgid "Slow"
-msgstr ""
+msgstr "Pomalu"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Zobrazené informace:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Zobrazit název"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Zobrazit umělce"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Velikost písma:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Nastavení zobrazení"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Režim zobrazení:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automaticky"
 
 msgid "Small"
-msgstr ""
+msgstr "Malý"
 
 msgid "Wide"
-msgstr ""
+msgstr "Široký"
 
 msgid "Large"
-msgstr ""
+msgstr "Velký"

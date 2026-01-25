@@ -48,100 +48,100 @@ msgid "General"
 msgstr "सामान्य"
 
 msgid "No Media"
-msgstr ""
+msgstr "कोई मीडिया नहीं"
 
 msgid "Appearance"
-msgstr ""
+msgstr "रूप"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "विजेट मार्जिन:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "सामान्य (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "कम (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "कोई नहीं (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "पृष्ठभूमि अपारदर्शिता:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "पैनल में नियंत्रण दिखाएं"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "पैनल सेटिंग्स"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "लेआउट मोड:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "बाएं संरेखित"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "दाएं संरेखित"
 
 msgid "Centered"
-msgstr ""
+msgstr "केंद्रित"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "बटन का आकार:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "पैनल ऊंचाई के आधार पर ऑटो आकार"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "आकार (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "यदि छोटा किया गया हो तो टेक्स्ट स्क्रॉल करें"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "गतिशील चौड़ाई (टेक्स्ट फिट करने के लिए ऑटो-विस्तार)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "अधिकतम चौड़ाई (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "गति:"
 
 msgid "Fast"
-msgstr ""
+msgstr "तेज़"
 
 msgid "Medium"
-msgstr ""
+msgstr "मध्यम"
 
 msgid "Slow"
-msgstr ""
+msgstr "धीमा"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "प्रदर्शित जानकारी:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "शीर्षک दिखाएं"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "कलाकार दिखाएं"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "फ़ॉन्ट आकार:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "दृश्य सेटिंग्स"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "दृश्य मोड:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "स्वचालित"
 
 msgid "Small"
-msgstr ""
+msgstr "छोटा"
 
 msgid "Wide"
-msgstr ""
+msgstr "चौड़ा"
 
 msgid "Large"
-msgstr ""
+msgstr "बड़ा"

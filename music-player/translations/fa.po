@@ -48,100 +48,100 @@ msgid "General"
 msgstr "عمومی"
 
 msgid "No Media"
-msgstr ""
+msgstr "بدون رسانه"
 
 msgid "Appearance"
-msgstr ""
+msgstr "ظاهر"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "حاشیه ویجت:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "معمولی (۱۰ پیکسل)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "کمتر (۵ پیکسل)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "بدون حاشیه (۰ پیکسل)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "شفافیت پس‌زمینه:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "نمایش کنترل‌ها در پنل"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "تنظیمات پنل"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "حالت طرح‌بندی:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "چپ‌چین"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "راست‌چین"
 
 msgid "Centered"
-msgstr ""
+msgstr "وسط‌چین"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "اندازه دکمه:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "اندازه خودکار بر اساس ارتفاع پنل"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "اندازه (پیکسل):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "پیمایش متن در صورت کوتاه بودن"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "عرض پویا (گسترش خودکار برای تناسب با متن)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "حداکثر عرض (پیکسل):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "سرعت:"
 
 msgid "Fast"
-msgstr ""
+msgstr "سریع"
 
 msgid "Medium"
-msgstr ""
+msgstr "متوسط"
 
 msgid "Slow"
-msgstr ""
+msgstr "آهسته"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "اطلاعات نمایش داده شده:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "نمایش عنوان"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "نمایش هنرمند"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "اندازه فونت:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "تنظیمات نما"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "حالت نما:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "خودکار"
 
 msgid "Small"
-msgstr ""
+msgstr "کوچک"
 
 msgid "Wide"
-msgstr ""
+msgstr "عریض"
 
 msgid "Large"
-msgstr ""
+msgstr "بزرگ"

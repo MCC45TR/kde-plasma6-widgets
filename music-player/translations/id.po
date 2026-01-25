@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Umum"
 
 msgid "No Media"
-msgstr ""
+msgstr "Tidak ada media"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Tampilan"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Margin Widget:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normal (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Lebih sedikit (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Tidak ada (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opasitas Latar Belakang:"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Tampilkan Kontrol di Panel"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Pengaturan Panel"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Mode Tata Letak:"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Rata Kiri"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Rata Kanan"
 
 msgid "Centered"
-msgstr ""
+msgstr "Tengah"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Ukuran Tombol:"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Ukuran Otomatis berdasarkan Tinggi Panel"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Ukuran (px):"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Gulir Teks jika terpotong"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Lebar Dinamis (perluas otomatis agar pas dengan teks)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Lebar Maksimum (px):"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Kecepatan:"
 
 msgid "Fast"
-msgstr ""
+msgstr "Cepat"
 
 msgid "Medium"
-msgstr ""
+msgstr "Sedang"
 
 msgid "Slow"
-msgstr ""
+msgstr "Lambat"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Informasi yang Ditampilkan:"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Tampilkan Judul"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Tampilkan Artis"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Ukuran Font:"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Pengaturan Tampilan"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Mode Tampilan:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Otomatis"
 
 msgid "Small"
-msgstr ""
+msgstr "Kecil"
 
 msgid "Wide"
-msgstr ""
+msgstr "Lebar"
 
 msgid "Large"
-msgstr ""
+msgstr "Besar"

@@ -48,100 +48,100 @@ msgid "General"
 msgstr "Général"
 
 msgid "No Media"
-msgstr ""
+msgstr "Aucun média"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Apparence"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Marge du widget :"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normale (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Moins (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Aucune (0px)"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacité de l'arrière-plan :"
 
 msgid "Show Controls in Panel"
-msgstr ""
+msgstr "Afficher les commandes dans le panneau"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Paramètres du panneau"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Mode de disposition :"
 
 msgid "Left Aligned"
-msgstr ""
+msgstr "Aligné à gauche"
 
 msgid "Right Aligned"
-msgstr ""
+msgstr "Aligné à droite"
 
 msgid "Centered"
-msgstr ""
+msgstr "Centré"
 
 msgid "Button Size:"
-msgstr ""
+msgstr "Taille du bouton :"
 
 msgid "Auto Size based on Panel Height"
-msgstr ""
+msgstr "Taille auto basée sur la hauteur du panneau"
 
 msgid "Size (px):"
-msgstr ""
+msgstr "Taille (px) :"
 
 msgid "Scroll Text if truncated"
-msgstr ""
+msgstr "Faire défiler le texte s'il est tronqué"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr ""
+msgstr "Largeur dynamique (extension auto pour le texte)"
 
 msgid "Max Width (px):"
-msgstr ""
+msgstr "Largeur max (px) :"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Vitesse :"
 
 msgid "Fast"
-msgstr ""
+msgstr "Rapide"
 
 msgid "Medium"
-msgstr ""
+msgstr "Moyenne"
 
 msgid "Slow"
-msgstr ""
+msgstr "Lente"
 
 msgid "Displayed Information:"
-msgstr ""
+msgstr "Informations affichées :"
 
 msgid "Show Title"
-msgstr ""
+msgstr "Afficher le titre"
 
 msgid "Show Artist"
-msgstr ""
+msgstr "Afficher l'artiste"
 
 msgid "Font Size:"
-msgstr ""
+msgstr "Taille de la police :"
 
 msgid "View Settings"
-msgstr ""
+msgstr "Paramètres de vue"
 
 msgid "View Mode:"
-msgstr ""
+msgstr "Mode de vue :"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatique"
 
 msgid "Small"
-msgstr ""
+msgstr "Petit"
 
 msgid "Wide"
-msgstr ""
+msgstr "Large"
 
 msgid "Large"
-msgstr ""
+msgstr "Grand"
