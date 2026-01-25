@@ -29,6 +29,8 @@ Item {
     property int layoutMode: 0 // 0: Left, 1: Right, 2: Center
     property bool scrollingText: true
     property bool dynamicWidth: true
+    property bool autoButtonSize: true
+    property int buttonSize: 32
     property int maxWidth: 350
     property int scrollingSpeed: 0 // 0: Fast, 1: Medium, 2: Slow
     
@@ -44,10 +46,12 @@ Item {
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
     readonly property int scrollInterval: scrollingSpeed === 1 ? 300 : (scrollingSpeed === 2 ? 400 : 200)
     
+    readonly property int calculatedButtonSize: autoButtonSize ? Math.min(panelMode.height * 0.9, 36) : buttonSize
+    
     // Dynamic Width Calculation
     readonly property int controlsWidth: {
         if (!showPanelControls) return 0
-        var btnSize = Math.min(panelMode.height * 0.9, 36)
+        var btnSize = calculatedButtonSize
         if (layoutMode === 2) return btnSize * 2 + 20 // Two single buttons + spacing
         return btnSize * 3 + 10 // Full control row (prev, play, next)
     }
@@ -115,7 +119,7 @@ Item {
                     anchors.centerIn: parent
                     visible: panelMode.layoutMode === 1
                     
-                    baseSize: Math.min(panelMode.height * 0.9, 36)
+                    baseSize: panelMode.calculatedButtonSize
                     expandAmount: 20
                     iconScale: 0.6
                     bgColor: panelMode.controlButtonBgColor
@@ -130,7 +134,7 @@ Item {
                 Rectangle {
                     visible: panelMode.layoutMode === 2
                     anchors.centerIn: parent
-                    width: Math.min(panelMode.height * 0.9, 36)
+                    width: panelMode.calculatedButtonSize
                     height: width
                     radius: 5
                     color: panelMode.controlButtonBgColor
@@ -410,7 +414,7 @@ Item {
                     anchors.centerIn: parent
                     visible: panelMode.layoutMode === 0
                     
-                    baseSize: Math.min(panelMode.height * 0.9, 36)
+                    baseSize: panelMode.calculatedButtonSize
                     expandAmount: 20
                     iconScale: 0.6
                     bgColor: panelMode.controlButtonBgColor
@@ -425,7 +429,7 @@ Item {
                 Rectangle {
                     visible: panelMode.layoutMode === 2
                     anchors.centerIn: parent
-                    width: Math.min(panelMode.height * 0.9, 36)
+                    width: panelMode.calculatedButtonSize
                     height: width
                     radius: 5
                     color: panelMode.controlButtonBgColor

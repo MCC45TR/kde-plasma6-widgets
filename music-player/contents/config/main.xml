@@ -59,6 +59,14 @@
       <default>0</default>
       <label>Panel Layout Mode (0: Left, 1: Right, 2: Center)</label>
     </entry>
+    <entry name="panelAutoButtonSize" type="Bool">
+      <default>true</default>
+      <label>Auto Button Size in Panel</label>
+    </entry>
+    <entry name="panelButtonSize" type="Int">
+      <default>32</default>
+      <label>Manual Button Size in Panel</label>
+    </entry>
     <entry name="panelDynamicWidth" type="Bool">
       <default>true</default>
       <label>Dynamic Width based on content</label>

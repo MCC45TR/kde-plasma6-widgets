@@ -19,6 +19,8 @@ Item {
     property int cfg_panelFontSize
     property int cfg_panelLayoutMode
     property bool cfg_panelDynamicWidth
+    property bool cfg_panelAutoButtonSize
+    property int cfg_panelButtonSize
     property int cfg_popupLayoutMode
     
     // Default values (required for Defaults button)
@@ -34,6 +36,8 @@ Item {
     property int cfg_panelFontSizeDefault: 12
     property int cfg_panelLayoutModeDefault: 0
     property bool cfg_panelDynamicWidthDefault: true
+    property bool cfg_panelAutoButtonSizeDefault: true
+    property int cfg_panelButtonSizeDefault: 32
     property int cfg_popupLayoutModeDefault: 0
     
     // General config (to silence property warnings - handled by ConfigGeneral)
@@ -124,6 +128,29 @@ Item {
                     model: [i18n("Left Aligned"), i18n("Right Aligned"), i18n("Centered")]
                     
                     onActivated: configAppearance.cfg_panelLayoutMode = currentIndex
+                }
+                
+                Label {
+                    text: i18n("Button Size:")
+                    font.bold: true
+                }
+                
+                CheckBox {
+                    text: i18n("Auto Size based on Panel Height")
+                    checked: configAppearance.cfg_panelAutoButtonSize
+                    onCheckedChanged: configAppearance.cfg_panelAutoButtonSize = checked
+                }
+                
+                RowLayout {
+                    enabled: !configAppearance.cfg_panelAutoButtonSize
+                    opacity: enabled ? 1.0 : 0.5
+                    Label { text: i18n("Size (px):") }
+                    SpinBox {
+                        from: 16
+                        to: 128
+                        value: configAppearance.cfg_panelButtonSize
+                        onValueModified: configAppearance.cfg_panelButtonSize = value
+                    }
                 }
                 
                 CheckBox {

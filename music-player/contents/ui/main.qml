@@ -32,6 +32,8 @@ PlasmoidItem {
     readonly property int cfg_panelScrollingSpeed: Plasmoid.configuration.panelScrollingSpeed !== undefined ? Plasmoid.configuration.panelScrollingSpeed : 0
     readonly property int cfg_panelFontSize: Plasmoid.configuration.panelFontSize !== undefined ? Plasmoid.configuration.panelFontSize : 12
     readonly property int cfg_panelLayoutMode: Plasmoid.configuration.panelLayoutMode !== undefined ? Plasmoid.configuration.panelLayoutMode : 0
+    readonly property bool cfg_panelAutoButtonSize: Plasmoid.configuration.panelAutoButtonSize !== undefined ? Plasmoid.configuration.panelAutoButtonSize : true
+    readonly property int cfg_panelButtonSize: Plasmoid.configuration.panelButtonSize !== undefined ? Plasmoid.configuration.panelButtonSize : 32
     readonly property bool cfg_panelDynamicWidth: Plasmoid.configuration.panelDynamicWidth !== undefined ? Plasmoid.configuration.panelDynamicWidth : true
     readonly property int cfg_popupLayoutMode: Plasmoid.configuration.popupLayoutMode !== undefined ? Plasmoid.configuration.popupLayoutMode : 0
     readonly property double cfg_backgroundOpacity: Plasmoid.configuration.backgroundOpacity !== undefined ? Plasmoid.configuration.backgroundOpacity : 0.8
@@ -237,7 +239,7 @@ PlasmoidItem {
         // Calculate controls width
         readonly property int controlsWidth: {
             if (!root.showPanelControls) return 0
-            var btnSize = Math.min(compactRep.height * 0.9, 36)
+            var btnSize = root.cfg_panelAutoButtonSize ? Math.min(compactRep.height * 0.9, 36) : root.cfg_panelButtonSize
             if (root.cfg_panelLayoutMode === 2) return btnSize * 2 + 20
             return btnSize * 3 + 10
         }
@@ -289,6 +291,8 @@ PlasmoidItem {
                     item.manualFontSize = Qt.binding(() => root.cfg_panelFontSize)
                     item.layoutMode = Qt.binding(() => root.cfg_panelLayoutMode)
                     item.dynamicWidth = Qt.binding(() => root.cfg_panelDynamicWidth)
+                    item.autoButtonSize = Qt.binding(() => root.cfg_panelAutoButtonSize)
+                    item.buttonSize = Qt.binding(() => root.cfg_panelButtonSize)
                     
                     // Callbacks
                     item.onPrevious = root.previous
