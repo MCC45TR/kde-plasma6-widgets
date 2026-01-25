@@ -36,6 +36,9 @@ Item {
         function onOperationalChanged() { refreshDevices() }
     }
 
+    property bool useCustomIcons: Plasmoid.configuration.useCustomIcons
+    property string iconVersion: Plasmoid.configuration.iconVersion || "v1"
+    
     function refreshDevices() {
         var newList = []
         var mainBat = null
@@ -46,8 +49,8 @@ Item {
         
         if (hasBattery) {
             mainBat = {
-                name: "Laptop", // Hostname will be fetched in UI
-                icon: "computer-laptop",
+                name: "Laptop", 
+                icon: resolveIcon("laptop", "computer-laptop"),
                 percentage: pmSource.data["Battery"]["Percent"] || 0,
                 isCharging: pmSource.data["AC Adapter"] ? pmSource.data["AC Adapter"]["Plugged in"] : false,
                 isMain: true,
@@ -74,9 +77,9 @@ Item {
                     if (per >= 0) { // Valid battery
                         newList.push({
                             name: dev.name,
-                            icon: getBluetoothIcon(dev),
+                            icon: resolveIcon(dev.name, dev.iconName),
                             percentage: per,
-                            isCharging: false, // Bluetooth usually doesn't report charging state reliable via this API?
+                            isCharging: false, 
                             isMain: false
                         })
                     }
@@ -84,39 +87,53 @@ Item {
             }
         }
         
-        // Sort: Main first, then by low battery?
-        // Requirement doesn't specify sort order, but Main should usually be prominent.
-        
         devices = newList
         mainDevice = mainBat
     }
     
-    function getBluetoothIcon(dev) {
-        var name = dev.name ? dev.name.toLowerCase() : ""
-        var icon = dev.iconName || ""
+    function resolveIcon(name, sysIcon) {
+        var n = name ? name.toLowerCase() : ""
+        var i = sysIcon || ""
         
-        // 1. Name based overriding (most specific)
-        if (name.includes("mouse") || name.includes("fare") || name.includes("mx master") || name.includes("mx any") || name.includes("logitech m") || name.includes("mi mouse")) return "input-mouse";
-        if (name.includes("keyboard") || name.includes("klavye") || name.includes("keychron") || name.includes("mx keys") || name.includes("logitech k")) return "input-keyboard";
-        if (name.includes("headset") || name.includes("kulaklık") || name.includes("wh-") || name.includes("quietcomfort")) return "audio-headset";
-        if (name.includes("headphone") || name.includes("buds") || name.includes("airpods") || name.includes("freebuds") || name.includes("tws") || name.includes("wf-") || name.includes("dots")) return "audio-headphones";
-        if (name.includes("speaker") || name.includes("hoparlör") || name.includes("jbl") || name.includes("boom") || name.includes("soundcore") || name.includes("flip") || name.includes("charge")) return "audio-speakers";
-        if (name.includes("phone") || name.includes("telefon") || name.includes("iphone") || name.includes("galaxy")) return "device-smartphone";
-        if (name.includes("watch") || name.includes("saat") || name.includes("watch gt") || name.includes("galaxy watch") || name.includes("apple watch") || name.includes("mi band")) return "device-watch";
-        if (name.includes("gamepad") || name.includes("controller") || name.includes("xbox") || name.includes("dualsense") || name.includes("dualshock")) return "input-gaming";
-        if (name.includes("esp32") || name.includes("arduino") || name.includes("raspberry")) return "applications-electronics";
-
-        // 2. Icon Name based fallback
-        if (icon.includes("mouse")) return "input-mouse";
-        if (icon.includes("keyboard")) return "input-keyboard";
-        if (icon.includes("headset")) return "audio-headset";
-        if (icon.includes("headphone") || icon.includes("earbud")) return "audio-headphones";
-        if (icon.includes("audio") || icon.includes("speaker")) return "audio-speakers";
-        if (icon.includes("phone") || icon.includes("smartphone")) return "device-smartphone";
-        if (icon.includes("computer") || icon.includes("laptop")) return "computer-laptop";
-        if (icon.includes("watch")) return "device-watch";
-        
-        // 3. Fallback to generic bluetooth icon
-        return icon && icon !== "" ? icon : "network-bluetooth";
+        if (!useCustomIcons) {
+            // System Icon Logic
+            if (n.includes("mouse") || n.includes("fare") || n.includes("mx") || n.includes("logitech m")) return "input-mouse";
+            if (n.includes("keyboard") || n.includes("klavye") || n.includes("keychron")) return "input-keyboard";
+            if (n.includes("headset") || n.includes("kulaklık") || n.includes("wh-")) return "audio-headset";
+            if (n.includes("headphone") || n.includes("buds") || n.includes("airpods") || n.includes("tws")) return "audio-headphones";
+            if (n.includes("speaker") || n.includes("hoparlör") || n.includes("jbl")) return "audio-speakers";
+            if (n.includes("phone") || n.includes("telefon") || n.includes("iphone")) return "device-smartphone";
+            if (n.includes("watch") || n.includes("saat") || n.includes("mi band")) return "device-watch";
+            if (n.includes("gamepad") || n.includes("xbox") || n.includes("dual")) return "input-gaming";
+            if (n.includes("esp32")) return "applications-electronics";
+            // Check icon hints
+            if (i.includes("mouse")) return "input-mouse";
+            if (i.includes("keyboard")) return "input-keyboard";
+            if (i.includes("headset")) return "audio-headset";
+            if (i.includes("headphone")) return "audio-headphones";
+            if (i !== "") return i;
+            return "network-bluetooth";
+        } else {
+            // Custom Icon Logic (Map to ../../icons/<version>/filename.svg)
+            var file = ""
+            if (n.includes("laptop")) file = "laptop.svg";
+            else if (n.includes("mouse") || n.includes("fare") || n.includes("mx")) file = "mouse.svg";
+            else if (n.includes("keyboard") || n.includes("klavye")) file = "keyboard.svg";
+            else if (n.includes("headset") || n.includes("kulaklık") || n.includes("wh-")) file = "headset.svg";
+            else if (n.includes("buds") || n.includes("airpods") || n.includes("tws")) file = "tws.svg"; 
+            else if (n.includes("speaker") || n.includes("hoparlör") || n.includes("jbl")) file = "speaker.svg";
+            else if (n.includes("watch") || n.includes("saat")) file = "watch.svg";
+            else if (n.includes("gamepad") || n.includes("xbox") || n.includes("dual")) file = "gamepad.svg";
+            else if (n.includes("esp32")) file = "esp32.svg";
+            else if (n.includes("desktop")) file = "desktop.svg";
+            else {
+                if (i.includes("mouse")) file = "mouse.svg";
+                else if (i.includes("keyboard")) file = "keyboard.svg";
+                else if (i.includes("laptop")) file = "laptop.svg";
+                else file = "laptop.svg"; 
+            }
+            
+            return Qt.resolvedUrl("../../icons/" + iconVersion + "/" + file);
+        }
     }
 }

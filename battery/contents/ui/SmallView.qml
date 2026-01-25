@@ -155,7 +155,13 @@ Item {
                                 source: modelData.icon
                                 Layout.preferredWidth: 20
                                 Layout.preferredHeight: 20
-                                color: Kirigami.Theme.textColor // Contrast?
+                                
+                                property color monoColor: {
+                                    if (modelData.percentage <= 10) return Kirigami.Theme.textColor
+                                    if (modelData.percentage >= 15 && modelData.percentage < 25) return "black"
+                                    return "white"
+                                }
+                                color: monoColor
                             }
                             
                             Text {

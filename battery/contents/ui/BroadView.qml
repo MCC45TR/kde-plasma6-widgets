@@ -72,57 +72,63 @@ Item {
                 }
             }
                 
-            RowLayout {
-                anchors.centerIn: parent
-                spacing: 16
-                
-                // Laptop Icon & Charge Icon
-                Item {
-                    width: 80
-                    height: 80
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        width: 64
-                        height: 64
-                        source: mainDevice ? mainDevice.icon : "computer-laptop"
-                    }
-                    // Charge badge
-                    Kirigami.Icon {
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        width: 24
-                        height: 24
-                        source: "battery-charging"
-                        visible: mainDevice ? mainDevice.isCharging : false
-                    }
-                }
-                
                 ColumnLayout {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 32
+                    anchors.verticalCenter: parent.verticalCenter
                     spacing: 0
+                    
+                    // Icons Row
+                    RowLayout {
+                        spacing: 12
+                        
+                        Kirigami.Icon {
+                            Layout.preferredWidth: 64
+                            Layout.preferredHeight: 64
+                            source: mainDevice ? mainDevice.icon : "computer-laptop"
+                            color: Kirigami.Theme.textColor
+                        }
+                        
+                        // Vertical Battery Icon with Charging Bolt
+                        // Using a standard icon for now, positioned next to laptop
+                        Kirigami.Icon {
+                            Layout.preferredWidth: 32
+                            Layout.preferredHeight: 32
+                            source: "battery-charging" 
+                            visible: mainDevice ? mainDevice.isCharging : false
+                            color: Kirigami.Theme.textColor
+                        }
+                    }
+                    
+                    // Spacer
+                    Item { Layout.preferredHeight: 10 }
+                    
                     Text {
                         text: mainDevice ? "%" + mainDevice.percentage : "--"
-                        font.pixelSize: 48
+                        font.pixelSize: 64
                         font.family: "Inter"
+                        font.weight: Font.Light
                         color: Kirigami.Theme.textColor
                     }
+                    
                     Text {
                         text: hostName.toUpperCase().replace(/\n/g, "")
-                        font.pixelSize: 14
+                        font.pixelSize: 18
                         font.bold: true
                         color: Kirigami.Theme.textColor
-                        opacity: 0.7
-                        Layout.fillWidth: true
+                        opacity: 0.8
+                        Layout.maximumWidth: parent.width - 40
                         elide: Text.ElideRight
                     }
+                    
                     Text {
                         text: mainDevice && mainDevice.remainingTime ? "Remaining " + mainDevice.remainingTime : ""
                         visible: text !== ""
-                        font.pixelSize: 12
+                        font.pixelSize: 14
                         color: Kirigami.Theme.textColor
                         opacity: 0.5
                     }
                 }
-            }
         }
     }
 }

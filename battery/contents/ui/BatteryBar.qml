@@ -123,7 +123,15 @@ Item {
             width: parent.width * 0.6
             height: width
             source: root.iconName
-            color: root.percentage < 50 ? (Kirigami.Theme.textColor) : (Kirigami.Theme.backgroundColor)
+            
+            // Monochrome Logic
+            property color monoColor: {
+                if (root.percentage <= 10) return Kirigami.Theme.textColor
+                // Yellow range (15-25 typically, but here <25 is yellow, <15 is red)
+                if (root.percentage >= 15 && root.percentage < 25) return "black"
+                return "white"
+            }
+            color: monoColor
         }
     }
     
