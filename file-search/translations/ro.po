@@ -3,83 +3,77 @@ msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-18 22:43+0300\n"
-"PO-Revision-Date: 2026-01-18 16:42\n"
-"Last-Translator: Auto Generator <auto@bot>\n"
+"PO-Revision-Date: 2026-01-22 12:00+0300\n"
+"Last-Translator: Automatically generated\n"
 "Language-Team: ro\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
 msgid "Appearance"
 msgstr "Aspect"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-#, fuzzy
 msgid "Categories"
-msgstr "Categorie"
+msgstr "Categorii"
 
 #: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
 msgid "Debug"
-msgstr ""
+msgstr "Depanare"
 
 #: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
 msgid "Help"
-msgstr ""
+msgstr "Ajutor"
 
 #: contents/ui/config/ConfigGeneral.qml:80
-#, fuzzy
 msgid "Panel"
-msgstr "Vizualizare panou"
+msgstr "Panou"
 
 #: contents/ui/config/ConfigGeneral.qml:84
 msgid "Popup"
-msgstr ""
+msgstr "Popup"
 
 #: contents/ui/config/ConfigGeneral.qml:88
 #: contents/ui/config/ConfigPreview.qml:9
-#, fuzzy
 msgid "Preview"
-msgstr "Previzualizare panou"
+msgstr "Previzualizare"
 
 #: contents/ui/config/ConfigGeneral.qml:92
 #: contents/ui/config/ConfigPrefix.qml:9
 msgid "Prefixes"
-msgstr ""
+msgstr "Prefixe"
 
 #: contents/ui/config/ConfigGeneral.qml:96
 msgid "Placeholder"
-msgstr ""
+msgstr "Substituent"
 
 #: contents/ui/config/ConfigGeneral.qml:114
-#, fuzzy
 msgid "Panel Appearance"
-msgstr "Aspect"
+msgstr "Aspect panou"
 
 #: contents/ui/config/ConfigGeneral.qml:120
 #: contents/ui/config/ConfigDebug.qml:123
 msgid "Display Mode"
-msgstr ""
+msgstr "Mod afișare"
 
 #: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
 msgid "Button Mode (Icon only)"
 msgstr "Mod buton (Doar pictogramă)"
 
 #: contents/ui/config/ConfigGeneral.qml:123
-#, fuzzy
 msgid "Medium Mode (Text)"
-msgstr "Mod mediu (Doar buton)"
+msgstr "Mod mediu (Text)"
 
 #: contents/ui/config/ConfigGeneral.qml:124
-#, fuzzy
 msgid "Wide Mode (Search Bar)"
-msgstr "Mod lat (Bară de căutare + pictogramă)"
+msgstr "Mod lat (Bară căutare)"
 
 #: contents/ui/config/ConfigGeneral.qml:125
 msgid "Extra Wide Mode"
-msgstr ""
+msgstr "Mod extra lat"
 
 #: contents/ui/config/ConfigGeneral.qml:132
 msgid "Panel Preview"
@@ -99,13 +93,12 @@ msgid "Search..."
 msgstr "Caută..."
 
 #: contents/ui/config/ConfigGeneral.qml:204
-#, fuzzy
 msgid "Power Options"
-msgstr "Utilizator avansat"
+msgstr "Opțiuni alimentare"
 
-#: contents/ui/config/ConfigGeneral.qml:205
+#: contents/ui/config/ConfigGeneral.get(1):205
 msgid "Show boot options in Reboot button"
-msgstr ""
+msgstr "Arată opțiuni boot în butonul repornire"
 
 #: contents/ui/config/ConfigGeneral.qml:213
 msgid "Results View"
@@ -114,7 +107,7 @@ msgstr "Vizualizare rezultate"
 #: contents/ui/config/ConfigGeneral.qml:219
 #: contents/ui/config/ConfigDebug.qml:129
 msgid "View Mode"
-msgstr ""
+msgstr "Mod vizualizare"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "List View"
@@ -136,100 +129,96 @@ msgstr "Dimensiune pictograme dale"
 
 #: contents/ui/config/ConfigGeneral.qml:243
 #: contents/ui/config/ConfigCategories.qml:170
-#, fuzzy
 msgid "Result Limits"
-msgstr "Vizualizare rezultate"
+msgstr "Limite rezultate"
 
 #: contents/ui/config/ConfigGeneral.qml:249
 #: contents/ui/config/ConfigCategories.qml:175
-#, fuzzy
 msgid "Min Results"
-msgstr "Vizualizare rezultate"
+msgstr "Rezultate minime"
 
 #: contents/ui/config/ConfigGeneral.qml:256
 #: contents/ui/config/ConfigCategories.qml:184
-#, fuzzy
 msgid "Max Results"
-msgstr "Vizualizare rezultate"
+msgstr "Rezultate maxime"
 
 #: contents/ui/config/ConfigGeneral.qml:263
 msgid "Smartly limit results based on relevance"
-msgstr ""
+msgstr "Limitează inteligent rezultatele după relevanță"
 
 #: contents/ui/config/ConfigGeneral.qml:264
 msgid "Dynamic Limit"
-msgstr ""
+msgstr "Limită dinamică"
 
 #: contents/ui/config/ConfigGeneral.qml:272
-#: contents/ui/config/ConfigSearch.qml:19
+#: contents/ui/config/ConfigSearch.get(1):19
 #: contents/ui/config/ConfigPreview.qml:112
-#, fuzzy
 msgid "Enable File Previews"
-msgstr "Previzualizare panou"
+msgstr "Activează previzualizarea fișierelor"
 
 #: contents/ui/config/ConfigGeneral.qml:273
 msgid "Master Switch"
-msgstr ""
+msgstr "Întrerupător principal"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 #: contents/ui/config/ConfigPreview.qml:134
 msgid "Preview Types"
-msgstr ""
+msgstr "Tipuri previzualizare"
 
 #: contents/ui/config/ConfigGeneral.qml:283
 #: contents/ui/config/ConfigPreview.qml:159
 msgid "Images"
-msgstr ""
+msgstr "Imagini"
 
 #: contents/ui/config/ConfigGeneral.qml:289
 #: contents/ui/config/ConfigPreview.qml:197
 msgid "Videos"
-msgstr ""
+msgstr "Videoclipuri"
 
 #: contents/ui/config/ConfigGeneral.qml:295
 #: contents/ui/config/ConfigPreview.qml:235
 msgid "Text Files"
-msgstr ""
+msgstr "Fișiere text"
 
 #: contents/ui/config/ConfigGeneral.qml:301
 #: contents/ui/config/ConfigPreview.qml:273
 msgid "Documents"
-msgstr ""
+msgstr "Documente"
 
 #: contents/ui/config/ConfigGeneral.qml:311
 #: contents/ui/config/ConfigPrefix.qml:29
 msgid "Date View (date:)"
-msgstr ""
+msgstr "Vizualizare dată (date:)"
 
 #: contents/ui/config/ConfigGeneral.qml:316
 #: contents/ui/config/ConfigPrefix.qml:36
 msgid "Show Large Clock"
-msgstr ""
+msgstr "Arată ceas mare"
 
 #: contents/ui/config/ConfigGeneral.qml:320
 #: contents/ui/config/ConfigPrefix.qml:43
 msgid "Show Calendar Events"
-msgstr ""
+msgstr "Arată evenimente calendar"
 
 #: contents/ui/config/ConfigGeneral.qml:323
 #: contents/ui/config/ConfigPrefix.qml:50
 msgid "Power View (power:)"
-msgstr ""
+msgstr "Vizualizare energie (power:)"
 
 #: contents/ui/config/ConfigGeneral.qml:328
 #: contents/ui/config/ConfigPrefix.qml:58
 msgid "Show Sleep Button"
-msgstr ""
+msgstr "Arată buton standby"
 
 #: contents/ui/config/ConfigGeneral.qml:332
 #: contents/ui/config/ConfigPrefix.qml:65
 msgid "Show Hibernate Button"
-msgstr ""
+msgstr "Arată buton hibernare"
 
 #: contents/ui/config/ConfigGeneral.qml:337
 #: contents/ui/config/ConfigPrefix.qml:72
 msgid "Available Prefixes Reference"
-msgstr ""
+msgstr "Referință prefixe disponibile"
 
 #: contents/ui/config/ConfigGeneral.qml:341
 #: contents/ui/config/ConfigPrefix.qml:76
@@ -237,372 +226,364 @@ msgid ""
 "These prefixes can be used to perform specific actions directly from the "
 "search bar."
 msgstr ""
+"Aceste prefixe pot fi folosite pentru acțiuni specifice direct din bara de căutare."
 
 #: contents/ui/config/ConfigGeneral.qml:363
 #: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
 #: contents/ui/config/ConfigPrefix.qml:98
 msgid "List files modified today"
-msgstr ""
+msgstr "Listă fișiere modificate astăzi"
 
 #: contents/ui/config/ConfigGeneral.qml:375
 #: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
 #: contents/ui/config/ConfigPrefix.qml:110
 msgid "Search on Google"
-msgstr ""
+msgstr "Căutare pe Google"
 
 #: contents/ui/config/ConfigGeneral.qml:387
 #: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
 #: contents/ui/config/ConfigPrefix.qml:122
 msgid "Search on DuckDuckGo"
-msgstr ""
+msgstr "Căutare pe DuckDuckGo"
 
 #: contents/ui/config/ConfigGeneral.qml:399
 #: contents/ui/config/ConfigPrefix.qml:134
 msgid "Show calendar and date information"
-msgstr ""
+msgstr "Arată informații calendar și dată"
 
-#: contents/ui/config/ConfigGeneral.qml:411
+#: contents/ui/config/ConfigGeneral.get(1):411
 #: contents/ui/config/ConfigPrefix.qml:146
 msgid "Show large clock"
-msgstr ""
+msgstr "Arată ceas mare"
 
 #: contents/ui/config/ConfigGeneral.qml:423
-#, fuzzy
 msgid "Show power management options"
-msgstr "Gestionare energie"
+msgstr "Arată opțiuni gestionare energie"
 
 #: contents/ui/config/ConfigGeneral.qml:435
 #: contents/ui/config/ConfigPrefix.qml:170
 msgid "Show this help screen"
-msgstr ""
+msgstr "Arată acest ecran de ajutor"
 
 #: contents/ui/config/ConfigGeneral.qml:447
 #: contents/ui/config/ConfigPrefix.qml:182
 msgid "Terminate running processes"
-msgstr ""
+msgstr "Termină procesele în curs"
 
 #: contents/ui/config/ConfigGeneral.qml:459
 #: contents/ui/config/ConfigPrefix.qml:194
 msgid "Check spelling of a word"
-msgstr ""
+msgstr "Verifică ortografia unui cuvânt"
 
 #: contents/ui/config/ConfigGeneral.qml:471
 #: contents/ui/config/ConfigPrefix.qml:206
 msgid "Execute shell commands"
-msgstr ""
+msgstr "Execută comenzi shell"
 
 #: contents/ui/config/ConfigGeneral.qml:483
 msgid "Convert units (requires KRunner)"
-msgstr ""
+msgstr "Convertește unități (necesită KRunner)"
 
 #: contents/ui/config/ConfigGeneral.qml:493
 #: contents/ui/config/ConfigSearch.qml:13
-#, fuzzy
 msgid "Search Settings"
-msgstr "Setări sistem"
+msgstr "Setări căutare"
 
 #: contents/ui/config/ConfigGeneral.qml:497
-#: contents/ui/config/ConfigCategories.qml:150
+#: contents/ui/config/ConfigCategories.get(1):150
 msgid "Search Algorithm"
-msgstr ""
+msgstr "Algoritm căutare"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Fuzzy"
-msgstr ""
+msgstr "Fuzzy"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Exact"
-msgstr ""
+msgstr "Exact"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Starts With"
-msgstr ""
+msgstr "Începe cu"
 
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
 msgstr ""
+"Arată previzualizări la plutire (poate fi activat și cu Ctrl+Space)"
 
 #: contents/ui/config/ConfigSearch.qml:33
-#, fuzzy
 msgid "Search Behavior"
-msgstr "Caută aici"
+msgstr "Comportament căutare"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr ""
+msgstr "Puteți utiliza următoarele comenzi și prefixe KRunner:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
-msgstr ""
+msgstr "Prefix"
 
 #: contents/ui/config/ConfigSearch.qml:56
 msgid "Description"
-msgstr ""
+msgstr "Descriere"
 
 #: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
 msgid "Terminate processes"
-msgstr ""
+msgstr "Termină procesele"
 
 #: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
 msgid "Check spelling"
-msgstr ""
+msgstr "Verifică ortografia"
 
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
-msgstr ""
+msgstr "Caută caractere Unicode"
 
 #: contents/ui/config/ConfigDebug.qml:68
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
 msgstr ""
+"Această filă este activă doar în modul Dezvoltator. Schimbă profilul în Setări Generale."
 
 #: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-#, fuzzy
 msgid "Debug Settings"
-msgstr "Setări sistem"
+msgstr "Setări depanare"
 
 #: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
 #: contents/ui/components/DebugOverlay.qml:57
 msgid "Debug Overlay"
-msgstr ""
+msgstr "Overlay depanare"
 
 #: contents/ui/config/ConfigDebug.qml:91
 msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr ""
+msgstr "Arată info depanare pe widget"
 
 #: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
 msgid "Debug Data"
-msgstr ""
+msgstr "Date depanare"
 
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Timestamp"
-msgstr ""
+msgstr "Marca temporală"
 
 #: contents/ui/config/ConfigDebug.qml:114
 msgid "Locale"
-msgstr ""
+msgstr "Localizare"
 
 #: contents/ui/config/ConfigDebug.qml:117
 msgid "User Profile"
 msgstr "Profil utilizator"
 
 #: contents/ui/config/ConfigDebug.qml:141
-#, fuzzy
 msgid "Enable Preview"
-msgstr "Previzualizare panou"
+msgstr "Activează previzualizarea"
 
-#: contents/ui/config/ConfigDebug.qml:147
+#: contents/ui/config/ConfigDebug.get(1):147
 msgid "History Count"
-msgstr ""
+msgstr "Contor istoric"
 
 #: contents/ui/config/ConfigDebug.qml:153
 msgid "items"
-msgstr ""
+msgstr "elemente"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/config/ConfigDebug.qml:165
 msgid "Telemetry"
-msgstr ""
+msgstr "Telemetrie"
 
 #: contents/ui/config/ConfigDebug.qml:174
 #: contents/ui/components/DebugOverlay.qml:100
-#, fuzzy
 msgid "Total Searches"
-msgstr "Căutări recente"
+msgstr "Total căutări"
 
 #: contents/ui/config/ConfigDebug.qml:185
 #: contents/ui/components/DebugOverlay.qml:103
 msgid "Avg Latency"
-msgstr ""
+msgstr "Latență medie"
 
 #: contents/ui/config/ConfigDebug.qml:198
 #: contents/ui/config/ConfigDebug.qml:200
 msgid "History Sample"
-msgstr ""
+msgstr "Eșantion istoric"
 
 #: contents/ui/config/ConfigDebug.qml:207
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
 msgstr ""
+"Notă confidențialitate: Toate datele sunt stocate doar LOCAL. Nu se trimite nimic pe internet."
 
 #: contents/ui/config/ConfigDebug.qml:281
 msgid "History is empty"
-msgstr ""
+msgstr "Istoricul este gol"
 
 #: contents/ui/config/ConfigHelp.qml:49
 msgid "Keyboard Shortcuts"
-msgstr "Comenzi rapide"
+msgstr "Scurtături tastatură"
 
 #: contents/ui/config/ConfigHelp.qml:53
 msgid "Navigate between results"
-msgstr ""
+msgstr "Navigare între rezultate"
 
 #: contents/ui/config/ConfigHelp.qml:59
 msgid "Navigate between sections"
-msgstr ""
+msgstr "Navigare între secțiuni"
 
 #: contents/ui/config/ConfigHelp.qml:65
-#, fuzzy
 msgid "List / Tile view"
-msgstr "Vizualizare listă"
+msgstr "Vizualizare Listă / Dale"
 
 #: contents/ui/config/ConfigHelp.qml:71
 msgid "Toggle file preview"
-msgstr ""
+msgstr "Comută previzualizarea fișierelor"
 
-#: contents/ui/config/ConfigHelp.qml:77
+#: contents/ui/config/ConfigHelp.get(1):77
 msgid "Open selected item"
-msgstr ""
+msgstr "Deschide elementul selectat"
 
 #: contents/ui/config/ConfigHelp.qml:83
 msgid "Close widget"
-msgstr ""
+msgstr "Închide widgetul"
 
 #: contents/ui/config/ConfigHelp.qml:90
-#, fuzzy
 msgid "Search Prefixes"
-msgstr "Caută aici"
+msgstr "Prefixe căutare"
 
 #: contents/ui/config/ConfigHelp.qml:125
-#, fuzzy
 msgid "User Profiles"
-msgstr "Profil utilizator"
+msgstr "Profiluri utilizator"
 
 #: contents/ui/config/ConfigHelp.qml:129
 msgid "A simplified interface with essential features."
-msgstr ""
+msgstr "O interfață simplificată cu funcții esențiale."
 
 #: contents/ui/config/ConfigHelp.qml:135
 msgid "Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Filă depanare activă, funcții dezvoltator activate."
 
 #: contents/ui/config/ConfigHelp.qml:141
 msgid "All features active, advanced settings available."
-msgstr ""
+msgstr "Toate funcțiile active, setări avansate disponibile."
 
 #: contents/ui/config/ConfigCategories.qml:145
-#, fuzzy
 msgid "Algorithm Settings"
-msgstr "Setări sistem"
+msgstr "Setări algoritm"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Fuzzy Match"
-msgstr ""
+msgstr "Potrivire Fuzzy"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Exact Match"
-msgstr ""
+msgstr "Potrivire exactă"
 
 #: contents/ui/config/ConfigCategories.qml:162
 msgid "Dynamic Result Count"
-msgstr ""
+msgstr "Număr dinamic rezultate"
 
 #: contents/ui/config/ConfigCategories.qml:163
 msgid "Automatically limit displayed results based on relevance score"
-msgstr ""
+msgstr "Limitează automat rezultatele afișate după scorul de relevanță"
 
 #: contents/ui/config/ConfigCategories.qml:195
 msgid "Prioritized Categories"
-msgstr ""
+msgstr "Categorii prioritare"
 
 #: contents/ui/config/ConfigCategories.qml:199
 msgid "Use buttons to reorder categories or move between sections"
-msgstr ""
+msgstr "Folosește butoanele pentru reordonare sau mutare"
 
-#: contents/ui/config/ConfigCategories.qml:208
+#: contents/ui/config/ConfigCategories.get(1):208
 msgid "Priority"
-msgstr ""
+msgstr "Prioritate"
 
 #: contents/ui/config/ConfigCategories.qml:299
 msgid "Move to Combined"
-msgstr ""
+msgstr "Mută la Combinate"
 
 #: contents/ui/config/ConfigCategories.qml:314
 msgid "Show Together (Merged)"
-msgstr ""
+msgstr "Arată împreună (Fuzionate)"
 
 #: contents/ui/config/ConfigCategories.qml:318
 msgid "Categories in this section will be grouped together"
-msgstr ""
+msgstr "Categoriile din această secțiune vor fi grupate"
 
 #: contents/ui/config/ConfigCategories.qml:339
 msgid "No combined categories"
-msgstr ""
+msgstr "Nicio categorie combinată"
 
 #: contents/ui/config/ConfigCategories.qml:398
-#, fuzzy
 msgid "Move to Separate"
-msgstr "Mută la coșul de gunoi"
+msgstr "Mută la Separate"
 
 #: contents/ui/config/ConfigCategories.qml:413
 msgid "Category Settings Information"
-msgstr ""
+msgstr "Informații setări categorii"
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
 msgstr ""
+"Modificările se aplică imediat. Categoriile ascunse nu apar. Prioritatea determină ordinea."
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid "Lower number = higher priority"
-msgstr ""
+msgstr "Număr mai mic = prioritate mai mare"
 
 #: contents/ui/config/ConfigPreview.qml:97
-#, fuzzy
 msgid "Preview Settings"
-msgstr "Setări sistem"
+msgstr "Setări previzualizare"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr ""
+msgstr "Activează/dezactivează previzualizarea pentru diverse tipuri."
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Enabled"
-msgstr ""
+msgstr "Activat"
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Disabled"
-msgstr ""
+msgstr "Dezactivat"
 
 #: contents/ui/config/ConfigPreview.qml:307
 msgid "Performance Information"
-msgstr ""
+msgstr "Informații performanță"
 
 #: contents/ui/config/ConfigPreview.qml:312
 msgid "Video and document previews may increase memory usage."
-msgstr ""
+msgstr "Previzualizările video pot crește consumul de memorie."
 
 #: contents/ui/config/ConfigPrefix.qml:24
 msgid "Prefix View Settings"
-msgstr ""
+msgstr "Setări vizualizare prefixe"
 
 #: contents/ui/config/ConfigPrefix.qml:158
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr ""
+msgstr "Arată opțiuni energie (Oprire, Repornire, etc.)"
 
 #: contents/ui/config/ConfigPrefix.qml:218
 msgid "Convert units (requires KRunner installed)"
-msgstr ""
+msgstr "Convertește unități (necesită KRunner)"
 
 #: contents/ui/config/ConfigPrefix.qml:228
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr ""
+msgstr "Notă: Unele prefixe depind de runnerii KRunner instalați."
 
 #: contents/ui/components/QueryHints.qml:40
 #: contents/ui/components/HelpView.qml:16
-#, fuzzy
 msgid "Timeline View"
-msgstr "Vizualizare dale"
+msgstr "Vizualizare cronologie"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
-msgstr ""
+msgstr "Calendar"
 
 #: contents/ui/components/QueryHints.qml:44
 #: contents/ui/components/QueryHints.qml:128
@@ -614,72 +595,71 @@ msgstr "Astăzi"
 #: contents/ui/components/QueryHints.qml:129
 #: contents/ui/components/QueryHints.qml:136
 msgid "Yesterday"
-msgstr ""
+msgstr "Ieri"
 
 #: contents/ui/components/QueryHints.qml:46
 msgid "This Week"
-msgstr ""
+msgstr "Săptămâna aceasta"
 
 #: contents/ui/components/QueryHints.qml:47
 msgid "This Month"
-msgstr ""
+msgstr "Luna aceasta"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Files modified today"
-msgstr ""
+msgstr "Fișiere modificate astăzi"
 
-#: contents/ui/components/QueryHints.qml:52
+#: contents/ui/components/QueryHints.get(1):52
 msgid "Files modified yesterday"
-msgstr ""
+msgstr "Fișiere modificate ieri"
 
 #: contents/ui/components/QueryHints.qml:53
 msgid "Files modified this week"
-msgstr ""
+msgstr "Fișiere modificate săptămâna aceasta"
 
 #: contents/ui/components/QueryHints.qml:54
 msgid "Files modified this month"
-msgstr ""
+msgstr "Fișiere modificate luna aceasta"
 
 #: contents/ui/components/QueryHints.qml:56
 #: contents/ui/components/HelpView.qml:18
 msgid "File Path Search"
-msgstr ""
+msgstr "Căutare după cale"
 
 #: contents/ui/components/QueryHints.qml:57
 #: contents/ui/components/HelpView.qml:23
 msgid "Man Pages"
-msgstr ""
+msgstr "Pagini Man"
 
 #: contents/ui/components/QueryHints.qml:58
 #: contents/ui/components/HelpView.qml:19
-#, fuzzy
 msgid "Google Search"
-msgstr "Căutare"
+msgstr "Căutare Google"
 
 #: contents/ui/components/QueryHints.qml:59
 #: contents/ui/components/HelpView.qml:20
 msgid "DuckDuckGo Search"
-msgstr ""
+msgstr "Căutare DuckDuckGo"
 
 #: contents/ui/components/QueryHints.qml:60
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr ""
+msgstr "Căutare Wikipedia"
 
 #: contents/ui/components/QueryHints.qml:61
 #: contents/ui/components/HelpView.qml:24
 msgid "Kill Process"
-msgstr ""
+msgstr "Oprește proces"
 
 #: contents/ui/components/QueryHints.qml:62
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
-msgstr ""
+msgstr "Verificare ortografică"
 
 #: contents/ui/components/QueryHints.qml:63
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr ""
+msgstr "Caractere Unicode"
 
 #: contents/ui/components/QueryHints.qml:64
 #: contents/ui/components/SearchPopup.qml:714
@@ -690,9 +670,8 @@ msgstr "Aplicații"
 
 #: contents/ui/components/QueryHints.qml:65
 #: contents/ui/components/HelpView.qml:28
-#, fuzzy
 msgid "Shell Commands"
-msgstr "Execută comandă"
+msgstr "Comenzi Shell"
 
 #: contents/ui/components/QueryHints.qml:66
 #: contents/ui/components/HelpView.qml:22
@@ -706,13 +685,11 @@ msgstr "Gestionare energie"
 
 #: contents/ui/components/QueryHints.qml:68
 #: contents/ui/components/HelpView.qml:30
-#, fuzzy
 msgid "System Services"
-msgstr "Setări sistem"
+msgstr "Servicii sistem"
 
 #: contents/ui/components/QueryHints.qml:69
 #: contents/ui/components/HelpView.qml:32
-#, fuzzy
 msgid "Date and Time"
 msgstr "Dată și oră"
 
@@ -726,7 +703,6 @@ msgstr "Definiție dicționar"
 msgid "Unit Converter"
 msgstr "Convertor unități"
 
-#: contents/ui/components/QueryHints.qml:72
 #: contents/ui/components/HelpView.qml:33
 msgid "Help & Shortcuts"
 msgstr "Ajutor și scurtături"
@@ -734,74 +710,72 @@ msgstr "Ajutor și scurtături"
 #: contents/ui/components/QueryHints.qml:130
 #: contents/ui/components/QueryHints.qml:136
 msgid "Two days ago"
-msgstr ""
+msgstr "Acum două zile"
 
 #: contents/ui/components/QueryHints.qml:217
 #: contents/ui/components/QueryHints.qml:227
 msgid "Browse calendar"
-msgstr ""
+msgstr "Răsfoiește calendarul"
 
 #: contents/ui/components/QueryHints.qml:241
-#, fuzzy
 msgid "Man pages not installed"
-msgstr "Pachetul Man nu este instalat"
+msgstr "Paginile Man nu sunt instalate"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "Unknown prefix"
-msgstr ""
+msgstr "Prefix necunoscut"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "try"
-msgstr ""
+msgstr "încearcă"
 
 #: contents/ui/components/DebugOverlay.qml:40
 msgid "Saved!"
-msgstr ""
+msgstr "Salvat!"
 
 #: contents/ui/components/DebugOverlay.qml:48
 #: contents/ui/components/DebugOverlay.qml:118
 msgid "Save Dump"
-msgstr ""
+msgstr "Salvează Dump"
 
 #: contents/ui/components/DebugOverlay.qml:77
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: contents/ui/components/DebugOverlay.qml:80
 msgid "Items"
-msgstr ""
+msgstr "Elemente"
 
 #: contents/ui/components/DebugOverlay.qml:83
 msgid "Latency"
-msgstr ""
+msgstr "Latență"
 
 #: contents/ui/components/DebugOverlay.qml:90
-#, fuzzy
 msgid "View"
-msgstr "Vizualizare listă"
+msgstr "Vizualizare"
 
 #: contents/ui/components/DebugOverlay.qml:93
 msgid "Display"
-msgstr ""
+msgstr "Afișaj"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/PinnedSection.qml:376
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Unpin"
-msgstr ""
+msgstr "Anulează fixarea"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Pin"
-msgstr ""
+msgstr "Fixează"
 
 #: contents/ui/components/PinnedSection.qml:71
 msgid "Pinned Items"
-msgstr ""
+msgstr "Elemente fixate"
 
 #: contents/ui/components/PinnedSection.qml:323
 msgid "Drag to reorder"
-msgstr ""
+msgstr "Trage pentru reordonare"
 
 #: contents/ui/components/PinnedSection.qml:342
 #: contents/ui/components/HistoryContextMenu.qml:52
@@ -815,7 +789,7 @@ msgstr "Copiază calea"
 #: contents/ui/components/PinnedSection.qml:363
 #: contents/ui/components/HistoryContextMenu.qml:101
 msgid "Open Containing Folder"
-msgstr "Deschide dosarul conținător"
+msgstr "Deschide folderul părinte"
 
 #: contents/ui/components/HistoryListView.qml:34
 #: contents/ui/components/HistoryTileView.qml:243
@@ -833,43 +807,43 @@ msgstr "Niciun rezultat găsit"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "Type to start searching"
-msgstr "Tastați pentru a căuta"
+msgstr "Tastați pentru a începe căutarea"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:269
 msgid "date"
-msgstr ""
+msgstr "data"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:270
 msgid "clock"
-msgstr ""
+msgstr "ceas"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:295
 msgid "power"
-msgstr ""
+msgstr "energie"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:279
 msgid "help"
-msgstr ""
+msgstr "ajutor"
 
 #: contents/ui/components/SearchPopup.qml:265
 msgid "unit"
-msgstr ""
+msgstr "unitate"
 
 #: contents/ui/components/SearchPopup.qml:283
 msgid "kill"
-msgstr ""
+msgstr "oprește"
 
 #: contents/ui/components/SearchPopup.qml:287
 msgid "spell"
-msgstr ""
+msgstr "ortografie"
 
 #: contents/ui/components/SearchPopup.qml:291
 msgid "shell"
-msgstr ""
+msgstr "shell"
 
 #: contents/ui/components/SearchPopup.qml:367
 msgid "Search Here"
@@ -881,9 +855,8 @@ msgid "Other"
 msgstr "Altele"
 
 #: contents/ui/components/HistoryContextMenu.qml:69
-#, fuzzy
 msgid "Copy Location"
-msgstr "Copiază calea"
+msgstr "Copiază locația"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
@@ -898,77 +871,76 @@ msgid "Properties"
 msgstr "Proprietăți"
 
 #: contents/ui/components/HistoryContextMenu.qml:134
-#, fuzzy
 msgid "Edit Application..."
-msgstr "Aplicații"
+msgstr "Editează aplicația..."
 
-#: contents/ui/components/HistoryContextMenu.qml:144
+#: contents/ui/components/HistoryContextMenu.get(1):144
 msgid "Remove from History"
 msgstr "Elimină din istoric"
 
 #: contents/ui/components/PowerView.qml:133
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernare"
 
 #: contents/ui/components/PowerView.qml:137
 msgid "(Press again to hibernate)"
-msgstr ""
+msgstr "(Apăsați iar pentru hibernare)"
 
 #: contents/ui/components/PowerView.qml:146
 msgid "Sleep"
-msgstr ""
+msgstr "Standby"
 
 #: contents/ui/components/PowerView.qml:150
 msgid "(Press again to sleep)"
-msgstr ""
+msgstr "(Apăsați iar pentru standby)"
 
 #: contents/ui/components/PowerView.qml:158
 msgid "Reboot"
-msgstr ""
+msgstr "Repornire"
 
 #: contents/ui/components/PowerView.qml:162
 msgid "(Press again to reboot)"
-msgstr ""
+msgstr "(Apăsați iar pentru repornire)"
 
 #: contents/ui/components/PowerView.qml:180
 msgid "Shutdown"
-msgstr ""
+msgstr "Oprire"
 
 #: contents/ui/components/PowerView.qml:184
 msgid "(Press again to shutdown)"
-msgstr ""
+msgstr "(Apăsați iar pentru oprire)"
 
 #: contents/ui/components/PowerView.qml:278
 msgid "Authorize to list entries"
-msgstr ""
+msgstr "Autorizează pentru a lista"
 
 #: contents/ui/components/PowerView.qml:299
 msgid "Lock Screen"
-msgstr ""
+msgstr "Blochează ecranul"
 
 #: contents/ui/components/PowerView.qml:309
 msgid "Log Out"
-msgstr ""
+msgstr "Ieșire din sesiune"
 
 #: contents/ui/components/PowerView.qml:313
 msgid "(Press again to log out)"
-msgstr ""
+msgstr "(Apăsați iar pentru ieșire)"
 
 #: contents/ui/components/PowerView.qml:321
 msgid "Switch User"
-msgstr ""
+msgstr "Schimbă utilizatorul"
 
 #: contents/ui/components/PowerView.qml:325
 msgid "(Press again to switch)"
-msgstr ""
+msgstr "(Apăsați iar pentru schimbare)"
 
 #: contents/ui/components/PowerView.qml:333
 msgid "Save Session"
-msgstr ""
+msgstr "Salvează sesiunea"
 
 #: contents/ui/components/PowerView.qml:352
 msgid "(Press again)"
-msgstr ""
+msgstr "(Apăsați încă o dată)"
 
 #: contents/ui/main.qml:96
 msgid "Medium Mode (Button only)"
@@ -976,86 +948,86 @@ msgstr "Mod mediu (Doar buton)"
 
 #: contents/ui/main.qml:102
 msgid "Wide Mode (Search bar + icon)"
-msgstr "Mod lat (Bară de căutare + pictogramă)"
+msgstr "Mod lat (Bară căutare + pict.)"
 
 #: contents/ui/main.qml:108
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "Mod extra lat (Lat + Substituent)"
+msgstr "Mod extra lat (Lat + Substituent lung)"
 
 msgid "Show/Hide Previews"
-msgstr ""
+msgstr "Arată/Ascunde previzualizările"
 
 msgid "Edge Appearance"
-msgstr ""
+msgstr "Aspect margini"
 
 msgid "Round corners"
-msgstr ""
+msgstr "Colțuri rotunde"
 
 msgid "Slightly round"
-msgstr ""
+msgstr "Ușor rotunjite"
 
 msgid "Less round"
-msgstr ""
+msgstr "Mai puțin rotunjite"
 
 msgid "Square corners"
-msgstr ""
+msgstr "Colțuri drepte"
 
 msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr ""
+msgstr "(Partiția swap este mai mică decât RAM sau lipsește)"
 
 msgid "Note: Systemd boot is required for this feature"
-msgstr ""
+msgstr "Notă: Necesită Systemd boot"
 
 msgid "Scan for boot entries"
-msgstr ""
+msgstr "Caută intrări boot"
 
 msgid "Result Count"
-msgstr ""
+msgstr "Număr rezultate"
 
 msgid "Priority Ranking"
-msgstr ""
+msgstr "Clasament prioritate"
 
 msgid "Show Together"
-msgstr ""
+msgstr "Arată împreună"
 
 msgid "Corner Roundness"
-msgstr ""
+msgstr "Rotunjime colțuri"
 
 msgid "Square"
-msgstr ""
+msgstr "Drept"
 
 msgid "Slightly Rounded"
-msgstr ""
+msgstr "Ușor rotunjit"
 
 msgid "Moderately Rounded"
-msgstr ""
+msgstr "Moderat rotunjit"
 
 msgid "Fully Rounded"
-msgstr ""
+msgstr "Complet rotunjit"
 
 msgid "Minimize automatically when searching"
-msgstr ""
+msgstr "Minimizează automat la căutare"
 
 msgid "Search on Wikipedia"
-msgstr ""
+msgstr "Căutare pe Wikipedia"
 
 msgid "Minimal - A simplified interface with essential features."
-msgstr ""
+msgstr "Minimal - Interfață simplificată cu funcții esențiale."
 
 msgid "Developer - Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Dezvoltator - Filă depanare activă."
 
 msgid "Power User - All features active, advanced settings available."
-msgstr ""
+msgstr "Utilizator avansat - Toate funcțiile active."
 
 msgid "Weather View (weather:)"
-msgstr "Vizualizare Meteo (vreme:)"
+msgstr "Vizualizare vreme (weather:)"
 
 msgid "Use System Units"
-msgstr "Utilizați unitățile de sistem"
+msgstr "Folosește unitățile sistemului"
 
 msgid "Refresh Interval:"
-msgstr "Interval de actualizare:"
+msgstr "Interval împrospătare:"
 
 msgid "Every Search"
 msgstr "La fiecare căutare"
@@ -1073,43 +1045,4 @@ msgid "(If time since last update > interval)"
 msgstr "(Dacă timpul de la ultima actualizare > interval)"
 
 msgid "Enable Weather Prefix"
-msgstr "Activează Prefixul Meteo"
-
-#~ msgid "Results Preview"
-#~ msgstr "Previzualizare rezultate"
-
-#~ msgid "Application 1"
-#~ msgstr "Aplicația 1"
-
-#~ msgid "Application 2"
-#~ msgstr "Aplicația 2"
-
-#~ msgid "File.txt"
-#~ msgstr "Fișier.txt"
-
-#~ msgid "File"
-#~ msgstr "Fișier"
-
-#~ msgid "Path"
-#~ msgstr "Cale"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Minimal"
-#~ msgstr "Minimal"
-
-#~ msgid "Developer"
-#~ msgstr "Dezvoltator"
-
-#~ msgid "Profiles"
-#~ msgstr "Profiluri"
-
-#~ msgid "Manage Application"
-#~ msgstr "Gestionează aplicația"
-
-#~ msgid "Reset Statistics"
-#~ msgstr "Resetează statisticile"
+msgstr "Activează prefixul meteo"

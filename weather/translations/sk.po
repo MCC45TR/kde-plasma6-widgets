@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Počasie"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Vzhľad"
 
 msgid "Details"
-msgstr ""
+msgstr "Podrobnosti"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Hodinová predpoveď"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Denná predpoveď"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Pocitovo"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Vlhkosť"
 
 msgid "Wind"
-msgstr ""
+msgstr "Vietor"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Tlak"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Oblačnosť"
 
 msgid "UV"
-msgstr ""
+msgstr "UV index"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Viditeľnosť"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Smer vetra"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Kliknutím zatvoríte"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Predvolené (Farebné SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Počasie v3 (Ploché SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Počasie v2 (Realistické PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Počasie v1 (Klasické PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Balík ikon:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Vyberte vizuálny štýl ikon počasia."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Poskytovateľ počasia"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Zadarmo, bez kľúča)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Vyžaduje kľúč)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Vyžaduje kľúč)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Najlepšia bezplatná možnosť. Nevyžaduje klúč API."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Štandardný poskytovateľ. Vyžaduje kľúč API nižšie."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Alternatívny poskytovateľ. Vyžaduje kľúč API nižšie."
 
 msgid "API Keys"
-msgstr ""
+msgstr "Kľúče API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "Kľúč API OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Zadajte svoj kľúč API OpenWeatherMap"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "Kľúč API WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Zadajte svoj kľúč WeatherAPI.com"
 
 msgid "Location"
-msgstr ""
+msgstr "Lokalita"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Automaticky zistiť z IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Zadať ručne"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Mesto 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Napr.: Bratislava, Košice, Londýn"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Mesto 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Druhé mesto (voliteľné)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Mesto 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Tretie mesto (voliteľné)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Môžete použiť názov mesta, 'Mesto, kód krajiny' alebo PSČ."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Lokalita bude automaticky zistená na základe vašej IP adresy."
 
 msgid "Settings"
-msgstr ""
+msgstr "Nastavenia"
 
 msgid "Units:"
-msgstr ""
+msgstr "Jednotky:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Použiť systémové jednotky"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Metrické (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Imperiálne (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Interval obnovenia:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minút"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minút"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minút"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 hodina"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 hodiny"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 hodiny"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 hodiny"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 hodín"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 hodín"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 hodín"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 deň"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Obnoviť"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Načítavanie údajov o počasí..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Jasno"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Prevažne jasno"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Polooblačno"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Zatiahnuté"
 
 msgid "Fog"
-msgstr ""
+msgstr "Hmla"
 
 msgid "Mist"
-msgstr ""
+msgstr "Opar"
 
 msgid "Haze"
-msgstr ""
+msgstr "Zákal"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Dym"
 
 msgid "Dust"
-msgstr ""
+msgstr "Prach"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Mrholenie"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Namŕzajúce mrholenie"
 
 msgid "Rain"
-msgstr ""
+msgstr "Dážď"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Slabý dážď"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Namŕzajúci dážď"
 
 msgid "Snow"
-msgstr ""
+msgstr "Sneh"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Slabé sneženie"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Snehová krupica"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Dažďové prehánky"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Snehové prehánky"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Búrka"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Búrka s krúpami"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Neznáme"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Zamračené"
 
 msgid "Sun"
-msgstr ""
+msgstr "Ne"
 
 msgid "Mon"
-msgstr ""
+msgstr "Po"
 
 msgid "Tue"
-msgstr ""
+msgstr "Ut"
 
 msgid "Wed"
-msgstr ""
+msgstr "St"
 
 msgid "Thu"
-msgstr ""
+msgstr "Št"
 
 msgid "Fri"
-msgstr ""
+msgstr "Pi"
 
 msgid "Sat"
-msgstr ""
+msgstr "So"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Nastavenia písma"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Použiť predvolené systémové písmo"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Vlastná rodina písma:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Priehľadnosť pozadia:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Nastavenia pozadia"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Okraj widgetu:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normálny (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Menší (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Žiadny (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Režim rozvrhnutia:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatický"
 
 msgid "Small"
-msgstr ""
+msgstr "Malý"
 
 msgid "Wide"
-msgstr ""
+msgstr "Široký"
 
 msgid "Large"
-msgstr ""
+msgstr "Veľký"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Zobrazenie:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Jednoduchý panel"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Detailný panel"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Veľkosť písma (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Veľkosť ikon (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Dni predpovede:"
 
 msgid "NW"
-msgstr ""
+msgstr "SZ"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Nastavenia panela"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Vyberte vizuálny štýl ikon počasia. (Poznámka: staršie balíky ako v1/v2 môžu pri niektorých podmienkach postrádať ikony)"

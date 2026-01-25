@@ -6,374 +6,374 @@ msgstr ""
 "PO-Revision-Date: 2026-01-22 03:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
-"Language: zh_HK\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "天氣"
 
 msgid "Appearance"
-msgstr ""
+msgstr "外觀"
 
 msgid "Details"
-msgstr ""
+msgstr "詳情"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "每小時預報"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "每日預報"
 
 msgid "Feels like"
-msgstr ""
+msgstr "體感溫度"
 
 msgid "Humidity"
-msgstr ""
+msgstr "濕度"
 
 msgid "Wind"
-msgstr ""
+msgstr "風速"
 
 msgid "Pressure"
-msgstr ""
+msgstr "氣壓"
 
 msgid "Clouds"
-msgstr ""
+msgstr "雲量"
 
 msgid "UV"
-msgstr ""
+msgstr "紫外線指數"
 
 msgid "Visibility"
-msgstr ""
+msgstr "能見度"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "風向"
 
 msgid "Click to close"
-msgstr ""
+msgstr "點擊關閉"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "預設 (彩色 SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google 天氣 v3 (扁平 SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google 天氣 v2 (寫實 PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google 天氣 v1 (經典 PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "圖標包："
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "選擇天氣圖標的視覺風格。"
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "天氣數據源"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (免費，無需金鑰)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (需要金鑰)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (需要金鑰)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "最佳免費選項。無需 API 金鑰。"
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "標準提供商。需在下方填寫 API 金鑰。"
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "備選提供商。需在下方填寫 API 金鑰。"
 
 msgid "API Keys"
-msgstr ""
+msgstr "API 金鑰"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API 金鑰："
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "輸入您的 OpenWeatherMap API 金鑰"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API 金鑰："
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "輸入您的 WeatherAPI.com 金鑰"
 
 msgid "Location"
-msgstr ""
+msgstr "位置"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "透過 IP 自動偵測"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "手動輸入"
 
 msgid "City 1:"
-msgstr ""
+msgstr "城市 1："
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "例：台北, 台中, 倫敦"
 
 msgid "City 2:"
-msgstr ""
+msgstr "城市 2："
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "第二城市 (選填)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "城市 3："
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "第三城市 (選填)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "可以使用城市名稱、'城市,國家代碼' 或郵遞區號。"
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "將根據您的 IP 地址自動偵測位置。"
 
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 msgid "Units:"
-msgstr ""
+msgstr "單位："
 
 msgid "Use system units"
-msgstr ""
+msgstr "使用系統單位"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "公制 (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "英制 (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "延遲間隔："
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 分鐘"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 分鐘"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 分鐘"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 小時"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 小時"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 小時"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 小時"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 小時"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 小時"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 小時"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 天"
 
 msgid "Refresh"
-msgstr ""
+msgstr "重新整理"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "正在載入天氣數據..."
 
 msgid "Clear"
-msgstr ""
+msgstr "晴朗"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "大部晴朗"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "多雲"
 
 msgid "Overcast"
-msgstr ""
+msgstr "陰天"
 
 msgid "Fog"
-msgstr ""
+msgstr "霧"
 
 msgid "Mist"
-msgstr ""
+msgstr "薄霧"
 
 msgid "Haze"
-msgstr ""
+msgstr "霾"
 
 msgid "Smoke"
-msgstr ""
+msgstr "煙霧"
 
 msgid "Dust"
-msgstr ""
+msgstr "浮塵"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "毛毛雨"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "凍毛毛雨"
 
 msgid "Rain"
-msgstr ""
+msgstr "雨"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "小雨"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "凍雨"
 
 msgid "Snow"
-msgstr ""
+msgstr "雪"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "小雪"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "米雪"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "陣雨"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "陣雪"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "雷暴"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "雷暴伴有冰雹"
 
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "多雲"
 
 msgid "Sun"
-msgstr ""
+msgstr "週日"
 
 msgid "Mon"
-msgstr ""
+msgstr "週一"
 
 msgid "Tue"
-msgstr ""
+msgstr "週二"
 
 msgid "Wed"
-msgstr ""
+msgstr "週三"
 
 msgid "Thu"
-msgstr ""
+msgstr "週四"
 
 msgid "Fri"
-msgstr ""
+msgstr "週五"
 
 msgid "Sat"
-msgstr ""
+msgstr "週六"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "字體設定"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "使用系統預設字體"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "自訂字體系列："
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "背景不透明度："
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "背景設定"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "組件邊距："
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "正常 (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "較小 (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "無 (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "佈局模式："
 
 msgid "Automatic"
-msgstr ""
+msgstr "自動"
 
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 msgid "Wide"
-msgstr ""
+msgstr "寬"
 
 msgid "Large"
-msgstr ""
+msgstr "大"
 
 msgid "Representation:"
-msgstr ""
+msgstr "展示形式："
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "簡單面板"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "詳細面板"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "字體大小 (0 = 自動)："
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "圖標大小 (0 = 自動)："
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "預報天數："
 
 msgid "NW"
-msgstr ""
+msgstr "西北"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "面板設定"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "選擇天氣圖標的視覺樣式。(注意：舊的圖標包（如 v1/v2）可能會缺失某些天氣的圖標)"

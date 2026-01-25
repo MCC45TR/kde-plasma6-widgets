@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Thời tiết"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Giao diện"
 
 msgid "Details"
-msgstr ""
+msgstr "Chi tiết"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Dự báo theo giờ"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Dự báo hàng ngày"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Cảm giác như"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Độ ẩm"
 
 msgid "Wind"
-msgstr ""
+msgstr "Gió"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Áp suất"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Mây"
 
 msgid "UV"
-msgstr ""
+msgstr "Chỉ số UV"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Tầm nhìn"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Hướng gió"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Nhấp để đóng"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Mặc định (SVG nhiều màu)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Weather v3 (SVG phẳng)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Weather v2 (PNG thực tế)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Weather v1 (PNG cổ điển)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Gói biểu tượng:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Chọn phong cách trực quan cho biểu tượng thời tiết."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Nguồn thời tiết"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Miễn phí, không cần khóa)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Cần khóa)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Cần khóa)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Lựa chọn miễn phí tốt nhất. Không cần khóa API."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Nguồn chuẩn. Nhập khóa API bên dưới."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Nguồn thay thế. Nhập khóa API bên dưới."
 
 msgid "API Keys"
-msgstr ""
+msgstr "Khóa API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "Khóa API OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Nhập khóa API OpenWeatherMap của bạn"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "Khóa API WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Nhập khóa API WeatherAPI.com của bạn"
 
 msgid "Location"
-msgstr ""
+msgstr "Địa điểm"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Tự động phát hiện từ IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Nhập thủ công"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Thành phố 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Ví dụ: Hà Nội, TP.HCM, London"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Thành phố 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Thành phố thứ hai (tùy chọn)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Thành phố 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Thành phố thứ ba (tùy chọn)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Bạn có thể dùng tên Thành phố, 'Thành phố, Mã quốc gia' hoặc Mã bưu điện."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Vị trí sẽ được tự động phát hiện dựa trên địa chỉ IP của bạn."
 
 msgid "Settings"
-msgstr ""
+msgstr "Cài đặt"
 
 msgid "Units:"
-msgstr ""
+msgstr "Đơn vị:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Sử dụng đơn vị hệ thống"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Hệ mét (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Hệ Anh (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Khoảng thời gian làm mới:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 phút"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 phút"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 phút"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 giờ"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 giờ"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 giờ"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 giờ"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 giờ"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 giờ"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 giờ"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 ngày"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Làm mới"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Đang tải dữ liệu thời tiết..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Trời quang"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Trời có mây thưa"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Nhiều mây"
 
 msgid "Overcast"
-msgstr ""
+msgstr "U ám"
 
 msgid "Fog"
-msgstr ""
+msgstr "Sương mù"
 
 msgid "Mist"
-msgstr ""
+msgstr "Sương mù nhẹ"
 
 msgid "Haze"
-msgstr ""
+msgstr "Mù"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Khói"
 
 msgid "Dust"
-msgstr ""
+msgstr "Bụi"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Mưa phùn"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Mưa phùn lạnh giá"
 
 msgid "Rain"
-msgstr ""
+msgstr "Mưa"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Mưa nhẹ"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Mưa băng"
 
 msgid "Snow"
-msgstr ""
+msgstr "Tuyết"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Tuyết nhẹ"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Tuyết hột"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Mưa rào"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Tuyết rào"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Dông"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Dông có mưa đá"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Không xác định"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Cực kỳ nhiều mây"
 
 msgid "Sun"
-msgstr ""
+msgstr "CN"
 
 msgid "Mon"
-msgstr ""
+msgstr "T2"
 
 msgid "Tue"
-msgstr ""
+msgstr "T3"
 
 msgid "Wed"
-msgstr ""
+msgstr "T4"
 
 msgid "Thu"
-msgstr ""
+msgstr "T5"
 
 msgid "Fri"
-msgstr ""
+msgstr "T6"
 
 msgid "Sat"
-msgstr ""
+msgstr "T7"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Cài đặt phong chữ"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Sử dụng phong chữ mặc định hệ thống"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Phong chữ tùy chỉnh:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Độ mờ hậu cảnh:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Cài đặt hậu cảnh"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Lề Widget:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Bình thường (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Ít hơn (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Không có (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Chế độ bố cục:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Tự động"
 
 msgid "Small"
-msgstr ""
+msgstr "Nhỏ"
 
 msgid "Wide"
-msgstr ""
+msgstr "Rộng"
 
 msgid "Large"
-msgstr ""
+msgstr "Lớn"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Biểu hiện:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Bảng điều khiển đơn giản"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Bảng điều khiển chi tiết"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Kích thước phong chữ (0 = Tự động):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Kích thước biểu tượng (0 = Tự động):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Số ngày dự báo:"
 
 msgid "NW"
-msgstr ""
+msgstr "TB"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Cài đặt bảng điều khiển"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Chọn phong cách trực quan cho biểu tượng thời tiết. (Lưu ý: các gói cũ như v1/v2 có thể thiếu biểu tượng cho một số điều kiện)"

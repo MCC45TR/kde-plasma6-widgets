@@ -28,7 +28,7 @@ msgid "Daily Forecast"
 msgstr "Pronóstico diario"
 
 msgid "Feels like"
-msgstr "Sensación"
+msgstr "Sensación térmica"
 
 msgid "Humidity"
 msgstr "Humedad"
@@ -52,67 +52,67 @@ msgid "Wind Direction"
 msgstr "Dirección del viento"
 
 msgid "Click to close"
-msgstr "Haz clic para cerrar"
+msgstr "Haga clic para cerrar"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Predeterminado (SVG colorido)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Tiempo v3 (SVG plano)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Tiempo v2 (PNG realista)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Tiempo v1 (PNG clásico)"
 
 msgid "Icon Pack:"
 msgstr "Paquete de iconos:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Seleccione el estilo visual de los iconos meteorológicos."
 
 msgid "Weather Provider"
-msgstr "Proveedor de tiempo"
+msgstr "Proveedor meteorológico"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Gratis, no se requiere clave)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Se requiere clave)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Se requiere clave)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "La mejor opción gratuita. No se requiere clave API."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Proveedor estándar. Se requiere clave API a continuación."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Proveedor alternativo. Se requiere clave API a continuación."
 
 msgid "API Keys"
-msgstr ""
+msgstr "Claves API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "Clave API OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Introduzca su clave API OpenWeatherMap"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "Clave API WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Introduzca su clave de WeatherAPI.com"
 
 msgid "Location"
 msgstr "Ubicación"
 
 msgid "Auto-detect from IP"
-msgstr "Detectar por IP"
+msgstr "Autodetectar por IP"
 
 msgid "Enter manually"
 msgstr "Introducir manualmente"
@@ -121,25 +121,25 @@ msgid "City 1:"
 msgstr "Ciudad 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Ej: Madrid, Barcelona, Londres"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Ciudad 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Segunda ciudad (opcional)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Ciudad 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Tercera ciudad (opcional)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Puede usar el nombre de la ciudad, 'Ciudad,Código de país' o código postal."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "La ubicación se detectará automáticamente en función de su dirección IP."
 
 msgid "Settings"
 msgstr "Ajustes"
@@ -148,7 +148,7 @@ msgid "Units:"
 msgstr "Unidades:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Usar unidades del sistema"
 
 msgid "Metric (°C)"
 msgstr "Métrico (°C)"
@@ -157,52 +157,52 @@ msgid "Imperial (°F)"
 msgstr "Imperial (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Intervalo de actualización:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minutos"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minutos"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minutos"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 hora"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 horas"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 horas"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 horas"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 horas"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 horas"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 horas"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 día"
 
 msgid "Refresh"
 msgstr "Actualizar"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Cargando datos meteorológicos..."
 
 msgid "Clear"
 msgstr "Despejado"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Mayormente despejado"
 
 msgid "Partly Cloudy"
 msgstr "Parcialmente nublado"
@@ -211,118 +211,118 @@ msgid "Overcast"
 msgstr "Cubierto"
 
 msgid "Fog"
-msgstr ""
+msgstr "Niebla"
 
 msgid "Mist"
-msgstr ""
+msgstr "Neblina"
 
 msgid "Haze"
-msgstr ""
+msgstr "Calima"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Humo"
 
 msgid "Dust"
-msgstr ""
+msgstr "Polvo"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Llovizna"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Llovizna gélida"
 
 msgid "Rain"
 msgstr "Lluvia"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Lluvia ligera"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Lluvia gélida"
 
 msgid "Snow"
 msgstr "Nieve"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Nieve ligera"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Cinarra"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Chubascos de lluvia"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Chubascos de nieve"
 
 msgid "Thunderstorm"
 msgstr "Tormenta"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Tormenta con granizo"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Nublado"
 
 msgid "Sun"
-msgstr ""
+msgstr "Dom"
 
 msgid "Mon"
-msgstr ""
+msgstr "Lun"
 
 msgid "Tue"
-msgstr ""
+msgstr "Mar"
 
 msgid "Wed"
-msgstr ""
+msgstr "Mié"
 
 msgid "Thu"
-msgstr ""
+msgstr "Jue"
 
 msgid "Fri"
-msgstr ""
+msgstr "Vie"
 
 msgid "Sat"
-msgstr ""
+msgstr "Sáb"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Ajustes de fuente"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Usar fuente predeterminada del sistema"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Familia de fuente personalizada:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacidad del fondo:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Ajustes de fondo"
 
 msgid "Widget Margin:"
 msgstr "Margen del widget:"
@@ -337,43 +337,43 @@ msgid "None (0px)"
 msgstr "Ninguno (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Modo de disposición:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
 msgid "Small"
-msgstr ""
+msgstr "Pequeño"
 
 msgid "Wide"
-msgstr ""
+msgstr "Ancho"
 
 msgid "Large"
-msgstr ""
+msgstr "Grande"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Representación:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Panel simple"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Panel detallado"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Tamaño de fuente (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Tamaño de icono (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Días de pronóstico:"
 
 msgid "NW"
-msgstr ""
+msgstr "NO"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Ajustes del panel"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Seleccione el estilo visual para los iconos meteorológicos. (Nota: los paquetes más antiguos como v1/v2 pueden tener iconos faltantes para algunas condiciones)"

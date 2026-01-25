@@ -55,91 +55,91 @@ msgid "Click to close"
 msgstr "Klik om te sluiten"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Standaard (Kleurrijke SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Weer v3 (Vlakke SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Weer v2 (Realistische PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Weer v1 (Klassieke PNG)"
 
 msgid "Icon Pack:"
-msgstr "Icoonpakket:"
+msgstr "Iconpakket:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Selecteer de visuele stijl voor weerpictogrammen."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Weerprovider"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Gratis, geen sleutel nodig)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Sleutel nodig)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Sleutel nodig)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Beste gratis optie. Geen API-sleutel nodig."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Standaardprovider. API-sleutel hieronder vereist."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Alternatieve provider. API-sleutel hieronder vereist."
 
 msgid "API Keys"
-msgstr ""
+msgstr "API-sleutels"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API-sleutel:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Voer je OpenWeatherMap API-sleutel in"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API-sleutel:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Voer je WeatherAPI.com sleutel in"
 
 msgid "Location"
 msgstr "Locatie"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Automatisch detecteren via IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Handmatig invoeren"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Stad 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Bijv: Amsterdam, Brussel, Londen"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Stad 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Tweede stad (optioneel)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Stad 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Derde stad (optioneel)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Je kunt de stadsnaam, 'Stad,Landcode' of postcode gebruiken."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Locatie wordt automatisch gedetecteerd op basis van je IP-adres."
 
 msgid "Settings"
 msgstr "Instellingen"
@@ -148,7 +148,7 @@ msgid "Units:"
 msgstr "Eenheden:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Systeemeenheden gebruiken"
 
 msgid "Metric (°C)"
 msgstr "Metrisch (°C)"
@@ -157,175 +157,175 @@ msgid "Imperial (°F)"
 msgstr "Imperiaal (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Verversingsinterval:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuten"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuten"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minuten"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 uur"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 uur"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 uur"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 uur"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 uur"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 uur"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 uur"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 msgid "Refresh"
-msgstr "Vernieuwen"
+msgstr "Verversen"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Weergegevens laden..."
 
 msgid "Clear"
 msgstr "Helder"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Hoofdzakelijk helder"
 
 msgid "Partly Cloudy"
 msgstr "Licht bewolkt"
 
 msgid "Overcast"
-msgstr "Geheel bewolkt"
+msgstr "Betrokken"
 
 msgid "Fog"
-msgstr ""
+msgstr "Mist"
 
 msgid "Mist"
-msgstr ""
+msgstr "Nevel"
 
 msgid "Haze"
-msgstr ""
+msgstr "Wazig"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Rook"
 
 msgid "Dust"
-msgstr ""
+msgstr "Stof"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Motregen"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Ijskoude motregen"
 
 msgid "Rain"
 msgstr "Regen"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Lichte regen"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Ijskoude regen"
 
 msgid "Snow"
 msgstr "Sneeuw"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Lichte sneeuw"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Sneeuwkorrels"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Regenbuien"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Sneeuwbuien"
 
 msgid "Thunderstorm"
 msgstr "Onweer"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Onweer met hagel"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Bewolkt"
 
 msgid "Sun"
-msgstr ""
+msgstr "Zo"
 
 msgid "Mon"
-msgstr ""
+msgstr "Ma"
 
 msgid "Tue"
-msgstr ""
+msgstr "Di"
 
 msgid "Wed"
-msgstr ""
+msgstr "Wo"
 
 msgid "Thu"
-msgstr ""
+msgstr "Do"
 
 msgid "Fri"
-msgstr ""
+msgstr "Vr"
 
 msgid "Sat"
-msgstr ""
+msgstr "Za"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Lettertype-instellingen"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Dofault systeemlettertype gebruiken"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Aangepaste lettertypefamilie:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Achtergronddoorzichtigheid:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Achtergrondinstellingen"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Widget-marge:"
 
 msgid "Normal (10px)"
 msgstr "Normaal (10px)"
@@ -337,43 +337,43 @@ msgid "None (0px)"
 msgstr "Geen (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Indelingsmodus:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatisch"
 
 msgid "Small"
-msgstr ""
+msgstr "Klein"
 
 msgid "Wide"
-msgstr ""
+msgstr "Breed"
 
 msgid "Large"
-msgstr ""
+msgstr "Groot"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Weergave:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Eenvoudig paneel"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Gedetailleerd paneel"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Lettergrootte (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Icoongrootte (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Voorspellingsdagen:"
 
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Paneelinstellingen"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Selecteer de visuele stijl voor weerpictogrammen. (Opmerking: oudere pakketten zoals v1/v2 kunnen pictogrammen missen voor sommige omstandigheden)"

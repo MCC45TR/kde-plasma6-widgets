@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Погода"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Зовнішній вигляд"
 
 msgid "Details"
-msgstr ""
+msgstr "Деталі"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Погодинний прогноз"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Денний прогноз"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Відчувається як"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Вологість"
 
 msgid "Wind"
-msgstr ""
+msgstr "Вітер"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Тиск"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Хмарність"
 
 msgid "UV"
-msgstr ""
+msgstr "УФ-індекс"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Видимість"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Напрямок вітру"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Натисніть, щоб закрити"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "За замовчуванням (кольоровий SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Погода v3 (плоский SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Погода v2 (реалістичний PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Погода v1 (класичний PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Набір іконок:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Виберіть візуальний стиль для іконок погоди."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Постачальник погоди"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (безкоштовно, ключ не потрібен)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (потрібен ключ)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (потрібен ключ)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Найкращий безкоштовний варіант. Ключ API не потрібен."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Стандартний постачальник. Ключ API потрібен нижче."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Альтернативний постачальник. Ключ API потрібен нижче."
 
 msgid "API Keys"
-msgstr ""
+msgstr "Ключі API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "Ключ API OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Введіть ключ API OpenWeatherMap"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "Ключ API WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Введіть ключ WeatherAPI.com"
 
 msgid "Location"
-msgstr ""
+msgstr "Місцезнаходження"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Автовизначення за IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Ввести вручну"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Місто 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Приклад: Київ, Львів, Лондон"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Місто 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Друге місто (необов'язково)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Місто 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Третє місто (необов'язково)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Можна використовувати назву міста, 'Місто,код країни' або поштовий індекс."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Місцезнаходження буде визначено автоматично на основі вашої IP-адреси."
 
 msgid "Settings"
-msgstr ""
+msgstr "Налаштування"
 
 msgid "Units:"
-msgstr ""
+msgstr "Одиниці:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Використовувати системні одиниці"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Метрична (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Імперська (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Інтервал оновлення:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 хвилин"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 хвилин"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 хвилин"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 година"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 години"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 години"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 години"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 годин"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 годин"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 годин"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 день"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Оновити"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Завантаження даних про погоду..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Ясно"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Переважно ясно"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Мінлива хмарність"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Похмуро"
 
 msgid "Fog"
-msgstr ""
+msgstr "Туман"
 
 msgid "Mist"
-msgstr ""
+msgstr "Серпанок"
 
 msgid "Haze"
-msgstr ""
+msgstr "Мгла"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Дим"
 
 msgid "Dust"
-msgstr ""
+msgstr "Пил"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Мжичка"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Крижана мжичка"
 
 msgid "Rain"
-msgstr ""
+msgstr "Дощ"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Невеликий дощ"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Крижаний дощ"
 
 msgid "Snow"
-msgstr ""
+msgstr "Сніг"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Невеликий сніг"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Сніжна крупа"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Зливовий дощ"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Зливовий сніг"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Гроза"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Гроза з градом"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Хмарно"
 
 msgid "Sun"
-msgstr ""
+msgstr "Нд"
 
 msgid "Mon"
-msgstr ""
+msgstr "Пн"
 
 msgid "Tue"
-msgstr ""
+msgstr "Вт"
 
 msgid "Wed"
-msgstr ""
+msgstr "Ср"
 
 msgid "Thu"
-msgstr ""
+msgstr "Чт"
 
 msgid "Fri"
-msgstr ""
+msgstr "Пт"
 
 msgid "Sat"
-msgstr ""
+msgstr "Сб"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Налаштування шрифту"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Використовувати системний шрифт за замовчуванням"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Власний шрифт:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Прозорість фону:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Налаштування фону"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Відступи віджета:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Звичайні (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Менше (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Немає (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Режим компонування:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Автоматично"
 
 msgid "Small"
-msgstr ""
+msgstr "Малий"
 
 msgid "Wide"
-msgstr ""
+msgstr "Широкий"
 
 msgid "Large"
-msgstr ""
+msgstr "Великий"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Вигляд:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Проста панель"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Детальна панель"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Розмір шрифту (0 = Авто):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Розмір іконки (0 = Авто):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Днів прогнозу:"
 
 msgid "NW"
-msgstr ""
+msgstr "ПнЗ"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Налаштування панелі"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Виберіть візуальний стиль для іконок погоди. (Примітка: старіші набори, такі як v1/v2, можуть не мати іконок для деяких умов)"

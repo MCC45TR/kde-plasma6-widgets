@@ -3,83 +3,77 @@ msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-18 22:43+0300\n"
-"PO-Revision-Date: 2026-01-18 16:42\n"
-"Last-Translator: Auto Generator <auto@bot>\n"
+"PO-Revision-Date: 2026-01-22 12:00+0300\n"
+"Last-Translator: Automatically generated\n"
 "Language-Team: ru\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
 msgid "Appearance"
 msgstr "Внешний вид"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-#, fuzzy
 msgid "Categories"
-msgstr "Категория"
+msgstr "Категории"
 
 #: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
 msgid "Debug"
-msgstr ""
+msgstr "Отладка"
 
 #: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
 msgid "Help"
-msgstr ""
+msgstr "Справка"
 
 #: contents/ui/config/ConfigGeneral.qml:80
-#, fuzzy
 msgid "Panel"
-msgstr "Вид панели"
+msgstr "Панель"
 
 #: contents/ui/config/ConfigGeneral.qml:84
 msgid "Popup"
-msgstr ""
+msgstr "Всплывающее окно"
 
 #: contents/ui/config/ConfigGeneral.qml:88
 #: contents/ui/config/ConfigPreview.qml:9
-#, fuzzy
 msgid "Preview"
-msgstr "Предпросмотр панели"
+msgstr "Предпросмотр"
 
 #: contents/ui/config/ConfigGeneral.qml:92
 #: contents/ui/config/ConfigPrefix.qml:9
 msgid "Prefixes"
-msgstr ""
+msgstr "Префиксы"
 
 #: contents/ui/config/ConfigGeneral.qml:96
 msgid "Placeholder"
-msgstr ""
+msgstr "Заполнитель"
 
 #: contents/ui/config/ConfigGeneral.qml:114
-#, fuzzy
 msgid "Panel Appearance"
-msgstr "Внешний вид"
+msgstr "Внешний вид панели"
 
 #: contents/ui/config/ConfigGeneral.qml:120
 #: contents/ui/config/ConfigDebug.qml:123
 msgid "Display Mode"
-msgstr ""
+msgstr "Режим отображения"
 
 #: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
 msgid "Button Mode (Icon only)"
-msgstr "Режим кнопки (Только иконка)"
+msgstr "Режим кнопки (только значок)"
 
 #: contents/ui/config/ConfigGeneral.qml:123
-#, fuzzy
 msgid "Medium Mode (Text)"
-msgstr "Средний режим (Только кнопка)"
+msgstr "Средний режим (текст)"
 
 #: contents/ui/config/ConfigGeneral.qml:124
-#, fuzzy
 msgid "Wide Mode (Search Bar)"
-msgstr "Широкий режим (Строка поиска + иконка)"
+msgstr "Широкий режим (строка поиска)"
 
 #: contents/ui/config/ConfigGeneral.qml:125
 msgid "Extra Wide Mode"
-msgstr ""
+msgstr "Сверхширокий режим"
 
 #: contents/ui/config/ConfigGeneral.qml:132
 msgid "Panel Preview"
@@ -92,7 +86,7 @@ msgstr "Поиск"
 
 #: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
 msgid "Start searching..."
-msgstr "Начать поиск..."
+msgstr "Начните поиск..."
 
 #: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
 msgid "Search..."
@@ -100,20 +94,20 @@ msgstr "Поиск..."
 
 #: contents/ui/config/ConfigGeneral.qml:204
 msgid "Power Options"
-msgstr ""
+msgstr "Параметры питания"
 
 #: contents/ui/config/ConfigGeneral.qml:205
 msgid "Show boot options in Reboot button"
-msgstr ""
+msgstr "Показывать варианты загрузки в кнопке перезагрузки"
 
 #: contents/ui/config/ConfigGeneral.qml:213
 msgid "Results View"
-msgstr "Вид результатов"
+msgstr "Просмотр результатов"
 
 #: contents/ui/config/ConfigGeneral.qml:219
 #: contents/ui/config/ConfigDebug.qml:129
 msgid "View Mode"
-msgstr ""
+msgstr "Режим просмотра"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "List View"
@@ -126,109 +120,105 @@ msgstr "Вид плитки"
 #: contents/ui/config/ConfigGeneral.qml:227
 #: contents/ui/config/ConfigDebug.qml:138
 msgid "List Icon Size"
-msgstr "Размер иконок списка"
+msgstr "Размер значков списка"
 
 #: contents/ui/config/ConfigGeneral.qml:235
 #: contents/ui/config/ConfigDebug.qml:135
 msgid "Tile Icon Size"
-msgstr "Размер иконок плитки"
+msgstr "Размер значков плитки"
 
 #: contents/ui/config/ConfigGeneral.qml:243
 #: contents/ui/config/ConfigCategories.qml:170
-#, fuzzy
 msgid "Result Limits"
-msgstr "Вид результатов"
+msgstr "Лимиты результатов"
 
 #: contents/ui/config/ConfigGeneral.qml:249
 #: contents/ui/config/ConfigCategories.qml:175
-#, fuzzy
 msgid "Min Results"
-msgstr "Вид результатов"
+msgstr "Мин. результатов"
 
 #: contents/ui/config/ConfigGeneral.qml:256
 #: contents/ui/config/ConfigCategories.qml:184
-#, fuzzy
 msgid "Max Results"
-msgstr "Вид результатов"
+msgstr "Макс. результатов"
 
 #: contents/ui/config/ConfigGeneral.qml:263
 msgid "Smartly limit results based on relevance"
-msgstr ""
+msgstr "Умное ограничение результатов по релевантности"
 
 #: contents/ui/config/ConfigGeneral.qml:264
 msgid "Dynamic Limit"
-msgstr ""
+msgstr "Динамический лимит"
 
 #: contents/ui/config/ConfigGeneral.qml:272
 #: contents/ui/config/ConfigSearch.qml:19
 #: contents/ui/config/ConfigPreview.qml:112
-#, fuzzy
 msgid "Enable File Previews"
-msgstr "Предпросмотр панели"
+msgstr "Включить предпросмотр файлов"
 
 #: contents/ui/config/ConfigGeneral.qml:273
 msgid "Master Switch"
-msgstr ""
+msgstr "Главный переключатель"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 #: contents/ui/config/ConfigPreview.qml:134
 msgid "Preview Types"
-msgstr ""
+msgstr "Типы предпросмотра"
 
 #: contents/ui/config/ConfigGeneral.qml:283
 #: contents/ui/config/ConfigPreview.qml:159
 msgid "Images"
-msgstr ""
+msgstr "Изображения"
 
 #: contents/ui/config/ConfigGeneral.qml:289
 #: contents/ui/config/ConfigPreview.qml:197
 msgid "Videos"
-msgstr ""
+msgstr "Видео"
 
 #: contents/ui/config/ConfigGeneral.qml:295
 #: contents/ui/config/ConfigPreview.qml:235
 msgid "Text Files"
-msgstr ""
+msgstr "Текстовые файлы"
 
 #: contents/ui/config/ConfigGeneral.qml:301
 #: contents/ui/config/ConfigPreview.qml:273
 msgid "Documents"
-msgstr ""
+msgstr "Документы"
 
 #: contents/ui/config/ConfigGeneral.qml:311
 #: contents/ui/config/ConfigPrefix.qml:29
 msgid "Date View (date:)"
-msgstr ""
+msgstr "Просмотр даты (date:)"
 
 #: contents/ui/config/ConfigGeneral.qml:316
 #: contents/ui/config/ConfigPrefix.qml:36
 msgid "Show Large Clock"
-msgstr ""
+msgstr "Показывать большие часы"
 
 #: contents/ui/config/ConfigGeneral.qml:320
 #: contents/ui/config/ConfigPrefix.qml:43
 msgid "Show Calendar Events"
-msgstr ""
+msgstr "Показывать события календаря"
 
 #: contents/ui/config/ConfigGeneral.qml:323
 #: contents/ui/config/ConfigPrefix.qml:50
 msgid "Power View (power:)"
-msgstr ""
+msgstr "Просмотр питания (power:)"
 
 #: contents/ui/config/ConfigGeneral.qml:328
 #: contents/ui/config/ConfigPrefix.qml:58
 msgid "Show Sleep Button"
-msgstr ""
+msgstr "Показывать кнопку сна"
 
 #: contents/ui/config/ConfigGeneral.qml:332
 #: contents/ui/config/ConfigPrefix.qml:65
 msgid "Show Hibernate Button"
-msgstr ""
+msgstr "Показывать кнопку гибернации"
 
 #: contents/ui/config/ConfigGeneral.qml:337
 #: contents/ui/config/ConfigPrefix.qml:72
 msgid "Available Prefixes Reference"
-msgstr ""
+msgstr "Справочник доступных префиксов"
 
 #: contents/ui/config/ConfigGeneral.qml:341
 #: contents/ui/config/ConfigPrefix.qml:76
@@ -236,201 +226,200 @@ msgid ""
 "These prefixes can be used to perform specific actions directly from the "
 "search bar."
 msgstr ""
+"Эти префиксы можно использовать для выполнения действий прямо из строки поиска."
 
 #: contents/ui/config/ConfigGeneral.qml:363
 #: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
 #: contents/ui/config/ConfigPrefix.qml:98
 msgid "List files modified today"
-msgstr ""
+msgstr "Список файлов, измененных сегодня"
 
 #: contents/ui/config/ConfigGeneral.qml:375
 #: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
 #: contents/ui/config/ConfigPrefix.qml:110
 msgid "Search on Google"
-msgstr ""
+msgstr "Поиск в Google"
 
 #: contents/ui/config/ConfigGeneral.qml:387
 #: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
 #: contents/ui/config/ConfigPrefix.qml:122
 msgid "Search on DuckDuckGo"
-msgstr ""
+msgstr "Поиск в DuckDuckGo"
 
 #: contents/ui/config/ConfigGeneral.qml:399
 #: contents/ui/config/ConfigPrefix.qml:134
 msgid "Show calendar and date information"
-msgstr ""
+msgstr "Показывать календарь и информацию о дате"
 
 #: contents/ui/config/ConfigGeneral.qml:411
 #: contents/ui/config/ConfigPrefix.qml:146
 msgid "Show large clock"
-msgstr ""
+msgstr "Показывать большие часы"
 
 #: contents/ui/config/ConfigGeneral.qml:423
-#, fuzzy
 msgid "Show power management options"
-msgstr "Управление питанием"
+msgstr "Показывать опции управления питанием"
 
 #: contents/ui/config/ConfigGeneral.qml:435
 #: contents/ui/config/ConfigPrefix.qml:170
 msgid "Show this help screen"
-msgstr ""
+msgstr "Показывать этот экран справки"
 
 #: contents/ui/config/ConfigGeneral.qml:447
 #: contents/ui/config/ConfigPrefix.qml:182
 msgid "Terminate running processes"
-msgstr ""
+msgstr "Завершить запущенные процессы"
 
 #: contents/ui/config/ConfigGeneral.qml:459
 #: contents/ui/config/ConfigPrefix.qml:194
 msgid "Check spelling of a word"
-msgstr ""
+msgstr "Проверить орфографию слова"
 
 #: contents/ui/config/ConfigGeneral.qml:471
 #: contents/ui/config/ConfigPrefix.qml:206
 msgid "Execute shell commands"
-msgstr ""
+msgstr "Выполнить команды оболочки"
 
 #: contents/ui/config/ConfigGeneral.qml:483
 msgid "Convert units (requires KRunner)"
-msgstr ""
+msgstr "Конвертировать единицы (нужен KRunner)"
 
 #: contents/ui/config/ConfigGeneral.qml:493
 #: contents/ui/config/ConfigSearch.qml:13
-#, fuzzy
 msgid "Search Settings"
-msgstr "Настройки системы"
+msgstr "Настройки поиска"
 
 #: contents/ui/config/ConfigGeneral.qml:497
 #: contents/ui/config/ConfigCategories.qml:150
 msgid "Search Algorithm"
-msgstr ""
+msgstr "Алгоритм поиска"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Fuzzy"
-msgstr ""
+msgstr "Нечеткий"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Exact"
-msgstr ""
+msgstr "Точный"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Starts With"
-msgstr ""
+msgstr "Начинается с"
 
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
 msgstr ""
+"Предпросмотр при наведении (также по Ctrl+Space)"
 
 #: contents/ui/config/ConfigSearch.qml:33
-#, fuzzy
 msgid "Search Behavior"
-msgstr "Искать здесь"
+msgstr "Поведение поиска"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr ""
+msgstr "Вы можете использовать следующие команды и префиксы KRunner:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
-msgstr ""
+msgstr "Префикс"
 
 #: contents/ui/config/ConfigSearch.qml:56
 msgid "Description"
-msgstr ""
+msgstr "Описание"
 
 #: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
 msgid "Terminate processes"
-msgstr ""
+msgstr "Завершить процессы"
 
 #: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
 msgid "Check spelling"
-msgstr ""
+msgstr "Проверка орфографии"
 
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
-msgstr ""
+msgstr "Поиск символов Unicode"
 
 #: contents/ui/config/ConfigDebug.qml:68
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
 msgstr ""
+"Эта вкладка активна только в режиме разработчика. Измените профиль "
+"в общих настройках."
 
 #: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-#, fuzzy
 msgid "Debug Settings"
-msgstr "Настройки системы"
+msgstr "Настройки отладки"
 
 #: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
 #: contents/ui/components/DebugOverlay.qml:57
 msgid "Debug Overlay"
-msgstr ""
+msgstr "Оверлей отладки"
 
 #: contents/ui/config/ConfigDebug.qml:91
 msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr ""
+msgstr "Показывать инфо об отладке на виджете"
 
 #: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
 msgid "Debug Data"
-msgstr ""
+msgstr "Данные отладки"
 
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Timestamp"
-msgstr ""
+msgstr "Метка времени"
 
 #: contents/ui/config/ConfigDebug.qml:114
 msgid "Locale"
-msgstr ""
+msgstr "Локаль"
 
 #: contents/ui/config/ConfigDebug.qml:117
-#, fuzzy
 msgid "User Profile"
-msgstr "Профиль"
+msgstr "Профиль пользователя"
 
 #: contents/ui/config/ConfigDebug.qml:141
-#, fuzzy
 msgid "Enable Preview"
-msgstr "Предпросмотр панели"
+msgstr "Включить предпросмотр"
 
 #: contents/ui/config/ConfigDebug.qml:147
 msgid "History Count"
-msgstr ""
+msgstr "Количество записей истории"
 
 #: contents/ui/config/ConfigDebug.qml:153
 msgid "items"
-msgstr ""
+msgstr "элементов"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/config/ConfigDebug.qml:165
 msgid "Telemetry"
-msgstr ""
+msgstr "Телеметрия"
 
 #: contents/ui/config/ConfigDebug.qml:174
 #: contents/ui/components/DebugOverlay.qml:100
-#, fuzzy
 msgid "Total Searches"
-msgstr "Недавние поиски"
+msgstr "Всего поисков"
 
 #: contents/ui/config/ConfigDebug.qml:185
 #: contents/ui/components/DebugOverlay.qml:103
 msgid "Avg Latency"
-msgstr ""
+msgstr "Ср. задержка"
 
 #: contents/ui/config/ConfigDebug.qml:198
 #: contents/ui/config/ConfigDebug.qml:200
 msgid "History Sample"
-msgstr ""
+msgstr "Образец истории"
 
 #: contents/ui/config/ConfigDebug.qml:207
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
 msgstr ""
+"Конфиденциальность: Все данные отладки и телеметрии хранятся ЛОКАЛЬНО. Никакие "
+"данные не отправляются."
 
 #: contents/ui/config/ConfigDebug.qml:281
 msgid "History is empty"
-msgstr ""
+msgstr "История пуста"
 
 #: contents/ui/config/ConfigHelp.qml:49
 msgid "Keyboard Shortcuts"
@@ -438,171 +427,166 @@ msgstr "Горячие клавиши"
 
 #: contents/ui/config/ConfigHelp.qml:53
 msgid "Navigate between results"
-msgstr ""
+msgstr "Навигация между результатами"
 
 #: contents/ui/config/ConfigHelp.qml:59
 msgid "Navigate between sections"
-msgstr ""
+msgstr "Навигация между разделами"
 
 #: contents/ui/config/ConfigHelp.qml:65
-#, fuzzy
 msgid "List / Tile view"
-msgstr "Вид списка"
+msgstr "Вид списка / плитки"
 
 #: contents/ui/config/ConfigHelp.qml:71
 msgid "Toggle file preview"
-msgstr ""
+msgstr "Переключить предпросмотр файла"
 
 #: contents/ui/config/ConfigHelp.qml:77
 msgid "Open selected item"
-msgstr ""
+msgstr "Открыть выбранный элемент"
 
 #: contents/ui/config/ConfigHelp.qml:83
 msgid "Close widget"
-msgstr ""
+msgstr "Закрыть виджет"
 
 #: contents/ui/config/ConfigHelp.qml:90
-#, fuzzy
 msgid "Search Prefixes"
-msgstr "Искать здесь"
+msgstr "Префиксы поиска"
 
 #: contents/ui/config/ConfigHelp.qml:125
-#, fuzzy
 msgid "User Profiles"
-msgstr "Профиль"
+msgstr "Профили пользователей"
 
 #: contents/ui/config/ConfigHelp.qml:129
 msgid "A simplified interface with essential features."
-msgstr ""
+msgstr "Упрощенный интерфейс с основными функциями."
 
 #: contents/ui/config/ConfigHelp.qml:135
 msgid "Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Вкладка отладки активна, функции разработчика включены."
 
 #: contents/ui/config/ConfigHelp.qml:141
 msgid "All features active, advanced settings available."
-msgstr ""
+msgstr "Все функции активны, доступны расширенные настройки."
 
 #: contents/ui/config/ConfigCategories.qml:145
-#, fuzzy
 msgid "Algorithm Settings"
-msgstr "Настройки системы"
+msgstr "Настройки алгоритма"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Fuzzy Match"
-msgstr ""
+msgstr "Нечеткое соответствие"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Exact Match"
-msgstr ""
+msgstr "Точное соответствие"
 
 #: contents/ui/config/ConfigCategories.qml:162
 msgid "Dynamic Result Count"
-msgstr ""
+msgstr "Динамическое кол-во результатов"
 
 #: contents/ui/config/ConfigCategories.qml:163
 msgid "Automatically limit displayed results based on relevance score"
-msgstr ""
+msgstr "Автоматически ограничивать результаты по оценке релевантности"
 
 #: contents/ui/config/ConfigCategories.qml:195
 msgid "Prioritized Categories"
-msgstr ""
+msgstr "Приоритетные категории"
 
 #: contents/ui/config/ConfigCategories.qml:199
 msgid "Use buttons to reorder categories or move between sections"
-msgstr ""
+msgstr "Используйте кнопки для изменения порядка категорий"
 
 #: contents/ui/config/ConfigCategories.qml:208
 msgid "Priority"
-msgstr ""
+msgstr "Приоритет"
 
 #: contents/ui/config/ConfigCategories.qml:299
 msgid "Move to Combined"
-msgstr ""
+msgstr "Переместить в 'Объединенные'"
 
 #: contents/ui/config/ConfigCategories.qml:314
 msgid "Show Together (Merged)"
-msgstr ""
+msgstr "Показывать вместе (объединенно)"
 
 #: contents/ui/config/ConfigCategories.qml:318
 msgid "Categories in this section will be grouped together"
-msgstr ""
+msgstr "Категории в этом разделе будут сгруппированы вместе"
 
 #: contents/ui/config/ConfigCategories.qml:339
 msgid "No combined categories"
-msgstr ""
+msgstr "Нет объединенных категорий"
 
 #: contents/ui/config/ConfigCategories.qml:398
-#, fuzzy
 msgid "Move to Separate"
-msgstr "Удалить в корзину"
+msgstr "Переместить в 'Отдельные'"
 
 #: contents/ui/config/ConfigCategories.qml:413
 msgid "Category Settings Information"
-msgstr ""
+msgstr "Информация о настройках категорий"
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
 msgstr ""
+"Изменения применяются сразу. Скрытые категории не отображаются. Приоритет "
+"определяет порядок."
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid "Lower number = higher priority"
-msgstr ""
+msgstr "Меньшее число = выше приоритет"
 
 #: contents/ui/config/ConfigPreview.qml:97
-#, fuzzy
 msgid "Preview Settings"
-msgstr "Настройки системы"
+msgstr "Настройки предпросмотра"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr ""
+msgstr "Включить или выключить предпросмотр для разных типов файлов."
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Enabled"
-msgstr ""
+msgstr "Включено"
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Disabled"
-msgstr ""
+msgstr "Выключено"
 
 #: contents/ui/config/ConfigPreview.qml:307
 msgid "Performance Information"
-msgstr ""
+msgstr "Информация о производительности"
 
 #: contents/ui/config/ConfigPreview.qml:312
 msgid "Video and document previews may increase memory usage."
-msgstr ""
+msgstr "Предпросмотр видео и документов может увеличить использование памяти."
 
 #: contents/ui/config/ConfigPrefix.qml:24
 msgid "Prefix View Settings"
-msgstr ""
+msgstr "Настройки просмотра префиксов"
 
 #: contents/ui/config/ConfigPrefix.qml:158
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr ""
+msgstr "Показывать опции питания (Выключение, Перезагрузка и т.д.)"
 
 #: contents/ui/config/ConfigPrefix.qml:218
 msgid "Convert units (requires KRunner installed)"
-msgstr ""
+msgstr "Конвертер единиц (нужен установленный KRunner)"
 
 #: contents/ui/config/ConfigPrefix.qml:228
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr ""
+msgstr "Примечание: Некоторые префиксы зависят от установленных плагинов KRunner."
 
 #: contents/ui/components/QueryHints.qml:40
 #: contents/ui/components/HelpView.qml:16
-#, fuzzy
 msgid "Timeline View"
-msgstr "Вид плитки"
+msgstr "Хронологический вид"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
-msgstr ""
+msgstr "Календарь"
 
 #: contents/ui/components/QueryHints.qml:44
 #: contents/ui/components/QueryHints.qml:128
@@ -614,72 +598,71 @@ msgstr "Сегодня"
 #: contents/ui/components/QueryHints.qml:129
 #: contents/ui/components/QueryHints.qml:136
 msgid "Yesterday"
-msgstr ""
+msgstr "Вчера"
 
 #: contents/ui/components/QueryHints.qml:46
 msgid "This Week"
-msgstr ""
+msgstr "На этой неделе"
 
 #: contents/ui/components/QueryHints.qml:47
 msgid "This Month"
-msgstr ""
+msgstr "В этом месяце"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Files modified today"
-msgstr ""
+msgstr "Файлы, измененные сегодня"
 
 #: contents/ui/components/QueryHints.qml:52
 msgid "Files modified yesterday"
-msgstr ""
+msgstr "Файлы, измененные вчера"
 
 #: contents/ui/components/QueryHints.qml:53
 msgid "Files modified this week"
-msgstr ""
+msgstr "Файлы, измененные на этой неделе"
 
 #: contents/ui/components/QueryHints.qml:54
 msgid "Files modified this month"
-msgstr ""
+msgstr "Файлы, измененные в этом месяце"
 
 #: contents/ui/components/QueryHints.qml:56
-#: contents/ui/components/HelpView.qml:18
+#: contents/ui/components/HelpView.get(1):18
 msgid "File Path Search"
-msgstr ""
+msgstr "Поиск по пути к файлу"
 
 #: contents/ui/components/QueryHints.qml:57
 #: contents/ui/components/HelpView.qml:23
 msgid "Man Pages"
-msgstr ""
+msgstr "Страницы руководств"
 
 #: contents/ui/components/QueryHints.qml:58
 #: contents/ui/components/HelpView.qml:19
-#, fuzzy
 msgid "Google Search"
-msgstr "Поиск"
+msgstr "Поиск в Google"
 
 #: contents/ui/components/QueryHints.qml:59
 #: contents/ui/components/HelpView.qml:20
 msgid "DuckDuckGo Search"
-msgstr ""
+msgstr "Поиск в DuckDuckGo"
 
 #: contents/ui/components/QueryHints.qml:60
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr ""
+msgstr "Поиск в Википедии"
 
 #: contents/ui/components/QueryHints.qml:61
 #: contents/ui/components/HelpView.qml:24
 msgid "Kill Process"
-msgstr ""
+msgstr "Завершить процесс"
 
 #: contents/ui/components/QueryHints.qml:62
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
-msgstr ""
+msgstr "Проверка орфографии"
 
 #: contents/ui/components/QueryHints.qml:63
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr ""
+msgstr "Символы Unicode"
 
 #: contents/ui/components/QueryHints.qml:64
 #: contents/ui/components/SearchPopup.qml:714
@@ -690,9 +673,8 @@ msgstr "Приложения"
 
 #: contents/ui/components/QueryHints.qml:65
 #: contents/ui/components/HelpView.qml:28
-#, fuzzy
 msgid "Shell Commands"
-msgstr "Выполнить команду"
+msgstr "Команды оболочки"
 
 #: contents/ui/components/QueryHints.qml:66
 #: contents/ui/components/HelpView.qml:22
@@ -706,102 +688,97 @@ msgstr "Управление питанием"
 
 #: contents/ui/components/QueryHints.qml:68
 #: contents/ui/components/HelpView.qml:30
-#, fuzzy
 msgid "System Services"
-msgstr "Настройки системы"
+msgstr "Системные службы"
 
 #: contents/ui/components/QueryHints.qml:69
-#: contents/ui/components/HelpView.qml:32
-#, fuzzy
+#: contents/ui/components/HelpView.get(1):32
 msgid "Date and Time"
 msgstr "Дата и время"
 
 #: contents/ui/components/QueryHints.qml:70
 #: contents/ui/components/HelpView.qml:26
 msgid "Dictionary Definition"
-msgstr "Определение слова"
+msgstr "Определение из словаря"
 
 #: contents/ui/components/QueryHints.qml:71
 #: contents/ui/components/HelpView.qml:27
 msgid "Unit Converter"
 msgstr "Конвертер величин"
 
-#: contents/ui/components/QueryHints.qml:72
 #: contents/ui/components/HelpView.qml:33
 msgid "Help & Shortcuts"
-msgstr "Помощь и ярлыки"
+msgstr "Справка и ярлыки"
 
 #: contents/ui/components/QueryHints.qml:130
 #: contents/ui/components/QueryHints.qml:136
 msgid "Two days ago"
-msgstr ""
+msgstr "Два дня назад"
 
 #: contents/ui/components/QueryHints.qml:217
 #: contents/ui/components/QueryHints.qml:227
 msgid "Browse calendar"
-msgstr ""
+msgstr "Просмотр календаря"
 
 #: contents/ui/components/QueryHints.qml:241
-#, fuzzy
 msgid "Man pages not installed"
-msgstr "Пакет Man не установлен"
+msgstr "Страницы руководств не установлены"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "Unknown prefix"
-msgstr ""
+msgstr "Неизвестный префикс"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "try"
-msgstr ""
+msgstr "попробуйте"
 
 #: contents/ui/components/DebugOverlay.qml:40
 msgid "Saved!"
-msgstr ""
+msgstr "Сохранено!"
 
 #: contents/ui/components/DebugOverlay.qml:48
 #: contents/ui/components/DebugOverlay.qml:118
 msgid "Save Dump"
-msgstr ""
+msgstr "Сохранить дамп"
 
 #: contents/ui/components/DebugOverlay.qml:77
 msgid "Backend"
-msgstr ""
+msgstr "Бэкенд"
 
 #: contents/ui/components/DebugOverlay.qml:80
 msgid "Items"
-msgstr ""
+msgstr "Элементы"
 
 #: contents/ui/components/DebugOverlay.qml:83
 msgid "Latency"
-msgstr ""
+msgstr "Задержка"
 
 #: contents/ui/components/DebugOverlay.qml:90
-#, fuzzy
 msgid "View"
-msgstr "Вид списка"
+msgstr "Вид"
 
 #: contents/ui/components/DebugOverlay.qml:93
 msgid "Display"
-msgstr ""
+msgstr "Экран"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/PinnedSection.qml:376
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Unpin"
-msgstr ""
+msgstr "Открепить"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Pin"
-msgstr ""
+msgstr "Закрепить"
 
 #: contents/ui/components/PinnedSection.qml:71
 msgid "Pinned Items"
-msgstr ""
+msgstr "Закрепленные элементы"
 
 #: contents/ui/components/PinnedSection.qml:323
 msgid "Drag to reorder"
-msgstr ""
+msgstr "Перетащите для изменения порядка"
 
 #: contents/ui/components/PinnedSection.qml:342
 #: contents/ui/components/HistoryContextMenu.qml:52
@@ -829,47 +806,47 @@ msgstr "Очистить историю"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "No results found"
-msgstr "Результатов не найдено"
+msgstr "Ничего не найдено"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "Type to start searching"
-msgstr "Введите для поиска"
+msgstr "Введите текст для поиска"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:269
 msgid "date"
-msgstr "date"
+msgstr "дата"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:270
 msgid "clock"
-msgstr ""
+msgstr "часы"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:295
 msgid "power"
-msgstr "power"
+msgstr "питание"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:279
 msgid "help"
-msgstr "help"
+msgstr "справка"
 
 #: contents/ui/components/SearchPopup.qml:265
 msgid "unit"
-msgstr "unit"
+msgstr "единица"
 
 #: contents/ui/components/SearchPopup.qml:283
 msgid "kill"
-msgstr "kill"
+msgstr "завершить"
 
 #: contents/ui/components/SearchPopup.qml:287
 msgid "spell"
-msgstr "spell"
+msgstr "орфография"
 
 #: contents/ui/components/SearchPopup.qml:291
 msgid "shell"
-msgstr "shell"
+msgstr "оболочка"
 
 #: contents/ui/components/SearchPopup.qml:367
 msgid "Search Here"
@@ -881,15 +858,14 @@ msgid "Other"
 msgstr "Другое"
 
 #: contents/ui/components/HistoryContextMenu.qml:69
-#, fuzzy
 msgid "Copy Location"
-msgstr "Копировать путь"
+msgstr "Копировать расположение"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
 msgstr "Открыть в терминале"
 
-#: contents/ui/components/HistoryContextMenu.qml:111
+#: contents/ui/components/HistoryContextMenu.get(1):111
 msgid "Move to Trash"
 msgstr "Удалить в корзину"
 
@@ -898,9 +874,8 @@ msgid "Properties"
 msgstr "Свойства"
 
 #: contents/ui/components/HistoryContextMenu.qml:134
-#, fuzzy
 msgid "Edit Application..."
-msgstr "Приложения"
+msgstr "Правка приложения..."
 
 #: contents/ui/components/HistoryContextMenu.qml:144
 msgid "Remove from History"
@@ -908,148 +883,148 @@ msgstr "Удалить из истории"
 
 #: contents/ui/components/PowerView.qml:133
 msgid "Hibernate"
-msgstr ""
+msgstr "Гибернация"
 
 #: contents/ui/components/PowerView.qml:137
 msgid "(Press again to hibernate)"
-msgstr ""
+msgstr "(Нажмите еще раз для гибернации)"
 
 #: contents/ui/components/PowerView.qml:146
 msgid "Sleep"
-msgstr ""
+msgstr "Спящий режим"
 
 #: contents/ui/components/PowerView.qml:150
 msgid "(Press again to sleep)"
-msgstr ""
+msgstr "(Нажмите еще раз для сна)"
 
 #: contents/ui/components/PowerView.qml:158
 msgid "Reboot"
-msgstr ""
+msgstr "Перезагрузка"
 
 #: contents/ui/components/PowerView.qml:162
 msgid "(Press again to reboot)"
-msgstr ""
+msgstr "(Нажмите еще раз для перезагрузки)"
 
 #: contents/ui/components/PowerView.qml:180
 msgid "Shutdown"
-msgstr ""
+msgstr "Выключение"
 
 #: contents/ui/components/PowerView.qml:184
 msgid "(Press again to shutdown)"
-msgstr ""
+msgstr "(Нажмите еще раз для выключения)"
 
 #: contents/ui/components/PowerView.qml:278
 msgid "Authorize to list entries"
-msgstr ""
+msgstr "Авторизуйтесь для просмотра"
 
 #: contents/ui/components/PowerView.qml:299
 msgid "Lock Screen"
-msgstr ""
+msgstr "Заблокировать экран"
 
 #: contents/ui/components/PowerView.qml:309
 msgid "Log Out"
-msgstr ""
+msgstr "Выйти из сеанса"
 
 #: contents/ui/components/PowerView.qml:313
 msgid "(Press again to log out)"
-msgstr ""
+msgstr "(Нажмите еще раз для выхода)"
 
 #: contents/ui/components/PowerView.qml:321
 msgid "Switch User"
-msgstr ""
+msgstr "Сменить пользователя"
 
 #: contents/ui/components/PowerView.qml:325
 msgid "(Press again to switch)"
-msgstr ""
+msgstr "(Нажмите еще раз для смены)"
 
 #: contents/ui/components/PowerView.qml:333
 msgid "Save Session"
-msgstr ""
+msgstr "Сохранить сеанс"
 
 #: contents/ui/components/PowerView.qml:352
 msgid "(Press again)"
-msgstr ""
+msgstr "(Нажмите еще раз)"
 
 #: contents/ui/main.qml:96
 msgid "Medium Mode (Button only)"
-msgstr "Средний режим (Только кнопка)"
+msgstr "Средний режим (только кнопка)"
 
 #: contents/ui/main.qml:102
 msgid "Wide Mode (Search bar + icon)"
-msgstr "Широкий режим (Строка поиска + иконка)"
+msgstr "Широкий режим (строка + значок)"
 
 #: contents/ui/main.qml:108
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "Экстра широкий режим (Широкий + Заполнитель)"
+msgstr "Сверхширокий (Широкий + длинная подсказка)"
 
 msgid "Show/Hide Previews"
-msgstr ""
+msgstr "Показать/скрыть предпросмотр"
 
 msgid "Edge Appearance"
-msgstr ""
+msgstr "Внешний вид краев"
 
 msgid "Round corners"
-msgstr ""
+msgstr "Закругленные углы"
 
 msgid "Slightly round"
-msgstr ""
+msgstr "Слегка закругленные"
 
 msgid "Less round"
-msgstr ""
+msgstr "Менее закругленные"
 
 msgid "Square corners"
-msgstr ""
+msgstr "Прямоугольные углы"
 
 msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr ""
+msgstr "(Swap меньше RAM или не найден)"
 
 msgid "Note: Systemd boot is required for this feature"
-msgstr ""
+msgstr "Примечание: Нужен Systemd boot"
 
 msgid "Scan for boot entries"
-msgstr ""
+msgstr "Поиск записей загрузки"
 
 msgid "Result Count"
-msgstr ""
+msgstr "Количество результатов"
 
 msgid "Priority Ranking"
-msgstr ""
+msgstr "Ранжирование приоритетов"
 
 msgid "Show Together"
-msgstr ""
+msgstr "Показывать вместе"
 
 msgid "Corner Roundness"
-msgstr ""
+msgstr "Скругление углов"
 
 msgid "Square"
-msgstr ""
+msgstr "Квадрат"
 
 msgid "Slightly Rounded"
-msgstr ""
+msgstr "Слегка скругленный"
 
 msgid "Moderately Rounded"
-msgstr ""
+msgstr "Умеренно скругленный"
 
 msgid "Fully Rounded"
-msgstr ""
+msgstr "Полностью скругленный"
 
 msgid "Minimize automatically when searching"
-msgstr ""
+msgstr "Автоматически сворачивать при поиске"
 
 msgid "Search on Wikipedia"
-msgstr ""
+msgstr "Поиск в Википедии"
 
 msgid "Minimal - A simplified interface with essential features."
-msgstr ""
+msgstr "Минимальный - Упрощенный интерфейс с основными функциями."
 
 msgid "Developer - Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Разработчик - Вкладка отладки активна, функции разработчика."
 
 msgid "Power User - All features active, advanced settings available."
-msgstr ""
+msgstr "Опытный пользователь - Все функции, расширенные настройки."
 
 msgid "Weather View (weather:)"
-msgstr "Просмотр погоды (погода:)"
+msgstr "Просмотр погоды (weather:)"
 
 msgid "Use System Units"
 msgstr "Использовать системные единицы"
@@ -1070,43 +1045,7 @@ msgid "1 Hour"
 msgstr "1 час"
 
 msgid "(If time since last update > interval)"
-msgstr "(Если время с последнего обновления > интервал)"
+msgstr "(Если время более интервала)"
 
 msgid "Enable Weather Prefix"
 msgstr "Включить префикс погоды"
-
-#~ msgid "Results Preview"
-#~ msgstr "Предпросмотр результатов"
-
-#~ msgid "Application 1"
-#~ msgstr "Приложение 1"
-
-#~ msgid "Application 2"
-#~ msgstr "Приложение 2"
-
-#~ msgid "File.txt"
-#~ msgstr "Файл.txt"
-
-#~ msgid "File"
-#~ msgstr "Файл"
-
-#~ msgid "Path"
-#~ msgstr "Путь"
-
-#~ msgid "General"
-#~ msgstr "Общее"
-
-#~ msgid "Minimal"
-#~ msgstr "Минимальный"
-
-#~ msgid "Developer"
-#~ msgstr "Разработчик"
-
-#~ msgid "Manage Application"
-#~ msgstr "Управление приложением"
-
-#~ msgid "Reset Statistics"
-#~ msgstr "Сбросить статистику"
-
-#~ msgid "services"
-#~ msgstr "services"

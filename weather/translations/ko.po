@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "날씨"
 
 msgid "Appearance"
-msgstr ""
+msgstr "모양"
 
 msgid "Details"
-msgstr ""
+msgstr "세부 정보"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "시간별 예보"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "일일 예보"
 
 msgid "Feels like"
-msgstr ""
+msgstr "체감 온도"
 
 msgid "Humidity"
-msgstr ""
+msgstr "습도"
 
 msgid "Wind"
-msgstr ""
+msgstr "풍속"
 
 msgid "Pressure"
-msgstr ""
+msgstr "기압"
 
 msgid "Clouds"
-msgstr ""
+msgstr "구름"
 
 msgid "UV"
-msgstr ""
+msgstr "자외선 지수"
 
 msgid "Visibility"
-msgstr ""
+msgstr "가시거리"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "풍향"
 
 msgid "Click to close"
-msgstr ""
+msgstr "클릭하여 닫기"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "기본값 (색상 SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "구글 날씨 v3 (플랫 SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "구글 날씨 v2 (사실적인 PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "구글 날씨 v1 (클래식 PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "아이콘 팩:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "날씨 아이콘의 시각적 스타일을 선택합니다."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "날씨 제공업체"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (무료, 키 불필요)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (키 필요)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (키 필요)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "최고의 무료 옵션입니다. API 키가 필요하지 않습니다."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "표준 제공업체입니다. 아래에 API 키가 필요합니다."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "대체 제공업체입니다. 아래에 API 키가 필요합니다."
 
 msgid "API Keys"
-msgstr ""
+msgstr "API 키"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API 키:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "OpenWeatherMap API 키를 입력하세요"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API 키:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "WeatherAPI.com 키를 입력하세요"
 
 msgid "Location"
-msgstr ""
+msgstr "위치"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "IP에서 자동 감지"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "수동 입력"
 
 msgid "City 1:"
-msgstr ""
+msgstr "도시 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "예: 서울, 부산, 런던"
 
 msgid "City 2:"
-msgstr ""
+msgstr "도시 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "두 번째 도시 (선택 사항)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "도시 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "세 번째 도시 (선택 사항)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "도시 이름, '도시,국가 코드' 또는 우편번호를 사용할 수 있습니다."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "위치는 IP 주소를 기반으로 자동으로 감지됩니다."
 
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 msgid "Units:"
-msgstr ""
+msgstr "단위:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "시스템 단위 사용"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "미터법 (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "야드파운드법 (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "새로 고침 간격:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15분"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30분"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45분"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1시간"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2시간"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3시간"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4시간"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6시간"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8시간"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12시간"
 
 msgid "1 day"
-msgstr ""
+msgstr "1일"
 
 msgid "Refresh"
-msgstr ""
+msgstr "새로 고침"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "날씨 데이터 로드 중..."
 
 msgid "Clear"
-msgstr ""
+msgstr "맑음"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "대체로 맑음"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "구름 조금"
 
 msgid "Overcast"
-msgstr ""
+msgstr "흐림"
 
 msgid "Fog"
-msgstr ""
+msgstr "안개"
 
 msgid "Mist"
-msgstr ""
+msgstr "박무"
 
 msgid "Haze"
-msgstr ""
+msgstr "연무"
 
 msgid "Smoke"
-msgstr ""
+msgstr "연기"
 
 msgid "Dust"
-msgstr ""
+msgstr "먼지"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "이슬비"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "얼어붙는 이슬비"
 
 msgid "Rain"
-msgstr ""
+msgstr "비"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "약한 비"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "얼어붙는 비"
 
 msgid "Snow"
-msgstr ""
+msgstr "눈"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "약한 눈"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "가루눈"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "소나기"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "소낙눈"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "뇌우"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "우박을 동반한 뇌우"
 
 msgid "Unknown"
-msgstr ""
+msgstr "알 수 없음"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "흐림"
 
 msgid "Sun"
-msgstr ""
+msgstr "일"
 
 msgid "Mon"
-msgstr ""
+msgstr "월"
 
 msgid "Tue"
-msgstr ""
+msgstr "화"
 
 msgid "Wed"
-msgstr ""
+msgstr "수"
 
 msgid "Thu"
-msgstr ""
+msgstr "목"
 
 msgid "Fri"
-msgstr ""
+msgstr "금"
 
 msgid "Sat"
-msgstr ""
+msgstr "토"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "글꼴 설정"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "시스템 기본 글꼴 사용"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "사용자 정의 글꼴:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "배경 불투명도:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "배경 설정"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "위젯 여백:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "보통 (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "좁게 (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "없음 (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "레이아웃 모드:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "자동"
 
 msgid "Small"
-msgstr ""
+msgstr "소형"
 
 msgid "Wide"
-msgstr ""
+msgstr "와이드"
 
 msgid "Large"
-msgstr ""
+msgstr "대형"
 
 msgid "Representation:"
-msgstr ""
+msgstr "표시 방식:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "단순 패널"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "상세 패널"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "글꼴 크기 (0 = 자동):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "아이콘 크기 (0 = 자동):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "예보 일수:"
 
 msgid "NW"
-msgstr ""
+msgstr "북서"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "패널 설정"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "날씨 아이콘의 시각적 스타일을 선택합니다. (참고: v1/v2와 같은 이전 팩에는 일부 조건에 대한 아이콘이 없을 수 있습니다)"

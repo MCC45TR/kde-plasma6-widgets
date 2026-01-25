@@ -3,83 +3,81 @@ msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-18 22:43+0300\n"
-"PO-Revision-Date: 2026-01-18 16:42\n"
-"Last-Translator: Auto Generator <auto@bot>\n"
+"PO-Revision-Date: 2026-01-22 12:00+0300\n"
+"Last-Translator: Automatically generated\n"
 "Language-Team: hi\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
 msgid "Appearance"
 msgstr "दिखावट"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-#, fuzzy
 msgid "Categories"
-msgstr "श्रेणी सेटिंग्स"
+msgstr "श्रेणियाँ"
 
 #: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
 msgid "Debug"
-msgstr ""
+msgstr "डिबग"
 
 #: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
 msgid "Help"
-msgstr ""
+msgstr "सहायता"
 
 #: contents/ui/config/ConfigGeneral.qml:80
 msgid "Panel"
-msgstr ""
+msgstr "पैनल"
 
 #: contents/ui/config/ConfigGeneral.qml:84
 msgid "Popup"
-msgstr ""
+msgstr "पॉपअप"
 
 #: contents/ui/config/ConfigGeneral.qml:88
 #: contents/ui/config/ConfigPreview.qml:9
 msgid "Preview"
-msgstr ""
+msgstr "पूर्वावलोकन"
 
 #: contents/ui/config/ConfigGeneral.qml:92
 #: contents/ui/config/ConfigPrefix.qml:9
 msgid "Prefixes"
-msgstr ""
+msgstr "उपसर्ग"
 
 #: contents/ui/config/ConfigGeneral.qml:96
 msgid "Placeholder"
-msgstr ""
+msgstr "प्लेसहोल्डर"
 
 #: contents/ui/config/ConfigGeneral.qml:114
-#, fuzzy
 msgid "Panel Appearance"
-msgstr "दिखावट"
+msgstr "पैनल की दिखावट"
 
 #: contents/ui/config/ConfigGeneral.qml:120
 #: contents/ui/config/ConfigDebug.qml:123
 msgid "Display Mode"
-msgstr ""
+msgstr "प्रदर्शन मोड"
 
 #: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
 msgid "Button Mode (Icon only)"
-msgstr ""
+msgstr "बटन मोड (केवल आइकन)"
 
 #: contents/ui/config/ConfigGeneral.qml:123
 msgid "Medium Mode (Text)"
-msgstr ""
+msgstr "मध्यम मोड (पाठ)"
 
 #: contents/ui/config/ConfigGeneral.qml:124
 msgid "Wide Mode (Search Bar)"
-msgstr ""
+msgstr "वाइड मोड (खोज पट्टी)"
 
 #: contents/ui/config/ConfigGeneral.qml:125
 msgid "Extra Wide Mode"
-msgstr ""
+msgstr "अतिरिक्त वाइड मोड"
 
 #: contents/ui/config/ConfigGeneral.qml:132
 msgid "Panel Preview"
-msgstr ""
+msgstr "पैनल पूर्वावलोकन"
 
 #: contents/ui/config/ConfigGeneral.qml:176
 #: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:49
@@ -91,27 +89,25 @@ msgid "Start searching..."
 msgstr "खोजना शुरू करें..."
 
 #: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-#, fuzzy
 msgid "Search..."
-msgstr "खोजें"
+msgstr "खोजें..."
 
 #: contents/ui/config/ConfigGeneral.qml:204
 msgid "Power Options"
-msgstr ""
+msgstr "पावर विकल्प"
 
 #: contents/ui/config/ConfigGeneral.qml:205
 msgid "Show boot options in Reboot button"
-msgstr ""
+msgstr "रीबूट बटन में बूट विकल्प दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:213
-#, fuzzy
 msgid "Results View"
-msgstr "सूची दृश्य"
+msgstr "परिणाम दृश्य"
 
 #: contents/ui/config/ConfigGeneral.qml:219
 #: contents/ui/config/ConfigDebug.qml:129
 msgid "View Mode"
-msgstr ""
+msgstr "दृश्य मोड"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "List View"
@@ -119,73 +115,70 @@ msgstr "सूची दृश्य"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "Tile View"
-msgstr "टाइल्स दृश्य"
+msgstr "ग्रिड दृश्य"
 
 #: contents/ui/config/ConfigGeneral.qml:227
 #: contents/ui/config/ConfigDebug.qml:138
-#, fuzzy
 msgid "List Icon Size"
-msgstr "सूची दृश्य"
+msgstr "सूची आइकन आकार"
 
 #: contents/ui/config/ConfigGeneral.qml:235
 #: contents/ui/config/ConfigDebug.qml:135
-#, fuzzy
 msgid "Tile Icon Size"
-msgstr "टाइल्स दृश्य"
+msgstr "ग्रिड आइकन आकार"
 
 #: contents/ui/config/ConfigGeneral.qml:243
 #: contents/ui/config/ConfigCategories.qml:170
 msgid "Result Limits"
-msgstr ""
+msgstr "परिणाम सीमा"
 
 #: contents/ui/config/ConfigGeneral.qml:249
 #: contents/ui/config/ConfigCategories.qml:175
 msgid "Min Results"
-msgstr ""
+msgstr "न्यूनतम परिणाम"
 
 #: contents/ui/config/ConfigGeneral.qml:256
 #: contents/ui/config/ConfigCategories.qml:184
 msgid "Max Results"
-msgstr ""
+msgstr "अधिकतम परिणाम"
 
 #: contents/ui/config/ConfigGeneral.qml:263
 msgid "Smartly limit results based on relevance"
-msgstr ""
+msgstr "प्रासंगिकता के आधार पर परिणामों को समझदारी से सीमित करें"
 
 #: contents/ui/config/ConfigGeneral.qml:264
 msgid "Dynamic Limit"
-msgstr ""
+msgstr "गतिशील सीमा"
 
 #: contents/ui/config/ConfigGeneral.qml:272
 #: contents/ui/config/ConfigSearch.qml:19
 #: contents/ui/config/ConfigPreview.qml:112
 msgid "Enable File Previews"
-msgstr ""
+msgstr "फ़ाइल पूर्वावलोकन सक्षम करें"
 
 #: contents/ui/config/ConfigGeneral.qml:273
 msgid "Master Switch"
-msgstr ""
+msgstr "मास्टर स्विच"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 #: contents/ui/config/ConfigPreview.qml:134
 msgid "Preview Types"
-msgstr ""
+msgstr "पूर्वावलोकन प्रकार"
 
 #: contents/ui/config/ConfigGeneral.qml:283
 #: contents/ui/config/ConfigPreview.qml:159
 msgid "Images"
-msgstr ""
+msgstr "छवियां"
 
 #: contents/ui/config/ConfigGeneral.qml:289
 #: contents/ui/config/ConfigPreview.qml:197
 msgid "Videos"
-msgstr ""
+msgstr "वीडियो"
 
 #: contents/ui/config/ConfigGeneral.qml:295
 #: contents/ui/config/ConfigPreview.qml:235
-#, fuzzy
 msgid "Text Files"
-msgstr "फ़ाइलें"
+msgstr "टेक्स्ट फ़ाइलें"
 
 #: contents/ui/config/ConfigGeneral.qml:301
 #: contents/ui/config/ConfigPreview.qml:273
@@ -195,37 +188,37 @@ msgstr "दस्तावेज़"
 #: contents/ui/config/ConfigGeneral.qml:311
 #: contents/ui/config/ConfigPrefix.qml:29
 msgid "Date View (date:)"
-msgstr ""
+msgstr "दिनांक दृश्य (date:)"
 
 #: contents/ui/config/ConfigGeneral.qml:316
 #: contents/ui/config/ConfigPrefix.qml:36
 msgid "Show Large Clock"
-msgstr ""
+msgstr "बड़ी घड़ी दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:320
 #: contents/ui/config/ConfigPrefix.qml:43
 msgid "Show Calendar Events"
-msgstr ""
+msgstr "कैलेंडर ईवेंट दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:323
 #: contents/ui/config/ConfigPrefix.qml:50
 msgid "Power View (power:)"
-msgstr ""
+msgstr "पावर दृश्य (power:)"
 
 #: contents/ui/config/ConfigGeneral.qml:328
-#: contents/ui/config/ConfigPrefix.qml:58
+#: contents/ui/config/ConfigPrefix.get(1):58
 msgid "Show Sleep Button"
-msgstr ""
+msgstr "स्लीप बटन दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:332
 #: contents/ui/config/ConfigPrefix.qml:65
 msgid "Show Hibernate Button"
-msgstr ""
+msgstr "हाइबरनेट बटन दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:337
 #: contents/ui/config/ConfigPrefix.qml:72
 msgid "Available Prefixes Reference"
-msgstr ""
+msgstr "उपलब्ध उपसर्ग संदर्भ"
 
 #: contents/ui/config/ConfigGeneral.qml:341
 #: contents/ui/config/ConfigPrefix.qml:76
@@ -233,374 +226,364 @@ msgid ""
 "These prefixes can be used to perform specific actions directly from the "
 "search bar."
 msgstr ""
+"इन उपसर्गों का उपयोग खोज पट्टी से सीधे विशिष्ट क्रियाएं करने के लिए किया जा सकता है।"
 
 #: contents/ui/config/ConfigGeneral.qml:363
 #: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
 #: contents/ui/config/ConfigPrefix.qml:98
 msgid "List files modified today"
-msgstr ""
+msgstr "आज संशोधित फ़ाइलों की सूची बनाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:375
 #: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
 #: contents/ui/config/ConfigPrefix.qml:110
 msgid "Search on Google"
-msgstr ""
+msgstr "Google पर खोजें"
 
 #: contents/ui/config/ConfigGeneral.qml:387
 #: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
 #: contents/ui/config/ConfigPrefix.qml:122
 msgid "Search on DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo पर खोजें"
 
 #: contents/ui/config/ConfigGeneral.qml:399
 #: contents/ui/config/ConfigPrefix.qml:134
 msgid "Show calendar and date information"
-msgstr ""
+msgstr "कैलेंडर और दिनांक जानकारी दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:411
-#: contents/ui/config/ConfigPrefix.qml:146
+#: contents/ui/config/ConfigPrefix.get(1):146
 msgid "Show large clock"
-msgstr ""
+msgstr "बड़ी घड़ी दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:423
-#, fuzzy
 msgid "Show power management options"
-msgstr "पावर प्रबंधन"
+msgstr "पावर प्रबंधन विकल्प दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:435
 #: contents/ui/config/ConfigPrefix.qml:170
 msgid "Show this help screen"
-msgstr ""
+msgstr "यह सहायता स्क्रीन दिखाएं"
 
 #: contents/ui/config/ConfigGeneral.qml:447
 #: contents/ui/config/ConfigPrefix.qml:182
 msgid "Terminate running processes"
-msgstr ""
+msgstr "चल रही प्रक्रियाओं को समाप्त करें"
 
-#: contents/ui/config/ConfigGeneral.qml:459
+#: contents/ui/config/ConfigGeneral.get(1):459
 #: contents/ui/config/ConfigPrefix.qml:194
 msgid "Check spelling of a word"
-msgstr ""
+msgstr "शब्द की वर्तनी जांचें"
 
 #: contents/ui/config/ConfigGeneral.qml:471
 #: contents/ui/config/ConfigPrefix.qml:206
 msgid "Execute shell commands"
-msgstr ""
+msgstr "शेल कमांड निष्पादित करें"
 
 #: contents/ui/config/ConfigGeneral.qml:483
 msgid "Convert units (requires KRunner)"
-msgstr ""
+msgstr "इकाइयां बदलें (KRunner आवश्यक)"
 
 #: contents/ui/config/ConfigGeneral.qml:493
 #: contents/ui/config/ConfigSearch.qml:13
-#, fuzzy
 msgid "Search Settings"
-msgstr "सिस्टम सेटिंग्स"
+msgstr "खोज सेटिंग्स"
 
 #: contents/ui/config/ConfigGeneral.qml:497
 #: contents/ui/config/ConfigCategories.qml:150
 msgid "Search Algorithm"
-msgstr ""
+msgstr "खोज एल्गोरिथम"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Fuzzy"
-msgstr ""
+msgstr "फ़ज़ी"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Exact"
-msgstr ""
+msgstr "सटीक"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Starts With"
-msgstr ""
+msgstr "इससे शुरू होता है"
 
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
 msgstr ""
+"होवर पर फ़ाइल पूर्वावलोकन दिखाएं (Ctrl+Space से भी ट्रिगर किया जा सकता है)"
 
 #: contents/ui/config/ConfigSearch.qml:33
-#, fuzzy
 msgid "Search Behavior"
-msgstr "यहाँ खोजें"
+msgstr "खोज व्यवहार"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr ""
+msgstr "आप निम्नलिखित KRunner कमांड और उपसर्गों का उपयोग कर सकते हैं:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
-msgstr ""
+msgstr "उपसर्ग"
 
 #: contents/ui/config/ConfigSearch.qml:56
 msgid "Description"
-msgstr ""
+msgstr "विवरण"
 
 #: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
 msgid "Terminate processes"
-msgstr ""
+msgstr "प्रक्रियाएं समाप्त करें"
 
-#: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
+#: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.get(1):118
 msgid "Check spelling"
-msgstr ""
+msgstr "वर्तनी जांचें"
 
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
-msgstr ""
+msgstr "यूनिकोड वर्ण खोजें"
 
 #: contents/ui/config/ConfigDebug.qml:68
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
 msgstr ""
+"यह टैब केवल डेवलपर मोड में सक्रिय है। सामान्य सेटिंग्स में प्रोफ़ाइल बदलें।"
 
 #: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-#, fuzzy
 msgid "Debug Settings"
-msgstr "श्रेणी सेटिंग्स"
+msgstr "डिबग सेटिंग्स"
 
 #: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
 #: contents/ui/components/DebugOverlay.qml:57
 msgid "Debug Overlay"
-msgstr ""
+msgstr "डिबग ओवरले"
 
 #: contents/ui/config/ConfigDebug.qml:91
 msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr ""
+msgstr "विजेट पर डिबग जानकारी दिखाएं"
 
 #: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
 msgid "Debug Data"
-msgstr ""
+msgstr "डिबग डेटा"
 
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Timestamp"
-msgstr ""
+msgstr "टाइमस्टैम्प"
 
 #: contents/ui/config/ConfigDebug.qml:114
 msgid "Locale"
-msgstr ""
+msgstr "लोकेल"
 
 #: contents/ui/config/ConfigDebug.qml:117
-#, fuzzy
 msgid "User Profile"
-msgstr "प्रोफ़ाइल"
+msgstr "उपयोगकर्ता प्रोफ़ाइल"
 
 #: contents/ui/config/ConfigDebug.qml:141
 msgid "Enable Preview"
-msgstr ""
+msgstr "पूर्वावलोकन सक्षम करें"
 
 #: contents/ui/config/ConfigDebug.qml:147
 msgid "History Count"
-msgstr ""
+msgstr "इतिहास गणना"
 
 #: contents/ui/config/ConfigDebug.qml:153
 msgid "items"
-msgstr ""
+msgstr "वस्तुएं"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/config/ConfigDebug.qml:165
 msgid "Telemetry"
-msgstr ""
+msgstr "टेलीमेट्री"
 
 #: contents/ui/config/ConfigDebug.qml:174
 #: contents/ui/components/DebugOverlay.qml:100
-#, fuzzy
 msgid "Total Searches"
-msgstr "हाल की खोजें"
+msgstr "कुल खोजें"
 
 #: contents/ui/config/ConfigDebug.qml:185
 #: contents/ui/components/DebugOverlay.qml:103
 msgid "Avg Latency"
-msgstr ""
+msgstr "औसत विलंबता"
 
 #: contents/ui/config/ConfigDebug.qml:198
 #: contents/ui/config/ConfigDebug.qml:200
 msgid "History Sample"
-msgstr ""
+msgstr "इतिहास नमूना"
 
 #: contents/ui/config/ConfigDebug.qml:207
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
 msgstr ""
+"गोपनीयता सूचना: सभी डिबग और टेलीमेट्री डेटा केवल स्थानीय स्तर पर संग्रहीत किया जाता है।"
 
 #: contents/ui/config/ConfigDebug.qml:281
 msgid "History is empty"
-msgstr ""
+msgstr "इतिहास खाली है"
 
 #: contents/ui/config/ConfigHelp.qml:49
-#, fuzzy
 msgid "Keyboard Shortcuts"
-msgstr "सहायता और शॉर्टकट"
+msgstr "कीबोर्ड शॉर्टकट"
 
 #: contents/ui/config/ConfigHelp.qml:53
 msgid "Navigate between results"
-msgstr ""
+msgstr "परिणामों के बीच नेविगेट करें"
 
 #: contents/ui/config/ConfigHelp.qml:59
 msgid "Navigate between sections"
-msgstr ""
+msgstr "अनुभागों के बीच नेविगेट करें"
 
 #: contents/ui/config/ConfigHelp.qml:65
-#, fuzzy
 msgid "List / Tile view"
-msgstr "सूची दृश्य"
+msgstr "सूची / ग्रिड दृश्य"
 
 #: contents/ui/config/ConfigHelp.qml:71
 msgid "Toggle file preview"
-msgstr ""
+msgstr "फ़ाइल पूर्वावलोकन टॉगल करें"
 
 #: contents/ui/config/ConfigHelp.qml:77
 msgid "Open selected item"
-msgstr ""
+msgstr "चयनित वस्तु खोलें"
 
-#: contents/ui/config/ConfigHelp.qml:83
+#: contents/ui/config/ConfigHelp.get(1):83
 msgid "Close widget"
-msgstr ""
+msgstr "विजेट बंद करें"
 
-#: contents/ui/config/ConfigHelp.qml:90
-#, fuzzy
+#: contents/ui/config/ConfigHelp.get(1):90
 msgid "Search Prefixes"
-msgstr "यहाँ खोजें"
+msgstr "खोज उपसर्ग"
 
-#: contents/ui/config/ConfigHelp.qml:125
-#, fuzzy
+#: contents/ui/config/ConfigHelp.get(1):125
 msgid "User Profiles"
-msgstr "प्रोफ़ाइल"
+msgstr "उपयोगकर्ता प्रोफ़ाइल"
 
 #: contents/ui/config/ConfigHelp.qml:129
 msgid "A simplified interface with essential features."
-msgstr ""
+msgstr "आवश्यक सुविधाओं के साथ एक सरल इंटरफ़ेस।"
 
 #: contents/ui/config/ConfigHelp.qml:135
 msgid "Debug tab active, developer features enabled."
-msgstr ""
+msgstr "डिबग टैब सक्रिय, डेवलपर सुविधाएँ सक्षम।"
 
 #: contents/ui/config/ConfigHelp.qml:141
 msgid "All features active, advanced settings available."
-msgstr ""
+msgstr "सभी सुविधाएँ सक्रिय, उन्नत सेटिंग्स उपलब्ध।"
 
 #: contents/ui/config/ConfigCategories.qml:145
-#, fuzzy
 msgid "Algorithm Settings"
-msgstr "श्रेणी सेटिंग्स"
+msgstr "एल्गोरिथम सेटिंग्स"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Fuzzy Match"
-msgstr ""
+msgstr "फ़ज़ी मिलान"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Exact Match"
-msgstr ""
+msgstr "सटीक मिलान"
 
 #: contents/ui/config/ConfigCategories.qml:162
 msgid "Dynamic Result Count"
-msgstr ""
+msgstr "गतिशील परिणाम गणना"
 
 #: contents/ui/config/ConfigCategories.qml:163
 msgid "Automatically limit displayed results based on relevance score"
-msgstr ""
+msgstr "प्रासंगिकता स्कोर के आधार पर प्रदर्शित परिणामों को स्वचालित रूप से सीमित करें"
 
 #: contents/ui/config/ConfigCategories.qml:195
 msgid "Prioritized Categories"
-msgstr ""
+msgstr "प्राथमिकता प्राप्त श्रेणियां"
 
 #: contents/ui/config/ConfigCategories.qml:199
 msgid "Use buttons to reorder categories or move between sections"
-msgstr ""
+msgstr "श्रेणियों को पुनर्व्यवस्थित करने के लिए बटनों का उपयोग करें"
 
-#: contents/ui/config/ConfigCategories.qml:208
+#: contents/ui/config/ConfigCategories.get(1):208
 msgid "Priority"
-msgstr ""
+msgstr "प्राथमिकता"
 
 #: contents/ui/config/ConfigCategories.qml:299
 msgid "Move to Combined"
-msgstr ""
+msgstr "संयुक्त सूची में ले जाएँ"
 
 #: contents/ui/config/ConfigCategories.qml:314
 msgid "Show Together (Merged)"
-msgstr ""
+msgstr "साथ दिखाएं (विलय)"
 
 #: contents/ui/config/ConfigCategories.qml:318
 msgid "Categories in this section will be grouped together"
-msgstr ""
+msgstr "इस अनुभाग की श्रेणियां एक साथ समूहबद्ध की जाएंगी"
 
 #: contents/ui/config/ConfigCategories.qml:339
 msgid "No combined categories"
-msgstr ""
+msgstr "कोई संयुक्त श्रेणी नहीं"
 
 #: contents/ui/config/ConfigCategories.qml:398
-#, fuzzy
 msgid "Move to Separate"
-msgstr "ट्रैश में ले जाएं"
+msgstr "अलग सूची में ले जाएँ"
 
 #: contents/ui/config/ConfigCategories.qml:413
-#, fuzzy
 msgid "Category Settings Information"
-msgstr "श्रेणी सेटिंग्स"
+msgstr "श्रेणी सेटिंग्स जानकारी"
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
 msgstr ""
+"परिवर्तन तुरंत लागू किए जाते हैं। छिपी हुई श्रेणियां खोज परिणामों में नहीं आएंगी।"
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid "Lower number = higher priority"
-msgstr ""
+msgstr "कम संख्या = उच्च प्राथमिकता"
 
 #: contents/ui/config/ConfigPreview.qml:97
-#, fuzzy
 msgid "Preview Settings"
-msgstr "सिस्टम सेटिंग्स"
+msgstr "पूर्वावलोकन सेटिंग्स"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr ""
+msgstr "विभिन्न फ़ाइल प्रकारों के लिए फ़ाइल पूर्वावलोकन सक्षम या अक्षम करें।"
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Enabled"
-msgstr ""
+msgstr "सक्षम"
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Disabled"
-msgstr ""
+msgstr "अक्षम"
 
 #: contents/ui/config/ConfigPreview.qml:307
 msgid "Performance Information"
-msgstr ""
+msgstr "प्रदर्शन जानकारी"
 
 #: contents/ui/config/ConfigPreview.qml:312
 msgid "Video and document previews may increase memory usage."
-msgstr ""
+msgstr "वीडियो और दस्तावेज़ पूर्वावलोकन से स्मृति उपयोग बढ़ सकता है।"
 
 #: contents/ui/config/ConfigPrefix.qml:24
 msgid "Prefix View Settings"
-msgstr ""
+msgstr "उपसर्ग दृश्य सेटिंग्स"
 
 #: contents/ui/config/ConfigPrefix.qml:158
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr ""
+msgstr "पावर प्रबंधन विकल्प दिखाएं (शटडाउन, रीबूट, आदि)"
 
 #: contents/ui/config/ConfigPrefix.qml:218
 msgid "Convert units (requires KRunner installed)"
-msgstr ""
+msgstr "इकाइयां बदलें (KRunner स्थापित होना चाहिए)"
 
 #: contents/ui/config/ConfigPrefix.qml:228
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr ""
+msgstr "नोट: कुछ उपसर्ग स्थापित KRunner रनर्स पर निर्भर करते हैं।"
 
 #: contents/ui/components/QueryHints.qml:40
 #: contents/ui/components/HelpView.qml:16
-#, fuzzy
 msgid "Timeline View"
-msgstr "टाइल्स दृश्य"
+msgstr "समयरेखा दृश्य"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
-msgstr ""
+msgstr "कैलेंडर"
 
 #: contents/ui/components/QueryHints.qml:44
 #: contents/ui/components/QueryHints.qml:128
@@ -609,75 +592,74 @@ msgid "Today"
 msgstr "आज"
 
 #: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:129
+#: contents/ui/components/QueryHints.get(1):129
 #: contents/ui/components/QueryHints.qml:136
 msgid "Yesterday"
-msgstr ""
+msgstr "कल"
 
 #: contents/ui/components/QueryHints.qml:46
 msgid "This Week"
-msgstr ""
+msgstr "इस सप्ताह"
 
 #: contents/ui/components/QueryHints.qml:47
 msgid "This Month"
-msgstr ""
+msgstr "इस महीने"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Files modified today"
-msgstr ""
+msgstr "आज संशोधित फ़ाइलें"
 
 #: contents/ui/components/QueryHints.qml:52
 msgid "Files modified yesterday"
-msgstr ""
+msgstr "कल संशोधित फ़ाइलें"
 
 #: contents/ui/components/QueryHints.qml:53
 msgid "Files modified this week"
-msgstr ""
+msgstr "इस सप्ताह संशोधित फ़ाइलें"
 
 #: contents/ui/components/QueryHints.qml:54
 msgid "Files modified this month"
-msgstr ""
+msgstr "इस महीने संशोधित फ़ाइलें"
 
 #: contents/ui/components/QueryHints.qml:56
-#: contents/ui/components/HelpView.qml:18
+#: contents/ui/components/HelpView.get(1):18
 msgid "File Path Search"
-msgstr ""
+msgstr "फ़ाइल पथ खोज"
 
 #: contents/ui/components/QueryHints.qml:57
 #: contents/ui/components/HelpView.qml:23
 msgid "Man Pages"
-msgstr ""
+msgstr "कमांड सहायता (Man)"
 
 #: contents/ui/components/QueryHints.qml:58
 #: contents/ui/components/HelpView.qml:19
-#, fuzzy
 msgid "Google Search"
-msgstr "खोजें"
+msgstr "Google खोज"
 
 #: contents/ui/components/QueryHints.qml:59
 #: contents/ui/components/HelpView.qml:20
 msgid "DuckDuckGo Search"
-msgstr ""
+msgstr "DuckDuckGo खोज"
 
 #: contents/ui/components/QueryHints.qml:60
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr ""
+msgstr "विकिपीडिया खोज"
 
 #: contents/ui/components/QueryHints.qml:61
 #: contents/ui/components/HelpView.qml:24
 msgid "Kill Process"
-msgstr ""
+msgstr "प्रक्रिया समाप्त करें"
 
 #: contents/ui/components/QueryHints.qml:62
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
-msgstr ""
+msgstr "वर्तनी जांच"
 
 #: contents/ui/components/QueryHints.qml:63
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr ""
+msgstr "यूनिकोड वर्ण"
 
 #: contents/ui/components/QueryHints.qml:64
 #: contents/ui/components/SearchPopup.qml:714
@@ -687,10 +669,9 @@ msgid "Applications"
 msgstr "अनुप्रयोग"
 
 #: contents/ui/components/QueryHints.qml:65
-#: contents/ui/components/HelpView.qml:28
-#, fuzzy
+#: contents/ui/components/HelpView.get(1):28
 msgid "Shell Commands"
-msgstr "कमांड चलाएं"
+msgstr "शेल कमांड"
 
 #: contents/ui/components/QueryHints.qml:66
 #: contents/ui/components/HelpView.qml:22
@@ -704,13 +685,11 @@ msgstr "पावर प्रबंधन"
 
 #: contents/ui/components/QueryHints.qml:68
 #: contents/ui/components/HelpView.qml:30
-#, fuzzy
 msgid "System Services"
-msgstr "सिस्टम सेटिंग्स"
+msgstr "सिस्टम सेवाएँ"
 
 #: contents/ui/components/QueryHints.qml:69
 #: contents/ui/components/HelpView.qml:32
-#, fuzzy
 msgid "Date and Time"
 msgstr "दिनांक और समय"
 
@@ -724,7 +703,6 @@ msgstr "शब्दकोश परिभाषा"
 msgid "Unit Converter"
 msgstr "इकाई परिवर्तक"
 
-#: contents/ui/components/QueryHints.qml:72
 #: contents/ui/components/HelpView.qml:33
 msgid "Help & Shortcuts"
 msgstr "सहायता और शॉर्टकट"
@@ -732,55 +710,53 @@ msgstr "सहायता और शॉर्टकट"
 #: contents/ui/components/QueryHints.qml:130
 #: contents/ui/components/QueryHints.qml:136
 msgid "Two days ago"
-msgstr ""
+msgstr "दो दिन पहले"
 
 #: contents/ui/components/QueryHints.qml:217
 #: contents/ui/components/QueryHints.qml:227
 msgid "Browse calendar"
-msgstr ""
+msgstr "कैलेंडर ब्राउज़ करें"
 
 #: contents/ui/components/QueryHints.qml:241
-#, fuzzy
 msgid "Man pages not installed"
-msgstr "Man पैकेज स्थापित नहीं है"
+msgstr "Man पृष्ठ स्थापित नहीं हैं"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "Unknown prefix"
-msgstr ""
+msgstr "अज्ञात उपसर्ग"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "try"
-msgstr ""
+msgstr "कोशिश करें"
 
 #: contents/ui/components/DebugOverlay.qml:40
 msgid "Saved!"
-msgstr ""
+msgstr "सहेजा गया!"
 
 #: contents/ui/components/DebugOverlay.qml:48
 #: contents/ui/components/DebugOverlay.qml:118
 msgid "Save Dump"
-msgstr ""
+msgstr "डंप सहेजें"
 
 #: contents/ui/components/DebugOverlay.qml:77
 msgid "Backend"
-msgstr ""
+msgstr "बैकएंड"
 
 #: contents/ui/components/DebugOverlay.qml:80
 msgid "Items"
-msgstr ""
+msgstr "वस्तुएं"
 
 #: contents/ui/components/DebugOverlay.qml:83
 msgid "Latency"
-msgstr ""
+msgstr "विलंबता"
 
 #: contents/ui/components/DebugOverlay.qml:90
-#, fuzzy
 msgid "View"
-msgstr "सूची दृश्य"
+msgstr "दृश्य"
 
 #: contents/ui/components/DebugOverlay.qml:93
 msgid "Display"
-msgstr ""
+msgstr "प्रदर्शन"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/PinnedSection.qml:376
@@ -789,7 +765,7 @@ msgid "Unpin"
 msgstr "अनपिन करें"
 
 #: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/HistoryContextMenu.get(1):27
 msgid "Pin"
 msgstr "पिन करें"
 
@@ -799,10 +775,10 @@ msgstr "पिन की गई वस्तुएं"
 
 #: contents/ui/components/PinnedSection.qml:323
 msgid "Drag to reorder"
-msgstr ""
+msgstr "पुनः व्यवस्थित करने के लिए खींचें"
 
 #: contents/ui/components/PinnedSection.qml:342
-#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/HistoryContextMenu.get(1):52
 msgid "Open"
 msgstr "खोलें"
 
@@ -813,7 +789,7 @@ msgstr "पथ कॉपी करें"
 #: contents/ui/components/PinnedSection.qml:363
 #: contents/ui/components/HistoryContextMenu.qml:101
 msgid "Open Containing Folder"
-msgstr "फ़ोल्डर खोलें"
+msgstr "युक्त फ़ोल्डर खोलें"
 
 #: contents/ui/components/HistoryListView.qml:34
 #: contents/ui/components/HistoryTileView.qml:243
@@ -823,7 +799,7 @@ msgstr "हाल की खोजें"
 #: contents/ui/components/HistoryListView.qml:54
 #: contents/ui/components/HistoryTileView.qml:263
 msgid "Clear History"
-msgstr "इतिहास मिटाएं"
+msgstr "इतिहास साफ़ करें"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "No results found"
@@ -831,43 +807,43 @@ msgstr "कोई परिणाम नहीं मिला"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "Type to start searching"
-msgstr "खोजने के लिए टाइप करें"
+msgstr "खोज शुरू करने के लिए टाइप करें"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:269
 msgid "date"
-msgstr ""
+msgstr "तारीख"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:270
 msgid "clock"
-msgstr ""
+msgstr "घड़ी"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:295
 msgid "power"
-msgstr ""
+msgstr "पावर"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:279
 msgid "help"
-msgstr ""
+msgstr "सहायता"
 
 #: contents/ui/components/SearchPopup.qml:265
 msgid "unit"
-msgstr ""
+msgstr "इकाई"
 
 #: contents/ui/components/SearchPopup.qml:283
 msgid "kill"
-msgstr ""
+msgstr "समाप्त"
 
 #: contents/ui/components/SearchPopup.qml:287
 msgid "spell"
-msgstr ""
+msgstr "वर्तनी"
 
 #: contents/ui/components/SearchPopup.qml:291
 msgid "shell"
-msgstr ""
+msgstr "शेल"
 
 #: contents/ui/components/SearchPopup.qml:367
 msgid "Search Here"
@@ -879,9 +855,8 @@ msgid "Other"
 msgstr "अन्य"
 
 #: contents/ui/components/HistoryContextMenu.qml:69
-#, fuzzy
 msgid "Copy Location"
-msgstr "पथ कॉपी करें"
+msgstr "स्थान कॉपी करें"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
@@ -896,167 +871,166 @@ msgid "Properties"
 msgstr "गुण"
 
 #: contents/ui/components/HistoryContextMenu.qml:134
-#, fuzzy
 msgid "Edit Application..."
-msgstr "अनुप्रयोग"
+msgstr "अनुप्रयोग संपादित करें..."
 
 #: contents/ui/components/HistoryContextMenu.qml:144
 msgid "Remove from History"
-msgstr "इतिहास से हटाएं"
+msgstr "इतिहास से निकालें"
 
 #: contents/ui/components/PowerView.qml:133
 msgid "Hibernate"
-msgstr ""
+msgstr "हाइबरनेट"
 
 #: contents/ui/components/PowerView.qml:137
 msgid "(Press again to hibernate)"
-msgstr ""
+msgstr "(हाइबरनेट करने के लिए फिर से दबाएं)"
 
 #: contents/ui/components/PowerView.qml:146
 msgid "Sleep"
-msgstr ""
+msgstr "शयन"
 
 #: contents/ui/components/PowerView.qml:150
 msgid "(Press again to sleep)"
-msgstr ""
+msgstr "(शयन के लिए फिर से दबाएं)"
 
 #: contents/ui/components/PowerView.qml:158
 msgid "Reboot"
-msgstr ""
+msgstr "रीबूट"
 
 #: contents/ui/components/PowerView.qml:162
 msgid "(Press again to reboot)"
-msgstr ""
+msgstr "(रीबूट करने के लिए फिर से दबाएं)"
 
 #: contents/ui/components/PowerView.qml:180
 msgid "Shutdown"
-msgstr ""
+msgstr "बंद करें"
 
 #: contents/ui/components/PowerView.qml:184
 msgid "(Press again to shutdown)"
-msgstr ""
+msgstr "(बंद करने के लिए फिर से दबाएं)"
 
 #: contents/ui/components/PowerView.qml:278
 msgid "Authorize to list entries"
-msgstr ""
+msgstr "प्रविष्टियों को सूचीबद्ध करने के लिए अधिकृत करें"
 
 #: contents/ui/components/PowerView.qml:299
 msgid "Lock Screen"
-msgstr ""
+msgstr "स्क्रीन लॉक करें"
 
 #: contents/ui/components/PowerView.qml:309
 msgid "Log Out"
-msgstr ""
+msgstr "लॉग आउट"
 
 #: contents/ui/components/PowerView.qml:313
 msgid "(Press again to log out)"
-msgstr ""
+msgstr "(लॉग आउट करने के लिए फिर से दबाएं)"
 
 #: contents/ui/components/PowerView.qml:321
 msgid "Switch User"
-msgstr ""
+msgstr "उपयोगकर्ता बदलें"
 
 #: contents/ui/components/PowerView.qml:325
 msgid "(Press again to switch)"
-msgstr ""
+msgstr "(बदलने के लिए फिर से दबाएं)"
 
 #: contents/ui/components/PowerView.qml:333
 msgid "Save Session"
-msgstr ""
+msgstr "सत्र सहेजें"
 
 #: contents/ui/components/PowerView.qml:352
 msgid "(Press again)"
-msgstr ""
+msgstr "(फिर से दबाएं)"
 
 #: contents/ui/main.qml:96
 msgid "Medium Mode (Button only)"
-msgstr ""
+msgstr "मध्यम मोड (केवल बटन)"
 
 #: contents/ui/main.qml:102
 msgid "Wide Mode (Search bar + icon)"
-msgstr ""
+msgstr "वाइड मोड (खोज पट्टी + आइकन)"
 
 #: contents/ui/main.qml:108
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr ""
+msgstr "अतिरिक्त वाइड मोड (वाइड + लंबा प्लेसहोल्डर)"
 
 msgid "Show/Hide Previews"
-msgstr ""
+msgstr "पूर्वावलोकन दिखाएं/छिपाएं"
 
 msgid "Edge Appearance"
-msgstr ""
+msgstr "किनारा दिखावट"
 
 msgid "Round corners"
-msgstr ""
+msgstr "गोल कोने"
 
 msgid "Slightly round"
-msgstr ""
+msgstr "थोड़ा गोल"
 
 msgid "Less round"
-msgstr ""
+msgstr "कम गोल"
 
 msgid "Square corners"
-msgstr ""
+msgstr "चौकोर कोने"
 
 msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr ""
+msgstr "(स्वैप विभाजन आकार रैम से छोटा है या कोई स्वैप नहीं मिला)"
 
 msgid "Note: Systemd boot is required for this feature"
-msgstr ""
+msgstr "नोट: इस सुविधा के लिए Systemd बूट आवश्यक है"
 
 msgid "Scan for boot entries"
-msgstr ""
+msgstr "बूट प्रविष्टियों के लिए स्कैन करें"
 
 msgid "Result Count"
-msgstr ""
+msgstr "परिणाम गणना"
 
 msgid "Priority Ranking"
-msgstr ""
+msgstr "प्राथमिकता रैंकिंग"
 
 msgid "Show Together"
-msgstr ""
+msgstr "एक साथ दिखाएं"
 
 msgid "Corner Roundness"
-msgstr ""
+msgstr "कोने की गोलाई"
 
 msgid "Square"
-msgstr ""
+msgstr "चौकोर"
 
 msgid "Slightly Rounded"
-msgstr ""
+msgstr "थोड़ा गोल"
 
 msgid "Moderately Rounded"
-msgstr ""
+msgstr "मध्यम गोल"
 
 msgid "Fully Rounded"
-msgstr ""
+msgstr "पूरी तरह गोल"
 
 msgid "Minimize automatically when searching"
-msgstr ""
+msgstr "खोजते समय स्वचालित रूप से छोटा करें"
 
 msgid "Search on Wikipedia"
-msgstr ""
+msgstr "विकिपीडिया पर खोजें"
 
 msgid "Minimal - A simplified interface with essential features."
-msgstr ""
+msgstr "न्यूनतम - आवश्यक सुविधाओं के साथ एक सरल इंटरफ़ेस।"
 
 msgid "Developer - Debug tab active, developer features enabled."
-msgstr ""
+msgstr "डेवलपर - डिबग टैब सक्रिय, डेवलपर सुविधाएँ सक्षम।"
 
 msgid "Power User - All features active, advanced settings available."
-msgstr ""
+msgstr "पावर यूजर - सभी सुविधाएँ सक्रिय, उन्नत सेटिंग्स उपलब्ध।"
 
 msgid "Weather View (weather:)"
-msgstr "मौसम दृश्य (मौसम:)"
+msgstr "मौसम दृश्य (weather:)"
 
 msgid "Use System Units"
 msgstr "सिस्टम इकाइयों का उपयोग करें"
 
 msgid "Refresh Interval:"
-msgstr "ताज़ा अंतराल:"
+msgstr "ताज़ा करने का अंतराल:"
 
 msgid "Every Search"
-msgstr "हर खोज"
+msgstr "प्रत्येक खोज"
 
 msgid "15 Minutes"
 msgstr "15 मिनट"
@@ -1068,22 +1042,7 @@ msgid "1 Hour"
 msgstr "1 घंटा"
 
 msgid "(If time since last update > interval)"
-msgstr "(यदि अंतिम अद्यतन के बाद का समय > अंतराल)"
+msgstr "(यदि अंतिम अपडेट के बाद का समय > अंतराल)"
 
 msgid "Enable Weather Prefix"
 msgstr "मौसम उपसर्ग सक्षम करें"
-
-#~ msgid "General"
-#~ msgstr "सामान्य"
-
-#~ msgid "Folders"
-#~ msgstr "फ़ोल्डर्स"
-
-#~ msgid "Web"
-#~ msgstr "वेब"
-
-#~ msgid "Manage Application"
-#~ msgstr "एप्लिकेशन प्रबंधित करें"
-
-#~ msgid "Reset Statistics"
-#~ msgstr "आंकड़े रीसेट करें"

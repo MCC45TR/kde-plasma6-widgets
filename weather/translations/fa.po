@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "آب و هوا"
 
 msgid "Appearance"
-msgstr ""
+msgstr "ظاهر"
 
 msgid "Details"
-msgstr ""
+msgstr "جزئیات"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "پیش‌بینی ساعتی"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "پیش‌بینی روزانه"
 
 msgid "Feels like"
-msgstr ""
+msgstr "دمای احساسی"
 
 msgid "Humidity"
-msgstr ""
+msgstr "رطوبت"
 
 msgid "Wind"
-msgstr ""
+msgstr "باد"
 
 msgid "Pressure"
-msgstr ""
+msgstr "فشار"
 
 msgid "Clouds"
-msgstr ""
+msgstr "ابرها"
 
 msgid "UV"
-msgstr ""
+msgstr "شاخص UV"
 
 msgid "Visibility"
-msgstr ""
+msgstr "دید افقی"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "جهت باد"
 
 msgid "Click to close"
-msgstr ""
+msgstr "برای بستن کلیک کنید"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "پیش‌فرض (SVG رنگی)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "گوگل هواشناسی نسخه ۳ (SVG تخت)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "گوگل هواشناسی نسخه ۲ (PNG واقع‌گرایانه)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "گوگل هواشناسی نسخه ۱ (PNG کلاسیک)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "بسته آیکون:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "سبک بصری آیکون‌های هواشناسی را انتخاب کنید."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "تامین‌کننده هواشناسی"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (رایگان، بدون نیاز به کلید)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (نیاز به کلید)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (نیاز به کلید)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "بهترین گزینه رایگان. بدون نیاز به کلید API."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "تامین‌کننده استاندارد. کلید API در پایین لازم است."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "تامین‌کننده جایگزین. کلید API در پایین لازم است."
 
 msgid "API Keys"
-msgstr ""
+msgstr "کلیدهای API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "کلید API OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "کلید API OpenWeatherMap خود را وارد کنید"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "کلید API WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "کلید WeatherAPI.com خود را وارد کنید"
 
 msgid "Location"
-msgstr ""
+msgstr "مکان"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "تشخیص خودکار از IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "وارد کردن دستی"
 
 msgid "City 1:"
-msgstr ""
+msgstr "شهر ۱:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "مثال: تهران، مشهد، لندن"
 
 msgid "City 2:"
-msgstr ""
+msgstr "شهر ۲:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "شهر دوم (اختیاری)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "شهر ۳:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "شهر سوم (اختیاری)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "می‌توانید از نام شهر، 'شهر، کد کشور' یا کد پستی استفاده کنید."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "مکان بر اساس آدرس IP شما به طور خودکار تشخیص داده می‌شود."
 
 msgid "Settings"
-msgstr ""
+msgstr "تنظیمات"
 
 msgid "Units:"
-msgstr ""
+msgstr "واحدها:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "استفاده از واحدهای سیستم"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "متریک (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "امپریال (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "فاصله به‌روزرسانی:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "۱۵ دقیقه"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "۳۰ دقیقه"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "۴۵ دقیقه"
 
 msgid "1 hour"
-msgstr ""
+msgstr "۱ ساعت"
 
 msgid "2 hours"
-msgstr ""
+msgstr "۲ ساعت"
 
 msgid "3 hours"
-msgstr ""
+msgstr "۳ ساعت"
 
 msgid "4 hours"
-msgstr ""
+msgstr "۴ ساعت"
 
 msgid "6 hours"
-msgstr ""
+msgstr "۶ ساعت"
 
 msgid "8 hours"
-msgstr ""
+msgstr "۸ ساعت"
 
 msgid "12 hours"
-msgstr ""
+msgstr "۱۲ ساعت"
 
 msgid "1 day"
-msgstr ""
+msgstr "۱ روز"
 
 msgid "Refresh"
-msgstr ""
+msgstr "به‌روزرسانی"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "درحال بارگذاری داده‌های هواشناسی..."
 
 msgid "Clear"
-msgstr ""
+msgstr "صاف"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "عمدتاً صاف"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "کمی ابری"
 
 msgid "Overcast"
-msgstr ""
+msgstr "تمام ابری"
 
 msgid "Fog"
-msgstr ""
+msgstr "مه"
 
 msgid "Mist"
-msgstr ""
+msgstr "مه رقیق"
 
 msgid "Haze"
-msgstr ""
+msgstr "غبار"
 
 msgid "Smoke"
-msgstr ""
+msgstr "دود"
 
 msgid "Dust"
-msgstr ""
+msgstr "گرد و خاک"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "نم‌نم باران"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "نم‌نم باران منجمد"
 
 msgid "Rain"
-msgstr ""
+msgstr "باران"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "باران سبک"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "باران منجمد"
 
 msgid "Snow"
-msgstr ""
+msgstr "برف"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "برف سبک"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "برف دانه‌ای"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "رگبار باران"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "رگبار برف"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "رعد و برق"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "رعد و برق همراه با تگرگ"
 
 msgid "Unknown"
-msgstr ""
+msgstr "نامشخص"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "ابری"
 
 msgid "Sun"
-msgstr ""
+msgstr "یک"
 
 msgid "Mon"
-msgstr ""
+msgstr "دو"
 
 msgid "Tue"
-msgstr ""
+msgstr "سه"
 
 msgid "Wed"
-msgstr ""
+msgstr "چهار"
 
 msgid "Thu"
-msgstr ""
+msgstr "پنج"
 
 msgid "Fri"
-msgstr ""
+msgstr "جمعه"
 
 msgid "Sat"
-msgstr ""
+msgstr "شنبه"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "تنظیمات فونت"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "استفاده از فونت پیش‌فرض سیستم"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "خانواده فونت سفارشی:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "شفافیت پس‌زمینه:"
 
 msgid "100%"
-msgstr ""
+msgstr "۱۰۰٪"
 
 msgid "75%"
-msgstr ""
+msgstr "۷۵٪"
 
 msgid "50%"
-msgstr ""
+msgstr "۵۰٪"
 
 msgid "25%"
-msgstr ""
+msgstr "۲۵٪"
 
 msgid "10%"
-msgstr ""
+msgstr "۱۰٪"
 
 msgid "5%"
-msgstr ""
+msgstr "۵٪"
 
 msgid "0%"
-msgstr ""
+msgstr "۰٪"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "تنظیمات پس‌زمینه"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "حاشیه ویجت:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "معمولی (۱۰ پیکسل)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "کمتر (۵ پیکسل)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "بدون حاشیه (۰ پیکسل)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "حالت طرح‌بندی:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "خودکار"
 
 msgid "Small"
-msgstr ""
+msgstr "کوچک"
 
 msgid "Wide"
-msgstr ""
+msgstr "عریض"
 
 msgid "Large"
-msgstr ""
+msgstr "بزرگ"
 
 msgid "Representation:"
-msgstr ""
+msgstr "نمایش:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "پنل ساده"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "پنل دقیق"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "اندازه فونت (۰ = خودکار):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "اندازه آیکون (۰ = خودکار):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "روزهای پیش‌بینی:"
 
 msgid "NW"
-msgstr ""
+msgstr "شمال غربی"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "تنظیمات پنل"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "سبک بصری آیکون‌های هواشناسی را انتخاب کنید. (توجه: بسته‌های قدیمی‌تر مانند نسخه ۱ یا ۲ ممکن است برای برخی شرایط آیکون نداشته باشند)"

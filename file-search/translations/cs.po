@@ -3,83 +3,77 @@ msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-18 22:43+0300\n"
-"PO-Revision-Date: 2026-01-18 16:42\n"
-"Last-Translator: Auto Generator <auto@bot>\n"
+"PO-Revision-Date: 2026-01-22 12:00+0300\n"
+"Last-Translator: Automatically generated\n"
 "Language-Team: cs\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
 msgid "Appearance"
 msgstr "Vzhled"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-#, fuzzy
 msgid "Categories"
 msgstr "Kategorie"
 
 #: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
 msgid "Debug"
-msgstr ""
+msgstr "Ladění"
 
 #: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
 msgid "Help"
-msgstr ""
+msgstr "Nápověda"
 
 #: contents/ui/config/ConfigGeneral.qml:80
-#, fuzzy
 msgid "Panel"
-msgstr "Zobrazení panelu"
+msgstr "Panel"
 
 #: contents/ui/config/ConfigGeneral.qml:84
 msgid "Popup"
-msgstr ""
+msgstr "Vyskakovací okno"
 
 #: contents/ui/config/ConfigGeneral.qml:88
 #: contents/ui/config/ConfigPreview.qml:9
-#, fuzzy
 msgid "Preview"
-msgstr "Náhled panelu"
+msgstr "Náhled"
 
 #: contents/ui/config/ConfigGeneral.qml:92
 #: contents/ui/config/ConfigPrefix.qml:9
 msgid "Prefixes"
-msgstr ""
+msgstr "Předpony"
 
 #: contents/ui/config/ConfigGeneral.qml:96
 msgid "Placeholder"
-msgstr ""
+msgstr "Zástupný text"
 
 #: contents/ui/config/ConfigGeneral.qml:114
-#, fuzzy
 msgid "Panel Appearance"
-msgstr "Vzhled"
+msgstr "Vzhled panelu"
 
 #: contents/ui/config/ConfigGeneral.qml:120
 #: contents/ui/config/ConfigDebug.qml:123
 msgid "Display Mode"
-msgstr ""
+msgstr "Režim zobrazení"
 
 #: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
 msgid "Button Mode (Icon only)"
-msgstr "Režim tlačítka (Pouze ikona)"
+msgstr "Režim tlačítka (pouze ikona)"
 
 #: contents/ui/config/ConfigGeneral.qml:123
-#, fuzzy
 msgid "Medium Mode (Text)"
-msgstr "Střední režim (Pouze tlačítko)"
+msgstr "Střední režim (text)"
 
 #: contents/ui/config/ConfigGeneral.qml:124
-#, fuzzy
 msgid "Wide Mode (Search Bar)"
-msgstr "Široký režim (Vyhledávací panel + ikona)"
+msgstr "Široký režim (vyhledávací panel)"
 
 #: contents/ui/config/ConfigGeneral.qml:125
 msgid "Extra Wide Mode"
-msgstr ""
+msgstr "Extra široký režim"
 
 #: contents/ui/config/ConfigGeneral.qml:132
 msgid "Panel Preview"
@@ -92,7 +86,7 @@ msgstr "Hledat"
 
 #: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
 msgid "Start searching..."
-msgstr "Začít hledat..."
+msgstr "Začněte hledat..."
 
 #: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
 msgid "Search..."
@@ -100,11 +94,11 @@ msgstr "Hledat..."
 
 #: contents/ui/config/ConfigGeneral.qml:204
 msgid "Power Options"
-msgstr ""
+msgstr "Možnosti napájení"
 
 #: contents/ui/config/ConfigGeneral.qml:205
 msgid "Show boot options in Reboot button"
-msgstr ""
+msgstr "Zobrazit možnosti zavádění v tlačítku Restartovat"
 
 #: contents/ui/config/ConfigGeneral.qml:213
 msgid "Results View"
@@ -113,7 +107,7 @@ msgstr "Zobrazení výsledků"
 #: contents/ui/config/ConfigGeneral.qml:219
 #: contents/ui/config/ConfigDebug.qml:129
 msgid "View Mode"
-msgstr ""
+msgstr "Režim zobrazení"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "List View"
@@ -126,7 +120,7 @@ msgstr "Zobrazení dlaždic"
 #: contents/ui/config/ConfigGeneral.qml:227
 #: contents/ui/config/ConfigDebug.qml:138
 msgid "List Icon Size"
-msgstr "Velikost ikon seznamu"
+msgstr "Velikost ikon v seznamu"
 
 #: contents/ui/config/ConfigGeneral.qml:235
 #: contents/ui/config/ConfigDebug.qml:135
@@ -135,100 +129,96 @@ msgstr "Velikost ikon dlaždic"
 
 #: contents/ui/config/ConfigGeneral.qml:243
 #: contents/ui/config/ConfigCategories.qml:170
-#, fuzzy
 msgid "Result Limits"
-msgstr "Zobrazení výsledků"
+msgstr "Limity výsledků"
 
 #: contents/ui/config/ConfigGeneral.qml:249
 #: contents/ui/config/ConfigCategories.qml:175
-#, fuzzy
 msgid "Min Results"
-msgstr "Zobrazení výsledků"
+msgstr "Min. výsledků"
 
 #: contents/ui/config/ConfigGeneral.qml:256
 #: contents/ui/config/ConfigCategories.qml:184
-#, fuzzy
 msgid "Max Results"
-msgstr "Zobrazení výsledků"
+msgstr "Max. výsledků"
 
 #: contents/ui/config/ConfigGeneral.qml:263
 msgid "Smartly limit results based on relevance"
-msgstr ""
+msgstr "Chytře omezit výsledky na základě relevance"
 
 #: contents/ui/config/ConfigGeneral.qml:264
 msgid "Dynamic Limit"
-msgstr ""
+msgstr "Dynamický limit"
 
 #: contents/ui/config/ConfigGeneral.qml:272
 #: contents/ui/config/ConfigSearch.qml:19
 #: contents/ui/config/ConfigPreview.qml:112
-#, fuzzy
 msgid "Enable File Previews"
-msgstr "Náhled panelu"
+msgstr "Povolit náhledy souborů"
 
 #: contents/ui/config/ConfigGeneral.qml:273
 msgid "Master Switch"
-msgstr ""
+msgstr "Hlavní vypínač"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 #: contents/ui/config/ConfigPreview.qml:134
 msgid "Preview Types"
-msgstr ""
+msgstr "Typy náhledů"
 
 #: contents/ui/config/ConfigGeneral.qml:283
 #: contents/ui/config/ConfigPreview.qml:159
 msgid "Images"
-msgstr ""
+msgstr "Obrázky"
 
 #: contents/ui/config/ConfigGeneral.qml:289
 #: contents/ui/config/ConfigPreview.qml:197
 msgid "Videos"
-msgstr ""
+msgstr "Videa"
 
 #: contents/ui/config/ConfigGeneral.qml:295
 #: contents/ui/config/ConfigPreview.qml:235
 msgid "Text Files"
-msgstr ""
+msgstr "Textové soubory"
 
 #: contents/ui/config/ConfigGeneral.qml:301
 #: contents/ui/config/ConfigPreview.qml:273
 msgid "Documents"
-msgstr ""
+msgstr "Dokumenty"
 
 #: contents/ui/config/ConfigGeneral.qml:311
 #: contents/ui/config/ConfigPrefix.qml:29
 msgid "Date View (date:)"
-msgstr ""
+msgstr "Zobrazení data (date:)"
 
 #: contents/ui/config/ConfigGeneral.qml:316
 #: contents/ui/config/ConfigPrefix.qml:36
 msgid "Show Large Clock"
-msgstr ""
+msgstr "Zobrazit velké hodiny"
 
 #: contents/ui/config/ConfigGeneral.qml:320
 #: contents/ui/config/ConfigPrefix.qml:43
 msgid "Show Calendar Events"
-msgstr ""
+msgstr "Zobrazit události kalendáře"
 
 #: contents/ui/config/ConfigGeneral.qml:323
 #: contents/ui/config/ConfigPrefix.qml:50
 msgid "Power View (power:)"
-msgstr ""
+msgstr "Zobrazení napájení (power:)"
 
 #: contents/ui/config/ConfigGeneral.qml:328
 #: contents/ui/config/ConfigPrefix.qml:58
 msgid "Show Sleep Button"
-msgstr ""
+msgstr "Zobrazit tlačítko spánku"
 
 #: contents/ui/config/ConfigGeneral.qml:332
 #: contents/ui/config/ConfigPrefix.qml:65
 msgid "Show Hibernate Button"
-msgstr ""
+msgstr "Zobrazit tlačítko hibernace"
 
 #: contents/ui/config/ConfigGeneral.qml:337
 #: contents/ui/config/ConfigPrefix.qml:72
 msgid "Available Prefixes Reference"
-msgstr ""
+msgstr "Přehled dostupných předpon"
 
 #: contents/ui/config/ConfigGeneral.qml:341
 #: contents/ui/config/ConfigPrefix.qml:76
@@ -236,201 +226,203 @@ msgid ""
 "These prefixes can be used to perform specific actions directly from the "
 "search bar."
 msgstr ""
+"Tyto předpony lze použít k provádění konkrétních akcí přímo z "
+"vyhledávacího panelu."
 
 #: contents/ui/config/ConfigGeneral.qml:363
 #: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
 #: contents/ui/config/ConfigPrefix.qml:98
 msgid "List files modified today"
-msgstr ""
+msgstr "Seznam souborů změněných dnes"
 
 #: contents/ui/config/ConfigGeneral.qml:375
 #: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
 #: contents/ui/config/ConfigPrefix.qml:110
 msgid "Search on Google"
-msgstr ""
+msgstr "Hledat přes Google"
 
 #: contents/ui/config/ConfigGeneral.qml:387
 #: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
 #: contents/ui/config/ConfigPrefix.qml:122
 msgid "Search on DuckDuckGo"
-msgstr ""
+msgstr "Hledat přes DuckDuckGo"
 
 #: contents/ui/config/ConfigGeneral.qml:399
 #: contents/ui/config/ConfigPrefix.qml:134
 msgid "Show calendar and date information"
-msgstr ""
+msgstr "Zobrazit kalendář a informace o datu"
 
 #: contents/ui/config/ConfigGeneral.qml:411
 #: contents/ui/config/ConfigPrefix.qml:146
 msgid "Show large clock"
-msgstr ""
+msgstr "Zobrazit velké hodiny"
 
 #: contents/ui/config/ConfigGeneral.qml:423
-#, fuzzy
 msgid "Show power management options"
-msgstr "Správa napájení"
+msgstr "Zobrazit možnosti správy napájení"
 
 #: contents/ui/config/ConfigGeneral.qml:435
 #: contents/ui/config/ConfigPrefix.qml:170
 msgid "Show this help screen"
-msgstr ""
+msgstr "Zobrazit tuto nápovědu"
 
 #: contents/ui/config/ConfigGeneral.qml:447
 #: contents/ui/config/ConfigPrefix.qml:182
 msgid "Terminate running processes"
-msgstr ""
+msgstr "Ukončit běžící procesy"
 
 #: contents/ui/config/ConfigGeneral.qml:459
 #: contents/ui/config/ConfigPrefix.qml:194
 msgid "Check spelling of a word"
-msgstr ""
+msgstr "Zkontrolovat pravopis slova"
 
 #: contents/ui/config/ConfigGeneral.qml:471
 #: contents/ui/config/ConfigPrefix.qml:206
 msgid "Execute shell commands"
-msgstr ""
+msgstr "Spustit příkazy shellu"
 
 #: contents/ui/config/ConfigGeneral.qml:483
 msgid "Convert units (requires KRunner)"
-msgstr ""
+msgstr "Převést jednotky (vyžaduje KRunner)"
 
 #: contents/ui/config/ConfigGeneral.qml:493
 #: contents/ui/config/ConfigSearch.qml:13
-#, fuzzy
 msgid "Search Settings"
-msgstr "Nastavení systému"
+msgstr "Nastavení hledání"
 
 #: contents/ui/config/ConfigGeneral.qml:497
 #: contents/ui/config/ConfigCategories.qml:150
 msgid "Search Algorithm"
-msgstr ""
+msgstr "Algoritmus hledání"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Fuzzy"
-msgstr ""
+msgstr "Fuzzy (přibližné)"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Exact"
-msgstr ""
+msgstr "Přesné"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Starts With"
-msgstr ""
+msgstr "Začíná na"
 
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
 msgstr ""
+"Zobrazit náhledy souborů při najetí myší (lze vyvolat také pomocí Ctrl+Space)"
 
 #: contents/ui/config/ConfigSearch.qml:33
-#, fuzzy
 msgid "Search Behavior"
-msgstr "Hledat zde"
+msgstr "Chování hledání"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr ""
+msgstr "Můžete použít následující KRunner příkazy a předpony:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
-msgstr ""
+msgstr "Předpona"
 
 #: contents/ui/config/ConfigSearch.qml:56
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
 msgid "Terminate processes"
-msgstr ""
+msgstr "Ukončit procesy"
 
 #: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
 msgid "Check spelling"
-msgstr ""
+msgstr "Kontrola pravopisu"
 
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
-msgstr ""
+msgstr "Hledat Unicode znaky"
 
 #: contents/ui/config/ConfigDebug.qml:68
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
 msgstr ""
+"Tato karta je aktivní pouze v vývojářském režimu. Změňte profil v Obecném "
+"nastavení."
 
 #: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-#, fuzzy
 msgid "Debug Settings"
-msgstr "Nastavení systému"
+msgstr "Nastavení ladění"
 
 #: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
 #: contents/ui/components/DebugOverlay.qml:57
 msgid "Debug Overlay"
-msgstr ""
+msgstr "Ladící vrstva"
 
 #: contents/ui/config/ConfigDebug.qml:91
 msgid "Show debug info on widget (active mode, item count, index source)"
 msgstr ""
+"Zobrazit debug informace na widgetu (aktivní režim, počet položek, zdroj "
+"indexu)"
 
 #: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
 msgid "Debug Data"
-msgstr ""
+msgstr "Ladící data"
 
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Timestamp"
-msgstr ""
+msgstr "Časové razítko"
 
 #: contents/ui/config/ConfigDebug.qml:114
 msgid "Locale"
-msgstr ""
+msgstr "Lokalizace"
 
 #: contents/ui/config/ConfigDebug.qml:117
-#, fuzzy
 msgid "User Profile"
-msgstr "Profil"
+msgstr "Uživatelský profil"
 
 #: contents/ui/config/ConfigDebug.qml:141
-#, fuzzy
 msgid "Enable Preview"
-msgstr "Náhled panelu"
+msgstr "Povolit náhled"
 
 #: contents/ui/config/ConfigDebug.qml:147
 msgid "History Count"
-msgstr ""
+msgstr "Počet v historii"
 
 #: contents/ui/config/ConfigDebug.qml:153
 msgid "items"
-msgstr ""
+msgstr "položky"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/config/ConfigDebug.qml:165
 msgid "Telemetry"
-msgstr ""
+msgstr "Telemetrie"
 
 #: contents/ui/config/ConfigDebug.qml:174
 #: contents/ui/components/DebugOverlay.qml:100
-#, fuzzy
 msgid "Total Searches"
-msgstr "Nedávná hledání"
+msgstr "Celkem hledání"
 
 #: contents/ui/config/ConfigDebug.qml:185
 #: contents/ui/components/DebugOverlay.qml:103
 msgid "Avg Latency"
-msgstr ""
+msgstr "Průměrná latence"
 
 #: contents/ui/config/ConfigDebug.qml:198
 #: contents/ui/config/ConfigDebug.qml:200
 msgid "History Sample"
-msgstr ""
+msgstr "Ukázka historie"
 
 #: contents/ui/config/ConfigDebug.qml:207
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
 msgstr ""
+"Oznámení o soukromí: Všechna ladící a telemetrická data jsou uložena pouze "
+"LOKÁLNĚ. Žádná data se neposílají na internet."
 
 #: contents/ui/config/ConfigDebug.qml:281
 msgid "History is empty"
-msgstr ""
+msgstr "Historie je prázdná"
 
 #: contents/ui/config/ConfigHelp.qml:49
 msgid "Keyboard Shortcuts"
@@ -438,171 +430,169 @@ msgstr "Klávesové zkratky"
 
 #: contents/ui/config/ConfigHelp.qml:53
 msgid "Navigate between results"
-msgstr ""
+msgstr "Navigace mezi výsledky"
 
 #: contents/ui/config/ConfigHelp.qml:59
 msgid "Navigate between sections"
-msgstr ""
+msgstr "Navigace mezi sekcemi"
 
 #: contents/ui/config/ConfigHelp.qml:65
-#, fuzzy
 msgid "List / Tile view"
-msgstr "Zobrazení seznamu"
+msgstr "Seznam / Dlaždice"
 
 #: contents/ui/config/ConfigHelp.qml:71
 msgid "Toggle file preview"
-msgstr ""
+msgstr "Přepnout náhled souboru"
 
 #: contents/ui/config/ConfigHelp.qml:77
 msgid "Open selected item"
-msgstr ""
+msgstr "Otevřít vybranou položku"
 
 #: contents/ui/config/ConfigHelp.qml:83
 msgid "Close widget"
-msgstr ""
+msgstr "Zavřít widget"
 
 #: contents/ui/config/ConfigHelp.qml:90
-#, fuzzy
 msgid "Search Prefixes"
-msgstr "Hledat zde"
+msgstr "Předpony hledání"
 
 #: contents/ui/config/ConfigHelp.qml:125
-#, fuzzy
 msgid "User Profiles"
-msgstr "Profil"
+msgstr "Uživatelské profily"
 
 #: contents/ui/config/ConfigHelp.qml:129
 msgid "A simplified interface with essential features."
-msgstr ""
+msgstr "Zjednodušené rozhraní se základními funkcemi."
 
 #: contents/ui/config/ConfigHelp.qml:135
 msgid "Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Karta ladění aktivní, vývojářské funkce povoleny."
 
 #: contents/ui/config/ConfigHelp.qml:141
 msgid "All features active, advanced settings available."
-msgstr ""
+msgstr "Všechny funkce aktivní, pokročilá nastavení k dispozici."
 
 #: contents/ui/config/ConfigCategories.qml:145
-#, fuzzy
 msgid "Algorithm Settings"
-msgstr "Nastavení systému"
+msgstr "Nastavení algoritmu"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Fuzzy Match"
-msgstr ""
+msgstr "Fuzzy shoda"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Exact Match"
-msgstr ""
+msgstr "Přesná shoda"
 
 #: contents/ui/config/ConfigCategories.qml:162
 msgid "Dynamic Result Count"
-msgstr ""
+msgstr "Dynamický počet výsledků"
 
 #: contents/ui/config/ConfigCategories.qml:163
 msgid "Automatically limit displayed results based on relevance score"
-msgstr ""
+msgstr "Automaticky omezit zobrazené výsledky na základě skóre relevance"
 
 #: contents/ui/config/ConfigCategories.qml:195
 msgid "Prioritized Categories"
-msgstr ""
+msgstr "Prioritizované kategorie"
 
 #: contents/ui/config/ConfigCategories.qml:199
 msgid "Use buttons to reorder categories or move between sections"
 msgstr ""
+"Pomocí tlačítek změňte pořadí kategorií nebo je přesuňte mezi sekcemi"
 
 #: contents/ui/config/ConfigCategories.qml:208
 msgid "Priority"
-msgstr ""
+msgstr "Priorita"
 
 #: contents/ui/config/ConfigCategories.qml:299
 msgid "Move to Combined"
-msgstr ""
+msgstr "Přesunout do kombinovaných"
 
 #: contents/ui/config/ConfigCategories.qml:314
 msgid "Show Together (Merged)"
-msgstr ""
+msgstr "Zobrazit společně (sloučené)"
 
 #: contents/ui/config/ConfigCategories.qml:318
 msgid "Categories in this section will be grouped together"
-msgstr ""
+msgstr "Kategorie v této sekci budou seskupeny dohromady"
 
 #: contents/ui/config/ConfigCategories.qml:339
 msgid "No combined categories"
-msgstr ""
+msgstr "Žádné kombinované kategorie"
 
 #: contents/ui/config/ConfigCategories.qml:398
-#, fuzzy
 msgid "Move to Separate"
-msgstr "Přesunout do koše"
+msgstr "Přesunout do oddělených"
 
 #: contents/ui/config/ConfigCategories.qml:413
 msgid "Category Settings Information"
-msgstr ""
+msgstr "Informace o nastavení kategorií"
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
 msgstr ""
+"Změny se aplikují okamžitě. Skryté kategorie se nebudou zobrazovat ve "
+"výsledcích hledání. Priorita určuje pořadí zobrazení."
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid "Lower number = higher priority"
-msgstr ""
+msgstr "Nižší číslo = vyšší priorita"
 
 #: contents/ui/config/ConfigPreview.qml:97
-#, fuzzy
 msgid "Preview Settings"
-msgstr "Nastavení systému"
+msgstr "Nastavení náhledu"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr ""
+msgstr "Povolit nebo zakázat náhledy souborů pro různé typy souborů."
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Enabled"
-msgstr ""
+msgstr "Povoleno"
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Disabled"
-msgstr ""
+msgstr "Zakázáno"
 
 #: contents/ui/config/ConfigPreview.qml:307
 msgid "Performance Information"
-msgstr ""
+msgstr "Informace o výkonu"
 
 #: contents/ui/config/ConfigPreview.qml:312
 msgid "Video and document previews may increase memory usage."
-msgstr ""
+msgstr "Náhledy videa a dokumentů mohou zvýšit využití paměti."
 
 #: contents/ui/config/ConfigPrefix.qml:24
 msgid "Prefix View Settings"
-msgstr ""
+msgstr "Nastavení zobrazení předpon"
 
 #: contents/ui/config/ConfigPrefix.qml:158
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr ""
+msgstr "Zobrazit možnosti správy napájení (Vypnout, Restartovat atd.)"
 
 #: contents/ui/config/ConfigPrefix.qml:218
 msgid "Convert units (requires KRunner installed)"
-msgstr ""
+msgstr "Převést jednotky (vyžaduje nainstalovaný KRunner)"
 
 #: contents/ui/config/ConfigPrefix.qml:228
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
 msgstr ""
+"Poznámka: Některé předpony (jako převod jednotek) závisí na "
+"nainstalovaných modulech KRunner."
 
 #: contents/ui/components/QueryHints.qml:40
 #: contents/ui/components/HelpView.qml:16
-#, fuzzy
 msgid "Timeline View"
-msgstr "Zobrazení dlaždic"
+msgstr "Časová osa"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
-msgstr ""
+msgstr "Kalendář"
 
 #: contents/ui/components/QueryHints.qml:44
 #: contents/ui/components/QueryHints.qml:128
@@ -614,72 +604,71 @@ msgstr "Dnes"
 #: contents/ui/components/QueryHints.qml:129
 #: contents/ui/components/QueryHints.qml:136
 msgid "Yesterday"
-msgstr ""
+msgstr "Včera"
 
 #: contents/ui/components/QueryHints.qml:46
 msgid "This Week"
-msgstr ""
+msgstr "Tento týden"
 
 #: contents/ui/components/QueryHints.qml:47
 msgid "This Month"
-msgstr ""
+msgstr "Tento měsíc"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Files modified today"
-msgstr ""
+msgstr "Soubory změněné dnes"
 
 #: contents/ui/components/QueryHints.qml:52
 msgid "Files modified yesterday"
-msgstr ""
+msgstr "Soubory změněné včera"
 
 #: contents/ui/components/QueryHints.qml:53
 msgid "Files modified this week"
-msgstr ""
+msgstr "Soubory změněné tento týden"
 
 #: contents/ui/components/QueryHints.qml:54
 msgid "Files modified this month"
-msgstr ""
+msgstr "Soubory změněné tento měsíc"
 
 #: contents/ui/components/QueryHints.qml:56
 #: contents/ui/components/HelpView.qml:18
 msgid "File Path Search"
-msgstr ""
+msgstr "Hledání podle cesty k souboru"
 
 #: contents/ui/components/QueryHints.qml:57
 #: contents/ui/components/HelpView.qml:23
 msgid "Man Pages"
-msgstr ""
+msgstr "Man stránky"
 
 #: contents/ui/components/QueryHints.qml:58
 #: contents/ui/components/HelpView.qml:19
-#, fuzzy
 msgid "Google Search"
-msgstr "Hledat"
+msgstr "Vyhledávání Google"
 
 #: contents/ui/components/QueryHints.qml:59
 #: contents/ui/components/HelpView.qml:20
 msgid "DuckDuckGo Search"
-msgstr ""
+msgstr "Vyhledávání DuckDuckGo"
 
 #: contents/ui/components/QueryHints.qml:60
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr ""
+msgstr "Vyhledávání Wikipedia"
 
 #: contents/ui/components/QueryHints.qml:61
 #: contents/ui/components/HelpView.qml:24
 msgid "Kill Process"
-msgstr ""
+msgstr "Ukončit proces"
 
 #: contents/ui/components/QueryHints.qml:62
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
-msgstr ""
+msgstr "Kontrola pravopisu"
 
 #: contents/ui/components/QueryHints.qml:63
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr ""
+msgstr "Unicode znaky"
 
 #: contents/ui/components/QueryHints.qml:64
 #: contents/ui/components/SearchPopup.qml:714
@@ -690,9 +679,8 @@ msgstr "Aplikace"
 
 #: contents/ui/components/QueryHints.qml:65
 #: contents/ui/components/HelpView.qml:28
-#, fuzzy
 msgid "Shell Commands"
-msgstr "Spustit příkaz"
+msgstr "Příkazy shellu"
 
 #: contents/ui/components/QueryHints.qml:66
 #: contents/ui/components/HelpView.qml:22
@@ -706,13 +694,11 @@ msgstr "Správa napájení"
 
 #: contents/ui/components/QueryHints.qml:68
 #: contents/ui/components/HelpView.qml:30
-#, fuzzy
 msgid "System Services"
-msgstr "Nastavení systému"
+msgstr "Systémové služby"
 
 #: contents/ui/components/QueryHints.qml:69
 #: contents/ui/components/HelpView.qml:32
-#, fuzzy
 msgid "Date and Time"
 msgstr "Datum a čas"
 
@@ -726,7 +712,6 @@ msgstr "Definice ve slovníku"
 msgid "Unit Converter"
 msgstr "Převodník jednotek"
 
-#: contents/ui/components/QueryHints.qml:72
 #: contents/ui/components/HelpView.qml:33
 msgid "Help & Shortcuts"
 msgstr "Nápověda a zkratky"
@@ -734,74 +719,72 @@ msgstr "Nápověda a zkratky"
 #: contents/ui/components/QueryHints.qml:130
 #: contents/ui/components/QueryHints.qml:136
 msgid "Two days ago"
-msgstr ""
+msgstr "Před dvěma dny"
 
 #: contents/ui/components/QueryHints.qml:217
 #: contents/ui/components/QueryHints.qml:227
 msgid "Browse calendar"
-msgstr ""
+msgstr "Procházet kalendář"
 
 #: contents/ui/components/QueryHints.qml:241
-#, fuzzy
 msgid "Man pages not installed"
-msgstr "Balíček Man není nainstalován"
+msgstr "Man stránky nejsou nainstalovány"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "Unknown prefix"
-msgstr ""
+msgstr "Neznámá předpona"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "try"
-msgstr ""
+msgstr "zkuste"
 
 #: contents/ui/components/DebugOverlay.qml:40
 msgid "Saved!"
-msgstr ""
+msgstr "Uloženo!"
 
 #: contents/ui/components/DebugOverlay.qml:48
 #: contents/ui/components/DebugOverlay.qml:118
 msgid "Save Dump"
-msgstr ""
+msgstr "Uložit výpis"
 
 #: contents/ui/components/DebugOverlay.qml:77
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: contents/ui/components/DebugOverlay.qml:80
 msgid "Items"
-msgstr ""
+msgstr "Položky"
 
 #: contents/ui/components/DebugOverlay.qml:83
 msgid "Latency"
-msgstr ""
+msgstr "Latence"
 
 #: contents/ui/components/DebugOverlay.qml:90
-#, fuzzy
 msgid "View"
-msgstr "Zobrazení seznamu"
+msgstr "Zobrazení"
 
 #: contents/ui/components/DebugOverlay.qml:93
 msgid "Display"
-msgstr ""
+msgstr "Displej"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/PinnedSection.qml:376
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Unpin"
-msgstr ""
+msgstr "Odepnout"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Pin"
-msgstr ""
+msgstr "Připnout"
 
 #: contents/ui/components/PinnedSection.qml:71
 msgid "Pinned Items"
-msgstr ""
+msgstr "Připnuté položky"
 
 #: contents/ui/components/PinnedSection.qml:323
 msgid "Drag to reorder"
-msgstr ""
+msgstr "Přetáhněte pro změnu pořadí"
 
 #: contents/ui/components/PinnedSection.qml:342
 #: contents/ui/components/HistoryContextMenu.qml:52
@@ -815,7 +798,7 @@ msgstr "Kopírovat cestu"
 #: contents/ui/components/PinnedSection.qml:363
 #: contents/ui/components/HistoryContextMenu.qml:101
 msgid "Open Containing Folder"
-msgstr "Otevřít složku"
+msgstr "Otevřít nadřazenou složku"
 
 #: contents/ui/components/HistoryListView.qml:34
 #: contents/ui/components/HistoryTileView.qml:243
@@ -829,47 +812,47 @@ msgstr "Vymazat historii"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "No results found"
-msgstr "Žádné výsledky"
+msgstr "Nenalezeny žádné výsledky"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "Type to start searching"
-msgstr "Pište pro hledání"
+msgstr "Pište pro začátek hledání"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:269
 msgid "date"
-msgstr ""
+msgstr "datum"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:270
 msgid "clock"
-msgstr ""
+msgstr "hodiny"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:295
 msgid "power"
-msgstr ""
+msgstr "napájení"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:279
 msgid "help"
-msgstr ""
+msgstr "nápověda"
 
 #: contents/ui/components/SearchPopup.qml:265
 msgid "unit"
-msgstr ""
+msgstr "jednotka"
 
 #: contents/ui/components/SearchPopup.qml:283
 msgid "kill"
-msgstr ""
+msgstr "ukončit"
 
 #: contents/ui/components/SearchPopup.qml:287
 msgid "spell"
-msgstr ""
+msgstr "pravopis"
 
 #: contents/ui/components/SearchPopup.qml:291
 msgid "shell"
-msgstr ""
+msgstr "shell"
 
 #: contents/ui/components/SearchPopup.qml:367
 msgid "Search Here"
@@ -881,9 +864,8 @@ msgid "Other"
 msgstr "Jiné"
 
 #: contents/ui/components/HistoryContextMenu.qml:69
-#, fuzzy
 msgid "Copy Location"
-msgstr "Kopírovat cestu"
+msgstr "Kopírovat umístění"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
@@ -898,9 +880,8 @@ msgid "Properties"
 msgstr "Vlastnosti"
 
 #: contents/ui/components/HistoryContextMenu.qml:134
-#, fuzzy
 msgid "Edit Application..."
-msgstr "Aplikace"
+msgstr "Upravit aplikaci..."
 
 #: contents/ui/components/HistoryContextMenu.qml:144
 msgid "Remove from History"
@@ -908,148 +889,148 @@ msgstr "Odstranit z historie"
 
 #: contents/ui/components/PowerView.qml:133
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernace"
 
 #: contents/ui/components/PowerView.qml:137
 msgid "(Press again to hibernate)"
-msgstr ""
+msgstr "(Stiskněte znovu pro hibernaci)"
 
 #: contents/ui/components/PowerView.qml:146
 msgid "Sleep"
-msgstr ""
+msgstr "Spánek"
 
 #: contents/ui/components/PowerView.qml:150
 msgid "(Press again to sleep)"
-msgstr ""
+msgstr "(Stiskněte znovu pro spánek)"
 
 #: contents/ui/components/PowerView.qml:158
 msgid "Reboot"
-msgstr ""
+msgstr "Restartovat"
 
 #: contents/ui/components/PowerView.qml:162
 msgid "(Press again to reboot)"
-msgstr ""
+msgstr "(Stiskněte znovu pro restart)"
 
 #: contents/ui/components/PowerView.qml:180
 msgid "Shutdown"
-msgstr ""
+msgstr "Vypnout"
 
 #: contents/ui/components/PowerView.qml:184
 msgid "(Press again to shutdown)"
-msgstr ""
+msgstr "(Stiskněte znovu pro vypnutí)"
 
 #: contents/ui/components/PowerView.qml:278
 msgid "Authorize to list entries"
-msgstr ""
+msgstr "Autorizovat pro zobrazení položek"
 
 #: contents/ui/components/PowerView.qml:299
 msgid "Lock Screen"
-msgstr ""
+msgstr "Zamknout obrazovku"
 
 #: contents/ui/components/PowerView.qml:309
 msgid "Log Out"
-msgstr ""
+msgstr "Odhlásit se"
 
 #: contents/ui/components/PowerView.qml:313
 msgid "(Press again to log out)"
-msgstr ""
+msgstr "(Stiskněte znovu pro odhlášení)"
 
 #: contents/ui/components/PowerView.qml:321
 msgid "Switch User"
-msgstr ""
+msgstr "Přepnout uživatele"
 
 #: contents/ui/components/PowerView.qml:325
 msgid "(Press again to switch)"
-msgstr ""
+msgstr "(Stiskněte znovu pro přepnutí)"
 
 #: contents/ui/components/PowerView.qml:333
 msgid "Save Session"
-msgstr ""
+msgstr "Uložit relaci"
 
 #: contents/ui/components/PowerView.qml:352
 msgid "(Press again)"
-msgstr ""
+msgstr "(Stiskněte znovu)"
 
 #: contents/ui/main.qml:96
 msgid "Medium Mode (Button only)"
-msgstr "Střední režim (Pouze tlačítko)"
+msgstr "Střední režim (jen tlačítko)"
 
 #: contents/ui/main.qml:102
 msgid "Wide Mode (Search bar + icon)"
-msgstr "Široký režim (Vyhledávací panel + ikona)"
+msgstr "Široký režim (vyhledávací panel + ikona)"
 
 #: contents/ui/main.qml:108
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "Extra široký režim (Široký + Zástupný text)"
+msgstr "Extra široký režim (široký + dlouhý zástupný text)"
 
 msgid "Show/Hide Previews"
-msgstr ""
+msgstr "Zobrazit/Skrýt náhledy"
 
 msgid "Edge Appearance"
-msgstr ""
+msgstr "Vzhled hran"
 
 msgid "Round corners"
-msgstr ""
+msgstr "Kulaté rohy"
 
 msgid "Slightly round"
-msgstr ""
+msgstr "Mírně zakulacené"
 
 msgid "Less round"
-msgstr ""
+msgstr "Méně zakulacené"
 
 msgid "Square corners"
-msgstr ""
+msgstr "Hranaté rohy"
 
 msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr ""
+msgstr "(Velikost swap oddílu je menší než RAM nebo swap nebyl nalezen)"
 
 msgid "Note: Systemd boot is required for this feature"
-msgstr ""
+msgstr "Poznámka: Pro tuto funkci je vyžadován Systemd boot"
 
 msgid "Scan for boot entries"
-msgstr ""
+msgstr "Hledat položky zavádění"
 
 msgid "Result Count"
-msgstr ""
+msgstr "Počet výsledků"
 
 msgid "Priority Ranking"
-msgstr ""
+msgstr "Pořadí priority"
 
 msgid "Show Together"
-msgstr ""
+msgstr "Zobrazit společně"
 
 msgid "Corner Roundness"
-msgstr ""
+msgstr "Zakulacení rohů"
 
 msgid "Square"
-msgstr ""
+msgstr "Čtverec"
 
 msgid "Slightly Rounded"
-msgstr ""
+msgstr "Mírně zakulacený"
 
 msgid "Moderately Rounded"
-msgstr ""
+msgstr "Středně zakulacený"
 
 msgid "Fully Rounded"
-msgstr ""
+msgstr "Plně zakulacený"
 
 msgid "Minimize automatically when searching"
-msgstr ""
+msgstr "Při hledání automaticky minimalizovat"
 
 msgid "Search on Wikipedia"
-msgstr ""
+msgstr "Hledat na Wikipedia"
 
 msgid "Minimal - A simplified interface with essential features."
-msgstr ""
+msgstr "Minimální - Zjednodušené rozhraní se základními funkcemi."
 
 msgid "Developer - Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Vývojář - Karta ladění aktivní, vývojářské funkce povoleny."
 
 msgid "Power User - All features active, advanced settings available."
-msgstr ""
+msgstr "Zkušený uživatel - Všechny funkce aktivní, pokročilá nastavení k dispozici."
 
 msgid "Weather View (weather:)"
-msgstr "Zobrazení počasí (počasí:)"
+msgstr "Zobrazení počasí (weather:)"
 
 msgid "Use System Units"
 msgstr "Použít systémové jednotky"
@@ -1070,40 +1051,7 @@ msgid "1 Hour"
 msgstr "1 hodina"
 
 msgid "(If time since last update > interval)"
-msgstr "(Pokud čas od poslední aktualizace > interval)"
+msgstr "(Pokud je čas od poslední aktualizace > interval)"
 
 msgid "Enable Weather Prefix"
-msgstr "Povolit prefix počasí"
-
-#~ msgid "Results Preview"
-#~ msgstr "Náhled výsledků"
-
-#~ msgid "Application 1"
-#~ msgstr "Aplikace 1"
-
-#~ msgid "Application 2"
-#~ msgstr "Aplikace 2"
-
-#~ msgid "File.txt"
-#~ msgstr "Soubor.txt"
-
-#~ msgid "File"
-#~ msgstr "Soubor"
-
-#~ msgid "Path"
-#~ msgstr "Cesta"
-
-#~ msgid "General"
-#~ msgstr "Obecné"
-
-#~ msgid "Minimal"
-#~ msgstr "Minimální"
-
-#~ msgid "Developer"
-#~ msgstr "Vývojář"
-
-#~ msgid "Manage Application"
-#~ msgstr "Spravovat aplikaci"
-
-#~ msgid "Reset Statistics"
-#~ msgstr "Resetovat statistiky"
+msgstr "Povolit předponu počasí"

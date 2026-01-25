@@ -3,115 +3,111 @@ msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-18 22:43+0300\n"
-"PO-Revision-Date: 2026-01-18 16:42\n"
-"Last-Translator: Auto Generator <auto@bot>\n"
+"PO-Revision-Date: 2026-01-22 12:00+0300\n"
+"Last-Translator: Automatically generated\n"
 "Language-Team: hy\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
 msgid "Appearance"
 msgstr "Տեսք"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-#, fuzzy
 msgid "Categories"
-msgstr "Կատեգորիայի կարգավորումներ"
+msgstr "Կատեգորիաներ"
 
 #: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
 msgid "Debug"
-msgstr ""
+msgstr "Կարգաբերում"
 
 #: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
 msgid "Help"
-msgstr ""
+msgstr "Օգնություն"
 
 #: contents/ui/config/ConfigGeneral.qml:80
 msgid "Panel"
-msgstr ""
+msgstr "Վահանակ"
 
 #: contents/ui/config/ConfigGeneral.qml:84
 msgid "Popup"
-msgstr ""
+msgstr "Պատուհան"
 
 #: contents/ui/config/ConfigGeneral.qml:88
 #: contents/ui/config/ConfigPreview.qml:9
 msgid "Preview"
-msgstr ""
+msgstr "Նախադիտում"
 
 #: contents/ui/config/ConfigGeneral.qml:92
 #: contents/ui/config/ConfigPrefix.qml:9
 msgid "Prefixes"
-msgstr ""
+msgstr "Նախդիրներ"
 
 #: contents/ui/config/ConfigGeneral.qml:96
 msgid "Placeholder"
-msgstr ""
+msgstr "Տեղապահ"
 
 #: contents/ui/config/ConfigGeneral.qml:114
-#, fuzzy
 msgid "Panel Appearance"
-msgstr "Տեսք"
+msgstr "Վահանակի Տեսքը"
 
 #: contents/ui/config/ConfigGeneral.qml:120
 #: contents/ui/config/ConfigDebug.qml:123
 msgid "Display Mode"
-msgstr ""
+msgstr "Ցուցադրման ռեժիմ"
 
 #: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
 msgid "Button Mode (Icon only)"
-msgstr ""
+msgstr "Կոճակի ռեժիմ (Միայն պատկերակ)"
 
 #: contents/ui/config/ConfigGeneral.qml:123
 msgid "Medium Mode (Text)"
-msgstr ""
+msgstr "Միջին ռեժիմ (Տեքստ)"
 
 #: contents/ui/config/ConfigGeneral.qml:124
 msgid "Wide Mode (Search Bar)"
-msgstr ""
+msgstr "Լայն ռեժիմ (Որոնման տող)"
 
 #: contents/ui/config/ConfigGeneral.qml:125
 msgid "Extra Wide Mode"
-msgstr ""
+msgstr "Գերլայն ռեժիմ"
 
 #: contents/ui/config/ConfigGeneral.qml:132
 msgid "Panel Preview"
-msgstr ""
+msgstr "Վահանակի Նախադիտում"
 
 #: contents/ui/config/ConfigGeneral.qml:176
 #: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:49
 msgid "Search"
-msgstr "Որոնել"
+msgstr "Որոնում"
 
 #: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
 msgid "Start searching..."
 msgstr "Սկսել որոնումը..."
 
 #: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-#, fuzzy
 msgid "Search..."
-msgstr "Որոնել"
+msgstr "Որոնել..."
 
 #: contents/ui/config/ConfigGeneral.qml:204
 msgid "Power Options"
-msgstr ""
+msgstr "Սնուցման Ընտրանքներ"
 
 #: contents/ui/config/ConfigGeneral.qml:205
 msgid "Show boot options in Reboot button"
-msgstr ""
+msgstr "Ցուցադրել բեռնման տարբերակները վերագործարկման կոճակում"
 
 #: contents/ui/config/ConfigGeneral.qml:213
-#, fuzzy
 msgid "Results View"
-msgstr "Ցուցակի տեսք"
+msgstr "Արդյունքների Տեսք"
 
 #: contents/ui/config/ConfigGeneral.qml:219
 #: contents/ui/config/ConfigDebug.qml:129
 msgid "View Mode"
-msgstr ""
+msgstr "Դիտման ռեժիմ"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "List View"
@@ -123,69 +119,66 @@ msgstr "Սալիկների տեսք"
 
 #: contents/ui/config/ConfigGeneral.qml:227
 #: contents/ui/config/ConfigDebug.qml:138
-#, fuzzy
 msgid "List Icon Size"
-msgstr "Ցուցակի տեսք"
+msgstr "Ցուցակի պատկերակի չափը"
 
 #: contents/ui/config/ConfigGeneral.qml:235
 #: contents/ui/config/ConfigDebug.qml:135
-#, fuzzy
 msgid "Tile Icon Size"
-msgstr "Սալիկների տեսք"
+msgstr "Սալիկի պատկերակի չափը"
 
 #: contents/ui/config/ConfigGeneral.qml:243
 #: contents/ui/config/ConfigCategories.qml:170
 msgid "Result Limits"
-msgstr ""
+msgstr "Արդյունքների Սահմաններ"
 
 #: contents/ui/config/ConfigGeneral.qml:249
 #: contents/ui/config/ConfigCategories.qml:175
 msgid "Min Results"
-msgstr ""
+msgstr "Նվազագույն արդյունքներ"
 
 #: contents/ui/config/ConfigGeneral.qml:256
 #: contents/ui/config/ConfigCategories.qml:184
 msgid "Max Results"
-msgstr ""
+msgstr "Առավելագույն արդյունքներ"
 
 #: contents/ui/config/ConfigGeneral.qml:263
 msgid "Smartly limit results based on relevance"
-msgstr ""
+msgstr "Խելացիորեն սահմանափակել արդյունքները ըստ համապատասխանության"
 
 #: contents/ui/config/ConfigGeneral.qml:264
 msgid "Dynamic Limit"
-msgstr ""
+msgstr "Դինամիկ սահման"
 
 #: contents/ui/config/ConfigGeneral.qml:272
 #: contents/ui/config/ConfigSearch.qml:19
 #: contents/ui/config/ConfigPreview.qml:112
 msgid "Enable File Previews"
-msgstr ""
+msgstr "Միացնել ֆայլերի նախադիտումը"
 
 #: contents/ui/config/ConfigGeneral.qml:273
 msgid "Master Switch"
-msgstr ""
+msgstr "Գլխավոր անջատիչ"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 #: contents/ui/config/ConfigPreview.qml:134
 msgid "Preview Types"
-msgstr ""
+msgstr "Նախադիտման տեսակները"
 
 #: contents/ui/config/ConfigGeneral.qml:283
 #: contents/ui/config/ConfigPreview.qml:159
 msgid "Images"
-msgstr ""
+msgstr "Պատկերներ"
 
 #: contents/ui/config/ConfigGeneral.qml:289
 #: contents/ui/config/ConfigPreview.qml:197
 msgid "Videos"
-msgstr ""
+msgstr "Տեսանյութեր"
 
 #: contents/ui/config/ConfigGeneral.qml:295
 #: contents/ui/config/ConfigPreview.qml:235
-#, fuzzy
 msgid "Text Files"
-msgstr "Ֆայլեր"
+msgstr "Տեքստային ֆայլեր"
 
 #: contents/ui/config/ConfigGeneral.qml:301
 #: contents/ui/config/ConfigPreview.qml:273
@@ -195,37 +188,37 @@ msgstr "Փաստաթղթեր"
 #: contents/ui/config/ConfigGeneral.qml:311
 #: contents/ui/config/ConfigPrefix.qml:29
 msgid "Date View (date:)"
-msgstr ""
+msgstr "Ամսաթվի Տեսք (date:)"
 
 #: contents/ui/config/ConfigGeneral.qml:316
 #: contents/ui/config/ConfigPrefix.qml:36
 msgid "Show Large Clock"
-msgstr ""
+msgstr "Ցուցադրել մեծ ժամացույց"
 
 #: contents/ui/config/ConfigGeneral.qml:320
 #: contents/ui/config/ConfigPrefix.qml:43
 msgid "Show Calendar Events"
-msgstr ""
+msgstr "Ցուցադրել օրացույցի իրադարձությունները"
 
 #: contents/ui/config/ConfigGeneral.qml:323
 #: contents/ui/config/ConfigPrefix.qml:50
 msgid "Power View (power:)"
-msgstr ""
+msgstr "Սնուցման Տեսք (power:)"
 
 #: contents/ui/config/ConfigGeneral.qml:328
 #: contents/ui/config/ConfigPrefix.qml:58
 msgid "Show Sleep Button"
-msgstr ""
+msgstr "Ցուցադրել քնի կոճակը"
 
 #: contents/ui/config/ConfigGeneral.qml:332
 #: contents/ui/config/ConfigPrefix.qml:65
 msgid "Show Hibernate Button"
-msgstr ""
+msgstr "Ցուցադրել քնի կոճակը"
 
 #: contents/ui/config/ConfigGeneral.qml:337
 #: contents/ui/config/ConfigPrefix.qml:72
 msgid "Available Prefixes Reference"
-msgstr ""
+msgstr "Հասանելի նախդիրների տեղեկատու"
 
 #: contents/ui/config/ConfigGeneral.qml:341
 #: contents/ui/config/ConfigPrefix.qml:76
@@ -233,374 +226,363 @@ msgid ""
 "These prefixes can be used to perform specific actions directly from the "
 "search bar."
 msgstr ""
+"Այս նախդիրները կարող են օգտագործվել որոնման տողից ուղղակիորեն գործողություններ կատարելու համար:"
 
 #: contents/ui/config/ConfigGeneral.qml:363
 #: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
 #: contents/ui/config/ConfigPrefix.qml:98
 msgid "List files modified today"
-msgstr ""
+msgstr "Ցուցակագրել այսօր փոփոխված ֆայլերը"
 
 #: contents/ui/config/ConfigGeneral.qml:375
 #: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
 #: contents/ui/config/ConfigPrefix.qml:110
 msgid "Search on Google"
-msgstr ""
+msgstr "Որոնել Google-ում"
 
 #: contents/ui/config/ConfigGeneral.qml:387
 #: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
 #: contents/ui/config/ConfigPrefix.qml:122
 msgid "Search on DuckDuckGo"
-msgstr ""
+msgstr "Որոնել DuckDuckGo-ում"
 
 #: contents/ui/config/ConfigGeneral.qml:399
 #: contents/ui/config/ConfigPrefix.qml:134
 msgid "Show calendar and date information"
-msgstr ""
+msgstr "Ցուցադրել օրացույցի և ամսաթվի տեղեկությունները"
 
 #: contents/ui/config/ConfigGeneral.qml:411
 #: contents/ui/config/ConfigPrefix.qml:146
 msgid "Show large clock"
-msgstr ""
+msgstr "Ցուցադրել մեծ ժամացույց"
 
 #: contents/ui/config/ConfigGeneral.qml:423
-#, fuzzy
 msgid "Show power management options"
-msgstr "Սնուցման կառավարում"
+msgstr "Ցուցադրել սնուցման կառավարման ընտրանքները"
 
 #: contents/ui/config/ConfigGeneral.qml:435
 #: contents/ui/config/ConfigPrefix.qml:170
 msgid "Show this help screen"
-msgstr ""
+msgstr "Ցուցադրել օգնության այս էկրանը"
 
 #: contents/ui/config/ConfigGeneral.qml:447
-#: contents/ui/config/ConfigPrefix.qml:182
+#: contents/ui/config/ConfigPrefix.get(1):182
 msgid "Terminate running processes"
-msgstr ""
+msgstr "Դադարեցնել գործող պրոցեսները"
 
 #: contents/ui/config/ConfigGeneral.qml:459
 #: contents/ui/config/ConfigPrefix.qml:194
 msgid "Check spelling of a word"
-msgstr ""
+msgstr "Ստուգել բառի ուղղագրությունը"
 
 #: contents/ui/config/ConfigGeneral.qml:471
 #: contents/ui/config/ConfigPrefix.qml:206
 msgid "Execute shell commands"
-msgstr ""
+msgstr "Կատարել shell հրամաններ"
 
 #: contents/ui/config/ConfigGeneral.qml:483
 msgid "Convert units (requires KRunner)"
-msgstr ""
+msgstr "Փոխարկել միավորները (պահանջվում է KRunner)"
 
 #: contents/ui/config/ConfigGeneral.qml:493
 #: contents/ui/config/ConfigSearch.qml:13
-#, fuzzy
 msgid "Search Settings"
-msgstr "Համակարգի կարգավորումներ"
+msgstr "Որոնման Կարգավորումներ"
 
 #: contents/ui/config/ConfigGeneral.qml:497
 #: contents/ui/config/ConfigCategories.qml:150
 msgid "Search Algorithm"
-msgstr ""
+msgstr "Որոնման Ալգորիթմ"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Fuzzy"
-msgstr ""
+msgstr "Աղոտ (Fuzzy)"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 msgid "Exact"
-msgstr ""
+msgstr "Ճշգրիտ"
 
 #: contents/ui/config/ConfigGeneral.qml:498
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Starts With"
-msgstr ""
+msgstr "Սկսվում է"
 
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
 msgstr ""
+"Ցուցադրել նախադիտումը մկնիկը պահելիս (կամ Ctrl+Space-ով)"
 
 #: contents/ui/config/ConfigSearch.qml:33
-#, fuzzy
 msgid "Search Behavior"
-msgstr "Որոնել այստեղ"
+msgstr "Որոնման Վարքագիծ"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr ""
+msgstr "Դուք կարող եք օգտագործել հետևյալ KRunner հրամանները և նախդիրները."
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
-msgstr ""
+msgstr "Նախդիր"
 
 #: contents/ui/config/ConfigSearch.qml:56
 msgid "Description"
-msgstr ""
+msgstr "Նկարագրություն"
 
 #: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
 msgid "Terminate processes"
-msgstr ""
+msgstr "Դադարեցնել պրոցեսները"
 
 #: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
 msgid "Check spelling"
-msgstr ""
+msgstr "Ստուգել ուղղագրությունը"
 
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
-msgstr ""
+msgstr "Որոնել Unicode նիշեր"
 
 #: contents/ui/config/ConfigDebug.qml:68
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
 msgstr ""
+"Այս էջը ակտիվ է միայն Մշակողի ռեժիմում: Փոխեք պրոֆիլը Ընդհանուր կարգավորումներում:"
 
 #: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-#, fuzzy
 msgid "Debug Settings"
-msgstr "Կատեգորիայի կարգավորումներ"
+msgstr "Կարգաբերման Կարգավորումներ"
 
 #: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
 #: contents/ui/components/DebugOverlay.qml:57
 msgid "Debug Overlay"
-msgstr ""
+msgstr "Կարգաբերման Շերտ"
 
 #: contents/ui/config/ConfigDebug.qml:91
 msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr ""
+msgstr "Ցուցադրել կարգաբերման տեղեկատվությունը"
 
 #: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
 msgid "Debug Data"
-msgstr ""
+msgstr "Կարգաբերման Տվյալներ"
 
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Timestamp"
-msgstr ""
+msgstr "Ժամանակի նիշ"
 
 #: contents/ui/config/ConfigDebug.qml:114
 msgid "Locale"
-msgstr ""
+msgstr "Լոկալ"
 
 #: contents/ui/config/ConfigDebug.qml:117
-#, fuzzy
 msgid "User Profile"
-msgstr "Պրոֆիլ"
+msgstr "Օգտատիրոջ Պրոֆիլ"
 
 #: contents/ui/config/ConfigDebug.qml:141
 msgid "Enable Preview"
-msgstr ""
+msgstr "Միացնել Նախադիտումը"
 
 #: contents/ui/config/ConfigDebug.qml:147
 msgid "History Count"
-msgstr ""
+msgstr "Պատմության Քանակ"
 
 #: contents/ui/config/ConfigDebug.qml:153
 msgid "items"
-msgstr ""
+msgstr "տարր"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/config/ConfigDebug.qml:165
 msgid "Telemetry"
-msgstr ""
+msgstr "Տելեմետրիա"
 
 #: contents/ui/config/ConfigDebug.qml:174
 #: contents/ui/components/DebugOverlay.qml:100
-#, fuzzy
 msgid "Total Searches"
-msgstr "Վերջին որոնումները"
+msgstr "Ընդհանուր որոնումներ"
 
 #: contents/ui/config/ConfigDebug.qml:185
 #: contents/ui/components/DebugOverlay.qml:103
 msgid "Avg Latency"
-msgstr ""
+msgstr "Միջին ուշացում"
 
 #: contents/ui/config/ConfigDebug.qml:198
 #: contents/ui/config/ConfigDebug.qml:200
 msgid "History Sample"
-msgstr ""
+msgstr "Պատմության Նմուշ"
 
 #: contents/ui/config/ConfigDebug.qml:207
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
 msgstr ""
+"Գաղտնիության ծանուցում. Բոլոր տվյալները պահվում են ՏԵՂԱՅԻՆ. տվյալներ չեն ուղարկվում:"
 
 #: contents/ui/config/ConfigDebug.qml:281
 msgid "History is empty"
-msgstr ""
+msgstr "Պատմությունը դատարկ է"
 
 #: contents/ui/config/ConfigHelp.qml:49
-#, fuzzy
 msgid "Keyboard Shortcuts"
-msgstr "Օգնություն և դյուրանցումներ"
+msgstr "Ստեղնաշարի Դյուրանցումներ"
 
 #: contents/ui/config/ConfigHelp.qml:53
 msgid "Navigate between results"
-msgstr ""
+msgstr "Նավարկել արդյունքների միջև"
 
 #: contents/ui/config/ConfigHelp.qml:59
 msgid "Navigate between sections"
-msgstr ""
+msgstr "Նավարկել բաժինների միջև"
 
 #: contents/ui/config/ConfigHelp.qml:65
-#, fuzzy
 msgid "List / Tile view"
-msgstr "Ցուցակի տեսք"
+msgstr "Ցուցակ / Սալիկ տեսք"
 
 #: contents/ui/config/ConfigHelp.qml:71
 msgid "Toggle file preview"
-msgstr ""
+msgstr "Փոխել նախադիտումը"
 
 #: contents/ui/config/ConfigHelp.qml:77
 msgid "Open selected item"
-msgstr ""
+msgstr "Բացել ընտրվածը"
 
 #: contents/ui/config/ConfigHelp.qml:83
 msgid "Close widget"
-msgstr ""
+msgstr "Փակել վիջեթը"
 
 #: contents/ui/config/ConfigHelp.qml:90
-#, fuzzy
 msgid "Search Prefixes"
-msgstr "Որոնել այստեղ"
+msgstr "Որոնման Նախդիրներ"
 
 #: contents/ui/config/ConfigHelp.qml:125
-#, fuzzy
 msgid "User Profiles"
-msgstr "Պրոֆիլ"
+msgstr "Օգտատիրոջ Պրոֆիլներ"
 
 #: contents/ui/config/ConfigHelp.qml:129
 msgid "A simplified interface with essential features."
-msgstr ""
+msgstr "Պարզեցված ինտերֆեյս հիմնական գործառույթներով:"
 
 #: contents/ui/config/ConfigHelp.qml:135
 msgid "Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Կարգաբերման էջը ակտիվ է, մշակողի գործառույթները միացված են:"
 
 #: contents/ui/config/ConfigHelp.qml:141
 msgid "All features active, advanced settings available."
-msgstr ""
+msgstr "Բոլոր ֆունկցիաները միացված են, հասանելի են առաջադեմ կարգավորումներ:"
 
 #: contents/ui/config/ConfigCategories.qml:145
-#, fuzzy
 msgid "Algorithm Settings"
-msgstr "Կատեգորիայի կարգավորումներ"
+msgstr "Ալգորիթմի Կարգավորումներ"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Fuzzy Match"
-msgstr ""
+msgstr "Աղոտ Համապատասխանություն"
 
 #: contents/ui/config/ConfigCategories.qml:151
 msgid "Exact Match"
-msgstr ""
+msgstr "Ճշգրիտ Համապատասխանություն"
 
 #: contents/ui/config/ConfigCategories.qml:162
 msgid "Dynamic Result Count"
-msgstr ""
+msgstr "Արդյունքների դինամիկ քանակ"
 
 #: contents/ui/config/ConfigCategories.qml:163
 msgid "Automatically limit displayed results based on relevance score"
-msgstr ""
+msgstr "Ավտոմատ սահմանափակել արդյունքները ըստ համապատասխանության"
 
 #: contents/ui/config/ConfigCategories.qml:195
 msgid "Prioritized Categories"
-msgstr ""
+msgstr "Առաջնահերթ Կատեգորիաներ"
 
 #: contents/ui/config/ConfigCategories.qml:199
 msgid "Use buttons to reorder categories or move between sections"
-msgstr ""
+msgstr "Օգտագործեք կոճակները կարգը փոխելու համար"
 
 #: contents/ui/config/ConfigCategories.qml:208
 msgid "Priority"
-msgstr ""
+msgstr "Առաջնահերթություն"
 
 #: contents/ui/config/ConfigCategories.qml:299
 msgid "Move to Combined"
-msgstr ""
+msgstr "Տեղափոխել Համակցված"
 
 #: contents/ui/config/ConfigCategories.qml:314
 msgid "Show Together (Merged)"
-msgstr ""
+msgstr "Ցուցադրել Միասին (Միավորված)"
 
 #: contents/ui/config/ConfigCategories.qml:318
 msgid "Categories in this section will be grouped together"
-msgstr ""
+msgstr "Այս բաժնի կատեգորիաները կխմբավորվեն միասին"
 
 #: contents/ui/config/ConfigCategories.qml:339
 msgid "No combined categories"
-msgstr ""
+msgstr "Համակցված կատեգորիաներ չկան"
 
 #: contents/ui/config/ConfigCategories.qml:398
-#, fuzzy
 msgid "Move to Separate"
-msgstr "Տեղափոխել աղբարկղ"
+msgstr "Տեղափոխել Առանձին"
 
-#: contents/ui/config/ConfigCategories.qml:413
-#, fuzzy
+#: contents/ui/config/ConfigCategories.get(1):413
 msgid "Category Settings Information"
-msgstr "Կատեգորիայի կարգավորումներ"
+msgstr "Կատեգորիայի Կարգավորումների Տվյալներ"
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
-msgstr ""
+msgstr "Փոփոխությունները կիրառվում են անմիջապես: Թաքցվածները չեն ցուցադրվում:"
 
 #: contents/ui/config/ConfigCategories.qml:417
 msgid "Lower number = higher priority"
-msgstr ""
+msgstr "Փոքր թիվ = բարձր առաջնահերթություն"
 
 #: contents/ui/config/ConfigPreview.qml:97
-#, fuzzy
 msgid "Preview Settings"
-msgstr "Համակարգի կարգավորումներ"
+msgstr "Նախադիտման Կարգավորումներ"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr ""
+msgstr "Միացնել կամ անջատել նախադիտումը ըստ տեսակների:"
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Enabled"
-msgstr ""
+msgstr "Միացված է"
 
 #: contents/ui/config/ConfigPreview.qml:126
 msgid "Disabled"
-msgstr ""
+msgstr "Անջատված է"
 
 #: contents/ui/config/ConfigPreview.qml:307
 msgid "Performance Information"
-msgstr ""
+msgstr "Արտադրողականության Տվյալներ"
 
 #: contents/ui/config/ConfigPreview.qml:312
 msgid "Video and document previews may increase memory usage."
-msgstr ""
+msgstr "Տեսանյութերի նախադիտումը կարող է ավելացնել հիշողության օգտագործումը:"
 
 #: contents/ui/config/ConfigPrefix.qml:24
 msgid "Prefix View Settings"
-msgstr ""
+msgstr "Նախդիրների Դիտման Կարգավորումներ"
 
 #: contents/ui/config/ConfigPrefix.qml:158
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr ""
+msgstr "Ցուցադրել սնուցման տարբերակները (Անջատել, Վերագործարկել և այլն)"
 
 #: contents/ui/config/ConfigPrefix.qml:218
 msgid "Convert units (requires KRunner installed)"
-msgstr ""
+msgstr "Փոխարկել միավորները (պահանջում է KRunner)"
 
 #: contents/ui/config/ConfigPrefix.qml:228
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr ""
+msgstr "Նշում. Որոշ նախդիրներ կախված են տեղադրված KRunner մոդուլներից:"
 
 #: contents/ui/components/QueryHints.qml:40
 #: contents/ui/components/HelpView.qml:16
-#, fuzzy
 msgid "Timeline View"
-msgstr "Սալիկների տեսք"
+msgstr "Ժամանակացույցի Տեսք"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
-msgstr ""
+msgstr "Օրացույց"
 
 #: contents/ui/components/QueryHints.qml:44
 #: contents/ui/components/QueryHints.qml:128
@@ -612,72 +594,71 @@ msgstr "Այսօր"
 #: contents/ui/components/QueryHints.qml:129
 #: contents/ui/components/QueryHints.qml:136
 msgid "Yesterday"
-msgstr ""
+msgstr "Երեկ"
 
 #: contents/ui/components/QueryHints.qml:46
 msgid "This Week"
-msgstr ""
+msgstr "Այս Շաբաթ"
 
 #: contents/ui/components/QueryHints.qml:47
 msgid "This Month"
-msgstr ""
+msgstr "Այս Ամիս"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Files modified today"
-msgstr ""
+msgstr "Այսօր փոփոխված ֆայլեր"
 
 #: contents/ui/components/QueryHints.qml:52
 msgid "Files modified yesterday"
-msgstr ""
+msgstr "Երեկ փոփոխված ֆայլեր"
 
 #: contents/ui/components/QueryHints.qml:53
 msgid "Files modified this week"
-msgstr ""
+msgstr "Այս շաբաթ փոփոխված ֆայլեր"
 
 #: contents/ui/components/QueryHints.qml:54
 msgid "Files modified this month"
-msgstr ""
+msgstr "Այս ամիս փոփոխված ֆայլեր"
 
 #: contents/ui/components/QueryHints.qml:56
 #: contents/ui/components/HelpView.qml:18
 msgid "File Path Search"
-msgstr ""
+msgstr "Որոնում ըստ ուղու"
 
 #: contents/ui/components/QueryHints.qml:57
 #: contents/ui/components/HelpView.qml:23
 msgid "Man Pages"
-msgstr ""
+msgstr "Man էջեր"
 
 #: contents/ui/components/QueryHints.qml:58
 #: contents/ui/components/HelpView.qml:19
-#, fuzzy
 msgid "Google Search"
-msgstr "Որոնել"
+msgstr "Որոնում Google-ում"
 
 #: contents/ui/components/QueryHints.qml:59
-#: contents/ui/components/HelpView.qml:20
+#: contents/ui/components/HelpView.get(1):20
 msgid "DuckDuckGo Search"
-msgstr ""
+msgstr "Որոնում DuckDuckGo-ում"
 
 #: contents/ui/components/QueryHints.qml:60
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr ""
+msgstr "Որոնում Wikipedia-ում"
 
 #: contents/ui/components/QueryHints.qml:61
 #: contents/ui/components/HelpView.qml:24
 msgid "Kill Process"
-msgstr ""
+msgstr "Դադարեցնել Պրոցեսը"
 
 #: contents/ui/components/QueryHints.qml:62
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
-msgstr ""
+msgstr "Ուղղագրության Ստուգում"
 
 #: contents/ui/components/QueryHints.qml:63
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr ""
+msgstr "Unicode նիշեր"
 
 #: contents/ui/components/QueryHints.qml:64
 #: contents/ui/components/SearchPopup.qml:714
@@ -688,9 +669,8 @@ msgstr "Ծրագրեր"
 
 #: contents/ui/components/QueryHints.qml:65
 #: contents/ui/components/HelpView.qml:28
-#, fuzzy
 msgid "Shell Commands"
-msgstr "Կատարել հրաման"
+msgstr "Shell հրամաններ"
 
 #: contents/ui/components/QueryHints.qml:66
 #: contents/ui/components/HelpView.qml:22
@@ -704,83 +684,78 @@ msgstr "Սնուցման կառավարում"
 
 #: contents/ui/components/QueryHints.qml:68
 #: contents/ui/components/HelpView.qml:30
-#, fuzzy
 msgid "System Services"
-msgstr "Համակարգի կարգավորումներ"
+msgstr "Համակարգի ծառայություններ"
 
 #: contents/ui/components/QueryHints.qml:69
 #: contents/ui/components/HelpView.qml:32
-#, fuzzy
 msgid "Date and Time"
 msgstr "Ամսաթիվ և ժամ"
 
 #: contents/ui/components/QueryHints.qml:70
 #: contents/ui/components/HelpView.qml:26
 msgid "Dictionary Definition"
-msgstr "Բառարանի սահմանում"
+msgstr "Բառարանի Սահմանում"
 
 #: contents/ui/components/QueryHints.qml:71
 #: contents/ui/components/HelpView.qml:27
 msgid "Unit Converter"
-msgstr "Միավորների փոխարկիչ"
+msgstr "Միավորների Փոխարկիչ"
 
-#: contents/ui/components/QueryHints.qml:72
 #: contents/ui/components/HelpView.qml:33
 msgid "Help & Shortcuts"
-msgstr "Օգնություն և դյուրանցումներ"
+msgstr "Օգնություն և Դյուրանցումներ"
 
 #: contents/ui/components/QueryHints.qml:130
 #: contents/ui/components/QueryHints.qml:136
 msgid "Two days ago"
-msgstr ""
+msgstr "Երկու օր առաջ"
 
 #: contents/ui/components/QueryHints.qml:217
 #: contents/ui/components/QueryHints.qml:227
 msgid "Browse calendar"
-msgstr ""
+msgstr "Դիտել օրացույցը"
 
 #: contents/ui/components/QueryHints.qml:241
-#, fuzzy
 msgid "Man pages not installed"
-msgstr "Man փաթեթը տեղադրված չէ"
+msgstr "Man էջերը տեղադրված չեն"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "Unknown prefix"
-msgstr ""
+msgstr "Անհայտ նախդիր"
 
 #: contents/ui/components/QueryHints.qml:295
 msgid "try"
-msgstr ""
+msgstr "փորձեք"
 
 #: contents/ui/components/DebugOverlay.qml:40
 msgid "Saved!"
-msgstr ""
+msgstr "Պահպանված է"
 
 #: contents/ui/components/DebugOverlay.qml:48
 #: contents/ui/components/DebugOverlay.qml:118
 msgid "Save Dump"
-msgstr ""
+msgstr "Պահել դամփը"
 
 #: contents/ui/components/DebugOverlay.qml:77
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: contents/ui/components/DebugOverlay.qml:80
 msgid "Items"
-msgstr ""
+msgstr "Տարրեր"
 
 #: contents/ui/components/DebugOverlay.qml:83
 msgid "Latency"
-msgstr ""
+msgstr "Ուշացում"
 
 #: contents/ui/components/DebugOverlay.qml:90
-#, fuzzy
 msgid "View"
-msgstr "Ցուցակի տեսք"
+msgstr "Տեսք"
 
 #: contents/ui/components/DebugOverlay.qml:93
 msgid "Display"
-msgstr ""
+msgstr "Էկրան"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/PinnedSection.qml:376
@@ -795,11 +770,11 @@ msgstr "Ամրացնել"
 
 #: contents/ui/components/PinnedSection.qml:71
 msgid "Pinned Items"
-msgstr "Ամրացվածներ"
+msgstr "Ամրացված տարրեր"
 
 #: contents/ui/components/PinnedSection.qml:323
 msgid "Drag to reorder"
-msgstr ""
+msgstr "Քաշեք՝ կարգը փոխելու համար"
 
 #: contents/ui/components/PinnedSection.qml:342
 #: contents/ui/components/HistoryContextMenu.qml:52
@@ -813,7 +788,7 @@ msgstr "Պատճենել ուղին"
 #: contents/ui/components/PinnedSection.qml:363
 #: contents/ui/components/HistoryContextMenu.qml:101
 msgid "Open Containing Folder"
-msgstr "Բացել պանակը"
+msgstr "Բացել պարունակող թղթապանակը"
 
 #: contents/ui/components/HistoryListView.qml:34
 #: contents/ui/components/HistoryTileView.qml:243
@@ -827,51 +802,51 @@ msgstr "Մաքրել պատմությունը"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "No results found"
-msgstr "Արդյունքներ չեն գտնվել"
+msgstr "Ոչինչ չի գտնվել"
 
 #: contents/ui/components/ResultsListView.qml:330
 msgid "Type to start searching"
-msgstr "Մուտքագրեք որոնման համար"
+msgstr "Տպեք՝ որոնումը սկսելու համար"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:269
 msgid "date"
-msgstr ""
+msgstr "ամսաթիվ"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:270
 msgid "clock"
-msgstr ""
+msgstr "ժամ"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:295
 msgid "power"
-msgstr ""
+msgstr "սնուցում"
 
 #: contents/ui/components/SearchPopup.qml:253
 #: contents/ui/components/SearchPopup.qml:279
 msgid "help"
-msgstr ""
+msgstr "օգնություն"
 
 #: contents/ui/components/SearchPopup.qml:265
 msgid "unit"
-msgstr ""
+msgstr "միավոր"
 
 #: contents/ui/components/SearchPopup.qml:283
 msgid "kill"
-msgstr ""
+msgstr "դադարեցնել"
 
 #: contents/ui/components/SearchPopup.qml:287
 msgid "spell"
-msgstr ""
+msgstr "ուղղագրություն"
 
 #: contents/ui/components/SearchPopup.qml:291
 msgid "shell"
-msgstr ""
+msgstr "shell"
 
 #: contents/ui/components/SearchPopup.qml:367
 msgid "Search Here"
-msgstr "Որոնել այստեղ"
+msgstr "Որոնել Այստեղ"
 
 #: contents/ui/components/SearchPopup.qml:714
 #: contents/ui/components/SearchPopup.qml:720
@@ -879,13 +854,12 @@ msgid "Other"
 msgstr "Այլ"
 
 #: contents/ui/components/HistoryContextMenu.qml:69
-#, fuzzy
 msgid "Copy Location"
-msgstr "Պատճենել ուղին"
+msgstr "Պատճենել տեղադրությունը"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
-msgstr "Բացել տերմինալում"
+msgstr "Բացել Տերմինալում"
 
 #: contents/ui/components/HistoryContextMenu.qml:111
 msgid "Move to Trash"
@@ -896,9 +870,8 @@ msgid "Properties"
 msgstr "Հատկություններ"
 
 #: contents/ui/components/HistoryContextMenu.qml:134
-#, fuzzy
 msgid "Edit Application..."
-msgstr "Ծրագրեր"
+msgstr "Խմբագրել ծրագիրը..."
 
 #: contents/ui/components/HistoryContextMenu.qml:144
 msgid "Remove from History"
@@ -906,157 +879,157 @@ msgstr "Հեռացնել պատմությունից"
 
 #: contents/ui/components/PowerView.qml:133
 msgid "Hibernate"
-msgstr ""
+msgstr "Քնի ռեժիմ (Hibernate)"
 
 #: contents/ui/components/PowerView.qml:137
 msgid "(Press again to hibernate)"
-msgstr ""
+msgstr "(Սեղմեք նորից՝ քնեցնելու համար)"
 
 #: contents/ui/components/PowerView.qml:146
 msgid "Sleep"
-msgstr ""
+msgstr "Քուն"
 
 #: contents/ui/components/PowerView.qml:150
 msgid "(Press again to sleep)"
-msgstr ""
+msgstr "(Սեղմեք նորից՝ քնելու համար)"
 
 #: contents/ui/components/PowerView.qml:158
 msgid "Reboot"
-msgstr ""
+msgstr "Վերագործարկել"
 
 #: contents/ui/components/PowerView.qml:162
 msgid "(Press again to reboot)"
-msgstr ""
+msgstr "(Սեղմեք նորից՝ վերագործարկելու համար)"
 
 #: contents/ui/components/PowerView.qml:180
 msgid "Shutdown"
-msgstr ""
+msgstr "Անջատել"
 
 #: contents/ui/components/PowerView.qml:184
 msgid "(Press again to shutdown)"
-msgstr ""
+msgstr "(Սեղմեք նորից՝ անջատելու համար)"
 
 #: contents/ui/components/PowerView.qml:278
 msgid "Authorize to list entries"
-msgstr ""
+msgstr "Լիազորեք՝ տարրերը ցուցակագրելու համար"
 
 #: contents/ui/components/PowerView.qml:299
 msgid "Lock Screen"
-msgstr ""
+msgstr "Արգելափակել էկրանը"
 
 #: contents/ui/components/PowerView.qml:309
 msgid "Log Out"
-msgstr ""
+msgstr "Դուրս գալ"
 
 #: contents/ui/components/PowerView.qml:313
 msgid "(Press again to log out)"
-msgstr ""
+msgstr "(Սեղմեք նորից՝ դուրս գալու համար)"
 
 #: contents/ui/components/PowerView.qml:321
 msgid "Switch User"
-msgstr ""
+msgstr "Փոխել օգտատիրոջը"
 
 #: contents/ui/components/PowerView.qml:325
 msgid "(Press again to switch)"
-msgstr ""
+msgstr "(Սեղմեք նորից՝ փոխելու համար)"
 
 #: contents/ui/components/PowerView.qml:333
 msgid "Save Session"
-msgstr ""
+msgstr "Պահպանել սեսիան"
 
 #: contents/ui/components/PowerView.qml:352
 msgid "(Press again)"
-msgstr ""
+msgstr "(Սեղմեք նորից)"
 
 #: contents/ui/main.qml:96
 msgid "Medium Mode (Button only)"
-msgstr ""
+msgstr "Միջին ռեժիմ (Միայն կոճակ)"
 
 #: contents/ui/main.qml:102
 msgid "Wide Mode (Search bar + icon)"
-msgstr ""
+msgstr "Լայն ռեժիմ (Որոնման տող + պատկերակ)"
 
 #: contents/ui/main.qml:108
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr ""
+msgstr "Գերլայն ռեժիմ (Լայն + Երկար տեքստ)"
 
 msgid "Show/Hide Previews"
-msgstr ""
+msgstr "Ցուցադրել/Թաքցնել Նախադիտումները"
 
 msgid "Edge Appearance"
-msgstr ""
+msgstr "Եզրերի Տեսք"
 
 msgid "Round corners"
-msgstr ""
+msgstr "Կլորացված անկյուններ"
 
 msgid "Slightly round"
-msgstr ""
+msgstr "Թեթևակի կլորացված"
 
 msgid "Less round"
-msgstr ""
+msgstr "Ավելի քիչ կլորացված"
 
 msgid "Square corners"
-msgstr ""
+msgstr "Ուղիղ անկյուններ"
 
 msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr ""
+msgstr "(Swap-ը փոքր է RAM-ից կամ չկա)"
 
 msgid "Note: Systemd boot is required for this feature"
-msgstr ""
+msgstr "Նշում. Այս ֆունկցիան պահանջում է Systemd boot"
 
 msgid "Scan for boot entries"
-msgstr ""
+msgstr "Որոնել բեռնման տարրեր"
 
 msgid "Result Count"
-msgstr ""
+msgstr "Արդյունքների քանակ"
 
 msgid "Priority Ranking"
-msgstr ""
+msgstr "Առաջնահերթության վարկանիշ"
 
 msgid "Show Together"
-msgstr ""
+msgstr "Ցուցադրել Միասին"
 
 msgid "Corner Roundness"
-msgstr ""
+msgstr "Անկյունների Կլորություն"
 
 msgid "Square"
-msgstr ""
+msgstr "Ուղղանկյուն"
 
 msgid "Slightly Rounded"
-msgstr ""
+msgstr "Թեթևակի կլորացված"
 
 msgid "Moderately Rounded"
-msgstr ""
+msgstr "Չափավոր կլորացված"
 
 msgid "Fully Rounded"
-msgstr ""
+msgstr "Ամբողջովին կլորացված"
 
 msgid "Minimize automatically when searching"
-msgstr ""
+msgstr "Ավտոմատ փոքրացնել որոնելիս"
 
 msgid "Search on Wikipedia"
-msgstr ""
+msgstr "Որոնել Wikipedia-ում"
 
 msgid "Minimal - A simplified interface with essential features."
-msgstr ""
+msgstr "Նվազագույն - Պարզեցված ինտերֆեյս հիմնական ֆունկցիաներով:"
 
 msgid "Developer - Debug tab active, developer features enabled."
-msgstr ""
+msgstr "Մշակող - Կարգաբերման էջը ակտիվ է, մշակողի գործառույթներով:"
 
 msgid "Power User - All features active, advanced settings available."
-msgstr ""
+msgstr "Փորձառու օգտատեր - Բոլոր ֆունկցիաները ակտիվ են:"
 
 msgid "Weather View (weather:)"
-msgstr "Եղանակի տեսք (եղանակ:)"
+msgstr "Եղանակի Տեսք (weather:)"
 
 msgid "Use System Units"
 msgstr "Օգտագործել համակարգի միավորները"
 
 msgid "Refresh Interval:"
-msgstr "Թարմացման ինտերվալ:"
+msgstr "Թարմացման միջակայք."
 
 msgid "Every Search"
-msgstr "Յուրաքանչյուր որոնում"
+msgstr "Ամեն որոնման ժամանակ"
 
 msgid "15 Minutes"
 msgstr "15 րոպե"
@@ -1068,22 +1041,7 @@ msgid "1 Hour"
 msgstr "1 ժամ"
 
 msgid "(If time since last update > interval)"
-msgstr "(Եթե վերջին թարմացումից անցած ժամանակը > ինտերվալ)"
+msgstr "(Եթե վերջին թարմացումից անցել է նշված ժամանակը)"
 
 msgid "Enable Weather Prefix"
-msgstr "Միացնել եղանակի նախածանցը"
-
-#~ msgid "General"
-#~ msgstr "Ընդհանուր"
-
-#~ msgid "Folders"
-#~ msgstr "Պանակներ"
-
-#~ msgid "Web"
-#~ msgstr "Վեբ"
-
-#~ msgid "Manage Application"
-#~ msgstr "Կառավարել ծրագիրը"
-
-#~ msgid "Reset Statistics"
-#~ msgstr "Վերականգնել վիճակագրությունը"
+msgstr "Միացնել եղանակի նախդիրը"

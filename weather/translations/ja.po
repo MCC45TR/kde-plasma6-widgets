@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "天気"
 
 msgid "Appearance"
-msgstr ""
+msgstr "外観"
 
 msgid "Details"
-msgstr ""
+msgstr "詳細"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "1時間ごとの予報"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "日ごとの予報"
 
 msgid "Feels like"
-msgstr ""
+msgstr "体感温度"
 
 msgid "Humidity"
-msgstr ""
+msgstr "湿度"
 
 msgid "Wind"
-msgstr ""
+msgstr "風"
 
 msgid "Pressure"
-msgstr ""
+msgstr "気圧"
 
 msgid "Clouds"
-msgstr ""
+msgstr "雲量"
 
 msgid "UV"
-msgstr ""
+msgstr "UV指数"
 
 msgid "Visibility"
-msgstr ""
+msgstr "視程"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "風向"
 
 msgid "Click to close"
-msgstr ""
+msgstr "クリックして閉じる"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "デフォルト (カラーSVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google天気 v3 (フラットSVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google天気 v2 (リアルなPNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google天気 v1 (クラシックPNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "アイコンパック:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "天気アイコンのビジュアルスタイルを選択します。"
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "お天気プロバイダー"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (無料、キー不要)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (キーが必要)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (キーが必要)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "最高の無料オプション。APIキーは不要です。"
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "標準プロバイダー。以下にAPIキーを入力してください。"
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "代替プロバイダー。以下にAPIキーを入力してください。"
 
 msgid "API Keys"
-msgstr ""
+msgstr "APIキー"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap APIキー:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "OpenWeatherMapのAPIキーを入力してください"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com APIキー:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "WeatherAPI.comのキーを入力してください"
 
 msgid "Location"
-msgstr ""
+msgstr "場所"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "IPから自動検出"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "手動で入力"
 
 msgid "City 1:"
-msgstr ""
+msgstr "都市 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "例: 東京, 大阪, ロンドン"
 
 msgid "City 2:"
-msgstr ""
+msgstr "都市 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "第2の都市 (任意)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "都市 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "第3の都市 (任意)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "都市名、'都市,国コード'、または郵便番号を使用できます。"
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "場所はIPアドレスに基づいて自動的に検出されます。"
 
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 msgid "Units:"
-msgstr ""
+msgstr "単位:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "システムの単位を使用する"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "メートル法 (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "ヤード・ポンド法 (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "更新の間隔:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15分"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30分"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45分"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1時間"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2時間"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3時間"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4時間"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6時間"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8時間"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12時間"
 
 msgid "1 day"
-msgstr ""
+msgstr "1日"
 
 msgid "Refresh"
-msgstr ""
+msgstr "更新"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "気象データを読み込み中..."
 
 msgid "Clear"
-msgstr ""
+msgstr "快晴"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "晴れ"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "時々曇り"
 
 msgid "Overcast"
-msgstr ""
+msgstr "曇天"
 
 msgid "Fog"
-msgstr ""
+msgstr "霧"
 
 msgid "Mist"
-msgstr ""
+msgstr "霞"
 
 msgid "Haze"
-msgstr ""
+msgstr "煙霧"
 
 msgid "Smoke"
-msgstr ""
+msgstr "煙"
 
 msgid "Dust"
-msgstr ""
+msgstr "砂塵"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "霧雨"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "着氷性の霧雨"
 
 msgid "Rain"
-msgstr ""
+msgstr "雨"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "小雨"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "着氷性の雨"
 
 msgid "Snow"
-msgstr ""
+msgstr "雪"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "小雪"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "霧雪"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "にわか雨"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "にわか雪"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "雷雨"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "雹（ひょう）を伴う雷雨"
 
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "曇り"
 
 msgid "Sun"
-msgstr ""
+msgstr "日"
 
 msgid "Mon"
-msgstr ""
+msgstr "月"
 
 msgid "Tue"
-msgstr ""
+msgstr "火"
 
 msgid "Wed"
-msgstr ""
+msgstr "水"
 
 msgid "Thu"
-msgstr ""
+msgstr "木"
 
 msgid "Fri"
-msgstr ""
+msgstr "金"
 
 msgid "Sat"
-msgstr ""
+msgstr "土"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "フォント設定"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "システムのデフォルトフォントを使用"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "カスタムフォントファミリー:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "背景の不透明度:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "背景の設定"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "ウィジェットのマージン:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "標準 (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "狭い (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "なし (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "レイアウトモード:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "自動"
 
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 msgid "Wide"
-msgstr ""
+msgstr "ワイド"
 
 msgid "Large"
-msgstr ""
+msgstr "大"
 
 msgid "Representation:"
-msgstr ""
+msgstr "表示形式:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "シンプルパネル"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "詳細パネル"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "フォントサイズ (0 = 自動):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "アイコンサイズ (0 = 自動):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "予報日数:"
 
 msgid "NW"
-msgstr ""
+msgstr "北西"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "パネル設定"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "天気アイコンのビジュアルスタイルを選択します。(注: v1/v2などの古いパックでは、一部の条件でアイコンが不足している場合があります)"

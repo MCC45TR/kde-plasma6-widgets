@@ -13,367 +13,367 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Väder"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Utseende"
 
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Timprognos"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Dygnsprognos"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Känns som"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Luftfuktighet"
 
 msgid "Wind"
-msgstr ""
+msgstr "Vind"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Lufttryck"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Molnighet"
 
 msgid "UV"
-msgstr ""
+msgstr "UV-index"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Sikt"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Vindriktning"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Klicka för att stänga"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Standard (Färgglad SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Väder v3 (Platt SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Väder v2 (Realistisk PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Väder v1 (Klassisk PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Ikonpaket:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Välj visuell stil för väderikoner."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Väderleverantör"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Gratis, ingen nyckel krävs)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Nyckel krävs)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Nyckel krävs)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Bästa gratisalternativet. Ingen API-nyckel krävs."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Standardleverantör. API-nyckel krävs nedan."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Alternativ leverantör. API-nyckel krävs nedan."
 
 msgid "API Keys"
-msgstr ""
+msgstr "API-nycklar"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API-nyckel:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Ange din OpenWeatherMap API-nyckel"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API-nyckel:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Ange din WeatherAPI.com-nyckel"
 
 msgid "Location"
-msgstr ""
+msgstr "Plats"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Identifiera automatiskt via IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Ange manuellt"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Stad 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "T.ex. Stockholm, Göteborg, London"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Stad 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Andra stad (valfritt)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Stad 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Tredje stad (valfritt)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Du kan använda stadsnamn, 'Stad,landskod' eller postnummer."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Platsen identifieras automatiskt baserat på din IP-adress."
 
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 msgid "Units:"
-msgstr ""
+msgstr "Enheter:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Använd systemenheter"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Metrisk (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Imperial (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Uppdateringsintervall:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuter"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuter"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minuter"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 timme"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 timmar"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 timmar"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 timmar"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 timmar"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 timmar"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 timmar"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Uppdatera"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Laddar väderdata..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Klart"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Mestadels klart"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Växlande molnighet"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Mulet"
 
 msgid "Fog"
-msgstr ""
+msgstr "Dimma"
 
 msgid "Mist"
-msgstr ""
+msgstr "Dis"
 
 msgid "Haze"
-msgstr ""
+msgstr "Tunn dimma"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Rök"
 
 msgid "Dust"
-msgstr ""
+msgstr "Damm"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Duggregn"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Underkylt duggregn"
 
 msgid "Rain"
-msgstr ""
+msgstr "Regn"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Lätt regn"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Underkylt regn"
 
 msgid "Snow"
-msgstr ""
+msgstr "Snö"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Lätt snöfall"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Kornsnö"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Regnskurar"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Snöbyar"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Åska"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Åska med hagel"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Okänt"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Molnigt"
 
 msgid "Sun"
-msgstr ""
+msgstr "Sön"
 
 msgid "Mon"
-msgstr ""
+msgstr "Mån"
 
 msgid "Tue"
-msgstr ""
+msgstr "Tis"
 
 msgid "Wed"
-msgstr ""
+msgstr "Ons"
 
 msgid "Thu"
-msgstr ""
+msgstr "Tor"
 
 msgid "Fri"
-msgstr ""
+msgstr "Fre"
 
 msgid "Sat"
-msgstr ""
+msgstr "Lör"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Teckensnittsinställningar"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Använd systemets standardteckensnitt"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Eget teckensnitt:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Bakgrundens opacitet:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Bakgrundsinställningar"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Widget-marginal:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normal (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Mindre (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Ingen (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Layout-läge:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatiskt"
 
 msgid "Small"
-msgstr ""
+msgstr "Litet"
 
 msgid "Wide"
-msgstr ""
+msgstr "Brett"
 
 msgid "Large"
-msgstr ""
+msgstr "Stort"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Representation:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Enkel panel"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Detaljerad panel"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Teckenstorlek (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Ikonstorlek (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Prognosdagar:"
 
 msgid "NW"
-msgstr ""
+msgstr "NV"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Panelinställningar"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Välj visuell stil för väderikoner. (Obs: äldre paket som v1/v2 kan sakna ikoner för vissa väderförhållanden)"

@@ -88,25 +88,25 @@ msgid "Best free option. No API key required."
 msgstr "Beste kostenlose Option. Kein API-Schlüssel erforderlich."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Standardanbieter. API-Schlüssel unten erforderlich."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Alternativer Anbieter. API-Schlüssel unten erforderlich."
 
 msgid "API Keys"
 msgstr "API-Schlüssel"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API-Schlüssel:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Geben Sie Ihren OpenWeatherMap API-Schlüssel ein"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API-Schlüssel:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Geben Sie Ihren WeatherAPI.com Schlüssel ein"
 
 msgid "Location"
 msgstr "Standort"
@@ -124,22 +124,22 @@ msgid "Ex: Ankara, Istanbul, London"
 msgstr "Bsp: Ankara, Istanbul, London"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Stadt 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Zweite Stadt (optional)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Stadt 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Dritte Stadt (optional)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Sie können den Stadtnamen, 'Stadt,Ländercode' oder die Postleitzahl verwenden."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Der Standort wird automatisch basierend auf Ihrer IP-Adresse erkannt."
 
 msgid "Settings"
 msgstr "Einstellungen"
@@ -148,7 +148,7 @@ msgid "Units:"
 msgstr "Einheiten:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Systemeinheiten verwenden"
 
 msgid "Metric (°C)"
 msgstr "Metrisch (°C)"
@@ -166,31 +166,31 @@ msgid "30 minutes"
 msgstr "30 Minuten"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 Minuten"
 
 msgid "1 hour"
 msgstr "1 Stunde"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 Stunden"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 Stunden"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 Stunden"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 Stunden"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 Stunden"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 Stunden"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 Tag"
 
 msgid "Refresh"
 msgstr "Aktualisieren"
@@ -214,115 +214,115 @@ msgid "Fog"
 msgstr "Nebel"
 
 msgid "Mist"
-msgstr ""
+msgstr "Nebel"
 
 msgid "Haze"
-msgstr ""
+msgstr "Dunst"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Rauch"
 
 msgid "Dust"
-msgstr ""
+msgstr "Staub"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Nieselregen"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Gefrierender Nieselregen"
 
 msgid "Rain"
 msgstr "Regen"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Leichter Regen"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Gefrierender Regen"
 
 msgid "Snow"
 msgstr "Schnee"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Leichter Schneefall"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Schneegriesel"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Regenschauer"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Schneeschauer"
 
 msgid "Thunderstorm"
 msgstr "Gewitter"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Gewitter mit Hagel"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Bewölkt"
 
 msgid "Sun"
-msgstr ""
+msgstr "So"
 
 msgid "Mon"
-msgstr ""
+msgstr "Mo"
 
 msgid "Tue"
-msgstr ""
+msgstr "Di"
 
 msgid "Wed"
-msgstr ""
+msgstr "Mi"
 
 msgid "Thu"
-msgstr ""
+msgstr "Do"
 
 msgid "Fri"
-msgstr ""
+msgstr "Fr"
 
 msgid "Sat"
-msgstr ""
+msgstr "Sa"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Schrifteinstellungen"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Standardschriftart des Systems verwenden"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Benutzerdefinierte Schriftfamilie:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Hintergrund-Deckkraft:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Hintergrund-Einstellungen"
 
 msgid "Widget Margin:"
 msgstr "Widget-Abstand:"
@@ -337,7 +337,7 @@ msgid "None (0px)"
 msgstr "Keiner (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Layout-Modus:"
 
 msgid "Automatic"
 msgstr "Automatisch"
@@ -352,7 +352,7 @@ msgid "Large"
 msgstr "Groß"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Darstellung:"
 
 msgid "Simple Panel"
 msgstr "Einfaches Panel"
@@ -361,16 +361,19 @@ msgid "Detailed Panel"
 msgstr "Detailliertes Panel"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Schriftgröße (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Symbolgröße (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Vorhersagetage:"
 
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Panel-Einstellungen"
+
+msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
+msgstr "Wählen Sie den visuellen Stil für Wettersymbole aus. (Hinweis: Ältere Pakete wie v1/v2 können bei manchen Bedingungen fehlende Symbole aufweisen)"

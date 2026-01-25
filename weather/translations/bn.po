@@ -13,367 +13,367 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "আবহাওয়া"
 
 msgid "Appearance"
-msgstr ""
+msgstr "চেহারা"
 
 msgid "Details"
-msgstr ""
+msgstr "বিস্তারিত"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "প্রতি ঘণ্টার পূর্বাভাস"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "দৈনিক পূর্বাভাস"
 
 msgid "Feels like"
-msgstr ""
+msgstr "অনুভূত হয়"
 
 msgid "Humidity"
-msgstr ""
+msgstr "আর্দ্রতা"
 
 msgid "Wind"
-msgstr ""
+msgstr "বাতাস"
 
 msgid "Pressure"
-msgstr ""
+msgstr "চাপ"
 
 msgid "Clouds"
-msgstr ""
+msgstr "মেঘ"
 
 msgid "UV"
-msgstr ""
+msgstr "ইউভি সূচক"
 
 msgid "Visibility"
-msgstr ""
+msgstr "দৃশ্যমানতা"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "বাতাসের দিক"
 
 msgid "Click to close"
-msgstr ""
+msgstr "বন্ধ করতে ক্লিক করুন"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "ডিফল্ট (রঙিন SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "গুগল আবহাওয়া v3 (ফ্ল্যাট SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "গুগল আবহাওয়া v2 (বাস্তবসম্মত PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "গুগল আবহাওয়া v1 (ক্লাসিক PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "আইকন প্যাক:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "আবহাওয়া আইকনগুলির জন্য ভিজ্যুয়াল স্টাইল নির্বাচন করুন।"
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "আবহাওয়া প্রদানকারী"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (বিনামূল্যে, কোনো কি প্রয়োজন নেই)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (কি প্রয়োজন)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (কি প্রয়োজন)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "সেরা বিনামূল্যের বিকল্প। কোনো API কি প্রয়োজন নেই।"
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "স্ট্যান্ডার্ড প্রদানকারী। নিচে API কি প্রয়োজন।"
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "বিকল্প প্রদানকারী। নিচে API কি প্রয়োজন।"
 
 msgid "API Keys"
-msgstr ""
+msgstr "API চাবি সমূহ"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API কি:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "আপনার OpenWeatherMap API কি লিখুন"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API কি:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "আপনার WeatherAPI.com কি লিখুন"
 
 msgid "Location"
-msgstr ""
+msgstr "অবস্থান"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "IP থেকে স্বয়ংক্রিয়ভাবে সনাক্ত করুন"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "ম্যানুয়ালি লিখুন"
 
 msgid "City 1:"
-msgstr ""
+msgstr "শহর ১:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "উদাঃ ঢাকা, কোলকাতা, লন্ডন"
 
 msgid "City 2:"
-msgstr ""
+msgstr "শহর ২:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "দ্বিতীয় শহর (ঐচ্ছিক)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "শহর ৩:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "তৃতীয় শহর (ঐচ্ছিক)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "আপনি শহরের নাম, 'শহর, কান্ট্রি কোড' বা জিপ কোড ব্যবহার করতে পারেন।"
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "আপনার IP ঠিকানার উপর ভিত্তি করে অবস্থান স্বয়ংক্রিয়ভাবে সনাক্ত করা হবে।"
 
 msgid "Settings"
-msgstr ""
+msgstr "সেটিং"
 
 msgid "Units:"
-msgstr ""
+msgstr "একক সমুহ:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "সিস্টেম একক ব্যবহার করুন"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "মেট্রিক (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "ইম্পেরিয়াল (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "রিফ্রেশ ব্যবধান:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "১৫ মিনিট"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "৩০ মিনিট"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "৪৫ মিনিট"
 
 msgid "1 hour"
-msgstr ""
+msgstr "১ ঘণ্টা"
 
 msgid "2 hours"
-msgstr ""
+msgstr "২ ঘণ্টা"
 
 msgid "3 hours"
-msgstr ""
+msgstr "৩ ঘণ্টা"
 
 msgid "4 hours"
-msgstr ""
+msgstr "৪ ঘণ্টা"
 
 msgid "6 hours"
-msgstr ""
+msgstr "৬ ঘণ্টা"
 
 msgid "8 hours"
-msgstr ""
+msgstr "৮ ঘণ্টা"
 
 msgid "12 hours"
-msgstr ""
+msgstr "১২ ঘণ্টা"
 
 msgid "1 day"
-msgstr ""
+msgstr "১ দিন"
 
 msgid "Refresh"
-msgstr ""
+msgstr "রিফ্রেশ"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "আবহাওয়া তথ্য লোড হচ্ছে..."
 
 msgid "Clear"
-msgstr ""
+msgstr "পরিষ্কার"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "প্রধানত পরিষ্কার"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "আংশিক মেঘলা"
 
 msgid "Overcast"
-msgstr ""
+msgstr "মেঘলা"
 
 msgid "Fog"
-msgstr ""
+msgstr "কুয়াশা"
 
 msgid "Mist"
-msgstr ""
+msgstr "কুয়াশা"
 
 msgid "Haze"
-msgstr ""
+msgstr "ঝাপসা"
 
 msgid "Smoke"
-msgstr ""
+msgstr "ধোঁয়া"
 
 msgid "Dust"
-msgstr ""
+msgstr "ধুলো"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "গুঁড়ি গুঁড়ি বৃষ্টি"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "হিমায়িত গুঁড়ি গুঁড়ি বৃষ্টি"
 
 msgid "Rain"
-msgstr ""
+msgstr "বৃষ্টি"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "হালকা বৃষ্টি"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "হিমায়িত বৃষ্টি"
 
 msgid "Snow"
-msgstr ""
+msgstr "বরফ"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "হালকা তুষারপাত"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "বরফের দানা"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "বৃষ্টির ঝরনা"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "তুষার ঝরনা"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "বজ্রঝড়"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "শিলাবৃষ্টি সহ বজ্রঝড়"
 
 msgid "Unknown"
-msgstr ""
+msgstr "অজানা"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "মেঘলা"
 
 msgid "Sun"
-msgstr ""
+msgstr "রবি"
 
 msgid "Mon"
-msgstr ""
+msgstr "সোম"
 
 msgid "Tue"
-msgstr ""
+msgstr "মঙ্গল"
 
 msgid "Wed"
-msgstr ""
+msgstr "বুধ"
 
 msgid "Thu"
-msgstr ""
+msgstr "বৃহস্পতি"
 
 msgid "Fri"
-msgstr ""
+msgstr "শুক্র"
 
 msgid "Sat"
-msgstr ""
+msgstr "শনি"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "ফন্ট সেটিংস"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "সিস্টেমের ডিফল্ট ফন্ট ব্যবহার করুন"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "কাস্টম ফন্ট ফ্যামিলি:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "ব্যাকগ্রাউন্ডের অস্বচ্ছতা:"
 
 msgid "100%"
-msgstr ""
+msgstr "১০০%"
 
 msgid "75%"
-msgstr ""
+msgstr "৭৫%"
 
 msgid "50%"
-msgstr ""
+msgstr "৫০%"
 
 msgid "25%"
-msgstr ""
+msgstr "২৫%"
 
 msgid "10%"
-msgstr ""
+msgstr "১০%"
 
 msgid "5%"
-msgstr ""
+msgstr "৫%"
 
 msgid "0%"
-msgstr ""
+msgstr "০%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "ব্যাকগ্রাউন্ড সেটিংস"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "উইজেট মার্জিন:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "স্বাভাবিক (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "কম (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "কোনোটিই না (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "লেআউট মোড:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "স্বয়ংক্রিয়"
 
 msgid "Small"
-msgstr ""
+msgstr "ছোট"
 
 msgid "Wide"
-msgstr ""
+msgstr "প্রশস্ত"
 
 msgid "Large"
-msgstr ""
+msgstr "বড়"
 
 msgid "Representation:"
-msgstr ""
+msgstr "উপস্থাপনা:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "সাধারণ প্যানেল"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "বিস্তারিত প্যানেল"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "ফন্ট সাইজ (০ = অটো):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "আইকন সাইজ (০ = অটো):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "পূর্বাভাস দিন:"
 
 msgid "NW"
-msgstr ""
+msgstr "উ.প."
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "প্যানেল সেটিংস"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "আবহাওয়া আইকনগুলির জন্য ভিজ্যুয়াল স্টাইল নির্বাচন করুন। (দ্রষ্টব্য: v1/v2 এর মতো পুরানো প্যাকগুলিতে কিছু অবস্থার জন্য আইকন অনুপস্থিত থাকতে পারে)"

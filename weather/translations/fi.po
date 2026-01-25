@@ -13,367 +13,367 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Sää"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Ulkoasu"
 
 msgid "Details"
-msgstr ""
+msgstr "Yksityiskohdat"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Tuntiennuste"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Päiväennuste"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Tuntuu kuin"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Kosteus"
 
 msgid "Wind"
-msgstr ""
+msgstr "Tuuli"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Ilmanpaine"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Pilvisyys"
 
 msgid "UV"
-msgstr ""
+msgstr "UV-indeksi"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Näkyvyys"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Tuulen suunta"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Sulje napsauttamalla"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Oletus (Värillinen SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Sää v3 (Litteä SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Sää v2 (Realistinen PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Sää v1 (Klassinen PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Ikonipaketti:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Valitse sääkuvakkeiden visuaalinen tyyli."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Sään tarjoaja"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Ilmainen, ei avainta)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Vaatii avaimen)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Vaatii avaimen)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Paras ilmainen vaihtoehto. API-avainta ei tarvita."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Vakio tarjoaja. API-avain vaaditaan alla."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Vaihtoehtoinen tarjoaja. API-avain vaaditaan alla."
 
 msgid "API Keys"
-msgstr ""
+msgstr "API-avaimet"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API-avain:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Syötä OpenWeatherMap API-avaimesi"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API-avain:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Syötä WeatherAPI.com-avaimesi"
 
 msgid "Location"
-msgstr ""
+msgstr "Sijainti"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Tunnista automaattisesti IP-osoitteesta"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Syötä manuaalisesti"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Kaupunki 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Esim: Helsinki, Tampere, Lontoo"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Kaupunki 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Toinen kaupunki (valinnainen)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Kaupunki 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Kolmas kaupunki (valinnainen)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Voit käyttää kaupungin nimeä, 'Kaupunki,Maatunnus' tai postinumeroa."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Sijainti tunnistetaan automaattisesti IP-osoitteesi perusteella."
 
 msgid "Settings"
-msgstr ""
+msgstr "Asetukset"
 
 msgid "Units:"
-msgstr ""
+msgstr "Yksiköt:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Käytä järjestelmän yksiköitä"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Metrinen (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Imperiaalinen (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Päivitysväli:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuuttia"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuuttia"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minuuttia"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 tunti"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 tuntia"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 tuntia"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 tuntia"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 tuntia"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 tuntia"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 tuntia"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 päivä"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Päivitä"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Ladataan säätietoja..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Selkeää"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Melko selkeää"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Puolipilvistä"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Pilvistä"
 
 msgid "Fog"
-msgstr ""
+msgstr "Sumua"
 
 msgid "Mist"
-msgstr ""
+msgstr "Usvua"
 
 msgid "Haze"
-msgstr ""
+msgstr "Autere"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Savua"
 
 msgid "Dust"
-msgstr ""
+msgstr "Pölyä"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Tihkusadetta"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Jäätävää tihkusadetta"
 
 msgid "Rain"
-msgstr ""
+msgstr "Sadetta"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Kevyttä sadetta"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Jäätävää sadetta"
 
 msgid "Snow"
-msgstr ""
+msgstr "Lunta"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Kevyttä lumisadetta"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Lumijyväsiä"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Sadekuuroja"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Lumikuuroja"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Ukkosta"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Ukkosta ja rakeita"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Pilvistä"
 
 msgid "Sun"
-msgstr ""
+msgstr "Su"
 
 msgid "Mon"
-msgstr ""
+msgstr "Ma"
 
 msgid "Tue"
-msgstr ""
+msgstr "Ti"
 
 msgid "Wed"
-msgstr ""
+msgstr "Ke"
 
 msgid "Thu"
-msgstr ""
+msgstr "To"
 
 msgid "Fri"
-msgstr ""
+msgstr "Pe"
 
 msgid "Sat"
-msgstr ""
+msgstr "La"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Fonttiasetukset"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Käytä järjestelmän oletusfonttia"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Oma fonttiperhe:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Taustan peittävyys:"
 
 msgid "100%"
-msgstr ""
+msgstr "100 %"
 
 msgid "75%"
-msgstr ""
+msgstr "75 %"
 
 msgid "50%"
-msgstr ""
+msgstr "50 %"
 
 msgid "25%"
-msgstr ""
+msgstr "25 %"
 
 msgid "10%"
-msgstr ""
+msgstr "10 %"
 
 msgid "5%"
-msgstr ""
+msgstr "5 %"
 
 msgid "0%"
-msgstr ""
+msgstr "0 %"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Tausta-asetukset"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Widgetin reunus:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normaali (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Vähemmän (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Ei mitään (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Asettelutila:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automaattinen"
 
 msgid "Small"
-msgstr ""
+msgstr "Pieni"
 
 msgid "Wide"
-msgstr ""
+msgstr "Leveä"
 
 msgid "Large"
-msgstr ""
+msgstr "Suuri"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Esitystapa:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Yksinkertainen paneeli"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Yksityiskohtainen paneeli"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Fonttikoko (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Kuvakekoko (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Ennustepäivät:"
 
 msgid "NW"
-msgstr ""
+msgstr "LU"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Paneelin asetukset"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Valitse sääkuvakkeiden visuaalinen tyyli (Huom: vanhemmista paketeista kuten v1/v2 saattaa puuttua kuvakkeita tietyille olosuhteille)"

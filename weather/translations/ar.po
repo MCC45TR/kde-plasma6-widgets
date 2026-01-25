@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "الطقس"
 
 msgid "Appearance"
-msgstr ""
+msgstr "المظهر"
 
 msgid "Details"
-msgstr ""
+msgstr "التفاصيل"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "التوقعات بالساعة"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "التوقعات اليومية"
 
 msgid "Feels like"
-msgstr ""
+msgstr "يبدو كأنه"
 
 msgid "Humidity"
-msgstr ""
+msgstr "الرطوبة"
 
 msgid "Wind"
-msgstr ""
+msgstr "الرياح"
 
 msgid "Pressure"
-msgstr ""
+msgstr "الضغط"
 
 msgid "Clouds"
-msgstr ""
+msgstr "الغُيوم"
 
 msgid "UV"
-msgstr ""
+msgstr "مؤشر الأشعة فوق البنفسجية"
 
 msgid "Visibility"
-msgstr ""
+msgstr "الرؤية"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "اتجاه الرياح"
 
 msgid "Click to close"
-msgstr ""
+msgstr "انقر للإغلاق"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "افتراضي (SVG ملون)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "جوجل للطقس v3 (SVG مسطح)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "جوجل للطقس v2 (PNG واقعي)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "جوجل للطقس v1 (PNG كلاسيكي)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "حزمة الأيقونات:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "حدد النمط المرئي لأيقونات الطقس."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "مزود خدمة الطقس"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (مجاني، لا يتطلب مفتاح)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (يتطلب مفتاح)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (يتطلب مفتاح)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "أفضل خيار مجاني. لا يتطلب مفتاح API."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "المزود القياسي. يتطلب مفتاح API أدناه."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "مزود بديل. يتطلب مفتاح API أدناه."
 
 msgid "API Keys"
-msgstr ""
+msgstr "مفاتيح API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "مفتاح API لـ OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "أدخل مفتاح API لـ OpenWeatherMap الخاص بك"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "مفتاح API لـ WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "أدخل مفتاح WeatherAPI.com الخاص بك"
 
 msgid "Location"
-msgstr ""
+msgstr "الموقع"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "كشف تلقائي من عنوان IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "أدخل يدوياً"
 
 msgid "City 1:"
-msgstr ""
+msgstr "المدينة 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "مثال: القاهرة، مكة، لندن"
 
 msgid "City 2:"
-msgstr ""
+msgstr "المدينة 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "المدينة الثانية (اختياري)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "المدينة 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "المدينة الثالثة (اختياري)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "يمكنك استخدام اسم المدينة، 'المدينة، رمز الدولة' أو الرمز البريدي."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "سيتم اكتشاف الموقع تلقائيًا بناءً على عنوان IP الخاص بك."
 
 msgid "Settings"
-msgstr ""
+msgstr "الإعدادات"
 
 msgid "Units:"
-msgstr ""
+msgstr "الوحدات:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "استخدم وحدات النظام"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "متري (°م)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "إمبراطوري (°ف)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "فترة التحديث:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 دقيقة"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 دقيقة"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 دقيقة"
 
 msgid "1 hour"
-msgstr ""
+msgstr "ساعة واحدة"
 
 msgid "2 hours"
-msgstr ""
+msgstr "ساعتان"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 ساعات"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 ساعات"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 ساعات"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 ساعات"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 ساعة"
 
 msgid "1 day"
-msgstr ""
+msgstr "يوم واحد"
 
 msgid "Refresh"
-msgstr ""
+msgstr "تحديث"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "جارٍ تحميل بيانات الطقس..."
 
 msgid "Clear"
-msgstr ""
+msgstr "صافٍ"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "صافٍ غالباً"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "غائم جزئياً"
 
 msgid "Overcast"
-msgstr ""
+msgstr "غائم كلياً"
 
 msgid "Fog"
-msgstr ""
+msgstr "ضباب"
 
 msgid "Mist"
-msgstr ""
+msgstr "سديم"
 
 msgid "Haze"
-msgstr ""
+msgstr "عجاج"
 
 msgid "Smoke"
-msgstr ""
+msgstr "دخان"
 
 msgid "Dust"
-msgstr ""
+msgstr "غبار"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "رذاذ"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "رذاذ متجمد"
 
 msgid "Rain"
-msgstr ""
+msgstr "مطر"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "مطر خفيف"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "مطر متجمد"
 
 msgid "Snow"
-msgstr ""
+msgstr "ثلج"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "ثلج خفيف"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "حبيبات ثلجية"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "زخات مطر"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "زخات ثلج"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "عاصفة رعدية"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "عاصفة رعدية مع برد"
 
 msgid "Unknown"
-msgstr ""
+msgstr "غير معروف"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "غائم"
 
 msgid "Sun"
-msgstr ""
+msgstr "الأحد"
 
 msgid "Mon"
-msgstr ""
+msgstr "الاثنين"
 
 msgid "Tue"
-msgstr ""
+msgstr "الثلاثاء"
 
 msgid "Wed"
-msgstr ""
+msgstr "الأربعاء"
 
 msgid "Thu"
-msgstr ""
+msgstr "الخميس"
 
 msgid "Fri"
-msgstr ""
+msgstr "الجمعة"
 
 msgid "Sat"
-msgstr ""
+msgstr "السبت"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "إعدادات الخط"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "استخدم خط النظام الافتراضي"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "عائلة الخط المخصصة:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "عتمة الخلفية:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "إعدادات الخلفية"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "هامش الأداة:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "عادي (10 بكسل)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "أقل (5 بكسل)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "بدون (0 بكسل)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "وضع التنسيق:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "تلقائي"
 
 msgid "Small"
-msgstr ""
+msgstr "صغير"
 
 msgid "Wide"
-msgstr ""
+msgstr "عريض"
 
 msgid "Large"
-msgstr ""
+msgstr "كبير"
 
 msgid "Representation:"
-msgstr ""
+msgstr "التمثيل:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "لوحة بسيطة"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "لوحة مفصلة"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "حجم الخط (0 = تلقائي):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "حجم الأيقونة (0 = تلقائي):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "أيام التوقعات:"
 
 msgid "NW"
-msgstr ""
+msgstr "شمال غرب"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "إعدادات اللوحة"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "حدد النمط المرئي لأيقونات الطقس. (ملاحظة: الحزم القديمة مثل v1/v2 قد تفتقر إلى الأيقونات لبعض الظروف الجوية)"

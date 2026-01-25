@@ -13,367 +13,367 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Եղանակ"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Արտաքին տեսք"
 
 msgid "Details"
-msgstr ""
+msgstr "Մանրամասներ"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Ժամային կանխատեսում"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Օրական կանխատեսում"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Զգացվում է որպես"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Խոնավություն"
 
 msgid "Wind"
-msgstr ""
+msgstr "Քամի"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Ճնշում"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Ամպամածություն"
 
 msgid "UV"
-msgstr ""
+msgstr "ՈւՄ ինդեքս"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Տեսանելիություն"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Քամու ուղղություն"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Սեղմեք՝ փակելու համար"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Լռելյայն (գունավոր SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Եղանակ v3 (հարթ SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Եղանակ v2 (ռեալիստիկ PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Եղանակ v1 (դասական PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Պատկերակների փաթեթ."
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Ընտրեք եղանակի պատկերակների տեսողական ոճը:"
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Եղանակի մատակարար"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (անվճար, բանալի չի պահանջվում)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (պահանջվում է բանալի)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (պահանջվում է բանալի)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Լավագույն անվճար տարբերակը: API բանալի չի պահանջվում:"
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Ստանդարտ մատակարար: Ստորև պահանջվում է API բանալի:"
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Այլընտրանքային մատակարար: Ստորև պահանջվում է API բանալի:"
 
 msgid "API Keys"
-msgstr ""
+msgstr "API բանալիներ"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API բանալի."
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Մուտքագրեք ձեր OpenWeatherMap API բանալին"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API բանալի."
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Մուտքագրեք ձեր WeatherAPI.com բանալին"
 
 msgid "Location"
-msgstr ""
+msgstr "Գտնվելու վայրը"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Ավտոմատ հայտնաբերում IP-ից"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Մուտքագրեք ձեռքով"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Քաղաք 1."
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Օրինակ՝ Երևան, Լոնդոն, Փարիզ"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Քաղաք 2."
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Երկրորդ քաղաք (ըստ ցանկության)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Քաղաք 3."
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Երրորդ քաղաք (ըստ ցանկության)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Կարող եք օգտագործել քաղաքի անունը, «Քաղաք, Երկրի կոդ» կամ փոստային ինդեքսը:"
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Գտնվելու վայրը ավտոմատ կերպով կհայտնաբերվի՝ հիմնվելով ձեր IP հասցեի վրա:"
 
 msgid "Settings"
-msgstr ""
+msgstr "Կարգավորումներ"
 
 msgid "Units:"
-msgstr ""
+msgstr "Միավորներ."
 
 msgid "Use system units"
-msgstr ""
+msgstr "Օգտագործել համակարգի միավորները"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Մետրիկ (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Իմպերիալ (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Թարմացման միջակայքը."
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 րոպե"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 րոպե"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 րոպե"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 ժամ"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 ժամ"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 ժամ"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 ժամ"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 ժամ"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 ժամ"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 ժամ"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 օր"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Թարմացնել"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Եղանակի տվյալների բեռնում..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Պարզ"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Հիմնականում պարզ"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Մասնակի ամպամած"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Ամպամած"
 
 msgid "Fog"
-msgstr ""
+msgstr "Մառախուղ"
 
 msgid "Mist"
-msgstr ""
+msgstr "Մշուշ"
 
 msgid "Haze"
-msgstr ""
+msgstr "Թույլ մշուշ"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Ծուխ"
 
 msgid "Dust"
-msgstr ""
+msgstr "Փոշի"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Մաղող անձրև"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Սառչող մաղող անձրև"
 
 msgid "Rain"
-msgstr ""
+msgstr "Անձրև"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Թույլ անձրև"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Սառչող անձրև"
 
 msgid "Snow"
-msgstr ""
+msgstr "Ձյուն"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Թույլ ձյուն"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Ձյան փաթիլներ"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Անձրևային տեղումներ"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Ձյունառատ տեղումներ"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Ամպրոպ"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Ամպրոպ կարկուտով"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Անհայտ"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Ամպամած"
 
 msgid "Sun"
-msgstr ""
+msgstr "Կիր"
 
 msgid "Mon"
-msgstr ""
+msgstr "Երկ"
 
 msgid "Tue"
-msgstr ""
+msgstr "Երք"
 
 msgid "Wed"
-msgstr ""
+msgstr "Չոր"
 
 msgid "Thu"
-msgstr ""
+msgstr "Հնգ"
 
 msgid "Fri"
-msgstr ""
+msgstr "Ուրբ"
 
 msgid "Sat"
-msgstr ""
+msgstr "Շաբ"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Տառատեսակի կարգավորումներ"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Օգտագործել համակարգի լռելյայն տառատեսակը"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Ընտրովի տառատեսակ."
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Ֆոնի թափանցիկություն."
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Ֆոնի կարգավորումներ"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Վիդջեթի լուսանցք."
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Սովորական (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Քիչ (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Չկա (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Դասավորության ռեժիմ."
 
 msgid "Automatic"
-msgstr ""
+msgstr "Ավտոմատ"
 
 msgid "Small"
-msgstr ""
+msgstr "Փոքր"
 
 msgid "Wide"
-msgstr ""
+msgstr "Լայն"
 
 msgid "Large"
-msgstr ""
+msgstr "Մեծ"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Ներկայացում."
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Պարզ վահանակ"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Մանրամասն վահանակ"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Տառատեսակի չափը (0 = Ավտո)."
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Պատկերակի չափը (0 = Ավտո)."
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Կանխատեսման օրերը."
 
 msgid "NW"
-msgstr ""
+msgstr "ՀյՍ"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Վահանակի կարگավորումներ"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Ընտրեք եղանակի պատկերակների տեսողական ոճը: (Նշում. հին փաթեթները, ինչպիսիք են v1/v2-ը, կարող են պատկերակներ չունենալ որոշ պայմանների համար)"

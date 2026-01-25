@@ -13,367 +13,367 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Καιρός"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Εμφάνιση"
 
 msgid "Details"
-msgstr ""
+msgstr "Λεπτομέρειες"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Ωριαία πρόγνωση"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Ημερήσια πρόγνωση"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Αίσθηση σαν"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Υγρασία"
 
 msgid "Wind"
-msgstr ""
+msgstr "Άνεμος"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Πίεση"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Σύννεφα"
 
 msgid "UV"
-msgstr ""
+msgstr "Δείκτης UV"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Ορατότητα"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Διεύθυνση ανέμου"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Κλικ για κλείσιμο"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Προεπιλογή (Πολύχρωμο SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Καιρός v3 (Επίπεδο SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Καιρός v2 (Ρεαλιστικό PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Καιρός v1 (Κλασικό PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Πακέτο εικονιδίων:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Επιλέξτε το οπτικό στυλ για τα εικονίδια καιρού."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Πάροχος καιρού"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Δωρεάν, δεν απαιτείται κλειδί)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Απαιτείται κλειδί)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Απαιτείται κλειδί)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Η καλύτερη δωρεάν επιλογή. Δεν απαιτείται κλειδί API."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Τυπικός πάροχος. Απαιτείται κλειδί API παρακάτω."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Εναλλακτικός πάροχος. Απαιτείται κλειδί API παρακάτω."
 
 msgid "API Keys"
-msgstr ""
+msgstr "Κλειδιά API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "Κλειδί API OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Εισαγάγετε το κλειδί API OpenWeatherMap"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "Κλειδί API WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Εισαγάγετε το κλειδί WeatherAPI.com"
 
 msgid "Location"
-msgstr ""
+msgstr "Τοποθεσία"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Αυτόματος εντοπισμός από IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Χειροκίνητη εισαγωγή"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Πόλη 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Π.χ.: Αθήνα, Θεσσαλονίκη, Λονδίνο"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Πόλη 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Δεύτερη πόλη (προαιρετικά)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Πόλη 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Τρίτη πόλη (προαιρετικά)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Μπορείτε να χρησιμοποιήσετε το όνομα της πόλης, 'Πόλη, Κωδικός Χώρας' ή Ταχυδρομικό Κώδικα."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Η τοποθεσία θα εντοπιστεί αυτόματα με βάση τη διεύθυνση IP σας."
 
 msgid "Settings"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 msgid "Units:"
-msgstr ""
+msgstr "Μονάδες:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Χρήση μονάδων συστήματος"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Μετρικό (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Αγγλοσαξονικό (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Διάστημα ανανέωσης:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 λεπτά"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 λεπτά"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 λεπτά"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 ώρα"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 ώρες"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 ώρες"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 ώρες"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 ώρες"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 ώρες"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 ώρες"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 ημέρα"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Ανανέωση"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Φόρτωση δεδομένων καιρού..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Αίθριος"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Κυρίως αίθριος"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Μερικώς συννεφιασμένος"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Νεφελώδης"
 
 msgid "Fog"
-msgstr ""
+msgstr "Ομίχλη"
 
 msgid "Mist"
-msgstr ""
+msgstr "Καταχνιά"
 
 msgid "Haze"
-msgstr ""
+msgstr "Θολή ατμόσφαιρα"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Καπνός"
 
 msgid "Dust"
-msgstr ""
+msgstr "Σκόνη"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Ψιλόβροχο"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Παγωμένο ψιλόβροχο"
 
 msgid "Rain"
-msgstr ""
+msgstr "Βροχή"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Ελαφριά βροχή"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Παγωμένη βροχή"
 
 msgid "Snow"
-msgstr ""
+msgstr "Χιόνι"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Ελαφρά χιονόπτωση"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Χιονοκόκκοι"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Μπόρες"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Χιονομπόρες"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Καταιγίδα"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Καταιγίδα με χαλάζι"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Άγνωστο"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Συννεφιά"
 
 msgid "Sun"
-msgstr ""
+msgstr "Κυρ"
 
 msgid "Mon"
-msgstr ""
+msgstr "Δευ"
 
 msgid "Tue"
-msgstr ""
+msgstr "Τρι"
 
 msgid "Wed"
-msgstr ""
+msgstr "Τετ"
 
 msgid "Thu"
-msgstr ""
+msgstr "Πεμ"
 
 msgid "Fri"
-msgstr ""
+msgstr "Παρ"
 
 msgid "Sat"
-msgstr ""
+msgstr "Σαβ"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Ρυθμίσεις γραμματοσειράς"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Χρήση προεπιλεγμένης γραμματοσειράς συστήματος"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Προσαρμοσμένη οικογένεια γραμματοσειρών:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Διαφάνεια φόντου:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Ρυθμίσεις φόντου"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Περιθώριο γραφικού στοιχείου:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Κανονικό (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Λιγότερο (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Κανένα (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Λειτουργία διάταξης:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Αυτόματη"
 
 msgid "Small"
-msgstr ""
+msgstr "Μικρή"
 
 msgid "Wide"
-msgstr ""
+msgstr "Ευρεία"
 
 msgid "Large"
-msgstr ""
+msgstr "Μεγάλη"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Αναπαράσταση:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Απλό πάνελ"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Λεπτομερές πάνελ"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Μέγεθος γραμματοσειράς (0 = Αυτόματο):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Μέγεθος εικονιδίων (0 = Αυτόματο):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Ημέρες πρόγνωσης:"
 
 msgid "NW"
-msgstr ""
+msgstr "ΒΔ"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Ρυθμίσεις πάνελ"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Επιλέξτε το οπτικό στυλ για τα εικονίδια καιρού. (Σημείωση: παλαιότερα πακέτα όπως τα v1/v2 ενδέχεται να έχουν ελλείποντα εικονίδια για ορισμένες συνθήκες)"

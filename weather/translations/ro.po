@@ -10,370 +10,370 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||(n%100==0&&n!=0))?2:1));\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Vremea"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Aspect"
 
 msgid "Details"
-msgstr ""
+msgstr "Detalii"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Prognoză orară"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Prognoză zilnică"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Se simte ca"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Umiditate"
 
 msgid "Wind"
-msgstr ""
+msgstr "Vânt"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Presiune"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Nori"
 
 msgid "UV"
-msgstr ""
+msgstr "Indice UV"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Vizibilitate"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Direcția vântului"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Click pentru a închide"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Implicit (SVG colorit)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Weather v3 (SVG plat)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Weather v2 (PNG realist)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Weather v1 (PNG clasic)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Pachet de pictograme:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Selectați stilul vizual pentru pictogramele meteo."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Furnizor de vreme"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Gratuit, nu este necesară o cheie)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Cheie necesară)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Cheie necesară)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "Cea mai bună opțiune gratuită. Nu este necesară o cheie API."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Furnizor standard. Cheia API este necesară mai jos."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Furnizor alternativ. Cheia API este necesară mai jos."
 
 msgid "API Keys"
-msgstr ""
+msgstr "Chei API"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "Cheie API OpenWeatherMap:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Introduceți cheia API OpenWeatherMap"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "Cheie API WeatherAPI.com:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Introduceți cheia WeatherAPI.com"
 
 msgid "Location"
-msgstr ""
+msgstr "Locație"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Detectare automată prin IP"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Introducere manuală"
 
 msgid "City 1:"
-msgstr ""
+msgstr "Orașul 1:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Ex: București, Cluj-Napoca, Londra"
 
 msgid "City 2:"
-msgstr ""
+msgstr "Orașul 2:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Al doilea oraș (opțional)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "Orașul 3:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Al treilea oraș (opțional)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Puteți folosi numele orașului, 'Oraș,Cod Țară' sau Cod Poștal."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "Locația va fi detectată automat pe baza adresei IP."
 
 msgid "Settings"
-msgstr ""
+msgstr "Setări"
 
 msgid "Units:"
-msgstr ""
+msgstr "Unități:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Folosește unitățile sistemului"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Metric (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Imperial (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Interval de reîmprospătare:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minute"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minute"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minute"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 oră"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 ore"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 ore"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 ore"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 ore"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 ore"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 ore"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 zi"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Reîmprospătează"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Se încarcă datele meteo..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Senin"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Predominant senin"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Parțial noros"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Noros"
 
 msgid "Fog"
-msgstr ""
+msgstr "Ceață"
 
 msgid "Mist"
-msgstr ""
+msgstr "Negură"
 
 msgid "Haze"
-msgstr ""
+msgstr "Pâclă"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Fum"
 
 msgid "Dust"
-msgstr ""
+msgstr "Praf"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Burniță"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Burniță înghețată"
 
 msgid "Rain"
-msgstr ""
+msgstr "Ploaie"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Ploaie ușoară"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Ploaie înghețată"
 
 msgid "Snow"
-msgstr ""
+msgstr "Zăpadă"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Zăpadă ușoară"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Zăpadă grăunțoasă"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Averse de ploaie"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Averse de zăpadă"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Furtună"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Furtună cu grindină"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Necunoscut"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Înnorat"
 
 msgid "Sun"
-msgstr ""
+msgstr "Dum"
 
 msgid "Mon"
-msgstr ""
+msgstr "Lun"
 
 msgid "Tue"
-msgstr ""
+msgstr "Mar"
 
 msgid "Wed"
-msgstr ""
+msgstr "Mie"
 
 msgid "Thu"
-msgstr ""
+msgstr "Joi"
 
 msgid "Fri"
-msgstr ""
+msgstr "Vin"
 
 msgid "Sat"
-msgstr ""
+msgstr "Sâm"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Setări font"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Folosește fontul implicit al sistemului"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Familie de fonturi personalizată:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacitate fundal:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Setări fundal"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Margine widget:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normală (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Mai mică (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Niciuna (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Mod aspect:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automat"
 
 msgid "Small"
-msgstr ""
+msgstr "Mic"
 
 msgid "Wide"
-msgstr ""
+msgstr "Lat"
 
 msgid "Large"
-msgstr ""
+msgstr "Mare"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Reprezentare:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Panou simplu"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Panou detaliat"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Dimensiune font (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Dimensiune pictograme (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Zile de prognoză:"
 
 msgid "NW"
-msgstr ""
+msgstr "NV"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Setări panou"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Selectați stilul vizual pentru pictogramele meteo. (Notă: pachetele mai vechi, cum ar fi v1/v2, pot avea pictograme lipsă pentru anumite condiții)"

@@ -13,367 +13,367 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Weather"
-msgstr ""
+msgstr "Időjárás"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Megjelenés"
 
 msgid "Details"
-msgstr ""
+msgstr "Részletek"
 
 msgid "Hourly Forecast"
-msgstr ""
+msgstr "Óránkénti előrejelzés"
 
 msgid "Daily Forecast"
-msgstr ""
+msgstr "Napi előrejelzés"
 
 msgid "Feels like"
-msgstr ""
+msgstr "Hőérzet"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Páratartalom"
 
 msgid "Wind"
-msgstr ""
+msgstr "Szél"
 
 msgid "Pressure"
-msgstr ""
+msgstr "Légnyomás"
 
 msgid "Clouds"
-msgstr ""
+msgstr "Felhőzet"
 
 msgid "UV"
-msgstr ""
+msgstr "UV index"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Látótávolság"
 
 msgid "Wind Direction"
-msgstr ""
+msgstr "Szélirány"
 
 msgid "Click to close"
-msgstr ""
+msgstr "Kattintson a bezáráshoz"
 
 msgid "Default (Colorful SVG)"
-msgstr ""
+msgstr "Alapértelmezett (színes SVG)"
 
 msgid "Google Weather v3 (Flat SVG)"
-msgstr ""
+msgstr "Google Időjárás v3 (Lapos SVG)"
 
 msgid "Google Weather v2 (Realistic PNG)"
-msgstr ""
+msgstr "Google Időjárás v2 (Realisztikus PNG)"
 
 msgid "Google Weather v1 (Classic PNG)"
-msgstr ""
+msgstr "Google Időjárás v1 (Klasszikus PNG)"
 
 msgid "Icon Pack:"
-msgstr ""
+msgstr "Ikoncsomag:"
 
 msgid "Select the visual style for weather icons."
-msgstr ""
+msgstr "Válassza ki az időjárás ikonok stílusát."
 
 msgid "Weather Provider"
-msgstr ""
+msgstr "Időjárás szolgáltató"
 
 msgid "Open-Meteo (Free, No Key Required)"
-msgstr ""
+msgstr "Open-Meteo (Ingyenes, nem kell kulcs)"
 
 msgid "OpenWeatherMap (Key Required)"
-msgstr ""
+msgstr "OpenWeatherMap (Kulcs szükséges)"
 
 msgid "WeatherAPI.com (Key Required)"
-msgstr ""
+msgstr "WeatherAPI.com (Kulcs szükséges)"
 
 msgid "Best free option. No API key required."
-msgstr ""
+msgstr "A legjobb ingyenes opció. Nem szükséges API kulcs."
 
 msgid "Standard provider. API key required below."
-msgstr ""
+msgstr "Standard szolgáltató. API kulcs szükséges alább."
 
 msgid "Alternative provider. API key required below."
-msgstr ""
+msgstr "Alternatív szolgáltató. API kulcs szükséges alább."
 
 msgid "API Keys"
-msgstr ""
+msgstr "API kulcsok"
 
 msgid "OpenWeatherMap API Key:"
-msgstr ""
+msgstr "OpenWeatherMap API kulcs:"
 
 msgid "Enter your OpenWeatherMap API key"
-msgstr ""
+msgstr "Adja meg az OpenWeatherMap API kulcsát"
 
 msgid "WeatherAPI.com API Key:"
-msgstr ""
+msgstr "WeatherAPI.com API kulcs:"
 
 msgid "Enter your WeatherAPI.com key"
-msgstr ""
+msgstr "Adja meg a WeatherAPI.com kulcsát"
 
 msgid "Location"
-msgstr ""
+msgstr "Helyszín"
 
 msgid "Auto-detect from IP"
-msgstr ""
+msgstr "Automatikus felismerés IP alapján"
 
 msgid "Enter manually"
-msgstr ""
+msgstr "Kézi bevitel"
 
 msgid "City 1:"
-msgstr ""
+msgstr "1. város:"
 
 msgid "Ex: Ankara, Istanbul, London"
-msgstr ""
+msgstr "Pl: Budapest, London, Bécs"
 
 msgid "City 2:"
-msgstr ""
+msgstr "2. város:"
 
 msgid "Second city (optional)"
-msgstr ""
+msgstr "Második város (opcionális)"
 
 msgid "City 3:"
-msgstr ""
+msgstr "3. város:"
 
 msgid "Third city (optional)"
-msgstr ""
+msgstr "Harmadik város (opcionális)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
-msgstr ""
+msgstr "Használhat városnevet, 'Város, országkód' formátumot vagy irányítószámot."
 
 msgid "Location will be auto-detected based on your IP address."
-msgstr ""
+msgstr "A helyszínt automatikusan felismerjük az IP-címe alapján."
 
 msgid "Settings"
-msgstr ""
+msgstr "Beállítások"
 
 msgid "Units:"
-msgstr ""
+msgstr "Mértékegységek:"
 
 msgid "Use system units"
-msgstr ""
+msgstr "Rendszer mértékegységek használata"
 
 msgid "Metric (°C)"
-msgstr ""
+msgstr "Metrikus (°C)"
 
 msgid "Imperial (°F)"
-msgstr ""
+msgstr "Angolszász (°F)"
 
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "Frissítési időköz:"
 
 msgid "15 minutes"
-msgstr ""
+msgstr "15 perc"
 
 msgid "30 minutes"
-msgstr ""
+msgstr "30 perc"
 
 msgid "45 minutes"
-msgstr ""
+msgstr "45 perc"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 óra"
 
 msgid "2 hours"
-msgstr ""
+msgstr "2 óra"
 
 msgid "3 hours"
-msgstr ""
+msgstr "3 óra"
 
 msgid "4 hours"
-msgstr ""
+msgstr "4 óra"
 
 msgid "6 hours"
-msgstr ""
+msgstr "6 óra"
 
 msgid "8 hours"
-msgstr ""
+msgstr "8 óra"
 
 msgid "12 hours"
-msgstr ""
+msgstr "12 óra"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 nap"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Frissítés"
 
 msgid "Loading weather data..."
-msgstr ""
+msgstr "Időjárási adatok betöltése..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Derült"
 
 msgid "Mainly Clear"
-msgstr ""
+msgstr "Túlnyomóan derült"
 
 msgid "Partly Cloudy"
-msgstr ""
+msgstr "Részben felhős"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Borult"
 
 msgid "Fog"
-msgstr ""
+msgstr "Köd"
 
 msgid "Mist"
-msgstr ""
+msgstr "Pára"
 
 msgid "Haze"
-msgstr ""
+msgstr "Ködös párásság"
 
 msgid "Smoke"
-msgstr ""
+msgstr "Füst"
 
 msgid "Dust"
-msgstr ""
+msgstr "Por"
 
 msgid "Drizzle"
-msgstr ""
+msgstr "Szitálás"
 
 msgid "Freezing Drizzle"
-msgstr ""
+msgstr "Fagyos szitálás"
 
 msgid "Rain"
-msgstr ""
+msgstr "Eső"
 
 msgid "Light Rain"
-msgstr ""
+msgstr "Enyhe eső"
 
 msgid "Freezing Rain"
-msgstr ""
+msgstr "Ónos eső"
 
 msgid "Snow"
-msgstr ""
+msgstr "Hó"
 
 msgid "Light Snow"
-msgstr ""
+msgstr "Enyhe havazás"
 
 msgid "Snow Grains"
-msgstr ""
+msgstr "Hódara"
 
 msgid "Rain Showers"
-msgstr ""
+msgstr "Záporok"
 
 msgid "Snow Showers"
-msgstr ""
+msgstr "Hózáporok"
 
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Zivatar"
 
 msgid "Thunderstorm with Hail"
-msgstr ""
+msgstr "Zivatar jégesővel"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Ismeretlen"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Felhős"
 
 msgid "Sun"
-msgstr ""
+msgstr "Vas"
 
 msgid "Mon"
-msgstr ""
+msgstr "Hét"
 
 msgid "Tue"
-msgstr ""
+msgstr "Kedd"
 
 msgid "Wed"
-msgstr ""
+msgstr "Sze"
 
 msgid "Thu"
-msgstr ""
+msgstr "Csüt"
 
 msgid "Fri"
-msgstr ""
+msgstr "Pén"
 
 msgid "Sat"
-msgstr ""
+msgstr "Szom"
 
 msgid "Font Settings"
-msgstr ""
+msgstr "Betűtípus beállítások"
 
 msgid "Use Default System Font"
-msgstr ""
+msgstr "Rendszer alapértelmezett betűtípus használata"
 
 msgid "Custom Font Family:"
-msgstr ""
+msgstr "Egyedi betűkészlet:"
 
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Háttér átlátszatlansága:"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 msgid "25%"
-msgstr ""
+msgstr "25%"
 
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
 msgid "0%"
-msgstr ""
+msgstr "0%"
 
 msgid "Background Settings"
-msgstr ""
+msgstr "Háttér beállítások"
 
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Widget margó:"
 
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normál (10px)"
 
 msgid "Less (5px)"
-msgstr ""
+msgstr "Kevesebb (5px)"
 
 msgid "None (0px)"
-msgstr ""
+msgstr "Nincs (0px)"
 
 msgid "Layout Mode:"
-msgstr ""
+msgstr "Elrendezés módja:"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatikus"
 
 msgid "Small"
-msgstr ""
+msgstr "Kicsi"
 
 msgid "Wide"
-msgstr ""
+msgstr "Széles"
 
 msgid "Large"
-msgstr ""
+msgstr "Nagy"
 
 msgid "Representation:"
-msgstr ""
+msgstr "Megjelenítés:"
 
 msgid "Simple Panel"
-msgstr ""
+msgstr "Egyszerű panel"
 
 msgid "Detailed Panel"
-msgstr ""
+msgstr "Részletes panel"
 
 msgid "Font Size (0 = Auto):"
-msgstr ""
+msgstr "Betűméret (0 = Auto):"
 
 msgid "Icon Size (0 = Auto):"
-msgstr ""
+msgstr "Ikonméret (0 = Auto):"
 
 msgid "Forecast Days:"
-msgstr ""
+msgstr "Előrejelzési napok:"
 
 msgid "NW"
-msgstr ""
+msgstr "ÉNY"
 
 msgid "Panel Settings"
-msgstr ""
+msgstr "Panel beállítások"
 
 msgid "Select the visual style for weather icons. (Note: older packs like v1/v2 may have missing icons for some conditions)"
-msgstr ""
+msgstr "Válassza ki az időjárás ikonok stílusát. (Megjegyzés: a régebbi csomagokból, mint a v1/v2, hiányozhatnak bizonyos állapotokhoz tartozó ikonok)"
