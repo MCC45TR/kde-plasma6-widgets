@@ -84,7 +84,7 @@ Item {
             
             // Title
             Text {
-                text: largeSquareMode.title === "" ? "Çalan medya yok" : largeSquareMode.title
+                text: largeSquareMode.title === "" ? i18n("No Media Playing") : largeSquareMode.title
                 font.family: "Roboto Condensed"
                 font.bold: true
                 font.pixelSize: 22

@@ -46,3 +46,102 @@ msgstr "显示播放器徽章"
 
 msgid "General"
 msgstr "常规"
+
+msgid "No Media"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Widget Margin:"
+msgstr ""
+
+msgid "Normal (10px)"
+msgstr ""
+
+msgid "Less (5px)"
+msgstr ""
+
+msgid "None (0px)"
+msgstr ""
+
+msgid "Background Opacity:"
+msgstr ""
+
+msgid "Show Controls in Panel"
+msgstr ""
+
+msgid "Panel Settings"
+msgstr ""
+
+msgid "Layout Mode:"
+msgstr ""
+
+msgid "Left Aligned"
+msgstr ""
+
+msgid "Right Aligned"
+msgstr ""
+
+msgid "Centered"
+msgstr ""
+
+msgid "Button Size:"
+msgstr ""
+
+msgid "Auto Size based on Panel Height"
+msgstr ""
+
+msgid "Size (px):"
+msgstr ""
+
+msgid "Scroll Text if truncated"
+msgstr ""
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr ""
+
+msgid "Max Width (px):"
+msgstr ""
+
+msgid "Speed:"
+msgstr ""
+
+msgid "Fast"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Slow"
+msgstr ""
+
+msgid "Displayed Information:"
+msgstr ""
+
+msgid "Show Title"
+msgstr ""
+
+msgid "Show Artist"
+msgstr ""
+
+msgid "Font Size:"
+msgstr ""
+
+msgid "View Settings"
+msgstr ""
+
+msgid "View Mode:"
+msgstr ""
+
+msgid "Automatic"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Wide"
+msgstr ""
+
+msgid "Large"
+msgstr ""

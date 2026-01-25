@@ -3,7 +3,7 @@ import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-        name: "Genel"
+        name: i18n("General")
         icon: "multimedia-player"
         source: "config/ConfigGeneral.qml"
     }

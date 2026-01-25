@@ -81,6 +81,7 @@ Item {
                         else if (currentIndex === 1) configAppearance.cfg_edgeMargin = 5
                         else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
                     }
+                }
 
                 Label {
                     text: i18n("Background Opacity:")
@@ -98,7 +99,6 @@ Item {
                     onActivated: {
                          configAppearance.cfg_backgroundOpacity = opacityValues[currentIndex]
                     }
-                }
                 }
                 
                 CheckBox {

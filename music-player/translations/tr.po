@@ -7,6 +7,9 @@ msgstr ""
 msgid "No Media Playing"
 msgstr "Çalan Medya Yok"
 
+msgid "No Media"
+msgstr "Medya Yok"
+
 msgid "Previous Track"
 msgstr "Önceki Müzik"
 
@@ -45,3 +48,99 @@ msgstr "Medya oynatıcı rozetini göster"
 
 msgid "General"
 msgstr "Genel"
+
+msgid "Appearance"
+msgstr "Görünüm"
+
+msgid "Widget Margin:"
+msgstr "Araç Kenar Boşluğu:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Daha Az (5px)"
+
+msgid "None (0px)"
+msgstr "Yok (0px)"
+
+msgid "Background Opacity:"
+msgstr "Arka Plan Opaklığı:"
+
+msgid "Show Controls in Panel"
+msgstr "Panelde Kontrolleri Göster"
+
+msgid "Panel Settings"
+msgstr "Panel Ayarları"
+
+msgid "Layout Mode:"
+msgstr "Yerleşim Modu:"
+
+msgid "Left Aligned"
+msgstr "Sola Yaslı"
+
+msgid "Right Aligned"
+msgstr "Sağa Yaslı"
+
+msgid "Centered"
+msgstr "Ortalanmış"
+
+msgid "Button Size:"
+msgstr "Buton Boyutu:"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Panel Yüksekliğine Göre Otomatik Boyut"
+
+msgid "Size (px):"
+msgstr "Boyut (px):"
+
+msgid "Scroll Text if truncated"
+msgstr "Metin sığmazsa kaydır"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Dinamik Genişlik (metne göre otomatik genişle)"
+
+msgid "Max Width (px):"
+msgstr "Maksimum Genişlik (px):"
+
+msgid "Speed:"
+msgstr "Hız:"
+
+msgid "Fast"
+msgstr "Hızlı"
+
+msgid "Medium"
+msgstr "Orta"
+
+msgid "Slow"
+msgstr "Yavaş"
+
+msgid "Displayed Information:"
+msgstr "Görüntülenen Bilgiler:"
+
+msgid "Show Title"
+msgstr "Başlığı Göster"
+
+msgid "Show Artist"
+msgstr "Sanatçıyı Göster"
+
+msgid "Font Size:"
+msgstr "Yazı Tipi Boyutu:"
+
+msgid "View Settings"
+msgstr "Görünüm Ayarları"
+
+msgid "View Mode:"
+msgstr "Görünüm Modu:"
+
+msgid "Automatic"
+msgstr "Otomatik"
+
+msgid "Small"
+msgstr "Küçük"
+
+msgid "Wide"
+msgstr "Geniş"
+
+msgid "Large"
+msgstr "Büyük"
