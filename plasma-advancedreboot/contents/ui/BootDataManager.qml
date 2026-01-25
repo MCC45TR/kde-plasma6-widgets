@@ -162,8 +162,19 @@ Item {
 
     function rebootToEntry(id) {
         console.log("BootDataManager: Rebooting to " + id)
-        // Attempt to use systemctl to avoid explicit password prompt if polkit allows it
-        execSource.connectSource("systemctl reboot --boot-loader-entry=\"" + id + "\"")
+        var cmd = ""
+        if (id === "auto-reboot-to-firmware-setup" || id === "reboot-into-firmware-interface") {
+            // SetRebootToFirmwareSetup b true
+            cmd = "busctl call org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager SetRebootToFirmwareSetup b true"
+        } else {
+             // SetRebootToBootLoaderEntry s "id"
+            cmd = "busctl call org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager SetRebootToBootLoaderEntry s \"" + id + "\""
+        }
+        // Chain with reboot
+        cmd += " && systemctl reboot"
+        
+        console.log("BootDataManager: Command: " + cmd)
+        execSource.connectSource(cmd)
     }
     
     Timer {
