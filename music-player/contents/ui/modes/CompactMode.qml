@@ -114,6 +114,7 @@ Item {
                 preferredPlayer: compactMode.preferredPlayer
                 onLaunchApp: compactMode.onLaunchApp
                 showPlayerBadge: compactMode.showPlayerBadge
+                placeholderSource: "../placeholders/NoMediaCompact.qml"
                 
                 pillMode: false
                 showNoMediaText: true

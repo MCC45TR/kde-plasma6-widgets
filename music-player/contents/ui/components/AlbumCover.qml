@@ -16,6 +16,7 @@ Rectangle {
     property bool hasPlayer: false
     property string preferredPlayer: ""
     property var onLaunchApp: function() {}
+    property string placeholderSource: ""
     
     // Mode flags
     property bool pillMode: false
@@ -88,51 +89,14 @@ Rectangle {
         id: placeholderLoader
         anchors.fill: parent
         active: !albumCover.hasArt
+        source: albumCover.placeholderSource
+        asynchronous: true
         
-        sourceComponent: Item {
-            ColumnLayout {
-                anchors.centerIn: parent
-                spacing: 10
-                width: parent.width * 0.8
-                
-                // Default Placeholder (Always show if no art)
-                Loader {
-                    Layout.preferredWidth: parent.width * 0.5
-                    Layout.preferredHeight: Layout.preferredWidth
-                    Layout.alignment: Qt.AlignHCenter
-                    active: true
-                    
-                    sourceComponent: Image {
-                        source: "../../images/album.png"
-                        fillMode: Image.PreserveAspectFit
-                        opacity: 0.8
-                        asynchronous: true
-                    }
-                }
-
-                // Player Icon (Disabled in center, we used album.png instead)
-                Loader {
-                    Layout.preferredWidth: parent.width * 0.5
-                    Layout.preferredHeight: Layout.preferredWidth
-                    Layout.alignment: Qt.AlignHCenter
-                    active: false
-                    
-                    sourceComponent: Kirigami.Icon {
-                        source: albumCover.playerIcon
-                        opacity: albumCover.showCenterPlayIcon ? 0 : 1
-                        Behavior on opacity { NumberAnimation { duration: 100 } }
-                    }
-                }
-                
-                Text {
-                    text: albumCover.noMediaText
-                    font.family: "Roboto Condensed"
-                    font.bold: true
-                    font.pixelSize: 16
-                    color: Kirigami.Theme.textColor
-                    Layout.alignment: Qt.AlignHCenter
-                    visible: albumCover.showNoMediaText && !albumCover.hasPlayer
-                }
+        onLoaded: {
+            if (item) {
+                if (item.hasOwnProperty("noMediaText")) item.noMediaText = Qt.binding(() => albumCover.noMediaText)
+                if (item.hasOwnProperty("hasPlayer")) item.hasPlayer = Qt.binding(() => albumCover.hasPlayer)
+                if (item.hasOwnProperty("showText")) item.showText = Qt.binding(() => albumCover.showNoMediaText)
             }
         }
     }

@@ -55,6 +55,7 @@ Item {
             preferredPlayer: wideMode.preferredPlayer
             onLaunchApp: wideMode.onLaunchApp
             showPlayerBadge: wideMode.showPlayerBadge
+            placeholderSource: "../placeholders/NoMediaWide.qml"
             
             pillMode: true
             showNoMediaText: false

@@ -56,6 +56,7 @@ Item {
             preferredPlayer: largeSquareMode.preferredPlayer
             onLaunchApp: largeSquareMode.onLaunchApp
             showPlayerBadge: largeSquareMode.showPlayerBadge
+            placeholderSource: "../placeholders/NoMediaLarge.qml"
             
             pillMode: true
             showNoMediaText: false
