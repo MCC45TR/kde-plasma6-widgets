@@ -8,5 +8,16 @@
     <entry name="cachedBootEntries" type="String">
       <default></default>
     </entry>
+    <entry name="viewMode" type="Int">
+      <default>0</default> <!-- 0: Single View (SmallView), 1: List View (RegularListView) -->
+    </entry>
+    <entry name="backgroundOpacity" type="Double">
+      <default>1.0</default>
+      <label>Background Opacity</label>
+    </entry>
+    <entry name="edgeMargin" type="Int">
+      <default>10</default>
+      <label>Widget Edge Margin</label>
+    </entry>
   </group>
 </kcfg>

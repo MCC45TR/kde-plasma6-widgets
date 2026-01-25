@@ -6,6 +6,12 @@ Bu dosyalarda projedeki her bir widget için yapılan değişiklikler sürümler
 
 ## 🔍 MFile Finder (`file-search`)
 
+### v1.2.2 (2026-01-25)
+**TR:**
+- **Dil Desteği Güncellemesi:** Birçok dil için (`es`, `it`, `pt`, `ru`, `ja`, `zh`, `hi`, `hy`, `id`, `ro`, `ur`) çeviriler güncellendi ve eksik dizeler tamamlandı.
+**EN:**
+- **Translation Updates:** Updated translations for multiple languages (Spanish, Italian, Portuguese, Russian, Japanese, Chinese, Hindi, Armenian, Indonesian, Romanian, and Urdu).
+
 ### v1.2.1 (2026-01-22)
 **TR:**
 - **Panel Yüksekliği Özelleştirmesi:** Manuel ayar (18-96px) ve "Otomatik" seçeneği eklendi.
