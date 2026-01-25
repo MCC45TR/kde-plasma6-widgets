@@ -20,6 +20,7 @@ Item {
         highlightRangeMode: ListView.StrictlyEnforceRange
         preferredHighlightBegin: 0
         preferredHighlightEnd: 0
+        highlightMoveDuration: 200
         cacheBuffer: Math.max(0, itemHeight) 
         model: root.bootEntries
         clip: true
@@ -198,6 +199,19 @@ Item {
             }
         }
     }
+
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.NoButton
+        onWheel: (wheel) => {
+            if (wheel.angleDelta.y < 0) {
+                listView.incrementCurrentIndex()
+            } else {
+                listView.decrementCurrentIndex()
+            }
+        }
+    }
+
     Item {
         id: pagerContainer
         width: root.isExtraSmall ? 8 : 16
