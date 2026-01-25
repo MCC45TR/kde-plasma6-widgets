@@ -11,10 +11,7 @@ import "js/PlayerData.js" as PlayerData
 PlasmoidItem {
     id: root
 
-    // --- Localization Logic ---
-    // Standard Plasma i18n is used now.
-    
-    // Widget Size Constraints
+    // --- Widget Size Constraints ---
     Layout.preferredWidth: 200
     Layout.preferredHeight: 200
     Layout.minimumWidth: 150
@@ -22,26 +19,53 @@ PlasmoidItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     // ---------------------------------------------------------
-    // Data Source
+    // Configuration (Lazy evaluated)
     // ---------------------------------------------------------
-    Mpris.Mpris2Model { id: mpris2Model }
-    
-    // Configuration
     readonly property string preferredPlayer: Plasmoid.configuration.preferredPlayer || ""
     readonly property bool showPlayerBadge: Plasmoid.configuration.showPlayerBadge !== undefined ? Plasmoid.configuration.showPlayerBadge : true
-    
-    // Secondary model for probing without affecting the main one's state
-    Mpris.Mpris2Model { id: probeModel }
+    readonly property bool showPanelControls: Plasmoid.configuration.showPanelControls !== undefined ? Plasmoid.configuration.showPanelControls : true
+    readonly property bool cfg_panelShowTitle: Plasmoid.configuration.panelShowTitle !== undefined ? Plasmoid.configuration.panelShowTitle : true
+    readonly property bool cfg_panelShowArtist: Plasmoid.configuration.panelShowArtist !== undefined ? Plasmoid.configuration.panelShowArtist : true
+    readonly property bool cfg_panelAutoFontSize: Plasmoid.configuration.panelAutoFontSize !== undefined ? Plasmoid.configuration.panelAutoFontSize : true
+    readonly property bool cfg_panelScrollingText: Plasmoid.configuration.panelScrollingText !== undefined ? Plasmoid.configuration.panelScrollingText : true
+    readonly property int cfg_panelMaxWidth: Plasmoid.configuration.panelMaxWidth !== undefined ? Plasmoid.configuration.panelMaxWidth : 350
+    readonly property int cfg_panelScrollingSpeed: Plasmoid.configuration.panelScrollingSpeed !== undefined ? Plasmoid.configuration.panelScrollingSpeed : 0
+    readonly property int cfg_panelFontSize: Plasmoid.configuration.panelFontSize !== undefined ? Plasmoid.configuration.panelFontSize : 12
+    readonly property int cfg_panelLayoutMode: Plasmoid.configuration.panelLayoutMode !== undefined ? Plasmoid.configuration.panelLayoutMode : 0
+    readonly property int cfg_popupLayoutMode: Plasmoid.configuration.popupLayoutMode !== undefined ? Plasmoid.configuration.popupLayoutMode : 0
+    readonly property double cfg_backgroundOpacity: Plasmoid.configuration.backgroundOpacity !== undefined ? Plasmoid.configuration.backgroundOpacity : 0.8
 
-    // Smartly find the best player to show
+    // Panel Detection
+    readonly property bool isInPanel: (Plasmoid.formFactor == PlasmaCore.Types.Horizontal || Plasmoid.formFactor == PlasmaCore.Types.Vertical)
+
+    // ---------------------------------------------------------
+    // Data Source - Lazy Loaded MPRIS Models
+    // ---------------------------------------------------------
+    
+    // Main MPRIS model - always needed
+    Mpris.Mpris2Model { id: mpris2Model }
+    
+    // Probe model - only created when needed for smart player detection
+    Loader {
+        id: probeModelLoader
+        active: preferredPlayer === "" // Only active in "General" mode
+        sourceComponent: Mpris.Mpris2Model {}
+    }
+    
+    readonly property var probeModel: probeModelLoader.item
+
+    // ---------------------------------------------------------
+    // Smart Player Selection
+    // ---------------------------------------------------------
+    property var currentPlayer: null
+    
     function findSmartPlayer() {
-        // If a specific player is pinned, look for it
+        // If a specific player is pinned, look for it in the main model
         if (preferredPlayer !== "") {
-            var count = probeModel.rowCount()
+            var count = mpris2Model.rowCount()
             for (var i = 0; i < count; i++) {
-                probeModel.currentIndex = i
-                var player = probeModel.currentPlayer
-                
+                mpris2Model.currentIndex = i
+                var player = mpris2Model.currentPlayer
                 if (player && player.identity && player.identity.toLowerCase().includes(preferredPlayer.toLowerCase())) {
                     return player
                 }
@@ -49,7 +73,9 @@ PlasmoidItem {
             return null
         }
         
-        // "General" Mode: Prioritize Playing > Paused > Any
+        // "General" Mode: Use probe model if available
+        if (!probeModel) return mpris2Model.currentPlayer
+        
         var count = probeModel.rowCount()
         var pausedCandidate = null
         var anyCandidate = null
@@ -65,50 +91,41 @@ PlasmoidItem {
                 }
                 // Priority 2: Paused
                 if (player.playbackStatus === Mpris.PlaybackStatus.Paused) {
-                    // If we have multiple paused players, prefer the one that matches system selection
                     if (!pausedCandidate || (mpris2Model.currentPlayer && player.identity === mpris2Model.currentPlayer.identity)) {
                         pausedCandidate = player
                     }
                 }
-                // Priority 3: Any (Stopped/Unknown)
+                // Priority 3: Any
                 if (!anyCandidate) {
-                     anyCandidate = player
+                    anyCandidate = player
                 }
             }
         }
         
-        // Return best match
         return pausedCandidate || anyCandidate || mpris2Model.currentPlayer
     }
     
-    // Reactively determine the smart player
-    property var currentPlayer: null
-    
     function updateCurrentPlayer() {
-        // Use the probe model logic
         currentPlayer = findSmartPlayer()
     }
     
-    // Watch for players appearing/disappearing
+    // Watch for players appearing/disappearing - connect to appropriate model
     Connections {
-        target: probeModel
+        target: probeModel || mpris2Model
         function onRowsInserted() { root.updateCurrentPlayer() }
         function onRowsRemoved() { root.updateCurrentPlayer() }
         function onModelReset() { root.updateCurrentPlayer() }
     }
     
-    // Also watch for playback status changes to switch to the playing one dynamically
+    // Smart player switch timer - only active in General mode
     Timer {
-        interval: 1000
-        running: true
+        interval: 1500 // Slightly longer interval for better performance
+        running: preferredPlayer === "" && root.visible
         repeat: true
         onTriggered: {
-            // Periodically check if we should switch focus (e.g. if another player started playing)
-            if (preferredPlayer === "") {
-                var smart = findSmartPlayer()
-                if (smart !== currentPlayer) {
-                    currentPlayer = smart
-                }
+            var smart = findSmartPlayer()
+            if (smart !== currentPlayer) {
+                currentPlayer = smart
             }
         }
     }
@@ -116,14 +133,17 @@ PlasmoidItem {
     onPreferredPlayerChanged: updateCurrentPlayer()
     
     Component.onCompleted: {
-        updateCurrentPlayer()
+        // Defer initial player detection for faster startup
+        Qt.callLater(updateCurrentPlayer)
     }
-    
-    // Player state properties
+
+    // ---------------------------------------------------------
+    // Player State Properties (Computed on-demand)
+    // ---------------------------------------------------------
     readonly property bool hasPlayer: !!currentPlayer
     readonly property bool isPlaying: currentPlayer ? currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : false
     readonly property string artUrl: currentPlayer ? currentPlayer.artUrl : ""
-    readonly property bool hasArt: artUrl != ""
+    readonly property bool hasArt: artUrl !== ""
     readonly property string title: currentPlayer ? currentPlayer.track : i18n("No Media Playing")
     readonly property string artist: currentPlayer ? currentPlayer.artist : ""
     readonly property real length: currentPlayer ? currentPlayer.length : 0
@@ -131,25 +151,29 @@ PlasmoidItem {
     
     property real currentPosition: 0
     
-    // Position Sync Logic
+    // Position Sync - Lazy connection
     Connections {
         target: currentPlayer
+        enabled: !!currentPlayer
         function onPositionChanged() {
             var diff = Math.abs(root.currentPosition - currentPlayer.position)
             if (diff > 2000000) root.currentPosition = currentPlayer.position
         }
     }
     
+    // Position timer - only runs when playing
     Timer {
         interval: 1000
-        running: root.isPlaying
+        running: root.isPlaying && root.visible
         repeat: true
-        onTriggered: if (root.currentPosition < root.length) root.currentPosition += 1000 * 1000
+        onTriggered: if (root.currentPosition < root.length) root.currentPosition += 1000000
     }
     
     onCurrentPlayerChanged: root.currentPosition = currentPlayer ? currentPlayer.position : 0
-    
+
+    // ---------------------------------------------------------
     // Player Control Functions
+    // ---------------------------------------------------------
     function togglePlayPause() {
         if (currentPlayer) currentPlayer.PlayPause()
     }
@@ -178,100 +202,83 @@ PlasmoidItem {
         return PlayerData.getPlayerIcon(identity)
     }
 
-    readonly property bool showPanelControls: Plasmoid.configuration.showPanelControls !== undefined ? Plasmoid.configuration.showPanelControls : true
-    readonly property bool cfg_panelShowTitle: Plasmoid.configuration.panelShowTitle !== undefined ? Plasmoid.configuration.panelShowTitle : true
-    readonly property bool cfg_panelShowArtist: Plasmoid.configuration.panelShowArtist !== undefined ? Plasmoid.configuration.panelShowArtist : true
-    readonly property bool cfg_panelAutoFontSize: Plasmoid.configuration.panelAutoFontSize !== undefined ? Plasmoid.configuration.panelAutoFontSize : true
-    readonly property bool cfg_panelScrollingText: Plasmoid.configuration.panelScrollingText !== undefined ? Plasmoid.configuration.panelScrollingText : true
-    readonly property int cfg_panelMaxWidth: Plasmoid.configuration.panelMaxWidth !== undefined ? Plasmoid.configuration.panelMaxWidth : 350
-    readonly property int cfg_panelScrollingSpeed: Plasmoid.configuration.panelScrollingSpeed !== undefined ? Plasmoid.configuration.panelScrollingSpeed : 0
-    readonly property int cfg_panelFontSize: Plasmoid.configuration.panelFontSize !== undefined ? Plasmoid.configuration.panelFontSize : 12
-    readonly property int cfg_panelLayoutMode: Plasmoid.configuration.panelLayoutMode !== undefined ? Plasmoid.configuration.panelLayoutMode : 0
-    readonly property int cfg_popupLayoutMode: Plasmoid.configuration.popupLayoutMode !== undefined ? Plasmoid.configuration.popupLayoutMode : 0
-    readonly property double cfg_backgroundOpacity: Plasmoid.configuration.backgroundOpacity !== undefined ? Plasmoid.configuration.backgroundOpacity : 0.8
-    
-    // Panel Detection
-    readonly property bool isInPanel: (Plasmoid.formFactor == PlasmaCore.Types.Horizontal || Plasmoid.formFactor == PlasmaCore.Types.Vertical)
-
+    // ---------------------------------------------------------
+    // Representations
+    // ---------------------------------------------------------
     preferredRepresentation: isInPanel ? compactRepresentation : fullRepresentation
     
+    // ---------------------------------------------------------
+    // Compact Representation (Panel Mode)
+    // ---------------------------------------------------------
     compactRepresentation: Item {
         id: compactRep
         
-        // Use PanelMode from separate file
         Loader {
             anchors.fill: parent
+            asynchronous: true
             source: "modes/PanelMode.qml"
+            
             onLoaded: {
                 if (item) {
-                     item.hasArt = Qt.binding(function() { return root.hasArt })
-                     item.artUrl = Qt.binding(function() { return root.artUrl })
-                     item.title = Qt.binding(function() { return root.title })
-                     item.artist = Qt.binding(function() { return root.artist })
-                     item.playerIdentity = Qt.binding(function() { return root.playerIdentity })
-                     item.hasPlayer = Qt.binding(function() { return root.hasPlayer })
-                     item.preferredPlayer = Qt.binding(function() { return root.preferredPlayer })
-                     item.isPlaying = Qt.binding(function() { return root.isPlaying })
-                     item.currentPosition = Qt.binding(function() { return root.currentPosition })
-                     item.length = Qt.binding(function() { return root.length })
-                     
-                     item.showPanelControls = Qt.binding(function() { return root.showPanelControls })
-                     
-                     // New Config Bindings
-                     item.showTitle = Qt.binding(function() { return root.cfg_panelShowTitle })
-                     item.showArtist = Qt.binding(function() { return root.cfg_panelShowArtist })
-                     item.autoFontSize = Qt.binding(function() { return root.cfg_panelAutoFontSize })
-                     item.scrollingText = Qt.binding(function() { return root.cfg_panelScrollingText })
-                     item.maxWidth = Qt.binding(function() { return root.cfg_panelMaxWidth })
-                     item.scrollingSpeed = Qt.binding(function() { return root.cfg_panelScrollingSpeed })
-                     item.manualFontSize = Qt.binding(function() { return root.cfg_panelFontSize })
-                     item.layoutMode = Qt.binding(function() { return root.cfg_panelLayoutMode })
-                     
-                     item.onPrevious = root.previous
-                     item.onPlayPause = root.togglePlayPause
-                     item.onNext = root.next
-                     item.onSeek = root.seek
-                     item.onExpand = function() { root.expanded = true }
-                     item.onLaunchApp = function() { root.launchApp(root.preferredPlayer) }
+                    // Bind all properties
+                    item.hasArt = Qt.binding(() => root.hasArt)
+                    item.artUrl = Qt.binding(() => root.artUrl)
+                    item.title = Qt.binding(() => root.title)
+                    item.artist = Qt.binding(() => root.artist)
+                    item.playerIdentity = Qt.binding(() => root.playerIdentity)
+                    item.hasPlayer = Qt.binding(() => root.hasPlayer)
+                    item.preferredPlayer = Qt.binding(() => root.preferredPlayer)
+                    item.isPlaying = Qt.binding(() => root.isPlaying)
+                    item.currentPosition = Qt.binding(() => root.currentPosition)
+                    item.length = Qt.binding(() => root.length)
+                    item.showPanelControls = Qt.binding(() => root.showPanelControls)
+                    item.showTitle = Qt.binding(() => root.cfg_panelShowTitle)
+                    item.showArtist = Qt.binding(() => root.cfg_panelShowArtist)
+                    item.autoFontSize = Qt.binding(() => root.cfg_panelAutoFontSize)
+                    item.scrollingText = Qt.binding(() => root.cfg_panelScrollingText)
+                    item.maxWidth = Qt.binding(() => root.cfg_panelMaxWidth)
+                    item.scrollingSpeed = Qt.binding(() => root.cfg_panelScrollingSpeed)
+                    item.manualFontSize = Qt.binding(() => root.cfg_panelFontSize)
+                    item.layoutMode = Qt.binding(() => root.cfg_panelLayoutMode)
+                    
+                    // Callbacks
+                    item.onPrevious = root.previous
+                    item.onPlayPause = root.togglePlayPause
+                    item.onNext = root.next
+                    item.onSeek = root.seek
+                    item.onExpand = () => { root.expanded = !root.expanded }
+                    item.onLaunchApp = () => { root.launchApp(root.preferredPlayer) }
                 }
             }
         }
         
-        // Ensure popup opens on click (if not handled by buttons)
+        // Fallback click handler
         MouseArea {
             anchors.fill: parent
             z: -1
-            onClicked: root.expanded = true
+            onClicked: root.expanded = !root.expanded
         }
     }
     
+    // ---------------------------------------------------------
+    // Full Representation (Desktop/Popup Mode)
+    // ---------------------------------------------------------
     fullRepresentation: Item {
         id: fullRep
         anchors.fill: parent
         
-        // Mode Detection
-        // Large Square Mode: Height > 350 AND Aspect Ratio Difference < 0.15 (Square-ish)
+        // Mode Detection - Computed properties
         readonly property bool isLargeSq: (root.height > 350) && (root.width < root.height * 1.05)
-        // Wide Mode: Not Large Square and Width > Height * 1.05
         readonly property bool isWide: !isLargeSq && (root.width > (root.height * 1.05))
-        // Compact Mode: Neither Wide nor Large Square
-        readonly property bool isCompact: !isWide && !isLargeSq
         
         // Current mode for loader
         readonly property string currentMode: {
-            // View Mode Mapping: 
-            // 0: Auto, 1: Small (Compact), 2: Wide, 3: Large
-            
             if (cfg_popupLayoutMode === 1) return "compact"
             if (cfg_popupLayoutMode === 2) return "wide"
             if (cfg_popupLayoutMode === 3) return "largeSquare"
             
-            // Auto Mode (0)
-            
-            // If in panel (popup mode), default to LargeSquare
+            // Auto Mode
             if (root.isInPanel) return "largeSquare"
-
-            // Fallback to responsive logic (Desktop Auto)
             if (isLargeSq) return "largeSquare"
             if (isWide) return "wide"
             return "compact"
@@ -291,8 +298,8 @@ PlasmoidItem {
                 id: modeLoader
                 anchors.fill: parent
                 asynchronous: true
+                active: root.visible || root.expanded // Only load when visible
                 
-                // Source based on current mode
                 source: {
                     switch (fullRep.currentMode) {
                         case "compact": return "modes/CompactMode.qml"
@@ -307,39 +314,36 @@ PlasmoidItem {
                     anchors.centerIn: parent
                     running: modeLoader.status === Loader.Loading
                     visible: running
+                    width: 32
+                    height: 32
                 }
                 
-                // Bind properties when loaded
                 onLoaded: {
                     if (item) {
-                        // Common properties
-                        item.hasArt = Qt.binding(function() { return root.hasArt })
-                        item.artUrl = Qt.binding(function() { return root.artUrl })
-                        item.title = Qt.binding(function() { return root.title })
-                        item.playerIdentity = Qt.binding(function() { return root.playerIdentity })
-                        item.hasPlayer = Qt.binding(function() { return root.hasPlayer })
-                        item.preferredPlayer = Qt.binding(function() { return root.preferredPlayer })
-                        item.isPlaying = Qt.binding(function() { return root.isPlaying })
-                        item.currentPosition = Qt.binding(function() { return root.currentPosition })
-                        item.length = Qt.binding(function() { return root.length })
-                        item.noMediaText = Qt.binding(function() { return i18n("No Media Playing") })
+                        // Common properties - use arrow function bindings for efficiency
+                        item.hasArt = Qt.binding(() => root.hasArt)
+                        item.artUrl = Qt.binding(() => root.artUrl)
+                        item.title = Qt.binding(() => root.title)
+                        item.playerIdentity = Qt.binding(() => root.playerIdentity)
+                        item.hasPlayer = Qt.binding(() => root.hasPlayer)
+                        item.preferredPlayer = Qt.binding(() => root.preferredPlayer)
+                        item.isPlaying = Qt.binding(() => root.isPlaying)
+                        item.currentPosition = Qt.binding(() => root.currentPosition)
+                        item.length = Qt.binding(() => root.length)
+                        item.noMediaText = Qt.binding(() => i18n("No Media Playing"))
                         
-                        // Show player badge setting
+                        // Optional properties
                         if (item.hasOwnProperty("showPlayerBadge")) {
-                            item.showPlayerBadge = Qt.binding(function() { return root.showPlayerBadge })
+                            item.showPlayerBadge = Qt.binding(() => root.showPlayerBadge)
                         }
-                        
-                        // Artist (Wide and LargeSquare modes)
                         if (item.hasOwnProperty("artist")) {
-                            item.artist = Qt.binding(function() { return root.artist })
+                            item.artist = Qt.binding(() => root.artist)
                         }
-                        
-                        // Compact mode specific
                         if (item.hasOwnProperty("prevText")) {
-                            item.prevText = Qt.binding(function() { return i18n("Previous Track") })
+                            item.prevText = Qt.binding(() => i18n("Previous Track"))
                         }
                         if (item.hasOwnProperty("nextText")) {
-                            item.nextText = Qt.binding(function() { return i18n("Next Track") })
+                            item.nextText = Qt.binding(() => i18n("Next Track"))
                         }
                         
                         // Callbacks
@@ -347,7 +351,7 @@ PlasmoidItem {
                         item.onPlayPause = root.togglePlayPause
                         item.onNext = root.next
                         item.onSeek = root.seek
-                        item.onLaunchApp = function() { root.launchApp(root.preferredPlayer) }
+                        item.onLaunchApp = () => { root.launchApp(root.preferredPlayer) }
                         item.getPlayerIcon = root.getPlayerIcon
                     }
                 }

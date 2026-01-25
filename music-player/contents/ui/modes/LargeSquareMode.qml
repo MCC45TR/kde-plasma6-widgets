@@ -4,11 +4,11 @@ import org.kde.kirigami as Kirigami
 import "../components" as Components
 import "../js/PlayerData.js" as PlayerData
 
-// LargeSquareMode.qml - Büyük kare mod UI
+// LargeSquareMode.qml - Büyük kare mod UI with lazy loading
 Item {
     id: largeSquareMode
     
-    // Properties from parent (not required, set by Loader)
+    // Properties from parent (set by Loader)
     property bool hasArt: false
     property string artUrl: ""
     property string title: ""
@@ -30,20 +30,21 @@ Item {
     property var onLaunchApp: function() {}
     property var getPlayerIcon: function(id) { return "multimedia-player" }
     
+    // Cached color
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.25)
     
-    // Album Cover (Top)
-    Item {
-        id: albumCoverContainer
+    // Album Cover (Top) - Lazy loaded
+    Loader {
+        id: albumCoverLoader
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: bottomControls.top
         anchors.margins: 10
         anchors.bottomMargin: 0
+        asynchronous: true
         
-        Components.AlbumCover {
-            anchors.fill: parent
+        sourceComponent: Components.AlbumCover {
             radius: 10
             
             artUrl: largeSquareMode.artUrl
@@ -81,7 +82,7 @@ Item {
             anchors.bottom: parent.bottom
             spacing: 5
             
-            // Title (Full Width)
+            // Title
             Text {
                 text: largeSquareMode.title
                 font.family: "Roboto Condensed"
@@ -106,47 +107,55 @@ Item {
                     Layout.alignment: Qt.AlignBottom
                     spacing: 2
                     
-                    // Seek Bar
-                    MouseArea {
-                        id: seekArea
+                    // Seek Bar - Only visible when there's a track
+                    Loader {
+                        id: seekBarLoader
                         Layout.fillWidth: true
-                        height: 16
-                        property bool dragging: false
-                        onPressed: dragging = true
-                        onReleased: {
-                            dragging = false
-                            largeSquareMode.onSeek((mouseX / width) * largeSquareMode.length)
-                        }
+                        Layout.preferredHeight: 16
+                        active: largeSquareMode.length > 0
                         
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: parent.width
-                            height: 6
-                            radius: 3
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
-                        }
-                        Rectangle {
-                            anchors.left: parent.left
-                            anchors.verticalCenter: parent.verticalCenter
-                            height: 6
-                            radius: 3
-                            color: Kirigami.Theme.highlightColor
-                            width: {
-                                if (largeSquareMode.length <= 0) return 0
-                                var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * largeSquareMode.length : largeSquareMode.currentPosition
-                                return Math.max(0, Math.min(parent.width, (pos / largeSquareMode.length) * parent.width))
+                        sourceComponent: MouseArea {
+                            id: seekArea
+                            property bool dragging: false
+                            
+                            onPressed: dragging = true
+                            onReleased: {
+                                dragging = false
+                                largeSquareMode.onSeek((mouseX / width) * largeSquareMode.length)
                             }
-                        }
-                        Rectangle {
-                            width: 14
-                            height: 14
-                            radius: 7
-                            color: Kirigami.Theme.highlightColor
-                            anchors.verticalCenter: parent.verticalCenter
-                            x: {
-                                if (largeSquareMode.length <= 0) return -width / 2
-                                var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * largeSquareMode.length : largeSquareMode.currentPosition
-                                return (parent.width * (pos / largeSquareMode.length)) - width / 2
+                            
+                            Rectangle {
+                                anchors.centerIn: parent
+                                width: parent.width
+                                height: 6
+                                radius: 3
+                                color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                            }
+                            
+                            Rectangle {
+                                anchors.left: parent.left
+                                anchors.verticalCenter: parent.verticalCenter
+                                height: 6
+                                radius: 3
+                                color: Kirigami.Theme.highlightColor
+                                width: {
+                                    if (largeSquareMode.length <= 0) return 0
+                                    var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * largeSquareMode.length : largeSquareMode.currentPosition
+                                    return Math.max(0, Math.min(parent.width, (pos / largeSquareMode.length) * parent.width))
+                                }
+                            }
+                            
+                            Rectangle {
+                                width: 14
+                                height: 14
+                                radius: 7
+                                color: Kirigami.Theme.highlightColor
+                                anchors.verticalCenter: parent.verticalCenter
+                                x: {
+                                    if (largeSquareMode.length <= 0) return -width / 2
+                                    var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * largeSquareMode.length : largeSquareMode.currentPosition
+                                    return (parent.width * (pos / largeSquareMode.length)) - width / 2
+                                }
                             }
                         }
                     }

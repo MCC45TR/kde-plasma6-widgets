@@ -4,7 +4,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
 import "../components" as Components
 
-// PanelMode.qml - Panel representation with enhanced customization
+// PanelMode.qml - Panel representation with enhanced customization and lazy loading
 Item {
     id: panelMode
     
@@ -39,12 +39,9 @@ Item {
     property var onExpand: function() {}
     property var onLaunchApp: function() {}
     
+    // Computed once
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
-    
-    // Layout Logic
-    // Left Mode (0): [Text] [Buttons] [Spacer]
-    // Right Mode (1): [Spacer] [Buttons] [Text]
-    // Center Mode (2): [Spacer] [Prev] [Text] [Next] [Spacer]
+    readonly property int scrollInterval: scrollingSpeed === 1 ? 300 : (scrollingSpeed === 2 ? 400 : 200)
     
     RowLayout {
         anchors.centerIn: parent
@@ -53,83 +50,72 @@ Item {
         layoutDirection: Qt.LeftToRight
         
         // --- RIGHT ALIGN SPACER (Right/Center Mode) ---
-        // Pushes content to right in Mode 1.
-        // Acts as flexible spring in Mode 2 (Center).
         Item {
             visible: panelMode.layoutMode === 1 || panelMode.layoutMode === 2
             Layout.fillWidth: true
         }
 
         // --- LEFT CONTROL GROUP (Visible in Right & Center Modes) ---
-        // Mode 1 (Right): Full Controls (Buttons on Left of Text)
-        // Mode 2 (Center): Prev Button
-        Item {
-            id: leftControls
-            visible: panelMode.showPanelControls && (panelMode.layoutMode === 1 || panelMode.layoutMode === 2)
+        Loader {
+            id: leftControlsLoader
+            active: panelMode.showPanelControls && (panelMode.layoutMode === 1 || panelMode.layoutMode === 2)
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredHeight: Math.min(panelMode.height, 36)
-            Layout.preferredWidth: panelMode.layoutMode === 2 ? height : implicitWidth
+            Layout.preferredWidth: item ? (panelMode.layoutMode === 2 ? Layout.preferredHeight : item.implicitWidth) : 0
             
-            // Full Controls (Right Mode)
-            Components.MediaControlRow {
-                anchors.centerIn: parent
-                visible: panelMode.layoutMode === 1
+            sourceComponent: Item {
+                implicitWidth: controlRow.implicitWidth
+                implicitHeight: controlRow.implicitHeight
                 
-                baseSize: Math.min(panelMode.height * 0.9, 36)
-                expandAmount: 20
-                iconScale: 0.6
-                bgColor: panelMode.controlButtonBgColor
-                
-                isPlaying: panelMode.isPlaying
-                onPrevious: panelMode.onPrevious
-                onPlayPause: panelMode.onPlayPause
-                onNext: panelMode.onNext
-            }
-            
-            // Prev Button (Center Mode)
-            Rectangle {
-                visible: panelMode.layoutMode === 2
-                anchors.centerIn: parent
-                width: Math.min(panelMode.height * 0.9, 36)
-                height: width
-                radius: 5
-                color: panelMode.controlButtonBgColor
-                
-                Kirigami.Icon {
+                // Full Controls (Right Mode)
+                Components.MediaControlRow {
+                    id: controlRow
                     anchors.centerIn: parent
-                    source: "media-skip-backward"
-                    width: parent.width * 0.6
-                    height: width
-                    color: Kirigami.Theme.textColor
+                    visible: panelMode.layoutMode === 1
+                    
+                    baseSize: Math.min(panelMode.height * 0.9, 36)
+                    expandAmount: 20
+                    iconScale: 0.6
+                    bgColor: panelMode.controlButtonBgColor
+                    
+                    isPlaying: panelMode.isPlaying
+                    onPrevious: panelMode.onPrevious
+                    onPlayPause: panelMode.onPlayPause
+                    onNext: panelMode.onNext
                 }
                 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: panelMode.onPrevious()
+                // Prev Button (Center Mode)
+                Rectangle {
+                    visible: panelMode.layoutMode === 2
+                    anchors.centerIn: parent
+                    width: Math.min(panelMode.height * 0.9, 36)
+                    height: width
+                    radius: 5
+                    color: panelMode.controlButtonBgColor
+                    
+                    Kirigami.Icon {
+                        anchors.centerIn: parent
+                        source: "media-skip-backward"
+                        width: parent.width * 0.6
+                        height: width
+                        color: Kirigami.Theme.textColor
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: panelMode.onPrevious()
+                    }
                 }
             }
         }
 
         // --- TEXT GROUP ---
         Item {
-            // Wrapper to hold ColumnLayout and overlapping MouseArea
-            Layout.fillWidth: false 
-            
-            readonly property real maxTextWidth: {
-                var spacing = panelMode.layoutMode === 2 ? 5 : 10
-                var controlsW = (leftControls.visible ? leftControls.width + spacing : 0) + 
-                                (rightControls.visible ? rightControls.width + spacing : 0) +
-                                20 // Extra safety for margins
-                
-                // Limit text width so Total Widget Width ~= maxWidth
-                return Math.max(50, panelMode.maxWidth - controlsW)
-            }
-            
-            Layout.maximumWidth: maxTextWidth
-            Layout.preferredWidth: panelMode.layoutMode === 2 ? -1 : Math.min(textColumn.implicitWidth, maxTextWidth)
+            id: textContainer
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
+            clip: true
             
-            implicitWidth: textColumn.implicitWidth
             implicitHeight: textColumn.implicitHeight
             
             ColumnLayout {
@@ -138,7 +124,7 @@ Item {
                 width: parent.width
                 spacing: 0
                 
-                // Font Logic
+                // Font Logic - Cached
                 readonly property int calculatedPixelSize: panelMode.autoFontSize 
                     ? Math.max(10, Math.min(panelMode.height * 0.5, 16)) 
                     : panelMode.manualFontSize
@@ -147,102 +133,204 @@ Item {
                     ? Math.max(9, Math.min(panelMode.height * 0.4, 13))
                     : Math.max(9, panelMode.manualFontSize - 2)
                 
-                // Text Alignment
+                // Text Alignment - Cached
                 readonly property int textAlign: {
                     if (panelMode.layoutMode === 1) return Text.AlignRight
                     if (panelMode.layoutMode === 2) return Text.AlignHCenter
                     return Text.AlignLeft
                 }
                 
+                // Title Text with optimized scrolling
                 Text {
                     id: titleText
-                    text: _scrolledText
+                    text: _displayText
                     color: Kirigami.Theme.textColor
                     font.family: "Roboto Condensed"
                     font.bold: true
                     font.pixelSize: parent.calculatedPixelSize
-                    elide: Text.ElideRight
+                    elide: _shouldScroll ? Text.ElideNone : Text.ElideRight
                     Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter
                     horizontalAlignment: parent.textAlign
+                    verticalAlignment: Text.AlignVCenter
                     visible: panelMode.showTitle
                     
-                    // Scrolling Logic
+                    // Scrolling Logic - Optimized
                     property string fullText: panelMode.title || i18n("No Media")
-                    property string _scrolledText: fullText
+                    property string _displayText: fullText
                     property bool _shouldScroll: false
+                    property int _scrollIndex: 0
+                    property string _scrollBuffer: ""
                     
-                    function checkScroll() {
-                        if (!panelMode.scrollingText) {
-                            _shouldScroll = false
-                            _scrolledText = fullText
-                            return
-                        }
-                        if (truncated && !_shouldScroll) {
+                    // Lazy text measurement - only measure when needed
+                    readonly property real measuredWidth: _textMetrics.advanceWidth
+                    readonly property bool textOverflows: panelMode.scrollingText && measuredWidth > textContainer.width && textContainer.width > 0
+                    
+                    TextMetrics {
+                        id: _textMetrics
+                        font: titleText.font
+                        text: titleText.fullText
+                    }
+                    
+                    function startScrolling() {
+                        if (!_shouldScroll && textOverflows) {
                             _shouldScroll = true
-                            _scrolledText = fullText
+                            _scrollIndex = 0
+                            _scrollBuffer = fullText + "   •   "
+                            _displayText = _scrollBuffer
                         }
                     }
                     
-                    onTruncatedChanged: checkScroll()
-                    onFullTextChanged: { _shouldScroll = false; _scrolledText = fullText; Qt.callLater(checkScroll) }
+                    function stopScrolling() {
+                        _shouldScroll = false
+                        _scrollIndex = 0
+                        _displayText = fullText
+                    }
+                    
+                    function updateScroll() {
+                        if (!_shouldScroll) return
+                        _scrollIndex = (_scrollIndex + 1) % _scrollBuffer.length
+                        _displayText = _scrollBuffer.substring(_scrollIndex) + _scrollBuffer.substring(0, _scrollIndex)
+                    }
+                    
+                    onTextOverflowsChanged: {
+                        if (textOverflows) {
+                            Qt.callLater(startScrolling)
+                        } else {
+                            stopScrolling()
+                        }
+                    }
+                    
+                    onFullTextChanged: {
+                        stopScrolling()
+                        Qt.callLater(() => { if (textOverflows) startScrolling() })
+                    }
                     
                     Connections {
                         target: panelMode
-                        function onScrollingTextChanged() { titleText.checkScroll() }
+                        function onScrollingTextChanged() { 
+                            if (panelMode.scrollingText) {
+                                Qt.callLater(() => { if (titleText.textOverflows) titleText.startScrolling() })
+                            } else {
+                                titleText.stopScrolling()
+                            }
+                        }
+                    }
+                    
+                    Connections {
+                        target: textContainer
+                        function onWidthChanged() {
+                            if (titleText.textOverflows && !titleText._shouldScroll) {
+                                Qt.callLater(titleText.startScrolling)
+                            } else if (!titleText.textOverflows && titleText._shouldScroll) {
+                                titleText.stopScrolling()
+                            }
+                        }
                     }
                     
                     Timer {
-                        interval: panelMode.scrollingSpeed === 1 ? 300 : (panelMode.scrollingSpeed === 2 ? 400 : 200)
-                        running: parent._shouldScroll && panelMode.scrollingText
+                        interval: panelMode.scrollInterval
+                        running: titleText._shouldScroll && panelMode.scrollingText
                         repeat: true
-                        onTriggered: parent._scrolledText = parent._scrolledText.substring(1) + parent._scrolledText.charAt(0)
+                        onTriggered: titleText.updateScroll()
                     }
                 }
                 
+                // Artist Text with optimized scrolling
                 Text {
                     id: artistText
-                    text: _scrolledText
+                    text: _displayText
                     color: Kirigami.Theme.textColor
                     opacity: 0.8
                     font.family: "Roboto Condensed"
                     font.pixelSize: parent.artistPixelSize
-                    elide: Text.ElideRight
+                    elide: _shouldScroll ? Text.ElideNone : Text.ElideRight
                     Layout.fillWidth: true
                     horizontalAlignment: parent.textAlign
-                    visible: panelMode.showArtist && panelMode.artist !== ""
-                    Layout.preferredHeight: visible ? implicitHeight : 0 // Ensure 0 height when hidden
-                    Layout.topMargin: visible ? 0 : 0 // Remove margin if hidden
+                    verticalAlignment: Text.AlignVCenter
+                    visible: panelMode.showArtist && panelMode.artist && panelMode.artist.trim() !== ""
+                    Layout.preferredHeight: visible ? implicitHeight : 0
+                    Layout.minimumHeight: 0
+                    Layout.maximumHeight: visible ? implicitHeight : 0
                     
-                    // Scrolling Logic
-                    property string fullText: panelMode.artist || i18n("Unknown Artist")
-                    property string _scrolledText: fullText
+                    // Scrolling Logic - Optimized
+                    property string fullText: panelMode.artist || ""
+                    property string _displayText: fullText
                     property bool _shouldScroll: false
+                    property int _scrollIndex: 0
+                    property string _scrollBuffer: ""
                     
-                    function checkScroll() {
-                         if (!panelMode.scrollingText) {
-                            _shouldScroll = false
-                            _scrolledText = fullText
-                            return
-                        }
-                        if (truncated && !_shouldScroll) {
+                    // Lazy text measurement
+                    readonly property real measuredWidth: _artistMetrics.advanceWidth
+                    readonly property bool textOverflows: panelMode.scrollingText && measuredWidth > textContainer.width && textContainer.width > 0
+                    
+                    TextMetrics {
+                        id: _artistMetrics
+                        font: artistText.font
+                        text: artistText.fullText
+                    }
+                    
+                    function startScrolling() {
+                        if (!_shouldScroll && textOverflows) {
                             _shouldScroll = true
-                            _scrolledText = fullText
+                            _scrollIndex = 0
+                            _scrollBuffer = fullText + "   •   "
+                            _displayText = _scrollBuffer
                         }
                     }
                     
-                    onTruncatedChanged: checkScroll()
-                    onFullTextChanged: { _shouldScroll = false; _scrolledText = fullText; Qt.callLater(checkScroll) }
-                     
+                    function stopScrolling() {
+                        _shouldScroll = false
+                        _scrollIndex = 0
+                        _displayText = fullText
+                    }
+                    
+                    function updateScroll() {
+                        if (!_shouldScroll) return
+                        _scrollIndex = (_scrollIndex + 1) % _scrollBuffer.length
+                        _displayText = _scrollBuffer.substring(_scrollIndex) + _scrollBuffer.substring(0, _scrollIndex)
+                    }
+                    
+                    onTextOverflowsChanged: {
+                        if (textOverflows) {
+                            Qt.callLater(startScrolling)
+                        } else {
+                            stopScrolling()
+                        }
+                    }
+                    
+                    onFullTextChanged: {
+                        stopScrolling()
+                        Qt.callLater(() => { if (textOverflows) startScrolling() })
+                    }
+                    
                     Connections {
                         target: panelMode
-                        function onScrollingTextChanged() { artistText.checkScroll() }
+                        function onScrollingTextChanged() { 
+                            if (panelMode.scrollingText) {
+                                Qt.callLater(() => { if (artistText.textOverflows) artistText.startScrolling() })
+                            } else {
+                                artistText.stopScrolling()
+                            }
+                        }
+                    }
+                    
+                    Connections {
+                        target: textContainer
+                        function onWidthChanged() {
+                            if (artistText.textOverflows && !artistText._shouldScroll) {
+                                Qt.callLater(artistText.startScrolling)
+                            } else if (!artistText.textOverflows && artistText._shouldScroll) {
+                                artistText.stopScrolling()
+                            }
+                        }
                     }
                     
                     Timer {
-                        interval: panelMode.scrollingSpeed === 1 ? 300 : (panelMode.scrollingSpeed === 2 ? 400 : 200)
-                        running: parent._shouldScroll && panelMode.scrollingText
+                        interval: panelMode.scrollInterval
+                        running: artistText._shouldScroll && panelMode.scrollingText && artistText.visible
                         repeat: true
-                        onTriggered: parent._scrolledText = parent._scrolledText.substring(1) + parent._scrolledText.charAt(0)
+                        onTriggered: artistText.updateScroll()
                     }
                 }
             }
@@ -263,58 +351,60 @@ Item {
         }
         
         // --- RIGHT CONTROL GROUP (Visible in Left & Center Modes) ---
-        // Mode 0 (Left): Full Controls (Buttons on Right of Text)
-        // Mode 2 (Center): Next Button
-        Item {
-            id: rightControls
-            visible: panelMode.showPanelControls && (panelMode.layoutMode === 0 || panelMode.layoutMode === 2)
+        Loader {
+            id: rightControlsLoader
+            active: panelMode.showPanelControls && (panelMode.layoutMode === 0 || panelMode.layoutMode === 2)
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredHeight: Math.min(panelMode.height, 36)
-            Layout.preferredWidth: panelMode.layoutMode === 2 ? height : implicitWidth
+            Layout.preferredWidth: item ? (panelMode.layoutMode === 2 ? Layout.preferredHeight : item.implicitWidth) : 0
             
-            // Full Controls (Left Mode - shows on Right)
-            Components.MediaControlRow {
-                anchors.centerIn: parent
-                visible: panelMode.layoutMode === 0
+            sourceComponent: Item {
+                implicitWidth: rightControlRow.implicitWidth
+                implicitHeight: rightControlRow.implicitHeight
                 
-                baseSize: Math.min(panelMode.height * 0.9, 36)
-                expandAmount: 20
-                iconScale: 0.6
-                bgColor: panelMode.controlButtonBgColor
-                
-                isPlaying: panelMode.isPlaying
-                onPrevious: panelMode.onPrevious
-                onPlayPause: panelMode.onPlayPause
-                onNext: panelMode.onNext
-            }
-            
-            // Next Button (Center Mode)
-            Rectangle {
-                visible: panelMode.layoutMode === 2
-                anchors.centerIn: parent
-                width: Math.min(panelMode.height * 0.9, 36)
-                height: width
-                radius: 5
-                color: panelMode.controlButtonBgColor
-                
-                Kirigami.Icon {
+                // Full Controls (Left Mode - shows on Right)
+                Components.MediaControlRow {
+                    id: rightControlRow
                     anchors.centerIn: parent
-                    source: "media-skip-forward"
-                    width: parent.width * 0.6
-                    height: width
-                    color: Kirigami.Theme.textColor
+                    visible: panelMode.layoutMode === 0
+                    
+                    baseSize: Math.min(panelMode.height * 0.9, 36)
+                    expandAmount: 20
+                    iconScale: 0.6
+                    bgColor: panelMode.controlButtonBgColor
+                    
+                    isPlaying: panelMode.isPlaying
+                    onPrevious: panelMode.onPrevious
+                    onPlayPause: panelMode.onPlayPause
+                    onNext: panelMode.onNext
                 }
                 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: panelMode.onNext()
+                // Next Button (Center Mode)
+                Rectangle {
+                    visible: panelMode.layoutMode === 2
+                    anchors.centerIn: parent
+                    width: Math.min(panelMode.height * 0.9, 36)
+                    height: width
+                    radius: 5
+                    color: panelMode.controlButtonBgColor
+                    
+                    Kirigami.Icon {
+                        anchors.centerIn: parent
+                        source: "media-skip-forward"
+                        width: parent.width * 0.6
+                        height: width
+                        color: Kirigami.Theme.textColor
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: panelMode.onNext()
+                    }
                 }
             }
         }
 
         // --- LEFT ALIGN SPACER (Left/Center Mode) ---
-        // Pushes content to left in Mode 0.
-        // Acts as flexible spring in Mode 2 (Center).
         Item {
             visible: panelMode.layoutMode === 0 || panelMode.layoutMode === 2
             Layout.fillWidth: true

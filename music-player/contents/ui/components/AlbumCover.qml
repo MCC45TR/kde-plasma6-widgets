@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import Qt5Compat.GraphicalEffects
 
-// AlbumCover.qml - Albüm kapağı bileşeni
+// AlbumCover.qml - Albüm kapağı bileşeni with lazy loading
 Rectangle {
     id: albumCover
     
@@ -43,27 +43,36 @@ Rectangle {
         visible: false
     }
     
-    // Album Art Image
-    Image {
+    // Album Art Image - Lazy loaded when artUrl is available
+    Loader {
+        id: artImageLoader
         anchors.fill: parent
-        source: albumCover.artUrl
-        fillMode: Image.PreserveAspectCrop
-        visible: albumCover.hasArt
+        active: albumCover.hasArt && albumCover.artUrl !== ""
+        asynchronous: true
+        
+        sourceComponent: Image {
+            source: albumCover.artUrl
+            fillMode: Image.PreserveAspectCrop
+            cache: true
+            asynchronous: true
+        }
     }
     
-    // App Icon Badge
-    AppBadge {
-        id: appBadge
+    // App Badge - Lazy loaded when visible
+    Loader {
+        id: appBadgeLoader
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.leftMargin: 5
         anchors.topMargin: 5
+        active: albumCover.showPlayerBadge && (albumCover.playerIdentity !== "" || albumCover.hasPlayer)
         
-        pillMode: albumCover.pillMode
-        iconSize: pillMode ? 16 : Math.max(16, parent.width * 0.09)
-        playerIdentity: albumCover.playerIdentity
-        iconSource: albumCover.playerIcon
-        visible: albumCover.showPlayerBadge && (albumCover.playerIdentity !== "" || albumCover.hasPlayer)
+        sourceComponent: AppBadge {
+            pillMode: albumCover.pillMode
+            iconSize: pillMode ? 16 : Math.max(16, albumCover.width * 0.09)
+            playerIdentity: albumCover.playerIdentity
+            iconSource: albumCover.playerIcon
+        }
     }
     
     // Click to launch app when no media
@@ -74,85 +83,105 @@ Rectangle {
         onClicked: albumCover.onLaunchApp()
     }
     
-    // Empty/No Media Placeholder
-    Item {
+    // Empty/No Media Placeholder - Lazy loaded when no art
+    Loader {
+        id: placeholderLoader
         anchors.fill: parent
-        visible: !albumCover.hasArt
+        active: !albumCover.hasArt
         
-        ColumnLayout {
-            anchors.centerIn: parent
-            spacing: 10
-            width: parent.width * 0.8
-            
-            // Default Placeholder (No Player)
-            Image {
-                Layout.preferredWidth: parent.width * 0.5
-                Layout.preferredHeight: Layout.preferredWidth
-                Layout.alignment: Qt.AlignHCenter
-                source: "../../images/album.png"
-                fillMode: Image.PreserveAspectFit
-                opacity: 0.8
-                visible: !albumCover.hasPlayer
-            }
-
-            // Player Icon (Player Active, No Art)
-            Kirigami.Icon {
-                Layout.preferredWidth: parent.width * 0.5
-                Layout.preferredHeight: Layout.preferredWidth
-                Layout.alignment: Qt.AlignHCenter
-                source: albumCover.playerIcon
-                visible: albumCover.hasPlayer
+        sourceComponent: Item {
+            ColumnLayout {
+                anchors.centerIn: parent
+                spacing: 10
+                width: parent.width * 0.8
                 
-                // Fade out when play/pause icon is visible to prevent overlap
-                opacity: albumCover.showCenterPlayIcon ? 0 : 1
-                Behavior on opacity { NumberAnimation { duration: 100 } }
-            }
-            
-            Text {
-                text: albumCover.noMediaText
-                font.family: "Roboto Condensed"
-                font.bold: true
-                font.pixelSize: 16
-                color: Kirigami.Theme.textColor
-                Layout.alignment: Qt.AlignHCenter
-                visible: albumCover.showNoMediaText && !albumCover.hasPlayer
+                // Default Placeholder (No Player)
+                Loader {
+                    Layout.preferredWidth: parent.width * 0.5
+                    Layout.preferredHeight: Layout.preferredWidth
+                    Layout.alignment: Qt.AlignHCenter
+                    active: !albumCover.hasPlayer
+                    
+                    sourceComponent: Image {
+                        source: "../../images/album.png"
+                        fillMode: Image.PreserveAspectFit
+                        opacity: 0.8
+                        asynchronous: true
+                    }
+                }
+
+                // Player Icon (Player Active, No Art)
+                Loader {
+                    Layout.preferredWidth: parent.width * 0.5
+                    Layout.preferredHeight: Layout.preferredWidth
+                    Layout.alignment: Qt.AlignHCenter
+                    active: albumCover.hasPlayer
+                    
+                    sourceComponent: Kirigami.Icon {
+                        source: albumCover.playerIcon
+                        opacity: albumCover.showCenterPlayIcon ? 0 : 1
+                        Behavior on opacity { NumberAnimation { duration: 100 } }
+                    }
+                }
+                
+                Text {
+                    text: albumCover.noMediaText
+                    font.family: "Roboto Condensed"
+                    font.bold: true
+                    font.pixelSize: 16
+                    color: Kirigami.Theme.textColor
+                    Layout.alignment: Qt.AlignHCenter
+                    visible: albumCover.showNoMediaText && !albumCover.hasPlayer
+                }
             }
         }
     }
     
-    // Dim Overlay
-    Rectangle {
+    // Dim Overlay - Lazy loaded when needed
+    Loader {
+        id: dimOverlayLoader
         anchors.fill: parent
-        color: "black"
-        opacity: albumCover.showDimOverlay ? 0.4 : 0.1
-        Behavior on opacity { NumberAnimation { duration: 200 } }
-        visible: albumCover.hasArt || albumCover.hasPlayer
+        active: albumCover.hasArt || albumCover.hasPlayer
+        
+        sourceComponent: Rectangle {
+            color: "black"
+            opacity: albumCover.showDimOverlay ? 0.4 : 0.1
+            Behavior on opacity { NumberAnimation { duration: 200 } }
+        }
     }
     
-    // Bottom Gradient
-    Rectangle {
+    // Bottom Gradient - Lazy loaded when needed
+    Loader {
+        id: gradientLoader
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         height: parent.height / 2
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "transparent" }
-            GradientStop { position: 1.0; color: "black" }
+        active: albumCover.hasArt && albumCover.showGradient
+        
+        sourceComponent: Rectangle {
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "transparent" }
+                GradientStop { position: 1.0; color: "black" }
+            }
+            opacity: albumCover.showGradient ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: 300 } }
         }
-        visible: albumCover.hasArt && albumCover.showGradient
-        opacity: albumCover.showGradient ? 1 : 0
-        Behavior on opacity { NumberAnimation { duration: 300 } }
     }
     
-    // Center Play Icon
-    Kirigami.Icon {
+    // Center Play Icon - Lazy loaded when needed
+    Loader {
+        id: playIconLoader
         anchors.centerIn: parent
-        width: 48
-        height: 48
-        source: albumCover.isPlaying ? "media-playback-pause" : "media-playback-start"
-        color: "white"
-        visible: albumCover.showCenterPlayIcon && (albumCover.hasArt || albumCover.hasPlayer)
-        opacity: visible ? 1 : 0
-        Behavior on opacity { NumberAnimation { duration: 200 } }
+        active: albumCover.showCenterPlayIcon && (albumCover.hasArt || albumCover.hasPlayer)
+        
+        sourceComponent: Kirigami.Icon {
+            width: 48
+            height: 48
+            source: albumCover.isPlaying ? "media-playback-pause" : "media-playback-start"
+            color: "white"
+            opacity: 1
+            Behavior on opacity { NumberAnimation { duration: 200 } }
+        }
     }
 }

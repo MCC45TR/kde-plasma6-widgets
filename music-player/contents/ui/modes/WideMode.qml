@@ -4,11 +4,11 @@ import org.kde.kirigami as Kirigami
 import "../components" as Components
 import "../js/PlayerData.js" as PlayerData
 
-// WideMode.qml - Geniş mod UI
+// WideMode.qml - Geniş mod UI with lazy loading
 Item {
     id: wideMode
     
-    // Properties from parent (not required, set by Loader)
+    // Properties from parent (set by Loader)
     property bool hasArt: false
     property string artUrl: ""
     property string title: ""
@@ -30,19 +30,20 @@ Item {
     property var onLaunchApp: function() {}
     property var getPlayerIcon: function(id) { return "multimedia-player" }
     
+    // Cached color
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.25)
     
-    // Album Cover (Left Side)
-    Item {
-        id: albumCoverContainer
+    // Album Cover (Left Side) - Lazy loaded
+    Loader {
+        id: albumCoverLoader
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.margins: 10
         width: height // Square
+        asynchronous: true
         
-        Components.AlbumCover {
-            anchors.fill: parent
+        sourceComponent: Components.AlbumCover {
             radius: 10
             
             artUrl: wideMode.artUrl
@@ -67,7 +68,7 @@ Item {
     // Right Side Controls
     Item {
         id: controlsContainer
-        anchors.left: albumCoverContainer.right
+        anchors.left: albumCoverLoader.right
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -134,77 +135,83 @@ Item {
             Item { Layout.fillHeight: true }
         }
         
-        // Progress Section (Middle)
-        Item {
+        // Progress Section (Middle) - Lazy loaded
+        Loader {
             id: progressItem
             anchors.bottom: controlsRow.top
             anchors.bottomMargin: 0
             anchors.left: parent.left
             anchors.right: parent.right
             height: 30
-            visible: wideMode.length > 0
+            active: wideMode.length > 0
             
-            MouseArea {
-                id: seekArea
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: parent.top
-                height: 20
-                property bool dragging: false
-                onPressed: dragging = true
-                onReleased: {
-                    dragging = false
-                    wideMode.onSeek((mouseX / width) * wideMode.length)
+            sourceComponent: Item {
+                MouseArea {
+                    id: seekArea
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    height: 20
+                    property bool dragging: false
+                    
+                    onPressed: dragging = true
+                    onReleased: {
+                        dragging = false
+                        wideMode.onSeek((mouseX / width) * wideMode.length)
+                    }
+                    
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width
+                        height: 6
+                        radius: 3
+                        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                    }
+                    
+                    Rectangle {
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        height: 6
+                        radius: 3
+                        color: Kirigami.Theme.highlightColor
+                        width: {
+                            if (wideMode.length <= 0) return 0
+                            var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * wideMode.length : wideMode.currentPosition
+                            return Math.max(0, Math.min(parent.width, (pos / wideMode.length) * parent.width))
+                        }
+                    }
+                    
+                    Rectangle {
+                        width: 16
+                        height: 16
+                        radius: 8
+                        color: Kirigami.Theme.highlightColor
+                        anchors.verticalCenter: parent.verticalCenter
+                        x: {
+                            if (wideMode.length <= 0) return -width / 2
+                            var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * wideMode.length : wideMode.currentPosition
+                            return (parent.width * (pos / wideMode.length)) - width / 2
+                        }
+                    }
                 }
                 
-                Rectangle {
-                    anchors.centerIn: parent
-                    width: parent.width
-                    height: 6
-                    radius: 3
-                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
-                }
-                Rectangle {
+                Text {
                     anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: 6
-                    radius: 3
-                    color: Kirigami.Theme.highlightColor
-                    width: {
-                        if (wideMode.length <= 0) return 0
-                        var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * wideMode.length : wideMode.currentPosition
-                        return Math.max(0, Math.min(parent.width, (pos / wideMode.length) * parent.width))
-                    }
+                    anchors.top: seekArea.bottom
+                    text: PlayerData.formatTime(wideMode.currentPosition)
+                    font.pixelSize: 11
+                    color: Kirigami.Theme.textColor
+                    opacity: 0.7
                 }
-                Rectangle {
-                    width: 16
-                    height: 16
-                    radius: 8
-                    color: Kirigami.Theme.highlightColor
-                    anchors.verticalCenter: parent.verticalCenter
-                    x: {
-                        if (wideMode.length <= 0) return -width / 2
-                        var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * wideMode.length : wideMode.currentPosition
-                        return (parent.width * (pos / wideMode.length)) - width / 2
-                    }
+                
+                Text {
+                    anchors.right: parent.right
+                    anchors.top: seekArea.bottom
+                    text: PlayerData.formatTime(wideMode.length)
+                    font.pixelSize: 11
+                    color: Kirigami.Theme.textColor
+                    opacity: 0.7
                 }
-            }
-            
-            Text {
-                anchors.left: parent.left
-                anchors.top: seekArea.bottom
-                text: PlayerData.formatTime(wideMode.currentPosition)
-                font.pixelSize: 11
-                color: Kirigami.Theme.textColor
-                opacity: 0.7
-            }
-            Text {
-                anchors.right: parent.right
-                anchors.top: seekArea.bottom
-                text: PlayerData.formatTime(wideMode.length)
-                font.pixelSize: 11
-                color: Kirigami.Theme.textColor
-                opacity: 0.7
             }
         }
         

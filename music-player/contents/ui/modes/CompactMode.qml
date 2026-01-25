@@ -4,11 +4,11 @@ import org.kde.kirigami as Kirigami
 import "../components" as Components
 import "../js/PlayerData.js" as PlayerData
 
-// CompactMode.qml - Kompakt mod UI
+// CompactMode.qml - Kompakt mod UI with lazy loading
 Item {
     id: compactMode
     
-    // Properties from parent (not required, set by Loader)
+    // Properties from parent (set by Loader)
     property bool hasArt: false
     property string artUrl: ""
     property string title: ""
@@ -41,6 +41,7 @@ Item {
         id: sideTexts
         anchors.fill: parent
         
+        // Prev text container - Lazy loaded when hovered
         Item {
             id: prevTextContainer
             anchors.left: parent.left
@@ -59,6 +60,7 @@ Item {
             }
         }
         
+        // Next text container
         Item {
             id: nextTextContainer
             anchors.right: parent.right
@@ -94,100 +96,112 @@ Item {
         
         z: 10
         
-        Components.AlbumCover {
+        // Album Cover - Lazy loaded
+        Loader {
+            id: albumCoverLoader
             anchors.fill: parent
-            radius: 20
+            asynchronous: true
             
-            artUrl: compactMode.artUrl
-            hasArt: compactMode.hasArt
-            noMediaText: compactMode.noMediaText
-            playerIdentity: compactMode.playerIdentity
-            playerIcon: compactMode.getPlayerIcon(compactMode.playerIdentity)
-            hasPlayer: compactMode.hasPlayer
-            preferredPlayer: compactMode.preferredPlayer
-            onLaunchApp: compactMode.onLaunchApp
-            showPlayerBadge: compactMode.showPlayerBadge
-            
-            pillMode: false
-            showNoMediaText: true
-            showDimOverlay: compactMode.centerHovered && compactMode.isPlaying
-            showGradient: true
-            showCenterPlayIcon: (compactMode.centerHovered || !compactMode.isPlaying)
-            isPlaying: compactMode.isPlaying
+            sourceComponent: Components.AlbumCover {
+                radius: 20
+                
+                artUrl: compactMode.artUrl
+                hasArt: compactMode.hasArt
+                noMediaText: compactMode.noMediaText
+                playerIdentity: compactMode.playerIdentity
+                playerIcon: compactMode.getPlayerIcon(compactMode.playerIdentity)
+                hasPlayer: compactMode.hasPlayer
+                preferredPlayer: compactMode.preferredPlayer
+                onLaunchApp: compactMode.onLaunchApp
+                showPlayerBadge: compactMode.showPlayerBadge
+                
+                pillMode: false
+                showNoMediaText: true
+                showDimOverlay: compactMode.centerHovered && compactMode.isPlaying
+                showGradient: true
+                showCenterPlayIcon: (compactMode.centerHovered || !compactMode.isPlaying)
+                isPlaying: compactMode.isPlaying
+            }
         }
         
-        // Bottom Controls
-        Item {
-            id: bottomControls
+        // Bottom Controls - Lazy loaded when track is available
+        Loader {
+            id: bottomControlsLoader
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: 15
             height: 50
-            visible: compactMode.length > 0
+            active: compactMode.length > 0
             
-            // Seek Bar
-            MouseArea {
-                id: seekArea
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: timeRow.top
-                anchors.bottomMargin: 8
-                height: 10
-                property bool dragging: false
-                onPressed: dragging = true
-                onReleased: {
-                    dragging = false
-                    compactMode.onSeek((mouseX / width) * compactMode.length)
-                }
-                
-                Rectangle {
-                    anchors.centerIn: parent
-                    width: parent.width
-                    height: 4
-                    radius: 2
-                    color: "#4dffffff"
-                }
-                Rectangle {
-                    height: 4
-                    radius: 2
-                    color: Kirigami.Theme.highlightColor
+            sourceComponent: Item {
+                // Seek Bar
+                MouseArea {
+                    id: seekArea
                     anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: {
-                        if (compactMode.length <= 0) return 0
-                        var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * compactMode.length : compactMode.currentPosition
-                        return Math.max(0, Math.min(parent.width, (pos / compactMode.length) * parent.width))
+                    anchors.right: parent.right
+                    anchors.bottom: timeRow.top
+                    anchors.bottomMargin: 8
+                    height: 10
+                    property bool dragging: false
+                    
+                    onPressed: dragging = true
+                    onReleased: {
+                        dragging = false
+                        compactMode.onSeek((mouseX / width) * compactMode.length)
+                    }
+                    
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width
+                        height: 4
+                        radius: 2
+                        color: "#4dffffff"
+                    }
+                    
+                    Rectangle {
+                        height: 4
+                        radius: 2
+                        color: Kirigami.Theme.highlightColor
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: {
+                            if (compactMode.length <= 0) return 0
+                            var pos = seekArea.dragging ? (seekArea.mouseX / seekArea.width) * compactMode.length : compactMode.currentPosition
+                            return Math.max(0, Math.min(parent.width, (pos / compactMode.length) * parent.width))
+                        }
                     }
                 }
-            }
-            
-            Item {
-                id: timeRow
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: 20
                 
-                Text {
-                    text: PlayerData.formatTime(compactMode.currentPosition)
-                    color: "white"
-                    font.bold: true
+                Item {
+                    id: timeRow
                     anchors.left: parent.left
-                }
-                Text {
-                    text: PlayerData.formatTime(compactMode.length)
-                    color: "white"
-                    font.bold: true
                     anchors.right: parent.right
-                }
-                Text {
-                    text: compactMode.title
-                    color: "white"
-                    elide: Text.ElideRight
-                    anchors.centerIn: parent
-                    width: parent.width - 80
-                    horizontalAlignment: Text.AlignHCenter
+                    anchors.bottom: parent.bottom
+                    height: 20
+                    
+                    Text {
+                        text: PlayerData.formatTime(compactMode.currentPosition)
+                        color: "white"
+                        font.bold: true
+                        anchors.left: parent.left
+                    }
+                    
+                    Text {
+                        text: PlayerData.formatTime(compactMode.length)
+                        color: "white"
+                        font.bold: true
+                        anchors.right: parent.right
+                    }
+                    
+                    Text {
+                        text: compactMode.title
+                        color: "white"
+                        elide: Text.ElideRight
+                        anchors.centerIn: parent
+                        width: parent.width - 80
+                        horizontalAlignment: Text.AlignHCenter
+                    }
                 }
             }
         }
