@@ -95,12 +95,12 @@ Rectangle {
                 spacing: 10
                 width: parent.width * 0.8
                 
-                // Default Placeholder (No Player)
+                // Default Placeholder (Always show if no art)
                 Loader {
                     Layout.preferredWidth: parent.width * 0.5
                     Layout.preferredHeight: Layout.preferredWidth
                     Layout.alignment: Qt.AlignHCenter
-                    active: !albumCover.hasPlayer
+                    active: true
                     
                     sourceComponent: Image {
                         source: "../../images/album.png"
@@ -110,12 +110,12 @@ Rectangle {
                     }
                 }
 
-                // Player Icon (Player Active, No Art)
+                // Player Icon (Disabled in center, we used album.png instead)
                 Loader {
                     Layout.preferredWidth: parent.width * 0.5
                     Layout.preferredHeight: Layout.preferredWidth
                     Layout.alignment: Qt.AlignHCenter
-                    active: albumCover.hasPlayer
+                    active: false
                     
                     sourceComponent: Kirigami.Icon {
                         source: albumCover.playerIcon

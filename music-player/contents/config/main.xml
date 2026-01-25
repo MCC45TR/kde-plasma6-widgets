@@ -59,6 +59,10 @@
       <default>0</default>
       <label>Panel Layout Mode (0: Left, 1: Right, 2: Center)</label>
     </entry>
+    <entry name="panelDynamicWidth" type="Bool">
+      <default>true</default>
+      <label>Dynamic Width based on content</label>
+    </entry>
     <entry name="popupLayoutMode" type="Int">
       <default>0</default>
       <label>Popup Layout Mode (0: Auto/Large, 1: Wide)</label>

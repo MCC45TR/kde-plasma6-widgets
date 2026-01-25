@@ -28,6 +28,7 @@ Item {
     property int manualFontSize: 12
     property int layoutMode: 0 // 0: Left, 1: Right, 2: Center
     property bool scrollingText: true
+    property bool dynamicWidth: true
     property int maxWidth: 350
     property int scrollingSpeed: 0 // 0: Fast, 1: Medium, 2: Slow
     
@@ -43,17 +44,58 @@ Item {
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
     readonly property int scrollInterval: scrollingSpeed === 1 ? 300 : (scrollingSpeed === 2 ? 400 : 200)
     
+    // Dynamic Width Calculation
+    readonly property int controlsWidth: {
+        if (!showPanelControls) return 0
+        var btnSize = Math.min(panelMode.height * 0.9, 36)
+        if (layoutMode === 2) return btnSize * 2 + 20 // Two single buttons + spacing
+        return btnSize * 3 + 10 // Full control row (prev, play, next)
+    }
+    
+    readonly property int calculatedTextWidth: {
+        var titleW = titleMetrics.advanceWidth
+        var artistW = showArtist && panelMode.artist ? artistMetrics.advanceWidth : 0
+        return Math.max(titleW, artistW)
+    }
+    
+    readonly property int dynamicImplicitWidth: {
+        if (!dynamicWidth) return maxWidth
+        var textW = calculatedTextWidth
+        var ctrlW = controlsWidth
+        var spacing = showPanelControls ? 20 : 10
+        var total = textW + ctrlW + spacing
+        return Math.min(Math.max(total, 100), maxWidth)
+    }
+    
+    implicitWidth: dynamicImplicitWidth
+    
+    // Text measurement for dynamic width
+    TextMetrics {
+        id: titleMetrics
+        font.family: "Roboto Condensed"
+        font.bold: true
+        font.pixelSize: panelMode.autoFontSize 
+            ? Math.max(10, Math.min(panelMode.height * 0.5, 16)) 
+            : panelMode.manualFontSize
+        text: panelMode.title || i18n("No Media")
+    }
+    
+    TextMetrics {
+        id: artistMetrics
+        font.family: "Roboto Condensed"
+        font.pixelSize: panelMode.autoFontSize
+            ? Math.max(9, Math.min(panelMode.height * 0.4, 13))
+            : Math.max(9, panelMode.manualFontSize - 2)
+        text: panelMode.artist || ""
+    }
+    
     RowLayout {
         anchors.centerIn: parent
         width: parent.width
         spacing: panelMode.layoutMode === 2 ? 5 : 10
         layoutDirection: Qt.LeftToRight
         
-        // --- RIGHT ALIGN SPACER (Right/Center Mode) ---
-        Item {
-            visible: panelMode.layoutMode === 1 || panelMode.layoutMode === 2
-            Layout.fillWidth: true
-        }
+        // Spacers removed - buttons now anchor to edges in all modes
 
         // --- LEFT CONTROL GROUP (Visible in Right & Center Modes) ---
         Loader {
@@ -404,10 +446,6 @@ Item {
             }
         }
 
-        // --- LEFT ALIGN SPACER (Left/Center Mode) ---
-        Item {
-            visible: panelMode.layoutMode === 0 || panelMode.layoutMode === 2
-            Layout.fillWidth: true
-        }
+        // Spacers removed - buttons now anchor to edges in all modes
     }
 }

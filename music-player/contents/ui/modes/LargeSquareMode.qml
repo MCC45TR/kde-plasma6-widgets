@@ -84,7 +84,7 @@ Item {
             
             // Title
             Text {
-                text: largeSquareMode.title
+                text: largeSquareMode.title === "" ? "Çalan medya yok" : largeSquareMode.title
                 font.family: "Roboto Condensed"
                 font.bold: true
                 font.pixelSize: 22
@@ -173,7 +173,7 @@ Item {
                         }
                         
                         Text {
-                            text: largeSquareMode.artist
+                            text: largeSquareMode.artist === "" ? "..." : largeSquareMode.artist
                             font.family: "Roboto Condensed"
                             font.pixelSize: 14
                             color: Kirigami.Theme.textColor

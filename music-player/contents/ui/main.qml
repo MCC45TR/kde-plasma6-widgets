@@ -32,6 +32,7 @@ PlasmoidItem {
     readonly property int cfg_panelScrollingSpeed: Plasmoid.configuration.panelScrollingSpeed !== undefined ? Plasmoid.configuration.panelScrollingSpeed : 0
     readonly property int cfg_panelFontSize: Plasmoid.configuration.panelFontSize !== undefined ? Plasmoid.configuration.panelFontSize : 12
     readonly property int cfg_panelLayoutMode: Plasmoid.configuration.panelLayoutMode !== undefined ? Plasmoid.configuration.panelLayoutMode : 0
+    readonly property bool cfg_panelDynamicWidth: Plasmoid.configuration.panelDynamicWidth !== undefined ? Plasmoid.configuration.panelDynamicWidth : true
     readonly property int cfg_popupLayoutMode: Plasmoid.configuration.popupLayoutMode !== undefined ? Plasmoid.configuration.popupLayoutMode : 0
     readonly property double cfg_backgroundOpacity: Plasmoid.configuration.backgroundOpacity !== undefined ? Plasmoid.configuration.backgroundOpacity : 0.8
 
@@ -213,7 +214,54 @@ PlasmoidItem {
     compactRepresentation: Item {
         id: compactRep
         
+        // Text measurement for dynamic width
+        TextMetrics {
+            id: titleMetrics
+            font.family: "Roboto Condensed"
+            font.bold: true
+            font.pixelSize: root.cfg_panelAutoFontSize 
+                ? Math.max(10, Math.min(compactRep.height * 0.5, 16)) 
+                : root.cfg_panelFontSize
+            text: root.title || i18n("No Media")
+        }
+        
+        TextMetrics {
+            id: artistMetrics
+            font.family: "Roboto Condensed"
+            font.pixelSize: root.cfg_panelAutoFontSize
+                ? Math.max(9, Math.min(compactRep.height * 0.4, 13))
+                : Math.max(9, root.cfg_panelFontSize - 2)
+            text: root.artist || ""
+        }
+        
+        // Calculate controls width
+        readonly property int controlsWidth: {
+            if (!root.showPanelControls) return 0
+            var btnSize = Math.min(compactRep.height * 0.9, 36)
+            if (root.cfg_panelLayoutMode === 2) return btnSize * 2 + 20
+            return btnSize * 3 + 10
+        }
+        
+        // Calculate text width
+        readonly property int textWidth: {
+            var titleW = titleMetrics.advanceWidth
+            var artistW = root.cfg_panelShowArtist && root.artist ? artistMetrics.advanceWidth : 0
+            return Math.max(titleW, artistW)
+        }
+        
+        // Calculate total dynamic width
+        readonly property int dynamicContentWidth: {
+            var spacing = root.showPanelControls ? 20 : 10
+            var total = textWidth + controlsWidth + spacing
+            return Math.min(Math.max(total, 100), root.cfg_panelMaxWidth)
+        }
+        
+        Layout.preferredWidth: root.cfg_panelDynamicWidth ? dynamicContentWidth : root.cfg_panelMaxWidth
+        Layout.maximumWidth: root.cfg_panelMaxWidth
+        Layout.minimumWidth: 50
+        
         Loader {
+            id: panelModeLoader
             anchors.fill: parent
             asynchronous: true
             source: "modes/PanelMode.qml"
@@ -240,6 +288,7 @@ PlasmoidItem {
                     item.scrollingSpeed = Qt.binding(() => root.cfg_panelScrollingSpeed)
                     item.manualFontSize = Qt.binding(() => root.cfg_panelFontSize)
                     item.layoutMode = Qt.binding(() => root.cfg_panelLayoutMode)
+                    item.dynamicWidth = Qt.binding(() => root.cfg_panelDynamicWidth)
                     
                     // Callbacks
                     item.onPrevious = root.previous

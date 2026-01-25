@@ -18,6 +18,7 @@ Item {
     property int cfg_panelScrollingSpeed
     property int cfg_panelFontSize
     property int cfg_panelLayoutMode
+    property bool cfg_panelDynamicWidth
     property int cfg_popupLayoutMode
     
     // Default values (required for Defaults button)
@@ -32,6 +33,7 @@ Item {
     property int cfg_panelScrollingSpeedDefault: 0
     property int cfg_panelFontSizeDefault: 12
     property int cfg_panelLayoutModeDefault: 0
+    property bool cfg_panelDynamicWidthDefault: true
     property int cfg_popupLayoutModeDefault: 0
     
     // General config (to silence property warnings - handled by ConfigGeneral)
@@ -129,8 +131,16 @@ Item {
                     checked: configAppearance.cfg_panelScrollingText
                     onCheckedChanged: configAppearance.cfg_panelScrollingText = checked
                 }
+                
+                CheckBox {
+                    text: i18n("Dynamic Width (auto-expand to fit text)")
+                    checked: configAppearance.cfg_panelDynamicWidth
+                    onCheckedChanged: configAppearance.cfg_panelDynamicWidth = checked
+                }
 
                 RowLayout {
+                    enabled: !configAppearance.cfg_panelDynamicWidth
+                    opacity: enabled ? 1.0 : 0.5
                     Label { text: i18n("Max Width (px):") }
                     SpinBox {
                         from: 50
