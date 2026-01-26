@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as Plasma5Support
-import Qt.labs.platform as Platform
+import org.kde.plasma.plasmoid
 
 Item {
     id: root
@@ -19,14 +19,8 @@ Item {
     property bool showBootOptions: false
     property bool showHibernate: false
     property bool showSleep: true
+    // Loading state
     property bool isLoading: false
-    
-    // Cache File Path - Robust handling
-    // Removes file:// prefix if present
-    property string cacheFile: {
-        var path = Platform.StandardPaths.writableLocation(Platform.StandardPaths.CacheLocation)
-        return String(path).replace("file://", "") + "/plasma_com_mcc45tr_filesearch_bootentries.json"
-    }
     
     // Buffer for accumulating data
     property var cmdDataBuffer: ({})
@@ -55,40 +49,14 @@ Item {
                     root.isLoading = false
                     
                     if (sourceName.indexOf("pkexec") !== -1) {
-                         console.log("[PowerView] Saving to cache...")
-                         root.saveCache(entries)
+                         console.log("[PowerView] Saving to config cache...")
+                         Plasmoid.configuration.cachedBootEntries = fullData
                     }
                     execSource.disconnectSource(sourceName)
                     delete root.cmdDataBuffer[sourceName]
                 } catch(e) {
                     // Incomplete JSON, wait for more? 
                 }
-            } else if (sourceName.indexOf("cat_cache") !== -1) {
-                try {
-                    if (fullData.indexOf("CACHE_MISS") !== -1) {
-                         console.log("[PowerView] Cache MISS")
-                         root.isLoading = false
-                         execSource.disconnectSource(sourceName)
-                         delete root.cmdDataBuffer[sourceName]
-                    } else if (fullData.trim().length > 0) {
-                        console.log("[PowerView] Loaded from Cache: " + fullData)
-                        var entries = JSON.parse(fullData)
-                        root.processEntries(entries)
-                        root.isLoading = false
-                        execSource.disconnectSource(sourceName)
-                        delete root.cmdDataBuffer[sourceName]
-                    }
-                } catch(e) {
-                     console.error("[PowerView] JSON Parse Error (Cache): " + e)
-                }
-            } else if (fullData.indexOf("CACHE_SAVED") !== -1) {
-                console.log("[PowerView] Database functionality: Cache successfully saved.")
-                execSource.disconnectSource(sourceName)
-                delete root.cmdDataBuffer[sourceName]
-            } else if (fullData.indexOf("CACHE_SAVE_FAILED") !== -1) {
-                console.error("[PowerView] Database functionality: Cache SAVE FAILED.")
-                execSource.disconnectSource(sourceName)
-                delete root.cmdDataBuffer[sourceName]
             } else if (sourceName.indexOf("CanHibernate") !== -1 && data["stdout"]) {
                 var res = data["stdout"].trim()
                 root.canHibernate = (res === "yes")
@@ -120,10 +88,19 @@ Item {
     }
     
     function loadEntries() {
-        root.isLoading = true
-        // Start safety timer for cache load too, just in case
-        authSafetyTimer.start()
-        loadCache()
+        var cached = Plasmoid.configuration.cachedBootEntries
+        if (cached && cached.length > 0) {
+            try {
+                console.log("[PowerView] Loading from config cache")
+                var rawCached = JSON.parse(cached)
+                root.processEntries(rawCached)
+                return
+            } catch(e) {
+                console.error("[PowerView] Cache corrupt")
+            }
+        }
+        // If no cache, we stop loading. User must click "Scan" to trigger auth load.
+        root.isLoading = false
     }
 
     function loadEntriesWithAuth() {
@@ -133,26 +110,6 @@ Item {
         // Reset buffer
         root.cmdDataBuffer = {} 
         execSource.connectSource("pkexec bootctl list --json=short")
-    }
-    
-    function loadCache() {
-        root.cmdDataBuffer = {}
-        // Use bash to check file existence. If exists, cat it. If not, echo CACHE_MISS.
-        var cmd = "bash -c 'if [ -f \"" + root.cacheFile + "\" ]; then cat \"" + root.cacheFile + "\"; else echo \"CACHE_MISS\"; fi' # cat_cache"
-        execSource.connectSource(cmd)
-    }
-    
-    function saveCache(data) {
-        var jsonStr = JSON.stringify(data)
-        // Escape single quotes: ' -> '\''
-        var escapedJson = jsonStr.replace(/'/g, "'\\''")
-        var path = root.cacheFile
-        
-        // Command: Create dir, write file, check success
-        var cmd = "bash -c \"mkdir -p \\\"$(dirname \\\"" + path + "\\\")\\\" && echo '" + escapedJson + "' > \\\"" + path + "\\\" && echo CACHE_SAVED || echo CACHE_SAVE_FAILED\""
-        
-        console.log("[PowerView] Executing Save Command for: " + path)
-        execSource.connectSource(cmd)
     }
     
     // Auto-load if visible and empty (fail-safe)
@@ -165,18 +122,47 @@ Item {
     function processEntries(entries) {
         // Customize text for BIOS/Firmware and assign icons
         for (var k = 0; k < entries.length; k++) {
+            var t = (entries[k].title || "").toLowerCase()
+            var i = (entries[k].id || "").toLowerCase()
+            
             if (entries[k].id === "auto-reboot-to-firmware-setup" || 
                 entries[k].title === "Reboot Into Firmware Interface" || 
-                entries[k].title === "reboot into firmware interface") {
+                t === "reboot into firmware interface") {
                 entries[k].title = "BIOS"
-                entries[k].iconName = "configure"
+                entries[k].iconName = "application-x-firmware"
             } else {
-                var t = (entries[k].title || "").toLowerCase()
-                var i = (entries[k].id || "").toLowerCase()
-                if (t.includes("arch") || i.includes("arch")) entries[k].iconName = "distributor-logo-archlinux"
+                if (t.includes("limine") || i.includes("limine")) entries[k].iconName = "org.xfce.terminal-settings"
+                else if (t.includes("arch") || i.includes("arch")) entries[k].iconName = "distributor-logo-archlinux"
+                else if (t.includes("manjaro")) entries[k].iconName = "distributor-logo-manjaro"
+                else if (t.includes("endeavour")) entries[k].iconName = "distributor-logo-endeavouros"
+                else if (t.includes("garuda")) entries[k].iconName = "distributor-logo-garuda"
+                else if (t.includes("cachyos")) entries[k].iconName = "distributor-logo-cachyos"
+                else if (t.includes("gentoo")) entries[k].iconName = "distributor-logo-gentoo"
                 else if (t.includes("windows") || i.includes("windows")) entries[k].iconName = "distributor-logo-windows"
+                else if (t.includes("kubuntu")) entries[k].iconName = "distributor-logo-kubuntu"
+                else if (t.includes("xubuntu")) entries[k].iconName = "distributor-logo-xubuntu"
+                else if (t.includes("lubuntu")) entries[k].iconName = "distributor-logo-lubuntu"
+                else if (t.includes("neon")) entries[k].iconName = "distributor-logo-neon"
                 else if (t.includes("ubuntu")) entries[k].iconName = "distributor-logo-ubuntu"
                 else if (t.includes("fedora")) entries[k].iconName = "distributor-logo-fedora"
+                else if (t.includes("opensuse") || t.includes("suse")) entries[k].iconName = "distributor-logo-opensuse"
+                else if (t.includes("debian")) entries[k].iconName = "distributor-logo-debian"
+                else if (t.includes("kali")) entries[k].iconName = "distributor-logo-kali"
+                else if (t.includes("mint")) entries[k].iconName = "distributor-logo-linuxmint"
+                else if (t.includes("elementary")) entries[k].iconName = "distributor-logo-elementary"
+                else if (t.includes("pop") && t.includes("os")) entries[k].iconName = "distributor-logo-pop-os"
+                else if (t.includes("centos")) entries[k].iconName = "distributor-logo-centos"
+                else if (t.includes("alma")) entries[k].iconName = "distributor-logo-almalinux"
+                else if (t.includes("rocky")) entries[k].iconName = "distributor-logo-rocky"
+                else if (t.includes("rhel") || t.includes("redhat")) entries[k].iconName = "distributor-logo-redhat"
+                else if (t.includes("nixos")) entries[k].iconName = "distributor-logo-nixos"
+                else if (t.includes("void")) entries[k].iconName = "distributor-logo-void"
+                else if (t.includes("mageia")) entries[k].iconName = "distributor-logo-mageia"
+                else if (t.includes("zorin")) entries[k].iconName = "distributor-logo-zorin"
+                else if (t.includes("freebsd")) entries[k].iconName = "distributor-logo-freebsd"
+                else if (t.includes("android")) entries[k].iconName = "distributor-logo-android"
+                else if (t.includes("qubes")) entries[k].iconName = "distributor-logo-qubes"
+                else if (t.includes("slackware")) entries[k].iconName = "distributor-logo-slackware"
                 else entries[k].iconName = "system-run"
             }
         }
@@ -308,49 +294,23 @@ Item {
             // --- BOOT ENTRIES SECTION ---
             Item {
                 Layout.fillWidth: true
-                visible: implicitHeight > 0
+                visible: true // implicitHeight controls visibility
                 // Animation for height
-                implicitHeight: root.bootEntriesVisible ? (Math.max(bootFlow.implicitHeight, 40) + 20) : 0
+                // Show if toggled ON via reboot button, OR if we have no entries (to show scan button)
+                property bool shouldShow: root.bootEntriesVisible || root.bootEntries.length === 0
+                implicitHeight: shouldShow ? (Math.max(bootFlow.implicitHeight, 40) + 20) : 0
                 Behavior on implicitHeight { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
+
                 clip: true
 
                 // Opacity animation as well for smoother look
-                opacity: root.bootEntriesVisible ? 1 : 0
+                opacity: shouldShow ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: 200 } }
                 
                 Rectangle {
                     anchors.fill: parent
                     color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.05)
                     radius: 8
-                }
-                
-                // Refresh Button (Top Right)
-                Kirigami.Icon {
-                    source: "view-refresh"
-                    width: 16
-                    height: 16
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.margins: 6
-                    // Visible if entries exist OR if we have processed entries (even if empty, but usually we want refresh if user suspects new ones)
-                    // Let's make it visible if boot options are visible
-                    visible: root.bootEntriesVisible && !root.isLoading && root.bootEntries.length > 0
-                    color: refreshMouse.containsMouse ? root.accentColor : Qt.alpha(root.textColor, 0.5)
-                    
-                    MouseArea {
-                        id: refreshMouse
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        hoverEnabled: true
-                        onClicked: {
-                            // Force refresh
-                            root.bootEntries = []
-                            root.loadEntriesWithAuth()
-                        }
-                    }
-                    
-                    ToolTip.visible: refreshMouse.containsMouse
-                    ToolTip.text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh boot entries")
                 }
                 
                 // Loading Indicator
@@ -429,9 +389,50 @@ Item {
                         }
                     }
                     
-                    // Scan Button - Only visible if NO entries and NOT loading
+                    // Refresh Tile (Appended to the end)
                     Rectangle {
-                        visible: root.bootEntries.length === 0 && !root.isLoading
+                        visible: root.bootEntriesVisible && !root.isLoading && root.bootEntries.length > 0
+                        width: bootFlow.tileWidth
+                        height: 80
+                        color: refreshTileMouse.containsMouse ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.15) : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1)
+                        radius: 6
+                        
+                        MouseArea {
+                            id: refreshTileMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                root.bootEntries = []
+                                root.loadEntriesWithAuth()
+                            }
+                        }
+                        
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 4
+                            
+                            Kirigami.Icon {
+                                source: "view-refresh"
+                                Layout.preferredWidth: 24
+                                Layout.preferredHeight: 24
+                                Layout.alignment: Qt.AlignHCenter
+                                color: root.textColor
+                            }
+                            
+                            Text {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh")
+                                font.pixelSize: 12
+                                font.bold: true
+                                color: root.textColor
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+                        }
+                    }
+
+                    // Scan Button - Visible if NO entries, OR if we have entries but user wants to refresh/scan
+                    Rectangle {
+                        visible: (root.bootEntries.length === 0) && !root.isLoading
                         width: bootFlow.width - 12
                         height: 40
                         color: scanMouse.containsMouse ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1) : "transparent"

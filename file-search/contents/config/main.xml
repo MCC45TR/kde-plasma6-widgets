@@ -97,6 +97,10 @@
       <default>false</default>
       <label>Show boot options in Reboot button</label>
     </entry>
+    <entry name="cachedBootEntries" type="String">
+      <default></default>
+      <label>Cached boot entries (JSON)</label>
+    </entry>
   </group>
 
   <group name="Weather">

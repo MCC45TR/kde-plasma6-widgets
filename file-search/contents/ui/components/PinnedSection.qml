@@ -32,10 +32,16 @@ Item {
     property int draggedIndex: -1
     property int dropTargetIndex: -1
     
+    // Search state
+    property bool isSearching: false
+
     // Height calculation
     implicitHeight: pinnedItems.length > 0 ? contentColumn.implicitHeight : 0
     visible: pinnedItems.length > 0
     
+    // Calculate height of a single row (Item height + Top Margin + Bottom Padding)
+    readonly property real singleRowHeight: (isTileView ? (iconSize + 48) : 40) + 12
+
     ColumnLayout {
         id: contentColumn
         anchors.fill: parent
@@ -95,7 +101,17 @@ Item {
         // Pinned Container
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: pinnedSectionRoot.isExpanded ? (pinnedContent.implicitHeight + 8) : 0
+            // If collapsed: 0
+            // If searching: Single row height (but cap at full height if smaller)
+            // Else: Full height
+            Layout.preferredHeight: {
+                if (!pinnedSectionRoot.isExpanded) return 0;
+                var fullHeight = pinnedContent.implicitHeight + 8;
+                if (pinnedSectionRoot.isSearching) {
+                    return Math.min(fullHeight, pinnedSectionRoot.singleRowHeight);
+                }
+                return fullHeight;
+            }
             radius: 10
             color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.05)
             clip: true

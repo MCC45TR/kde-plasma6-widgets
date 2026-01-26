@@ -521,6 +521,7 @@ Item {
             accentColor: popupRoot.accentColor
             iconSize: popupRoot.iconSize
             isTileView: popupRoot.isTileView
+            isSearching: popupRoot.searchText.length > 0
             // trFunc removed
             
             onItemClicked: (item) => {
