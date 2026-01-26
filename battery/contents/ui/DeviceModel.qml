@@ -116,14 +116,18 @@ Item {
         } else {
             // Custom Icon Logic (Map to ../../icons/<version>/filename.svg)
             var file = ""
+            var isV2 = (iconVersion === "v2" || iconVersion === "v2/") // Handle potential trailing slash just in case
+
             if (n.includes("laptop")) file = "laptop.svg";
             else if (n.includes("mouse") || n.includes("fare") || n.includes("mx")) file = "mouse.svg";
             else if (n.includes("keyboard") || n.includes("klavye")) file = "keyboard.svg";
             else if (n.includes("headset") || n.includes("kulaklık") || n.includes("wh-")) file = "headset.svg";
-            else if (n.includes("buds") || n.includes("airpods") || n.includes("tws")) file = "tws.svg"; 
+            else if (n.includes("headphone")) file = isV2 ? "headphones.svg" : "headset.svg";
+            else if (n.includes("buds") || n.includes("airpods") || n.includes("tws")) file = isV2 ? "earbuds.svg" : "tws.svg"; 
             else if (n.includes("speaker") || n.includes("hoparlör") || n.includes("jbl")) file = "speaker.svg";
+            else if (n.includes("smart") && (n.includes("watch") || n.includes("saat"))) file = isV2 ? "watch-smart.svg" : "smartwatch.svg";
             else if (n.includes("watch") || n.includes("saat")) file = "watch.svg";
-            else if (n.includes("gamepad") || n.includes("xbox") || n.includes("dual")) file = "gamepad.svg";
+            else if (n.includes("gamepad") || n.includes("xbox") || n.includes("dual") || n.includes("controller")) file = isV2 ? "console-controller.svg" : "gamepad.svg";
             else if (n.includes("esp32")) file = "esp32.svg";
             else if (n.includes("desktop")) file = "desktop.svg";
             else {

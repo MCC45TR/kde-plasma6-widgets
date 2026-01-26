@@ -20,6 +20,7 @@ ColumnLayout {
     property int displayYear: 0
     property int currentMonthIndex: -1
     property var selectedDate
+    property bool dateInView: false // Track if the selected date is visible in this specific view
     signal dateSelected(date date)
 
     // --- HEADER ---
@@ -72,6 +73,7 @@ ColumnLayout {
                 Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 30
+                    
                     Text {
                         anchors.centerIn: parent
                         text: modelData
@@ -80,6 +82,16 @@ ColumnLayout {
                         font.weight: Font.DemiBold
                         color: calendarLayout.completedColor
                         opacity: 0.7
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        // Support both hover and click as the user interaction evolved
+                        hoverEnabled: true 
+                        onClicked: {
+                            columnHighlighter.columnIndex = index
+                            selectionTimer.restart()
+                        }
                     }
                 }
             }
@@ -111,7 +123,11 @@ ColumnLayout {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
+                            // Reset column selection when a specific date is clicked
+                            columnHighlighter.columnIndex = -1 
+                            calendarLayout.selectedDate = cellData.date
                             calendarLayout.dateSelected(cellData.date)
+                            selectionTimer.restart()
                         }
                     }
 
@@ -130,7 +146,7 @@ ColumnLayout {
                                     cellData.date.getDate() === calendarLayout.selectedDate.getDate()
                         }
 
-                        color: isSelected ? "white" : (cellData.isToday ? calendarLayout.highlightedTextColor : Qt.alpha(calendarLayout.textColor, 0.7))
+                        color: cellData.isToday ? calendarLayout.highlightedTextColor : (isSelected && selectionTimer.running && columnHighlighter.columnIndex === -1 ? calendarLayout.accentColor : Qt.alpha(calendarLayout.textColor, 0.7))
                         opacity: cellData.currentMonth ? 1 : 0.2
                     }
                 }
@@ -140,32 +156,60 @@ ColumnLayout {
         // --- ANIMATED SELECTION RECT ---
         Rectangle {
             id: animatedSelectionRect
+            // Use this invisible Item to track state ("column" vs "date")
+            // Reusing the id 'columnHighlighter' conceptually to store the index state, 
+            // but the visual is THIS rect.
+            Item {
+                id: columnHighlighter
+                property int columnIndex: -1
+                onColumnIndexChanged: gridContainer.updatePosition()
+            }
+
             width: 24
             height: 24
-            radius: 6
+            radius: width / 2
+            
             color: "#5e5ce6" 
             
-            visible: calendarLayout.selectedDate !== null
-            opacity: visible ? 1 : 0
+            // Visible if opacity is > 0 to allow fade out animation
+            visible: opacity > 0
+            opacity: (selectionTimer.running && (columnHighlighter.columnIndex !== -1 || (calendarLayout.selectedDate !== null && calendarLayout.dateInView))) ? 0.2 : 0
+
+            Timer {
+                id: selectionTimer
+                interval: 10000
+            }
             
             // Initial position (will be updated)
             x: 0
             y: 0
             
+            // Add animations for size changes too
             Behavior on x { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
             Behavior on y { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
-            
-            onVisibleChanged: {
-                if (visible) gridContainer.updatePosition()
-            }
+            Behavior on width { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
+            Behavior on height { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
+            Behavior on opacity { NumberAnimation { duration: 400 } }
         }
         
         function updatePosition() {
+            // Priority: Column Highlight > Date Highlight
+            if (columnHighlighter.columnIndex !== -1) {
+                // Column Highlight Mode
+                var colWidth = calendarGrid.width / 7
+                animatedSelectionRect.x = colWidth * columnHighlighter.columnIndex
+                animatedSelectionRect.y = 0
+                animatedSelectionRect.width = colWidth
+                animatedSelectionRect.height = calendarGrid.height
+                return
+            }
+
             if (!calendarLayout.selectedDate) return
             
+            // Date Highlight Mode
             var selDate = calendarLayout.selectedDate
             var targetItem = null
+            calendarLayout.dateInView = false
             
             // Find the item corresponding to the selected date
             for (var i = 0; i < dayRepeater.count; i++) {
@@ -181,20 +225,29 @@ ColumnLayout {
             }
             
             if (targetItem) {
+                calendarLayout.dateInView = true
+                // Reset to circle size
+                var targetSize = 24
+                animatedSelectionRect.width = targetSize
+                animatedSelectionRect.height = targetSize
+
                 // Calculate center relative to container
                 var centerX = targetItem.x + targetItem.width / 2
                 var centerY = targetItem.y + targetItem.height / 2
                 
-                // Set rect to be centered
-                animatedSelectionRect.x = centerX - animatedSelectionRect.width / 2
-                animatedSelectionRect.y = centerY - animatedSelectionRect.height / 2
+                // Set rect to be centered using fixed target size
+                animatedSelectionRect.x = centerX - targetSize / 2
+                animatedSelectionRect.y = centerY - targetSize / 2
             }
         }
         
         // Trigger update when selectedDate changes or grid layout changes
         Connections {
             target: calendarLayout
-            function onSelectedDateChanged() { gridContainer.updatePosition() }
+            function onSelectedDateChanged() { 
+                gridContainer.updatePosition()
+                selectionTimer.restart()
+            }
         }
         // Also update if layout changes size
         onWidthChanged: updatePosition()
