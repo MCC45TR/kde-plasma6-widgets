@@ -277,25 +277,49 @@ FocusScope {
                c.includes("power") || c.includes("güç");
     }
 
-    ScrollView {
-        anchors.fill: parent
-        clip: true
-        ScrollBar.vertical: ScrollBar {
-            policy: ScrollBar.AsNeeded
-            width: 8
+    property int scrollBarStyle: 0
+
+    Component {
+        id: systemScrollBarComp
+        ScrollBar {
+            policy: resultsTileRoot.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+        }
+    }
+
+    Component {
+        id: minimalScrollBarComp
+        ScrollBar {
+            policy: resultsTileRoot.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
+            width: 4
             active: hovered || pressed
             anchors.right: parent.right
-            anchors.rightMargin: 5
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
             
             contentItem: Rectangle {
-                implicitWidth: 4
-                radius: 2
+                implicitWidth: 2
+                radius: 1
                 color: parent.pressed ? resultsTileRoot.accentColor : Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.3)
             }
             background: Item {
-                implicitWidth: 8
+                implicitWidth: 4
             }
         }
+    }
+
+    Loader {
+        id: scrollBarLoader
+        active: true
+        sourceComponent: resultsTileRoot.scrollBarStyle === 1 ? minimalScrollBarComp : systemScrollBarComp
+    }
+
+    ScrollView {
+        anchors.fill: parent
+        clip: true
+        ScrollBar.vertical: scrollBarLoader.item
         
         ListView {
             id: tileCategoryList

@@ -282,6 +282,45 @@ FocusScope {
     }
 
     // Tile Grid
+    property int scrollBarStyle: 0
+
+    Component {
+        id: systemScrollBarComp
+        ScrollBar {
+            policy: historyTile.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+        }
+    }
+
+    Component {
+        id: minimalScrollBarComp
+        ScrollBar {
+            policy: historyTile.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
+            width: 4
+            active: hovered || pressed
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            
+            contentItem: Rectangle {
+                implicitWidth: 2
+                radius: 1
+                color: parent.pressed ? historyTile.accentColor : Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.3)
+            }
+            background: Item {
+                implicitWidth: 4
+            }
+        }
+    }
+
+    Loader {
+        id: scrollBarLoader
+        active: true
+        sourceComponent: historyTile.scrollBarStyle === 1 ? minimalScrollBarComp : systemScrollBarComp
+    }
+
     ScrollView {
         visible: historyTile.categorizedHistory.length > 0
         anchors.top: historyHeader.bottom
@@ -290,22 +329,7 @@ FocusScope {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         clip: true
-        ScrollBar.vertical: ScrollBar {
-            policy: ScrollBar.AsNeeded
-            width: 8
-            active: hovered || pressed
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            
-            contentItem: Rectangle {
-                implicitWidth: 4
-                radius: 2
-                color: parent.pressed ? historyTile.accentColor : Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.3)
-            }
-            background: Item {
-                implicitWidth: 8
-            }
-        }
+        ScrollBar.vertical: scrollBarLoader.item
         
         ListView {
             id: tileView

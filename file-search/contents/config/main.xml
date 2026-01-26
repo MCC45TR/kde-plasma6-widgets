@@ -33,6 +33,10 @@
       <default>0</default>
       <label>View Mode: 0=List, 1=Tile</label>
     </entry>
+    <entry name="scrollBarStyle" type="Int">
+      <default>0</default>
+      <label>Scroll Bar Style: 0=System, 1=Minimal, 2=Hidden</label>
+    </entry>
     <entry name="iconSize" type="Int">
       <default>48</default>
       <label>Tile Icon Size in pixels</label>

@@ -632,6 +632,7 @@ Item {
              // trFunc removed
              searchText: popupRoot.searchText
              previewSettings: popupRoot.previewSettings
+             scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
              
@@ -812,6 +813,7 @@ Item {
                  accentColor: popupRoot.accentColor
                  // trFunc removed
                  previewSettings: popupRoot.previewSettings
+                 scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
                  
                  onItemClicked: (item) => handleHistoryClick(item)
                  onClearClicked: logic.clearHistory()

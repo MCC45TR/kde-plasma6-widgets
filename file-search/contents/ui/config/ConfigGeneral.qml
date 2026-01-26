@@ -36,6 +36,7 @@ Item {
     
     // Popup (View + Search Limits)
     property alias cfg_viewMode: viewModeCombo.currentIndex
+    property alias cfg_scrollBarStyle: scrollBarCombo.currentIndex
     property int cfg_iconSize
     property int cfg_listIconSize
     property int cfg_minResults
@@ -296,6 +297,17 @@ Item {
                         id: viewModeCombo
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "View Mode")
                         model: [i18nd("plasma_applet_com.mcc45tr.filesearch", "List View"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Tile View")]
+                        Layout.fillWidth: true
+                    }
+                    
+                    ComboBox {
+                        id: scrollBarCombo
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Scroll Bar")
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "System Default"), 
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Minimal (Custom)"), 
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Hidden")
+                        ]
                         Layout.fillWidth: true
                     }
                     
