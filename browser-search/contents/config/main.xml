@@ -17,5 +17,9 @@
       <default>10</default>
       <label>Widget Edge Margin</label>
     </entry>
+    <entry name="customBrowserExecutable" type="String">
+      <default></default>
+      <label>Custom browser executable command (e.g. brave-browser, firefox)</label>
+    </entry>
   </group>
 </kcfg>

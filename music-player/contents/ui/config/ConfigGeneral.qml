@@ -38,6 +38,12 @@ Kirigami.FormLayout {
     property int cfg_panelLayoutModeDefault: 0
     property int cfg_popupLayoutMode
     property int cfg_popupLayoutModeDefault: 0
+    property bool cfg_panelAutoButtonSize
+    property bool cfg_panelAutoButtonSizeDefault: true
+    property int cfg_panelButtonSize
+    property int cfg_panelButtonSizeDefault: 32
+    property bool cfg_panelDynamicWidth
+    property bool cfg_panelDynamicWidthDefault: true
     
     property string title: i18n("General")
     Mpris.Mpris2Model { 

@@ -8,6 +8,14 @@ Kirigami.FormLayout {
     
     property alias cfg_searchEngine: searchEngineCombo.currentValue
     property alias cfg_customSearchUrl: customUrlField.text
+    property alias cfg_customBrowserExecutable: customBrowserField.text
+    
+    TextField {
+        id: customBrowserField
+        Kirigami.FormData.label: "Custom Browser Command:"
+        placeholderText: "e.g. brave-browser, firefox (Leave empty for auto-detect)"
+        Layout.fillWidth: true
+    }
     
     ComboBox {
         id: searchEngineCombo

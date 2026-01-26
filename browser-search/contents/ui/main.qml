@@ -45,7 +45,7 @@ PlasmoidItem {
                     root.browserScheme = "about"
                     root.browserDisplayName = "Firefox"
                 } else if (stdout.includes("brave")) {
-                    root.detectedBrowser = "brave"
+                    root.detectedBrowser = "brave-browser" // Standard package name
                     root.browserType = "chromium"
                     root.browserIcon = "brave"
                     root.browserScheme = "brave"
@@ -103,6 +103,20 @@ PlasmoidItem {
     // --- Configuration ---
     property string searchEngine: Plasmoid.configuration.searchEngine || "google"
     property string customSearchUrl: Plasmoid.configuration.customSearchUrl || ""
+    property string customBrowserExecutable: Plasmoid.configuration.customBrowserExecutable || ""
+    
+    // override detection if custom executable is set
+    onCustomBrowserExecutableChanged: {
+        if (customBrowserExecutable !== "") {
+            root.detectedBrowser = customBrowserExecutable
+            root.browserType = "other" // Fallback type, or we could try to guess
+            if (customBrowserExecutable.includes("brave")) root.browserType = "chromium"
+            if (customBrowserExecutable.includes("chrome")) root.browserType = "chromium"
+            if (customBrowserExecutable.includes("firefox")) root.browserType = "firefox"
+        } else {
+            detectDefaultBrowser()
+        }
+    }
     
     readonly property var searchEngines: {
         "google": "https://www.google.com/search?q=",

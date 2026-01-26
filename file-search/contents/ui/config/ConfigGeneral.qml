@@ -57,10 +57,12 @@ Item {
     property alias cfg_weatherUseSystemUnits: useSystemUnitsCheck.checked
     property int cfg_weatherRefreshInterval
 
+    property alias cfg_prefixPowerShowHibernate: showHibernateCheck.checked
     property alias cfg_prefixPowerShowSleep: prefixPowerSleep.checked
     
-    // Placeholder (Search History & Others)
+    // Placeholder (Search History & Others) - defined to prevent warnings
     property string cfg_searchHistory
+    property string cfg_cachedBootEntries
     
     // Other (Defined to prevent warnings)
     property string cfg_pinnedItems

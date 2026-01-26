@@ -25,6 +25,8 @@ Item {
     // Buffer for accumulating data
     property var cmdDataBuffer: ({})
 
+    property var plasmoidConfig
+    
     // Data Source for executing commands
     Plasma5Support.DataSource {
         id: execSource
@@ -38,7 +40,7 @@ Item {
             // We try to process immediately, assuming small JSON comes fast or in one chunk.
             var fullData = root.cmdDataBuffer[sourceName]
             
-            if (sourceName.indexOf("bootctl list") !== -1) {
+            if (sourceName && sourceName.indexOf("bootctl list") !== -1) {
                 // Auth successful
                 root.requestPreventClosing(false)
                 authSafetyTimer.stop()
@@ -50,14 +52,19 @@ Item {
                     
                     if (sourceName.indexOf("pkexec") !== -1) {
                          console.log("[PowerView] Saving to config cache...")
-                         Plasmoid.configuration.cachedBootEntries = fullData
+                         if (root.plasmoidConfig) {
+                             root.plasmoidConfig.cachedBootEntries = fullData
+                             Plasmoid.configuration.cachedBootEntries = fullData // Fallback/Sync
+                         } else {
+                             Plasmoid.configuration.cachedBootEntries = fullData
+                         }
                     }
                     execSource.disconnectSource(sourceName)
                     delete root.cmdDataBuffer[sourceName]
                 } catch(e) {
                     // Incomplete JSON, wait for more? 
                 }
-            } else if (sourceName.indexOf("CanHibernate") !== -1 && data["stdout"]) {
+            } else if (sourceName && sourceName.indexOf("CanHibernate") !== -1 && data["stdout"]) {
                 var res = data["stdout"].trim()
                 root.canHibernate = (res === "yes")
                 execSource.disconnectSource(sourceName)
@@ -88,7 +95,14 @@ Item {
     }
     
     function loadEntries() {
-        var cached = Plasmoid.configuration.cachedBootEntries
+        var cached
+        if (root.plasmoidConfig) {
+             cached = root.plasmoidConfig.cachedBootEntries
+        } else {
+             // Fallback
+             try { cached = Plasmoid.configuration.cachedBootEntries } catch(e) {}
+        }
+
         if (cached && cached.length > 0) {
             try {
                 console.log("[PowerView] Loading from config cache")

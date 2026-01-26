@@ -737,6 +737,7 @@ Item {
             showSleep: popupRoot.prefixPowerShowSleep
             bgColor: popupRoot.bgColor
             showBootOptions: popupRoot.showBootOptions
+            plasmoidConfig: popupRoot.plasmoidConfig
             
             onRequestPreventClosing: (prevent) => {
                 popupRoot.preventClosing = prevent
