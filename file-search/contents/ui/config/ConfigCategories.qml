@@ -57,6 +57,18 @@ Kirigami.FormLayout {
     property bool cfg_debugOverlayDefault
     property int cfg_displayMode
     property int cfg_displayModeDefault
+
+    // Missing Defaults to silence warnings
+    property bool cfg_autoMinimizePinnedDefault
+    property string cfg_cachedBootEntriesDefault
+    property int cfg_panelHeightDefault
+    property int cfg_panelRadiusDefault
+    property string cfg_weatherCacheDefault
+    property bool cfg_weatherEnabledDefault
+    property string cfg_weatherLastUpdateDefault
+    property int cfg_weatherRefreshIntervalDefault
+    property string cfg_weatherUnitsDefault
+    property bool cfg_weatherUseSystemUnitsDefault
     
     // Internal state management
     property var categorySettings: ({})

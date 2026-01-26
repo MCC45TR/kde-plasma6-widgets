@@ -69,7 +69,42 @@ Item {
     property string cfg_pinnedItems
     property string cfg_categorySettings
     property bool cfg_debugOverlay
+
     property string cfg_telemetryData
+
+    // Default Properties (Matching main.xml to prevent errors)
+    property int cfg_displayModeDefault
+    property int cfg_panelRadiusDefault
+    property int cfg_panelHeightDefault
+    property bool cfg_showBootOptionsDefault
+    property int cfg_userProfileDefault
+    property int cfg_viewModeDefault
+    property int cfg_iconSizeDefault
+    property int cfg_listIconSizeDefault
+    property int cfg_minResultsDefault
+    property int cfg_maxResultsDefault
+    property bool cfg_smartResultLimitDefault
+    property bool cfg_showPinnedBarDefault
+    property bool cfg_autoMinimizePinnedDefault
+    property int cfg_searchAlgorithmDefault
+    property string cfg_previewSettingsDefault
+    property bool cfg_previewEnabledDefault
+    property bool cfg_prefixDateShowClockDefault
+    property bool cfg_prefixDateShowEventsDefault
+    property bool cfg_weatherEnabledDefault
+    property bool cfg_weatherUseSystemUnitsDefault
+    property int cfg_weatherRefreshIntervalDefault
+    property bool cfg_prefixPowerShowHibernateDefault
+    property bool cfg_prefixPowerShowSleepDefault
+    property string cfg_searchHistoryDefault
+    property string cfg_cachedBootEntriesDefault
+    property string cfg_pinnedItemsDefault
+    property string cfg_categorySettingsDefault
+    property bool cfg_debugOverlayDefault
+    property string cfg_telemetryDataDefault
+    property string cfg_weatherCacheDefault
+    property string cfg_weatherLastUpdateDefault
+    property string cfg_weatherUnitsDefault
 
     // Internal
     property var previewSettings: ({})

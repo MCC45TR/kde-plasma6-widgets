@@ -54,9 +54,9 @@ Item {
                          console.log("[PowerView] Saving to config cache...")
                          if (root.plasmoidConfig) {
                              root.plasmoidConfig.cachedBootEntries = fullData
-                             Plasmoid.configuration.cachedBootEntries = fullData // Fallback/Sync
+                             try { Plasmoid.configuration.cachedBootEntries = fullData } catch(e) {} // Fallback/Sync
                          } else {
-                             Plasmoid.configuration.cachedBootEntries = fullData
+                             try { Plasmoid.configuration.cachedBootEntries = fullData } catch(e) {}
                          }
                     }
                     execSource.disconnectSource(sourceName)
@@ -68,7 +68,7 @@ Item {
                 var res = data["stdout"].trim()
                 root.canHibernate = (res === "yes")
                 execSource.disconnectSource(sourceName)
-            } else if (sourceName.indexOf("checkBootctl") !== -1) {
+            } else if (sourceName && sourceName.indexOf("checkBootctl") !== -1) {
                 if(data["stdout"] && data["stdout"].trim().length > 0) {
                      root.isBootctlInstalled = true
                 }
