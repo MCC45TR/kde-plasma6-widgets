@@ -72,6 +72,11 @@ Item {
 
     property string cfg_telemetryData
 
+    // Missing non-default properties
+    property string cfg_weatherUnits
+    property double cfg_weatherLastUpdate
+    property string cfg_weatherCache
+
     // Default Properties (Matching main.xml to prevent errors)
     property int cfg_displayModeDefault
     property int cfg_panelRadiusDefault

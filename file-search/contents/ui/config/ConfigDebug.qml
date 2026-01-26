@@ -57,6 +57,40 @@ Kirigami.FormLayout {
     property bool cfg_showBootOptions: false
     property bool cfg_showBootOptionsDefault: false
 
+    // Missing Properties
+    property int cfg_panelRadius: 0
+    property int cfg_panelRadiusDefault: 0
+    property int cfg_panelHeight: 0
+    property int cfg_panelHeightDefault: 0
+    property int cfg_scrollBarStyle: 0
+    property int cfg_scrollBarStyleDefault: 0
+    property bool cfg_autoMinimizePinned: false
+    property bool cfg_autoMinimizePinnedDefault: false
+    property bool cfg_showPinnedBar: true
+    property bool cfg_showPinnedBarDefault: true
+    property string cfg_cachedBootEntries: ""
+    property string cfg_cachedBootEntriesDefault: ""
+    property bool cfg_prefixDateShowClock: true
+    property bool cfg_prefixDateShowClockDefault: true
+    property bool cfg_prefixDateShowEvents: true
+    property bool cfg_prefixDateShowEventsDefault: true
+    property bool cfg_prefixPowerShowHibernate: false
+    property bool cfg_prefixPowerShowHibernateDefault: false
+    property bool cfg_prefixPowerShowSleep: true
+    property bool cfg_prefixPowerShowSleepDefault: true
+    property bool cfg_weatherEnabled: true
+    property bool cfg_weatherEnabledDefault: true
+    property string cfg_weatherUnits: "metric"
+    property string cfg_weatherUnitsDefault: "metric"
+    property bool cfg_weatherUseSystemUnits: true
+    property bool cfg_weatherUseSystemUnitsDefault: true
+    property int cfg_weatherRefreshInterval: 15
+    property int cfg_weatherRefreshIntervalDefault: 15
+    property double cfg_weatherLastUpdate: 0
+    property double cfg_weatherLastUpdateDefault: 0
+    property string cfg_weatherCache: "{}"
+    property string cfg_weatherCacheDefault: "{}"
+
     // =========================================================================
     
     // Helper property

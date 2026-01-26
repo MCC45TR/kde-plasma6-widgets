@@ -58,6 +58,19 @@ Kirigami.FormLayout {
     property int cfg_displayMode
     property int cfg_displayModeDefault
 
+    // Missing non-default properties
+    property bool cfg_autoMinimizePinned
+    property string cfg_cachedBootEntries
+    property int cfg_panelHeight
+    property int cfg_panelRadius
+    property int cfg_scrollBarStyle
+    property string cfg_weatherCache
+    property bool cfg_weatherEnabled
+    property double cfg_weatherLastUpdate
+    property int cfg_weatherRefreshInterval
+    property string cfg_weatherUnits
+    property bool cfg_weatherUseSystemUnits
+
     // Missing Defaults to silence warnings
     property bool cfg_autoMinimizePinnedDefault
     property string cfg_cachedBootEntriesDefault
