@@ -280,7 +280,22 @@ FocusScope {
     ScrollView {
         anchors.fill: parent
         clip: true
-        ScrollBar.vertical.policy: ScrollBar.AsNeeded
+        ScrollBar.vertical: ScrollBar {
+            policy: ScrollBar.AsNeeded
+            width: 8
+            active: hovered || pressed
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            
+            contentItem: Rectangle {
+                implicitWidth: 4
+                radius: 2
+                color: parent.pressed ? resultsTileRoot.accentColor : Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.3)
+            }
+            background: Item {
+                implicitWidth: 8
+            }
+        }
         
         ListView {
             id: tileCategoryList
