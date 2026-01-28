@@ -40,9 +40,9 @@ Item {
                     onClicked: root.tabSelected(0)
                 }
 
-                // Tab 1: Uncategorized
+                // Tab 1: All Apps
                 PlasmaComponents.Button {
-                    text: i18n("Uncategorized")
+                    text: i18n("All")
                     checked: root.currentIndex === 1
                     flat: true
                     onClicked: root.tabSelected(1)
@@ -57,6 +57,22 @@ Item {
                         checked: root.currentIndex === (index + 2)
                         flat: true
                         onClicked: root.tabSelected(index + 2)
+                        
+                        // Hide "Recent *" tabs
+                        readonly property bool shouldShow: {
+                            const name = model.display;
+                            return name !== i18n("Recent Applications") && 
+                                   name !== i18n("Recent Files") && 
+                                   name !== i18n("Recent Documents") &&
+                                   name !== "Son Kullanılan Uygulamalar" && // Hardcoded fallback for Turkish
+                                   name !== "Son Dosyalar";
+                        }
+                        
+                        visible: shouldShow
+                        
+                        // If hidden, don't take up space (Layout safety)
+                        Layout.preferredWidth: visible ? implicitWidth : 0
+                        Layout.preferredHeight: visible ? implicitHeight : 0
                     }
                 }
             }

@@ -11,5 +11,11 @@
     <entry name="pinnedItems" type="String">
       <default>[]</default>
     </entry>
+    <entry name="iconSize" type="Int">
+      <default>48</default>
+    </entry>
+    <entry name="showLabelsInTiles" type="Bool">
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

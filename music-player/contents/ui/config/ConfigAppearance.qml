@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-Item {
+Kirigami.FormLayout {
     id: configAppearance
     
     // Config binding
@@ -49,227 +49,167 @@ Item {
     // Title for tab
     property string title: i18n("Appearance")
     
-    implicitHeight: layout.implicitHeight
+    // Appearance Section
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18n("Appearance")
+    }
     
-    ColumnLayout {
-        id: layout
-        anchors.left: parent.left
-        anchors.right: parent.right
-        spacing: 15
+    ComboBox {
+        id: edgeMarginCombo
+        Kirigami.FormData.label: i18n("Widget Margin") + ":"
+        Layout.fillWidth: true
+        model: [i18n("Normal (10px)"), i18n("Less (5px)"), i18n("None (0px)")]
         
-        GroupBox {
-            title: i18n("Appearance")
-            Layout.fillWidth: true
-            
-            ColumnLayout {
-                width: parent.width
-                spacing: 10
-                
-                Label {
-                    text: i18n("Widget Margin:")
-                    font.bold: true
-                }
-                
-                ComboBox {
-                    id: edgeMarginCombo
-                    Layout.fillWidth: true
-                    model: [i18n("Normal (10px)"), i18n("Less (5px)"), i18n("None (0px)")]
-                    
-
-                    onActivated: {
-                        if (currentIndex === 0) configAppearance.cfg_edgeMargin = 10
-                        else if (currentIndex === 1) configAppearance.cfg_edgeMargin = 5
-                        else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
-                    }
-                }
-
-                Label {
-                    text: i18n("Background Opacity:")
-                    font.bold: true
-                }
-
-                ComboBox {
-                    id: opacityCombo
-                    Layout.fillWidth: true
-                    model: ["100%", "90%", "80%", "75%", "50%", "25%", "10%", "5%", "0%"]
-                    
-                    // Maps index to opacity value
-                    property var opacityValues: [1.0, 0.9, 0.8, 0.75, 0.5, 0.25, 0.1, 0.05, 0.0]
-
-                    onActivated: {
-                         configAppearance.cfg_backgroundOpacity = opacityValues[currentIndex]
-                    }
-                }
-                
-                CheckBox {
-                    text: i18n("Show Controls in Panel")
-                    checked: configAppearance.cfg_showPanelControls
-                    onCheckedChanged: configAppearance.cfg_showPanelControls = checked
-                }
-            }
+        onActivated: {
+            if (currentIndex === 0) configAppearance.cfg_edgeMargin = 10
+            else if (currentIndex === 1) configAppearance.cfg_edgeMargin = 5
+            else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
         }
-        
-        GroupBox {
-            title: i18n("Panel Settings")
-            Layout.fillWidth: true
-            
-            ColumnLayout {
-                width: parent.width
-                spacing: 10
-                
-                Label {
-                    text: i18n("Layout Mode:")
-                    font.bold: true
-                }
-                
-                ComboBox {
-                    id: panelLayoutCombo
-                    Layout.fillWidth: true
-                    model: [i18n("Left Aligned"), i18n("Right Aligned"), i18n("Centered")]
-                    
-                    onActivated: configAppearance.cfg_panelLayoutMode = currentIndex
-                }
-                
-                Label {
-                    text: i18n("Button Size:")
-                    font.bold: true
-                }
-                
-                CheckBox {
-                    text: i18n("Auto Size based on Panel Height")
-                    checked: configAppearance.cfg_panelAutoButtonSize
-                    onCheckedChanged: configAppearance.cfg_panelAutoButtonSize = checked
-                }
-                
-                RowLayout {
-                    enabled: !configAppearance.cfg_panelAutoButtonSize
-                    opacity: enabled ? 1.0 : 0.5
-                    Label { text: i18n("Size (px):") }
-                    SpinBox {
-                        from: 16
-                        to: 128
-                        value: configAppearance.cfg_panelButtonSize
-                        onValueModified: configAppearance.cfg_panelButtonSize = value
-                    }
-                }
-                
-                CheckBox {
-                    text: i18n("Scroll Text if truncated")
-                    checked: configAppearance.cfg_panelScrollingText
-                    onCheckedChanged: configAppearance.cfg_panelScrollingText = checked
-                }
-                
-                CheckBox {
-                    text: i18n("Dynamic Width (auto-expand to fit text)")
-                    checked: configAppearance.cfg_panelDynamicWidth
-                    onCheckedChanged: configAppearance.cfg_panelDynamicWidth = checked
-                }
+    }
 
-                RowLayout {
-                    enabled: !configAppearance.cfg_panelDynamicWidth
-                    opacity: enabled ? 1.0 : 0.5
-                    Label { text: i18n("Max Width (px):") }
-                    SpinBox {
-                        from: 50
-                        to: 1500
-                        stepSize: 10
-                        value: configAppearance.cfg_panelMaxWidth
-                        onValueModified: configAppearance.cfg_panelMaxWidth = value
-                    }
-                }
-                
-                RowLayout {
-                    enabled: configAppearance.cfg_panelScrollingText
-                    Label { text: i18n("Speed:") }
-                    ComboBox {
-                        id: scrollSpeedCombo
-                        Layout.fillWidth: true
-                        model: [i18n("Fast"), i18n("Medium"), i18n("Slow")]
-                        onActivated: configAppearance.cfg_panelScrollingSpeed = currentIndex
-                    }
-                }
-                
-                Label {
-                    text: i18n("Displayed Information:")
-                    font.bold: true
-                }
-                
-                RowLayout {
-                    CheckBox {
-                        text: i18n("Show Title")
-                        checked: configAppearance.cfg_panelShowTitle
-                        onCheckedChanged: configAppearance.cfg_panelShowTitle = checked
-                    }
-                    CheckBox {
-                        text: i18n("Show Artist")
-                        checked: configAppearance.cfg_panelShowArtist
-                        onCheckedChanged: configAppearance.cfg_panelShowArtist = checked
-                    }
-                }
-                
-                Label {
-                    text: i18n("Font Size:")
-                    font.bold: true
-                }
-                
-                CheckBox {
-                    text: i18n("Auto Size based on Panel Height")
-                    checked: configAppearance.cfg_panelAutoFontSize
-                    onCheckedChanged: configAppearance.cfg_panelAutoFontSize = checked
-                }
-                
-                RowLayout {
-                    enabled: !configAppearance.cfg_panelAutoFontSize
-                    Label { text: i18n("Size (px):") }
-                    SpinBox {
-                        from: 12
-                        to: 72
-                        value: configAppearance.cfg_panelFontSize
-                        onValueModified: configAppearance.cfg_panelFontSize = value
-                    }
-                }
-            }
-        }
+    ComboBox {
+        id: opacityCombo
+        Kirigami.FormData.label: i18n("Background Opacity") + ":"
+        Layout.fillWidth: true
+        model: ["100%", "90%", "80%", "75%", "50%", "25%", "10%", "5%", "0%"]
         
-        GroupBox {
-            title: i18n("View Settings")
-            Layout.fillWidth: true
-            
-            ColumnLayout {
-                width: parent.width
-                spacing: 10
-                
-                Label {
-                    text: i18n("View Mode:")
-                    font.bold: true
-                }
-                
-                ComboBox {
-                    id: popupLayoutCombo
-                    Layout.fillWidth: true
-                    
-                    // Check if in panel (2=Horizontal, 3=Vertical)
-                    readonly property bool isInPanel: (plasmoid.formFactor === 2 || plasmoid.formFactor === 3)
-                    
-                    model: isInPanel
-                           ? [i18n("Automatic"), i18n("Wide"), i18n("Large")]
-                           : [i18n("Automatic"), i18n("Small"), i18n("Wide"), i18n("Large")]
-                    
-                    onActivated: {
-                         // Mapping:
-                         // Internal Config: 0=Auto, 1=Small, 2=Wide, 3=Large
-                         if (isInPanel) {
-                             // Panel Model: 0=Auto, 1=Wide, 2=Large
-                             if (currentIndex === 0) configAppearance.cfg_popupLayoutMode = 0
-                             else if (currentIndex === 1) configAppearance.cfg_popupLayoutMode = 2
-                             else if (currentIndex === 2) configAppearance.cfg_popupLayoutMode = 3
-                         } else {
-                             // Desktop Model: 0=Auto, 1=Small, 2=Wide, 3=Large
-                             configAppearance.cfg_popupLayoutMode = currentIndex
-                         }
-                    }
-                }
-            }
+        property var opacityValues: [1.0, 0.9, 0.8, 0.75, 0.5, 0.25, 0.1, 0.05, 0.0]
+
+        onActivated: {
+             configAppearance.cfg_backgroundOpacity = opacityValues[currentIndex]
+        }
+    }
+    
+    CheckBox {
+        Kirigami.FormData.label: i18n("Controls") + ":"
+        text: i18n("Show Controls in Panel")
+        checked: configAppearance.cfg_showPanelControls
+        onCheckedChanged: configAppearance.cfg_showPanelControls = checked
+    }
+    
+    // Panel Settings Section
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18n("Panel Settings")
+    }
+    
+    ComboBox {
+        id: panelLayoutCombo
+        Kirigami.FormData.label: i18n("Layout Mode") + ":"
+        Layout.fillWidth: true
+        model: [i18n("Left Aligned"), i18n("Right Aligned"), i18n("Centered")]
+        
+        onActivated: configAppearance.cfg_panelLayoutMode = currentIndex
+    }
+    
+    CheckBox {
+        Kirigami.FormData.label: i18n("Button Size") + ":"
+        text: i18n("Auto Size based on Panel Height")
+        checked: configAppearance.cfg_panelAutoButtonSize
+        onCheckedChanged: configAppearance.cfg_panelAutoButtonSize = checked
+    }
+    
+    SpinBox {
+        Kirigami.FormData.label: i18n("Button Size (px)") + ":"
+        enabled: !configAppearance.cfg_panelAutoButtonSize
+        from: 16
+        to: 128
+        value: configAppearance.cfg_panelButtonSize
+        onValueModified: configAppearance.cfg_panelButtonSize = value
+    }
+    
+    CheckBox {
+        Kirigami.FormData.label: i18n("Text") + ":"
+        text: i18n("Scroll Text if truncated")
+        checked: configAppearance.cfg_panelScrollingText
+        onCheckedChanged: configAppearance.cfg_panelScrollingText = checked
+    }
+    
+    CheckBox {
+        text: i18n("Dynamic Width (auto-expand to fit text)")
+        checked: configAppearance.cfg_panelDynamicWidth
+        onCheckedChanged: configAppearance.cfg_panelDynamicWidth = checked
+    }
+
+    SpinBox {
+        Kirigami.FormData.label: i18n("Max Width (px)") + ":"
+        enabled: !configAppearance.cfg_panelDynamicWidth
+        from: 50
+        to: 1500
+        stepSize: 10
+        value: configAppearance.cfg_panelMaxWidth
+        onValueModified: configAppearance.cfg_panelMaxWidth = value
+    }
+    
+    ComboBox {
+        id: scrollSpeedCombo
+        Kirigami.FormData.label: i18n("Scroll Speed") + ":"
+        enabled: configAppearance.cfg_panelScrollingText
+        Layout.fillWidth: true
+        model: [i18n("Fast"), i18n("Medium"), i18n("Slow")]
+        onActivated: configAppearance.cfg_panelScrollingSpeed = currentIndex
+    }
+    
+    CheckBox {
+        Kirigami.FormData.label: i18n("Displayed Info") + ":"
+        text: i18n("Show Title")
+        checked: configAppearance.cfg_panelShowTitle
+        onCheckedChanged: configAppearance.cfg_panelShowTitle = checked
+    }
+    
+    CheckBox {
+        text: i18n("Show Artist")
+        checked: configAppearance.cfg_panelShowArtist
+        onCheckedChanged: configAppearance.cfg_panelShowArtist = checked
+    }
+    
+    CheckBox {
+        Kirigami.FormData.label: i18n("Font Size") + ":"
+        text: i18n("Auto Size based on Panel Height")
+        checked: configAppearance.cfg_panelAutoFontSize
+        onCheckedChanged: configAppearance.cfg_panelAutoFontSize = checked
+    }
+    
+    SpinBox {
+        Kirigami.FormData.label: i18n("Font Size (px)") + ":"
+        enabled: !configAppearance.cfg_panelAutoFontSize
+        from: 12
+        to: 72
+        value: configAppearance.cfg_panelFontSize
+        onValueModified: configAppearance.cfg_panelFontSize = value
+    }
+    
+    // View Settings Section
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18n("View Settings")
+    }
+    
+    ComboBox {
+        id: popupLayoutCombo
+        Kirigami.FormData.label: i18n("View Mode") + ":"
+        Layout.fillWidth: true
+        
+        // Check if in panel (2=Horizontal, 3=Vertical)
+        readonly property bool isInPanel: (plasmoid.formFactor === 2 || plasmoid.formFactor === 3)
+        
+        model: isInPanel
+               ? [i18n("Automatic"), i18n("Wide"), i18n("Large")]
+               : [i18n("Automatic"), i18n("Small"), i18n("Wide"), i18n("Large")]
+        
+        onActivated: {
+             // Mapping:
+             // Internal Config: 0=Auto, 1=Small, 2=Wide, 3=Large
+             if (isInPanel) {
+                 // Panel Model: 0=Auto, 1=Wide, 2=Large
+                 if (currentIndex === 0) configAppearance.cfg_popupLayoutMode = 0
+                 else if (currentIndex === 1) configAppearance.cfg_popupLayoutMode = 2
+                 else if (currentIndex === 2) configAppearance.cfg_popupLayoutMode = 3
+             } else {
+                 // Desktop Model: 0=Auto, 1=Small, 2=Wide, 3=Large
+                 configAppearance.cfg_popupLayoutMode = currentIndex
+             }
         }
     }
     
@@ -283,18 +223,14 @@ Item {
          panelLayoutCombo.currentIndex = cfg_panelLayoutMode
          
          // Sync Layout Mode
-         // Config: 0=Auto, 1=Small, 2=Wide, 3=Large
          var mode = cfg_popupLayoutMode
          var pCombo = popupLayoutCombo
          
          if (pCombo.isInPanel) {
-             // Model: 0=Auto, 1=Wide, 2=Large
              if (mode === 2) pCombo.currentIndex = 1 // Wide
              else if (mode === 3) pCombo.currentIndex = 2 // Large
-             else pCombo.currentIndex = 0 // Auto (or fallback if Small is set but hidden)
+             else pCombo.currentIndex = 0 // Auto
          } else {
-             // Model: 0=Auto, 1=Small, 2=Wide, 3=Large
-             // Safe guard if mode is out of bounds (though unlikely with int)
              if (mode >= 0 && mode <= 3) pCombo.currentIndex = mode
              else pCombo.currentIndex = 0
          }
@@ -318,5 +254,4 @@ Item {
     onCfg_edgeMarginChanged: syncSettings()
     onCfg_backgroundOpacityChanged: syncSettings()
     Component.onCompleted: syncSettings()
-
 }

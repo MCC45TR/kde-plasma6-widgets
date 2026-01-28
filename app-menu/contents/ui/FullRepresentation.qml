@@ -41,6 +41,15 @@ Item {
         mergeResults: true
     }
 
+    Kicker.RootModel {
+        id: allAppsModel
+        autoPopulate: true
+        appNameFormat: Plasmoid.configuration.appNameFormat || 0
+        flat: true // Flattened list for "All Apps"
+        sorted: true
+        showSeparators: false
+    }
+
     // Main Layout
     ColumnLayout {
         anchors.fill: parent
@@ -71,31 +80,15 @@ Item {
             Components.AppLibraryView {
                 rootModel: rootModel
                 onRequestCategoryPage: (index) => {
-                     // Offset by 2 (0=Library, 1=Uncategorized, 2+=Categories)
-                     mainSwipeView.currentIndex = index + 1 
+                     // Offset by 2 (0=Library, 1=AllApps, 2+=Categories)
+                     mainSwipeView.currentIndex = index + 2
                 }
             }
             
-            // Tab 1: Uncategorized Apps
-            Components.UncategorizedView {
-                id: uncategorizedView
-                
-                Component.onCompleted: {
-                    // Try to find "Lost & Found" or "Uncategorized" in rootModel
-                    // Since models are async, this might need a connection or checking later
-                    // But usually rootModel is fast.
-                    // We iterate over rows.
-                    for (let i = 0; i < rootModel.count; i++) {
-                        let display = rootModel.data(rootModel.index(i, 0), Qt.DisplayRole)
-                        // This comparison is localized, which is bad practice but we lack ID role access easily here.
-                        // Common names: "Lost & Found", "Uncategorized", "Kayıp ve Bulunan"
-                        // Or we can check if it's the last one?
-                        if (display === i18n("Lost & Found") || display === "Lost & Found" || display === "Uncategorized") {
-                            uncategorizedView.categoryModel = rootModel.modelForRow(i)
-                            break;
-                        }
-                    }
-                }
+            // Tab 1: All Apps View
+            Components.AllAppsView {
+                id: allAppsView
+                model: allAppsModel
             }
             
             // Dynamic Categories
@@ -104,6 +97,26 @@ Item {
                 model: rootModel
                 delegate: Components.CategoryPage {
                     categoryModel: rootModel.modelForRow(index)
+                    
+                    // Match visibility with BottomPanel logic
+                    property bool isRecent: {
+                        const name = model.display;
+                         return name === i18n("Recent Applications") || 
+                                name === i18n("Recent Files") || 
+                                name === i18n("Recent Documents") ||
+                                name === "Son Kullanılan Uygulamalar" ||
+                                name === "Son Dosyalar";
+                    }
+                    
+                    // If hidden, it shouldn't take up space in SwipeView navigation ideally,
+                    // but SwipeView is index-based.
+                    // We just hide the content. Swiping to it might show a blank page, 
+                    // but since BottomPanel hides the button, user won't click to it.
+                    // If user swipes, they will see blank recent pages.
+                    // To truly skip, we'd need a filtered model. 
+                    // For now, visibility handling in BottomPanel prevents direct access.
+                    // Visually, we can just disable it.
+                    visible: !isRecent
                 }
             }
         }

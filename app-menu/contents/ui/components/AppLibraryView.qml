@@ -2,59 +2,80 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
 
-ScrollView {
+Item {
     id: root
     
     required property var rootModel
     
+    signal requestCategoryPage(int index)
+    
     // Style settings
-    property real cardSize: Kirigami.Units.gridUnit * 8
-    property real iconSize: Kirigami.Units.iconSizes.large // 32px or 48px usually
-    property real smallIconSize: Kirigami.Units.iconSizes.small // 16px or 22px
+    property real iconSize: Plasmoid.configuration.iconSize || 48
+    property real cardSize: ((iconSize + 34) * 2) + 10
+    property real smallIconSize: Math.max(16, iconSize / 2)
     
-    // contentWidth: availableWidth
+    // We forward width/height to GridView but logic is encapsulated here.
     
-    Flow {
+    GridView {
+        id: grid
         anchors.fill: parent
         anchors.margins: 10
-        spacing: 15
         
-        Repeater {
-            model: rootModel
+        focus: true
+        clip: true
+        
+        ScrollBar.vertical: ScrollBar {
+            active: true
+        }
+
+        // Layout Calculation
+        property real minSpacing: 10
+        // Use grid.width because anchors.fill makes grid size match parent (Item)
+        property int columns: Math.max(1, Math.floor((width - 20) / (root.cardSize + minSpacing)))
+        
+        cellWidth: Math.floor(width / columns)
+        cellHeight: root.cardSize + 20 + 20 
+        
+        model: root.rootModel
+        
+        delegate: Item {
+            width: grid.cellWidth
+            height: grid.cellHeight
             
-            delegate: Item {
-                // Category Card
+            property var categoryModel: grid.model.modelForRow(index)
+            
+            // Centered Card
+            Item {
                 width: root.cardSize
-                height: root.cardSize + 20 // Extra for title
-                
-                property var categoryModel: rootModel.modelForRow(index)
-                
-                // Title
-                Text {
-                    id: title
-                    text: model.display
-                    anchors.bottom: bg.top
-                    anchors.bottomMargin: 5
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.bold: true
-                    color: Kirigami.Theme.textColor
-                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
-                    elide: Text.ElideRight
-                    width: parent.width
-                    horizontalAlignment: Text.AlignHCenter
-                }
+                height: root.cardSize + 20
+                anchors.centerIn: parent
                 
                 // Card Background
                 Rectangle {
                     id: bg
                     width: parent.width
                     height: parent.width // Square
-                    anchors.bottom: parent.bottom
+                    anchors.top: parent.top
                     color: Kirigami.Theme.backgroundColor
                     radius: 10
                     border.color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                
+                    // Title
+                    Text {
+                        id: title
+                        text: model.display
+                        anchors.top: bg.bottom
+                        anchors.topMargin: 5
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        color: Kirigami.Theme.textColor
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
+                        elide: Text.ElideRight
+                        width: parent.width
+                        horizontalAlignment: Text.AlignHCenter
+                    }
                     
                     // 2x2 Grid for items
                     Grid {
@@ -68,18 +89,36 @@ ScrollView {
                             height: width
                             visible: categoryModel?.count > 0
                             
-                            Kirigami.Icon {
-                                anchors.centerIn: parent
-                                source: (categoryModel?.count > 0) ? categoryModel.data(categoryModel.index(0, 0), Qt.DecorationRole) : ""
-                                width: root.iconSize
-                                height: root.iconSize
-                            }
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
                                     if (categoryModel) {
-                                        root.launchApp(categoryModel.index(0, 0))
+                                         categoryModel.trigger(0, "", null);
                                     }
+                                }
+                            }
+
+                            Column {
+                                anchors.centerIn: parent
+                                spacing: 2
+                                width: parent.width
+                                
+                                Kirigami.Icon {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    source: (categoryModel?.count > 0) ? categoryModel.data(categoryModel.index(0, 0), Qt.DecorationRole) : ""
+                                    width: root.iconSize
+                                    height: root.iconSize
+                                }
+
+                                Text {
+                                    text: (categoryModel?.count > 0) ? categoryModel.data(categoryModel.index(0, 0), Qt.DisplayRole) : ""
+                                    width: parent.width
+                                    horizontalAlignment: Text.AlignHCenter
+                                    elide: Text.ElideRight
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize * 0.8
+                                    color: Kirigami.Theme.textColor
+                                    maximumLineCount: 1
+                                    visible: text !== "" && Plasmoid.configuration.showLabelsInTiles
                                 }
                             }
                         }
@@ -90,18 +129,36 @@ ScrollView {
                             height: width
                             visible: categoryModel?.count > 1
                             
-                            Kirigami.Icon {
-                                anchors.centerIn: parent
-                                source: (categoryModel?.count > 1) ? categoryModel.data(categoryModel.index(1, 0), Qt.DecorationRole) : ""
-                                width: root.iconSize
-                                height: root.iconSize
-                            }
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
                                     if (categoryModel) {
-                                        root.launchApp(categoryModel.index(1, 0))
+                                         categoryModel.trigger(1, "", null);
                                     }
+                                }
+                            }
+
+                            Column {
+                                anchors.centerIn: parent
+                                spacing: 2
+                                width: parent.width
+
+                                Kirigami.Icon {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    source: (categoryModel?.count > 1) ? categoryModel.data(categoryModel.index(1, 0), Qt.DecorationRole) : ""
+                                    width: root.iconSize
+                                    height: root.iconSize
+                                }
+
+                                Text {
+                                    text: (categoryModel?.count > 1) ? categoryModel.data(categoryModel.index(1, 0), Qt.DisplayRole) : ""
+                                    width: parent.width
+                                    horizontalAlignment: Text.AlignHCenter
+                                    elide: Text.ElideRight
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize * 0.8
+                                    color: Kirigami.Theme.textColor
+                                    maximumLineCount: 1
+                                    visible: text !== "" && Plasmoid.configuration.showLabelsInTiles
                                 }
                             }
                         }
@@ -112,18 +169,36 @@ ScrollView {
                             height: width
                             visible: categoryModel?.count > 2
                             
-                            Kirigami.Icon {
-                                anchors.centerIn: parent
-                                source: (categoryModel?.count > 2) ? categoryModel.data(categoryModel.index(2, 0), Qt.DecorationRole) : ""
-                                width: root.iconSize
-                                height: root.iconSize
-                            }
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
                                     if (categoryModel) {
-                                        root.launchApp(categoryModel.index(2, 0))
+                                         categoryModel.trigger(2, "", null);
                                     }
+                                }
+                            }
+
+                            Column {
+                                anchors.centerIn: parent
+                                spacing: 2
+                                width: parent.width
+
+                                Kirigami.Icon {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    source: (categoryModel?.count > 2) ? categoryModel.data(categoryModel.index(2, 0), Qt.DecorationRole) : ""
+                                    width: root.iconSize
+                                    height: root.iconSize
+                                }
+
+                                Text {
+                                    text: (categoryModel?.count > 2) ? categoryModel.data(categoryModel.index(2, 0), Qt.DisplayRole) : ""
+                                    width: parent.width
+                                    horizontalAlignment: Text.AlignHCenter
+                                    elide: Text.ElideRight
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize * 0.8
+                                    color: Kirigami.Theme.textColor
+                                    maximumLineCount: 1
+                                    visible: text !== "" && Plasmoid.configuration.showLabelsInTiles
                                 }
                             }
                         }
@@ -135,21 +210,39 @@ ScrollView {
                             visible: categoryModel?.count > 3
                             
                             // Case A: <= 4 items total -> Just show Item 3
-                            Kirigami.Icon {
-                                anchors.centerIn: parent
-                                visible: categoryModel?.count <= 4 && categoryModel?.count > 3
-                                source: visible ? categoryModel.data(categoryModel.index(3, 0), Qt.DecorationRole) : ""
-                                width: root.iconSize
-                                height: root.iconSize
-                            }
                             
                              MouseArea {
                                 anchors.fill: parent
                                 enabled: categoryModel?.count <= 4
                                 onClicked: {
                                     if (categoryModel) {
-                                        root.launchApp(categoryModel.index(3, 0))
+                                         categoryModel.trigger(3, "", null);
                                     }
+                                }
+                            }
+
+                            Column {
+                                anchors.centerIn: parent
+                                spacing: 2
+                                width: parent.width
+                                visible: categoryModel?.count <= 4 && categoryModel?.count > 3
+
+                                Kirigami.Icon {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    source: parent.visible ? categoryModel.data(categoryModel.index(3, 0), Qt.DecorationRole) : ""
+                                    width: root.iconSize
+                                    height: root.iconSize
+                                }
+                                
+                                Text {
+                                    text: parent.visible ? categoryModel.data(categoryModel.index(3, 0), Qt.DisplayRole) : ""
+                                    width: parent.width
+                                    horizontalAlignment: Text.AlignHCenter
+                                    elide: Text.ElideRight
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize * 0.8
+                                    color: Kirigami.Theme.textColor
+                                    maximumLineCount: 1
+                                    visible: text !== "" && Plasmoid.configuration.showLabelsInTiles
                                 }
                             }
                             
@@ -178,40 +271,13 @@ ScrollView {
                                 enabled: categoryModel?.count > 4
                                 onClicked: {
                                     // Navigate to category page
-                                    // Find index in parent swipe view?
-                                    // index in repeater corresponds to rootModel index
-                                    // SwipeView has AppLibrary at 0, then Categories at 1..N
-                                    // So target index is index + 1
-                                    
-                                    // We need to signal the parent
-                                    // quick hack: access global logic or emit signal
-                                    root.requestCategoryPage(index + 1)
+                                    root.requestCategoryPage(index)
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-    }
-    
-    signal requestCategoryPage(int index)
-    
-    function launchApp(modelIndex) {
-        // Kicker types trigger
-        // modelIndex.model.trigger(modelIndex.row, "", null)
-        // Or if it's a proxy model, we might need to map it.
-        // But here categoryModel is a Kicker.AppsModel (or similar)
-        // trigger() should work.
-        // Wait, Kicker models usually have a 'trigger' method on the model itself?
-        // Or use `model.trigger(index, "", null)`?
-        // Checking Kicker docs/usage:
-        // `kickoff.rootModel.trigger(index, "", null)`
-        
-        // categoryModel is a recursive model.
-        // It should have a trigger method.
-        if (categoryModel && categoryModel.trigger) {
-             categoryModel.trigger(modelIndex.row, "", null);
         }
     }
 }

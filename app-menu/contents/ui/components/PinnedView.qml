@@ -13,6 +13,8 @@ Item {
     // Config properties
     property var pinnedItems: PinnedManager.loadPinned(Plasmoid.configuration.pinnedItems)
     
+    visible: pinnedItems && pinnedItems.length > 0
+    
     // Save function
     function saveItems() {
         Plasmoid.configuration.pinnedItems = PinnedManager.savePinned(root.pinnedItems)

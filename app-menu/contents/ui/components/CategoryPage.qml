@@ -8,7 +8,8 @@ ScrollView {
     required property var categoryModel
     
     // contentWidth: availableWidth
-    width: availableWidth
+    // contentWidth: availableWidth
+    // width: availableWidth
     
     GridView {
         anchors.fill: parent

@@ -3,9 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mpris as Mpris
+
 Kirigami.FormLayout {
     id: page
-    anchors.fill: parent
 
     Component.onCompleted: {
         Qt.callLater(refreshPlayerList)

@@ -83,3 +83,14 @@ function formatTime(micros) {
     s = s % 60
     return m + ":" + (s < 10 ? "0" + s : s)
 }
+
+function getPrettyName(identity) {
+    if (!identity) return ""
+    var id = identity.toLowerCase()
+    for (var key in appIcons) {
+        if (id.includes(key)) {
+            return key.charAt(0).toUpperCase() + key.slice(1)
+        }
+    }
+    return identity.charAt(0).toUpperCase() + identity.slice(1)
+}

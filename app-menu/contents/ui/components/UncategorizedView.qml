@@ -11,7 +11,8 @@ ScrollView {
     
     // If no model is provided (e.g. we couldn't find "Uncategorized"), show placeholder
     
-    width: availableWidth
+    // width: availableWidth
+    contentWidth: availableWidth
     
     GridView {
         anchors.fill: parent

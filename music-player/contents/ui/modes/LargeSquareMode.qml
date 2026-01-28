@@ -30,6 +30,9 @@ Item {
     property var onLaunchApp: function() {}
     property var getPlayerIcon: function(id) { return "multimedia-player" }
     
+    property var playersModel: null
+    property var onSwitchPlayer: function(id) {}
+    
     // Cached color
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.25)
     
@@ -64,6 +67,9 @@ Item {
             showGradient: false
             showCenterPlayIcon: false
             isPlaying: largeSquareMode.isPlaying
+            
+            playersModel: largeSquareMode.playersModel
+            onSwitchPlayer: largeSquareMode.onSwitchPlayer
         }
     }
     

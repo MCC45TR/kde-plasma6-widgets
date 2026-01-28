@@ -204,6 +204,11 @@ PlasmoidItem {
     function getPlayerIcon(identity) {
         return PlayerData.getPlayerIcon(identity)
     }
+    
+    function switchPlayer(identity) {
+        Plasmoid.configuration.preferredPlayer = identity
+        root.updateCurrentPlayer()
+    }
 
     // ---------------------------------------------------------
     // Representations
@@ -406,6 +411,12 @@ PlasmoidItem {
                         item.onSeek = root.seek
                         item.onLaunchApp = () => { root.launchApp(root.preferredPlayer) }
                         item.getPlayerIcon = root.getPlayerIcon
+                        
+                        // Player Selection
+                        if (item.hasOwnProperty("playersModel")) {
+                            item.playersModel = mpris2Model
+                        }
+                        item.onSwitchPlayer = root.switchPlayer
                     }
                 }
             }

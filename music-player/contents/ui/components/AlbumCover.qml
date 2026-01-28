@@ -18,6 +18,9 @@ Rectangle {
     property var onLaunchApp: function() {}
     property string placeholderSource: ""
     
+    property var playersModel: null
+    property var onSwitchPlayer: function(id) {}
+    
     // Mode flags
     property bool pillMode: false
     property bool showNoMediaText: true
@@ -32,7 +35,9 @@ Rectangle {
     radius: 10
     color: hasArt ? "#2a2a2a" : Kirigami.Theme.backgroundColor
     clip: true
-    layer.enabled: true
+    
+    // Only enable layer effect when mask is properly sized
+    layer.enabled: maskRectItem.width > 0 && maskRectItem.height > 0
     layer.effect: OpacityMask {
         maskSource: maskRectItem
     }
@@ -52,10 +57,12 @@ Rectangle {
         asynchronous: true
         
         sourceComponent: Image {
-            source: albumCover.artUrl
+            source: albumCover.artUrl || ""
             fillMode: Image.PreserveAspectCrop
             cache: true
             asynchronous: true
+            sourceSize.width: width > 0 ? width : 256
+            sourceSize.height: height > 0 ? height : 256
         }
     }
     
@@ -66,13 +73,16 @@ Rectangle {
         anchors.top: parent.top
         anchors.leftMargin: 5
         anchors.topMargin: 5
-        active: albumCover.showPlayerBadge && (albumCover.playerIdentity !== "" || albumCover.hasPlayer)
+        active: albumCover.showPlayerBadge && albumCover.hasPlayer && albumCover.playerIdentity !== ""
         
         sourceComponent: AppBadge {
             pillMode: albumCover.pillMode
             iconSize: pillMode ? 16 : Math.max(16, albumCover.width * 0.09)
             playerIdentity: albumCover.playerIdentity
             iconSource: albumCover.playerIcon
+            
+            playersModel: albumCover.playersModel
+            onSwitchPlayer: albumCover.onSwitchPlayer
         }
     }
     
@@ -105,7 +115,7 @@ Rectangle {
     Loader {
         id: dimOverlayLoader
         anchors.fill: parent
-        active: albumCover.hasArt || albumCover.hasPlayer
+        active: albumCover.hasPlayer
         
         sourceComponent: Rectangle {
             color: "black"
@@ -137,7 +147,7 @@ Rectangle {
     Loader {
         id: playIconLoader
         anchors.centerIn: parent
-        active: albumCover.showCenterPlayIcon && (albumCover.hasArt || albumCover.hasPlayer)
+        active: albumCover.showCenterPlayIcon && albumCover.hasPlayer
         
         sourceComponent: Kirigami.Icon {
             width: 48

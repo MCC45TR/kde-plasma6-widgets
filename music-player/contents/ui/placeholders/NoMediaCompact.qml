@@ -8,10 +8,15 @@ Item {
 
     property bool showText: true
 
+    // Only show the placeholder image when there's no player
+    // When there's a player but no art, the AlbumCover will show the play icon
+    visible: !hasPlayer
+
     ColumnLayout {
         anchors.centerIn: parent
         spacing: 2
         width: parent.width * 0.8
+        visible: !hasPlayer
 
         Image {
             Layout.preferredWidth: parent.width * 0.5
@@ -21,6 +26,8 @@ Item {
             fillMode: Image.PreserveAspectFit
             opacity: 0.8
             asynchronous: true
+            sourceSize.width: 128
+            sourceSize.height: 128
         }
 
         Text {
@@ -30,7 +37,7 @@ Item {
             font.pixelSize: 16
             color: Kirigami.Theme.textColor
             Layout.alignment: Qt.AlignHCenter
-            visible: showText && !hasPlayer
+            visible: showText
         }
     }
 }

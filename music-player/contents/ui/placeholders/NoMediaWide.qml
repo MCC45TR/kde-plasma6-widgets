@@ -18,6 +18,8 @@ Item {
             fillMode: Image.PreserveAspectFit
             opacity: 0.8
             asynchronous: true
+            sourceSize.width: 128
+            sourceSize.height: 128
         }
     }
 }

@@ -31,6 +31,9 @@ Item {
     property var onLaunchApp: function() {}
     property var getPlayerIcon: function(id) { return "multimedia-player" }
     
+    property var playersModel: null
+    property var onSwitchPlayer: function(id) {}
+    
     // Hover states
     property bool leftHovered: false
     property bool rightHovered: false
@@ -113,7 +116,7 @@ Item {
                 hasPlayer: compactMode.hasPlayer
                 preferredPlayer: compactMode.preferredPlayer
                 onLaunchApp: compactMode.onLaunchApp
-                showPlayerBadge: compactMode.showPlayerBadge
+                showPlayerBadge: false // Badge is rendered separately to stay fixed
                 placeholderSource: "../placeholders/NoMediaCompact.qml"
                 
                 pillMode: false
@@ -122,6 +125,9 @@ Item {
                 showGradient: true
                 showCenterPlayIcon: (compactMode.centerHovered || !compactMode.isPlaying)
                 isPlaying: compactMode.isPlaying
+                
+                playersModel: compactMode.playersModel
+                onSwitchPlayer: compactMode.onSwitchPlayer
             }
         }
         
@@ -205,6 +211,28 @@ Item {
                     }
                 }
             }
+        }
+    }
+    
+    // Fixed App Badge (outside sliding container)
+    Loader {
+        id: fixedBadgeLoader
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 5
+        anchors.topMargin: 5
+        z: 110 // Above hit zones (100) so badge clicks work properly
+        active: compactMode.showPlayerBadge && compactMode.hasPlayer && compactMode.playerIdentity !== ""
+        
+        sourceComponent: Components.AppBadge {
+            pillMode: false // Icon only when collapsed
+            iconOnlyMode: true // Only show icons when expanded (no text)
+            iconSize: Math.max(16, compactMode.width * 0.09)
+            playerIdentity: compactMode.playerIdentity
+            iconSource: compactMode.getPlayerIcon(compactMode.playerIdentity)
+            
+            playersModel: compactMode.playersModel
+            onSwitchPlayer: compactMode.onSwitchPlayer
         }
     }
     
