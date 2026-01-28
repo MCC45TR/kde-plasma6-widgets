@@ -6,6 +6,8 @@ import org.kde.kirigami as Kirigami
 Item {
     id: configAppearance
     
+    property string title: i18n("Appearance")
+    
     // Config binding
     property int cfg_edgeMargin
     

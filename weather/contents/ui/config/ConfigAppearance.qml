@@ -18,6 +18,7 @@ Item {
     property int cfg_panelIconSize
     property int cfg_edgeMargin
     property bool cfg_showForecastUnits
+    property int cfg_forecastDays
 
 
 
@@ -58,6 +59,7 @@ Item {
     property int cfg_panelIconSizeDefault
     property int cfg_edgeMarginDefault
     property bool cfg_showForecastUnitsDefault
+    property int cfg_forecastDaysDefault
     
     // Model for icon packs
     property var iconPacksModel: ["default", "system", "google_v3", "google_v2", "google_v1"]

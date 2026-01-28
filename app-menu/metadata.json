@@ -1,0 +1,24 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "MCC",
+                "Email": "info@mcc.com"
+            }
+        ],
+        "Category": "Application Launchers",
+        "Description": "Modern App Menu with Pinned Apps and App Library",
+        "EnabledByDefault": true,
+        "Icon": "launcher-program-symbolic",
+        "Id": "com.plasma6widgets.appmenu",
+        "License": "GPL-2.0+",
+        "Name": "App Menu",
+        "Version": "1.0",
+        "Website": ""
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.launchermenu"
+    ]
+}

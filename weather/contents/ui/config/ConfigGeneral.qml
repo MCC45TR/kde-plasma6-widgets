@@ -24,6 +24,7 @@ Item {
     property string cfg_customFontFamily
     property double cfg_backgroundOpacity
     property int cfg_forecastDays
+    property bool cfg_showForecastUnits
     property int cfg_edgeMargin
     property string cfg_layoutMode
     property int cfg_panelFontSize
@@ -49,6 +50,7 @@ Item {
     property string cfg_customFontFamilyDefault
     property double cfg_backgroundOpacityDefault
     property int cfg_forecastDaysDefault
+    property bool cfg_showForecastUnitsDefault
     property int cfg_edgeMarginDefault
     property string cfg_layoutModeDefault
     property int cfg_panelFontSizeDefault

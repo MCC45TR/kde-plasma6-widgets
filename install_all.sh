@@ -21,6 +21,7 @@ available_widgets=(
 "minimal-analog-clock"
 "file-search"
 "browser-search"
+"app-menu"
 )
 
 BASE_DIR="/home/mcc45tr/Gitler/Projelerim/Plasma6Widgets"
