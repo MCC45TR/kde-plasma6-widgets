@@ -61,8 +61,9 @@ Rectangle {
             fillMode: Image.PreserveAspectCrop
             cache: true
             asynchronous: true
-            sourceSize.width: width > 0 ? width : 256
-            sourceSize.height: height > 0 ? height : 256
+            // Use fixed sourceSize to prevent reload during resize animations
+            sourceSize.width: 512
+            sourceSize.height: 512
         }
     }
     

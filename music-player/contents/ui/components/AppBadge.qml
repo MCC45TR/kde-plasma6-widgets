@@ -123,13 +123,14 @@ Rectangle {
                 // Icon centered in iconOnlyMode, left-aligned otherwise
                 Item {
                     id: iconContainer
-                    width: badgeIcon.width
+                    width: badge.iconSize
                     height: parent.height
                     anchors.centerIn: badge.iconOnlyMode ? parent : undefined
                     anchors.left: badge.iconOnlyMode ? undefined : parent.left
-                    anchors.leftMargin: badge.iconOnlyMode ? 0 : ((badge.headerWidth - badgeIcon.width) / 2)
+                    anchors.leftMargin: badge.iconOnlyMode ? 0 : ((badge.headerWidth - badge.iconSize) / 2)
                     anchors.verticalCenter: badge.iconOnlyMode ? undefined : parent.verticalCenter
                     
+                    // Current icon with fade animation
                     Kirigami.Icon {
                         id: badgeIcon
                         anchors.centerIn: parent
@@ -137,6 +138,54 @@ Rectangle {
                         width: badge.iconSize
                         height: width
                         source: badge.iconSource
+                        opacity: 1
+                        
+                        Behavior on opacity {
+                            NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+                        }
+                    }
+                    
+                    // Previous icon for crossfade effect
+                    Kirigami.Icon {
+                        id: previousIcon
+                        anchors.centerIn: parent
+                        anchors.verticalCenterOffset: badge.pillMode ? -1 : 0
+                        width: badge.iconSize
+                        height: width
+                        source: ""
+                        opacity: 0
+                        
+                        Behavior on opacity {
+                            NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+                        }
+                    }
+                    
+                    // Track icon changes for crossfade
+                    property string lastIconSource: badge.iconSource
+                    
+                    Connections {
+                        target: badge
+                        function onIconSourceChanged() {
+                            if (iconContainer.lastIconSource !== badge.iconSource && iconContainer.lastIconSource !== "") {
+                                // Set previous icon to old source
+                                previousIcon.source = iconContainer.lastIconSource
+                                previousIcon.opacity = 1
+                                badgeIcon.opacity = 0
+                                
+                                // Fade transition
+                                crossfadeTimer.restart()
+                            }
+                            iconContainer.lastIconSource = badge.iconSource
+                        }
+                    }
+                    
+                    Timer {
+                        id: crossfadeTimer
+                        interval: 50
+                        onTriggered: {
+                            badgeIcon.opacity = 1
+                            previousIcon.opacity = 0
+                        }
                     }
                 }
                 
