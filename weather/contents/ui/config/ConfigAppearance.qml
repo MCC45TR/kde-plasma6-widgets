@@ -1,9 +1,14 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 
 Item {
     id: configAppearance
+    
+    // Check if widget is in panel mode
+    readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
     
     property var title // To silence "does not have a property called title" error
     
@@ -86,12 +91,19 @@ Item {
             Layout.fillWidth: true
             
             ColumnLayout {
-                width: parent.width
+                anchors.fill: parent
                 spacing: 10
+                
+                CheckBox {
+                    text: i18n("Show Units in Forecast")
+                    checked: configAppearance.cfg_showForecastUnits
+                    onCheckedChanged: {
+                        configAppearance.cfg_showForecastUnits = checked
+                    }
+                }
                 
                 Label {
                     text: i18n("Layout Mode:")
-                    
                     font.bold: true
                 }
 
@@ -127,7 +139,7 @@ Item {
                           i18n("Select the visual style for weather icons.")
                     font.pixelSize: 10
                     opacity: 0.7
-                    wrapMode: Text.WordWrap // Enable multiline
+                    wrapMode: Text.WordWrap
                     Layout.fillWidth: true
                 }
                 
@@ -147,17 +159,7 @@ Item {
                         else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
                     }
                 }
-
             }
-            
-            CheckBox {
-                text: i18n("Show Units in Forecast")
-                checked: configAppearance.cfg_showForecastUnits
-                onCheckedChanged: {
-                    configAppearance.cfg_showForecastUnits = checked
-                }
-            }
-
         }
 
         GroupBox {
@@ -165,7 +167,7 @@ Item {
             Layout.fillWidth: true
 
             ColumnLayout {
-                width: parent.width
+                anchors.fill: parent
                 spacing: 10
 
                 CheckBox {
@@ -201,9 +203,11 @@ Item {
         GroupBox {
             title: i18n("Panel Settings")
             Layout.fillWidth: true
+            enabled: configAppearance.isPanel
+            opacity: configAppearance.isPanel ? 1.0 : 0.5
 
             ColumnLayout {
-                width: parent.width
+                anchors.fill: parent
                 spacing: 10
 
                 Label {
@@ -264,7 +268,7 @@ Item {
             Layout.fillWidth: true
 
             ColumnLayout {
-                width: parent.width
+                anchors.fill: parent
                 spacing: 10
 
                 Label {

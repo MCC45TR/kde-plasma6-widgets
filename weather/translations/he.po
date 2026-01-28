@@ -313,7 +313,7 @@ msgid "25%"
 msgstr "25%"
 
 msgid "10%"
-msgstr "10%" Israeli
+msgstr "10%"
 msgid "5%"
 msgstr "5%"
 

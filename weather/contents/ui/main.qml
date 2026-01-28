@@ -88,8 +88,13 @@ PlasmoidItem {
 
 
     function detectSystemUnits() {
-        var imperialLocales = ["en_US", "en_LR", "en_MM"]
-        return imperialLocales.indexOf(Qt.locale().name) >= 0 ? "imperial" : "metric"
+        // Qt.locale().measurementSystem returns:
+        // 0 = MetricSystem (Metric)
+        // 1 = ImperialUSSystem (Imperial US)
+        // 2 = ImperialUKSystem (Imperial UK)
+        // This will properly read from KDE Plasma's regional settings
+        var measurementSystem = Qt.locale().measurementSystem
+        return measurementSystem === 0 ? "metric" : "imperial"
     }
 
     function getActiveLocation() {
@@ -233,7 +238,7 @@ PlasmoidItem {
                 spacing: 0
                 
                 Text {
-                    text: root.currentWeather ? Math.round(root.currentWeather.temp) + "°C" : "--"
+                    text: root.currentWeather ? Math.round(root.currentWeather.temp) + (root.units === "metric" ? "°C" : "°F") : "--"
                     color: Kirigami.Theme.textColor
                     font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize : compactRep.height * 0.4
                     font.bold: true
