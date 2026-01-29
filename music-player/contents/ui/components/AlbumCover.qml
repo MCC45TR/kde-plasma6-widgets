@@ -25,6 +25,7 @@ Rectangle {
     property bool pillMode: false
     property bool showNoMediaText: true
     property bool showPlayerBadge: true
+    property bool expandBadgeToFullWidth: false
     
     // Overlay properties
     property bool showDimOverlay: false
@@ -98,6 +99,8 @@ Rectangle {
             playerIdentity: albumCover.playerIdentity
             iconSource: albumCover.playerIcon
             preferredPlayer: albumCover.preferredPlayer
+            
+            explicitExpandedWidth: albumCover.expandBadgeToFullWidth ? (albumCover.width - 2 * appBadgeLoader.distance) : 0
             
             playersModel: albumCover.playersModel
             onSwitchPlayer: albumCover.onSwitchPlayer

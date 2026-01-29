@@ -283,6 +283,15 @@ FocusScope {
 
     // Tile Grid
     property int scrollBarStyle: 0
+    
+    // Compact tile view mode
+    property bool compactTileView: false
+    
+    // Computed tile dimensions
+    readonly property real tileWidth: compactTileView ? (iconSize + 16) : (iconSize + 40)
+    readonly property real tileHeight: compactTileView ? (iconSize + 40) : (iconSize + 50)
+    readonly property real textWidth: compactTileView ? (iconSize + 8) : (iconSize + 32)
+    readonly property int textFontSize: compactTileView ? 9 : (iconSize > 32 ? 11 : 9)
 
     Component {
         id: systemScrollBarComp
@@ -400,8 +409,8 @@ FocusScope {
                         
                         Item {
                             id: histTileDelegate
-                            width: historyTile.iconSize + 40
-                            height: historyTile.iconSize + 50
+                            width: historyTile.tileWidth
+                            height: historyTile.tileHeight
                             
                             property int itemIdx: index
                             property bool isSelected: historyTile.isItemSelected(histCategoryDelegate.catIdx, itemIdx)
@@ -479,10 +488,10 @@ FocusScope {
                                     }
                                     
                                     Text {
-                                        width: historyTile.iconSize + 32
+                                        width: historyTile.textWidth
                                         text: modelData.display || ""
                                         color: historyTile.textColor
-                                        font.pixelSize: historyTile.iconSize > 32 ? 11 : 9
+                                        font.pixelSize: historyTile.textFontSize
                                         horizontalAlignment: Text.AlignHCenter
                                         elide: Text.ElideMiddle
                                         maximumLineCount: 2
@@ -491,7 +500,7 @@ FocusScope {
                                     
                                     // Parent folder name (Grid mode)
                                     Text {
-                                        width: historyTile.iconSize + 32
+                                        width: historyTile.textWidth
                                         text: {
                                             if (modelData.isApplication) return "";
                                             

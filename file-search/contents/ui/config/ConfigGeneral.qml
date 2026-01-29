@@ -44,12 +44,12 @@ Item {
     property bool cfg_smartResultLimit
     property alias cfg_showPinnedBar: showPinnedBarCheck.checked
     property alias cfg_autoMinimizePinned: autoMinimizePinnedCheck.checked
+    property alias cfg_compactPinnedView: tileViewModeCombo.currentIndex
     property int cfg_searchAlgorithm 
     
     // Preview
     property string cfg_previewSettings
-    property bool cfg_previewEnabled
-    property alias cfg_previewEnabledUI: masterPreviewSwitch.checked
+    property alias cfg_previewEnabled: masterPreviewSwitch.checked
     
     // Prefix
     property alias cfg_prefixDateShowClock: prefixDateClock.checked
@@ -91,6 +91,7 @@ Item {
     property bool cfg_smartResultLimitDefault
     property bool cfg_showPinnedBarDefault
     property bool cfg_autoMinimizePinnedDefault
+    // cfg_compactPinnedViewDefault is handled by the alias
     property int cfg_searchAlgorithmDefault
     property string cfg_previewSettingsDefault
     property bool cfg_previewEnabledDefault
@@ -385,6 +386,21 @@ Item {
                             checked: cfg_autoMinimizePinned
                             enabled: showPinnedBarCheck.checked
                         }
+                    }
+                    
+                    // Tile View Mode ComboBox
+                    ComboBox {
+                        id: tileViewModeCombo
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Tile Size Mode")
+                        enabled: viewModeCombo.currentIndex === 1
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Normal (wide tiles)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Compact (all small)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Only pinned compact"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Only history/results compact")
+                        ]
+                        Layout.fillWidth: true
+                        // currentIndex is bound via alias to cfg_compactPinnedView
                     }
                     
                     // Popup Preview

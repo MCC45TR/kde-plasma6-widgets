@@ -13,7 +13,7 @@
         "Icon": "system-search",
         "Id": "com.mcc45tr.filesearch",
         "Name": "MFile Finder",
-        "Version": "1.2.1",
+        "Version": "1.2.2",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/file-search",
         "License": "GPL-3.0",
         "Name[tr]": "MDosya Bulucu",

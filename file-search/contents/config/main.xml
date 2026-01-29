@@ -65,6 +65,10 @@
       <default>false</default>
       <label>Automatically minimize pinned items when searching</label>
     </entry>
+    <entry name="compactPinnedView" type="Int">
+      <default>0</default>
+      <label>Tile view compact mode: 0=Normal, 1=All Compact, 2=Only Pinned Compact, 3=Only History Compact</label>
+    </entry>
   </group>
 
   <!-- Tab 3: Preview Settings -->

@@ -56,6 +56,13 @@ Item {
     property bool prefixPowerShowSleep: true
     property bool showPinnedBar: true
     property bool autoMinimizePinned: false
+    
+    // Tile size mode: 0=Normal, 1=All Compact, 2=Only Pinned Compact, 3=Only History Compact
+    property int compactTileMode: 0
+    
+    // Computed compact properties based on mode
+    readonly property bool compactPinnedItems: compactTileMode === 1 || compactTileMode === 2
+    readonly property bool compactHistoryItems: compactTileMode === 1 || compactTileMode === 3
 
     // property var trFunc removed
     
@@ -522,6 +529,7 @@ Item {
             iconSize: popupRoot.iconSize
             isTileView: popupRoot.isTileView
             isSearching: popupRoot.searchText.length > 0
+            compactPinnedView: popupRoot.compactPinnedItems
             // trFunc removed
             
             onItemClicked: (item) => {
@@ -633,6 +641,7 @@ Item {
              searchText: popupRoot.searchText
              previewSettings: popupRoot.previewSettings
              scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
+             compactTileView: popupRoot.compactHistoryItems
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
              
@@ -814,6 +823,7 @@ Item {
                  // trFunc removed
                  previewSettings: popupRoot.previewSettings
                  scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
+                 compactTileView: popupRoot.compactHistoryItems
                  
                  onItemClicked: (item) => handleHistoryClick(item)
                  onClearClicked: logic.clearHistory()

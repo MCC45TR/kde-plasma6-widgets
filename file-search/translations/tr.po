@@ -803,6 +803,26 @@ msgstr "Sabitle"
 msgid "Pinned Items"
 msgstr "Sabitlenmiş Öğeler"
 
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Tile Size Mode"
+msgstr "Döşeme Boyut Modu"
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Normal (wide tiles)"
+msgstr "Normal (geniş karolar)"
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Compact (all small)"
+msgstr "Kompakt (tamamı küçük)"
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Only pinned compact"
+msgstr "Sadece sabitlenmiş kompakt"
+
+#: contents/ui/config/ConfigGeneral.qml
+msgid "Only history/results compact"
+msgstr "Sadece geçmiş/sonuçlar kompakt"
+
 #: contents/ui/components/PinnedSection.qml:323
 msgid "Drag to reorder"
 msgstr "Sıralamak için sürükleyin"

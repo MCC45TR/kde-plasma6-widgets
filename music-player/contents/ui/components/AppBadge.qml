@@ -18,7 +18,8 @@ Rectangle {
     property bool iconOnlyMode: false // When true, shows only icons in expanded view
     property real iconSize: 16
     property string preferredPlayer: "" // Current preferred player setting
-    
+    property real explicitExpandedWidth: 0 // If > 0, this width is used when expanded
+
     // State
     property bool expanded: false
     
@@ -73,7 +74,7 @@ Rectangle {
     readonly property real itemHeight: iconOnlyMode ? headerHeight : 36
     readonly property real listHeight: listItemCount * itemHeight + itemHeight /* General Item */
 
-    width: iconOnlyMode ? headerWidth : (expanded ? Math.max(headerWidth, 180) : headerWidth)
+    width: iconOnlyMode ? headerWidth : (expanded ? (explicitExpandedWidth > 0 ? explicitExpandedWidth : Math.max(headerWidth, 180)) : headerWidth)
     height: expanded ? (headerHeight + 1 + listHeight + (iconOnlyMode ? 5 : 10)) : headerHeight
     
     Behavior on width { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }

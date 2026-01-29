@@ -1,5 +1,23 @@
 # 🎵 MMusic Player (`music-player`)
 
+### v1.2.5 (2026-01-29)
+**TR-TR:**
+- **Yeni Görünüm Modları**:
+    - **Ekstra Büyük Mod (Extra Large Mode)**: Büyük albüm kapağı, detaylı oynatıcı kontrolleri, shuffle/loop butonları ve 10 saniyelik atlatma düğmeleri içeren yeni bir mod eklendi.
+    - **Panel Görünümü (Panel Mode)**: Panel üzerinde daha şık, kompakt ve dinamik genişliğe sahip yeni bir görünüm tasarımı uygulandı.
+- **Uluslararasılaştırma (i18n) Tamamlandı**: Kod tabanındaki tüm arayüz metinleri (`No Media`, `Previous`, `Next` vb.) `i18n()` sarmalına alınarak tam çeviri desteği sağlandı.
+- **Yerelleştirme**: 19 farklı dil (TR, DE, FR, ES, IT, AZ, RU, JA, ZH, PT, RO, ID, CS, EL, HY, HI, BN, UR, FA) için çeviri dosyaları (`.po` ve `.mo`) güncellendi ve eksik olanlar sıfırdan oluşturuldu.
+- **Hata Düzeltmesi**: Shuffle ve Loop butonlarının görsel durum geri bildirimleri ve mod döngüleri iyileştirildi.
+
+**EN-US:**
+- **New View Modes**:
+    - **Extra Large Mode**: Added a new comprehensive mode featuring large artwork, shuffle/loop controls, and 10-second seek buttons.
+    - **Enhanced Panel Mode**: Implementation of a sleek, compact, and dynamic-width representation specifically designed for the Plasma panel.
+- **Full i18n Completion**: All remaining hardcoded UI strings were wrapped in `i18n()` calls for complete localization support.
+- **Global Translations**: Added and updated translation files for 19 languages, including binary `.mo` compilation for performance.
+- **Bug Fixes**: Improved shuffle and loop button visual states and cycle logic.
+
+
 ### v1.2.4 (2026-01-24)
 **TR-TR:**
 - **İyileştirme**: Widget kenar boşlukları artık ayarlanabiliyor ve bu ayar kalıcı olarak kaydediliyor.

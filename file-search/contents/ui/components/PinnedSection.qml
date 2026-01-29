@@ -34,13 +34,20 @@ Item {
     
     // Search state
     property bool isSearching: false
+    
+    // Compact vs Normal tile view. Normal = same size as history tiles
+    property bool compactPinnedView: false
+    
+    // Computed tile dimensions - match HistoryTileView when normal mode
+    readonly property real tileWidth: compactPinnedView ? (iconSize + 16) : (iconSize + 40)
+    readonly property real tileHeight: compactPinnedView ? (iconSize + 48) : (iconSize + 50)
 
     // Height calculation
     implicitHeight: pinnedItems.length > 0 ? contentColumn.implicitHeight : 0
     visible: pinnedItems.length > 0
     
     // Calculate height of a single row (Item height + Top Margin + Bottom Padding)
-    readonly property real singleRowHeight: (isTileView ? (iconSize + 48) : 40) + 12
+    readonly property real singleRowHeight: (isTileView ? tileHeight : 40) + 12
 
     ColumnLayout {
         id: contentColumn
@@ -216,8 +223,8 @@ Item {
                             
                             delegate: Item {
                                 id: tileDelegate
-                                width: pinnedSectionRoot.iconSize + 16
-                                height: pinnedSectionRoot.iconSize + 48
+                                width: pinnedSectionRoot.tileWidth
+                                height: pinnedSectionRoot.tileHeight
                                 
                                 property int visualIndex: index
                                 property bool isDragging: pinnedSectionRoot.draggedIndex === index
@@ -274,10 +281,10 @@ Item {
                                         
                                         Text {
                                             text: modelData.display || ""
-                                            width: pinnedSectionRoot.iconSize + 8
+                                            width: pinnedSectionRoot.compactPinnedView ? (pinnedSectionRoot.iconSize + 8) : (pinnedSectionRoot.iconSize + 32)
                                             horizontalAlignment: Text.AlignHCenter
                                             color: pinnedSectionRoot.textColor
-                                            font.pixelSize: 10
+                                            font.pixelSize: pinnedSectionRoot.compactPinnedView ? 10 : 11
                                             wrapMode: Text.Wrap
                                             maximumLineCount: 2
                                             elide: Text.ElideRight

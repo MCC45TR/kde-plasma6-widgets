@@ -11,7 +11,7 @@ Item {
     // KCM Configuration Properties (Preview specific)
     property string cfg_previewSettings
     property string cfg_previewSettingsDefault
-    property bool cfg_previewEnabled
+    property alias cfg_previewEnabled: masterPreviewSwitch.checked
     property bool cfg_previewEnabledDefault
 
     // Other Config Properties (to silence warnings)
@@ -118,8 +118,7 @@ Item {
                 
                 Switch {
                     id: masterPreviewSwitch
-                    checked: configPreview.cfg_previewEnabled
-                    onToggled: configPreview.cfg_previewEnabled = checked
+                    // checked is bound via alias to cfg_previewEnabled
                 }
                 
                 Label {

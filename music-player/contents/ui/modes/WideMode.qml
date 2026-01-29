@@ -61,6 +61,7 @@ Item {
             placeholderSource: "../placeholders/NoMediaWide.qml"
             
             pillMode: true
+            expandBadgeToFullWidth: true
             showNoMediaText: false
             showDimOverlay: false
             showGradient: false

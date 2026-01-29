@@ -164,6 +164,7 @@ PlasmoidItem {
         showBootOptions: Plasmoid.configuration.showBootOptions
         showPinnedBar: Plasmoid.configuration.showPinnedBar
         autoMinimizePinned: Plasmoid.configuration.autoMinimizePinned
+        compactTileMode: Plasmoid.configuration.compactPinnedView
         previewEnabled: Plasmoid.configuration.previewEnabled
         previewSettings: {
             try {

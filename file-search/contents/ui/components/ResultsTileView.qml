@@ -98,7 +98,7 @@ FocusScope {
     property bool previewForceVisible: false
     
     function columnsInRow() {
-        var itemWidth = iconSize + 48
+        var itemWidth = tileWidth + 8 // tile width + spacing
         return Math.max(1, Math.floor(width / itemWidth))
     }
     
@@ -278,6 +278,15 @@ FocusScope {
     }
 
     property int scrollBarStyle: 0
+    
+    // Compact tile view mode
+    property bool compactTileView: false
+    
+    // Computed tile dimensions for grid items
+    readonly property real tileWidth: compactTileView ? (iconSize + 16) : (iconSize + 40)
+    readonly property real tileHeight: compactTileView ? (iconSize + 40) : (iconSize + 50)
+    readonly property real textWidth: compactTileView ? (iconSize + 8) : (iconSize + 32)
+    readonly property int textFontSize: compactTileView ? 9 : (iconSize > 32 ? 11 : 9)
 
     Component {
         id: systemScrollBarComp
@@ -394,8 +403,8 @@ FocusScope {
                         delegate: Item {
                             id: tileDelegate
                             // Wide vs Grid sizing
-                            width: categoryDelegate.isWide ? parent.width : (resultsTileRoot.iconSize + 40)
-                            height: categoryDelegate.isWide ? Math.max(50, resultsTileRoot.iconSize + 16) : (resultsTileRoot.iconSize + 50)
+                            width: categoryDelegate.isWide ? parent.width : resultsTileRoot.tileWidth
+                            height: categoryDelegate.isWide ? Math.max(50, resultsTileRoot.iconSize + 16) : resultsTileRoot.tileHeight
                             
                             property int itemIdx: index
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
@@ -511,7 +520,7 @@ FocusScope {
                                             width: tileDelegate.width - 16
                                             text: modelData.display || ""
                                             color: resultsTileRoot.textColor
-                                            font.pixelSize: resultsTileRoot.iconSize > 32 ? 11 : 9
+                                            font.pixelSize: resultsTileRoot.textFontSize
                                             horizontalAlignment: Text.AlignHCenter
                                             elide: Text.ElideMiddle
                                             maximumLineCount: 2
