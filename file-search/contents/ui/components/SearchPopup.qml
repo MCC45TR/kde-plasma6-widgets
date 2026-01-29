@@ -839,8 +839,8 @@ Item {
               resultCount: tileData.resultCount
               activeBackend: popupRoot.activeBackend
               lastLatency: tileData.lastLatency
-              viewModeName: isTileView ? "Tile" : "List"
-              displayModeName: isButtonMode ? "Button" : "Mode"
+              viewModeName: isTileView ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Tile") : i18nd("plasma_applet_com.mcc45tr.filesearch", "List")
+              displayModeName: isButtonMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Button") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Mode")
               totalSearches: logic.telemetryStats.totalSearches || 0
               avgLatency: logic.telemetryStats.averageLatency || 0
               // trFunc removed

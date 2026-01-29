@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Bengali <kde-i18n-bn@kde.org>\n"
+"Language: bn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "সাধারণ"
+
+msgid "Default Media Player"
+msgstr "ডিফল্ট মিডিয়া প্লেয়ার"
+
+msgid "Selected Player:"
+msgstr "নির্বাচিত প্লেয়ার:"
+
+msgid "⚠ No active players"
+msgstr "⚠ কোন সক্রিয় প্লেয়ার নেই"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 টি সক্রিয় প্লেয়ার পাওয়া গেছে"
+
+msgid "All media sources are tracked."
+msgstr "সব মিডিয়া সোর্স ট্র্যাক করা হচ্ছে।"
+
+msgid "Only \"%1\" is tracked."
+msgstr "শুধুমাত্র \"%1\" ট্র্যাক করা হচ্ছে।"
+
+msgid "Show media player badge"
+msgstr "মিডিয়া প্লেয়ার ব্যাজ দেখান"
+
+msgid "Appearance"
+msgstr "চেহারা"
+
+msgid "Widget Margin"
+msgstr "উইজেট মার্জিন"
+
+msgid "Normal (10px)"
+msgstr "স্বাভাবিক (10px)"
+
+msgid "Less (5px)"
+msgstr "কম (5px)"
+
+msgid "None (0px)"
+msgstr "কিছুই না (0px)"
+
+msgid "Background Opacity"
+msgstr "ব্যাকগ্রাউন্ডের অস্বচ্ছতা"
+
+msgid "Controls"
+msgstr "নিয়ন্ত্রণ"
+
+msgid "Show Controls in Panel"
+msgstr "প্যানেলে কন্ট্রোল দেখান"
+
+msgid "Panel Settings"
+msgstr "প্যানেল সেটিংস"
+
+msgid "Layout Mode"
+msgstr "লেআউট মোড"
+
+msgid "Left Aligned"
+msgstr "বামে সাজানো"
+
+msgid "Right Aligned"
+msgstr "ডানে সাজানো"
+
+msgid "Centered"
+msgstr "কেন্দ্রীভূত"
+
+msgid "Button Size"
+msgstr "বোতামের আকার"
+
+msgid "Auto Size based on Panel Height"
+msgstr "প্যানেল উচ্চতা অনুযায়ী অটো সাইজ"
+
+msgid "Button Size (px)"
+msgstr "বোতামের আকার (px)"
+
+msgid "Text"
+msgstr "টেক্সট"
+
+msgid "Scroll Text if truncated"
+msgstr "টেক্সট বড় হলে স্ক্রল করুন"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "ডায়নামিক প্রশস্ততা"
+
+msgid "Max Width (px)"
+msgstr "সর্বোচ্চ প্রশস্ততা (px)"
+
+msgid "Scroll Speed"
+msgstr "স্ক্রলিং গতি"
+
+msgid "Fast"
+msgstr "দ্রুত"
+
+msgid "Medium"
+msgstr "মাঝারি"
+
+msgid "Slow"
+msgstr "ধীর"
+
+msgid "Displayed Info"
+msgstr "প্রদর্শিত তথ্য"
+
+msgid "Show Title"
+msgstr "শিরোনাম দেখান"
+
+msgid "Show Artist"
+msgstr "শিল্পী দেখান"
+
+msgid "Font Size"
+msgstr "ফন্ট সাইজ"
+
+msgid "Font Size (px)"
+msgstr "ফন্ট সাইজ (px)"
+
+msgid "View Settings"
+msgstr "ভিউ সেটিংস"
+
+msgid "View Mode"
+msgstr "ভিউ মোড"
+
+msgid "Automatic"
+msgstr "স্বয়ংক্রিয়"
+
+msgid "Wide"
+msgstr "প্রশস্ত"
+
+msgid "Large"
+msgstr "বড়"
+
+msgid "Extra Large"
+msgstr "অতিরিক্ত বড়"
+
+msgid "Small"
+msgstr "ছোট"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "অতিরিক্ত বড় মোড বোতাম:"
+
+msgid "Shuffle Button"
+msgstr "শাফল বোতাম"
+
+msgid "not working"
+msgstr "কাজ করছে না"
+
+msgid "Loop/Repeat Button"
+msgstr "লুপ/রিপিট বোতাম"
+
+msgid "10-Second Seek Buttons"
+msgstr "১০ সেকেন্ড সিক বোতাম"
+
+msgid "No Media Playing"
+msgstr "কোন মিডিয়া চলছে না"
+
+msgid "No Media"
+msgstr "কোন মিডিয়া নেই"
+
+msgid "Previous Track"
+msgstr "আগের গান"
+
+msgid "Next Track"
+msgstr "পরের গান"
+
+msgid "Previous"
+msgstr "আগের"
+
+msgid "Next"
+msgstr "পরের"

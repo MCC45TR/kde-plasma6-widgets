@@ -18,9 +18,9 @@ Item {
     property bool isPlaying: false
     property real currentPosition: 0
     property real length: 0
-    property string prevText: "Previous"
-    property string nextText: "Next"
-    property string noMediaText: "No Media"
+    property string prevText: i18n("Previous")
+    property string nextText: i18n("Next")
+    property string noMediaText: i18n("No Media")
     property bool showPlayerBadge: true
     
     // Callbacks

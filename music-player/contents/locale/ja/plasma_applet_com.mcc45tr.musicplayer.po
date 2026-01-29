@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Japanese <kde-i18n-ja@kde.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "全般"
+
+msgid "Default Media Player"
+msgstr "規定のメディアプレーヤー"
+
+msgid "Selected Player:"
+msgstr "選択されたプレーヤー:"
+
+msgid "⚠ No active players"
+msgstr "⚠ アクティブなプレーヤーがありません"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 個のアクティブなプレーヤーが見つかりました"
+
+msgid "All media sources are tracked."
+msgstr "すべてのメディアソースをトラック中です。"
+
+msgid "Only \"%1\" is tracked."
+msgstr "\"%1\" のみトラック中。 "
+
+msgid "Show media player badge"
+msgstr "プレーヤーのバッジを表示"
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Widget Margin"
+msgstr "ウィジェットの余白"
+
+msgid "Normal (10px)"
+msgstr "通常 (10px)"
+
+msgid "Less (5px)"
+msgstr "少なめ (5px)"
+
+msgid "None (0px)"
+msgstr "なし (0px)"
+
+msgid "Background Opacity"
+msgstr "背景の不透明度"
+
+msgid "Controls"
+msgstr "コントロール"
+
+msgid "Show Controls in Panel"
+msgstr "パネルにコントロールを表示"
+
+msgid "Panel Settings"
+msgstr "パネル設定"
+
+msgid "Layout Mode"
+msgstr "レイアウトモード"
+
+msgid "Left Aligned"
+msgstr "左揃え"
+
+msgid "Right Aligned"
+msgstr "右揃え"
+
+msgid "Centered"
+msgstr "中央揃え"
+
+msgid "Button Size"
+msgstr "ボタンサイズ"
+
+msgid "Auto Size based on Panel Height"
+msgstr "パネルの高さに合わせる"
+
+msgid "Button Size (px)"
+msgstr "ボタンサイズ (px)"
+
+msgid "Text"
+msgstr "テキスト"
+
+msgid "Scroll Text if truncated"
+msgstr "長いテキストをスクロール"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "動的な幅 (テキストに合わせる)"
+
+msgid "Max Width (px)"
+msgstr "最大幅 (px)"
+
+msgid "Scroll Speed"
+msgstr "スクロール速度"
+
+msgid "Fast"
+msgstr "速い"
+
+msgid "Medium"
+msgstr "標準"
+
+msgid "Slow"
+msgstr "遅い"
+
+msgid "Displayed Info"
+msgstr "表示情報"
+
+msgid "Show Title"
+msgstr "タイトルを表示"
+
+msgid "Show Artist"
+msgstr "アーティストを表示"
+
+msgid "Font Size"
+msgstr "フォントサイズ"
+
+msgid "Font Size (px)"
+msgstr "フォントサイズ (px)"
+
+msgid "View Settings"
+msgstr "表示設定"
+
+msgid "View Mode"
+msgstr "表示モード"
+
+msgid "Automatic"
+msgstr "自動"
+
+msgid "Wide"
+msgstr "ワイド"
+
+msgid "Large"
+msgstr "大"
+
+msgid "Extra Large"
+msgstr "最大"
+
+msgid "Small"
+msgstr "小"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "最大モードのボタン:"
+
+msgid "Shuffle Button"
+msgstr "シャッフルボタン"
+
+msgid "not working"
+msgstr "動作しません"
+
+msgid "Loop/Repeat Button"
+msgstr "ループ・リピートボタン"
+
+msgid "10-Second Seek Buttons"
+msgstr "10秒シークボタン"
+
+msgid "No Media Playing"
+msgstr "メディアを再生していません"
+
+msgid "No Media"
+msgstr "メディアなし"
+
+msgid "Previous Track"
+msgstr "前の曲"
+
+msgid "Next Track"
+msgstr "次の曲"
+
+msgid "Previous"
+msgstr "戻る"
+
+msgid "Next"
+msgstr "進む"

@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Persian <kde-i18n-fa@kde.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "Default Media Player"
+msgstr "پخش‌کننده پیش‌فرض"
+
+msgid "Selected Player:"
+msgstr "پخش‌کننده انتخاب شده:"
+
+msgid "⚠ No active players"
+msgstr "⚠ پخش‌کننده فعالی وجود ندارد"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 پخش‌کننده فعال پیدا شد"
+
+msgid "All media sources are tracked."
+msgstr "تمام منابع رسانه‌ای ردیابی می‌شوند."
+
+msgid "Only \"%1\" is tracked."
+msgstr "فقط \"%1\" ردیابی می‌شود."
+
+msgid "Show media player badge"
+msgstr "نمایش نشان پخش‌کننده"
+
+msgid "Appearance"
+msgstr "ظاهر"
+
+msgid "Widget Margin"
+msgstr "حاشیه ویجت"
+
+msgid "Normal (10px)"
+msgstr "معمولی (10px)"
+
+msgid "Less (5px)"
+msgstr "کمتر (5px)"
+
+msgid "None (0px)"
+msgstr "هیچ"
+
+msgid "Background Opacity"
+msgstr "شفافیت پس‌زمینه"
+
+msgid "Controls"
+msgstr "کنترل‌ها"
+
+msgid "Show Controls in Panel"
+msgstr "نمایش کنترل‌ها در پانل"
+
+msgid "Panel Settings"
+msgstr "تنظیمات پانل"
+
+msgid "Layout Mode"
+msgstr "حالت چیدمان"
+
+msgid "Left Aligned"
+msgstr "چپ‌چین"
+
+msgid "Right Aligned"
+msgstr "راست‌چین"
+
+msgid "Centered"
+msgstr "وسط‌چین"
+
+msgid "Button Size"
+msgstr "اندازه دکمه"
+
+msgid "Auto Size based on Panel Height"
+msgstr "اندازه خودکار بر اساس ارتفاع پانل"
+
+msgid "Button Size (px)"
+msgstr "اندازه دکمه (px)"
+
+msgid "Text"
+msgstr "متن"
+
+msgid "Scroll Text if truncated"
+msgstr "پیمایش متن در صورت طولانی بودن"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "عرض پویا (گسترش خودکار)"
+
+msgid "Max Width (px)"
+msgstr "حداکثر عرض (px)"
+
+msgid "Scroll Speed"
+msgstr "سرعت پیمایش"
+
+msgid "Fast"
+msgstr "سریع"
+
+msgid "Medium"
+msgstr "متوسط"
+
+msgid "Slow"
+msgstr "آرام"
+
+msgid "Displayed Info"
+msgstr "اطلاعات نمایش داده شده"
+
+msgid "Show Title"
+msgstr "نمایش عنوان"
+
+msgid "Show Artist"
+msgstr "نمایش هنرمند"
+
+msgid "Font Size"
+msgstr "اندازه قلم"
+
+msgid "Font Size (px)"
+msgstr "اندازه قلم (px)"
+
+msgid "View Settings"
+msgstr "تنظیمات نما"
+
+msgid "View Mode"
+msgstr "حالت نمایش"
+
+msgid "Automatic"
+msgstr "خودکار"
+
+msgid "Wide"
+msgstr "عریض"
+
+msgid "Large"
+msgstr "بزرگ"
+
+msgid "Extra Large"
+msgstr "خیلی بزرگ"
+
+msgid "Small"
+msgstr "کوچک"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "دکمه‌های حالت خیلی بزرگ:"
+
+msgid "Shuffle Button"
+msgstr "دکمه پخش تصادفی"
+
+msgid "not working"
+msgstr "کار نمی‌کند"
+
+msgid "Loop/Repeat Button"
+msgstr "دکمه تکرار"
+
+msgid "10-Second Seek Buttons"
+msgstr "دکمه‌های پرش ۱۰ ثانیه‌ای"
+
+msgid "No Media Playing"
+msgstr "رسانه‌ای در حال پخش نیست"
+
+msgid "No Media"
+msgstr "بدون رسانه"
+
+msgid "Previous Track"
+msgstr "آهنگ قبلی"
+
+msgid "Next Track"
+msgstr "آهنگ بعدی"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid "Next"
+msgstr "بعدی"

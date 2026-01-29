@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Allgemein"
+
+msgid "Default Media Player"
+msgstr "Standard-Mediaplayer"
+
+msgid "Selected Player:"
+msgstr "Ausgewählter Player:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Keine aktiven Player"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 aktive Player gefunden"
+
+msgid "All media sources are tracked."
+msgstr "Alle Medienquellen werden verfolgt."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Nur \"%1\" wird verfolgt."
+
+msgid "Show media player badge"
+msgstr "Mediaplayer-Badge anzeigen"
+
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+msgid "Widget Margin"
+msgstr "Widget-Rand"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Weniger (5px)"
+
+msgid "None (0px)"
+msgstr "Keiner (0px)"
+
+msgid "Background Opacity"
+msgstr "Hintergrund-Deckkraft"
+
+msgid "Controls"
+msgstr "Steuerelemente"
+
+msgid "Show Controls in Panel"
+msgstr "Steuerelemente im Panel anzeigen"
+
+msgid "Panel Settings"
+msgstr "Panel-Einstellungen"
+
+msgid "Layout Mode"
+msgstr "Layout-Modus"
+
+msgid "Left Aligned"
+msgstr "Linksbündig"
+
+msgid "Right Aligned"
+msgstr "Rechtsbündig"
+
+msgid "Centered"
+msgstr "Zentriert"
+
+msgid "Button Size"
+msgstr "Schaltflächengröße"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Größe automatisch an Panel-Höhe anpassen"
+
+msgid "Button Size (px)"
+msgstr "Schaltflächengröße (px)"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Scroll Text if truncated"
+msgstr "Text scrollen, wenn er abgeschnitten ist"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Dynamische Breite (automatisch erweitern)"
+
+msgid "Max Width (px)"
+msgstr "Maximale Breite (px)"
+
+msgid "Scroll Speed"
+msgstr "Scroll-Geschwindigkeit"
+
+msgid "Fast"
+msgstr "Schnell"
+
+msgid "Medium"
+msgstr "Mittel"
+
+msgid "Slow"
+msgstr "Langsam"
+
+msgid "Displayed Info"
+msgstr "Angezeigte Informationen"
+
+msgid "Show Title"
+msgstr "Titel anzeigen"
+
+msgid "Show Artist"
+msgstr "Interpret anzeigen"
+
+msgid "Font Size"
+msgstr "Schriftgröße"
+
+msgid "Font Size (px)"
+msgstr "Schriftgröße (px)"
+
+msgid "View Settings"
+msgstr "Ansichtseinstellungen"
+
+msgid "View Mode"
+msgstr "Ansichtsmodus"
+
+msgid "Automatic"
+msgstr "Automatisch"
+
+msgid "Wide"
+msgstr "Breit"
+
+msgid "Large"
+msgstr "Groß"
+
+msgid "Extra Large"
+msgstr "Extragroß"
+
+msgid "Small"
+msgstr "Klein"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Schaltflächen im Extragroß-Modus:"
+
+msgid "Shuffle Button"
+msgstr "Shuffle-Schaltfläche"
+
+msgid "not working"
+msgstr "funktioniert nicht"
+
+msgid "Loop/Repeat Button"
+msgstr "Schleifen/Wiederholen-Schaltfläche"
+
+msgid "10-Second Seek Buttons"
+msgstr "10-Sekunden-Suchlauf-Schaltflächen"
+
+msgid "No Media Playing"
+msgstr "Keine Medienwiedergabe"
+
+msgid "No Media"
+msgstr "Keine Medien"
+
+msgid "Previous Track"
+msgstr "Vorheriger Titel"
+
+msgid "Next Track"
+msgstr "Nächster Titel"
+
+msgid "Previous"
+msgstr "Zurück"
+
+msgid "Next"
+msgstr "Weiter"

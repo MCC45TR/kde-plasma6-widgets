@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Geral"
+
+msgid "Default Media Player"
+msgstr "Reprodutor padrão"
+
+msgid "Selected Player:"
+msgstr "Reprodutor selecionado:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Nenhum reprodutor ativo"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 reprodutores ativos encontrados"
+
+msgid "All media sources are tracked."
+msgstr "Todas as fontes são monitoradas."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Somente \"%1\" é monitorado."
+
+msgid "Show media player badge"
+msgstr "Mostrar emblema do reprodutor"
+
+msgid "Appearance"
+msgstr "Aparência"
+
+msgid "Widget Margin"
+msgstr "Margem do widget"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Menor (5px)"
+
+msgid "None (0px)"
+msgstr "Nenhuma (0px)"
+
+msgid "Background Opacity"
+msgstr "Opacidade do fundo"
+
+msgid "Controls"
+msgstr "Controles"
+
+msgid "Show Controls in Panel"
+msgstr "Mostrar controles no painel"
+
+msgid "Panel Settings"
+msgstr "Configurações do painel"
+
+msgid "Layout Mode"
+msgstr "Modo de layout"
+
+msgid "Left Aligned"
+msgstr "Alinhado à esquerda"
+
+msgid "Right Aligned"
+msgstr "Alinhado à direita"
+
+msgid "Centered"
+msgstr "Centralizado"
+
+msgid "Button Size"
+msgstr "Tamanho do botão"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Tamanho automático (altura do painel)"
+
+msgid "Button Size (px)"
+msgstr "Tamanho do botão (px)"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Scroll Text if truncated"
+msgstr "Rolar texto se cortado"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Largura dinâmica (ajuste automático)"
+
+msgid "Max Width (px)"
+msgstr "Largura máxima (px)"
+
+msgid "Scroll Speed"
+msgstr "Velocidade de rolagem"
+
+msgid "Fast"
+msgstr "Rápido"
+
+msgid "Medium"
+msgstr "Médio"
+
+msgid "Slow"
+msgstr "Lento"
+
+msgid "Displayed Info"
+msgstr "Info exibida"
+
+msgid "Show Title"
+msgstr "Mostrar título"
+
+msgid "Show Artist"
+msgstr "Mostrar artista"
+
+msgid "Font Size"
+msgstr "Tamanho da fonte"
+
+msgid "Font Size (px)"
+msgstr "Tamanho da fonte (px)"
+
+msgid "View Settings"
+msgstr "Configurações de vista"
+
+msgid "View Mode"
+msgstr "Modo de vista"
+
+msgid "Automatic"
+msgstr "Automático"
+
+msgid "Wide"
+msgstr "Largo"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Extra Large"
+msgstr "Extra grande"
+
+msgid "Small"
+msgstr "Pequeno"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Botões do modo extra grande:"
+
+msgid "Shuffle Button"
+msgstr "Botão aleatório"
+
+msgid "not working"
+msgstr "não funciona"
+
+msgid "Loop/Repeat Button"
+msgstr "Botão repetir"
+
+msgid "10-Second Seek Buttons"
+msgstr "Botões de busca de 10s"
+
+msgid "No Media Playing"
+msgstr "Nada sendo reproduzido"
+
+msgid "No Media"
+msgstr "Sem mídia"
+
+msgid "Previous Track"
+msgstr "Faixa anterior"
+
+msgid "Next Track"
+msgstr "Próxima faixa"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Próximo"

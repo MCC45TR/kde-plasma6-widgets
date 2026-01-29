@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Turkish <kde-i18n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Genel"
+
+msgid "Default Media Player"
+msgstr "Varsayılan Medya Oynatıcı"
+
+msgid "Selected Player:"
+msgstr "Seçili Oynatıcı:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Etkin oynatıcı yok"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 etkin oynatıcı bulundu"
+
+msgid "All media sources are tracked."
+msgstr "Tüm medya kaynakları izleniyor."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Sadece \"%1\" izleniyor."
+
+msgid "Show media player badge"
+msgstr "Medya oynatıcı rozetini göster"
+
+msgid "Appearance"
+msgstr "Görünüm"
+
+msgid "Widget Margin"
+msgstr "Gereç Kenar Boşluğu"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Az (5px)"
+
+msgid "None (0px)"
+msgstr "Yok (0px)"
+
+msgid "Background Opacity"
+msgstr "Arkaplan Opaklığı"
+
+msgid "Controls"
+msgstr "Kontroller"
+
+msgid "Show Controls in Panel"
+msgstr "Panelde Kontrolleri Göster"
+
+msgid "Panel Settings"
+msgstr "Panel Ayarları"
+
+msgid "Layout Mode"
+msgstr "Düzen Modu"
+
+msgid "Left Aligned"
+msgstr "Sola Hizalı"
+
+msgid "Right Aligned"
+msgstr "Sağa Hizalı"
+
+msgid "Centered"
+msgstr "Ortalanmış"
+
+msgid "Button Size"
+msgstr "Düğme Boyutu"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Panel Yüksekliğine Göre Otomatik Boyutlandır"
+
+msgid "Button Size (px)"
+msgstr "Düğme Boyutu (px)"
+
+msgid "Text"
+msgstr "Metin"
+
+msgid "Scroll Text if truncated"
+msgstr "Metin sığmazsa kaydır"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Dinamik Genişlik (metne sığdırmak için genişlet)"
+
+msgid "Max Width (px)"
+msgstr "Maksimum Genişlik (px)"
+
+msgid "Scroll Speed"
+msgstr "Kaydırma Hızı"
+
+msgid "Fast"
+msgstr "Hızlı"
+
+msgid "Medium"
+msgstr "Orta"
+
+msgid "Slow"
+msgstr "Yavaş"
+
+msgid "Displayed Info"
+msgstr "Görüntülenen Bilgi"
+
+msgid "Show Title"
+msgstr "Başlığı Göster"
+
+msgid "Show Artist"
+msgstr "Sanatçıyı Göster"
+
+msgid "Font Size"
+msgstr "Yazı Tipi Boyutu"
+
+msgid "Font Size (px)"
+msgstr "Yazı Tipi Boyutu (px)"
+
+msgid "View Settings"
+msgstr "Görünüm Ayarları"
+
+msgid "View Mode"
+msgstr "Görünüm Modu"
+
+msgid "Automatic"
+msgstr "Otomatik"
+
+msgid "Wide"
+msgstr "Geniş"
+
+msgid "Large"
+msgstr "Büyük"
+
+msgid "Extra Large"
+msgstr "Ekstra Büyük"
+
+msgid "Small"
+msgstr "Küçük"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Ekstra Büyük Mod Düğmeleri:"
+
+msgid "Shuffle Button"
+msgstr "Karıştır Düğmesi"
+
+msgid "not working"
+msgstr "çalışmıyor"
+
+msgid "Loop/Repeat Button"
+msgstr "Döngü/Tekrar Düğmesi"
+
+msgid "10-Second Seek Buttons"
+msgstr "10 Saniye Atlatma Düğmeleri"
+
+msgid "No Media Playing"
+msgstr "Medya Oynatılmıyor"
+
+msgid "No Media"
+msgstr "Medya Yok"
+
+msgid "Previous Track"
+msgstr "Önceki Parça"
+
+msgid "Next Track"
+msgstr "Sonraki Parça"
+
+msgid "Previous"
+msgstr "Önceki"
+
+msgid "Next"
+msgstr "Sonraki"

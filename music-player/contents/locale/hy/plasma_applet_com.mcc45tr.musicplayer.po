@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Armenian <kde-i18n-hy@kde.org>\n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Ընդհանուր"
+
+msgid "Default Media Player"
+msgstr "Լռելյայն մեդիա նվագարկիչ"
+
+msgid "Selected Player:"
+msgstr "Ընտրված նվագարկիչ․"
+
+msgid "⚠ No active players"
+msgstr "⚠ Ակտիվ նվագարկիչներ չկան"
+
+msgid "✓ %1 active players found"
+msgstr "✓ Գտնվել է %1 ակտիվ նվագարկիչ"
+
+msgid "All media sources are tracked."
+msgstr "Բոլոր մեդիա աղբյուրները հետևվում են։"
+
+msgid "Only \"%1\" is tracked."
+msgstr "Միայն \"%1\"-ն է հետևվում։"
+
+msgid "Show media player badge"
+msgstr "Ցուցադրել նվագարկիչի նշանը"
+
+msgid "Appearance"
+msgstr "Տեսք"
+
+msgid "Widget Margin"
+msgstr "Վիջեթի լուսանցք"
+
+msgid "Normal (10px)"
+msgstr "Սովորական (10px)"
+
+msgid "Less (5px)"
+msgstr "Քիչ (5px)"
+
+msgid "None (0px)"
+msgstr "Չկա (0px)"
+
+msgid "Background Opacity"
+msgstr "Ֆոնի անթափանցելիություն"
+
+msgid "Controls"
+msgstr "Կառավարում"
+
+msgid "Show Controls in Panel"
+msgstr "Ցուցադրել կառավարումը վահանակում"
+
+msgid "Panel Settings"
+msgstr "Վահանակի կարգավորումներ"
+
+msgid "Layout Mode"
+msgstr "Դասավորության ռեժիմ"
+
+msgid "Left Aligned"
+msgstr "Ձախից հավասարեցված"
+
+msgid "Right Aligned"
+msgstr "Աջից հավասարեցված"
+
+msgid "Centered"
+msgstr "Կենտրոնացված"
+
+msgid "Button Size"
+msgstr "Կոճակի չափը"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Ավտոմատ չափ՝ ըստ վահանակի բարձրության"
+
+msgid "Button Size (px)"
+msgstr "Կոճակի չափը (px)"
+
+msgid "Text"
+msgstr "Տեքստ"
+
+msgid "Scroll Text if truncated"
+msgstr "Ոլորել տեքստը, եթե կտրված է"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Դինամիկ լայնություն"
+
+msgid "Max Width (px)"
+msgstr "Առավելագույն լայնություն (px)"
+
+msgid "Scroll Speed"
+msgstr "Ոլորման արագություն"
+
+msgid "Fast"
+msgstr "Արագ"
+
+msgid "Medium"
+msgstr "Միջին"
+
+msgid "Slow"
+msgstr "Դանդաղ"
+
+msgid "Displayed Info"
+msgstr "Ցուցադրվող տեղեկություն"
+
+msgid "Show Title"
+msgstr "Ցուցադրել վերնագիրը"
+
+msgid "Show Artist"
+msgstr "Ցուցադրել կատարողին"
+
+msgid "Font Size"
+msgstr "Տառատեսակի չափը"
+
+msgid "Font Size (px)"
+msgstr "Տառատեսակի չափը (px)"
+
+msgid "View Settings"
+msgstr "Դիտման կարգավորումներ"
+
+msgid "View Mode"
+msgstr "Դիտման ռեժիմ"
+
+msgid "Automatic"
+msgstr "Ավտոմատ"
+
+msgid "Wide"
+msgstr "Լայն"
+
+msgid "Large"
+msgstr "Մեծ"
+
+msgid "Extra Large"
+msgstr "Շատ մեծ"
+
+msgid "Small"
+msgstr "Փոքր"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Շատ մեծ ռեժիմի կոճակներ․"
+
+msgid "Shuffle Button"
+msgstr "Խառնելու կոճակ"
+
+msgid "not working"
+msgstr "չի աշխատում"
+
+msgid "Loop/Repeat Button"
+msgstr "Կրկնման կոճակ"
+
+msgid "10-Second Seek Buttons"
+msgstr "10 վայրկյանանոց որոնման կոճակներ"
+
+msgid "No Media Playing"
+msgstr "Մեդիա չի նվագարկվում"
+
+msgid "No Media"
+msgstr "Մեդիա չկա"
+
+msgid "Previous Track"
+msgstr "Նախորդ երգը"
+
+msgid "Next Track"
+msgstr "Հաջորդ երգը"
+
+msgid "Previous"
+msgstr "Նախորդ"
+
+msgid "Next"
+msgstr "Հաջորդ"

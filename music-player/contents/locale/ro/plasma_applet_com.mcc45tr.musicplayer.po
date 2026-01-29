@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||(n%100==0)&&(n!=0))?2:1));\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "General"
+
+msgid "Default Media Player"
+msgstr "Player implicit"
+
+msgid "Selected Player:"
+msgstr "Player selectat:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Niciun player activ"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 playere active găsite"
+
+msgid "All media sources are tracked."
+msgstr "Toate sursele media sunt urmărite."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Doar \"%1\" este urmărit."
+
+msgid "Show media player badge"
+msgstr "Afișează emblema playerului"
+
+msgid "Appearance"
+msgstr "Aspect"
+
+msgid "Widget Margin"
+msgstr "Margine widget"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Mai puțin (5px)"
+
+msgid "None (0px)"
+msgstr "Fără (0px)"
+
+msgid "Background Opacity"
+msgstr "Opacitate fundal"
+
+msgid "Controls"
+msgstr "Controale"
+
+msgid "Show Controls in Panel"
+msgstr "Afișează controale în panou"
+
+msgid "Panel Settings"
+msgstr "Setări panou"
+
+msgid "Layout Mode"
+msgstr "Mod aspect"
+
+msgid "Left Aligned"
+msgstr "Aliniat la stânga"
+
+msgid "Right Aligned"
+msgstr "Aliniat la dreapta"
+
+msgid "Centered"
+msgstr "Centrat"
+
+msgid "Button Size"
+msgstr "Dimensiune buton"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Dimensiune auto după înălțimea panoului"
+
+msgid "Button Size (px)"
+msgstr "Dimensiune buton (px)"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Scroll Text if truncated"
+msgstr "Derulează textul dacă e tăiat"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Lățime dinamică (ajustare automată)"
+
+msgid "Max Width (px)"
+msgstr "Lățime maximă (px)"
+
+msgid "Scroll Speed"
+msgstr "Viteză derulare"
+
+msgid "Fast"
+msgstr "Rapid"
+
+msgid "Medium"
+msgstr "Mediu"
+
+msgid "Slow"
+msgstr "Lent"
+
+msgid "Displayed Info"
+msgstr "Info afișate"
+
+msgid "Show Title"
+msgstr "Afișează titlul"
+
+msgid "Show Artist"
+msgstr "Afișează artistul"
+
+msgid "Font Size"
+msgstr "Mărime font"
+
+msgid "Font Size (px)"
+msgstr "Mărime font (px)"
+
+msgid "View Settings"
+msgstr "Setări vizualizare"
+
+msgid "View Mode"
+msgstr "Mod vizualizare"
+
+msgid "Automatic"
+msgstr "Automat"
+
+msgid "Wide"
+msgstr "Lat"
+
+msgid "Large"
+msgstr "Mare"
+
+msgid "Extra Large"
+msgstr "Foarte mare"
+
+msgid "Small"
+msgstr "Mic"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Butoane mod foarte mare:"
+
+msgid "Shuffle Button"
+msgstr "Buton amestecare"
+
+msgid "not working"
+msgstr "nu funcționează"
+
+msgid "Loop/Repeat Button"
+msgstr "Buton repetare"
+
+msgid "10-Second Seek Buttons"
+msgstr "Butoane căutare 10s"
+
+msgid "No Media Playing"
+msgstr "Nimic în redare"
+
+msgid "No Media"
+msgstr "Nicio media"
+
+msgid "Previous Track"
+msgstr "Piesa anterioară"
+
+msgid "Next Track"
+msgstr "Piesa următoare"
+
+msgid "Previous"
+msgstr "Înapoi"
+
+msgid "Next"
+msgstr "Înainte"

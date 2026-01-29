@@ -274,7 +274,7 @@ Item {
                             font.bold: true
                         }
                         Label {
-                            text: "PDF, ODT, DOCX (Icon only)"
+                            text: "PDF, ODT, DOCX (" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Icon only") + ")"
                             font.pixelSize: 10
                             opacity: 0.6
                         }

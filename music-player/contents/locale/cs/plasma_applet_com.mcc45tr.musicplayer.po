@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Czech <kde-i18n-cs@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Obecné"
+
+msgid "Default Media Player"
+msgstr "Výchozí přehrávač"
+
+msgid "Selected Player:"
+msgstr "Vybraný přehrávač:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Žádné aktivní přehrávače"
+
+msgid "✓ %1 active players found"
+msgstr "✓ Nalezeno %1 aktivních přehrávačů"
+
+msgid "All media sources are tracked."
+msgstr "Všechny zdroje jsou sledovány."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Sleduje se pouze \"%1\"."
+
+msgid "Show media player badge"
+msgstr "Zobrazit odznak přehrávače"
+
+msgid "Appearance"
+msgstr "Vzhled"
+
+msgid "Widget Margin"
+msgstr "Okraj widgetu"
+
+msgid "Normal (10px)"
+msgstr "Normální (10px)"
+
+msgid "Less (5px)"
+msgstr "Menší (5px)"
+
+msgid "None (0px)"
+msgstr "Žádný (0px)"
+
+msgid "Background Opacity"
+msgstr "Neprůhlednost pozadí"
+
+msgid "Controls"
+msgstr "Ovládání"
+
+msgid "Show Controls in Panel"
+msgstr "Zobrazit ovládání v panelu"
+
+msgid "Panel Settings"
+msgstr "Nastavení panelu"
+
+msgid "Layout Mode"
+msgstr "Režim rozvržení"
+
+msgid "Left Aligned"
+msgstr "Zarovnáno vlevo"
+
+msgid "Right Aligned"
+msgstr "Zarovnáno vpravo"
+
+msgid "Centered"
+msgstr "Vycentrované"
+
+msgid "Button Size"
+msgstr "Velikost tlačítek"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Automaticky podle výšky panelu"
+
+msgid "Button Size (px)"
+msgstr "Velikost tlačítek (px)"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Scroll Text if truncated"
+msgstr "Rolovat text, pokud je oříznut"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Dynamická šířka (automaticky)"
+
+msgid "Max Width (px)"
+msgstr "Maximální šířka (px)"
+
+msgid "Scroll Speed"
+msgstr "Rychlost rolování"
+
+msgid "Fast"
+msgstr "Rychle"
+
+msgid "Medium"
+msgstr "Středně"
+
+msgid "Slow"
+msgstr "Pomalu"
+
+msgid "Displayed Info"
+msgstr "Zobrazené informace"
+
+msgid "Show Title"
+msgstr "Zobrazit název"
+
+msgid "Show Artist"
+msgstr "Zobrazit interpreta"
+
+msgid "Font Size"
+msgstr "Velikost písma"
+
+msgid "Font Size (px)"
+msgstr "Velikost písma (px)"
+
+msgid "View Settings"
+msgstr "Nastavení zobrazení"
+
+msgid "View Mode"
+msgstr "Režim zobrazení"
+
+msgid "Automatic"
+msgstr "Automaticky"
+
+msgid "Wide"
+msgstr "Široké"
+
+msgid "Large"
+msgstr "Velké"
+
+msgid "Extra Large"
+msgstr "Extra velké"
+
+msgid "Small"
+msgstr "Malé"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Tlačítka v extra velkém režimu:"
+
+msgid "Shuffle Button"
+msgstr "Tlačítko náhodně"
+
+msgid "not working"
+msgstr "nefunguje"
+
+msgid "Loop/Repeat Button"
+msgstr "Tlačítko opakování"
+
+msgid "10-Second Seek Buttons"
+msgstr "Tlačítka 10s posunu"
+
+msgid "No Media Playing"
+msgstr "Nic se nepřehrává"
+
+msgid "No Media"
+msgstr "Žádná média"
+
+msgid "Previous Track"
+msgstr "Předchozí skladba"
+
+msgid "Next Track"
+msgstr "Následující skladba"
+
+msgid "Previous"
+msgstr "Předchozí"
+
+msgid "Next"
+msgstr "Následující"

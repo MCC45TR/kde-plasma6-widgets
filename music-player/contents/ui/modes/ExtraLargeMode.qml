@@ -19,7 +19,7 @@ Item {
     property bool isPlaying: false
     property real currentPosition: 0
     property real length: 0
-    property string noMediaText: "No Media"
+    property string noMediaText: i18n("No Media")
     property bool showPlayerBadge: true
     
     // Callbacks

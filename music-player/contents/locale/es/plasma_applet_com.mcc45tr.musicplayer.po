@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Spanish <kde-i18n-es@kde.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "General"
+
+msgid "Default Media Player"
+msgstr "Reproductor predeterminado"
+
+msgid "Selected Player:"
+msgstr "Reproductor seleccionado:"
+
+msgid "⚠ No active players"
+msgstr "⚠ No hay reproductores activos"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 reproductores activos encontrados"
+
+msgid "All media sources are tracked."
+msgstr "Se siguen todas las fuentes de medios."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Solo se sigue \"%1\"."
+
+msgid "Show media player badge"
+msgstr "Mostrar distintivo del reproductor"
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Widget Margin"
+msgstr "Margen del widget"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Menos (5px)"
+
+msgid "None (0px)"
+msgstr "Ninguno (0px)"
+
+msgid "Background Opacity"
+msgstr "Opacidad del fondo"
+
+msgid "Controls"
+msgstr "Controles"
+
+msgid "Show Controls in Panel"
+msgstr "Mostrar controles en el panel"
+
+msgid "Panel Settings"
+msgstr "Ajustes del panel"
+
+msgid "Layout Mode"
+msgstr "Modo de diseño"
+
+msgid "Left Aligned"
+msgstr "Alineado a la izquierda"
+
+msgid "Right Aligned"
+msgstr "Alineado a la derecha"
+
+msgid "Centered"
+msgstr "Centrado"
+
+msgid "Button Size"
+msgstr "Tamaño del botón"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Tamaño auto según altura del panel"
+
+msgid "Button Size (px)"
+msgstr "Tamaño del botón (px)"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Scroll Text if truncated"
+msgstr "Desplazar texto si está truncado"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Ancho dinámico (auto-expandir para ajustar)"
+
+msgid "Max Width (px)"
+msgstr "Ancho máximo (px)"
+
+msgid "Scroll Speed"
+msgstr "Velocidad de desplazamiento"
+
+msgid "Fast"
+msgstr "Rápido"
+
+msgid "Medium"
+msgstr "Medio"
+
+msgid "Slow"
+msgstr "Lento"
+
+msgid "Displayed Info"
+msgstr "Info mostrada"
+
+msgid "Show Title"
+msgstr "Mostrar título"
+
+msgid "Show Artist"
+msgstr "Mostrar artista"
+
+msgid "Font Size"
+msgstr "Tamaño de fuente"
+
+msgid "Font Size (px)"
+msgstr "Tamaño de fuente (px)"
+
+msgid "View Settings"
+msgstr "Ajustes de vista"
+
+msgid "View Mode"
+msgstr "Modo de vista"
+
+msgid "Automatic"
+msgstr "Automático"
+
+msgid "Wide"
+msgstr "Ancho"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Extra Large"
+msgstr "Extra grande"
+
+msgid "Small"
+msgstr "Pequeño"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Botones del modo extra grande:"
+
+msgid "Shuffle Button"
+msgstr "Botón aleatorio"
+
+msgid "not working"
+msgstr "no funciona"
+
+msgid "Loop/Repeat Button"
+msgstr "Botón repetir"
+
+msgid "10-Second Seek Buttons"
+msgstr "Botones de búsqueda de 10s"
+
+msgid "No Media Playing"
+msgstr "Nada reproduciéndose"
+
+msgid "No Media"
+msgstr "Sin medios"
+
+msgid "Previous Track"
+msgstr "Pista anterior"
+
+msgid "Next Track"
+msgstr "Pista siguiente"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Siguiente"

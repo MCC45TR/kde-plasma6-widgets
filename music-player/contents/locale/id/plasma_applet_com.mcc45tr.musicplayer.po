@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-id@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Umum"
+
+msgid "Default Media Player"
+msgstr "Pemutar Media Bawaan"
+
+msgid "Selected Player:"
+msgstr "Pemutar Terpilih:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Tidak ada pemutar aktif"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 pemutar aktif ditemukan"
+
+msgid "All media sources are tracked."
+msgstr "Semua sumber media dilacak."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Hanya \"%1\" yang dilacak."
+
+msgid "Show media player badge"
+msgstr "Tampilkan lencana pemutar"
+
+msgid "Appearance"
+msgstr "Tampilan"
+
+msgid "Widget Margin"
+msgstr "Margin Widget"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Sedikit (5px)"
+
+msgid "None (0px)"
+msgstr "Tidak ada (0px)"
+
+msgid "Background Opacity"
+msgstr "Opasitas Latar Belakang"
+
+msgid "Controls"
+msgstr "Kontrol"
+
+msgid "Show Controls in Panel"
+msgstr "Tampilkan Kontrol di Panel"
+
+msgid "Panel Settings"
+msgstr "Pengaturan Panel"
+
+msgid "Layout Mode"
+msgstr "Mode Tata Letak"
+
+msgid "Left Aligned"
+msgstr "Rata Kiri"
+
+msgid "Right Aligned"
+msgstr "Rata Kanan"
+
+msgid "Centered"
+msgstr "Tengah"
+
+msgid "Button Size"
+msgstr "Ukuran Tombol"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Ukuran Otomatis (Tinggi Panel)"
+
+msgid "Button Size (px)"
+msgstr "Ukuran Tombol (px)"
+
+msgid "Text"
+msgstr "Teks"
+
+msgid "Scroll Text if truncated"
+msgstr "Gulir Teks jika terpotong"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Lebar Dinamis (Otomatis)"
+
+msgid "Max Width (px)"
+msgstr "Lebar Maksimal (px)"
+
+msgid "Scroll Speed"
+msgstr "Kecepatan Gulir"
+
+msgid "Fast"
+msgstr "Cepat"
+
+msgid "Medium"
+msgstr "Sedang"
+
+msgid "Slow"
+msgstr "Lambat"
+
+msgid "Displayed Info"
+msgstr "Info yang Ditampilkan"
+
+msgid "Show Title"
+msgstr "Tampilkan Judul"
+
+msgid "Show Artist"
+msgstr "Tampilkan Artis"
+
+msgid "Font Size"
+msgstr "Ukuran Font"
+
+msgid "Font Size (px)"
+msgstr "Ukuran Font (px)"
+
+msgid "View Settings"
+msgstr "Pengaturan Tampilan"
+
+msgid "View Mode"
+msgstr "Mode Tampilan"
+
+msgid "Automatic"
+msgstr "Otomatis"
+
+msgid "Wide"
+msgstr "Lebar"
+
+msgid "Large"
+msgstr "Besar"
+
+msgid "Extra Large"
+msgstr "Sangat Besar"
+
+msgid "Small"
+msgstr "Kecil"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Tombol Mode Sangat Besar:"
+
+msgid "Shuffle Button"
+msgstr "Tombol Acak"
+
+msgid "not working"
+msgstr "tidak berfungsi"
+
+msgid "Loop/Repeat Button"
+msgstr "Tombol Ulang"
+
+msgid "10-Second Seek Buttons"
+msgstr "Tombol Lompat 10 Detik"
+
+msgid "No Media Playing"
+msgstr "Tidak Ada Media yang Diputar"
+
+msgid "No Media"
+msgstr "Tidak Ada Media"
+
+msgid "Previous Track"
+msgstr "Trek Sebelumnya"
+
+msgid "Next Track"
+msgstr "Trek Berikutnya"
+
+msgid "Previous"
+msgstr "Sebelumnya"
+
+msgid "Next"
+msgstr "Berikutnya"

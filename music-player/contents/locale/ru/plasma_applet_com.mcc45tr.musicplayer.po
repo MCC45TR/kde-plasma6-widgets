@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Russian <kde-i18n-ru@kde.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Общие"
+
+msgid "Default Media Player"
+msgstr "Плеер по умолчанию"
+
+msgid "Selected Player:"
+msgstr "Выбранный плеер:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Нет активных плееров"
+
+msgid "✓ %1 active players found"
+msgstr "✓ Найдено активных плееров: %1"
+
+msgid "All media sources are tracked."
+msgstr "Отслеживаются все источники."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Отслеживается только «%1»."
+
+msgid "Show media player badge"
+msgstr "Показывать значок плеера"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "Widget Margin"
+msgstr "Отступы виджета"
+
+msgid "Normal (10px)"
+msgstr "Обычные (10px)"
+
+msgid "Less (5px)"
+msgstr "Меньше (5px)"
+
+msgid "None (0px)"
+msgstr "Нет (0px)"
+
+msgid "Background Opacity"
+msgstr "Прозрачность фона"
+
+msgid "Controls"
+msgstr "Управление"
+
+msgid "Show Controls in Panel"
+msgstr "Показывать кнопки на панели"
+
+msgid "Panel Settings"
+msgstr "Настройки панели"
+
+msgid "Layout Mode"
+msgstr "Режим компоновки"
+
+msgid "Left Aligned"
+msgstr "По левому краю"
+
+msgid "Right Aligned"
+msgstr "По правому краю"
+
+msgid "Centered"
+msgstr "По центру"
+
+msgid "Button Size"
+msgstr "Размер кнопок"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Автоматически по высоте панели"
+
+msgid "Button Size (px)"
+msgstr "Размер кнопок (пикс.)"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Scroll Text if truncated"
+msgstr "Прокручивать длинный текст"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Динамическая ширина"
+
+msgid "Max Width (px)"
+msgstr "Макс. ширина (пикс.)"
+
+msgid "Scroll Speed"
+msgstr "Скорость прокрутки"
+
+msgid "Fast"
+msgstr "Быстро"
+
+msgid "Medium"
+msgstr "Средне"
+
+msgid "Slow"
+msgstr "Медленно"
+
+msgid "Displayed Info"
+msgstr "Отображаемая информация"
+
+msgid "Show Title"
+msgstr "Показывать название"
+
+msgid "Show Artist"
+msgstr "Показывать исполнителя"
+
+msgid "Font Size"
+msgstr "Размер шрифта"
+
+msgid "Font Size (px)"
+msgstr "Размер шрифта (пикс.)"
+
+msgid "View Settings"
+msgstr "Настройки вида"
+
+msgid "View Mode"
+msgstr "Режим отображения"
+
+msgid "Automatic"
+msgstr "Автоматически"
+
+msgid "Wide"
+msgstr "Широкий"
+
+msgid "Large"
+msgstr "Квадратный"
+
+msgid "Extra Large"
+msgstr "Большой"
+
+msgid "Small"
+msgstr "Компактный"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Кнопки в большом режиме:"
+
+msgid "Shuffle Button"
+msgstr "Кнопка перемешивания"
+
+msgid "not working"
+msgstr "не работает"
+
+msgid "Loop/Repeat Button"
+msgstr "Кнопка повтора"
+
+msgid "10-Second Seek Buttons"
+msgstr "Кнопки перемотки на 10с"
+
+msgid "No Media Playing"
+msgstr "Ничего не воспроизводится"
+
+msgid "No Media"
+msgstr "Нет медиа"
+
+msgid "Previous Track"
+msgstr "Предыдущий трек"
+
+msgid "Next Track"
+msgstr "Следующий трек"
+
+msgid "Previous"
+msgstr "Назад"
+
+msgid "Next"
+msgstr "Вперёд"

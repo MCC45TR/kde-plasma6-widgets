@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-az@kde.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Ümumi"
+
+msgid "Default Media Player"
+msgstr "Standart Media Pleyeri"
+
+msgid "Selected Player:"
+msgstr "Seçilmiş Pleyer:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Aktiv pleyer yoxdur"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 aktiv pleyer tapıldı"
+
+msgid "All media sources are tracked."
+msgstr "Bütün media mənbələri izlənilir."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Yalnız \"%1\" izlənilir."
+
+msgid "Show media player badge"
+msgstr "Media pleyer nişanını göstər"
+
+msgid "Appearance"
+msgstr "Görünüş"
+
+msgid "Widget Margin"
+msgstr "Vidjet Kənarı"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Daha az (5px)"
+
+msgid "None (0px)"
+msgstr "Heç biri (0px)"
+
+msgid "Background Opacity"
+msgstr "Arxa plan qeyri-şəffaflığı"
+
+msgid "Controls"
+msgstr "İdarəetmələr"
+
+msgid "Show Controls in Panel"
+msgstr "Paneldə idarəetmələri göstər"
+
+msgid "Panel Settings"
+msgstr "Panel Parametrləri"
+
+msgid "Layout Mode"
+msgstr "Düzəliş rejimi"
+
+msgid "Left Aligned"
+msgstr "Sola düzləndirilmiş"
+
+msgid "Right Aligned"
+msgstr "Sağa düzləndirilmiş"
+
+msgid "Centered"
+msgstr "Mərkəzləşdirilmiş"
+
+msgid "Button Size"
+msgstr "Düymə ölçüsü"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Panel hündürlüyünə görə avtomatik ölçüləndir"
+
+msgid "Button Size (px)"
+msgstr "Düymə ölçüsü (px)"
+
+msgid "Text"
+msgstr "Mətn"
+
+msgid "Scroll Text if truncated"
+msgstr "Kəsilmiş olarsa mətni sürüşdür"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Dinamik en (mətnə uyğun avtomatik genişlənmə)"
+
+msgid "Max Width (px)"
+msgstr "Maksimum en (px)"
+
+msgid "Scroll Speed"
+msgstr "Sürüşmə sürəti"
+
+msgid "Fast"
+msgstr "Sürətli"
+
+msgid "Medium"
+msgstr "Orta"
+
+msgid "Slow"
+msgstr "Yavaş"
+
+msgid "Displayed Info"
+msgstr "Göstərilən məlumat"
+
+msgid "Show Title"
+msgstr "Başlığı göstər"
+
+msgid "Show Artist"
+msgstr "İfaçını göstər"
+
+msgid "Font Size"
+msgstr "Şrift ölçüsü"
+
+msgid "Font Size (px)"
+msgstr "Şrift ölçüsü (px)"
+
+msgid "View Settings"
+msgstr "Görünüş Parametrləri"
+
+msgid "View Mode"
+msgstr "Görünüş rejimi"
+
+msgid "Automatic"
+msgstr "Avtomatik"
+
+msgid "Wide"
+msgstr "Geniş"
+
+msgid "Large"
+msgstr "Böyük"
+
+msgid "Extra Large"
+msgstr "Ekstra Böyük"
+
+msgid "Small"
+msgstr "Kiçik"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Ekstra Böyük Rejim Düymələri:"
+
+msgid "Shuffle Button"
+msgstr "Qarışdırma düyməsi"
+
+msgid "not working"
+msgstr "işləmir"
+
+msgid "Loop/Repeat Button"
+msgstr "Dövr/Təkrar düyməsi"
+
+msgid "10-Second Seek Buttons"
+msgstr "10 saniyəlik axtarış düymələri"
+
+msgid "No Media Playing"
+msgstr "Heç nə oxudulmur"
+
+msgid "No Media"
+msgstr "Media Yoxdur"
+
+msgid "Previous Track"
+msgstr "Əvvəlki trek"
+
+msgid "Next Track"
+msgstr "Növbəti trek"
+
+msgid "Previous"
+msgstr "Əvvəlki"
+
+msgid "Next"
+msgstr "Növbəti"

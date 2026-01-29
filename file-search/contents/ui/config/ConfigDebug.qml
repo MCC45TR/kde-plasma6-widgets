@@ -148,19 +148,19 @@ Kirigami.FormLayout {
         
         Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "User Profile") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
-            text: cfg_userProfile === 0 ? "Minimal (0)" : (cfg_userProfile === 1 ? "Developer (1)" : "Power User (2)")
+            text: cfg_userProfile === 0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Minimal") + " (0)" : (cfg_userProfile === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Developer") + " (1)" : i18nd("plasma_applet_com.mcc45tr.filesearch", "Power User") + " (2)")
             font.family: "Monospace" 
         }
         
         Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Display Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
-            text: cfg_displayMode === 0 ? "Button (0)" : (cfg_displayMode === 1 ? "Medium (1)" : (cfg_displayMode === 2 ? "Wide (2)" : "Extra Wide (3)"))
+            text: cfg_displayMode === 0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Button") + " (0)" : (cfg_displayMode === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium") + " (1)" : (cfg_displayMode === 2 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Wide") + " (2)" : i18nd("plasma_applet_com.mcc45tr.filesearch", "Extra Wide") + " (3)"))
             font.family: "Monospace" 
         }
         
         Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "View Mode") + ":"; font.bold: true; color: Kirigami.Theme.highlightColor }
         Label { 
-            text: cfg_viewMode === 0 ? "List (0)" : "Tile (1)"
+            text: cfg_viewMode === 0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "List") + " (0)" : i18nd("plasma_applet_com.mcc45tr.filesearch", "Tile") + " (1)"
             font.family: "Monospace" 
         }
         

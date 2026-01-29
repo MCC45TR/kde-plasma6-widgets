@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Chinese Simplified <kde-i18n-zh_CN@kde.org>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "常规"
+
+msgid "Default Media Player"
+msgstr "默认媒体播放器"
+
+msgid "Selected Player:"
+msgstr "已选播放器："
+
+msgid "⚠ No active players"
+msgstr "⚠ 无活跃播放器"
+
+msgid "✓ %1 active players found"
+msgstr "✓ 找到 %1 个活跃播放器"
+
+msgid "All media sources are tracked."
+msgstr "正在追踪所有媒体源。"
+
+msgid "Only \"%1\" is tracked."
+msgstr "仅追踪 \"%1\"。"
+
+msgid "Show media player badge"
+msgstr "显示播放器标记"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Widget Margin"
+msgstr "小部件边距"
+
+msgid "Normal (10px)"
+msgstr "正常 (10px)"
+
+msgid "Less (5px)"
+msgstr "较少 (5px)"
+
+msgid "None (0px)"
+msgstr "无 (0px)"
+
+msgid "Background Opacity"
+msgstr "背景不透明度"
+
+msgid "Controls"
+msgstr "控制"
+
+msgid "Show Controls in Panel"
+msgstr "在面板中显示控制器"
+
+msgid "Panel Settings"
+msgstr "面板设置"
+
+msgid "Layout Mode"
+msgstr "布局模式"
+
+msgid "Left Aligned"
+msgstr "左对齐"
+
+msgid "Right Aligned"
+msgstr "右对齐"
+
+msgid "Centered"
+msgstr "居中"
+
+msgid "Button Size"
+msgstr "按钮大小"
+
+msgid "Auto Size based on Panel Height"
+msgstr "根据面板高度自动调整"
+
+msgid "Button Size (px)"
+msgstr "按钮大小 (px)"
+
+msgid "Text"
+msgstr "文本"
+
+msgid "Scroll Text if truncated"
+msgstr "如果截断则滚动文本"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "动态宽度 (自动扩展以适应文本)"
+
+msgid "Max Width (px)"
+msgstr "最大宽度 (px)"
+
+msgid "Scroll Speed"
+msgstr "滚动速度"
+
+msgid "Fast"
+msgstr "快"
+
+msgid "Medium"
+msgstr "中"
+
+msgid "Slow"
+msgstr "慢"
+
+msgid "Displayed Info"
+msgstr "显示信息"
+
+msgid "Show Title"
+msgstr "显示标题"
+
+msgid "Show Artist"
+msgstr "显示艺术家"
+
+msgid "Font Size"
+msgstr "字体大小"
+
+msgid "Font Size (px)"
+msgstr "字体大小 (px)"
+
+msgid "View Settings"
+msgstr "视图设置"
+
+msgid "View Mode"
+msgstr "视图模式"
+
+msgid "Automatic"
+msgstr "自动"
+
+msgid "Wide"
+msgstr "宽"
+
+msgid "Large"
+msgstr "大"
+
+msgid "Extra Large"
+msgstr "特大"
+
+msgid "Small"
+msgstr "小"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "特大模式按钮："
+
+msgid "Shuffle Button"
+msgstr "随机按钮"
+
+msgid "not working"
+msgstr "尚未启用"
+
+msgid "Loop/Repeat Button"
+msgstr "循环按钮"
+
+msgid "10-Second Seek Buttons"
+msgstr "10秒跳转按钮"
+
+msgid "No Media Playing"
+msgstr "无正在播放的内容"
+
+msgid "No Media"
+msgstr "无媒体"
+
+msgid "Previous Track"
+msgstr "上一曲"
+
+msgid "Next Track"
+msgstr "下一曲"
+
+msgid "Previous"
+msgstr "上一曲"
+
+msgid "Next"
+msgstr "下一曲"

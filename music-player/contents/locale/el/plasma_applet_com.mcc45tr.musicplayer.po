@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 15:00+0300\n"
+"PO-Revision-Date: 2026-01-29 05:40+0300\n"
+"Last-Translator: MCC45TR <mcc45tr@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity\n"
+
+msgid "General"
+msgstr "Γενικά"
+
+msgid "Default Media Player"
+msgstr "Προεπιλεγμένο πρόγραμμα αναπαραγωγής"
+
+msgid "Selected Player:"
+msgstr "Επιλεγμένο πρόγραμμα:"
+
+msgid "⚠ No active players"
+msgstr "⚠ Δεν υπάρχουν ενεργά προγράμματα"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1 ενεργά προγράμματα βρέθηκαν"
+
+msgid "All media sources are tracked."
+msgstr "Παρακολουθούνται όλες οι πηγές."
+
+msgid "Only \"%1\" is tracked."
+msgstr "Παρακολουθείται μόνο το \"%1\"."
+
+msgid "Show media player badge"
+msgstr "Εμφάνιση σήματος προγράμματος"
+
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+msgid "Widget Margin"
+msgstr "Περιθώριο Widget"
+
+msgid "Normal (10px)"
+msgstr "Κανονικό (10px)"
+
+msgid "Less (5px)"
+msgstr "Λιγότερο (5px)"
+
+msgid "None (0px)"
+msgstr "Καμία (0px)"
+
+msgid "Background Opacity"
+msgstr "Διαφάνεια φόντου"
+
+msgid "Controls"
+msgstr "Χειριστήρια"
+
+msgid "Show Controls in Panel"
+msgstr "Εμφάνιση χειριστηρίων στον πίνακα"
+
+msgid "Panel Settings"
+msgstr "Ρυθμίσεις πίνακα"
+
+msgid "Layout Mode"
+msgstr "Λειτουργία διάταξης"
+
+msgid "Left Aligned"
+msgstr "Στοίχιση αριστερά"
+
+msgid "Right Aligned"
+msgstr "Στοίχιση δεξιά"
+
+msgid "Centered"
+msgstr "Κεντραρισμένο"
+
+msgid "Button Size"
+msgstr "Μέγεθος κουμπιών"
+
+msgid "Auto Size based on Panel Height"
+msgstr "Αυτόματο μέγεθος βάσει ύψους πίνακα"
+
+msgid "Button Size (px)"
+msgstr "Μέγεθος κουμπιών (px)"
+
+msgid "Text"
+msgstr "Κείμενο"
+
+msgid "Scroll Text if truncated"
+msgstr "Κύλιση κειμένου αν είναι κομμένο"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "Δυναμικό πλάτος (αυτόματη επέκταση)"
+
+msgid "Max Width (px)"
+msgstr "Μέγιστο πλάτος (px)"
+
+msgid "Scroll Speed"
+msgstr "Ταχύτητα κύλισης"
+
+msgid "Fast"
+msgstr "Γρήγορη"
+
+msgid "Medium"
+msgstr "Μέτρια"
+
+msgid "Slow"
+msgstr "Αργή"
+
+msgid "Displayed Info"
+msgstr "Εμφανιζόμενες πληροφορίες"
+
+msgid "Show Title"
+msgstr "Εμφάνιση τίτλου"
+
+msgid "Show Artist"
+msgstr "Εμφάνιση καλλιτέχνη"
+
+msgid "Font Size"
+msgstr "Μέγεθος γραμματοσειράς"
+
+msgid "Font Size (px)"
+msgstr "Μέγεθος γραμματοσειράς (px)"
+
+msgid "View Settings"
+msgstr "Ρυθμίσεις προβολής"
+
+msgid "View Mode"
+msgstr "Λειτουργία προβολής"
+
+msgid "Automatic"
+msgstr "Αυτόματη"
+
+msgid "Wide"
+msgstr "Ευρεία"
+
+msgid "Large"
+msgstr "Μεγάλη"
+
+msgid "Extra Large"
+msgstr "Πολύ μεγάλη"
+
+msgid "Small"
+msgstr "Μικρή"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Κουμπιά πολύ μεγάλης προβολής:"
+
+msgid "Shuffle Button"
+msgstr "Κουμπί τυχαίας σειράς"
+
+msgid "not working"
+msgstr "δεν λειτουργεί"
+
+msgid "Loop/Repeat Button"
+msgstr "Κουμπί επανάληψης"
+
+msgid "10-Second Seek Buttons"
+msgstr "Κουμπιά αναζήτησης 10 δευτ."
+
+msgid "No Media Playing"
+msgstr "Δεν γίνεται αναπαραγωγή"
+
+msgid "No Media"
+msgstr "Χωρίς μέσα"
+
+msgid "Previous Track"
+msgstr "Προηγούμενο κομμάτι"
+
+msgid "Next Track"
+msgstr "Επόμενο κομμάτι"
+
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+msgid "Next"
+msgstr "Επόμενο"
