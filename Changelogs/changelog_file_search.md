@@ -1,5 +1,16 @@
 # 🔍 MFile Finder (`file-search`)
 
+### v1.2.3 (2026-01-29)
+**TR:**
+- **Hata Düzeltmeleri:** `Plasmoid` nesnesine erişim hatası (`ReferenceError`) düzeltildi, ayarların düzgün yüklenmesi sağlandı.
+- **Kararlılık:** Plasma 6 altında oluşan bazı başlatma ve çökme sorunları giderildi.
+- **Performans:** Arama motorunun başlatılma sürecindeki gecikmeler optimize edildi.
+
+**EN:**
+- **Bug Fixes:** Resolved `ReferenceError: Plasmoid is not defined`, ensuring configuration settings load correctly.
+- **Stability:** Fixed various startup and crash issues under Plasma 6.
+- **Performance:** Optimized latencies during the search engine initialization process.
+
 ### v1.2.2 (2026-01-25)
 **TR:**
 - **Dil Desteği Güncellemesi:** Birçok dil için (`es`, `it`, `pt`, `ru`, `ja`, `zh`, `hi`, `hy`, `id`, `ro`, `ur`) çeviriler güncellendi ve eksik dizeler tamamlandı.

@@ -48,7 +48,7 @@ Item {
         asynchronous: true
         
         sourceComponent: Components.AlbumCover {
-            radius: 10
+            radius: 20
             
             artUrl: largeSquareMode.artUrl
             hasArt: largeSquareMode.hasArt

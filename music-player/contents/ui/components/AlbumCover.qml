@@ -68,19 +68,36 @@ Rectangle {
     }
     
     // App Badge - Lazy loaded when visible
+    // App Badge - Lazy loaded when visible
     Loader {
         id: appBadgeLoader
+        
+        // Distance from edge (equal for top and left)
+        readonly property real distance: 4
+        
         anchors.left: parent.left
         anchors.top: parent.top
-        anchors.leftMargin: 5
-        anchors.topMargin: 5
+        anchors.leftMargin: distance
+        anchors.topMargin: distance
         active: albumCover.showPlayerBadge && albumCover.hasPlayer && albumCover.playerIdentity !== ""
         
         sourceComponent: AppBadge {
             pillMode: albumCover.pillMode
-            iconSize: pillMode ? 16 : Math.max(16, albumCover.width * 0.09)
+            
+            // User Request: Tile Radius = Background Radius - Distance
+            // Therefore: Tile Diameter (Header Height) = 2 * (Background Radius - Distance)
+            readonly property real targetDiameter: 2 * (albumCover.radius - appBadgeLoader.distance)
+            
+            // Calculate iconSize based on targetDiameter
+            // AppBadge logic: headerHeight = pillMode ? (iconSize + 9) : (iconSize * 1.25)
+            iconSize: {
+                var calculated = pillMode ? (targetDiameter - 9) : (targetDiameter / 1.25)
+                return Math.max(12, calculated) // Minimum size safe-guard
+            }
+            
             playerIdentity: albumCover.playerIdentity
             iconSource: albumCover.playerIcon
+            preferredPlayer: albumCover.preferredPlayer
             
             playersModel: albumCover.playersModel
             onSwitchPlayer: albumCover.onSwitchPlayer

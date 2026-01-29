@@ -1,5 +1,18 @@
 # 🌤️ MWeather (`weather`)
 
+### v1.1.9 (2026-01-29)
+**TR-TR:**
+- **Düzeltme:** Sistem birim (Metrik/İmperyal) algılaması düzeltildi, artık KDE bölgesel ayarlarını kullanıyor.
+- **Düzeltme:** Görünüm ayarlarındaki arayüz kayması ve üst üste binme sorunları giderildi.
+- **İyileştirme:** Panel ayarları, widget panelde değilse artık pasif (devre dışı) görünüyor.
+- **Düzeltme:** İbranice çeviri dosyasındaki sözdizimi hatası düzeltildi.
+
+**EN-US:**
+- **Fix:** Fixed automatic unit detection (Metric/Imperial) to correctly use KDE regional settings.
+- **Fix:** Resolved UI overlap and layout issues in Appearance settings.
+- **Improvement:** Panel settings are now disabled when the widget is not in a panel.
+- **Fix:** Fixed syntax error in Hebrew translation.
+
 ### v1.1.8 (2026-01-22)
 **TR-TR:**
 - **Yeni Özellik**: Widget kenar boşluğu (Normal, Az, Yok) seçeneği eklendi.

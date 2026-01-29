@@ -37,6 +37,9 @@ PlasmoidItem {
     readonly property bool cfg_panelDynamicWidth: Plasmoid.configuration.panelDynamicWidth !== undefined ? Plasmoid.configuration.panelDynamicWidth : true
     readonly property int cfg_popupLayoutMode: Plasmoid.configuration.popupLayoutMode !== undefined ? Plasmoid.configuration.popupLayoutMode : 0
     readonly property double cfg_backgroundOpacity: Plasmoid.configuration.backgroundOpacity !== undefined ? Plasmoid.configuration.backgroundOpacity : 0.8
+    readonly property bool cfg_showShuffleButton: Plasmoid.configuration.showShuffleButton !== undefined ? Plasmoid.configuration.showShuffleButton : true
+    readonly property bool cfg_showLoopButton: Plasmoid.configuration.showLoopButton !== undefined ? Plasmoid.configuration.showLoopButton : true
+    readonly property bool cfg_showSeekButtons: Plasmoid.configuration.showSeekButtons !== undefined ? Plasmoid.configuration.showSeekButtons : true
 
     // Panel Detection
     readonly property bool isInPanel: (Plasmoid.formFactor == PlasmaCore.Types.Horizontal || Plasmoid.formFactor == PlasmaCore.Types.Vertical)
@@ -152,7 +155,39 @@ PlasmoidItem {
     readonly property real length: currentPlayer ? currentPlayer.length : 0
     readonly property string playerIdentity: currentPlayer ? currentPlayer.identity : preferredPlayer
     
+    // Shuffle and Loop status - use local state for immediate UI feedback
+    readonly property bool canControlShuffle: currentPlayer ? currentPlayer.canControl : false
+    property bool shuffle: false
+    property int loopStatus: 0  // 0=None, 1=Track, 2=Playlist
+    
     property real currentPosition: 0
+    
+    // Sync shuffle/loop from player
+    Connections {
+        target: currentPlayer
+        enabled: !!currentPlayer
+        
+        function onShuffleChanged() {
+            root.shuffle = currentPlayer.shuffle
+        }
+        
+        function onLoopStatusChanged() {
+            root.loopStatus = currentPlayer.loopStatus
+        }
+    }
+    
+    // Initialize shuffle/loop/position when player changes
+    onCurrentPlayerChanged: {
+        if (currentPlayer) {
+            root.shuffle = currentPlayer.shuffle || false
+            root.loopStatus = currentPlayer.loopStatus || 0
+            root.currentPosition = currentPlayer.position || 0
+        } else {
+            root.shuffle = false
+            root.loopStatus = 0
+            root.currentPosition = 0
+        }
+    }
     
     // Position Sync - Lazy connection
     Connections {
@@ -171,8 +206,6 @@ PlasmoidItem {
         repeat: true
         onTriggered: if (root.currentPosition < root.length) root.currentPosition += 1000000
     }
-    
-    onCurrentPlayerChanged: root.currentPosition = currentPlayer ? currentPlayer.position : 0
 
     // ---------------------------------------------------------
     // Player Control Functions
@@ -196,6 +229,32 @@ PlasmoidItem {
         }
     }
     
+    function seekBack10() {
+        if (currentPlayer && currentPlayer.canSeek) {
+            var newPos = Math.max(0, root.currentPosition - 10000000) // 10 seconds in microseconds
+            // Use SetPosition for absolute seeking
+            if (typeof currentPlayer.SetPosition === "function") {
+                currentPlayer.SetPosition(currentPlayer.trackId, newPos)
+            } else {
+                currentPlayer.Seek(-10000000) // Fallback to relative seek
+            }
+            root.currentPosition = newPos
+        }
+    }
+    
+    function seekForward10() {
+        if (currentPlayer && currentPlayer.canSeek) {
+            var newPos = Math.min(root.length, root.currentPosition + 10000000) // 10 seconds in microseconds
+            // Use SetPosition for absolute seeking
+            if (typeof currentPlayer.SetPosition === "function") {
+                currentPlayer.SetPosition(currentPlayer.trackId, newPos)
+            } else {
+                currentPlayer.Seek(10000000) // Fallback to relative seek
+            }
+            root.currentPosition = newPos
+        }
+    }
+    
     function launchApp(appId) {
         var desktopFile = PlayerData.getDesktopFile(appId || preferredPlayer)
         Qt.openUrlExternally("file:///usr/share/applications/" + desktopFile)
@@ -208,6 +267,41 @@ PlasmoidItem {
     function switchPlayer(identity) {
         Plasmoid.configuration.preferredPlayer = identity
         root.updateCurrentPlayer()
+    }
+    
+    function toggleShuffle() {
+        if (currentPlayer && currentPlayer.canControl) {
+            // Toggle local state immediately for responsive UI
+            var newShuffle = !root.shuffle
+            root.shuffle = newShuffle
+            
+            // Send to player
+            currentPlayer.shuffle = newShuffle
+            console.log("Shuffle:", !newShuffle, "->", newShuffle)
+        }
+    }
+    
+    function cycleLoopStatus() {
+        if (currentPlayer && currentPlayer.canControl) {
+            var current = root.loopStatus
+            var newStatus
+            
+            // Simple cycle: 0 -> 1 -> 2 -> 0
+            if (current === 0) {
+                newStatus = 1  // Track
+            } else if (current === 1) {
+                newStatus = 2  // Playlist
+            } else {
+                newStatus = 0  // None
+            }
+            
+            // Update local state immediately for responsive UI
+            root.loopStatus = newStatus
+            
+            // Send to player
+            currentPlayer.loopStatus = newStatus
+            console.log("Loop:", current, "->", newStatus)
+        }
     }
 
     // ---------------------------------------------------------
@@ -334,9 +428,10 @@ PlasmoidItem {
             if (cfg_popupLayoutMode === 1) return "compact"
             if (cfg_popupLayoutMode === 2) return "wide"
             if (cfg_popupLayoutMode === 3) return "largeSquare"
+            if (cfg_popupLayoutMode === 4) return "extraLarge"
             
             // Auto Mode
-            if (root.isInPanel) return "largeSquare"
+            if (root.isInPanel) return "extraLarge"  // Extra Large for panel popup
             if (isLargeSq) return "largeSquare"
             if (isWide) return "wide"
             return "compact"
@@ -363,6 +458,7 @@ PlasmoidItem {
                         case "compact": return "modes/CompactMode.qml"
                         case "wide": return "modes/WideMode.qml"
                         case "largeSquare": return "modes/LargeSquareMode.qml"
+                        case "extraLarge": return "modes/ExtraLargeMode.qml"
                         default: return "modes/LargeSquareMode.qml" 
                     }
                 }
@@ -411,6 +507,39 @@ PlasmoidItem {
                         item.onSeek = root.seek
                         item.onLaunchApp = () => { root.launchApp(root.preferredPlayer) }
                         item.getPlayerIcon = root.getPlayerIcon
+                        
+                        // Shuffle and Loop (optional - only for ExtraLargeMode)
+                        if (item.hasOwnProperty("shuffle")) {
+                            item.shuffle = Qt.binding(() => root.shuffle)
+                        }
+                        if (item.hasOwnProperty("loopStatus")) {
+                            item.loopStatus = Qt.binding(() => root.loopStatus)
+                        }
+                        if (item.hasOwnProperty("onToggleShuffle")) {
+                            item.onToggleShuffle = root.toggleShuffle
+                        }
+                        if (item.hasOwnProperty("onCycleLoop")) {
+                            item.onCycleLoop = root.cycleLoopStatus
+                        }
+                        
+                        // 10-second seek (optional - only for ExtraLargeMode)
+                        if (item.hasOwnProperty("onSeekBack10")) {
+                            item.onSeekBack10 = root.seekBack10
+                        }
+                        if (item.hasOwnProperty("onSeekForward10")) {
+                            item.onSeekForward10 = root.seekForward10
+                        }
+                        
+                        // Button visibility settings (only for ExtraLargeMode)
+                        if (item.hasOwnProperty("showShuffleButton")) {
+                            item.showShuffleButton = Qt.binding(() => root.cfg_showShuffleButton)
+                        }
+                        if (item.hasOwnProperty("showLoopButton")) {
+                            item.showLoopButton = Qt.binding(() => root.cfg_showLoopButton)
+                        }
+                        if (item.hasOwnProperty("showSeekButtons")) {
+                            item.showSeekButtons = Qt.binding(() => root.cfg_showSeekButtons)
+                        }
                         
                         // Player Selection
                         if (item.hasOwnProperty("playersModel")) {

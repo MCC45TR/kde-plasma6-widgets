@@ -17,6 +17,7 @@ Rectangle {
     property bool pillMode: false
     property bool iconOnlyMode: false // When true, shows only icons in expanded view
     property real iconSize: 16
+    property string preferredPlayer: "" // Current preferred player setting
     
     // State
     property bool expanded: false
@@ -56,7 +57,13 @@ Rectangle {
     
     // Computed properties
     readonly property real headerHeight: pillMode ? (iconSize + 9) : (iconSize * 1.25)
-    readonly property real headerWidth: pillMode ? (badgeRow.implicitWidth + 16 + 5 + 4) : headerHeight
+    readonly property real headerWidth: {
+        if (pillMode && !iconOnlyMode) {
+             // Icon (iconSize) + LeftPad(5) + TextMargs(12) + Text(metrics) + Arrow(16) + RightPad(10)
+             return 5 + iconSize + 12 + Math.min(100, headerTextMetrics.width) + 26
+        }
+        return headerHeight
+    }
     
     // Calculate expanded header height (for wrapping text)
     readonly property real expandedHeaderHeight: expanded ? Math.max(headerHeight, headerTextMetrics.height + 10) : headerHeight
@@ -127,7 +134,7 @@ Rectangle {
                     height: parent.height
                     anchors.centerIn: badge.iconOnlyMode ? parent : undefined
                     anchors.left: badge.iconOnlyMode ? undefined : parent.left
-                    anchors.leftMargin: badge.iconOnlyMode ? 0 : ((badge.headerWidth - badge.iconSize) / 2)
+                    anchors.leftMargin: (badge.pillMode && !badge.iconOnlyMode) ? 5 : (badge.iconOnlyMode ? 0 : ((badge.headerWidth - badge.iconSize) / 2))
                     anchors.verticalCenter: badge.iconOnlyMode ? undefined : parent.verticalCenter
                     
                     // Current icon with fade animation
@@ -290,9 +297,20 @@ Rectangle {
                     color: Kirigami.Theme.textColor
                     font.pixelSize: 13
                     elide: Text.ElideRight
-                    width: parent.width - 40
+                    width: parent.width - 60
                     font.italic: true
                     visible: !badge.iconOnlyMode
+                }
+                
+                // Checkmark for active General mode
+                Kirigami.Icon {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    width: 16
+                    height: 16
+                    source: "checkmark"
+                    color: Kirigami.Theme.highlightColor
+                    visible: !badge.iconOnlyMode && badge.preferredPlayer === ""
                 }
             }
         }
@@ -346,11 +364,38 @@ Rectangle {
                         color: Kirigami.Theme.textColor
                         font.pixelSize: 13
                         elide: Text.ElideRight
-                        width: parent.width - 40
+                        width: parent.width - 60
                         visible: !badge.iconOnlyMode
+                    }
+                    
+                    // Checkmark for selected player
+                    Kirigami.Icon {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        width: 16
+                        height: 16
+                        source: "checkmark"
+                        color: Kirigami.Theme.highlightColor
+                        visible: !badge.iconOnlyMode && badge.preferredPlayer.toLowerCase() === model.rawName.toLowerCase()
                     }
                 }
             }
+        }
+    }
+
+    // Auto-close functionality: close menu after 5s if mouse is not hovering
+    HoverHandler {
+        id: badgeHoverHandler
+    }
+
+    Timer {
+        id: autoCloseTimer
+        interval: 5000
+        repeat: false
+        running: badge.expanded && !badgeHoverHandler.hovered
+        onTriggered: {
+            console.log("Auto-closing player selector menu")
+            badge.expanded = false
         }
     }
 }

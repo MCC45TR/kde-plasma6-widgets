@@ -46,6 +46,12 @@ Kirigami.FormLayout {
     property int cfg_panelButtonSizeDefault: 32
     property bool cfg_panelDynamicWidth
     property bool cfg_panelDynamicWidthDefault: true
+    property bool cfg_showShuffleButton
+    property bool cfg_showShuffleButtonDefault: false
+    property bool cfg_showLoopButton
+    property bool cfg_showLoopButtonDefault: false
+    property bool cfg_showSeekButtons
+    property bool cfg_showSeekButtonsDefault: true
     
     property string title: i18n("General")
     Mpris.Mpris2Model { 

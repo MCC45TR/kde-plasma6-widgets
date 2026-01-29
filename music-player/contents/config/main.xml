@@ -73,7 +73,19 @@
     </entry>
     <entry name="popupLayoutMode" type="Int">
       <default>0</default>
-      <label>Popup Layout Mode (0: Auto/Large, 1: Wide)</label>
+      <label>Popup Layout Mode (0: Auto, 1: Small, 2: Wide, 3: Large, 4: ExtraLarge)</label>
+    </entry>
+    <entry name="showShuffleButton" type="Bool">
+      <default>false</default>
+      <label>Show Shuffle button in Extra Large mode</label>
+    </entry>
+    <entry name="showLoopButton" type="Bool">
+      <default>false</default>
+      <label>Show Loop/Repeat button in Extra Large mode</label>
+    </entry>
+    <entry name="showSeekButtons" type="Bool">
+      <default>true</default>
+      <label>Show 10-second seek buttons in Extra Large mode</label>
     </entry>
   </group>
 </kcfg>

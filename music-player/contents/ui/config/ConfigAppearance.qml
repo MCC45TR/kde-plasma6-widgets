@@ -22,6 +22,9 @@ Kirigami.FormLayout {
     property bool cfg_panelAutoButtonSize
     property int cfg_panelButtonSize
     property int cfg_popupLayoutMode
+    property bool cfg_showShuffleButton
+    property bool cfg_showLoopButton
+    property bool cfg_showSeekButtons
     
     // Default values (required for Defaults button)
     property int cfg_edgeMarginDefault: 10
@@ -39,6 +42,9 @@ Kirigami.FormLayout {
     property bool cfg_panelAutoButtonSizeDefault: true
     property int cfg_panelButtonSizeDefault: 32
     property int cfg_popupLayoutModeDefault: 0
+    property bool cfg_showShuffleButtonDefault: false
+    property bool cfg_showLoopButtonDefault: false
+    property bool cfg_showSeekButtonsDefault: true
     
     // General config (to silence property warnings - handled by ConfigGeneral)
     property string cfg_preferredPlayer
@@ -195,22 +201,76 @@ Kirigami.FormLayout {
         readonly property bool isInPanel: (plasmoid.formFactor === 2 || plasmoid.formFactor === 3)
         
         model: isInPanel
-               ? [i18n("Automatic"), i18n("Wide"), i18n("Large")]
-               : [i18n("Automatic"), i18n("Small"), i18n("Wide"), i18n("Large")]
+               ? [i18n("Automatic"), i18n("Wide"), i18n("Large"), i18n("Extra Large")]
+               : [i18n("Automatic"), i18n("Small"), i18n("Wide"), i18n("Large"), i18n("Extra Large")]
         
         onActivated: {
              // Mapping:
-             // Internal Config: 0=Auto, 1=Small, 2=Wide, 3=Large
+             // Internal Config: 0=Auto, 1=Small, 2=Wide, 3=Large, 4=ExtraLarge
              if (isInPanel) {
-                 // Panel Model: 0=Auto, 1=Wide, 2=Large
+                 // Panel Model: 0=Auto, 1=Wide, 2=Large, 3=ExtraLarge
                  if (currentIndex === 0) configAppearance.cfg_popupLayoutMode = 0
                  else if (currentIndex === 1) configAppearance.cfg_popupLayoutMode = 2
                  else if (currentIndex === 2) configAppearance.cfg_popupLayoutMode = 3
+                 else if (currentIndex === 3) configAppearance.cfg_popupLayoutMode = 4
              } else {
-                 // Desktop Model: 0=Auto, 1=Small, 2=Wide, 3=Large
+                 // Desktop Model: 0=Auto, 1=Small, 2=Wide, 3=Large, 4=ExtraLarge
                  configAppearance.cfg_popupLayoutMode = currentIndex
              }
         }
+    }
+    
+    // Extra Large Mode specific settings
+    Label {
+        text: i18n("Extra Large Mode Buttons:")
+        opacity: isExtraLargeMode ? 1.0 : 0.5
+        
+        // Check if Extra Large mode is selected (4) or Auto mode on panel (0 with panel)
+        readonly property bool isExtraLargeMode: {
+            var mode = configAppearance.cfg_popupLayoutMode
+            if (mode === 4) return true
+            if (mode === 0 && popupLayoutCombo.isInPanel) return true
+            return false
+        }
+    }
+    
+    CheckBox {
+        text: i18n("Shuffle Button") + " (" + i18n("not working") + ")"
+        checked: configAppearance.cfg_showShuffleButton
+        onCheckedChanged: configAppearance.cfg_showShuffleButton = checked
+        enabled: {
+            var mode = configAppearance.cfg_popupLayoutMode
+            if (mode === 4) return true
+            if (mode === 0 && popupLayoutCombo.isInPanel) return true
+            return false
+        }
+        opacity: enabled ? 1.0 : 0.5
+    }
+    
+    CheckBox {
+        text: i18n("Loop/Repeat Button") + " (" + i18n("not working") + ")"
+        checked: configAppearance.cfg_showLoopButton
+        onCheckedChanged: configAppearance.cfg_showLoopButton = checked
+        enabled: {
+            var mode = configAppearance.cfg_popupLayoutMode
+            if (mode === 4) return true
+            if (mode === 0 && popupLayoutCombo.isInPanel) return true
+            return false
+        }
+        opacity: enabled ? 1.0 : 0.5
+    }
+    
+    CheckBox {
+        text: i18n("10-Second Seek Buttons")
+        checked: configAppearance.cfg_showSeekButtons
+        onCheckedChanged: configAppearance.cfg_showSeekButtons = checked
+        enabled: {
+            var mode = configAppearance.cfg_popupLayoutMode
+            if (mode === 4) return true
+            if (mode === 0 && popupLayoutCombo.isInPanel) return true
+            return false
+        }
+        opacity: enabled ? 1.0 : 0.5
     }
     
     function syncSettings() {
@@ -229,9 +289,10 @@ Kirigami.FormLayout {
          if (pCombo.isInPanel) {
              if (mode === 2) pCombo.currentIndex = 1 // Wide
              else if (mode === 3) pCombo.currentIndex = 2 // Large
+             else if (mode === 4) pCombo.currentIndex = 3 // ExtraLarge
              else pCombo.currentIndex = 0 // Auto
          } else {
-             if (mode >= 0 && mode <= 3) pCombo.currentIndex = mode
+             if (mode >= 0 && mode <= 4) pCombo.currentIndex = mode
              else pCombo.currentIndex = 0
          }
 
