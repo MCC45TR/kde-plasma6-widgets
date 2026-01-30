@@ -1,5 +1,30 @@
 # 🌤️ MWeather (`weather`)
 
+### v1.2.0 (2026-01-30)
+**TR-TR:**
+- **Kapsamlı Yerelleştirme**: 20'den fazla dil için (Azerice, Bengalce, Çekçe, Almanca, Yunanca, İspanyolca, Farsça, Fransızca, Hintçe, Ermenice, Endonezyaca, İtalyanca, Japonca, Portekizce, Rumence, Rusça, Türkçe, Urduca, Çince) çeviriler eklendi ve güncellendi.
+- **Hava Durumu Detayları**: "Bulutluluk", "Çiy Noktası", "UV İndeksi", "Yağış Olasılığı" ve "Yağış Miktarı" gibi detaylı veriler eklendi.
+- **Gelişmiş Görünüm**:
+    - Rüzgar yönleri için tam isimler ve kısaltmalar eklendi.
+    - Gün doğumu ve gün batımı bilgileri tahmin detaylarına eklendi.
+    - "Kapatmak için tıkla/dokun" ipuçları eklendi.
+    - Her gün için detaylı hava durumu görünümü eklendi.
+- **Teknik İyileştirmeler**: Çeviri sistemi modernize edildi (`translations/` dizini), gereksiz dosya ve kayıtlar temizlendi.
+- **Ayar Geliştirmeleri**: "Sistem Teması", "Tahminde Birimleri Göster" ve "Köşe Yuvarlama" seçenekleri için yerelleştirme desteği tamamlandı.
+- **Metadata Yerelleştirme**: Widget adı ve açıklaması tüm desteklenen diller için `metadata.json` içinde yerelleştirildi.
+
+**EN-US:**
+- **Massive Localization**: Added and updated translations for over 20 languages (Azerbaijani, Bengali, Czech, German, Greek, Spanish, Persian, French, Hindi, Armenian, Indonesian, Italian, Japanese, Portuguese, Romanian, Russian, Turkish, Urdu, Chinese).
+- **Weather Insights**: Added detailed weather points including "Cloud Cover", "Dew Point", "UV Index", "Rain Chance", and "Precipitation".
+- **Visual Enhancements**:
+    - Added full cardinal directions and short abbreviations for wind.
+    - Added sunrise and sunset information to the forecast view.
+    - Added "Click/Tap to close" interaction hints.
+    - Added detailed weather view for each day.
+- **Technical Refactor**: Modernized translation architecture (unified `translations/` directory) and cleaned up obsolete entries.
+- **Configuration Polish**: Completed localization for "System Theme", "Show Units in Forecast", and "Corner Radius" settings.
+- **Metadata Localization**: Localized widget name and description in `metadata.json` for all supported languages.
+
 ### v1.1.9 (2026-01-29)
 **TR-TR:**
 - **Düzeltme:** Sistem birim (Metrik/İmperyal) algılaması düzeltildi, artık KDE bölgesel ayarlarını kullanıyor.

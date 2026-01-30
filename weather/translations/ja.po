@@ -1,0 +1,596 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-30 23:44+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: contents/ui/main.qml:75 contents/ui/main.qml:290
+msgid "Refresh"
+msgstr "更新"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Daily Forecast"
+msgstr "日ごとの予報"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Hourly Forecast"
+msgstr "1時間ごとの予報"
+
+#: contents/ui/main.qml:280
+msgid "Loading weather data..."
+msgstr "気象データを読み込み中..."
+
+#: contents/ui/main.qml:322
+msgid "Clear"
+msgstr "快晴"
+
+#: contents/ui/main.qml:323
+msgid "Mainly Clear"
+msgstr "晴れ"
+
+#: contents/ui/main.qml:324
+msgid "Partly Cloudy"
+msgstr "時々曇り"
+
+#: contents/ui/main.qml:325
+msgid "Overcast"
+msgstr "曇天"
+
+#: contents/ui/main.qml:326
+msgid "Fog"
+msgstr "霧"
+
+#: contents/ui/main.qml:327
+msgid "Drizzle"
+msgstr "霧雨"
+
+#: contents/ui/main.qml:328
+msgid "Freezing Drizzle"
+msgstr "着氷性の霧雨"
+
+#: contents/ui/main.qml:329
+msgid "Rain"
+msgstr "雨"
+
+#: contents/ui/main.qml:330
+msgid "Freezing Rain"
+msgstr "着氷性の雨"
+
+#: contents/ui/main.qml:331
+msgid "Snow"
+msgstr "雪"
+
+#: contents/ui/main.qml:332
+msgid "Snow Grains"
+msgstr "霧雪"
+
+#: contents/ui/main.qml:333
+msgid "Rain Showers"
+msgstr "にわか雨"
+
+#: contents/ui/main.qml:334
+msgid "Snow Showers"
+msgstr "にわか雪"
+
+#: contents/ui/main.qml:335
+msgid "Thunderstorm"
+msgstr "雷雨"
+
+#: contents/ui/main.qml:336
+msgid "Thunderstorm with Hail"
+msgstr "ひょうを伴う雷雨"
+
+#: contents/ui/main.qml:337
+msgid "Unknown"
+msgstr "不明"
+
+#: contents/ui/main.qml:338
+msgid "Cloudy"
+msgstr "曇り"
+
+#: contents/ui/main.qml:339
+msgid "Mist"
+msgstr "霞"
+
+#: contents/ui/main.qml:340
+msgid "Smoke"
+msgstr "煙"
+
+#: contents/ui/main.qml:341
+msgid "Haze"
+msgstr "煙霧"
+
+#: contents/ui/main.qml:342
+msgid "Dust"
+msgstr "砂塵"
+
+#: contents/ui/main.qml:343
+msgid "Sand"
+msgstr "砂"
+
+#: contents/ui/main.qml:344
+msgid "Ash"
+msgstr "火山灰"
+
+#: contents/ui/main.qml:345
+msgid "Squall"
+msgstr "スコール"
+
+#: contents/ui/main.qml:346
+msgid "Tornado"
+msgstr "竜巻"
+
+#: contents/ui/config/ConfigGeneral.qml:109
+msgid "Weather Provider"
+msgstr "お天気プロバイダー"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (無料、キー不要)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (キーが必要)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (キーが必要)"
+
+#: contents/ui/config/ConfigGeneral.qml:127
+msgid "Best free option. No API key required."
+msgstr "最高の無料オプション。APIキーは不要です。"
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Standard provider. API key required below."
+msgstr "標準プロバイダー。以下にAPIキーを入力してください。"
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Alternative provider. API key required below."
+msgstr "代替プロバイダー。以下にAPIキーを入力してください。"
+
+#: contents/ui/config/ConfigGeneral.qml:136
+msgid "API Keys"
+msgstr "APIキー"
+
+#: contents/ui/config/ConfigGeneral.qml:145
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap APIキー:"
+
+#: contents/ui/config/ConfigGeneral.qml:152
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMapのAPIキーを入力してください"
+
+#: contents/ui/config/ConfigGeneral.qml:157
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com APIキー:"
+
+#: contents/ui/config/ConfigGeneral.qml:164
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.comのキーを入力してください"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "Location"
+msgstr "場所"
+
+#: contents/ui/config/ConfigGeneral.qml:184
+msgid "Auto-detect from IP"
+msgstr "IPから自動検出"
+
+#: contents/ui/config/ConfigGeneral.qml:192
+msgid "Enter manually"
+msgstr "手動で入力"
+
+#: contents/ui/config/ConfigGeneral.qml:206
+msgid "City 1:"
+msgstr "都市 1:"
+
+#: contents/ui/config/ConfigGeneral.qml:212
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "例: 東京, 大阪, ロンドン"
+
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "City 2:"
+msgstr "都市 2:"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Second city (optional)"
+msgstr "第2の都市 (任意)"
+
+#: contents/ui/config/ConfigGeneral.qml:226
+msgid "City 3:"
+msgstr "都市 3:"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Third city (optional)"
+msgstr "第3の都市 (任意)"
+
+#: contents/ui/config/ConfigGeneral.qml:236
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "都市名、'都市,国コード'、または郵便番号を使用できます。"
+
+#: contents/ui/config/ConfigGeneral.qml:246
+msgid "Location will be auto-detected based on your IP address."
+msgstr "場所はIPアドレスに基づいて自動的に検出されます。"
+
+#: contents/ui/config/ConfigGeneral.qml:256
+msgid "Settings"
+msgstr "設定"
+
+#: contents/ui/config/ConfigGeneral.qml:266
+msgid "Units:"
+msgstr "単位:"
+
+#: contents/ui/config/ConfigGeneral.qml:274
+msgid "Use system units"
+msgstr "システムの単位を使用する"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Metric (°C)"
+msgstr "メートル法 (°C)"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Imperial (°F)"
+msgstr "ヤード・ポンド法 (°F)"
+
+#: contents/ui/config/ConfigGeneral.qml:299
+msgid "Refresh Interval:"
+msgstr "更新の間隔:"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "15 minutes"
+msgstr "15分"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "30 minutes"
+msgstr "30分"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "45 minutes"
+msgstr "45分"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 hour"
+msgstr "1時間"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "2 hours"
+msgstr "2時間"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "3 hours"
+msgstr "3時間"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "4 hours"
+msgstr "4時間"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "6 hours"
+msgstr "6時間"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "8 hours"
+msgstr "8時間"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "12 hours"
+msgstr "12時間"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 day"
+msgstr "1日"
+
+#: contents/ui/config/ConfigGeneral.qml:316
+msgid "Forecast Days:"
+msgstr "予報日数:"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Default (Colorful SVG)"
+msgstr "デフォルト (カラーSVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "System Theme"
+msgstr "システムテーマ"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google天気 v3 (フラットSVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google天気 v2 (リアルなPNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google天気 v1 (クラシックPNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:103
+msgid "Appearance"
+msgstr "外観"
+
+#: contents/ui/config/ConfigAppearance.qml:111
+msgid "Show Units in Forecast"
+msgstr "予報に単位を表示"
+
+#: contents/ui/config/ConfigAppearance.qml:119
+msgid "Layout Mode:"
+msgstr "レイアウトモード:"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Automatic"
+msgstr "自動"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Small"
+msgstr "小"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Wide"
+msgstr "ワイド"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Large"
+msgstr "大"
+
+#: contents/ui/config/ConfigAppearance.qml:135
+msgid "Icon Pack:"
+msgstr "アイコンパック:"
+
+#: contents/ui/config/ConfigAppearance.qml:151
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"天気アイコンのビジュアルスタイルを選択します。(注: v1/v2などの古いパックで"
+"は、一部の条件でアイコンが不足している場合があります)"
+
+#: contents/ui/config/ConfigAppearance.qml:152
+msgid "Select the visual style for weather icons."
+msgstr "天気アイコンのビジュアルスタイルを選択します。"
+
+#: contents/ui/config/ConfigAppearance.qml:160
+msgid "Widget Margin:"
+msgstr "ウィジェットのマージン:"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Normal (10px)"
+msgstr "標準 (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Less (5px)"
+msgstr "狭い (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "None (0px)"
+msgstr "なし (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:177
+msgid "Corner Radius:"
+msgstr "角の半径:"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Normal"
+msgstr "標準"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Square"
+msgstr "四角"
+
+#: contents/ui/config/ConfigAppearance.qml:196
+msgid "Font Settings"
+msgstr "フォント設定"
+
+#: contents/ui/config/ConfigAppearance.qml:205
+msgid "Use Default System Font"
+msgstr "システムのデフォルトフォントを使用"
+
+#: contents/ui/config/ConfigAppearance.qml:213
+msgid "Custom Font Family:"
+msgstr "カスタムフォントファミリー:"
+
+#: contents/ui/config/ConfigAppearance.qml:234
+msgid "Panel Settings"
+msgstr "パネル設定"
+
+#: contents/ui/config/ConfigAppearance.qml:244
+msgid "Representation:"
+msgstr "表示形式:"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Simple Panel"
+msgstr "シンプルパネル"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Detailed Panel"
+msgstr "詳細パネル"
+
+#: contents/ui/config/ConfigAppearance.qml:259
+msgid "Font Size (0 = Auto):"
+msgstr "フォントサイズ (0 = 自動):"
+
+#: contents/ui/config/ConfigAppearance.qml:277
+msgid "Icon Size (0 = Auto):"
+msgstr "アイコンサイズ (0 = 自動):"
+
+#: contents/ui/config/ConfigAppearance.qml:297
+msgid "Background Settings"
+msgstr "背景の設定"
+
+#: contents/ui/config/ConfigAppearance.qml:305
+msgid "Background Opacity:"
+msgstr "背景の不透明度:"
+
+#: contents/ui/config/ConfigAppearance.qml:312
+msgid "0% (No Backgrounds)"
+msgstr "0% (背景なし)"
+
+#: contents/ui/WeatherDetailsView.qml:101
+#: contents/ui/ForecastDetailsView.qml:102
+msgid "Feels like"
+msgstr "体感温度"
+
+#: contents/ui/WeatherDetailsView.qml:119
+#: contents/ui/ForecastDetailsView.qml:121
+msgid "Humidity"
+msgstr "湿度"
+
+#: contents/ui/WeatherDetailsView.qml:137
+#: contents/ui/ForecastDetailsView.qml:140
+msgid "Wind"
+msgstr "風"
+
+#: contents/ui/WeatherDetailsView.qml:155
+msgid "Pressure"
+msgstr "気圧"
+
+#: contents/ui/WeatherDetailsView.qml:188
+msgid "Cloud Cover"
+msgstr "雲量"
+
+#: contents/ui/WeatherDetailsView.qml:206
+msgid "UV"
+msgstr "UV指数"
+
+#: contents/ui/WeatherDetailsView.qml:232
+msgid "Visibility"
+msgstr "視程"
+
+#: contents/ui/WeatherDetailsView.qml:250
+msgid "Dew Point"
+msgstr "露点"
+
+#: contents/ui/WeatherDetailsView.qml:281
+#: contents/ui/ForecastDetailsView.qml:231
+msgid "Wind Direction"
+msgstr "風向"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North"
+msgstr "北"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North East"
+msgstr "北東"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "East"
+msgstr "東"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South East"
+msgstr "南東"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South"
+msgstr "南"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South West"
+msgstr "南西"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "West"
+msgstr "西"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North West"
+msgstr "北西"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "N"
+msgstr "北"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NE"
+msgstr "北東"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "E"
+msgstr "東"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SE"
+msgstr "南東"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "S"
+msgstr "南"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SW"
+msgstr "南西"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "W"
+msgstr "西"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NW"
+msgstr "北西"
+
+#: contents/ui/WeatherDetailsView.qml:361
+msgid "Click to close"
+msgstr "クリックして閉じる"
+
+#: contents/ui/LargeModeLayout.qml:182
+msgid "Today"
+msgstr "今日"
+
+#: contents/ui/ForecastDetailsView.qml:159
+msgid "Rain Chance"
+msgstr "降水確率"
+
+#: contents/ui/ForecastDetailsView.qml:185
+msgid "Precipitation"
+msgstr "降水量"
+
+#: contents/ui/ForecastDetailsView.qml:204
+msgid "UV Index"
+msgstr "UV指数"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunset"
+msgstr "日の入り"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunrise"
+msgstr "日の出"
+
+#: contents/ui/ForecastDetailsView.qml:313
+msgid "Tap to close"
+msgstr "タップして閉じる"
+
+#: contents/ui/ForecastDetailsView.qml:368
+msgid "Next week %1"
+msgstr "来週 %1"
+
+#: contents/ui/ForecastDetailsView.qml:370
+msgid "2 weeks later %1"
+msgstr "2週間後 %1"

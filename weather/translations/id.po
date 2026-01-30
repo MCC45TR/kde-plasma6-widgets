@@ -1,0 +1,596 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-30 23:44+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: contents/ui/main.qml:75 contents/ui/main.qml:290
+msgid "Refresh"
+msgstr "Segarkan"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Daily Forecast"
+msgstr "Ramalan Harian"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Hourly Forecast"
+msgstr "Ramalan Per Jam"
+
+#: contents/ui/main.qml:280
+msgid "Loading weather data..."
+msgstr "Memuat data cuaca..."
+
+#: contents/ui/main.qml:322
+msgid "Clear"
+msgstr "Cerah"
+
+#: contents/ui/main.qml:323
+msgid "Mainly Clear"
+msgstr "Sebagian Besar Cerah"
+
+#: contents/ui/main.qml:324
+msgid "Partly Cloudy"
+msgstr "Berawan Sebagian"
+
+#: contents/ui/main.qml:325
+msgid "Overcast"
+msgstr "Mendung"
+
+#: contents/ui/main.qml:326
+msgid "Fog"
+msgstr "Kabut"
+
+#: contents/ui/main.qml:327
+msgid "Drizzle"
+msgstr "Gerimis"
+
+#: contents/ui/main.qml:328
+msgid "Freezing Drizzle"
+msgstr "Gerimis Beku"
+
+#: contents/ui/main.qml:329
+msgid "Rain"
+msgstr "Hujan"
+
+#: contents/ui/main.qml:330
+msgid "Freezing Rain"
+msgstr "Hujan Beku"
+
+#: contents/ui/main.qml:331
+msgid "Snow"
+msgstr "Salju"
+
+#: contents/ui/main.qml:332
+msgid "Snow Grains"
+msgstr "Butiran Salju"
+
+#: contents/ui/main.qml:333
+msgid "Rain Showers"
+msgstr "Hujan Lokal"
+
+#: contents/ui/main.qml:334
+msgid "Snow Showers"
+msgstr "Salju Lokal"
+
+#: contents/ui/main.qml:335
+msgid "Thunderstorm"
+msgstr "Badai Petir"
+
+#: contents/ui/main.qml:336
+msgid "Thunderstorm with Hail"
+msgstr "Badai Petir dengan Hujan Es"
+
+#: contents/ui/main.qml:337
+msgid "Unknown"
+msgstr "Tidak Diketahui"
+
+#: contents/ui/main.qml:338
+msgid "Cloudy"
+msgstr "Berawan"
+
+#: contents/ui/main.qml:339
+msgid "Mist"
+msgstr "Kabut Tipis"
+
+#: contents/ui/main.qml:340
+msgid "Smoke"
+msgstr "Asap"
+
+#: contents/ui/main.qml:341
+msgid "Haze"
+msgstr "Kabut Asap"
+
+#: contents/ui/main.qml:342
+msgid "Dust"
+msgstr "Debu"
+
+#: contents/ui/main.qml:343
+msgid "Sand"
+msgstr "Pasir"
+
+#: contents/ui/main.qml:344
+msgid "Ash"
+msgstr "Abu"
+
+#: contents/ui/main.qml:345
+msgid "Squall"
+msgstr "Angin Kencang"
+
+#: contents/ui/main.qml:346
+msgid "Tornado"
+msgstr "Tornado"
+
+#: contents/ui/config/ConfigGeneral.qml:109
+msgid "Weather Provider"
+msgstr "Penyedia Cuaca"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratis, Tidak Perlu Kunci)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Perlu Kunci)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Perlu Kunci)"
+
+#: contents/ui/config/ConfigGeneral.qml:127
+msgid "Best free option. No API key required."
+msgstr "Opsi gratis terbaik. Tidak perlu kunci API."
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Standard provider. API key required below."
+msgstr "Penyedia standar. Kunci API diperlukan di bawah."
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Alternative provider. API key required below."
+msgstr "Penyedia alternatif. Kunci API diperlukan di bawah."
+
+#: contents/ui/config/ConfigGeneral.qml:136
+msgid "API Keys"
+msgstr "Kunci API"
+
+#: contents/ui/config/ConfigGeneral.qml:145
+msgid "OpenWeatherMap API Key:"
+msgstr "Kunci API OpenWeatherMap:"
+
+#: contents/ui/config/ConfigGeneral.qml:152
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Masukkan kunci API OpenWeatherMap Anda"
+
+#: contents/ui/config/ConfigGeneral.qml:157
+msgid "WeatherAPI.com API Key:"
+msgstr "Kunci API WeatherAPI.com:"
+
+#: contents/ui/config/ConfigGeneral.qml:164
+msgid "Enter your WeatherAPI.com key"
+msgstr "Masukkan kunci WeatherAPI.com Anda"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "Location"
+msgstr "Lokasi"
+
+#: contents/ui/config/ConfigGeneral.qml:184
+msgid "Auto-detect from IP"
+msgstr "Deteksi otomatis dari IP"
+
+#: contents/ui/config/ConfigGeneral.qml:192
+msgid "Enter manually"
+msgstr "Masukkan secara manual"
+
+#: contents/ui/config/ConfigGeneral.qml:206
+msgid "City 1:"
+msgstr "Kota 1:"
+
+#: contents/ui/config/ConfigGeneral.qml:212
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Misal: Jakarta, Surabaya, London"
+
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "City 2:"
+msgstr "Kota 2:"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Second city (optional)"
+msgstr "Kota kedua (opsional)"
+
+#: contents/ui/config/ConfigGeneral.qml:226
+msgid "City 3:"
+msgstr "Kota 3:"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Third city (optional)"
+msgstr "Kota ketiga (opsional)"
+
+#: contents/ui/config/ConfigGeneral.qml:236
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "Anda dapat menggunakan nama Kota, 'Kota, Kode Negara' atau Kode Pos."
+
+#: contents/ui/config/ConfigGeneral.qml:246
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Lokasi akan dideteksi secara otomatis berdasarkan alamat IP Anda."
+
+#: contents/ui/config/ConfigGeneral.qml:256
+msgid "Settings"
+msgstr "Pengaturan"
+
+#: contents/ui/config/ConfigGeneral.qml:266
+msgid "Units:"
+msgstr "Unit:"
+
+#: contents/ui/config/ConfigGeneral.qml:274
+msgid "Use system units"
+msgstr "Gunakan unit sistem"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Metric (°C)"
+msgstr "Metrik (°C)"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Imperial (°F)"
+msgstr "Imperial (°F)"
+
+#: contents/ui/config/ConfigGeneral.qml:299
+msgid "Refresh Interval:"
+msgstr "Interval Penyegaran:"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "15 minutes"
+msgstr "15 menit"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "30 minutes"
+msgstr "30 menit"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "45 minutes"
+msgstr "45 menit"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 hour"
+msgstr "1 jam"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "2 hours"
+msgstr "2 jam"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "3 hours"
+msgstr "3 jam"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "4 hours"
+msgstr "4 jam"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "6 hours"
+msgstr "6 jam"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "8 hours"
+msgstr "8 jam"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "12 hours"
+msgstr "12 jam"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 day"
+msgstr "1 hari"
+
+#: contents/ui/config/ConfigGeneral.qml:316
+msgid "Forecast Days:"
+msgstr "Hari Ramalan:"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Default (Colorful SVG)"
+msgstr "Default (SVG Berwarna)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "System Theme"
+msgstr "Tema Sistem"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Weather v3 (SVG Datar)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Weather v2 (PNG Realistis)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Weather v1 (PNG Klasik)"
+
+#: contents/ui/config/ConfigAppearance.qml:103
+msgid "Appearance"
+msgstr "Tampilan"
+
+#: contents/ui/config/ConfigAppearance.qml:111
+msgid "Show Units in Forecast"
+msgstr "Tampilkan Unit di Ramalan"
+
+#: contents/ui/config/ConfigAppearance.qml:119
+msgid "Layout Mode:"
+msgstr "Mode Tata Letak:"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Automatic"
+msgstr "Otomatis"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Small"
+msgstr "Kecil"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Wide"
+msgstr "Lebar"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Large"
+msgstr "Besar"
+
+#: contents/ui/config/ConfigAppearance.qml:135
+msgid "Icon Pack:"
+msgstr "Paket Ikon:"
+
+#: contents/ui/config/ConfigAppearance.qml:151
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"Pilih gaya visual untuk ikon cuaca. (Catatan: paket lama seperti v1/v2 "
+"mungkin kehilangan ikon untuk beberapa kondisi)"
+
+#: contents/ui/config/ConfigAppearance.qml:152
+msgid "Select the visual style for weather icons."
+msgstr "Pilih gaya visual untuk ikon cuaca."
+
+#: contents/ui/config/ConfigAppearance.qml:160
+msgid "Widget Margin:"
+msgstr "Margin Widget:"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Less (5px)"
+msgstr "Lebih Sedikit (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "None (0px)"
+msgstr "Tidak Ada (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:177
+msgid "Corner Radius:"
+msgstr "Radius Sudut:"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Normal"
+msgstr "Normal"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Square"
+msgstr "Kotak"
+
+#: contents/ui/config/ConfigAppearance.qml:196
+msgid "Font Settings"
+msgstr "Pengaturan Font"
+
+#: contents/ui/config/ConfigAppearance.qml:205
+msgid "Use Default System Font"
+msgstr "Gunakan Font Default Sistem"
+
+#: contents/ui/config/ConfigAppearance.qml:213
+msgid "Custom Font Family:"
+msgstr "Keluarga Font Kustom:"
+
+#: contents/ui/config/ConfigAppearance.qml:234
+msgid "Panel Settings"
+msgstr "Pengaturan Panel"
+
+#: contents/ui/config/ConfigAppearance.qml:244
+msgid "Representation:"
+msgstr "Representasi:"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Simple Panel"
+msgstr "Panel Sederhana"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Detailed Panel"
+msgstr "Panel Detail"
+
+#: contents/ui/config/ConfigAppearance.qml:259
+msgid "Font Size (0 = Auto):"
+msgstr "Ukuran Font (0 = Auto):"
+
+#: contents/ui/config/ConfigAppearance.qml:277
+msgid "Icon Size (0 = Auto):"
+msgstr "Ukuran Ikon (0 = Auto):"
+
+#: contents/ui/config/ConfigAppearance.qml:297
+msgid "Background Settings"
+msgstr "Pengaturan Latar Belakang"
+
+#: contents/ui/config/ConfigAppearance.qml:305
+msgid "Background Opacity:"
+msgstr "Opasitas Latar Belakang:"
+
+#: contents/ui/config/ConfigAppearance.qml:312
+msgid "0% (No Backgrounds)"
+msgstr "0% (Tanpa Latar Belakang)"
+
+#: contents/ui/WeatherDetailsView.qml:101
+#: contents/ui/ForecastDetailsView.qml:102
+msgid "Feels like"
+msgstr "Terasa seperti"
+
+#: contents/ui/WeatherDetailsView.qml:119
+#: contents/ui/ForecastDetailsView.qml:121
+msgid "Humidity"
+msgstr "Kelembapan"
+
+#: contents/ui/WeatherDetailsView.qml:137
+#: contents/ui/ForecastDetailsView.qml:140
+msgid "Wind"
+msgstr "Angin"
+
+#: contents/ui/WeatherDetailsView.qml:155
+msgid "Pressure"
+msgstr "Tekanan"
+
+#: contents/ui/WeatherDetailsView.qml:188
+msgid "Cloud Cover"
+msgstr "Tutupan Awan"
+
+#: contents/ui/WeatherDetailsView.qml:206
+msgid "UV"
+msgstr "Indeks UV"
+
+#: contents/ui/WeatherDetailsView.qml:232
+msgid "Visibility"
+msgstr "Jarak Pandang"
+
+#: contents/ui/WeatherDetailsView.qml:250
+msgid "Dew Point"
+msgstr "Titik Embun"
+
+#: contents/ui/WeatherDetailsView.qml:281
+#: contents/ui/ForecastDetailsView.qml:231
+msgid "Wind Direction"
+msgstr "Arah Angin"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North"
+msgstr "Utara"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North East"
+msgstr "Timur Laut"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "East"
+msgstr "Timur"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South East"
+msgstr "Tenggara"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South"
+msgstr "Selatan"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South West"
+msgstr "Barat Daya"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "West"
+msgstr "Barat"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North West"
+msgstr "Barat Laut"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "N"
+msgstr "U"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NE"
+msgstr "TL"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "E"
+msgstr "T"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SE"
+msgstr "TG"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "S"
+msgstr "S"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SW"
+msgstr "BD"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "W"
+msgstr "B"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NW"
+msgstr "BL"
+
+#: contents/ui/WeatherDetailsView.qml:361
+msgid "Click to close"
+msgstr "Klik untuk menutup"
+
+#: contents/ui/LargeModeLayout.qml:182
+msgid "Today"
+msgstr "Hari Ini"
+
+#: contents/ui/ForecastDetailsView.qml:159
+msgid "Rain Chance"
+msgstr "Kemungkinan Hujan"
+
+#: contents/ui/ForecastDetailsView.qml:185
+msgid "Precipitation"
+msgstr "Presipitasi"
+
+#: contents/ui/ForecastDetailsView.qml:204
+msgid "UV Index"
+msgstr "Indeks UV"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunset"
+msgstr "Matahari Terbenam"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunrise"
+msgstr "Matahari Terbit"
+
+#: contents/ui/ForecastDetailsView.qml:313
+msgid "Tap to close"
+msgstr "Ketuk untuk menutup"
+
+#: contents/ui/ForecastDetailsView.qml:368
+msgid "Next week %1"
+msgstr "Minggu depan %1"
+
+#: contents/ui/ForecastDetailsView.qml:370
+msgid "2 weeks later %1"
+msgstr "2 minggu kemudian %1"

@@ -1,0 +1,597 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-30 23:44+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ur\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: contents/ui/main.qml:75 contents/ui/main.qml:290
+msgid "Refresh"
+msgstr "تازہ کریں"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Daily Forecast"
+msgstr "روزانہ کی پیشن گوئی"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Hourly Forecast"
+msgstr "فی گھنٹہ کی پیشن گوئی"
+
+#: contents/ui/main.qml:280
+msgid "Loading weather data..."
+msgstr "موسم کا ڈیٹا لوڈ ہو رہا ہے..."
+
+#: contents/ui/main.qml:322
+msgid "Clear"
+msgstr "صاف"
+
+#: contents/ui/main.qml:323
+msgid "Mainly Clear"
+msgstr "زیادہ تر صاف"
+
+#: contents/ui/main.qml:324
+msgid "Partly Cloudy"
+msgstr "جزوی طور پر ابر آلود"
+
+#: contents/ui/main.qml:325
+msgid "Overcast"
+msgstr "ابر آلود"
+
+#: contents/ui/main.qml:326
+msgid "Fog"
+msgstr "دھند"
+
+#: contents/ui/main.qml:327
+msgid "Drizzle"
+msgstr "بونداباندی"
+
+#: contents/ui/main.qml:328
+msgid "Freezing Drizzle"
+msgstr "جمنے والی بونداباندی"
+
+#: contents/ui/main.qml:329
+msgid "Rain"
+msgstr "بارش"
+
+#: contents/ui/main.qml:330
+msgid "Freezing Rain"
+msgstr "جمنے والی بارش"
+
+#: contents/ui/main.qml:331
+msgid "Snow"
+msgstr "برف باری"
+
+#: contents/ui/main.qml:332
+msgid "Snow Grains"
+msgstr "برف کے دانے"
+
+#: contents/ui/main.qml:333
+msgid "Rain Showers"
+msgstr "بارش کی بوچھاریں"
+
+#: contents/ui/main.qml:334
+msgid "Snow Showers"
+msgstr "برف کی بوچھاریں"
+
+#: contents/ui/main.qml:335
+msgid "Thunderstorm"
+msgstr "گرج چمک کے ساتھ طوفان"
+
+#: contents/ui/main.qml:336
+msgid "Thunderstorm with Hail"
+msgstr "ژالہ باری کے ساتھ طوفان"
+
+#: contents/ui/main.qml:337
+msgid "Unknown"
+msgstr "نامعلوم"
+
+#: contents/ui/main.qml:338
+msgid "Cloudy"
+msgstr "ابر آلود"
+
+#: contents/ui/main.qml:339
+msgid "Mist"
+msgstr "دھند"
+
+#: contents/ui/main.qml:340
+msgid "Smoke"
+msgstr "دھواں"
+
+#: contents/ui/main.qml:341
+msgid "Haze"
+msgstr "دھندلاہٹ"
+
+#: contents/ui/main.qml:342
+msgid "Dust"
+msgstr "گرد و غبار"
+
+#: contents/ui/main.qml:343
+msgid "Sand"
+msgstr "ریت"
+
+#: contents/ui/main.qml:344
+msgid "Ash"
+msgstr "راکھ"
+
+#: contents/ui/main.qml:345
+msgid "Squall"
+msgstr "تیز ہوا کا جھونکا"
+
+#: contents/ui/main.qml:346
+msgid "Tornado"
+msgstr "بگولہ"
+
+#: contents/ui/config/ConfigGeneral.qml:109
+msgid "Weather Provider"
+msgstr "موسم کا فراہم کنندہ"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (مفت، کسی کی (Key) کی ضرورت نہیں)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (کی (Key) درکار ہے)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (کی (Key) درکار ہے)"
+
+#: contents/ui/config/ConfigGeneral.qml:127
+msgid "Best free option. No API key required."
+msgstr "بہترین مفت آپشن۔ کسی API کلید کی ضرورت نہیں ہے۔"
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Standard provider. API key required below."
+msgstr "معیاری فراہم کنندہ۔ نیچے API کی (Key) درکار ہے۔"
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Alternative provider. API key required below."
+msgstr "متبادل فراہم کنندہ۔ نیچے API کی (Key) درکار ہے۔"
+
+#: contents/ui/config/ConfigGeneral.qml:136
+msgid "API Keys"
+msgstr "API کلیدیں"
+
+#: contents/ui/config/ConfigGeneral.qml:145
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API کلید:"
+
+#: contents/ui/config/ConfigGeneral.qml:152
+msgid "Enter your OpenWeatherMap API key"
+msgstr "اپنی OpenWeatherMap API کلید درج کریں"
+
+#: contents/ui/config/ConfigGeneral.qml:157
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API کلید:"
+
+#: contents/ui/config/ConfigGeneral.qml:164
+msgid "Enter your WeatherAPI.com key"
+msgstr "اپنی WeatherAPI.com کلید درج کریں"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "Location"
+msgstr "مقام"
+
+#: contents/ui/config/ConfigGeneral.qml:184
+msgid "Auto-detect from IP"
+msgstr "آئی پی سے خودکار پتہ لگائیں"
+
+#: contents/ui/config/ConfigGeneral.qml:192
+msgid "Enter manually"
+msgstr "دستی طور پر درج کریں"
+
+#: contents/ui/config/ConfigGeneral.qml:206
+msgid "City 1:"
+msgstr "شہر 1:"
+
+#: contents/ui/config/ConfigGeneral.qml:212
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "مثال: لاہور، کراچی، لندن"
+
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "City 2:"
+msgstr "شہر 2:"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Second city (optional)"
+msgstr "دوسرا شہر (اختیاری)"
+
+#: contents/ui/config/ConfigGeneral.qml:226
+msgid "City 3:"
+msgstr "شہر 3:"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Third city (optional)"
+msgstr "تیسرا شہر (اختیاری)"
+
+#: contents/ui/config/ConfigGeneral.qml:236
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "آپ شہر کا نام، 'شہر، ملکی کوڈ' یا زپ کوڈ استعمال کر سکتے ہیں۔"
+
+#: contents/ui/config/ConfigGeneral.qml:246
+msgid "Location will be auto-detected based on your IP address."
+msgstr ""
+"مقام کا پتہ آپ کے آئی پی ایڈریس کی بنیاد پر خودکار طور پر لگایا جائے گا۔"
+
+#: contents/ui/config/ConfigGeneral.qml:256
+msgid "Settings"
+msgstr "ترتیبات"
+
+#: contents/ui/config/ConfigGeneral.qml:266
+msgid "Units:"
+msgstr "اکائیاں:"
+
+#: contents/ui/config/ConfigGeneral.qml:274
+msgid "Use system units"
+msgstr "سسٹم کی اکائیاں استعمال کریں"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Metric (°C)"
+msgstr "میٹرک (°C)"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Imperial (°F)"
+msgstr "امپیریل (°F)"
+
+#: contents/ui/config/ConfigGeneral.qml:299
+msgid "Refresh Interval:"
+msgstr "ریفریش کا وقفہ:"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "15 minutes"
+msgstr "15 منٹ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "30 minutes"
+msgstr "30 منٹ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "45 minutes"
+msgstr "45 منٹ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 hour"
+msgstr "1 گھنٹہ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "2 hours"
+msgstr "2 گھنٹے"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "3 hours"
+msgstr "3 گھنٹے"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "4 hours"
+msgstr "4 گھنٹے"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "6 hours"
+msgstr "6 گھنٹے"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "8 hours"
+msgstr "8 گھنٹے"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "12 hours"
+msgstr "12 گھنٹے"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 day"
+msgstr "1 دن"
+
+#: contents/ui/config/ConfigGeneral.qml:316
+msgid "Forecast Days:"
+msgstr "پیشن گوئی کے دن:"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Default (Colorful SVG)"
+msgstr "ڈیفالٹ (رنگین SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "System Theme"
+msgstr "سسٹم تھیم"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "گوگل موسم v3 (فلیٹ SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "گوگل موسم v2 (حقیقی PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "گوگل موسم v1 (کلاسک PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:103
+msgid "Appearance"
+msgstr "ظاہری شکل"
+
+#: contents/ui/config/ConfigAppearance.qml:111
+msgid "Show Units in Forecast"
+msgstr "پیشن گوئی میں اکائیاں دکھائیں"
+
+#: contents/ui/config/ConfigAppearance.qml:119
+msgid "Layout Mode:"
+msgstr "لے آؤٹ موڈ:"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Automatic"
+msgstr "خودکار"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Small"
+msgstr "چھوٹا"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Wide"
+msgstr "کشادہ"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Large"
+msgstr "بڑا"
+
+#: contents/ui/config/ConfigAppearance.qml:135
+msgid "Icon Pack:"
+msgstr "آئیکن پیک:"
+
+#: contents/ui/config/ConfigAppearance.qml:151
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"موسم کے آئیکونز کے لیے بصری انداز منتخب کریں۔ (نوٹ: v1/v2 جیسے پرانے پیک میں "
+"کچھ حالات کے لیے آئیکونز غائب ہو سکتے ہیں)"
+
+#: contents/ui/config/ConfigAppearance.qml:152
+msgid "Select the visual style for weather icons."
+msgstr "موسم کے آئیکونز کے لیے بصری انداز منتخب کریں۔"
+
+#: contents/ui/config/ConfigAppearance.qml:160
+msgid "Widget Margin:"
+msgstr "وجیٹ کا مارجن:"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Normal (10px)"
+msgstr "نارمل (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Less (5px)"
+msgstr "کم (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "None (0px)"
+msgstr "کوئی نہیں (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:177
+msgid "Corner Radius:"
+msgstr "کونے کا رداس:"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Normal"
+msgstr "نارمل"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Square"
+msgstr "مربع"
+
+#: contents/ui/config/ConfigAppearance.qml:196
+msgid "Font Settings"
+msgstr "فونٹ کی ترتیبات"
+
+#: contents/ui/config/ConfigAppearance.qml:205
+msgid "Use Default System Font"
+msgstr "ڈیفالٹ سسٹم فونٹ استعمال کریں"
+
+#: contents/ui/config/ConfigAppearance.qml:213
+msgid "Custom Font Family:"
+msgstr "کسٹم فونٹ فیملی:"
+
+#: contents/ui/config/ConfigAppearance.qml:234
+msgid "Panel Settings"
+msgstr "پینل کی ترتیبات"
+
+#: contents/ui/config/ConfigAppearance.qml:244
+msgid "Representation:"
+msgstr "نمائش:"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Simple Panel"
+msgstr "سادہ پینل"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Detailed Panel"
+msgstr "تفصیلی پینل"
+
+#: contents/ui/config/ConfigAppearance.qml:259
+msgid "Font Size (0 = Auto):"
+msgstr "فونٹ کا سائز (0 = آٹو):"
+
+#: contents/ui/config/ConfigAppearance.qml:277
+msgid "Icon Size (0 = Auto):"
+msgstr "آئیکن کا سائز (0 = آٹو):"
+
+#: contents/ui/config/ConfigAppearance.qml:297
+msgid "Background Settings"
+msgstr "پس منظر کی ترتیبات"
+
+#: contents/ui/config/ConfigAppearance.qml:305
+msgid "Background Opacity:"
+msgstr "پس منظر کی دھندلاہٹ:"
+
+#: contents/ui/config/ConfigAppearance.qml:312
+msgid "0% (No Backgrounds)"
+msgstr "0% (کوئی پس منظر نہیں)"
+
+#: contents/ui/WeatherDetailsView.qml:101
+#: contents/ui/ForecastDetailsView.qml:102
+msgid "Feels like"
+msgstr "محسوس ہوتا ہے"
+
+#: contents/ui/WeatherDetailsView.qml:119
+#: contents/ui/ForecastDetailsView.qml:121
+msgid "Humidity"
+msgstr "نمی"
+
+#: contents/ui/WeatherDetailsView.qml:137
+#: contents/ui/ForecastDetailsView.qml:140
+msgid "Wind"
+msgstr "ہوا"
+
+#: contents/ui/WeatherDetailsView.qml:155
+msgid "Pressure"
+msgstr "دباؤ"
+
+#: contents/ui/WeatherDetailsView.qml:188
+msgid "Cloud Cover"
+msgstr "بادلوں کی موجودگی"
+
+#: contents/ui/WeatherDetailsView.qml:206
+msgid "UV"
+msgstr "یووی انڈیکس"
+
+#: contents/ui/WeatherDetailsView.qml:232
+msgid "Visibility"
+msgstr "نظارہ"
+
+#: contents/ui/WeatherDetailsView.qml:250
+msgid "Dew Point"
+msgstr "نقطہ شبنم"
+
+#: contents/ui/WeatherDetailsView.qml:281
+#: contents/ui/ForecastDetailsView.qml:231
+msgid "Wind Direction"
+msgstr "ہوا کی سمت"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North"
+msgstr "شمال"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North East"
+msgstr "شمال مشرق"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "East"
+msgstr "مشرق"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South East"
+msgstr "جنوب مشرق"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South"
+msgstr "جنوب"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South West"
+msgstr "جنوب مغرب"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "West"
+msgstr "مغرب"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North West"
+msgstr "شمال مغرب"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "N"
+msgstr "ش"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NE"
+msgstr "ش‌م"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "E"
+msgstr "م"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SE"
+msgstr "ج‌م"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "S"
+msgstr "ج"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SW"
+msgstr "ج‌م"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "W"
+msgstr "م"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NW"
+msgstr "شمال مغربی"
+
+#: contents/ui/WeatherDetailsView.qml:361
+msgid "Click to close"
+msgstr "بند کرنے کے لیے کلک کریں"
+
+#: contents/ui/LargeModeLayout.qml:182
+msgid "Today"
+msgstr "آج"
+
+#: contents/ui/ForecastDetailsView.qml:159
+msgid "Rain Chance"
+msgstr "بارش کا امکان"
+
+#: contents/ui/ForecastDetailsView.qml:185
+msgid "Precipitation"
+msgstr "پریسیپیٹیشن"
+
+#: contents/ui/ForecastDetailsView.qml:204
+msgid "UV Index"
+msgstr "یووی انڈیکس"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunset"
+msgstr "غروب آفتاب"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunrise"
+msgstr "طلوع آفتاب"
+
+#: contents/ui/ForecastDetailsView.qml:313
+msgid "Tap to close"
+msgstr "بند کرنے کے لیے تھپتھپائیں"
+
+#: contents/ui/ForecastDetailsView.qml:368
+msgid "Next week %1"
+msgstr "اگلے ہفتے %1"
+
+#: contents/ui/ForecastDetailsView.qml:370
+msgid "2 weeks later %1"
+msgstr "2 ہفتوں بعد %1"

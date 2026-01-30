@@ -1,0 +1,598 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-30 23:44+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: contents/ui/main.qml:75 contents/ui/main.qml:290
+msgid "Refresh"
+msgstr "Թարմացնել"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Daily Forecast"
+msgstr "Օրական կանխատեսում"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Hourly Forecast"
+msgstr "Ժամային կանխատեսում"
+
+#: contents/ui/main.qml:280
+msgid "Loading weather data..."
+msgstr "Եղանակի տվյալների բեռնում..."
+
+#: contents/ui/main.qml:322
+msgid "Clear"
+msgstr "Պարզ"
+
+#: contents/ui/main.qml:323
+msgid "Mainly Clear"
+msgstr "Հիմնականում պարզ"
+
+#: contents/ui/main.qml:324
+msgid "Partly Cloudy"
+msgstr "Մասնակի ամպամած"
+
+#: contents/ui/main.qml:325
+msgid "Overcast"
+msgstr "Ամպամած"
+
+#: contents/ui/main.qml:326
+msgid "Fog"
+msgstr "Մառախուղ"
+
+#: contents/ui/main.qml:327
+msgid "Drizzle"
+msgstr "Մաղող անձրև"
+
+#: contents/ui/main.qml:328
+msgid "Freezing Drizzle"
+msgstr "Սառչող մաղող անձրև"
+
+#: contents/ui/main.qml:329
+msgid "Rain"
+msgstr "Անձրև"
+
+#: contents/ui/main.qml:330
+msgid "Freezing Rain"
+msgstr "Սառչող անձրև"
+
+#: contents/ui/main.qml:331
+msgid "Snow"
+msgstr "Ձյուն"
+
+#: contents/ui/main.qml:332
+msgid "Snow Grains"
+msgstr "Ձյան հատիկներ"
+
+#: contents/ui/main.qml:333
+msgid "Rain Showers"
+msgstr "Տեղատարափ անձրև"
+
+#: contents/ui/main.qml:334
+msgid "Snow Showers"
+msgstr "Տեղատարափ ձյուն"
+
+#: contents/ui/main.qml:335
+msgid "Thunderstorm"
+msgstr "Ամպրոպ"
+
+#: contents/ui/main.qml:336
+msgid "Thunderstorm with Hail"
+msgstr "Ամպրոպ և կարկուտ"
+
+#: contents/ui/main.qml:337
+msgid "Unknown"
+msgstr "Անհայտ"
+
+#: contents/ui/main.qml:338
+msgid "Cloudy"
+msgstr "Ամպամած"
+
+#: contents/ui/main.qml:339
+msgid "Mist"
+msgstr "Մշուշ"
+
+#: contents/ui/main.qml:340
+msgid "Smoke"
+msgstr "Ծուխ"
+
+#: contents/ui/main.qml:341
+msgid "Haze"
+msgstr "Մշուշ"
+
+#: contents/ui/main.qml:342
+msgid "Dust"
+msgstr "Փոշի"
+
+#: contents/ui/main.qml:343
+msgid "Sand"
+msgstr "Ավազ"
+
+#: contents/ui/main.qml:344
+msgid "Ash"
+msgstr "Մոխիր"
+
+#: contents/ui/main.qml:345
+msgid "Squall"
+msgstr "Պորտկում"
+
+#: contents/ui/main.qml:346
+msgid "Tornado"
+msgstr "Տորնադո"
+
+#: contents/ui/config/ConfigGeneral.qml:109
+msgid "Weather Provider"
+msgstr "Եղանակի մատակարար"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (անվճար, բանալի չի պահանջվում)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (պահանջվում է բանալի)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (պահանջվում է բանալի)"
+
+#: contents/ui/config/ConfigGeneral.qml:127
+msgid "Best free option. No API key required."
+msgstr "Լավագույն անվճար տարբերակը: API բանալի չի պահանջվում:"
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Standard provider. API key required below."
+msgstr "Ստանդարտ մատակարար: Ստորև պահանջվում է API բանալի:"
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Alternative provider. API key required below."
+msgstr "Այլընտրանքային մատակարար: Ստորև պահանջվում է API բանալի:"
+
+#: contents/ui/config/ConfigGeneral.qml:136
+msgid "API Keys"
+msgstr "API բանալիներ"
+
+#: contents/ui/config/ConfigGeneral.qml:145
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API բանալի."
+
+#: contents/ui/config/ConfigGeneral.qml:152
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Մուտքագրեք ձեր OpenWeatherMap API բանալին"
+
+#: contents/ui/config/ConfigGeneral.qml:157
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API բանալի."
+
+#: contents/ui/config/ConfigGeneral.qml:164
+msgid "Enter your WeatherAPI.com key"
+msgstr "Մուտքագրեք ձեր WeatherAPI.com բանալին"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "Location"
+msgstr "Գտնվելու վայրը"
+
+#: contents/ui/config/ConfigGeneral.qml:184
+msgid "Auto-detect from IP"
+msgstr "Ավտոմատ հայտնաբերում IP-ից"
+
+#: contents/ui/config/ConfigGeneral.qml:192
+msgid "Enter manually"
+msgstr "Մուտքագրեք ձեռքով"
+
+#: contents/ui/config/ConfigGeneral.qml:206
+msgid "City 1:"
+msgstr "Քաղաք 1."
+
+#: contents/ui/config/ConfigGeneral.qml:212
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Օրինակ՝ Երևան, Լոնդոն, Փարիզ"
+
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "City 2:"
+msgstr "Քաղաք 2."
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Second city (optional)"
+msgstr "Երկրորդ քաղաք (ըստ ցանկության)"
+
+#: contents/ui/config/ConfigGeneral.qml:226
+msgid "City 3:"
+msgstr "Քաղաք 3."
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Third city (optional)"
+msgstr "Երրորդ քաղաք (ըստ ցանկության)"
+
+#: contents/ui/config/ConfigGeneral.qml:236
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr ""
+"Կարող եք օգտագործել քաղաքի անունը, «Քաղաք, Երկրի կոդ» կամ փոստային ինդեքսը:"
+
+#: contents/ui/config/ConfigGeneral.qml:246
+msgid "Location will be auto-detected based on your IP address."
+msgstr ""
+"Գտնվելու վայրը ավտոմատ կերպով կհայտնաբերվի՝ հիմնվելով ձեր IP հասցեի վրա:"
+
+#: contents/ui/config/ConfigGeneral.qml:256
+msgid "Settings"
+msgstr "Կարգավորումներ"
+
+#: contents/ui/config/ConfigGeneral.qml:266
+msgid "Units:"
+msgstr "Միավորներ."
+
+#: contents/ui/config/ConfigGeneral.qml:274
+msgid "Use system units"
+msgstr "Օգտագործել համակարգի միավորները"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Metric (°C)"
+msgstr "Մետրիկ (°C)"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Imperial (°F)"
+msgstr "Իմպերիալ (°F)"
+
+#: contents/ui/config/ConfigGeneral.qml:299
+msgid "Refresh Interval:"
+msgstr "Թարմացման միջակայքը."
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "15 minutes"
+msgstr "15 րոպե"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "30 minutes"
+msgstr "30 րոպե"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "45 minutes"
+msgstr "45 րոպե"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 hour"
+msgstr "1 ժամ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "2 hours"
+msgstr "2 ժամ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "3 hours"
+msgstr "3 ժամ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "4 hours"
+msgstr "4 ժամ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "6 hours"
+msgstr "6 ժամ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "8 hours"
+msgstr "8 ժամ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "12 hours"
+msgstr "12 ժամ"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 day"
+msgstr "1 օր"
+
+#: contents/ui/config/ConfigGeneral.qml:316
+msgid "Forecast Days:"
+msgstr "Կանխատեսման օրերը."
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Default (Colorful SVG)"
+msgstr "Լռելյայն (գունավոր SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "System Theme"
+msgstr "Համակարգի թեմա"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Եղանակ v3 (հարթ SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Եղանակ v2 (ռեալիստիկ PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Եղանակ v1 (դասական PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:103
+msgid "Appearance"
+msgstr "Արտաքին տեսք"
+
+#: contents/ui/config/ConfigAppearance.qml:111
+msgid "Show Units in Forecast"
+msgstr "Ցուցադրել միավորները կանխատեսման մեջ"
+
+#: contents/ui/config/ConfigAppearance.qml:119
+msgid "Layout Mode:"
+msgstr "Դասավորության ռեժիմ."
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Automatic"
+msgstr "Ավտոմատ"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Small"
+msgstr "Փոքր"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Wide"
+msgstr "Լայն"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Large"
+msgstr "Մեծ"
+
+#: contents/ui/config/ConfigAppearance.qml:135
+msgid "Icon Pack:"
+msgstr "Պատկերակների փաթեթ."
+
+#: contents/ui/config/ConfigAppearance.qml:151
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"Ընտրեք եղանակի պատկերակների տեսողական ոճը: (Նշում. հին փաթեթները, ինչպիսիք "
+"են v1/v2-ը, կարող են պատկերակներ չունենալ որոշ պայմանների համար)"
+
+#: contents/ui/config/ConfigAppearance.qml:152
+msgid "Select the visual style for weather icons."
+msgstr "Ընտրեք եղանակի պատկերակների տեսողական ոճը:"
+
+#: contents/ui/config/ConfigAppearance.qml:160
+msgid "Widget Margin:"
+msgstr "Վիդջեթի լուսանցք."
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Normal (10px)"
+msgstr "Սովորական (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Less (5px)"
+msgstr "Քիչ (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "None (0px)"
+msgstr "Չկա (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:177
+msgid "Corner Radius:"
+msgstr "Անկյունի շառավիղ."
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Normal"
+msgstr "Սովորական"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Square"
+msgstr "Քառակուսի"
+
+#: contents/ui/config/ConfigAppearance.qml:196
+msgid "Font Settings"
+msgstr "Տառատեսակի կարգավորումներ"
+
+#: contents/ui/config/ConfigAppearance.qml:205
+msgid "Use Default System Font"
+msgstr "Օգտագործել համակարգի լռելյայն տառատեսակը"
+
+#: contents/ui/config/ConfigAppearance.qml:213
+msgid "Custom Font Family:"
+msgstr "Ընտրովի տառատեսակ."
+
+#: contents/ui/config/ConfigAppearance.qml:234
+msgid "Panel Settings"
+msgstr "Վահանակի կարگավորումներ"
+
+#: contents/ui/config/ConfigAppearance.qml:244
+msgid "Representation:"
+msgstr "Ներկայացում."
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Simple Panel"
+msgstr "Պարզ վահանակ"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Detailed Panel"
+msgstr "Մանրամասն վահանակ"
+
+#: contents/ui/config/ConfigAppearance.qml:259
+msgid "Font Size (0 = Auto):"
+msgstr "Տառատեսակի չափը (0 = Ավտո)."
+
+#: contents/ui/config/ConfigAppearance.qml:277
+msgid "Icon Size (0 = Auto):"
+msgstr "Պատկերակի չափը (0 = Ավտո)."
+
+#: contents/ui/config/ConfigAppearance.qml:297
+msgid "Background Settings"
+msgstr "Ֆոնի կարգավորումներ"
+
+#: contents/ui/config/ConfigAppearance.qml:305
+msgid "Background Opacity:"
+msgstr "Ֆոնի թափանցիկություն."
+
+#: contents/ui/config/ConfigAppearance.qml:312
+msgid "0% (No Backgrounds)"
+msgstr "0% (Առանց ֆոնի)"
+
+#: contents/ui/WeatherDetailsView.qml:101
+#: contents/ui/ForecastDetailsView.qml:102
+msgid "Feels like"
+msgstr "Զգացվում է որպես"
+
+#: contents/ui/WeatherDetailsView.qml:119
+#: contents/ui/ForecastDetailsView.qml:121
+msgid "Humidity"
+msgstr "Խոնավություն"
+
+#: contents/ui/WeatherDetailsView.qml:137
+#: contents/ui/ForecastDetailsView.qml:140
+msgid "Wind"
+msgstr "Քամի"
+
+#: contents/ui/WeatherDetailsView.qml:155
+msgid "Pressure"
+msgstr "Ճնշում"
+
+#: contents/ui/WeatherDetailsView.qml:188
+msgid "Cloud Cover"
+msgstr "Ամպամածություն"
+
+#: contents/ui/WeatherDetailsView.qml:206
+msgid "UV"
+msgstr "ՈւՄ ինդեքս"
+
+#: contents/ui/WeatherDetailsView.qml:232
+msgid "Visibility"
+msgstr "Տեսանելիություն"
+
+#: contents/ui/WeatherDetailsView.qml:250
+msgid "Dew Point"
+msgstr "Ցողի կետ"
+
+#: contents/ui/WeatherDetailsView.qml:281
+#: contents/ui/ForecastDetailsView.qml:231
+msgid "Wind Direction"
+msgstr "Քամու ուղղություն"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North"
+msgstr "Հյուսիս"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North East"
+msgstr "Հյուսիս-Արևելք"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "East"
+msgstr "Արևելք"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South East"
+msgstr "Հարավ-Արևելք"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South"
+msgstr "Հարավ"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South West"
+msgstr "Հարավ-Արևմուտք"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "West"
+msgstr "Արևմուտք"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North West"
+msgstr "Հյուսիս-Արևմուտք"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "N"
+msgstr "Հ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NE"
+msgstr "ՀԱ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "E"
+msgstr "Ա"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SE"
+msgstr "ՀԱ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "S"
+msgstr "Հ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SW"
+msgstr "ՀԱ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "W"
+msgstr "Ա"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NW"
+msgstr "ՀյՍ"
+
+#: contents/ui/WeatherDetailsView.qml:361
+msgid "Click to close"
+msgstr "Սեղմեք՝ փակելու համար"
+
+#: contents/ui/LargeModeLayout.qml:182
+msgid "Today"
+msgstr "Այսօր"
+
+#: contents/ui/ForecastDetailsView.qml:159
+msgid "Rain Chance"
+msgstr "Անձրևի հավանականություն"
+
+#: contents/ui/ForecastDetailsView.qml:185
+msgid "Precipitation"
+msgstr "Տեղումներ"
+
+#: contents/ui/ForecastDetailsView.qml:204
+msgid "UV Index"
+msgstr "ՈւՄ ինդեքս"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunset"
+msgstr "Մայրամուտ"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunrise"
+msgstr "Արևածագ"
+
+#: contents/ui/ForecastDetailsView.qml:313
+msgid "Tap to close"
+msgstr "Հպեք՝ փակելու համար"
+
+#: contents/ui/ForecastDetailsView.qml:368
+msgid "Next week %1"
+msgstr "Հաջորդ շաբաթ %1"
+
+#: contents/ui/ForecastDetailsView.qml:370
+msgid "2 weeks later %1"
+msgstr "2 շաբաթ անց %1"

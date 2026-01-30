@@ -4,7 +4,7 @@ const config = {
         "ignore": null
     },
     "i18n": {
-        "dir": "contents/translations",
+        "dir": "translations",
         "locales": [
             "az",
             "bn",

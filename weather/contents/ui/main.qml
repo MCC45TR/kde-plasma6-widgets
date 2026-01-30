@@ -168,9 +168,9 @@ PlasmoidItem {
         return iconPath
     }
 
-    function getLocalizedDay(dayKey) {
-        if (!dayKey) return ""
-        return i18n(dayKey)
+    function getLocalizedDay(dayIndex) {
+        if (dayIndex === undefined) return ""
+        return Qt.locale().dayName(dayIndex, Locale.ShortFormat)
     }
 
     compactRepresentation: Item {
@@ -317,5 +317,33 @@ PlasmoidItem {
                 onClicked: (mouse) => { if (mouse.button === Qt.MiddleButton) root.fetchWeatherData() }
             }
         }
+    // Dummy function to provide strings for xgettext
+    function translationDummy() {
+        i18n("Clear")
+        i18n("Mainly Clear")
+        i18n("Partly Cloudy")
+        i18n("Overcast")
+        i18n("Fog")
+        i18n("Drizzle")
+        i18n("Freezing Drizzle")
+        i18n("Rain")
+        i18n("Freezing Rain")
+        i18n("Snow")
+        i18n("Snow Grains")
+        i18n("Rain Showers")
+        i18n("Snow Showers")
+        i18n("Thunderstorm")
+        i18n("Thunderstorm with Hail")
+        i18n("Unknown")
+        i18n("Cloudy")
+        i18n("Mist")
+        i18n("Smoke")
+        i18n("Haze")
+        i18n("Dust")
+        i18n("Sand")
+        i18n("Ash")
+        i18n("Squall")
+        i18n("Tornado")
     }
+}
 }

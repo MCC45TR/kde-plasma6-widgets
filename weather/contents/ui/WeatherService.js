@@ -366,7 +366,7 @@ function parseForecastOpenWeather(data) {
             if (hours >= 11 && hours <= 14) {
                 seenDays[dayKey] = true
                 daily.push({
-                    day: getDayName(date.getDay()),
+                    day: date.getDay(),
                     temp: Math.round(item.main.temp),
                     temp_min: Math.round(item.main.temp_min),
                     temp_max: Math.round(item.main.temp_max),
@@ -390,7 +390,7 @@ function parseForecastWeatherAPI(forecastDays) {
         var date = new Date(day.date)
 
         daily.push({
-            day: getDayName(date.getDay()),
+            day: date.getDay(),
             temp: Math.round(day.day.avgtemp_c),
             temp_min: Math.round(day.day.mintemp_c),
             temp_max: Math.round(day.day.maxtemp_c),
@@ -425,7 +425,7 @@ function parseForecastOpenMeteo(data) {
         for (var i = 0; i < data.daily.time.length; i++) {
             var date = new Date(data.daily.time[i])
             daily.push({
-                day: getDayName(date.getDay()),
+                day: date.getDay(),
                 date: data.daily.time[i],
                 temp: Math.round((data.daily.temperature_2m_max[i] + data.daily.temperature_2m_min[i]) / 2),
                 temp_min: Math.round(data.daily.temperature_2m_min[i]),
@@ -494,8 +494,7 @@ function normalizeCondition(text) {
 }
 
 function getDayName(dayIndex) {
-    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    return days[dayIndex]
+    return dayIndex
 }
 
 function clearCache() {

@@ -1,0 +1,599 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-30 23:44+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: contents/ui/main.qml:75 contents/ui/main.qml:290
+msgid "Refresh"
+msgstr "Ανανέωση"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Daily Forecast"
+msgstr "Ημερήσια πρόγνωση"
+
+#: contents/ui/main.qml:80 contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml:127
+msgid "Hourly Forecast"
+msgstr "Ωριαία πρόγνωση"
+
+#: contents/ui/main.qml:280
+msgid "Loading weather data..."
+msgstr "Φόρτωση δεδομένων καιρού..."
+
+#: contents/ui/main.qml:322
+msgid "Clear"
+msgstr "Αίθριος"
+
+#: contents/ui/main.qml:323
+msgid "Mainly Clear"
+msgstr "Κυρίως αίθριος"
+
+#: contents/ui/main.qml:324
+msgid "Partly Cloudy"
+msgstr "Μερικώς νεφελώδης"
+
+#: contents/ui/main.qml:325
+msgid "Overcast"
+msgstr "Νεφελώδης"
+
+#: contents/ui/main.qml:326
+msgid "Fog"
+msgstr "Ομίχλη"
+
+#: contents/ui/main.qml:327
+msgid "Drizzle"
+msgstr "Ψιχάλισμα"
+
+#: contents/ui/main.qml:328
+msgid "Freezing Drizzle"
+msgstr "Παγωμένο ψιχάλισμα"
+
+#: contents/ui/main.qml:329
+msgid "Rain"
+msgstr "Βροχή"
+
+#: contents/ui/main.qml:330
+msgid "Freezing Rain"
+msgstr "Παγωμένη βροχή"
+
+#: contents/ui/main.qml:331
+msgid "Snow"
+msgstr "Χιόνι"
+
+#: contents/ui/main.qml:332
+msgid "Snow Grains"
+msgstr "Χιονόκοκκοι"
+
+#: contents/ui/main.qml:333
+msgid "Rain Showers"
+msgstr "Όμβροι βροχής"
+
+#: contents/ui/main.qml:334
+msgid "Snow Showers"
+msgstr "Όμβροι χιονιού"
+
+#: contents/ui/main.qml:335
+msgid "Thunderstorm"
+msgstr "Καταιγίδα"
+
+#: contents/ui/main.qml:336
+msgid "Thunderstorm with Hail"
+msgstr "Καταιγίδα με χαλάζι"
+
+#: contents/ui/main.qml:337
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: contents/ui/main.qml:338
+msgid "Cloudy"
+msgstr "Συννεφιά"
+
+#: contents/ui/main.qml:339
+msgid "Mist"
+msgstr "Καταχνιά"
+
+#: contents/ui/main.qml:340
+msgid "Smoke"
+msgstr "Καπνός"
+
+#: contents/ui/main.qml:341
+msgid "Haze"
+msgstr "Θολή ατμόσφαιρα"
+
+#: contents/ui/main.qml:342
+msgid "Dust"
+msgstr "Σκόνη"
+
+#: contents/ui/main.qml:343
+msgid "Sand"
+msgstr "Άμμος"
+
+#: contents/ui/main.qml:344
+msgid "Ash"
+msgstr "Τέφρα"
+
+#: contents/ui/main.qml:345
+msgid "Squall"
+msgstr "Μπουρίνι"
+
+#: contents/ui/main.qml:346
+msgid "Tornado"
+msgstr "Σίφωνας"
+
+#: contents/ui/config/ConfigGeneral.qml:109
+msgid "Weather Provider"
+msgstr "Πάροχος καιρού"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Δωρεάν, δεν απαιτείται κλειδί)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Απαιτείται κλειδί)"
+
+#: contents/ui/config/ConfigGeneral.qml:119
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Απαιτείται κλειδί)"
+
+#: contents/ui/config/ConfigGeneral.qml:127
+msgid "Best free option. No API key required."
+msgstr "Η καλύτερη δωρεάν επιλογή. Δεν απαιτείται κλειδί API."
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Standard provider. API key required below."
+msgstr "Τυπικός πάροχος. Απαιτείται κλειδί API παρακάτω."
+
+#: contents/ui/config/ConfigGeneral.qml:128
+msgid "Alternative provider. API key required below."
+msgstr "Εναλλακτικός πάροχος. Απαιτείται κλειδί API παρακάτω."
+
+#: contents/ui/config/ConfigGeneral.qml:136
+msgid "API Keys"
+msgstr "Κλειδιά API"
+
+#: contents/ui/config/ConfigGeneral.qml:145
+msgid "OpenWeatherMap API Key:"
+msgstr "Κλειδί API OpenWeatherMap:"
+
+#: contents/ui/config/ConfigGeneral.qml:152
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Εισαγάγετε το κλειδί API OpenWeatherMap"
+
+#: contents/ui/config/ConfigGeneral.qml:157
+msgid "WeatherAPI.com API Key:"
+msgstr "Κλειδί API WeatherAPI.com:"
+
+#: contents/ui/config/ConfigGeneral.qml:164
+msgid "Enter your WeatherAPI.com key"
+msgstr "Εισαγάγετε το κλειδί WeatherAPI.com"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "Location"
+msgstr "Τοποθεσία"
+
+#: contents/ui/config/ConfigGeneral.qml:184
+msgid "Auto-detect from IP"
+msgstr "Αυτόματος εντοπισμός από IP"
+
+#: contents/ui/config/ConfigGeneral.qml:192
+msgid "Enter manually"
+msgstr "Χειροκίνητη εισαγωγή"
+
+#: contents/ui/config/ConfigGeneral.qml:206
+msgid "City 1:"
+msgstr "Πόλη 1:"
+
+#: contents/ui/config/ConfigGeneral.qml:212
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Π.χ.: Αθήνα, Θεσσαλονίκη, Λονδίνο"
+
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "City 2:"
+msgstr "Πόλη 2:"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Second city (optional)"
+msgstr "Δεύτερη πόλη (προαιρετικά)"
+
+#: contents/ui/config/ConfigGeneral.qml:226
+msgid "City 3:"
+msgstr "Πόλη 3:"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Third city (optional)"
+msgstr "Τρίτη πόλη (προαιρετικά)"
+
+#: contents/ui/config/ConfigGeneral.qml:236
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr ""
+"Μπορείτε να χρησιμοποιήσετε το όνομα της πόλης, 'Πόλη, Κωδικός Χώρας' ή "
+"Ταχυδρομικό Κώδικα."
+
+#: contents/ui/config/ConfigGeneral.qml:246
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Η τοποθεσία θα εντοπιστεί αυτόματα με βάση τη διεύθυνση IP σας."
+
+#: contents/ui/config/ConfigGeneral.qml:256
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: contents/ui/config/ConfigGeneral.qml:266
+msgid "Units:"
+msgstr "Μονάδες:"
+
+#: contents/ui/config/ConfigGeneral.qml:274
+msgid "Use system units"
+msgstr "Χρήση μονάδων συστήματος"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Metric (°C)"
+msgstr "Μετρικό (°C)"
+
+#: contents/ui/config/ConfigGeneral.qml:287
+msgid "Imperial (°F)"
+msgstr "Αγγλοσαξονικό (°F)"
+
+#: contents/ui/config/ConfigGeneral.qml:299
+msgid "Refresh Interval:"
+msgstr "Διάστημα ανανέωσης:"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "15 minutes"
+msgstr "15 λεπτά"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "30 minutes"
+msgstr "30 λεπτά"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "45 minutes"
+msgstr "45 λεπτά"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 hour"
+msgstr "1 ώρα"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "2 hours"
+msgstr "2 ώρες"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "3 hours"
+msgstr "3 ώρες"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "4 hours"
+msgstr "4 ώρες"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "6 hours"
+msgstr "6 ώρες"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "8 hours"
+msgstr "8 ώρες"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "12 hours"
+msgstr "12 ώρες"
+
+#: contents/ui/config/ConfigGeneral.qml:305
+msgid "1 day"
+msgstr "1 ημέρα"
+
+#: contents/ui/config/ConfigGeneral.qml:316
+msgid "Forecast Days:"
+msgstr "Ημέρες πρόγνωσης:"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Default (Colorful SVG)"
+msgstr "Προεπιλογή (Πολύχρωμο SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "System Theme"
+msgstr "Θέμα συστήματος"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Καιρός v3 (Επίπεδο SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Καιρός v2 (Ρεαλιστικό PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Καιρός v1 (Κλασικό PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:103
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: contents/ui/config/ConfigAppearance.qml:111
+msgid "Show Units in Forecast"
+msgstr "Εμφάνιση μονάδων στην πρόγνωση"
+
+#: contents/ui/config/ConfigAppearance.qml:119
+msgid "Layout Mode:"
+msgstr "Λειτουργία διάταξης:"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Automatic"
+msgstr "Αυτόματη"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Small"
+msgstr "Μικρή"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Wide"
+msgstr "Ευρεία"
+
+#: contents/ui/config/ConfigAppearance.qml:126
+msgid "Large"
+msgstr "Μεγάλη"
+
+#: contents/ui/config/ConfigAppearance.qml:135
+msgid "Icon Pack:"
+msgstr "Πακέτο εικονιδίων:"
+
+#: contents/ui/config/ConfigAppearance.qml:151
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"Επιλέξτε το οπτικό στυλ για τα εικονίδια καιρού. (Σημείωση: παλαιότερα "
+"πακέτα όπως τα v1/v2 ενδέχεται να έχουν ελλείποντα εικονίδια για ορισμένες "
+"συνθήκες)"
+
+#: contents/ui/config/ConfigAppearance.qml:152
+msgid "Select the visual style for weather icons."
+msgstr "Επιλέξτε το οπτικό στυλ για τα εικονίδια καιρού."
+
+#: contents/ui/config/ConfigAppearance.qml:160
+msgid "Widget Margin:"
+msgstr "Περιθώριο γραφικού στοιχείου:"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Normal (10px)"
+msgstr "Κανονικό (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "Less (5px)"
+msgstr "Λιγότερο (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:167
+msgid "None (0px)"
+msgstr "Κανένα (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:177
+msgid "Corner Radius:"
+msgstr "Ακτίνα γωνίας:"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Normal"
+msgstr "Κανονική"
+
+#: contents/ui/config/ConfigAppearance.qml:184
+msgid "Square"
+msgstr "Τετράγωνη"
+
+#: contents/ui/config/ConfigAppearance.qml:196
+msgid "Font Settings"
+msgstr "Ρυθμίσεις γραμματοσειράς"
+
+#: contents/ui/config/ConfigAppearance.qml:205
+msgid "Use Default System Font"
+msgstr "Χρήση προεπιλεγμένης γραμματοσειράς συστήματος"
+
+#: contents/ui/config/ConfigAppearance.qml:213
+msgid "Custom Font Family:"
+msgstr "Προσαρμοσμένη οικογένεια γραμματοσειρών:"
+
+#: contents/ui/config/ConfigAppearance.qml:234
+msgid "Panel Settings"
+msgstr "Ρυθμίσεις πάνελ"
+
+#: contents/ui/config/ConfigAppearance.qml:244
+msgid "Representation:"
+msgstr "Αναπαράσταση:"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Simple Panel"
+msgstr "Απλό πάνελ"
+
+#: contents/ui/config/ConfigAppearance.qml:251
+msgid "Detailed Panel"
+msgstr "Λεπτομερές πάνελ"
+
+#: contents/ui/config/ConfigAppearance.qml:259
+msgid "Font Size (0 = Auto):"
+msgstr "Μέγεθος γραμματοσειράς (0 = Αυτόματο):"
+
+#: contents/ui/config/ConfigAppearance.qml:277
+msgid "Icon Size (0 = Auto):"
+msgstr "Μέγεθος εικονιδίων (0 = Αυτόματο):"
+
+#: contents/ui/config/ConfigAppearance.qml:297
+msgid "Background Settings"
+msgstr "Ρυθμίσεις φόντου"
+
+#: contents/ui/config/ConfigAppearance.qml:305
+msgid "Background Opacity:"
+msgstr "Διαφάνεια φόντου:"
+
+#: contents/ui/config/ConfigAppearance.qml:312
+msgid "0% (No Backgrounds)"
+msgstr "0% (Χωρίς φόντο)"
+
+#: contents/ui/WeatherDetailsView.qml:101
+#: contents/ui/ForecastDetailsView.qml:102
+msgid "Feels like"
+msgstr "Αίσθηση σαν"
+
+#: contents/ui/WeatherDetailsView.qml:119
+#: contents/ui/ForecastDetailsView.qml:121
+msgid "Humidity"
+msgstr "Υγρασία"
+
+#: contents/ui/WeatherDetailsView.qml:137
+#: contents/ui/ForecastDetailsView.qml:140
+msgid "Wind"
+msgstr "Άνεμος"
+
+#: contents/ui/WeatherDetailsView.qml:155
+msgid "Pressure"
+msgstr "Πίεση"
+
+#: contents/ui/WeatherDetailsView.qml:188
+msgid "Cloud Cover"
+msgstr "Νεφοκάλυψη"
+
+#: contents/ui/WeatherDetailsView.qml:206
+msgid "UV"
+msgstr "Δείκτης UV"
+
+#: contents/ui/WeatherDetailsView.qml:232
+msgid "Visibility"
+msgstr "Ορατότητα"
+
+#: contents/ui/WeatherDetailsView.qml:250
+msgid "Dew Point"
+msgstr "Σημείο δρόσου"
+
+#: contents/ui/WeatherDetailsView.qml:281
+#: contents/ui/ForecastDetailsView.qml:231
+msgid "Wind Direction"
+msgstr "Διεύθυνση ανέμου"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North"
+msgstr "Βορράς"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North East"
+msgstr "Βορειοανατολικά"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "East"
+msgstr "Ανατολή"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South East"
+msgstr "Νοτιοανατολικά"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South"
+msgstr "Νότος"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "South West"
+msgstr "Νοτιοδυτικά"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "West"
+msgstr "Δύση"
+
+#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml:238
+msgid "North West"
+msgstr "Βορειοδυτικά"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "N"
+msgstr "Β"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NE"
+msgstr "ΒΑ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "E"
+msgstr "Α"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SE"
+msgstr "ΝΑ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "S"
+msgstr "Ν"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "SW"
+msgstr "ΝΔ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "W"
+msgstr "Δ"
+
+#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml:247
+msgid "NW"
+msgstr "ΒΔ"
+
+#: contents/ui/WeatherDetailsView.qml:361
+msgid "Click to close"
+msgstr "Κλικ για κλείσιμο"
+
+#: contents/ui/LargeModeLayout.qml:182
+msgid "Today"
+msgstr "Σήμερα"
+
+#: contents/ui/ForecastDetailsView.qml:159
+msgid "Rain Chance"
+msgstr "Πιθανότητα βροχής"
+
+#: contents/ui/ForecastDetailsView.qml:185
+msgid "Precipitation"
+msgstr "Υετός"
+
+#: contents/ui/ForecastDetailsView.qml:204
+msgid "UV Index"
+msgstr "Δείκτης UV"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunset"
+msgstr "Δύση ηλίου"
+
+#: contents/ui/ForecastDetailsView.qml:286
+msgid "Sunrise"
+msgstr "Ανατολή ηλίου"
+
+#: contents/ui/ForecastDetailsView.qml:313
+msgid "Tap to close"
+msgstr "Πατήστε για κλείσιμο"
+
+#: contents/ui/ForecastDetailsView.qml:368
+msgid "Next week %1"
+msgstr "Επόμενη εβδομάδα %1"
+
+#: contents/ui/ForecastDetailsView.qml:370
+msgid "2 weeks later %1"
+msgstr "Μετά από 2 εβδομάδες %1"

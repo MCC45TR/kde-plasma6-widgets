@@ -360,7 +360,7 @@ ColumnLayout {
         var diffTime = targetMonday.getTime() - currentMonday.getTime()
         var diffWeeks = Math.round(diffTime / (1000 * 60 * 60 * 24 * 7))
         
-        var longDayName = i18n(Qt.formatDate(targetDate, "dddd"))
+        var longDayName = Qt.locale().dayName(targetDate.getDay(), Locale.LongFormat)
         
         if (diffWeeks <= 0) {
             return longDayName
