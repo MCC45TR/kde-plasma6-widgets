@@ -65,6 +65,10 @@ PlasmoidItem {
     property bool forecastMode: false
     property bool largeDetailsOpen: false
     property int lastFetchMinute: -1
+    
+    property var selectedForecast: null
+    property bool showForecastDetails: false
+    property rect clickedCardRect: Qt.rect(0, 0, 0, 0)
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {

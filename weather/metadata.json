@@ -6,7 +6,7 @@
     "KPlugin": {
         "Id": "com.mcc45tr.mweather",
         "Name": "MWeather",
-        "Version": "1.1.9",
+        "Version": "1.2.0",
         "Category": "Utilities",
         "Description": "Modern weather widget with Google Weather icons, daily/hourly forecasts, and auto-refresh",
         "Icon": "weather-many-clouds",

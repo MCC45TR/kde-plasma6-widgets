@@ -14,6 +14,12 @@ Item {
     property string units: "metric"
     property bool showUnits: true
     property string fontFamily: Kirigami.Theme.defaultFont.family
+    
+    property var forecastData: null
+    property int itemIndex: 0
+    property bool hasDetails: forecastData && forecastData.hasDetails === true
+    
+    signal clicked(var data, int index, rect cardRect)
 
     property real availableWidth: 300
     property int cardCount: 5
@@ -117,5 +123,12 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: itemRoot.hasDetails ? Qt.PointingHandCursor : Qt.ArrowCursor
+        onClicked: function(mouse) {
+            if (itemRoot.hasDetails && itemRoot.forecastData) {
+                var globalPos = itemRoot.mapToGlobal(0, 0)
+                itemRoot.clicked(itemRoot.forecastData, itemRoot.itemIndex, Qt.rect(globalPos.x, globalPos.y, itemRoot.width, itemRoot.height))
+            }
+        }
     }
 }

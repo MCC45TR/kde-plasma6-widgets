@@ -139,7 +139,7 @@ function fetchOpenMeteo(location, units, callback) {
                     var weatherUrl = "https://api.open-meteo.com/v1/forecast?" +
                         "latitude=" + lat + "&longitude=" + lon +
                         "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m" +
-                        "&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum" +
+                        "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant" +
                         "&forecast_days=" + (16) +
                         "&hourly=temperature_2m,weather_code&forecast_hours=48" +
                         "&timezone=auto" +
@@ -422,12 +422,24 @@ function parseForecastOpenMeteo(data) {
             var date = new Date(data.daily.time[i])
             daily.push({
                 day: getDayName(date.getDay()),
+                date: data.daily.time[i],
                 temp: Math.round((data.daily.temperature_2m_max[i] + data.daily.temperature_2m_min[i]) / 2),
                 temp_min: Math.round(data.daily.temperature_2m_min[i]),
                 temp_max: Math.round(data.daily.temperature_2m_max[i]),
+                feels_like: data.daily.apparent_temperature_max ? Math.round((data.daily.apparent_temperature_max[i] + data.daily.apparent_temperature_min[i]) / 2) : null,
+                feels_like_max: data.daily.apparent_temperature_max ? Math.round(data.daily.apparent_temperature_max[i]) : null,
+                feels_like_min: data.daily.apparent_temperature_min ? Math.round(data.daily.apparent_temperature_min[i]) : null,
+                wind_speed: data.daily.wind_speed_10m_max ? Math.round(data.daily.wind_speed_10m_max[i]) : null,
+                wind_deg: data.daily.wind_direction_10m_dominant ? data.daily.wind_direction_10m_dominant[i] : null,
+                uv_index: data.daily.uv_index_max ? Math.round(data.daily.uv_index_max[i]) : null,
+                precipitation: data.daily.precipitation_sum ? data.daily.precipitation_sum[i] : null,
+                precipitation_probability: data.daily.precipitation_probability_max ? data.daily.precipitation_probability_max[i] : null,
+                sunrise: data.daily.sunrise ? data.daily.sunrise[i] : null,
+                sunset: data.daily.sunset ? data.daily.sunset[i] : null,
                 code: data.daily.weather_code ? data.daily.weather_code[i] : 0,
                 condition: getOpenMeteoCondition(data.daily.weather_code ? data.daily.weather_code[i] : 0),
-                icon: ""
+                icon: "",
+                hasDetails: true
             })
         }
     }

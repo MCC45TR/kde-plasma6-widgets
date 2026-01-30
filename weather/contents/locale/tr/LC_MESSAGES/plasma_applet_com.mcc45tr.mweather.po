@@ -371,3 +371,12 @@ msgstr "B"
 
 msgid "NW"
 msgstr "KB"
+
+msgid "Next week %1"
+msgstr "Gelecek hafta %1"
+
+msgid "2 weeks later %1"
+msgstr "2 hafta sonra %1"
+
+msgid "Tap to close"
+msgstr "Kapatmak için dokunun"

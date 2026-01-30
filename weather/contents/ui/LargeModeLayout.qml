@@ -24,8 +24,14 @@ Item {
     Item {
         id: contentContainer
         anchors.fill: parent
-        opacity: largeDetailsOpen ? 0 : 1
-        Behavior on opacity { NumberAnimation { duration: 200 } }
+        
+        opacity: weatherRoot.showForecastDetails ? 0 : 1
+        Behavior on opacity { NumberAnimation { duration: 300; easing.type: Easing.OutQuad } }
+
+        transform: Translate {
+            y: weatherRoot.showForecastDetails ? -largeLayout.height : 0
+            Behavior on y { NumberAnimation { duration: 350; easing.type: Easing.InOutQuart } }
+        }
 
         ColumnLayout {
             anchors.fill: parent
@@ -210,6 +216,18 @@ Item {
                     showUnits: weatherRoot.showForecastUnits
                     fontFamily: weatherRoot.activeFont.family
                     showBackground: weatherRoot.showInnerBackgrounds
+                    
+                    forecastData: modelData
+                    itemIndex: index
+                    
+                    onClicked: function(data, idx, cardRect) {
+                        if (!forecastMode && idx > 0 && data.hasDetails) {
+                            var globalPos = mapToItem(largeLayout, 0, 0)
+                            weatherRoot.clickedCardRect = Qt.rect(globalPos.x, globalPos.y, width, height)
+                            weatherRoot.selectedForecast = data
+                            weatherRoot.showForecastDetails = true
+                        }
+                    }
 
                     radiusTL: 12 * weatherRoot.radiusMultiplier
                     radiusTR: 12 * weatherRoot.radiusMultiplier
@@ -294,6 +312,96 @@ Item {
                 id: overlayContent
                 width: parent.width
                 weatherRoot: largeLayout.weatherRoot
+            }
+        }
+    }
+
+    Rectangle {
+        id: forecastDetailsOverlayLarge
+        width: parent.width
+        height: parent.height
+        radius: 20 * weatherRoot.radiusMultiplier
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.98)
+        z: 200
+        clip: true
+
+        transform: Translate {
+            y: weatherRoot.showForecastDetails ? 0 : largeLayout.height
+            Behavior on y { NumberAnimation { duration: 350; easing.type: Easing.InOutQuart } }
+        }
+
+        Timer {
+            id: overlayAutoCloseTimerLarge
+            interval: 5000
+            repeat: false
+            onTriggered: weatherRoot.showForecastDetails = false
+        }
+
+        Connections {
+            target: weatherRoot
+            function onShowForecastDetailsChanged() {
+                if (weatherRoot.showForecastDetails) {
+                    overlayAutoCloseTimerLarge.restart()
+                } else {
+                    overlayAutoCloseTimerLarge.stop()
+                }
+            }
+        }
+
+        property real contentOpacity: weatherRoot.showForecastDetails ? 1 : 0
+        Behavior on contentOpacity { NumberAnimation { duration: 300; easing.type: Easing.OutQuad } }
+
+        // Hover Listener
+        MouseArea {
+            anchors.fill: parent
+            z: 1000
+            hoverEnabled: true
+            propagateComposedEvents: true
+            onPressed: (mouse) => mouse.accepted = false
+            onWheel: (wheel) => wheel.accepted = false
+            onEntered: overlayAutoCloseTimerLarge.stop()
+            onExited: if (weatherRoot.showForecastDetails) overlayAutoCloseTimerLarge.restart()
+        }
+
+        // Background Click Listener
+        MouseArea {
+            anchors.fill: parent
+            onClicked: weatherRoot.showForecastDetails = false
+            z: -1
+        }
+
+        Flickable {
+            id: forecastFlickableLarge
+            anchors.fill: parent
+            contentWidth: width
+            contentHeight: Math.max(forecastDetailsContentLarge.height, height)
+            clip: true
+            flickableDirection: Flickable.VerticalFlick
+            boundsBehavior: Flickable.StopAtBounds
+            opacity: forecastDetailsOverlayLarge.contentOpacity
+
+            ScrollBar.vertical: ScrollBar { policy: forecastDetailsContentLarge.height > parent.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff; width: 6 }
+
+            Item {
+                width: parent.width
+                height: forecastFlickableLarge.contentHeight
+                
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: weatherRoot.showForecastDetails = false
+                }
+
+                MouseArea {
+                    anchors.fill: forecastDetailsContentLarge
+                    onClicked: {}
+                }
+
+                ForecastDetailsView {
+                    id: forecastDetailsContentLarge
+                    width: parent.width
+                    weatherRoot: largeLayout.weatherRoot
+                    forecastData: weatherRoot.selectedForecast
+                }
             }
         }
     }
