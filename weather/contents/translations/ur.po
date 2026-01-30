@@ -1,0 +1,471 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-22 03:00+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ur\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Weather"
+msgstr "موسم"
+
+msgid "Appearance"
+msgstr "ظاہری شکل"
+
+msgid "Details"
+msgstr "تفصیلات"
+
+msgid "Hourly Forecast"
+msgstr "فی گھنٹہ کی پیشن گوئی"
+
+msgid "Daily Forecast"
+msgstr "روزانہ کی پیشن گوئی"
+
+msgid "Feels like"
+msgstr "محسوس ہوتا ہے"
+
+msgid "Humidity"
+msgstr "نمی"
+
+msgid "Wind"
+msgstr "ہوا"
+
+msgid "Pressure"
+msgstr "دباؤ"
+
+msgid "Clouds"
+msgstr "بادل"
+
+msgid "UV"
+msgstr "یووی انڈیکس"
+
+msgid "Visibility"
+msgstr "نظارہ"
+
+msgid "Wind Direction"
+msgstr "ہوا کی سمت"
+
+msgid "Click to close"
+msgstr "بند کرنے کے لیے کلک کریں"
+
+msgid "Default (Colorful SVG)"
+msgstr "ڈیفالٹ (رنگین SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "گوگل موسم v3 (فلیٹ SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "گوگل موسم v2 (حقیقی PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "گوگل موسم v1 (کلاسک PNG)"
+
+msgid "Icon Pack:"
+msgstr "آئیکن پیک:"
+
+msgid "Select the visual style for weather icons."
+msgstr "موسم کے آئیکونز کے لیے بصری انداز منتخب کریں۔"
+
+msgid "Weather Provider"
+msgstr "موسم کا فراہم کنندہ"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (مفت، کسی کی (Key) کی ضرورت نہیں)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (کی (Key) درکار ہے)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (کی (Key) درکار ہے)"
+
+msgid "Best free option. No API key required."
+msgstr "بہترین مفت آپشن۔ کسی API کلید کی ضرورت نہیں ہے۔"
+
+msgid "Standard provider. API key required below."
+msgstr "معیاری فراہم کنندہ۔ نیچے API کی (Key) درکار ہے۔"
+
+msgid "Alternative provider. API key required below."
+msgstr "متبادل فراہم کنندہ۔ نیچے API کی (Key) درکار ہے۔"
+
+msgid "API Keys"
+msgstr "API کلیدیں"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API کلید:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "اپنی OpenWeatherMap API کلید درج کریں"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API کلید:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "اپنی WeatherAPI.com کلید درج کریں"
+
+msgid "Location"
+msgstr "مقام"
+
+msgid "Auto-detect from IP"
+msgstr "آئی پی سے خودکار پتہ لگائیں"
+
+msgid "Enter manually"
+msgstr "دستی طور پر درج کریں"
+
+msgid "City 1:"
+msgstr "شہر 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "مثال: لاہور، کراچی، لندن"
+
+msgid "City 2:"
+msgstr "شہر 2:"
+
+msgid "Second city (optional)"
+msgstr "دوسرا شہر (اختیاری)"
+
+msgid "City 3:"
+msgstr "شہر 3:"
+
+msgid "Third city (optional)"
+msgstr "تیسرا شہر (اختیاری)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "آپ شہر کا نام، 'شہر، ملکی کوڈ' یا زپ کوڈ استعمال کر سکتے ہیں۔"
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr ""
+"مقام کا پتہ آپ کے آئی پی ایڈریس کی بنیاد پر خودکار طور پر لگایا جائے گا۔"
+
+msgid "Settings"
+msgstr "ترتیبات"
+
+msgid "Units:"
+msgstr "اکائیاں:"
+
+msgid "Use system units"
+msgstr "سسٹم کی اکائیاں استعمال کریں"
+
+msgid "Metric (°C)"
+msgstr "میٹرک (°C)"
+
+msgid "Imperial (°F)"
+msgstr "امپیریل (°F)"
+
+msgid "Refresh Interval:"
+msgstr "ریفریش کا وقفہ:"
+
+msgid "15 minutes"
+msgstr "15 منٹ"
+
+msgid "30 minutes"
+msgstr "30 منٹ"
+
+msgid "45 minutes"
+msgstr "45 منٹ"
+
+msgid "1 hour"
+msgstr "1 گھنٹہ"
+
+msgid "2 hours"
+msgstr "2 گھنٹے"
+
+msgid "3 hours"
+msgstr "3 گھنٹے"
+
+msgid "4 hours"
+msgstr "4 گھنٹے"
+
+msgid "6 hours"
+msgstr "6 گھنٹے"
+
+msgid "8 hours"
+msgstr "8 گھنٹے"
+
+msgid "12 hours"
+msgstr "12 گھنٹے"
+
+msgid "1 day"
+msgstr "1 دن"
+
+msgid "Refresh"
+msgstr "تازہ کریں"
+
+msgid "Loading weather data..."
+msgstr "موسم کا ڈیٹا لوڈ ہو رہا ہے..."
+
+msgid "Clear"
+msgstr "صاف"
+
+msgid "Mainly Clear"
+msgstr "بنیادی طور پر صاف"
+
+msgid "Partly Cloudy"
+msgstr "جزوی طور پر ابر آلود"
+
+msgid "Overcast"
+msgstr "ابر آلود"
+
+msgid "Fog"
+msgstr "دھند"
+
+msgid "Mist"
+msgstr "دھند"
+
+msgid "Haze"
+msgstr "دھندلا پن"
+
+msgid "Smoke"
+msgstr "دھواں"
+
+msgid "Dust"
+msgstr "گرد و غبار"
+
+msgid "Drizzle"
+msgstr "بونداباندی"
+
+msgid "Freezing Drizzle"
+msgstr "جمنے والی بونداباندی"
+
+msgid "Rain"
+msgstr "بارش"
+
+msgid "Light Rain"
+msgstr "ہلکی بارش"
+
+msgid "Freezing Rain"
+msgstr "جمنے والی بارش"
+
+msgid "Snow"
+msgstr "برف باری"
+
+msgid "Light Snow"
+msgstr "ہلکی برف باری"
+
+msgid "Snow Grains"
+msgstr "برف کے دانے"
+
+msgid "Rain Showers"
+msgstr "بارش کی بوچھاڑ"
+
+msgid "Snow Showers"
+msgstr "برف کی بوچھاڑ"
+
+msgid "Thunderstorm"
+msgstr "گرج چمک کے ساتھ طوفان"
+
+msgid "Thunderstorm with Hail"
+msgstr "اولوں کے ساتھ تھنڈر اسٹارم"
+
+msgid "Unknown"
+msgstr "نامعلوم"
+
+msgid "Cloudy"
+msgstr "ابر آلود"
+
+msgid "Sun"
+msgstr "اتوار"
+
+msgid "Mon"
+msgstr "پیر"
+
+msgid "Tue"
+msgstr "منگل"
+
+msgid "Wed"
+msgstr "بدھ"
+
+msgid "Thu"
+msgstr "جمعرات"
+
+msgid "Fri"
+msgstr "جمعہ"
+
+msgid "Sat"
+msgstr "ہفتہ"
+
+msgid "Font Settings"
+msgstr "فونٹ کی ترتیبات"
+
+msgid "Use Default System Font"
+msgstr "ڈیفالٹ سسٹم فونٹ استعمال کریں"
+
+msgid "Custom Font Family:"
+msgstr "کسٹم فونٹ فیملی:"
+
+msgid "Background Opacity:"
+msgstr "پس منظر کی دھندلاہٹ:"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "0%"
+msgstr "0%"
+
+msgid "Background Settings"
+msgstr "پس منظر کی ترتیبات"
+
+msgid "Widget Margin:"
+msgstr "وجیٹ کا مارجن:"
+
+msgid "Normal (10px)"
+msgstr "نارمل (10px)"
+
+msgid "Less (5px)"
+msgstr "کم (5px)"
+
+msgid "None (0px)"
+msgstr "کوئی نہیں (0px)"
+
+msgid "Layout Mode:"
+msgstr "لے آؤٹ موڈ:"
+
+msgid "Automatic"
+msgstr "خودکار"
+
+msgid "Small"
+msgstr "چھوٹا"
+
+msgid "Wide"
+msgstr "کشادہ"
+
+msgid "Large"
+msgstr "بڑا"
+
+msgid "Representation:"
+msgstr "نمائش:"
+
+msgid "Simple Panel"
+msgstr "سادہ پینل"
+
+msgid "Detailed Panel"
+msgstr "تفصیلی پینل"
+
+msgid "Font Size (0 = Auto):"
+msgstr "فونٹ کا سائز (0 = آٹو):"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "آئیکن کا سائز (0 = آٹو):"
+
+msgid "Forecast Days:"
+msgstr "پیشن گوئی کے دن:"
+
+msgid "NW"
+msgstr "شمال مغربی"
+
+msgid "Panel Settings"
+msgstr "پینل کی ترتیبات"
+
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"موسم کے آئیکونز کے لیے بصری انداز منتخب کریں۔ (نوٹ: v1/v2 جیسے پرانے پیک میں "
+"کچھ حالات کے لیے آئیکونز غائب ہو سکتے ہیں)"
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Precipitation"
+msgstr ""
+
+msgid "Wind Speed"
+msgstr ""
+
+msgid "UV Index"
+msgstr ""
+
+msgid "Rain Chance"
+msgstr ""
+
+msgid "Sunrise"
+msgstr ""
+
+msgid "Sunset"
+msgstr ""
+
+msgid "Tap to close"
+msgstr ""
+
+msgid "Next week %1"
+msgstr ""
+
+msgid "2 weeks later %1"
+msgstr ""
+
+msgid "N"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "W"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "SW"
+msgstr ""
+
+msgid "Corner Radius:"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Square"
+msgstr ""
+
+msgid "0% (No Backgrounds)"
+msgstr ""
+
+msgid "Show Units in Forecast"
+msgstr ""

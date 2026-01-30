@@ -1,0 +1,471 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-22 03:00+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Weather"
+msgstr "Hava Durumu"
+
+msgid "Appearance"
+msgstr "Görünüş"
+
+msgid "Details"
+msgstr "Təfərrüatlar"
+
+msgid "Hourly Forecast"
+msgstr "Saatlıq proqnoz"
+
+msgid "Daily Forecast"
+msgstr "Gündəlik proqnoz"
+
+msgid "Feels like"
+msgstr "Hiss edilən"
+
+msgid "Humidity"
+msgstr "Rütubət"
+
+msgid "Wind"
+msgstr "Külək"
+
+msgid "Pressure"
+msgstr "Təzyiq"
+
+msgid "Clouds"
+msgstr "Buludluluq"
+
+msgid "UV"
+msgstr "UV İndeksi"
+
+msgid "Visibility"
+msgstr "Görünüş"
+
+msgid "Wind Direction"
+msgstr "Külək İstiqaməti"
+
+msgid "Click to close"
+msgstr "Bağlamaq üçün vurun"
+
+msgid "Default (Colorful SVG)"
+msgstr "Defolt (Rəngli SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Hava Durumu v3 (Yastı SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Hava Durumu v2 (Realist PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Hava Durumu v1 (Klassik PNG)"
+
+msgid "Icon Pack:"
+msgstr "İkon paketi:"
+
+msgid "Select the visual style for weather icons."
+msgstr "Hava durumu ikonları üçün vizual stili seçin."
+
+msgid "Weather Provider"
+msgstr "Hava durumu təminatçısı"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Pulsuz, açar tələb olunmur)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Açar tələb olunur)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Açar tələb olunur)"
+
+msgid "Best free option. No API key required."
+msgstr "Ən yaxşı pulsuz seçim. API açarı tələb olunmur."
+
+msgid "Standard provider. API key required below."
+msgstr "Standart təminatçı. Aşağıda API açarı tələb olunur."
+
+msgid "Alternative provider. API key required below."
+msgstr "Alternativ təminatçı. Aşağıda API açarı tələb olunur."
+
+msgid "API Keys"
+msgstr "API açarları"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API açarı:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMap API açarınızı daxil edin"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API açarı:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.com açarınızı daxil edin"
+
+msgid "Location"
+msgstr "Məkan"
+
+msgid "Auto-detect from IP"
+msgstr "IP-dən avtomatik aşkarla"
+
+msgid "Enter manually"
+msgstr "Əllə daxil edin"
+
+msgid "City 1:"
+msgstr "Şəhər 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Məs: Bakı, London, İstanbul"
+
+msgid "City 2:"
+msgstr "Şəhər 2:"
+
+msgid "Second city (optional)"
+msgstr "İkinci şəhər (istəyə bağlı)"
+
+msgid "City 3:"
+msgstr "Şəhər 3:"
+
+msgid "Third city (optional)"
+msgstr "Üçüncü şəhər (istəyə bağlı)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr ""
+"Şəhər adı, 'Şəhər,Ölkə Kodu' və ya poçt indeksi istifadə edə bilərsiniz."
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Məkan IP ünvanınıza əsasən avtomatik müəyyən ediləcək."
+
+msgid "Settings"
+msgstr "Tənzimləmələr"
+
+msgid "Units:"
+msgstr "Vahidlər:"
+
+msgid "Use system units"
+msgstr "Sistem vahidlərini istifadə et"
+
+msgid "Metric (°C)"
+msgstr "Metrik (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Imperial (°F)"
+
+msgid "Refresh Interval:"
+msgstr "Yeniləmə intervalı:"
+
+msgid "15 minutes"
+msgstr "15 dəqiqə"
+
+msgid "30 minutes"
+msgstr "30 dəqiqə"
+
+msgid "45 minutes"
+msgstr "45 dəqiqə"
+
+msgid "1 hour"
+msgstr "1 saat"
+
+msgid "2 hours"
+msgstr "2 saat"
+
+msgid "3 hours"
+msgstr "3 saat"
+
+msgid "4 hours"
+msgstr "4 saat"
+
+msgid "6 hours"
+msgstr "6 saat"
+
+msgid "8 hours"
+msgstr "8 saat"
+
+msgid "12 hours"
+msgstr "12 saat"
+
+msgid "1 day"
+msgstr "1 gün"
+
+msgid "Refresh"
+msgstr "Yenilə"
+
+msgid "Loading weather data..."
+msgstr "Hava durumu məlumatları yüklənir..."
+
+msgid "Clear"
+msgstr "Açıq"
+
+msgid "Mainly Clear"
+msgstr "Əsasən açıq"
+
+msgid "Partly Cloudy"
+msgstr "Az buludlu"
+
+msgid "Overcast"
+msgstr "Tutqun"
+
+msgid "Fog"
+msgstr "Duman"
+
+msgid "Mist"
+msgstr "Çən"
+
+msgid "Haze"
+msgstr "Pus"
+
+msgid "Smoke"
+msgstr "Tüstü"
+
+msgid "Dust"
+msgstr "Toz"
+
+msgid "Drizzle"
+msgstr "Çiskinli yağış"
+
+msgid "Freezing Drizzle"
+msgstr "Dondurucu çiskinli yağış"
+
+msgid "Rain"
+msgstr "Yağış"
+
+msgid "Light Rain"
+msgstr "Zəif yağış"
+
+msgid "Freezing Rain"
+msgstr "Dondurucu yağış"
+
+msgid "Snow"
+msgstr "Qar"
+
+msgid "Light Snow"
+msgstr "Zəif qar"
+
+msgid "Snow Grains"
+msgstr "Qar dənəcikləri"
+
+msgid "Rain Showers"
+msgstr "Leysan yağışlar"
+
+msgid "Snow Showers"
+msgstr "Leysan qar"
+
+msgid "Thunderstorm"
+msgstr "İldırım"
+
+msgid "Thunderstorm with Hail"
+msgstr "Dolu ilə ildırım"
+
+msgid "Unknown"
+msgstr "Naməlum"
+
+msgid "Cloudy"
+msgstr "Buludlu"
+
+msgid "Sun"
+msgstr "Baz"
+
+msgid "Mon"
+msgstr "B.E."
+
+msgid "Tue"
+msgstr "Ç.A."
+
+msgid "Wed"
+msgstr "Çəş"
+
+msgid "Thu"
+msgstr "C.A."
+
+msgid "Fri"
+msgstr "Cüm"
+
+msgid "Sat"
+msgstr "Şən"
+
+msgid "Font Settings"
+msgstr "Şrift tənzimləmələri"
+
+msgid "Use Default System Font"
+msgstr "Defolt sistem şriftini istifadə et"
+
+msgid "Custom Font Family:"
+msgstr "Xüsusi şrift ailəsi:"
+
+msgid "Background Opacity:"
+msgstr "Arxa fonun qeyri-şəffaflığı:"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "0%"
+msgstr "0%"
+
+msgid "Background Settings"
+msgstr "Arxa fon tənzimləmələri"
+
+msgid "Widget Margin:"
+msgstr "Kənar Boşluq:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Az (5px)"
+
+msgid "None (0px)"
+msgstr "Yoxdur (0px)"
+
+msgid "Layout Mode:"
+msgstr "Düzülüş rejimi:"
+
+msgid "Automatic"
+msgstr "Avtomatik"
+
+msgid "Small"
+msgstr "Kiçik"
+
+msgid "Wide"
+msgstr "Geniş"
+
+msgid "Large"
+msgstr "Böyük"
+
+msgid "Representation:"
+msgstr "Təqdimat:"
+
+msgid "Simple Panel"
+msgstr "Sadə panel"
+
+msgid "Detailed Panel"
+msgstr "Təfərrüatlı panel"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Şrift ölçüsü (0 = Avto):"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "İkon ölçüsü (0 = Avto):"
+
+msgid "Forecast Days:"
+msgstr "Proqnoz günləri:"
+
+msgid "NW"
+msgstr "KB"
+
+msgid "Panel Settings"
+msgstr "Panel tənzimləmələri"
+
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"Hava durumu ikonları üçün vizual stili seçin. (Qeyd: v1/v2 kimi köhnə "
+"paketlərdə bəzi hallar üçün ikonlar çatışmaya bilər)"
+
+msgid "Corner Radius:"
+msgstr "Künc Radiusu:"
+
+msgid "Square"
+msgstr "Kvadrat"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Arxa fon yoxdur)"
+
+msgid "Precipitation"
+msgstr "Yağıntı"
+
+msgid "Wind Speed"
+msgstr "Külək Sürəti"
+
+msgid "UV Index"
+msgstr "UV İndeksi"
+
+msgid "Rain Chance"
+msgstr "Yağış Ehtimalı"
+
+msgid "Sunrise"
+msgstr "Gün Doğumu"
+
+msgid "Sunset"
+msgstr "Gün Batımı"
+
+msgid "Monday"
+msgstr "Bazar ertəsi"
+
+msgid "Tuesday"
+msgstr "Çərşənbə axşamı"
+
+msgid "Wednesday"
+msgstr "Çərşənbə"
+
+msgid "Thursday"
+msgstr "Cümə axşamı"
+
+msgid "Friday"
+msgstr "Cümə"
+
+msgid "Saturday"
+msgstr "Şənbə"
+
+msgid "Sunday"
+msgstr "Bazar"
+
+msgid "Next week %1"
+msgstr "Gələn həftə %1"
+
+msgid "2 weeks later %1"
+msgstr "2 həftə sonra %1"
+
+msgid "Tap to close"
+msgstr "Bağlamaq üçün toxunun"
+
+msgid "Today"
+msgstr ""
+
+msgid "N"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "W"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "SW"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Show Units in Forecast"
+msgstr ""

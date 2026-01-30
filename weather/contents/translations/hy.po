@@ -1,0 +1,472 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-22 03:00+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Weather"
+msgstr "Եղանակ"
+
+msgid "Appearance"
+msgstr "Արտաքին տեսք"
+
+msgid "Details"
+msgstr "Մանրամասներ"
+
+msgid "Hourly Forecast"
+msgstr "Ժամային կանխատեսում"
+
+msgid "Daily Forecast"
+msgstr "Օրական կանխատեսում"
+
+msgid "Feels like"
+msgstr "Զգացվում է որպես"
+
+msgid "Humidity"
+msgstr "Խոնավություն"
+
+msgid "Wind"
+msgstr "Քամի"
+
+msgid "Pressure"
+msgstr "Ճնշում"
+
+msgid "Clouds"
+msgstr "Ամպամածություն"
+
+msgid "UV"
+msgstr "ՈւՄ ինդեքս"
+
+msgid "Visibility"
+msgstr "Տեսանելիություն"
+
+msgid "Wind Direction"
+msgstr "Քամու ուղղություն"
+
+msgid "Click to close"
+msgstr "Սեղմեք՝ փակելու համար"
+
+msgid "Default (Colorful SVG)"
+msgstr "Լռելյայն (գունավոր SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Եղանակ v3 (հարթ SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Եղանակ v2 (ռեալիստիկ PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Եղանակ v1 (դասական PNG)"
+
+msgid "Icon Pack:"
+msgstr "Պատկերակների փաթեթ."
+
+msgid "Select the visual style for weather icons."
+msgstr "Ընտրեք եղանակի պատկերակների տեսողական ոճը:"
+
+msgid "Weather Provider"
+msgstr "Եղանակի մատակարար"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (անվճար, բանալի չի պահանջվում)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (պահանջվում է բանալի)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (պահանջվում է բանալի)"
+
+msgid "Best free option. No API key required."
+msgstr "Լավագույն անվճար տարբերակը: API բանալի չի պահանջվում:"
+
+msgid "Standard provider. API key required below."
+msgstr "Ստանդարտ մատակարար: Ստորև պահանջվում է API բանալի:"
+
+msgid "Alternative provider. API key required below."
+msgstr "Այլընտրանքային մատակարար: Ստորև պահանջվում է API բանալի:"
+
+msgid "API Keys"
+msgstr "API բանալիներ"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API բանալի."
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Մուտքագրեք ձեր OpenWeatherMap API բանալին"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API բանալի."
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Մուտքագրեք ձեր WeatherAPI.com բանալին"
+
+msgid "Location"
+msgstr "Գտնվելու վայրը"
+
+msgid "Auto-detect from IP"
+msgstr "Ավտոմատ հայտնաբերում IP-ից"
+
+msgid "Enter manually"
+msgstr "Մուտքագրեք ձեռքով"
+
+msgid "City 1:"
+msgstr "Քաղաք 1."
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Օրինակ՝ Երևան, Լոնդոն, Փարիզ"
+
+msgid "City 2:"
+msgstr "Քաղաք 2."
+
+msgid "Second city (optional)"
+msgstr "Երկրորդ քաղաք (ըստ ցանկության)"
+
+msgid "City 3:"
+msgstr "Քաղաք 3."
+
+msgid "Third city (optional)"
+msgstr "Երրորդ քաղաք (ըստ ցանկության)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr ""
+"Կարող եք օգտագործել քաղաքի անունը, «Քաղաք, Երկրի կոդ» կամ փոստային ինդեքսը:"
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr ""
+"Գտնվելու վայրը ավտոմատ կերպով կհայտնաբերվի՝ հիմնվելով ձեր IP հասցեի վրա:"
+
+msgid "Settings"
+msgstr "Կարգավորումներ"
+
+msgid "Units:"
+msgstr "Միավորներ."
+
+msgid "Use system units"
+msgstr "Օգտագործել համակարգի միավորները"
+
+msgid "Metric (°C)"
+msgstr "Մետրիկ (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Իմպերիալ (°F)"
+
+msgid "Refresh Interval:"
+msgstr "Թարմացման միջակայքը."
+
+msgid "15 minutes"
+msgstr "15 րոպե"
+
+msgid "30 minutes"
+msgstr "30 րոպե"
+
+msgid "45 minutes"
+msgstr "45 րոպե"
+
+msgid "1 hour"
+msgstr "1 ժամ"
+
+msgid "2 hours"
+msgstr "2 ժամ"
+
+msgid "3 hours"
+msgstr "3 ժամ"
+
+msgid "4 hours"
+msgstr "4 ժամ"
+
+msgid "6 hours"
+msgstr "6 ժամ"
+
+msgid "8 hours"
+msgstr "8 ժամ"
+
+msgid "12 hours"
+msgstr "12 ժամ"
+
+msgid "1 day"
+msgstr "1 օր"
+
+msgid "Refresh"
+msgstr "Թարմացնել"
+
+msgid "Loading weather data..."
+msgstr "Եղանակի տվյալների բեռնում..."
+
+msgid "Clear"
+msgstr "Պարզ"
+
+msgid "Mainly Clear"
+msgstr "Հիմնականում պարզ"
+
+msgid "Partly Cloudy"
+msgstr "Մասնակի ամպամած"
+
+msgid "Overcast"
+msgstr "Ամպամած"
+
+msgid "Fog"
+msgstr "Մառախուղ"
+
+msgid "Mist"
+msgstr "Մշուշ"
+
+msgid "Haze"
+msgstr "Թույլ մշուշ"
+
+msgid "Smoke"
+msgstr "Ծուխ"
+
+msgid "Dust"
+msgstr "Փոշի"
+
+msgid "Drizzle"
+msgstr "Մաղող անձրև"
+
+msgid "Freezing Drizzle"
+msgstr "Սառչող մաղող անձրև"
+
+msgid "Rain"
+msgstr "Անձրև"
+
+msgid "Light Rain"
+msgstr "Թույլ անձրև"
+
+msgid "Freezing Rain"
+msgstr "Սառչող անձրև"
+
+msgid "Snow"
+msgstr "Ձյուն"
+
+msgid "Light Snow"
+msgstr "Թույլ ձյուն"
+
+msgid "Snow Grains"
+msgstr "Ձյան փաթիլներ"
+
+msgid "Rain Showers"
+msgstr "Անձրևային տեղումներ"
+
+msgid "Snow Showers"
+msgstr "Ձյունառատ տեղումներ"
+
+msgid "Thunderstorm"
+msgstr "Ամպրոպ"
+
+msgid "Thunderstorm with Hail"
+msgstr "Ամպրոպ կարկուտով"
+
+msgid "Unknown"
+msgstr "Անհայտ"
+
+msgid "Cloudy"
+msgstr "Ամպամած"
+
+msgid "Sun"
+msgstr "Կիր"
+
+msgid "Mon"
+msgstr "Երկ"
+
+msgid "Tue"
+msgstr "Երք"
+
+msgid "Wed"
+msgstr "Չոր"
+
+msgid "Thu"
+msgstr "Հնգ"
+
+msgid "Fri"
+msgstr "Ուրբ"
+
+msgid "Sat"
+msgstr "Շաբ"
+
+msgid "Font Settings"
+msgstr "Տառատեսակի կարգավորումներ"
+
+msgid "Use Default System Font"
+msgstr "Օգտագործել համակարգի լռելյայն տառատեսակը"
+
+msgid "Custom Font Family:"
+msgstr "Ընտրովի տառատեսակ."
+
+msgid "Background Opacity:"
+msgstr "Ֆոնի թափանցիկություն."
+
+msgid "100%"
+msgstr "100%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "0%"
+msgstr "0%"
+
+msgid "Background Settings"
+msgstr "Ֆոնի կարգավորումներ"
+
+msgid "Widget Margin:"
+msgstr "Վիդջեթի լուսանցք."
+
+msgid "Normal (10px)"
+msgstr "Սովորական (10px)"
+
+msgid "Less (5px)"
+msgstr "Քիչ (5px)"
+
+msgid "None (0px)"
+msgstr "Չկա (0px)"
+
+msgid "Layout Mode:"
+msgstr "Դասավորության ռեժիմ."
+
+msgid "Automatic"
+msgstr "Ավտոմատ"
+
+msgid "Small"
+msgstr "Փոքր"
+
+msgid "Wide"
+msgstr "Լայն"
+
+msgid "Large"
+msgstr "Մեծ"
+
+msgid "Representation:"
+msgstr "Ներկայացում."
+
+msgid "Simple Panel"
+msgstr "Պարզ վահանակ"
+
+msgid "Detailed Panel"
+msgstr "Մանրամասն վահանակ"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Տառատեսակի չափը (0 = Ավտո)."
+
+msgid "Icon Size (0 = Auto):"
+msgstr "Պատկերակի չափը (0 = Ավտո)."
+
+msgid "Forecast Days:"
+msgstr "Կանխատեսման օրերը."
+
+msgid "NW"
+msgstr "ՀյՍ"
+
+msgid "Panel Settings"
+msgstr "Վահանակի կարگավորումներ"
+
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"Ընտրեք եղանակի պատկերակների տեսողական ոճը: (Նշում. հին փաթեթները, ինչպիսիք "
+"են v1/v2-ը, կարող են պատկերակներ չունենալ որոշ պայմանների համար)"
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Precipitation"
+msgstr ""
+
+msgid "Wind Speed"
+msgstr ""
+
+msgid "UV Index"
+msgstr ""
+
+msgid "Rain Chance"
+msgstr ""
+
+msgid "Sunrise"
+msgstr ""
+
+msgid "Sunset"
+msgstr ""
+
+msgid "Tap to close"
+msgstr ""
+
+msgid "Next week %1"
+msgstr ""
+
+msgid "2 weeks later %1"
+msgstr ""
+
+msgid "N"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "W"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "SW"
+msgstr ""
+
+msgid "Corner Radius:"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Square"
+msgstr ""
+
+msgid "0% (No Backgrounds)"
+msgstr ""
+
+msgid "Show Units in Forecast"
+msgstr ""

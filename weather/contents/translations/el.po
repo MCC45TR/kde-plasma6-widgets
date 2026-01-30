@@ -1,0 +1,473 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MWeather 1.1.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-22 03:00+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Weather"
+msgstr "Καιρός"
+
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+msgid "Details"
+msgstr "Λεπτομέρειες"
+
+msgid "Hourly Forecast"
+msgstr "Ωριαία πρόγνωση"
+
+msgid "Daily Forecast"
+msgstr "Ημερήσια πρόγνωση"
+
+msgid "Feels like"
+msgstr "Αίσθηση σαν"
+
+msgid "Humidity"
+msgstr "Υγρασία"
+
+msgid "Wind"
+msgstr "Άνεμος"
+
+msgid "Pressure"
+msgstr "Πίεση"
+
+msgid "Clouds"
+msgstr "Σύννεφα"
+
+msgid "UV"
+msgstr "Δείκτης UV"
+
+msgid "Visibility"
+msgstr "Ορατότητα"
+
+msgid "Wind Direction"
+msgstr "Διεύθυνση ανέμου"
+
+msgid "Click to close"
+msgstr "Κλικ για κλείσιμο"
+
+msgid "Default (Colorful SVG)"
+msgstr "Προεπιλογή (Πολύχρωμο SVG)"
+
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Καιρός v3 (Επίπεδο SVG)"
+
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Καιρός v2 (Ρεαλιστικό PNG)"
+
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Καιρός v1 (Κλασικό PNG)"
+
+msgid "Icon Pack:"
+msgstr "Πακέτο εικονιδίων:"
+
+msgid "Select the visual style for weather icons."
+msgstr "Επιλέξτε το οπτικό στυλ για τα εικονίδια καιρού."
+
+msgid "Weather Provider"
+msgstr "Πάροχος καιρού"
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Δωρεάν, δεν απαιτείται κλειδί)"
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Απαιτείται κλειδί)"
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Απαιτείται κλειδί)"
+
+msgid "Best free option. No API key required."
+msgstr "Η καλύτερη δωρεάν επιλογή. Δεν απαιτείται κλειδί API."
+
+msgid "Standard provider. API key required below."
+msgstr "Τυπικός πάροχος. Απαιτείται κλειδί API παρακάτω."
+
+msgid "Alternative provider. API key required below."
+msgstr "Εναλλακτικός πάροχος. Απαιτείται κλειδί API παρακάτω."
+
+msgid "API Keys"
+msgstr "Κλειδιά API"
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Κλειδί API OpenWeatherMap:"
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Εισαγάγετε το κλειδί API OpenWeatherMap"
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Κλειδί API WeatherAPI.com:"
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Εισαγάγετε το κλειδί WeatherAPI.com"
+
+msgid "Location"
+msgstr "Τοποθεσία"
+
+msgid "Auto-detect from IP"
+msgstr "Αυτόματος εντοπισμός από IP"
+
+msgid "Enter manually"
+msgstr "Χειροκίνητη εισαγωγή"
+
+msgid "City 1:"
+msgstr "Πόλη 1:"
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Π.χ.: Αθήνα, Θεσσαλονίκη, Λονδίνο"
+
+msgid "City 2:"
+msgstr "Πόλη 2:"
+
+msgid "Second city (optional)"
+msgstr "Δεύτερη πόλη (προαιρετικά)"
+
+msgid "City 3:"
+msgstr "Πόλη 3:"
+
+msgid "Third city (optional)"
+msgstr "Τρίτη πόλη (προαιρετικά)"
+
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr ""
+"Μπορείτε να χρησιμοποιήσετε το όνομα της πόλης, 'Πόλη, Κωδικός Χώρας' ή "
+"Ταχυδρομικό Κώδικα."
+
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Η τοποθεσία θα εντοπιστεί αυτόματα με βάση τη διεύθυνση IP σας."
+
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+msgid "Units:"
+msgstr "Μονάδες:"
+
+msgid "Use system units"
+msgstr "Χρήση μονάδων συστήματος"
+
+msgid "Metric (°C)"
+msgstr "Μετρικό (°C)"
+
+msgid "Imperial (°F)"
+msgstr "Αγγλοσαξονικό (°F)"
+
+msgid "Refresh Interval:"
+msgstr "Διάστημα ανανέωσης:"
+
+msgid "15 minutes"
+msgstr "15 λεπτά"
+
+msgid "30 minutes"
+msgstr "30 λεπτά"
+
+msgid "45 minutes"
+msgstr "45 λεπτά"
+
+msgid "1 hour"
+msgstr "1 ώρα"
+
+msgid "2 hours"
+msgstr "2 ώρες"
+
+msgid "3 hours"
+msgstr "3 ώρες"
+
+msgid "4 hours"
+msgstr "4 ώρες"
+
+msgid "6 hours"
+msgstr "6 ώρες"
+
+msgid "8 hours"
+msgstr "8 ώρες"
+
+msgid "12 hours"
+msgstr "12 ώρες"
+
+msgid "1 day"
+msgstr "1 ημέρα"
+
+msgid "Refresh"
+msgstr "Ανανέωση"
+
+msgid "Loading weather data..."
+msgstr "Φόρτωση δεδομένων καιρού..."
+
+msgid "Clear"
+msgstr "Αίθριος"
+
+msgid "Mainly Clear"
+msgstr "Κυρίως αίθριος"
+
+msgid "Partly Cloudy"
+msgstr "Μερικώς συννεφιασμένος"
+
+msgid "Overcast"
+msgstr "Νεφελώδης"
+
+msgid "Fog"
+msgstr "Ομίχλη"
+
+msgid "Mist"
+msgstr "Καταχνιά"
+
+msgid "Haze"
+msgstr "Θολή ατμόσφαιρα"
+
+msgid "Smoke"
+msgstr "Καπνός"
+
+msgid "Dust"
+msgstr "Σκόνη"
+
+msgid "Drizzle"
+msgstr "Ψιλόβροχο"
+
+msgid "Freezing Drizzle"
+msgstr "Παγωμένο ψιλόβροχο"
+
+msgid "Rain"
+msgstr "Βροχή"
+
+msgid "Light Rain"
+msgstr "Ελαφριά βροχή"
+
+msgid "Freezing Rain"
+msgstr "Παγωμένη βροχή"
+
+msgid "Snow"
+msgstr "Χιόνι"
+
+msgid "Light Snow"
+msgstr "Ελαφρά χιονόπτωση"
+
+msgid "Snow Grains"
+msgstr "Χιονοκόκκοι"
+
+msgid "Rain Showers"
+msgstr "Μπόρες"
+
+msgid "Snow Showers"
+msgstr "Χιονομπόρες"
+
+msgid "Thunderstorm"
+msgstr "Καταιγίδα"
+
+msgid "Thunderstorm with Hail"
+msgstr "Καταιγίδα με χαλάζι"
+
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+msgid "Cloudy"
+msgstr "Συννεφιά"
+
+msgid "Sun"
+msgstr "Κυρ"
+
+msgid "Mon"
+msgstr "Δευ"
+
+msgid "Tue"
+msgstr "Τρι"
+
+msgid "Wed"
+msgstr "Τετ"
+
+msgid "Thu"
+msgstr "Πεμ"
+
+msgid "Fri"
+msgstr "Παρ"
+
+msgid "Sat"
+msgstr "Σαβ"
+
+msgid "Font Settings"
+msgstr "Ρυθμίσεις γραμματοσειράς"
+
+msgid "Use Default System Font"
+msgstr "Χρήση προεπιλεγμένης γραμματοσειράς συστήματος"
+
+msgid "Custom Font Family:"
+msgstr "Προσαρμοσμένη οικογένεια γραμματοσειρών:"
+
+msgid "Background Opacity:"
+msgstr "Διαφάνεια φόντου:"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "0%"
+msgstr "0%"
+
+msgid "Background Settings"
+msgstr "Ρυθμίσεις φόντου"
+
+msgid "Widget Margin:"
+msgstr "Περιθώριο γραφικού στοιχείου:"
+
+msgid "Normal (10px)"
+msgstr "Κανονικό (10px)"
+
+msgid "Less (5px)"
+msgstr "Λιγότερο (5px)"
+
+msgid "None (0px)"
+msgstr "Κανένα (0px)"
+
+msgid "Layout Mode:"
+msgstr "Λειτουργία διάταξης:"
+
+msgid "Automatic"
+msgstr "Αυτόματη"
+
+msgid "Small"
+msgstr "Μικρή"
+
+msgid "Wide"
+msgstr "Ευρεία"
+
+msgid "Large"
+msgstr "Μεγάλη"
+
+msgid "Representation:"
+msgstr "Αναπαράσταση:"
+
+msgid "Simple Panel"
+msgstr "Απλό πάνελ"
+
+msgid "Detailed Panel"
+msgstr "Λεπτομερές πάνελ"
+
+msgid "Font Size (0 = Auto):"
+msgstr "Μέγεθος γραμματοσειράς (0 = Αυτόματο):"
+
+msgid "Icon Size (0 = Auto):"
+msgstr "Μέγεθος εικονιδίων (0 = Αυτόματο):"
+
+msgid "Forecast Days:"
+msgstr "Ημέρες πρόγνωσης:"
+
+msgid "NW"
+msgstr "ΒΔ"
+
+msgid "Panel Settings"
+msgstr "Ρυθμίσεις πάνελ"
+
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"Επιλέξτε το οπτικό στυλ για τα εικονίδια καιρού. (Σημείωση: παλαιότερα "
+"πακέτα όπως τα v1/v2 ενδέχεται να έχουν ελλείποντα εικονίδια για ορισμένες "
+"συνθήκες)"
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Precipitation"
+msgstr ""
+
+msgid "Wind Speed"
+msgstr ""
+
+msgid "UV Index"
+msgstr ""
+
+msgid "Rain Chance"
+msgstr ""
+
+msgid "Sunrise"
+msgstr ""
+
+msgid "Sunset"
+msgstr ""
+
+msgid "Tap to close"
+msgstr ""
+
+msgid "Next week %1"
+msgstr ""
+
+msgid "2 weeks later %1"
+msgstr ""
+
+msgid "N"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "W"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "SW"
+msgstr ""
+
+msgid "Corner Radius:"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Square"
+msgstr ""
+
+msgid "0% (No Backgrounds)"
+msgstr ""
+
+msgid "Show Units in Forecast"
+msgstr ""
