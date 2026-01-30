@@ -97,6 +97,17 @@ Item {
                     lineHeight: 0.85
                 }
 
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (forecastDaily && forecastDaily.length > 0) {
+                            weatherRoot.selectedForecast = forecastDaily[0]
+                            weatherRoot.showForecastDetails = true
+                        }
+                    }
+                }
+
                 Row {
                     id: headerButtons
                     anchors.right: parent.right
@@ -105,49 +116,9 @@ Item {
                     spacing: 4
 
                     Rectangle {
-                        id: detailsButton
-                        width: detailsText.implicitWidth + 20
-                        height: 28
-                        radius: 14 * weatherRoot.radiusMultiplier
-                        topRightRadius: 5
-                        bottomRightRadius: 5
-                        color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1) : "transparent"
-
-                        Text {
-                            id: detailsText
-                            anchors.centerIn: parent
-                            text: i18n("Details")
-                            color: Kirigami.Theme.textColor
-                            font.family: weatherRoot.activeFont.family
-                            font.pixelSize: 12
-                            font.bold: true
-                        }
-
-                        MouseArea {
-                            id: detailsMouseArea
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            hoverEnabled: true
-                            onClicked: weatherRoot.largeDetailsOpen = true
-                        }
-
-                        Rectangle {
-                            anchors.fill: parent
-                            color: Kirigami.Theme.highlightColor
-                            opacity: detailsMouseArea.containsMouse ? 0.1 : 0
-                            radius: 14 * weatherRoot.radiusMultiplier
-                            topRightRadius: 5
-                            bottomRightRadius: 5
-                            Behavior on opacity { NumberAnimation { duration: 150 } }
-                        }
-                    }
-
-                    Rectangle {
                         width: toggleTextLarge.implicitWidth + 24
                         height: 28
                         radius: 14 * weatherRoot.radiusMultiplier
-                        topLeftRadius: 5
-                        bottomLeftRadius: 5
                         color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1) : "transparent"
 
                         Text {
@@ -208,7 +179,7 @@ Item {
                     width: largeForecastGrid.cellWidth - 4
                     height: largeForecastGrid.cellHeight - 4
 
-                    label: forecastMode ? modelData.time : getLocalizedDay(modelData.day)
+                    label: forecastMode ? modelData.time : (index === 0 ? i18n("Today") : getLocalizedDay(modelData.day))
                     iconPath: getWeatherIcon(modelData)
                     temp: modelData.temp
                     isHourly: forecastMode
@@ -221,7 +192,7 @@ Item {
                     itemIndex: index
                     
                     onClicked: function(data, idx, cardRect) {
-                        if (!forecastMode && idx > 0 && data.hasDetails) {
+                        if (!forecastMode && data.hasDetails) {
                             var globalPos = mapToItem(largeLayout, 0, 0)
                             weatherRoot.clickedCardRect = Qt.rect(globalPos.x, globalPos.y, width, height)
                             weatherRoot.selectedForecast = data
