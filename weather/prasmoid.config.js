@@ -1,5 +1,3 @@
-/// <reference path="prasmoid.d.ts" />
-/** @type {PrasmoidConfig} */
 const config = {
     "commands": {
         "dir": ".prasmoid/commands",

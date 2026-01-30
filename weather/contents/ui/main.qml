@@ -7,17 +7,14 @@ import org.kde.kirigami as Kirigami
 import "WeatherService.js" as WeatherService
 import "IconMapper.js" as IconMapper
 
-
 PlasmoidItem {
     id: root
 
-    // Widget Size Constraints
     Layout.preferredWidth: 400
     Layout.preferredHeight: 200
     Layout.minimumWidth: 200
     Layout.minimumHeight: 200
 
-    // Configuration Properties
     readonly property string apiKey: Plasmoid.configuration.apiKey || ""
     readonly property string apiKey2: Plasmoid.configuration.apiKey2 || ""
     readonly property string locationMode: Plasmoid.configuration.locationMode || "auto"
@@ -30,7 +27,15 @@ PlasmoidItem {
     readonly property string weatherProvider: Plasmoid.configuration.weatherProvider || "openmeteo"
     readonly property string iconPack: Plasmoid.configuration.iconPack || "default"
     readonly property int updateInterval: Plasmoid.configuration.updateInterval || 30
-    readonly property double backgroundOpacity: isPanel ? 0.0 : ((Plasmoid.configuration.backgroundOpacity !== undefined) ? Plasmoid.configuration.backgroundOpacity : 0.9)
+    readonly property double backgroundOpacity: {
+        if (isPanel) return 0.0
+        var op = Plasmoid.configuration.backgroundOpacity
+        if (op === -1.0) return 0.0 // Full transparent mode
+        return (op !== undefined) ? op : 0.9
+    }
+    
+    // New property to control inner elements transparency
+    readonly property bool showInnerBackgrounds: (Plasmoid.configuration.backgroundOpacity !== -1.0)
     readonly property string panelMode: Plasmoid.configuration.panelMode || "simple"
     readonly property int panelFontSize: Plasmoid.configuration.panelFontSize || 0
     readonly property int panelIconSize: Plasmoid.configuration.panelIconSize || 0
@@ -38,14 +43,19 @@ PlasmoidItem {
     readonly property int forecastDays: Plasmoid.configuration.forecastDays || 5
     readonly property int edgeMargin: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
     readonly property bool showForecastUnits: Plasmoid.configuration.showForecastUnits !== undefined ? Plasmoid.configuration.showForecastUnits : true
+    
+    readonly property string cornerRadiusMode: Plasmoid.configuration.cornerRadius || "normal"
+    readonly property real radiusMultiplier: {
+        if (cornerRadiusMode === "small") return 0.5
+        if (cornerRadiusMode === "square") return 0.0
+        return 1.0
+    }
 
-    // Layout Mode Detection
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
     readonly property bool isWideMode: layoutMode === "wide" || (layoutMode === "auto" && root.width > 350 && root.height <= 350)
     readonly property bool isLargeMode: layoutMode === "large" || (layoutMode === "auto" && root.width > 350 && root.height > 350)
     readonly property bool isSmallMode: layoutMode === "small" || (layoutMode === "auto" && !isWideMode && !isLargeMode)
 
-    // Weather Data State
     property var currentWeather: null
     property var forecastDaily: []
     property var forecastHourly: []
@@ -56,7 +66,6 @@ PlasmoidItem {
     property bool largeDetailsOpen: false
     property int lastFetchMinute: -1
 
-    // Context Menu Actions
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             text: i18n("Refresh")
@@ -71,7 +80,6 @@ PlasmoidItem {
     ]
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    // Auto-refresh Timer
     Timer {
         interval: 60000
         running: true
@@ -85,14 +93,7 @@ PlasmoidItem {
         }
     }
 
-
-
     function detectSystemUnits() {
-        // Qt.locale().measurementSystem returns:
-        // 0 = MetricSystem (Metric)
-        // 1 = ImperialUSSystem (Imperial US)
-        // 2 = ImperialUKSystem (Imperial UK)
-        // This will properly read from KDE Plasma's regional settings
         var measurementSystem = Qt.locale().measurementSystem
         return measurementSystem === 0 ? "metric" : "imperial"
     }
@@ -114,11 +115,7 @@ PlasmoidItem {
         }
     }
 
-
-
     Component.onCompleted: {
-        // Load and transform localization data synchronously
-
 
         var cached = Plasmoid.configuration.cachedWeather
         if (cached && cached.length > 0) {
@@ -159,13 +156,11 @@ PlasmoidItem {
         if (!item) return Qt.resolvedUrl("../images/clear_day.svg")
         var isDark = ((Kirigami.Theme.backgroundColor.r + Kirigami.Theme.backgroundColor.g + Kirigami.Theme.backgroundColor.b) / 3) < 0.5
         var iconPath = IconMapper.getIconPath(item.code, item.icon, weatherProvider, isDark, iconPack)
-        
-        // If it is a relative path (local file), resolve it to a full URL
+
         if (iconPath.indexOf("/") !== -1) {
             return Qt.resolvedUrl(iconPath)
         }
-        
-        // Otherwise, return as is (system icon name)
+
         return iconPath
     }
 
@@ -176,54 +171,22 @@ PlasmoidItem {
 
     compactRepresentation: Item {
         id: compactRep
-        // Determine layout based on panelMode
         readonly property bool detailed: root.panelMode === "detailed"
-        
+
         Layout.minimumWidth: detailed ? detailedLayout.implicitWidth : simpleLayout.implicitWidth
         Layout.preferredWidth: detailed ? detailedLayout.implicitWidth : simpleLayout.implicitWidth
-        
+
         MouseArea {
             anchors.fill: parent
             onClicked: root.expanded = !root.expanded
         }
 
-        // Simple View (Icon + Temp)
         RowLayout {
             id: simpleLayout
             anchors.centerIn: parent
             spacing: 0
             visible: !compactRep.detailed
-            
-            // Removed spacers to allow auto-sizing
-            
-            Kirigami.Icon {
-                source: root.getWeatherIcon(root.currentWeather)
-                Layout.preferredHeight: root.panelIconSize > 0 ? root.panelIconSize : compactRep.height * 0.8
-                Layout.preferredWidth: height
-                isMask: false
-                smooth: true
-                Layout.alignment: Qt.AlignVCenter
-            }
-            Text {
-                text: root.currentWeather ? Math.round(root.currentWeather.temp) + "°" : "--"
-                color: Kirigami.Theme.textColor
-                verticalAlignment: Text.AlignVCenter
-                font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize : compactRep.height * 0.5
-                font.bold: true
-                Layout.alignment: Qt.AlignVCenter
-                leftPadding: 4
-            }
-        }
 
-        // Detailed View (Icon + Temp + Condition)
-        RowLayout {
-            id: detailedLayout
-            anchors.centerIn: parent
-            spacing: 6
-            visible: compactRep.detailed
-            
-            // Removed spacers
-            
             Kirigami.Icon {
                 source: root.getWeatherIcon(root.currentWeather)
                 Layout.preferredHeight: root.panelIconSize > 0 ? root.panelIconSize : compactRep.height * 0.8
@@ -232,27 +195,55 @@ PlasmoidItem {
                 smooth: true
                 Layout.alignment: Qt.AlignVCenter
             }
-            
-            ColumnLayout {
-                Layout.alignment: Qt.AlignVCenter
-                spacing: 0
-                
                 Text {
-                    text: root.currentWeather ? Math.round(root.currentWeather.temp) + (root.units === "metric" ? "°C" : "°F") : "--"
+                    text: root.currentWeather ? Math.round(root.currentWeather.temp) + "°" : "--"
                     color: Kirigami.Theme.textColor
-                    font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize : compactRep.height * 0.4
+                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize : compactRep.height * 0.5
+                    font.family: root.activeFont.family
                     font.bold: true
-                    lineHeight: 0.8
+                    Layout.alignment: Qt.AlignVCenter
+                    leftPadding: 4
                 }
-                
-                Text {
-                    text: root.currentWeather ? i18n(root.currentWeather.condition) : ""
-                    color: Kirigami.Theme.textColor
-                    font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize * 0.6 : compactRep.height * 0.25
-                    opacity: 0.8
-                    elide: Text.ElideRight
-                    lineHeight: 0.8
+            }
+
+            RowLayout {
+                id: detailedLayout
+                anchors.centerIn: parent
+                spacing: 6
+                visible: compactRep.detailed
+
+                Kirigami.Icon {
+                    source: root.getWeatherIcon(root.currentWeather)
+                    Layout.preferredHeight: root.panelIconSize > 0 ? root.panelIconSize : compactRep.height * 0.8
+                    Layout.preferredWidth: height
+                    isMask: false
+                    smooth: true
+                    Layout.alignment: Qt.AlignVCenter
                 }
+
+                ColumnLayout {
+                    Layout.alignment: Qt.AlignVCenter
+                    spacing: 0
+
+                    Text {
+                        text: root.currentWeather ? Math.round(root.currentWeather.temp) + (root.units === "metric" ? "°C" : "°F") : "--"
+                        color: Kirigami.Theme.textColor
+                        font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize : compactRep.height * 0.4
+                        font.family: root.activeFont.family
+                        font.bold: true
+                        lineHeight: 0.8
+                    }
+
+                    Text {
+                        text: root.currentWeather ? i18n(root.currentWeather.condition) : ""
+                        color: Kirigami.Theme.textColor
+                        font.pixelSize: root.panelFontSize > 0 ? root.panelFontSize * 0.6 : compactRep.height * 0.25
+                        font.family: root.activeFont.family
+                        opacity: 0.8
+                        elide: Text.ElideRight
+                        lineHeight: 0.8
+                    }
             }
         }
     }
@@ -272,24 +263,11 @@ PlasmoidItem {
             anchors.fill: parent
             anchors.margins: (Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical) ? 0 : root.edgeMargin
             color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, root.backgroundOpacity)
-            radius: 20
+            radius: 20 * root.radiusMultiplier
             clip: true
-            
-            // Set default font for all children
-            // Note: Some complex children might override this if they don't inherit explicitly
-            // But usually this works for standard QtQuick types
+
             property font font: root.activeFont
-            // Force application to children text items that inherit
-            // Not standard prop in Rectangle but we can alias or use it as attached if needed, 
-            // but for QML inheritance, just having it here might not be enough if children bind to theme.
-            // Let's bind 'Font.family' to it for the context of this Rect.
-            
-            // Actually, best way is to set it on the specific Text elements or override the system font locally.
-            // But since this is a widget, we can't easily globally override.
-            // We'll pass 'activeFont' down to the Loaders as a property.
 
-
-            // Loading State
             ColumnLayout {
                 anchors.centerIn: parent
                 visible: root.isLoading
@@ -298,7 +276,6 @@ PlasmoidItem {
                 Text { text: i18n("Loading weather data..."); color: Kirigami.Theme.textColor; font.pixelSize: 14; Layout.alignment: Qt.AlignHCenter }
             }
 
-            // Error State
             ColumnLayout {
                 anchors.centerIn: parent
                 visible: !root.isLoading && root.errorMessage !== ""
@@ -309,7 +286,6 @@ PlasmoidItem {
                 Button { text: i18n("Refresh"); Layout.alignment: Qt.AlignHCenter; onClicked: root.fetchWeatherData() }
             }
 
-            // Lazy-loaded Mode Layouts
             Loader {
                 anchors.fill: parent
                 anchors.margins: 8
@@ -331,7 +307,6 @@ PlasmoidItem {
                 sourceComponent: LargeModeLayout { weatherRoot: root }
             }
 
-            // Middle-click Refresh
             MouseArea {
                 anchors.fill: parent
                 acceptedButtons: Qt.MiddleButton

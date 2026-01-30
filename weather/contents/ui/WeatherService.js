@@ -1,20 +1,17 @@
 .pragma library
-// WeatherService.js - Weather data fetching with OpenWeatherMap + WeatherAPI fallback
 
 var cache = {
     current: null,
     forecast: null,
     timestamp: 0,
-    ttl: 5 * 60 * 1000 // 5 minutes
+    ttl: 5 * 60 * 1000
 }
 
-var currentProvider = "openweathermap" // or "weatherapi"
+var currentProvider = "openweathermap"
 
-// OpenWeatherMap API
 function fetchOpenWeatherMap(apiKey, location, units, callback) {
     var baseUrl = "https://api.openweathermap.org/data/2.5/"
 
-    // Fetch current weather
     var currentUrl = baseUrl + "weather?q=" + encodeURIComponent(location) + "&appid=" + apiKey + "&units=" + units
 
     var xhr = new XMLHttpRequest()
@@ -31,11 +28,11 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
                         temp_max: Math.round(data.main.temp_max),
                         humidity: data.main.humidity,
                         pressure: data.main.pressure,
-                        visibility: data.visibility ? Math.round(data.visibility / 1000) : null, // km
-                        wind_speed: data.wind ? Math.round(data.wind.speed * 3.6) : null, // m/s to km/h
+                        visibility: data.visibility ? Math.round(data.visibility / 1000) : null,
+                        wind_speed: data.wind ? Math.round(data.wind.speed * 3.6) : null,
                         wind_deg: data.wind ? data.wind.deg : null,
                         wind_gust: data.wind && data.wind.gust ? Math.round(data.wind.gust * 3.6) : null,
-                        clouds: data.clouds ? data.clouds.all : null, // %
+                        clouds: data.clouds ? data.clouds.all : null,
                         sunrise: data.sys ? data.sys.sunrise : null,
                         sunset: data.sys ? data.sys.sunset : null,
                         condition: normalizeCondition(data.weather[0].main),
@@ -47,7 +44,6 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
                         timestamp: Date.now()
                     }
 
-                    // Fetch forecast
                     var forecastUrl = baseUrl + "forecast?q=" + encodeURIComponent(location) + "&appid=" + apiKey + "&units=" + units
                     var xhr2 = new XMLHttpRequest()
                     xhr2.open("GET", forecastUrl)
@@ -80,7 +76,6 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
     xhr.send()
 }
 
-// WeatherAPI.com fallback
 function fetchWeatherAPI(apiKey, location, callback) {
     var baseUrl = "https://api.weatherapi.com/v1/"
     var url = baseUrl + "forecast.json?key=" + apiKey + "&q=" + encodeURIComponent(location) + "&days=7&aqi=no&alerts=no"
@@ -120,9 +115,7 @@ function fetchWeatherAPI(apiKey, location, callback) {
     xhr.send()
 }
 
-// Open-Meteo API (Free, no API key required)
 function fetchOpenMeteo(location, units, callback) {
-    // Step 1: Geocode city name to coordinates
     var geocodeUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(location) + "&count=1&language=en&format=json"
 
     var xhr = new XMLHttpRequest()
@@ -142,7 +135,6 @@ function fetchOpenMeteo(location, units, callback) {
                     var lon = place.longitude
                     var locationName = place.name
 
-                    // Step 2: Fetch weather data (10 days forecast) with extended current data
                     var tempUnit = units === "imperial" ? "&temperature_unit=fahrenheit&wind_speed_unit=mph" : "&temperature_unit=celsius&wind_speed_unit=kmh"
                     var weatherUrl = "https://api.open-meteo.com/v1/forecast?" +
                         "latitude=" + lat + "&longitude=" + lon +
@@ -161,7 +153,6 @@ function fetchOpenMeteo(location, units, callback) {
                                 try {
                                     var data = JSON.parse(xhr2.responseText)
 
-                                    // Current weather with extended data
                                     var current = {
                                         temp: Math.round(data.current.temperature_2m),
                                         feels_like: Math.round(data.current.apparent_temperature),
@@ -186,7 +177,6 @@ function fetchOpenMeteo(location, units, callback) {
                                         timestamp: Date.now()
                                     }
 
-                                    // Parse forecast
                                     var forecast = parseForecastOpenMeteo(data)
                                     callback({ success: true, current: current, forecast: forecast, provider: "openmeteo" })
                                 } catch (e) {
@@ -209,7 +199,6 @@ function fetchOpenMeteo(location, units, callback) {
     xhr.send()
 }
 
-// Fetch location from IP (ipinfo.io)
 function fetchIpAndWeather(config, callback) {
     var xhr = new XMLHttpRequest()
     var url = "https://ipinfo.io/json"
@@ -221,14 +210,12 @@ function fetchIpAndWeather(config, callback) {
                     var data = JSON.parse(xhr.responseText)
                     if (data.city) {
                         console.log("Detected location from IP: " + data.city)
-                        // Create a new config with the detected city
                         var newConfig = {
                             apiKey: config.apiKey,
                             apiKey2: config.apiKey2,
                             location: data.city,
                             units: config.units
                         }
-                        // Proceed to fetch weather with detected city
                         fetchWeatherInternal(newConfig, callback)
                     } else {
                         console.log("Could not detect city from IP, falling back to default.")
@@ -293,18 +280,14 @@ function fetchWeatherInternal(config, callback) {
         return
     }
 
-    // Default: Open-Meteo (openmeteo) or fallback
     fetchOpenMeteo(location, units, function (result) {
         if (result.success) {
-            // Cache the FULL result (all days from API)
             cache.current = result.current
             cache.forecast = result.forecast
             cache.timestamp = Date.now()
         }
 
-        // Return result (slice if needed for the callback, but keeping cache full)
         if (result.success && result.forecast && result.forecast.daily) {
-            // We need to return a COPY with sliced data, so we don't mutate the cached object if it refers to it
             var finalResult = {
                 success: result.success,
                 current: result.current,
@@ -321,22 +304,17 @@ function fetchWeatherInternal(config, callback) {
     })
 }
 
-// Main fetch function with fallback
 function fetchWeather(config, callback) {
     var now = Date.now()
 
-    // Setup cache invalidation if needed
-    // If the cache contains country name in location, we consider it invalid for the new display requirement
     var forceRefresh = false
     if (cache.current && cache.current.location && cache.current.location.indexOf(",") !== -1) {
         forceRefresh = true
     }
 
-    // Return cached data if still valid and we don't need to force refresh
     if (!forceRefresh && cache.current && cache.forecast && (now - cache.timestamp) < cache.ttl) {
         var requestedDays = config.forecastDays || 5
 
-        // If we have enough cached days, use cache
         if (cache.forecast.daily && cache.forecast.daily.length >= requestedDays) {
             var result = {
                 success: true,
@@ -350,10 +328,8 @@ function fetchWeather(config, callback) {
             callback(result)
             return
         }
-        // If insufficient days in cache (e.g. cached 5, requested 12), proceed to fetch fresh data
     }
 
-    // If location is the default "Ankara" or empty, try auto-detection
     if (!config.location || config.location === "Ankara") {
         fetchIpAndWeather(config, callback)
     } else {
@@ -361,7 +337,6 @@ function fetchWeather(config, callback) {
     }
 }
 
-// Parse OpenWeatherMap forecast (3-hour intervals)
 function parseForecastOpenWeather(data) {
     var daily = []
     var hourly = []
@@ -372,7 +347,6 @@ function parseForecastOpenWeather(data) {
         var date = new Date(item.dt * 1000)
         var dayKey = date.toDateString()
 
-        // Hourly forecast (next 24 hours, every 3 hours)
         if (hourly.length < 24) {
             hourly.push({
                 time: date.getHours() + ":00",
@@ -383,10 +357,9 @@ function parseForecastOpenWeather(data) {
             })
         }
 
-        // Daily forecast (one per day, use noon/midday data)
         if (!seenDays[dayKey] && daily.length < 10) {
             var hours = date.getHours()
-            if (hours >= 11 && hours <= 14) { // Use midday data
+            if (hours >= 11 && hours <= 14) {
                 seenDays[dayKey] = true
                 daily.push({
                     day: getDayName(date.getDay()),
@@ -404,7 +377,6 @@ function parseForecastOpenWeather(data) {
     return { daily: daily, hourly: hourly }
 }
 
-// Parse WeatherAPI forecast
 function parseForecastWeatherAPI(forecastDays) {
     var daily = []
     var hourly = []
@@ -423,7 +395,6 @@ function parseForecastWeatherAPI(forecastDays) {
             icon: ""
         })
 
-        // Hourly forecast from first day
         if (i === 0 && day.hour) {
             for (var h = 0; h < day.hour.length && hourly.length < 8; h += 3) {
                 var hour = day.hour[h]
@@ -442,12 +413,10 @@ function parseForecastWeatherAPI(forecastDays) {
     return { daily: daily, hourly: hourly }
 }
 
-// Parse Open-Meteo forecast
 function parseForecastOpenMeteo(data) {
     var daily = []
     var hourly = []
 
-    // Daily forecast (up to 16 days from API default)
     if (data.daily && data.daily.time) {
         for (var i = 0; i < data.daily.time.length; i++) {
             var date = new Date(data.daily.time[i])
@@ -463,11 +432,10 @@ function parseForecastOpenMeteo(data) {
         }
     }
 
-    // Hourly forecast (next 24 hours)
     if (data.hourly && data.hourly.time) {
         for (var h = 0; h < data.hourly.time.length && hourly.length < 24; h++) {
             var hourDate = new Date(data.hourly.time[h])
-            if (hourDate > new Date()) { // Only future hours
+            if (hourDate > new Date()) {
                 hourly.push({
                     time: hourDate.getHours() + ":00",
                     temp: Math.round(data.hourly.temperature_2m[h]),
@@ -482,7 +450,6 @@ function parseForecastOpenMeteo(data) {
     return { daily: daily, hourly: hourly }
 }
 
-// Open-Meteo WMO Weather interpretation codes to text
 function getOpenMeteoCondition(code) {
     if (code === 0) return "Clear"
     if (code === 1) return "Mainly Clear"
@@ -502,17 +469,14 @@ function getOpenMeteoCondition(code) {
     return "Unknown"
 }
 
-// Helper to normalize condition text to align with available translations
 function normalizeCondition(text) {
     if (!text) return ""
     var t = text.trim()
     if (t === "Clouds") return "Cloudy"
-    // Add more mappings if needed to match PO msgids
     return t
 }
 
 function getDayName(dayIndex) {
-    // Return Title Case to match PO msgids like "Sun", "Mon"
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     return days[dayIndex]
 }

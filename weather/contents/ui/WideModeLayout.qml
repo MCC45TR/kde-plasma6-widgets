@@ -3,40 +3,36 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-// Wide Mode Layout Component
 RowLayout {
     id: wideLayout
     spacing: 8
-    
+
     required property var weatherRoot
-    
-    // Aliases
+
     property var currentWeather: weatherRoot.currentWeather
     property var forecastDaily: weatherRoot.forecastDaily
     property var forecastHourly: weatherRoot.forecastHourly
     property bool forecastMode: weatherRoot.forecastMode
     property string location: weatherRoot.location
-    
 
     function getWeatherIcon(item) { return weatherRoot.getWeatherIcon(item) }
     function getLocalizedDay(day) { return weatherRoot.getLocalizedDay(day) }
 
-    // Left Section: Current Weather (Expandable Card)
     Rectangle {
         id: currentSection
         property bool isExpanded: false
-        
+
         readonly property real normalWidth: contentLayout.implicitWidth + 20
         readonly property real normalHeight: wideLayout.height
         readonly property real expandedWidth: wideLayout.width
         readonly property real expandedHeight: wideLayout.height
-        
+
         Layout.fillHeight: !isExpanded
         Layout.preferredWidth: isExpanded ? expandedWidth : normalWidth
         Layout.preferredHeight: isExpanded ? expandedHeight : -1
         z: isExpanded ? 100 : 0
-        radius: isExpanded ? 15 : 10
-        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+        radius: (isExpanded ? 15 : 10) * weatherRoot.radiusMultiplier
+        color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1) : "transparent"
 
         Timer {
             id: autoCloseTimer
@@ -59,7 +55,6 @@ RowLayout {
             onExited: if (currentSection.isExpanded) autoCloseTimer.restart()
         }
 
-        // Normal Content
         ColumnLayout {
             id: contentLayout
             anchors.fill: parent
@@ -135,7 +130,6 @@ RowLayout {
             Item { Layout.fillHeight: true }
         }
 
-        // Expanded Content
         Flickable {
             id: expandedFlickable
             anchors.fill: parent
@@ -147,10 +141,10 @@ RowLayout {
             clip: true
             flickableDirection: Flickable.VerticalFlick
             boundsBehavior: Flickable.StopAtBounds
-            
+
             Behavior on opacity { NumberAnimation { duration: 150 } }
             ScrollBar.vertical: ScrollBar { policy: expandedContent.height > expandedFlickable.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff; width: 6 }
-            
+
             WheelHandler {
                 target: expandedFlickable
                 orientation: Qt.Vertical
@@ -175,7 +169,6 @@ RowLayout {
         }
     }
 
-    // Right Section: Location, Condition, Forecast
     ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
@@ -202,14 +195,15 @@ RowLayout {
                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
                 Layout.preferredWidth: toggleText.implicitWidth + 24
                 Layout.preferredHeight: 28
-                radius: 14
-                color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                radius: 14 * weatherRoot.radiusMultiplier
+                color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1) : "transparent"
 
                 Text {
                     id: toggleText
                     anchors.centerIn: parent
                     text: forecastMode ? i18n("Hourly Forecast") : i18n("Daily Forecast")
                     color: Kirigami.Theme.textColor
+                    font.family: weatherRoot.activeFont.family
                     font.pixelSize: 11
                     font.bold: true
                 }
@@ -267,16 +261,18 @@ RowLayout {
                 isHourly: forecastMode
                 units: weatherRoot.units
                 showUnits: weatherRoot.showForecastUnits
+                fontFamily: weatherRoot.activeFont.family
+                showBackground: weatherRoot.showInnerBackgrounds
 
                 readonly property int cols: Math.max(1, Math.floor(forecastGrid.width / forecastGrid.cellWidth))
                 readonly property int row: Math.floor(index / cols)
                 readonly property int col: index % cols
                 readonly property int totalRows: Math.ceil(forecastGrid.count / cols)
 
-                radiusTL: (row === 0 && col === 0) ? 24 : 10
-                radiusTR: (row === 0 && (col === cols - 1 || index === forecastGrid.count - 1)) ? 24 : 10
-                radiusBL: (row === totalRows - 1 && col === 0) ? 24 : 10
-                radiusBR: (row === totalRows - 1 && (col === cols - 1 || index === forecastGrid.count - 1)) ? 24 : 10
+                radiusTL: ((row === 0 && col === 0) ? 24 : 10) * weatherRoot.radiusMultiplier
+                radiusTR: ((row === 0 && (col === cols - 1 || index === forecastGrid.count - 1)) ? 24 : 10) * weatherRoot.radiusMultiplier
+                radiusBL: ((row === totalRows - 1 && col === 0) ? 24 : 10) * weatherRoot.radiusMultiplier
+                radiusBR: ((row === totalRows - 1 && (col === cols - 1 || index === forecastGrid.count - 1)) ? 24 : 10) * weatherRoot.radiusMultiplier
             }
         }
     }

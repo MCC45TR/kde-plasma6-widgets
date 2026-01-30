@@ -13,10 +13,12 @@ Item {
     required property color textColor
     required property color accentColor
     required property var formatTimeFunc
+    required property bool previewEnabled
     required property var previewSettings
     
     // Signals
     signal itemClicked(var item)
+
     signal clearClicked()
     
     // Localization removed
@@ -116,38 +118,60 @@ Item {
                             anchors.rightMargin: 8
                             spacing: 10
                             
-                            Kirigami.Icon {
-                                source: {
-                                    if (historyList.listIconSize <= 22) return modelData.decoration || "application-x-executable";
-                                    
-                                    var url = (modelData.filePath || "").toString();
-                                    // Fallback
-                                    if (!url) url = (modelData.url || "").toString();
-
-                                    if (!url) return modelData.decoration || "application-x-executable";
-                                    
-                                    var ext = url.split('.').pop().toLowerCase();
-                                    
-                                    if (historyList.previewSettings.images) {
-                                        var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                        if (imageExts.indexOf(ext) >= 0) return url
-                                    }
-                                    
-                                    if (historyList.previewSettings.videos) {
-                                        var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                        if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                    }
-                                    
-                                    if (historyList.previewSettings.documents) {
-                                        var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
-                                        if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                    }
-                                    
-                                    return modelData.decoration || "application-x-executable"
-                                }
+                            // Icon Container
+                            Item {
                                 Layout.preferredWidth: historyList.listIconSize
                                 Layout.preferredHeight: historyList.listIconSize
-                                color: historyList.textColor
+                                
+                                // 1. Fallback Icon
+                                Kirigami.Icon {
+                                    anchors.fill: parent
+                                    source: modelData.decoration || "application-x-executable"
+                                    color: historyList.textColor
+                                    visible: previewImageHistory.status !== Image.Ready
+                                }
+                                
+                                // 2. Preview Image
+                                Image {
+                                    id: previewImageHistory
+                                    anchors.fill: parent
+                                    asynchronous: true
+                                    fillMode: Image.PreserveAspectCrop
+                                    sourceSize.width: historyList.listIconSize
+                                    sourceSize.height: historyList.listIconSize
+                                    cache: true
+                                    
+                                    source: {
+                                        if (historyList.listIconSize <= 22 || !historyList.previewEnabled) return "";
+                                        
+                                        var url = (modelData.filePath || "").toString();
+                                        // Fallback
+                                        if (!url) url = (modelData.url || "").toString();
+
+                                        if (!url) return "";
+                                        
+                                        // Strip file:// prefix and decode special characters
+                                        var path = decodeURIComponent(url.replace("file://", ""));
+                                        var ext = path.split('.').pop().toLowerCase();
+                                        
+                                        var showPreview = false;
+                                        
+                                        var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                        if (historyList.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
+
+                                        var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                        if (!showPreview && historyList.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
+
+                                        var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                        if (!showPreview && historyList.previewSettings.documents && docExts.indexOf(ext) >= 0) showPreview = true;
+                                        
+                                        if (showPreview) {
+                                            return "image://preview/" + path;
+                                        }
+                                        
+                                        return "";
+                                    }
+                                }
                             }
                             
                             // Name and parent folder column

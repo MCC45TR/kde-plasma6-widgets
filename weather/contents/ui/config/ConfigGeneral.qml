@@ -4,9 +4,9 @@ import QtQuick.Layouts
 
 Item {
     id: configRoot
-    
-    property var title // To silence "does not have a property called title" error
-    
+
+    property var title
+
     property string cfg_weatherProvider
     property string cfg_locationMode
     property alias cfg_apiKey: apiKeyField.text
@@ -31,8 +31,7 @@ Item {
     property int cfg_panelIconSize
     property string cfg_panelMode
     property bool initialized: false
-    
-    // Default values (Required for 'Defaults' button)
+
     property string cfg_apiKeyDefault
     property string cfg_apiKey2Default
     property string cfg_weatherProviderDefault
@@ -56,19 +55,17 @@ Item {
     property int cfg_panelFontSizeDefault
     property int cfg_panelIconSizeDefault
     property string cfg_panelModeDefault
-    
-    // Units mapping
+
     property var unitsModel: ["metric", "imperial"]
     property var providersModel: ["openmeteo", "openweathermap", "weatherapi"]
-    
-    // When config loads, update UI
+
     onCfg_weatherProviderChanged: {
         var idx = providersModel.indexOf(cfg_weatherProvider)
         if (idx >= 0 && idx !== providerCombo.currentIndex) {
             providerCombo.currentIndex = idx
         }
     }
-    
+
     onCfg_locationModeChanged: {
         if (cfg_locationMode === "auto") {
             autoModeRadio.checked = true
@@ -76,49 +73,53 @@ Item {
             manualModeRadio.checked = true
         }
     }
-    
+
     Component.onCompleted: {
-        // Set units combo index from config
         var unitValue = cfg_units || "metric"
         var unitIdx = unitsModel.indexOf(unitValue)
         if (unitIdx >= 0) unitsCombo.currentIndex = unitIdx
-        
-        // Set interval combo index from config
+
         var intervalValue = cfg_updateInterval || 30
         var intervalIdx = intervalCombo.intervalValues.indexOf(intervalValue)
         if (intervalIdx >= 0) intervalCombo.currentIndex = intervalIdx
 
-        // Initialize Forecast Days
         var days = cfg_forecastDays || 5
         var daysIdx = forecastDaysCombo.model.indexOf(String(days))
         if (daysIdx >= 0) forecastDaysCombo.currentIndex = daysIdx
-        
+
         initialized = true
     }
-    
-    ColumnLayout {
+
+    ScrollView {
+        id: scrollView
         anchors.fill: parent
-        spacing: 15
-        
-        // Provider Section
+        clip: true
+
+        ScrollBar.vertical.policy: ScrollBar.AsNeeded
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+        ColumnLayout {
+            width: scrollView.availableWidth
+            spacing: 15
+
         GroupBox {
             title: i18n("Weather Provider")
             Layout.fillWidth: true
-            
+
             ColumnLayout {
                 anchors.fill: parent
                 spacing: 10
-                
+
                 ComboBox {
                     id: providerCombo
                     Layout.fillWidth: true
                     model: [i18n("Open-Meteo (Free, No Key Required)"), i18n("OpenWeatherMap (Key Required)"), i18n("WeatherAPI.com (Key Required)")]
-                    
+
                     onCurrentIndexChanged: {
                         configRoot.cfg_weatherProvider = configRoot.providersModel[currentIndex]
                     }
                 }
-                
+
                 Label {
                     text: providerCombo.currentIndex === 0 ? i18n("Best free option. No API key required.") :
                           providerCombo.currentIndex === 1 ? i18n("Standard provider. API key required below.") : i18n("Alternative provider. API key required below.")
@@ -128,16 +129,15 @@ Item {
             }
         }
 
-        // API Keys Section
         GroupBox {
             title: i18n("API Keys")
             Layout.fillWidth: true
-            visible: providerCombo.currentIndex !== 0 // Hide if Open-Meteo is selected
-            
+            visible: providerCombo.currentIndex !== 0
+
             ColumnLayout {
                 anchors.fill: parent
                 spacing: 10
-                
+
                 Label {
                     text: i18n("OpenWeatherMap API Key:")
                     font.bold: true
@@ -149,7 +149,7 @@ Item {
                     placeholderText: i18n("Enter your OpenWeatherMap API key")
                     visible: providerCombo.currentIndex === 1
                 }
-                
+
                 Label {
                     text: i18n("WeatherAPI.com API Key:")
                     font.bold: true
@@ -163,21 +163,19 @@ Item {
                 }
             }
         }
-        
-        // Location Section
+
         GroupBox {
             title: i18n("Location")
             Layout.fillWidth: true
-            
+
             ColumnLayout {
                 anchors.fill: parent
                 spacing: 10
-                
-                // Mode Toggle
+
                 RowLayout {
                     Layout.fillWidth: true
                     spacing: 10
-                    
+
                     RadioButton {
                         id: autoModeRadio
                         text: i18n("Auto-detect from IP")
@@ -195,13 +193,12 @@ Item {
                         }
                     }
                 }
-                
-                // Manual Entry Section (visible only when manual mode)
+
                 ColumnLayout {
                     Layout.fillWidth: true
                     spacing: 8
                     visible: manualModeRadio.checked
-                    
+
                     Label {
                         text: i18n("City 1:")
                         font.bold: true
@@ -211,7 +208,7 @@ Item {
                         Layout.fillWidth: true
                         placeholderText: i18n("Ex: Ankara, Istanbul, London")
                     }
-                    
+
                     Label {
                         text: i18n("City 2:")
                         font.bold: true
@@ -221,7 +218,7 @@ Item {
                         Layout.fillWidth: true
                         placeholderText: i18n("Second city (optional)")
                     }
-                    
+
                     Label {
                         text: i18n("City 3:")
                         font.bold: true
@@ -231,7 +228,7 @@ Item {
                         Layout.fillWidth: true
                         placeholderText: i18n("Third city (optional)")
                     }
-                    
+
                     Label {
                         text: i18n("You can use City name, 'City,Country Code' or Zip Code.")
                         font.pixelSize: 10
@@ -240,8 +237,7 @@ Item {
                         Layout.fillWidth: true
                     }
                 }
-                
-                // Auto mode info
+
                 Label {
                     visible: autoModeRadio.checked
                     text: i18n("Location will be auto-detected based on your IP address.")
@@ -252,25 +248,24 @@ Item {
                 }
             }
         }
-        
-        // Units Section
+
         GroupBox {
             title: i18n("Settings")
             Layout.fillWidth: true
-            
+
             GridLayout {
                 anchors.fill: parent
                 columns: 2
                 rowSpacing: 10
                 columnSpacing: 10
-                
+
                 Label {
                     text: i18n("Units:")
                     font.bold: true
                 }
                 RowLayout {
                     Layout.fillWidth: true
-                    
+
                     CheckBox {
                         id: useSystemUnitsCheck
                         text: i18n("Use system units")
@@ -278,7 +273,7 @@ Item {
                         onCheckedChanged: configRoot.cfg_useSystemUnits = checked
                     }
                 }
-                
+
                 Label {
                     text: ""
                     visible: !useSystemUnitsCheck.checked
@@ -289,14 +284,14 @@ Item {
                     model: [i18n("Metric (°C)"), i18n("Imperial (°F)")]
                     visible: !useSystemUnitsCheck.checked
                     enabled: !useSystemUnitsCheck.checked
-                    
+
                     onCurrentIndexChanged: {
                         if (!useSystemUnitsCheck.checked) {
                             configRoot.cfg_units = configRoot.unitsModel[currentIndex]
                         }
                     }
                 }
-                
+
                 Label {
                     text: i18n("Refresh Interval:")
                     font.bold: true
@@ -305,15 +300,15 @@ Item {
                     id: intervalCombo
                     Layout.fillWidth: true
                     model: [i18n("15 minutes"), i18n("30 minutes"), i18n("45 minutes"), i18n("1 hour"), i18n("2 hours"), i18n("3 hours"), i18n("4 hours"), i18n("6 hours"), i18n("8 hours"), i18n("12 hours"), i18n("1 day")]
-                    
+
                     property var intervalValues: [15, 30, 45, 60, 120, 180, 240, 360, 480, 720, 1440]
-                    
+
                     onCurrentIndexChanged: {
                         if (!configRoot.initialized) return
                         configRoot.cfg_updateInterval = intervalValues[currentIndex]
                     }
                 }
-                
+
                 Label {
                     text: i18n("Forecast Days:")
                     font.bold: true
@@ -322,7 +317,7 @@ Item {
                     id: forecastDaysCombo
                     Layout.fillWidth: true
                     model: ["4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
-                    
+
                     onCurrentIndexChanged: {
                          if (!configRoot.initialized) return
                          configRoot.cfg_forecastDays = parseInt(model[currentIndex])
@@ -330,7 +325,8 @@ Item {
                 }
             }
         }
-        
+
         Item { Layout.fillHeight: true }
+        }
     }
 }

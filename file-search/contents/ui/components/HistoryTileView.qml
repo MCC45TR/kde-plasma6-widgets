@@ -13,6 +13,7 @@ FocusScope {
     required property int iconSize
     required property color textColor
     required property color accentColor
+    required property bool previewEnabled
     required property var previewSettings
     
     // Signals
@@ -451,40 +452,61 @@ FocusScope {
                                     anchors.centerIn: parent
                                     spacing: 6
                                     
-                                    Kirigami.Icon {
+                                    // Icon Container
+                                    Item {
                                         width: historyTile.iconSize
                                         height: historyTile.iconSize
                                         anchors.horizontalCenter: parent.horizontalCenter
-                                        source: {
-                                            // standard icon if small
-                                            if (historyTile.iconSize <= 22) return modelData.decoration || "application-x-executable";
-                                            
-                                            var url = (modelData.filePath || "").toString();
-                                            // Fallback to url property if filePath is missing (some history items might have different structure)
-                                            if (!url) url = (modelData.url || "").toString();
-                                            
-                                            if (!url) return modelData.decoration || "application-x-executable";
-                                            
-                                            var ext = url.split('.').pop().toLowerCase();
-                                            
-                                            if (historyTile.previewSettings.images) {
-                                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                                if (imageExts.indexOf(ext) >= 0) return url
-                                            }
-                                            
-                                            if (historyTile.previewSettings.videos) {
-                                                var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                                if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                            }
-                                            
-                                            if (historyTile.previewSettings.documents) {
-                                                var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
-                                                if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                            }
-                                            
-                                            return modelData.decoration || "application-x-executable"
+                                        
+                                        // 1. Fallback Icon
+                                        Kirigami.Icon {
+                                            anchors.fill: parent
+                                            source: modelData.decoration || "application-x-executable"
+                                            color: historyTile.textColor
+                                            visible: previewImageTile.status !== Image.Ready
                                         }
-                                        color: historyTile.textColor
+                                        
+                                        // 2. Preview Image
+                                        Image {
+                                            id: previewImageTile
+                                            anchors.fill: parent
+                                            asynchronous: true
+                                            fillMode: Image.PreserveAspectCrop
+                                            sourceSize.width: historyTile.iconSize
+                                            sourceSize.height: historyTile.iconSize
+                                            cache: true
+                                            
+                                            source: {
+                                                if (historyTile.iconSize <= 22 || !historyTile.previewEnabled) return "";
+                                                
+                                                var url = (modelData.filePath || "").toString();
+                                                // Fallback
+                                                if (!url) url = (modelData.url || "").toString();
+
+                                                if (!url) return "";
+                                                
+                                                // Strip file:// prefix and decode special characters (like %20 for spaces)
+                                                var path = decodeURIComponent(url.replace("file://", ""));
+                                                var ext = path.split('.').pop().toLowerCase();
+                                                
+                                                var showPreview = false;
+                                                
+                                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                                if (historyTile.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
+
+                                                var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                                if (!showPreview && historyTile.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
+
+                                                var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
+                                                if (!showPreview && (historyTile.previewSettings.documents || historyTile.previewSettings.text) && docExts.indexOf(ext) >= 0) showPreview = true;
+                                                
+                                                if (showPreview) {
+                                                    return "image://preview/" + path;
+                                                }
+                                                
+                                                return "";
+                                            }
+                                        }
                                     }
                                     
                                     Text {

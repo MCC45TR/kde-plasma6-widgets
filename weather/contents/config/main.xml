@@ -10,62 +10,62 @@
       <default></default>
       <label>OpenWeatherMap API Key</label>
     </entry>
-    
+
     <entry name="apiKey2" type="String">
       <default></default>
       <label>WeatherAPI.com API Key (Fallback)</label>
     </entry>
-    
+
     <entry name="weatherProvider" type="String">
       <default>openmeteo</default>
       <label>Weather Provider</label>
     </entry>
-    
+
     <entry name="locationMode" type="String">
       <default>auto</default>
       <label>Location Mode (auto or manual)</label>
     </entry>
-    
+
     <entry name="location" type="String">
       <default></default>
       <label>Location 1</label>
     </entry>
-    
+
     <entry name="location2" type="String">
       <default></default>
       <label>Location 2</label>
     </entry>
-    
+
     <entry name="location3" type="String">
       <default></default>
       <label>Location 3</label>
     </entry>
-    
+
     <entry name="units" type="String">
       <default>metric</default>
       <label>Units</label>
     </entry>
-    
+
     <entry name="useSystemUnits" type="Bool">
       <default>true</default>
       <label>Use System Units</label>
     </entry>
-    
+
     <entry name="updateInterval" type="Int">
       <default>30</default>
       <label>Update Interval (minutes)</label>
     </entry>
-    
+
     <entry name="cachedWeather" type="String">
       <default></default>
       <label>Cached Weather Data</label>
     </entry>
-    
+
     <entry name="lastUpdate" type="Double">
       <default>0</default>
       <label>Last Update Timestamp</label>
     </entry>
-    
+
     <entry name="iconPack" type="String">
       <default>default</default>
       <label>Icon Pack</label>
@@ -119,6 +119,11 @@
     <entry name="showForecastUnits" type="Bool">
       <default>true</default>
       <label>Show Units in Forecast</label>
+    </entry>
+
+    <entry name="cornerRadius" type="String">
+      <default>normal</default>
+      <label>Corner Radius Mode (normal, small, square)</label>
     </entry>
   </group>
 </kcfg>

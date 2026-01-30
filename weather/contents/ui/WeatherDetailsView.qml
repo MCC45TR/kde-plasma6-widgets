@@ -6,39 +6,35 @@ import org.kde.kirigami as Kirigami
 ColumnLayout {
     id: detailsView
     property var weatherRoot
-    property string weatherProvider: "" // Optional if needed explicitly
+    property string weatherProvider: ""
 
     spacing: 8
 
-    // Header Row - Compact
     RowLayout {
         Layout.fillWidth: true
         spacing: 10
-        
-        // Icon
-        // Icon
+
         Kirigami.Icon {
             source: weatherRoot.getWeatherIcon(weatherRoot.currentWeather)
             Layout.preferredHeight: 50
             Layout.preferredWidth: 50
             smooth: true
         }
-        
-        // Location & Condition
+
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 0
-            
+
             Text {
                 text: weatherRoot.currentWeather ? weatherRoot.currentWeather.location : weatherRoot.location
                 color: Kirigami.Theme.textColor
-                font.family: "Roboto Condensed"
+                font.family: weatherRoot.activeFont.family
                 font.bold: true
                 font.pixelSize: 16
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
-            
+
             Text {
                 text: weatherRoot.currentWeather ? i18n(weatherRoot.currentWeather.condition) : ""
                 color: Kirigami.Theme.textColor
@@ -46,31 +42,29 @@ ColumnLayout {
                 font.pixelSize: 12
             }
         }
-        
-        // Temperature Block
+
         ColumnLayout {
             spacing: 0
-            
+
             RowLayout {
                 spacing: 0
                 Text {
                     text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp : "--"
                     color: Kirigami.Theme.textColor
-                    font.family: "Roboto Condensed"
+                    font.family: weatherRoot.activeFont.family
                     font.bold: true
                     font.pixelSize: 36
                 }
                 Text {
                     text: "°"
                     color: Kirigami.Theme.textColor
-                    font.family: "Roboto Condensed"
+                    font.family: weatherRoot.activeFont.family
                     font.bold: true
                     font.pixelSize: 22
                     Layout.alignment: Qt.AlignTop
                 }
             }
-            
-            // High/Low inline
+
             RowLayout {
                 spacing: 8
                 Layout.alignment: Qt.AlignHCenter
@@ -87,95 +81,88 @@ ColumnLayout {
             }
         }
     }
-    
-    // Stats Cards Row 1
+
     RowLayout {
         Layout.fillWidth: true
         spacing: 6
-        
-        // Card: Feels Like
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.feels_like !== undefined
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: i18n("Feels like"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.feels_like !== undefined) ? weatherRoot.currentWeather.feels_like + "°" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
-        
-        // Card: Humidity
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.humidity !== undefined
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: "💧 " + i18n("Humidity"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.humidity !== undefined) ? weatherRoot.currentWeather.humidity + "%" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
-        
-        // Card: Wind
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.wind_speed !== undefined
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: "💨 " + i18n("Wind"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.wind_speed !== undefined) ? weatherRoot.currentWeather.wind_speed + " km/h" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
-        
-        // Card: Pressure
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.pressure !== undefined && weatherRoot.currentWeather.pressure !== null
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: i18n("Pressure"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.pressure !== undefined && weatherRoot.currentWeather.pressure !== null) ? weatherRoot.currentWeather.pressure + " hPa" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 11; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    color: Kirigami.Theme.textColor; font.pixelSize: 11; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
     }
-    
-    // Stats Cards Row 2
+
     RowLayout {
         Layout.fillWidth: true
         spacing: 6
         visible: {
-            // Only show this row if at least one card has data
             var hasData = weatherRoot.currentWeather && (
                 weatherRoot.currentWeather.clouds !== undefined ||
                 weatherRoot.currentWeather.uv_index !== undefined ||
@@ -184,39 +171,37 @@ ColumnLayout {
             )
             return hasData
         }
-        
-        // Card: Clouds
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.clouds !== undefined
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: "☁️ " + i18n("Clouds"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.clouds !== undefined) ? weatherRoot.currentWeather.clouds + "%" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
-        
-        // Card: UV Index
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.uv_index !== undefined
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: "☀️ " + i18n("UV"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.uv_index !== undefined && weatherRoot.currentWeather.uv_index !== null) ? weatherRoot.currentWeather.uv_index.toString() : "--"
                     color: {
                         var uv = (weatherRoot.currentWeather && weatherRoot.currentWeather.uv_index !== undefined) ? weatherRoot.currentWeather.uv_index : 0
@@ -226,56 +211,53 @@ ColumnLayout {
                         if (uv >= 3) return "#F7E400"
                         return Kirigami.Theme.textColor
                     }
-                    font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
-        
-        // Card: Visibility
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.visibility !== undefined && weatherRoot.currentWeather.visibility !== null
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: "👁️ " + i18n("Visibility"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.visibility !== undefined && weatherRoot.currentWeather.visibility !== null) ? weatherRoot.currentWeather.visibility + " km" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
-        
-        // Card: Wind Direction
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
-            radius: 8
-            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.wind_deg !== undefined
-            
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
                 Text { text: "🧭 " + i18n("Wind Direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
-                Text { 
+                Text {
                     text: {
                         if (!weatherRoot.currentWeather || weatherRoot.currentWeather.wind_deg === undefined) return "--"
                         var deg = weatherRoot.currentWeather.wind_deg
                         var dirs = [i18n("N"), i18n("NE"), i18n("E"), i18n("SE"), i18n("S"), i18n("SW"), i18n("W"), i18n("NW")]
                         return dirs[Math.round(deg / 45) % 8]
                     }
-                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter 
+                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
     }
-    
-    // Sunrise/Sunset Row
+
     RowLayout {
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignHCenter
@@ -284,7 +266,7 @@ ColumnLayout {
         RowLayout {
             spacing: 6
             Text { text: "🌅"; font.pixelSize: 14 }
-            Text { 
+            Text {
                 text: {
                     if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunrise) return "--"
                     var sr = weatherRoot.currentWeather.sunrise
@@ -297,14 +279,14 @@ ColumnLayout {
                     }
                     return "--"
                 }
-                color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true 
+                color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
             }
         }
-        
+
         RowLayout {
             spacing: 6
             Text { text: "🌇"; font.pixelSize: 14 }
-            Text { 
+            Text {
                 text: {
                     if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunset) return "--"
                     var ss = weatherRoot.currentWeather.sunset
@@ -317,12 +299,11 @@ ColumnLayout {
                     }
                     return "--"
                 }
-                color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true 
+                color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
             }
         }
     }
-    
-    // Close hint
+
     Text {
         text: i18n("Click to close")
         color: Kirigami.Theme.textColor

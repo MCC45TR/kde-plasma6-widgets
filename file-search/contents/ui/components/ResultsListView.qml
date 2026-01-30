@@ -92,35 +92,57 @@ ScrollView {
                 spacing: 10
                 
                 // Icon
-                Kirigami.Icon {
-                    source: {
-                        if (resultsListRoot.listIconSize <= 22) return modelData.decoration || "application-x-executable";
-                        
-                        var url = (modelData.url || "").toString();
-                        if (!url) return modelData.decoration || "application-x-executable";
-                        
-                        var ext = url.split('.').pop().toLowerCase();
-                        
-                        if (resultsListRoot.previewSettings.images) {
-                            var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                            if (imageExts.indexOf(ext) >= 0) return url
-                        }
-                        
-                        if (resultsListRoot.previewSettings.videos) {
-                            var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                            if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
-                        }
-                        
-                        if (resultsListRoot.previewSettings.documents) {
-                            var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
-                            if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
-                        }
-                        
-                        return modelData.decoration || "application-x-executable"
-                    }
+                // Icon Container
+                Item {
                     Layout.preferredWidth: resultsListRoot.listIconSize
                     Layout.preferredHeight: resultsListRoot.listIconSize
-                    color: resultsListRoot.textColor
+                    
+                    // 1. Fallback / Base Icon (MIME type or App icon)
+                    Kirigami.Icon {
+                        anchors.fill: parent
+                        source: modelData.decoration || "application-x-executable"
+                        color: resultsListRoot.textColor
+                        visible: previewImage.status !== Image.Ready
+                    }
+                    
+                    // 2. Preview Image
+                    Image {
+                        id: previewImage
+                        anchors.fill: parent
+                        asynchronous: true
+                        fillMode: Image.PreserveAspectCrop
+                        sourceSize.width: resultsListRoot.listIconSize
+                        sourceSize.height: resultsListRoot.listIconSize
+                        cache: true
+                        
+                        source: {
+                            if (resultsListRoot.listIconSize <= 22 || !resultsListRoot.previewEnabled) return "";
+                            
+                            var url = (modelData.url || "").toString();
+                            if (!url) return "";
+                            
+                            // Strip file:// prefix and decode special characters
+                            var path = decodeURIComponent(url.replace("file://", ""));
+                            var ext = path.split('.').pop().toLowerCase();
+                            
+                            var showPreview = false;
+                            
+                            var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                            if (resultsListRoot.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
+                            
+                            var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                            if (!showPreview && resultsListRoot.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
+                            
+                            var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                            if (!showPreview && resultsListRoot.previewSettings.documents && docExts.indexOf(ext) >= 0) showPreview = true;
+                            
+                            if (showPreview) {
+                                return "image://preview/" + path;
+                            }
+                            
+                            return "";
+                        }
+                    }
                 }
                 
                 // Result text with optional parent folder

@@ -805,6 +805,7 @@ Item {
                  accentColor: popupRoot.accentColor
                  formatTimeFunc: logic.formatHistoryTime
                  // trFunc removed
+                 previewEnabled: popupRoot.previewEnabled
                  previewSettings: popupRoot.previewSettings
                  
                  onItemClicked: (item) => handleHistoryClick(item)
@@ -814,6 +815,7 @@ Item {
              // History Tile
              HistoryTileView {
                  id: histTileView
+                 previewEnabled: popupRoot.previewEnabled
                  anchors.fill: parent
                  visible: isTileView
                  categorizedHistory: historyLoader.categorizedHistory
