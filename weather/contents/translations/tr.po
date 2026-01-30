@@ -48,7 +48,7 @@ msgstr "UV İndeksi"
 #, fuzzy
 msgid "Visibility"
 msgstr ""
-"GörünürlükGörünürlük#-#-#-#-#  tr.po (MWeather 1.1.8)  #-#-#-#-#\n"
+"GörünürlükGörünürlükGörünürlük#-#-#-#-#  tr.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Görüş Mesafesi\n"
 "#-#-#-#-#  tr.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Görünürlük"
@@ -59,8 +59,8 @@ msgstr "Rüzgar Yönü"
 #, fuzzy
 msgid "Click to close"
 msgstr ""
-"Kapatmak için tıklayınKapatmak için tıklayın#-#-#-#-#  tr.po (MWeather "
-"1.1.8)  #-#-#-#-#\n"
+"Kapatmak için tıklayınKapatmak için tıklayınKapatmak için tıklayın#-#-#-#-#  "
+"tr.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Kapatmak için tıkla\n"
 "#-#-#-#-#  tr.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Kapatmak için tıklayın"
@@ -479,3 +479,33 @@ msgstr "Normal"
 
 msgid "Show Units in Forecast"
 msgstr "Tahminde Birimleri Göster"
+
+msgid "Dew Point"
+msgstr "Çiy Noktası"
+
+msgid "Cloud Cover"
+msgstr "Bulutluluk"
+
+msgid "North"
+msgstr "Kuzey"
+
+msgid "North East"
+msgstr "Kuzeydoğu"
+
+msgid "East"
+msgstr "Doğu"
+
+msgid "South East"
+msgstr "Güneydoğu"
+
+msgid "South"
+msgstr "Güney"
+
+msgid "South West"
+msgstr "Güneybatı"
+
+msgid "West"
+msgstr "Batı"
+
+msgid "North West"
+msgstr "Kuzeybatı"

@@ -44,7 +44,9 @@ translations = {
     # --- UI Elements & Labels ---
     "Feels like": {"tr": "Hissedilen", "de": "Gefühlt", "fr": "Ressenti", "es": "Sensación", "ru": "Ощущается как"},
     "Precipitation": {"tr": "Yağış", "de": "Niederschlag", "fr": "Précipitations", "es": "Precipitación", "ru": "Осадки"},
-    "Pressure": {"tr": "Basınç", "de": "Druck", "fr": "Pression", "es": "Presión", "ru": "Давление"},
+    "Pressure": {"tr": "Basınç", "de": "Luftdruck", "fr": "Pression", "es": "Presión", "ru": "Давление"},
+    "Dew Point": {"tr": "Çiy Noktası", "de": "Taupunkt", "fr": "Point de rosée", "es": "Punto de rocío", "ru": "Точка росы"},
+    "Cloud Cover": {"tr": "Bulutluluk", "de": "Bewölkung", "fr": "Couverture nuageuse", "es": "Nubosidad", "ru": "Облачность"},
     "Wind Direction": {"tr": "Rüzgar Yönü", "de": "Windrichtung", "fr": "Direction du vent", "es": "Dirección del viento", "ru": "Направление ветра"},
     "Humidity": {"tr": "Nem", "de": "Luftfeuchtigkeit", "fr": "Humidité", "es": "Humedad", "ru": "Влажность"},
     "Visibility": {"tr": "Görünürlük", "de": "Sichtweite", "fr": "Visibilité", "es": "Visibilidad", "ru": "Видимость"},
@@ -71,6 +73,16 @@ translations = {
     "NW": {"tr": "KB", "de": "NW", "fr": "NO", "es": "NO", "ru": "СЗ"},
     "SE": {"tr": "GD", "de": "SO", "fr": "SE", "es": "SE", "ru": "ЮВ"},
     "SW": {"tr": "GB", "de": "SW", "fr": "SO", "es": "SO", "ru": "ЮЗ"},
+    
+    # --- Full Directions ---
+    "North": {"tr": "Kuzey", "de": "Nord", "fr": "Nord", "es": "Norte", "ru": "Север"},
+    "North East": {"tr": "Kuzeydoğu", "de": "Nordost", "fr": "Nord-Est", "es": "Noreste", "ru": "Северо-восток"},
+    "East": {"tr": "Doğu", "de": "Ost", "fr": "Est", "es": "Este", "ru": "Восток"},
+    "South East": {"tr": "Güneydoğu", "de": "Südost", "fr": "Sud-Est", "es": "Sureste", "ru": "Юго-восток"},
+    "South": {"tr": "Güney", "de": "Süd", "fr": "Sud", "es": "Sur", "ru": "Юг"},
+    "South West": {"tr": "Güneybatı", "de": "Südwest", "fr": "Sud-Ouest", "es": "Suroeste", "ru": "Юго-запад"},
+    "West": {"tr": "Batı", "de": "West", "fr": "Ouest", "es": "Oeste", "ru": "Запад"},
+    "North West": {"tr": "Kuzeybatı", "de": "Nordwest", "fr": "Nord-Ouest", "es": "Noroeste", "ru": "Северо-запад"},
 
     # --- Config Settings ---
     "Appearance": {"tr": "Görünüm", "de": "Erscheinungsbild", "fr": "Apparence", "es": "Apariencia"},

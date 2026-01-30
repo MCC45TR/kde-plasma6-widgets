@@ -481,3 +481,33 @@ msgstr ""
 
 msgid "Show Units in Forecast"
 msgstr ""
+
+msgid "Dew Point"
+msgstr "Точка росы"
+
+msgid "Cloud Cover"
+msgstr "Облачность"
+
+msgid "North"
+msgstr "Север"
+
+msgid "North East"
+msgstr "Северо-восток"
+
+msgid "East"
+msgstr "Восток"
+
+msgid "South East"
+msgstr "Юго-восток"
+
+msgid "South"
+msgstr "Юг"
+
+msgid "South West"
+msgstr "Юго-запад"
+
+msgid "West"
+msgstr "Запад"
+
+msgid "North West"
+msgstr "Северо-запад"

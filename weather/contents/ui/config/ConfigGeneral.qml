@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 Item {
     id: configRoot
@@ -30,6 +31,7 @@ Item {
     property int cfg_panelFontSize
     property int cfg_panelIconSize
     property string cfg_panelMode
+    property string cfg_cornerRadius
     property bool initialized: false
 
     property string cfg_apiKeyDefault
@@ -55,6 +57,7 @@ Item {
     property int cfg_panelFontSizeDefault
     property int cfg_panelIconSizeDefault
     property string cfg_panelModeDefault
+    property string cfg_cornerRadiusDefault
 
     property var unitsModel: ["metric", "imperial"]
     property var providersModel: ["openmeteo", "openweathermap", "weatherapi"]

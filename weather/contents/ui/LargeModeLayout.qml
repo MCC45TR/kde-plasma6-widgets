@@ -272,7 +272,7 @@ Item {
             clip: true
             opacity: 0
 
-            ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 6 }
+            ScrollBar.vertical: ScrollBar { policy: ScrollBar.AlwaysOff; width: 0 }
 
             MouseArea {
                 anchors.fill: parent

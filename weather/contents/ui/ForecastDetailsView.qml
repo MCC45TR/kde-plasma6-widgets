@@ -8,8 +8,9 @@ ColumnLayout {
     property var weatherRoot
     property var forecastData: null
 
-    spacing: 8
+    spacing: 5
 
+    // --- Row 1: Header ---
     RowLayout {
         Layout.fillWidth: true
         spacing: 10
@@ -34,8 +35,6 @@ ColumnLayout {
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
-    
-
 
             Text {
                 text: forecastData ? i18n(forecastData.condition) : ""
@@ -58,11 +57,11 @@ ColumnLayout {
                     font.pixelSize: 36
                 }
                 Text {
-                    text: "°"
+                    text: weatherRoot.units === "imperial" ? "°F" : "°C"
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
                     font.bold: true
-                    font.pixelSize: 22
+                    font.pixelSize: 36
                     Layout.alignment: Qt.AlignTop
                 }
             }
@@ -73,27 +72,29 @@ ColumnLayout {
                 RowLayout {
                     spacing: 2
                     Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: 11 }
-                    Text { text: forecastData ? forecastData.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                    Text { text: forecastData ? forecastData.temp_max + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
                 }
                 RowLayout {
                     spacing: 2
                     Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: 11 }
-                    Text { text: forecastData ? forecastData.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                    Text { text: forecastData ? forecastData.temp_min + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
                 }
             }
         }
     }
 
+    // --- Row 2: Feels Like, Humidity, Wind, Rain Chance ---
     RowLayout {
         Layout.fillWidth: true
         spacing: 6
 
+        // Feels Like
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
             radius: 8 * weatherRoot.radiusMultiplier
             color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
-            visible: forecastData && forecastData.feels_like !== undefined && forecastData.feels_like !== null
+            visible: forecastData && forecastData.feels_like !== undefined
 
             ColumnLayout {
                 anchors.centerIn: parent
@@ -106,30 +107,32 @@ ColumnLayout {
             }
         }
 
+        // Humidity
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
             radius: 8 * weatherRoot.radiusMultiplier
             color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
-            visible: forecastData && forecastData.precipitation_probability !== undefined && forecastData.precipitation_probability !== null
+            visible: forecastData && forecastData.humidity !== undefined
 
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "🌧️ " + i18n("Rain Chance"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "💧 " + i18n("Humidity"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
-                    text: (forecastData && forecastData.precipitation_probability !== undefined) ? forecastData.precipitation_probability + "%" : "--"
+                    text: (forecastData && forecastData.humidity !== undefined) ? forecastData.humidity + "%" : "--"
                     color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
 
+        // Wind Speed
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
             radius: 8 * weatherRoot.radiusMultiplier
             color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
-            visible: forecastData && forecastData.wind_speed !== undefined && forecastData.wind_speed !== null
+            visible: forecastData && forecastData.wind_speed !== undefined
 
             ColumnLayout {
                 anchors.centerIn: parent
@@ -142,36 +145,39 @@ ColumnLayout {
             }
         }
 
+        // Rain Chance
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
             radius: 8 * weatherRoot.radiusMultiplier
             color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
-            visible: forecastData && forecastData.uv_index !== undefined && forecastData.uv_index !== null
+            visible: forecastData && forecastData.precipitation_probability !== undefined
 
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "☀️ " + i18n("UV Index"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "🌧️ " + i18n("Rain Chance"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
-                    text: (forecastData && forecastData.uv_index !== undefined) ? forecastData.uv_index : "--"
+                    text: (forecastData && forecastData.precipitation_probability !== undefined) ? forecastData.precipitation_probability + "%" : "--"
                     color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
     }
 
+    // --- Row 3: Precipitation, UV Index, Wind Direction, Sunrise/Sunset ---
     RowLayout {
         Layout.fillWidth: true
         spacing: 6
-        visible: forecastData && (forecastData.precipitation !== undefined || forecastData.wind_deg !== undefined || forecastData.sunrise !== undefined)
+        visible: forecastData
 
+        // Precipitation (mm)
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
             radius: 8 * weatherRoot.radiusMultiplier
             color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
-            visible: forecastData && forecastData.precipitation !== undefined && forecastData.precipitation !== null
+            visible: forecastData && forecastData.precipitation !== undefined
 
             ColumnLayout {
                 anchors.centerIn: parent
@@ -184,29 +190,110 @@ ColumnLayout {
             }
         }
 
+        // UV Index
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 45
             radius: 8 * weatherRoot.radiusMultiplier
             color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
-            visible: forecastData && forecastData.wind_deg !== undefined && forecastData.wind_deg !== null
+            visible: forecastData && forecastData.uv_index !== undefined
 
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: i18n("Wind Direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "☀️ " + i18n("UV Index"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
+                    text: (forecastData && forecastData.uv_index !== undefined) ? forecastData.uv_index : "--"
+                    color: {
+                        var uv = (forecastData && forecastData.uv_index !== undefined) ? forecastData.uv_index : 0
+                        if (uv >= 11) return "#8B3FC7"
+                        if (uv >= 8) return "#D90011"
+                        if (uv >= 6) return "#F95901"
+                        if (uv >= 3) return "#F7E400"
+                        return Kirigami.Theme.textColor
+                    }
+                    font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                }
+            }
+        }
+
+        // Wind Direction
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 45
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
+            visible: forecastData && forecastData.wind_deg !== undefined
+
+            ColumnLayout {
+                anchors.centerIn: parent
+                spacing: 1
+                Text { text: "🧭 " + i18n("Wind Direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text {
+                    id: windDirText
                     text: {
                         if (!forecastData || forecastData.wind_deg === undefined) return "--"
                         var deg = forecastData.wind_deg
-                        if (deg >= 337.5 || deg < 22.5) return "N"
-                        if (deg >= 22.5 && deg < 67.5) return "NE"
-                        if (deg >= 67.5 && deg < 112.5) return "E"
-                        if (deg >= 112.5 && deg < 157.5) return "SE"
-                        if (deg >= 157.5 && deg < 202.5) return "S"
-                        if (deg >= 202.5 && deg < 247.5) return "SW"
-                        if (deg >= 247.5 && deg < 292.5) return "W"
-                        return "NW"
+                        var idx = Math.round(deg / 45) % 8
+                        var fullDirs = [i18n("North"), i18n("North East"), i18n("East"), i18n("South East"), i18n("South"), i18n("South West"), i18n("West"), i18n("North West")]
+                        return fullDirs[idx]
+                    }
+                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    
+                    onContentWidthChanged: {
+                        if (forecastData && forecastData.wind_deg !== undefined && parent && windDirText.contentWidth > parent.width - 15) {
+                            var deg = forecastData.wind_deg
+                            var idx = Math.round(deg / 45) % 8
+                            var shortDirs = [i18n("N"), i18n("NE"), i18n("E"), i18n("SE"), i18n("S"), i18n("SW"), i18n("W"), i18n("NW")]
+                            text = shortDirs[idx]
+                        }
+                    }
+                }
+            }
+        }
+
+        // Sun Times (Dynamic)
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 45
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
+            visible: forecastData && (forecastData.sunrise || forecastData.sunset)
+
+            property bool showSunset: {
+                if (!forecastData || !forecastData.sunrise || !forecastData.sunset) return false
+                var d = new Date()
+                var srVal = forecastData.sunrise
+                var ssVal = forecastData.sunset
+                var sr = (typeof srVal === "number") ? new Date(srVal * 1000) : new Date(srVal)
+                var ss = (typeof ssVal === "number") ? new Date(ssVal * 1000) : new Date(ssVal)
+
+                // If it's today, check time ranges
+                if (d.toDateString() === sr.toDateString()) {
+                    // Logic: If Sunrise < Now < Sunset -> Show Sunset (Next event is Sunset)
+                    // If Now > Sunset -> Sunset passed, show Sunrise (Loop)
+                    // If Now < Sunrise -> Sunrise hasn't happened, show Sunrise
+                    if (d > sr && d < ss) return true 
+                    return false
+                }
+                return false
+            }
+
+            ColumnLayout {
+                anchors.centerIn: parent
+                spacing: 1
+                Text { 
+                    text: parent.parent.showSunset ? "🌇 " + i18n("Sunset") : "🌅 " + i18n("Sunrise")
+                    color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter 
+                }
+                Text {
+                    text: {
+                        if (!forecastData) return "--"
+                        var val = parent.parent.showSunset ? forecastData.sunset : forecastData.sunrise
+                        if (!val) return "--"
+                        
+                        var dt = (typeof val === "number") ? new Date(val * 1000) : new Date(val)
+                        return Qt.formatTime(dt, "hh:mm")
                     }
                     color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
@@ -214,48 +301,9 @@ ColumnLayout {
         }
     }
 
-    RowLayout {
-        Layout.fillWidth: true
-        Layout.alignment: Qt.AlignHCenter
-        spacing: 20
-        visible: forecastData && (forecastData.sunrise || forecastData.sunset)
-
-        RowLayout {
-            spacing: 4
-            visible: forecastData && forecastData.sunrise
-            Text { text: "🌅"; font.pixelSize: 16 }
-            Text {
-                text: {
-                    if (!forecastData || !forecastData.sunrise) return "--"
-                    var d = new Date(forecastData.sunrise)
-                    return Qt.formatTime(d, "hh:mm")
-                }
-                color: Kirigami.Theme.textColor
-                font.pixelSize: 12
-                font.bold: true
-            }
-        }
-
-        RowLayout {
-            spacing: 4
-            visible: forecastData && forecastData.sunset
-            Text { text: "🌇"; font.pixelSize: 16 }
-            Text {
-                text: {
-                    if (!forecastData || !forecastData.sunset) return "--"
-                    var d = new Date(forecastData.sunset)
-                    return Qt.formatTime(d, "hh:mm")
-                }
-                color: Kirigami.Theme.textColor
-                font.pixelSize: 12
-                font.bold: true
-            }
-        }
-    }
-
     Rectangle {
         Layout.fillWidth: true
-        Layout.topMargin: 5
+        Layout.topMargin: 0
         Layout.preferredHeight: 32
         radius: 8 * weatherRoot.radiusMultiplier
         color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.08)
@@ -299,7 +347,6 @@ ColumnLayout {
         today.setHours(0,0,0,0)
         targetDate.setHours(0,0,0,0)
         
-        // Helper to get start of week (Monday)
         function getMonday(d) {
             var d = new Date(d);
             var day = d.getDay();

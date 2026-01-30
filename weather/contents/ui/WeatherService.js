@@ -138,8 +138,8 @@ function fetchOpenMeteo(location, units, callback) {
                     var tempUnit = units === "imperial" ? "&temperature_unit=fahrenheit&wind_speed_unit=mph" : "&temperature_unit=celsius&wind_speed_unit=kmh"
                     var weatherUrl = "https://api.open-meteo.com/v1/forecast?" +
                         "latitude=" + lat + "&longitude=" + lon +
-                        "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m" +
-                        "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant" +
+                        "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,dew_point_2m" +
+                        "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant,relative_humidity_2m_max" +
                         "&forecast_days=" + (16) +
                         "&hourly=temperature_2m,weather_code&forecast_hours=48" +
                         "&timezone=auto" +
@@ -168,8 +168,12 @@ function fetchOpenMeteo(location, units, callback) {
                                         uv_index: data.daily.uv_index_max ? Math.round(data.daily.uv_index_max[0]) : null,
                                         sunrise: data.daily.sunrise ? data.daily.sunrise[0] : null,
                                         sunset: data.daily.sunset ? data.daily.sunset[0] : null,
-                                        condition: getOpenMeteoCondition(data.current.weather_code),
+                                        weather_code: data.current.weather_code, /* Keep raw code for debugging/logic if needed */
+                                        visibility: data.current.visibility ? Math.round(data.current.visibility / 1000) : null,
+                                        dew_point: Math.round(data.current.dew_point_2m),
+                                        cloud_cover: data.current.cloud_cover,
                                         description: getOpenMeteoCondition(data.current.weather_code),
+                                        condition: getOpenMeteoCondition(data.current.weather_code),
                                         icon: "",
                                         code: data.current.weather_code,
                                         location: locationName,
@@ -434,6 +438,7 @@ function parseForecastOpenMeteo(data) {
                 uv_index: data.daily.uv_index_max ? Math.round(data.daily.uv_index_max[i]) : null,
                 precipitation: data.daily.precipitation_sum ? data.daily.precipitation_sum[i] : null,
                 precipitation_probability: data.daily.precipitation_probability_max ? data.daily.precipitation_probability_max[i] : null,
+                humidity: data.daily.relative_humidity_2m_max ? Math.round(data.daily.relative_humidity_2m_max[i]) : null,
                 sunrise: data.daily.sunrise ? data.daily.sunrise[i] : null,
                 sunset: data.daily.sunset ? data.daily.sunset[i] : null,
                 code: data.daily.weather_code ? data.daily.weather_code[i] : 0,

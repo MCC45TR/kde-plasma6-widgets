@@ -33,8 +33,8 @@ msgstr "Gefühlt"
 #, fuzzy
 msgid "Humidity"
 msgstr ""
-"LuftfeuchtigkeitLuftfeuchtigkeit#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-#-"
-"#\n"
+"LuftfeuchtigkeitLuftfeuchtigkeitLuftfeuchtigkeit#-#-#-#-#  de.po (MWeather "
+"1.1.8)  #-#-#-#-#\n"
 "Feuchtigkeit\n"
 "#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Luftfeuchtigkeit"
@@ -45,7 +45,7 @@ msgstr "Wind"
 #, fuzzy
 msgid "Pressure"
 msgstr ""
-"DruckDruck#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-#-#\n"
+"LuftdruckDruckDruck#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Luftdruck\n"
 "#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Druck"
@@ -149,6 +149,7 @@ msgstr "Dritte Stadt (optional)"
 msgid "You can use City name, 'City,Country Code' or Zip Code."
 msgstr ""
 "Sie können Stadtname, 'Stadt,Länderkürzel' oder Postleitzahl verwenden.Sie "
+"können Stadtname, 'Stadt,Länderkürzel' oder Postleitzahl verwenden.Sie "
 "können Stadtname, 'Stadt,Länderkürzel' oder Postleitzahl verwenden.Sie "
 "können den Stadtnamen, 'Stadt,Ländercode' oder die Postleitzahl verwenden."
 
@@ -341,7 +342,8 @@ msgstr "Hintergrund-Einstellungen"
 #, fuzzy
 msgid "Widget Margin:"
 msgstr ""
-"Widget-Rand:Widget-Rand:#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-#-#\n"
+"Widget-Rand:Widget-Rand:Widget-Rand:#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-"
+"#-#\n"
 "Widget-Abstand:\n"
 "#-#-#-#-#  de.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Widget-Rand:"
@@ -492,3 +494,33 @@ msgstr "Normal"
 
 msgid "Show Units in Forecast"
 msgstr "Einheiten anzeigen"
+
+msgid "Dew Point"
+msgstr "Taupunkt"
+
+msgid "Cloud Cover"
+msgstr "Bewölkung"
+
+msgid "North"
+msgstr "Nord"
+
+msgid "North East"
+msgstr "Nordost"
+
+msgid "East"
+msgstr "Ost"
+
+msgid "South East"
+msgstr "Südost"
+
+msgid "South"
+msgstr "Süd"
+
+msgid "South West"
+msgstr "Südwest"
+
+msgid "West"
+msgstr "West"
+
+msgid "North West"
+msgstr "Nordwest"

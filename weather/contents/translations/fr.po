@@ -469,3 +469,33 @@ msgstr ""
 
 msgid "Show Units in Forecast"
 msgstr ""
+
+msgid "Dew Point"
+msgstr "Point de rosée"
+
+msgid "Cloud Cover"
+msgstr "Couverture nuageuse"
+
+msgid "North"
+msgstr "Nord"
+
+msgid "North East"
+msgstr "Nord-Est"
+
+msgid "East"
+msgstr "Est"
+
+msgid "South East"
+msgstr "Sud-Est"
+
+msgid "South"
+msgstr "Sud"
+
+msgid "South West"
+msgstr "Sud-Ouest"
+
+msgid "West"
+msgstr "Ouest"
+
+msgid "North West"
+msgstr "Nord-Ouest"

@@ -137,11 +137,14 @@ msgstr "Tercera ciudad (opcional)"
 
 msgid "You can use City name, 'City,Country Code' or Zip Code."
 msgstr ""
-"Puede usar el nombre de la ciudad, 'Ciudad,Código de país' o código postal."
+"Puedes usar el nombre de la ciudad, 'Ciudad,Código de país' o código "
+"postal.Puede usar el nombre de la ciudad, 'Ciudad,Código de país' o código "
+"postal."
 
 msgid "Location will be auto-detected based on your IP address."
 msgstr ""
-"La ubicación se detectará automáticamente en función de su dirección IP."
+"La ubicación se detectará automáticamente según su dirección IP.La ubicación "
+"se detectará automáticamente en función de su dirección IP."
 
 msgid "Settings"
 msgstr "Ajustes"
@@ -377,13 +380,18 @@ msgstr "NO"
 msgid "Panel Settings"
 msgstr "Ajustes del panel"
 
+#, fuzzy
 msgid ""
 "Select the visual style for weather icons. (Note: older packs like v1/v2 may "
 "have missing icons for some conditions)"
 msgstr ""
+"#-#-#-#-#  es.po (MWeather 1.1.8)  #-#-#-#-#\n"
 "Seleccione el estilo visual para los iconos meteorológicos. (Nota: los "
 "paquetes más antiguos como v1/v2 pueden tener iconos faltantes para algunas "
-"condiciones)"
+"condiciones)\n"
+"#-#-#-#-#  es.po (MWeather 1.1.8)  #-#-#-#-#\n"
+"Selecciona el estilo visual. (Nota: los paquetes antiguos pueden tener "
+"iconos faltantes)"
 
 msgid "Monday"
 msgstr "Lunes"
@@ -471,3 +479,33 @@ msgstr "0% (Sin fondo)"
 
 msgid "Show Units in Forecast"
 msgstr "Mostrar unidades"
+
+msgid "Dew Point"
+msgstr "Punto de rocío"
+
+msgid "Cloud Cover"
+msgstr "Nubosidad"
+
+msgid "North"
+msgstr "Norte"
+
+msgid "North East"
+msgstr "Noreste"
+
+msgid "East"
+msgstr "Este"
+
+msgid "South East"
+msgstr "Sureste"
+
+msgid "South"
+msgstr "Sur"
+
+msgid "South West"
+msgstr "Suroeste"
+
+msgid "West"
+msgstr "Oeste"
+
+msgid "North West"
+msgstr "Noroeste"

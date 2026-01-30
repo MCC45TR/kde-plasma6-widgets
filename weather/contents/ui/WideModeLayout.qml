@@ -157,7 +157,7 @@ Item {
                 boundsBehavior: Flickable.StopAtBounds
 
                 Behavior on opacity { NumberAnimation { duration: 150 } }
-                ScrollBar.vertical: ScrollBar { policy: expandedContent.height > expandedFlickable.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff; width: 6 }
+                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AlwaysOff; width: 0 }
 
                 WheelHandler {
                     target: expandedFlickable

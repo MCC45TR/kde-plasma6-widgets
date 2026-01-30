@@ -10,6 +10,7 @@ ColumnLayout {
 
     spacing: 8
 
+    // --- Header: Icon, Location, Temp ---
     RowLayout {
         Layout.fillWidth: true
         spacing: 10
@@ -56,11 +57,11 @@ ColumnLayout {
                     font.pixelSize: 36
                 }
                 Text {
-                    text: "°"
+                    text: weatherRoot.units === "imperial" ? "°F" : "°C"
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
                     font.bold: true
-                    font.pixelSize: 22
+                    font.pixelSize: 36
                     Layout.alignment: Qt.AlignTop
                 }
             }
@@ -71,17 +72,18 @@ ColumnLayout {
                 RowLayout {
                     spacing: 2
                     Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: 11 }
-                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_max + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
                 }
                 RowLayout {
                     spacing: 2
                     Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: 11 }
-                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_min + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
                 }
             }
         }
     }
 
+    // --- Row 2: Feels Like, Humidity, Wind Speed, Pressure ---
     RowLayout {
         Layout.fillWidth: true
         spacing: 6
@@ -159,6 +161,7 @@ ColumnLayout {
         }
     }
 
+    // --- Row 3: Clouds, UV, Visibility, Dew Point ---
     RowLayout {
         Layout.fillWidth: true
         spacing: 6
@@ -167,7 +170,7 @@ ColumnLayout {
                 weatherRoot.currentWeather.clouds !== undefined ||
                 weatherRoot.currentWeather.uv_index !== undefined ||
                 weatherRoot.currentWeather.visibility !== undefined ||
-                weatherRoot.currentWeather.wind_deg !== undefined
+                weatherRoot.currentWeather.dew_point !== undefined
             )
             return hasData
         }
@@ -182,7 +185,7 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "☁️ " + i18n("Clouds"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "☁️ " + i18n("Cloud Cover"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.clouds !== undefined) ? weatherRoot.currentWeather.clouds + "%" : "--"
                     color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
@@ -239,6 +242,37 @@ ColumnLayout {
             Layout.preferredHeight: 45
             radius: 8 * weatherRoot.radiusMultiplier
             color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
+            visible: weatherRoot.currentWeather && weatherRoot.currentWeather.dew_point !== undefined
+
+            ColumnLayout {
+                anchors.centerIn: parent
+                spacing: 1
+                Text { text: "💧 " + i18n("Dew Point"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text {
+                    text: (weatherRoot.currentWeather && weatherRoot.currentWeather.dew_point !== undefined) ? weatherRoot.currentWeather.dew_point + "°" : "--"
+                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                }
+            }
+        }
+    }
+
+    // --- Row 4: Wind Direction (Full Width Logic) ---
+    // --- Row 4: Wind Direction & Sun Times (Side by Side) ---
+    RowLayout {
+        Layout.fillWidth: true
+        spacing: 6
+        visible: weatherRoot.currentWeather && (
+            weatherRoot.currentWeather.wind_deg !== undefined || 
+            weatherRoot.currentWeather.sunrise !== undefined || 
+            weatherRoot.currentWeather.sunset !== undefined
+        )
+
+        // Wind Direction Card
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 45
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
             visible: weatherRoot.currentWeather && weatherRoot.currentWeather.wind_deg !== undefined
 
             ColumnLayout {
@@ -246,60 +280,79 @@ ColumnLayout {
                 spacing: 1
                 Text { text: "🧭 " + i18n("Wind Direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
+                    id: windDirText
                     text: {
                         if (!weatherRoot.currentWeather || weatherRoot.currentWeather.wind_deg === undefined) return "--"
                         var deg = weatherRoot.currentWeather.wind_deg
-                        var dirs = [i18n("N"), i18n("NE"), i18n("E"), i18n("SE"), i18n("S"), i18n("SW"), i18n("W"), i18n("NW")]
-                        return dirs[Math.round(deg / 45) % 8]
+                        var idx = Math.round(deg / 45) % 8
+                        var fullDirs = [i18n("North"), i18n("North East"), i18n("East"), i18n("South East"), i18n("South"), i18n("South West"), i18n("West"), i18n("North West")]
+                        return fullDirs[idx]
                     }
                     color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    
+                    onContentWidthChanged: {
+                        if (weatherRoot.currentWeather && weatherRoot.currentWeather.wind_deg !== undefined && parent && windDirText.contentWidth > parent.width - 20) {
+                            var deg = weatherRoot.currentWeather.wind_deg
+                            var idx = Math.round(deg / 45) % 8
+                            var shortDirs = [i18n("N"), i18n("NE"), i18n("E"), i18n("SE"), i18n("S"), i18n("SW"), i18n("W"), i18n("NW")]
+                            text = shortDirs[idx]
+                        }
+                    }
                 }
             }
         }
-    }
 
-    RowLayout {
-        Layout.fillWidth: true
-        Layout.alignment: Qt.AlignHCenter
-        spacing: 20
-        visible: weatherRoot.currentWeather && (weatherRoot.currentWeather.sunrise !== undefined || weatherRoot.currentWeather.sunset !== undefined)
-        RowLayout {
-            spacing: 6
-            Text { text: "🌅"; font.pixelSize: 14 }
-            Text {
-                text: {
-                    if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunrise) return "--"
-                    var sr = weatherRoot.currentWeather.sunrise
-                    if (typeof sr === "number") {
-                        var d = new Date(sr * 1000)
-                        return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
-                    } else if (typeof sr === "string") {
-                        var d2 = new Date(sr)
-                        return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
-                    }
-                    return "--"
-                }
-                color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
-            }
-        }
+        // Sun Times Card
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 45
+            radius: 8 * weatherRoot.radiusMultiplier
+            color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05) : "transparent"
+            visible: weatherRoot.currentWeather && (weatherRoot.currentWeather.sunrise !== undefined || weatherRoot.currentWeather.sunset !== undefined)
 
-        RowLayout {
-            spacing: 6
-            Text { text: "🌇"; font.pixelSize: 14 }
-            Text {
-                text: {
-                    if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunset) return "--"
-                    var ss = weatherRoot.currentWeather.sunset
-                    if (typeof ss === "number") {
-                        var d = new Date(ss * 1000)
-                        return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
-                    } else if (typeof ss === "string") {
-                        var d2 = new Date(ss)
-                        return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
+            RowLayout {
+                anchors.centerIn: parent
+                spacing: 15
+                
+                RowLayout {
+                    spacing: 4
+                    Text { text: "🌅"; font.pixelSize: 12 }
+                    Text {
+                        text: {
+                            if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunrise) return "--"
+                            var sr = weatherRoot.currentWeather.sunrise
+                            if (typeof sr === "number") {
+                                var d = new Date(sr * 1000)
+                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
+                            } else if (typeof sr === "string") {
+                                var d2 = new Date(sr)
+                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
+                            }
+                            return "--"
+                        }
+                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
                     }
-                    return "--"
                 }
-                color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
+
+                RowLayout {
+                    spacing: 4
+                    Text { text: "🌇"; font.pixelSize: 12 }
+                    Text {
+                        text: {
+                            if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunset) return "--"
+                            var ss = weatherRoot.currentWeather.sunset
+                            if (typeof ss === "number") {
+                                var d = new Date(ss * 1000)
+                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
+                            } else if (typeof ss === "string") {
+                                var d2 = new Date(ss)
+                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
+                            }
+                            return "--"
+                        }
+                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
+                    }
+                }
             }
         }
     }
