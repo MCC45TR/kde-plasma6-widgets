@@ -372,3 +372,15 @@ msgstr "Q"
 
 msgid "NW"
 msgstr "ŞmQ"
+
+
+msgid "Next week %1"
+msgstr "Gələn həftə %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2 həftə sonra %1"
+
+
+msgid "Tap to close"
+msgstr "Bağlamaq üçün toxunun"

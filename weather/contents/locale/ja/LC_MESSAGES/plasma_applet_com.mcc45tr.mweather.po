@@ -372,3 +372,15 @@ msgstr "西"
 
 msgid "NW"
 msgstr "北西"
+
+
+msgid "Next week %1"
+msgstr "来週 %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2週間後 %1"
+
+
+msgid "Tap to close"
+msgstr "タップして閉じる"

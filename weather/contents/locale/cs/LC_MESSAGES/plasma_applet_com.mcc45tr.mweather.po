@@ -170,3 +170,15 @@ msgstr "Bouřka s krupobitím"
 
 msgid "Unknown"
 msgstr "Neznámý"
+
+
+msgid "Next week %1"
+msgstr "Příští týden %1"
+
+
+msgid "2 weeks later %1"
+msgstr "O 2 týdny později %1"
+
+
+msgid "Tap to close"
+msgstr "Klepnutím zavřete"

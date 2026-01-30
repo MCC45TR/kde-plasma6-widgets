@@ -170,3 +170,15 @@ msgstr "Καταιγίδα με χαλάζι"
 
 msgid "Unknown"
 msgstr "Άγνωστος"
+
+
+msgid "Next week %1"
+msgstr "Την επόμενη εβδομάδα %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2 εβδομάδες αργότερα %1"
+
+
+msgid "Tap to close"
+msgstr "Πατήστε για κλείσιμο"

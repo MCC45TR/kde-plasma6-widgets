@@ -372,3 +372,15 @@ msgstr "W"
 
 msgid "NW"
 msgstr "NW"
+
+
+msgid "Next week %1"
+msgstr "Nächste Woche %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2 Wochen später %1"
+
+
+msgid "Tap to close"
+msgstr "Zum Schließen tippen"

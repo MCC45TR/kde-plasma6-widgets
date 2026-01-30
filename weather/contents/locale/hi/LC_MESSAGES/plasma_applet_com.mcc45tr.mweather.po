@@ -170,3 +170,15 @@ msgstr "ओलों के साथ आंधी"
 
 msgid "Unknown"
 msgstr "अज्ञात"
+
+
+msgid "Next week %1"
+msgstr "अगले सप्ताह %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2 सप्ताह बाद %1"
+
+
+msgid "Tap to close"
+msgstr "बंद करने के लिए टैप करें"

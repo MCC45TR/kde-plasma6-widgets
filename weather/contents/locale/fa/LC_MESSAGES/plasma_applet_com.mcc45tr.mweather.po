@@ -170,3 +170,15 @@ msgstr "رعد و برق همراه با تگرگ"
 
 msgid "Unknown"
 msgstr "نامعلوم"
+
+
+msgid "Next week %1"
+msgstr ""
+
+
+msgid "2 weeks later %1"
+msgstr ""
+
+
+msgid "Tap to close"
+msgstr ""

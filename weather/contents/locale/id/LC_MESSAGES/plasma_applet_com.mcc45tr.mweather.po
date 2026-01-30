@@ -170,3 +170,15 @@ msgstr "Badai petir dengan hujan es"
 
 msgid "Unknown"
 msgstr "Tidak diketahui"
+
+
+msgid "Next week %1"
+msgstr "Minggu depan %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2 minggu kemudian %1"
+
+
+msgid "Tap to close"
+msgstr "Ketuk untuk menutup"

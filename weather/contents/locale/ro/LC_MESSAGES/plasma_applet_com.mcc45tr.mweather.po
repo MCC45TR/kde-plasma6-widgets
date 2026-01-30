@@ -170,3 +170,15 @@ msgstr "Furtună cu grindină"
 
 msgid "Unknown"
 msgstr "Necunoscut"
+
+
+msgid "Next week %1"
+msgstr "Săptămâna viitoare %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2 săptămâni mai târziu %1"
+
+
+msgid "Tap to close"
+msgstr "Atingeți pentru a închide"

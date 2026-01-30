@@ -372,3 +372,15 @@ msgstr "O"
 
 msgid "NW"
 msgstr "NO"
+
+
+msgid "Next week %1"
+msgstr "La prossima settimana %1"
+
+
+msgid "2 weeks later %1"
+msgstr "2 settimane dopo %1"
+
+
+msgid "Tap to close"
+msgstr "Tocca per chiudere"

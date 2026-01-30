@@ -372,3 +372,15 @@ msgstr "З"
 
 msgid "NW"
 msgstr "СЗ"
+
+
+msgid "Next week %1"
+msgstr "На следующей неделе %1"
+
+
+msgid "2 weeks later %1"
+msgstr "Через 2 недели %1"
+
+
+msgid "Tap to close"
+msgstr "Нажмите, чтобы закрыть"

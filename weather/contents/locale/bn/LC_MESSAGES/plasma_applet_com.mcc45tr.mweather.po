@@ -170,3 +170,15 @@ msgstr "শিলাবৃষ্টিসহ ঝড়"
 
 msgid "Unknown"
 msgstr "অজানা"
+
+
+msgid "Next week %1"
+msgstr ""
+
+
+msgid "2 weeks later %1"
+msgstr ""
+
+
+msgid "Tap to close"
+msgstr ""
