@@ -34,3 +34,11 @@ Releases/
 
 # Notes for my self
 .MY_NOTES/
+
+# Backup Files
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+.backups/
