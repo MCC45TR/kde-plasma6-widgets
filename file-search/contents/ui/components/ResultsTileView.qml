@@ -409,9 +409,34 @@ FocusScope {
                             property int itemIdx: index
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
                             
-                            // Simple fade-in without per-tile Timer (performance optimization)
-                            opacity: 1
-                            Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
+                            // Staggered fade-in animation
+                            opacity: 0
+                            
+                            Timer {
+                                id: tileFadeInTrigger
+                                interval: (categoryDelegate.catIdx * 10 + itemIdx) * 10  // 10ms stagger
+                                running: true
+                                onTriggered: tileFadeInAnim.start()
+                            }
+                            
+                            NumberAnimation {
+                                id: tileFadeInAnim
+                                target: tileDelegate
+                                property: "opacity"
+                                from: 0
+                                to: 1
+                                duration: 100
+                                easing.type: Easing.OutQuad
+                            }
+                            
+                            // Reset animation when data changes
+                            Connections {
+                                target: resultsTileRoot
+                                function onSearchTextChanged() {
+                                    tileDelegate.opacity = 0
+                                    tileFadeInTrigger.restart()
+                                }
+                            }
                             
                             Rectangle {
                                 id: tileBg
@@ -467,14 +492,23 @@ FocusScope {
                                                 if (resultsTileRoot.iconSize <= 22) return modelData.decoration || "application-x-executable";
                                                 
                                                 var url = (modelData.url || "").toString();
-                                                if (!url || !url.startsWith("file://")) return modelData.decoration || "application-x-executable";
+                                                if (!url) return modelData.decoration || "application-x-executable";
                                                 
                                                 var ext = url.split('.').pop().toLowerCase();
                                                 
-                                                // Only images can be previewed directly
                                                 if (resultsTileRoot.previewSettings.images) {
                                                     var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
                                                     if (imageExts.indexOf(ext) >= 0) return url
+                                                }
+                                                
+                                                if (resultsTileRoot.previewSettings.videos) {
+                                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                                }
+                                                
+                                                if (resultsTileRoot.previewSettings.documents) {
+                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
                                                 }
                                                 
                                                 return modelData.decoration || "application-x-executable"
@@ -627,14 +661,26 @@ FocusScope {
                                         Image {
                                             id: thumbnailImage
                                             source: {
-                                                var url = (modelData.url || "").toString()
-                                                if (!url || !url.startsWith("file://")) return ""
+                                                var url = modelData.url || ""
+                                                if (url.length === 0) return ""
                                                 var ext = url.split('.').pop().toLowerCase()
                                                 
-                                                // Only images can be previewed directly
+                                                // 1. Images
                                                 if (resultsTileRoot.previewSettings.images) {
                                                     var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
                                                     if (imageExts.indexOf(ext) >= 0) return url
+                                                }
+                                                
+                                                // 2. Videos
+                                                if (resultsTileRoot.previewSettings.videos) {
+                                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                                }
+                                                
+                                                // 3. Documents
+                                                if (resultsTileRoot.previewSettings.documents) {
+                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
                                                 }
                                                 
                                                 return ""

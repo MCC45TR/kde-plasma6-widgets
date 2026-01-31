@@ -22,47 +22,9 @@ available_widgets=(
 "file-search"
 "browser-search"
 "app-menu"
-"msi-control"
 )
-# Get script directory (works on any computer)
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Help function
-show_help() {
-    cat << EOF
-╔══════════════════════════════════════════════════════════════════╗
-║              Plasma6 Widgets Installation Script                 ║
-╚══════════════════════════════════════════════════════════════════╝
-
-USAGE:
-    ./install_all.sh [OPTIONS] [WIDGET...]
-
-OPTIONS:
-    -h, --help       Show this help message
-    -t <widget>      Install and test widget with plasmawindowed
-    --prasmoid       Run 'prasmoid build' before installation
-    -l, --list       List all available widgets
-
-EXAMPLES:
-    ./install_all.sh                    # Install ALL widgets
-    ./install_all.sh weather battery    # Install specific widgets
-    ./install_all.sh -t msi-control     # Install and test msi-control
-    ./install_all.sh --prasmoid weather # Build then install weather
-
-AVAILABLE WIDGETS:
-EOF
-    printf '    • %s\n' "${available_widgets[@]}"
-    echo ""
-    exit 0
-}
-
-# List widgets function
-list_widgets() {
-    echo "Available widgets (${#available_widgets[@]} total):"
-    echo "────────────────────────────────────────"
-    printf '  %s\n' "${available_widgets[@]}"
-    exit 0
-}
+BASE_DIR="/home/mcc45tr/Gitler/Projelerim/Plasma6Widgets"
 
 # Arrays to hold targets
 install_targets=()
@@ -72,12 +34,6 @@ use_prasmoid_build=false
 # Parse arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -h|--help)
-            show_help
-            ;;
-        -l|--list)
-            list_widgets
-            ;;
         -t)
             if [ -n "$2" ]; then
                 test_target="$2"

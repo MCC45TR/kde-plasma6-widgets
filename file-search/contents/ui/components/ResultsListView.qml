@@ -119,14 +119,25 @@ ScrollView {
                             if (resultsListRoot.listIconSize <= 22 || !resultsListRoot.previewEnabled) return "";
                             
                             var url = (modelData.url || "").toString();
-                            if (!url || !url.startsWith("file://")) return "";
+                            if (!url) return "";
                             
-                            var ext = url.split('.').pop().toLowerCase();
+                            // Strip file:// prefix and decode special characters
+                            var path = decodeURIComponent(url.replace("file://", ""));
+                            var ext = path.split('.').pop().toLowerCase();
                             
-                            // Only preview images directly - video/document thumbnails require native ImageProvider
+                            var showPreview = false;
+                            
                             var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                            if (resultsListRoot.previewSettings.images && imageExts.indexOf(ext) >= 0) {
-                                return url; // Direct file:// URL for images
+                            if (resultsListRoot.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
+                            
+                            var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                            if (!showPreview && resultsListRoot.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
+                            
+                            var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                            if (!showPreview && resultsListRoot.previewSettings.documents && docExts.indexOf(ext) >= 0) showPreview = true;
+                            
+                            if (showPreview) {
+                                return "image://preview/" + path;
                             }
                             
                             return "";
@@ -273,14 +284,26 @@ ScrollView {
                         // Thumbnail for images
                         Image {
                             source: {
-                                var url = (modelData.url || "").toString()
-                                if (!url || !url.startsWith("file://")) return ""
+                                var url = modelData.url || ""
+                                if (url.length === 0) return ""
                                 var ext = url.split('.').pop().toLowerCase()
                                 
-                                // Only images can be previewed directly
+                                // 1. Images
                                 if (resultsListRoot.previewSettings.images) {
                                     var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
                                     if (imageExts.indexOf(ext) >= 0) return url
+                                }
+                                
+                                // 2. Videos
+                                if (resultsListRoot.previewSettings.videos) {
+                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                }
+                                
+                                // 3. Documents
+                                if (resultsListRoot.previewSettings.documents) {
+                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
                                 }
                                 
                                 return ""

@@ -51,31 +51,5 @@
         "Description[pt]": "Widget de clima moderno com ícones do Google Weather",
         "Description[hi]": "Google Weather आइकन के साथ आधुनिक मौसम विजेट",
         "Description[cs]": "Moderní widget počasí s ikonami Google Weather"
-    },
-    "X-Plasma-ConfigModel": [
-        {
-            "Key": "General",
-            "Name": "General",
-            "Name[tr]": "Genel",
-            "Name[de]": "Allgemein",
-            "Name[fr]": "Général",
-            "Source": "ui/config/ConfigGeneral.qml"
-        },
-        {
-            "Key": "Appearance",
-            "Name": "Appearance",
-            "Name[tr]": "Görünüm",
-            "Name[de]": "Erscheinungsbild",
-            "Name[fr]": "Apparence",
-            "Source": "ui/config/ConfigAppearance.qml"
-        },
-        {
-            "Key": "Notifications",
-            "Name": "Notifications",
-            "Name[tr]": "Bildirimler",
-            "Name[de]": "Benachrichtigungen",
-            "Name[fr]": "Notifications",
-            "Source": "ui/config/ConfigNotifications.qml"
-        }
-    ]
+    }
 }

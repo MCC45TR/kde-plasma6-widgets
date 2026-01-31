@@ -8,9 +8,6 @@ Item {
     property var devices: []
     property var mainDevice: null
     property string hostName: ""
-    property string timeToEvent: ""
-    property string currentPowerProfile: "balanced"
-    signal setPowerProfile(string profile)
 
     // Large View: > 350 width, > 350 height
     // Image 3: 3 Tall Vertical Bars. 
@@ -32,7 +29,6 @@ Item {
     RowLayout {
         anchors.fill: parent
         anchors.margins: 16
-        anchors.topMargin: 60 // Leave room for overlay header
         spacing: 16
         
         Repeater {
@@ -58,65 +54,16 @@ Item {
         }
     }
     
-    // Header Overlay with Hostname, Time-to-Event, and Power Profiles
-    Column {
+    // Overlay Text for Hostname?
+    // "HOST adı yazılacak ... büyük görünümde"
+    Text {
         anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.topMargin: 12
-        anchors.leftMargin: 20
-        anchors.rightMargin: 20
-        spacing: 4
-        
-        Row {
-            spacing: 12
-            
-            Text {
-                text: hostName.toUpperCase()
-                color: Kirigami.Theme.textColor
-                font.pixelSize: 14
-                font.bold: true
-                opacity: 0.8
-            }
-            
-            // Time-to-Event
-            Text {
-                text: timeToEvent
-                visible: timeToEvent.length > 0
-                font.pixelSize: 12
-                font.bold: true
-                color: mainDevice && mainDevice.isCharging ? Kirigami.Theme.positiveColor : Kirigami.Theme.neutralColor
-            }
-        }
-        
-        // Power Profile Row
-        Row {
-            spacing: 6
-            
-            Repeater {
-                model: ["power-saver", "balanced", "performance"]
-                
-                Rectangle {
-                    width: 28
-                    height: 22
-                    radius: 11
-                    color: currentPowerProfile === modelData ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
-                    
-                    Text {
-                        anchors.centerIn: parent
-                        text: modelData === "power-saver" ? "🔋" : (modelData === "balanced" ? "⚖️" : "⚡")
-                        font.pixelSize: 11
-                    }
-                    
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        hoverEnabled: true
-                        onClicked: root.setPowerProfile(modelData)
-                    }
-                }
-            }
-        }
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 20
+        text: hostName.toUpperCase()
+        color: Kirigami.Theme.textColor
+        style: Text.Outline
+        styleColor: Kirigami.Theme.backgroundColor
+        visible: devices.length > 0
     }
 }
-

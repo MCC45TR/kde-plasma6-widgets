@@ -45,15 +45,6 @@ PlasmoidItem {
     readonly property bool showForecastUnits: Plasmoid.configuration.showForecastUnits !== undefined ? Plasmoid.configuration.showForecastUnits : true
     
     readonly property string cornerRadiusMode: Plasmoid.configuration.cornerRadius || "normal"
-    
-    // Notification settings
-    readonly property bool notifyEnabled: Plasmoid.configuration.notifyEnabled || false
-    readonly property bool notifyRoutineEnabled: Plasmoid.configuration.notifyRoutineEnabled || false
-    readonly property int notifyRoutineHour: Plasmoid.configuration.notifyRoutineHour || 8
-    readonly property bool notifySevereWeather: Plasmoid.configuration.notifySevereWeather !== undefined ? Plasmoid.configuration.notifySevereWeather : true
-    readonly property bool notifyRain: Plasmoid.configuration.notifyRain !== undefined ? Plasmoid.configuration.notifyRain : true
-    readonly property bool notifyTemperatureDrop: Plasmoid.configuration.notifyTemperatureDrop || false
-    readonly property int notifyTemperatureThreshold: Plasmoid.configuration.notifyTemperatureThreshold || 0
     readonly property real radiusMultiplier: {
         if (cornerRadiusMode === "small") return 0.5
         if (cornerRadiusMode === "square") return 0.0
@@ -61,24 +52,6 @@ PlasmoidItem {
     }
 
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
-    
-    // Notification Manager
-    Loader {
-        id: notificationManagerLoader
-        active: root.notifyEnabled
-        sourceComponent: NotificationManager {
-            currentWeather: root.currentWeather
-            forecastHourly: root.forecastHourly
-            units: root.units
-            enabled: root.notifyEnabled
-            routineEnabled: root.notifyRoutineEnabled
-            routineHour: root.notifyRoutineHour
-            severeWeatherEnabled: root.notifySevereWeather
-            rainEnabled: root.notifyRain
-            temperatureDropEnabled: root.notifyTemperatureDrop
-            temperatureThreshold: root.notifyTemperatureThreshold
-        }
-    }
     readonly property bool isWideMode: layoutMode === "wide" || (layoutMode === "auto" && root.width > 350 && root.height <= 350)
     readonly property bool isLargeMode: layoutMode === "large" || (layoutMode === "auto" && root.width > 350 && root.height > 350)
     readonly property bool isSmallMode: layoutMode === "small" || (layoutMode === "auto" && !isWideMode && !isLargeMode)
@@ -177,11 +150,6 @@ PlasmoidItem {
                 processWeatherData(result)
                 Plasmoid.configuration.cachedWeather = JSON.stringify(result)
                 Plasmoid.configuration.lastUpdate = new Date().getTime()
-                
-                // Check notifications after successful fetch
-                if (notificationManagerLoader.item) {
-                    notificationManagerLoader.item.checkNotifications()
-                }
             } else {
                 errorMessage = result.error || "Unknown error"
             }

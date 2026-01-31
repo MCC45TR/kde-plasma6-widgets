@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
-import "WeatherService.js" as WeatherService
 
 Item {
     id: largeLayout
@@ -72,35 +71,6 @@ Item {
                         opacity: 0.7
                         elide: Text.ElideRight
                         width: parent.width
-                    }
-                    
-                    // Smart Clothing Suggestion
-                    Row {
-                        id: clothingSuggestionRow
-                        spacing: 8
-                        visible: clothingRepeater.count > 0
-                        
-                        property var suggestions: currentWeather ? WeatherService.getClothingSuggestion(currentWeather, weatherRoot.units) : null
-                        
-                        Repeater {
-                            id: clothingRepeater
-                            model: clothingSuggestionRow.suggestions || []
-                            
-                            Row {
-                                spacing: 3
-                                Text {
-                                    text: modelData.icon
-                                    font.pixelSize: 14
-                                }
-                                Text {
-                                    text: i18n(modelData.text)
-                                    color: Kirigami.Theme.textColor
-                                    font.family: weatherRoot.activeFont.family
-                                    font.pixelSize: 12
-                                    opacity: 0.6
-                                }
-                            }
-                        }
                     }
                 }
 
@@ -179,46 +149,6 @@ Item {
                             Behavior on opacity { NumberAnimation { duration: 150 } }
                         }
                     }
-                }
-            }
-
-            // Air Quality Indicator (above forecast grid)
-            Row {
-                id: aqiRow
-                Layout.fillWidth: true
-                Layout.preferredHeight: visible ? 24 : 0
-                spacing: 8
-                visible: currentWeather && currentWeather.aqi !== undefined
-                
-                property var aqiInfo: currentWeather && currentWeather.aqi !== undefined ? 
-                    WeatherService.getAQIDescription(currentWeather.aqi, currentWeather.pm25, currentWeather.pm10) : null
-                
-                Rectangle {
-                    width: 8
-                    height: 8
-                    radius: 4
-                    color: aqiRow.aqiInfo ? aqiRow.aqiInfo.color : "transparent"
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                
-                Text {
-                    text: aqiRow.aqiInfo ? ("AQI " + aqiRow.aqiInfo.aqi + " • " + i18n(aqiRow.aqiInfo.level)) : ""
-                    color: Kirigami.Theme.textColor
-                    font.family: weatherRoot.activeFont.family
-                    font.pixelSize: 12
-                    font.bold: true
-                    opacity: 0.8
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                
-                Text {
-                    text: aqiRow.aqiInfo && aqiRow.aqiInfo.pm25 ? ("PM2.5: " + aqiRow.aqiInfo.pm25 + " µg/m³") : ""
-                    color: Kirigami.Theme.textColor
-                    font.family: weatherRoot.activeFont.family
-                    font.pixelSize: 11
-                    opacity: 0.5
-                    visible: text.length > 0
-                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
 

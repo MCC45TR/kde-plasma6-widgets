@@ -125,51 +125,5 @@
       <default>normal</default>
       <label>Corner Radius Mode (normal, small, square)</label>
     </entry>
-
-    <!-- Notifications -->
-    <entry name="notifyEnabled" type="Bool">
-      <default>false</default>
-      <label>Enable Weather Notifications</label>
-    </entry>
-
-    <entry name="notifyRoutineEnabled" type="Bool">
-      <default>false</default>
-      <label>Enable Routine Daily Notification</label>
-    </entry>
-
-    <entry name="notifyRoutineHour" type="Int">
-      <default>8</default>
-      <label>Routine Notification Hour (0-23)</label>
-    </entry>
-
-    <entry name="notifySevereWeather" type="Bool">
-      <default>true</default>
-      <label>Notify on Severe Weather (Thunderstorm, Snow, Fog)</label>
-    </entry>
-
-    <entry name="notifyRain" type="Bool">
-      <default>true</default>
-      <label>Notify on Upcoming Rain</label>
-    </entry>
-
-    <entry name="notifyTemperatureDrop" type="Bool">
-      <default>false</default>
-      <label>Notify on Temperature Drop Below Threshold</label>
-    </entry>
-
-    <entry name="notifyTemperatureThreshold" type="Int">
-      <default>0</default>
-      <label>Temperature Threshold for Alert (Celsius)</label>
-    </entry>
-
-    <entry name="lastRoutineNotify" type="Double">
-      <default>0</default>
-      <label>Last Routine Notification Timestamp</label>
-    </entry>
-
-    <entry name="lastSevereNotify" type="Double">
-      <default>0</default>
-      <label>Last Severe Weather Notification Timestamp</label>
-    </entry>
   </group>
 </kcfg>

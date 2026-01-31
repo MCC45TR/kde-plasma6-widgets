@@ -148,14 +148,25 @@ Item {
                                         // Fallback
                                         if (!url) url = (modelData.url || "").toString();
 
-                                        if (!url || !url.startsWith("file://")) return "";
+                                        if (!url) return "";
                                         
-                                        var ext = url.split('.').pop().toLowerCase();
+                                        // Strip file:// prefix and decode special characters
+                                        var path = decodeURIComponent(url.replace("file://", ""));
+                                        var ext = path.split('.').pop().toLowerCase();
                                         
-                                        // Only images can be previewed directly
+                                        var showPreview = false;
+                                        
                                         var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                        if (historyList.previewSettings.images && imageExts.indexOf(ext) >= 0) {
-                                            return url; // Direct file:// URL for images
+                                        if (historyList.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
+
+                                        var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                        if (!showPreview && historyList.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
+
+                                        var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                                        if (!showPreview && historyList.previewSettings.documents && docExts.indexOf(ext) >= 0) showPreview = true;
+                                        
+                                        if (showPreview) {
+                                            return "image://preview/" + path;
                                         }
                                         
                                         return "";
