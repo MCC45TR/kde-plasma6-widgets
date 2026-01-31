@@ -96,6 +96,9 @@ PlasmoidItem {
             devices: deviceModel.devices
             mainDevice: deviceModel.mainDevice
             hostName: root.localHostName
+            timeToEvent: deviceModel.timeToEvent
+            currentPowerProfile: deviceModel.currentPowerProfile
+            onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
         }
     }
     
@@ -105,6 +108,9 @@ PlasmoidItem {
             devices: deviceModel.devices
             mainDevice: deviceModel.mainDevice
             hostName: root.localHostName
+            timeToEvent: deviceModel.timeToEvent
+            currentPowerProfile: deviceModel.currentPowerProfile
+            onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
         }
     }
     
@@ -114,6 +120,9 @@ PlasmoidItem {
             devices: deviceModel.devices
             mainDevice: deviceModel.mainDevice
             hostName: root.localHostName
+            timeToEvent: deviceModel.timeToEvent
+            currentPowerProfile: deviceModel.currentPowerProfile
+            onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
         }
     }
 }

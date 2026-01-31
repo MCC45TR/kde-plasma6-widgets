@@ -11,7 +11,7 @@
 <p align="center">
   <a href="#-installation"><img src="https://img.shields.io/badge/Platform-KDE_Plasma_6-1d99f3?style=for-the-badge&logo=kde" alt="Platform"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="License"></a>
-  <a href="#-widget-catalog"><img src="https://img.shields.io/badge/Widgets-18+-success?style=for-the-badge" alt="Widgets"></a>
+  <a href="#-widget-catalog"><img src="https://img.shields.io/badge/Widgets-19+-success?style=for-the-badge" alt="Widgets"></a>
   <a href="#-key-features"><img src="https://img.shields.io/badge/Languages-20-orange?style=for-the-badge" alt="Languages"></a>
 </p>
 
@@ -161,6 +161,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 | **Spotify** | Dedicated Spotify controller |
 | **Events** | Event reminder widget |
 | **Alarms** | Alarm clock widget |
+| **MSI Control** | MSI laptop control (temps, fan, shift modes) |
 
 
 ---
@@ -274,10 +275,11 @@ This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LIC
 | :--- | :---: |
 | **Analog Clock** | ✅ |
 | **Calendar** | ✅ |
+| **File Search** | ✅ |
 | **Music Player** | ✅ |
 | **Weather** | ✅ |
+| **App Menu** | 🚧 |
 | **Browser Search** | 🚧 |
-| **File Search** | 🚧 |
 | **Plasma Advanced Reboot** | 🚧 |
 | **Alarms** | ❌ |
 | **AUR Updates** | ❌ |
@@ -291,6 +293,7 @@ This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LIC
 | **Spotify** | ❌ |
 | **System Monitor** | ❌ |
 | **World Clock** | ❌ |
+| **MSI Control** | ✅ |
 
 ---
 

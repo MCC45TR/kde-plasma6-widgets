@@ -8,6 +8,9 @@ Item {
     property var devices: []
     property var mainDevice: null
     property string hostName: ""
+    property string timeToEvent: ""
+    property string currentPowerProfile: "balanced"
+    signal setPowerProfile(string profile)
     
     // Small Mode: < 350w
     // Image 1: Looks like a compact vertical card.
@@ -86,12 +89,55 @@ Item {
                         elide: Text.ElideRight
                         Layout.fillWidth: true
                     }
+                    // Time-to-Event (dynamic estimation)
                     Text {
-                        text: mainDevice && mainDevice.remainingTime ? "Remaining " + mainDevice.remainingTime : ""
+                        text: timeToEvent
                         font.pixelSize: 11
-                        color: Kirigami.Theme.textColor
-                        opacity: 0.5
-                        visible: text !== ""
+                        font.bold: true
+                        color: mainDevice && mainDevice.isCharging ? Kirigami.Theme.positiveColor : Kirigami.Theme.neutralColor
+                        opacity: 0.9
+                        visible: timeToEvent.length > 0
+                    }
+                }
+            }
+        }
+        
+        // Power Profile Toggle Row
+        Row {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 32
+            spacing: 6
+            
+            Repeater {
+                model: ["power-saver", "balanced", "performance"]
+                
+                Rectangle {
+                    width: (parent.width - 12) / 3
+                    height: 28
+                    radius: 14
+                    color: currentPowerProfile === modelData ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                    
+                    Text {
+                        anchors.centerIn: parent
+                        text: modelData === "power-saver" ? "🔋" : (modelData === "balanced" ? "⚖️" : "⚡")
+                        font.pixelSize: 14
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.setPowerProfile(modelData)
+                    }
+                    
+                    ToolTip.visible: profileMouse.containsMouse
+                    ToolTip.text: modelData === "power-saver" ? i18n("Power Saver") : (modelData === "balanced" ? i18n("Balanced") : i18n("Performance"))
+                    
+                    MouseArea {
+                        id: profileMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.setPowerProfile(modelData)
                     }
                 }
             }

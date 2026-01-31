@@ -483,25 +483,14 @@ FocusScope {
                                                 // Fallback
                                                 if (!url) url = (modelData.url || "").toString();
 
-                                                if (!url) return "";
+                                                if (!url || !url.startsWith("file://")) return "";
                                                 
-                                                // Strip file:// prefix and decode special characters (like %20 for spaces)
-                                                var path = decodeURIComponent(url.replace("file://", ""));
-                                                var ext = path.split('.').pop().toLowerCase();
+                                                var ext = url.split('.').pop().toLowerCase();
                                                 
-                                                var showPreview = false;
-                                                
+                                                // Only images can be previewed directly
                                                 var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                                if (historyTile.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
-
-                                                var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                                if (!showPreview && historyTile.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
-
-                                                var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
-                                                if (!showPreview && (historyTile.previewSettings.documents || historyTile.previewSettings.text) && docExts.indexOf(ext) >= 0) showPreview = true;
-                                                
-                                                if (showPreview) {
-                                                    return "image://preview/" + path;
+                                                if (historyTile.previewSettings.images && imageExts.indexOf(ext) >= 0) {
+                                                    return url; // Direct file:// URL for images
                                                 }
                                                 
                                                 return "";

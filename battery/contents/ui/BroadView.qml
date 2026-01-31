@@ -11,6 +11,9 @@ Item {
     // Expects 'mainDevice' object
     property var mainDevice: null
     property string hostName: ""
+    property string timeToEvent: ""
+    property string currentPowerProfile: "balanced"
+    signal setPowerProfile(string profile)
 
     // "Broad" View: > 350w, < 350h
     
@@ -121,12 +124,44 @@ Item {
                         elide: Text.ElideRight
                     }
                     
+                    // Time-to-Event
                     Text {
-                        text: mainDevice && mainDevice.remainingTime ? "Remaining " + mainDevice.remainingTime : ""
-                        visible: text !== ""
+                        text: timeToEvent
+                        visible: timeToEvent.length > 0
                         font.pixelSize: 14
-                        color: Kirigami.Theme.textColor
-                        opacity: 0.5
+                        font.bold: true
+                        color: mainDevice && mainDevice.isCharging ? Kirigami.Theme.positiveColor : Kirigami.Theme.neutralColor
+                        opacity: 0.9
+                    }
+                    
+                    // Power Profile Row
+                    Row {
+                        spacing: 6
+                        Layout.topMargin: 8
+                        
+                        Repeater {
+                            model: ["power-saver", "balanced", "performance"]
+                            
+                            Rectangle {
+                                width: 32
+                                height: 24
+                                radius: 12
+                                color: currentPowerProfile === modelData ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
+                                
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: modelData === "power-saver" ? "🔋" : (modelData === "balanced" ? "⚖️" : "⚡")
+                                    font.pixelSize: 12
+                                }
+                                
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    hoverEnabled: true
+                                    onClicked: root.setPowerProfile(modelData)
+                                }
+                            }
+                        }
                     }
                 }
         }

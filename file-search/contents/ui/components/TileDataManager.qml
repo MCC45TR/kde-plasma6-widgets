@@ -18,6 +18,42 @@ Item {
     property int resultCount: 0
     property int lastLatency: 0
     
+    // File type filter (empty = all, "image", "video", "document", "application", "folder")
+    property string fileTypeFilter: ""
+    
+    // File extension mappings
+    readonly property var imageExtensions: ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff", "raw", "heic"]
+    readonly property var videoExtensions: ["mp4", "mkv", "avi", "webm", "mov", "wmv", "flv", "m4v", "mpg", "mpeg"]
+    readonly property var documentExtensions: ["pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "odt", "ods", "odp", "txt", "rtf", "md"]
+    
+    function matchesFileTypeFilter(url, category) {
+        if (fileTypeFilter === "") return true
+        
+        var urlStr = (url || "").toString().toLowerCase()
+        var cat = (category || "").toString().toLowerCase()
+        var ext = urlStr.split('.').pop()
+        
+        switch (fileTypeFilter) {
+            case "image":
+                return imageExtensions.indexOf(ext) >= 0
+            case "video":
+                return videoExtensions.indexOf(ext) >= 0
+            case "document":
+                return documentExtensions.indexOf(ext) >= 0
+            case "application":
+                return cat.indexOf("application") >= 0 || 
+                       cat.indexOf("uygulamalar") >= 0 || 
+                       urlStr.endsWith(".desktop")
+            case "folder":
+                return cat.indexOf("folder") >= 0 || 
+                       cat.indexOf("klasör") >= 0 ||
+                       cat.indexOf("yerler") >= 0 ||
+                       cat.indexOf("places") >= 0
+            default:
+                return true
+        }
+    }
+    
     // Internal state
     property real searchStartTime: 0
     
@@ -61,6 +97,11 @@ Item {
                  var isAllowed = isFileUrl || allowedCats.indexOf(cat) !== -1;
                  
                  if (!isAllowed) continue;
+            }
+            
+            // FILE TYPE FILTER
+            if (fileTypeFilter !== "" && !matchesFileTypeFilter(item.url, cat)) {
+                continue;
             }
             
             rawItems.push({

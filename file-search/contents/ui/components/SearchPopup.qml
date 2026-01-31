@@ -56,6 +56,8 @@ Item {
     property bool prefixPowerShowSleep: true
     property bool showPinnedBar: true
     property bool autoMinimizePinned: false
+    property bool showFileTypeFilters: true
+    property string activeFileTypeFilter: ""
     
     // Tile size mode: 0=Normal, 1=All Compact, 2=Only Pinned Compact, 3=Only History Compact
     property int compactTileMode: 0
@@ -102,6 +104,7 @@ Item {
         resultsModel: resultsModel
         logic: popupRoot.logic
         searchText: popupRoot.searchText
+        fileTypeFilter: popupRoot.activeFileTypeFilter
         
         onCategorizedDataChanged: {
              // propagated automatically to bindings
@@ -577,10 +580,35 @@ Item {
         }
     }
 
+    // File Type Filter Bar (Loader)
+    Loader {
+        id: filterBarLoader
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? 8 : 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
+        asynchronous: true
+        
+        active: popupRoot.expanded && popupRoot.showFileTypeFilters && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText)
+        
+        sourceComponent: FileTypeFilterBar {
+            textColor: popupRoot.textColor
+            accentColor: popupRoot.accentColor
+            bgColor: popupRoot.bgColor
+            activeFilter: popupRoot.activeFileTypeFilter
+            
+            onFilterChanged: (filter) => {
+                popupRoot.activeFileTypeFilter = filter
+            }
+        }
+    }
+
     // Result List View (Loader)
     Loader {
         id: resultsListLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterBarLoader.active ? filterBarLoader.bottom : pinnedLoader.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -620,7 +648,7 @@ Item {
     // Result Tile View (Loader)
     Loader {
         id: tileResultsLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterBarLoader.active ? filterBarLoader.bottom : pinnedLoader.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -775,65 +803,12 @@ Item {
          
          property var categorizedHistory: (logic.historyVersion >= 0 && logic.searchHistory.length > 0) ? HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other")) : []
          
-         sourceComponent: Item {
-             anchors.fill: parent
-             // Helper to route navigation
-             function moveUp() { 
-                 if (isTileView) histTileView.moveUp();
-             }
-             function moveDown() { 
-                 if (isTileView) histTileView.moveDown();
-             }
-             function moveLeft() { 
-                 if (isTileView) histTileView.moveLeft();
-             }
-             function moveRight() { 
-                 if (isTileView) histTileView.moveRight();
-             }
-             function activateCurrentItem() {
-                 if (isTileView) histTileView.activateCurrentItem();
-             }
-
-             // History List
-                             HistoryListView {
-                 id: histListView
-                 anchors.fill: parent
-                 visible: !isTileView
-                 categorizedHistory: historyLoader.categorizedHistory
-                 listIconSize: popupRoot.listIconSize
-                 textColor: popupRoot.textColor
-                 accentColor: popupRoot.accentColor
-                 formatTimeFunc: logic.formatHistoryTime
-                 // trFunc removed
-                 previewEnabled: popupRoot.previewEnabled
-                 previewSettings: popupRoot.previewSettings
-                 
-                 onItemClicked: (item) => handleHistoryClick(item)
-                 onClearClicked: logic.clearHistory()
-             }
+         sourceComponent: HistoryViewWrapper {
+             logic: popupRoot.logic
+             popupRoot: popupRoot
+             categorizedHistory: historyLoader.categorizedHistory
              
-             // History Tile
-             HistoryTileView {
-                 id: histTileView
-                 previewEnabled: popupRoot.previewEnabled
-                 anchors.fill: parent
-                 visible: isTileView
-                 categorizedHistory: historyLoader.categorizedHistory
-                 iconSize: popupRoot.iconSize
-                 textColor: popupRoot.textColor
-                 accentColor: popupRoot.accentColor
-                 // trFunc removed
-                 previewSettings: popupRoot.previewSettings
-                 scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
-                 compactTileView: popupRoot.compactHistoryItems
-                 
-                 onItemClicked: (item) => handleHistoryClick(item)
-                 onClearClicked: logic.clearHistory()
-                 
-                 onTabPressed: cycleFocusSection(true)
-                 onShiftTabPressed: cycleFocusSection(false)
-                 onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
-             }
+             onItemClicked: (item) => handleHistoryClick(item)
          }
     }
     
