@@ -25,9 +25,13 @@ Item {
     property bool coolerBoost: false
     property bool webcamEnabled: true
     property bool superBattery: false
+    // New Toggles
+    property bool fnKeySwap: false 
+    property bool usbPower: false
     
-    // Battery limit
+    // Battery
     property int batteryLimit: 100
+    property int batteryPercentage: 0
     
     // Firmware info
     property string fwVersion: ""
@@ -35,7 +39,8 @@ Item {
     
     // Base path
     readonly property string basePath: "/sys/devices/platform/msi-ec"
-    readonly property string batteryPath: "/sys/class/power_supply/BAT1/charge_control_end_threshold"
+    readonly property string batteryLimitPath: "/sys/class/power_supply/BAT1/charge_control_end_threshold"
+    readonly property string batteryCapacityPath: "/sys/class/power_supply/BAT1/capacity"
     
     // === DATA SOURCE ===
     P5Support.DataSource {
@@ -93,9 +98,13 @@ Item {
         readFile(basePath + "/cooler_boost", "coolerBoost")
         readFile(basePath + "/webcam", "webcam")
         readFile(basePath + "/super_battery", "superBattery")
+        // New toggles (paths are guesses, adjust if needed)
+        readFile(basePath + "/fn_key_swap", "fnKeySwap")
+        readFile(basePath + "/usb_power", "usbPower")
         
-        // Read battery limit
-        readFile(batteryPath, "batteryLimit")
+        // Read battery
+        readFile(batteryLimitPath, "batteryLimit")
+        readFile(batteryCapacityPath, "batteryPercentage")
         
         // Read firmware info
         readFile(basePath + "/fw_version", "fwVersion")
@@ -166,8 +175,17 @@ Item {
             case "superBattery":
                 superBattery = (value === "on")
                 break
+            case "fnKeySwap":
+                fnKeySwap = (value === "on")
+                break
+            case "usbPower":
+                usbPower = (value === "on")
+                break
             case "batteryLimit":
                 batteryLimit = parseInt(value) || 100
+                break
+            case "batteryPercentage":
+                batteryPercentage = parseInt(value) || 0
                 break
             case "fwVersion":
                 fwVersion = value
@@ -200,8 +218,16 @@ Item {
         writeFile(basePath + "/super_battery", enabled ? "on" : "off")
     }
     
+    function setFnKeySwap(enabled) {
+        writeFile(basePath + "/fn_key_swap", enabled ? "on" : "off")
+    }
+    
+    function setUsbPower(enabled) {
+        writeFile(basePath + "/usb_power", enabled ? "on" : "off")
+    }
+    
     function setBatteryLimit(limit) {
-        writeFile(batteryPath, limit.toString())
+        writeFile(batteryLimitPath, limit.toString())
     }
     
     function writeFile(path, value) {

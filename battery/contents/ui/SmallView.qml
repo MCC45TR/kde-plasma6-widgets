@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
-
+import QtQuick.Controls
 Item {
     id: root
 
@@ -94,7 +94,7 @@ Item {
                         text: timeToEvent
                         font.pixelSize: 11
                         font.bold: true
-                        color: mainDevice && mainDevice.isCharging ? Kirigami.Theme.positiveColor : Kirigami.Theme.neutralColor
+                        color: mainDevice && mainDevice.isCharging ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.neutralTextColor
                         opacity: 0.9
                         visible: timeToEvent.length > 0
                     }
@@ -124,21 +124,15 @@ Item {
                     }
                     
                     MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: root.setPowerProfile(modelData)
-                    }
-                    
-                    ToolTip.visible: profileMouse.containsMouse
-                    ToolTip.text: modelData === "power-saver" ? i18n("Power Saver") : (modelData === "balanced" ? i18n("Balanced") : i18n("Performance"))
-                    
-                    MouseArea {
                         id: profileMouse
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: root.setPowerProfile(modelData)
                     }
+
+                    ToolTip.visible: profileMouse.containsMouse
+                    ToolTip.text: modelData === "power-saver" ? i18n("Power Saver") : (modelData === "balanced" ? i18n("Balanced") : i18n("Performance"))
                 }
             }
         }
@@ -175,8 +169,9 @@ Item {
                             
                             // Color logic
                             property color dynamicColor: {
-                                if (modelData.percentage < 15) return Kirigami.Theme.negativeColor
-                                if (modelData.percentage < 25) return Kirigami.Theme.neutralColor
+                                if (modelData.isCharging) return "#2ecc71" // Green
+                                if (modelData.percentage < 15) return "#DA4453" // Breeze Red
+                                if (modelData.percentage < 25) return "#939597" // Breeze Gray (or Yellow?) - keeping as per previous logic
                                 return Kirigami.Theme.highlightColor // System Accent
                             }
                             color: dynamicColor

@@ -13,10 +13,19 @@ PlasmoidItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     preferredRepresentation: fullRepresentation
     
-    // Layout Logic
-    readonly property bool isSmall: width < 350 && height < 350
-    readonly property bool isBroad: width >= 350 && height < 350
-    readonly property bool isLarge: width >= 350 && height >= 350
+    Layout.minimumWidth: 200
+    Layout.minimumHeight: 200
+
+    readonly property string currentViewMode: {
+        switch (true) {
+            case (width < 250 && height < 250): return "extrasmall"
+            case (width < 350 && height < 350): return "small"
+            case (width >= 350 && height < 350): return "broad"
+            case (width < 350 && height >= 350): return "tall"
+            case (width >= 350 && height >= 350): return "large"
+            default: return "large"
+        }
+    }
     
     // Hostname
     property string localHostName: "Device Label"
@@ -43,7 +52,11 @@ PlasmoidItem {
     // Data Model
     DeviceModel {
         id: deviceModel
+        useCustomIcons: Plasmoid.configuration.useCustomIcons
+        iconVersion: Plasmoid.configuration.iconVersion
     }
+
+    readonly property int edgeMargin: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
 
     fullRepresentation: Item {
         id: fullRep
@@ -52,7 +65,7 @@ PlasmoidItem {
         // Background
         Rectangle {
             anchors.fill: parent
-            anchors.margins: 0 // Widget handles internal margins usually?
+            anchors.margins: root.edgeMargin
             // "Widgetin kenar boşlukları ... @[Plasma6Widgets/weather] widgetine bak"
              // Weather uses margin 0 if panel, else 'edgeMargin'.
              // Assuming desktop widget for now based on size descriptions.
@@ -81,48 +94,27 @@ PlasmoidItem {
                 property var mainDevice: deviceModel.mainDevice
                 property string hostName: root.localHostName
                 
-                sourceComponent: {
-                    if (root.isSmall) return largeViewComp
-                    if (root.isBroad) return broadViewComp
-                    return smallViewComp
-                }
+                sourceComponent: largeViewComp
             }
         }
     }
 
-    Component {
-        id: smallViewComp
-        SmallView {
-            devices: deviceModel.devices
-            mainDevice: deviceModel.mainDevice
-            hostName: root.localHostName
-            timeToEvent: deviceModel.timeToEvent
-            currentPowerProfile: deviceModel.currentPowerProfile
-            onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
-        }
-    }
-    
-    Component {
-        id: broadViewComp
-        BroadView {
-            devices: deviceModel.devices
-            mainDevice: deviceModel.mainDevice
-            hostName: root.localHostName
-            timeToEvent: deviceModel.timeToEvent
-            currentPowerProfile: deviceModel.currentPowerProfile
-            onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
-        }
-    }
-    
     Component {
         id: largeViewComp
         LargeView {
             devices: deviceModel.devices
             mainDevice: deviceModel.mainDevice
             hostName: root.localHostName
-            timeToEvent: deviceModel.timeToEvent
+            finishTime: deviceModel.mainDevice ? deviceModel.formatFinishTime(deviceModel.pmSourceData["Battery"]["Remaining msec"] || 0) : ""
             currentPowerProfile: deviceModel.currentPowerProfile
             onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
+            
+            // Adaptive Mode
+            property string mode: root.currentViewMode
+            // We need to aliasing this property in LargeView to use it
+            // Assuming we added 'viewMode' to LargeView, let's pass it as such
+            viewMode: mode
+            iconShape: Plasmoid.configuration.iconShape
         }
     }
 }

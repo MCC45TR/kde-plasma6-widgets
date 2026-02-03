@@ -13,5 +13,13 @@
             <default>v1</default>
             <label>Icon Theme Version</label>
         </entry>
+        <entry name="iconShape" type="String">
+            <default>square</default>
+            <label>Shape of the icon card</label>
+        </entry>
+        <entry name="edgeMargin" type="Int">
+            <default>10</default>
+            <label>Margin around the widget edges</label>
+        </entry>
     </group>
 </kcfg>

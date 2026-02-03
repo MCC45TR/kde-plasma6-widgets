@@ -1,4 +1,5 @@
 import QtQuick
+import QtQml
 import org.kde.plasma.plasma5support as P5Support
 import org.kde.bluezqt as BluezQt
 import org.kde.kdeconnect as KDEConnect
@@ -24,6 +25,7 @@ Item {
     // === POWER PROFILES ===
     property string currentPowerProfile: "balanced"
     property var availableProfiles: ["power-saver", "balanced", "performance"]
+    property string powerBackend: "" // "tuned", "ppd", or ""
     
     P5Support.DataSource {
         id: powerProfileSource
@@ -31,24 +33,79 @@ Item {
         connectedSources: []
         
         onNewData: (source, data) => {
-            if (source === "powerprofilesctl get" && data["exit code"] === 0) {
-                root.currentPowerProfile = data["stdout"].trim()
+            if (data["exit code"] > 0) return
+            
+            var stdout = data["stdout"].trim()
+            
+            // Backend Detection & Reading
+            if (source === "check_backend") {
+                // Determine backend based on output
+                disconnectSource("check_backend")
+                return
             }
+            
+            if (source === "powerprofilesctl get") {
+                root.powerBackend = "ppd"
+                root.currentPowerProfile = stdout
+            } 
+            else if (source === "tuned-adm active") {
+                root.powerBackend = "tuned"
+                // Output format: "Current active profile: balanced"
+                var parts = stdout.split(": ")
+                if (parts.length > 1) {
+                    var profile = parts[1].trim()
+                    // Map tuned profile to UI profile
+                    if (profile === "powersave") root.currentPowerProfile = "power-saver"
+                    else if (profile === "throughput-performance") root.currentPowerProfile = "performance"
+                    else root.currentPowerProfile = "balanced"
+                }
+            }
+            
             disconnectSource(source)
         }
         
-        function fetchProfile() {
+        function detectBackend() {
+            // Try PPD first, then Tuned
+            // We connect to both, whichever returns valid data first/wins dictates backend, 
+            // but effectively we prefer PPD if both exist (rare), or just whatever works.
             connectSource("powerprofilesctl get")
+            connectSource("tuned-adm active")
+        }
+        
+        function fetchProfile() {
+            if (powerBackend === "ppd") {
+                connectSource("powerprofilesctl get")
+            } else if (powerBackend === "tuned") {
+                connectSource("tuned-adm active")
+            } else {
+                detectBackend()
+            }
         }
         
         function setProfile(profile) {
-            connectSource("powerprofilesctl set " + profile)
+            if (powerBackend === "ppd") {
+                connectSource("powerprofilesctl set " + profile)
+            } else if (powerBackend === "tuned") {
+                // Map UI profile to Tuned profile
+                var tunedProfile = "balanced"
+                if (profile === "power-saver") tunedProfile = "powersave"
+                else if (profile === "performance") tunedProfile = "throughput-performance"
+                
+                connectSource("tuned-adm profile " + tunedProfile)
+            }
+            
+            // Re-fetch after short delay
             Qt.callLater(fetchProfile)
         }
     }
     
     function setPowerProfile(profile) {
         powerProfileSource.setProfile(profile)
+    }
+    
+    Component.onCompleted: {
+        powerProfileSource.detectBackend()
+        refreshDevices()
     }
     
     // === TIME TO EVENT ===
@@ -76,6 +133,36 @@ Item {
         }
     }
 
+    // === HOSTNAME ===
+    property string hostName: ""
+    
+    P5Support.DataSource {
+        id: hostNameSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: (source, data) => {
+            if (data["exit code"] === 0) {
+                root.hostName = data["stdout"].trim()
+            }
+            disconnectSource(source)
+        }
+        function fetchHostName() {
+            connectSource("uname -n")
+        }
+    }
+    
+    // === TIME HELPER ===
+    function formatFinishTime(msec) {
+        if (msec <= 0) return ""
+        var now = new Date()
+        var finish = new Date(now.getTime() + msec)
+        var h = finish.getHours()
+        var m = finish.getMinutes()
+        return (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m)
+    }
+
+    property alias pmSourceData: pmSource.data
+
     P5Support.DataSource {
         id: pmSource
         engine: "powermanagement"
@@ -84,6 +171,7 @@ Item {
         onNewData: {
             refreshDevices()
             powerProfileSource.fetchProfile()
+            if (root.hostName === "") hostNameSource.fetchHostName()
         }
     }
     
@@ -94,7 +182,7 @@ Item {
         onTriggered: refreshDevices()
     }
     
-    Component.onCompleted: refreshDevices()
+
     
     Connections {
         target: btManager
@@ -104,16 +192,59 @@ Item {
         function onOperationalChanged() { refreshDevices() }
     }
 
-    Connections {
-        target: kdeConnectDevices
-        function onRowsInserted() { refreshDevices() }
-        function onRowsRemoved() { refreshDevices() }
-        function onDataChanged() { refreshDevices() }
+    // === KDE Connect Integration via Instantiator ===
+    Instantiator {
+        id: kdeConnectInstantiator
+        model: kdeConnectDevices
+        
+        delegate: QtObject {
+            id: deviceWrapper
+            
+            // Access roles from the model
+            readonly property string deviceId: model.deviceId
+            readonly property string deviceName: model.name
+            readonly property string deviceType: model.type || ""
+            readonly property string deviceIcon: model.iconName
+            
+            // Interfaces
+            readonly property var deviceInterface: KDEConnect.DeviceDbusInterfaceFactory.create(deviceId)
+            readonly property var batteryInterface: KDEConnect.DeviceBatteryDbusInterfaceFactory.create(deviceId)
+            
+            // Plugin Checker
+            readonly property var pluginChecker: KDEConnect.PluginChecker {
+                pluginName: "battery"
+                device: deviceWrapper.deviceInterface
+            }
+            
+            readonly property bool hasBatteryConfig: pluginChecker.available
+            readonly property int charge: batteryInterface ? batteryInterface.charge : -1
+            readonly property bool isCharging: batteryInterface ? batteryInterface.isCharging : false
+            
+            // Trigger refresh when relevant properties change
+            onHasBatteryConfigChanged: root.scheduleRefresh()
+            onChargeChanged: root.scheduleRefresh()
+            onIsChargingChanged: root.scheduleRefresh()
+        }
+        
+        onObjectAdded: root.scheduleRefresh()
+        onObjectRemoved: root.scheduleRefresh()
     }
 
-    property bool useCustomIcons: Plasmoid.configuration.useCustomIcons
-    property string iconVersion: Plasmoid.configuration.iconVersion || "v1"
+    property bool useCustomIcons: false
+    property string iconVersion: "v1"
     
+    // De-bounce refresh to avoid too many updates
+    Timer {
+        id: refreshTimer
+        interval: 100
+        repeat: false
+        onTriggered: refreshDevices()
+    }
+    
+    function scheduleRefresh() {
+        refreshTimer.restart()
+    }
+
     function refreshDevices() {
         var newList = []
         var mainBat = null
@@ -171,40 +302,20 @@ Item {
             }
         }
         
-        // 3. KDE Connect Devices
-        for (var j = 0; j < kdeConnectDevices.count; j++) {
-            var deviceId = kdeConnectDevices.data(kdeConnectDevices.index(j, 0), Qt.UserRole + 1) // deviceId role
-            if (!deviceId) continue
+        // 3. KDE Connect Devices (via Instantiator)
+        for (var j = 0; j < kdeConnectInstantiator.count; j++) {
+            var wrapper = kdeConnectInstantiator.objectAt(j)
             
-            try {
-                var deviceInterface = KDEConnect.DeviceDbusInterfaceFactory.create(deviceId)
-                if (!deviceInterface) continue
-                
-                // Check if battery plugin is available
-                var pluginChecker = Qt.createQmlObject(
-                    'import org.kde.kdeconnect as KDEConnect; KDEConnect.PluginChecker { pluginName: "battery" }',
-                    root, "pluginChecker"
-                )
-                pluginChecker.device = deviceInterface
-                
-                if (pluginChecker.available) {
-                    var batteryInterface = KDEConnect.DeviceBatteryDbusInterfaceFactory.create(deviceId)
-                    if (batteryInterface && batteryInterface.charge >= 0) {
-                        var kdeDeviceType = getKdeConnectDeviceType(deviceInterface)
-                        newList.push({
-                            name: deviceInterface.name,
-                            icon: resolveIcon(deviceInterface.name, getKdeConnectIcon(kdeDeviceType)),
-                            percentage: batteryInterface.charge,
-                            isCharging: batteryInterface.isCharging,
-                            isMain: false,
-                            deviceType: kdeDeviceType
-                        })
-                    }
-                }
-                
-                pluginChecker.destroy()
-            } catch (e) {
-                console.log("KDE Connect device error:", e)
+            if (wrapper.hasBatteryConfig && wrapper.charge >= 0) {
+                var kdeDeviceType = getKdeConnectDeviceType(wrapper.deviceType)
+                newList.push({
+                    name: wrapper.deviceName,
+                    icon: resolveIcon(wrapper.deviceName, getKdeConnectIcon(kdeDeviceType)),
+                    percentage: wrapper.charge,
+                    isCharging: wrapper.isCharging,
+                    isMain: false,
+                    deviceType: kdeDeviceType
+                })
             }
         }
         
@@ -212,9 +323,9 @@ Item {
         mainDevice = mainBat
     }
     
-    function getKdeConnectDeviceType(device) {
+    function getKdeConnectDeviceType(typeStr) {
         // KDE Connect device types: smartphone, tablet, desktop, laptop, tv
-        var type = device.type || ""
+        var type = typeStr || ""
         type = type.toLowerCase()
         if (type === "smartphone" || type === "phone") return "phone"
         if (type === "tablet") return "tablet"

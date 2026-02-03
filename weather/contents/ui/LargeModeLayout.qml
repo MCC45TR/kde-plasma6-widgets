@@ -362,7 +362,7 @@ Item {
         width: parent.width
         height: parent.height
         radius: 20 * weatherRoot.radiusMultiplier
-        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.98)
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, weatherRoot.backgroundOpacity)
         z: 200
         clip: true
 

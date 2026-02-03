@@ -8,17 +8,19 @@ PlasmoidItem {
     id: root
     
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
-    preferredRepresentation: compactRepresentation
+    // preferredRepresentation: compactRepresentation
+    // preferredRepresentation: compactRepresentation
     
     // Tooltip for the plasmoid
-    Plasmoid.toolTipMainText: i18n("MSI Control Center")
-    Plasmoid.toolTipSubText: msiModel.isAvailable ? 
-        i18n("CPU: %1°C | GPU: %2°C", msiModel.cpuTemp, msiModel.gpuTemp) : 
-        i18n("msi-ec driver not available")
+    // Plasmoid.toolTipMainText: i18n("MSI Control Center")
+    // Plasmoid.toolTipSubText: msiModel.isAvailable ? 
+    //    i18n("CPU: %1°C | GPU: %2°C", msiModel.cpuTemp, msiModel.gpuTemp) : 
+    //    i18n("msi-ec driver not available")
     
     // Data model
     MsiEcModel {
         id: msiModel
+        Component.onCompleted: console.log("MsiEcModel loaded in main.qml with id:", msiModel)
     }
     
     // Compact representation (system tray icon)
@@ -36,6 +38,7 @@ PlasmoidItem {
     // Full representation (popup)
     fullRepresentation: ControlPanel {
         msiModel: msiModel
+        Component.onCompleted: console.log("ControlPanel loaded. msiModel is:", msiModel)
         
         Layout.preferredWidth: Kirigami.Units.gridUnit * 22
         Layout.preferredHeight: Kirigami.Units.gridUnit * 28

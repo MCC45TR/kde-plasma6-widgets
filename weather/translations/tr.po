@@ -594,3 +594,87 @@ msgstr "Gelecek hafta %1"
 #: contents/ui/ForecastDetailsView.qml:370
 msgid "2 weeks later %1"
 msgstr "2 hafta sonra %1"
+
+#: contents/ui/config/config.qml:14
+msgid "Notifications"
+msgstr "Bildirimler"
+
+#: contents/ui/config/ConfigNotifications.qml:42
+msgid "Weather Notifications"
+msgstr "Hava Durumu Bildirimleri"
+
+#: contents/ui/config/ConfigNotifications.qml:57
+msgid "Enable weather notifications"
+msgstr "Hava durumu bildirimlerini etkinleştir"
+
+#: contents/ui/config/ConfigNotifications.qml:64
+msgid "When enabled, the widget will send Plasma desktop notifications based on weather conditions."
+msgstr "Etkinleştirildiğinde, widget hava koşullarına göre Plasma masaüstü bildirimleri gönderecektir."
+
+#: contents/ui/config/ConfigNotifications.qml:75
+msgid "Routine Notifications"
+msgstr "Rutin Bildirimler"
+
+#: contents/ui/config/ConfigNotifications.qml:92
+msgid "Daily weather summary"
+msgstr "Günlük hava durumu özeti"
+
+#: contents/ui/config/ConfigNotifications.qml:104
+msgid "Notification time:"
+msgstr "Bildirim zamanı:"
+
+#: contents/ui/config/ConfigNotifications.qml:121
+msgid "(24-hour format)"
+msgstr "(24 saat biçimi)"
+
+#: contents/ui/config/ConfigNotifications.qml:128
+msgid "Receive a daily notification with current weather and today's forecast."
+msgstr "Mevcut hava durumu ve bugünün tahmini ile günlük bir bildirim alın."
+
+#: contents/ui/config/ConfigNotifications.qml:139
+msgid "Weather Alerts"
+msgstr "Hava Durumu Uyarıları"
+
+#: contents/ui/config/ConfigNotifications.qml:160
+msgid "Severe weather alerts"
+msgstr "Şiddetli hava durumu uyarıları"
+
+#: contents/ui/config/ConfigNotifications.qml:163
+msgid "Thunderstorm, heavy snow, dense fog"
+msgstr "Fırtına, yoğun kar, yoğun sis"
+
+#: contents/ui/config/ConfigNotifications.qml:182
+msgid "Rain forecast alert"
+msgstr "Yağmur tahmini uyarısı"
+
+#: contents/ui/config/ConfigNotifications.qml:185
+msgid "Notify when rain is expected in the next few hours"
+msgstr "Sonraki birkaç saat içinde yağmur beklendiğinde bildir"
+
+#: contents/ui/config/ConfigNotifications.qml:196
+msgid "Temperature Alerts"
+msgstr "Sıcaklık Uyarıları"
+
+#: contents/ui/config/ConfigNotifications.qml:213
+msgid "Low temperature warning"
+msgstr "Düşük sıcaklık uyarısı"
+
+#: contents/ui/config/ConfigNotifications.qml:225
+msgid "Alert when below:"
+msgstr "Şunun altındayken uyar:"
+
+#: contents/ui/config/ConfigNotifications.qml:242
+msgid "(Celsius)"
+msgstr "(Celsius)"
+
+#: contents/ui/config/ConfigNotifications.qml:249
+msgid "Receive an alert when the current temperature drops below your set threshold."
+msgstr "Mevcut sıcaklık ayarladığınız eşiğin altına düştüğünde bir uyarı alın."
+
+#: contents/ui/config/ConfigNotifications.qml:282
+msgid "How it works"
+msgstr "Nasıl çalışır"
+
+#: contents/ui/config/ConfigNotifications.qml:287
+msgid "Notifications are checked each time weather data is refreshed. To avoid spam, each alert type has a cooldown period."
+msgstr "Bildirimler hava durumu verileri her yenilendiğinde kontrol edilir. Spam'i önlemek için her uyarı türünün bir bekleme süresi vardır."

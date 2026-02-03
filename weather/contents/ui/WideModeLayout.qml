@@ -282,11 +282,16 @@ Item {
                     itemIndex: index
                     
                     onClicked: function(data, idx, cardRect) {
-                        if (!forecastMode && idx > 0 && data.hasDetails) {
-                            var globalPos = mapToItem(wideLayoutContainer, 0, 0)
-                            weatherRoot.clickedCardRect = Qt.rect(globalPos.x, globalPos.y, width, height)
-                            weatherRoot.selectedForecast = data
-                            weatherRoot.showForecastDetails = true
+                        if (!forecastMode) {
+                            if (idx === 0) {
+                                currentSection.isExpanded = true
+                                autoCloseTimer.restart()
+                            } else if (data.hasDetails) {
+                                var globalPos = mapToItem(wideLayoutContainer, 0, 0)
+                                weatherRoot.clickedCardRect = Qt.rect(globalPos.x, globalPos.y, width, height)
+                                weatherRoot.selectedForecast = data
+                                weatherRoot.showForecastDetails = true
+                            }
                         }
                     }
 
@@ -309,7 +314,7 @@ Item {
         width: parent.width
         height: parent.height
         radius: 20 * weatherRoot.radiusMultiplier
-        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.98)
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, weatherRoot.backgroundOpacity)
         z: 200
         clip: true
 
