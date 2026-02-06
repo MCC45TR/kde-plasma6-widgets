@@ -41,7 +41,7 @@ PlasmoidItem {
              disconnectSource(source)
         }
         function fetch() {
-            connectSource("hostname")
+            connectSource("uname -n")
         }
     }
     

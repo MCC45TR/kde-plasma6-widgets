@@ -34,12 +34,18 @@ import Qt5Compat.GraphicalEffects
         
         // --- TOP SECTION (Main Card) ---
         Item {
-            Layout.fillWidth: true
+            Layout.fillWidth: root.viewMode !== "broad"
+            Layout.preferredWidth: {
+                if (root.viewMode === "broad") {
+                     return height < (root.width / 2) ? height : (root.width / 2)
+                }
+                return -1
+            }
             // Fill height only if it's the only item (small/extrasmall) or side-by-side (broad)
             Layout.fillHeight: root.viewMode === "small" || root.viewMode === "extrasmall" || root.viewMode === "broad"
             
-            // Fixed 200px height for Large/Tall modes (where it stacks vertically with list)
-            Layout.preferredHeight: (root.viewMode === "large" || root.viewMode === "tall") ? 200 : -1
+            // Fixed 134px height for Large/Tall modes (where it stacks vertically with list)
+            Layout.preferredHeight: (root.viewMode === "large" || root.viewMode === "tall") ? 134 : -1
             
             Shape {
                 id: deviceInfoCard
@@ -104,13 +110,13 @@ import Qt5Compat.GraphicalEffects
                 // Main Device Content
                 RowLayout {
                     anchors.fill: parent
-                    anchors.margins: root.contentGap
-                    spacing: root.contentGap
+                    anchors.margins: 5
+                    spacing: 5
                     
                     // Left Side: Rounded Square with Laptop Icon (Swapped)
                     Item {
                         // Square slot relative to height. 
-                        // RowLayout height is effectively parent.height - 20 (margins).
+                        // RowLayout height is effectively parent.height - 10 (margins).
                         // We want this item to be square.
                         Layout.preferredWidth: height
                         Layout.fillHeight: true
@@ -123,15 +129,56 @@ import Qt5Compat.GraphicalEffects
                                 if (root.iconShape === "circle") return width / 2
                                 if (root.iconShape === "rounded") return 20
                                 // "square" (Default/Adaptive)
-                                return deviceInfoCard.topRadius - root.contentGap
+                                return deviceInfoCard.topRadius - 5
                             }
-                            color: Kirigami.Theme.backgroundColor
+                            color: root.viewMode === "broad" ? "transparent" : Kirigami.Theme.backgroundColor
                             
                             Kirigami.Icon {
-                                anchors.fill: parent
-                                anchors.margins: 10
+                                id: deviceIcon
+                                anchors.centerIn: root.viewMode === "broad" ? null : parent
+                                anchors.top: root.viewMode === "broad" ? parent.top : undefined
+                                anchors.left: root.viewMode === "broad" ? parent.left : undefined
+                                
+                                property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0) * (root.viewMode === "broad" ? 0.66 : 1.0)
+                                width: iconSize
+                                height: iconSize
                                 source: "computer-laptop"
                                 color: "white"
+                            }
+
+                            TextMetrics {
+                                id: tm
+                                font: broadPercentText.font
+                                text: "%" + (mainDevice ? mainDevice.percentage : "")
+                            }
+
+                            Text {
+                                id: broadPercentText
+                                visible: root.viewMode === "broad"
+                                anchors.left: deviceIcon.right
+                                anchors.verticalCenter: deviceIcon.verticalCenter
+                                anchors.right: parent.right
+                                anchors.leftMargin: 5
+                                
+                                color: "white"
+                                font.pixelSize: deviceIcon.height * 0.8
+                                font.family: "Roboto Condensed" 
+                                font.weight: Font.Light
+                                
+                                text: mainDevice ? (tm.width > width ? mainDevice.percentage : tm.text) : "--"
+                            }
+                            
+                            Text {
+                                visible: root.viewMode === "broad"
+                                anchors.top: deviceIcon.bottom
+                                anchors.left: deviceIcon.left
+                                anchors.leftMargin: 5
+                                anchors.topMargin: -5
+                                
+                                text: hostName.toUpperCase().replace(/\n/g, " ")
+                                color: Qt.rgba(1,1,1,0.9)
+                                font.pixelSize: 12
+                                font.bold: true
                             }
                         }
                     }
@@ -145,11 +192,12 @@ import Qt5Compat.GraphicalEffects
                         
                         // Percentage Row
                         RowLayout {
+                            visible: root.viewMode !== "broad"
                             spacing: 4
                             Text {
                                 text: mainDevice ? "%" + mainDevice.percentage : "--"
                                 color: "white"
-                                font.pixelSize: 84 // Huge text
+                                font.pixelSize: Math.max(36, deviceInfoCard.height * 0.40) // Adaptive font size
                                 font.family: "Roboto Condensed" 
                                 font.weight: Font.Light
                                 lineHeight: 0.8
@@ -166,6 +214,7 @@ import Qt5Compat.GraphicalEffects
                         
                         // Hostname
                         Text {
+                            visible: root.viewMode !== "broad"
                             text: hostName.toUpperCase().replace(/\n/g, " ")
                             color: Qt.rgba(1,1,1,0.9)
                             font.pixelSize: 15
@@ -185,126 +234,23 @@ import Qt5Compat.GraphicalEffects
                         }
                         
                         // Spacer
-                        Item { height: 8 }
+                        Item { height: 4 }
                         
                         // Power Profile Switcher
-                        Rectangle {
-                            id: track
-                            height: 36
-                            width: 140
-                            color: Qt.rgba(0,0,0,0.3)
-                            radius: 10
-                            
-                            // Highlight Indicator
-                            Rectangle {
-                                id: highlightRect
-                                width: parent.width / 3
-                                height: parent.height
-                                radius: 10
-                                color: Qt.rgba(1,1,1,0.2)
-                                
-                                // Position Logic:
-                                // If dragging, follow mouse (clamped).
-                                // If not dragging, strictly follow the current profile state.
-                                x: {
-                                    if (switcherMouseArea.drag.active) {
-                                        // While dragging, x is controlled by MouseArea drag target logic mostly,
-                                        // but we need to ensure it doesn't snap back due to binding.
-                                        // Actually, drag.target binding usually overrides this.
-                                        // But to act as a fallback/initial pos:
-                                        return x // Keep current pos
-                                    }
-                                    
-                                    // State-based positioning
-                                    if (currentPowerProfile === "balanced") return width
-                                    if (currentPowerProfile === "performance") return width * 2
-                                    return 0 // "power-saver"
-                                }
-                                
-                                // Disable animation during drag for 1:1 feel, enable for snap
-                                Behavior on x {
-                                    enabled: !switcherMouseArea.drag.active
-                                    NumberAnimation {
-                                        duration: 200
-                                        easing.type: Easing.OutBack // "Gravity" feel - slightly bouncy/smooth
-                                        easing.overshoot: 0.8
-                                    }
-                                }
-                            }
-                            
-                            // Icons Layer
-                            RowLayout {
-                                anchors.fill: parent
-                                spacing: 0
-                                
-                                Item {
-                                    Layout.fillWidth: true; Layout.fillHeight: true
-                                    Kirigami.Icon {
-                                        anchors.centerIn: parent
-                                        source: "battery-profile-powersave"
-                                        width: 20; height: 20
-                                        color: currentPowerProfile === "power-saver" ? "#4CAF50" : "white"
-                                    }
-                                }
-                                Item {
-                                    Layout.fillWidth: true; Layout.fillHeight: true
-                                    Kirigami.Icon {
-                                        anchors.centerIn: parent
-                                        source: width <= 22 ? "power-profile-balanced-symbolic" : "battery-profile-balanced"
-                                        width: 20; height: 20
-                                        color: currentPowerProfile === "balanced" ? "#FFC107" : "white"
-                                    }
-                                }
-                                Item {
-                                    Layout.fillWidth: true; Layout.fillHeight: true
-                                    Kirigami.Icon {
-                                        anchors.centerIn: parent
-                                        source: "battery-profile-performance"
-                                        width: 20; height: 20
-                                        color: currentPowerProfile === "performance" ? "#FF5252" : "white"
-                                    }
-                                }
-                            }
-                            
-                            // Interaction Layer
-                            MouseArea {
-                                id: switcherMouseArea
-                                anchors.fill: parent
-                                
-                                // Drag logic
-                                drag.target: highlightRect
-                                drag.axis: Drag.XAxis
-                                drag.minimumX: 0
-                                drag.maximumX: track.width - highlightRect.width
-                                
-                                onClicked: (mouse) => {
-                                    // Simple click logic
-                                    var slotWidth = width / 3
-                                    if (mouse.x < slotWidth) root.setPowerProfile("power-saver")
-                                    else if (mouse.x < slotWidth * 2) root.setPowerProfile("balanced")
-                                    else root.setPowerProfile("performance")
-                                }
-                                
-                                onReleased: {
-                                    // Gravity/Snap logic
-                                    if (drag.active) {
-                                        var center = highlightRect.x + (highlightRect.width / 2)
-                                        var slotWidth = width / 3
-                                        
-                                        var targetProfile = "power-saver"
-                                        if (center > slotWidth && center < slotWidth * 2) targetProfile = "balanced"
-                                        else if (center >= slotWidth * 2) targetProfile = "performance"
-                                        
-                                        root.setPowerProfile(targetProfile)
-                                        
-                                        // Note: The Property binding on 'x' in highlightRect will take over 
-                                        // as soon as drag.active becomes false, animating it to the correct 
-                                        // position for 'targetProfile'.
-                                    }
-                                }
-                            }
+                        Loader {
+                            sourceComponent: powerSwitcherComponent
+                            visible: root.viewMode !== "broad"
                         }
                     }
+                }
+
+                Loader {
+                    anchors.bottom: parent.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottomMargin: 5
+                    sourceComponent: powerSwitcherComponent
+                    visible: root.viewMode === "broad"
+                    onLoaded: item.width = Qt.binding(() => parent.width - 10)
                 }
             }
         }
@@ -391,6 +337,106 @@ import Qt5Compat.GraphicalEffects
                         Layout.preferredWidth: parent.height < 60 ? 24 : 32
                         Layout.preferredHeight: Layout.preferredWidth
                         color: modelData.percentage > 15 && modelData.percentage <= 30 ? "black" : "white"
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: powerSwitcherComponent
+        Rectangle {
+            id: track
+            height: 30
+            width: 140
+            color: Qt.rgba(0,0,0,0.3)
+            radius: 10
+            
+            // Highlight Indicator
+            Rectangle {
+                id: highlightRect
+                width: parent.width / 3
+                height: parent.height
+                radius: 10
+                color: Qt.rgba(1,1,1,0.2)
+                
+                // Position Logic:
+                x: {
+                    if (switcherMouseArea.drag.active) return x
+                    if (currentPowerProfile === "balanced") return width
+                    if (currentPowerProfile === "performance") return width * 2
+                    return 0 // "power-saver"
+                }
+                
+                Behavior on x {
+                    enabled: !switcherMouseArea.drag.active
+                    NumberAnimation {
+                        duration: 200
+                        easing.type: Easing.OutBack
+                        easing.overshoot: 0.8
+                    }
+                }
+            }
+            
+            // Icons Layer
+            RowLayout {
+                anchors.fill: parent
+                spacing: 0
+                
+                Item {
+                    Layout.fillWidth: true; Layout.fillHeight: true
+                    Kirigami.Icon {
+                        anchors.centerIn: parent
+                        source: "battery-profile-powersave"
+                        width: 20; height: 20
+                        color: currentPowerProfile === "power-saver" ? "#4CAF50" : "white"
+                    }
+                }
+                Item {
+                    Layout.fillWidth: true; Layout.fillHeight: true
+                    Kirigami.Icon {
+                        anchors.centerIn: parent
+                        source: width <= 22 ? "power-profile-balanced-symbolic" : "battery-profile-balanced"
+                        width: 20; height: 20
+                        color: currentPowerProfile === "balanced" ? "#FFC107" : "white"
+                    }
+                }
+                Item {
+                    Layout.fillWidth: true; Layout.fillHeight: true
+                    Kirigami.Icon {
+                        anchors.centerIn: parent
+                        source: "battery-profile-performance"
+                        width: 20; height: 20
+                        color: currentPowerProfile === "performance" ? "#FF5252" : "white"
+                    }
+                }
+            }
+            
+            // Interaction Layer
+            MouseArea {
+                id: switcherMouseArea
+                anchors.fill: parent
+                
+                drag.target: highlightRect
+                drag.axis: Drag.XAxis
+                drag.minimumX: 0
+                drag.maximumX: track.width - highlightRect.width
+                
+                onClicked: (mouse) => {
+                    var slotWidth = width / 3
+                    if (mouse.x < slotWidth) root.setPowerProfile("power-saver")
+                    else if (mouse.x < slotWidth * 2) root.setPowerProfile("balanced")
+                    else root.setPowerProfile("performance")
+                }
+                
+                onReleased: {
+                    if (drag.active) {
+                        var center = highlightRect.x + highlightRect.width / 2
+                        var slotWidth = width / 3
+                        var targetProfile = "power-saver"
+                        if (center > slotWidth && center < slotWidth * 2) targetProfile = "balanced"
+                        else if (center >= slotWidth * 2) targetProfile = "performance"
+                        root.setPowerProfile(targetProfile)
                     }
                 }
             }
