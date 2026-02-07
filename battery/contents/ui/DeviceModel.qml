@@ -3,6 +3,7 @@ import QtQml
 import org.kde.plasma.plasma5support as P5Support
 import org.kde.bluezqt as BluezQt
 import org.kde.kdeconnect as KDEConnect
+import "Formatter.js" as Formatter
 
 Item {
     id: root
@@ -113,23 +114,15 @@ Item {
         refreshDevices()
     }
     
+
+
     // === TIME TO EVENT ===
     property string timeToEvent: ""
     property bool isTimeToFull: false
     
     function formatTimeToEvent(msec, charging) {
-        if (msec <= 0) return ""
-        
-        var totalMins = Math.floor(msec / 60000)
-        var h = Math.floor(totalMins / 60)
-        var m = totalMins % 60
-        
-        var timeStr = ""
-        if (h > 0) {
-            timeStr = h + "h " + m + "m"
-        } else {
-            timeStr = m + "m"
-        }
+        var timeStr = Formatter.formatDuration(msec)
+        if (timeStr === "") return ""
         
         if (charging) {
             return i18n("Full in %1", timeStr)

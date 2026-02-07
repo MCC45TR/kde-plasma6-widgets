@@ -1,160 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-07 23:59+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: contents/ui/main.qml
-msgid "Device Label"
-msgstr ""
-
-#: contents/ui/DeviceModel.qml
-msgid "Full in %1"
-msgstr ""
-
-#: contents/ui/DeviceModel.qml
-msgid "Empty in %1"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:31
 msgid "Behavior:"
-msgstr ""
+msgstr "Comportament:"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:32
 msgid "Use custom battery icons"
-msgstr ""
+msgstr "Utilizează pictograme personalizate"
 
-#: contents/ui/ConfigGeneral.qml
-msgid "Icon Card Shape:"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
-msgid "Adaptive Square (Matches Parent)"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
-msgid "Rounded Square (Fixed 20px)"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
-msgid "Circle"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:42
 msgid "Widget Margin:"
-msgstr ""
+msgstr "Marginea widgetului:"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:46
 msgid "Normal (10px)"
-msgstr ""
+msgstr "Normal (10px)"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:47
 msgid "Less (5px)"
-msgstr ""
+msgstr "Mai puțin (5px)"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:48
 msgid "None (0px)"
-msgstr ""
+msgstr "Niciuna (0px)"
 
-#: contents/ui/ConfigGeneral.qml
-msgid "Laptop Icon:"
-msgstr ""
+#: contents/ui/ConfigGeneral.qml:74
+msgid "Device Icons:"
+msgstr "Pictograme dispozitiv:"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:78
+msgid "Default"
+msgstr "Implicit"
+
+#: contents/ui/ConfigGeneral.qml:79
+msgid "Alternative (Trusted)"
+msgstr "Alternativ (De încredere)"
+
+#: contents/ui/ConfigGeneral.qml:101
 msgid "Device Type:"
-msgstr ""
+msgstr "Tip dispozitiv:"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:105
 msgid "Laptop"
-msgstr ""
+msgstr "Laptop"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:106
 msgid "Desktop"
-msgstr ""
+msgstr "Desktop"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:128
 msgid "Display:"
-msgstr ""
+msgstr "Afișaj:"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:129
 msgid "Show charging indicator icon"
-msgstr ""
+msgstr "Arată pictograma indicatorului de încărcare"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:137
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacitatea fundalului:"
 
-#: contents/ui/ConfigGeneral.qml
-msgid "Full (100%)"
-msgstr ""
+#: contents/ui/ConfigGeneral.qml:141 contents/ui/ConfigGeneral.qml:142
+#: contents/ui/ConfigGeneral.qml:143 contents/ui/ConfigGeneral.qml:144
+#: contents/ui/ConfigGeneral.qml:145
+#, javascript-format
+msgid "%1%"
+msgstr "%1%"
 
-#: contents/ui/ConfigGeneral.qml
-msgid "High (75%)"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
-msgid "Medium (50%)"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
-msgid "Low (25%)"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
-msgid "None (0%)"
-msgstr ""
-
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:167
 msgid "Corner Radius:"
-msgstr ""
+msgstr "Raza colțului:"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:171
 msgid "Normal (20px)"
-msgstr ""
+msgstr "Normal (20px)"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:172
 msgid "Small (10px)"
-msgstr ""
+msgstr "Mică (10px)"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:173
 msgid "Square (0px)"
-msgstr ""
+msgstr "Pătrată (0px)"
 
-#: contents/ui/ConfigGeneral.qml
+#: contents/ui/ConfigGeneral.qml:198
 msgid "Battery Bars:"
+msgstr "Bare de baterie:"
+
+#: contents/ui/ConfigGeneral.qml:202
+msgid "Default (radius based)"
+msgstr "Implicit (bazat pe rază)"
+
+#: contents/ui/ConfigGeneral.qml:203
+msgid "Pill geometry"
+msgstr "Geometrie pastilă"
+
+#: contents/ui/ConfigGeneral.qml:265
+msgid ""
+"No power profile management found. Install one of the following packages:\n"
+"\n"
+"• power-profiles-daemon (Fedora, Ubuntu, Debian, Arch)\n"
+"• tuned (Fedora, RHEL, CentOS)\n"
+"• tuned-ppd (openSUSE)\n"
+"• tlp (All distros - alternative)\n"
+"\n"
+"Install commands:\n"
+"Fedora/RHEL: sudo dnf install power-profiles-daemon\n"
+"Ubuntu/Debian: sudo apt install power-profiles-daemon\n"
+"Arch: sudo pacman -S power-profiles-daemon\n"
+"openSUSE: sudo zypper install tuned-ppd"
 msgstr ""
 
-#: contents/ui/ConfigGeneral.qml
-msgid "Pill geometry mode (radius = height/2)"
+#: contents/ui/DeviceModel.qml:128
+msgid "Full in %1"
+msgstr "Plin în %1"
+
+#: contents/ui/DeviceModel.qml:130
+msgid "Empty in %1"
+msgstr "Gol în %1"
+
+#: contents/ui/HorizontalBatteryBar.qml:71
+msgid ""
+"%1\n"
+"%2%"
 msgstr ""
 
-#: contents/ui/LargeView.qml
-msgid "Remaining to %1"
-msgstr ""
+#: contents/ui/HorizontalBatteryBar.qml:71
+msgid "%1 (%2%)"
+msgstr "%1 (%2%)"
 
-#: contents/ui/LargeView.qml
+#: contents/ui/main.qml:51
+msgid "Device Label"
+msgstr "Etichetă dispozitiv"
+
+#: contents/ui/TallView.qml:229 contents/ui/WideView.qml:202
+#: contents/ui/WideView.qml:290
+msgctxt "Time to full"
+msgid "Time to full: %1"
+msgstr "Timp până la plin: %1"
+
+#: contents/ui/TallView.qml:231 contents/ui/WideView.qml:204
+#: contents/ui/WideView.qml:292
+msgctxt "Time remaining"
+msgid "Remaining: %1"
+msgstr "Ramas: %1"
+
+#: contents/ui/Formatter.js:8
 msgctxt "minutes"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 m"
 
-#: contents/ui/LargeView.qml
+#: contents/ui/Formatter.js:12
 msgctxt "hours and minutes"
 msgid "%1 h %2 m"
-msgstr ""
+msgstr "%1 h %2 m"
 
-#: contents/ui/LargeView.qml
+#: contents/ui/Formatter.js:17
 msgctxt "days and hours"
 msgid "%1 d %2 h"
-msgstr ""
+msgstr "%1 z %2 h"
 
-#: contents/ui/SmallView.qml
-msgid "Power Saver"
-msgstr ""
-
-#: contents/ui/SmallView.qml
-msgid "Balanced"
-msgstr ""
-
-#: contents/ui/SmallView.qml
-msgid "Performance"
-msgstr ""
+#: contents/config/config.qml:6
+msgid "General"
+msgstr "General"

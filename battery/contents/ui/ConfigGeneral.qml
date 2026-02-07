@@ -17,6 +17,8 @@ Kirigami.FormLayout {
     property bool cfg_showChargingIconDefault: true
     property string cfg_backgroundOpacityDefault: "full"
     property string cfg_cornerRadiusDefault: "normal"
+    property bool cfg_pillGeometryDefault: false
+    property bool cfg_useAlternativeIconsDefault: false
     
     // Alias to "useCustomIcons" entry in main.xml
     property alias cfg_useCustomIcons: useCustomIcons.checked
