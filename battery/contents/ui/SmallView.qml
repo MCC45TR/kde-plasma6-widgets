@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import QtQuick.Shapes
 import Qt5Compat.GraphicalEffects
+import "Formatter.js" as Formatter
 
     Item {
     id: root
@@ -17,47 +18,18 @@ import Qt5Compat.GraphicalEffects
     property bool hasPowerProfiles: true
     signal setPowerProfile(string profile)
     
-    function formatDuration(msec) {
-        if (msec <= 0) return ""
-        var totalMins = Math.floor(msec / 60000)
-        
-        if (totalMins < 60) {
-            return i18nc("minutes", "%1 m", totalMins)
-        } else if (totalMins < 1440) {
-            var h = Math.floor(totalMins / 60)
-            var m = totalMins % 60
-            return i18nc("hours and minutes", "%1 h %2 m", h, m)
-        } else {
-            var d = Math.floor(totalMins / 1440)
-            var h = Math.round((totalMins % 1440) / 60)
-            if (h === 24) { d++; h = 0; }
-            return i18nc("days and hours", "%1 d %2 h", d, h)
-        }
-    }
-
     // View Mode (Adaptive)
     property string viewMode: "big" // "small", "wide", "big"
     property string iconShape: "square" // "square", "rounded", "circle"
     property bool showChargingIcon: true
-    property string backgroundOpacity: "full"
-    property string cornerRadius: "normal"
     property bool pillGeometry: false
 
-    // Design Tokens
-    readonly property int backgroundRadius: cornerRadius === "normal" ? 20 : (cornerRadius === "small" ? 10 : 0)
-    readonly property double opacityValue: {
-        switch(backgroundOpacity) {
-            case "full": return 1.0
-            case "high": return 0.75
-            case "medium": return 0.5
-            case "low": return 0.25
-            case "none": return 0.0
-            default: return 1.0
-        }
-    }
-    readonly property int barRadius: cornerRadius === "normal" ? 10 : (cornerRadius === "small" ? 5 : 0)
-    readonly property int switchRadius: Math.max(0, backgroundRadius - contentGap)
-    readonly property int contentGap: 10
+    // Design Tokens (Passed from Main via BigView)
+    property int backgroundRadius: 20
+    property double opacityValue: 1.0
+    property int barRadius: 10
+    property int switchRadius: 10
+    property int contentGap: 10
 
     // --- BOTTOM SECTION (Peripheral List) ---
     ListView {
@@ -65,6 +37,7 @@ import Qt5Compat.GraphicalEffects
         anchors.fill: parent
         anchors.margins: root.contentGap
         spacing: 5
+        snapMode: ListView.SnapToItem
         clip: true
         
         model: {

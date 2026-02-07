@@ -13,18 +13,36 @@ PlasmoidItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     preferredRepresentation: fullRepresentation
     
-    Layout.minimumWidth: 150
-    Layout.minimumHeight: 150
+    Layout.minimumWidth: 140
+    Layout.minimumHeight: 140
     Layout.preferredWidth: 200
     Layout.preferredHeight: 200
 
     readonly property string currentViewMode: {
-        if (width < 160 && height < 160) return "extrasmall"   // Both tiny
-        if (width < 250 && height < 200) return "small"        // Both small (includes 160-199)
-        if (width >= 250 && height < 250) return "wide"        // Wide but short
-        if (width < 200 && height >= 200) return "tall"        // Narrow but tall
-        if (width >= 200 && height >= 350) return "big"        // Wide and very tall
-        return "big"                                           // Wide, medium height (200-449)
+        // Extrasmall Mode Definition (0   <= height < 160)       and (0   <= width < 160)
+        // Small Mode Definition      (160 <= height < 250)       and (160 <= width < 280)
+        // Wide Mode Definition       (160 <= height < 250)       and (280 <= width < infinite)
+        // Tall Mode Definition       (250 <= height < infinite)  and (160 <= width < 280)
+        // Big Mode Definition        (250 <= height < infinite)  and (280 <= width < infinite)
+        // Height bucket: 0 = <160, 1 = 160-249, 2 = >=250
+        var hBucket = height < 160 ? 0 : (height < 250 ? 1 : 2)
+        // Width bucket: 0 = <160, 1 = 160-279, 2 = >=280
+        var wBucket = width < 160 ? 0 : (width < 280 ? 1 : 2)
+        // Combined key: hBucket * 3 + wBucket
+        var key = hBucket * 3 + wBucket
+
+        switch(key) {
+            case 0: return "extrasmall" // h<160, w<160
+            case 1: return "extrasmall" // h<160, 160<=w<280 (fallback)
+            case 2: return "extrasmall" // h<160, w>=280 (fallback)
+            case 3: return "extrasmall" // 160<=h<250, w<160 (fallback)
+            case 4: return "small"      // 160<=h<250, 160<=w<280
+            case 5: return "wide"       // 160<=h<250, w>=280
+            case 6: return "extrasmall" // h>=250, w<160 (fallback)
+            case 7: return "tall"       // h>=250, 160<=w<280
+            case 8: return "big"        // h>=250, w>=280
+            default: return "extrasmall"
+        }
     }
     
     onCurrentViewModeChanged: console.log("View Mode:", currentViewMode, "(" + width + "x" + height + ")")
@@ -82,6 +100,11 @@ PlasmoidItem {
             default: return 1.0
         }
     }
+    
+    readonly property int contentGap: 10
+    readonly property int barRadius: computedRadius === 20 ? 10 : (computedRadius === 10 ? 5 : 0)
+    readonly property int switchRadius: Math.max(0, computedRadius - contentGap)
+
 
     fullRepresentation: Item {
         id: fullRep
@@ -143,9 +166,14 @@ PlasmoidItem {
             viewMode: mode
             iconShape: Plasmoid.configuration.iconShape
             showChargingIcon: Plasmoid.configuration.showChargingIcon
-            backgroundOpacity: Plasmoid.configuration.backgroundOpacity
-            cornerRadius: Plasmoid.configuration.cornerRadius
             pillGeometry: Plasmoid.configuration.pillGeometry
+
+            // Styles (Calculated)
+            backgroundRadius: root.computedRadius
+            opacityValue: root.computedOpacity
+            barRadius: root.barRadius
+            switchRadius: root.switchRadius
+            contentGap: root.contentGap
         }
     }
 }

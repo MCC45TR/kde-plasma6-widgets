@@ -68,7 +68,7 @@ Item {
         }
         
         Text {
-            text: root.deviceName + " (%" + root.percentage + ")"
+            text: root.height >= 60 ? root.deviceName + "\n%" + root.percentage : root.deviceName + " (%" + root.percentage + ")"
             font.bold: true
             font.pixelSize: Math.max(10, Math.min(root.height * 0.45, 20))
             color: Kirigami.Theme.textColor
