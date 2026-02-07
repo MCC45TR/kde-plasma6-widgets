@@ -20,7 +20,7 @@ Item {
     // Bar Background (Track)
     Rectangle {
         anchors.fill: parent
-        color: Qt.rgba(0.3, 0.3, 0.3, 0.5)
+        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
         radius: root.effectiveRadius
     }
     
@@ -32,52 +32,54 @@ Item {
         radius: root.effectiveRadius
         
         // Color Logic
+        property color chargeColor: "#2ecc71"
+        property color criticalColor: Kirigami.Theme.negativeColor || "#e74c3c"
+        property color warningColor: "#FFAA00"
+        property color normalColor: Kirigami.Theme.highlightColor || "#3498db"
+        
         property color barColor: {
-            if (root.isCharging) return "#2ecc71" // Green
+            if (root.isCharging) return chargeColor
             var p = root.percentage
-            if (p <= 15) return Kirigami.Theme.negativeColor
-            if (p <= 30) return "#FFAA00"
-            return Kirigami.Theme.highlightColor
+            if (p <= 15) return criticalColor
+            if (p <= 30) return warningColor
+            return normalColor
         }
         color: barColor
         
         Behavior on width { NumberAnimation { duration: 300; easing.type: Easing.OutQuad } }
-        Behavior on color { ColorAnimation { duration: 200 } }
+        Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutQuad } }
     }
     
-    // Content Row (Inside Bar)
+    // Content Row
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: root.height < 60 ? 5 : 10
-        anchors.rightMargin: root.height < 60 ? 5 : 10
+        anchors.leftMargin: Math.max(2, root.height * 0.15)
+        anchors.rightMargin: Math.max(2, root.height * 0.15)
         anchors.topMargin: 0
         anchors.bottomMargin: 0
-        spacing: root.height < 60 ? 5 : 8
+        spacing: Math.max(2, root.height * 0.1)
         
-        // Icon
         Kirigami.Icon {
             source: root.deviceIcon
-            Layout.preferredWidth: root.height < 60 ? 32 : 48
+            Layout.preferredWidth: Math.min(root.height * 0.8, 48)
             Layout.preferredHeight: Layout.preferredWidth
             Layout.alignment: Qt.AlignVCenter
             color: Kirigami.Theme.textColor
         }
         
-        // Text
         Text {
             text: root.deviceName + " (%" + root.percentage + ")"
             font.bold: true
-            font.pixelSize: root.height < 60 ? 14 : 20
+            font.pixelSize: Math.max(10, Math.min(root.height * 0.45, 20))
             color: Kirigami.Theme.textColor
             elide: Text.ElideRight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
         }
         
-        // Charging Indicator with circular background
         Item {
             visible: root.isCharging && root.showChargingIcon
-            Layout.preferredWidth: root.height < 60 ? 28 : 36
+            Layout.preferredWidth: Math.min(root.height * 0.7, 36)
             Layout.preferredHeight: Layout.preferredWidth
             Layout.alignment: Qt.AlignVCenter
             

@@ -21,7 +21,7 @@ Item {
         return Kirigami.Theme.highlightColor // System Accent
     }
 
-    readonly property color trackColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
+    readonly property color trackColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
     
     // Animation for low battery (<15%)
     // "progress bars ... blink animation 1.0 to 0.5 opacity, 200ms duration, 3s wait"

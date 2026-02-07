@@ -59,54 +59,44 @@ import Qt5Compat.GraphicalEffects
     readonly property int switchRadius: Math.max(0, backgroundRadius - contentGap)
     readonly property int contentGap: 10
 
-    // --- BOTTOM SECTION (Peripheral List) ---
-    ListView {
-        id: deviceList
+    // Switcher Logic
+    Loader {
+        id: viewLoader
         anchors.fill: parent
-        anchors.margins: root.contentGap
-        spacing: 5
-        clip: true
+        asynchronous: false // Load directly to avoid flicker, since we are already inside an asynchronous Loader in main.qml
         
-        model: {
-            // Show all devices, ensure Main is first
-            var main = devices.filter(d => d.isMain);
-            var others = devices.filter(d => !d.isMain);
-            return main.concat(others);
+        source: {
+            if (root.viewMode === "small" || root.viewMode === "extrasmall") {
+                return "SmallView.qml"
+            } else if (root.viewMode === "wide") {
+                return "WideView.qml"
+            } else {
+                return "TallView.qml"
+            }
         }
         
-        delegate: Item {
-            id: delegateRoot
-            width: ListView.view.width
-            
-            readonly property int itemCount: ListView.view.count
-            readonly property real calculatedHeight: {
-                var totalH = ListView.view.height
-                var sp = ListView.view.spacing
-                var minH = 40
+        // Pass properties to loaded item
+        onLoaded: {
+            if (item) {
+                // Binding properties to ensure updates propagate
+                item.devices = Qt.binding(() => root.devices)
+                item.mainDevice = Qt.binding(() => root.mainDevice)
+                item.hostName = Qt.binding(() => root.hostName)
+                item.finishTime = Qt.binding(() => root.finishTime)
+                item.remainingMsec = Qt.binding(() => root.remainingMsec)
+                item.currentPowerProfile = Qt.binding(() => root.currentPowerProfile)
+                item.hasPowerProfiles = Qt.binding(() => root.hasPowerProfiles)
+                item.viewMode = Qt.binding(() => root.viewMode)
+                item.iconShape = Qt.binding(() => root.iconShape)
+                item.showChargingIcon = Qt.binding(() => root.showChargingIcon)
+                item.backgroundOpacity = Qt.binding(() => root.backgroundOpacity)
+                item.cornerRadius = Qt.binding(() => root.cornerRadius)
+                item.pillGeometry = Qt.binding(() => root.pillGeometry)
                 
-                // How many items can fully fit?
-                var maxFit = Math.floor((totalH + sp) / (minH + sp))
-                maxFit = Math.max(1, maxFit)
-                
-                // If we have more items than fit, use maxFit to calculate height (triggers scroll)
-                // Otherwise use actual count to spread evenly
-                var effectiveCount = (itemCount > maxFit) ? maxFit : itemCount
-                
-                return (totalH - (sp * (effectiveCount - 1))) / effectiveCount
-            }
-            
-            height: calculatedHeight
-            
-            HorizontalBatteryBar {
-                anchors.fill: parent
-                // If main device (and named generic "Laptop"), show real hostname
-                deviceName: modelData.isMain && (modelData.name === "Laptop" || modelData.name === "") ? root.hostName : modelData.name
-                deviceIcon: modelData.icon
-                percentage: modelData.percentage
-                isCharging: modelData.isCharging === true
-                showChargingIcon: root.showChargingIcon
-                barRadius: root.barRadius
-                pillGeometry: root.pillGeometry
+                // Connect signal
+                if (item.setPowerProfile) {
+                    item.setPowerProfile.connect(root.setPowerProfile)
+                }
             }
         }
     }

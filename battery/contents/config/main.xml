@@ -45,5 +45,9 @@
             <default>false</default>
             <label>Use pill-shaped battery bars (radius = height/2)</label>
         </entry>
+        <entry name="useAlternativeIcons" type="Bool">
+            <default>false</default>
+            <label>Use alternative KDE Connect device icons (trusted)</label>
+        </entry>
     </group>
 </kcfg>

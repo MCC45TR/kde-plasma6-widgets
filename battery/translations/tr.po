@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: contents/ui/main.qml
+msgid "Device Label"
+msgstr "Cihaz Etiketi"
+
+#: contents/ui/DeviceModel.qml
+msgid "Full in %1"
+msgstr "%1 içinde tam dolu"
+
+#: contents/ui/DeviceModel.qml
+msgid "Empty in %1"
+msgstr "%1 içinde boş"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Behavior:"
+msgstr "Davranış:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Use custom battery icons"
+msgstr "Özel pil simgelerini kullan"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Icon Card Shape:"
+msgstr "Simge Kartı Şekli:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Adaptive Square (Matches Parent)"
+msgstr "Uyarlanabilir Kare (Ebeveynle Eşleşir)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Rounded Square (Fixed 20px)"
+msgstr "Yuvarlatılmış Kare (Sabit 20px)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Circle"
+msgstr "Daire"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Widget Margin:"
+msgstr "Araç Takımı Kenar Boşluğu:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Less (5px)"
+msgstr "Az (5px)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "None (0px)"
+msgstr "Yok (0px)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Laptop Icon:"
+msgstr "Dizüstü Bilgisayar Simgesi:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Device Type:"
+msgstr "Cihaz Türü:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Laptop"
+msgstr "Dizüstü Bilgisayar"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Desktop"
+msgstr "Masaüstü Bilgisayar"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Display:"
+msgstr "Görünüm:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Show charging indicator icon"
+msgstr "Şarj göstergesi simgesini göster"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Background Opacity:"
+msgstr "Arka Plan Opaklığı:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Full (100%)"
+msgstr "Tam (%%100)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "High (75%)"
+msgstr "Yüksek (%%75)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Medium (50%)"
+msgstr "Orta (%%50)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Low (25%)"
+msgstr "Düşük (%%25)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "None (0%)"
+msgstr "Yok (%%0)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Corner Radius:"
+msgstr "Köşe Yarıçapı:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Normal (20px)"
+msgstr "Normal (20px)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Small (10px)"
+msgstr "Küçük (10px)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Square (0px)"
+msgstr "Kare (0px)"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Battery Bars:"
+msgstr "Pil Çubukları:"
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Pill geometry mode (radius = height/2)"
+msgstr "Hap geometrisi modu (yarıçap = yükseklik/2)"
+
+#: contents/ui/LargeView.qml
+msgid "Remaining to %1"
+msgstr "Kalan süre: %1"
+
+#: contents/ui/LargeView.qml
+msgctxt "minutes"
+msgid "%1 m"
+msgstr "%1 dk"
+
+#: contents/ui/LargeView.qml
+msgctxt "hours and minutes"
+msgid "%1 h %2 m"
+msgstr "%1 s %2 dk"
+
+#: contents/ui/LargeView.qml
+msgctxt "days and hours"
+msgid "%1 d %2 h"
+msgstr "%1 g %2 s"
+
+#: contents/ui/SmallView.qml
+msgid "Power Saver"
+msgstr "Güç Tasarrufu"
+
+#: contents/ui/SmallView.qml
+msgid "Balanced"
+msgstr "Dengeli"
+
+#: contents/ui/SmallView.qml
+msgid "Performance"
+msgstr "Performans"

@@ -26,6 +26,8 @@ Item {
     property string currentPowerProfile: "balanced"
     property var availableProfiles: ["power-saver", "balanced", "performance"]
     property string powerBackend: "" // "tuned", "ppd", or ""
+    property bool hasPowerProfiles: powerBackend !== ""
+    property bool powerProfilesDetectionComplete: false
     
     P5Support.DataSource {
         id: powerProfileSource
@@ -33,41 +35,44 @@ Item {
         connectedSources: []
         
         onNewData: (source, data) => {
-            if (data["exit code"] > 0) return
-            
-            var stdout = data["stdout"].trim()
+            var stdout = (data["stdout"] || "").trim()
+            var exitCode = data["exit code"]
             
             // Backend Detection & Reading
-            if (source === "check_backend") {
-                // Determine backend based on output
-                disconnectSource("check_backend")
-                return
-            }
-            
             if (source === "powerprofilesctl get") {
-                root.powerBackend = "ppd"
-                root.currentPowerProfile = stdout
+                if (exitCode === 0 && stdout !== "") {
+                    root.powerBackend = "ppd"
+                    root.currentPowerProfile = stdout
+                }
+                disconnectSource(source)
             } 
             else if (source === "tuned-adm active") {
-                root.powerBackend = "tuned"
-                // Output format: "Current active profile: balanced"
-                var parts = stdout.split(": ")
-                if (parts.length > 1) {
-                    var profile = parts[1].trim()
-                    // Map tuned profile to UI profile
-                    if (profile === "powersave") root.currentPowerProfile = "power-saver"
-                    else if (profile === "throughput-performance") root.currentPowerProfile = "performance"
-                    else root.currentPowerProfile = "balanced"
+                if (exitCode === 0 && stdout !== "") {
+                    // Only set tuned if ppd wasn't found
+                    if (root.powerBackend === "") {
+                        root.powerBackend = "tuned"
+                        // Output format: "Current active profile: balanced"
+                        var parts = stdout.split(": ")
+                        if (parts.length > 1) {
+                            var profile = parts[1].trim()
+                            // Map tuned profile to UI profile
+                            if (profile === "powersave") root.currentPowerProfile = "power-saver"
+                            else if (profile === "throughput-performance") root.currentPowerProfile = "performance"
+                            else root.currentPowerProfile = "balanced"
+                        }
+                    }
                 }
+                disconnectSource(source)
+                // Mark detection as complete after checking both
+                root.powerProfilesDetectionComplete = true
             }
-            
-            disconnectSource(source)
+            else if (source.startsWith("powerprofilesctl set") || source.startsWith("tuned-adm profile")) {
+                disconnectSource(source)
+            }
         }
         
         function detectBackend() {
             // Try PPD first, then Tuned
-            // We connect to both, whichever returns valid data first/wins dictates backend, 
-            // but effectively we prefer PPD if both exist (rare), or just whatever works.
             connectSource("powerprofilesctl get")
             connectSource("tuned-adm active")
         }
@@ -203,12 +208,14 @@ Item {
             // Access roles from the model
             readonly property string deviceId: model.deviceId
             readonly property string deviceName: model.name
-            readonly property string deviceType: model.type || ""
             readonly property string deviceIcon: model.iconName
             
             // Interfaces
             readonly property var deviceInterface: KDEConnect.DeviceDbusInterfaceFactory.create(deviceId)
             readonly property var batteryInterface: KDEConnect.DeviceBatteryDbusInterfaceFactory.create(deviceId)
+            
+            // Device type - read once to avoid non-bindable property warning
+            property string deviceType: ""
             
             // Plugin Checker
             readonly property var pluginChecker: KDEConnect.PluginChecker {
@@ -219,6 +226,14 @@ Item {
             readonly property bool hasBatteryConfig: pluginChecker.available
             readonly property int charge: batteryInterface ? batteryInterface.charge : -1
             readonly property bool isCharging: batteryInterface ? batteryInterface.isCharging : false
+            
+            // Read device type once when component is completed
+            Component.onCompleted: {
+                if (deviceInterface) {
+                    deviceType = deviceInterface.type || ""
+                }
+                root.scheduleRefresh()
+            }
             
             // Trigger refresh when relevant properties change
             onHasBatteryConfigChanged: root.scheduleRefresh()
@@ -235,6 +250,7 @@ Item {
 
     property string laptopIcon: "computer-laptop"
     property string deviceTypeConfig: "laptop" // "laptop" or "desktop"
+    property bool useAlternativeIcons: false // Use trusted/alternative icon set for KDE Connect devices
     
     // De-bounce refresh to avoid too many updates
     Timer {
@@ -295,9 +311,11 @@ Item {
                 if (dev.connected && dev.battery) {
                     var per = dev.battery.percentage
                     if (per >= 0) { // Valid battery
+                        // Use device.type from BluezQt for proper type detection
+                        var btIcon = getBluetoothIcon(dev.type, dev.iconName)
                         newList.push({
                             name: dev.name,
-                            icon: resolveIcon(dev.name, dev.iconName),
+                            icon: btIcon,
                             percentage: per,
                             isCharging: false, 
                             isMain: false,
@@ -314,9 +332,12 @@ Item {
             
             if (wrapper.hasBatteryConfig && wrapper.charge >= 0) {
                 var kdeDeviceType = getKdeConnectDeviceType(wrapper.deviceType)
+                // Use getKdeConnectIcon directly - don't use resolveIcon which overrides based on device name
+                var kdeIcon = getKdeConnectIcon(kdeDeviceType)
+                
                 newList.push({
                     name: wrapper.deviceName,
-                    icon: resolveIcon(wrapper.deviceName, getKdeConnectIcon(kdeDeviceType)),
+                    icon: kdeIcon,
                     percentage: wrapper.charge,
                     isCharging: wrapper.isCharging,
                     isMain: false,
@@ -330,7 +351,7 @@ Item {
     }
     
     function getKdeConnectDeviceType(typeStr) {
-        // KDE Connect device types: smartphone, tablet, desktop, laptop, tv
+        // KDE Connect device types: smartphone, tablet, desktop, laptop, tv, watch
         var type = typeStr || ""
         type = type.toLowerCase()
         if (type === "smartphone" || type === "phone") return "phone"
@@ -338,17 +359,75 @@ Item {
         if (type === "desktop") return "desktop"
         if (type === "laptop") return "laptop"
         if (type === "tv") return "tv"
+        if (type === "watch") return "watch"
         return "phone" // Default to phone for unknown KDE Connect devices
     }
     
     function getKdeConnectIcon(deviceType) {
+        if (root.useAlternativeIcons) {
+            // Alternative/Trusted icon set
+            switch (deviceType) {
+                case "phone": return "smartphone-trusted"
+                case "tablet": return "tablet-trusted"
+                case "desktop": return "laptop-trusted"
+                case "laptop": return "laptop-trusted"
+                case "tv": return "tv-trusted"
+                case "watch": return "org.kde.plasma.analogclock"
+                default: return "smartphone-trusted"
+            }
+        } else {
+            // Default icon set
+            switch (deviceType) {
+                case "phone": return "phone"
+                case "tablet": return "tablet"
+                case "desktop": return "computer-laptop"
+                case "laptop": return root.laptopIcon
+                case "tv": return "video-television"
+                case "watch": return "xclock"
+                default: return "phone"
+            }
+        }
+    }
+    
+    // BluezQt Device.Type enum values:
+    // 0: Uncategorized, 1: Computer, 2: Phone, 3: Network, 4: AudioVideo,
+    // 5: Peripheral, 6: Imaging, 7: Wearable, 8: Toy, 9: Health
+    // We also check iconName for more specific types
+    function getBluetoothIcon(deviceType, iconName) {
+        var icon = (iconName || "").toLowerCase()
+        
+        // First check specific icon hints from BlueZ
+        if (icon.includes("headset")) return "blueman-headset"
+        if (icon.includes("headphone")) return "blueman-headset"
+        if (icon.includes("mouse")) return "blueman-mouse"
+        if (icon.includes("keyboard")) return "keyboard"
+        if (icon.includes("speaker") || icon.includes("audio")) return "blueman-loudspeaker"
+        if (icon.includes("microphone")) return "audio-input-microphone"
+        if (icon.includes("camera") && icon.includes("web")) return "camera-web"
+        if (icon.includes("camera")) return "blueman-camera"
+        if (icon.includes("scanner")) return "blueman-scanner"
+        if (icon.includes("printer")) return "printer"
+        if (icon.includes("joystick") || icon.includes("gamepad") || icon.includes("joypad")) return "joystick"
+        if (icon.includes("phone") || icon.includes("smartphone")) return "phone"
+        if (icon.includes("tablet")) return "blueman-handheld"
+        if (icon.includes("computer") || icon.includes("laptop")) return "computer"
+        if (icon.includes("watch") || icon.includes("wearable")) return "device-watch"
+        if (icon.includes("media") || icon.includes("player") || icon.includes("ipod")) return "gnome-dev-ipod"
+        if (icon.includes("wii")) return "wiimotedev"
+        if (icon.includes("ups") || icon.includes("power-supply")) return "uninterruptible-power-supply"
+        
+        // Fallback based on BluezQt device type enum
         switch (deviceType) {
-            case "phone": return "smartphone"
-            case "tablet": return "tablet"
-            case "desktop": return "computer"
-            case "laptop": return root.laptopIcon
-            case "tv": return "video-television"
-            default: return "smartphone"
+            case 1: return "computer" // Computer
+            case 2: return "phone" // Phone
+            case 3: return "network-wired" // Network
+            case 4: return "blueman-headset" // AudioVideo - default to headset
+            case 5: return "blueman-mouse" // Peripheral - default to mouse
+            case 6: return "blueman-camera" // Imaging
+            case 7: return "device-watch" // Wearable
+            case 8: return "joystick" // Toy
+            case 9: return "blueman-headset" // Health
+            default: return "network-bluetooth" // Uncategorized
         }
     }
     

@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: contents/ui/main.qml
+msgid "Device Label"
+msgstr ""
+
+#: contents/ui/DeviceModel.qml
+msgid "Full in %1"
+msgstr ""
+
+#: contents/ui/DeviceModel.qml
+msgid "Empty in %1"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Behavior:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Use custom battery icons"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Icon Card Shape:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Adaptive Square (Matches Parent)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Rounded Square (Fixed 20px)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Circle"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Widget Margin:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Normal (10px)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Less (5px)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "None (0px)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Laptop Icon:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Device Type:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Laptop"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Desktop"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Display:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Show charging indicator icon"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Background Opacity:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Full (100%)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "High (75%)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Medium (50%)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Low (25%)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "None (0%)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Corner Radius:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Normal (20px)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Small (10px)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Square (0px)"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Battery Bars:"
+msgstr ""
+
+#: contents/ui/ConfigGeneral.qml
+msgid "Pill geometry mode (radius = height/2)"
+msgstr ""
+
+#: contents/ui/LargeView.qml
+msgid "Remaining to %1"
+msgstr ""
+
+#: contents/ui/LargeView.qml
+msgctxt "minutes"
+msgid "%1 m"
+msgstr ""
+
+#: contents/ui/LargeView.qml
+msgctxt "hours and minutes"
+msgid "%1 h %2 m"
+msgstr ""
+
+#: contents/ui/LargeView.qml
+msgctxt "days and hours"
+msgid "%1 d %2 h"
+msgstr ""
+
+#: contents/ui/SmallView.qml
+msgid "Power Saver"
+msgstr ""
+
+#: contents/ui/SmallView.qml
+msgid "Balanced"
+msgstr ""
+
+#: contents/ui/SmallView.qml
+msgid "Performance"
+msgstr ""

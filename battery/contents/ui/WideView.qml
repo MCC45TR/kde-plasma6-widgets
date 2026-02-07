@@ -14,6 +14,7 @@ import Qt5Compat.GraphicalEffects
     property string finishTime: "" // New property
     property real remainingMsec: 0 // New property for relative time
     property string currentPowerProfile: "balanced"
+    property bool hasPowerProfiles: true
     signal setPowerProfile(string profile)
     
     function formatDuration(msec) {
@@ -65,22 +66,14 @@ import Qt5Compat.GraphicalEffects
         anchors.margins: root.contentGap
         rowSpacing: root.contentGap
         columnSpacing: root.contentGap
-        columns: root.viewMode === "wide" ? 2 : 1
+        columns: 2
         
+
         // --- TOP SECTION (Main Card) ---
         Item {
-            Layout.fillWidth: root.viewMode !== "wide"
-            Layout.preferredWidth: {
-                if (root.viewMode === "wide") {
-                     return height < (root.width / 2) ? height : (root.width / 2)
-                }
-                return -1
-            }
-            // Fill height only if it's the only item (small/extrasmall) or side-by-side (wide)
-            Layout.fillHeight: root.viewMode === "small" || root.viewMode === "extrasmall" || root.viewMode === "wide"
-            
-            // Fixed 134px height for Large/Tall modes (where it stacks vertically with list)
-            Layout.preferredHeight: (root.viewMode === "big" || root.viewMode === "tall") ? 134 : -1
+            Layout.fillWidth: false
+            Layout.preferredWidth: height < (root.width / 2) ? height : (root.width / 2)
+            Layout.fillHeight: true
             
             Shape {
                 id: deviceInfoCard
@@ -166,19 +159,19 @@ import Qt5Compat.GraphicalEffects
                                 // "square" (Default/Adaptive)
                                 return deviceInfoCard.topRadius - 5
                             }
-                            color: root.viewMode === "wide" ? "transparent" : Kirigami.Theme.backgroundColor
+                            color: "transparent"
                             
                             Kirigami.Icon {
                                 id: deviceIcon
-                                anchors.centerIn: root.viewMode === "wide" ? null : parent
-                                anchors.top: root.viewMode === "wide" ? parent.top : undefined
-                                anchors.left: root.viewMode === "wide" ? parent.left : undefined
+                                anchors.centerIn: null
+                                anchors.top: parent.top
+                                anchors.left: parent.left
                                 
-                                property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0) * (root.viewMode === "wide" ? 0.44 : 1.0)
+                                property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0) * 0.44
                                 width: iconSize
                                 height: iconSize
                                 source: "computer-laptop"
-                                color: "white"
+                                color: Kirigami.Theme.textColor
                             }
 
                             TextMetrics {
@@ -191,13 +184,13 @@ import Qt5Compat.GraphicalEffects
 
                             Text {
                                 id: widePercentText
-                                visible: root.viewMode === "wide"
+                                visible: true
                                 anchors.left: deviceIcon.right
                                 anchors.verticalCenter: deviceIcon.verticalCenter
                                 anchors.right: parent.right
                                 anchors.leftMargin: 5
                                 
-                                color: "white"
+                                color: Kirigami.Theme.textColor
                                 font.pixelSize: deviceIcon.height * 0.8
                                 font.family: "Roboto Condensed" 
                                 font.weight: Font.Light
@@ -213,7 +206,7 @@ import Qt5Compat.GraphicalEffects
                             }
                             
                             Column {
-                                visible: root.viewMode === "wide"
+                                visible: true
                                 anchors.top: deviceIcon.bottom
                                 anchors.left: deviceIcon.left
                                 anchors.leftMargin: 5
@@ -222,14 +215,14 @@ import Qt5Compat.GraphicalEffects
                                 
                                 Text {
                                     text: hostName.toUpperCase().replace(/\n/g, " ")
-                                    color: Qt.rgba(1,1,1,0.9)
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
                                     font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
                                     font.bold: true
                                 }
                                 
                                 Text {
                                     text: formatDuration(remainingMsec)
-                                    color: Qt.rgba(1,1,1,0.7)
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.7)
                                     font.pixelSize: 12
                                     font.bold: false
                                     visible: remainingMsec > 0
@@ -238,7 +231,7 @@ import Qt5Compat.GraphicalEffects
                         }
                     }
 
-                    // Right Side: Text Info (Swapped)
+                    // Right Side: Text Info (Not used in Wide mode mostly)
                     ColumnLayout {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
@@ -247,7 +240,7 @@ import Qt5Compat.GraphicalEffects
                         
                         // Percentage Row
                         RowLayout {
-                            visible: root.viewMode !== "wide"
+                            visible: false // Not visible in wide mode
                             spacing: 4
                             Layout.fillWidth: true // Constrain to parent width
                             
@@ -272,7 +265,7 @@ import Qt5Compat.GraphicalEffects
                                     
                                     return "%" + mainDevice.percentage
                                 }
-                                color: "white"
+                                color: Kirigami.Theme.textColor
                                 font.pixelSize: Math.max(36, deviceInfoCard.height * 0.40) // Target size
                                 font.family: "Roboto Condensed" 
                                 font.weight: Font.Light
@@ -289,15 +282,15 @@ import Qt5Compat.GraphicalEffects
                                 Layout.preferredWidth: 32
                                 Layout.preferredHeight: 32
                                 Layout.alignment: Qt.AlignVCenter
-                                color: "white"
+                                color: Kirigami.Theme.textColor
                             }
                         }
                         
                         // Hostname
                         Text {
-                            visible: root.viewMode !== "wide"
+                            visible: false // Not visible in wide mode
                             text: hostName.toUpperCase().replace(/\n/g, " ")
-                            color: Qt.rgba(1,1,1,0.9)
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
                             font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
                             font.bold: true
                             wrapMode: Text.Wrap
@@ -308,9 +301,9 @@ import Qt5Compat.GraphicalEffects
                         
                         // Estimated Time Remaining (below hostname)
                         Text {
-                            visible: root.viewMode !== "wide" && remainingMsec > 0
+                            visible: false // Not visible in wide mode
                             text: formatDuration(remainingMsec)
-                            color: Qt.rgba(1,1,1,0.6)
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
                             font.pixelSize: deviceInfoCard.height < 60 ? 12 : 14
                             Layout.fillWidth: true
                         }
@@ -318,7 +311,7 @@ import Qt5Compat.GraphicalEffects
                         // Time Remaining (Absolute Timestamp)
                         Text {
                             text: finishTime ? i18n("Remaining to %1", finishTime) : ""
-                            color: Qt.rgba(1,1,1,0.6)
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
                             font.pixelSize: 13
                             visible: finishTime.length > 0
                         }
@@ -328,7 +321,7 @@ import Qt5Compat.GraphicalEffects
                         
                         // Power Profile Switcher
                         PowerProfileSwitcher {
-                            visible: root.viewMode !== "wide"
+                            visible: false // Not visible in wide mode
                             width: 140
                             height: 30
                             currentProfile: root.currentPowerProfile
@@ -342,7 +335,7 @@ import Qt5Compat.GraphicalEffects
                     anchors.bottom: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottomMargin: 5
-                    visible: root.viewMode === "wide"
+                    visible: root.hasPowerProfiles
                     width: parent.width - 10
                     height: 30
                     currentProfile: root.currentPowerProfile
@@ -358,30 +351,44 @@ import Qt5Compat.GraphicalEffects
             id: deviceList
             Layout.fillWidth: true
             Layout.fillHeight: true
-            visible: root.viewMode !== "small" && root.viewMode !== "extrasmall"
-            spacing: 10 // Requested spacing
-            clip: true // Enable scrolling if content overflows
+            visible: true
+            spacing: 5
+            clip: true
             
-            // Filter non-main devices
-            model: devices.filter(d => !d.isMain)
+            model: {
+                if (root.viewMode === "small" || root.viewMode === "extrasmall") {
+                    // Show all devices, ensure Main is first
+                    var main = devices.filter(d => d.isMain);
+                    var others = devices.filter(d => !d.isMain);
+                    return main.concat(others);
+                }
+                return devices.filter(d => !d.isMain)
+            }
             
             delegate: Item {
+                id: delegateRoot
                 width: ListView.view.width
                 
-                // Height Logic:
-                // 1. Calculate available height per item based on count
-                // 2. Minimum 50px
-                // 3. If it fits, expand to fill available space
                 readonly property int itemCount: ListView.view.count
-                readonly property real availableHeight: ListView.view.height - (ListView.view.spacing * (itemCount - 1))
-                readonly property real calculatedHeight: availableHeight / itemCount
+                readonly property real calculatedHeight: {
+                    var totalH = ListView.view.height
+                    var sp = ListView.view.spacing
+                    var minH = 40
+                    
+                    var maxFit = Math.floor((totalH + sp) / (minH + sp))
+                    maxFit = Math.max(1, maxFit)
+                    
+                    var effectiveCount = (itemCount > maxFit) ? maxFit : itemCount
+                    
+                    return (totalH - (sp * (effectiveCount - 1))) / effectiveCount
+                }
                 
-                height: Math.max(50, calculatedHeight)
+                height: calculatedHeight
                 
                 HorizontalBatteryBar {
-                    width: parent.width
-                    height: parent.height
-                    deviceName: modelData.name
+                    anchors.fill: parent
+                    // If main device (and named generic "Laptop"), show real hostname
+                    deviceName: modelData.isMain && (modelData.name === "Laptop" || modelData.name === "") ? root.hostName : modelData.name
                     deviceIcon: modelData.icon
                     percentage: modelData.percentage
                     isCharging: modelData.isCharging === true

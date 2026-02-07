@@ -19,11 +19,9 @@ PlasmoidItem {
     Layout.preferredHeight: 200
 
     readonly property string currentViewMode: {
-        // Width thresholds: 160 (tiny), 200 (normal)
-        // Height thresholds: 160 (tiny), 200 (normal), 450 (tall)
         if (width < 160 && height < 160) return "extrasmall"   // Both tiny
-        if (width < 200 && height < 200) return "small"        // Both small (includes 160-199)
-        if (width >= 200 && height < 250) return "wide"        // Wide but short
+        if (width < 250 && height < 200) return "small"        // Both small (includes 160-199)
+        if (width >= 250 && height < 250) return "wide"        // Wide but short
         if (width < 200 && height >= 200) return "tall"        // Narrow but tall
         if (width >= 200 && height >= 350) return "big"        // Wide and very tall
         return "big"                                           // Wide, medium height (200-449)
@@ -32,7 +30,7 @@ PlasmoidItem {
     onCurrentViewModeChanged: console.log("View Mode:", currentViewMode, "(" + width + "x" + height + ")")
     
     // Hostname
-    property string localHostName: "Device Label"
+    property string localHostName: i18n("Device Label")
     
     // Helper to get hostname
     property var sysNameSource: P5Support.DataSource {
@@ -60,6 +58,7 @@ PlasmoidItem {
         iconVersion: Plasmoid.configuration.iconVersion
         laptopIcon: Plasmoid.configuration.laptopIcon
         deviceTypeConfig: Plasmoid.configuration.deviceType
+        useAlternativeIcons: Plasmoid.configuration.useAlternativeIcons
     }
 
     readonly property int edgeMargin: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
@@ -112,9 +111,11 @@ PlasmoidItem {
                 visible: false
             }
             
-            // Views Loader
+            // Views Loader - Lazy Loading
             Loader {
                 anchors.fill: parent
+                asynchronous: true
+                
                 // Pass properties
                 property var devices: deviceModel.devices
                 property var mainDevice: deviceModel.mainDevice
@@ -127,13 +128,14 @@ PlasmoidItem {
 
     Component {
         id: largeViewComp
-        LargeView {
+        BigView {
             devices: deviceModel.devices
             mainDevice: deviceModel.mainDevice
             hostName: root.localHostName
             finishTime: deviceModel.mainDevice ? deviceModel.formatFinishTime(deviceModel.pmSourceData["Battery"]["Remaining msec"] || 0) : ""
             remainingMsec: deviceModel.pmSourceData["Battery"] ? (deviceModel.pmSourceData["Battery"]["Remaining msec"] || 0) : 0
             currentPowerProfile: deviceModel.currentPowerProfile
+            hasPowerProfiles: deviceModel.hasPowerProfiles
             onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
             
             // Adaptive Mode

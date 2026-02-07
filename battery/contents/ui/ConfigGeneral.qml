@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls 2.15
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as P5Support
 
 Kirigami.FormLayout {
     
@@ -222,5 +223,72 @@ Kirigami.FormLayout {
         id: pillGeometryCheck
         Kirigami.FormData.label: i18n("Battery Bars:")
         text: i18n("Pill geometry mode (radius = height/2)")
+    }
+    
+    // Alternative KDE Connect Icons
+    property alias cfg_useAlternativeIcons: useAlternativeIconsCheck.checked
+    property bool cfg_useAlternativeIconsDefault: false
+    
+    CheckBox {
+        id: useAlternativeIconsCheck
+        Kirigami.FormData.label: i18n("KDE Connect:")
+        text: i18n("Use alternative device icons (trusted)")
+    }
+    
+    // Power Profile Detection
+    property bool hasPowerProfiles: false
+    property bool detectionComplete: false
+    property int checksCompleted: 0
+    
+    // P5Support DataSource for executable check
+    Loader {
+        id: powerProfileCheckLoader
+        active: true
+        sourceComponent: Component {
+            Item {
+                id: checker
+                
+                // Import P5Support via alias
+                property var dataSource: P5Support.DataSource {
+                    id: checkDataSource
+                    engine: "executable"
+                    connectedSources: []
+                    
+                    onNewData: (source, data) => {
+                        if (data["exit code"] === 0) {
+                            hasPowerProfiles = true
+                        }
+                        checksCompleted++
+                        if (checksCompleted >= 2) {
+                            detectionComplete = true
+                        }
+                        disconnectSource(source)
+                    }
+                }
+                
+                Component.onCompleted: {
+                    checkDataSource.connectSource("which powerprofilesctl")
+                    checkDataSource.connectSource("which tuned-adm")
+                }
+            }
+        }
+    }
+    
+    // Power Profile Warning
+    Kirigami.InlineMessage {
+        Kirigami.FormData.isSection: true
+        Layout.fillWidth: true
+        type: Kirigami.MessageType.Warning
+        visible: detectionComplete && !hasPowerProfiles
+        text: i18n("No power profile management found. Install one of the following packages:\n\n" +
+                   "• power-profiles-daemon (Fedora, Ubuntu, Debian, Arch)\n" +
+                   "• tuned (Fedora, RHEL, CentOS)\n" +
+                   "• tuned-ppd (openSUSE)\n" +
+                   "• tlp (All distros - alternative)\n\n" +
+                   "Install commands:\n" +
+                   "Fedora/RHEL: sudo dnf install power-profiles-daemon\n" +
+                   "Ubuntu/Debian: sudo apt install power-profiles-daemon\n" +
+                   "Arch: sudo pacman -S power-profiles-daemon\n" +
+                   "openSUSE: sudo zypper install tuned-ppd")
     }
 }
