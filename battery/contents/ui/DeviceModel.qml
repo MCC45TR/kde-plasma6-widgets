@@ -312,7 +312,7 @@ Item {
                     var per = dev.battery.percentage
                     if (per >= 0) { // Valid battery
                         // Use device.type from BluezQt for proper type detection
-                        var btIcon = getBluetoothIcon(dev.type, dev.iconName)
+                        var btIcon = getBluetoothIcon(dev.type, dev.iconName, dev.name)
                         newList.push({
                             name: dev.name,
                             icon: btIcon,
@@ -392,41 +392,54 @@ Item {
     // BluezQt Device.Type enum values:
     // 0: Uncategorized, 1: Computer, 2: Phone, 3: Network, 4: AudioVideo,
     // 5: Peripheral, 6: Imaging, 7: Wearable, 8: Toy, 9: Health
-    // We also check iconName for more specific types
-    function getBluetoothIcon(deviceType, iconName) {
+    // We also check iconName and deviceName for more specific types
+    function getBluetoothIcon(deviceType, iconName, deviceName) {
         var icon = (iconName || "").toLowerCase()
+        var name = (deviceName || "").toLowerCase()
         
-        // First check specific icon hints from BlueZ
-        if (icon.includes("headset")) return "blueman-headset"
-        if (icon.includes("headphone")) return "blueman-headset"
-        if (icon.includes("mouse")) return "blueman-mouse"
-        if (icon.includes("keyboard")) return "keyboard"
-        if (icon.includes("speaker") || icon.includes("audio")) return "blueman-loudspeaker"
+        // First check device name for specific device types
+        if (name.includes("mouse") || name.includes("fare")) return "input-mouse"
+        if (name.includes("keyboard") || name.includes("klavye") || name.includes("keychron")) return "input-keyboard"
+        if (name.includes("headset") || name.includes("kulaklık") || name.includes("wh-")) return "audio-headset"
+        if (name.includes("headphone") || name.includes("buds") || name.includes("airpods") || name.includes("tws")) return "audio-headphones"
+        if (name.includes("speaker") || name.includes("hoparlör") || name.includes("jbl")) return "audio-speakers"
+        if (name.includes("gamepad") || name.includes("controller") || name.includes("xbox") || name.includes("dualsense") || name.includes("dualshock")) return "input-gaming"
+        if (name.includes("joystick")) return "input-gaming"
+        if (name.includes("phone") || name.includes("telefon")) return "phone"
+        if (name.includes("tablet") || name.includes("ipad")) return "tablet"
+        if (name.includes("watch") || name.includes("saat") || name.includes("band")) return "device-watch"
+        
+        // Then check icon hints from BlueZ
+        if (icon.includes("headset")) return "audio-headset"
+        if (icon.includes("headphone")) return "audio-headphones"
+        if (icon.includes("mouse")) return "input-mouse"
+        if (icon.includes("keyboard")) return "input-keyboard"
+        if (icon.includes("speaker") || icon.includes("audio")) return "audio-speakers"
         if (icon.includes("microphone")) return "audio-input-microphone"
         if (icon.includes("camera") && icon.includes("web")) return "camera-web"
-        if (icon.includes("camera")) return "blueman-camera"
-        if (icon.includes("scanner")) return "blueman-scanner"
+        if (icon.includes("camera")) return "camera-photo"
+        if (icon.includes("scanner")) return "scanner"
         if (icon.includes("printer")) return "printer"
-        if (icon.includes("joystick") || icon.includes("gamepad") || icon.includes("joypad")) return "joystick"
+        if (icon.includes("joystick") || icon.includes("gamepad") || icon.includes("joypad")) return "input-gaming"
         if (icon.includes("phone") || icon.includes("smartphone")) return "phone"
-        if (icon.includes("tablet")) return "blueman-handheld"
+        if (icon.includes("tablet")) return "tablet"
         if (icon.includes("computer") || icon.includes("laptop")) return "computer"
         if (icon.includes("watch") || icon.includes("wearable")) return "device-watch"
-        if (icon.includes("media") || icon.includes("player") || icon.includes("ipod")) return "gnome-dev-ipod"
-        if (icon.includes("wii")) return "wiimotedev"
-        if (icon.includes("ups") || icon.includes("power-supply")) return "uninterruptible-power-supply"
+        if (icon.includes("media") || icon.includes("player") || icon.includes("ipod")) return "multimedia-player"
+        if (icon.includes("wii")) return "input-gaming"
+        if (icon.includes("ups") || icon.includes("power-supply")) return "battery"
         
         // Fallback based on BluezQt device type enum
         switch (deviceType) {
             case 1: return "computer" // Computer
             case 2: return "phone" // Phone
             case 3: return "network-wired" // Network
-            case 4: return "blueman-headset" // AudioVideo - default to headset
-            case 5: return "blueman-mouse" // Peripheral - default to mouse
-            case 6: return "blueman-camera" // Imaging
+            case 4: return "audio-headset" // AudioVideo - default to headset
+            case 5: return "input-mouse" // Peripheral - default to mouse (most common peripheral)
+            case 6: return "camera-photo" // Imaging
             case 7: return "device-watch" // Wearable
-            case 8: return "joystick" // Toy
-            case 9: return "blueman-headset" // Health
+            case 8: return "input-gaming" // Toy - probably a game controller
+            case 9: return "audio-headset" // Health
             default: return "network-bluetooth" // Uncategorized
         }
     }

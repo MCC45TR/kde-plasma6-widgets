@@ -109,7 +109,7 @@ Item {
                     Text {
                         text: mainDevice ? "%" + mainDevice.percentage : "--"
                         font.pixelSize: 64
-                        font.family: "Inter"
+
                         font.weight: Font.Light
                         color: Kirigami.Theme.textColor
                     }

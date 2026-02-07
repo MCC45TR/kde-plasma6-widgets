@@ -29,131 +29,64 @@ Item {
     property double opacityValue: 1.0
     property int barRadius: 10
     property int switchRadius: 10
-    property int contentGap: 5 
+    property int contentGap: 4 
 
-    // Main Content - Directly filling the parent, no card Shape
-    RowLayout {
+    // Background Rectangle covering the whole view
+    Rectangle {
+        id: bgRect
         anchors.fill: parent
-        anchors.margins: root.contentGap
-        spacing: 5
+        radius: root.backgroundRadius
+        color: Kirigami.Theme.backgroundColor // Or transparent if main handles it? 
+        // Based on previous code, the inner rectangle had this color. 
+        // If main.qml has a background, this might be redundant or needed for the "card" look.
+        // Let's assume we want a card look.
         
-        // Left Side: Rounded Square with Laptop Icon
-        Item {
-            // Square slot relative to height. 
-            // RowLayout height is effectively parent.height - margins.
-            Layout.preferredWidth: height
-            Layout.fillHeight: true
-            
-            Rectangle {
-                id: cihazSimgeKarosu
-                anchors.fill: parent
-                // Shape Logic
-                radius: {
-                    if (root.iconShape === "circle") return width / 2
-                    if (root.iconShape === "rounded") return 20
-                    // "square" (Default/Adaptive)
-                    return root.backgroundRadius > 5 ? root.backgroundRadius - 5 : 5
-                }
-                color: Kirigami.Theme.backgroundColor // Keep the icon background for contrast
-                
-                Kirigami.Icon {
-                    id: deviceIcon
-                    anchors.centerIn: parent
-                    
-                    property real iconSize: (parent.width - 10) * (root.iconShape === "circle" ? 0.66 : 1.0)
-                    width: iconSize
-                    height: iconSize
-                    source: "computer-laptop"
-                    color: Kirigami.Theme.textColor
-                }
-
-                TextMetrics {
-                    id: tm
-                    font.pixelSize: deviceIcon.height * 0.8
-                    font.family: "Roboto Condensed"
-                    font.weight: Font.Light
-                    text: "%" + (mainDevice ? mainDevice.percentage : "")
-                }
-            }
-        }
-
-        // Right Side: Text Info
         ColumnLayout {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            spacing: 0
-            Layout.alignment: Qt.AlignVCenter
+            anchors.fill: parent
+            anchors.margins: root.contentGap
+            spacing: 2
             
-            // Percentage Row
-            RowLayout {
-                visible: true
-                spacing: 2
-                Layout.fillWidth: true 
+            // 1. Top: Device Icon (Flexible Height)
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 
-                    Text {
-                    id: percentageText
-                    
-                    TextMetrics {
-                        id: tmPercentage
-                        font: percentageText.font
-                        text: "%" + (mainDevice ? mainDevice.percentage : "")
-                    }
-                    
-                    text: {
-                        if (!mainDevice) return "--"
-                        if (mainDevice.deviceType === "desktop") return mainDevice.percentage + " W"
-                        
-                        // Check overflow
-                        var available = parent.width - 36 - 5
-                        // If full text is wider than available, drop the '%'
-                        if (tmPercentage.width > available && available > 0) return mainDevice.percentage
-                        
-                        return "%" + mainDevice.percentage
-                    }
-                    color: Kirigami.Theme.textColor
-                    font.pixelSize: Math.max(20, Math.min(36, parent.height * 0.40)) // Adaptive font size
-                    font.family: "Roboto Condensed" 
-                    font.weight: Font.Light
-                    lineHeight: 0.8
-                    Layout.fillWidth: true
-                    elide: Text.ElideNone
-                    
-                    fontSizeMode: Text.HorizontalFit
-                    minimumPixelSize: 16 
-                }
-                // Small Battery Icon next to it
                 Kirigami.Icon {
-                    source: mainDevice && mainDevice.isCharging ? "battery-charging" : "battery-060" 
-                    Layout.preferredWidth: 24
-                    Layout.preferredHeight: 24
-                    Layout.alignment: Qt.AlignVCenter
+                    anchors.centerIn: parent
+                    // Scale icon to fit, but leave space for text/switch
+                    height: Math.min(parent.width, parent.height) * 1.0
+                    width: height
+                    source: mainDevice && mainDevice.deviceType === "desktop" ? "computer" : "computer-laptop"
                     color: Kirigami.Theme.textColor
                 }
             }
             
-            // Hostname
+            // 2. Middle: Hostname + Battery Percentage
             Text {
-                visible: true
-                text: hostName.toUpperCase().replace(/\n/g, " ")
-                color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
-                font.pixelSize: 14 // Fİxed small size
-                font.bold: true
-                wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                maximumLineCount: 2
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Text.AlignHCenter
+                
+                text: {
+                    var batt = mainDevice ? mainDevice.percentage : "--"
+                    return hostName + " (" + batt + "%)"
+                }
+                
+                color: Kirigami.Theme.textColor
+                font.pixelSize: 12
+                 // Matching other views
                 elide: Text.ElideRight
+                visible: true
             }
             
-            // Power Profile Switcher (Compact version if possible, or same)
-            // If space is very tight, checking visibility
+            // 3. Bottom: Power Profile Switcher
             PowerProfileSwitcher {
-                visible: root.hasPowerProfiles && root.height > 80 // Only show if height allows
                 Layout.fillWidth: true
-                Layout.preferredHeight: 24
-                Layout.topMargin: 2
+                Layout.preferredHeight: 22 // Compact height
                 currentProfile: root.currentPowerProfile
                 radius: root.switchRadius
                 onProfileChanged: (profile) => root.setPowerProfile(profile)
+                visible: root.hasPowerProfiles && root.height > 100 // Hide if super small
             }
         }
     }

@@ -21,8 +21,8 @@ PlasmoidItem {
     readonly property string currentViewMode: {
         // Extrasmall Mode Definition (0   <= height < 160)       and (0   <= width < 160)
         // Small Mode Definition      (160 <= height < 250)       and (160 <= width < 280)
-        // Wide Mode Definition       (160 <= height < 250)       and (280 <= width < infinite)
-        // Tall Mode Definition       (250 <= height < infinite)  and (160 <= width < 280)
+        // Wide Mode Definition       (0   <= height < 250)       and (280 <= width < infinite)
+        // Tall Mode Definition       (250 <= height < infinite)  and (0   <= width < 280)
         // Big Mode Definition        (250 <= height < infinite)  and (280 <= width < infinite)
         // Height bucket: 0 = <160, 1 = 160-249, 2 = >=250
         var hBucket = height < 160 ? 0 : (height < 250 ? 1 : 2)
@@ -33,13 +33,13 @@ PlasmoidItem {
 
         switch(key) {
             case 0: return "extrasmall" // h<160, w<160
-            case 1: return "extrasmall" // h<160, 160<=w<280 (fallback)
-            case 2: return "extrasmall" // h<160, w>=280 (fallback)
+            case 1: return "extrasmall" // h<160, 160<=w<280 (fallback - doesn't fit small)
+            case 2: return "wide"       // h<160, w>=280 (wide: h<250 && w>=280)
             case 3: return "extrasmall" // 160<=h<250, w<160 (fallback)
             case 4: return "small"      // 160<=h<250, 160<=w<280
-            case 5: return "wide"       // 160<=h<250, w>=280
-            case 6: return "extrasmall" // h>=250, w<160 (fallback)
-            case 7: return "tall"       // h>=250, 160<=w<280
+            case 5: return "wide"       // 160<=h<250, w>=280 (wide: h<250 && w>=280)
+            case 6: return "tall"       // h>=250, w<160 (tall: h>=250 && w<280)
+            case 7: return "tall"       // h>=250, 160<=w<280 (tall: h>=250 && w<280)
             case 8: return "big"        // h>=250, w>=280
             default: return "extrasmall"
         }
@@ -166,7 +166,7 @@ PlasmoidItem {
             viewMode: mode
             iconShape: Plasmoid.configuration.iconShape
             showChargingIcon: Plasmoid.configuration.showChargingIcon
-            pillGeometry: Plasmoid.configuration.pillGeometry
+            pillGeometry: Plasmoid.configuration.batteryBarsStyle === "pill"
 
             // Styles (Calculated)
             backgroundRadius: root.computedRadius

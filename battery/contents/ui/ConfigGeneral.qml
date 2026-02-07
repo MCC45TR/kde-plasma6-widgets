@@ -30,41 +30,7 @@ Kirigami.FormLayout {
         text: i18n("Use custom battery icons")
     }
     
-    ComboBox {
-        id: shapeCombo
-        Kirigami.FormData.label: i18n("Icon Card Shape:")
-        
-        textRole: "text"
-        valueRole: "value"
-        
-        model: [
-            { text: i18n("Adaptive Square (Matches Parent)"), value: "square" },
-            { text: i18n("Rounded Square (Fixed 20px)"), value: "rounded" },
-            { text: i18n("Circle"), value: "circle" }
-        ]
-        
-        // When user selects a new item, update the config property
-        onActivated: {
-            if (currentIndex >= 0) {
-                cfg_iconShape = model[currentIndex].value
-            }
-        }
-        
-        // When binding sets the index, Qt handling ensures sync, but we need initial load logic
-    }
-    
-    // Config -> UI Sync
-    // When the config loader sets 'cfg_iconShape', we must update the ComboBox selection
-    onCfg_iconShapeChanged: {
-        for (var i = 0; i < shapeCombo.model.length; i++) {
-            if (shapeCombo.model[i].value === cfg_iconShape) {
-                if (shapeCombo.currentIndex !== i) {
-                    shapeCombo.currentIndex = i;
-                }
-                break;
-            }
-        }
-    }
+    // Icon Card Shape - REMOVED (no longer used)
     
     // Edge Margin Config
     property int cfg_edgeMargin: 10
@@ -94,28 +60,32 @@ Kirigami.FormLayout {
         }
     }
 
-    // Laptop Icon Config
-    property string cfg_laptopIcon: "computer-laptop"
+    // Device Icons Config (combines laptop icon and alternative icons)
+    property string cfg_deviceIcons: "default"
+    property string cfg_deviceIconsDefault: "default"
+    // Keep old properties for backward compatibility
+    property string cfg_laptopIcon: cfg_deviceIcons === "alternative" ? "laptoptrusted" : "computer-laptop"
+    property bool cfg_useAlternativeIcons: cfg_deviceIcons === "alternative"
 
     ComboBox {
-        id: laptopIconCombo
-        Kirigami.FormData.label: i18n("Laptop Icon:")
+        id: deviceIconsCombo
+        Kirigami.FormData.label: i18n("Device Icons:")
         textRole: "text"
         valueRole: "value"
         model: [
-           { text: "computer-laptop (Default)", value: "computer-laptop" },
-           { text: "laptoptrusted (Trusted)", value: "laptoptrusted" }
+           { text: i18n("Default"), value: "default" },
+           { text: i18n("Alternative (Trusted)"), value: "alternative" }
         ]
         
         onActivated: {
-             if (currentIndex >= 0) cfg_laptopIcon = model[currentIndex].value
+             if (currentIndex >= 0) cfg_deviceIcons = model[currentIndex].value
         }
     }
     
-    onCfg_laptopIconChanged: {
-        for(var i=0; i<laptopIconCombo.model.length; i++) {
-             if(laptopIconCombo.model[i].value === cfg_laptopIcon) {
-                 if(laptopIconCombo.currentIndex !== i) laptopIconCombo.currentIndex = i;
+    onCfg_deviceIconsChanged: {
+        for(var i=0; i<deviceIconsCombo.model.length; i++) {
+             if(deviceIconsCombo.model[i].value === cfg_deviceIcons) {
+                 if(deviceIconsCombo.currentIndex !== i) deviceIconsCombo.currentIndex = i;
                  break;
              }
         }
@@ -166,11 +136,11 @@ Kirigami.FormLayout {
         textRole: "text"
         valueRole: "value"
         model: [
-           { text: i18n("Full (100%)"), value: "full" },
-           { text: i18n("High (75%)"), value: "high" },
-           { text: i18n("Medium (50%)"), value: "medium" },
-           { text: i18n("Low (25%)"), value: "low" },
-           { text: i18n("None (0%)"), value: "none" }
+           { text: i18n("%1%", 100), value: "full" },
+           { text: i18n("%1%", 75), value: "high" },
+           { text: i18n("%1%", 50), value: "medium" },
+           { text: i18n("%1%", 25), value: "low" },
+           { text: i18n("%1%", 0), value: "none" }
         ]
         
         onActivated: {
@@ -215,24 +185,34 @@ Kirigami.FormLayout {
         }
     }
     
-    // Pill Geometry
-    property alias cfg_pillGeometry: pillGeometryCheck.checked
-    property bool cfg_pillGeometryDefault: false
-    
-    CheckBox {
-        id: pillGeometryCheck
+    // Battery Bars Style Config
+    property string cfg_batteryBarsStyle: "default"
+    property string cfg_batteryBarsStyleDefault: "default"
+    // Keep old property for backward compatibility
+    property bool cfg_pillGeometry: cfg_batteryBarsStyle === "pill"
+
+    ComboBox {
+        id: batteryBarsCombo
         Kirigami.FormData.label: i18n("Battery Bars:")
-        text: i18n("Pill geometry mode (radius = height/2)")
+        textRole: "text"
+        valueRole: "value"
+        model: [
+           { text: i18n("Default (radius based)"), value: "default" },
+           { text: i18n("Pill geometry"), value: "pill" }
+        ]
+        
+        onActivated: {
+             if (currentIndex >= 0) cfg_batteryBarsStyle = model[currentIndex].value
+        }
     }
     
-    // Alternative KDE Connect Icons
-    property alias cfg_useAlternativeIcons: useAlternativeIconsCheck.checked
-    property bool cfg_useAlternativeIconsDefault: false
-    
-    CheckBox {
-        id: useAlternativeIconsCheck
-        Kirigami.FormData.label: i18n("KDE Connect:")
-        text: i18n("Use alternative device icons (trusted)")
+    onCfg_batteryBarsStyleChanged: {
+        for(var i=0; i<batteryBarsCombo.model.length; i++) {
+             if(batteryBarsCombo.model[i].value === cfg_batteryBarsStyle) {
+                 if(batteryBarsCombo.currentIndex !== i) batteryBarsCombo.currentIndex = i;
+                 break;
+             }
+        }
     }
     
     // Power Profile Detection

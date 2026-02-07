@@ -37,7 +37,9 @@ import Qt5Compat.GraphicalEffects
         asynchronous: false // Load directly to avoid flicker, since we are already inside an asynchronous Loader in main.qml
         
         source: {
-            if (root.viewMode === "small" || root.viewMode === "extrasmall") {
+            if (root.viewMode === "extrasmall") {
+                return "ExtraSmallView.qml"
+            } else if (root.viewMode === "small") {
                 return "SmallView.qml"
             } else if (root.viewMode === "wide") {
                 return "WideView.qml"

@@ -108,145 +108,162 @@ import "Formatter.js" as Formatter
                     anchors.margins: 5
                     spacing: 5
                     
-                    // Left Side: Rounded Square with Laptop Icon
+                    // Left Side: Device Info Container
+                    // In Big Mode: Fill width (text left, icon right)
+                    // Other modes: Square (icon top-left, text next to it)
                     Item {
-                        // Square slot relative to height. 
-                        // RowLayout height is effectively parent.height - 10 (margins).
-                        // We want this item to be square.
-                        Layout.preferredWidth: height
+                        Layout.preferredWidth: root.viewMode === "big" ? parent.width : height
+                        Layout.fillWidth: root.viewMode === "big"
                         Layout.fillHeight: true
                         
                         Rectangle {
                             id: cihazSimgeKarosu
                             anchors.fill: parent
-                            // Shape Logic
                             radius: {
                                 if (root.iconShape === "circle") return width / 2
                                 if (root.iconShape === "rounded") return 20
-                                // "square" (Default/Adaptive)
                                 return deviceInfoCard.topRadius - 5
                             }
-                            color: Kirigami.Theme.backgroundColor
+                            color: "transparent"
                             
+                            // Original small icon (hidden in Big Mode)
                             Kirigami.Icon {
                                 id: deviceIcon
-                                anchors.centerIn: parent
+                                visible: root.viewMode !== "big"
+                                anchors.top: parent.top
+                                anchors.left: parent.left
                                 
-                                property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0)
+                                property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0) * 0.44
                                 width: iconSize
                                 height: iconSize
-                                source: "computer-laptop"
+                                source: mainDevice && mainDevice.deviceType === "desktop" ? "computer" : "computer-laptop"
+                                color: Kirigami.Theme.textColor
+                            }
+                            
+                            // Big Mode Icon (right side, vertically centered, height-filling)
+                            Kirigami.Icon {
+                                id: bigModeIcon
+                                visible: root.viewMode === "big"
+                                anchors.right: parent.right
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.rightMargin: 0
+                                
+                                property real iconSize: parent.height
+                                width: iconSize
+                                height: iconSize
+                                source: mainDevice && mainDevice.deviceType === "desktop" ? "computer" : "computer-laptop"
                                 color: Kirigami.Theme.textColor
                             }
 
                             TextMetrics {
                                 id: tm
                                 font.pixelSize: deviceIcon.height * 0.8
-                                font.family: "Roboto Condensed"
                                 font.weight: Font.Light
-                                text: "%" + (mainDevice ? mainDevice.percentage : "")
+                                text: (root.viewMode === "big" ? "%" : "") + (mainDevice ? mainDevice.percentage : "")
+                            }
+
+                            Text {
+                                id: percentText
+                                visible: true
+                                
+                                // Big Mode: anchor to parent left
+                                // Other modes: anchor to deviceIcon right
+                                anchors.left: root.viewMode === "big" ? parent.left : deviceIcon.right
+                                anchors.top: root.viewMode === "big" ? parent.top : undefined
+                                anchors.verticalCenter: root.viewMode === "big" ? undefined : deviceIcon.verticalCenter
+                                anchors.right: root.viewMode === "big" ? bigModeIcon.left : parent.right
+                                anchors.leftMargin: root.viewMode === "big" ? 10 : 5
+                                anchors.topMargin: root.viewMode === "big" ? 5 : 0
+                                anchors.rightMargin: root.viewMode === "big" ? 10 : 0
+                                
+                                color: Kirigami.Theme.textColor
+                                // Larger font for tall and big modes
+                                font.pixelSize: (root.viewMode === "big" || root.viewMode === "tall") ? 48 : deviceIcon.height * 0.8
+                                font.weight: Font.Normal
+                                elide: Text.ElideRight
+                                
+                                text: {
+                                    if (!mainDevice) return "--"
+                                    if (mainDevice.deviceType === "desktop") {
+                                        return mainDevice.percentage + " W"
+                                    }
+                                    if (root.viewMode === "big") {
+                                        return "%" + mainDevice.percentage
+                                    }
+                                    return mainDevice.percentage
+                                }
+                            }
+                            
+                            Column {
+                                visible: true
+                                
+                                // Big Mode: anchor to parent, below percentage text
+                                // Other modes: anchor to deviceIcon
+                                // Big Mode: anchor to profileSwitcher top (to avoid overlap)
+                                // Other modes: anchor to deviceIcon bottom
+                                // Big Mode: anchor to parent bottom with margin for switcher
+                                // Other modes: anchor to deviceIcon bottom
+                                anchors.top: root.viewMode === "big" ? undefined : deviceIcon.bottom
+                                anchors.bottom: root.viewMode === "big" ? parent.bottom : undefined
+                                anchors.left: root.viewMode === "big" ? parent.left : deviceIcon.left
+                                anchors.right: root.viewMode === "big" ? bigModeIcon.left : parent.right
+                                anchors.leftMargin: root.viewMode === "big" ? 10 : 5
+                                anchors.topMargin: root.viewMode === "big" ? 0 : -5
+                                anchors.bottomMargin: root.viewMode === "big" ? (root.hasPowerProfiles ? profileSwitcher.height + 5 : 5) : 0
+                                anchors.rightMargin: root.viewMode === "big" ? 10 : 0
+                                spacing: 0
+                                
+                                Text {
+                                    text: hostName.toUpperCase().replace(/\n/g, " ")
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
+                                    font.pixelSize: root.viewMode === "big" ? 16 : (deviceInfoCard.height < 60 ? 14 : 20)
+                                    font.bold: true
+                                    width: parent.width
+                                    elide: Text.ElideRight
+                                }
+                                
+                                Text {
+                                    text: {
+                                        var duration = Formatter.formatDuration(remainingMsec)
+                                        if (mainDevice && mainDevice.isCharging) {
+                                            return i18nc("Time to full", "Time to full: %1", duration)
+                                        } else {
+                                            return i18nc("Time remaining", "Remaining: %1", duration)
+                                        }
+                                    }
+                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.7)
+                                    font.pixelSize: 12
+                                    font.bold: false
+                                    visible: remainingMsec > 0
+                                }
                             }
                         }
                     }
 
-                    // Right Side: Text Info
-                    ColumnLayout {
+                    // Right Side: Empty (not used in this layout)
+                    Item {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        spacing: 0
-                        Layout.alignment: Qt.AlignVCenter
-                        
-                        // Percentage Row
-                        RowLayout {
-                            visible: true
-                            spacing: 4
-                            Layout.fillWidth: true // Constrain to parent width
-                            
-                            Text {
-                                id: percentageText
-                                property bool usePercent: true
-                                
-                                TextMetrics {
-                                    id: tmPercentage
-                                    font: percentageText.font
-                                    text: "%" + (mainDevice ? mainDevice.percentage : "")
-                                }
-                                
-                                text: {
-                                    if (!mainDevice) return "--"
-                                    if (mainDevice.deviceType === "desktop") return mainDevice.percentage + " W"
-                                    
-                                    // Check overflow
-                                    var available = parent.width - 36 - 5
-                                    // If full text is wider than available, drop the '%'
-                                    if (tmPercentage.width > available && available > 0) return mainDevice.percentage
-                                    
-                                    return "%" + mainDevice.percentage
-                                }
-                                color: Kirigami.Theme.textColor
-                                font.pixelSize: Math.max(36, deviceInfoCard.height * 0.40) // Target size
-                                font.family: "Roboto Condensed" 
-                                font.weight: Font.Light
-                                lineHeight: 0.8
-                                Layout.fillWidth: true
-                                elide: Text.ElideNone
-                                
-                                fontSizeMode: Text.HorizontalFit
-                                minimumPixelSize: 24 // Don't go smaller than this
-                            }
-                            // Small Battery Icon next to it
-                            Kirigami.Icon {
-                                source: mainDevice && mainDevice.isCharging ? "battery-charging" : "battery-060" 
-                                Layout.preferredWidth: 32
-                                Layout.preferredHeight: 32
-                                Layout.alignment: Qt.AlignVCenter
-                                color: Kirigami.Theme.textColor
-                            }
-                        }
-                        
-                        // Hostname
-                        Text {
-                            visible: true
-                            text: hostName.toUpperCase().replace(/\n/g, " ")
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
-                            font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
-                            font.bold: true
-                            wrapMode: Text.Wrap
-                            Layout.fillWidth: true
-                            maximumLineCount: 2
-                            elide: Text.ElideRight
-                        }
-                        
-                        // Estimated Time Remaining (below hostname)
-                        Text {
-                            visible: remainingMsec > 0
-                            text: Formatter.formatDuration(remainingMsec)
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
-                            font.pixelSize: deviceInfoCard.height < 60 ? 12 : 14
-                            Layout.fillWidth: true
-                        }
-                        
-                        // Time Remaining (Absolute Timestamp)
-                        Text {
-                            text: finishTime ? i18n("Remaining to %1", finishTime) : ""
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
-                            font.pixelSize: 13
-                            visible: finishTime.length > 0
-                        }
-                        
-                        // Spacer
-                        Item { height: 4 }
-                        
-                        // Power Profile Switcher
-                        PowerProfileSwitcher {
-                            visible: root.hasPowerProfiles
-                            width: 140
-                            height: 30
-                            currentProfile: root.currentPowerProfile
-                            radius: root.switchRadius
-                            onProfileChanged: (profile) => root.setPowerProfile(profile)
-                        }
                     }
+                }
+
+                PowerProfileSwitcher {
+                    id: profileSwitcher
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    anchors.bottomMargin: 5
+                    visible: root.hasPowerProfiles
+                    
+                    // In Big Mode: width stops where the icon starts
+                    // Other modes: full width minus margins
+                    width: root.viewMode === "big" 
+                        ? (parent.width - bigModeIcon.width - 25) // 5 left + 10 icon margin + 10 gap
+                        : (parent.width - 10)
+                    height: 30
+                    currentProfile: root.currentPowerProfile
+                    radius: root.switchRadius
+                    onProfileChanged: (profile) => root.setPowerProfile(profile)
                 }
             }
         }

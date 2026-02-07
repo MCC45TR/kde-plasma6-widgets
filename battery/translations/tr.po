@@ -85,24 +85,8 @@ msgid "Background Opacity:"
 msgstr "Arka Plan Opaklığı:"
 
 #: contents/ui/ConfigGeneral.qml
-msgid "Full (100%)"
-msgstr "Tam (%%100)"
-
-#: contents/ui/ConfigGeneral.qml
-msgid "High (75%)"
-msgstr "Yüksek (%%75)"
-
-#: contents/ui/ConfigGeneral.qml
-msgid "Medium (50%)"
-msgstr "Orta (%%50)"
-
-#: contents/ui/ConfigGeneral.qml
-msgid "Low (25%)"
-msgstr "Düşük (%%25)"
-
-#: contents/ui/ConfigGeneral.qml
-msgid "None (0%)"
-msgstr "Yok (%%0)"
+msgid "%1%"
+msgstr "%%%1"
 
 #: contents/ui/ConfigGeneral.qml
 msgid "Corner Radius:"

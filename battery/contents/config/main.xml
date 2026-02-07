@@ -49,5 +49,13 @@
             <default>false</default>
             <label>Use alternative KDE Connect device icons (trusted)</label>
         </entry>
+        <entry name="deviceIcons" type="String">
+            <default>default</default>
+            <label>Device icon style (default/alternative)</label>
+        </entry>
+        <entry name="batteryBarsStyle" type="String">
+            <default>default</default>
+            <label>Battery bars style (default/pill)</label>
+        </entry>
     </group>
 </kcfg>

@@ -142,16 +142,16 @@ import "Formatter.js" as Formatter
                                 property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0) * 0.44
                                 width: iconSize
                                 height: iconSize
-                                source: "computer-laptop"
+                                source: mainDevice && mainDevice.deviceType === "desktop" ? "computer" : "computer-laptop"
                                 color: Kirigami.Theme.textColor
                             }
 
                             TextMetrics {
                                 id: tm
                                 font.pixelSize: deviceIcon.height * 0.8
-                                font.family: "Roboto Condensed"
+                                
                                 font.weight: Font.Light
-                                text: "%" + (mainDevice ? mainDevice.percentage : "")
+                                text: (mainDevice ? mainDevice.percentage : "")
                             }
 
                             Text {
@@ -164,7 +164,7 @@ import "Formatter.js" as Formatter
                                 
                                 color: Kirigami.Theme.textColor
                                 font.pixelSize: deviceIcon.height * 0.8
-                                font.family: "Roboto Condensed" 
+                                 
                                 font.weight: Font.Light
                                 elide: Text.ElideRight
                                 
@@ -173,7 +173,7 @@ import "Formatter.js" as Formatter
                                     if (mainDevice.deviceType === "desktop") {
                                         return mainDevice.percentage + " W"
                                     }
-                                    return "%" + mainDevice.percentage
+                                    return mainDevice.percentage
                                 }
                             }
                             
@@ -181,6 +181,7 @@ import "Formatter.js" as Formatter
                                 visible: true
                                 anchors.top: deviceIcon.bottom
                                 anchors.left: deviceIcon.left
+                                anchors.right: parent.right
                                 anchors.leftMargin: 5
                                 anchors.topMargin: -5
                                 spacing: 0
@@ -190,10 +191,19 @@ import "Formatter.js" as Formatter
                                     color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
                                     font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
                                     font.bold: true
+                                    width: parent.width
+                                    elide: Text.ElideRight
                                 }
                                 
                                 Text {
-                                    text: Formatter.formatDuration(remainingMsec)
+                                    text: {
+                                        var duration = Formatter.formatDuration(remainingMsec)
+                                        if (mainDevice && mainDevice.isCharging) {
+                                            return i18nc("Time to full", "Time to full: %1", duration)
+                                        } else {
+                                            return i18nc("Time remaining", "Remaining: %1", duration)
+                                        }
+                                    }
                                     color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.7)
                                     font.pixelSize: 12
                                     font.bold: false
@@ -239,7 +249,7 @@ import "Formatter.js" as Formatter
                                 }
                                 color: Kirigami.Theme.textColor
                                 font.pixelSize: Math.max(36, deviceInfoCard.height * 0.40) // Target size
-                                font.family: "Roboto Condensed" 
+                                 
                                 font.weight: Font.Light
                                 lineHeight: 0.8
                                 Layout.fillWidth: true
@@ -273,20 +283,21 @@ import "Formatter.js" as Formatter
                         
                         // Estimated Time Remaining (below hostname)
                         Text {
-                            visible: false // Not visible in wide mode
-                            text: Formatter.formatDuration(remainingMsec)
+                            visible: false // Not visible in wide mode, kept for potential future use
+                            text: {
+                                var duration = Formatter.formatDuration(remainingMsec)
+                                if (mainDevice && mainDevice.isCharging) {
+                                    return i18nc("Time to full", "Time to full: %1", duration)
+                                } else {
+                                    return i18nc("Time remaining", "Remaining: %1", duration)
+                                }
+                            }
                             color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
                             font.pixelSize: deviceInfoCard.height < 60 ? 12 : 14
                             Layout.fillWidth: true
                         }
                         
-                        // Time Remaining (Absolute Timestamp)
-                        Text {
-                            text: finishTime ? i18n("Remaining to %1", finishTime) : ""
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
-                            font.pixelSize: 13
-                            visible: finishTime.length > 0
-                        }
+
                         
                         // Spacer
                         Item { height: 4 }
