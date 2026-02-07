@@ -232,6 +232,9 @@ Item {
 
     property bool useCustomIcons: false
     property string iconVersion: "v1"
+
+    property string laptopIcon: "computer-laptop"
+    property string deviceTypeConfig: "laptop" // "laptop" or "desktop"
     
     // De-bounce refresh to avoid too many updates
     Timer {
@@ -256,14 +259,16 @@ Item {
         if (hasBattery) {
             var msec = pmSource.data["Battery"]["Remaining msec"] || 0
             var charging = pmSource.data["AC Adapter"] ? pmSource.data["AC Adapter"]["Plugged in"] : false
+            var energyRate = pmSource.data["Battery"]["Energy Rate"] || 0 // Watts
+            var isDesktop = root.deviceTypeConfig === "desktop"
             
             mainBat = {
-                name: "Laptop", 
-                icon: resolveIcon("laptop", "computer-laptop"),
-                percentage: pmSource.data["Battery"]["Percent"] || 0,
+                name: isDesktop ? "Desktop" : "Laptop", 
+                icon: isDesktop ? "computer" : root.laptopIcon,
+                percentage: isDesktop ? energyRate : (pmSource.data["Battery"]["Percent"] || 0),
                 isCharging: charging,
                 isMain: true,
-                deviceType: "laptop",
+                deviceType: isDesktop ? "desktop" : "laptop",
                 remainingTime: (function() {
                     if (msec > 0) {
                         var totalMins = Math.floor(msec / 60000)
@@ -275,6 +280,7 @@ Item {
                 })(),
                 timeToEvent: formatTimeToEvent(msec, charging)
             }
+
             newList.push(mainBat)
             
             // Update root-level time to event
@@ -340,7 +346,7 @@ Item {
             case "phone": return "smartphone"
             case "tablet": return "tablet"
             case "desktop": return "computer"
-            case "laptop": return "computer-laptop"
+            case "laptop": return root.laptopIcon
             case "tv": return "video-television"
             default: return "smartphone"
         }

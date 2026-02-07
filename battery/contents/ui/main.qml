@@ -13,19 +13,23 @@ PlasmoidItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     preferredRepresentation: fullRepresentation
     
-    Layout.minimumWidth: 200
-    Layout.minimumHeight: 200
+    Layout.minimumWidth: 150
+    Layout.minimumHeight: 150
+    Layout.preferredWidth: 200
+    Layout.preferredHeight: 200
 
     readonly property string currentViewMode: {
-        switch (true) {
-            case (width < 250 && height < 250): return "extrasmall"
-            case (width < 350 && height < 350): return "small"
-            case (width >= 350 && height < 350): return "broad"
-            case (width < 350 && height >= 350): return "tall"
-            case (width >= 350 && height >= 350): return "large"
-            default: return "large"
-        }
+        // Width thresholds: 160 (tiny), 200 (normal)
+        // Height thresholds: 160 (tiny), 200 (normal), 450 (tall)
+        if (width < 160 && height < 160) return "extrasmall"   // Both tiny
+        if (width < 200 && height < 200) return "small"        // Both small (includes 160-199)
+        if (width >= 200 && height < 250) return "wide"        // Wide but short
+        if (width < 200 && height >= 200) return "tall"        // Narrow but tall
+        if (width >= 200 && height >= 350) return "big"        // Wide and very tall
+        return "big"                                           // Wide, medium height (200-449)
     }
+    
+    onCurrentViewModeChanged: console.log("View Mode:", currentViewMode, "(" + width + "x" + height + ")")
     
     // Hostname
     property string localHostName: "Device Label"
@@ -54,9 +58,31 @@ PlasmoidItem {
         id: deviceModel
         useCustomIcons: Plasmoid.configuration.useCustomIcons
         iconVersion: Plasmoid.configuration.iconVersion
+        laptopIcon: Plasmoid.configuration.laptopIcon
+        deviceTypeConfig: Plasmoid.configuration.deviceType
     }
 
     readonly property int edgeMargin: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
+    
+    readonly property int computedRadius: {
+        switch(Plasmoid.configuration.cornerRadius) {
+            case "normal": return 20
+            case "small": return 10
+            case "square": return 0
+            default: return 20
+        }
+    }
+    
+    readonly property double computedOpacity: {
+        switch(Plasmoid.configuration.backgroundOpacity) {
+            case "full": return 1.0
+            case "high": return 0.75
+            case "medium": return 0.5
+            case "low": return 0.25
+            case "none": return 0.0
+            default: return 1.0
+        }
+    }
 
     fullRepresentation: Item {
         id: fullRep
@@ -70,8 +96,8 @@ PlasmoidItem {
              // Weather uses margin 0 if panel, else 'edgeMargin'.
              // Assuming desktop widget for now based on size descriptions.
             
-            radius: 20
-            color: Kirigami.Theme.backgroundColor
+            radius: root.computedRadius
+            color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, root.computedOpacity)
             
             // Mask/Clip for rounded corners
             layer.enabled: true
@@ -82,7 +108,7 @@ PlasmoidItem {
             Rectangle {
                 id: maskItem
                 anchors.fill: parent
-                radius: 20
+                radius: root.computedRadius
                 visible: false
             }
             
@@ -106,15 +132,18 @@ PlasmoidItem {
             mainDevice: deviceModel.mainDevice
             hostName: root.localHostName
             finishTime: deviceModel.mainDevice ? deviceModel.formatFinishTime(deviceModel.pmSourceData["Battery"]["Remaining msec"] || 0) : ""
+            remainingMsec: deviceModel.pmSourceData["Battery"] ? (deviceModel.pmSourceData["Battery"]["Remaining msec"] || 0) : 0
             currentPowerProfile: deviceModel.currentPowerProfile
             onSetPowerProfile: (profile) => deviceModel.setPowerProfile(profile)
             
             // Adaptive Mode
             property string mode: root.currentViewMode
-            // We need to aliasing this property in LargeView to use it
-            // Assuming we added 'viewMode' to LargeView, let's pass it as such
             viewMode: mode
             iconShape: Plasmoid.configuration.iconShape
+            showChargingIcon: Plasmoid.configuration.showChargingIcon
+            backgroundOpacity: Plasmoid.configuration.backgroundOpacity
+            cornerRadius: Plasmoid.configuration.cornerRadius
+            pillGeometry: Plasmoid.configuration.pillGeometry
         }
     }
 }

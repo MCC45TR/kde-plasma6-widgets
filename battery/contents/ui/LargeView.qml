@@ -12,15 +12,50 @@ import Qt5Compat.GraphicalEffects
     property var mainDevice: null
     property string hostName: ""
     property string finishTime: "" // New property
+    property real remainingMsec: 0 // New property for relative time
     property string currentPowerProfile: "balanced"
     signal setPowerProfile(string profile)
     
+    function formatDuration(msec) {
+        if (msec <= 0) return ""
+        var totalMins = Math.floor(msec / 60000)
+        
+        if (totalMins < 60) {
+            return i18nc("minutes", "%1 m", totalMins)
+        } else if (totalMins < 1440) {
+            var h = Math.floor(totalMins / 60)
+            var m = totalMins % 60
+            return i18nc("hours and minutes", "%1 h %2 m", h, m)
+        } else {
+            var d = Math.floor(totalMins / 1440)
+            var h = Math.round((totalMins % 1440) / 60)
+            if (h === 24) { d++; h = 0; }
+            return i18nc("days and hours", "%1 d %2 h", d, h)
+        }
+    }
+
     // View Mode (Adaptive)
-    property string viewMode: "large" // "small", "broad", "large"
+    property string viewMode: "big" // "small", "wide", "big"
     property string iconShape: "square" // "square", "rounded", "circle"
+    property bool showChargingIcon: true
+    property string backgroundOpacity: "full"
+    property string cornerRadius: "normal"
+    property bool pillGeometry: false
 
     // Design Tokens
-    readonly property int backgroundRadius: 20
+    readonly property int backgroundRadius: cornerRadius === "normal" ? 20 : (cornerRadius === "small" ? 10 : 0)
+    readonly property double opacityValue: {
+        switch(backgroundOpacity) {
+            case "full": return 1.0
+            case "high": return 0.75
+            case "medium": return 0.5
+            case "low": return 0.25
+            case "none": return 0.0
+            default: return 1.0
+        }
+    }
+    readonly property int barRadius: cornerRadius === "normal" ? 10 : (cornerRadius === "small" ? 5 : 0)
+    readonly property int switchRadius: Math.max(0, backgroundRadius - contentGap)
     readonly property int contentGap: 10
 
     // Layout: 50/50 vertical split
@@ -30,35 +65,35 @@ import Qt5Compat.GraphicalEffects
         anchors.margins: root.contentGap
         rowSpacing: root.contentGap
         columnSpacing: root.contentGap
-        columns: root.viewMode === "broad" ? 2 : 1
+        columns: root.viewMode === "wide" ? 2 : 1
         
         // --- TOP SECTION (Main Card) ---
         Item {
-            Layout.fillWidth: root.viewMode !== "broad"
+            Layout.fillWidth: root.viewMode !== "wide"
             Layout.preferredWidth: {
-                if (root.viewMode === "broad") {
+                if (root.viewMode === "wide") {
                      return height < (root.width / 2) ? height : (root.width / 2)
                 }
                 return -1
             }
-            // Fill height only if it's the only item (small/extrasmall) or side-by-side (broad)
-            Layout.fillHeight: root.viewMode === "small" || root.viewMode === "extrasmall" || root.viewMode === "broad"
+            // Fill height only if it's the only item (small/extrasmall) or side-by-side (wide)
+            Layout.fillHeight: root.viewMode === "small" || root.viewMode === "extrasmall" || root.viewMode === "wide"
             
             // Fixed 134px height for Large/Tall modes (where it stacks vertically with list)
-            Layout.preferredHeight: (root.viewMode === "large" || root.viewMode === "tall") ? 134 : -1
+            Layout.preferredHeight: (root.viewMode === "big" || root.viewMode === "tall") ? 134 : -1
             
             Shape {
                 id: deviceInfoCard
                 anchors.fill: parent
                 
-                // Radius Logic
-                readonly property int topRadius: root.backgroundRadius - root.contentGap
+                // Radius Logic - ensure non-negative
+                readonly property int topRadius: Math.max(0, root.backgroundRadius - root.contentGap)
                 readonly property int bottomRadius: topRadius
                 
                 ShapePath {
                     strokeWidth: 0
                     strokeColor: "transparent"
-                    fillColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                    fillColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1 * root.opacityValue)
                     
                     startX: 0; startY: deviceInfoCard.topRadius
                     
@@ -131,15 +166,15 @@ import Qt5Compat.GraphicalEffects
                                 // "square" (Default/Adaptive)
                                 return deviceInfoCard.topRadius - 5
                             }
-                            color: root.viewMode === "broad" ? "transparent" : Kirigami.Theme.backgroundColor
+                            color: root.viewMode === "wide" ? "transparent" : Kirigami.Theme.backgroundColor
                             
                             Kirigami.Icon {
                                 id: deviceIcon
-                                anchors.centerIn: root.viewMode === "broad" ? null : parent
-                                anchors.top: root.viewMode === "broad" ? parent.top : undefined
-                                anchors.left: root.viewMode === "broad" ? parent.left : undefined
+                                anchors.centerIn: root.viewMode === "wide" ? null : parent
+                                anchors.top: root.viewMode === "wide" ? parent.top : undefined
+                                anchors.left: root.viewMode === "wide" ? parent.left : undefined
                                 
-                                property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0) * (root.viewMode === "broad" ? 0.66 : 1.0)
+                                property real iconSize: (parent.width - 20) * (root.iconShape === "circle" ? 0.66 : 1.0) * (root.viewMode === "wide" ? 0.44 : 1.0)
                                 width: iconSize
                                 height: iconSize
                                 source: "computer-laptop"
@@ -148,13 +183,15 @@ import Qt5Compat.GraphicalEffects
 
                             TextMetrics {
                                 id: tm
-                                font: broadPercentText.font
+                                font.pixelSize: deviceIcon.height * 0.8
+                                font.family: "Roboto Condensed"
+                                font.weight: Font.Light
                                 text: "%" + (mainDevice ? mainDevice.percentage : "")
                             }
 
                             Text {
-                                id: broadPercentText
-                                visible: root.viewMode === "broad"
+                                id: widePercentText
+                                visible: root.viewMode === "wide"
                                 anchors.left: deviceIcon.right
                                 anchors.verticalCenter: deviceIcon.verticalCenter
                                 anchors.right: parent.right
@@ -164,21 +201,39 @@ import Qt5Compat.GraphicalEffects
                                 font.pixelSize: deviceIcon.height * 0.8
                                 font.family: "Roboto Condensed" 
                                 font.weight: Font.Light
+                                elide: Text.ElideRight
                                 
-                                text: mainDevice ? (tm.width > width ? mainDevice.percentage : tm.text) : "--"
+                                text: {
+                                    if (!mainDevice) return "--"
+                                    if (mainDevice.deviceType === "desktop") {
+                                        return mainDevice.percentage + " W"
+                                    }
+                                    return "%" + mainDevice.percentage
+                                }
                             }
                             
-                            Text {
-                                visible: root.viewMode === "broad"
+                            Column {
+                                visible: root.viewMode === "wide"
                                 anchors.top: deviceIcon.bottom
                                 anchors.left: deviceIcon.left
                                 anchors.leftMargin: 5
                                 anchors.topMargin: -5
+                                spacing: 0
                                 
-                                text: hostName.toUpperCase().replace(/\n/g, " ")
-                                color: Qt.rgba(1,1,1,0.9)
-                                font.pixelSize: 12
-                                font.bold: true
+                                Text {
+                                    text: hostName.toUpperCase().replace(/\n/g, " ")
+                                    color: Qt.rgba(1,1,1,0.9)
+                                    font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
+                                    font.bold: true
+                                }
+                                
+                                Text {
+                                    text: formatDuration(remainingMsec)
+                                    color: Qt.rgba(1,1,1,0.7)
+                                    font.pixelSize: 12
+                                    font.bold: false
+                                    visible: remainingMsec > 0
+                                }
                             }
                         }
                     }
@@ -192,15 +247,41 @@ import Qt5Compat.GraphicalEffects
                         
                         // Percentage Row
                         RowLayout {
-                            visible: root.viewMode !== "broad"
+                            visible: root.viewMode !== "wide"
                             spacing: 4
+                            Layout.fillWidth: true // Constrain to parent width
+                            
                             Text {
-                                text: mainDevice ? "%" + mainDevice.percentage : "--"
+                                id: percentageText
+                                property bool usePercent: true
+                                
+                                TextMetrics {
+                                    id: tmPercentage
+                                    font: percentageText.font
+                                    text: "%" + (mainDevice ? mainDevice.percentage : "")
+                                }
+                                
+                                text: {
+                                    if (!mainDevice) return "--"
+                                    if (mainDevice.deviceType === "desktop") return mainDevice.percentage + " W"
+                                    
+                                    // Check overflow
+                                    var available = parent.width - 36 - 5
+                                    // If full text is wider than available, drop the '%'
+                                    if (tmPercentage.width > available && available > 0) return mainDevice.percentage
+                                    
+                                    return "%" + mainDevice.percentage
+                                }
                                 color: "white"
-                                font.pixelSize: Math.max(36, deviceInfoCard.height * 0.40) // Adaptive font size
+                                font.pixelSize: Math.max(36, deviceInfoCard.height * 0.40) // Target size
                                 font.family: "Roboto Condensed" 
                                 font.weight: Font.Light
                                 lineHeight: 0.8
+                                Layout.fillWidth: true
+                                elide: Text.ElideNone
+                                
+                                fontSizeMode: Text.HorizontalFit
+                                minimumPixelSize: 24 // Don't go smaller than this
                             }
                             // Small Battery Icon next to it
                             Kirigami.Icon {
@@ -214,15 +295,24 @@ import Qt5Compat.GraphicalEffects
                         
                         // Hostname
                         Text {
-                            visible: root.viewMode !== "broad"
+                            visible: root.viewMode !== "wide"
                             text: hostName.toUpperCase().replace(/\n/g, " ")
                             color: Qt.rgba(1,1,1,0.9)
-                            font.pixelSize: 15
+                            font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
                             font.bold: true
                             wrapMode: Text.Wrap
                             Layout.fillWidth: true
                             maximumLineCount: 2
                             elide: Text.ElideRight
+                        }
+                        
+                        // Estimated Time Remaining (below hostname)
+                        Text {
+                            visible: root.viewMode !== "wide" && remainingMsec > 0
+                            text: formatDuration(remainingMsec)
+                            color: Qt.rgba(1,1,1,0.6)
+                            font.pixelSize: deviceInfoCard.height < 60 ? 12 : 14
+                            Layout.fillWidth: true
                         }
                         
                         // Time Remaining (Absolute Timestamp)
@@ -237,20 +327,27 @@ import Qt5Compat.GraphicalEffects
                         Item { height: 4 }
                         
                         // Power Profile Switcher
-                        Loader {
-                            sourceComponent: powerSwitcherComponent
-                            visible: root.viewMode !== "broad"
+                        PowerProfileSwitcher {
+                            visible: root.viewMode !== "wide"
+                            width: 140
+                            height: 30
+                            currentProfile: root.currentPowerProfile
+                            radius: root.switchRadius
+                            onProfileChanged: (profile) => root.setPowerProfile(profile)
                         }
                     }
                 }
 
-                Loader {
+                PowerProfileSwitcher {
                     anchors.bottom: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottomMargin: 5
-                    sourceComponent: powerSwitcherComponent
-                    visible: root.viewMode === "broad"
-                    onLoaded: item.width = Qt.binding(() => parent.width - 10)
+                    visible: root.viewMode === "wide"
+                    width: parent.width - 10
+                    height: 30
+                    currentProfile: root.currentPowerProfile
+                    radius: root.switchRadius
+                    onProfileChanged: (profile) => root.setPowerProfile(profile)
                 }
             }
         }
@@ -281,163 +378,16 @@ import Qt5Compat.GraphicalEffects
                 
                 height: Math.max(50, calculatedHeight)
                 
-                // Bar Background (Track)
-                Rectangle {
-                    anchors.fill: parent
-                    color: Qt.rgba(0.3, 0.3, 0.3, 0.5)
-                    radius: 10
-                }
-                
-                // Filled Progress
-                Rectangle {
-                    id: barFill
+                HorizontalBatteryBar {
+                    width: parent.width
                     height: parent.height
-                    width: parent.width * (modelData.percentage / 100)
-                    radius: 10
-                    
-                    // Color Logic
-                    property color barColor: {
-                        if (modelData.isCharging) return "#2ecc71" // Green
-                        var p = modelData.percentage
-                        if (p <= 15) return Kirigami.Theme.negativeColor
-                        if (p <= 30) return "#FFAA00"
-                        return Kirigami.Theme.highlightColor
-                    }
-                    color: barColor
-                }
-                
-                // Content Row (Inside Bar)
-                RowLayout {
-                    anchors.fill: parent
-                    anchors.margins: parent.height < 60 ? 10 : 20 // Adaptive margins
-                    spacing: 15
-                    
-                    // Icon
-                    Kirigami.Icon {
-                        source: modelData.icon
-                        Layout.preferredWidth: parent.height < 60 ? 32 : 48
-                        Layout.preferredHeight: Layout.preferredWidth
-                        color: modelData.percentage > 15 && modelData.percentage <= 30 ? "black" : "white"
-                    }
-                    
-                    // Text
-                    Text {
-                        text: modelData.name + " (%" + modelData.percentage + ")"
-                        font.bold: true
-                        font.pixelSize: parent.height < 60 ? 14 : 20
-                        color: modelData.percentage > 15 && modelData.percentage <= 30 ? "black" : "white"
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
-                    }
-                    
-                    // Charging Indicator
-                    Kirigami.Icon {
-                        source: "battery-charging"
-                        visible: modelData.isCharging === true
-                        Layout.preferredWidth: parent.height < 60 ? 24 : 32
-                        Layout.preferredHeight: Layout.preferredWidth
-                        color: modelData.percentage > 15 && modelData.percentage <= 30 ? "black" : "white"
-                    }
-                }
-            }
-        }
-    }
-
-    Component {
-        id: powerSwitcherComponent
-        Rectangle {
-            id: track
-            height: 30
-            width: 140
-            color: Qt.rgba(0,0,0,0.3)
-            radius: 10
-            
-            // Highlight Indicator
-            Rectangle {
-                id: highlightRect
-                width: parent.width / 3
-                height: parent.height
-                radius: 10
-                color: Qt.rgba(1,1,1,0.2)
-                
-                // Position Logic:
-                x: {
-                    if (switcherMouseArea.drag.active) return x
-                    if (currentPowerProfile === "balanced") return width
-                    if (currentPowerProfile === "performance") return width * 2
-                    return 0 // "power-saver"
-                }
-                
-                Behavior on x {
-                    enabled: !switcherMouseArea.drag.active
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutBack
-                        easing.overshoot: 0.8
-                    }
-                }
-            }
-            
-            // Icons Layer
-            RowLayout {
-                anchors.fill: parent
-                spacing: 0
-                
-                Item {
-                    Layout.fillWidth: true; Layout.fillHeight: true
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        source: "battery-profile-powersave"
-                        width: 20; height: 20
-                        color: currentPowerProfile === "power-saver" ? "#4CAF50" : "white"
-                    }
-                }
-                Item {
-                    Layout.fillWidth: true; Layout.fillHeight: true
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        source: width <= 22 ? "power-profile-balanced-symbolic" : "battery-profile-balanced"
-                        width: 20; height: 20
-                        color: currentPowerProfile === "balanced" ? "#FFC107" : "white"
-                    }
-                }
-                Item {
-                    Layout.fillWidth: true; Layout.fillHeight: true
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        source: "battery-profile-performance"
-                        width: 20; height: 20
-                        color: currentPowerProfile === "performance" ? "#FF5252" : "white"
-                    }
-                }
-            }
-            
-            // Interaction Layer
-            MouseArea {
-                id: switcherMouseArea
-                anchors.fill: parent
-                
-                drag.target: highlightRect
-                drag.axis: Drag.XAxis
-                drag.minimumX: 0
-                drag.maximumX: track.width - highlightRect.width
-                
-                onClicked: (mouse) => {
-                    var slotWidth = width / 3
-                    if (mouse.x < slotWidth) root.setPowerProfile("power-saver")
-                    else if (mouse.x < slotWidth * 2) root.setPowerProfile("balanced")
-                    else root.setPowerProfile("performance")
-                }
-                
-                onReleased: {
-                    if (drag.active) {
-                        var center = highlightRect.x + highlightRect.width / 2
-                        var slotWidth = width / 3
-                        var targetProfile = "power-saver"
-                        if (center > slotWidth && center < slotWidth * 2) targetProfile = "balanced"
-                        else if (center >= slotWidth * 2) targetProfile = "performance"
-                        root.setPowerProfile(targetProfile)
-                    }
+                    deviceName: modelData.name
+                    deviceIcon: modelData.icon
+                    percentage: modelData.percentage
+                    isCharging: modelData.isCharging === true
+                    showChargingIcon: root.showChargingIcon
+                    barRadius: root.barRadius
+                    pillGeometry: root.pillGeometry
                 }
             }
         }

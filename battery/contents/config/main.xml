@@ -21,5 +21,29 @@
             <default>10</default>
             <label>Margin around the widget edges</label>
         </entry>
+        <entry name="laptopIcon" type="String">
+            <default>computer-laptop</default>
+            <label>Icon to simulate for Laptop</label>
+        </entry>
+        <entry name="deviceType" type="String">
+            <default>laptop</default>
+            <label>Device Type (laptop/desktop)</label>
+        </entry>
+        <entry name="showChargingIcon" type="Bool">
+            <default>true</default>
+            <label>Show charging indicator icon</label>
+        </entry>
+        <entry name="backgroundOpacity" type="String">
+            <default>full</default>
+            <label>Background Opacity</label>
+        </entry>
+        <entry name="cornerRadius" type="String">
+            <default>normal</default>
+            <label>Corner Radius Mode (normal, small, square)</label>
+        </entry>
+        <entry name="pillGeometry" type="Bool">
+            <default>false</default>
+            <label>Use pill-shaped battery bars (radius = height/2)</label>
+        </entry>
     </group>
 </kcfg>
