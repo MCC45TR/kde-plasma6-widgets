@@ -5,6 +5,7 @@ import org.kde.kirigami as Kirigami
 
 Kirigami.FormLayout {
     id: page
+    property string title: i18n("Appearance")
     
     property int cfg_clockStyle
     property double cfg_backgroundOpacity
@@ -19,6 +20,21 @@ Kirigami.FormLayout {
     property int cfg_verticalSpacingRatio
     property int cfg_edgeMargin
     property int cfg_widgetRadius
+    
+    // Default Values (Requested by Environment)
+    readonly property int cfg_clockStyleDefault: 2
+    readonly property double cfg_backgroundOpacityDefault: 1.0
+    readonly property bool cfg_showDigitalClockDefault: false
+    readonly property bool cfg_useCustomFontDefault: false
+    readonly property string cfg_customFontFamilyDefault: ""
+    readonly property bool cfg_fontAutoAdjustDefault: true
+    readonly property int cfg_fixedWeightDefault: 400
+    readonly property int cfg_fixedWidthDefault: 100
+    readonly property int cfg_verticalSpacingRatioDefault: 10
+    readonly property int cfg_edgeMarginDefault: 10
+    readonly property int cfg_widgetRadiusDefault: 20
+    readonly property int cfg_hourMarkerRatioDefault: 0
+    readonly property bool cfg_boldHourMarkersDefault: false
 
     CheckBox {
         id: showDigitalCheck

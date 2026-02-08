@@ -391,16 +391,16 @@ PlasmoidItem {
             width: clockFace.isHovered ? hourHand.width : 3
             Behavior on width { NumberAnimation { duration: 300 } }
             
-            readonly property real rawAngle: (root.currentTime.getMinutes() * 6) + (root.currentTime.getSeconds() * 0.1) + (root.currentTime.getMilliseconds() * 0.0001)
+            readonly property real rawAngle: (root.currentTime.getMinutes() * 6) + (root.currentTime.getSeconds() * 0.1)
             readonly property real projAngle: root.getProjectedAngle(rawAngle)
             
             rotation: clockFace.isHovered ? rawAngle : projAngle
-            Behavior on rotation { RotationAnimation { direction: RotationAnimation.Shortest; duration: 300 } }
+            Behavior on rotation { RotationAnimation { direction: RotationAnimation.Shortest; duration: 150 } }
             
             readonly property real sqHeight: calculateRayLength(projAngle)
             readonly property real safeLength: root.calculateRayLengthWithInset(projAngle, clockFace.tickInset + clockFace.maxInnerGap + 5)
             height: clockFace.isHovered ? clockFace.numberRadius : sqHeight
-            Behavior on height { NumberAnimation { duration: 300 } }
+            Behavior on height { NumberAnimation { duration: 150 } }
             
             anchors.bottom: centerPivot.verticalCenter
             anchors.horizontalCenter: centerPivot.horizontalCenter
@@ -415,7 +415,7 @@ PlasmoidItem {
                 // Position logic
                 anchors.top: parent.top
                 anchors.topMargin: clockFace.isHovered ? 0 : (parent.height - minuteHand.safeLength)
-                Behavior on anchors.topMargin { NumberAnimation { duration: 300 } }
+                Behavior on anchors.topMargin { NumberAnimation { duration: 150 } }
                 
                 anchors.horizontalCenter: parent.horizontalCenter
                 
