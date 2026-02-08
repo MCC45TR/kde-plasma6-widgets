@@ -21,6 +21,7 @@ Item {
     property real length: 0
     property string noMediaText: i18n("No Media")
     property bool showPlayerBadge: true
+    property int radius: 20
     
     // Callbacks
     property var onPrevious: function() {}
@@ -47,7 +48,8 @@ Item {
         asynchronous: true
         
         sourceComponent: Components.AlbumCover {
-            radius: 10
+            id: albumArt
+            radius: Math.max(0, wideMode.radius - 10)
             
             artUrl: wideMode.artUrl
             hasArt: wideMode.hasArt

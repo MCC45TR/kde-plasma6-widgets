@@ -8,6 +8,7 @@ Kirigami.FormLayout {
     
     // Config binding
     property int cfg_edgeMargin
+    property int cfg_widgetRadius
     property double cfg_backgroundOpacity
     property bool cfg_showPanelControls
     property bool cfg_panelShowTitle
@@ -28,6 +29,7 @@ Kirigami.FormLayout {
     
     // Default values (required for Defaults button)
     property int cfg_edgeMarginDefault: 10
+    property int cfg_widgetRadiusDefault: 20
     property double cfg_backgroundOpacityDefault: 1.0
     property bool cfg_showPanelControlsDefault: true
     property bool cfg_panelShowTitleDefault: true
@@ -71,6 +73,20 @@ Kirigami.FormLayout {
             if (currentIndex === 0) configAppearance.cfg_edgeMargin = 10
             else if (currentIndex === 1) configAppearance.cfg_edgeMargin = 5
             else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
+        }
+    }
+
+    ComboBox {
+        id: radiusCombo
+        Kirigami.FormData.label: i18n("Corner Radius") + ":"
+        Layout.fillWidth: true
+        model: [i18n("Normal (20px)"), i18n("Less (10px)"), i18n("Even Less (5px)"), i18n("Square (0px)")]
+        
+        onActivated: {
+            if (currentIndex === 0) configAppearance.cfg_widgetRadius = 20
+            else if (currentIndex === 1) configAppearance.cfg_widgetRadius = 10
+            else if (currentIndex === 2) configAppearance.cfg_widgetRadius = 5
+            else if (currentIndex === 3) configAppearance.cfg_widgetRadius = 0
         }
     }
 
@@ -280,6 +296,13 @@ Kirigami.FormLayout {
          else if (margin === 0) edgeMarginCombo.currentIndex = 2
          else edgeMarginCombo.currentIndex = 0
          
+         var radius = cfg_widgetRadius
+         if (radius === 20) radiusCombo.currentIndex = 0
+         else if (radius === 10) radiusCombo.currentIndex = 1
+         else if (radius === 5) radiusCombo.currentIndex = 2
+         else if (radius === 0) radiusCombo.currentIndex = 3
+         else radiusCombo.currentIndex = 0
+         
          panelLayoutCombo.currentIndex = cfg_panelLayoutMode
          
          // Sync Layout Mode
@@ -313,6 +336,7 @@ Kirigami.FormLayout {
     }
 
     onCfg_edgeMarginChanged: syncSettings()
+    onCfg_widgetRadiusChanged: syncSettings()
     onCfg_backgroundOpacityChanged: syncSettings()
     Component.onCompleted: syncSettings()
 }

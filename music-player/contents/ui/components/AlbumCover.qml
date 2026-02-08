@@ -17,6 +17,7 @@ Rectangle {
     property string preferredPlayer: ""
     property var onLaunchApp: function() {}
     property string placeholderSource: ""
+    property bool showPlayerBadge: true
     
     property var playersModel: null
     property var onSwitchPlayer: function(id) {}
@@ -24,7 +25,7 @@ Rectangle {
     // Mode flags
     property bool pillMode: false
     property bool showNoMediaText: true
-    property bool showPlayerBadge: true
+    // property bool showPlayerBadge: true // Removed duplicate property
     property bool expandBadgeToFullWidth: false
     
     // Overlay properties
@@ -87,7 +88,11 @@ Rectangle {
             
             // User Request: Tile Radius = Background Radius - Distance
             // Therefore: Tile Diameter (Header Height) = 2 * (Background Radius - Distance)
-            readonly property real targetDiameter: 2 * (albumCover.radius - appBadgeLoader.distance)
+            // Fix for 0px radius: Ensure it doesn't go negative.
+            readonly property real targetDiameter: {
+                if (albumCover.radius === 0) return 32 // Default size for square mode
+                return Math.max(24, 2 * (albumCover.radius - appBadgeLoader.distance))
+            }
             
             // Calculate iconSize based on targetDiameter
             // AppBadge logic: headerHeight = pillMode ? (iconSize + 9) : (iconSize * 1.25)

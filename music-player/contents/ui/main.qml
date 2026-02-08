@@ -7,6 +7,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mpris as Mpris
 
 import "js/PlayerData.js" as PlayerData
+import "components" as Components
 
 PlasmoidItem {
     id: root
@@ -40,6 +41,7 @@ PlasmoidItem {
     readonly property bool cfg_showShuffleButton: Plasmoid.configuration.showShuffleButton !== undefined ? Plasmoid.configuration.showShuffleButton : true
     readonly property bool cfg_showLoopButton: Plasmoid.configuration.showLoopButton !== undefined ? Plasmoid.configuration.showLoopButton : true
     readonly property bool cfg_showSeekButtons: Plasmoid.configuration.showSeekButtons !== undefined ? Plasmoid.configuration.showSeekButtons : true
+    readonly property int cfg_widgetRadius: Plasmoid.configuration.widgetRadius !== undefined ? Plasmoid.configuration.widgetRadius : 20
 
     // Panel Detection
     readonly property bool isInPanel: (Plasmoid.formFactor == PlasmaCore.Types.Horizontal || Plasmoid.formFactor == PlasmaCore.Types.Vertical)
@@ -148,7 +150,18 @@ PlasmoidItem {
     // ---------------------------------------------------------
     readonly property bool hasPlayer: !!currentPlayer
     readonly property bool isPlaying: currentPlayer ? currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : false
-    readonly property string artUrl: currentPlayer ? currentPlayer.artUrl : ""
+    
+    // Album Art Fallback Logic
+    Components.AlbumArtFetcher {
+        id: artFetcher
+        mprisArtUrl: currentPlayer ? currentPlayer.artUrl : ""
+        trackUrl: (currentPlayer && currentPlayer.url) ? currentPlayer.url : ""
+        artist: currentPlayer ? currentPlayer.artist : ""
+        album: (currentPlayer && currentPlayer.album) ? currentPlayer.album : ""
+        title: (currentPlayer && currentPlayer.track) ? currentPlayer.track : ""
+    }
+    
+    readonly property string artUrl: artFetcher.effectiveArtUrl
     readonly property bool hasArt: artUrl !== ""
     readonly property string title: currentPlayer ? currentPlayer.track : i18n("No Media Playing")
     readonly property string artist: currentPlayer ? currentPlayer.artist : ""
@@ -321,7 +334,7 @@ PlasmoidItem {
             font.family: "Roboto Condensed"
             font.bold: true
             font.pixelSize: root.cfg_panelAutoFontSize 
-                ? Math.max(10, Math.min(compactRep.height * 0.5, 16)) 
+                ? Math.max(5, Math.min(compactRep.height * 0.5, 16)) 
                 : root.cfg_panelFontSize
             text: root.title || i18n("No Media")
         }
@@ -330,8 +343,8 @@ PlasmoidItem {
             id: artistMetrics
             font.family: "Roboto Condensed"
             font.pixelSize: root.cfg_panelAutoFontSize
-                ? Math.max(9, Math.min(compactRep.height * 0.4, 13))
-                : Math.max(9, root.cfg_panelFontSize - 2)
+                ? Math.max(5, Math.min(compactRep.height * 0.4, 13))
+                : Math.max(5, root.cfg_panelFontSize - 2)
             text: root.artist || ""
         }
         
@@ -353,12 +366,12 @@ PlasmoidItem {
         // Calculate total dynamic width
         readonly property int dynamicContentWidth: {
             var spacing = root.showPanelControls ? 20 : 10
-            var total = textWidth + controlsWidth + spacing
-            return Math.min(Math.max(total, 100), root.cfg_panelMaxWidth)
+            var total = textWidth + controlsWidth + spacing + 30 // Extra buffer to prevent truncation
+            return Math.max(total, 100)
         }
         
         Layout.preferredWidth: root.cfg_panelDynamicWidth ? dynamicContentWidth : root.cfg_panelMaxWidth
-        Layout.maximumWidth: root.cfg_panelMaxWidth
+        Layout.maximumWidth: root.cfg_panelDynamicWidth ? -1 : root.cfg_panelMaxWidth
         Layout.minimumWidth: 50
         
         Loader {
@@ -420,8 +433,8 @@ PlasmoidItem {
         anchors.fill: parent
         
         // Mode Detection - Computed properties
-        readonly property bool isLargeSq: (root.height > 350) && (root.width < root.height * 1.05)
-        readonly property bool isWide: !isLargeSq && (root.width > (root.height * 1.05))
+        readonly property bool isWide: root.width > 300
+        readonly property bool isLargeSq: (root.height > 250) && isWide
         
         // Current mode for loader
         readonly property string currentMode: {
@@ -443,7 +456,7 @@ PlasmoidItem {
             anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
             color: root.isInPanel ? "transparent" : Kirigami.Theme.backgroundColor
             opacity: root.isInPanel ? 1 : root.cfg_backgroundOpacity
-            radius: 20
+            radius: root.cfg_widgetRadius
             clip: true
             
             // Lazy Loader for Mode Components
@@ -485,6 +498,7 @@ PlasmoidItem {
                         item.currentPosition = Qt.binding(() => root.currentPosition)
                         item.length = Qt.binding(() => root.length)
                         item.noMediaText = Qt.binding(() => i18n("No Media Playing"))
+                        item.radius = Qt.binding(() => root.cfg_widgetRadius)
                         
                         // Optional properties
                         if (item.hasOwnProperty("showPlayerBadge")) {

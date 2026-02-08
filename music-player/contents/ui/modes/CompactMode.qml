@@ -22,6 +22,7 @@ Item {
     property string nextText: i18n("Next")
     property string noMediaText: i18n("No Media")
     property bool showPlayerBadge: true
+    property int radius: 20
     
     // Callbacks
     property var onPrevious: function() {}
@@ -106,7 +107,8 @@ Item {
             asynchronous: true
             
             sourceComponent: Components.AlbumCover {
-                radius: 20
+                id: albumArt
+                radius: compactMode.radius
                 
                 artUrl: compactMode.artUrl
                 hasArt: compactMode.hasArt
@@ -137,18 +139,21 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.margins: 15
-            height: 50
+            anchors.leftMargin: 15
+            anchors.rightMargin: 15
+            anchors.bottomMargin: 5
+            height: item ? item.implicitHeight : 50
             active: compactMode.length > 0
             
             sourceComponent: Item {
+                implicitHeight: seekArea.height + 2 + timeRow.height
                 // Seek Bar
                 MouseArea {
                     id: seekArea
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: timeRow.top
-                    anchors.bottomMargin: 8
+                    anchors.bottomMargin: 2
                     height: 10
                     property bool dragging: false
                     
@@ -185,23 +190,26 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
-                    height: 20
+                    height: Math.max(20, titleText.contentHeight)
                     
                     Text {
                         text: PlayerData.formatTime(compactMode.currentPosition)
                         color: "white"
-                        font.bold: true
                         anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                     
                     Text {
                         text: PlayerData.formatTime(compactMode.length)
                         color: "white"
-                        font.bold: true
                         anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                     
                     Text {
+                        id: titleText
+                        wrapMode: Text.Wrap
+                        maximumLineCount: 2
                         text: compactMode.title
                         color: "white"
                         elide: Text.ElideRight

@@ -67,8 +67,11 @@ Item {
         var textW = calculatedTextWidth
         var ctrlW = controlsWidth
         var spacing = showPanelControls ? 20 : 10
-        var total = textW + ctrlW + spacing
-        return Math.min(Math.max(total, 100), maxWidth)
+        var total = textW + ctrlW + spacing + 30 // Extra buffer to prevent truncation
+        
+        // If dynamic width is enabled, don't cap at maxWidth (allow it to grow as needed)
+        // Only apply maxWidth if dynamicWidth is FALSE
+        return Math.max(total, 100)
     }
     
     implicitWidth: dynamicImplicitWidth
@@ -79,7 +82,7 @@ Item {
         font.family: "Roboto Condensed"
         font.bold: true
         font.pixelSize: panelMode.autoFontSize 
-            ? Math.max(10, Math.min(panelMode.height * 0.5, 16)) 
+            ? Math.max(5, Math.min(panelMode.height * 0.5, 16)) 
             : panelMode.manualFontSize
         text: panelMode.title || i18n("No Media")
     }
@@ -88,8 +91,8 @@ Item {
         id: artistMetrics
         font.family: "Roboto Condensed"
         font.pixelSize: panelMode.autoFontSize
-            ? Math.max(9, Math.min(panelMode.height * 0.4, 13))
-            : Math.max(9, panelMode.manualFontSize - 2)
+            ? Math.max(5, Math.min(panelMode.height * 0.4, 13))
+            : Math.max(5, panelMode.manualFontSize - 2)
         text: panelMode.artist || ""
     }
     
@@ -172,12 +175,12 @@ Item {
                 
                 // Font Logic - Cached
                 readonly property int calculatedPixelSize: panelMode.autoFontSize 
-                    ? Math.max(10, Math.min(panelMode.height * 0.5, 16)) 
+                    ? Math.max(5, Math.min(panelMode.height * 0.5, 16)) 
                     : panelMode.manualFontSize
                 
                 readonly property int artistPixelSize: panelMode.autoFontSize
-                    ? Math.max(9, Math.min(panelMode.height * 0.4, 13))
-                    : Math.max(9, panelMode.manualFontSize - 2)
+                    ? Math.max(5, Math.min(panelMode.height * 0.4, 13))
+                    : Math.max(5, panelMode.manualFontSize - 2)
                 
                 // Text Alignment - Cached
                 readonly property int textAlign: {

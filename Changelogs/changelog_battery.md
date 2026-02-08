@@ -14,7 +14,7 @@
 - **Özel Cihaz İkonları**: Farklı cihaz türleri (KDE Connect, Bluetooth vb.) için özel ikon desteği getirildi.
 - **Çoklu Görünüm Düzenleri**: Farklı widget boyutları (Small, Tall, Large) için uyumlu tasarım şablonları oluşturuldu.
 - **Türkçe Çeviri**: Tam Türkçe dil desteği eklendi.
-- **MSI Kontrol Entegrasyonu**: Güç profili yönetimi ve MSI kontrol özellikleri eklendi.
+- **MSI Kontrol Entegrasyonu**: Güç profili yönetimi özellikleri eklendi.
 
 ### v1.0.0 (2025-12-29)
 **TR-TR:**
