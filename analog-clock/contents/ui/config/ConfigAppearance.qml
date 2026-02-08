@@ -18,6 +18,7 @@ Kirigami.FormLayout {
     property int cfg_fixedWidth
     property int cfg_verticalSpacingRatio
     property int cfg_edgeMargin
+    property int cfg_widgetRadius
 
     CheckBox {
         id: showDigitalCheck
@@ -27,11 +28,29 @@ Kirigami.FormLayout {
         onCheckedChanged: cfg_showDigitalClock = checked
     }
 
+    property int cfg_hourMarkerRatio
+
+    property bool cfg_boldHourMarkers
+
     ComboBox {
         Kirigami.FormData.label: i18n("Clock Style:")
         model: [i18n("Automatic"), i18n("Classic (Circular)"), i18n("Modern (Squircle)")]
         currentIndex: cfg_clockStyle
         onActivated: cfg_clockStyle = currentIndex
+    }
+
+    ComboBox {
+        Kirigami.FormData.label: i18n("Hour Line Length:")
+        model: [i18n("1.0x (Default)"), i18n("1.25x"), i18n("1.5x"), i18n("1.75x"), i18n("2.0x")]
+        currentIndex: cfg_hourMarkerRatio
+        onActivated: cfg_hourMarkerRatio = currentIndex
+    }
+
+    CheckBox {
+        Kirigami.FormData.label: i18n("Hour Line Thickness:")
+        text: i18n("Bold hour markers")
+        checked: cfg_boldHourMarkers
+        onCheckedChanged: cfg_boldHourMarkers = checked
     }
 
     ComboBox {
@@ -57,6 +76,22 @@ Kirigami.FormLayout {
             if (currentIndex === 0) page.cfg_edgeMargin = 10
             else if (currentIndex === 1) page.cfg_edgeMargin = 5
             else if (currentIndex === 2) page.cfg_edgeMargin = 0
+        }
+    }
+
+    ComboBox {
+        id: widgetRadiusCombo
+        Kirigami.FormData.label: i18n("Widget Radius:")
+        model: [i18n("Square (0px)"), i18n("10px"), i18n("20px"), i18n("30px"), i18n("40px"), i18n("50px"), i18n("Full")]
+        
+        onActivated: {
+            if (currentIndex === 0) page.cfg_widgetRadius = 0
+            else if (currentIndex === 1) page.cfg_widgetRadius = 10
+            else if (currentIndex === 2) page.cfg_widgetRadius = 20
+            else if (currentIndex === 3) page.cfg_widgetRadius = 30
+            else if (currentIndex === 4) page.cfg_widgetRadius = 40
+            else if (currentIndex === 5) page.cfg_widgetRadius = 50
+            else if (currentIndex === 6) page.cfg_widgetRadius = -1
         }
     }
     
@@ -147,18 +182,18 @@ Kirigami.FormLayout {
         }
     }
         
-    Component.onCompleted: {
-             var currentOp = (page.cfg_backgroundOpacity !== undefined) ? page.cfg_backgroundOpacity : 1.0
-             var closestIdx = 0
-             var minDiff = 100
-             for (var i = 0; i < opacityValues.length; i++) {
-                 var diff = Math.abs(currentOp - opacityValues[i])
-                 if (diff < minDiff) {
-                     minDiff = diff
-                     closestIdx = i
-                 }
-             }
-             opacityCombo.currentIndex = closestIdx
+     Component.onCompleted: {
+              var currentOp = (page.cfg_backgroundOpacity !== undefined) ? page.cfg_backgroundOpacity : 1.0
+              var closestIdx = 0
+              var minDiff = 100
+              for (var i = 0; i < opacityCombo.opacityValues.length; i++) {
+                  var diff = Math.abs(currentOp - opacityCombo.opacityValues[i])
+                  if (diff < minDiff) {
+                      minDiff = diff
+                      closestIdx = i
+                  }
+              }
+              opacityCombo.currentIndex = closestIdx
              
              // Initialize Edge Margin
              var margin = page.cfg_edgeMargin !== undefined ? page.cfg_edgeMargin : 10
@@ -166,6 +201,17 @@ Kirigami.FormLayout {
              else if (margin === 5) edgeMarginCombo.currentIndex = 1
              else if (margin === 0) edgeMarginCombo.currentIndex = 2
              else edgeMarginCombo.currentIndex = 0
+             
+             // Initialize Widget Radius
+             var radius = page.cfg_widgetRadius !== undefined ? page.cfg_widgetRadius : 20
+             if (radius === 0) widgetRadiusCombo.currentIndex = 0
+             else if (radius === 10) widgetRadiusCombo.currentIndex = 1
+             else if (radius === 20) widgetRadiusCombo.currentIndex = 2
+             else if (radius === 30) widgetRadiusCombo.currentIndex = 3
+             else if (radius === 40) widgetRadiusCombo.currentIndex = 4
+             else if (radius === 50) widgetRadiusCombo.currentIndex = 5
+             else if (radius === -1) widgetRadiusCombo.currentIndex = 6
+             else widgetRadiusCombo.currentIndex = 2 // Default to 20 if unknown
              
              if (page.cfg_customFontFamily) {
                  var fIdx = fontCombo.find(page.cfg_customFontFamily)

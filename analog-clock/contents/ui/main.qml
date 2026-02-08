@@ -25,17 +25,19 @@ PlasmoidItem {
     }
     
     // Updated 24.12.27: Math for Squircle/Rounded Rectangle
-    property real cornerRadius: Math.min(width, height) * 0.11
+    property int baseRadius: Plasmoid.configuration.widgetRadius !== undefined ? Plasmoid.configuration.widgetRadius : 20
+    property real cornerRadius: baseRadius === -1 ? Math.max(width, height) / 2 : baseRadius
 
     // Function to calculate intersection distance from center to Rounded Rectangle edge
     function calculateRayLength(angleInDegrees) {
         var offset = clockFace.tickInset
-        var w = clockFace.width - 2 * offset
-        var h = clockFace.height - 2 * offset
+        // Calculate against the outer boundary (ClockFace dimensions)
+        var w = clockFace.width
+        var h = clockFace.height
         var w2 = w / 2
         var h2 = h / 2
         
-        var r = Math.max(0, root.cornerRadius - offset)
+        var r = Math.min(root.cornerRadius, Math.min(w2, h2))
         
         var theta = angleInDegrees * Math.PI / 180
         var sinT = Math.abs(Math.sin(theta))
@@ -47,24 +49,84 @@ PlasmoidItem {
         var iw = w2 - r
         var ih = h2 - r
         
+        var dist = 0
+        
         // Vertical hit check (x = +/- w2)
         var tVert = w2 / sinT
         var yVert = tVert * cosT
-        if (yVert <= ih) return tVert
         
         // Horizontal hit check (y = +/- h2)
         var tHorz = h2 / cosT
         var xHorz = tHorz * sinT
-        if (xHorz <= iw) return tHorz
         
-        // Corner intersection
-        var B = 2 * (-iw * sinT - ih * cosT)
-        var C = (iw * iw + ih * ih) - r * r
+        if (yVert <= ih) {
+            dist = tVert
+        } else if (xHorz <= iw) {
+            dist = tHorz
+        } else {
+            // Corner intersection
+            var B = 2 * (-iw * sinT - ih * cosT)
+            var C = (iw * iw + ih * ih) - r * r
+            
+            var det = B*B - 4*C
+            if (det < 0) dist = Math.min(tVert, tHorz) 
+            else dist = (-B + Math.sqrt(det)) / 2
+        }
         
-        var det = B*B - 4*C
-        if (det < 0) return Math.min(tVert, tHorz) 
+        // Subtract offset to keep constant margin from edge
+        return dist - offset
+    }
+
+    // Calculate ray length for an inset rounded rectangle (for inner tick alignment)
+    function calculateRayLengthWithInset(angleInDegrees, inset) {
+        // Calculate against the outer boundary minus inset
+        var w = clockFace.width - 2 * inset
+        var h = clockFace.height - 2 * inset
+        if (w <= 0 || h <= 0) return 0
         
-        return (-B + Math.sqrt(det)) / 2
+        var w2 = w / 2
+        var h2 = h / 2
+        
+        // Scale corner radius proportionally
+        var outerR = Math.min(root.cornerRadius, Math.min(clockFace.width/2, clockFace.height/2))
+        var r = Math.max(0, outerR - inset)
+        r = Math.min(r, Math.min(w2, h2))
+        
+        var theta = angleInDegrees * Math.PI / 180
+        var sinT = Math.abs(Math.sin(theta))
+        var cosT = Math.abs(Math.cos(theta))
+        
+        if (sinT < 0.001) sinT = 0.001
+        if (cosT < 0.001) cosT = 0.001
+        
+        var iw = w2 - r
+        var ih = h2 - r
+        
+        var dist = 0
+        
+        // Vertical hit check
+        var tVert = w2 / sinT
+        var yVert = tVert * cosT
+        
+        // Horizontal hit check
+        var tHorz = h2 / cosT
+        var xHorz = tHorz * sinT
+        
+        if (yVert <= ih) {
+            dist = tVert
+        } else if (xHorz <= iw) {
+            dist = tHorz
+        } else {
+            // Corner intersection
+            var B = 2 * (-iw * sinT - ih * cosT)
+            var C = (iw * iw + ih * ih) - r * r
+            
+            var det = B*B - 4*C
+            if (det < 0) dist = Math.min(tVert, tHorz)
+            else dist = (-B + Math.sqrt(det)) / 2
+        }
+        
+        return dist
     }
 
     // Function to warp circular angles to rectangular aspect ratio
@@ -100,7 +162,7 @@ PlasmoidItem {
     Rectangle {
         anchors.fill: parent
         color: Kirigami.Theme.backgroundColor
-        radius: 20
+        radius: root.cornerRadius
         anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
         // Use configured opacity
         opacity: (Plasmoid.configuration.backgroundOpacity !== undefined) ? Plasmoid.configuration.backgroundOpacity : 1.0
@@ -128,7 +190,8 @@ PlasmoidItem {
         readonly property real handOffset: Math.min(width, height) * 0.15
         readonly property real hourHandStartOffset: Math.min(width, height) * 0.2
         readonly property real edgeMargin: Math.min(width, height) * 0.08
-        readonly property real tickInset: 15
+        readonly property real tickInset: 10
+        readonly property real maxInnerGap: 15 * (1.0 + (Plasmoid.configuration.hourMarkerRatio || 0) * 0.25)
         readonly property real hoverCenterGap: Math.min(width, height) * 0.1
         
         // Mouse Interaction for Hover Effect
@@ -140,7 +203,7 @@ PlasmoidItem {
         }
         
         property bool hoverState: false
-        property int style: Plasmoid.configuration.clockStyle !== undefined ? Plasmoid.configuration.clockStyle : 0 // 0=Auto, 1=Classic, 2=Modern
+        property int style: Plasmoid.configuration.clockStyle !== undefined ? Plasmoid.configuration.clockStyle : 2 // 0=Auto, 1=Classic, 2=Modern
         
         // Classic (1) -> Always show detailed face (isHovered = true)
         // Modern (2) -> Never show detailed face (isHovered = false)
@@ -179,9 +242,20 @@ PlasmoidItem {
                 // Warp the angle based on aspect ratio
                 readonly property real angleDeg: root.getProjectedAngle(index * 6)
                 
-                // Calculate position considering the shape
-                // We use calculateRayLength to get distance to edge, then padding
-                readonly property real dist: root.calculateRayLength(angleDeg) 
+                // Calculate tick height as difference between outer and inner rounded rectangle
+                readonly property real outerInset: clockFace.tickInset  // 10px margin from background
+                readonly property real baseInnerGap: (index % 5 === 0) ? (15 * (1.0 + (Plasmoid.configuration.hourMarkerRatio || 0) * 0.25)) : 15
+                readonly property real innerInset: outerInset + baseInnerGap
+                
+                // Outer edge position (where tick tip touches)
+                readonly property real outerDist: root.calculateRayLengthWithInset(angleDeg, outerInset)
+                // Inner edge position (where tick base ends)
+                readonly property real innerDist: root.calculateRayLengthWithInset(angleDeg, innerInset)
+                // Tick height is the difference
+                readonly property real tickHeight: Math.max(2, outerDist - innerDist)
+                
+                // Position tick centered between outer and inner
+                readonly property real dist: (outerDist + innerDist) / 2
                 
                 x: clockFace.width/2 + Math.sin(angleDeg * Math.PI / 180) * dist - width/2
                 y: clockFace.height/2 - Math.cos(angleDeg * Math.PI / 180) * dist - height/2
@@ -192,10 +266,10 @@ PlasmoidItem {
                 // Visual Tick (Rectangle)
                 Rectangle {
                    anchors.centerIn: parent
-                   // Dynamic Tick Size: thicker at cardinal points (0, 15, 30, 45)
-                   width: (index % 5 === 0) ? 4 : 2
+                   // Dynamic Tick Size: thicker at cardinal points (0, 15, 30, 45) if enabled
+                   width: (index % 5 === 0 && (Plasmoid.configuration.boldHourMarkers === true)) ? 4 : 2
                    // Length constant as requested
-                   height: 15
+                   height: tickItem.tickHeight
                    
                    rotation: tickItem.angleDeg
                    
@@ -282,6 +356,7 @@ PlasmoidItem {
             Behavior on rotation { RotationAnimation { direction: RotationAnimation.Shortest; duration: 300 } }
             
             readonly property real sqHeight: calculateRayLength(projAngle)
+            readonly property real safeLength: root.calculateRayLengthWithInset(projAngle, clockFace.tickInset + clockFace.maxInnerGap + 5)
             height: clockFace.isHovered ? clockFace.numberRadius : sqHeight
             Behavior on height { NumberAnimation { duration: 300 } }
             
@@ -292,11 +367,11 @@ PlasmoidItem {
             Rectangle {
                 width: parent.width
                 // Extend hand to center when hovered (Full Radius)
-                height: clockFace.isHovered ? parent.height * 0.75 : clockFace.handOffset
+                height: clockFace.isHovered ? parent.height * 0.75 : (width * 1.2)
                 Behavior on height { NumberAnimation { duration: 300 } }
                 
                 anchors.top: parent.top
-                anchors.topMargin: clockFace.isHovered ? parent.height * 0.25 : clockFace.edgeMargin
+                anchors.topMargin: clockFace.isHovered ? parent.height * 0.25 : (parent.height - hourHand.safeLength)
                 Behavior on anchors.topMargin { NumberAnimation { duration: 300 } }
 
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -323,6 +398,7 @@ PlasmoidItem {
             Behavior on rotation { RotationAnimation { direction: RotationAnimation.Shortest; duration: 300 } }
             
             readonly property real sqHeight: calculateRayLength(projAngle)
+            readonly property real safeLength: root.calculateRayLengthWithInset(projAngle, clockFace.tickInset + clockFace.maxInnerGap + 5)
             height: clockFace.isHovered ? clockFace.numberRadius : sqHeight
             Behavior on height { NumberAnimation { duration: 300 } }
             
@@ -338,7 +414,7 @@ PlasmoidItem {
                 
                 // Position logic
                 anchors.top: parent.top
-                anchors.topMargin: clockFace.isHovered ? 0 : clockFace.edgeMargin
+                anchors.topMargin: clockFace.isHovered ? 0 : (parent.height - minuteHand.safeLength)
                 Behavior on anchors.topMargin { NumberAnimation { duration: 300 } }
                 
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -417,7 +493,7 @@ PlasmoidItem {
             //    BUT, if style is Classic, we might prefer hiding it. 
             //    Let's stick to the toggle: if 'showDigitalClock' is true, we show it.
             
-            property bool show: (Plasmoid.configuration.showDigitalClock !== undefined ? Plasmoid.configuration.showDigitalClock : true) && (style !== 1)
+            property bool show: (Plasmoid.configuration.showDigitalClock !== undefined ? Plasmoid.configuration.showDigitalClock : false) && (style !== 1)
             
             visible: show
             

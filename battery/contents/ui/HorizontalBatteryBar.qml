@@ -53,11 +53,11 @@ Item {
     // Content Row
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: Math.max(2, root.height * 0.15)
-        anchors.rightMargin: Math.max(2, root.height * 0.15)
+        anchors.leftMargin: 0
+        anchors.rightMargin: 5
         anchors.topMargin: 0
         anchors.bottomMargin: 0
-        spacing: Math.max(2, root.height * 0.1)
+        spacing: 0
         
         Kirigami.Icon {
             source: root.deviceIcon
@@ -79,8 +79,8 @@ Item {
         
         Item {
             visible: root.isCharging && root.showChargingIcon
-            Layout.preferredWidth: Math.min(root.height * 0.7, 36)
-            Layout.preferredHeight: Layout.preferredWidth
+            Layout.preferredWidth: 22
+            Layout.preferredHeight: 22
             Layout.alignment: Qt.AlignVCenter
             
             Rectangle {

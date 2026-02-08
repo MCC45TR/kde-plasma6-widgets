@@ -11,7 +11,7 @@
       <label>Background Opacity</label>
     </entry>
     <entry name="showDigitalClock" type="Bool">
-      <default>true</default>
+      <default>false</default>
       <label>Show Digital Clock</label>
     </entry>
     <entry name="useCustomFont" type="Bool">
@@ -29,7 +29,32 @@
         <choice name="Classic"/>
         <choice name="Modern"/>
       </choices>
-      <default>Automatic</default>
+      <default>Modern</default>
+    </entry>
+    <entry name="hourMarkerRatio" type="Enum">
+      <label>Hour Marker Length</label>
+      <choices>
+        <choice name="Ratio100">
+            <label>1x</label>
+        </choice>
+        <choice name="Ratio125">
+             <label>1.25x</label>
+        </choice>
+        <choice name="Ratio150">
+             <label>1.5x</label>
+        </choice>
+        <choice name="Ratio175">
+             <label>1.75x</label>
+        </choice>
+        <choice name="Ratio200">
+             <label>2x</label>
+        </choice>
+      </choices>
+      <default>Ratio100</default>
+    </entry>
+    <entry name="boldHourMarkers" type="Bool">
+      <default>false</default>
+      <label>Bold Hour Markers</label>
     </entry>
     <entry name="fontAutoAdjust" type="Bool">
       <default>true</default>
@@ -56,6 +81,10 @@
     <entry name="edgeMargin" type="Int">
       <default>10</default>
       <label>Widget Edge Margin</label>
+    </entry>
+    <entry name="widgetRadius" type="Int">
+      <default>20</default>
+      <label>Widget Corner Radius</label>
     </entry>
   </group>
 </kcfg>
