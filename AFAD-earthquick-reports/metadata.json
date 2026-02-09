@@ -1,0 +1,25 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPlugin": {
+        "Name": "AFAD Earthquake Reports",
+        "Name[tr]": "AFAD Deprem Raporları",
+        "Description": "Lists earthquakes provided by AFAD under the Republic of Türkiye.",
+        "Description[tr]": "Türkiye Cumhuriyeti bünyesindeki AFAD tarafından sağlanan depremleri listeler.",
+        "Id": "com.mcc45tr.afadearthquake",
+        "Version": "1.0",
+        "Website": "https://github.com/mcc45tr",
+        "Category": "Utilities",
+        "License": "GPL-3.0+",
+        "Authors": [
+            {
+                "Name": "mcc45tr",
+                "Email": "mcc45tr@gmail.com"
+            }
+        ],
+        "Icon": "globe",
+        "EnabledByDefault": true
+    }
+}

@@ -23,6 +23,7 @@ available_widgets=(
 "browser-search"
 "app-menu"
 "msi-control"
+"AFAD-earthquick-reports"
 )
 # Get script directory (works on any computer)
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

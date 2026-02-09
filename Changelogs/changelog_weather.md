@@ -1,5 +1,20 @@
 # 🌤️ MWeather (`weather`)
 
+### v1.2.1 (2026-02-09)
+**TR-TR:**
+- **Gelişmiş Rutin Bildirimler**: "Bugünün Hava Değişimleri" seçeneği eklendi. Artık gün içindeki önemli hava durumu değişimlerini (örn. güneşliden yağmura geçiş) saatlik bazda bildirim olarak alabilirsiniz.
+- **Bildirim Kontrol Mekanizması**: Bildirim kontrol sıklığı 30 saniyeye düşürüldü. Ayrıca, rutin bildirimler için 2 dakikalık bekleme süresi (cooldown) eklenerek spam önlendi.
+- **Küresel Yerelleştirme Güncellemesi**: Yeni eklenen bildirim ayarları ve içerikleri 20'den fazla dilde tamamen yerelleştirildi.
+- **Tavsiye Metinleri**: Bildirimlere "Görüş mesafesi düşük, dikkatli sürün" gibi hava durumuna özel güvenli sürüş ve yaşam tavsiyeleri eklendi.
+- **Teknik Düzeltmeler**: Yapılandırma sayfalarındaki "Setting initial properties failed" hataları giderildi ve sistem kararlılığı artırıldı.
+
+**EN-US:**
+- **Advanced Routine Notifications**: Added "Today's Weather Changes" option. You can now receive notifications detailing significant weather shifts (e.g., from sunny to rainy) on an hourly basis.
+- **Notification Timing & Logic**: Reduced system check interval to 30 seconds and implemented a 2-minute cooldown for routine notifications to prevent spamming.
+- **Global Localization Update**: Fully localized new notification settings and strings for over 20 supported languages.
+- **Smart Advice**: Added weather-specific safety advice to notifications (e.g., "Visibility is low, drive carefully").
+- **Technical Fixes**: Resolved "Setting initial properties failed" initialization errors and improved configuration binding stability.
+
 ### v1.2.0 (2026-01-30)
 **TR-TR:**
 - **Kapsamlı Yerelleştirme**: 20'den fazla dil için (Azerice, Bengalce, Çekçe, Almanca, Yunanca, İspanyolca, Farsça, Fransızca, Hintçe, Ermenice, Endonezyaca, İtalyanca, Japonca, Portekizce, Rumence, Rusça, Türkçe, Urduca, Çince) çeviriler eklendi ve güncellendi.
