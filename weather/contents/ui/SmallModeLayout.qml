@@ -68,16 +68,18 @@ Item {
     ColumnLayout {
         anchors.left: smallTemp.right
         anchors.leftMargin: 5
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
+        anchors.top: smallTemp.top
+        anchors.topMargin: smallTemp.font.pixelSize * 0.2 // Visual alignment for cap height
         spacing: 2
 
-        Text {
-            text: "°"
-            color: Kirigami.Theme.textColor
-            font.pixelSize: smallLayout.height * 0.2
-            font.bold: true
-            Layout.alignment: Qt.AlignHCenter
+        Rectangle {
+            Layout.alignment: Qt.AlignLeft
+            width: smallLayout.height * 0.12
+            height: width
+            radius: width / 2
+            color: "transparent"
+            border.color: Kirigami.Theme.textColor
+            border.width: smallLayout.height * 0.025 // Thicker border (approx 3-4px depending on size)
         }
 
         RowLayout {

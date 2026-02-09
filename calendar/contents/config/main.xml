@@ -10,5 +10,9 @@
       <default>10</default>
       <label>Widget Edge Margin</label>
     </entry>
+    <entry name="widgetRadius" type="Int">
+      <default>20</default>
+      <label>Widget Radius</label>
+    </entry>
   </group>
 </kcfg>

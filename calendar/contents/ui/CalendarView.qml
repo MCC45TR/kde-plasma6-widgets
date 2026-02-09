@@ -30,6 +30,10 @@ ColumnLayout {
 
         Text {
             anchors.left: parent.left
+            // Align with the visual start of the first column's content (centered)
+            // Column width is parent.width / 7. Center is at w/14.
+            // Text content (like 'P' or '23') is centered. Assume approx half-width is 8px.
+            anchors.leftMargin: Math.max(0, (parent.width / 7) / 2 - 8)
             anchors.verticalCenter: parent.verticalCenter
             text: monthLabel
             font.family: titleFont
@@ -41,6 +45,7 @@ ColumnLayout {
 
         Text {
             anchors.right: parent.right
+            anchors.rightMargin: Math.max(0, (parent.width / 7) / 2 - 8)
             anchors.verticalCenter: parent.verticalCenter
             text: displayYear
             font.family: titleFont
@@ -169,7 +174,7 @@ ColumnLayout {
             height: 24
             radius: width / 2
             
-            color: "#5e5ce6" 
+            color: calendarLayout.accentColor 
             
             // Visible if opacity is > 0 to allow fade out animation
             visible: opacity > 0

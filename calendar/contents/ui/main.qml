@@ -143,7 +143,7 @@ PlasmoidItem {
         Rectangle {
             id: background
             anchors.fill: parent
-            radius: 20
+            radius: Plasmoid.configuration.widgetRadius !== undefined ? Plasmoid.configuration.widgetRadius : 20
             anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
             color: root.bgColor
             
@@ -163,10 +163,10 @@ PlasmoidItem {
                 anchors.fill: parent
                 // Arkaplanın marginlerine göre içerik de marginli olsun ancak
                 // clip parent'ta yapıldığı için burada padding verelim.
-                topPadding: 17
-                bottomPadding: 17
-                leftPadding: 17
-                rightPadding: 17
+                topPadding: 10
+                bottomPadding: 10
+                leftPadding: 10
+                rightPadding: 10
                 
                 clip: true
                 orientation: Qt.Vertical
