@@ -136,6 +136,10 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 <p align="center">
   <img src="./.Samples/MAnalog-Clock-Small.png" alt="MAnalog Clock Small" height="225" style="margin: 5px;">
   <img src="./.Samples/MAnalog-Clock-Large.png" alt="MAnalog Clock Large" height="225" style="margin: 5px;">
+  <img src="./.Samples/MAnalog-Clock-Square.png" alt="MAnalog Clock Square" height="225" style="margin: 5px;">
+  <br>
+  <img src="./.Samples/MAnalog-Clock-Small-Alt.png" alt="MAnalog Clock Small Alt" height="225" style="margin: 5px;">
+  <img src="./.Samples/MAnalog-Clock-Large-Alt.png" alt="MAnalog Clock Large Alt" height="225" style="margin: 5px;">
 </p>
 
 - **Analog**: Minimalist design with dynamic opacity and hand smoothing
