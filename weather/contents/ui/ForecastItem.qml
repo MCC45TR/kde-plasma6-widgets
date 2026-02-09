@@ -10,6 +10,7 @@ Item {
     required property string iconPath
     required property int temp
     required property bool isHourly
+    property bool isHorizontalLayout: false
     property bool showBackground: true
     property string units: "metric"
     property bool showUnits: true
@@ -30,6 +31,7 @@ Item {
 
     implicitWidth: calculatedWidth
     implicitHeight: parent ? parent.height : 120
+    clip: true
 
     property real radiusTL: 10
     property real radiusTR: 10
@@ -85,6 +87,7 @@ Item {
     }
 
     ColumnLayout {
+        visible: !itemRoot.isHorizontalLayout
         anchors.centerIn: parent
         width: parent.width - 8
         spacing: 4
@@ -116,6 +119,66 @@ Item {
             font.bold: true
             font.pixelSize: 18
             Layout.alignment: Qt.AlignHCenter
+        }
+    }
+
+    RowLayout {
+        anchors.fill: parent
+        spacing: 0
+        visible: itemRoot.isHorizontalLayout
+
+        // Left: Icon Area
+        Item {
+            Layout.preferredHeight: parent.height
+            Layout.preferredWidth: parent.height // Square aspect ratio
+            
+            Kirigami.Icon {
+                anchors.centerIn: parent
+                width: parent.width - 20
+                height: parent.height - 20           
+                source: itemRoot.iconPath
+                isMask: false
+                smooth: true
+            }
+        }
+
+        // Right: Text Area
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            spacing: 0
+            
+            // Top: Day (Yellow Area placeholder)
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                
+                Text {
+                    anchors.centerIn: parent
+                    text: itemRoot.label
+                    color: Kirigami.Theme.textColor
+                    font.family: itemRoot.fontFamily
+                    font.bold: true
+                    font.pixelSize: parent.height * 0.4
+                    elide: Text.ElideRight
+                }
+            }
+            
+            // Bottom: Temp (Green Area placeholder)
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                
+                Text {
+                    anchors.centerIn: parent
+                    // Reuse unit logic or simplify
+                    text: itemRoot.temp + "°"
+                    color: Kirigami.Theme.textColor
+                    font.family: itemRoot.fontFamily
+                    font.bold: true
+                    font.pixelSize: parent.height * 0.5
+                }
+            }
         }
     }
 

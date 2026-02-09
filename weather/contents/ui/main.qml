@@ -331,7 +331,7 @@ PlasmoidItem {
 
             Loader {
                 anchors.fill: parent
-                anchors.margins: 10
+                anchors.margins: 0
                 active: !root.isLoading && root.errorMessage === "" && root.currentWeather && root.isSmallMode
                 sourceComponent: SmallModeLayout { weatherRoot: root }
             }

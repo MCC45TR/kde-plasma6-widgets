@@ -222,58 +222,35 @@ Item {
                 }
             }
 
-            GridView {
+            DailyForecastView {
                 id: largeForecastGrid
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                clip: true
+
+                weatherRoot: largeLayout.weatherRoot
+                isHourly: forecastMode
+                useTodayLabel: true
+                showUnits: weatherRoot.showForecastUnits
+                showBackground: weatherRoot.showInnerBackgrounds
+                cornerRadius: 12 * weatherRoot.radiusMultiplier
+                itemSpacing: 4
+                edgeMargins: 0
 
                 readonly property real minCardHeight: 100
                 readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
-                cellHeight: height / visibleRows
 
                 readonly property real minCardWidth: 70
                 readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
-                cellWidth: width / cardsPerRow
 
-                snapMode: GridView.SnapToRow
-                boundsBehavior: Flickable.StopAtBounds
+                cellWidth: width / cardsPerRow
+                cellHeight: height / visibleRows
                 flow: GridView.FlowLeftToRight
 
-                model: forecastMode ? forecastHourly : forecastDaily
-
-                delegate: ForecastItem {
-                    required property var modelData
-                    required property int index
-
-                    width: largeForecastGrid.cellWidth - 4
-                    height: largeForecastGrid.cellHeight - 4
-
-                    label: forecastMode ? modelData.time : (index === 0 ? i18n("Today") : getLocalizedDay(modelData.day))
-                    iconPath: getWeatherIcon(modelData)
-                    temp: modelData.temp
-                    isHourly: forecastMode
-                    units: weatherRoot.units
-                    showUnits: weatherRoot.showForecastUnits
-                    fontFamily: weatherRoot.activeFont.family
-                    showBackground: weatherRoot.showInnerBackgrounds
-                    
-                    forecastData: modelData
-                    itemIndex: index
-                    
-                    onClicked: function(data, idx, cardRect) {
-                        if (!forecastMode && data.hasDetails) {
-                            var globalPos = mapToItem(largeLayout, 0, 0)
-                            weatherRoot.clickedCardRect = Qt.rect(globalPos.x, globalPos.y, width, height)
-                            weatherRoot.selectedForecast = data
-                            weatherRoot.showForecastDetails = true
-                        }
+                onItemClicked: function(data, idx, cardRect) {
+                    if (!forecastMode && data.hasDetails) {
+                        weatherRoot.selectedForecast = data
+                        weatherRoot.showForecastDetails = true
                     }
-
-                    radiusTL: 12 * weatherRoot.radiusMultiplier
-                    radiusTR: 12 * weatherRoot.radiusMultiplier
-                    radiusBL: 12 * weatherRoot.radiusMultiplier
-                    radiusBR: 12 * weatherRoot.radiusMultiplier
                 }
             }
         }

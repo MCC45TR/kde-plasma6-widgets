@@ -240,70 +240,39 @@ Item {
                 }
             }
 
-            GridView {
+            DailyForecastView {
                 id: forecastGrid
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.minimumHeight: 80
-                clip: true
+
+                weatherRoot: wideLayoutContainer.weatherRoot
+                isHourly: forecastMode
+                showUnits: weatherRoot.showForecastUnits
+                showBackground: weatherRoot.showInnerBackgrounds
+                cornerRadius: 24 * weatherRoot.radiusMultiplier
+                itemSpacing: 4
+                edgeMargins: 0
 
                 readonly property real minCardWidth: 70
                 readonly property real minCardHeight: 100
                 readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
                 readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
-                readonly property real actualCardWidth: width / cardsPerRow
-                readonly property real actualCardHeight: height / visibleRows
 
-                cellWidth: actualCardWidth
-                cellHeight: actualCardHeight
-                snapMode: GridView.SnapToRow
-                boundsBehavior: Flickable.StopAtBounds
+                cellWidth: width / cardsPerRow
+                cellHeight: height / visibleRows
                 flow: GridView.FlowLeftToRight
 
-                model: forecastMode ? forecastHourly : forecastDaily
-
-                delegate: ForecastItem {
-                    required property var modelData
-                    required property int index
-
-                    width: forecastGrid.cellWidth - 4
-                    height: forecastGrid.cellHeight - 4
-
-                    label: forecastMode ? modelData.time : getLocalizedDay(modelData.day)
-                    iconPath: getWeatherIcon(modelData)
-                    temp: modelData.temp
-                    isHourly: forecastMode
-                    units: weatherRoot.units
-                    showUnits: weatherRoot.showForecastUnits
-                    fontFamily: weatherRoot.activeFont.family
-                    showBackground: weatherRoot.showInnerBackgrounds
-                    
-                    forecastData: modelData
-                    itemIndex: index
-                    
-                    onClicked: function(data, idx, cardRect) {
-                        if (!forecastMode) {
-                            if (idx === 0) {
-                                currentSection.isExpanded = true
-                                autoCloseTimer.restart()
-                            } else if (data.hasDetails) {
-                                var globalPos = mapToItem(wideLayoutContainer, 0, 0)
-                                weatherRoot.clickedCardRect = Qt.rect(globalPos.x, globalPos.y, width, height)
-                                weatherRoot.selectedForecast = data
-                                weatherRoot.showForecastDetails = true
-                            }
+                onItemClicked: function(data, idx, cardRect) {
+                    if (!forecastMode) {
+                        if (idx === 0) {
+                            currentSection.isExpanded = true
+                            autoCloseTimer.restart()
+                        } else if (data.hasDetails) {
+                            weatherRoot.selectedForecast = data
+                            weatherRoot.showForecastDetails = true
                         }
                     }
-
-                    readonly property int cols: Math.max(1, Math.floor(forecastGrid.width / forecastGrid.cellWidth))
-                    readonly property int row: Math.floor(index / cols)
-                    readonly property int col: index % cols
-                    readonly property int totalRows: Math.ceil(forecastGrid.count / cols)
-
-                    radiusTL: ((row === 0 && col === 0) ? 24 : 10) * weatherRoot.radiusMultiplier
-                    radiusTR: ((row === 0 && (col === cols - 1 || index === forecastGrid.count - 1)) ? 24 : 10) * weatherRoot.radiusMultiplier
-                    radiusBL: ((row === totalRows - 1 && col === 0) ? 24 : 10) * weatherRoot.radiusMultiplier
-                    radiusBR: ((row === totalRows - 1 && (col === cols - 1 || index === forecastGrid.count - 1)) ? 24 : 10) * weatherRoot.radiusMultiplier
                 }
             }
         }
