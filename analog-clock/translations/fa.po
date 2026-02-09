@@ -1,54 +1,156 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-08 23:29+0300\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fa\n"
 
+#: contents/ui/config/ConfigAppearance.qml:8 contents/config/config.qml:6
+msgid "Appearance"
+msgstr "ظاهر"
+
+#: contents/ui/config/ConfigAppearance.qml:41
 msgid "Digital Clock:"
-msgstr ""
+msgstr "ساعت دیجیتال:"
 
+#: contents/ui/config/ConfigAppearance.qml:42
 msgid "Show digital clock in center"
-msgstr ""
+msgstr "نمایش ساعت دیجیتال در مرکز"
 
+#: contents/ui/config/ConfigAppearance.qml:52
 msgid "Clock Style:"
-msgstr ""
+msgstr "سبک ساعت:"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Automatic"
-msgstr ""
+msgstr "خودکار"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Classic (Circular)"
-msgstr ""
+msgstr "کلاسیک (دایره‌ای)"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Modern (Squircle)"
-msgstr ""
+msgstr "مدرن (مربعی گرد)"
 
+#: contents/ui/config/ConfigAppearance.qml:59
+msgid "Hour Line Length:"
+msgstr "طول خط ساعت:"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.0x (Default)"
+msgstr "۱.۰x (پیش‌فرض)"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.25x"
+msgstr "۱.۲۵x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.5x"
+msgstr "۱.۵x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.75x"
+msgstr "۱.۷۵x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "2.0x"
+msgstr "۲.۰x"
+
+#: contents/ui/config/ConfigAppearance.qml:66
+msgid "Hour Line Thickness:"
+msgstr "ضخامت خط ساعت:"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Bold hour markers"
+msgstr "نشانگرهای ساعت ضخیم"
+
+#: contents/ui/config/ConfigAppearance.qml:74
 msgid "Background Opacity:"
-msgstr ""
+msgstr "شفافیت پس‌زمینه:"
 
+#: contents/ui/config/ConfigAppearance.qml:88
+msgid "Widget Margin:"
+msgstr "حاشیه ویجت:"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Normal (10px)"
+msgstr "عادی (۱۰ پبکسل)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Less (5px)"
+msgstr "کمتر (۵ پیکسل)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "None (0px)"
+msgstr "بدون حاشیه (۰ پیکسل)"
+
+#: contents/ui/config/ConfigAppearance.qml:100
+msgid "Widget Radius:"
+msgstr "شعاع ویجت:"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Square (0px)"
+msgstr "مربعی (۰ پیکسل)"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "10px"
+msgstr "۱۰ پیکسل"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "20px"
+msgstr "۲۰ پیکسل"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "30px"
+msgstr "۳۰ پیکسل"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "40px"
+msgstr "۴۰ پیکسل"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "50px"
+msgstr "۵۰ پیکسل"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Full"
+msgstr "کامل"
+
+#: contents/ui/config/ConfigAppearance.qml:118
 msgid "Digital Clock Customization"
-msgstr ""
+msgstr "شخصی‌سازی ساعت دیجیتال"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Font Settings:"
-msgstr ""
+msgstr "تنظیمات فونت:"
 
+#: contents/ui/config/ConfigAppearance.qml:125
 msgid "Auto-adjust font weight & width"
-msgstr ""
+msgstr "تنظیم خودکار وزن و عرض فونت"
 
+#: contents/ui/config/ConfigAppearance.qml:133
 msgid "Weight:"
-msgstr ""
+msgstr "وزن:"
 
+#: contents/ui/config/ConfigAppearance.qml:147
 msgid "Width:"
-msgstr ""
+msgstr "عرض:"
 
+#: contents/ui/config/ConfigAppearance.qml:163
 msgid "Vertical Spacing:"
-msgstr ""
+msgstr "فاصله عمودی:"
 
+#: contents/ui/config/ConfigAppearance.qml:181
 msgid "Font:"
-msgstr ""
+msgstr "فونت:"
 
+#: contents/ui/config/ConfigAppearance.qml:182
 msgid "Use custom font for digital clock"
-msgstr ""
+msgstr "استفاده از فونت سفارشی"
 
+#: contents/ui/config/ConfigAppearance.qml:190
 msgid "Font Family:"
-msgstr ""
+msgstr "خانواده فونت:"

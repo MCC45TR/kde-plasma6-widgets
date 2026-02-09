@@ -1,54 +1,156 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-08 23:29+0300\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 
+#: contents/ui/config/ConfigAppearance.qml:8 contents/config/config.qml:6
+msgid "Appearance"
+msgstr "Apparence"
+
+#: contents/ui/config/ConfigAppearance.qml:41
 msgid "Digital Clock:"
-msgstr ""
+msgstr "Horloge numérique :"
 
+#: contents/ui/config/ConfigAppearance.qml:42
 msgid "Show digital clock in center"
-msgstr ""
+msgstr "Afficher l'horloge numérique au centre"
 
+#: contents/ui/config/ConfigAppearance.qml:52
 msgid "Clock Style:"
-msgstr ""
+msgstr "Style d'horloge :"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Automatic"
-msgstr ""
+msgstr "Automatique"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Classic (Circular)"
-msgstr ""
+msgstr "Classique (Circulaire)"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Modern (Squircle)"
-msgstr ""
+msgstr "Moderne (Squircle)"
 
+#: contents/ui/config/ConfigAppearance.qml:59
+msgid "Hour Line Length:"
+msgstr "Longueur de la ligne des heures :"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.0x (Default)"
+msgstr "1.0x (Par défaut)"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.25x"
+msgstr "1.25x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.5x"
+msgstr "1.5x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.75x"
+msgstr "1.75x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "2.0x"
+msgstr "2.0x"
+
+#: contents/ui/config/ConfigAppearance.qml:66
+msgid "Hour Line Thickness:"
+msgstr "Épaisseur de la ligne des heures :"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Bold hour markers"
+msgstr "Marqueurs d'heures en gras"
+
+#: contents/ui/config/ConfigAppearance.qml:74
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacité de l'arrière-plan :"
 
+#: contents/ui/config/ConfigAppearance.qml:88
+msgid "Widget Margin:"
+msgstr "Marge du widget :"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Normal (10px)"
+msgstr "Normale (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Less (5px)"
+msgstr "Moins (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "None (0px)"
+msgstr "Aucune (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:100
+msgid "Widget Radius:"
+msgstr "Rayon du widget :"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Square (0px)"
+msgstr "Carré (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "10px"
+msgstr "10px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "20px"
+msgstr "20px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "30px"
+msgstr "30px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "40px"
+msgstr "40px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "50px"
+msgstr "50px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Full"
+msgstr "Plein"
+
+#: contents/ui/config/ConfigAppearance.qml:118
 msgid "Digital Clock Customization"
-msgstr ""
+msgstr "Personnalisation de l'horloge numérique"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Font Settings:"
-msgstr ""
+msgstr "Paramètres de police :"
 
+#: contents/ui/config/ConfigAppearance.qml:125
 msgid "Auto-adjust font weight & width"
-msgstr ""
+msgstr "Ajuster auto. le poids et la largeur de police"
 
+#: contents/ui/config/ConfigAppearance.qml:133
 msgid "Weight:"
-msgstr ""
+msgstr "Poids :"
 
+#: contents/ui/config/ConfigAppearance.qml:147
 msgid "Width:"
-msgstr ""
+msgstr "Largeur :"
 
+#: contents/ui/config/ConfigAppearance.qml:163
 msgid "Vertical Spacing:"
-msgstr ""
+msgstr "Espacement vertical :"
 
+#: contents/ui/config/ConfigAppearance.qml:181
 msgid "Font:"
-msgstr ""
+msgstr "Police :"
 
+#: contents/ui/config/ConfigAppearance.qml:182
 msgid "Use custom font for digital clock"
-msgstr ""
+msgstr "Utiliser une police personnalisée"
 
+#: contents/ui/config/ConfigAppearance.qml:190
 msgid "Font Family:"
-msgstr ""
+msgstr "Famille de polices :"

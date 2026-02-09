@@ -1,54 +1,156 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-08 23:29+0300\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 
+#: contents/ui/config/ConfigAppearance.qml:8 contents/config/config.qml:6
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: contents/ui/config/ConfigAppearance.qml:41
 msgid "Digital Clock:"
-msgstr ""
+msgstr "Reloj digital:"
 
+#: contents/ui/config/ConfigAppearance.qml:42
 msgid "Show digital clock in center"
-msgstr ""
+msgstr "Mostrar reloj digital en el centro"
 
+#: contents/ui/config/ConfigAppearance.qml:52
 msgid "Clock Style:"
-msgstr ""
+msgstr "Estilo de reloj:"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Classic (Circular)"
-msgstr ""
+msgstr "Clásico (Circular)"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Modern (Squircle)"
-msgstr ""
+msgstr "Moderno (Squircle)"
 
+#: contents/ui/config/ConfigAppearance.qml:59
+msgid "Hour Line Length:"
+msgstr "Longitud de la línea de las horas:"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.0x (Default)"
+msgstr "1.0x (Predeterminado)"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.25x"
+msgstr "1.25x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.5x"
+msgstr "1.5x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.75x"
+msgstr "1.75x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "2.0x"
+msgstr "2.0x"
+
+#: contents/ui/config/ConfigAppearance.qml:66
+msgid "Hour Line Thickness:"
+msgstr "Grosor de la línea de las horas:"
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Bold hour markers"
+msgstr "Marcadores de hora en negrita"
+
+#: contents/ui/config/ConfigAppearance.qml:74
 msgid "Background Opacity:"
-msgstr ""
+msgstr "Opacidad del fondo:"
 
+#: contents/ui/config/ConfigAppearance.qml:88
+msgid "Widget Margin:"
+msgstr "Margen del widget:"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Less (5px)"
+msgstr "Menos (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "None (0px)"
+msgstr "Ninguno (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:100
+msgid "Widget Radius:"
+msgstr "Radio del widget:"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Square (0px)"
+msgstr "Cuadrado (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "10px"
+msgstr "10px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "20px"
+msgstr "20px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "30px"
+msgstr "30px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "40px"
+msgstr "40px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "50px"
+msgstr "50px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Full"
+msgstr "Completo"
+
+#: contents/ui/config/ConfigAppearance.qml:118
 msgid "Digital Clock Customization"
-msgstr ""
+msgstr "Personalización del reloj digital"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Font Settings:"
-msgstr ""
+msgstr "Ajustes de fuente:"
 
+#: contents/ui/config/ConfigAppearance.qml:125
 msgid "Auto-adjust font weight & width"
-msgstr ""
+msgstr "Ajustar auto. el peso y ancho de la fuente"
 
+#: contents/ui/config/ConfigAppearance.qml:133
 msgid "Weight:"
-msgstr ""
+msgstr "Peso:"
 
+#: contents/ui/config/ConfigAppearance.qml:147
 msgid "Width:"
-msgstr ""
+msgstr "Ancho:"
 
+#: contents/ui/config/ConfigAppearance.qml:163
 msgid "Vertical Spacing:"
-msgstr ""
+msgstr "Espacio vertical:"
 
+#: contents/ui/config/ConfigAppearance.qml:181
 msgid "Font:"
-msgstr ""
+msgstr "Fuente:"
 
+#: contents/ui/config/ConfigAppearance.qml:182
 msgid "Use custom font for digital clock"
-msgstr ""
+msgstr "Usar fuente personalizada"
 
+#: contents/ui/config/ConfigAppearance.qml:190
 msgid "Font Family:"
-msgstr ""
+msgstr "Familia de fuentes:"

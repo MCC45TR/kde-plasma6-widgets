@@ -1,54 +1,156 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-08 23:29+0300\n"
+"Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh\n"
 
+#: contents/ui/config/ConfigAppearance.qml:8 contents/config/config.qml:6
+msgid "Appearance"
+msgstr "外观"
+
+#: contents/ui/config/ConfigAppearance.qml:41
 msgid "Digital Clock:"
-msgstr ""
+msgstr "数字时钟："
 
+#: contents/ui/config/ConfigAppearance.qml:42
 msgid "Show digital clock in center"
-msgstr ""
+msgstr "在中心显示数字时钟"
 
+#: contents/ui/config/ConfigAppearance.qml:52
 msgid "Clock Style:"
-msgstr ""
+msgstr "时钟样式："
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Automatic"
-msgstr ""
+msgstr "自动"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Classic (Circular)"
-msgstr ""
+msgstr "经典 (圆形)"
 
+#: contents/ui/config/ConfigAppearance.qml:53
 msgid "Modern (Squircle)"
-msgstr ""
+msgstr "现代 (方圆形)"
 
+#: contents/ui/config/ConfigAppearance.qml:59
+msgid "Hour Line Length:"
+msgstr "刻度线长度："
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.0x (Default)"
+msgstr "1.0x (默认)"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.25x"
+msgstr "1.25x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.5x"
+msgstr "1.5x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "1.75x"
+msgstr "1.75x"
+
+#: contents/ui/config/ConfigAppearance.qml:60
+msgid "2.0x"
+msgstr "2.0x"
+
+#: contents/ui/config/ConfigAppearance.qml:66
+msgid "Hour Line Thickness:"
+msgstr "刻度线粗细："
+
+#: contents/ui/config/ConfigAppearance.qml:67
+msgid "Bold hour markers"
+msgstr "粗体小时标记"
+
+#: contents/ui/config/ConfigAppearance.qml:74
 msgid "Background Opacity:"
-msgstr ""
+msgstr "背景透明度："
 
+#: contents/ui/config/ConfigAppearance.qml:88
+msgid "Widget Margin:"
+msgstr "小部件边距："
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Normal (10px)"
+msgstr "默认 (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "Less (5px)"
+msgstr "较小 (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:89
+msgid "None (0px)"
+msgstr "无 (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:100
+msgid "Widget Radius:"
+msgstr "小部件圆角："
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Square (0px)"
+msgstr "直角 (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "10px"
+msgstr "10px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "20px"
+msgstr "20px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "30px"
+msgstr "30px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "40px"
+msgstr "40px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "50px"
+msgstr "50px"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Full"
+msgstr "最大"
+
+#: contents/ui/config/ConfigAppearance.qml:118
 msgid "Digital Clock Customization"
-msgstr ""
+msgstr "数字时钟自定义"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Font Settings:"
-msgstr ""
+msgstr "字体设置："
 
+#: contents/ui/config/ConfigAppearance.qml:125
 msgid "Auto-adjust font weight & width"
-msgstr ""
+msgstr "自动调节字体粗细和宽度"
 
+#: contents/ui/config/ConfigAppearance.qml:133
 msgid "Weight:"
-msgstr ""
+msgstr "粗细："
 
+#: contents/ui/config/ConfigAppearance.qml:147
 msgid "Width:"
-msgstr ""
+msgstr "宽度："
 
+#: contents/ui/config/ConfigAppearance.qml:163
 msgid "Vertical Spacing:"
-msgstr ""
+msgstr "垂直间距："
 
+#: contents/ui/config/ConfigAppearance.qml:181
 msgid "Font:"
-msgstr ""
+msgstr "字体："
 
+#: contents/ui/config/ConfigAppearance.qml:182
 msgid "Use custom font for digital clock"
-msgstr ""
+msgstr "为数字时钟使用自定义字体"
 
+#: contents/ui/config/ConfigAppearance.qml:190
 msgid "Font Family:"
-msgstr ""
+msgstr "字体系列："
