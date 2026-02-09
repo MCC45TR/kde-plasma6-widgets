@@ -21,5 +21,14 @@
         ],
         "Icon": "globe",
         "EnabledByDefault": true
-    }
+    },
+    "X-Plasma-ConfigModel": [
+        {
+            "Key": "General",
+            "Name": "General",
+            "Name[tr]": "Genel",
+            "Icon": "settings-configure",
+            "Source": "ui/config/ConfigGeneral.qml"
+        }
+    ]
 }

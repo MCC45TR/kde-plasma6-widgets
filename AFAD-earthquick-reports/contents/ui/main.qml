@@ -12,7 +12,10 @@ PlasmoidItem {
     Layout.preferredWidth: 400
     Layout.preferredHeight: 300
     Layout.minimumWidth: 300
-    Layout.minimumHeight: 200
+    readonly property double minMagnitude: Plasmoid.configuration.minMagnitude !== undefined ? Plasmoid.configuration.minMagnitude : 0.0
+    readonly property int timeRange: Plasmoid.configuration.timeRange || 24
+    readonly property int limit: Plasmoid.configuration.limit || 100
+    readonly property int updateIntervalMinutes: Plasmoid.configuration.updateInterval || 10
     
     property bool isLoading: false
     property string lastUpdate: ""
@@ -23,11 +26,10 @@ PlasmoidItem {
 
     function refreshData() {
         isLoading = true
-        // Default options: last 24 hours, min magnitude 0
         var options = {
-            hours: 24,
-            minMag: 0,
-            limit: 100
+            hours: root.timeRange,
+            minMag: root.minMagnitude,
+            limit: root.limit
         }
         
         AfadApi.fetchEarthquakes(function(err, data) {
@@ -38,8 +40,12 @@ PlasmoidItem {
             }
             
             if (data) {
+                // Sort by date DESC (AFAD usually returns newest first, but let's be sure)
+                data.sort(function(a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                });
+
                 earthquakeModel.clear()
-                // AFAD returns newest first usually, but let's just append
                 for (var i = 0; i < data.length; i++) {
                     earthquakeModel.append(data[i])
                 }
@@ -48,11 +54,23 @@ PlasmoidItem {
         }, options)
     }
 
+    Connections {
+        target: Plasmoid.configuration
+        function onMinMagnitudeChanged() { refreshData() }
+        function onTimeRangeChanged() { refreshData() }
+        function onLimitChanged() { refreshData() }
+    }
+
     Timer {
-        interval: 600000 // 10 minutes
+        id: refreshTimer
+        interval: updateIntervalMinutes * 60000
         running: true
         repeat: true
         onTriggered: refreshData()
+        
+        onIntervalChanged: {
+            restart()
+        }
     }
 
     Component.onCompleted: {
