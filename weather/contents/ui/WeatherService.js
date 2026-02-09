@@ -141,7 +141,7 @@ function fetchOpenMeteo(location, units, callback) {
                         "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,dew_point_2m" +
                         "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant,relative_humidity_2m_max" +
                         "&forecast_days=" + (16) +
-                        "&hourly=temperature_2m,weather_code&forecast_hours=48" +
+                        "&hourly=temperature_2m,weather_code,precipitation,precipitation_probability&forecast_hours=48" +
                         "&timezone=auto" +
                         tempUnit
 
@@ -458,6 +458,8 @@ function parseForecastOpenMeteo(data) {
                     temp: Math.round(data.hourly.temperature_2m[h]),
                     code: data.hourly.weather_code ? data.hourly.weather_code[h] : 0,
                     condition: getOpenMeteoCondition(data.hourly.weather_code ? data.hourly.weather_code[h] : 0),
+                    precipitation: data.hourly.precipitation ? data.hourly.precipitation[h] : 0,
+                    precipitation_probability: data.hourly.precipitation_probability ? data.hourly.precipitation_probability[h] : 0,
                     icon: ""
                 })
             }

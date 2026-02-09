@@ -6,10 +6,10 @@
     "KPlugin": {
         "Id": "com.mcc45tr.mweather",
         "Name": "MWeather",
-        "Version": "1.2.0",
+        "Version": "1.2.1",
         "Category": "Utilities",
         "Description": "Modern weather widget with Google Weather icons, daily/hourly forecasts, and auto-refresh",
-        "Icon": "weather-many-clouds",
+        "Icon": "weather",
         "License": "GPL-3.0",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/weather",
         "Authors": [

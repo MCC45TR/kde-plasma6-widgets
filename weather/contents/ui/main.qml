@@ -49,7 +49,10 @@ PlasmoidItem {
     // Notification settings
     readonly property bool notifyEnabled: Plasmoid.configuration.notifyEnabled || false
     readonly property bool notifyRoutineEnabled: Plasmoid.configuration.notifyRoutineEnabled || false
-    readonly property int notifyRoutineHour: Plasmoid.configuration.notifyRoutineHour || 8
+    readonly property int notifyRoutineTime1: Plasmoid.configuration.notifyRoutineTime1 !== undefined ? Plasmoid.configuration.notifyRoutineTime1 : 480
+    readonly property int notifyRoutineTime2: Plasmoid.configuration.notifyRoutineTime2 !== undefined ? Plasmoid.configuration.notifyRoutineTime2 : 1140
+    readonly property bool notifyRoutineTime2Enabled: Plasmoid.configuration.notifyRoutineTime2Enabled || false
+    readonly property string notifyRoutineType: Plasmoid.configuration.notifyRoutineType || "forecast_3day"
     readonly property bool notifySevereWeather: Plasmoid.configuration.notifySevereWeather !== undefined ? Plasmoid.configuration.notifySevereWeather : true
     readonly property bool notifyRain: Plasmoid.configuration.notifyRain !== undefined ? Plasmoid.configuration.notifyRain : true
     readonly property bool notifyTemperatureDrop: Plasmoid.configuration.notifyTemperatureDrop || false
@@ -61,6 +64,7 @@ PlasmoidItem {
     }
 
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
+    readonly property double triggerTestNotification: Plasmoid.configuration.triggerTestNotification || 0
     
     // Notification Manager
     Loader {
@@ -69,14 +73,19 @@ PlasmoidItem {
         sourceComponent: NotificationManager {
             currentWeather: root.currentWeather
             forecastHourly: root.forecastHourly
+            forecastDaily: root.forecastDaily
             units: root.units
             enabled: root.notifyEnabled
             routineEnabled: root.notifyRoutineEnabled
-            routineHour: root.notifyRoutineHour
+            routineTime1: root.notifyRoutineTime1
+            routineTime2: root.notifyRoutineTime2
+            routineTime2Enabled: root.notifyRoutineTime2Enabled
+            routineType: root.notifyRoutineType
             severeWeatherEnabled: root.notifySevereWeather
             rainEnabled: root.notifyRain
             temperatureDropEnabled: root.notifyTemperatureDrop
             temperatureThreshold: root.notifyTemperatureThreshold
+            testNotificationTrigger: root.triggerTestNotification
         }
     }
     readonly property bool isWideMode: layoutMode === "wide" || (layoutMode === "auto" && root.width > 350 && root.height <= 350)

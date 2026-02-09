@@ -129,6 +129,24 @@ for widget in "${install_targets[@]}"; do
         prasmoid build
     fi
     
+    # Compile translations manually if present
+    if [ -d "translations" ]; then
+        echo "  -> Compiling translations..."
+        # get plugin id for mo filename
+        if [ -f "metadata.json" ]; then
+             P_ID=$(python3 -c "import json; print(json.load(open('metadata.json'))['KPlugin']['Id'])" 2>/dev/null)
+             MO_NAME="plasma_applet_${P_ID}.mo"
+             
+             for po_file in translations/*.po; do
+                 lang=$(basename "$po_file" .po)
+                 if [ "$lang" != "template" ]; then
+                     mkdir -p "contents/locale/$lang/LC_MESSAGES"
+                     msgfmt "$po_file" -o "contents/locale/$lang/LC_MESSAGES/$MO_NAME"
+                 fi
+             done
+        fi
+    fi
+    
     # Extract Plugin ID from metadata.json
     PLUGIN_ID=""
     if [ -f "metadata.json" ]; then
@@ -149,6 +167,14 @@ for widget in "${install_targets[@]}"; do
     # Install
     if kpackagetool6 --type Plasma/Applet --install . > /dev/null 2>&1; then
             echo "  -> Installed successfully."
+            
+            # Install notification config if it exists
+            if ls contents/notifications/*.notifyrc >/dev/null 2>&1; then
+                NOTIFY_DIR="$HOME/.local/share/knotifications6"
+                mkdir -p "$NOTIFY_DIR"
+                cp contents/notifications/*.notifyrc "$NOTIFY_DIR/"
+                echo "  -> Installed notification config."
+            fi
     else
             echo "  -> Failed to install."
             # Show error log if failed for debugging

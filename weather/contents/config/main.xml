@@ -137,9 +137,34 @@
       <label>Enable Routine Daily Notification</label>
     </entry>
 
-    <entry name="notifyRoutineHour" type="Int">
-      <default>8</default>
-      <label>Routine Notification Hour (0-23)</label>
+    <entry name="notifyRoutineTime1" type="Int">
+      <default>480</default>
+      <label>Routine Notification Time 1 (Minutes from midnight)</label>
+    </entry>
+    
+    <entry name="notifyRoutineTime2" type="Int">
+      <default>1140</default>
+      <label>Routine Notification Time 2 (Minutes from midnight)</label>
+    </entry>
+
+    <entry name="notifyRoutineTime2Enabled" type="Bool">
+      <default>false</default>
+      <label>Enable Second Routine Notification</label>
+    </entry>
+
+    <entry name="lastRoutineDate1" type="String">
+      <default></default>
+      <label>Last Routine Notification Date 1</label>
+    </entry>
+
+    <entry name="lastRoutineDate2" type="String">
+      <default></default>
+      <label>Last Routine Notification Date 2</label>
+    </entry>
+
+    <entry name="notifyRoutineType" type="String">
+      <default>forecast_3day</default>
+      <label>Routine Notification Type (forecast_3day or daily_change)</label>
     </entry>
 
     <entry name="notifySevereWeather" type="Bool">
@@ -170,6 +195,66 @@
     <entry name="lastSevereNotify" type="Double">
       <default>0</default>
       <label>Last Severe Weather Notification Timestamp</label>
+    </entry>
+
+    <entry name="lastRainNotify" type="Double">
+      <default>0</default>
+      <label>Last Rain Notification Timestamp</label>
+    </entry>
+
+    <entry name="lastTempNotify" type="Double">
+      <default>0</default>
+      <label>Last Temperature Notification Timestamp</label>
+    </entry>
+
+    <entry name="triggerTestNotification" type="Double">
+      <default>0</default>
+      <label>Trigger Test Notification</label>
+    </entry>
+
+    <entry name="notifyHighTemp" type="Bool">
+      <default>false</default>
+      <label>Notify on High Temperature</label>
+    </entry>
+
+    <entry name="notifyHighTempThreshold" type="Int">
+      <default>30</default>
+      <label>High Temperature Threshold (Celsius)</label>
+    </entry>
+
+    <entry name="lastHighTempNotify" type="Double">
+      <default>0</default>
+      <label>Last High Temperature Notification Timestamp</label>
+    </entry>
+
+    <entry name="notifyUvIndex" type="Bool">
+      <default>true</default>
+      <label>Notify on High UV Index</label>
+    </entry>
+
+    <entry name="notifyUvThreshold" type="Int">
+      <default>6</default>
+      <label>UV Index Threshold</label>
+    </entry>
+
+    <entry name="lastUvNotify" type="Double">
+      <default>0</default>
+      <label>Last UV Notification Timestamp</label>
+    </entry>
+
+    <entry name="notifyWind" type="Bool">
+      <default>true</default>
+      <label>Notify on Strong Wind</label>
+    </entry>
+
+    <entry name="notifyWindThreshold" type="Int">
+      <default>50</default>
+      <label>Wind Speed Threshold (km/h)</label>
+    </entry>
+
+    <entry name="lastWindNotify" type="Double">
+      <default>0</default>
+      <label>Last Wind Notification Timestamp</label>
     </entry>
   </group>
 </kcfg>

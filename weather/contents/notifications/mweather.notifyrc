@@ -1,0 +1,18 @@
+[Global]
+IconName=weather
+Comment=MWeather Weather Widget
+Name=MWeather
+
+[Event/notification]
+Name=Routine Weather Update
+Comment=Daily weather update
+Action=Popup|Sound
+Urgency=Normal
+Sound=
+
+[Event/alert]
+Name=Weather Alert
+Comment=Severe weather, rain, or extreme conditions
+Action=Popup|Sound
+Urgency=Critical
+Sound=dialog-information
