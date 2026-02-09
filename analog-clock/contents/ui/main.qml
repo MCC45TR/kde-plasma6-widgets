@@ -204,6 +204,7 @@ PlasmoidItem {
         
         property bool hoverState: false
         property int style: Plasmoid.configuration.clockStyle !== undefined ? Plasmoid.configuration.clockStyle : 2 // 0=Auto, 1=Classic, 2=Modern
+        property int modernDisplayMode: Plasmoid.configuration.modernDisplayMode !== undefined ? Plasmoid.configuration.modernDisplayMode : 0 // 0=Analog, 1=Hybrid, 2=Digital
         
         // Classic (1) -> Always show detailed face (isHovered = true)
         // Modern (2) -> Never show detailed face (isHovered = false)
@@ -346,6 +347,7 @@ PlasmoidItem {
         Item {
             id: hourHand
             z: 10 // Above digital clock
+            visible: clockFace.style === 1 || clockFace.modernDisplayMode !== 2
             width: clockFace.isHovered ? clockFace.secondThick : 10
             Behavior on width { NumberAnimation { duration: 300 } }
             
@@ -387,6 +389,7 @@ PlasmoidItem {
         Item {
             id: minuteHand
             z: 10 // Above digital clock
+            visible: clockFace.style === 1 || clockFace.modernDisplayMode !== 2
             // Width Logic: Use hourHand width (10) when hovered, otherwise 3
             width: clockFace.isHovered ? hourHand.width : 3
             Behavior on width { NumberAnimation { duration: 300 } }
@@ -442,7 +445,7 @@ PlasmoidItem {
             anchors.horizontalCenter: centerPivot.horizontalCenter
             transformOrigin: Item.Bottom
             
-            opacity: clockFace.isHovered ? 1 : 0
+            opacity: (clockFace.style === 1 || clockFace.modernDisplayMode !== 2) && clockFace.isHovered ? 1 : 0
             visible: opacity > 0
             Behavior on opacity { NumberAnimation { duration: 300 } }
             
@@ -461,7 +464,7 @@ PlasmoidItem {
             anchors.centerIn: parent
             
             // Diameter 22.5 (3/4 of 30), grows from 0
-            width: clockFace.isHovered ? 11 : 0
+            width: (clockFace.style === 1 || clockFace.modernDisplayMode !== 2) && clockFace.isHovered ? 11 : 0
             height: width
             radius: width / 2
             
@@ -493,7 +496,11 @@ PlasmoidItem {
             //    BUT, if style is Classic, we might prefer hiding it. 
             //    Let's stick to the toggle: if 'showDigitalClock' is true, we show it.
             
-            property bool show: (Plasmoid.configuration.showDigitalClock !== undefined ? Plasmoid.configuration.showDigitalClock : false) && (style !== 1)
+            property bool show: {
+                if (style === 1) return false; // Classic never shows digital
+                if (clockFace.modernDisplayMode === 0) return false; // Analog mode: no digital
+                return true; // Hybrid and DigitalOnly both show digital
+            }
             
             visible: show
             
@@ -528,7 +535,10 @@ PlasmoidItem {
             property int fixedWidth: Plasmoid.configuration.fixedWidth !== undefined ? Plasmoid.configuration.fixedWidth : 100
             
             // Vertical Spacing (percentage: 10 means 0.1)
-            property real verticalSpacing: (Plasmoid.configuration.verticalSpacingRatio !== undefined ? Plasmoid.configuration.verticalSpacingRatio : 10) / 100.0
+            property real verticalSpacing: (digitalClock.fontAutoAdjust ? 10 : (Plasmoid.configuration.verticalSpacingRatio !== undefined ? Plasmoid.configuration.verticalSpacingRatio : 10)) / 100.0
+
+            property real fontSizeRatio: digitalClock.fontAutoAdjust ? 1.0 : (Plasmoid.configuration.fontSizeRatio !== undefined ? Plasmoid.configuration.fontSizeRatio : 1.0)
+            property real letterSpacingRatio: digitalClock.fontAutoAdjust ? 0.0 : (Plasmoid.configuration.letterSpacingRatio !== undefined ? Plasmoid.configuration.letterSpacingRatio : 0.0)
 
             ColumnLayout {
                 anchors.centerIn: parent
@@ -541,9 +551,10 @@ PlasmoidItem {
                     font.family: digitalClock.effectiveFont
                     
                     // Dynamic Font Fitting for Vertical Mode
-                    property real fitHeight: digitalClock.height * 0.45
+                    property real fitHeight: digitalClock.height * 0.45 * digitalClock.fontSizeRatio
                     
                     font.pixelSize: fitHeight
+                    font.letterSpacing: fitHeight * (digitalClock.letterSpacingRatio / 100.0)
                     
                     // Auto Logic: Vertical mode always most condensed (wdth 25), weight 400
                     property int autoWdth: 25
@@ -561,8 +572,9 @@ PlasmoidItem {
                     text: digitalClock.minText
                     font.family: digitalClock.effectiveFont
                     
-                    property real fitHeight: digitalClock.height * 0.45
+                    property real fitHeight: digitalClock.height * 0.45 * digitalClock.fontSizeRatio
                     font.pixelSize: fitHeight
+                    font.letterSpacing: fitHeight * (digitalClock.letterSpacingRatio / 100.0)
                     
                     property int autoWdth: 25
                     property int autoWght: 400
@@ -590,7 +602,8 @@ PlasmoidItem {
                 property real maxW: parent.width
                 
                 // Base pixel size on height first
-                font.pixelSize: maxH
+                font.pixelSize: maxH * digitalClock.fontSizeRatio
+                font.letterSpacing: (maxH * digitalClock.fontSizeRatio) * (digitalClock.letterSpacingRatio / 100.0)
                 
                 // Calculate width compression needed
                 // 5 chars * 0.6 = 3.0 aspect
@@ -620,7 +633,9 @@ PlasmoidItem {
                 property real maxH: parent.height * 0.85
                 property real maxW: parent.width * 0.85
                 
-                font.pixelSize: maxH
+                font.pixelSize: maxH * digitalClock.fontSizeRatio
+                font.letterSpacing: (maxH * digitalClock.fontSizeRatio) * (digitalClock.letterSpacingRatio / 100.0)
+
                 
                 // 2 chars (HH) approx 1.2 aspect
                 property real requiredWdth: (maxW / (maxH * 1.2)) * 100

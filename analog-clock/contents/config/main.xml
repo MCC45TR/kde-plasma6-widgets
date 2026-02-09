@@ -86,5 +86,26 @@
       <default>20</default>
       <label>Widget Corner Radius</label>
     </entry>
+    <entry name="modernDisplayMode" type="Enum">
+      <label>Modern Clock Display Mode</label>
+      <choices>
+        <choice name="Analog"/>
+        <choice name="Hybrid"/>
+        <choice name="Digital"/>
+      </choices>
+      <default>Analog</default>
+    </entry>
+    <entry name="fontSizeRatio" type="Double">
+      <default>1.0</default>
+      <label>Font Size Ratio</label>
+      <min>0.5</min>
+      <max>2.0</max>
+    </entry>
+    <entry name="letterSpacingRatio" type="Double">
+      <default>0.0</default>
+      <label>Letter Spacing Ratio</label>
+      <min>-5.0</min>
+      <max>20.0</max>
+    </entry>
   </group>
 </kcfg>

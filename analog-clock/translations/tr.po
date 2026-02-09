@@ -154,3 +154,21 @@ msgstr "Dijital saat için özel yazı tipi kullan"
 #: contents/ui/config/ConfigAppearance.qml:190
 msgid "Font Family:"
 msgstr "Yazı Tipi Ailesi:"
+
+msgid "Display Mode:"
+msgstr "Görüntüleme Modu:"
+
+msgid "Analog"
+msgstr "Analog"
+
+msgid "Hybrid"
+msgstr "Hibrit"
+
+msgid "Digital"
+msgstr "Dijital"
+
+msgid "Font Size Scale:"
+msgstr "Yazı Boyutu Ölçeği:"
+
+msgid "Letter Spacing:"
+msgstr "Karakter Aralığı:"
