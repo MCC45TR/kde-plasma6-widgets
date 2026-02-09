@@ -4,6 +4,14 @@
 - **2025-12-30**: **Minimal Analog Clock** projesi oluşturuldu (Temel tasarım ve akrep/yelkovan mantığı).
 - **2025-12-27**: Dinamik elkovan uzunluğu ve başlangıç pozisyonu iyileştirmeleri.
 - **2025-12-26**: Squircle şekline uygun görsel iyileştirmeler.
+### v1.3 (2026-02-09)
+- **Tam Lokalizasyon**: 19 farklı dil için yerelleştirme desteği tamamlandı ve tüm dillerde çeviriler güncellendi.
+- **Ayarlanabilir Köşe Yarıçapı**: Widget köşeleri için yeni yarıçap seçenekleri (0px, 10px, 20px, 30px, 40px, 50px, Tam Daire) eklendi.
+- **Gelişmiş Kadran Ayarları**: Saat işaretçileri (ticks) için uzunluk (1.0x - 2.0x) ve kalınlık (Kalın/Normal) özelleştirme seçenekleri eklendi.
+- **Hizalama Algoritması**: Kare olmayan görünüm oranlarında saat işaretçilerinin kenarlara tam hizalanması için kadran matematiği optimize edildi.
+- **Arkaplan Opaklığı**: Kullanıcıların widget şeffaflığını ayarlayabilmesi için %0 ile %100 arası opaklık kontrolü eklendi.
+- **EN-US**: Full localization (19 languages), adjustable widget radius, advanced hour marker customization, optimized rectangular alignment, and background opacity control.
+
 ### v1.2 (2026-01-22)
 - **Yeni Özellik**: Widget kenar boşluğu (Normal, Az, Yok) seçeneği eklendi.
 - **EN-US**: Added "Widget Edge Margin" (Normal, Less, None) configuration.

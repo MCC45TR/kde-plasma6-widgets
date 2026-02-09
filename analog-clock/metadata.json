@@ -13,7 +13,7 @@
         "Icon": "chronometer",
         "Id": "com.mcc45tr.analogclock",
         "Name": "MAnalog Clock",
-        "Version": "1.3",
+        "Version": "1.2.0",
         "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/analog-clock",
         "License": "GPL-3.0",
         "Name[tr]": "MAnalog Saat",
