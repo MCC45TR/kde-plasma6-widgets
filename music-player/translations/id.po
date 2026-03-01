@@ -16,8 +16,8 @@ msgstr "Lagu berikutnya"
 msgid "General (Follow All)"
 msgstr "Umum (Ikuti semua)"
 
-msgid "Default Media Player"
-msgstr "Pemutar media default"
+msgid "Default Media Player:"
+msgstr "Pemutar media default:"
 
 msgid "Inactive players are not shown."
 msgstr "Pemutar yang tidak aktif tidak ditampilkan."
@@ -40,8 +40,8 @@ msgstr "Semua sumber media dilacak."
 msgid "Only \"%1\" is tracked."
 msgstr "Hanya \"%1\" yang dilacak."
 
-msgid "Show media player badge"
-msgstr "Tampilkan lencana pemutar"
+msgid "Show media player badge:"
+msgstr "Tampilkan lencana pemutar:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "Lebih sedikit (5px)"
 msgid "None (0px)"
 msgstr "Tidak ada (0px)"
 
+msgid "Corner Radius:"
+msgstr "Radius Sudut:"
+
+msgid "Normal (20px)"
+msgstr "Normal (20px)"
+
+msgid "Less (10px)"
+msgstr "Lebih sedikit (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Bahkan lebih sedikit (5px)"
+
+msgid "Square (0px)"
+msgstr "Kotak (0px)"
+
 msgid "Background Opacity:"
 msgstr "Opasitas Latar Belakang:"
+
+msgid "Controls:"
+msgstr "Kontrol:"
 
 msgid "Show Controls in Panel"
 msgstr "Tampilkan Kontrol di Panel"
@@ -92,8 +110,11 @@ msgstr "Ukuran Tombol:"
 msgid "Auto Size based on Panel Height"
 msgstr "Ukuran Otomatis berdasarkan Tinggi Panel"
 
-msgid "Size (px):"
-msgstr "Ukuran (px):"
+msgid "Button Size (px):"
+msgstr "Ukuran Tombol (px):"
+
+msgid "Text:"
+msgstr "Teks:"
 
 msgid "Scroll Text if truncated"
 msgstr "Gulir Teks jika terpotong"
@@ -104,8 +125,8 @@ msgstr "Lebar Dinamis (perluas otomatis agar pas dengan teks)"
 msgid "Max Width (px):"
 msgstr "Lebar Maksimum (px):"
 
-msgid "Speed:"
-msgstr "Kecepatan:"
+msgid "Scroll Speed:"
+msgstr "Kecepatan Gulir:"
 
 msgid "Fast"
 msgstr "Cepat"
@@ -116,8 +137,8 @@ msgstr "Sedang"
 msgid "Slow"
 msgstr "Lambat"
 
-msgid "Displayed Information:"
-msgstr "Informasi yang Ditampilkan:"
+msgid "Displayed Info:"
+msgstr "Info yang Ditampilkan:"
 
 msgid "Show Title"
 msgstr "Tampilkan Judul"
@@ -128,6 +149,9 @@ msgstr "Tampilkan Artis"
 msgid "Font Size:"
 msgstr "Ukuran Font:"
 
+msgid "Font Size (px):"
+msgstr "Ukuran Font (px):"
+
 msgid "View Settings"
 msgstr "Pengaturan Tampilan"
 
@@ -137,11 +161,63 @@ msgstr "Mode Tampilan:"
 msgid "Automatic"
 msgstr "Otomatis"
 
-msgid "Small"
-msgstr "Kecil"
-
 msgid "Wide"
 msgstr "Lebar"
 
 msgid "Large"
 msgstr "Besar"
+
+msgid "Extra Large"
+msgstr "Ekstra Besar"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Tombol Mode Ekstra Besar:"
+
+msgid "Shuffle Button"
+msgstr "Tombol Acak"
+
+msgid "not working"
+msgstr "tidak berfungsi"
+
+msgid "Loop/Repeat Button"
+msgstr "Tombol Loop/Ulang"
+
+msgid "10-Second Seek Buttons"
+msgstr "Tombol Pencarian 10 Detik"
+
+msgid "Volume Slider"
+msgstr "Slider Volume"
+
+msgid "Panel Options"
+msgstr "Opsi Panel"
+
+msgid "Album Art:"
+msgstr "Sampul Album:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Tampilkan sampul album di panel"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Hanya tersedia saat widget berada di panel."
+
+msgid "Visibility"
+msgstr "Visibilitas"
+
+msgid "Auto-hide:"
+msgstr "Sembunyikan otomatis:"
+
+msgid "Hide when locked player is not active"
+msgstr "Sembunyikan saat pemutar tidak aktif"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "Memerlukan penguncian pada pemutar tertentu."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "Menghilang dari panel saat \"%1\" tidak berjalan."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Sembunyikan di panel saat tidak ada yang diputar"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Widget menghilang dari panel saat dijeda atau dihentikan."
+

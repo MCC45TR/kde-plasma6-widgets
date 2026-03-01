@@ -19,8 +19,8 @@ msgstr "Sonraki Müzik"
 msgid "General (Follow All)"
 msgstr "Genel (Tümünü Takip Et)"
 
-msgid "Default Media Player"
-msgstr "Varsayılan Medya Oynatıcı"
+msgid "Default Media Player:"
+msgstr "Varsayılan Medya Oynatıcı:"
 
 msgid "Inactive players are not shown."
 msgstr "Aktif olmayan oynatıcılar gösterilmez."
@@ -43,8 +43,8 @@ msgstr "Tüm medya kaynakları takip edilir."
 msgid "Only \"%1\" is tracked."
 msgstr "Sadece \"%1\" takip edilir."
 
-msgid "Show media player badge"
-msgstr "Medya oynatıcı rozetini göster"
+msgid "Show media player badge:"
+msgstr "Medya oynatıcı rozetini göster:"
 
 msgid "General"
 msgstr "Genel"
@@ -64,8 +64,26 @@ msgstr "Daha Az (5px)"
 msgid "None (0px)"
 msgstr "Yok (0px)"
 
+msgid "Corner Radius:"
+msgstr "Köşe Yarıçapı:"
+
+msgid "Normal (20px)"
+msgstr "Normal (20px)"
+
+msgid "Less (10px)"
+msgstr "Daha Az (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Çok Daha Az (5px)"
+
+msgid "Square (0px)"
+msgstr "Kare (0px)"
+
 msgid "Background Opacity:"
 msgstr "Arka Plan Opaklığı:"
+
+msgid "Controls:"
+msgstr "Kontroller:"
 
 msgid "Show Controls in Panel"
 msgstr "Panelde Kontrolleri Göster"
@@ -91,8 +109,11 @@ msgstr "Buton Boyutu:"
 msgid "Auto Size based on Panel Height"
 msgstr "Panel Yüksekliğine Göre Otomatik Boyut"
 
-msgid "Size (px):"
-msgstr "Boyut (px):"
+msgid "Button Size (px):"
+msgstr "Buton Boyutu (px):"
+
+msgid "Text:"
+msgstr "Metin:"
 
 msgid "Scroll Text if truncated"
 msgstr "Metin sığmazsa kaydır"
@@ -103,8 +124,8 @@ msgstr "Dinamik Genişlik (metne göre otomatik genişle)"
 msgid "Max Width (px):"
 msgstr "Maksimum Genişlik (px):"
 
-msgid "Speed:"
-msgstr "Hız:"
+msgid "Scroll Speed:"
+msgstr "Kaydırma Hızı:"
 
 msgid "Fast"
 msgstr "Hızlı"
@@ -115,7 +136,7 @@ msgstr "Orta"
 msgid "Slow"
 msgstr "Yavaş"
 
-msgid "Displayed Information:"
+msgid "Displayed Info:"
 msgstr "Görüntülenen Bilgiler:"
 
 msgid "Show Title"
@@ -127,6 +148,9 @@ msgstr "Sanatçıyı Göster"
 msgid "Font Size:"
 msgstr "Yazı Tipi Boyutu:"
 
+msgid "Font Size (px):"
+msgstr "Yazı Tipi Boyutu (px):"
+
 msgid "View Settings"
 msgstr "Görünüm Ayarları"
 
@@ -136,11 +160,63 @@ msgstr "Görünüm Modu:"
 msgid "Automatic"
 msgstr "Otomatik"
 
-msgid "Small"
-msgstr "Küçük"
-
 msgid "Wide"
 msgstr "Geniş"
 
 msgid "Large"
 msgstr "Büyük"
+
+msgid "Extra Large"
+msgstr "Ekstra Büyük"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Ekstra Büyük Mod Butonları:"
+
+msgid "Shuffle Button"
+msgstr "Karıştırma Butonu"
+
+msgid "not working"
+msgstr "çalışmıyor"
+
+msgid "Loop/Repeat Button"
+msgstr "Döngü/Tekrar Butonu"
+
+msgid "10-Second Seek Buttons"
+msgstr "10 Saniye Atlama Butonları"
+
+msgid "Volume Slider"
+msgstr "Ses Sürgüsü"
+
+msgid "Panel Options"
+msgstr "Panel Seçenekleri"
+
+msgid "Album Art:"
+msgstr "Albüm Kapağı:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Panelde albüm kapağı küçük resmini göster"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Yalnızca araç bir panele yerleştirildiğinde kullanılabilir."
+
+msgid "Visibility"
+msgstr "Görünürlük"
+
+msgid "Auto-hide:"
+msgstr "Otomatik Gizle:"
+
+msgid "Hide when locked player is not active"
+msgstr "Kilitli oynatıcı aktif değilken gizle"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "Çalışması için kilitli (belirli) bir oynatıcı gerektirir."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "\"%1\" çalışmadığında panelden kaybolur."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Hiçbir şey çalmadığında panelde gizle"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Oynatma duraklatıldığında veya durdurulduğunda araç panelden kaybolur."
+

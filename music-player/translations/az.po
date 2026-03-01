@@ -16,8 +16,8 @@ msgstr "Növbəti trek"
 msgid "General (Follow All)"
 msgstr "Ümumi (Hamısını izlə)"
 
-msgid "Default Media Player"
-msgstr "Defolt media pleyeri"
+msgid "Default Media Player:"
+msgstr "Defolt media pleyeri:"
 
 msgid "Inactive players are not shown."
 msgstr "Aktiv olmayan pleyerlər göstərilmir."
@@ -40,8 +40,8 @@ msgstr "Bütün media mənbələri izlənilir."
 msgid "Only \"%1\" is tracked."
 msgstr "Yalnız \"%1\" izlənilir."
 
-msgid "Show media player badge"
-msgstr "Pleyer nişanını göstər"
+msgid "Show media player badge:"
+msgstr "Pleyer nişanını göstər:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "Az (5px)"
 msgid "None (0px)"
 msgstr "Yoxdur (0px)"
 
+msgid "Corner Radius:"
+msgstr "Künc radiusu:"
+
+msgid "Normal (20px)"
+msgstr "Normal (20px)"
+
+msgid "Less (10px)"
+msgstr "Az (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Daha az (5px)"
+
+msgid "Square (0px)"
+msgstr "Kvadrat (0px)"
+
 msgid "Background Opacity:"
 msgstr "Arxa fonun qeyri-şəffaflığı:"
+
+msgid "Controls:"
+msgstr "İdarəetmə elementləri:"
 
 msgid "Show Controls in Panel"
 msgstr "Paneldə idarəetmə düymələrini göstər"
@@ -92,8 +110,11 @@ msgstr "Düymə ölçüsü:"
 msgid "Auto Size based on Panel Height"
 msgstr "Panel hündürlüyünə uyğun avtomatik ölçü"
 
-msgid "Size (px):"
-msgstr "Ölçü (px):"
+msgid "Button Size (px):"
+msgstr "Düymə ölçüsü (px):"
+
+msgid "Text:"
+msgstr "Mətn:"
 
 msgid "Scroll Text if truncated"
 msgstr "Kəsilmişsə mətni sürüşdür"
@@ -104,8 +125,8 @@ msgstr "Dinamik en (mətnə uyğun avtomatik genişlənmə)"
 msgid "Max Width (px):"
 msgstr "Maksimum en (px):"
 
-msgid "Speed:"
-msgstr "Sürət:"
+msgid "Scroll Speed:"
+msgstr "Sürüşdürmə sürəti:"
 
 msgid "Fast"
 msgstr "Sürətli"
@@ -116,7 +137,7 @@ msgstr "Orta"
 msgid "Slow"
 msgstr "Yavaş"
 
-msgid "Displayed Information:"
+msgid "Displayed Info:"
 msgstr "Göstərilən məlumatlar:"
 
 msgid "Show Title"
@@ -128,6 +149,9 @@ msgstr "İfaçını göstər"
 msgid "Font Size:"
 msgstr "Şrift ölçüsü:"
 
+msgid "Font Size (px):"
+msgstr "Şrift ölçüsü (px):"
+
 msgid "View Settings"
 msgstr "Görünüş tənzimləmələri"
 
@@ -137,11 +161,63 @@ msgstr "Görünüş rejimi:"
 msgid "Automatic"
 msgstr "Avtomatik"
 
-msgid "Small"
-msgstr "Kiçik"
-
 msgid "Wide"
 msgstr "Geniş"
 
 msgid "Large"
 msgstr "Böyük"
+
+msgid "Extra Large"
+msgstr "Ekstra böyük"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Ekstra böyük rejimin düymələri:"
+
+msgid "Shuffle Button"
+msgstr "Qarışdırma düyməsi"
+
+msgid "not working"
+msgstr "işləmir"
+
+msgid "Loop/Repeat Button"
+msgstr "Dövr/Təkrar düyməsi"
+
+msgid "10-Second Seek Buttons"
+msgstr "10 saniyə keçid düymələri"
+
+msgid "Volume Slider"
+msgstr "Səs səviyyəsi sürüşdürücüsü"
+
+msgid "Panel Options"
+msgstr "Panel seçimləri"
+
+msgid "Album Art:"
+msgstr "Albom şəkli:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Paneldə albom şəkli kiçik nümunəsini göstər"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Yalnız vidcet paneldə yerləşdirildikdə mümkündür."
+
+msgid "Visibility"
+msgstr "Görünüş"
+
+msgid "Auto-hide:"
+msgstr "Avtomatik gizlətmə:"
+
+msgid "Hide when locked player is not active"
+msgstr "Kilidlənmiş pleyer aktiv olmadıqda gizlət"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "İşləməsi üçün kilidlənmiş (xüsusi) bir pleyer lazımdır."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "\"%1\" işləmədikdə paneldən silinir."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Heç nə oxunmadıqda paneldə gizlət"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Gözləmədə olduqda və ya dayandıqda vidcet paneldən silinir."
+

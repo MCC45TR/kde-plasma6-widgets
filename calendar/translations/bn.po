@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "আজ"
+
+msgid "Appearance"
+msgstr "চেহারা"
+
+msgid "Widget Margin:"
+msgstr "উইজেট মার্জিন:"
+
+msgid "Normal (10px)"
+msgstr "স্বাভাবিক (১০px)"
+
+msgid "Less (5px)"
+msgstr "কম (৫px)"
+
+msgid "None (0px)"
+msgstr "কিছুই না (০px)"
+
+msgid "Corner Radius:"
+msgstr "কোণ ব্যাসার্ধ:"
+
+msgid "Normal"
+msgstr "স্বাভাবিক"
+
+msgid "Small"
+msgstr "ছোট"
+
+msgid "Square"
+msgstr "বর্গক্ষেত্র"
+
+msgid "Widget Size:"
+msgstr "উইজেট আকার:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "বড় আকার ২K/৪K ডিসপ্লেতে পাঠযোগ্যতা সাহায্য করে।"
+
+msgid "Background Settings"
+msgstr "পটভূমি সেটিংস"
+
+msgid "Background Opacity:"
+msgstr "পটভূমি স্বচ্ছতা:"
+
+msgid "0% (No Backgrounds)"
+msgstr "০% (কোন পটভূমি নেই)"

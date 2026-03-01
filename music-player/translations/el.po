@@ -16,8 +16,8 @@ msgstr "Επόμενο κομμάti"
 msgid "General (Follow All)"
 msgstr "Γενικά (Ακολουθήστε όλα)"
 
-msgid "Default Media Player"
-msgstr "Προεπιλεγμένο πρόγραμμα αναπαραγωγής"
+msgid "Default Media Player:"
+msgstr "Προεπιλεγμένο πρόγραμμα αναπαραγωγής:"
 
 msgid "Inactive players are not shown."
 msgstr "Τα ανενεργά προγράμματα αναπαραγωγής δεν εμφανίζονται."
@@ -40,8 +40,8 @@ msgstr "Παρακολουθούνται όλες οι πηγές πολυμέσ
 msgid "Only \"%1\" is tracked."
 msgstr "Παρακολουθείται μόνο το \"%1\"."
 
-msgid "Show media player badge"
-msgstr "Εμφάνιση σήματος προγράμματος αναπαραγωγής"
+msgid "Show media player badge:"
+msgstr "Εμφάνιση σήματος προγράμματος αναπαραγωγής:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "Λιγότερο (5px)"
 msgid "None (0px)"
 msgstr "Κανένα (0px)"
 
+msgid "Corner Radius:"
+msgstr "Ακτίνα γωνίας:"
+
+msgid "Normal (20px)"
+msgstr "Κανονική (20px)"
+
+msgid "Less (10px)"
+msgstr "Λιγότερη (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Ακόμη λιγότερη (5px)"
+
+msgid "Square (0px)"
+msgstr "Τετράγωνο (0px)"
+
 msgid "Background Opacity:"
 msgstr "Διαφάνεια φόντου:"
+
+msgid "Controls:"
+msgstr "Στοιχεία ελέγχου:"
 
 msgid "Show Controls in Panel"
 msgstr "Εμφάνιση στοιχείων ελέγχου στον πίνακα"
@@ -92,8 +110,11 @@ msgstr "Μέγεθος κουμπιού:"
 msgid "Auto Size based on Panel Height"
 msgstr "Αυτόματο μέγεθος βάσει ύψους πίνακα"
 
-msgid "Size (px):"
-msgstr "Μέγεθος (px):"
+msgid "Button Size (px):"
+msgstr "Μέγεθος κουμπιού (px):"
+
+msgid "Text:"
+msgstr "Κείμενο:"
 
 msgid "Scroll Text if truncated"
 msgstr "Κύλιση κειμένου εάν είναι κομμένο"
@@ -104,8 +125,8 @@ msgstr "Δυναμικό πλάτος (αυτόματη επέκταση για 
 msgid "Max Width (px):"
 msgstr "Μέγιστο πλάτος (px):"
 
-msgid "Speed:"
-msgstr "Ταχύτητα:"
+msgid "Scroll Speed:"
+msgstr "Ταχύτητα κύλισης:"
 
 msgid "Fast"
 msgstr "Γρήγορα"
@@ -116,7 +137,7 @@ msgstr "Μέτρια"
 msgid "Slow"
 msgstr "Αργά"
 
-msgid "Displayed Information:"
+msgid "Displayed Info:"
 msgstr "Εμφανιζόμενες πληροφορίες:"
 
 msgid "Show Title"
@@ -128,6 +149,9 @@ msgstr "Εμφάνιση καλλιτέχνη"
 msgid "Font Size:"
 msgstr "Μέγεθος γραμματοσειράς:"
 
+msgid "Font Size (px):"
+msgstr "Μέγεθος γραμματοσειράς (px):"
+
 msgid "View Settings"
 msgstr "Ρυθμίσεις προβολής"
 
@@ -137,11 +161,63 @@ msgstr "Λειτουργία προβολής:"
 msgid "Automatic"
 msgstr "Αυτόματο"
 
-msgid "Small"
-msgstr "Μικρό"
-
 msgid "Wide"
 msgstr "Ευρύ"
 
 msgid "Large"
 msgstr "Μεγάλο"
+
+msgid "Extra Large"
+msgstr "Πολύ μεγάλο"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Κουμπιά πολύ μεγάλης λειτουργίας:"
+
+msgid "Shuffle Button"
+msgstr "Κουμπί τυχαίας αναπαραγωγής"
+
+msgid "not working"
+msgstr "δεν λειτουργεί"
+
+msgid "Loop/Repeat Button"
+msgstr "Κουμπί επανάληψης"
+
+msgid "10-Second Seek Buttons"
+msgstr "Κουμπιά αναζήτησης 10δευτ."
+
+msgid "Volume Slider"
+msgstr "Ρυθμιστικό έντασης"
+
+msgid "Panel Options"
+msgstr "Επιλογές πίνακα"
+
+msgid "Album Art:"
+msgstr "Εξώφυλλο άλμπουμ:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Εμφάνιση εξωφύλλου στον πίνακα"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Διαθέσιμο μόνο σε πίνακες."
+
+msgid "Visibility"
+msgstr "Ορατότητα"
+
+msgid "Auto-hide:"
+msgstr "Αυτόματη απόκρυψη:"
+
+msgid "Hide when locked player is not active"
+msgstr "Απόκρυψη αν το πρόγραμμα δεν είναι ενεργό"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "Απαιτεί κλείδωμα σε συγκεκριμένο πρόγραμμα."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "Εξαφανίζεται αν το \"%1\" δεν εκτελείται."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Απόκρυψη αν δεν αναπαράγεται τίποτα"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Το γραφικό στοιχείο εξαφανίζεται σε παύση ή διακοπή."
+

@@ -1,6 +1,8 @@
 {
     "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
     "KPlugin": {
         "Authors": [
             {
@@ -9,7 +11,7 @@
             }
         ],
         "Category": "Utilities",
-        "Description": "A simple Takvim widget",
+        "Description": "A simple calendar widget for KDE Plasma 6",
         "Icon": "office-calendar",
         "Id": "com.mcc45tr.mcalendar",
         "Name": "MCalendar",
@@ -19,11 +21,40 @@
         "Name[tr]": "MTakvim",
         "Name[de]": "MKalender",
         "Name[fr]": "MCalendrier",
+        "Name[it]": "MCalendario",
         "Name[ro]": "MCalendar",
         "Name[cs]": "MKalendář",
         "Name[es]": "MCalendario",
         "Name[ru]": "Календарь",
         "Name[pt]": "MCalendário",
-        "Name[ja]": "カレンダー"
+        "Name[ja]": "カレンダー",
+        "Name[az]": "MTəqvim",
+        "Name[bn]": "এম ক্যালেন্ডার",
+        "Name[el]": "Ημερολόγιο",
+        "Name[fa]": "تقویم",
+        "Name[hi]": "कैलेंडर",
+        "Name[id]": "Kalender",
+        "Name[ur]": "کیلنڈر",
+        "Name[zh]": "日历",
+        "Name[ko]": "M캘린더",
+        "Description[tr]": "KDE Plasma 6 için basit bir takvim widget'ı",
+        "Description[de]": "Ein einfaches Kalender-Widget für KDE Plasma 6",
+        "Description[fr]": "Un widget de calendrier simple pour KDE Plasma 6",
+        "Description[it]": "Un semplice widget di calendario per KDE Plasma 6",
+        "Description[ro]": "Un widget simplu de calendar pentru KDE Plasma 6",
+        "Description[cs]": "Jednoduchý widget kalendáře pro KDE Plasma 6",
+        "Description[es]": "Un widget de calendario simple para KDE Plasma 6",
+        "Description[ru]": "Простой виджет календаря для KDE Plasma 6",
+        "Description[pt]": "Um widget de calendário simples para o KDE Plasma 6",
+        "Description[ja]": "KDE Plasma 6 用のシンプルなカレンダーウィジェット",
+        "Description[az]": "KDE Plasma 6 üçün sadə təqvim vidceti",
+        "Description[bn]": "KDE Plasma 6 এর জন্য একটি সাধারণ ক্যালেন্ডার উইজেট",
+        "Description[el]": "Ένα απλό widget ημερολογίου για το KDE Plasma 6",
+        "Description[fa]": "یک ویجت تقویم ساده برای KDE Plasma 6",
+        "Description[hi]": "KDE Plasma 6 के लिए एक सरल कैलेंडर विजेट",
+        "Description[id]": "Widget kalender sederhana untuk KDE Plasma 6",
+        "Description[ur]": "KDE Plasma 6 کے لئے ایک سادہ کیلنڈر ویجیٹ",
+        "Description[zh]": "KDE Plasma 6 的简单日历小部件",
+        "Description[ko]": "KDE Plasma 6용 간단한 달력 위젯"
     }
 }

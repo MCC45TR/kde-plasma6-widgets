@@ -37,6 +37,7 @@
         "Name[bn]": "মিউজিক প্লেয়ার",
         "Name[ur]": "میوزک پلیئر",
         "Name[fa]": "پخش‌کننده موسیقی",
+        "Name[ko]": "M뮤직 플레이어",
         "Description[tr]": "KDE Plasma 6 için modern bir müzik çalar widget'ı",
         "Description[de]": "Ein modernes Musikplayer-Widget für KDE Plasma 6",
         "Description[fr]": "Un widget de lecteur de musique moderne pour KDE Plasma 6",
@@ -55,6 +56,7 @@
         "Description[hi]": "KDE Plasma 6 के लिए एक आधुनिक संगीत प्लेयर विजेट",
         "Description[bn]": "KDE Plasma 6 এর জন্য একটি আধুনিক মিউজিক প্লেয়ার উইজেট",
         "Description[ur]": "KDE Plasma 6 کے لئے ایک جدید موسیقی پلیئر ویجیٹ",
-        "Description[fa]": "یک ویجت پخش‌کننده موسیقی مدرن برای KDE Plasma 6"
+        "Description[fa]": "یک ویجت پخش‌کننده موسیقی مدرن برای KDE Plasma 6",
+        "Description[ko]": "KDE Plasma 6용 최신 음악 플레이어 위젯"
     }
 }

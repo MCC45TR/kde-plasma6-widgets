@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Dnes"
+
+msgid "Appearance"
+msgstr "Vzhled"
+
+msgid "Widget Margin:"
+msgstr "Okraj widgetu:"
+
+msgid "Normal (10px)"
+msgstr "Normální (10 px)"
+
+msgid "Less (5px)"
+msgstr "Méně (5 px)"
+
+msgid "None (0px)"
+msgstr "Žádný (0 px)"
+
+msgid "Corner Radius:"
+msgstr "Poloměr rohu:"
+
+msgid "Normal"
+msgstr "Normální"
+
+msgid "Small"
+msgstr "Malý"
+
+msgid "Square"
+msgstr "Čtvercový"
+
+msgid "Widget Size:"
+msgstr "Velikost widgetu:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Větší velikosti pomáhají čitelnosti na 2K/4K displejích."
+
+msgid "Background Settings"
+msgstr "Nastavení pozadí"
+
+msgid "Background Opacity:"
+msgstr "Průhlednost pozadí:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Bez pozadí)"

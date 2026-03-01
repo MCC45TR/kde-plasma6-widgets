@@ -1,0 +1,222 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
+
+msgid "No Media Playing"
+msgstr "재생 중인 미디어 없음"
+
+msgid "No Media"
+msgstr "미디어 없음"
+
+msgid "Previous Track"
+msgstr "이전 트랙"
+
+msgid "Next Track"
+msgstr "다음 트랙"
+
+msgid "General (Follow All)"
+msgstr "일반 (모두 팔로우)"
+
+msgid "Default Media Player:"
+msgstr "기본 미디어 플레이어:"
+
+msgid "Inactive players are not shown."
+msgstr "비활성 플레이어는 표시되지 않습니다."
+
+msgid "Selected Player:"
+msgstr "선택된 플레이어:"
+
+msgid "Select Application"
+msgstr "애플리케이션 선택"
+
+msgid "⚠ No active players"
+msgstr "⚠ 활성 플레이어 없음"
+
+msgid "✓ %1 active players found"
+msgstr "✓ %1개의 활성 플레이어 발견"
+
+msgid "All media sources are tracked."
+msgstr "모든 미디어 소스가 추적됩니다."
+
+msgid "Only \"%1\" is tracked."
+msgstr "\"%1\"만 추적됩니다."
+
+msgid "Show media player badge:"
+msgstr "미디어 플레이어 배지 표시:"
+
+msgid "General"
+msgstr "일반"
+
+msgid "Appearance"
+msgstr "모양"
+
+msgid "Widget Margin:"
+msgstr "위젯 여백:"
+
+msgid "Normal (10px)"
+msgstr "보통 (10px)"
+
+msgid "Less (5px)"
+msgstr "적게 (5px)"
+
+msgid "None (0px)"
+msgstr "없음 (0px)"
+
+msgid "Corner Radius:"
+msgstr "모서리 곡률:"
+
+msgid "Normal (20px)"
+msgstr "보통 (20px)"
+
+msgid "Less (10px)"
+msgstr "적게 (10px)"
+
+msgid "Even Less (5px)"
+msgstr "더 적게 (5px)"
+
+msgid "Square (0px)"
+msgstr "사각형 (0px)"
+
+msgid "Background Opacity:"
+msgstr "배경 투명도:"
+
+msgid "Controls:"
+msgstr "컨트롤:"
+
+msgid "Show Controls in Panel"
+msgstr "패널에 컨트롤 표시"
+
+msgid "Panel Settings"
+msgstr "패널 설정"
+
+msgid "Layout Mode:"
+msgstr "레이아웃 모드:"
+
+msgid "Left Aligned"
+msgstr "왼쪽 정렬"
+
+msgid "Right Aligned"
+msgstr "오른쪽 정렬"
+
+msgid "Centered"
+msgstr "가운데 정렬"
+
+msgid "Button Size:"
+msgstr "버튼 크기:"
+
+msgid "Auto Size based on Panel Height"
+msgstr "패널 높이에 따라 자동 크기 조절"
+
+msgid "Button Size (px):"
+msgstr "버튼 크기 (px):"
+
+msgid "Text:"
+msgstr "텍스트:"
+
+msgid "Scroll Text if truncated"
+msgstr "텍스트가 잘리면 스크롤"
+
+msgid "Dynamic Width (auto-expand to fit text)"
+msgstr "동적 너비 (텍스트에 맞게 자동 확장)"
+
+msgid "Max Width (px):"
+msgstr "최대 너비 (px):"
+
+msgid "Scroll Speed:"
+msgstr "스크롤 속도:"
+
+msgid "Fast"
+msgstr "빠름"
+
+msgid "Medium"
+msgstr "보통"
+
+msgid "Slow"
+msgstr "느림"
+
+msgid "Displayed Info:"
+msgstr "표시되는 정보:"
+
+msgid "Show Title"
+msgstr "제목 표시"
+
+msgid "Show Artist"
+msgstr "아티스트 표시"
+
+msgid "Font Size:"
+msgstr "글꼴 크기:"
+
+msgid "Font Size (px):"
+msgstr "글꼴 크기 (px):"
+
+msgid "View Settings"
+msgstr "보기 설정"
+
+msgid "View Mode:"
+msgstr "보기 모드:"
+
+msgid "Automatic"
+msgstr "자동"
+
+msgid "Wide"
+msgstr "와이드"
+
+msgid "Large"
+msgstr "큼"
+
+msgid "Extra Large"
+msgstr "매우 큼"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "매우 큰 모드 버튼:"
+
+msgid "Shuffle Button"
+msgstr "셔플 버튼"
+
+msgid "not working"
+msgstr "작동하지 않음"
+
+msgid "Loop/Repeat Button"
+msgstr "루프/반복 버튼"
+
+msgid "10-Second Seek Buttons"
+msgstr "10초 탐색 버튼"
+
+msgid "Volume Slider"
+msgstr "볼륨 슬라이더"
+
+msgid "Panel Options"
+msgstr "패널 옵션"
+
+msgid "Album Art:"
+msgstr "앨범 아트:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "패널에 앨범 아트 썸네일 표시"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "위젯이 패널에 배치된 경우에만 사용할 수 있습니다."
+
+msgid "Visibility"
+msgstr "가시성"
+
+msgid "Auto-hide:"
+msgstr "자동 숨기기:"
+
+msgid "Hide when locked player is not active"
+msgstr "잠긴 플레이어가 활성화되지 않은 경우 숨기기"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "작동하려면 잠긴(특정) 플레이어가 필요합니다."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "\"%1\"이(가) 실행 중이지 않을 때 패널에서 사라집니다."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "재생 중이지 않을 때 패널에서 숨기기"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "일시 중지되거나 정지되면 위젯이 패널에서 사라집니다."

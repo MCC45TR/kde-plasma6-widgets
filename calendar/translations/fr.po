@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Aujourd'hui"
+
+msgid "Appearance"
+msgstr "Apparence"
+
+msgid "Widget Margin:"
+msgstr "Marge du widget :"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Moins (5px)"
+
+msgid "None (0px)"
+msgstr "Aucune (0px)"
+
+msgid "Corner Radius:"
+msgstr "Rayon des coins :"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Small"
+msgstr "Petit"
+
+msgid "Square"
+msgstr "Carré"
+
+msgid "Widget Size:"
+msgstr "Taille du widget :"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Les grandes tailles facilitent la lecture sur les écrans 2K/4K."
+
+msgid "Background Settings"
+msgstr "Paramètres d'arrière-plan"
+
+msgid "Background Opacity:"
+msgstr "Opacité de l'arrière-plan :"
+
+msgid "0% (No Backgrounds)"
+msgstr "0 % (Pas d'arrière-plan)"

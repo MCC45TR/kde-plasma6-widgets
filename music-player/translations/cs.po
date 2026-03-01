@@ -16,8 +16,8 @@ msgstr "Další skladba"
 msgid "General (Follow All)"
 msgstr "Obecné (Sledovat vše)"
 
-msgid "Default Media Player"
-msgstr "Výchozí přehrávač médií"
+msgid "Default Media Player:"
+msgstr "Výchozí přehrávač médií:"
 
 msgid "Inactive players are not shown."
 msgstr "Neaktivní přehrávače nejsou zobrazeny."
@@ -40,8 +40,8 @@ msgstr "Všechny zdroje médií jsou sledovány."
 msgid "Only \"%1\" is tracked."
 msgstr "Sledováno pouze \"%1\"."
 
-msgid "Show media player badge"
-msgstr "Zobrazit odznak přehrávače"
+msgid "Show media player badge:"
+msgstr "Zobrazit odznak přehrávače:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "Menší (5px)"
 msgid "None (0px)"
 msgstr "Žádné (0px)"
 
+msgid "Corner Radius:"
+msgstr "Poloměr rohů:"
+
+msgid "Normal (20px)"
+msgstr "Normální (20px)"
+
+msgid "Less (10px)"
+msgstr "Menší (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Ještě menší (5px)"
+
+msgid "Square (0px)"
+msgstr "Čtvercový (0px)"
+
 msgid "Background Opacity:"
 msgstr "Průhlednost pozadí:"
+
+msgid "Controls:"
+msgstr "Ovládací prvky:"
 
 msgid "Show Controls in Panel"
 msgstr "Zobrazit ovládání v panelu"
@@ -92,8 +110,11 @@ msgstr "Velikost tlačítek:"
 msgid "Auto Size based on Panel Height"
 msgstr "Automatická velikost podle výšky panelu"
 
-msgid "Size (px):"
-msgstr "Velikost (px):"
+msgid "Button Size (px):"
+msgstr "Velikost tlačítek (px):"
+
+msgid "Text:"
+msgstr "Text:"
 
 msgid "Scroll Text if truncated"
 msgstr "Posouvat text, pokud je zkrácen"
@@ -104,8 +125,8 @@ msgstr "Dynamická šířka (automatické rozbalení podle textu)"
 msgid "Max Width (px):"
 msgstr "Maximální šířka (px):"
 
-msgid "Speed:"
-msgstr "Rychlost:"
+msgid "Scroll Speed:"
+msgstr "Rychlost posouvání:"
 
 msgid "Fast"
 msgstr "Rychle"
@@ -116,8 +137,8 @@ msgstr "Středně"
 msgid "Slow"
 msgstr "Pomalu"
 
-msgid "Displayed Information:"
-msgstr "Zobrazené informace:"
+msgid "Displayed Info:"
+msgstr "Zobrazené info:"
 
 msgid "Show Title"
 msgstr "Zobrazit název"
@@ -128,6 +149,9 @@ msgstr "Zobrazit umělce"
 msgid "Font Size:"
 msgstr "Velikost písma:"
 
+msgid "Font Size (px):"
+msgstr "Velikost písma (px):"
+
 msgid "View Settings"
 msgstr "Nastavení zobrazení"
 
@@ -137,11 +161,63 @@ msgstr "Režim zobrazení:"
 msgid "Automatic"
 msgstr "Automaticky"
 
-msgid "Small"
-msgstr "Malý"
-
 msgid "Wide"
 msgstr "Široký"
 
 msgid "Large"
 msgstr "Velký"
+
+msgid "Extra Large"
+msgstr "Extra velký"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Tlačítka v extra velkém režimu:"
+
+msgid "Shuffle Button"
+msgstr "Tlačítko náhodně"
+
+msgid "not working"
+msgstr "nefunguje"
+
+msgid "Loop/Repeat Button"
+msgstr "Tlačítko opakování"
+
+msgid "10-Second Seek Buttons"
+msgstr "10sekundová tlačítka hledání"
+
+msgid "Volume Slider"
+msgstr "Posuvník hlasitosti"
+
+msgid "Panel Options"
+msgstr "Možnosti panelu"
+
+msgid "Album Art:"
+msgstr "Obal alba:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Zobrazit náhled obalu v panelu"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Dostupné pouze pokud je widget v panelu."
+
+msgid "Visibility"
+msgstr "Viditelnost"
+
+msgid "Auto-hide:"
+msgstr "Automatické skrývání:"
+
+msgid "Hide when locked player is not active"
+msgstr "Skrýt, pokud není vybraný přehrávač aktivní"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "Vyžaduje výběr konkrétního přehrávače."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "Zmizí z panelu, pokud \"%1\" neběží."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Skrýt v panelu, pokud se nic nehraje"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Widget zmizí z panelu při pozastavení nebo zastavení."
+

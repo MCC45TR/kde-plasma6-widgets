@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Bugün"
+
+msgid "Appearance"
+msgstr "Görünüş"
+
+msgid "Widget Margin:"
+msgstr "Vidget kənar boşluğu:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Daha az (5px)"
+
+msgid "None (0px)"
+msgstr "Yoxdur (0px)"
+
+msgid "Corner Radius:"
+msgstr "Künc yuvarlaqlığı:"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Small"
+msgstr "Kiçik"
+
+msgid "Square"
+msgstr "Kvadrat"
+
+msgid "Widget Size:"
+msgstr "Vidget ölçüsü:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Böyük ölçülər 2K/4K ekranlarda oxunaqlılığı artırır."
+
+msgid "Background Settings"
+msgstr "Arxa plan parametrləri"
+
+msgid "Background Opacity:"
+msgstr "Arxa planın şəffaflığı:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Arxa plan yoxdur)"

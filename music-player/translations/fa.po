@@ -16,8 +16,8 @@ msgstr "آهنگ بعدی"
 msgid "General (Follow All)"
 msgstr "عمومی (دنبال کردن همه)"
 
-msgid "Default Media Player"
-msgstr "پخش‌کننده رسانه پیش‌فرض"
+msgid "Default Media Player:"
+msgstr "پخش‌کننده رسانه پیش‌فرض:"
 
 msgid "Inactive players are not shown."
 msgstr "پخش‌کننده‌های غیرفعال نشان داده نمی‌شوند."
@@ -40,8 +40,8 @@ msgstr "همه منابع رسانه‌ای ردیابی می‌شوند."
 msgid "Only \"%1\" is tracked."
 msgstr "فقط «%1» ردیابی می‌شود."
 
-msgid "Show media player badge"
-msgstr "نشان پخش‌کننده را نشان بده"
+msgid "Show media player badge:"
+msgstr "نشان پخش‌کننده را نشان بده:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "کمتر (۵ پیکسل)"
 msgid "None (0px)"
 msgstr "بدون حاشیه (۰ پیکسل)"
 
+msgid "Corner Radius:"
+msgstr "شعاع گوشه:"
+
+msgid "Normal (20px)"
+msgstr "معمولی (۲۰ پیکسل)"
+
+msgid "Less (10px)"
+msgstr "کمتر (۱۰ پیکسل)"
+
+msgid "Even Less (5px)"
+msgstr "حتی کمتر (۵ پیکسل)"
+
+msgid "Square (0px)"
+msgstr "مربعی (۰ پیکسل)"
+
 msgid "Background Opacity:"
 msgstr "شفافیت پس‌زمینه:"
+
+msgid "Controls:"
+msgstr "کنترل‌ها:"
 
 msgid "Show Controls in Panel"
 msgstr "نمایش کنترل‌ها در پنل"
@@ -92,8 +110,11 @@ msgstr "اندازه دکمه:"
 msgid "Auto Size based on Panel Height"
 msgstr "اندازه خودکار بر اساس ارتفاع پنل"
 
-msgid "Size (px):"
-msgstr "اندازه (پیکسل):"
+msgid "Button Size (px):"
+msgstr "اندازه دکمه (پیکسل):"
+
+msgid "Text:"
+msgstr "متن:"
 
 msgid "Scroll Text if truncated"
 msgstr "پیمایش متن در صورت کوتاه بودن"
@@ -104,8 +125,8 @@ msgstr "عرض پویا (گسترش خودکار برای تناسب با متن
 msgid "Max Width (px):"
 msgstr "حداکثر عرض (پیکسل):"
 
-msgid "Speed:"
-msgstr "سرعت:"
+msgid "Scroll Speed:"
+msgstr "سرعت پیمایش:"
 
 msgid "Fast"
 msgstr "سریع"
@@ -116,7 +137,7 @@ msgstr "متوسط"
 msgid "Slow"
 msgstr "آهسته"
 
-msgid "Displayed Information:"
+msgid "Displayed Info:"
 msgstr "اطلاعات نمایش داده شده:"
 
 msgid "Show Title"
@@ -128,6 +149,9 @@ msgstr "نمایش هنرمند"
 msgid "Font Size:"
 msgstr "اندازه فونت:"
 
+msgid "Font Size (px):"
+msgstr "اندازه فونت (پیکسل):"
+
 msgid "View Settings"
 msgstr "تنظیمات نما"
 
@@ -137,11 +161,63 @@ msgstr "حالت نما:"
 msgid "Automatic"
 msgstr "خودکار"
 
-msgid "Small"
-msgstr "کوچک"
-
 msgid "Wide"
 msgstr "عریض"
 
 msgid "Large"
 msgstr "بزرگ"
+
+msgid "Extra Large"
+msgstr "خیلی بزرگ"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "دکمه‌های حالت خیلی بزرگ:"
+
+msgid "Shuffle Button"
+msgstr "دکمه بر زدن"
+
+msgid "not working"
+msgstr "کار نمی‌کند"
+
+msgid "Loop/Repeat Button"
+msgstr "دکمه تکرار"
+
+msgid "10-Second Seek Buttons"
+msgstr "دکمه‌های پرش ۱۰ ثانیه‌ای"
+
+msgid "Volume Slider"
+msgstr "لغزنده صدا"
+
+msgid "Panel Options"
+msgstr "گزینه‌های پنل"
+
+msgid "Album Art:"
+msgstr "طرح آلبوم:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "نمایش تصویر کوچک آلبوم در پنل"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "فقط زمانی که در پنل باشد در دسترس است."
+
+msgid "Visibility"
+msgstr "قابلیت رویت"
+
+msgid "Auto-hide:"
+msgstr "پنهان‌سازی خودکار:"
+
+msgid "Hide when locked player is not active"
+msgstr "پنهان کردن وقتی پخش‌کننده فعال نیست"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "نیاز به قفل روی یک پخش‌کننده دارد."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "وقتی «%1» در حال اجرا نباشد ناپدید می‌شود."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "پنهان کردن در پنل وقتی چیزی پخش نمی‌شود"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "هنگام توقف یا درنگ از پنل ناپدید می‌شود."
+

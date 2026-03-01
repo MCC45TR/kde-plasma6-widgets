@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "امروز"
+
+msgid "Appearance"
+msgstr "ظاهر"
+
+msgid "Widget Margin:"
+msgstr "حاشیه ویجت:"
+
+msgid "Normal (10px)"
+msgstr "معمولی (۱۰ پیکسل)"
+
+msgid "Less (5px)"
+msgstr "کمتر (۵ پیکسل)"
+
+msgid "None (0px)"
+msgstr "بدون حاشیه (۰ پیکسل)"
+
+msgid "Corner Radius:"
+msgstr "شعاع گوشه:"
+
+msgid "Normal"
+msgstr "معمولی"
+
+msgid "Small"
+msgstr "کوچک"
+
+msgid "Square"
+msgstr "مربعی"
+
+msgid "Widget Size:"
+msgstr "اندازه ویجت:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "اندازه‌های بزرگتر به خوانایی در نمایشگرهای 2K/4K کمک می‌کنند."
+
+msgid "Background Settings"
+msgstr "تنظیمات پس‌زمینه"
+
+msgid "Background Opacity:"
+msgstr "شفافیت پس‌زمینه:"
+
+msgid "0% (No Backgrounds)"
+msgstr "۰٪ (بدون پس‌زمینه)"

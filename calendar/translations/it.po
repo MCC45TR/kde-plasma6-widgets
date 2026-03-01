@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Oggi"
+
+msgid "Appearance"
+msgstr "Aspetto"
+
+msgid "Widget Margin:"
+msgstr "Margine del widget:"
+
+msgid "Normal (10px)"
+msgstr "Normale (10px)"
+
+msgid "Less (5px)"
+msgstr "Meno (5px)"
+
+msgid "None (0px)"
+msgstr "Nessuno (0px)"
+
+msgid "Corner Radius:"
+msgstr "Raggio degli angoli:"
+
+msgid "Normal"
+msgstr "Normale"
+
+msgid "Small"
+msgstr "Piccolo"
+
+msgid "Square"
+msgstr "Quadrato"
+
+msgid "Widget Size:"
+msgstr "Dimensione del widget:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Dimensioni maggiori aiutano la leggibilità su schermi 2K/4K."
+
+msgid "Background Settings"
+msgstr "Impostazioni dello sfondo"
+
+msgid "Background Opacity:"
+msgstr "Opacità dello sfondo:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Nessuno sfondo)"

@@ -16,8 +16,8 @@ msgstr "اگلا ٹریک"
 msgid "General (Follow All)"
 msgstr "عام (تمام کی پیروی کریں)"
 
-msgid "Default Media Player"
-msgstr "ڈیفالٹ میڈیا پلیئر"
+msgid "Default Media Player:"
+msgstr "ڈیفالٹ میڈیا پلیئر:"
 
 msgid "Inactive players are not shown."
 msgstr "غیر فعال پلیئرز نہیں دکھائے گئے۔"
@@ -40,8 +40,8 @@ msgstr "تمام میڈیا ذرائع کو ٹریک کیا جا رہا ہے۔"
 msgid "Only \"%1\" is tracked."
 msgstr "صرف \"%1\" کو ٹریک کیا جا رہا ہے۔"
 
-msgid "Show media player badge"
-msgstr "پلیئر بیج دکھائیں"
+msgid "Show media player badge:"
+msgstr "پلیئر بیج دکھائیں:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "کم (5px)"
 msgid "None (0px)"
 msgstr "کوئی نہیں (0px)"
 
+msgid "Corner Radius:"
+msgstr "کونے کا رداس:"
+
+msgid "Normal (20px)"
+msgstr "نارمل (20px)"
+
+msgid "Less (10px)"
+msgstr "کم (10px)"
+
+msgid "Even Less (5px)"
+msgstr "مزید کم (5px)"
+
+msgid "Square (0px)"
+msgstr "مربع (0px)"
+
 msgid "Background Opacity:"
 msgstr "پس منظر کی دھندلاہٹ:"
+
+msgid "Controls:"
+msgstr "کنٹرولز:"
 
 msgid "Show Controls in Panel"
 msgstr "پینل میں کنٹرول دکھائیں"
@@ -92,8 +110,11 @@ msgstr "بٹن کا سائز:"
 msgid "Auto Size based on Panel Height"
 msgstr "پینل کی اونچائی کی بنیاد پر آٹو سائز"
 
-msgid "Size (px):"
-msgstr "سائز (px):"
+msgid "Button Size (px):"
+msgstr "بٹن کا سائز (px):"
+
+msgid "Text:"
+msgstr "متن:"
 
 msgid "Scroll Text if truncated"
 msgstr "اگر متن بڑا ہو تو سکرول کریں"
@@ -104,8 +125,8 @@ msgstr "ڈائنامک چوڑائی (متن کے مطابق آٹو پھیلاؤ)
 msgid "Max Width (px):"
 msgstr "زیادہ سے زیادہ چوڑائی (px):"
 
-msgid "Speed:"
-msgstr "رفتار:"
+msgid "Scroll Speed:"
+msgstr "سکرول کی رفتار:"
 
 msgid "Fast"
 msgstr "تیز"
@@ -116,7 +137,7 @@ msgstr "درمیانہ"
 msgid "Slow"
 msgstr "آہستہ"
 
-msgid "Displayed Information:"
+msgid "Displayed Info:"
 msgstr "دکھائی گئی معلومات:"
 
 msgid "Show Title"
@@ -128,6 +149,9 @@ msgstr "آرٹسٹ دکھائیں"
 msgid "Font Size:"
 msgstr "فونٹ کا سائز:"
 
+msgid "Font Size (px):"
+msgstr "فونٹ کا سائز (px):"
+
 msgid "View Settings"
 msgstr "منظر کی ترتیبات"
 
@@ -137,11 +161,63 @@ msgstr "منظر کا موڈ:"
 msgid "Automatic"
 msgstr "خودکار"
 
-msgid "Small"
-msgstr "چھوٹا"
-
 msgid "Wide"
 msgstr "کشادہ"
 
 msgid "Large"
 msgstr "بڑا"
+
+msgid "Extra Large"
+msgstr "بہت بڑا"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "بہت بڑے موڈ کے بٹن:"
+
+msgid "Shuffle Button"
+msgstr "شفل بٹن"
+
+msgid "not working"
+msgstr "کام نہیں کر رہا"
+
+msgid "Loop/Repeat Button"
+msgstr "لوپ/دہرانے کا بٹن"
+
+msgid "10-Second Seek Buttons"
+msgstr "10 سیکنڈ سرچ بٹن"
+
+msgid "Volume Slider"
+msgstr "والیوم سلائیڈر"
+
+msgid "Panel Options"
+msgstr "پینل کے اختیارات"
+
+msgid "Album Art:"
+msgstr "البم آرٹ:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "پینل میں البم کی تصویر دکھائیں"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "صرف پینل میں دستیاب ہے۔"
+
+msgid "Visibility"
+msgstr "نمایاں ہونا"
+
+msgid "Auto-hide:"
+msgstr "خودکار چھپائیں:"
+
+msgid "Hide when locked player is not active"
+msgstr "غیر فعال ہونے پر چھپائیں"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "کسی خاص پلیئر کے ساتھ کام کرتا ہے۔"
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "جب \"%1\" نہیں چل رہا ہو گا تو پینل سے غائب ہو جائے گا۔"
+
+msgid "Hide in panel when nothing is playing"
+msgstr "کچھ نہ چلنے پر پینل میں چھپائیں"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "توقف پر وجیٹ پینل سے غائب ہو جاتا ہے۔"
+

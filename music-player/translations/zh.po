@@ -16,8 +16,8 @@ msgstr "下一曲"
 msgid "General (Follow All)"
 msgstr "常规 (跟随所有)"
 
-msgid "Default Media Player"
-msgstr "默认媒体播放器"
+msgid "Default Media Player:"
+msgstr "默认媒体播放器:"
 
 msgid "Inactive players are not shown."
 msgstr "不显示未激活的播放器。"
@@ -40,8 +40,8 @@ msgstr "正在跟踪所有媒体源。"
 msgid "Only \"%1\" is tracked."
 msgstr "仅跟踪 \"%1\"。"
 
-msgid "Show media player badge"
-msgstr "显示播放器徽章"
+msgid "Show media player badge:"
+msgstr "显示播放器徽章:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "较小 (5px)"
 msgid "None (0px)"
 msgstr "无 (0px)"
 
+msgid "Corner Radius:"
+msgstr "圆角半径:"
+
+msgid "Normal (20px)"
+msgstr "正常 (20px)"
+
+msgid "Less (10px)"
+msgstr "较小 (10px)"
+
+msgid "Even Less (5px)"
+msgstr "更小 (5px)"
+
+msgid "Square (0px)"
+msgstr "直角 (0px)"
+
 msgid "Background Opacity:"
 msgstr "背景透明度:"
+
+msgid "Controls:"
+msgstr "控制按钮:"
 
 msgid "Show Controls in Panel"
 msgstr "在面板中显示控制按钮"
@@ -92,8 +110,11 @@ msgstr "按钮大小:"
 msgid "Auto Size based on Panel Height"
 msgstr "根据面板高度自动调整大小"
 
-msgid "Size (px):"
-msgstr "大小 (px):"
+msgid "Button Size (px):"
+msgstr "按钮大小 (px):"
+
+msgid "Text:"
+msgstr "文本:"
 
 msgid "Scroll Text if truncated"
 msgstr "如果文字被截断则滚动"
@@ -104,8 +125,8 @@ msgstr "动态宽度 (根据文字自动展开)"
 msgid "Max Width (px):"
 msgstr "最大宽度 (px):"
 
-msgid "Speed:"
-msgstr "速度:"
+msgid "Scroll Speed:"
+msgstr "滚动速度:"
 
 msgid "Fast"
 msgstr "快"
@@ -116,8 +137,8 @@ msgstr "中"
 msgid "Slow"
 msgstr "慢"
 
-msgid "Displayed Information:"
-msgstr "显示的信息:"
+msgid "Displayed Info:"
+msgstr "面板显信息:"
 
 msgid "Show Title"
 msgstr "显示标题"
@@ -128,6 +149,9 @@ msgstr "显示艺术家"
 msgid "Font Size:"
 msgstr "字体大小:"
 
+msgid "Font Size (px):"
+msgstr "字体大小 (px):"
+
 msgid "View Settings"
 msgstr "视图设置"
 
@@ -137,11 +161,63 @@ msgstr "视图模式:"
 msgid "Automatic"
 msgstr "自动"
 
-msgid "Small"
-msgstr "小"
-
 msgid "Wide"
 msgstr "宽"
 
 msgid "Large"
 msgstr "大"
+
+msgid "Extra Large"
+msgstr "特大"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "特大模式按钮:"
+
+msgid "Shuffle Button"
+msgstr "随机按钮"
+
+msgid "not working"
+msgstr "失效"
+
+msgid "Loop/Repeat Button"
+msgstr "循环按钮"
+
+msgid "10-Second Seek Buttons"
+msgstr "10秒进度按钮"
+
+msgid "Volume Slider"
+msgstr "音量滑块"
+
+msgid "Panel Options"
+msgstr "面板选项"
+
+msgid "Album Art:"
+msgstr "专辑封面:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "在面板中显示专辑封面"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "仅在部件位于面板时可用。"
+
+msgid "Visibility"
+msgstr "可见性"
+
+msgid "Auto-hide:"
+msgstr "自动隐藏:"
+
+msgid "Hide when locked player is not active"
+msgstr "当锁定播放器不活跃时隐藏"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "需要锁定特定播放器才能生效。"
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "当 \"%1\" 未运行时从面板中消失。"
+
+msgid "Hide in panel when nothing is playing"
+msgstr "没有任何播放时隐藏面板内容"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "暂停或停止时部件从面板中消失。"
+

@@ -108,6 +108,8 @@ Item {
                     id: weatherIcon
                     anchors.right: parent.right
                     anchors.top: parent.top
+                    anchors.rightMargin: 10
+                    anchors.topMargin: 10
                     width: Math.min(headerArea.iconMaxSize, parent.width * 0.45)
                     height: width
                     source: getWeatherIcon(currentWeather)

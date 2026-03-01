@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "آج"
+
+msgid "Appearance"
+msgstr "ظہور"
+
+msgid "Widget Margin:"
+msgstr "ویجیٹ مارجن:"
+
+msgid "Normal (10px)"
+msgstr "نارمل (10px)"
+
+msgid "Less (5px)"
+msgstr "کم (5px)"
+
+msgid "None (0px)"
+msgstr "کوئی نہیں (0px)"
+
+msgid "Corner Radius:"
+msgstr "کونے کا رداس:"
+
+msgid "Normal"
+msgstr "عام"
+
+msgid "Small"
+msgstr "چھوٹا"
+
+msgid "Square"
+msgstr "مربع"
+
+msgid "Widget Size:"
+msgstr "ویجیٹ سائز:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "بڑے سائز 2K/4K ڈسپلے پر پڑھنے میں مدد کرتے ہیں۔"
+
+msgid "Background Settings"
+msgstr "پس منظر کی ترتیبات"
+
+msgid "Background Opacity:"
+msgstr "پس منظر کی دھندلاہٹ:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (کوئی پس منظر نہیں)"

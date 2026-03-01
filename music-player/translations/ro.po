@@ -16,8 +16,8 @@ msgstr "Piesa următoare"
 msgid "General (Follow All)"
 msgstr "General (Urmărește tot)"
 
-msgid "Default Media Player"
-msgstr "Player media implicit"
+msgid "Default Media Player:"
+msgstr "Player media implicit:"
 
 msgid "Inactive players are not shown."
 msgstr "Playerele inactive nu sunt afișate."
@@ -40,8 +40,8 @@ msgstr "Toate sursele media sunt urmărite."
 msgid "Only \"%1\" is tracked."
 msgstr "Doar \"%1\" este urmărit."
 
-msgid "Show media player badge"
-msgstr "Afișați insigna playerului"
+msgid "Show media player badge:"
+msgstr "Afișați insigna playerului:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "Mai mică (5px)"
 msgid "None (0px)"
 msgstr "Niciuna (0px)"
 
+msgid "Corner Radius:"
+msgstr "Raza colțurilor:"
+
+msgid "Normal (20px)"
+msgstr "Normală (20px)"
+
+msgid "Less (10px)"
+msgstr "Mai mică (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Și mai mică (5px)"
+
+msgid "Square (0px)"
+msgstr "Pătrat (0px)"
+
 msgid "Background Opacity:"
 msgstr "Opacitatea fundalului:"
+
+msgid "Controls:"
+msgstr "Comenzi:"
 
 msgid "Show Controls in Panel"
 msgstr "Afișează comenzile în panou"
@@ -87,13 +105,16 @@ msgid "Centered"
 msgstr "Centrat"
 
 msgid "Button Size:"
-msgstr "Dimensiunea butoanelor:"
+msgstr "Dimensionea butoanelor:"
 
 msgid "Auto Size based on Panel Height"
 msgstr "Dimensiune auto în funcție de înălțimea panoului"
 
-msgid "Size (px):"
-msgstr "Dimensiune (px):"
+msgid "Button Size (px):"
+msgstr "Dimensiunea butoanelor (px):"
+
+msgid "Text:"
+msgstr "Text:"
 
 msgid "Scroll Text if truncated"
 msgstr "Derulează textul dacă este trunchiat"
@@ -104,8 +125,8 @@ msgstr "Lățime dinamică (extindere auto pentru a se potrivi textului)"
 msgid "Max Width (px):"
 msgstr "Lățime maximă (px):"
 
-msgid "Speed:"
-msgstr "Viteză:"
+msgid "Scroll Speed:"
+msgstr "Viteză derulare:"
 
 msgid "Fast"
 msgstr "Rapidă"
@@ -116,8 +137,8 @@ msgstr "Medie"
 msgid "Slow"
 msgstr "Lentă"
 
-msgid "Displayed Information:"
-msgstr "Informații afișate:"
+msgid "Displayed Info:"
+msgstr "Info afișate:"
 
 msgid "Show Title"
 msgstr "Afișează titlul"
@@ -128,6 +149,9 @@ msgstr "Afișează artistul"
 msgid "Font Size:"
 msgstr "Dimensiunea fontului:"
 
+msgid "Font Size (px):"
+msgstr "Dimensiunea fontului (px):"
+
 msgid "View Settings"
 msgstr "Setări vizualizare"
 
@@ -137,11 +161,63 @@ msgstr "Mod vizualizare:"
 msgid "Automatic"
 msgstr "Automat"
 
-msgid "Small"
-msgstr "Mic"
-
 msgid "Wide"
 msgstr "Lat"
 
 msgid "Large"
 msgstr "Mare"
+
+msgid "Extra Large"
+msgstr "Foarte mare"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Butoane mod foarte mare:"
+
+msgid "Shuffle Button"
+msgstr "Buton amestecare"
+
+msgid "not working"
+msgstr "nu funcționează"
+
+msgid "Loop/Repeat Button"
+msgstr "Buton repetiție"
+
+msgid "10-Second Seek Buttons"
+msgstr "Butoane căutare 10s"
+
+msgid "Volume Slider"
+msgstr "Glisor volum"
+
+msgid "Panel Options"
+msgstr "Opțiuni panou"
+
+msgid "Album Art:"
+msgstr "Copertă album:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Afișează coperta în panou"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Disponibil doar în panou."
+
+msgid "Visibility"
+msgstr "Vizibilitate"
+
+msgid "Auto-hide:"
+msgstr "Ascundere auto:"
+
+msgid "Hide when locked player is not active"
+msgstr "Ascunde dacă playerul nu este activ"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "Necesită blocarea pe un player specific."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "Dispare din panou dacă \"%1\" nu rulează."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Ascunde în panou dacă nu se redă nimic"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Widget-ul dispare la pauză sau oprire."
+

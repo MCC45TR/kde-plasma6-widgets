@@ -126,7 +126,7 @@ Item {
     
     ComboBox {
         id: edgeMarginCombo
-        Kirigami.FormData.label: i18n("Widget Margin") + ":"
+        Kirigami.FormData.label: i18n("Widget Margin:")
         Layout.fillWidth: true
         model: [i18n("Normal (10px)"), i18n("Less (5px)"), i18n("None (0px)")]
         
@@ -139,7 +139,7 @@ Item {
 
     ComboBox {
         id: radiusCombo
-        Kirigami.FormData.label: i18n("Corner Radius") + ":"
+        Kirigami.FormData.label: i18n("Corner Radius:")
         Layout.fillWidth: true
         model: [i18n("Normal (20px)"), i18n("Less (10px)"), i18n("Even Less (5px)"), i18n("Square (0px)")]
         
@@ -153,7 +153,7 @@ Item {
 
     ComboBox {
         id: opacityCombo
-        Kirigami.FormData.label: i18n("Background Opacity") + ":"
+        Kirigami.FormData.label: i18n("Background Opacity:")
         Layout.fillWidth: true
         model: ["100%", "90%", "80%", "75%", "50%", "25%", "10%", "5%", "0%"]
         
@@ -165,7 +165,7 @@ Item {
     }
     
     CheckBox {
-        Kirigami.FormData.label: i18n("Controls") + ":"
+        Kirigami.FormData.label: i18n("Controls:")
         text: i18n("Show Controls in Panel")
         checked: configAppearance.cfg_showPanelControls
         onCheckedChanged: configAppearance.cfg_showPanelControls = checked
@@ -179,7 +179,7 @@ Item {
     
     ComboBox {
         id: panelLayoutCombo
-        Kirigami.FormData.label: i18n("Layout Mode") + ":"
+        Kirigami.FormData.label: i18n("Layout Mode:")
         Layout.fillWidth: true
         model: [i18n("Left Aligned"), i18n("Right Aligned"), i18n("Centered")]
         
@@ -187,14 +187,14 @@ Item {
     }
     
     CheckBox {
-        Kirigami.FormData.label: i18n("Button Size") + ":"
+        Kirigami.FormData.label: i18n("Button Size:")
         text: i18n("Auto Size based on Panel Height")
         checked: configAppearance.cfg_panelAutoButtonSize
         onCheckedChanged: configAppearance.cfg_panelAutoButtonSize = checked
     }
     
     SpinBox {
-        Kirigami.FormData.label: i18n("Button Size (px)") + ":"
+        Kirigami.FormData.label: i18n("Button Size (px):")
         enabled: !configAppearance.cfg_panelAutoButtonSize
         from: 16
         to: 128
@@ -203,7 +203,7 @@ Item {
     }
     
     CheckBox {
-        Kirigami.FormData.label: i18n("Text") + ":"
+        Kirigami.FormData.label: i18n("Text:")
         text: i18n("Scroll Text if truncated")
         checked: configAppearance.cfg_panelScrollingText
         onCheckedChanged: configAppearance.cfg_panelScrollingText = checked
@@ -216,7 +216,7 @@ Item {
     }
 
     SpinBox {
-        Kirigami.FormData.label: i18n("Max Width (px)") + ":"
+        Kirigami.FormData.label: i18n("Max Width (px):")
         enabled: !configAppearance.cfg_panelDynamicWidth
         from: 50
         to: 1500
@@ -227,7 +227,7 @@ Item {
     
     ComboBox {
         id: scrollSpeedCombo
-        Kirigami.FormData.label: i18n("Scroll Speed") + ":"
+        Kirigami.FormData.label: i18n("Scroll Speed:")
         enabled: configAppearance.cfg_panelScrollingText
         Layout.fillWidth: true
         model: [i18n("Fast"), i18n("Medium"), i18n("Slow")]
@@ -235,7 +235,7 @@ Item {
     }
     
     CheckBox {
-        Kirigami.FormData.label: i18n("Displayed Info") + ":"
+        Kirigami.FormData.label: i18n("Displayed Info:")
         text: i18n("Show Title")
         checked: configAppearance.cfg_panelShowTitle
         onCheckedChanged: configAppearance.cfg_panelShowTitle = checked
@@ -248,14 +248,14 @@ Item {
     }
     
     CheckBox {
-        Kirigami.FormData.label: i18n("Font Size") + ":"
+        Kirigami.FormData.label: i18n("Font Size:")
         text: i18n("Auto Size based on Panel Height")
         checked: configAppearance.cfg_panelAutoFontSize
         onCheckedChanged: configAppearance.cfg_panelAutoFontSize = checked
     }
     
     SpinBox {
-        Kirigami.FormData.label: i18n("Font Size (px)") + ":"
+        Kirigami.FormData.label: i18n("Font Size (px):")
         enabled: !configAppearance.cfg_panelAutoFontSize
         from: 12
         to: 72
@@ -271,7 +271,7 @@ Item {
     
     ComboBox {
         id: popupLayoutCombo
-        Kirigami.FormData.label: i18n("View Mode") + ":"
+        Kirigami.FormData.label: i18n("View Mode:")
         Layout.fillWidth: true
         
         // Check if in panel (2=Horizontal, 3=Vertical)
@@ -370,7 +370,7 @@ Item {
     }
 
     CheckBox {
-        Kirigami.FormData.label: i18n("Album Art") + ":"
+        Kirigami.FormData.label: i18n("Album Art:")
         text: i18n("Show album art thumbnail in panel")
         checked: configAppearance.cfg_panelShowAlbumArt
         onCheckedChanged: configAppearance.cfg_panelShowAlbumArt = checked
@@ -395,7 +395,7 @@ Item {
 
     CheckBox {
         id: autoHideCheckbox
-        Kirigami.FormData.label: i18n("Auto-hide") + ":"
+        Kirigami.FormData.label: i18n("Auto-hide:")
         text: i18n("Hide when locked player is not active")
         checked: configAppearance.cfg_autoHideWhenInactive
         onCheckedChanged: configAppearance.cfg_autoHideWhenInactive = checked

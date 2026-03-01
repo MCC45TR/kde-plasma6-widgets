@@ -16,8 +16,8 @@ msgstr "次のトラック"
 msgid "General (Follow All)"
 msgstr "一般 (すべて追跡)"
 
-msgid "Default Media Player"
-msgstr "デフォルトのメディアプレーヤー"
+msgid "Default Media Player:"
+msgstr "デフォルトのメディアプレーヤー:"
 
 msgid "Inactive players are not shown."
 msgstr "非アクティブなプレーヤーは表示されません。"
@@ -40,8 +40,8 @@ msgstr "すべてのメディアソースが追跡されます。"
 msgid "Only \"%1\" is tracked."
 msgstr "\"%1\" のみが追跡されます。"
 
-msgid "Show media player badge"
-msgstr "プレーヤーバッジを表示"
+msgid "Show media player badge:"
+msgstr "プレーヤーバッジを表示:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "狭い (5px)"
 msgid "None (0px)"
 msgstr "なし (0px)"
 
+msgid "Corner Radius:"
+msgstr "角の半径:"
+
+msgid "Normal (20px)"
+msgstr "標準 (20px)"
+
+msgid "Less (10px)"
+msgstr "狭い (10px)"
+
+msgid "Even Less (5px)"
+msgstr "さらに狭い (5px)"
+
+msgid "Square (0px)"
+msgstr "四角 (0px)"
+
 msgid "Background Opacity:"
 msgstr "背景の不透明度:"
+
+msgid "Controls:"
+msgstr "コントロール:"
 
 msgid "Show Controls in Panel"
 msgstr "パネルにコントロールを表示"
@@ -92,8 +110,11 @@ msgstr "ボタンのサイズ:"
 msgid "Auto Size based on Panel Height"
 msgstr "パネルの高さに合わせて自動調整"
 
-msgid "Size (px):"
-msgstr "サイズ (px):"
+msgid "Button Size (px):"
+msgstr "ボタンサイズ (px):"
+
+msgid "Text:"
+msgstr "テキスト:"
 
 msgid "Scroll Text if truncated"
 msgstr "テキストが長い場合にスクロールする"
@@ -104,8 +125,8 @@ msgstr "動的な幅 (テキストに合わせて自動拡張)"
 msgid "Max Width (px):"
 msgstr "最大の幅 (px):"
 
-msgid "Speed:"
-msgstr "速度:"
+msgid "Scroll Speed:"
+msgstr "スクロール速度:"
 
 msgid "Fast"
 msgstr "速い"
@@ -116,7 +137,7 @@ msgstr "普通"
 msgid "Slow"
 msgstr "遅い"
 
-msgid "Displayed Information:"
+msgid "Displayed Info:"
 msgstr "表示情報:"
 
 msgid "Show Title"
@@ -128,6 +149,9 @@ msgstr "アーティストを表示"
 msgid "Font Size:"
 msgstr "フォントサイズ:"
 
+msgid "Font Size (px):"
+msgstr "フォントサイズ (px):"
+
 msgid "View Settings"
 msgstr "表示設定"
 
@@ -137,11 +161,63 @@ msgstr "表示モード:"
 msgid "Automatic"
 msgstr "自動"
 
-msgid "Small"
-msgstr "スモール"
-
 msgid "Wide"
 msgstr "ワイド"
 
 msgid "Large"
 msgstr "ラージ"
+
+msgid "Extra Large"
+msgstr "特大"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "特大モードのボタン:"
+
+msgid "Shuffle Button"
+msgstr "シャッフルボタン"
+
+msgid "not working"
+msgstr "動作しません"
+
+msgid "Loop/Repeat Button"
+msgstr "ループ/リピートボタン"
+
+msgid "10-Second Seek Buttons"
+msgstr "10秒シークボタン"
+
+msgid "Volume Slider"
+msgstr "音量スライダー"
+
+msgid "Panel Options"
+msgstr "パネルオプション"
+
+msgid "Album Art:"
+msgstr "アルバムアート:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "パネルにアルバムアートを表示"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "ウィジェットがパネルに配置されている場合のみ利用可能です。"
+
+msgid "Visibility"
+msgstr "表示設定"
+
+msgid "Auto-hide:"
+msgstr "自動非表示:"
+
+msgid "Hide when locked player is not active"
+msgstr "ロックされたプレーヤーが非アクティブな時に隠す"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "動作には特定のプレーヤーのロックが必要です。"
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "\"%1\" が実行されていない時にパネルから消えます。"
+
+msgid "Hide in panel when nothing is playing"
+msgstr "何も再生されていない時にパネルで隠す"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "再生が一時停止または停止した時にウィジェットがパネルから消えます。"
+

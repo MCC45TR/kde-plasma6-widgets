@@ -185,7 +185,7 @@ Item {
 
     ComboBox {
         id: playerCombo
-        Kirigami.FormData.label: i18n("Default Media Player") + ":"
+        Kirigami.FormData.label: i18n("Default Media Player:")
         Layout.fillWidth: true
         Layout.minimumWidth: 350
         model: appListModel
@@ -276,7 +276,7 @@ Item {
     }
     CheckBox {
         id: showBadgeCheckbox
-        Kirigami.FormData.label: i18n("Show media player badge") + ":"
+        Kirigami.FormData.label: i18n("Show media player badge:")
         checked: cfg_showPlayerBadge
          onCheckedChanged: cfg_showPlayerBadge = checked
     }

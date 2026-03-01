@@ -16,8 +16,8 @@ msgstr "Հաջորդ երգը"
 msgid "General (Follow All)"
 msgstr "Ընդհանուր (Հետևել բոլորին)"
 
-msgid "Default Media Player"
-msgstr "Լռելյայն մեդիա նվագարկիչ"
+msgid "Default Media Player:"
+msgstr "Լռելյայն մեդիա նվագարկիչ:"
 
 msgid "Inactive players are not shown."
 msgstr "Ոչ ակտիվ նվագարկիչները չեն ցուցադրվում:"
@@ -40,8 +40,8 @@ msgstr "Բոլոր մեդիա աղբյուրները հետևվում են:"
 msgid "Only \"%1\" is tracked."
 msgstr "Հետևվում է միայն «%1»-ը:"
 
-msgid "Show media player badge"
-msgstr "Ցույց տալ նվագարկիչի նշանը"
+msgid "Show media player badge:"
+msgstr "Ցույց տալ նվագարկիչի նշանը:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "Քիչ (5px)"
 msgid "None (0px)"
 msgstr "Չկա (0px)"
 
+msgid "Corner Radius:"
+msgstr "Անկյունային շառավիղ:"
+
+msgid "Normal (20px)"
+msgstr "Սովորական (20px)"
+
+msgid "Less (10px)"
+msgstr "Քիչ (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Էլ ավելի քիչ (5px)"
+
+msgid "Square (0px)"
+msgstr "Քառակուսի (0px)"
+
 msgid "Background Opacity:"
 msgstr "Ֆոնի թափանցիկություն:"
+
+msgid "Controls:"
+msgstr "Կառավարման տարրեր:"
 
 msgid "Show Controls in Panel"
 msgstr "Ցույց տալ կառավարումը վահանակում"
@@ -92,8 +110,11 @@ msgstr "Կոճակի չափը:"
 msgid "Auto Size based on Panel Height"
 msgstr "Ավտոմատ չափ՝ կախված վահանակի բարձրությունից"
 
-msgid "Size (px):"
-msgstr "Չափը (px):"
+msgid "Button Size (px):"
+msgstr "Կոճակի չափը (px):"
+
+msgid "Text:"
+msgstr "Տեքստ:"
 
 msgid "Scroll Text if truncated"
 msgstr "Ոլորել տեքստը, եթե կրճատված է"
@@ -104,8 +125,8 @@ msgstr "Դինամիկ լայնություն (ավտոմատ ընդլայնու
 msgid "Max Width (px):"
 msgstr "Առավելագույն լայնություն (px):"
 
-msgid "Speed:"
-msgstr "Արագություն:"
+msgid "Scroll Speed:"
+msgstr "Ոլորման արագություն:"
 
 msgid "Fast"
 msgstr "Արագ"
@@ -116,7 +137,7 @@ msgstr "Միջին"
 msgid "Slow"
 msgstr "Դանդաղ"
 
-msgid "Displayed Information:"
+msgid "Displayed Info:"
 msgstr "Ցուցադրվող տեղեկատվություն:"
 
 msgid "Show Title"
@@ -128,6 +149,9 @@ msgstr "Ցույց տալ կատարողին"
 msgid "Font Size:"
 msgstr "Տառատեսակի չափը:"
 
+msgid "Font Size (px):"
+msgstr "Տառատեսակի չափը (px):"
+
 msgid "View Settings"
 msgstr "Տեսքի կարգավորումներ"
 
@@ -137,11 +161,63 @@ msgstr "Տեսքի ռեժիմ:"
 msgid "Automatic"
 msgstr "Ավտոմատ"
 
-msgid "Small"
-msgstr "Փոքր"
-
 msgid "Wide"
 msgstr "Լայն"
 
 msgid "Large"
 msgstr "Մեծ"
+
+msgid "Extra Large"
+msgstr "Շատ մեծ"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Շատ մեծ ռեժիմի կոճակներ:"
+
+msgid "Shuffle Button"
+msgstr "Պատահական նվագարկման կոճակ"
+
+msgid "not working"
+msgstr "չի աշխատում"
+
+msgid "Loop/Repeat Button"
+msgstr "Կրկնության կոճակ"
+
+msgid "10-Second Seek Buttons"
+msgstr "10 վայրկյանանոց որոնման կոճակներ"
+
+msgid "Volume Slider"
+msgstr "Ձայնի կարգավորիչ"
+
+msgid "Panel Options"
+msgstr "Վահանակի տարբերակներ"
+
+msgid "Album Art:"
+msgstr "Ալբոմի նկարը:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Ցույց տալ ալբոմի նկարը վահանակում"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Հասանելի է միայն վահանակում տեղադրվելիս:"
+
+msgid "Visibility"
+msgstr "Տեսանելիություն"
+
+msgid "Auto-hide:"
+msgstr "Ավտոմատ թաքցնել:"
+
+msgid "Hide when locked player is not active"
+msgstr "Թաքցնել, երբ նվագարկիչը ակտիվ չէ"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "Պահանջում է կառավարել կոնկրետ նվագարկիչ:"
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "Անհետանում է վահանակից, երբ «%1»-ը չի աշխատում:"
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Թաքցնել վահանակում, երբ ոչինչ չի նվագարկվում"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Վիդջեթը անհետանում է վահանակից դադարի ժամանակ:"
+

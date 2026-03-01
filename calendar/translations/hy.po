@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Այսօր"
+
+msgid "Appearance"
+msgstr "Արտաքին տեսք"
+
+msgid "Widget Margin:"
+msgstr "Վիդջեթի լուսանցք:"
+
+msgid "Normal (10px)"
+msgstr "Սովորական (10px)"
+
+msgid "Less (5px)"
+msgstr "Քիչ (5px)"
+
+msgid "None (0px)"
+msgstr "Չկա (0px)"
+
+msgid "Corner Radius:"
+msgstr "Անկյունների շառավիղ:"
+
+msgid "Normal"
+msgstr "Սովորական"
+
+msgid "Small"
+msgstr "Փոքր"
+
+msgid "Square"
+msgstr "Քառակուսի"
+
+msgid "Widget Size:"
+msgstr "Վիդջեթի չափը:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Մեծ չափերը օգնում են ընթեռնելիությանը 2K/4K էկրանների վրա:"
+
+msgid "Background Settings"
+msgstr "Ֆոնի կարգավորումներ"
+
+msgid "Background Opacity:"
+msgstr "Ֆոնի թափանցիկություն:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Առանց ֆոնի)"

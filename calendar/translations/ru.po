@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Сегодня"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "Widget Margin:"
+msgstr "Отступ виджета:"
+
+msgid "Normal (10px)"
+msgstr "Обычный (10px)"
+
+msgid "Less (5px)"
+msgstr "Меньше (5px)"
+
+msgid "None (0px)"
+msgstr "Нет (0px)"
+
+msgid "Corner Radius:"
+msgstr "Радиус углов:"
+
+msgid "Normal"
+msgstr "Обычный"
+
+msgid "Small"
+msgstr "Маленький"
+
+msgid "Square"
+msgstr "Квадратный"
+
+msgid "Widget Size:"
+msgstr "Размер виджета:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Большие размеры помогают читаемости на 2K/4K дисплеях."
+
+msgid "Background Settings"
+msgstr "Настройки фона"
+
+msgid "Background Opacity:"
+msgstr "Прозрачность фона:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Без фона)"

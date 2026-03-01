@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "今日"
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Widget Margin:"
+msgstr "ウィジェットの余白:"
+
+msgid "Normal (10px)"
+msgstr "通常 (10px)"
+
+msgid "Less (5px)"
+msgstr "少なめ (5px)"
+
+msgid "None (0px)"
+msgstr "なし (0px)"
+
+msgid "Corner Radius:"
+msgstr "角の半径:"
+
+msgid "Normal"
+msgstr "通常"
+
+msgid "Small"
+msgstr "小"
+
+msgid "Square"
+msgstr "四角"
+
+msgid "Widget Size:"
+msgstr "ウィジェットのサイズ:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "大きなサイズは2K/4Kディスプレイでの視認性を高めます。"
+
+msgid "Background Settings"
+msgstr "背景設定"
+
+msgid "Background Opacity:"
+msgstr "背景の不透明度:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (背景なし)"

@@ -6,3 +6,45 @@ msgstr ""
 
 msgid "Today"
 msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Widget Margin:"
+msgstr ""
+
+msgid "Normal (10px)"
+msgstr ""
+
+msgid "Less (5px)"
+msgstr ""
+
+msgid "None (0px)"
+msgstr ""
+
+msgid "Corner Radius:"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Square"
+msgstr ""
+
+msgid "Widget Size:"
+msgstr ""
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr ""
+
+msgid "Background Settings"
+msgstr ""
+
+msgid "Background Opacity:"
+msgstr ""
+
+msgid "0% (No Backgrounds)"
+msgstr ""

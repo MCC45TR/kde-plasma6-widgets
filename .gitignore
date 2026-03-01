@@ -5,6 +5,7 @@
 *.moc
 *.qmlc
 *.jsc
+*.py
 
 # CMake / build
 build/

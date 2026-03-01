@@ -3,49 +3,49 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ro\n"
+"Language: ko\n"
 
 msgid "Today"
-msgstr "Astăzi"
+msgstr "오늘"
 
 msgid "Appearance"
-msgstr "Aspect"
+msgstr "모양"
 
 msgid "Widget Margin:"
-msgstr "Marginea widgetului:"
+msgstr "위젯 여백:"
 
 msgid "Normal (10px)"
-msgstr "Normal (10px)"
+msgstr "보통 (10px)"
 
 msgid "Less (5px)"
-msgstr "Mai puțin (5px)"
+msgstr "적게 (5px)"
 
 msgid "None (0px)"
-msgstr "Nicio margine (0px)"
+msgstr "없음 (0px)"
 
 msgid "Corner Radius:"
-msgstr "Raza colțului:"
+msgstr "모서리 곡률:"
 
 msgid "Normal"
-msgstr "Normal"
+msgstr "보통"
 
 msgid "Small"
-msgstr "Mic"
+msgstr "작게"
 
 msgid "Square"
-msgstr "Pătrat"
+msgstr "사각형"
 
 msgid "Widget Size:"
-msgstr "Mărimea widgetului:"
+msgstr "위젯 크기:"
 
 msgid "Larger sizes help readability on 2K/4K displays."
-msgstr "Dimensiunile mai mari ajută la lizibilitate pe ecranele 2K/4K."
+msgstr "큰 크기는 2K/4K 디스플레이의 가독성에 도움이 됩니다."
 
 msgid "Background Settings"
-msgstr "Setări de fundal"
+msgstr "배경 설정"
 
 msgid "Background Opacity:"
-msgstr "Opacitatea fundalului:"
+msgstr "배경 투명도:"
 
 msgid "0% (No Backgrounds)"
-msgstr "0% (Fără fundal)"
+msgstr "0% (배경 없음)"

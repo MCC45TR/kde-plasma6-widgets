@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Σήμερα"
+
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+msgid "Widget Margin:"
+msgstr "Περιθώριο Widget:"
+
+msgid "Normal (10px)"
+msgstr "Κανονικό (10px)"
+
+msgid "Less (5px)"
+msgstr "Λιγότερο (5px)"
+
+msgid "None (0px)"
+msgstr "Κανένα (0px)"
+
+msgid "Corner Radius:"
+msgstr "Ακτίνα Γωνίας:"
+
+msgid "Normal"
+msgstr "Κανονική"
+
+msgid "Small"
+msgstr "Μικρή"
+
+msgid "Square"
+msgstr "Τετράγωνη"
+
+msgid "Widget Size:"
+msgstr "Μέγεθος Widget:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Τα μεγαλύτερα μεγέθη βοηθούν την αναγνωσιμότητα σε οθόνες 2K/4K."
+
+msgid "Background Settings"
+msgstr "Ρυθμίσεις Φόντου"
+
+msgid "Background Opacity:"
+msgstr "Διαφάνεια Φόντου:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Χωρίς Φόντο)"

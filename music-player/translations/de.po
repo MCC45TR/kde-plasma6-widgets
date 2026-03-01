@@ -16,8 +16,8 @@ msgstr "Nächster Titel"
 msgid "General (Follow All)"
 msgstr "Allgemein (Alle folgen)"
 
-msgid "Default Media Player"
-msgstr "Standard-Medienplayer"
+msgid "Default Media Player:"
+msgstr "Standard-Medienplayer:"
 
 msgid "Inactive players are not shown."
 msgstr "Inaktive Player werden nicht angezeigt."
@@ -40,8 +40,8 @@ msgstr "Alle Medienquellen werden verfolgt."
 msgid "Only \"%1\" is tracked."
 msgstr "Nur \"%1\" wird verfolgt."
 
-msgid "Show media player badge"
-msgstr "Medienplayer-Abzeichen anzeigen"
+msgid "Show media player badge:"
+msgstr "Medienplayer-Abzeichen anzeigen:"
 
 
 msgid "General"
@@ -65,8 +65,26 @@ msgstr "Weniger (5px)"
 msgid "None (0px)"
 msgstr "Keiner (0px)"
 
+msgid "Corner Radius:"
+msgstr "Eckenradius:"
+
+msgid "Normal (20px)"
+msgstr "Normal (20px)"
+
+msgid "Less (10px)"
+msgstr "Weniger (10px)"
+
+msgid "Even Less (5px)"
+msgstr "Noch weniger (5px)"
+
+msgid "Square (0px)"
+msgstr "Eckig (0px)"
+
 msgid "Background Opacity:"
 msgstr "Hintergrund-Deckkraft:"
+
+msgid "Controls:"
+msgstr "Steuerelemente:"
 
 msgid "Show Controls in Panel"
 msgstr "Steuerelemente im Panel anzeigen"
@@ -92,20 +110,23 @@ msgstr "Schaltflächengröße:"
 msgid "Auto Size based on Panel Height"
 msgstr "Automatische Größe basierend auf der Panelhöhe"
 
-msgid "Size (px):"
-msgstr "Größe (px):"
+msgid "Button Size (px):"
+msgstr "Schaltflächengröße (px):"
+
+msgid "Text:"
+msgstr "Text:"
 
 msgid "Scroll Text if truncated"
 msgstr "Text scrollen, wenn abgeschnitten"
 
 msgid "Dynamic Width (auto-expand to fit text)"
-msgstr "Dinamische Breite (automatisch erweitern, um Text anzupassen)"
+msgstr "Dynamische Breite (automatisch erweitern, um Text anzupassen)"
 
 msgid "Max Width (px):"
 msgstr "Maximale Breite (px):"
 
-msgid "Speed:"
-msgstr "Geschwindigkeit:"
+msgid "Scroll Speed:"
+msgstr "Scroll-Geschwindigkeit:"
 
 msgid "Fast"
 msgstr "Schnell"
@@ -116,8 +137,8 @@ msgstr "Mittel"
 msgid "Slow"
 msgstr "Langsam"
 
-msgid "Displayed Information:"
-msgstr "Angezeigte Informationen:"
+msgid "Displayed Info:"
+msgstr "Anzeigedaten:"
 
 msgid "Show Title"
 msgstr "Titel anzeigen"
@@ -128,6 +149,9 @@ msgstr "Künstler anzeigen"
 msgid "Font Size:"
 msgstr "Schriftgröße:"
 
+msgid "Font Size (px):"
+msgstr "Schriftgröße (px):"
+
 msgid "View Settings"
 msgstr "Ansichtseinstellungen"
 
@@ -137,11 +161,63 @@ msgstr "Ansichtsmodus:"
 msgid "Automatic"
 msgstr "Automatisch"
 
-msgid "Small"
-msgstr "Klein"
-
 msgid "Wide"
 msgstr "Breit"
 
 msgid "Large"
 msgstr "Groß"
+
+msgid "Extra Large"
+msgstr "Extra groß"
+
+msgid "Extra Large Mode Buttons:"
+msgstr "Schaltflächen für den extra großen Modus:"
+
+msgid "Shuffle Button"
+msgstr "Zufallswiedergabe"
+
+msgid "not working"
+msgstr "funktioniert nicht"
+
+msgid "Loop/Repeat Button"
+msgstr "Wiederholung"
+
+msgid "10-Second Seek Buttons"
+msgstr "10-Sekunden-Suchlauf"
+
+msgid "Volume Slider"
+msgstr "Lautstärkeregler"
+
+msgid "Panel Options"
+msgstr "Panel-Optionen"
+
+msgid "Album Art:"
+msgstr "Album-Cover:"
+
+msgid "Show album art thumbnail in panel"
+msgstr "Album-Cover im Panel anzeigen"
+
+msgid "Only available when widget is placed in a panel."
+msgstr "Nur verfügbar, wenn sich das Widget in einem Panel befindet."
+
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
+msgid "Auto-hide:"
+msgstr "Automatisches Ausblenden:"
+
+msgid "Hide when locked player is not active"
+msgstr "Ausblenden, wenn der gesperrte Player nicht aktiv ist"
+
+msgid "Requires a locked (specific) player to work."
+msgstr "Erfordert einen gesperrten (spezifischen) Player."
+
+msgid "Disappears from panel when \"%1\" is not running."
+msgstr "Verschwindet aus dem Panel, wenn \"%1\" nicht läuft."
+
+msgid "Hide in panel when nothing is playing"
+msgstr "Im Panel ausblenden, wenn nichts abgespielt wird"
+
+msgid "Widget disappears from panel when paused or stopped."
+msgstr "Das Widget verschwindet aus dem Panel, wenn die Wiedergabe pausiert oder gestoppt wurde."
+

@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "Hari Ini"
+
+msgid "Appearance"
+msgstr "Tampilan"
+
+msgid "Widget Margin:"
+msgstr "Margin Widget:"
+
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+msgid "Less (5px)"
+msgstr "Sedikit (5px)"
+
+msgid "None (0px)"
+msgstr "Tidak Ada (0px)"
+
+msgid "Corner Radius:"
+msgstr "Radius Sudut:"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Small"
+msgstr "Kecil"
+
+msgid "Square"
+msgstr "Kotak"
+
+msgid "Widget Size:"
+msgstr "Ukuran Widget:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "Ukuran yang lebih besar membantu keterbacaan pada layar 2K/4K."
+
+msgid "Background Settings"
+msgstr "Pengaturan Latar Belakang"
+
+msgid "Background Opacity:"
+msgstr "Opasitas Latar Belakang:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (Tanpa Latar Belakang)"

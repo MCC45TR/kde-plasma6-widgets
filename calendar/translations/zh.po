@@ -7,3 +7,45 @@ msgstr ""
 
 msgid "Today"
 msgstr "今天"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Widget Margin:"
+msgstr "小部件边距:"
+
+msgid "Normal (10px)"
+msgstr "正常 (10px)"
+
+msgid "Less (5px)"
+msgstr "减少 (5px)"
+
+msgid "None (0px)"
+msgstr "无 (0px)"
+
+msgid "Corner Radius:"
+msgstr "圆角半径:"
+
+msgid "Normal"
+msgstr "正常"
+
+msgid "Small"
+msgstr "小"
+
+msgid "Square"
+msgstr "方形"
+
+msgid "Widget Size:"
+msgstr "小部件尺寸:"
+
+msgid "Larger sizes help readability on 2K/4K displays."
+msgstr "较大的尺寸有助于在 2K/4K 显示器上实现可读性。"
+
+msgid "Background Settings"
+msgstr "背景设置"
+
+msgid "Background Opacity:"
+msgstr "背景不透明度:"
+
+msgid "0% (No Backgrounds)"
+msgstr "0% (无背景)"
