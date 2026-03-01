@@ -60,7 +60,7 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.rightMargin: 10 // Page 1 margin
-                anchors.topMargin: 0   // Compensate for icon padding
+                anchors.topMargin: 10   // Margin from top boundary
                 width: parent.width * 0.5
                 height: width
                 sourceSize.width: width * 2

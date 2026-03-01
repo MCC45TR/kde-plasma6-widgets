@@ -1,8 +1,6 @@
 .pragma library
 
-function mapOpenWeatherIcon(code, iconCode, isDarkTheme) {
-    var isNight = isDarkTheme || (iconCode && iconCode.endsWith("n"))
-
+function mapOpenWeatherIcon(code, iconCode, isNight) {
     if (code >= 200 && code < 300) {
         if (code <= 202) return "isolated_thunderstorms.svg"
         if (code <= 221) return isNight ? "isolated_scattered_thunderstorms_night.svg" : "isolated_scattered_thunderstorms_day.svg"
@@ -55,16 +53,14 @@ function mapOpenWeatherIcon(code, iconCode, isDarkTheme) {
     return isNight ? "clear_night.svg" : "clear_day.svg"
 }
 
-function mapWeatherAPIIcon(code, isDarkTheme) {
-    var suffix = isDarkTheme ? "_day.svg" : "_day.svg"
-
-    if (code === 1000) return "clear_day.svg"
-    if (code === 1003) return "partly_cloudy_day.svg"
+function mapWeatherAPIIcon(code, isNight) {
+    if (code === 1000) return isNight ? "clear_night.svg" : "clear_day.svg"
+    if (code === 1003) return isNight ? "partly_cloudy_night.svg" : "partly_cloudy_day.svg"
     if (code === 1006) return "cloudy.svg"
     if (code === 1009) return "cloudy.svg"
     if (code === 1030) return "haze_fog_dust_smoke.svg"
-    if (code === 1063) return "scattered_showers_day.svg"
-    if (code === 1066) return "scattered_snow_showers_day.svg"
+    if (code === 1063) return isNight ? "scattered_showers_night.svg" : "scattered_showers_day.svg"
+    if (code === 1066) return isNight ? "scattered_snow_showers_night.svg" : "scattered_snow_showers_day.svg"
     if (code === 1069) return "sleet_hail.svg"
     if (code === 1072) return "drizzle.svg"
     if (code === 1087) return "isolated_thunderstorms.svg"
@@ -72,12 +68,12 @@ function mapWeatherAPIIcon(code, isDarkTheme) {
     if (code === 1135 || code === 1147) return "haze_fog_dust_smoke.svg"
     if (code === 1150 || code === 1153) return "drizzle.svg"
     if (code === 1168 || code === 1171) return "drizzle.svg"
-    if (code === 1180 || code === 1183) return "scattered_showers_day.svg"
+    if (code === 1180 || code === 1183) return isNight ? "scattered_showers_night.svg" : "scattered_showers_day.svg"
     if (code === 1186 || code === 1189) return "showers_rain.svg"
     if (code === 1192 || code === 1195) return "heavy_rain.svg"
     if (code === 1198 || code === 1201) return "sleet_hail.svg"
     if (code === 1204 || code === 1207) return "sleet_hail.svg"
-    if (code === 1210 || code === 1213) return "scattered_snow_showers_day.svg"
+    if (code === 1210 || code === 1213) return isNight ? "scattered_snow_showers_night.svg" : "scattered_snow_showers_day.svg"
     if (code === 1216 || code === 1219) return "showers_snow.svg"
     if (code === 1222 || code === 1225) return "heavy_snow.svg"
     if (code === 1237) return "sleet_hail.svg"
@@ -86,15 +82,13 @@ function mapWeatherAPIIcon(code, isDarkTheme) {
     if (code === 1249 || code === 1252) return "sleet_hail.svg"
     if (code === 1255 || code === 1258) return "showers_snow.svg"
     if (code === 1261 || code === 1264) return "sleet_hail.svg"
-    if (code === 1273 || code === 1276) return "isolated_scattered_thunderstorms_day.svg"
+    if (code === 1273 || code === 1276) return isNight ? "isolated_scattered_thunderstorms_night.svg" : "isolated_scattered_thunderstorms_day.svg"
     if (code === 1279 || code === 1282) return "strong_thunderstorms.svg"
 
-    return "clear_day.svg"
+    return isNight ? "clear_night.svg" : "clear_day.svg"
 }
 
-function mapOpenMeteoIcon(code, isDarkTheme) {
-    var isNight = isDarkTheme
-
+function mapOpenMeteoIcon(code, isNight) {
     if (code === 0) return isNight ? "clear_night.svg" : "clear_day.svg"
     if (code === 1) return isNight ? "mostly_clear_night.svg" : "mostly_clear_day.svg"
     if (code === 2) return isNight ? "partly_cloudy_night.svg" : "partly_cloudy_day.svg"
@@ -102,11 +96,11 @@ function mapOpenMeteoIcon(code, isDarkTheme) {
     if (code === 45 || code === 48) return "haze_fog_dust_smoke.svg"
     if (code === 51 || code === 53 || code === 55) return "drizzle.svg"
     if (code === 56 || code === 57) return "drizzle.svg"
-    if (code === 61) return "scattered_showers_day.svg"
+    if (code === 61) return isNight ? "scattered_showers_night.svg" : "scattered_showers_day.svg"
     if (code === 63) return "showers_rain.svg"
     if (code === 65) return "heavy_rain.svg"
     if (code === 66 || code === 67) return "sleet_hail.svg"
-    if (code === 71) return "scattered_snow_showers_day.svg"
+    if (code === 71) return isNight ? "scattered_snow_showers_night.svg" : "scattered_snow_showers_day.svg"
     if (code === 73) return "showers_snow.svg"
     if (code === 75) return "heavy_snow.svg"
     if (code === 77) return "sleet_hail.svg"
@@ -115,16 +109,16 @@ function mapOpenMeteoIcon(code, isDarkTheme) {
     if (code === 95) return "isolated_thunderstorms.svg"
     if (code === 96 || code === 99) return "strong_thunderstorms.svg"
 
-    return "clear_day.svg"
+    return isNight ? "clear_night.svg" : "clear_day.svg"
 }
 
-function getWeatherIcon(code, iconCode, provider, isDarkTheme) {
+function getWeatherIcon(code, iconCode, provider, isNight) {
     if (provider === "weatherapi") {
-        return mapWeatherAPIIcon(code, isDarkTheme)
+        return mapWeatherAPIIcon(code, isNight)
     } else if (provider === "openmeteo") {
-        return mapOpenMeteoIcon(code, isDarkTheme)
+        return mapOpenMeteoIcon(code, isNight)
     } else {
-        return mapOpenWeatherIcon(code, iconCode, isDarkTheme)
+        return mapOpenWeatherIcon(code, iconCode, isNight)
     }
 }
 
@@ -189,6 +183,9 @@ function mapToSystem(filename) {
     if (filename === "partly_cloudy_day.svg") return "weather-few-clouds"
     if (filename === "partly_cloudy_night.svg") return "weather-few-clouds-night"
 
+    if (filename === "mostly_clear_day.svg") return "weather-few-clouds"
+    if (filename === "mostly_clear_night.svg") return "weather-few-clouds-night"
+
     if (filename === "mostly_cloudy_day.svg") return "weather-clouds"
     if (filename === "mostly_cloudy_night.svg") return "weather-clouds-night"
 
@@ -220,8 +217,8 @@ function mapToSystem(filename) {
     return "weather-clear"
 }
 
-function getIconPath(code, iconCode, provider, isDarkTheme, iconPack) {
-    var iconFile = getWeatherIcon(code, iconCode, provider, isDarkTheme)
+function getIconPath(code, iconCode, provider, isNight, iconPack) {
+    var iconFile = getWeatherIcon(code, iconCode, provider, isNight)
 
     if (!iconPack || iconPack === "default") {
         return "../images/" + iconFile

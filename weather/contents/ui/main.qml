@@ -197,10 +197,29 @@ PlasmoidItem {
         })
     }
 
+    function calculateIsNight(item) {
+        if (!item) return false
+
+        var referenceItem = (item.sunrise && item.sunset) ? item : root.currentWeather
+        
+        if (!referenceItem || !referenceItem.sunrise || !referenceItem.sunset) {
+            // Fallback to system time
+            var hour = item.timestamp ? new Date(item.timestamp).getHours() : new Date().getHours()
+            return hour < 6 || hour > 19
+        }
+        
+        var timeToCompare = item.timestamp ? new Date(item.timestamp).getTime() : Date.now()
+        var sunrise = new Date(referenceItem.sunrise).getTime()
+        var sunset = new Date(referenceItem.sunset).getTime()
+        
+        return timeToCompare < sunrise || timeToCompare > sunset
+    }
+
     function getWeatherIcon(item) {
         if (!item) return Qt.resolvedUrl("../images/clear_day.svg")
-        var isDark = ((Kirigami.Theme.backgroundColor.r + Kirigami.Theme.backgroundColor.g + Kirigami.Theme.backgroundColor.b) / 3) < 0.5
-        var iconPath = IconMapper.getIconPath(item.code, item.icon, weatherProvider, isDark, iconPack)
+        
+        var isNight = calculateIsNight(item)
+        var iconPath = IconMapper.getIconPath(item.code, item.icon, weatherProvider, isNight, iconPack)
 
         if (iconPath.indexOf("/") !== -1) {
             return Qt.resolvedUrl(iconPath)

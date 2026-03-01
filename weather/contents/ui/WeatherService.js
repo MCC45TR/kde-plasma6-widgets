@@ -33,8 +33,8 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
                         wind_deg: data.wind ? data.wind.deg : null,
                         wind_gust: data.wind && data.wind.gust ? Math.round(data.wind.gust * 3.6) : null,
                         clouds: data.clouds ? data.clouds.all : null,
-                        sunrise: data.sys ? data.sys.sunrise : null,
-                        sunset: data.sys ? data.sys.sunset : null,
+                        sunrise: data.sys && data.sys.sunrise ? data.sys.sunrise * 1000 : null,
+                        sunset: data.sys && data.sys.sunset ? data.sys.sunset * 1000 : null,
                         condition: normalizeCondition(data.weather[0].main),
                         description: data.weather[0].description,
                         icon: data.weather[0].icon,
@@ -76,6 +76,23 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
     xhr.send()
 }
 
+function parseAstroTime(dateStr, timeStr) {
+    if (!timeStr) return null
+    var parts = timeStr.match(/(\d+):(\d+) (AM|PM)/)
+    if (!parts) return null
+
+    var hours = parseInt(parts[1])
+    var minutes = parseInt(parts[2])
+    var ampm = parts[3]
+
+    if (ampm === "PM" && hours < 12) hours += 12
+    if (ampm === "AM" && hours === 12) hours = 0
+
+    var d = new Date(dateStr)
+    d.setHours(hours, minutes, 0, 0)
+    return d.getTime()
+}
+
 function fetchWeatherAPI(apiKey, location, callback) {
     var baseUrl = "https://api.weatherapi.com/v1/"
     var url = baseUrl + "forecast.json?key=" + apiKey + "&q=" + encodeURIComponent(location) + "&days=7&aqi=no&alerts=no"
@@ -87,11 +104,14 @@ function fetchWeatherAPI(apiKey, location, callback) {
             if (xhr.status === 200) {
                 try {
                     var data = JSON.parse(xhr.responseText)
+                    var today = data.forecast.forecastday[0]
                     var current = {
                         temp: Math.round(data.current.temp_c),
                         feels_like: Math.round(data.current.feelslike_c),
-                        temp_min: Math.round(data.forecast.forecastday[0].day.mintemp_c),
-                        temp_max: Math.round(data.forecast.forecastday[0].day.maxtemp_c),
+                        temp_min: Math.round(today.day.mintemp_c),
+                        temp_max: Math.round(today.day.maxtemp_c),
+                        sunrise: parseAstroTime(today.date, today.astro.sunrise),
+                        sunset: parseAstroTime(today.date, today.astro.sunset),
                         condition: normalizeCondition(data.current.condition.text),
                         description: data.current.condition.text,
                         icon: "",
@@ -354,6 +374,7 @@ function parseForecastOpenWeather(data) {
         if (hourly.length < 24) {
             hourly.push({
                 time: date.getHours() + ":00",
+                timestamp: date.getTime(),
                 temp: Math.round(item.main.temp),
                 code: item.weather[0].id,
                 condition: normalizeCondition(item.weather[0].main),
@@ -405,6 +426,7 @@ function parseForecastWeatherAPI(forecastDays) {
                 var hourDate = new Date(hour.time)
                 hourly.push({
                     time: hourDate.getHours() + ":00",
+                    timestamp: hourDate.getTime(),
                     temp: Math.round(hour.temp_c),
                     code: hour.condition.code,
                     condition: normalizeCondition(hour.condition.text),
@@ -455,6 +477,7 @@ function parseForecastOpenMeteo(data) {
             if (hourDate > new Date()) {
                 hourly.push({
                     time: hourDate.getHours() + ":00",
+                    timestamp: hourDate.getTime(),
                     temp: Math.round(data.hourly.temperature_2m[h]),
                     code: data.hourly.weather_code ? data.hourly.weather_code[h] : 0,
                     condition: getOpenMeteoCondition(data.hourly.weather_code ? data.hourly.weather_code[h] : 0),
@@ -508,31 +531,31 @@ function clearCache() {
 // Smart Clothing Suggestion based on weather conditions
 function getClothingSuggestion(current, units) {
     if (!current) return null
-    
+
     var temp = current.temp
     var code = current.code || 0
     var wind = current.wind_speed || 0
     var isMetric = (units !== "imperial")
-    
+
     // Convert to Celsius for logic if imperial
     var tempC = isMetric ? temp : Math.round((temp - 32) * 5 / 9)
     var windKmh = isMetric ? wind : Math.round(wind * 1.60934)
-    
+
     var suggestions = []
-    
+
     // Rain/Snow check (WMO codes)
     var rainCodes = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82]
     var snowCodes = [71, 73, 75, 77, 85, 86]
     var stormCodes = [95, 96, 99]
-    
+
     if (rainCodes.indexOf(code) >= 0 || stormCodes.indexOf(code) >= 0) {
         suggestions.push({ icon: "☔", text: "umbrella" })
     }
-    
+
     if (snowCodes.indexOf(code) >= 0) {
         suggestions.push({ icon: "🧤", text: "gloves" })
     }
-    
+
     // Temperature-based suggestions
     if (tempC <= 0) {
         suggestions.push({ icon: "🧥", text: "heavy coat" })
@@ -543,21 +566,21 @@ function getClothingSuggestion(current, units) {
     } else if (tempC >= 30) {
         suggestions.push({ icon: "🕶️", text: "sunglasses" })
     }
-    
+
     // Wind chill
     if (windKmh > 40 && tempC < 15) {
         suggestions.push({ icon: "💨", text: "windbreaker" })
     }
-    
+
     return suggestions.length > 0 ? suggestions : null
 }
 
 // AQI Description helper (for Open-Meteo AQI data)
 function getAQIDescription(aqi, pm25, pm10) {
     if (!aqi && aqi !== 0) return null
-    
+
     var level, color, advice
-    
+
     if (aqi <= 50) {
         level = "Good"
         color = "#4caf50"
@@ -583,7 +606,7 @@ function getAQIDescription(aqi, pm25, pm10) {
         color = "#880e4f"
         advice = "Stay indoors"
     }
-    
+
     return {
         aqi: aqi,
         level: level,
