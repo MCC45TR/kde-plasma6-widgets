@@ -71,6 +71,36 @@ PlasmoidItem {
     // ---------------------------------------------------------
     property var currentPlayer: null
     
+    // Get priority score for a player identity (lower = higher priority)
+    function _getPlayerPriorityScore(identity) {
+        if (!identity) return 999
+        var id = identity.toLowerCase()
+        for (var i = 0; i < PlayerData.playerPriority.length; i++) {
+            if (id.indexOf(PlayerData.playerPriority[i]) !== -1) {
+                return i
+            }
+        }
+        return 500 // Unknown player
+    }
+    
+    // Choose the best player from a list based on PlayerData priority
+    function _bestByPriority(candidates) {
+        if (candidates.length === 0) return null
+        if (candidates.length === 1) return candidates[0]
+        
+        var best = candidates[0]
+        var bestScore = _getPlayerPriorityScore(best.identity)
+        
+        for (var i = 1; i < candidates.length; i++) {
+            var score = _getPlayerPriorityScore(candidates[i].identity)
+            if (score < bestScore) {
+                bestScore = score
+                best = candidates[i]
+            }
+        }
+        return best
+    }
+    
     function findSmartPlayer() {
         // If a specific player is pinned, look for it in the main model
         if (preferredPlayer !== "") {
@@ -89,32 +119,31 @@ PlasmoidItem {
         if (!probeModel) return mpris2Model.currentPlayer
         
         var count = probeModel.rowCount()
-        var pausedCandidate = null
-        var anyCandidate = null
+        var playingCandidates = []
+        var pausedCandidates = []
+        var anyCandidates = []
         
         for (var i = 0; i < count; i++) {
             probeModel.currentIndex = i
             var player = probeModel.currentPlayer
             
             if (player) {
-                // Priority 1: Playing
                 if (player.playbackStatus === Mpris.PlaybackStatus.Playing) {
-                    return player
-                }
-                // Priority 2: Paused
-                if (player.playbackStatus === Mpris.PlaybackStatus.Paused) {
-                    if (!pausedCandidate || (mpris2Model.currentPlayer && player.identity === mpris2Model.currentPlayer.identity)) {
-                        pausedCandidate = player
-                    }
-                }
-                // Priority 3: Any
-                if (!anyCandidate) {
-                    anyCandidate = player
+                    playingCandidates.push(player)
+                } else if (player.playbackStatus === Mpris.PlaybackStatus.Paused) {
+                    pausedCandidates.push(player)
+                } else {
+                    anyCandidates.push(player)
                 }
             }
         }
         
-        return pausedCandidate || anyCandidate || mpris2Model.currentPlayer
+        // Priority: Playing > Paused > Any, with PlayerData ranking within each group
+        if (playingCandidates.length > 0) return _bestByPriority(playingCandidates)
+        if (pausedCandidates.length > 0) return _bestByPriority(pausedCandidates)
+        if (anyCandidates.length > 0) return _bestByPriority(anyCandidates)
+        
+        return mpris2Model.currentPlayer
     }
     
     function updateCurrentPlayer() {
@@ -129,9 +158,9 @@ PlasmoidItem {
         function onModelReset() { root.updateCurrentPlayer() }
     }
     
-    // Smart player switch timer - only active in General mode
+    // Smart player switch timer - adaptive intervals
     Timer {
-        interval: 1500 // Slightly longer interval for better performance
+        interval: root.isPlaying ? 2000 : 5000 // Faster when playing, slower when idle
         running: preferredPlayer === "" && root.visible
         repeat: true
         onTriggered: {
@@ -207,25 +236,46 @@ PlasmoidItem {
     
     property real currentPosition: 0
     
-    // Sync shuffle/loop from player
+    // Sync shuffle/loop/art from player
     Connections {
         target: currentPlayer
         enabled: !!currentPlayer
         
         function onShuffleChanged() {
-            root.shuffle = currentPlayer.shuffle
+            var val = currentPlayer.shuffle
+            console.log("[MPRIS] Shuffle changed from player:", val, typeof val)
+            root.shuffle = val === true || val === 1
         }
         
         function onLoopStatusChanged() {
-            root.loopStatus = currentPlayer.loopStatus
+            var val = currentPlayer.loopStatus
+            console.log("[MPRIS] LoopStatus changed from player:", val, typeof val)
+            root.loopStatus = Number(val) || 0
+        }
+        
+        // Immediately refresh art when player's art URL changes
+        function onArtUrlChanged() {
+            artFetcher.mprisArtUrl = currentPlayer.artUrl || ""
+            artFetcher.refresh()
+        }
+        
+        // Refresh art on track change
+        function onTrackChanged() {
+            artFetcher.refresh()
         }
     }
     
     // Initialize shuffle/loop/position when player changes
     onCurrentPlayerChanged: {
+        // Clear stale album art from previous player immediately
+        artFetcher.clearAndRefresh()
+        
         if (currentPlayer) {
-            root.shuffle = currentPlayer.shuffle || false
-            root.loopStatus = currentPlayer.loopStatus || 0
+            var sh = currentPlayer.shuffle
+            var ls = currentPlayer.loopStatus
+            console.log("[MPRIS] Player changed. Shuffle:", sh, typeof sh, "| LoopStatus:", ls, typeof ls)
+            root.shuffle = sh === true || sh === 1
+            root.loopStatus = Number(ls) || 0
             root.currentPosition = currentPlayer.position || 0
         } else {
             root.shuffle = false
@@ -239,8 +289,9 @@ PlasmoidItem {
         target: currentPlayer
         enabled: !!currentPlayer
         function onPositionChanged() {
+            // Sync from player on significant difference (>1s)
             var diff = Math.abs(root.currentPosition - currentPlayer.position)
-            if (diff > 2000000) root.currentPosition = currentPlayer.position
+            if (diff > 1000000) root.currentPosition = currentPlayer.position
         }
     }
     
@@ -267,37 +318,41 @@ PlasmoidItem {
         if (currentPlayer) currentPlayer.Next()
     }
     
+    // Absolute seek to a position (microseconds) — used by seek bar drag
     function seek(micros) {
-        if (currentPlayer) {
-            currentPlayer.Seek(micros - root.currentPosition)
-            root.currentPosition = micros
-        }
+        if (!currentPlayer || !currentPlayer.canSeek) return
+        
+        var targetPos = Math.max(0, Math.min(root.length, micros))
+        
+        // Update UI immediately
+        root.currentPosition = targetPos
+        
+        // MPRIS: Use Seek(offset) — this is the standard MPRIS method
+        // Seek takes a RELATIVE offset in microseconds
+        var offset = targetPos - (currentPlayer.position || 0)
+        currentPlayer.Seek(offset)
     }
     
+    // Relative seek backward by 10 seconds
     function seekBack10() {
-        if (currentPlayer && currentPlayer.canSeek) {
-            var newPos = Math.max(0, root.currentPosition - 10000000) // 10 seconds in microseconds
-            // Use SetPosition for absolute seeking
-            if (typeof currentPlayer.SetPosition === "function") {
-                currentPlayer.SetPosition(currentPlayer.trackId, newPos)
-            } else {
-                currentPlayer.Seek(-10000000) // Fallback to relative seek
-            }
-            root.currentPosition = newPos
-        }
+        if (!currentPlayer || !currentPlayer.canSeek) return
+        
+        var newPos = Math.max(0, root.currentPosition - 10000000)
+        root.currentPosition = newPos
+        
+        // MPRIS Seek() takes relative offset in microseconds
+        currentPlayer.Seek(-10000000)
     }
     
+    // Relative seek forward by 10 seconds
     function seekForward10() {
-        if (currentPlayer && currentPlayer.canSeek) {
-            var newPos = Math.min(root.length, root.currentPosition + 10000000) // 10 seconds in microseconds
-            // Use SetPosition for absolute seeking
-            if (typeof currentPlayer.SetPosition === "function") {
-                currentPlayer.SetPosition(currentPlayer.trackId, newPos)
-            } else {
-                currentPlayer.Seek(10000000) // Fallback to relative seek
-            }
-            root.currentPosition = newPos
-        }
+        if (!currentPlayer || !currentPlayer.canSeek) return
+        
+        var newPos = Math.min(root.length, root.currentPosition + 10000000)
+        root.currentPosition = newPos
+        
+        // MPRIS Seek() takes relative offset in microseconds
+        currentPlayer.Seek(10000000)
     }
     
     function launchApp(appId) {
@@ -315,38 +370,32 @@ PlasmoidItem {
     }
     
     function toggleShuffle() {
-        if (currentPlayer && currentPlayer.canControl) {
-            // Toggle local state immediately for responsive UI
-            var newShuffle = !root.shuffle
-            root.shuffle = newShuffle
-            
-            // Send to player
-            currentPlayer.shuffle = newShuffle
-            console.log("Shuffle:", !newShuffle, "->", newShuffle)
-        }
+        if (!currentPlayer || !currentPlayer.canControl) return
+        
+        var newShuffle = !root.shuffle
+        console.log("[MPRIS] Toggle shuffle:", root.shuffle, "->", newShuffle)
+        root.shuffle = newShuffle
+        currentPlayer.shuffle = newShuffle
     }
     
     function cycleLoopStatus() {
-        if (currentPlayer && currentPlayer.canControl) {
-            var current = root.loopStatus
-            var newStatus
-            
-            // Simple cycle: 0 -> 1 -> 2 -> 0
-            if (current === 0) {
-                newStatus = 1  // Track
-            } else if (current === 1) {
-                newStatus = 2  // Playlist
-            } else {
-                newStatus = 0  // None
-            }
-            
-            // Update local state immediately for responsive UI
-            root.loopStatus = newStatus
-            
-            // Send to player
-            currentPlayer.loopStatus = newStatus
-            console.log("Loop:", current, "->", newStatus)
+        if (!currentPlayer || !currentPlayer.canControl) return
+        
+        var current = root.loopStatus
+        var newStatus
+        
+        // Cycle: None(0) -> Track(1) -> Playlist(2) -> None(0)
+        if (current === 0) {
+            newStatus = 1
+        } else if (current === 1) {
+            newStatus = 2
+        } else {
+            newStatus = 0
         }
+        
+        console.log("[MPRIS] Cycle loop:", current, "->", newStatus)
+        root.loopStatus = newStatus
+        currentPlayer.loopStatus = newStatus
     }
 
     // ---------------------------------------------------------
