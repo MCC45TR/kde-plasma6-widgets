@@ -37,123 +37,94 @@ Item {
         return bestIdx
     }
 
-    implicitHeight: layout.implicitHeight
+    implicitHeight: mainLayout.implicitHeight
 
     ColumnLayout {
-        id: layout
-        anchors.left: parent.left
-        anchors.right: parent.right
-        spacing: 15
+        id: mainLayout
+        anchors.fill: parent
+        spacing: Kirigami.Units.largeSpacing
 
-        GroupBox {
-            title: i18n("Appearance")
+        Kirigami.FormLayout {
             Layout.fillWidth: true
 
-            ColumnLayout {
-                width: parent.width
-                spacing: 10
+            ComboBox {
+                id: edgeMarginCombo
+                Kirigami.FormData.label: i18n("Widget Margin:")
+                Layout.fillWidth: true
+                model: [i18n("Normal (10px)"), i18n("Less (5px)"), i18n("None (0px)")]
 
-                Label {
-                    text: i18n("Widget Margin:")
-                    font.bold: true
+                onCurrentIndexChanged: {
+                    if (currentIndex === 0) configAppearance.cfg_edgeMargin = 10
+                    else if (currentIndex === 1) configAppearance.cfg_edgeMargin = 5
+                    else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
                 }
+            }
 
-                ComboBox {
-                    id: edgeMarginCombo
-                    Layout.fillWidth: true
-                    model: [i18n("Normal (10px)"), i18n("Less (5px)"), i18n("None (0px)")]
+            ComboBox {
+                id: contentPaddingCombo
+                Kirigami.FormData.label: i18n("Content Padding:")
+                Layout.fillWidth: true
+                model: [i18n("None (0px)"), i18n("Less (5px)"), i18n("Medium (10px)"), i18n("More (15px)"), i18n("Most (20px)")]
 
-                    onCurrentIndexChanged: {
-                        if (currentIndex === 0) configAppearance.cfg_edgeMargin = 10
-                        else if (currentIndex === 1) configAppearance.cfg_edgeMargin = 5
-                        else if (currentIndex === 2) configAppearance.cfg_edgeMargin = 0
-                    }
+                property var paddingValues: [0, 5, 10, 15, 20]
+
+                onCurrentIndexChanged: {
+                    configAppearance.cfg_contentPadding = paddingValues[currentIndex]
                 }
+            }
 
-                Label {
-                    text: i18n("Content Padding:")
-                    font.bold: true
+            ComboBox {
+                id: cornerRadiusCombo
+                Kirigami.FormData.label: i18n("Corner Radius:")
+                Layout.fillWidth: true
+                model: [i18n("Normal"), i18n("Small"), i18n("Square")]
+
+                onCurrentIndexChanged: {
+                    if (currentIndex === 0) configAppearance.cfg_cornerRadius = "normal"
+                    else if (currentIndex === 1) configAppearance.cfg_cornerRadius = "small"
+                    else if (currentIndex === 2) configAppearance.cfg_cornerRadius = "square"
                 }
+            }
 
-                ComboBox {
-                    id: contentPaddingCombo
-                    Layout.fillWidth: true
-                    model: [i18n("None (0px)"), i18n("Less (5px)"), i18n("Medium (10px)"), i18n("More (15px)"), i18n("Most (20px)")]
+            ComboBox {
+                id: widgetScaleCombo
+                Kirigami.FormData.label: i18n("Widget Size:")
+                Layout.fillWidth: true
+                model: ["1.0x", "1.25x", "1.5x", "1.75x", "2.0x", "2.25x", "2.5x"]
 
-                    property var paddingValues: [0, 5, 10, 15, 20]
+                property var scaleValues: [1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5]
 
-                    onCurrentIndexChanged: {
-                        configAppearance.cfg_contentPadding = paddingValues[currentIndex]
-                    }
+                onCurrentIndexChanged: {
+                    configAppearance.cfg_widgetScale = scaleValues[currentIndex]
                 }
+            }
 
-                Label {
-                    text: i18n("Corner Radius:")
-                    font.bold: true
-                }
-
-                ComboBox {
-                    id: cornerRadiusCombo
-                    Layout.fillWidth: true
-                    model: [i18n("Normal"), i18n("Small"), i18n("Square")]
-
-                    onCurrentIndexChanged: {
-                        if (currentIndex === 0) configAppearance.cfg_cornerRadius = "normal"
-                        else if (currentIndex === 1) configAppearance.cfg_cornerRadius = "small"
-                        else if (currentIndex === 2) configAppearance.cfg_cornerRadius = "square"
-                    }
-                }
-
-                Label {
-                    text: i18n("Widget Size:")
-                    font.bold: true
-                }
-
-                ComboBox {
-                    id: widgetScaleCombo
-                    Layout.fillWidth: true
-                    model: ["1.0x", "1.25x", "1.5x", "1.75x", "2.0x", "2.25x", "2.5x"]
-
-                    property var scaleValues: [1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5]
-
-                    onCurrentIndexChanged: {
-                        configAppearance.cfg_widgetScale = scaleValues[currentIndex]
-                    }
-                }
-
-                Label {
-                    text: i18n("Larger sizes help readability on 2K/4K displays.")
-                    font.pixelSize: 10
-                    opacity: 0.7
-                    wrapMode: Text.WordWrap
-                    Layout.fillWidth: true
-                }
+            Label {
+                Layout.fillWidth: true
+                text: i18n("Larger sizes help readability on 2K/4K displays.")
+                font.pixelSize: Kirigami.Units.gridUnit
+                opacity: 0.7
+                wrapMode: Text.WordWrap
             }
         }
 
-        GroupBox {
-            title: i18n("Background Settings")
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
+
+        Kirigami.FormLayout {
             Layout.fillWidth: true
 
-            ColumnLayout {
-                width: parent.width
-                spacing: 10
+            ComboBox {
+                id: opacityCombo
+                Kirigami.FormData.label: i18n("Background Opacity:")
+                Layout.fillWidth: true
+                model: ["100%", "75%", "50%", "25%", "10%", "5%", "0%", i18n("0% (No Backgrounds)")]
 
-                Label {
-                    text: i18n("Background Opacity:")
-                    font.bold: true
-                }
+                property var opacityValues: [1.0, 0.75, 0.5, 0.25, 0.1, 0.05, 0.0, -1.0]
 
-                ComboBox {
-                    id: opacityCombo
-                    Layout.fillWidth: true
-                    model: ["100%", "75%", "50%", "25%", "10%", "5%", i18n("0% (No Backgrounds)")]
-
-                    property var opacityValues: [1.0, 0.75, 0.5, 0.25, 0.1, 0.05, -1.0]
-
-                    onCurrentIndexChanged: {
-                        configAppearance.cfg_backgroundOpacity = opacityValues[currentIndex]
-                    }
+                onCurrentIndexChanged: {
+                    configAppearance.cfg_backgroundOpacity = opacityValues[currentIndex]
                 }
             }
         }
@@ -168,9 +139,9 @@ Item {
         else edgeMarginCombo.currentIndex = 0
 
         // Initialize Content Padding
-        var padding = cfg_contentPadding
+        var padding = (cfg_contentPadding !== undefined) ? cfg_contentPadding : 10
         var paddingIdx = contentPaddingCombo.paddingValues.indexOf(padding)
-        contentPaddingCombo.currentIndex = paddingIdx >= 0 ? paddingIdx : 2 // default: Orta (10px)
+        contentPaddingCombo.currentIndex = paddingIdx >= 0 ? paddingIdx : 2
 
         // Initialize Corner Radius
         var radiusMode = cfg_cornerRadius || "normal"
