@@ -1,22 +1,30 @@
 # MSI-EC platform device attributes
-# Explicitly granting 0660 (rw-rw----) to 'msi-ec' group for CONTROL nodes
-SUBSYSTEM=="platform", DRIVERS=="msi-ec", \
-  ATTR{shift_mode}="0660", ATTR{fan_mode}="0660", ATTR{cooler_boost}="0660", \
-  ATTR{webcam}="0660", ATTR{webcam_block}="0660", ATTR{super_battery}="0660", \
-  ATTR{fn_key}="0660", ATTR{win_key}="0660", ATTR{usb_power}="0660", \
-  GROUP="msi-ec"
+# Grant rw-rw---- (0660) to 'msi-ec' group for CONTROL nodes
+# NOTE: ATTR{x}="value" writes string to sysfs, it does NOT chmod.
+#       For sysfs permission changes, RUN+= with chmod/chgrp is required.
 
-# CPU/GPU basic fan speed control
 SUBSYSTEM=="platform", DRIVERS=="msi-ec", \
-  ATTR{cpu/basic_fan_speed}="0660", ATTR{gpu/basic_fan_speed}="0660", \
-  GROUP="msi-ec"
+  RUN+="/bin/sh -c '\
+    cd /sys/devices/platform/msi-ec && \
+    for f in shift_mode fan_mode cooler_boost webcam webcam_block super_battery fn_key win_key usb_power; do \
+      [ -e \"$f\" ] && chgrp msi-ec \"$f\" && chmod 0660 \"$f\"; \
+    done; \
+    for f in cpu/basic_fan_speed gpu/basic_fan_speed; do \
+      [ -e \"$f\" ] && chgrp msi-ec \"$f\" && chmod 0660 \"$f\"; \
+    done \
+  '"
 
 # Battery threshold control attributes
 SUBSYSTEM=="power_supply", KERNEL=="BAT*", \
-  ATTR{charge_control_end_threshold}="0660", ATTR{charge_control_start_threshold}="0660", \
-  GROUP="msi-ec"
+  RUN+="/bin/sh -c '\
+    cd /sys%p && \
+    for f in charge_control_end_threshold charge_control_start_threshold; do \
+      [ -e \"$f\" ] && chgrp msi-ec \"$f\" && chmod 0660 \"$f\"; \
+    done \
+  '"
 
 # Keyboard backlight brightness
 SUBSYSTEM=="leds", KERNEL=="msiacpi::kbd_backlight", \
-  ATTR{brightness}="0660", \
-  GROUP="msi-ec"
+  RUN+="/bin/sh -c '\
+    [ -e /sys%p/brightness ] && chgrp msi-ec /sys%p/brightness && chmod 0660 /sys%p/brightness \
+  '"

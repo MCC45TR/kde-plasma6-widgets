@@ -95,6 +95,17 @@ Item {
         }
     }
 
+    // Fast timer — metrics only (temps + fan speeds): 1 second
+    Timer {
+        id: metricsPollTimer
+        interval: 1000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: refreshMetrics()
+    }
+
+    // Slow timer — everything else: 2 seconds
     Timer {
         id: pollTimer
         interval: 2000
@@ -123,8 +134,8 @@ Item {
         _permChecksCompleted = 0
         // Check 1: Does group 'msi-ec' exist?
         execSource.connectSource("getent group msi-ec >/dev/null 2>&1 && echo '1' || echo '0':::permGroupExists")
-        // Check 2: Is current user in 'msi-ec' group? (active session groups)
-        execSource.connectSource("id -nG 2>/dev/null | grep -qw msi-ec && echo '1' || echo '0':::permUserInGroup")
+        // Check 2: Is current user in 'msi-ec' group? (active session OR persistent /etc/group)
+        execSource.connectSource("(id -nG 2>/dev/null | grep -qw msi-ec || grep -q '^msi-ec:.*\\b'\"$(id -un)\"'\\b' /etc/group 2>/dev/null) && echo '1' || echo '0':::permUserInGroup")
         // Check 3: Are udev rules installed?
         execSource.connectSource("test -f " + rulesPath + " && echo '1' || echo '0':::permRulesInstalled")
         // Check 4: Can we actually write to sysfs?
@@ -146,8 +157,10 @@ Item {
             if (_permSysfsWritable) {
                 // Everything works — write access confirmed
                 permissionStatus = "ready"
-            } else if (_permGroupExists && _permRulesInstalled && !_permUserInGroup) {
-                // Setup was done but user hasn't re-logged in
+            } else if (_permGroupExists && _permRulesInstalled) {
+                // Setup was done, but sysfs isn't writable yet:
+                //   - User not in active session group (needs relogin)
+                //   - OR udev rules haven't been re-triggered yet
                 permissionStatus = "needs_relogin"
             } else {
                 // Something is missing — need to run setup
@@ -195,17 +208,26 @@ Item {
     //  POLLING
     // ═══════════════════════════════════════════════
 
+    // Fast metrics refresh (1 second) — temps + fan speeds only
+    function refreshMetrics() {
+        if (!isAvailable) return
+
+        if (hasCpuTemp) _read(basePath + "/cpu/realtime_temperature", "cpuTemp")
+        if (hasGpuTemp) _read(basePath + "/gpu/realtime_temperature", "gpuTemp")
+        if (hasCpuFan) _read(basePath + "/cpu/realtime_fan_speed", "cpuFan")
+        if (hasGpuFan) _read(basePath + "/gpu/realtime_fan_speed", "gpuFan")
+    }
+
     function refresh() {
         if (!isAvailable) {
             checkAvailability()
             return
         }
 
-        // Metrics (read-only, always works)
-        if (hasCpuTemp) _read(basePath + "/cpu/realtime_temperature", "cpuTemp")
-        if (hasGpuTemp) _read(basePath + "/gpu/realtime_temperature", "gpuTemp")
-        if (hasCpuFan) _read(basePath + "/cpu/realtime_fan_speed", "cpuFan")
-        if (hasGpuFan) _read(basePath + "/gpu/realtime_fan_speed", "gpuFan")
+        // Re-check permissions whenever not yet ready
+        if (permissionStatus !== "ready") {
+            checkPermissions()
+        }
 
         // Modes
         if (hasShiftMode) _read(basePath + "/shift_mode", "shiftMode")

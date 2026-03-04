@@ -284,10 +284,10 @@ This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LIC
 | **Weather** | ✅ |
 | **App Menu** | 🚧 |
 | **Browser Search** | 🚧 |
-| **Plasma Advanced Reboot** | 🚧 |
+| **Plasma Advanced Reboot** | ✅ |
 | **Alarms** | ❌ |
 | **AUR Updates** | ❌ |
-| **Battery** | ❌ |
+| **Battery** | 🚧 |
 | **Control Center** | ❌ |
 | **Digital Clock** | ❌ |
 | **Events** | ❌ |
@@ -297,7 +297,8 @@ This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LIC
 | **Spotify** | ❌ |
 | **System Monitor** | ❌ |
 | **World Clock** | ❌ |
-| **MSI Control** | ✅ |
+| **MSI Control** | 🚧 |
+| **AFAD-Earthquake** | 🚧 |
 
 ---
 

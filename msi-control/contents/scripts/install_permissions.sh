@@ -8,9 +8,36 @@ RULES_FILE="99-msi-ec.rules"
 TARGET_RULES="/etc/udev/rules.d/$RULES_FILE"
 
 # Detect the actual user (not root, since pkexec runs as root)
-REAL_USER="${PKEXEC_UID:+$(id -nu "$PKEXEC_UID")}"
-if [ -z "$REAL_USER" ]; then
-    REAL_USER="${SUDO_USER:-$USER}"
+REAL_USER=""
+
+# Method 1: PKEXEC_UID (set by pkexec)
+if [ -n "$PKEXEC_UID" ] && [ "$PKEXEC_UID" != "0" ]; then
+    REAL_USER=$(id -nu "$PKEXEC_UID" 2>/dev/null)
+fi
+
+# Method 2: SUDO_USER
+if [ -z "$REAL_USER" ] || [ "$REAL_USER" = "root" ]; then
+    REAL_USER="${SUDO_USER:-}"
+fi
+
+# Method 3: loginctl — find the graphical session owner
+if [ -z "$REAL_USER" ] || [ "$REAL_USER" = "root" ]; then
+    REAL_USER=$(loginctl list-sessions --no-legend 2>/dev/null \
+        | awk '$NF ~ /seat/ {print $3}' \
+        | grep -v root \
+        | head -1)
+fi
+
+# Method 4: logname
+if [ -z "$REAL_USER" ] || [ "$REAL_USER" = "root" ]; then
+    REAL_USER=$(logname 2>/dev/null)
+fi
+
+# Safety: refuse root
+if [ -z "$REAL_USER" ] || [ "$REAL_USER" = "root" ]; then
+    echo "ERROR: Could not detect the real user. Please run manually:"
+    echo "  sudo usermod -aG msi-ec YOUR_USERNAME"
+    exit 1
 fi
 
 echo "=== MSI Control Center: Secure Policy Setup ==="
