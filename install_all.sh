@@ -17,7 +17,7 @@ available_widgets=(
 "notes"
 "control-center"
 "system-monitor"
-"plasma-advancedreboot"
+"plasma-mselectivereboot"
 "minimal-analog-clock"
 "file-search"
 "browser-search"
