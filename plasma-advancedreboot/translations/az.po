@@ -1,90 +1,185 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-07 04:19+0300\n"
+"PO-Revision-Date: 2026-03-07 04:06+0300\n"
+"Last-Translator: Antigravity\n"
+"Language-Team: Azerbaijani\n"
+"Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POCreator\n"
 
+#: contents/ui/BootDataManager.qml:43
 msgid "BIOS / Firmware"
-msgstr "BIOS / Mikroproqram"
+msgstr "BIOS / Proqram təminatı"
 
-msgid "UEFI Settings"
-msgstr "UEFI Tənzimləmələri"
+#: contents/ui/BootDataManager.qml:66
+msgid "System is not booted with systemd-boot or EFI is not active."
+msgstr "Sistem systemd-boot ilə açılmayıb və ya EFI aktiv deyil."
 
+#: contents/ui/BootDataManager.qml:68
+msgid "Authorization failed or canceled."
+msgstr "Səlahiyyət uğursuz oldu və ya ləğv edildi."
+
+#: contents/ui/BootDataManager.qml:70
+msgid "Systemd-boot error: "
+msgstr "Systemd-boot xətası: "
+
+#: contents/ui/BootDataManager.qml:73
+msgid "Systemd-boot failed with exit code: "
+msgstr "Systemd-boot çıxış kodu ilə uğursuz oldu: "
+
+#: contents/ui/BootDataManager.qml:119
+msgid "Windows 11"
+msgstr "Windows 11"
+
+#: contents/ui/BootDataManager.qml:120
+msgid "Windows 10"
+msgstr "Windows 10"
+
+#: contents/ui/BootDataManager.qml:121
+msgid "Windows 8.1"
+msgstr "Windows 8.1"
+
+#: contents/ui/BootDataManager.qml:122
+msgid "Windows 8"
+msgstr "Windows 8"
+
+#: contents/ui/BootDataManager.qml:123
+msgid "Windows 7"
+msgstr "Windows 7"
+
+#: contents/ui/LargeView.qml:10
+msgid "Large Mode (Coming Soon)"
+msgstr "Böyük Rejim (Tezliklə)"
+
+#: contents/ui/main.qml:25
 msgid "Update Boot Entries"
-msgstr "Önyükləmə Girdilərini Yenilə"
+msgstr "Yükləmə Girdilərini Yenilə"
 
+#: contents/ui/main.qml:127
 msgid "No boot entries found"
-msgstr "Önyükləmə girdisi tapılmadı"
+msgstr "Yükləmə girdisi tapılmadı"
 
+#: contents/ui/main.qml:137
 msgid "Authorize & Refresh"
-msgstr "İcazə ver və Yenilə"
+msgstr "Səlahiyyət Ver və Yenilə"
 
+#: contents/ui/RegularListView.qml:215
+#, java-printf-format
 msgid "Rebooting in %1s..."
 msgstr "%1s ərzində yenidən başladılır..."
 
+#: contents/ui/RegularListView.qml:216
+msgid "Click again to confirm"
+msgstr "Təsdiqləmək üçün yenidən klikləyin"
+
+#: contents/ui/RegularListView.qml:217 contents/ui/SmallView.qml:195
+msgid "UEFI Settings"
+msgstr "UEFI Ayarları"
+
+#: contents/ui/SmallView.qml:179
+msgid "Rebooting in %1..."
+msgstr "%1 ərzində yenidən başladılır..."
+
+#: contents/ui/SmallView.qml:180
 msgid "Press again to reboot"
-msgstr "Yenidən başlatmaq üçün təkrar basın"
+msgstr "Yenidən başlatmaq üçün yenidən basın"
 
+#: contents/ui/SmallView.qml:194
 msgid "Click again to cancel"
-msgstr "Ləğv etmək üçün təkrar klikləyin"
+msgstr "Ləğv etmək üçün yenidən klikləyin"
 
+#: contents/ui/WideView.qml:10
+msgid "Wide Mode (Coming Soon)"
+msgstr "Geniş Rejim (Tezliklə)"
+
+#: contents/ui/config/ConfigAppearance.qml:10
 msgid "Appearance"
 msgstr "Görünüş"
 
+#: contents/ui/config/ConfigAppearance.qml:45
 msgid "Success! Entries updated."
 msgstr "Uğurlu! Girdilər yeniləndi."
 
+#: contents/ui/config/ConfigAppearance.qml:49
 msgid "Error parsing output."
-msgstr "Çıxışın təhlili xətası."
+msgstr "Çıxış emalı xətası."
 
+#: contents/ui/config/ConfigAppearance.qml:71
 msgid "Display Mode:"
-msgstr "Görüntü Modu:"
+msgstr "Görüntüleme Rejimi:"
 
+#: contents/ui/config/ConfigAppearance.qml:73
 msgid "Single Card (Large)"
 msgstr "Tək Kart (Böyük)"
 
+#: contents/ui/config/ConfigAppearance.qml:74
 msgid "Standard List (Compact)"
-msgstr "Standart Siyahı (Kompakt)"
+msgstr "Standart Siyahı (Yığcam)"
 
+#: contents/ui/config/ConfigAppearance.qml:80
 msgid "Single Card mode allows paging through entries one by one."
-msgstr "Tək Kart modu girdilər arasında tək-tək keçid etməyə imkan verir."
+msgstr "Tək Kart rejimi girdilər arasında bir-bir gəzməyə imkan verir."
 
+#: contents/ui/config/ConfigAppearance.qml:93
 msgid "Visual Adjustments"
 msgstr "Vizual Tənzimləmələr"
 
+#: contents/ui/config/ConfigAppearance.qml:101
 msgid "Background Opacity:"
 msgstr "Arxa Plan Şəffaflığı:"
 
+#: contents/ui/config/ConfigAppearance.qml:117
 msgid "Widget Margin:"
-msgstr "Vidjet Kənarlığı:"
+msgstr "Vidjet Kenar Boşluğu:"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Normal (10px)"
 msgstr "Normal (10px)"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Less (5px)"
 msgstr "Az (5px)"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "None (0px)"
 msgstr "Yox (0px)"
 
+#: contents/ui/config/ConfigAppearance.qml:134
+msgid "List Item Height:"
+msgstr "Siyahı Elementi Hündürlüyü:"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Small (40px)"
+msgstr "Kiçik (40px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Medium (60px)"
+msgstr "Orta (60px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Large (80px)"
+msgstr "Böyük (80px)"
+
+#: contents/ui/config/ConfigAppearance.qml:161
 msgid "Troubleshooting & Data"
 msgstr "Nasazlıqların Aradan Qaldırılması və Məlumat"
 
+#: contents/ui/config/ConfigAppearance.qml:172
 msgid "Reset Cache"
 msgstr "Keşi Sıfırla"
 
+#: contents/ui/config/ConfigAppearance.qml:175
 msgid "Cache cleared."
 msgstr "Keş təmizləndi."
 
+#: contents/ui/config/ConfigAppearance.qml:182
 msgid "Reload with Sudo"
 msgstr "Sudo ilə Yenidən Yüklə"
 
+#: contents/ui/config/ConfigAppearance.qml:186
 msgid "Requesting permissions..."
-msgstr "İcazələr istənilir..."
-
-msgid "Large Mode (Coming Soon)"
-msgstr "Böyük Mod (Tezliklə)"
-
-msgid "Wide Mode (Coming Soon)"
-msgstr "Geniş Mod (Tezliklə)"
+msgstr "İcazələr istenir..."

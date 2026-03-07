@@ -1,90 +1,185 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-07 04:19+0300\n"
+"PO-Revision-Date: 2026-03-07 04:06+0300\n"
+"Last-Translator: Antigravity\n"
+"Language-Team: Portuguese\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POCreator\n"
 
+#: contents/ui/BootDataManager.qml:43
 msgid "BIOS / Firmware"
 msgstr "BIOS / Firmware"
 
-msgid "UEFI Settings"
-msgstr "Configurações UEFI"
+#: contents/ui/BootDataManager.qml:66
+msgid "System is not booted with systemd-boot or EFI is not active."
+msgstr "O sistema não foi iniciado com systemd-boot ou o EFI não está ativo."
 
+#: contents/ui/BootDataManager.qml:68
+msgid "Authorization failed or canceled."
+msgstr "A autorização falhou ou foi cancelada."
+
+#: contents/ui/BootDataManager.qml:70
+msgid "Systemd-boot error: "
+msgstr "Erro do systemd-boot: "
+
+#: contents/ui/BootDataManager.qml:73
+msgid "Systemd-boot failed with exit code: "
+msgstr "O systemd-boot falhou com o código de saída: "
+
+#: contents/ui/BootDataManager.qml:119
+msgid "Windows 11"
+msgstr "Windows 11"
+
+#: contents/ui/BootDataManager.qml:120
+msgid "Windows 10"
+msgstr "Windows 10"
+
+#: contents/ui/BootDataManager.qml:121
+msgid "Windows 8.1"
+msgstr "Windows 8.1"
+
+#: contents/ui/BootDataManager.qml:122
+msgid "Windows 8"
+msgstr "Windows 8"
+
+#: contents/ui/BootDataManager.qml:123
+msgid "Windows 7"
+msgstr "Windows 7"
+
+#: contents/ui/LargeView.qml:10
+msgid "Large Mode (Coming Soon)"
+msgstr "Modo Grande (Em breve)"
+
+#: contents/ui/main.qml:25
 msgid "Update Boot Entries"
-msgstr "Atualizar entradas de inicialização"
+msgstr "Atualizar Entradas de Boot"
 
+#: contents/ui/main.qml:127
 msgid "No boot entries found"
-msgstr "Nenhuma entrada de inicialização encontrada"
+msgstr "Nenhuma entrada de boot encontrada"
 
+#: contents/ui/main.qml:137
 msgid "Authorize & Refresh"
-msgstr "Autorizar e atualizar"
+msgstr "Autorizar e Atualizar"
 
+#: contents/ui/RegularListView.qml:215
+#, java-printf-format
 msgid "Rebooting in %1s..."
 msgstr "Reiniciando em %1s..."
 
+#: contents/ui/RegularListView.qml:216
+msgid "Click again to confirm"
+msgstr "Clique novamente para confirmar"
+
+#: contents/ui/RegularListView.qml:217 contents/ui/SmallView.qml:195
+msgid "UEFI Settings"
+msgstr "Configurações UEFI"
+
+#: contents/ui/SmallView.qml:179
+msgid "Rebooting in %1..."
+msgstr "Reiniciando em %1..."
+
+#: contents/ui/SmallView.qml:180
 msgid "Press again to reboot"
 msgstr "Pressione novamente para reiniciar"
 
+#: contents/ui/SmallView.qml:194
 msgid "Click again to cancel"
 msgstr "Clique novamente para cancelar"
 
+#: contents/ui/WideView.qml:10
+msgid "Wide Mode (Coming Soon)"
+msgstr "Modo Amplo (Em breve)"
+
+#: contents/ui/config/ConfigAppearance.qml:10
 msgid "Appearance"
 msgstr "Aparência"
 
+#: contents/ui/config/ConfigAppearance.qml:45
 msgid "Success! Entries updated."
 msgstr "Sucesso! Entradas atualizadas."
 
+#: contents/ui/config/ConfigAppearance.qml:49
 msgid "Error parsing output."
-msgstr "Erro ao processar saída."
+msgstr "Erro ao analisar saída."
 
+#: contents/ui/config/ConfigAppearance.qml:71
 msgid "Display Mode:"
-msgstr "Modo de exibição:"
+msgstr "Modo de Exibição:"
 
+#: contents/ui/config/ConfigAppearance.qml:73
 msgid "Single Card (Large)"
 msgstr "Cartão Único (Grande)"
 
+#: contents/ui/config/ConfigAppearance.qml:74
 msgid "Standard List (Compact)"
 msgstr "Lista Padrão (Compacta)"
 
+#: contents/ui/config/ConfigAppearance.qml:80
 msgid "Single Card mode allows paging through entries one by one."
-msgstr "O modo Cartão Único permite navegar pelas entradas uma a uma."
+msgstr "O modo de Cartão Único permite folhear as entradas uma a uma."
 
+#: contents/ui/config/ConfigAppearance.qml:93
 msgid "Visual Adjustments"
 msgstr "Ajustes Visuais"
 
+#: contents/ui/config/ConfigAppearance.qml:101
 msgid "Background Opacity:"
 msgstr "Opacidade do Fundo:"
 
+#: contents/ui/config/ConfigAppearance.qml:117
 msgid "Widget Margin:"
 msgstr "Margem do Widget:"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Normal (10px)"
 msgstr "Normal (10px)"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Less (5px)"
-msgstr "Menos (5px)"
+msgstr "Menor (5px)"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "None (0px)"
-msgstr "Nenhum (0px)"
+msgstr "Nenhuma (0px)"
 
+#: contents/ui/config/ConfigAppearance.qml:134
+msgid "List Item Height:"
+msgstr "Altura do Item da Lista:"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Small (40px)"
+msgstr "Pequeno (40px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Medium (60px)"
+msgstr "Médio (60px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Large (80px)"
+msgstr "Grande (80px)"
+
+#: contents/ui/config/ConfigAppearance.qml:161
 msgid "Troubleshooting & Data"
 msgstr "Solução de Problemas e Dados"
 
+#: contents/ui/config/ConfigAppearance.qml:172
 msgid "Reset Cache"
-msgstr "Redefinir Cache"
+msgstr "Limpar Cache"
 
+#: contents/ui/config/ConfigAppearance.qml:175
 msgid "Cache cleared."
 msgstr "Cache limpo."
 
+#: contents/ui/config/ConfigAppearance.qml:182
 msgid "Reload with Sudo"
 msgstr "Recarregar com Sudo"
 
+#: contents/ui/config/ConfigAppearance.qml:186
 msgid "Requesting permissions..."
 msgstr "Solicitando permissões..."
-
-msgid "Large Mode (Coming Soon)"
-msgstr "Modo Grande (Em Breve)"
-
-msgid "Wide Mode (Coming Soon)"
-msgstr "Modo Largo (Em Breve)"

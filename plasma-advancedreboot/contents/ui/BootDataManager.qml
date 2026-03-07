@@ -7,6 +7,7 @@ Item {
 
     property var bootEntries: []
     property bool isLoading: false
+    property string errorMessage: ""
 
     // Signals
     signal entriesLoaded(var entries)
@@ -50,13 +51,34 @@ Item {
         id: execSource
         engine: "executable"
         
-        onNewData: (sourceName, data) => {
+        onNewData: function(sourceName, data) {
             console.log("BootDataManager: New Data from " + sourceName)
             console.log("BootDataManager: Data keys: " + Object.keys(data).join(", "))
             
             if (data["exit code"] !== undefined && data["exit code"] > 0) {
                  console.error("BootDataManager: Command failed with exit code: " + data["exit code"])
                  if (data["stderr"]) console.error("BootDataManager: Stderr: " + data["stderr"])
+                 
+                 if (sourceName.indexOf("bootctl list") !== -1) {
+                     if (data["stderr"]) {
+                         var errStr = data["stderr"].toLowerCase();
+                         if (errStr.includes("not booted with efi") || errStr.includes("systemd-boot not installed") || errStr.includes("efi variables") || errStr.includes("couldn't find efi")) {
+                             root.errorMessage = i18n("System is not booted with systemd-boot or EFI is not active.")
+                         } else if (data["exit code"] === 126 || data["exit code"] === 127 || errStr.includes("polkit")) {
+                             root.errorMessage = i18n("Authorization failed or canceled.")
+                         } else {
+                             root.errorMessage = i18n("Systemd-boot error: ") + data["stderr"]
+                         }
+                     } else {
+                         root.errorMessage = i18n("Systemd-boot failed with exit code: ") + data["exit code"]
+                     }
+                     root.isLoading = false
+                     loadingTimer.stop()
+                 }
+            } else {
+                 if (sourceName.indexOf("bootctl list") !== -1) {
+                     root.errorMessage = ""
+                 }
             }
 
             if (sourceName.indexOf("bootctl list") !== -1 && data["stdout"]) {
@@ -90,13 +112,15 @@ Item {
                  if (ver.length > 0) {
                      var formattedTitle = ""
                      try {
-                         // ... (version parsing) ...
                          var parts = ver.split('.')
                          if (parts.length >= 3) {
                             var build = parseInt(parts[2])
                             if (!isNaN(build)) {
-                                if (build >= 19041) formattedTitle = i18n("Windows 10") // Simplified
                                 if (build >= 22000) formattedTitle = i18n("Windows 11")
+                                else if (build >= 10240) formattedTitle = i18n("Windows 10")
+                                else if (build >= 9600) formattedTitle = i18n("Windows 8.1")
+                                else if (build >= 9200) formattedTitle = i18n("Windows 8")
+                                else if (build >= 7600) formattedTitle = i18n("Windows 7")
                             }
                          }
                      } catch(err) {}

@@ -1,0 +1,1 @@
+for po in de fr es it ru ja zh pt id az; do msgfmt "$po.po" -o "$po.mo"; done

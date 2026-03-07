@@ -158,6 +158,12 @@ Item {
                                 if (t.includes("android")) return "distributor-logo-android"
                                 if (t.includes("qubes")) return "distributor-logo-qubes"
                                 if (t.includes("slackware")) return "distributor-logo-slackware"
+                                if (t.includes("alpine")) return "distributor-logo-alpine"
+                                if (t.includes("deepin")) return "distributor-logo-deepin"
+                                if (t.includes("mx ") || t.includes("mxlinux")) return "distributor-logo-mx"
+                                if (t.includes("parrot")) return "distributor-logo-parrot"
+                                if (t.includes("solus")) return "distributor-logo-solus"
+                                if (t.includes("steamos")) return "distributor-logo-steamos"
                                 
                                 return "system-run" 
                             }

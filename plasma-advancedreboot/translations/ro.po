@@ -1,90 +1,188 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-07 04:19+0300\n"
+"PO-Revision-Date: 2026-03-07 04:06+0300\n"
+"Last-Translator: Antigravity\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POCreator\n"
 
+#: contents/ui/BootDataManager.qml:43
 msgid "BIOS / Firmware"
 msgstr "BIOS / Firmware"
 
-msgid "UEFI Settings"
-msgstr "Setări UEFI"
+#: contents/ui/BootDataManager.qml:66
+msgid "System is not booted with systemd-boot or EFI is not active."
+msgstr ""
 
-msgid "Update Boot Entries"
-msgstr "Actualizare intrări boot"
+#: contents/ui/BootDataManager.qml:68
+msgid "Authorization failed or canceled."
+msgstr ""
 
-msgid "No boot entries found"
-msgstr "Nu s-au găsit intrări de boot"
+#: contents/ui/BootDataManager.qml:70
+msgid "Systemd-boot error: "
+msgstr ""
 
-msgid "Authorize & Refresh"
-msgstr "Autorizare și reîmprospătare"
+#: contents/ui/BootDataManager.qml:73
+msgid "Systemd-boot failed with exit code: "
+msgstr ""
 
-msgid "Rebooting in %1s..."
-msgstr "Repornire în %1s..."
+#: contents/ui/BootDataManager.qml:119
+msgid "Windows 11"
+msgstr "Windows 11"
 
-msgid "Press again to reboot"
-msgstr "Apăsați din nou pentru a reporni"
+#: contents/ui/BootDataManager.qml:120
+msgid "Windows 10"
+msgstr "Windows 10"
 
-msgid "Click again to cancel"
-msgstr "Faceți clic din nou pentru a anula"
+#: contents/ui/BootDataManager.qml:121
+#, fuzzy
+msgid "Windows 8.1"
+msgstr "Windows 10"
 
-msgid "Appearance"
-msgstr "Aspect"
+#: contents/ui/BootDataManager.qml:122
+#, fuzzy
+msgid "Windows 8"
+msgstr "Windows 10"
 
-msgid "Success! Entries updated."
-msgstr "Succes! Intrări actualizate."
+#: contents/ui/BootDataManager.qml:123
+#, fuzzy
+msgid "Windows 7"
+msgstr "Windows 10"
 
-msgid "Error parsing output."
-msgstr "Eroare la analizarea ieșirii."
-
-msgid "Display Mode:"
-msgstr "Mod afișare:"
-
-msgid "Single Card (Large)"
-msgstr "Card unic (Mare)"
-
-msgid "Standard List (Compact)"
-msgstr "Listă standard (Compact)"
-
-msgid "Single Card mode allows paging through entries one by one."
-msgstr "Modul Card unic permite parcurgerea intrărilor una câte una."
-
-msgid "Visual Adjustments"
-msgstr "Ajustări vizuale"
-
-msgid "Background Opacity:"
-msgstr "Opacitate fundal:"
-
-msgid "Widget Margin:"
-msgstr "Margine widget:"
-
-msgid "Normal (10px)"
-msgstr "Normal (10px)"
-
-msgid "Less (5px)"
-msgstr "Mai puțin (5px)"
-
-msgid "None (0px)"
-msgstr "Deloc (0px)"
-
-msgid "Troubleshooting & Data"
-msgstr "Depanare și date"
-
-msgid "Reset Cache"
-msgstr "Resetare cache"
-
-msgid "Cache cleared."
-msgstr "Cache golit."
-
-msgid "Reload with Sudo"
-msgstr "Reîncărcare cu Sudo"
-
-msgid "Requesting permissions..."
-msgstr "Se solicită permisiuni..."
-
+#: contents/ui/LargeView.qml:10
 msgid "Large Mode (Coming Soon)"
 msgstr "Mod Mare (În curând)"
 
+#: contents/ui/main.qml:25
+msgid "Update Boot Entries"
+msgstr "Actualizează intrările de boot"
+
+#: contents/ui/main.qml:127
+msgid "No boot entries found"
+msgstr "Nu s-au găsit intrări de boot"
+
+#: contents/ui/main.qml:137
+msgid "Authorize & Refresh"
+msgstr "Autorizează și reîmprospătează"
+
+#: contents/ui/RegularListView.qml:215
+#, java-printf-format
+msgid "Rebooting in %1s..."
+msgstr "Repornire în %1s..."
+
+#: contents/ui/RegularListView.qml:216
+msgid "Click again to confirm"
+msgstr "Apasă din nou pentru confirmare"
+
+#: contents/ui/RegularListView.qml:217 contents/ui/SmallView.qml:195
+msgid "UEFI Settings"
+msgstr "Setări UEFI"
+
+#: contents/ui/SmallView.qml:179
+msgid "Rebooting in %1..."
+msgstr "Repornire în %1..."
+
+#: contents/ui/SmallView.qml:180
+msgid "Press again to reboot"
+msgstr "Apasă din nou pentru repornire"
+
+#: contents/ui/SmallView.qml:194
+msgid "Click again to cancel"
+msgstr "Apasă din nou pentru anulare"
+
+#: contents/ui/WideView.qml:10
 msgid "Wide Mode (Coming Soon)"
 msgstr "Mod Lat (În curând)"
+
+#: contents/ui/config/ConfigAppearance.qml:10
+msgid "Appearance"
+msgstr "Aspect"
+
+#: contents/ui/config/ConfigAppearance.qml:45
+msgid "Success! Entries updated."
+msgstr "Succes! Intrările au fost actualizate."
+
+#: contents/ui/config/ConfigAppearance.qml:49
+msgid "Error parsing output."
+msgstr "Eroare la parsarea ieșirii."
+
+#: contents/ui/config/ConfigAppearance.qml:71
+msgid "Display Mode:"
+msgstr "Mod afișare:"
+
+#: contents/ui/config/ConfigAppearance.qml:73
+msgid "Single Card (Large)"
+msgstr "Card unic (Mare)"
+
+#: contents/ui/config/ConfigAppearance.qml:74
+msgid "Standard List (Compact)"
+msgstr "Listă standard (Compact)"
+
+#: contents/ui/config/ConfigAppearance.qml:80
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Modul Card unic permite paginarea intrărilor una câte una."
+
+#: contents/ui/config/ConfigAppearance.qml:93
+msgid "Visual Adjustments"
+msgstr "Ajustări vizuale"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Background Opacity:"
+msgstr "Opacitate fundal:"
+
+#: contents/ui/config/ConfigAppearance.qml:117
+msgid "Widget Margin:"
+msgstr "Margine widget:"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Less (5px)"
+msgstr "Mai puțin (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "None (0px)"
+msgstr "Fără (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:134
+msgid "List Item Height:"
+msgstr "Înălțime element listă:"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Small (40px)"
+msgstr "Mic (40px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Medium (60px)"
+msgstr "Mediu (60px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Large (80px)"
+msgstr "Mare (80px)"
+
+#: contents/ui/config/ConfigAppearance.qml:161
+msgid "Troubleshooting & Data"
+msgstr "Depanare și date"
+
+#: contents/ui/config/ConfigAppearance.qml:172
+msgid "Reset Cache"
+msgstr "Resetează cache"
+
+#: contents/ui/config/ConfigAppearance.qml:175
+msgid "Cache cleared."
+msgstr "Cache golit."
+
+#: contents/ui/config/ConfigAppearance.qml:182
+msgid "Reload with Sudo"
+msgstr "Reîncarcă cu Sudo"
+
+#: contents/ui/config/ConfigAppearance.qml:186
+msgid "Requesting permissions..."
+msgstr "Se solicită permisiuni..."

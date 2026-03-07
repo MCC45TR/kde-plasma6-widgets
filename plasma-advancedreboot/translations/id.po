@@ -1,90 +1,185 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-07 04:19+0300\n"
+"PO-Revision-Date: 2026-03-07 04:06+0300\n"
+"Last-Translator: Antigravity\n"
+"Language-Team: Indonesian\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POCreator\n"
 
+#: contents/ui/BootDataManager.qml:43
 msgid "BIOS / Firmware"
 msgstr "BIOS / Firmware"
 
-msgid "UEFI Settings"
-msgstr "Pengaturan UEFI"
+#: contents/ui/BootDataManager.qml:66
+msgid "System is not booted with systemd-boot or EFI is not active."
+msgstr "Sistem tidak di-boot dengan systemd-boot veya EFI tidak aktif."
 
-msgid "Update Boot Entries"
-msgstr "Perbarui Entri Boot"
+#: contents/ui/BootDataManager.qml:68
+msgid "Authorization failed or canceled."
+msgstr "Autorisasi gagal atau dibatalkan."
 
-msgid "No boot entries found"
-msgstr "Tidak ada entri boot ditemukan"
+#: contents/ui/BootDataManager.qml:70
+msgid "Systemd-boot error: "
+msgstr "Kesalahan systemd-boot: "
 
-msgid "Authorize & Refresh"
-msgstr "Otorisasi & Segarkan"
+#: contents/ui/BootDataManager.qml:73
+msgid "Systemd-boot failed with exit code: "
+msgstr "Systemd-boot gagal dengan kode keluar: "
 
-msgid "Rebooting in %1s..."
-msgstr "Mulai ulang dalam %1s..."
+#: contents/ui/BootDataManager.qml:119
+msgid "Windows 11"
+msgstr "Windows 11"
 
-msgid "Press again to reboot"
-msgstr "Tekan lagi untuk mulai ulang"
+#: contents/ui/BootDataManager.qml:120
+msgid "Windows 10"
+msgstr "Windows 10"
 
-msgid "Click again to cancel"
-msgstr "Klik lagi untuk membatalkan"
+#: contents/ui/BootDataManager.qml:121
+msgid "Windows 8.1"
+msgstr "Windows 8.1"
 
-msgid "Appearance"
-msgstr "Tampilan"
+#: contents/ui/BootDataManager.qml:122
+msgid "Windows 8"
+msgstr "Windows 8"
 
-msgid "Success! Entries updated."
-msgstr "Sukses! Entri diperbarui."
+#: contents/ui/BootDataManager.qml:123
+msgid "Windows 7"
+msgstr "Windows 7"
 
-msgid "Error parsing output."
-msgstr "Kesalahan mengurai output."
-
-msgid "Display Mode:"
-msgstr "Mode Tampilan:"
-
-msgid "Single Card (Large)"
-msgstr "Kartu Tunggal (Besar)"
-
-msgid "Standard List (Compact)"
-msgstr "Daftar Standar (Kompak)"
-
-msgid "Single Card mode allows paging through entries one by one."
-msgstr "Mode Kartu Tunggal memungkinkan membalik entri satu per satu."
-
-msgid "Visual Adjustments"
-msgstr "Penyesuaian Visual"
-
-msgid "Background Opacity:"
-msgstr "Opasitas Latar Belakang:"
-
-msgid "Widget Margin:"
-msgstr "Margin Widget:"
-
-msgid "Normal (10px)"
-msgstr "Normal (10px)"
-
-msgid "Less (5px)"
-msgstr "Kurang (5px)"
-
-msgid "None (0px)"
-msgstr "Tidak Ada (0px)"
-
-msgid "Troubleshooting & Data"
-msgstr "Pemecahan Masalah & Data"
-
-msgid "Reset Cache"
-msgstr "Atur Ulang Cache"
-
-msgid "Cache cleared."
-msgstr "Cache dibersihkan."
-
-msgid "Reload with Sudo"
-msgstr "Muat Ulang dengan Sudo"
-
-msgid "Requesting permissions..."
-msgstr "Meminta izin..."
-
+#: contents/ui/LargeView.qml:10
 msgid "Large Mode (Coming Soon)"
 msgstr "Mode Besar (Segera Hadir)"
 
+#: contents/ui/main.qml:25
+msgid "Update Boot Entries"
+msgstr "Perbarui Entri Boot"
+
+#: contents/ui/main.qml:127
+msgid "No boot entries found"
+msgstr "Entri boot tidak ditemukan"
+
+#: contents/ui/main.qml:137
+msgid "Authorize & Refresh"
+msgstr "Otorisasi & Muat Ulang"
+
+#: contents/ui/RegularListView.qml:215
+#, java-printf-format
+msgid "Rebooting in %1s..."
+msgstr "Memuat ulang dalam %1s..."
+
+#: contents/ui/RegularListView.qml:216
+msgid "Click again to confirm"
+msgstr "Klik lagi untuk konfirmasi"
+
+#: contents/ui/RegularListView.qml:217 contents/ui/SmallView.qml:195
+msgid "UEFI Settings"
+msgstr "Pengaturan UEFI"
+
+#: contents/ui/SmallView.qml:179
+msgid "Rebooting in %1..."
+msgstr "Memuat ulang dalam %1..."
+
+#: contents/ui/SmallView.qml:180
+msgid "Press again to reboot"
+msgstr "Tekan lagi untuk memuat ulang"
+
+#: contents/ui/SmallView.qml:194
+msgid "Click again to cancel"
+msgstr "Klik lagi untuk membatalkan"
+
+#: contents/ui/WideView.qml:10
 msgid "Wide Mode (Coming Soon)"
 msgstr "Mode Lebar (Segera Hadir)"
+
+#: contents/ui/config/ConfigAppearance.qml:10
+msgid "Appearance"
+msgstr "Tampilan"
+
+#: contents/ui/config/ConfigAppearance.qml:45
+msgid "Success! Entries updated."
+msgstr "Berhasil! Entri diperbarui."
+
+#: contents/ui/config/ConfigAppearance.qml:49
+msgid "Error parsing output."
+msgstr "Gagal memproses keluaran."
+
+#: contents/ui/config/ConfigAppearance.qml:71
+msgid "Display Mode:"
+msgstr "Mode Tampilan:"
+
+#: contents/ui/config/ConfigAppearance.qml:73
+msgid "Single Card (Large)"
+msgstr "Kartu Tunggal (Besar)"
+
+#: contents/ui/config/ConfigAppearance.qml:74
+msgid "Standard List (Compact)"
+msgstr "Daftar Standar (Ringkas)"
+
+#: contents/ui/config/ConfigAppearance.qml:80
+msgid "Single Card mode allows paging through entries one by one."
+msgstr "Mode kartu tunggal memungkinkan navigasi entri satu per satu."
+
+#: contents/ui/config/ConfigAppearance.qml:93
+msgid "Visual Adjustments"
+msgstr "Penyesuaian Visual"
+
+#: contents/ui/config/ConfigAppearance.qml:101
+msgid "Background Opacity:"
+msgstr "Opasitas Latar Belakang:"
+
+#: contents/ui/config/ConfigAppearance.qml:117
+msgid "Widget Margin:"
+msgstr "Margin Widget:"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Less (5px)"
+msgstr "Sedikit (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "None (0px)"
+msgstr "Tidak ada (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:134
+msgid "List Item Height:"
+msgstr "Tinggi Item Daftar:"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Small (40px)"
+msgstr "Kecil (40px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Medium (60px)"
+msgstr "Sedang (60px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Large (80px)"
+msgstr "Besar (80px)"
+
+#: contents/ui/config/ConfigAppearance.qml:161
+msgid "Troubleshooting & Data"
+msgstr "Pemecahan Masalah & Data"
+
+#: contents/ui/config/ConfigAppearance.qml:172
+msgid "Reset Cache"
+msgstr "Reset Cache"
+
+#: contents/ui/config/ConfigAppearance.qml:175
+msgid "Cache cleared."
+msgstr "Cache dibersihkan."
+
+#: contents/ui/config/ConfigAppearance.qml:182
+msgid "Reload with Sudo"
+msgstr "Muat ulang dengan Sudo"
+
+#: contents/ui/config/ConfigAppearance.qml:186
+msgid "Requesting permissions..."
+msgstr "Meminta izin..."

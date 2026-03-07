@@ -1,90 +1,188 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-07 04:19+0300\n"
+"PO-Revision-Date: 2026-03-07 04:06+0300\n"
+"Last-Translator: Antigravity\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POCreator\n"
 
+#: contents/ui/BootDataManager.qml:43
 msgid "BIOS / Firmware"
 msgstr "BIOS / Firmware"
 
-msgid "UEFI Settings"
-msgstr "Nastavení UEFI"
+#: contents/ui/BootDataManager.qml:66
+msgid "System is not booted with systemd-boot or EFI is not active."
+msgstr ""
 
+#: contents/ui/BootDataManager.qml:68
+msgid "Authorization failed or canceled."
+msgstr ""
+
+#: contents/ui/BootDataManager.qml:70
+msgid "Systemd-boot error: "
+msgstr ""
+
+#: contents/ui/BootDataManager.qml:73
+msgid "Systemd-boot failed with exit code: "
+msgstr ""
+
+#: contents/ui/BootDataManager.qml:119
+msgid "Windows 11"
+msgstr "Windows 11"
+
+#: contents/ui/BootDataManager.qml:120
+msgid "Windows 10"
+msgstr "Windows 10"
+
+#: contents/ui/BootDataManager.qml:121
+#, fuzzy
+msgid "Windows 8.1"
+msgstr "Windows 10"
+
+#: contents/ui/BootDataManager.qml:122
+#, fuzzy
+msgid "Windows 8"
+msgstr "Windows 10"
+
+#: contents/ui/BootDataManager.qml:123
+#, fuzzy
+msgid "Windows 7"
+msgstr "Windows 10"
+
+#: contents/ui/LargeView.qml:10
+msgid "Large Mode (Coming Soon)"
+msgstr "Velký režim (již brzy)"
+
+#: contents/ui/main.qml:25
 msgid "Update Boot Entries"
-msgstr "Aktualizovat záznamy"
+msgstr "Aktualizovat položky spouštění"
 
+#: contents/ui/main.qml:127
 msgid "No boot entries found"
-msgstr "Nebyly nalezeny žádné záznamy"
+msgstr "Nebyly nalezeny žádné spouštěcí položky"
 
+#: contents/ui/main.qml:137
 msgid "Authorize & Refresh"
 msgstr "Autorizovat a obnovit"
 
+#: contents/ui/RegularListView.qml:215
+#, java-printf-format
 msgid "Rebooting in %1s..."
-msgstr "Restart za %1s..."
+msgstr "Restartování za %1s..."
 
+#: contents/ui/RegularListView.qml:216
+msgid "Click again to confirm"
+msgstr "Klikněte znovu pro potvrzení"
+
+#: contents/ui/RegularListView.qml:217 contents/ui/SmallView.qml:195
+msgid "UEFI Settings"
+msgstr "Nastavení UEFI"
+
+#: contents/ui/SmallView.qml:179
+msgid "Rebooting in %1..."
+msgstr "Restartování za %1..."
+
+#: contents/ui/SmallView.qml:180
 msgid "Press again to reboot"
 msgstr "Stiskněte znovu pro restart"
 
+#: contents/ui/SmallView.qml:194
 msgid "Click again to cancel"
 msgstr "Klikněte znovu pro zrušení"
 
+#: contents/ui/WideView.qml:10
+msgid "Wide Mode (Coming Soon)"
+msgstr "Široký režim (již brzy)"
+
+#: contents/ui/config/ConfigAppearance.qml:10
 msgid "Appearance"
 msgstr "Vzhled"
 
+#: contents/ui/config/ConfigAppearance.qml:45
 msgid "Success! Entries updated."
-msgstr "Úspěch! Záznamy aktualizovány."
+msgstr "Úspěch! Položky byly aktualizovány."
 
+#: contents/ui/config/ConfigAppearance.qml:49
 msgid "Error parsing output."
-msgstr "Chyba při zpracování výstupu."
+msgstr "Chyba při parsování výstupu."
 
+#: contents/ui/config/ConfigAppearance.qml:71
 msgid "Display Mode:"
 msgstr "Režim zobrazení:"
 
+#: contents/ui/config/ConfigAppearance.qml:73
 msgid "Single Card (Large)"
-msgstr "Jedna karta (Velká)"
+msgstr "Jedna karta (velká)"
 
+#: contents/ui/config/ConfigAppearance.qml:74
 msgid "Standard List (Compact)"
-msgstr "Standardní seznam (Kompaktní)"
+msgstr "Standardní seznam (kompaktní)"
 
+#: contents/ui/config/ConfigAppearance.qml:80
 msgid "Single Card mode allows paging through entries one by one."
-msgstr "Režim jedné karty umožňuje listovat záznamy po jednom."
+msgstr "Režim jedné karty umožňuje listovat položkami jednu po druhé."
 
+#: contents/ui/config/ConfigAppearance.qml:93
 msgid "Visual Adjustments"
 msgstr "Vizuální úpravy"
 
+#: contents/ui/config/ConfigAppearance.qml:101
 msgid "Background Opacity:"
 msgstr "Průhlednost pozadí:"
 
+#: contents/ui/config/ConfigAppearance.qml:117
 msgid "Widget Margin:"
 msgstr "Okraj widgetu:"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Normal (10px)"
 msgstr "Normální (10px)"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "Less (5px)"
 msgstr "Méně (5px)"
 
+#: contents/ui/config/ConfigAppearance.qml:124
 msgid "None (0px)"
 msgstr "Žádný (0px)"
 
+#: contents/ui/config/ConfigAppearance.qml:134
+msgid "List Item Height:"
+msgstr "Výška položky seznamu:"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Small (40px)"
+msgstr "Malá (40px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Medium (60px)"
+msgstr "Střední (60px)"
+
+#: contents/ui/config/ConfigAppearance.qml:142
+msgid "Large (80px)"
+msgstr "Velká (80px)"
+
+#: contents/ui/config/ConfigAppearance.qml:161
 msgid "Troubleshooting & Data"
-msgstr "Řešení potíží a data"
+msgstr "Řešení problémů a data"
 
+#: contents/ui/config/ConfigAppearance.qml:172
 msgid "Reset Cache"
-msgstr "Obnovit mezipaměť"
+msgstr "Resetovat mezipaměť"
 
+#: contents/ui/config/ConfigAppearance.qml:175
 msgid "Cache cleared."
 msgstr "Mezipaměť vymazána."
 
+#: contents/ui/config/ConfigAppearance.qml:182
 msgid "Reload with Sudo"
-msgstr "Obnovit pomocí Sudo"
+msgstr "Znovu načíst pomocí Sudo"
 
+#: contents/ui/config/ConfigAppearance.qml:186
 msgid "Requesting permissions..."
 msgstr "Žádost o oprávnění..."
-
-msgid "Large Mode (Coming Soon)"
-msgstr "Velký režim (Brzy)"
-
-msgid "Wide Mode (Coming Soon)"
-msgstr "Široký režim (Brzy)"

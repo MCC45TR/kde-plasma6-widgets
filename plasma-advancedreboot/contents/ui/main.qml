@@ -124,10 +124,13 @@ PlasmoidItem {
                     }
                     
                     Text { 
-                        text: i18n("No boot entries found")
+                        text: bootManager.errorMessage !== "" ? bootManager.errorMessage : i18n("No boot entries found")
                         color: Kirigami.Theme.disabledTextColor
                         font.pixelSize: 14
                         Layout.alignment: Qt.AlignHCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        wrapMode: Text.WordWrap
+                        Layout.maximumWidth: parent.width - 20
                     }
                     
                     Button { 
