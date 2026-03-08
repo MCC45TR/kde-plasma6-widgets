@@ -99,7 +99,7 @@ Item {
                 font.family: "Roboto Condensed"
                 font.bold: true
                 
-                property real maxFontSize: Math.min(30, parent.width * 0.14)
+                property real maxFontSize: Math.max(20, Math.min(30, parent.width * 0.14))
                 property real animFontSize: maxFontSize
                 
                 font.pixelSize: animFontSize
@@ -111,7 +111,7 @@ Item {
                 Timer {
                     id: shrinkTimer
                     interval: 200
-                    running: titleText.truncated && titleText.animFontSize > 12 && titleText.visible
+                    running: titleText.truncated && titleText.animFontSize > 20 && titleText.visible
                     repeat: true
                     onTriggered: {
                         if (titleText.truncated) {
@@ -125,9 +125,9 @@ Item {
                 horizontalAlignment: Text.AlignLeft
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 wrapMode: Text.Wrap
-                maximumLineCount: 2
+                maximumLineCount: 4
                 elide: Text.ElideRight
-                Layout.maximumHeight: parent.height * 0.55
+                Layout.maximumHeight: parent.height * 0.75
             }
             
             Text {
