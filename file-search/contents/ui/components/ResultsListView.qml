@@ -122,9 +122,6 @@ ScrollView {
                             if (!url) return "";
                             
                             // Strip file:// prefix and decode special characters
-                            var path = decodeURIComponent(url.replace("file://", ""));
-                            var ext = path.split('.').pop().toLowerCase();
-                            
                             var showPreview = false;
                             
                             var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
@@ -133,7 +130,7 @@ ScrollView {
                             var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
                             if (!showPreview && resultsListRoot.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
                             
-                            var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
+                            var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
                             if (!showPreview && resultsListRoot.previewSettings.documents && docExts.indexOf(ext) >= 0) showPreview = true;
                             
                             if (showPreview) {
@@ -284,28 +281,24 @@ ScrollView {
                         // Thumbnail for images
                         Image {
                             source: {
-                                var url = modelData.url || ""
-                                if (url.length === 0) return ""
-                                var ext = url.split('.').pop().toLowerCase()
+                                var path = decodeURIComponent(url.replace("file://", ""))
+                                var ext = path.split('.').pop().toLowerCase()
+                                var showPreview = false
                                 
-                                // 1. Images
                                 if (resultsListRoot.previewSettings.images) {
                                     var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                    if (imageExts.indexOf(ext) >= 0) return url
+                                    if (imageExts.indexOf(ext) >= 0) showPreview = true
                                 }
-                                
-                                // 2. Videos
-                                if (resultsListRoot.previewSettings.videos) {
+                                if (!showPreview && resultsListRoot.previewSettings.videos) {
                                     var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                    if (videoExts.indexOf(ext) >= 0) showPreview = true
+                                }
+                                if (!showPreview && resultsListRoot.previewSettings.documents) {
+                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
+                                    if (docExts.indexOf(ext) >= 0) showPreview = true
                                 }
                                 
-                                // 3. Documents
-                                if (resultsListRoot.previewSettings.documents) {
-                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
-                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                }
-                                
+                                if (showPreview) return "image://preview/" + path
                                 return ""
                             }
                             width: source.length > 0 ? Math.min(150, sourceSize.width) : 0

@@ -38,6 +38,9 @@ Item {
     // Compact vs Normal tile view. Normal = same size as history tiles
     property bool compactPinnedView: false
     
+    // Breeze appearance toggle
+    property bool breezeStyle: false
+    
     // Computed tile dimensions - match HistoryTileView when normal mode
     readonly property real tileWidth: compactPinnedView ? (iconSize + 16) : (iconSize + 40)
     readonly property real tileHeight: compactPinnedView ? (iconSize + 48) : (iconSize + 50)
@@ -120,7 +123,9 @@ Item {
                 return fullHeight;
             }
             radius: 10
-            color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.05)
+            color: pinnedSectionRoot.breezeStyle ? "transparent" : Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.05)
+            border.color: pinnedSectionRoot.breezeStyle ? Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.3) : "transparent"
+            border.width: pinnedSectionRoot.breezeStyle ? 1 : 0
             clip: true
             
             Behavior on Layout.preferredHeight {

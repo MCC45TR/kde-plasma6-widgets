@@ -31,6 +31,7 @@ Item {
             requestSearchTextUpdate("")
             buttonModeSearchInput.clear()
             hiddenSearchInput.text = ""
+            activeFilter = "Tümü"
         }
     }
     
@@ -80,6 +81,9 @@ Item {
     readonly property bool isButtonMode: displayMode === 0
     readonly property bool isTileView: viewMode === 1
     
+    // Active filter from chips
+    property string activeFilter: "Tümü"
+    
     // Layout
     Layout.preferredWidth: 500
     Layout.preferredHeight: 380
@@ -102,6 +106,7 @@ Item {
         resultsModel: resultsModel
         logic: popupRoot.logic
         searchText: popupRoot.searchText
+        activeFilter: popupRoot.activeFilter
         
         onCategorizedDataChanged: {
              // propagated automatically to bindings
@@ -441,10 +446,35 @@ Item {
         onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
     }
 
+    // Filter Chips Loader
+    Loader {
+        id: filterChipsLoader
+        anchors.top: parent.top
+        anchors.topMargin: isButtonMode ? 0 : 8
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
+        active: popupRoot.expanded && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText)
+        
+        sourceComponent: FilterChips {
+            textColor: popupRoot.textColor
+            accentColor: popupRoot.accentColor
+            bgColor: popupRoot.bgColor
+            activeFilter: popupRoot.activeFilter
+            breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
+            
+            onFilterSelected: (filter) => {
+                popupRoot.activeFilter = filter
+            }
+        }
+    }
+
     // Primary Preview (Loader)
     Loader {
         id: primaryResultPreviewLoader
-        anchors.top: parent.top
+        anchors.top: filterChipsLoader.active ? filterChipsLoader.bottom : parent.top
+        anchors.topMargin: filterChipsLoader.active ? 8 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 12
@@ -470,9 +500,9 @@ Item {
     // Query Hints (Loader)
     Loader {
         id: queryHintsLoader
-        anchors.top: primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready ? primaryResultPreviewLoader.bottom : parent.top
+        anchors.top: primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready ? primaryResultPreviewLoader.bottom : (filterChipsLoader.active ? filterChipsLoader.bottom : parent.top)
         // Add extra top margin in button mode to prevent content from being hidden behind panel button
-        anchors.topMargin: primaryResultPreviewLoader.active ? 8 : (isButtonMode ? 50 : 0)
+        anchors.topMargin: primaryResultPreviewLoader.active ? 8 : (isButtonMode ? 50 : (filterChipsLoader.active ? 8 : 0))
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
@@ -530,6 +560,7 @@ Item {
             isTileView: popupRoot.isTileView
             isSearching: popupRoot.searchText.length > 0
             compactPinnedView: popupRoot.compactPinnedItems
+            breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
             // trFunc removed
             
             onItemClicked: (item) => {

@@ -33,6 +33,7 @@ To install the widget, execute the following command in the project directory:
 
 ```bash
 ./install_all.sh plasma-mselectivereboot
+```
 
 ## License
 

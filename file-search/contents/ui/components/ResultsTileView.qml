@@ -483,37 +483,53 @@ FocusScope {
                                         spacing: 6
                                         anchors.centerIn: parent
                                         
-                                        Kirigami.Icon {
+                                        Item {
                                             width: resultsTileRoot.iconSize
                                             height: resultsTileRoot.iconSize
                                             anchors.horizontalCenter: parent.horizontalCenter
-                                            source: {
-                                                // standard icon if small
-                                                if (resultsTileRoot.iconSize <= 22) return modelData.decoration || "application-x-executable";
-                                                
-                                                var url = (modelData.url || "").toString();
-                                                if (!url) return modelData.decoration || "application-x-executable";
-                                                
-                                                var ext = url.split('.').pop().toLowerCase();
-                                                
-                                                if (resultsTileRoot.previewSettings.images) {
-                                                    var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                                    if (imageExts.indexOf(ext) >= 0) return url
-                                                }
-                                                
-                                                if (resultsTileRoot.previewSettings.videos) {
-                                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                                }
-                                                
-                                                if (resultsTileRoot.previewSettings.documents) {
-                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
-                                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                                }
-                                                
-                                                return modelData.decoration || "application-x-executable"
+                                            
+                                            Kirigami.Icon {
+                                                anchors.fill: parent
+                                                source: modelData.decoration || "application-x-executable"
+                                                color: resultsTileRoot.textColor
+                                                visible: previewImageGrid.status !== Image.Ready
                                             }
-                                            color: resultsTileRoot.textColor
+                                            
+                                            Image {
+                                                id: previewImageGrid
+                                                anchors.fill: parent
+                                                asynchronous: true
+                                                cache: true
+                                                fillMode: Image.PreserveAspectCrop
+                                                sourceSize.width: resultsTileRoot.iconSize
+                                                sourceSize.height: resultsTileRoot.iconSize
+                                                
+                                                source: {
+                                                    if (resultsTileRoot.iconSize <= 22) return "";
+                                                    var url = (modelData.url || "").toString();
+                                                    if (!url) return "";
+                                                    
+                                                    var path = decodeURIComponent(url.replace("file://", ""));
+                                                    var ext = path.split('.').pop().toLowerCase();
+                                                    var showPreview = false;
+                                                    
+                                                    if (resultsTileRoot.previewSettings.images) {
+                                                        var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
+                                                        if (imageExts.indexOf(ext) >= 0) showPreview = true;
+                                                    }
+                                                    if (!showPreview && resultsTileRoot.previewSettings.videos) {
+                                                        var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
+                                                        if (videoExts.indexOf(ext) >= 0) showPreview = true;
+                                                    }
+                                                    if (!showPreview && resultsTileRoot.previewSettings.documents) {
+                                                        var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
+                                                        if (docExts.indexOf(ext) >= 0) showPreview = true;
+                                                    }
+                                                    
+                                                    if (showPreview) return "image://preview/" + path;
+                                                    return "";
+                                                }
+                                            }
                                         }
                                         
                                         Text {
@@ -663,26 +679,24 @@ FocusScope {
                                             source: {
                                                 var url = modelData.url || ""
                                                 if (url.length === 0) return ""
-                                                var ext = url.split('.').pop().toLowerCase()
+                                                var path = decodeURIComponent(url.replace("file://", ""))
+                                                var ext = path.split('.').pop().toLowerCase()
+                                                var showPreview = false
                                                 
-                                                // 1. Images
                                                 if (resultsTileRoot.previewSettings.images) {
                                                     var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                                    if (imageExts.indexOf(ext) >= 0) return url
+                                                    if (imageExts.indexOf(ext) >= 0) showPreview = true
                                                 }
-                                                
-                                                // 2. Videos
-                                                if (resultsTileRoot.previewSettings.videos) {
+                                                if (!showPreview && resultsTileRoot.previewSettings.videos) {
                                                     var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                                    if (videoExts.indexOf(ext) >= 0) return "image://preview/" + url
+                                                    if (videoExts.indexOf(ext) >= 0) showPreview = true
+                                                }
+                                                if (!showPreview && resultsTileRoot.previewSettings.documents) {
+                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
+                                                    if (docExts.indexOf(ext) >= 0) showPreview = true
                                                 }
                                                 
-                                                // 3. Documents
-                                                if (resultsTileRoot.previewSettings.documents) {
-                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx"]
-                                                    if (docExts.indexOf(ext) >= 0) return "image://preview/" + url
-                                                }
-                                                
+                                                if (showPreview) return "image://preview/" + path
                                                 return ""
                                             }
                                             width: source.length > 0 ? Math.min(150, sourceSize.width) : 0

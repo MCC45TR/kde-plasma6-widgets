@@ -35,6 +35,7 @@ Item {
     property int cfg_userProfile
     
     // Popup (View + Search Limits)
+    property alias cfg_filterChipStyle: filterChipCombo.currentIndex
     property alias cfg_viewMode: viewModeCombo.currentIndex
     property alias cfg_scrollBarStyle: scrollBarCombo.currentIndex
     property int cfg_iconSize
@@ -91,7 +92,9 @@ Item {
     property bool cfg_smartResultLimitDefault
     property bool cfg_showPinnedBarDefault
     property bool cfg_autoMinimizePinnedDefault
-    // cfg_compactPinnedViewDefault is handled by the alias
+    property int cfg_filterChipStyleDefault
+    property int cfg_compactPinnedViewDefault
+    property int cfg_scrollBarStyleDefault
     property int cfg_searchAlgorithmDefault
     property string cfg_previewSettingsDefault
     property bool cfg_previewEnabledDefault
@@ -401,6 +404,16 @@ Item {
                         ]
                         Layout.fillWidth: true
                         // currentIndex is bound via alias to cfg_compactPinnedView
+                    }
+                    
+                    ComboBox {
+                        id: filterChipCombo
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Filter Chip Style")
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Current Appearance (Filled)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Breeze Appearance (Outline)")
+                        ]
+                        Layout.fillWidth: true
                     }
                     
                     // Popup Preview

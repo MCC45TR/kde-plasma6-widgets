@@ -486,11 +486,7 @@ FocusScope {
                                                 if (!url) return "";
                                                 
                                                 // Strip file:// prefix and decode special characters (like %20 for spaces)
-                                                var path = decodeURIComponent(url.replace("file://", ""));
-                                                var ext = path.split('.').pop().toLowerCase();
-                                                
                                                 var showPreview = false;
-                                                
                                                 var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
                                                 if (historyTile.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
 

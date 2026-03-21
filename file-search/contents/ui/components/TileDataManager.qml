@@ -12,6 +12,11 @@ Item {
     
     // Search text for similarity scoring
     property string searchText: ""
+    property string activeFilter: "Tümü"
+    
+    onActiveFilterChanged: {
+        refreshDebouncer.restart()
+    }
     
     property var categorizedData: []
     property var flatSortedData: []
@@ -42,6 +47,27 @@ Item {
             // Filter hidden categories
             if (!CategoryManager.isCategoryVisible(categorySettings, cat)) {
                 continue;
+            }
+            
+            // --- FILTER CHIPS LOGIC ---
+            if (dataManager.activeFilter !== "Tümü") {
+                var filter = dataManager.activeFilter;
+                var c = cat.toLowerCase();
+                var shouldKeep = false;
+                
+                if (filter === "Belgeler") {
+                    shouldKeep = (c.indexOf("belge") !== -1 || c.indexOf("document") !== -1 || c.indexOf("text") !== -1);
+                } else if (filter === "Resimler") {
+                    shouldKeep = (c.indexOf("resim") !== -1 || c.indexOf("image") !== -1 || c.indexOf("picture") !== -1 || c.indexOf("photo") !== -1);
+                } else if (filter === "Klasörler") {
+                    shouldKeep = (c.indexOf("klasör") !== -1 || c.indexOf("folder") !== -1 || c.indexOf("yerler") !== -1 || c.indexOf("place") !== -1);
+                } else if (filter === "Uygulamalar") {
+                    shouldKeep = (c.indexOf("uygulama") !== -1 || c.indexOf("application") !== -1 || c.indexOf("app") !== -1 || c.indexOf("program") !== -1);
+                } else if (filter === "Web") {
+                    shouldKeep = (c.indexOf("web") !== -1 || c.indexOf("bookmark") !== -1 || c.indexOf("yer imi") !== -1 || c.indexOf("internet") !== -1 || c.indexOf("browser") !== -1);
+                }
+                
+                if (!shouldKeep) continue;
             }
             
             // FILE ONLY MODE FILTER
