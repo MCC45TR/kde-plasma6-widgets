@@ -8,12 +8,14 @@
             }
         ],
         "Category": "Application Launchers",
+        "Name": "App Menu",
+        "Name[tr]": "Uygulama Menüsü",
         "Description": "Modern App Menu with Pinned Apps and App Library",
+        "Description[tr]": "Sabitlenmiş uygulamalar ve uygulama kütüphanesi içeren modern uygulama menüsü",
         "EnabledByDefault": true,
         "Icon": "launcher-program-symbolic",
         "Id": "com.plasma6widgets.appmenu",
         "License": "GPL-2.0+",
-        "Name": "App Menu",
         "Version": "1.0",
         "Website": ""
     },

@@ -55,11 +55,30 @@ Item {
         anchors.fill: parent
         spacing: 0
 
+        // 0. Search Bar
+        Components.SearchBar {
+            id: searchBar
+            Layout.fillWidth: true
+            Layout.margins: Kirigami.Units.smallSpacing
+            onTextChangedEvent: (query) => {
+                runnerModel.query = query
+            }
+            onEscapePressed: {
+                Plasmoid.expanded = false
+            }
+            onEnterPressed: {
+                if (runnerModel.count > 0) {
+                    runnerModel.trigger(0, "", null)
+                    Plasmoid.expanded = false
+                }
+            }
+        }
+
         // 1. Pinned Apps Section (Top)
         Components.PinnedView {
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? implicitHeight : 0
-            // logic to be added
+            visible: runnerModel.query === ""
         }
 
         // 2. Main Content (SwipeView for Categories)
@@ -69,6 +88,7 @@ Item {
             Layout.fillHeight: true
             clip: true
             currentIndex: bottomPanel.currentIndex
+            visible: runnerModel.query === ""
 
             onCurrentIndexChanged: {
                 if (bottomPanel.currentIndex !== currentIndex) {
@@ -79,10 +99,6 @@ Item {
             // Tab 0: App Library (Categorized View)
             Components.AppLibraryView {
                 rootModel: rootModel
-                onRequestCategoryPage: (index) => {
-                     // Offset by 2 (0=Library, 1=AllApps, 2+=Categories)
-                     mainSwipeView.currentIndex = index + 2
-                }
             }
             
             // Tab 1: All Apps View
@@ -96,16 +112,15 @@ Item {
                 id: categoriesRepeater
                 model: rootModel
                 delegate: Components.CategoryPage {
+                    required property int index
                     categoryModel: rootModel.modelForRow(index)
                     
                     // Match visibility with BottomPanel logic
                     property bool isRecent: {
-                        const name = model.display;
+                         const name = rootModel.data(rootModel.index(index, 0), Qt.DisplayRole);
                          return name === i18n("Recent Applications") || 
                                 name === i18n("Recent Files") || 
-                                name === i18n("Recent Documents") ||
-                                name === "Son Kullanılan Uygulamalar" ||
-                                name === "Son Dosyalar";
+                                name === i18n("Recent Documents");
                     }
                     
                     // If hidden, it shouldn't take up space in SwipeView navigation ideally,
@@ -120,12 +135,21 @@ Item {
                 }
             }
         }
+        
+        // 2.5 Search Results (Shows when searching)
+        Components.SearchResultsView {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            visible: runnerModel.query !== ""
+            runnerModel: runnerModel
+        }
 
         // 3. Bottom Panel (Tabs + Power)
         Components.BottomPanel {
             id: bottomPanel
             Layout.fillWidth: true
-            Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+            Layout.preferredHeight: visible ? Kirigami.Units.gridUnit * 3 : 0
+            visible: runnerModel.query === ""
             
             rootModel: rootModel
             currentIndex: mainSwipeView.currentIndex

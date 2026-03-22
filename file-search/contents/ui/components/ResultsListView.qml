@@ -281,8 +281,10 @@ ScrollView {
                         // Thumbnail for images
                         Image {
                             source: {
-                                var path = decodeURIComponent(url.replace("file://", ""))
-                                var ext = path.split('.').pop().toLowerCase()
+                                var url = modelData.url || "";
+                                if (url.length === 0) return "";
+                                var path = decodeURIComponent(url.replace("file://", ""));
+                                var ext = path.split('.').pop().toLowerCase();
                                 var showPreview = false
                                 
                                 if (resultsListRoot.previewSettings.images) {

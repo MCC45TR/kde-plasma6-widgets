@@ -446,35 +446,11 @@ Item {
         onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
     }
 
-    // Filter Chips Loader
-    Loader {
-        id: filterChipsLoader
-        anchors.top: parent.top
-        anchors.topMargin: isButtonMode ? 0 : 8
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 12
-        anchors.rightMargin: 12
-        active: popupRoot.expanded && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText)
-        
-        sourceComponent: FilterChips {
-            textColor: popupRoot.textColor
-            accentColor: popupRoot.accentColor
-            bgColor: popupRoot.bgColor
-            activeFilter: popupRoot.activeFilter
-            breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
-            
-            onFilterSelected: (filter) => {
-                popupRoot.activeFilter = filter
-            }
-        }
-    }
-
     // Primary Preview (Loader)
     Loader {
         id: primaryResultPreviewLoader
-        anchors.top: filterChipsLoader.active ? filterChipsLoader.bottom : parent.top
-        anchors.topMargin: filterChipsLoader.active ? 8 : 0
+        anchors.top: parent.top
+        anchors.topMargin: isButtonMode ? 0 : 8
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 12
@@ -500,9 +476,9 @@ Item {
     // Query Hints (Loader)
     Loader {
         id: queryHintsLoader
-        anchors.top: primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready ? primaryResultPreviewLoader.bottom : (filterChipsLoader.active ? filterChipsLoader.bottom : parent.top)
+        anchors.top: primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready ? primaryResultPreviewLoader.bottom : parent.top
         // Add extra top margin in button mode to prevent content from being hidden behind panel button
-        anchors.topMargin: primaryResultPreviewLoader.active ? 8 : (isButtonMode ? 50 : (filterChipsLoader.active ? 8 : 0))
+        anchors.topMargin: primaryResultPreviewLoader.active ? 8 : (isButtonMode ? 50 : 8)
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
@@ -608,10 +584,50 @@ Item {
         }
     }
 
+    // Filter Chips Wrapper
+    Item {
+        id: filterChipsWrapper
+        anchors.top: pinnedLoader.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
+        
+        property bool isVisible: popupRoot.expanded && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText)
+        
+        anchors.topMargin: isVisible ? 8 : 0
+        height: isVisible ? 32 : 0
+        opacity: isVisible ? 1 : 0
+        clip: true
+        visible: height > 0 || opacity > 0
+        
+        Behavior on height { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+        Behavior on anchors.topMargin { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+        Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+        
+        Loader {
+            anchors.fill: parent
+            active: filterChipsWrapper.visible
+            sourceComponent: FilterChips {
+                textColor: popupRoot.textColor
+                accentColor: popupRoot.accentColor
+                bgColor: popupRoot.bgColor
+                activeFilter: popupRoot.activeFilter
+                breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
+                
+                onFilterSelected: (filter) => {
+                    popupRoot.activeFilter = filter
+                }
+            }
+        }
+    }
+
+
+
     // Result List View (Loader)
     Loader {
         id: resultsListLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterChipsWrapper.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -651,7 +667,7 @@ Item {
     // Result Tile View (Loader)
     Loader {
         id: tileResultsLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterChipsWrapper.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -690,7 +706,7 @@ Item {
     // Date/Clock View (Special "date:" query)
     Loader {
         id: dateViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterChipsWrapper.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -711,7 +727,7 @@ Item {
     // Help View ("help:" query)
     Loader {
         id: helpViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterChipsWrapper.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -742,7 +758,7 @@ Item {
     // Weather View ("weather:" query)
     Loader {
         id: weatherViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterChipsWrapper.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -761,7 +777,7 @@ Item {
     // Power View ("power:" query)
     Loader {
         id: powerViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: filterChipsWrapper.bottom
         anchors.topMargin: active ? 12 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -790,7 +806,7 @@ Item {
     // History Container (Loader) - Show when no search text
     Loader {
          id: historyLoader
-         anchors.top: pinnedLoader.active ? pinnedLoader.bottom : parent.top
+         anchors.top: filterChipsWrapper.bottom
          anchors.left: parent.left
          anchors.right: parent.right
          anchors.bottom: parent.bottom // Anchor to parent bottom

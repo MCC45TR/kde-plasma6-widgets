@@ -33,28 +33,53 @@ Item {
     implicitHeight: (grid.cellHeight * Math.ceil(Math.min(14, Math.max(7, grid.count)) / 7)) + 20 // Approx height: max 2 rows or dynamic
     
     DropArea {
+        id: dropArea
         anchors.fill: parent
-        onEntered: (drag) => {
-            // Check if valid app drag
-            // In Plasma, app drags usually have mimeData
+        
+        property bool isDragActive: containsDrag
+        
+        Rectangle {
+            anchors.fill: parent
+            color: Kirigami.Theme.highlightColor
+            opacity: dropArea.isDragActive ? 0.3 : 0
+            radius: Kirigami.Units.largeSpacing
+            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration } }
         }
+        
+        onEntered: (drag) => {
+            drag.accept(Qt.LinkAction)
+        }
+        
         onDropped: (drop) => {
+            var serviceName = drop.getDataAsString("text/x-plasmoid-servicename")
+            if (serviceName) {
+                var title = serviceName.replace(".desktop", "").replace("org.kde.", "").split('.').pop()
+                // Capitalize first letter
+                title = title.charAt(0).toUpperCase() + title.slice(1)
+                var iconName = serviceName.replace(".desktop", "")
+                
+                root.pinItem({
+                    filePath: "applications:" + serviceName,
+                    matchId: serviceName,
+                    display: title,
+                    decoration: iconName
+                })
+                drop.accept()
+                return
+            }
+            
             if (drop.hasUrls) {
-                // Parse URL to find .desktop file or similar
-                // This is simplified; robust implementation needs MimeType checking
-                 var url = drop.urls[0].toString()
-                 // Mock item for now, needs real resolution logic
-                 if (url.endsWith(".desktop")) {
-                     // Need to resolve name/icon from desktop file. 
-                     // Since we can't easily read files here without a helper, 
-                     // we might need to rely on what data is available in drop keys.
-                     // Often drop.text contains the url.
-                     // For now, let's assume we can get some info.
-                     // LogicController in file-search handles this via history adds.
-                     
-                     // Placeholder:
-                     // root.pinItem({url: url, display: "App", decoration: "application-x-executable"})
-                 }
+                var url = drop.urls[0].toString()
+                var filename = url.split('/').pop()
+                var titleUrl = decodeURIComponent(filename.replace(".desktop", ""))
+                
+                root.pinItem({
+                    filePath: url,
+                    matchId: url,
+                    display: titleUrl,
+                    decoration: "application-x-executable"
+                })
+                drop.accept()
             }
         }
     }

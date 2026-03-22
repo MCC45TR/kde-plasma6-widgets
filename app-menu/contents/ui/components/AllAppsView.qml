@@ -11,13 +11,14 @@ ScrollView {
     
     contentWidth: availableWidth
     
-    ListModel {
-        id: sectionsModel
-    }
+    property var sectionsList: []
 
     function refreshModel() {
-        sectionsModel.clear()
-        if (!root.model) return
+        var tempList = []
+        if (!root.model) {
+            sectionsList = tempList
+            return
+        }
 
         let count = root.model.count
         let groups = {}
@@ -52,11 +53,12 @@ ScrollView {
         let sortedKeys = Object.keys(groups).sort((a, b) => a.localeCompare(b, Qt.locale().name))
         
         for (let key of sortedKeys) {
-            sectionsModel.append({
+            tempList.push({
                 section: key,
                 apps: groups[key]
             })
         }
+        sectionsList = tempList
     }
     
     Connections {
@@ -72,7 +74,7 @@ ScrollView {
     ListView {
         id: listView
         anchors.fill: parent
-        model: sectionsModel
+        model: sectionsList
         clip: true
         
         delegate: ColumnLayout {
@@ -88,7 +90,7 @@ ScrollView {
                 spacing: 10
                 
                 Text {
-                    text: model.section
+                    text: modelData.section
                     font.bold: true
                     color: Kirigami.Theme.highlightColor
                     font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 1.2
@@ -96,7 +98,7 @@ ScrollView {
                 Rectangle {
                     Layout.fillWidth: true
                     height: 1
-                    color: Kirigami.Theme.separatorColor
+                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
                     opacity: 0.5
                 }
             }
@@ -110,12 +112,25 @@ ScrollView {
                 spacing: 10
                 
                 Repeater {
-                    model: model.apps
+                    model: modelData.apps
                     
                     delegate: Item {
                         // Tile dimensions
                         width: Kirigami.Units.gridUnit * 6
                         height: width + 30
+                        
+                        property bool isHovered: hoverArea.containsMouse
+                        
+                        Rectangle {
+                            anchors.fill: parent
+                            color: Kirigami.Theme.highlightColor
+                            opacity: isHovered ? 0.2 : 0
+                            radius: Kirigami.Units.smallSpacing
+                            
+                            Behavior on opacity {
+                                NumberAnimation { duration: Kirigami.Units.shortDuration }
+                            }
+                        }
                         
                         // Content
                         Column {
@@ -144,10 +159,13 @@ ScrollView {
                         }
                         
                         MouseArea {
+                            id: hoverArea
                             anchors.fill: parent
+                            hoverEnabled: true
                             onClicked: {
                                 if (root.model) {
                                     root.model.trigger(modelData.originalIndex, "", null)
+                                    Plasmoid.expanded = false
                                 }
                             }
                         }

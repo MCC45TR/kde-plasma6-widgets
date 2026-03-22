@@ -63,9 +63,7 @@ Item {
                             const name = model.display;
                             return name !== i18n("Recent Applications") && 
                                    name !== i18n("Recent Files") && 
-                                   name !== i18n("Recent Documents") &&
-                                   name !== "Son Kullanılan Uygulamalar" && // Hardcoded fallback for Turkish
-                                   name !== "Son Dosyalar";
+                                   name !== i18n("Recent Documents");
                         }
                         
                         visible: shouldShow
