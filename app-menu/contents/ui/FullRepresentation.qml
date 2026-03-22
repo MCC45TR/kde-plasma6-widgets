@@ -59,7 +59,10 @@ Item {
         Components.SearchBar {
             id: searchBar
             Layout.fillWidth: true
-            Layout.margins: Kirigami.Units.smallSpacing
+            Layout.topMargin: Kirigami.Units.smallSpacing
+            Layout.leftMargin: Kirigami.Units.smallSpacing
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            Layout.bottomMargin: 10
             onTextChangedEvent: (query) => {
                 runnerModel.query = query
             }

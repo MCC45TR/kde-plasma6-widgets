@@ -17,7 +17,10 @@ Item {
     Flickable {
         id: flickable
         anchors.fill: parent
-        anchors.margins: Kirigami.Units.smallSpacing
+        anchors.topMargin: 0
+        anchors.leftMargin: Kirigami.Units.smallSpacing
+        anchors.rightMargin: Kirigami.Units.smallSpacing
+        anchors.bottomMargin: Kirigami.Units.smallSpacing
         contentWidth: width
         contentHeight: flowLayout.implicitHeight + 20
         
