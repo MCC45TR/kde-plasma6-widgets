@@ -9,45 +9,45 @@
 </p>
 
 <p align="center">
-  <a href="#-installation"><img src="https://img.shields.io/badge/Platform-KDE_Plasma_6-1d99f3?style=for-the-badge&logo=kde" alt="Platform"></a>
+  <a href="#installation"><img src="https://img.shields.io/badge/Platform-KDE_Plasma_6-1d99f3?style=for-the-badge&logo=kde" alt="Platform"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="License"></a>
-  <a href="#-widget-catalog"><img src="https://img.shields.io/badge/Widgets-19+-success?style=for-the-badge" alt="Widgets"></a>
-  <a href="#-key-features"><img src="https://img.shields.io/badge/Languages-20-orange?style=for-the-badge" alt="Languages"></a>
+  <a href="#widget-catalog"><img src="https://img.shields.io/badge/Widgets-19+-success?style=for-the-badge" alt="Widgets"></a>
+  <a href="#key-features"><img src="https://img.shields.io/badge/Languages-20-orange?style=for-the-badge" alt="Languages"></a>
 </p>
 
 <p align="center">
-  <a href="#-key-features">Features</a> •
-  <a href="#-widget-catalog">Widgets</a> •
-  <a href="#-installation">Installation</a> •
-  <a href="#%EF%B8%8F-configuration">Configuration</a> •
-  <a href="#-contribution">Contribute</a>
+  <a href="#key-features">Features</a> •
+  <a href="#widget-catalog">Widgets</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#configuration">Configuration</a> •
+  <a href="#contribution">Contribute</a>
 </p>
 
 ---
 
-## 📖 Overview
+## Overview
 
 This repository contains a suite of plasmoids ranging from advanced system tools (**File Search**, **System Monitor**) to essential desktop utilities (**Clock**, **Calendar**, **Notes**), all re-engineered for **performance**, **visual consistency**, and **ease of use**.
 
-> ⭐ **If you find this collection useful, please consider starring the repository!**
+> **If you find this collection useful, please consider starring the repository!**
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 | Feature | Description |
 |---------|-------------|
-| 🎨 **Plasma 6 Native** | Built fully on Qt6 and QML, optimized for the latest KDE Plasma desktop. |
-| 🎯 **Unified Design** | All widgets share a consistent look using system theme icons (`breeze-icons`). |
-| 🌍 **20+ Languages** | Standard Gettext-based localization (.po/.mo) supporting 20+ languages including English, Turkish, German, French, Spanish, Russian, Portuguese, Italian, and more. |
-| 🧩 **Modular Architecture** | Clean code with reusable components and logic separated into JavaScript modules. |
-| ⚡ **Power User Features** | Smart Query in File Finder, dynamic MPRIS discovery, offline-first Calendar, and more. |
+| **Plasma 6 Native** | Built fully on Qt6 and QML, optimized for the latest KDE Plasma desktop. |
+| **Unified Design** | All widgets share a consistent look using system theme icons (`breeze-icons`). |
+| **Localization** | Standard Gettext-based localization (.po/.mo) supporting 20+ languages including English, Turkish, German, French, Spanish, Russian, Portuguese, Italian, and more. |
+| **Modular Architecture** | Clean code with reusable components and logic separated into JavaScript modules. |
+| **Power User Features** | Smart Query in File Finder, dynamic MPRIS discovery, offline-first Calendar, and more. |
 
 ---
 
-## 📦 Widget Catalog
+## Widget Catalog
 
-### 🔍 MFile Search
+### MFile Search
 > A powerful **Spotlight/Raycast** alternative for Plasma.
 
 <p align="center">
@@ -67,9 +67,9 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Localized**: Full support for 20 languages including interactive prefix suggestions
 - **View Profiles**: Minimal, Developer (with live telemetry), and Power User modes
 - **Rich Previews**: Instant hover previews with async thumbnail caching
-- 📄 *[Read detailed documentation →](./file-search/README.md)*
+- *[Read detailed documentation](./file-search/README.md)*
 
-### 🌦️ MWeather
+### MWeather
 > A responsive, multi-provider weather dashboard with stunning animations.
 
 <p align="center">
@@ -84,17 +84,17 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Morphing Details**: Unique overlay that expands smoothly from UI elements
 - **Widget Edge Margin**: Customizable margins (Normal, Less, None) for better panel integration
 - **Zero Config**: Works out-of-the-box with Open-Meteo (no API key required)
-- 📄 *[Read detailed documentation →](./weather/README.md)*
+- *[Read detailed documentation](./weather/README.md)*
 
-### � MBrowser Search
+### MBrowser Search
 > A minimalist browser search bar with quick access to history and settings.
 
 - **Multi-Engine**: Support for Google, DuckDuckGo, Bing, and more
 - **Quick Access**: Dedicated buttons for browser history and settings
 - **Widget Edge Margin**: Adjustable spacing for a perfect panel fit
-- 📄 *[Read detailed documentation →](./browser-search/README.md)*
+- *[Read detailed documentation](./browser-search/README.md)*
 
-### �🎵 Music Player
+### Music Player
 > A dynamic media controller that adapts to your workflow.
 
 <p align="center">
@@ -107,9 +107,9 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Universal Control**: Automatically finds active media players (Spotify, VLC, browser, etc.)
 - **Smart Discovery**: Scans all active MPRIS services
 - **Visual Polish**: Squeeze animations, dynamic pill-shaped badge, themed icons
-- 📄 *[Read detailed documentation →](./music-player/README.md)*
+- *[Read detailed documentation](./music-player/README.md)*
 
-### 🗓️ MCalendar
+### MCalendar
 > A clean, offline-focused calendar widget.
 
 <p align="center">
@@ -122,15 +122,15 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Privacy-First**: No external dependencies for a fast, local experience
 - **System Integration**: Uses system locale for date formats
 - **Modern UI**: Fluid animations and improved event markers
-- 📄 *[Read detailed documentation →](./calendar/README.md)*
+- *[Read detailed documentation](./calendar/README.md)*
 
-### 🔋 Battery
+### Battery
 > A multi-device power monitor.
 
 - **Peripheral Support**: Up to 4 devices (Mouse, Keyboard, Headphones, etc.)
 - **Dynamic UI**: Charging indicators adapt to available space
 
-### ⏰ Clocks
+### Clocks
 > Analog & Digital clock widgets.
 
 <p align="center">
@@ -145,13 +145,13 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 - **Analog**: Minimalist design with dynamic opacity and hand smoothing
 - **Digital**: Configurable fonts (Roboto Condensed Variable) and hover-reveal seconds
 
-### 🔄 Advanced Reboot
+### Advanced Reboot
 > Power management with granular control.
 
 - **Boot Options**: List and select UEFI/BIOS entries directly (requires `bootctl`)
 - **Safe UI**: Confirmation interface to prevent accidental actions
 
-### 🛠️ Other Utilities
+### Other Utilities
 
 | Widget | Description |
 |--------|-------------|
@@ -171,7 +171,7 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 ---
 
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 
@@ -215,7 +215,7 @@ kpackagetool6 --type Plasma/Applet --upgrade .
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Most widgets have a rich configuration panel accessible via **Right Click → Configure**.
 
@@ -228,7 +228,7 @@ Most widgets have a rich configuration panel accessible via **Right Click → Co
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 <details>
 <summary><b>Widget not showing after install?</b></summary>
@@ -257,7 +257,7 @@ Ensure you have `breeze-icon-theme` or a compatible system icon theme installed.
 
 ---
 
-## 🤝 Contribution
+## Contribution
 
 Contributions are welcome! Please follow these guidelines:
 
@@ -267,43 +267,32 @@ Contributions are welcome! Please follow these guidelines:
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LICENSE) file for details.
 
 ---
 
-## 📊 Development Status
+## Development Status
 
-| Widget | Status |
-| :--- | :---: |
-| **Analog Clock** | ✅ |
-| **Calendar** | ✅ |
-| **File Search** | ✅ |
-| **Music Player** | ✅ |
-| **Weather** | ✅ |
-| **App Menu** | 🚧 |
-| **Browser Search** | 🚧 |
-| **Plasma Advanced Reboot** | ✅ |
-| **Alarms** | ❌ |
-| **AUR Updates** | ❌ |
-| **Battery** | 🚧 |
-| **Control Center** | ❌ |
-| **Digital Clock** | ❌ |
-| **Events** | ❌ |
-| **Minimal Analog Clock** | ❌ |
-| **Notes** | ❌ |
-| **Photos** | ❌ |
-| **Spotify** | ❌ |
-| **System Monitor** | ❌ |
-| **World Clock** | ❌ |
-| **MSI Control** | 🚧 |
-| **AFAD-Earthquake** | 🚧 |
+| Widget | Status | Widget | Status |
+| :--- | :---: | :--- | :---: |
+| **Analog Clock** | Stable | **Control Center** | Planned |
+| **Calendar** | Stable | **Digital Clock** | Planned |
+| **File Search** | Stable | **Events** | Planned |
+| **Music Player** | Stable | **Minimal Analog Clock** | Planned |
+| **Weather** | Stable | **Notes** | Planned |
+| **App Menu** | WIP | **Photos** | Planned |
+| **Browser Search** | WIP | **Spotify** | Planned |
+| **Plasma Advanced Reboot** | Stable | **System Monitor** | Planned |
+| **Alarms** | Planned | **World Clock** | Planned |
+| **AUR Updates** | Planned | **MSI Control** | WIP |
+| **Battery** | WIP | **AFAD-Earthquake** | WIP |
 
 ---
 
 <p align="center">
-  <b>Maintained with ❤️ by <a href="https://github.com/MCC45TR">MCC45TR</a></b>
+  <b>Maintained by <a href="https://github.com/MCC45TR">MCC45TR</a></b>
 </p>
 
 <p align="center">
