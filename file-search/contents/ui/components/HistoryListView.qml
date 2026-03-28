@@ -30,7 +30,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 32
+        height: 24
         
         Text {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Recent Searches")
@@ -78,7 +78,7 @@ Item {
     ScrollView {
         visible: historyList.categorizedHistory.length > 0
         anchors.top: historyHeader.bottom
-        anchors.topMargin: 8
+        anchors.topMargin: 4
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom

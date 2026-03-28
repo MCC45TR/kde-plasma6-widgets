@@ -897,7 +897,7 @@ msgstr "komut"
 
 #: contents/ui/components/SearchPopup.qml:367
 msgid "Search Here"
-msgstr "Arama Yapın"
+msgstr "Dosya, klasör ve uygulamaları ara..."
 
 #: contents/ui/components/SearchPopup.qml:714
 #: contents/ui/components/SearchPopup.qml:720

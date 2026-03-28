@@ -85,6 +85,15 @@ ScrollView {
             // Ensure visible initially
             opacity: 1 
             
+            // Sürükle ve Bırak Desteği
+            Drag.active: resultMouseArea.drag.active
+            Drag.dragType: Drag.Automatic
+            Drag.mimeData: {
+                "text/uri-list": modelData.url || "",
+                "text/plain": modelData.url || ""
+            }
+            // MimeData mapping
+            
             RowLayout {
                 anchors.fill: parent
                 anchors.leftMargin: 8
@@ -222,6 +231,10 @@ ScrollView {
                 cursorShape: Qt.PointingHandCursor
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 
+                // DRAG
+                drag.target: resultItem
+                drag.threshold: 10
+                
                 onClicked: (mouse) => {
                     var matchId = (modelData.duplicateId !== undefined ? modelData.duplicateId : modelData.display) || ""
                     var filePath = (modelData.url && modelData.url.toString) ? modelData.url.toString() : (modelData.url || "")
@@ -250,7 +263,7 @@ ScrollView {
                             matchId: matchId,
                             filePath: filePath,
                             isApplication: isApp,
-                            uuid: matchId // For compatibility with HistoryContextMenu
+                            uuid: "" // Live sonuçlar için boş bıraktığımıza emin olalım
                         }, mouse.x + resultItem.x, mouse.y + resultItem.y)
                     } else {
                         // Left-click: open item

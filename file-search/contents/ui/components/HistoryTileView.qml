@@ -238,7 +238,7 @@ FocusScope {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 32
+        height: 24
         
         Text {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Recent Searches")
@@ -334,7 +334,7 @@ FocusScope {
     ScrollView {
         visible: historyTile.categorizedHistory.length > 0
         anchors.top: historyHeader.bottom
-        anchors.topMargin: 8
+        anchors.topMargin: 4
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -344,13 +344,13 @@ FocusScope {
         ListView {
             id: tileView
             model: historyTile.categorizedHistory
-            spacing: 16
+            spacing: 8
             interactive: false
             
             delegate: Column {
                 id: histCategoryDelegate
                 width: tileView.width
-                spacing: 8
+                spacing: 4
                 
                 property int catIdx: index
                 property bool isCollapsed: historyTile.collapsedCategories[modelData.categoryName] || false

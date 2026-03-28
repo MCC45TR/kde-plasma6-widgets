@@ -118,6 +118,9 @@ msgstr "Metin:"
 msgid "Scroll Text if truncated"
 msgstr "Metin sığmazsa kaydır"
 
+msgid "Smooth Scrolling"
+msgstr "Pürüzsüz Kaydır"
+
 msgid "Dynamic Width (auto-expand to fit text)"
 msgstr "Dinamik Genişlik (metne göre otomatik genişle)"
 

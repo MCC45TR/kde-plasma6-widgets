@@ -53,18 +53,31 @@ Item {
             if (dataManager.activeFilter !== "Tümü") {
                 var filter = dataManager.activeFilter;
                 var c = cat.toLowerCase();
+                var d = (item.decoration || "").toString().toLowerCase();
+                var u = (item.url || "").toString().toLowerCase();
+                var ext = u.substring(u.lastIndexOf(".") + 1);
                 var shouldKeep = false;
                 
                 if (filter === "Belgeler") {
-                    shouldKeep = (c.indexOf("belge") !== -1 || c.indexOf("document") !== -1 || c.indexOf("text") !== -1);
+                    var docExts = ["pdf", "doc", "docx", "odt", "txt", "md", "xls", "xlsx", "ppt", "pptx", "ods", "csv"];
+                    shouldKeep = (c.indexOf("belge") !== -1 || c.indexOf("document") !== -1 || c.indexOf("text") !== -1 || 
+                                 d.indexOf("document") !== -1 || d.indexOf("text") !== -1 || docExts.indexOf(ext) !== -1);
                 } else if (filter === "Resimler") {
-                    shouldKeep = (c.indexOf("resim") !== -1 || c.indexOf("image") !== -1 || c.indexOf("picture") !== -1 || c.indexOf("photo") !== -1);
+                    var imgExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"];
+                    shouldKeep = (c.indexOf("resim") !== -1 || c.indexOf("image") !== -1 || c.indexOf("picture") !== -1 || 
+                                 c.indexOf("photo") !== -1 || c.indexOf("görsel") !== -1 || c.indexOf("görüntü") !== -1 ||
+                                 d.indexOf("image") !== -1 || d.indexOf("photo") !== -1 || d.indexOf("picture") !== -1 ||
+                                 imgExts.indexOf(ext) !== -1);
                 } else if (filter === "Klasörler") {
-                    shouldKeep = (c.indexOf("klasör") !== -1 || c.indexOf("folder") !== -1 || c.indexOf("yerler") !== -1 || c.indexOf("place") !== -1);
+                    shouldKeep = (c.indexOf("klasör") !== -1 || c.indexOf("folder") !== -1 || c.indexOf("yerler") !== -1 || 
+                                 c.indexOf("place") !== -1 || d.indexOf("folder") !== -1 || u.endsWith("/"));
                 } else if (filter === "Uygulamalar") {
-                    shouldKeep = (c.indexOf("uygulama") !== -1 || c.indexOf("application") !== -1 || c.indexOf("app") !== -1 || c.indexOf("program") !== -1);
+                    shouldKeep = (c.indexOf("uygulama") !== -1 || c.indexOf("application") !== -1 || c.indexOf("app") !== -1 || 
+                                 c.indexOf("program") !== -1 || d.indexOf("app") !== -1 || u.endsWith(".desktop"));
                 } else if (filter === "Web") {
-                    shouldKeep = (c.indexOf("web") !== -1 || c.indexOf("bookmark") !== -1 || c.indexOf("yer imi") !== -1 || c.indexOf("internet") !== -1 || c.indexOf("browser") !== -1);
+                    shouldKeep = (c.indexOf("web") !== -1 || c.indexOf("bookmark") !== -1 || c.indexOf("yer imi") !== -1 || 
+                                 c.indexOf("internet") !== -1 || c.indexOf("browser") !== -1 || d.indexOf("globe") !== -1 || 
+                                 d.indexOf("web") !== -1 || u.startsWith("http") || u.startsWith("www"));
                 }
                 
                 if (!shouldKeep) continue;
@@ -99,6 +112,11 @@ Item {
                 duplicateId: item.duplicateId || "",
                 index: item.itemIndex
             });
+            
+            // Debugging
+            if (dataManager.resultsModel.queryString !== "") {
+                console.log("FileSearch Matched Item:", item.display, " Category:", cat, " Icon:", item.decoration);
+            }
         }
         
         // Step 2: Sort by priority and similarity
@@ -193,7 +211,8 @@ Item {
         visible: false
         delegate: Item {
             property int itemIndex: index
-            property var category: model.category || ""
+            // Role name fallback for different Milou/Plasma versions
+            property var category: (model.category !== undefined ? model.category : (model.matchCategory !== undefined ? model.matchCategory : (model.categoryName !== undefined ? model.categoryName : "")))
             property var display: model.display || ""
             property var decoration: model.decoration || ""
             property var url: model.url || ""

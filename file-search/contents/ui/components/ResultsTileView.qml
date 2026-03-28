@@ -452,6 +452,14 @@ FocusScope {
                                 border.width: tileDelegate.isSelected ? 2 : 0
                                 border.color: resultsTileRoot.accentColor
                                 
+                                // Sürükle ve Bırak Desteği
+                                Drag.active: tileMouseArea.drag.active
+                                Drag.dragType: Drag.Automatic
+                                Drag.mimeData: {
+                                    "text/uri-list": modelData.url || "",
+                                    "text/plain": modelData.url || ""
+                                }
+                                
                                 Behavior on border.width { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
                                 Behavior on color { ColorAnimation { duration: 150 } }
                                 
@@ -614,6 +622,9 @@ FocusScope {
                                 MouseArea {
                                     id: tileMouseArea
                                     anchors.fill: parent
+                                    // DRAG
+                                    drag.target: tileBg
+                                    drag.threshold: 10
 
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
@@ -645,7 +656,7 @@ FocusScope {
                                                 matchId: matchId,
                                                 filePath: filePath,
                                                 isApplication: isApp,
-                                                uuid: matchId
+                                                uuid: ""
                                             }, mouse.x + tileDelegate.x, mouse.y + tileDelegate.y)
                                         } else {
                                             resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Diğer", matchId, filePath)

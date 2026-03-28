@@ -22,14 +22,14 @@ Item {
         if (expanded) {
             // Force focus when popup opens
             if (isButtonMode) {
-                buttonModeSearchInput.focusInput()
+                searchBar.focusInput()
             } else {
                 hiddenSearchInput.forceActiveFocus()
             }
         } else {
             // Clear search text when popup closes
             requestSearchTextUpdate("")
-            buttonModeSearchInput.clear()
+            searchBar.clear()
             hiddenSearchInput.text = ""
             activeFilter = "Tümü"
         }
@@ -116,11 +116,30 @@ Item {
     // ===== SEARCH MODEL =====
     Milou.ResultsModel {
         id: resultsModel
-        queryString: getEffectiveQuery(popupRoot.searchText)
-        limit: 50
+        queryString: getFilteredQuery(getEffectiveQuery(popupRoot.searchText), popupRoot.activeFilter)
+        // Set a high limit to ensure we get plenty of results from the targeted runner
+        limit: (popupRoot.activeFilter === "Tümü") ? 100 : 300
     }
     
     // ===== FUNCTIONS =====
+    
+    function getFilteredQuery(text, filter) {
+        if (!text || filter === "Tümü") return text;
+        
+        var prefix = "";
+        // Force specific runners with space to ensure they are parsed as providers
+        if (filter === "Belgeler" || filter === "Resimler" || filter === "Klasörler") {
+            prefix = "baloo: ";
+        } else if (filter === "Uygulamalar") {
+            prefix = "services: ";
+        } else if (filter === "Web") {
+            prefix = "bookmarks: ";
+        } else {
+            return text;
+        }
+        
+        return prefix + text;
+    }
     
     // Background for Desktop Mode (Matte)
     Rectangle {
@@ -197,7 +216,7 @@ Item {
         requestSearchTextUpdate(searchTerm);
         
         if (!isButtonMode) hiddenSearchInput.text = searchTerm;
-        else buttonModeSearchInput.setText(searchTerm);
+        else searchBar.setText(searchTerm);
         
         historyRunTimer.start();
     }
@@ -386,49 +405,41 @@ Item {
         onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
     }
 
-    // Button Mode Input
-    ButtonModeSearchInput {
-        id: buttonModeSearchInput
-        anchors.bottom: parent.bottom
+    // New Search Bar (matches app-menu style, placed at top)
+    SearchBar {
+        id: searchBar
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.margins: 12
         visible: isButtonMode
-        z: 100
-        
-        bgColor: popupRoot.bgColor
-        textColor: popupRoot.textColor
-        accentColor: popupRoot.accentColor
         placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Here")
         resultCount: tileData.resultCount
         resultsModel: resultsModel
+        
+        onTextUpdated: (newText) => {
+             if (isButtonMode && newText !== popupRoot.searchText) {
+                 requestSearchTextUpdate(newText);
+                 tileData.startSearch();
+             }
+        }
         
         // Manual binding for text (Popup -> Input)
         Connections {
              target: popupRoot
              function onSearchTextChanged() {
-                 if (popupRoot.expanded && isButtonMode && buttonModeSearchInput.searchText !== popupRoot.searchText) {
-                     buttonModeSearchInput.setText(popupRoot.searchText);
+                 if (popupRoot.expanded && isButtonMode && searchBar.text !== popupRoot.searchText) {
+                     searchBar.setText(popupRoot.searchText);
                  }
              }
         }
         
-        // Sync Input -> Popup
-        onSearchTextChanged: {
-            if (isButtonMode && buttonModeSearchInput.searchText !== popupRoot.searchText) {
-                // If the change initiated from input (user typing), sync up
-                requestSearchTextUpdate(buttonModeSearchInput.searchText);
-                tileData.startSearch();
-            }
-        }
-
         onSearchSubmitted: (text, idx) => {
-             // Just run index 0 or selected
              if (tileData.resultCount > 0) {
                  var modelIdx = resultsModel.index(idx, 0);
-                 var display = resultsModel.data(modelIdx, Qt.DisplayRole);
                  resultsModel.run(modelIdx);
                  requestSearchTextUpdate("");
-                 buttonModeSearchInput.clear();
+                 searchBar.clear();
                  requestExpandChange(false);
              }
          }
@@ -449,7 +460,7 @@ Item {
     // Primary Preview (Loader)
     Loader {
         id: primaryResultPreviewLoader
-        anchors.top: parent.top
+        anchors.top: isButtonMode ? searchBar.bottom : parent.top
         anchors.topMargin: isButtonMode ? 0 : 8
         anchors.left: parent.left
         anchors.right: parent.right
@@ -476,9 +487,10 @@ Item {
     // Query Hints (Loader)
     Loader {
         id: queryHintsLoader
-        anchors.top: primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready ? primaryResultPreviewLoader.bottom : parent.top
-        // Add extra top margin in button mode to prevent content from being hidden behind panel button
-        anchors.topMargin: primaryResultPreviewLoader.active ? 8 : (isButtonMode ? 50 : 8)
+        anchors.top: (primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready) 
+                     ? primaryResultPreviewLoader.bottom 
+                     : (searchBar.visible ? searchBar.bottom : parent.top)
+        anchors.topMargin: (primaryResultPreviewLoader.active || searchBar.visible) ? 8 : 8
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
@@ -497,7 +509,7 @@ Item {
             onHintSelected: (text) => {
                 requestSearchTextUpdate(text)
                 if (!isButtonMode) hiddenSearchInput.text = text
-                else buttonModeSearchInput.setText(text)
+                else searchBar.setText(text)
             }
         }
     }
@@ -515,8 +527,8 @@ Item {
     // Pinned Section (Loader)
     Loader {
         id: pinnedLoader
-        anchors.top: queryHintsLoader.bottom
-        anchors.topMargin: active ? 8 : 0
+        anchors.top: queryHintsLoader.active ? queryHintsLoader.bottom : (primaryResultPreviewLoader.active ? primaryResultPreviewLoader.bottom : (searchBar.visible ? searchBar.bottom : parent.top))
+        anchors.topMargin: active ? 4 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
@@ -595,7 +607,7 @@ Item {
         
         property bool isVisible: popupRoot.expanded && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText)
         
-        anchors.topMargin: isVisible ? 8 : 0
+        anchors.topMargin: isVisible ? 4 : 0
         height: isVisible ? 32 : 0
         opacity: isVisible ? 1 : 0
         clip: true
@@ -616,6 +628,7 @@ Item {
                 breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
                 
                 onFilterSelected: (filter) => {
+                    tileData.startSearch()
                     popupRoot.activeFilter = filter
                 }
             }
@@ -628,7 +641,7 @@ Item {
     Loader {
         id: resultsListLoader
         anchors.top: filterChipsWrapper.bottom
-        anchors.topMargin: active ? 12 : 0
+        anchors.topMargin: active ? 0 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom // Anchor to parent bottom
@@ -636,7 +649,7 @@ Item {
         anchors.rightMargin: 12
         asynchronous: true
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
-        anchors.bottomMargin: isButtonMode ? 56 : 12
+        anchors.bottomMargin: 12
         
         active: popupRoot.expanded && !isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
         
@@ -668,13 +681,13 @@ Item {
     Loader {
         id: tileResultsLoader
         anchors.top: filterChipsWrapper.bottom
-        anchors.topMargin: active ? 12 : 0
+        anchors.topMargin: active ? 0 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        anchors.bottomMargin: isButtonMode ? 56 : 12
+        anchors.bottomMargin: 12
 
         asynchronous: true
         active: popupRoot.expanded && isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
@@ -707,7 +720,7 @@ Item {
     Loader {
         id: dateViewLoader
         anchors.top: filterChipsWrapper.bottom
-        anchors.topMargin: active ? 12 : 0
+        anchors.topMargin: active ? 0 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom // Anchor to parent bottom
@@ -728,7 +741,7 @@ Item {
     Loader {
         id: helpViewLoader
         anchors.top: filterChipsWrapper.bottom
-        anchors.topMargin: active ? 12 : 0
+        anchors.topMargin: active ? 0 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -749,7 +762,7 @@ Item {
                 // If HelpView sends "birim:", we put "birim:".
                 requestSearchTextUpdate(prefix)
                 if (!isButtonMode) hiddenSearchInput.text = prefix
-                else buttonModeSearchInput.setText(prefix)
+                else searchBar.setText(prefix)
                 // Focus input?
             }
         }
@@ -759,7 +772,7 @@ Item {
     Loader {
         id: weatherViewLoader
         anchors.top: filterChipsWrapper.bottom
-        anchors.topMargin: active ? 12 : 0
+        anchors.topMargin: active ? 0 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -778,7 +791,7 @@ Item {
     Loader {
         id: powerViewLoader
         anchors.top: filterChipsWrapper.bottom
-        anchors.topMargin: active ? 12 : 0
+        anchors.topMargin: active ? 0 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -812,11 +825,10 @@ Item {
          anchors.bottom: parent.bottom // Anchor to parent bottom
          anchors.leftMargin: 12
          anchors.rightMargin: 12
-         // Add extra top margin in button mode to prevent content from being hidden behind panel button
-         anchors.topMargin: isButtonMode ? 50 : 12
+         // History top margin is now fixed
+         anchors.topMargin: 0 
          asynchronous: true
-         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
-         anchors.bottomMargin: isButtonMode ? 56 : 12
+         anchors.bottomMargin: 12
          
          active: popupRoot.expanded && searchText.length === 0
          

@@ -132,6 +132,40 @@ Item {
         globalShellSource.connectedSources = [cmd]
     }
     
+    // ===== FILE OPERATIONS =====
+    function openFolder(url) {
+        if (!url) return;
+        var path = url.toString();
+        // Use D-Bus to open file manager and select the item
+        var cmd = "dbus-send --session --dest=org.freedesktop.FileManager1 /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems array:string:\"" + path + "\" string:\"\"";
+        runShellCommand(cmd);
+    }
+    
+    function copyToClipboard(text) {
+        if (!text) return;
+        // Using a reliable shell command for clipboard since QML clipboard is restricted in some environments
+        var cmd = "echo -n '" + text.replace(/'/g, "'\\''") + "' | xclip -selection clipboard || echo -n '" + text.replace(/'/g, "'\\''") + "' | wl-copy";
+        runShellCommand(cmd);
+    }
+    
+    function moveToTrash(url) {
+        if (!url) return;
+        var path = url.toString();
+        var cmd = "kioclient6 move \"" + path + "\" trash:/";
+        runShellCommand(cmd);
+    }
+    
+    function openTerminal(url) {
+        if (!url) return;
+        var path = url.toString().replace("file://", "");
+        // If it's a file, get its directory
+        if (path.indexOf(".") !== -1 && path.lastIndexOf("/") < path.lastIndexOf(".")) {
+            path = path.substring(0, path.lastIndexOf("/"));
+        }
+        var cmd = "konsole --workdir \"" + path + "\"";
+        runShellCommand(cmd);
+    }
+    
     // ===== ICON CHECK TIMER =====
     Timer {
         id: iconCheckTimer

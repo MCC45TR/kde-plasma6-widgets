@@ -55,7 +55,7 @@ Item {
     ColumnLayout {
         id: contentColumn
         anchors.fill: parent
-        spacing: 8
+        spacing: 4
         
         // Section header
         Item {
@@ -116,7 +116,7 @@ Item {
             // Else: Full height
             Layout.preferredHeight: {
                 if (!pinnedSectionRoot.isExpanded) return 0;
-                var fullHeight = pinnedContent.implicitHeight + 8;
+                var fullHeight = pinnedContent.implicitHeight + 4;
                 if (pinnedSectionRoot.isSearching) {
                     return Math.min(fullHeight, pinnedSectionRoot.singleRowHeight);
                 }
@@ -139,8 +139,8 @@ Item {
                 anchors.top: parent.top
                 anchors.leftMargin: 8
                 anchors.rightMargin: 8
-                anchors.topMargin: 4
-                spacing: 8
+                anchors.topMargin: 0
+                spacing: 4
                 
                 // Pinned items - List view
                 Loader {

@@ -233,14 +233,6 @@ Item {
                     visible: panelMode.showTitle
                     clip: true
 
-                    TextMetrics {
-                        id: titleMetrics
-                        font.family: "Roboto Condensed"
-                        font.bold: true
-                        font.pixelSize: textColumn.calculatedPixelSize
-                        text: panelMode.title || i18n("No Media")
-                    }
-
                     readonly property bool overflows: titleMetrics.advanceWidth > parent.width
                     readonly property bool shouldScroll: panelMode.scrollingText && overflows
 
@@ -313,13 +305,6 @@ Item {
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
                     visible: panelMode.showArtist && panelMode.artist && panelMode.artist.trim() !== ""
                     clip: true
-
-                    TextMetrics {
-                        id: artistMetrics
-                        font.family: "Roboto Condensed"
-                        font.pixelSize: textColumn.artistPixelSize
-                        text: panelMode.artist || ""
-                    }
 
                     readonly property bool overflows: artistMetrics.advanceWidth > parent.width
                     readonly property bool shouldScroll: panelMode.scrollingText && overflows
@@ -457,8 +442,8 @@ Item {
                 }
             }
         }
+    }
 
-        // Spacers removed - buttons now anchor to edges in all modes
     WheelHandler {
         onWheel: (wheel) => {
             if (typeof root !== "undefined" && root.cfg_mouseWheelVolume) {
