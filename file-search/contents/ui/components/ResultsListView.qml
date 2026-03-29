@@ -200,7 +200,7 @@ ScrollView {
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Paylaş")
                                 icon.name: "mail-send"
                                 flat: true
-                                onClicked: logic.runShellCommand("echo -n '" + modelData.url + "' | xclip -selection clipboard")
+                                onClicked: logic.copyToClipboard(modelData.url)
                             }
                         }
                     }

@@ -432,6 +432,8 @@ Item {
         placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Here")
         resultCount: tileData.resultCount
         resultsModel: resultsModel
+        logic: popupRoot.logic
+        rssPlaceholderCycling: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssPlaceholderCycling || false) : false
         
         onTextUpdated: (newText) => {
              if (isButtonMode && newText !== popupRoot.searchText) {

@@ -25,6 +25,9 @@ Item {
     property int cfg_smartResultLimit: 0
     property int cfg_smartResultLimitDefault: 0
     
+    property bool cfg_rssPlaceholderCycling: true
+    property bool cfg_rssPlaceholderCyclingDefault: true
+    
     // Dummy properties to satisfy Plasma's automatic config injection
     property string title: ""
     property int cfg_displayMode: 0
@@ -445,7 +448,27 @@ Item {
                                 value: modelData.maxEntries || (cfg_rssMaxEntries || 10)
                                 onValueModified: updateSource(index, "maxEntries", value)
                             }
-                            Item { Layout.fillWidth: true }
+                            // General Settings
+            Kirigami.FormLayout {
+                Layout.fillWidth: true
+                
+                QQC2.CheckBox {
+                    Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haber Özellikleri:")
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Önizlemede RSS başlıkları")
+                    checked: cfg_rssPlaceholderCycling
+                    onCheckedChanged: cfg_rssPlaceholderCycling = checked
+                }
+
+                QQC2.SpinBox {
+                    Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Maksimum Haber (Kaynak Başlı):")
+                    from: 5
+                    to: 50
+                    value: cfg_rssMaxEntries
+                    onValueModified: cfg_rssMaxEntries = value
+                }
+            }
+
+            Kirigami.Separator { Layout.fillWidth: true }
                             QQC2.Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Interval:") }
                             QQC2.Button {
                                 property int currentVal: modelData.syncInterval || (cfg_rssSyncInterval || 60)

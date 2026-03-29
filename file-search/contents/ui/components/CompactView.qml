@@ -21,6 +21,9 @@ Item {
     required property int panelHeight
     required property bool showSearchButton
     required property bool showSearchButtonBackground
+    // New properties for animated ticker
+    property var logic: null
+    property bool rssPlaceholderCycling: true
     
     // Signals
     signal toggleExpanded()
@@ -47,6 +50,118 @@ Item {
             onClicked: compactRoot.toggleExpanded()
         }
     }
+
+    // Animated Ticker Logic (Shared with SearchBar)
+    Item {
+        id: tickerContainer
+        anchors.left: mainButton.left
+        anchors.right: searchIconButton.left
+        anchors.top: mainButton.top
+        anchors.bottom: mainButton.bottom
+        anchors.leftMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? 10 : 0
+        anchors.rightMargin: 6
+        visible: !compactRoot.isButtonMode && compactRoot.searchTextLength === 0
+        clip: true
+        
+        property int currentIndex: 0
+        property string defaultText: compactRoot.isExtraWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
+        
+        property var rssTitles: {
+            var list = []
+            var cache = (logic && logic.rssCache) ? logic.rssCache : []
+            if (rssPlaceholderCycling && cache.length > 0) {
+                var count = 0
+                for (var i = 0; i < cache.length && count < 8; i++) {
+                    var title = cache[i].display
+                    if (title && title.length < 50 && title.length > 3 && title !== defaultText) {
+                        list.push(title)
+                        count++
+                    }
+                }
+            }
+            return list
+        }
+        
+        property var allTitles: {
+            var combined = [defaultText]
+            if (rssTitles.length > 0) {
+                // Interleave defaultText and RSS titles if requested
+                var interleaved = []
+                for (var i = 0; i < rssTitles.length; i++) {
+                    interleaved.push(defaultText)
+                    interleaved.push(rssTitles[i])
+                }
+                return interleaved
+            }
+            return combined
+        }
+        
+        Label {
+            id: currentLabel
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? Text.AlignLeft : Text.AlignHCenter
+            text: tickerContainer.allTitles[0] || ""
+            elide: Text.ElideRight
+            opacity: 0.6
+            color: compactRoot.textColor
+            font.pixelSize: compactRoot.responsiveFontSize
+            font.family: "Roboto Condensed"
+        }
+        
+        Label {
+            id: nextLabel
+            anchors.fill: parent
+            y: -height
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: currentLabel.horizontalAlignment
+            text: ""
+            elide: Text.ElideRight
+            opacity: 0
+            color: compactRoot.textColor
+            font.pixelSize: compactRoot.responsiveFontSize
+            font.family: "Roboto Condensed"
+        }
+        
+        ParallelAnimation {
+            id: switchAnim
+            
+            property string targetText: ""
+            
+            SequentialAnimation {
+                PropertyAction { target: nextLabel; property: "text"; value: switchAnim.targetText }
+                PropertyAction { target: nextLabel; property: "y"; value: -tickerContainer.height }
+                PropertyAction { target: nextLabel; property: "opacity"; value: 0 }
+                
+                ParallelAnimation {
+                    NumberAnimation { target: currentLabel; property: "y"; to: tickerContainer.height; duration: 600; easing.type: Easing.InOutCubic }
+                    NumberAnimation { target: currentLabel; property: "opacity"; to: 0; duration: 600 }
+                    
+                    NumberAnimation { target: nextLabel; property: "y"; to: 0; duration: 600; easing.type: Easing.InOutCubic }
+                    NumberAnimation { target: nextLabel; property: "opacity"; to: 0.6; duration: 600 }
+                }
+            }
+            
+            onFinished: {
+                 currentLabel.text = nextLabel.text
+                 currentLabel.y = 0
+                 currentLabel.opacity = 0.6
+                 nextLabel.y = -tickerContainer.height
+                 nextLabel.opacity = 0
+            }
+        }
+        
+        Timer {
+            interval: 3500
+            running: tickerContainer.visible && tickerContainer.allTitles.length > 1 && compactRoot.rssPlaceholderCycling
+            repeat: true
+            onTriggered: {
+                tickerContainer.currentIndex = (tickerContainer.currentIndex + 1) % tickerContainer.allTitles.length
+                switchAnim.targetText = tickerContainer.allTitles[tickerContainer.currentIndex]
+                switchAnim.restart()
+            }
+        }
+    }
     
     // Main Button Container (for non-button modes)
     Rectangle {
@@ -69,18 +184,19 @@ Item {
             anchors.rightMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? (compactRoot.showSearchButton ? 4 : 10) : 0
             spacing: 6
             
-            // Display text (not editable - shows placeholder or search text)
+            // Display text (Static when searching, Hidden when ticker is running)
             Text {
                 id: displayText
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
                 text: compactRoot.truncatedText
-                color: Qt.rgba(compactRoot.textColor.r, compactRoot.textColor.g, compactRoot.textColor.b, compactRoot.searchTextLength > 0 ? 1.0 : 0.6)
+                color: compactRoot.textColor
                 font.pixelSize: compactRoot.responsiveFontSize
                 font.family: "Roboto Condensed"
                 horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? Text.AlignLeft : Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
+                visible: compactRoot.searchTextLength > 0 // Only show static text when user is typing
             }
             
             // Search Icon Button (Wide and Extra Wide Mode only)

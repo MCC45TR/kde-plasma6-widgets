@@ -132,7 +132,8 @@ Item {
     }
     
     function runShellCommand(cmd) {
-        globalShellSource.connectedSources = [cmd]
+        if (!cmd) return
+        globalShellSource.connectSource(cmd)
     }
     
     // ===== FILE OPERATIONS =====

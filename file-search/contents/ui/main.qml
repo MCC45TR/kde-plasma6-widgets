@@ -144,6 +144,9 @@ PlasmoidItem {
         showSearchButton: Plasmoid.configuration.showSearchButton
         showSearchButtonBackground: Plasmoid.configuration.showSearchButtonBackground
         
+        logic: root.controller
+        rssPlaceholderCycling: Plasmoid.configuration.rssPlaceholderCycling
+        
         onToggleExpanded: root.expanded = !root.expanded
     }
     

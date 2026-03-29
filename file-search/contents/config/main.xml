@@ -210,6 +210,10 @@
       <default>0</default>
       <label>Timestamp of last global RSS sync</label>
     </entry>
+    <entry name="rssPlaceholderCycling" type="Bool">
+      <default>true</default>
+      <label>Cycle RSS titles in search placeholder</label>
+    </entry>
   </group>
 
 </kcfg>
