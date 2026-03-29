@@ -434,6 +434,7 @@ Item {
         resultsModel: resultsModel
         logic: popupRoot.logic
         rssPlaceholderCycling: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssPlaceholderCycling || false) : false
+        rssFrequency: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssFrequency !== undefined ? popupRoot.plasmoidConfig.rssFrequency : 3) : 3
         
         onTextUpdated: (newText) => {
              if (isButtonMode && newText !== popupRoot.searchText) {

@@ -214,6 +214,10 @@
       <default>true</default>
       <label>Cycle RSS titles in search placeholder</label>
     </entry>
+    <entry name="rssFrequency" type="Int">
+      <default>3</default>
+      <label>Frequency of RSS placeholder cycles</label>
+    </entry>
   </group>
 
 </kcfg>

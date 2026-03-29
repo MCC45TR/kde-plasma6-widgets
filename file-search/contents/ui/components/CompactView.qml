@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 
 // Compact panel representation for the File Search widget
@@ -24,6 +25,7 @@ Item {
     // New properties for animated ticker
     property var logic: null
     property bool rssPlaceholderCycling: true
+    property int rssFrequency: 3
     
     // Signals
     signal toggleExpanded()
@@ -51,117 +53,7 @@ Item {
         }
     }
 
-    // Animated Ticker Logic (Shared with SearchBar)
-    Item {
-        id: tickerContainer
-        anchors.left: mainButton.left
-        anchors.right: searchIconButton.left
-        anchors.top: mainButton.top
-        anchors.bottom: mainButton.bottom
-        anchors.leftMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? 10 : 0
-        anchors.rightMargin: 6
-        visible: !compactRoot.isButtonMode && compactRoot.searchTextLength === 0
-        clip: true
-        
-        property int currentIndex: 0
-        property string defaultText: compactRoot.isExtraWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
-        
-        property var rssTitles: {
-            var list = []
-            var cache = (logic && logic.rssCache) ? logic.rssCache : []
-            if (rssPlaceholderCycling && cache.length > 0) {
-                var count = 0
-                for (var i = 0; i < cache.length && count < 8; i++) {
-                    var title = cache[i].display
-                    if (title && title.length < 50 && title.length > 3 && title !== defaultText) {
-                        list.push(title)
-                        count++
-                    }
-                }
-            }
-            return list
-        }
-        
-        property var allTitles: {
-            var combined = [defaultText]
-            if (rssTitles.length > 0) {
-                // Interleave defaultText and RSS titles if requested
-                var interleaved = []
-                for (var i = 0; i < rssTitles.length; i++) {
-                    interleaved.push(defaultText)
-                    interleaved.push(rssTitles[i])
-                }
-                return interleaved
-            }
-            return combined
-        }
-        
-        Label {
-            id: currentLabel
-            anchors.fill: parent
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? Text.AlignLeft : Text.AlignHCenter
-            text: tickerContainer.allTitles[0] || ""
-            elide: Text.ElideRight
-            opacity: 0.6
-            color: compactRoot.textColor
-            font.pixelSize: compactRoot.responsiveFontSize
-            font.family: "Roboto Condensed"
-        }
-        
-        Label {
-            id: nextLabel
-            anchors.fill: parent
-            y: -height
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: currentLabel.horizontalAlignment
-            text: ""
-            elide: Text.ElideRight
-            opacity: 0
-            color: compactRoot.textColor
-            font.pixelSize: compactRoot.responsiveFontSize
-            font.family: "Roboto Condensed"
-        }
-        
-        ParallelAnimation {
-            id: switchAnim
-            
-            property string targetText: ""
-            
-            SequentialAnimation {
-                PropertyAction { target: nextLabel; property: "text"; value: switchAnim.targetText }
-                PropertyAction { target: nextLabel; property: "y"; value: -tickerContainer.height }
-                PropertyAction { target: nextLabel; property: "opacity"; value: 0 }
-                
-                ParallelAnimation {
-                    NumberAnimation { target: currentLabel; property: "y"; to: tickerContainer.height; duration: 600; easing.type: Easing.InOutCubic }
-                    NumberAnimation { target: currentLabel; property: "opacity"; to: 0; duration: 600 }
-                    
-                    NumberAnimation { target: nextLabel; property: "y"; to: 0; duration: 600; easing.type: Easing.InOutCubic }
-                    NumberAnimation { target: nextLabel; property: "opacity"; to: 0.6; duration: 600 }
-                }
-            }
-            
-            onFinished: {
-                 currentLabel.text = nextLabel.text
-                 currentLabel.y = 0
-                 currentLabel.opacity = 0.6
-                 nextLabel.y = -tickerContainer.height
-                 nextLabel.opacity = 0
-            }
-        }
-        
-        Timer {
-            interval: 3500
-            running: tickerContainer.visible && tickerContainer.allTitles.length > 1 && compactRoot.rssPlaceholderCycling
-            repeat: true
-            onTriggered: {
-                tickerContainer.currentIndex = (tickerContainer.currentIndex + 1) % tickerContainer.allTitles.length
-                switchAnim.targetText = tickerContainer.allTitles[tickerContainer.currentIndex]
-                switchAnim.restart()
-            }
-        }
-    }
+
     
     // Main Button Container (for non-button modes)
     Rectangle {
@@ -198,6 +90,241 @@ Item {
                 elide: Text.ElideRight
                 visible: compactRoot.searchTextLength > 0 // Only show static text when user is typing
             }
+
+            // Animated Ticker Logic
+            Item {
+                id: tickerContainer
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                visible: !compactRoot.isButtonMode && compactRoot.searchTextLength === 0
+                clip: true
+                
+                property var recentIndices: []
+                property var recentSources: []
+                property string defaultText: compactRoot.isExtraWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
+                
+                property var rssTitles: {
+                    var list = []
+                    var cache = (logic && logic.rssCache) ? logic.rssCache : []
+                    if (rssPlaceholderCycling && cache.length > 0) {
+                        var validItems = []
+                        for (var i = 0; i < cache.length; i++) {
+                            var title = cache[i].display
+                            if (title && title.length > 3 && title !== defaultText) {
+                                var sub = cache[i].subtext || ""
+                                var src = sub.split(" | ")[0] || "Unknown"
+                                validItems.push({ text: title, source: src })
+                            }
+                        }
+                        
+                        // Shuffle to mix sources
+                        for (var i = validItems.length - 1; i > 0; i--) {
+                            var j = Math.floor(Math.random() * (i + 1));
+                            var temp = validItems[i];
+                            validItems[i] = validItems[j];
+                            validItems[j] = temp;
+                        }
+                        
+                        // Keep up to 20 mixed items for the queue
+                        list = validItems.slice(0, 20);
+                    }
+                    return list
+                }
+                
+                property int currentRssIndex: rssTitles.length > 0 ? 0 : -1
+                property int rssConsecutiveCount: 0
+                property string currentState: compactRoot.rssFrequency === 0 ? "rss" : "placeholder"
+                
+                function getInitialDuration() {
+                    var f = compactRoot.rssFrequency;
+                    if (f === 0) return 10000;
+                    if (f === 1) return 10000;
+                    if (f === 2) return 15000;
+                    if (f === 3) return 20000;
+                    if (f === 4) return 50000;
+                    if (f === 5) return 300000;
+                    if (f === 6) return 10000;
+                    return 10000;
+                }
+                
+                property int currentDuration: getInitialDuration()
+                property string currentTargetText: currentState === "placeholder" ? defaultText : (rssTitles.length > 0 && currentRssIndex >= 0 ? rssTitles[currentRssIndex].text : defaultText)
+                
+                Text {
+                    id: currentLabel
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: parent.height
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? Text.AlignLeft : Text.AlignHCenter
+                    text: tickerContainer.currentTargetText
+                    elide: Text.ElideRight
+                    opacity: 0.6
+                    color: compactRoot.textColor
+                    font.pixelSize: compactRoot.responsiveFontSize
+                    font.family: "Roboto Condensed"
+                }
+                
+                Text {
+                    id: nextLabel
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: parent.height
+                    y: -height
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: currentLabel.horizontalAlignment
+                    text: ""
+                    elide: Text.ElideRight
+                    opacity: 0
+                    color: compactRoot.textColor
+                    font.pixelSize: compactRoot.responsiveFontSize
+                    font.family: "Roboto Condensed"
+                }
+                
+                SequentialAnimation {
+                    id: switchAnim
+                    property string targetText: ""
+                    
+                    ParallelAnimation {
+                        NumberAnimation { target: currentLabel; property: "y"; to: tickerContainer.height; duration: 600; easing.type: Easing.InOutCubic }
+                        NumberAnimation { target: currentLabel; property: "opacity"; to: 0; duration: 600; easing.type: Easing.InOutCubic }
+                        
+                        SequentialAnimation {
+                            ScriptAction {
+                                script: {
+                                    nextLabel.text = switchAnim.targetText
+                                    nextLabel.y = -tickerContainer.height
+                                }
+                            }
+                            ParallelAnimation {
+                                NumberAnimation { target: nextLabel; property: "y"; to: 0; duration: 600; easing.type: Easing.InOutCubic }
+                                NumberAnimation { target: nextLabel; property: "opacity"; to: 0.6; duration: 600; easing.type: Easing.InOutCubic }
+                            }
+                        }
+                    }
+                    
+                    ScriptAction {
+                        script: {
+                            currentLabel.text = nextLabel.text
+                            currentLabel.y = 0
+                            currentLabel.opacity = 0.6
+                            nextLabel.opacity = 0
+                        }
+                    }
+                }
+                
+                function computeNextState() {
+                    if (rssTitles.length === 0) return { state: "placeholder", duration: 10000 };
+                    var f = compactRoot.rssFrequency;
+                    if (f === 0) return { state: "rss", duration: 10000 };
+                    
+                    if (currentState === "placeholder") {
+                        if (f === 6) {
+                            var isNew = logic && logic.plasmoidConfig && (Date.now() - logic.plasmoidConfig.rssLastSyncAll < 300000);
+                            if (!isNew) return { state: "placeholder", duration: 30000 };
+                            return { state: "rss", duration: 10000 };
+                        }
+                        return { state: "rss", duration: 10000 };
+                    }
+                    
+                    if (currentState === "rss") {
+                        var maxConsecutive = 1;
+                        if (f === 1) maxConsecutive = 5;
+                        if (f === 2) maxConsecutive = 2;
+                        
+                        if (rssConsecutiveCount >= maxConsecutive - 1) {
+                            var pDuration = 20000;
+                            if (f === 1) pDuration = 10000;
+                            if (f === 2) pDuration = 15000;
+                            if (f === 3) pDuration = 20000;
+                            if (f === 4) pDuration = 50000;
+                            if (f === 5) pDuration = 300000;
+                            if (f === 6) pDuration = 10000;
+                            return { state: "placeholder", duration: pDuration };
+                        } else {
+                            return { state: "rss", duration: 10000 };
+                        }
+                    }
+                    return { state: "placeholder", duration: 10000 };
+                }
+                
+                Timer {
+                    interval: tickerContainer.currentDuration
+                    running: tickerContainer.visible && tickerContainer.rssTitles.length > 0 && compactRoot.rssPlaceholderCycling && compactRoot.searchTextLength === 0
+                    repeat: true
+                    onTriggered: {
+                        var next = tickerContainer.computeNextState();
+                        
+                        if (next.state === "rss") {
+                            if (tickerContainer.currentState === "rss") {
+                                tickerContainer.rssConsecutiveCount++;
+                            } else {
+                                tickerContainer.rssConsecutiveCount = 0;
+                            }
+                            
+                            var maxIndex = tickerContainer.rssTitles.length - 1;
+                            var allUnique = [];
+                            for (var u = 0; u < tickerContainer.rssTitles.length; u++) {
+                                var s = tickerContainer.rssTitles[u].source;
+                                if (s && allUnique.indexOf(s) === -1) allUnique.push(s);
+                            }
+                            var uniqueSources = allUnique.length;
+                            
+                            if (tickerContainer.rssTitles.length < 3 || uniqueSources < 3) {
+                                tickerContainer.currentRssIndex = (tickerContainer.currentRssIndex + 1) % tickerContainer.rssTitles.length;
+                            } else {
+                                var randomIndex;
+                                var attempts = 0;
+                                var chosenItem;
+                                do {
+                                    randomIndex = Math.floor(Math.random() * (maxIndex + 1));
+                                    chosenItem = tickerContainer.rssTitles[randomIndex];
+                                    
+                                    var isRecentIndex = tickerContainer.recentIndices.indexOf(randomIndex) !== -1;
+                                    var isRecentSource = tickerContainer.recentSources.indexOf(chosenItem.source) !== -1;
+                                    
+                                    if (!isRecentIndex && (!isRecentSource || attempts > 8)) {
+                                        break;
+                                    }
+                                    attempts++;
+                                } while (attempts < 20);
+                                
+                                var newHistory = tickerContainer.recentIndices.slice();
+                                newHistory.push(randomIndex);
+                                var maxHistory = Math.min(3, maxIndex);
+                                if (newHistory.length > maxHistory) newHistory.shift();
+                                tickerContainer.recentIndices = newHistory;
+                                
+                                var newSources = tickerContainer.recentSources.slice();
+                                newSources.push(chosenItem.source);
+                                var maxSources = Math.max(0, uniqueSources - 2);
+                                if (newSources.length > maxSources && newSources.length > 0) newSources.shift();
+                                tickerContainer.recentSources = newSources;
+                                
+                                tickerContainer.currentRssIndex = randomIndex;
+                            }
+                        } else {
+                            tickerContainer.rssConsecutiveCount = 0;
+                        }
+                        
+                        tickerContainer.currentState = next.state;
+                        tickerContainer.currentDuration = next.duration;
+                        
+                        switchAnim.targetText = tickerContainer.currentTargetText;
+                        switchAnim.restart();
+                    }
+                }
+                
+                Component.onCompleted: {
+                    if (logic && compactRoot.rssPlaceholderCycling) {
+                        Qt.callLater(() => {
+                            if (!logic.rssCache || logic.rssCache.length === 0) {
+                                logic.syncAllRSS()
+                            }
+                        })
+                    }
+                }
+            }
             
             // Search Icon Button (Wide and Extra Wide Mode only)
             Rectangle {
@@ -233,4 +360,5 @@ Item {
             onClicked: compactRoot.toggleExpanded()
         }
     }
+
 }

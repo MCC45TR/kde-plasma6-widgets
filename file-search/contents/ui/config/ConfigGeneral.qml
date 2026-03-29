@@ -67,6 +67,8 @@ Item {
     // Placeholder (Search History & Others) - defined to prevent warnings
     property string cfg_searchHistory
     property string cfg_cachedBootEntries
+    property alias cfg_rssPlaceholderCycling: rssPlaceholderCyclingCheck.checked
+    property alias cfg_rssFrequency: rssFreqCombo.currentIndex
     
     // Other (Defined to prevent warnings)
     property string cfg_pinnedItems
@@ -109,6 +111,7 @@ Item {
     property bool cfg_prefixPowerShowSleepDefault
     property string cfg_searchHistoryDefault
     property string cfg_cachedBootEntriesDefault
+    property bool cfg_rssPlaceholderCyclingDefault
     property string cfg_pinnedItemsDefault
     property string cfg_categorySettingsDefault
     property bool cfg_debugOverlayDefault
@@ -227,6 +230,28 @@ Item {
                         opacity: enabled ? 1.0 : 0.5
                     }
 
+                    CheckBox {
+                        id: rssPlaceholderCyclingCheck
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show animated RSS titles in panel search bar")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "RSS Titles")
+                        enabled: displayModeCombo.currentIndex !== 0
+                    }
+                    
+                    ComboBox {
+                        id: rssFreqCombo
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "RSS Frequency")
+                        enabled: rssPlaceholderCyclingCheck.checked && rssPlaceholderCyclingCheck.enabled
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Always (Hep)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Very Frequent (Çok Sık)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Frequent (Sık)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Normal"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Less (Daha az)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Rare (Az)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Only when new (Sadece yeni)")
+                        ]
+                    }
+
                     RowLayout {
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Height")
                         Layout.fillWidth: true
@@ -321,12 +346,114 @@ Item {
                                 anchors.rightMargin: cfg_showSearchButton ? 6 : 12
                                 spacing: 8
                                 
-                                Text {
-                                    text: displayModeCombo.currentIndex === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search") : (displayModeCombo.currentIndex === 3 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search..."))
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
-                                    font.pixelSize: displayModeCombo.currentIndex !== 1 ? 14 : 12
+                                Item {
                                     Layout.fillWidth: true
-                                    horizontalAlignment: displayModeCombo.currentIndex === 1 ? Text.AlignHCenter : Text.AlignLeft
+                                    Layout.fillHeight: true
+                                    clip: true
+                                    
+                                    property string defaultTxt: displayModeCombo.currentIndex === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search") : (displayModeCombo.currentIndex === 3 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search..."))
+                                    property string rssMockTxt: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haber başlığı")
+                                    property int currentIndex: 0
+                                    property var allTitles: ["", ""]
+                                    
+                                    onDefaultTxtChanged: {
+                                        allTitles = [defaultTxt, rssMockTxt];
+                                        if (currentIndex === 0) previewCurrentLabel.text = allTitles[0];
+                                    }
+                                    
+                                    Component.onCompleted: {
+                                        allTitles = [defaultTxt, rssMockTxt];
+                                    }
+                                    
+                                    Text {
+                                        id: previewCurrentLabel
+                                        anchors.left: parent.left
+                                        anchors.right: parent.right
+                                        height: parent.height
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: displayModeCombo.currentIndex === 1 ? Text.AlignHCenter : Text.AlignLeft
+                                        text: parent.allTitles[parent.currentIndex] || parent.defaultTxt
+                                        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
+                                        font.pixelSize: displayModeCombo.currentIndex !== 1 ? 14 : 12
+                                        elide: Text.ElideRight
+                                    }
+                                    
+                                    Text {
+                                        id: previewNextLabel
+                                        anchors.left: parent.left
+                                        anchors.right: parent.right
+                                        height: parent.height
+                                        y: -height
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: previewCurrentLabel.horizontalAlignment
+                                        text: ""
+                                        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
+                                        font.pixelSize: previewCurrentLabel.font.pixelSize
+                                        elide: Text.ElideRight
+                                        opacity: 0
+                                    }
+                                    
+                                    ParallelAnimation {
+                                        id: previewSwitchAnim
+                                        property string targetText: ""
+                                        
+                                        SequentialAnimation {
+                                            PropertyAction { target: previewNextLabel; property: "text"; value: previewSwitchAnim.targetText }
+                                            PropertyAction { target: previewNextLabel; property: "y"; value: -previewNextLabel.parent.height }
+                                            PropertyAction { target: previewNextLabel; property: "opacity"; value: 0 }
+                                            
+                                            ParallelAnimation {
+                                                NumberAnimation { target: previewCurrentLabel; property: "y"; to: previewCurrentLabel.parent.height; duration: 600; easing.type: Easing.InOutCubic }
+                                                NumberAnimation { target: previewCurrentLabel; property: "opacity"; to: 0; duration: 600 }
+                                                
+                                                NumberAnimation { target: previewNextLabel; property: "y"; to: 0; duration: 600; easing.type: Easing.InOutCubic }
+                                                NumberAnimation { target: previewNextLabel; property: "opacity"; to: 1; duration: 600 }
+                                            }
+                                        }
+                                        
+                                        onFinished: {
+                                            previewCurrentLabel.text = previewNextLabel.text
+                                            previewCurrentLabel.y = 0
+                                            previewCurrentLabel.opacity = 1
+                                            previewNextLabel.y = -previewNextLabel.parent.height
+                                            previewNextLabel.opacity = 0
+                                        }
+                                    }
+                                    
+                                    Timer {
+                                        id: previewTimer
+                                        interval: {
+                                            var f = rssFreqCombo.currentIndex;
+                                            if (parent.currentIndex === 0) {
+                                                if (f === 0) return 500; // instantaneous jump to rss
+                                                if (f === 1) return 10000;
+                                                if (f === 2) return 15000;
+                                                if (f === 3) return 20000;
+                                                if (f === 4) return 50000;
+                                                if (f === 5) return 300000;
+                                                return 10000; // f==6 or unknown
+                                            } else {
+                                                return 5000; // Mock rss duration 5s
+                                            }
+                                        }
+                                        running: true
+                                        repeat: true
+                                        onTriggered: {
+                                            if (!rssPlaceholderCyclingCheck.checked) {
+                                                parent.currentIndex = 0;
+                                                previewCurrentLabel.text = parent.defaultTxt;
+                                                previewCurrentLabel.y = 0;
+                                                return;
+                                            }
+                                            if (rssFreqCombo.currentIndex === 0) {
+                                                parent.currentIndex = 1; // force stay at RSS mock and just animate
+                                            } else {
+                                                parent.currentIndex = (parent.currentIndex + 1) % 2;
+                                            }
+                                            previewSwitchAnim.targetText = parent.allTitles[parent.currentIndex];
+                                            previewSwitchAnim.restart();
+                                        }
+                                    }
                                 }
                                                                 Rectangle {
                                         Layout.preferredWidth: ((displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3) && cfg_showSearchButton) ? 28 : 0

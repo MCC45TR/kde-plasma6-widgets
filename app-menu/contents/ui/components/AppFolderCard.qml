@@ -48,19 +48,15 @@ Item {
         // When collapsed, the rectangle is square (doesn't cover the title)
         anchors.bottomMargin: root.isExpanded ? 0 : 30
         
-        color: root.isExpanded 
-            ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) 
-            : (root.isHovered 
-                ? (breezeStyle ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2) : Kirigami.Theme.hoverColor)
-                : (breezeStyle ? "transparent" : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05)))
+        color: root.isExpanded || root.isHovered
+            ? (breezeStyle ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2) : Kirigami.Theme.hoverColor)
+            : (breezeStyle ? "transparent" : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.05))
         radius: 12
-        border.color: root.isExpanded 
-            ? Kirigami.Theme.highlightColor 
-            : (breezeStyle ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.3) : "transparent")
-        border.width: root.isExpanded ? 2 : (breezeStyle ? 1 : 0)
+        border.color: breezeStyle ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.3) : "transparent"
+        border.width: breezeStyle ? 1 : 0
         
         Behavior on color { ColorAnimation { duration: animDuration } }
-        Behavior on anchors.bottomMargin { NumberAnimation { duration: animDuration; easing.type: Easing.OutCubic } }
+        Behavior on anchors.bottomMargin { NumberAnimation { duration: animDuration; easing.type: Easing.InOutQuad } }
 
         MouseArea {
             id: hoverArea
@@ -129,9 +125,21 @@ Item {
             cellWidth: root.cellW
             cellHeight: root.cellH
             
-            opacity: root.isExpanded ? 1 : 0
-            visible: opacity > 0
-            Behavior on opacity { NumberAnimation { duration: animDuration } }
+            opacity: 1
+            visible: root.isExpanded || closeTimer.running
+            
+            property bool closeTimerRunning: closeTimer.running
+            Timer {
+                id: closeTimer
+                interval: root.animDuration
+            }
+            Connections {
+                target: root
+                function onIsExpandedChanged() {
+                    if (!root.isExpanded) closeTimer.restart()
+                    else closeTimer.stop()
+                }
+            }
             
             model: root.categoryModel
             
@@ -147,63 +155,62 @@ Item {
                 property bool isHovered: itemHoverArea.containsMouse
                 
                 // --- Animation Logic for Transition from Collapsed to Expanded ---
-                // Items 0-3 are visible in collapsed state.
-                // We want them to animate from their collapsed positions.
+                readonly property bool isInitialItem: index < 3
                 
-                readonly property bool isInitialItem: index < 4
-                
-                // Initial positions (offsets relative to final expanded position)
-                // This is a rough estimation since we don't have absolute coordinates easily
                 property real startX: {
                     if (!isInitialItem) return 0
-                    // In collapsed, it's a 2x2 grid centered.
-                    // Let's just use a fixed offset to make it look like it's expanding from center.
+                    var W = (root.cardSize - 30) / 2
                     var col = index % 2
-                    var row = Math.floor(index / 2)
-                    return (col - 0.5) * 50
+                    var collX = (root.width / 2) + (col === 0 ? -5 - W/2 : 5 + W/2)
+                    var expGridCol = index % root.gridCols
+                    var expX = 20 + expGridCol * root.cellW + root.cellW/2
+                    return collX - expX
                 }
-                property real startY: {
-                    if (!isInitialItem) return -100 // Header height offset roughly
-                    var row = Math.floor(index / 2)
-                    return (row - 0.5) * 50 - 100
-                }
-
-                opacity: root.isExpanded ? 1 : 0
                 
-                transform: Translate {
-                    id: staggeredTranslate
-                    x: root.isExpanded ? 0 : staggeredItem.startX
-                    y: root.isExpanded ? 0 : staggeredItem.startY
-                    
-                    Behavior on x { NumberAnimation { duration: root.animDuration; easing.type: Easing.OutBack } }
-                    Behavior on y { NumberAnimation { duration: root.animDuration; easing.type: Easing.OutBack } }
+                property real startY: {
+                    if (!isInitialItem) return 0
+                    var W = (root.cardSize - 30) / 2
+                    var row = Math.floor(index / 2)
+                    var collY = (root.cardSize / 2) + (row === 0 ? -5 - W/2 : 5 + W/2)
+                    var expGridRow = Math.floor(index / root.gridCols)
+                    var expY = 40 + Kirigami.Units.largeSpacing + expGridRow * root.cellH + root.cellH/2
+                    return collY - expY
                 }
 
-                readonly property int staggerDelay: isInitialItem ? 0 : (index - 3) * 50
+                property real startScale: isInitialItem ? ((root.cardSize - 30) / 2) / root.cellW : 1.0
 
-                SequentialAnimation {
-                    running: root.isExpanded
-                    PauseAnimation { duration: Math.max(0, staggeredItem.staggerDelay) }
-                    NumberAnimation {
-                        target: staggeredItem
-                        property: "opacity"
-                        to: 1
-                        duration: 200
+                opacity: root.isExpanded ? 1 : (isInitialItem ? 1 : 0)
+                
+                Behavior on opacity {
+                    enabled: !isInitialItem
+                    SequentialAnimation {
+                        PauseAnimation { duration: root.isExpanded ? Math.max(0, (index - 3) * 30) : 0 }
+                        NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
                     }
                 }
-
-                // Reset state when closed
-                onVisibleChanged: {
-                    if (!root.isExpanded) {
-                        staggeredItem.opacity = 0;
+                
+                transform: [
+                    Translate {
+                        x: root.isExpanded ? 0 : staggeredItem.startX
+                        y: root.isExpanded ? 0 : staggeredItem.startY
+                        Behavior on x { NumberAnimation { duration: root.animDuration; easing.type: Easing.InOutQuad } }
+                        Behavior on y { NumberAnimation { duration: root.animDuration; easing.type: Easing.InOutQuad } }
+                    },
+                    Scale {
+                        origin.x: staggeredItem.width / 2
+                        origin.y: staggeredItem.height / 2
+                        xScale: root.isExpanded ? 1.0 : staggeredItem.startScale
+                        yScale: root.isExpanded ? 1.0 : staggeredItem.startScale
+                        Behavior on xScale { NumberAnimation { duration: root.animDuration; easing.type: Easing.InOutQuad } }
+                        Behavior on yScale { NumberAnimation { duration: root.animDuration; easing.type: Easing.InOutQuad } }
                     }
-                }
+                ]
 
                 Rectangle {
                     anchors.fill: parent
-                    color: breezeStyle 
-                        ? (isHovered ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2) : "transparent")
-                        : (isHovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2))
+                    color: isHovered 
+                        ? (breezeStyle ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.2) : Kirigami.Theme.highlightColor)
+                        : "transparent"
                     opacity: 1
                     border.width: 0 // Remove borders as requested
                     radius: Kirigami.Units.smallSpacing
@@ -317,21 +324,21 @@ Item {
 
                 Loader {
                     sourceComponent: itemDelegate
-                    visible: root.categoryModel?.count > 0
+                    visible: root.categoryModel?.count > 0 && !(root.isExpanded || innerGrid.closeTimerRunning)
                     property string modelDataDecoration: visible ? root.categoryModel.data(root.categoryModel.index(0, 0), Qt.DecorationRole) : ""
                     property string modelDataDisplay: visible ? root.categoryModel.data(root.categoryModel.index(0, 0), Qt.DisplayRole) : ""
                 }
 
                 Loader {
                     sourceComponent: itemDelegate
-                    visible: root.categoryModel?.count > 1
+                    visible: root.categoryModel?.count > 1 && !(root.isExpanded || innerGrid.closeTimerRunning)
                     property string modelDataDecoration: visible ? root.categoryModel.data(root.categoryModel.index(1, 0), Qt.DecorationRole) : ""
                     property string modelDataDisplay: visible ? root.categoryModel.data(root.categoryModel.index(1, 0), Qt.DisplayRole) : ""
                 }
 
                 Loader {
                     sourceComponent: itemDelegate
-                    visible: root.categoryModel?.count > 2
+                    visible: root.categoryModel?.count > 2 && !(root.isExpanded || innerGrid.closeTimerRunning)
                     property string modelDataDecoration: visible ? root.categoryModel.data(root.categoryModel.index(2, 0), Qt.DecorationRole) : ""
                     property string modelDataDisplay: visible ? root.categoryModel.data(root.categoryModel.index(2, 0), Qt.DisplayRole) : ""
                 }
