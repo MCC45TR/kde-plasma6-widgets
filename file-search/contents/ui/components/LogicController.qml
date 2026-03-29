@@ -362,6 +362,15 @@ Item {
         id: executable
         engine: "executable"
         connectedSources: []
+        property var callbacks: ({})
+        onNewData: (source, data) => {
+            if (callbacks[source]) {
+                var stdout = data["stdout"] || ""
+                callbacks[source](stdout)
+                delete callbacks[source]
+            }
+            disconnectSource(source)
+        }
     }
 
     function getSourceFilePath(url) {
@@ -374,22 +383,25 @@ Item {
             callback([])
             return
         }
-        var path = "file://" + getSourceFilePath(url)
-        var xhr = new XMLHttpRequest()
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 || xhr.status === 0) {
-                    try {
-                        var data = JSON.parse(xhr.responseText)
-                        callback(data || [])
-                    } catch(e) { callback([]) }
-                } else {
-                    callback([])
-                }
+        var path = getSourceFilePath(url)
+        var cmd = "cat '" + path + "'" // Standard shell cat
+        
+        executable.callbacks[cmd] = function(stdout) {
+            try {
+                var raw = stdout.trim()
+                if (raw.length === 0) return callback([])
+                // Our cache is saved as Base64 in one line
+                var decodedJson = decodeURIComponent(escape(Qt.atob(raw)))
+                var data = JSON.parse(decodedJson)
+                callback(data || [])
+            } catch(e) { 
+                // Fallback for old format
+                try {
+                     callback(JSON.parse(stdout) || [])
+                } catch(e2) { callback([]) }
             }
         }
-        xhr.open("GET", path)
-        xhr.send()
+        executable.connectSource(cmd)
     }
 
     function checkAndSyncRSS() {
@@ -414,7 +426,6 @@ Item {
         
         fetchRSS(source, function(entries) {
             if (entries.length === 0) {
-                // Keep old data if sync failed
                 updateCombinedCache()
                 return
             }
@@ -422,11 +433,12 @@ Item {
             rssSources[index].lastSync = new Date().getTime()
             plasmoidConfig.rssSources = JSON.stringify(rssSources)
             
-            // Save to file
+            // Save to file (Base64)
             var path = getSourceFilePath(source.url)
             var json = JSON.stringify(entries)
+            var base64Json = Qt.btoa(unescape(encodeURIComponent(json)))
             var baseDir = StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/plasma-file-search-rss"
-            executable.exec("mkdir -p '" + baseDir + "' && cat << 'EOF' > '" + path + "'\n" + json + "\nEOF")
+            executable.connectSource("mkdir -p '" + baseDir + "' && (echo '" + base64Json + "' > '" + path + "')")
             
             updateCombinedCache()
         })
@@ -453,7 +465,12 @@ Item {
                 combined = combined.concat(entries)
                 completedCount++
                 if (completedCount === rssSources.length) {
-                    combined.sort(function(a, b) { return 0 })
+                    // Sort chronologically (newest first)
+                    combined.sort(function(a, b) {
+                         var da = a.pubDate ? new Date(a.pubDate).getTime() : 0;
+                         var db = b.pubDate ? new Date(b.pubDate).getTime() : 0;
+                         return db - da; // Descending
+                    })
                     rssCache = combined
                 }
             })

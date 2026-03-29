@@ -111,6 +111,21 @@ Item {
     property var testLogs: ({}) // { index: [{msg: string, status: string}] }
     property var testResults: ({}) // Still needed for final state
     
+    Timer {
+        id: clearLogsTimer
+        interval: 3000
+        repeat: false
+        property int indexToClear: -1
+        onTriggered: {
+            if (indexToClear !== -1) {
+                clearLogs(indexToClear)
+                testResults[indexToClear] = ""
+                testResults = JSON.parse(JSON.stringify(testResults))
+                indexToClear = -1
+            }
+        }
+    }
+    
     readonly property var presetSources: {
         var lang = Qt.locale().name.substring(0, 2);
         var presets = [];
@@ -278,23 +293,16 @@ Item {
                                     var json = JSON.stringify(entries)
                                     var base64Json = Qt.btoa(unescape(encodeURIComponent(json)))
                                     
-                                    executable.exec("mkdir -p '" + base + "' && (echo '" + base64Json + "' | base64 -d > '" + path + "')")
+                                    executable.connectSource("mkdir -p '" + base + "' && (echo '" + base64Json + "' > '" + path + "')")
                                     
                                     addLog(index, "Persistence: OK", "ok")
                                     testResults[index] = "success"
                                     updateSource(index, "lastSync", new Date().getTime())
+                                    if (logic && logic.updateCombinedCache) logic.updateCombinedCache()
                                     
                                     // Auto-clear logs after success
-                                    var clearTimer = new Timer()
-                                    clearTimer.interval = 3000
-                                    clearTimer.repeat = false
-                                    clearTimer.triggered.connect(function() {
-                                        clearLogs(index)
-                                        testResults[index] = ""
-                                        testResults = JSON.parse(JSON.stringify(testResults))
-                                        clearTimer.destroy()
-                                    })
-                                    clearTimer.start()
+                                    clearLogsTimer.indexToClear = index
+                                    clearLogsTimer.restart()
                                 })
                             } else {
                                 addLog(index, "Parsing: FAIL", "fail")
@@ -473,7 +481,7 @@ Item {
                                         opacity: 0.7
                                     }
                                     QQC2.Label {
-                                        text: modelData.status === "ok" ? "OK" : (modelData.status === "fail" ? "FAIL" : "...")
+                                        text: modelData.status === "ok" ? "OK" : (modelData.status === "fail" ? "FAIL" : "TRYING")
                                         color: modelData.status === "ok" ? Kirigami.Theme.positiveTextColor : (modelData.status === "fail" ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.neutralTextColor)
                                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                         font.bold: true

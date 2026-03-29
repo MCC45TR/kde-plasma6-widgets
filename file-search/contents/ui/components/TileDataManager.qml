@@ -139,7 +139,18 @@ Item {
         }
         
         // Step 2: Sort by priority and similarity
-        if (searchText && searchText.length > 0) {
+        if (isRSSOnlyMode) {
+             // In RSS mode, we already have them sorted chronologically in Step 1.5 or by the cache order
+             // If there's a specific query after 'rss:', we can apply similarity using that part only
+             if (rssQuery && rssQuery.length > 3) {
+                 rawItems = SimilarityUtils.sortByPriorityAndSimilarity(
+                    rawItems,
+                    rssQuery,
+                    categorySettings,
+                    CategoryManager.getCategoryPriority
+                );
+             }
+        } else if (searchText && searchText.length > 0) {
             rawItems = SimilarityUtils.sortByPriorityAndSimilarity(
                 rawItems,
                 searchText,

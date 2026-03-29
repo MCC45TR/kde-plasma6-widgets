@@ -621,7 +621,10 @@ Item {
         anchors.leftMargin: 12
         anchors.rightMargin: 12
         
-        property bool isVisible: popupRoot.expanded && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText)
+        property bool isVisible: {
+            var hintsVisible = queryHintsLoader.active && queryHintsLoader.item && queryHintsLoader.item.visible;
+            return popupRoot.expanded && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText) && !hintsVisible;
+        }
         
         // Sabitlenmiş öğeler ile alttaki içerik (filtreler, geçmiş veya sonuçlar) arasına boşluk ekleyelim.
         // Buton modunda değilken kullanıcı 6px fazladan boşluk istedi (4+6=10).
