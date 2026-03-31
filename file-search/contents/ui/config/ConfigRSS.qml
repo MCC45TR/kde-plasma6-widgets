@@ -201,7 +201,8 @@ Item {
         }
     }
     
-    readonly property var presetSources: (function() {
+    readonly property var presetSources: {
+        // ... (rest of presetSources)
         var lang = Qt.locale().name.substring(0, 2);
         var presets = [];
         
@@ -387,8 +388,8 @@ Item {
                 { name: "Al Jazeera", url: "https://www.aljazeera.com/xml/rss/all.xml" }
             ]});
         }
-        return presets;
-    })()
+        return presets
+    }
     
     function isPresetSelected(url) {
         for (var i = 0; i < rssSources.length; i++) {
@@ -462,6 +463,13 @@ Item {
             rssSources = JSON.parse(JSON.stringify(rssSources)) 
             saveSources()
         }
+    }
+
+    function addLog(index, msg, status) {
+        var logs = testLogs[index] || []
+        logs.push({msg: msg, status: status})
+        testLogs[index] = logs
+        testLogs = JSON.parse(JSON.stringify(testLogs))
     }
 
     function clearLogs(index) {
