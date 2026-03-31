@@ -79,6 +79,7 @@ Item {
     
     // Read-only helpers
     readonly property bool isButtonMode: displayMode === 0
+    readonly property bool isRssOnlyQuery: searchText.toLowerCase().startsWith("rss:")
     readonly property bool isTileView: {
         if (searchText.toLowerCase().startsWith("rss:")) return false;
         return plasmoidConfig ? (plasmoidConfig.viewMode === 1) : true
@@ -96,6 +97,7 @@ Item {
     // internal state
     property int focusSection: 0
     property string activeBackend: "Milou"
+    property bool isLoadingResults: false
     
     // Context Menu for Results
     HistoryContextMenu {
@@ -110,6 +112,7 @@ Item {
         logic: popupRoot.logic
         searchText: popupRoot.searchText
         activeFilter: popupRoot.activeFilter
+        maxResults: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.maxResults || 20) : 20
         
         onCategorizedDataChanged: {
              // propagated automatically to bindings
@@ -121,27 +124,39 @@ Item {
         id: resultsModel
         // Use debounced query string to prevent stutter during rapid typing
         queryString: popupRoot.delayedQueryString
-        // Set a high limit to ensure we get plenty of results from the targeted runner
-        limit: (popupRoot.activeFilter === "Tümü") ? 100 : 300
+        limit: popupRoot.activeFilter === "Tümü"
+            ? (popupRoot.plasmoidConfig ? Math.max(10, popupRoot.plasmoidConfig.maxResults || 20) : 20)
+            : 400
     }
     
     // Debounce the query string update to Milou
     property string delayedQueryString: ""
     Timer {
         id: queryDebouncer
-        interval: 150
+        interval: 90
         repeat: false
         onTriggered: {
-            popupRoot.delayedQueryString = getFilteredQuery(getEffectiveQuery(popupRoot.searchText), popupRoot.activeFilter)
+            popupRoot.delayedQueryString = getBackendQuery(popupRoot.searchText, popupRoot.activeFilter)
         }
+    }
+
+    Timer {
+        id: loadingFallbackTimer
+        interval: 900
+        repeat: false
+        onTriggered: popupRoot.isLoadingResults = false
     }
     
     onSearchTextChanged: {
+        popupRoot.isLoadingResults = searchText.length > 0
+        if (searchText.length > 0) loadingFallbackTimer.restart()
+        else loadingFallbackTimer.stop()
         queryDebouncer.restart()
         // If query is cleared, update immediately for responsive feel
         if (searchText.length === 0) {
             queryDebouncer.stop()
             delayedQueryString = ""
+            popupRoot.isLoadingResults = false
         }
         
         // Auto-minimize pinned items logic
@@ -154,7 +169,19 @@ Item {
         }
     }
     
-    onActiveFilterChanged: queryDebouncer.restart()
+    onActiveFilterChanged: {
+        popupRoot.isLoadingResults = searchText.length > 0
+        if (searchText.length > 0) loadingFallbackTimer.restart()
+        queryDebouncer.restart()
+    }
+
+    Connections {
+        target: tileData
+        function onRefreshVersionChanged() {
+            popupRoot.isLoadingResults = false
+            loadingFallbackTimer.stop()
+        }
+    }
     
     // ===== FUNCTIONS =====
     
@@ -174,6 +201,22 @@ Item {
         }
         
         return prefix + text;
+    }
+
+    function getBackendQuery(text, filter) {
+        var effectiveQuery = getEffectiveQuery(text)
+        if (!effectiveQuery) return ""
+
+        var lower = effectiveQuery.toLowerCase()
+        if (lower.startsWith("rss:")) return ""
+
+        if (effectiveQuery === "date:" || effectiveQuery === "clock:" ||
+            effectiveQuery === "power:" || effectiveQuery === "help:" ||
+            effectiveQuery === "weather:") {
+            return ""
+        }
+
+        return getFilteredQuery(effectiveQuery, filter)
     }
     
     // Background for Desktop Mode (Matte)
@@ -519,7 +562,7 @@ Item {
         
         property bool isVisible: {
             var hintsVisible = queryHintsLoader.active && queryHintsLoader.item && queryHintsLoader.item.visible;
-            return popupRoot.expanded && popupRoot.searchText.length > 0 && !isCommandOnlyQuery(popupRoot.searchText) && !hintsVisible;
+            return popupRoot.expanded && popupRoot.searchText.length > 0 && !popupRoot.isRssOnlyQuery && !isCommandOnlyQuery(popupRoot.searchText) && !hintsVisible;
         }
         
         anchors.topMargin: isVisible ? 10 : 0
@@ -544,7 +587,6 @@ Item {
                 
                 onFilterSelected: (name) => {
                     popupRoot.activeFilter = name;
-                    popupRoot.requestFilterChange(name);
                     tileData.startSearch();
                 }
             }
@@ -590,7 +632,7 @@ Item {
         anchors.leftMargin: 12
         anchors.rightMargin: 12
         asynchronous: false
-        active: popupRoot.expanded && popupRoot.searchText.length > 0
+        active: popupRoot.expanded && popupRoot.searchText.length > 0 && !popupRoot.isRssOnlyQuery
         sourceComponent: QueryHints {
             searchText: popupRoot.searchText
             textColor: popupRoot.textColor
@@ -622,7 +664,7 @@ Item {
         asynchronous: false
         
         property var items: logic.visiblePinnedItems
-        active: showPinnedBar
+        active: showPinnedBar && !popupRoot.isRssOnlyQuery
         
         // Connections removed as binding handles updates now
         
@@ -710,6 +752,7 @@ Item {
              accentColor: popupRoot.accentColor
             // trFunc removed
              searchText: popupRoot.searchText
+             isLoading: popupRoot.isLoadingResults
              previewEnabled: popupRoot.previewEnabled
              previewSettings: popupRoot.previewSettings
              logic: popupRoot.logic
@@ -748,6 +791,8 @@ Item {
              accentColor: popupRoot.accentColor
              // trFunc removed
              searchText: popupRoot.searchText
+             isLoading: popupRoot.isLoadingResults
+             previewEnabled: popupRoot.previewEnabled
              previewSettings: popupRoot.previewSettings
              scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
              compactTileView: popupRoot.compactHistoryItems
@@ -913,6 +958,7 @@ Item {
                  accentColor: popupRoot.accentColor
                  formatTimeFunc: logic.formatHistoryTime
                  // trFunc removed
+                 logic: popupRoot.logic
                  previewEnabled: popupRoot.previewEnabled
                  previewSettings: popupRoot.previewSettings
                  
@@ -931,6 +977,7 @@ Item {
                  textColor: popupRoot.textColor
                  accentColor: popupRoot.accentColor
                  // trFunc removed
+                 logic: popupRoot.logic
                  previewSettings: popupRoot.previewSettings
                  scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
                  compactTileView: popupRoot.compactHistoryItems

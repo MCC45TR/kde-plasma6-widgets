@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "../js/PreviewUtils.js" as PreviewUtils
 
 // Results Tile View - Displays search results in tile/grid format
 // Features: Keyboard navigation, Category collapse/expand, File preview tooltip
@@ -20,8 +21,10 @@ FocusScope {
     
     // Localization
     property string searchText: ""
+    property bool isLoading: false
     
     // Preview settings from config
+    property bool previewEnabled: true
     property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
     
     // Navigation state
@@ -420,35 +423,11 @@ FocusScope {
                             
                             property int itemIdx: index
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
-                            
-                            // Staggered fade-in animation
-                            opacity: 0
-                            
-                            Timer {
-                                id: tileFadeInTrigger
-                                interval: (categoryDelegate.catIdx * 10 + itemIdx) * 10  // 10ms stagger
-                                running: true
-                                onTriggered: tileFadeInAnim.start()
-                            }
-                            
-                            NumberAnimation {
-                                id: tileFadeInAnim
-                                target: tileDelegate
-                                property: "opacity"
-                                from: 0
-                                to: 1
-                                duration: 100
-                                easing.type: Easing.OutQuad
-                            }
-                            
-                            // Reset animation when data changes
-                            Connections {
-                                target: resultsTileRoot
-                                function onSearchTextChanged() {
-                                    tileDelegate.opacity = 0
-                                    tileFadeInTrigger.restart()
-                                }
-                            }
+                            property string previewPath: PreviewUtils.getLocalPreviewPath(modelData.url || "")
+                            property string previewFileType: PreviewUtils.getFileTypeLabel(modelData.url || "")
+                            property string previewSource: ((tileMouseArea.containsMouse || tileDelegate.isSelected || resultsTileRoot.previewForceVisible) && !categoryDelegate.isWide)
+                                ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings)
+                                : ""
                             
                             Rectangle {
                                 id: tileBg
@@ -523,32 +502,8 @@ FocusScope {
                                                 fillMode: Image.PreserveAspectCrop
                                                 sourceSize.width: resultsTileRoot.iconSize
                                                 sourceSize.height: resultsTileRoot.iconSize
-                                                
-                                                source: {
-                                                    if (resultsTileRoot.iconSize <= 22) return "";
-                                                    var url = (modelData.url || "").toString();
-                                                    if (!url) return "";
-                                                    
-                                                    var path = decodeURIComponent(url.replace("file://", ""));
-                                                    var ext = path.split('.').pop().toLowerCase();
-                                                    var showPreview = false;
-                                                    
-                                                    if (resultsTileRoot.previewSettings.images) {
-                                                        var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                                        if (imageExts.indexOf(ext) >= 0) showPreview = true;
-                                                    }
-                                                    if (!showPreview && resultsTileRoot.previewSettings.videos) {
-                                                        var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                                        if (videoExts.indexOf(ext) >= 0) showPreview = true;
-                                                    }
-                                                    if (!showPreview && resultsTileRoot.previewSettings.documents) {
-                                                        var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
-                                                        if (docExts.indexOf(ext) >= 0) showPreview = true;
-                                                    }
-                                                    
-                                                    if (showPreview) return "image://preview/" + path;
-                                                    return "";
-                                                }
+                                                source: resultsTileRoot.iconSize > 22 ? tileDelegate.previewSource : ""
+                                                visible: source.length > 0 && status === Image.Ready
                                             }
                                         }
                                         
@@ -679,7 +634,7 @@ FocusScope {
                                 // File Preview Tooltip
                                 ToolTip {
                                     id: previewTooltip
-                                    visible: (tileMouseArea.containsMouse || (tileDelegate.isSelected && resultsTileRoot.previewForceVisible)) && (modelData.url || "").length > 0
+                                    visible: tileDelegate.previewSource.length > 0 && (tileMouseArea.containsMouse || (tileDelegate.isSelected && resultsTileRoot.previewForceVisible))
                                     delay: tileDelegate.isSelected && resultsTileRoot.previewForceVisible ? 0 : 500
                                     timeout: 10000
                                     x: tileDelegate.width + 4
@@ -699,29 +654,7 @@ FocusScope {
                                         // Thumbnail for images
                                         Image {
                                             id: thumbnailImage
-                                            source: {
-                                                var url = modelData.url || ""
-                                                if (url.length === 0) return ""
-                                                var path = decodeURIComponent(url.replace("file://", ""))
-                                                var ext = path.split('.').pop().toLowerCase()
-                                                var showPreview = false
-                                                
-                                                if (resultsTileRoot.previewSettings.images) {
-                                                    var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                                    if (imageExts.indexOf(ext) >= 0) showPreview = true
-                                                }
-                                                if (!showPreview && resultsTileRoot.previewSettings.videos) {
-                                                    var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                                    if (videoExts.indexOf(ext) >= 0) showPreview = true
-                                                }
-                                                if (!showPreview && resultsTileRoot.previewSettings.documents) {
-                                                    var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
-                                                    if (docExts.indexOf(ext) >= 0) showPreview = true
-                                                }
-                                                
-                                                if (showPreview) return "image://preview/" + path
-                                                return ""
-                                            }
+                                            source: tileDelegate.previewSource
                                             width: source.length > 0 ? Math.min(150, sourceSize.width) : 0
                                             height: source.length > 0 ? Math.min(100, sourceSize.height) : 0
                                             fillMode: Image.PreserveAspectFit
@@ -740,12 +673,7 @@ FocusScope {
                                         
                                         // File Type (from extension)
                                         Text {
-                                            property string fileExt: {
-                                                var url = modelData.url || ""
-                                                if (url.length === 0) return ""
-                                                var parts = url.split('.')
-                                                return parts.length > 1 ? parts.pop().toUpperCase() : ""
-                                            }
+                                            property string fileExt: tileDelegate.previewFileType
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + fileExt
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
@@ -754,12 +682,12 @@ FocusScope {
                                         
                                         // Path
                                         Text {
-                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + (modelData.url || "")
+                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + tileDelegate.previewPath
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             wrapMode: Text.WrapAnywhere
                                             width: Math.min(300, implicitWidth)
-                                            visible: (modelData.url || "").length > 0
+                                            visible: tileDelegate.previewPath.length > 0
                                         }
                                         
                                         // Shortcut hint
@@ -791,12 +719,24 @@ FocusScope {
     
     
     // Empty state
-    Text {
+    Column {
         anchors.centerIn: parent
-        text: resultsTileRoot.searchText.length > 0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
-        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
-        font.pixelSize: 12
+        spacing: 10
         visible: resultsTileRoot.categorizedData.length === 0
+
+        BusyIndicator {
+            anchors.horizontalCenter: parent.horizontalCenter
+            running: resultsTileRoot.isLoading && resultsTileRoot.searchText.length > 0
+            visible: running
+        }
+
+        Text {
+            text: resultsTileRoot.searchText.length > 0
+                ? (resultsTileRoot.isLoading ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found"))
+                : i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
+            color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
+            font.pixelSize: 12
+        }
     }
     
     // Reset selection when data changes

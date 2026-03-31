@@ -1,6 +1,7 @@
 import QtQuick
 import org.kde.milou as Milou
 import "../js/CategoryManager.js" as CategoryManager
+import "../js/PreviewUtils.js" as PreviewUtils
 import "../js/SimilarityUtils.js" as SimilarityUtils
 import "../js/IconMapper.js" as IconMapper
 
@@ -13,6 +14,8 @@ Item {
     // Search text for similarity scoring
     property string searchText: ""
     property string activeFilter: "Tümü"
+    property int maxResults: 20
+    property string lastRefreshSignature: ""
     
     onSearchTextChanged: {
         refreshDebouncer.restart()
@@ -28,91 +31,122 @@ Item {
             refreshDebouncer.restart()
         }
     }
+
+    Connections {
+        target: resultsModel
+        function onRowsInserted() { refreshDebouncer.restart() }
+        function onRowsRemoved() { refreshDebouncer.restart() }
+        function onModelReset() { refreshDebouncer.restart() }
+        function onDataChanged() { refreshDebouncer.restart() }
+    }
     
     property var categorizedData: []
     property var flatSortedData: []
     property int resultCount: 0
     property int lastLatency: 0
+    property int refreshVersion: 0
     
     // Internal state
     property real searchStartTime: 0
+    readonly property var fileOnlyCategories: ["Files", "Dosyalar", "Folders", "Klasörler", "Documents", "Belgeler", "Images", "Resimler", "Audio", "Ses", "Video", "Videolar", "Places", "Yerler"]
     
     function startSearch() {
         searchStartTime = new Date().getTime()
     }
     
     function refreshGroups() {
+        var rssItems = (logic.rssCache && Array.isArray(logic.rssCache)) ? logic.rssCache : [];
+        var firstItem = rawDataProxy.count > 0 ? rawDataProxy.itemAt(0) : null;
+        var lastItem = rawDataProxy.count > 0 ? rawDataProxy.itemAt(rawDataProxy.count - 1) : null;
+        var signature = [
+            searchText,
+            activeFilter,
+            maxResults,
+            rawDataProxy.count,
+            firstItem ? (firstItem.display || "") : "",
+            firstItem ? (firstItem.url || "") : "",
+            lastItem ? (lastItem.display || "") : "",
+            lastItem ? (lastItem.url || "") : "",
+            rssItems.length,
+            rssItems.length > 0 ? (rssItems[0].duplicateId || rssItems[0].display || "") : "",
+            rssItems.length > 0 ? (rssItems[rssItems.length - 1].duplicateId || rssItems[rssItems.length - 1].display || "") : ""
+        ].join("||");
+
+        if (signature === lastRefreshSignature)
+            return;
+        lastRefreshSignature = signature;
+
         var groups = {};
         var displayOrder = [];
         var categorySettings = logic.categorySettings || {};
-        
-        // Step 1: Collect raw items and filter hidden categories
         var rawItems = [];
         var lowerSearch = searchText.toLowerCase();
         var isFileOnlyMode = lowerSearch.startsWith("file:/");
         var isRSSOnlyMode = lowerSearch.startsWith("rss:");
+        var activeFilterLower = (dataManager.activeFilter || "").toLowerCase();
         
+        // Extract RSS query: everything after 'rss:' prefix
+        var rssQuery = "";
+        if (isRSSOnlyMode) {
+            rssQuery = lowerSearch.substring(4).trim();
+        }
+
         if (!isRSSOnlyMode) {
             for (var i = 0; i < rawDataProxy.count; i++) {
                 var item = rawDataProxy.itemAt(i);
-                if (!item) continue;
-                var cat = item.category || "Diğer";
-                
-                // Filter hidden categories
-                if (!CategoryManager.isCategoryVisible(categorySettings, cat)) {
+                if (!item)
                     continue;
-                }
-                
-                // --- FILTER CHIPS LOGIC ---
+
+                var cat = item.category || "Diğer";
+                if (!CategoryManager.isCategoryVisible(categorySettings, cat))
+                    continue;
+
+                var urlString = (item.url || "").toString();
+                var lowerCategory = cat.toLowerCase();
+                var lowerDecoration = (item.decoration || "").toString().toLowerCase();
+                var lowerUrl = urlString.toLowerCase();
+                var ext = PreviewUtils.getExtension(urlString);
+
                 if (dataManager.activeFilter !== "Tümü") {
-                    var filter = dataManager.activeFilter;
-                    var c = cat.toLowerCase();
-                    var d = (item.decoration || "").toString().toLowerCase();
-                    var u = (item.url || "").toString().toLowerCase();
-                    var ext = u.substring(u.lastIndexOf(".") + 1);
                     var shouldKeep = false;
-                    
-                    if (filter === "Belgeler") {
-                        var docExts = ["pdf", "doc", "docx", "odt", "txt", "md", "xls", "xlsx", "ppt", "pptx", "ods", "csv"];
-                        shouldKeep = (c.indexOf("belge") !== -1 || c.indexOf("document") !== -1 || c.indexOf("text") !== -1 || 
-                                     d.indexOf("document") !== -1 || d.indexOf("text") !== -1 || docExts.indexOf(ext) !== -1);
-                    } else if (filter === "Resimler") {
-                        var imgExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"];
-                        shouldKeep = (c.indexOf("resim") !== -1 || c.indexOf("image") !== -1 || c.indexOf("picture") !== -1 || 
-                                     c.indexOf("photo") !== -1 || c.indexOf("görsel") !== -1 || c.indexOf("görüntü") !== -1 ||
-                                     d.indexOf("image") !== -1 || d.indexOf("photo") !== -1 || d.indexOf("picture") !== -1 ||
-                                     imgExts.indexOf(ext) !== -1);
-                    } else if (filter === "Klasörler") {
-                        shouldKeep = (c.indexOf("klasör") !== -1 || c.indexOf("folder") !== -1 || c.indexOf("yerler") !== -1 || 
-                                     c.indexOf("place") !== -1 || d.indexOf("folder") !== -1 || u.endsWith("/"));
-                    } else if (filter === "Uygulamalar") {
-                        shouldKeep = (c.indexOf("uygulama") !== -1 || c.indexOf("application") !== -1 || c.indexOf("app") !== -1 || 
-                                     c.indexOf("program") !== -1 || d.indexOf("app") !== -1 || u.endsWith(".desktop"));
-                    } else if (filter === "Web") {
-                        shouldKeep = (c.indexOf("web") !== -1 || c.indexOf("bookmark") !== -1 || c.indexOf("yer imi") !== -1 || 
-                                     c.indexOf("internet") !== -1 || c.indexOf("browser") !== -1 || d.indexOf("globe") !== -1 || 
-                                     d.indexOf("web") !== -1 || u.startsWith("http") || u.startsWith("www"));
-                    } else if (filter === "Haberler" || filter === "RSS") {
-                        shouldKeep = (c.indexOf("haber") !== -1 || c.indexOf("news") !== -1 || c.indexOf("rss") !== -1 || d.indexOf("news") !== -1);
+
+                    if (activeFilterLower === "belgeler") {
+                        shouldKeep = (lowerCategory.indexOf("belge") !== -1 || lowerCategory.indexOf("document") !== -1 || lowerCategory.indexOf("text") !== -1 ||
+                                     lowerDecoration.indexOf("document") !== -1 || lowerDecoration.indexOf("text") !== -1 || PreviewUtils.isDocumentLikeExtension(ext));
+                    } else if (activeFilterLower === "resimler") {
+                        shouldKeep = (lowerCategory.indexOf("resim") !== -1 || lowerCategory.indexOf("image") !== -1 || lowerCategory.indexOf("picture") !== -1 ||
+                                     lowerCategory.indexOf("photo") !== -1 || lowerCategory.indexOf("görsel") !== -1 || lowerCategory.indexOf("görüntü") !== -1 ||
+                                     lowerDecoration.indexOf("image") !== -1 || lowerDecoration.indexOf("photo") !== -1 || lowerDecoration.indexOf("picture") !== -1 ||
+                                     PreviewUtils.isImageExtension(ext));
+                    } else if (activeFilterLower === "klasörler") {
+                        shouldKeep = (lowerCategory.indexOf("klasör") !== -1 || lowerCategory.indexOf("folder") !== -1 || lowerCategory.indexOf("yerler") !== -1 ||
+                                     lowerCategory.indexOf("place") !== -1 || lowerDecoration.indexOf("folder") !== -1 || lowerUrl.endsWith("/"));
+                    } else if (activeFilterLower === "uygulamalar") {
+                        shouldKeep = (lowerCategory.indexOf("uygulama") !== -1 || lowerCategory.indexOf("application") !== -1 || lowerCategory.indexOf("app") !== -1 ||
+                                     lowerCategory.indexOf("program") !== -1 || lowerDecoration.indexOf("app") !== -1 || lowerUrl.endsWith(".desktop"));
+                    } else if (activeFilterLower === "web") {
+                        shouldKeep = (lowerCategory.indexOf("web") !== -1 || lowerCategory.indexOf("bookmark") !== -1 || lowerCategory.indexOf("yer imi") !== -1 ||
+                                     lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("browser") !== -1 || lowerDecoration.indexOf("globe") !== -1 ||
+                                     lowerDecoration.indexOf("web") !== -1 || lowerUrl.startsWith("http") || lowerUrl.startsWith("www"));
+                    } else if (activeFilterLower === "haberler" || activeFilterLower === "rss") {
+                        shouldKeep = (lowerCategory.indexOf("haber") !== -1 || lowerCategory.indexOf("news") !== -1 || lowerCategory.indexOf("rss") !== -1 || lowerDecoration.indexOf("news") !== -1);
                     }
-                    
-                    if (!shouldKeep) continue;
+
+                    if (!shouldKeep)
+                        continue;
                 }
-                
-                // FILE ONLY MODE FILTER
+
                 if (isFileOnlyMode) {
-                     var allowedCats = ["Files", "Dosyalar", "Folders", "Klasörler", "Documents", "Belgeler", 
-                                        "Images", "Resimler", "Audio", "Ses", "Video", "Videolar", "Places", "Yerler"];
-                     var isFileUrl = item.url && item.url.toString().startsWith("file://");
-                     var isAllowed = isFileUrl || allowedCats.indexOf(cat) !== -1;
-                     if (!isAllowed) continue;
+                    var isFileUrl = urlString.indexOf("file://") === 0;
+                    if (!isFileUrl && fileOnlyCategories.indexOf(cat) === -1)
+                        continue;
                 }
-                
+
                 rawItems.push({
                     display: item.display || "",
-                    decoration: IconMapper.getIconForUrl(item.url || "", item.decoration || "", cat),
+                    decoration: IconMapper.getIconForUrl(urlString, item.decoration || "", cat),
                     category: cat,
-                    url: item.url || "", 
+                    url: urlString,
                     urls: item.urls || [],
                     subtext: item.subtext || "",
                     duplicateId: item.duplicateId || "",
@@ -120,47 +154,37 @@ Item {
                 });
             }
         }
-        
-        // Step 1.5: RSS Feeds Integration
-        var activeF = dataManager.activeFilter
-        if (isRSSOnlyMode || logic.rssEnabled && (activeF === "Tümü" || activeF === "All" || activeF === "Web" || activeF === "RSS" || activeF === "Haberler")) {
-            var rssItems = (logic.rssCache && Array.isArray(logic.rssCache)) ? logic.rssCache : [];
-            var rssQuery = isRSSOnlyMode ? lowerSearch.substring(4).trim() : lowerSearch;
-            
-            for (var r = 0; r < rssItems.length; r++) {
-                 var rssEntry = rssItems[r];
-                 
-                 // Apply query filter for rss: mode
-                 if (isRSSOnlyMode && rssQuery.length > 0) {
-                      var title = (rssEntry.display || "").toLowerCase();
-                      var content = (rssEntry.indexedContent || "").toLowerCase();
-                      if (title.indexOf(rssQuery) === -1 && content.indexOf(rssQuery) === -1) continue;
-                 }
 
-                 if (CategoryManager.isCategoryVisible(categorySettings, rssEntry.category)) {
-                     rawItems.push(rssEntry);
-                 }
+        var activeF = dataManager.activeFilter;
+        // RSS logic: Include if in RSS mode OR if RSS is enabled and a relevant filter is active
+        if (isRSSOnlyMode || (logic.rssEnabled && (activeF === "Tümü" || activeF === "All" || activeF === "Web" || activeF === "RSS" || activeF === "Haberler"))) {
+            for (var r = 0; r < rssItems.length; r++) {
+                var rssEntry = rssItems[r];
+                if (isRSSOnlyMode && rssQuery.length > 0) {
+                    var title = (rssEntry.display || "").toLowerCase();
+                    var content = (rssEntry.indexedContent || "").toLowerCase();
+                    if (title.indexOf(rssQuery) === -1 && content.indexOf(rssQuery) === -1)
+                        continue;
+                }
+
+                if (CategoryManager.isCategoryVisible(categorySettings, rssEntry.category))
+                    rawItems.push(rssEntry);
             }
         }
-        
-        // Final keyword filter for isRSSOnlyMode if just "rss:"
-        if (isRSSOnlyMode && lowerSearch === "rss:" && rawItems.length === 0) {
-            // Push all cached if empty and showing all
-             rawItems = (logic.rssCache && Array.isArray(logic.rssCache)) ? logic.rssCache : [];
-        }
-        
-        // Step 2: Sort by priority and similarity
+
+        // Final fallback for empty RSS query results
+        if (isRSSOnlyMode && rssQuery.length === 0 && rawItems.length === 0)
+            rawItems = rssItems.slice();
+
         if (isRSSOnlyMode) {
-             // In RSS mode, we already have them sorted chronologically in Step 1.5 or by the cache order
-             // If there's a specific query after 'rss:', we can apply similarity using that part only
-             if (rssQuery && rssQuery.length > 3) {
-                 rawItems = SimilarityUtils.sortByPriorityAndSimilarity(
+            if (rssQuery && rssQuery.length > 3) {
+                rawItems = SimilarityUtils.sortByPriorityAndSimilarity(
                     rawItems,
                     rssQuery,
                     categorySettings,
                     CategoryManager.getCategoryPriority
                 );
-             }
+            }
         } else if (searchText && searchText.length > 0) {
             rawItems = SimilarityUtils.sortByPriorityAndSimilarity(
                 rawItems,
@@ -169,44 +193,45 @@ Item {
                 CategoryManager.getCategoryPriority
             );
         } else {
-            // Sort by priority only
             rawItems = CategoryManager.applyPriorityToResults(rawItems, categorySettings);
         }
-        
-        // Step 3: Group by category (maintaining sorted order)
+
+        var effectiveMaxResults = isRSSOnlyMode ? 400 : maxResults;
+        if (effectiveMaxResults > 0 && rawItems.length > effectiveMaxResults)
+            rawItems = rawItems.slice(0, effectiveMaxResults);
+
         for (var j = 0; j < rawItems.length; j++) {
             var sortedItem = rawItems[j];
             var sortedCat = sortedItem.category;
-            
+
             if (!groups[sortedCat]) {
                 groups[sortedCat] = [];
                 displayOrder.push(sortedCat);
             }
-            
+
             groups[sortedCat].push(sortedItem);
         }
-        
-        // Step 4: Consolidate sparse categories
+
         var otherItems = [];
         var finalOrder = [];
-        
         for (var k = 0; k < displayOrder.length; k++) {
             var catName = displayOrder[k];
             var items = groups[catName];
             var isAppCategory = (catName === "Uygulamalar" || catName === "Applications");
-            
-            if (items.length <= 1 && !isAppCategory) {
-                for (var m = 0; m < items.length; m++) {
+            var isRSSCategory = (catName === "RSS" || catName === "Haberler");
+
+            // Don't merge RSS or Applications into "Other Results" even if there is only one
+            if (items.length <= 1 && !isAppCategory && !isRSSCategory) {
+                for (var m = 0; m < items.length; m++)
                     otherItems.push(items[m]);
-                }
             } else {
                 finalOrder.push(catName);
             }
         }
-        
-        // Step 5: Sort final categories by priority
+
+
         finalOrder = CategoryManager.getSortedCategoryNames(categorySettings, finalOrder);
-        
+
         var result = [];
         for (var n = 0; n < finalOrder.length; n++) {
             result.push({
@@ -214,29 +239,30 @@ Item {
                 items: groups[finalOrder[n]]
             });
         }
-        
+
         if (otherItems.length > 0) {
             result.push({
                 categoryName: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results"),
                 items: otherItems
             });
         }
-        
+
         categorizedData = result;
-        
-        // Step 6: Create flat sorted list matchin the categorized structure
+
         var flatList = [];
-        for (var i = 0; i < result.length; i++) {
-            var catName = result[i].categoryName;
-            var catItems = result[i].items;
-            for (var j = 0; j < catItems.length; j++) {
-                var item = catItems[j];
-                // Ensure item has the final category name for section grouping
-                item.category = catName;
-                flatList.push(item);
+        for (var p = 0; p < result.length; p++) {
+            var groupedCategoryName = result[p].categoryName;
+            var catItems = result[p].items;
+            for (var q = 0; q < catItems.length; q++) {
+                var groupedItem = catItems[q];
+                groupedItem.category = groupedCategoryName;
+                flatList.push(groupedItem);
             }
         }
+
         flatSortedData = flatList;
+        resultCount = flatList.length;
+        refreshVersion++;
     }
 
     // Debounce timer for refreshGroups to prevent excessive updates
@@ -278,4 +304,3 @@ Item {
         }
     }
 }
-

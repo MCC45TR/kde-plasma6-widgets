@@ -335,7 +335,7 @@ Rectangle {
         id: menuHeader
         width: parent.width
         height: visible ? 32 : 0
-        visible: queryHints.currentHint ? queryHints.currentHint.isPrefixMenu : false
+        visible: queryHints.currentHint ? !!queryHints.currentHint.isPrefixMenu : false
         color: "transparent"
         
         RowLayout {
@@ -381,7 +381,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 8
-        visible: queryHints.currentHint ? queryHints.currentHint.isPrefixMenu : false
+        visible: queryHints.currentHint ? !!queryHints.currentHint.isPrefixMenu : false
         clip: true
         
         GridView {

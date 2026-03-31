@@ -56,8 +56,9 @@ Item {
     // ===== RSS MANAGEMENT =====
     property var rssSources: []
     property var rssCache: []
+    property var rssTickerEntries: []
     readonly property bool rssEnabled: plasmoidConfig.rssEnabled || false
-    readonly property string rssCacheBase: StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.cache/com.mcc45tr.filesearch/rss"
+    readonly property string rssCacheBase: StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss"
     property var syncQueue: []
     property bool isSyncing: false
 
@@ -297,14 +298,96 @@ Item {
         try {
             rssSources = JSON.parse(plasmoidConfig.rssSources || "[]");
             rssCache = JSON.parse(plasmoidConfig.rssCache || "[]");
+            rebuildRssTickerEntries();
         } catch (e) {
             rssSources = [];
             rssCache = [];
+            rssTickerEntries = [];
         }
+    }
+
+    function rebuildRssTickerEntries() {
+        var cache = Array.isArray(rssCache) ? rssCache : [];
+        if (cache.length === 0) {
+            rssTickerEntries = [];
+            return;
+        }
+
+        var grouped = {};
+        var sourceOrder = [];
+        for (var i = 0; i < cache.length; i++) {
+            var entry = cache[i];
+            if (!entry || !entry.display || entry.display.length <= 3)
+                continue;
+
+            var subtext = entry.subtext || "";
+            var sourceName = subtext.split(" | ")[0] || "Unknown";
+            if (!grouped[sourceName]) {
+                grouped[sourceName] = [];
+                sourceOrder.push(sourceName);
+            }
+            grouped[sourceName].push({
+                text: entry.display,
+                source: sourceName
+            });
+        }
+
+        var mixed = [];
+        var offset = 0;
+        // Limit to 40 items for ticker to avoid heavy memory usage
+        while (mixed.length < 40) {
+            var added = false;
+            for (var j = 0; j < sourceOrder.length; j++) {
+                var source = sourceOrder[j];
+                var sourceEntries = grouped[source];
+                if (sourceEntries && offset < sourceEntries.length) {
+                    mixed.push(sourceEntries[offset]);
+                    added = true;
+                    if (mixed.length >= 40)
+                        break;
+                }
+            }
+            if (!added)
+                break;
+            offset++;
+        }
+
+        rssTickerEntries = mixed;
+    }
+
+    function finalizeUpdate(combined, markAsFresh) {
+        // Sort chronologically (newest first)
+        combined.sort(function(a, b) {
+            var da = a.rawDate ? new Date(a.rawDate).getTime() : 0;
+            var db = b.rawDate ? new Date(b.rawDate).getTime() : 0;
+            return db - da; // Descending
+        });
+        
+        rssCache = combined;
+        plasmoidConfig.rssCache = JSON.stringify(combined);
+        if (markAsFresh)
+            plasmoidConfig.rssLastSyncAll = new Date().getTime();
+        
+        rebuildRssTickerEntries();
     }
 
     function getSourceFilePath(url) {
         return RSSManager.getSourceFilePath(url, rssCacheBase);
+    }
+
+    function clearRssCache() {
+        var cmd = "rm -rf \"" + rssCacheBase + "\" && mkdir -p \"" + rssCacheBase + "\"";
+        executable.connectSource(cmd);
+        rssCache = [];
+        rssTickerEntries = [];
+        plasmoidConfig.rssCache = "[]";
+        plasmoidConfig.rssLastSyncAll = 0;
+        
+        // Reset lastSync for all sources
+        for (var i = 0; i < rssSources.length; i++) {
+            rssSources[i].lastSync = 0;
+        }
+        plasmoidConfig.rssSources = JSON.stringify(rssSources);
     }
 
     function loadSourceEntries(url, callback) {
@@ -313,30 +396,38 @@ Item {
             return ;
         }
         var path = getSourceFilePath(url);
-        var request = new XMLHttpRequest();
-        request.open("GET", "file://" + path);
-        request.onreadystatechange = function() {
-            if (request.readyState === XMLHttpRequest.DONE) {
-                if (request.status === 200 || request.status === 0) {
-                    try {
-                        var raw = request.responseText.trim();
-                        var decodedJson = RSSManager.decodeBase64(raw);
-                        var data = JSON.parse(decodedJson);
-                        callback(data || []);
-                    } catch (e) {
-                        // Fallback for old format
-                        try {
-                            callback(JSON.parse(request.responseText) || []);
-                        } catch (e2) {
-                            callback([]);
-                        }
-                    }
+        var cmd = "cat \"" + path + "\"";
+        
+        executable.callbacks[cmd] = function(stdout) {
+            var raw = stdout.trim();
+            if (!raw) {
+                callback([]);
+                return;
+            }
+            
+            try {
+                // Attempt base64 decode first
+                var decodedJson = RSSManager.decodeBase64(raw);
+                if (decodedJson && (decodedJson.indexOf("[") !== -1 || decodedJson.indexOf("{") !== -1)) {
+                    var data = JSON.parse(decodedJson);
+                    callback(Array.isArray(data) ? data : []);
                 } else {
+                    // Try parsing raw if base64 didn't look like JSON
+                    var rawData = JSON.parse(raw);
+                    callback(Array.isArray(rawData) ? rawData : []);
+                }
+            } catch (e) {
+                // Final attempt: raw JSON
+                try {
+                    var rawData2 = JSON.parse(raw);
+                    callback(Array.isArray(rawData2) ? rawData2 : []);
+                } catch (e2) {
+                    console.warn("LogicController: Failed to read/parse RSS cache for", url);
                     callback([]);
                 }
             }
         };
-        request.send();
+        executable.connectSource(cmd);
     }
 
     function checkAndSyncRSS() {
@@ -367,23 +458,43 @@ Item {
     }
 
     function syncSourceSingle(index) {
-        // updateCombinedCache() will be called when queue is empty
-
         var source = rssSources[index];
         if (!source || !source.url)
             return ;
 
-        fetchRSS(source, function(entries) {
-            if (entries.length === 0)
-                return ;
+        var scriptPath = plasmoid.file("tools/rss_sync.sh");
+        var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
+        var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
+        
+        executable.callbacks[cmd] = function(stdout) {
+            if (stdout.indexOf("SUCCESS") !== -1) {
+                rssSources[index].lastSync = new Date().getTime();
+                plasmoidConfig.rssSources = JSON.stringify(rssSources);
+            }
+        };
+        executable.connectSource(cmd);
+    }
 
-            rssSources[index].lastSync = new Date().getTime();
-            plasmoidConfig.rssSources = JSON.stringify(rssSources);
-            var path = getSourceFilePath(source.url);
-            var json = JSON.stringify(entries);
-            var base64Json = RSSManager.encodeBase64(json);
-            executable.connectSource("mkdir -p '" + rssCacheBase + "' && (echo '" + base64Json + "' > '" + path + "')");
-        });
+    // New non-blocking sync for config UI usage
+    function syncSourceBackground(index, callback) {
+        var source = rssSources[index];
+        if (!source || !source.url) {
+            if (callback) callback("FAIL: Invalid source");
+            return;
+        }
+
+        var scriptPath = plasmoid.file("tools/rss_sync.sh");
+        var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
+        var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
+        
+        executable.callbacks[cmd] = function(stdout) {
+            var lines = stdout.split("\n");
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].trim();
+                if (line && callback) callback(line, cmd);
+            }
+        };
+        executable.connectSource(cmd);
     }
 
     function syncAllRSS() {
@@ -395,27 +506,57 @@ Item {
         }
     }
 
-    function updateCombinedCache() {
+    function updateCombinedCache(markAsFresh) {
         var combined = [];
         var completedCount = 0;
-        if (rssSources.length === 0) {
+        var totalSources = rssSources.length;
+
+        if (totalSources === 0) {
             rssCache = [];
+            rssTickerEntries = [];
+            plasmoidConfig.rssCache = "[]";
             return ;
         }
-        for (var i = 0; i < rssSources.length; i++) {
-            loadSourceEntries(rssSources[i].url, function(entries) {
-                combined = combined.concat(entries);
-                completedCount++;
-                if (completedCount === rssSources.length) {
-                    // Sort chronologically (newest first)
-                    combined.sort(function(a, b) {
-                        var da = a.rawDate ? new Date(a.rawDate).getTime() : 0;
-                        var db = b.rawDate ? new Date(b.rawDate).getTime() : 0;
-                        return db - da; // Descending
-                    });
-                    rssCache = combined;
+
+        // Use a unique ID to track this specific batch of requests
+        var batchId = Date.now();
+
+        for (var i = 0; i < totalSources; i++) {
+            (function(index) {
+                var url = rssSources[index].url;
+                if (!url) {
+                    completedCount++;
+                    if (completedCount === totalSources) finalizeUpdate(combined, markAsFresh);
+                    return;
                 }
-            });
+
+                var path = getSourceFilePath(url);
+                // Unique command to avoid callback collision
+                var cmd = "cat \"" + path + "\" #batch_" + batchId + "_" + index;
+                
+                executable.callbacks[cmd] = function(stdout) {
+                    var raw = stdout.trim();
+                    if (raw) {
+                        try {
+                            var entries = [];
+                            var decodedJson = RSSManager.decodeBase64(raw);
+                            if (decodedJson && (decodedJson.indexOf("[") !== -1 || decodedJson.indexOf("{") !== -1)) {
+                                entries = JSON.parse(decodedJson);
+                            } else {
+                                entries = JSON.parse(raw);
+                            }
+                            if (Array.isArray(entries)) {
+                                combined = combined.concat(entries);
+                            }
+                        } catch (e) {
+                            console.warn("LogicController: Failed to parse cache for", url);
+                        }
+                    }
+                    completedCount++;
+                    if (completedCount === totalSources) finalizeUpdate(combined, markAsFresh);
+                };
+                executable.connectSource(cmd);
+            })(i);
         }
     }
 
@@ -460,7 +601,7 @@ Item {
         loadPinned();
         loadCategorySettings();
         loadRSS();
-        updateCombinedCache();
+        updateCombinedCache(false);
         checkManAvailability();
         // Initial sync check
         Qt.callLater(() => {
@@ -553,7 +694,7 @@ Item {
             if (syncQueue.length === 0) {
                 running = false;
                 isSyncing = false;
-                updateCombinedCache();
+                updateCombinedCache(true);
                 return ;
             }
             var index = syncQueue.shift();
@@ -578,12 +719,16 @@ Item {
             loadRSS();
             if (rssEnabled)
                 syncAllRSS();
+            else
+                updateCombinedCache(false);
 
         }
 
         function onRssEnabledChanged() {
             if (rssEnabled)
                 syncAllRSS();
+            else
+                updateCombinedCache(false);
 
         }
 

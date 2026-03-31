@@ -11,6 +11,7 @@ PlasmoidItem {
 
     // ===== CORE PROPERTIES =====
     property string searchText: ""
+    property alias logic: controller
     
     // Responsive font size based on height (40% of panel height)
     readonly property int responsiveFontSize: Math.max(10, Math.round(height * 0.4))

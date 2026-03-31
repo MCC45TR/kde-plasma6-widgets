@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "../js/PreviewUtils.js" as PreviewUtils
 
 // History Tile View - Displays search history in tile/grid format
 // Features: Keyboard navigation, Category collapse/expand
@@ -15,6 +16,7 @@ FocusScope {
     required property color accentColor
     required property bool previewEnabled
     required property var previewSettings
+    required property var logic
     
     // Signals
     signal itemClicked(var item)
@@ -279,7 +281,7 @@ FocusScope {
     // Context Menu
     HistoryContextMenu {
         id: contextMenu
-        logic: popupRoot.logic
+        logic: historyTile.logic
     }
 
     // Tile Grid
@@ -488,33 +490,10 @@ FocusScope {
                                             sourceSize.width: historyTile.iconSize
                                             sourceSize.height: historyTile.iconSize
                                             cache: true
-                                            
-                                            source: {
-                                                if (historyTile.iconSize <= 22 || !historyTile.previewEnabled) return "";
-                                                
-                                                var url = (modelData.filePath || "").toString();
-                                                // Fallback
-                                                if (!url) url = (modelData.url || "").toString();
-
-                                                if (!url) return "";
-                                                
-                                                // Strip file:// prefix and decode special characters (like %20 for spaces)
-                                                var showPreview = false;
-                                                var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                                if (historyTile.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
-
-                                                var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                                if (!showPreview && historyTile.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
-
-                                                var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
-                                                if (!showPreview && (historyTile.previewSettings.documents || historyTile.previewSettings.text) && docExts.indexOf(ext) >= 0) showPreview = true;
-                                                
-                                                if (showPreview) {
-                                                    return "image://preview/" + path;
-                                                }
-                                                
-                                                return "";
-                                            }
+                                            source: historyTile.iconSize > 22
+                                                ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyTile.previewEnabled, historyTile.previewSettings)
+                                                : ""
+                                            visible: source.length > 0 && status === Image.Ready
                                         }
                                     }
                                     
@@ -535,8 +514,9 @@ FocusScope {
                                         text: {
                                             if (modelData.isApplication) return "";
                                             
-                                            var path = modelData.filePath ? modelData.filePath.toString() : "";
+                                            var path = modelData.filePath ? modelData.filePath.toString() : (modelData.url ? modelData.url.toString() : "");
                                             if (path && path.length > 0) {
+                                                var ext = PreviewUtils.getExtension(path);
                                                 path = path.replace("file://", "");
                                                 if (path.endsWith("/")) path = path.slice(0, -1);
                                                 var parts = path.split("/");

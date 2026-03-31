@@ -36,24 +36,17 @@ PlasmaExtras.SearchField {
         // Cache management
         property var rssTitles: {
             var list = []
-            var cache = (logic && logic.rssCache) ? logic.rssCache : []
+            var cache = (logic && logic.rssTickerEntries) ? logic.rssTickerEntries : []
             if (rssPlaceholderCycling && cache.length > 0) {
-                var validItems = []
                 for (var i = 0; i < cache.length; i++) {
-                    var title = cache[i].display
+                    var title = cache[i].text
                     if (title && title.length > 3 && title !== defaultText) {
-                        var sub = cache[i].subtext || ""
-                        var src = sub.split(" | ")[0] || "Unknown"
-                        validItems.push({ text: title, source: src })
+                        list.push({
+                            text: title,
+                            source: cache[i].source || "Unknown"
+                        })
                     }
                 }
-                for (var i = validItems.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var temp = validItems[i];
-                    validItems[i] = validItems[j];
-                    validItems[j] = temp;
-                }
-                list = validItems.slice(0, 20);
             }
             return list
         }
@@ -61,6 +54,15 @@ PlasmaExtras.SearchField {
         property int currentRssIndex: rssTitles.length > 0 ? 0 : -1
         property int rssConsecutiveCount: 0
         property string currentState: root.rssFrequency === 0 ? "rss" : "placeholder"
+        
+        // Watch for RSS data arrival to potentially trigger a faster initial transition
+        onRssTitlesChanged: {
+            if (rssTitles.length > 0 && currentState === "placeholder" && !switchAnim.running) {
+                // If data just arrived, maybe trigger sooner? 
+                // For now, just ensure currentRssIndex is valid
+                if (currentRssIndex < 0) currentRssIndex = 0;
+            }
+        }
         
         function getInitialDuration() {
             var f = root.rssFrequency;
@@ -75,17 +77,32 @@ PlasmaExtras.SearchField {
         }
         
         property int currentDuration: getInitialDuration()
-        property string currentTargetText: currentState === "placeholder" ? defaultText : (rssTitles.length > 0 && currentRssIndex >= 0 ? "rss: " + rssTitles[currentRssIndex].text : defaultText)
+        property string currentTargetText: currentState === "placeholder" ? defaultText : (rssTitles.length > 0 && currentRssIndex >= 0 ? rssTitles[currentRssIndex].text : defaultText)
         
+        // Right side icon
+        Kirigami.Icon {
+            id: searchIconRight
+            anchors.right: parent.right
+            anchors.rightMargin: 12
+            anchors.verticalCenter: parent.verticalCenter
+            width: 16
+            height: 16
+            source: "plasma-search"
+            color: Kirigami.Theme.textColor
+            opacity: root.text.length === 0 ? 0.35 : 0.7
+            Behavior on opacity { NumberAnimation { duration: 250 } }
+        }
+
         Text {
             id: currentLabel
             anchors.left: parent.left
-            anchors.right: parent.right
+            anchors.right: searchIconRight.left
+            anchors.rightMargin: 8
             height: parent.height
             verticalAlignment: Text.AlignVCenter
             text: placeholderContainer.currentTargetText
             elide: Text.ElideRight
-            opacity: 0.5
+            opacity: 0.35
             color: Kirigami.Theme.textColor
             font.pixelSize: root.font.pixelSize
         }
@@ -93,7 +110,8 @@ PlasmaExtras.SearchField {
         Text {
             id: nextLabel
             anchors.left: parent.left
-            anchors.right: parent.right
+            anchors.right: searchIconRight.left
+            anchors.rightMargin: 8
             height: parent.height
             y: -height
             verticalAlignment: Text.AlignVCenter
@@ -121,7 +139,7 @@ PlasmaExtras.SearchField {
                     }
                     ParallelAnimation {
                         NumberAnimation { target: nextLabel; property: "y"; to: 0; duration: 600; easing.type: Easing.InOutCubic }
-                        NumberAnimation { target: nextLabel; property: "opacity"; to: 0.5; duration: 600; easing.type: Easing.InOutCubic }
+                        NumberAnimation { target: nextLabel; property: "opacity"; to: 0.35; duration: 600; easing.type: Easing.InOutCubic }
                     }
                 }
             }
@@ -130,7 +148,7 @@ PlasmaExtras.SearchField {
                 script: {
                     currentLabel.text = nextLabel.text
                     currentLabel.y = 0
-                    currentLabel.opacity = 0.5
+                    currentLabel.opacity = 0.35
                     nextLabel.opacity = 0
                 }
             }

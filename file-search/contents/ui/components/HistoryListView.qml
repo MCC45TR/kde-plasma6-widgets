@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "../js/PreviewUtils.js" as PreviewUtils
 
 // History List View - Displays search history in list format
 Item {
@@ -15,6 +16,7 @@ Item {
     required property var formatTimeFunc
     required property bool previewEnabled
     required property var previewSettings
+    required property var logic
     
     // Signals
     signal itemClicked(var item)
@@ -71,7 +73,7 @@ Item {
     // Context Menu
     HistoryContextMenu {
         id: contextMenu
-        logic: popupRoot.logic
+        logic: historyList.logic
     }
 
     // History List
@@ -196,22 +198,10 @@ Item {
                                         sourceSize.width: historyList.listIconSize
                                         sourceSize.height: historyList.listIconSize
                                         cache: true
-                                        
-                                        source: {
-                                            if (historyList.listIconSize <= 22 || !historyList.previewEnabled) return "";
-                                            var url = (modelData.filePath || "").toString();
-                                            if (!url) url = (modelData.url || "").toString();
-                                            if (!url) return "";
-                                            var showPreview = false;
-                                            var imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"]
-                                            if (historyList.previewSettings.images && imageExts.indexOf(ext) >= 0) showPreview = true;
-                                            var videoExts = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg"]
-                                            if (!showPreview && historyList.previewSettings.videos && videoExts.indexOf(ext) >= 0) showPreview = true;
-                                            var docExts = ["pdf", "odt", "docx", "pptx", "xlsx", "ods", "csv", "xls", "txt", "md"]
-                                            if (!showPreview && historyList.previewSettings.documents && docExts.indexOf(ext) >= 0) showPreview = true;
-                                            if (showPreview) return "image://preview/" + path;
-                                            return "";
-                                        }
+                                        source: historyList.listIconSize > 22
+                                            ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyList.previewEnabled, historyList.previewSettings)
+                                            : ""
+                                        visible: source.length > 0 && status === Image.Ready
                                     }
                                 }
                                 

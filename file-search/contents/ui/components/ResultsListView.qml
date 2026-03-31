@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "../js/PreviewUtils.js" as PreviewUtils
 
 // Results List View - Displays search results in list format
 ScrollView {
@@ -29,10 +30,22 @@ ScrollView {
     
     // Localization
     property string searchText: ""
+    property bool isLoading: false
     
     // Pin support
     property var isPinnedFunc: function(matchId) { return false }
     property var togglePinFunc: function(item) { }
+
+    function rssMetaLine(item) {
+        var parts = []
+        if (item.subtext && item.subtext.length > 0) {
+            parts.push(item.subtext)
+        }
+        if (item.url && item.url.length > 0) {
+            parts.push(item.url)
+        }
+        return parts.join("  •  ")
+    }
     
     clip: true
     ScrollBar.vertical.policy: ScrollBar.AlwaysOff
@@ -74,10 +87,19 @@ ScrollView {
         delegate: Item {
             id: delegateRoot
             width: resultsList.width
-            property bool isRSS: modelData.category === "RSS"
-            property bool isExpanded: false
             
-            height: isRSS ? (isExpanded ? (descriptionLabel.implicitHeight + 110) : 72) : Math.max(44, resultsListRoot.listIconSize + 18)
+            // Reliable RSS detection: check category OR the unique ID prefix
+            readonly property bool isRSS: modelData.category === "RSS" || 
+                                          modelData.category === i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberler") || 
+                                          (modelData.duplicateId && modelData.duplicateId.toString().startsWith("rss:"))
+                                          
+            property bool previewActive: resultsListRoot.previewEnabled && !isRSS && resultMouseArea.containsMouse
+            property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.url || "") : ""
+            property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsListRoot.previewEnabled, resultsListRoot.previewSettings) : ""
+            property string previewFileType: PreviewUtils.getFileTypeLabel(modelData.url || "")
+            
+            // Use implicitHeight of layout instead of anchors.fill to avoid circular dependency
+            height: isRSS ? (rssCardLayout.implicitHeight + 20) : Math.max(44, resultsListRoot.listIconSize + 18)
             
             // Background Container
             Rectangle {
@@ -90,7 +112,11 @@ ScrollView {
                 border.color: (isRSS || resultsList.currentIndex === index) ? Qt.rgba(resultsListRoot.accentColor.r, resultsListRoot.accentColor.g, resultsListRoot.accentColor.b, 0.3) : "transparent"
                 
                 ColumnLayout {
-                    anchors.fill: parent
+                    id: rssCardLayout
+                    // Use anchors for positioning, but the parent's height is derived from this layout's implicitHeight
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
                     anchors.margins: 10
                     spacing: 8
                     
@@ -150,23 +176,12 @@ ScrollView {
                                 visible: resultsListRoot.isPinnedFunc(modelData.duplicateId || modelData.display)
                                 color: resultsListRoot.accentColor
                             }
-                            
-                            // Expansion Indicator
-                            Kirigami.Icon {
-                                visible: isRSS
-                                source: delegateRoot.isExpanded ? "arrow-up" : "arrow-down"
-                                implicitWidth: 16
-                                implicitHeight: 16
-                                opacity: 0.5
-                                color: resultsListRoot.textColor
-                            }
                         }
                     }
                     
-                    // Expanded News Content
                     ColumnLayout {
                         Layout.fillWidth: true
-                        visible: isRSS && delegateRoot.isExpanded
+                        visible: isRSS
                         spacing: 8
                         
                         Rectangle {
@@ -182,10 +197,19 @@ ScrollView {
                             font.pixelSize: 13
                             wrapMode: Text.WordWrap
                             Layout.fillWidth: true
-                            maximumLineCount: 5
+                            maximumLineCount: 8
                             elide: Text.ElideRight
                             opacity: 0.85
                             lineHeight: 1.2
+                        }
+
+                        Text {
+                            text: resultsListRoot.rssMetaLine(modelData)
+                            color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.62)
+                            font.pixelSize: 11
+                            wrapMode: Text.WrapAnywhere
+                            Layout.fillWidth: true
+                            visible: text.length > 0
                         }
                         
                         RowLayout {
@@ -215,11 +239,6 @@ ScrollView {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 
                 onClicked: (mouse) => {
-                    if (mouse.button === Qt.LeftButton && isRSS) {
-                        delegateRoot.isExpanded = !delegateRoot.isExpanded
-                        return
-                    }
-                    
                     var matchId = modelData.duplicateId || modelData.display || ""
                     var filePath = (modelData.url || "").toString()
                     
@@ -234,19 +253,94 @@ ScrollView {
                             uuid: ""
                         }, mouse.x + delegateRoot.x, mouse.y + delegateRoot.y)
                     } else {
-                        resultsListRoot.itemClicked(index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Other", matchId, filePath)
+                        if (isRSS && filePath.length > 0) {
+                            Qt.openUrlExternally(filePath)
+                        } else {
+                            resultsListRoot.itemClicked(index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Other", matchId, filePath)
+                        }
                     }
+                }
+            }
+
+            ToolTip {
+                visible: delegateRoot.previewSource.length > 0
+                delay: 400
+                timeout: 10000
+                x: delegateRoot.width + 4
+                y: 0
+
+                contentItem: Column {
+                    spacing: 6
+
+                    Text {
+                        text: modelData.display || ""
+                        font.bold: true
+                        font.pixelSize: 12
+                        color: resultsListRoot.textColor
+                    }
+
+                    Image {
+                        source: delegateRoot.previewSource
+                        width: source.length > 0 ? 150 : 0
+                        height: source.length > 0 ? 100 : 0
+                        fillMode: Image.PreserveAspectFit
+                        visible: source.length > 0
+                        cache: true
+                        asynchronous: true
+                    }
+
+                    Text {
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
+                        font.pixelSize: 10
+                        color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
+                        visible: (modelData.category || "").length > 0
+                    }
+
+                    Text {
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + delegateRoot.previewFileType
+                        font.pixelSize: 10
+                        color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
+                        visible: delegateRoot.previewFileType.length > 0
+                    }
+
+                    Text {
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + delegateRoot.previewPath
+                        font.pixelSize: 10
+                        color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
+                        wrapMode: Text.WrapAnywhere
+                        width: 300
+                        visible: delegateRoot.previewPath.length > 0
+                    }
+                }
+
+                background: Rectangle {
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: resultsListRoot.accentColor
+                    border.width: 1
+                    radius: 6
                 }
             }
         }
         
         // Empty state
-        Text {
+        Column {
             anchors.centerIn: parent
-            text: resultsListRoot.searchText.length > 0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to start searching")
-            color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
-            font.pixelSize: 12
+            spacing: 10
             visible: resultsList.count === 0 && resultsListRoot.searchText.length > 0
+
+            BusyIndicator {
+                anchors.horizontalCenter: parent.horizontalCenter
+                running: resultsListRoot.isLoading
+                visible: resultsListRoot.isLoading
+            }
+
+            Text {
+                text: resultsListRoot.isLoading
+                    ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
+                    : i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
+                color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
+                font.pixelSize: 12
+            }
         }
     }
     
