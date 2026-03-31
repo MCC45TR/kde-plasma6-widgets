@@ -29,9 +29,33 @@ PlasmaExtras.SearchField {
         visible: root.text.length === 0
         clip: true
         
+        TextMetrics {
+            id: titleMetrics
+            font.pixelSize: root.font.pixelSize
+            font.family: root.font.family
+        }
+        
+        property var titleChunks: []
+        property int currentChunkIndex: -1
+        
         property var recentIndices: []
         property var recentSources: []
         property string defaultText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...")
+        
+        // Recalculate chunks if width changes (e.g. panel resize)
+        onWidthChanged: {
+            if (currentTargetText !== "" && currentLabel.width > 50) {
+                var rawText = (currentState === "rss" && rssTitles.length > 0 && currentRssIndex >= 0) ? rssTitles[currentRssIndex].text : defaultText;
+                var newChunks = splitTextIntoChunks(rawText, currentLabel.width);
+                if (newChunks.length !== titleChunks.length) {
+                    titleChunks = newChunks;
+                    currentChunkIndex = 0;
+                    currentTargetText = newChunks[0];
+                    switchAnim.targetText = currentTargetText;
+                    switchAnim.restart();
+                }
+            }
+        }
         
         // Cache management
         property var rssTitles: {
@@ -76,8 +100,8 @@ PlasmaExtras.SearchField {
             return 10000;
         }
         
-        property int currentDuration: getInitialDuration()
-        property string currentTargetText: currentState === "placeholder" ? defaultText : (rssTitles.length > 0 && currentRssIndex >= 0 ? rssTitles[currentRssIndex].text : defaultText)
+        property int currentDuration: 3000 // User requested 3s per part
+        property string currentTargetText: defaultText // Start with default text immediately
         
         // Right side icon
         Kirigami.Icon {
@@ -101,10 +125,12 @@ PlasmaExtras.SearchField {
             height: parent.height
             verticalAlignment: Text.AlignVCenter
             text: placeholderContainer.currentTargetText
-            elide: Text.ElideRight
+            elide: Text.ElideNone // Explicitly disable elision to show the full segment
+            wrapMode: Text.NoWrap // Ensure it doesn't wrap and spill over
             opacity: 0.35
             color: Kirigami.Theme.textColor
             font.pixelSize: root.font.pixelSize
+            font.family: root.font.family // Sync font family with root and metrics
         }
         
         Text {
@@ -116,10 +142,12 @@ PlasmaExtras.SearchField {
             y: -height
             verticalAlignment: Text.AlignVCenter
             text: ""
-            elide: Text.ElideRight
+            elide: Text.ElideNone // Explicitly disable elision
+            wrapMode: Text.NoWrap
             opacity: 0
             color: Kirigami.Theme.textColor
             font.pixelSize: root.font.pixelSize
+            font.family: root.font.family // Sync font family
         }
         
         SequentialAnimation {
@@ -188,15 +216,103 @@ PlasmaExtras.SearchField {
             }
             return { state: "placeholder", duration: 10000 };
         }
+
+        function splitTextIntoChunks(text, maxWidth) {
+            if (!text || maxWidth <= 60) return [text || ""];
+            
+            // Safety margin: 10% or at least 40px to account for icons and '..'
+            var targetWidth = maxWidth - 40;
+            
+            var chunks = [];
+            var words = text.split(" ");
+            var currentRawPart = "";
+            
+            function getDecorated(raw, isStart, isEnd) {
+                if (raw === "") return "";
+                var piece = raw.trim();
+                return (isStart ? "" : "..") + piece + (isEnd ? "" : "..");
+            }
+            
+            for (var i = 0; i < words.length; i++) {
+                var word = words[i];
+                var testRaw = currentRawPart + (currentRawPart === "" ? "" : " ") + word;
+                
+                // Measure with potential decorations
+                titleMetrics.text = getDecorated(testRaw, chunks.length === 0, false);
+                
+                if (titleMetrics.advanceWidth <= targetWidth) {
+                    currentRawPart = testRaw;
+                } else {
+                    if (currentRawPart !== "") {
+                        chunks.push(getDecorated(currentRawPart, chunks.length === 0, false));
+                        currentRawPart = word;
+                    } else {
+                        currentRawPart = word;
+                    }
+                    
+                    // Handle single word longer than width
+                    titleMetrics.text = getDecorated(currentRawPart, chunks.length === 0, false);
+                    if (titleMetrics.advanceWidth > targetWidth) {
+                        var remaining = currentRawPart;
+                        while (remaining.length > 0) {
+                            var low = 1, high = remaining.length, fitCount = 1;
+                            while (low <= high) {
+                                var mid = Math.floor((low + high) / 2);
+                                var sub = remaining.substring(0, mid);
+                                titleMetrics.text = getDecorated(sub, chunks.length === 0, false);
+                                if (titleMetrics.advanceWidth <= targetWidth) {
+                                    fitCount = mid;
+                                    low = mid + 1;
+                                } else {
+                                    high = mid - 1;
+                                }
+                            }
+                            chunks.push(getDecorated(remaining.substring(0, fitCount), chunks.length === 0, false));
+                            remaining = remaining.substring(fitCount);
+                            if (chunks.length > 20) break;
+                        }
+                        currentRawPart = "";
+                    }
+                }
+            }
+            if (currentRawPart !== "") {
+                chunks.push(getDecorated(currentRawPart, chunks.length === 0, true));
+            }
+            
+            // Fix the very last chunk decoration (no '..' at the end)
+            if (chunks.length > 1) {
+                var lastIdx = chunks.length - 1;
+                var lastRaw = currentRawPart; 
+                // Re-calculate last decoration to ensure it ends cleanly
+                // Note: currentRawPart was already the last piece
+                chunks[lastIdx] = ".." + currentRawPart.trim();
+            }
+            
+            return chunks;
+        }
         
         Timer {
-            interval: placeholderContainer.currentDuration
-            running: placeholderContainer.visible && placeholderContainer.rssTitles.length > 0 && root.rssPlaceholderCycling && root.text.length === 0
+            id: cycleTimer
+            interval: 3000 // Default 3s
+            running: placeholderContainer.visible && root.text.length === 0
             repeat: true
+            triggeredOnStart: false // Wait for initial layout to get correct width
+            
             onTriggered: {
-                var next = placeholderContainer.computeNextState();
+                // 1. If we have more chunks for the current item, show next chunk
+                if (placeholderContainer.currentChunkIndex < placeholderContainer.titleChunks.length - 1) {
+                    placeholderContainer.currentChunkIndex++;
+                    placeholderContainer.currentTargetText = placeholderContainer.titleChunks[placeholderContainer.currentChunkIndex];
+                    switchAnim.targetText = placeholderContainer.currentTargetText;
+                    switchAnim.restart();
+                    return;
+                }
                 
-                if (next.state === "rss") {
+                // 2. Otherwise, pick next item (Headline or Placeholder)
+                var next = placeholderContainer.computeNextState();
+                var newRawText = "";
+                
+                if (next.state === "rss" && placeholderContainer.rssTitles.length > 0) {
                     if (placeholderContainer.currentState === "rss") {
                         placeholderContainer.rssConsecutiveCount++;
                     } else {
@@ -204,53 +320,57 @@ PlasmaExtras.SearchField {
                     }
                     
                     var maxIndex = placeholderContainer.rssTitles.length - 1;
-                    var allUnique = [];
-                    for (var u = 0; u < placeholderContainer.rssTitles.length; u++) {
-                        var s = placeholderContainer.rssTitles[u].source;
-                        if (s && allUnique.indexOf(s) === -1) allUnique.push(s);
-                    }
-                    var uniqueSources = allUnique.length;
+                    var randomIndex = placeholderContainer.currentRssIndex;
                     
-                    if (placeholderContainer.rssTitles.length < 3 || uniqueSources < 3) {
-                        placeholderContainer.currentRssIndex = (placeholderContainer.currentRssIndex + 1) % placeholderContainer.rssTitles.length;
+                    // Logic to select a random item (same as before)
+                    if (placeholderContainer.rssTitles.length < 3) {
+                        randomIndex = (placeholderContainer.currentRssIndex + 1) % placeholderContainer.rssTitles.length;
                     } else {
-                        var randomIndex;
                         var attempts = 0;
-                        var chosenItem;
                         do {
                             randomIndex = Math.floor(Math.random() * (maxIndex + 1));
-                            chosenItem = placeholderContainer.rssTitles[randomIndex];
-                            
+                            var chosenItem = placeholderContainer.rssTitles[randomIndex];
                             var isRecentIndex = placeholderContainer.recentIndices.indexOf(randomIndex) !== -1;
                             var isRecentSource = placeholderContainer.recentSources.indexOf(chosenItem.source) !== -1;
-                            
-                            if (!isRecentIndex && (!isRecentSource || attempts > 8)) {
-                                break;
-                            }
+                            if (!isRecentIndex && (!isRecentSource || attempts > 10)) break;
                             attempts++;
                         } while (attempts < 20);
                         
+                        // Update history
                         var newHistory = placeholderContainer.recentIndices.slice();
                         newHistory.push(randomIndex);
-                        var maxHistory = Math.min(3, maxIndex);
-                        if (newHistory.length > maxHistory) newHistory.shift();
+                        if (newHistory.length > 3) newHistory.shift();
                         placeholderContainer.recentIndices = newHistory;
-                        
-                        var newSources = placeholderContainer.recentSources.slice();
-                        newSources.push(chosenItem.source);
-                        var maxSources = Math.max(0, uniqueSources - 2);
-                        if (newSources.length > maxSources && newSources.length > 0) newSources.shift();
-                        placeholderContainer.recentSources = newSources;
-                        
-                        placeholderContainer.currentRssIndex = randomIndex;
                     }
+                    
+                    placeholderContainer.currentRssIndex = randomIndex;
+                    newRawText = placeholderContainer.rssTitles[randomIndex].text;
                 } else {
                     placeholderContainer.rssConsecutiveCount = 0;
+                    newRawText = placeholderContainer.defaultText;
                 }
                 
-                placeholderContainer.currentState = next.state;
-                placeholderContainer.currentDuration = next.duration;
+                // 3. Prepare chunks for the new text
+                // Use currentLabel's actual width as the reference.
+                var availWidth = currentLabel.width;
+                if (availWidth <= 50) {
+                    // If still 0, try to estimate from placeholderContainer if available
+                    availWidth = placeholderContainer.width - searchIconRight.width - 24;
+                }
+                if (availWidth <= 50) availWidth = 400; // Better fallback for "en geniş mod" (widest mode)
                 
+                var newChunks = placeholderContainer.splitTextIntoChunks(newRawText, availWidth);
+                placeholderContainer.titleChunks = newChunks;
+                placeholderContainer.currentChunkIndex = 0;
+                placeholderContainer.currentState = next.state;
+                
+                // Duration Logic: 
+                // - If multi-part (chunks > 1), use 3s per part.
+                // - If single-part, use the user's frequency setting (next.duration).
+                placeholderContainer.currentDuration = (newChunks.length > 1) ? 3000 : next.duration;
+                cycleTimer.interval = placeholderContainer.currentDuration;
+                
+                placeholderContainer.currentTargetText = newChunks[0];
                 switchAnim.targetText = placeholderContainer.currentTargetText;
                 switchAnim.restart();
             }

@@ -27,6 +27,11 @@ FocusScope {
     property bool previewEnabled: true
     property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
     
+    // RSS settings from config
+    property bool rssShowImages: true
+    property bool rssExpandableCards: true
+    property var expandedItems: ({})
+    
     // Navigation state
     property int currentCategoryIndex: 0
     property int currentItemIndex: 0
@@ -417,21 +422,30 @@ FocusScope {
                         
                         delegate: Item {
                             id: tileDelegate
+                            property bool isRSS: modelData.category === "RSS"
+                            property bool isExpanded: isRSS && resultsTileRoot.rssExpandableCards && !!resultsTileRoot.expandedItems[modelData.duplicateId]
+                            
                             // Wide vs Grid sizing
-                            width: categoryDelegate.isWide ? parent.width : resultsTileRoot.tileWidth
-                            height: categoryDelegate.isWide ? Math.max(50, resultsTileRoot.iconSize + 16) : resultsTileRoot.tileHeight
+                            width: (categoryDelegate.isWide || tileDelegate.isExpanded) ? parent.width : resultsTileRoot.tileWidth
+                            height: (categoryDelegate.isWide || tileDelegate.isExpanded) ? (tileContent.implicitHeight + 16) : resultsTileRoot.tileHeight
+                            
+                            Layout.fillWidth: categoryDelegate.isWide || tileDelegate.isExpanded
+                            
+                            Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+                            Behavior on height { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
                             
                             property int itemIdx: index
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
                             property string previewPath: PreviewUtils.getLocalPreviewPath(modelData.url || "")
                             property string previewFileType: PreviewUtils.getFileTypeLabel(modelData.url || "")
-                            property string previewSource: ((tileMouseArea.containsMouse || tileDelegate.isSelected || resultsTileRoot.previewForceVisible) && !categoryDelegate.isWide)
+                            property string previewSource: ((tileMouseArea.containsMouse || tileDelegate.isSelected || resultsTileRoot.previewForceVisible) && !categoryDelegate.isWide && !tileDelegate.isExpanded)
                                 ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings)
                                 : ""
                             
                             Rectangle {
                                 id: tileBg
                                 anchors.fill: parent
+                                anchors.bottomMargin: (categoryDelegate.isWide || tileDelegate.isExpanded) ? 8 : 0
                                 radius: 8
                                 color: {
                                     if (tileDelegate.isSelected) 
@@ -470,12 +484,19 @@ FocusScope {
                                 }
                                 
                                 // Content Loader (Grid vs Horizontal Layout)
-                                Loader {
+                                Item {
+                                    id: tileContent
                                     anchors.fill: parent
-                                    anchors.margins: 6
-                                    sourceComponent: categoryDelegate.isWide ? wideLayoutComp : gridLayoutComp
+                                    anchors.margins: 8
+                                    implicitHeight: loader.item ? loader.item.implicitHeight : 50
+                                    
+                                    Loader {
+                                        id: loader
+                                        anchors.fill: parent
+                                        sourceComponent: (categoryDelegate.isWide || tileDelegate.isExpanded) ? wideLayoutComp : gridLayoutComp
+                                    }
                                 }
-                                
+                            }    
                                 Component {
                                     id: gridLayoutComp
                                     Column {
@@ -551,36 +572,100 @@ FocusScope {
                                 
                                 Component {
                                     id: wideLayoutComp
-                                    RowLayout {
+                                    ColumnLayout {
+                                        id: wideLayout
                                         spacing: 12
                                         
-                                        Kirigami.Icon {
-                                            source: modelData.decoration || "application-x-executable"
-                                            Layout.preferredWidth: resultsTileRoot.iconSize
-                                            Layout.preferredHeight: resultsTileRoot.iconSize
-                                            color: resultsTileRoot.textColor
-                                        }
-                                        
-                                        ColumnLayout {
+                                        RowLayout {
+                                            spacing: 12
                                             Layout.fillWidth: true
-                                            spacing: 2
                                             
-                                            Text {
-                                                text: modelData.display || ""
-                                                font.pixelSize: 14 // Larger font for wide cards
-                                                font.bold: true
+                                            Kirigami.Icon {
+                                                source: modelData.decoration || "application-x-executable"
+                                                Layout.preferredWidth: resultsTileRoot.iconSize
+                                                Layout.preferredHeight: resultsTileRoot.iconSize
                                                 color: resultsTileRoot.textColor
-                                                Layout.fillWidth: true
-                                                elide: Text.ElideRight
+                                                visible: !tileDelegate.isExpanded // Show icon only when not expanded
                                             }
                                             
-                                            Text {
-                                                text: modelData.subtext || ""
-                                                font.pixelSize: 11
-                                                color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                            ColumnLayout {
                                                 Layout.fillWidth: true
-                                                elide: Text.ElideRight
+                                                spacing: 2
+                                                
+                                                Text {
+                                                    text: modelData.display || ""
+                                                    font.pixelSize: tileDelegate.isExpanded ? 16 : 14
+                                                    font.bold: true
+                                                    color: resultsTileRoot.textColor
+                                                    Layout.fillWidth: true
+                                                    elide: tileDelegate.isExpanded ? Text.ElideNone : Text.ElideRight
+                                                    wrapMode: tileDelegate.isExpanded ? Text.Wrap : Text.NoWrap
+                                                }
+                                                
+                                                Text {
+                                                    text: modelData.subtext || ""
+                                                    font.pixelSize: 11
+                                                    color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                                    Layout.fillWidth: true
+                                                    elide: Text.ElideRight
+                                                    visible: text.length > 0 && !tileDelegate.isExpanded
+                                                }
+                                            }
+
+                                            // Close/Shrink button for RSS
+                                            Kirigami.Icon {
+                                                source: "window-restore"
+                                                Layout.preferredWidth: 16
+                                                Layout.preferredHeight: 16
+                                                color: resultsTileRoot.textColor
+                                                opacity: 0.5
+                                                visible: tileDelegate.isExpanded
+                                            }
+                                        }
+
+                                        // Expanded Content
+                                        ColumnLayout {
+                                            Layout.fillWidth: true
+                                            visible: tileDelegate.isExpanded
+                                            spacing: 12
+                                            
+                                            // Image
+                                            Image {
+                                                id: expandedImage
+                                                source: (tileDelegate.isExpanded && resultsTileRoot.rssShowImages) ? (modelData.imageUrl || "") : ""
+                                                Layout.fillWidth: true
+                                                Layout.preferredHeight: source.length > 0 ? Math.min(250, implicitHeight) : 0
+                                                fillMode: Image.PreserveAspectFit
+                                                visible: source.length > 0
+                                                asynchronous: true
+                                                cache: true
+                                            }
+                                            
+                                            // Full Text
+                                            Text {
+                                                text: modelData.fullContent || modelData.description || ""
+                                                Layout.fillWidth: true
+                                                wrapMode: Text.Wrap
+                                                font.pixelSize: 13
+                                                color: resultsTileRoot.textColor
+                                                opacity: 0.9
                                                 visible: text.length > 0
+                                            }
+
+                                            RowLayout {
+                                                Layout.fillWidth: true
+                                                Button {
+                                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Read in Browser")
+                                                    icon.name: "internet-services"
+                                                    onClicked: resultsTileRoot.activateCurrentItem()
+                                                }
+                                                Label {
+                                                    text: modelData.subtext || ""
+                                                    font.pixelSize: 10
+                                                    opacity: 0.6
+                                                    Layout.fillWidth: true
+                                                    horizontalAlignment: Text.AlignRight
+                                                }
                                             }
                                         }
                                     }
@@ -599,6 +684,24 @@ FocusScope {
                                     
                                     onClicked: (mouse) => {
                                         var matchId = modelData.duplicateId || modelData.display || ""
+                                        
+                                        // Expansion logic for RSS
+                                        if (tileDelegate.isRSS && resultsTileRoot.rssExpandableCards) {
+                                            if (mouse.button === Qt.LeftButton) {
+                                                var newExpanded = {}
+                                                // Option 1: Only one expanded at a time
+                                                // var currentVal = resultsTileRoot.expandedItems[matchId]
+                                                // newExpanded[matchId] = !currentVal
+                                                
+                                                // Option 2: Allow multiple (but keep local state simple)
+                                                Object.assign(newExpanded, resultsTileRoot.expandedItems)
+                                                newExpanded[matchId] = !newExpanded[matchId]
+                                                
+                                                resultsTileRoot.expandedItems = newExpanded
+                                                return;
+                                            }
+                                        }
+
                                         var filePath = (modelData.url && modelData.url.toString) ? modelData.url.toString() : (modelData.url || "")
                                         var subtext = modelData.subtext || ""
                                         var urls = modelData.urls || []
@@ -710,12 +813,11 @@ FocusScope {
                             }
                         }
                     }
-                    }
                 }
-            }
             }
         }
     }
+}
     
     
     // Empty state

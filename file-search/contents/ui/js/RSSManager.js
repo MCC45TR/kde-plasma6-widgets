@@ -56,6 +56,9 @@ function parseRSS(xml, sourceName) {
     var descRegex = /<(description|summary)>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/(description|summary)>/i
     var contentRegex = /<(content:encoded|content)>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/(content:encoded|content)>/i
     
+    var imageRegex = /<(media:content|enclosure|img)[^>]*url=\"([^\"]+)\"[^>]*>/i
+    var imageSrcRegex = /<img[^>]*src=\"([^\"]+)\"[^>]*>/i
+    
     var match
     while ((match = itemRegex.exec(xml)) !== null) {
         var itemContent = match[2]
@@ -64,6 +67,15 @@ function parseRSS(xml, sourceName) {
         var dateMatch = itemContent.match(dateRegex)
         var descMatch = itemContent.match(descRegex)
         var fullMatch = itemContent.match(contentRegex)
+        
+        var imageUrl = ""
+        var imgMatch = itemContent.match(imageRegex)
+        if (imgMatch) {
+            imageUrl = imgMatch[2]
+        } else {
+            var imgSrMatch = itemContent.match(imageSrcRegex)
+            if (imgSrMatch) imageUrl = imgSrMatch[1]
+        }
         
         if (titleMatch) {
             var title = unescapeHtml(titleMatch[1].trim().replace(/<[^>]*>?/gm, ''))
@@ -78,13 +90,21 @@ function parseRSS(xml, sourceName) {
             
             var indexedContent = (title + " " + desc + " " + full)
             
+            // Fallback for image in description
+            if (!imageUrl && descMatch) {
+                var imgDescMatch = descMatch[2].match(imageSrcRegex)
+                if (imgDescMatch) imageUrl = imgDescMatch[1]
+            }
+
             entries.push({
                 display: title,
                 decoration: "news-subscribe",
                 category: "RSS",
                 url: link,
                 subtext: sourceName + " | " + dateStr.replace(" +0000", "").replace("T", " ").split(".")[0],
-                description: desc.substring(0, 300),
+                description: desc.length > 300 ? desc.substring(0, 300) + "..." : desc,
+                fullContent: full || desc,
+                imageUrl: imageUrl,
                 indexedContent: indexedContent,
                 duplicateId: "rss:" + link,
                 rawDate: dateStr,

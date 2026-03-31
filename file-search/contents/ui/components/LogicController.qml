@@ -58,7 +58,13 @@ Item {
     property var rssCache: []
     property var rssTickerEntries: []
     readonly property bool rssEnabled: plasmoidConfig.rssEnabled || false
-    readonly property string rssCacheBase: StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss"
+    readonly property string rssCacheBase: {
+        var path = StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss";
+        if (path.indexOf("file://") === 0) {
+            return path.replace(/^file:\/\/\/?/, "/");
+        }
+        return path;
+    }
     property var syncQueue: []
     property bool isSyncing: false
 
@@ -462,7 +468,7 @@ Item {
         if (!source || !source.url)
             return ;
 
-        var scriptPath = plasmoid.file("tools/rss_sync.sh");
+        var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
         var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
         
@@ -483,7 +489,7 @@ Item {
             return;
         }
 
-        var scriptPath = plasmoid.file("tools/rss_sync.sh");
+        var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
         var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
         
@@ -495,6 +501,20 @@ Item {
             }
         };
         executable.connectSource(cmd);
+    }
+    
+    function getScriptPath() {
+        var path = "";
+        if (typeof plasmoid !== "undefined") {
+            path = plasmoid.file("tools/rss_sync.sh").toString();
+        } else {
+            path = Qt.resolvedUrl("../../tools/rss_sync.sh").toString();
+        }
+        
+        if (path.indexOf("file://") === 0) {
+            return path.replace(/^file:\/\/\/?/, "/");
+        }
+        return path;
     }
 
     function syncAllRSS() {
@@ -669,18 +689,36 @@ Item {
     Plasma5Support.DataSource {
         id: executable
 
-        property var callbacks: ({
-        })
+        property var callbacks: ({})
 
         engine: "executable"
         connectedSources: []
         onNewData: (source, data) => {
-            if (callbacks[source]) {
-                var stdout = data["stdout"] || "";
-                callbacks[source](stdout);
-                delete callbacks[source];
+            var stdout = data["stdout"] || "";
+            var lines = stdout.split("\n");
+            
+            var callback = callbacks[source];
+            if (callback) {
+                callback(stdout); // Keeping compatibility with single-string callbacks
+                
+                // Final state checks
+                if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1 || data["exit code"] !== undefined) {
+                    delete callbacks[source];
+                    disconnectSource(source);
+                }
+            } else {
+                // Fallback for partial source matches
+                for (var key in callbacks) {
+                    if (source.indexOf(key) !== -1) {
+                        callbacks[key](stdout);
+                        if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1 || data["exit code"] !== undefined) {
+                            delete callbacks[key];
+                            disconnectSource(source);
+                        }
+                        break;
+                    }
+                }
             }
-            disconnectSource(source);
         }
     }
 

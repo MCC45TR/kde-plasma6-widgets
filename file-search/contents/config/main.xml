@@ -218,6 +218,14 @@
       <default>3</default>
       <label>Frequency of RSS placeholder cycles</label>
     </entry>
+    <entry name="rssShowImages" type="Bool">
+      <default>true</default>
+      <label>Show images in RSS result cards</label>
+    </entry>
+    <entry name="rssExpandableCards" type="Bool">
+      <default>true</default>
+      <label>Allow RSS cards to expand for more details</label>
+    </entry>
   </group>
 
 </kcfg>

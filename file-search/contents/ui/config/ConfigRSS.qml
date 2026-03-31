@@ -9,7 +9,7 @@ import "../js/RSSManager.js" as RSSManager
 Item {
     id: configRSS
     
-    // Properties matching main.xml
+    // Properties matching main.xml (KConfig handles cfg_ prefix)
     property bool cfg_rssEnabled
     property bool cfg_rssEnabledDefault: true
     property string cfg_rssSources
@@ -20,152 +20,52 @@ Item {
     property int cfg_rssSyncIntervalDefault: 60
     property string cfg_rssCache: ""
     property string cfg_rssCacheDefault: ""
-    property string cfg_rssLastSyncAll: ""
-    property string cfg_rssLastSyncAllDefault: ""
-    property int cfg_smartResultLimit: 0
-    property int cfg_smartResultLimitDefault: 0
+    property real cfg_rssLastSyncAll: 0
+    property real cfg_rssLastSyncAllDefault: 0
+    property bool cfg_smartResultLimit: true
+    property bool cfg_smartResultLimitDefault: true
     
+    // RSS Advanced Settings
+    property bool cfg_rssShowImages: true
+    property bool cfg_rssShowImagesDefault: true
+    property bool cfg_rssExpandableCards: true
+    property bool cfg_rssExpandableCardsDefault: true
     property bool cfg_rssPlaceholderCycling: true
     property bool cfg_rssPlaceholderCyclingDefault: true
+    property int cfg_rssFrequency: 3
+    property int cfg_rssFrequencyDefault: 3
     
-    // Dummy properties to satisfy Plasma's automatic config injection
+    // Dummy properties to satisfy Plasma's automatic config injection (if needed by other tabs)
+    // These help avoid 'Setting initial properties failed' warnings
     property string title: ""
     property int cfg_displayMode: 0
-    property int cfg_displayModeDefault: 0
-    property int cfg_panelRadius: 0
-    property int cfg_panelRadiusDefault: 0
-    property int cfg_panelHeight: 0
-    property int cfg_panelHeightDefault: 0
-    property int cfg_viewMode: 0
-    property int cfg_viewModeDefault: 0
-    property int cfg_iconSize: 0
-    property int cfg_iconSizeDefault: 0
-    property int cfg_listIconSize: 0
-    property int cfg_listIconSizeDefault: 0
-    property int cfg_minResults: 0
-    property int cfg_minResultsDefault: 0
-    property int cfg_maxResults: 0
-    property int cfg_maxResultsDefault: 0
-    property bool cfg_showPinnedBar: true
-    property bool cfg_showPinnedBarDefault: true
-    property bool cfg_autoMinimizePinned: false
-    property bool cfg_autoMinimizePinnedDefault: false
-    property int cfg_compactPinnedView: 0
-    property int cfg_compactPinnedViewDefault: 0
-    property int cfg_filterChipStyle: 0
-    property int cfg_filterChipStyleDefault: 0
-    property int cfg_scrollBarStyle: 0
-    property int cfg_scrollBarStyleDefault: 0
-    property bool cfg_previewEnabled: true
-    property bool cfg_previewEnabledDefault: true
-    property string cfg_previewSettings: ""
-    property string cfg_previewSettingsDefault: ""
-    property bool cfg_prefixDateShowClock: true
-    property bool cfg_prefixDateShowClockDefault: true
-    property bool cfg_prefixDateShowEvents: true
-    property bool cfg_prefixDateShowEventsDefault: true
-    property bool cfg_weatherEnabled: true
-    property bool cfg_weatherEnabledDefault: true
-    property bool cfg_weatherUseSystemUnits: true
-    property bool cfg_weatherUseSystemUnitsDefault: true
-    property int cfg_weatherRefreshInterval: 0
-    property int cfg_weatherRefreshIntervalDefault: 0
-    property bool cfg_prefixPowerShowHibernate: false
-    property bool cfg_prefixPowerShowHibernateDefault: false
-    property bool cfg_prefixPowerShowSleep: true
-    property bool cfg_prefixPowerShowSleepDefault: true
-    property bool cfg_showBootOptions: false
-    property bool cfg_showBootOptionsDefault: false
-    property int cfg_searchAlgorithm: 0
-    property int cfg_searchAlgorithmDefault: 0
-    property string cfg_searchHistory: ""
-    property string cfg_searchHistoryDefault: ""
-    property string cfg_cachedBootEntries: ""
-    property string cfg_cachedBootEntriesDefault: ""
-    property string cfg_pinnedItems: ""
-    property string cfg_pinnedItemsDefault: ""
-    property string cfg_categorySettings: ""
-    property string cfg_categorySettingsDefault: ""
-    property bool cfg_debugOverlay: false
-    property bool cfg_debugOverlayDefault: false
-    property string cfg_telemetryData: ""
-    property string cfg_telemetryDataDefault: ""
-    property bool cfg_showSearchButton: true
-    property bool cfg_showSearchButtonDefault: true
-    property bool cfg_showSearchButtonBackground: true
-    property bool cfg_showSearchButtonBackgroundDefault: true
-    property string cfg_weatherCache: ""
-    property string cfg_weatherCacheDefault: ""
-    property string cfg_weatherLastUpdate: ""
-    property string cfg_weatherLastUpdateDefault: ""
-    property string cfg_weatherUnits: ""
-    property string cfg_weatherUnitsDefault: ""
     property int cfg_userProfile: 0
-    property int cfg_userProfileDefault: 0
+    property bool cfg_showSearchButton: true
+    property bool cfg_weatherEnabled: true
 
     // Access to the main logic controller for background tasks
     property var logic: {
-        if (typeof plasmoid === "undefined" || !plasmoid.rootItem) return null;
-        if (plasmoid.rootItem.logic) return plasmoid.rootItem.logic;
-        if (plasmoid.rootItem.controller) return plasmoid.rootItem.controller;
+        if (typeof plasmoid === "undefined") return null;
+        var root = plasmoid.rootItem;
+        if (!root) return null;
+        
+        if (root.logic) return root.logic;
+        if (root.controller) return root.controller;
         
         // Fallback for cases where the rootItem might be a wrapper
-        for (var i = 0; i < plasmoid.rootItem.children.length; i++) {
-            var child = plasmoid.rootItem.children[i];
-            if (child && (child.syncSourceBackground || child.logic)) return child.logic || child;
+        if (root.children) {
+            for (var i = 0; i < root.children.length; i++) {
+                var child = root.children[i];
+                if (child && (child.syncSourceBackground || child.logic)) return child.logic || child;
+            }
         }
         return null;
     }
-    
-    function getScriptPath() {
-        // More reliable way in Plasma 6 to get absolute path from relative
-        var path = Qt.resolvedUrl("../../tools/rss_sync.sh").toString();
-        // Remove file:// prefix (can be 7 or 8 chars depending on // or ///)
-        if (path.indexOf("file://") === 0) {
-            return path.replace(/^file:\/\/\/?/, "/");
-        }
-        return path;
-    }
 
-    readonly property string rssCacheBase: StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss"
-
-    Plasma5Support.DataSource {
-        id: executable
-        engine: "executable"
-        connectedSources: []
-        property var callbacks: ({})
-        onNewData: (source, data) => {
-            var stdout = data["stdout"] || ""
-            var lines = stdout.split("\n")
-            
-            for (var key in callbacks) {
-                if (source === key || source.indexOf(key) !== -1) {
-                    // If the process is persistent, we might get partial output here
-                    // For this widget, we treat the final callback call as the end of synchronization
-                    for (var i = 0; i < lines.length; i++) {
-                        var line = lines[i].trim()
-                        if (line) callbacks[key](line, source)
-                    }
-                    
-                    // If it contains "SUCCESS" or "FAIL:", delete the callback
-                    if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1) {
-                        delete callbacks[key]
-                    }
-                    break
-                }
-            }
-            
-            // Only disconnect if it finished or failed (to handle multi-line outputs)
-            if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1) {
-                disconnectSource(source)
-            }
-        }
-    }
-
-    // Internal state
+    // RSS Configuration UI State (Internal)
     property var rssSources: []
-    property var testLogs: ({}) // { index: [{msg: string, status: string}] }
-    property var testResults: ({}) // Still needed for final state
+    property var testLogs: ({})    // { index: [{msg: string, status: string}] }
+    property var testResults: ({}) // { index: "success" | "error" | "testing" }
 
     function addLog(index, msg, status) {
         var logs = testLogs[index] || []
@@ -183,6 +83,54 @@ Item {
             testLogs = JSON.parse(JSON.stringify(testLogs))
         } else {
             addLog(index, msg, status)
+        }
+    }
+
+    function getScriptPath() {
+        // Qt.resolvedUrl is more reliable in config dialog contexts than plasmoid.file
+        var path = Qt.resolvedUrl("../../tools/rss_sync.sh").toString();
+        
+        if (path.indexOf("file://") === 0) {
+            // Correctly handle file:// prefix for local paths
+            return path.replace(/^file:\/\/\/?/, "/");
+        }
+        return path;
+    }
+
+    readonly property string rssCacheBase: (StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss").replace(/^file:\/\/\/?/, "/")
+
+    Plasma5Support.DataSource {
+        id: executable
+        engine: "executable"
+        connectedSources: []
+        property var callbacks: ({})
+        onNewData: (source, data) => {
+            var stdout = (data["stdout"] || "") + (data["stderr"] || "") // Merge stderr for debugging
+            var lines = stdout.split("\n")
+            
+            var callback = callbacks[source]
+            if (!callback) {
+                // Fallback for partial source matches
+                for (var key in callbacks) {
+                    if (source.indexOf(key) !== -1) {
+                        callback = callbacks[key]
+                        break
+                    }
+                }
+            }
+
+            if (callback) {
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i].trim()
+                    if (line) callback(line, source)
+                }
+                
+                // Final state checks: SUCCESS, FAIL:, or execution finished (exit code)
+                if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1 || data["exit code"] !== undefined) {
+                    delete callbacks[source]
+                    disconnectSource(source)
+                }
+            }
         }
     }
     
@@ -465,13 +413,6 @@ Item {
         }
     }
 
-    function addLog(index, msg, status) {
-        var logs = testLogs[index] || []
-        logs.push({msg: msg, status: status})
-        testLogs[index] = logs
-        testLogs = JSON.parse(JSON.stringify(testLogs))
-    }
-
     function clearLogs(index) {
         var logs = testLogs
         delete logs[index]
@@ -509,7 +450,7 @@ Item {
 
         cfg_rssCache = JSON.stringify(combined)
         if (markAsFresh) {
-            cfg_rssLastSyncAll = String(Date.now())
+            cfg_rssLastSyncAll = Date.now()
         }
     }
 
@@ -558,7 +499,7 @@ Item {
             updateLastLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Sync: SUCCESS"), "ok")
             testResults[index] = "success"
             updateSource(index, "lastSync", Date.now())
-            cfg_rssLastSyncAll = String(Date.now())
+            cfg_rssLastSyncAll = Date.now()
             if (useLogic && logic) {
                 logic.updateCombinedCache(true)
             }
@@ -588,7 +529,7 @@ Item {
     function syncAllSources() {
         if (!rssSources.length) {
             cfg_rssCache = "[]"
-            cfg_rssLastSyncAll = String(Date.now())
+            cfg_rssLastSyncAll = Date.now()
             return
         }
 
@@ -619,7 +560,7 @@ Item {
             var base = rssCacheBase
             executable.connectSource("rm -rf \"" + base + "\" && mkdir -p \"" + base + "\"")
             cfg_rssCache = "[]"
-            cfg_rssLastSyncAll = "0"
+            cfg_rssLastSyncAll = 0
             for (var i = 0; i < rssSources.length; i++) {
                 rssSources[i].lastSync = 0
             }
@@ -642,16 +583,15 @@ Item {
         contentWidth: -1 // Disable horizontal scroll
         
         ColumnLayout {
-            width: parent.width - (parent.ScrollBar.vertical.visible ? parent.ScrollBar.vertical.width : 0)
+            width: parent.width
             spacing: Kirigami.Units.gridUnit
 
             QQC2.CheckBox {
-            Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable RSS")
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show RSS feed updates in search results")
-            checked: cfg_rssEnabled
-            onToggled: cfg_rssEnabled = checked
-            Layout.leftMargin: Kirigami.Units.gridUnit
-        }
+                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable RSS: Show feed updates in search results")
+                checked: cfg_rssEnabled
+                onToggled: cfg_rssEnabled = checked
+                Layout.leftMargin: Kirigami.Units.gridUnit
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -677,6 +617,24 @@ Item {
                 QQC2.Label {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Last full sync: %1", formatLastSync(cfg_rssLastSyncAll))
                     opacity: 0.75
+                }
+            }
+            
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                spacing: Kirigami.Units.gridUnit * 2
+                
+                QQC2.CheckBox {
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show images in results")
+                    checked: cfg_rssShowImages
+                    onToggled: cfg_rssShowImages = checked
+                }
+
+                QQC2.CheckBox {
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Expand cards on click")
+                    checked: cfg_rssExpandableCards
+                    onToggled: cfg_rssExpandableCards = checked
                 }
             }
             
@@ -793,7 +751,7 @@ Item {
                             QQC2.Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Interval:") }
                             QQC2.Button {
                                 property int currentVal: modelData.syncInterval || (cfg_rssSyncInterval || 60)
-                                text: currentVal >= 60 ? i18n("%1h", Math.floor(currentVal/60)) : i18n("%1m", currentVal)
+                                text: currentVal >= 60 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "%1h", Math.floor(currentVal/60)) : i18nd("plasma_applet_com.mcc45tr.filesearch", "%1m", currentVal)
                                 onClicked: intervalMenu.open()
                                 flat: true
                                 QQC2.Menu {
