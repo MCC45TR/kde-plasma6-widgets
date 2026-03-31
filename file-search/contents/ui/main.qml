@@ -136,6 +136,7 @@ PlasmoidItem {
         expanded: root.expanded
         truncatedText: root.truncatedText
         responsiveFontSize: root.responsiveFontSize
+        maxChars: root.maxChars
         bgColor: root.bgColor
         textColor: root.textColor
         accentColor: root.accentColor
@@ -166,6 +167,7 @@ PlasmoidItem {
         viewMode: root.viewMode
         iconSize: root.iconSize
         listIconSize: root.listIconSize
+        maxChars: root.maxChars
         
         textColor: root.textColor
         accentColor: root.accentColor
