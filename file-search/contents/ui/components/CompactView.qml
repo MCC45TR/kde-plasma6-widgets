@@ -26,6 +26,7 @@ Item {
     property var logic: null
     property bool rssPlaceholderCycling: true
     property int rssFrequency: 3
+    required property int maxChars
     
     // Signals
     signal toggleExpanded()
@@ -131,6 +132,9 @@ Item {
                 }
                 
                 function getInitialDuration() {
+                    // Segment duration is fixed at 4s if multiple segments exist
+                    if (currentSegments.length > 1) return 4000;
+                    
                     var f = compactRoot.rssFrequency;
                     if (f === 0) return 10000;
                     if (f === 1) return 10000;
@@ -142,8 +146,38 @@ Item {
                     return 10000;
                 }
                 
+                property var currentSegments: []
+                property int currentSegmentIndex: 0
+                
+                function splitIntoSegments(text, max) {
+                    if (!text || text.length <= max) return [text || ""];
+                    
+                    var segments = [];
+                    var chunk = max - 4; // Leave space for ".." at both ends if needed
+                    
+                    for (var i = 0; i < text.length; i += chunk) {
+                        var sub = text.substring(i, i + chunk).trim();
+                        var isFirst = (i === 0);
+                        var isLast = (i + chunk >= text.length);
+                        
+                        var res = "";
+                        if (!isFirst) res += "..";
+                        res += sub;
+                        if (!isLast) res += "..";
+                        
+                        segments.push(res);
+                    }
+                    return segments;
+                }
+
                 property int currentDuration: getInitialDuration()
-                property string currentTargetText: currentState === "placeholder" ? defaultText : (rssTitles.length > 0 && currentRssIndex >= 0 ? rssTitles[currentRssIndex].text : defaultText)
+                property string currentTargetText: {
+                    if (currentState === "placeholder") return defaultText;
+                    if (currentSegments.length > 0 && currentSegmentIndex >= 0) {
+                        return currentSegments[currentSegmentIndex];
+                    }
+                    return defaultText;
+                }
                 
                 Text {
                     id: currentLabel
@@ -248,6 +282,16 @@ Item {
                     running: tickerContainer.visible && tickerContainer.rssTitles.length > 0 && compactRoot.rssPlaceholderCycling && compactRoot.searchTextLength === 0
                     repeat: true
                     onTriggered: {
+                        // Check if we have more segments in the current title
+                        if (tickerContainer.currentSegments.length > 1 && tickerContainer.currentSegmentIndex < tickerContainer.currentSegments.length - 1) {
+                            tickerContainer.currentSegmentIndex++;
+                            tickerContainer.currentDuration = 4000;
+                            switchAnim.targetText = tickerContainer.currentTargetText;
+                            switchAnim.restart();
+                            return;
+                        }
+
+                        // Pick next title/state
                         var next = tickerContainer.computeNextState();
                         
                         if (next.state === "rss") {
@@ -265,8 +309,9 @@ Item {
                             }
                             var uniqueSources = allUnique.length;
                             
+                            var nextIdx = 0;
                             if (tickerContainer.rssTitles.length < 3 || uniqueSources < 3) {
-                                tickerContainer.currentRssIndex = (tickerContainer.currentRssIndex + 1) % tickerContainer.rssTitles.length;
+                                nextIdx = (tickerContainer.currentRssIndex + 1) % tickerContainer.rssTitles.length;
                             } else {
                                 var randomIndex;
                                 var attempts = 0;
@@ -296,15 +341,24 @@ Item {
                                 if (newSources.length > maxSources && newSources.length > 0) newSources.shift();
                                 tickerContainer.recentSources = newSources;
                                 
-                                tickerContainer.currentRssIndex = randomIndex;
+                                nextIdx = randomIndex;
                             }
+                            
+                            tickerContainer.currentRssIndex = nextIdx;
+                            // Prepare segments for new title
+                            var fullTitle = tickerContainer.rssTitles[nextIdx].text;
+                            tickerContainer.currentSegments = tickerContainer.splitIntoSegments(fullTitle, compactRoot.maxChars);
+                            tickerContainer.currentSegmentIndex = 0;
+                            tickerContainer.currentDuration = (tickerContainer.currentSegments.length > 1) ? 4000 : next.duration;
+                            
                         } else {
                             tickerContainer.rssConsecutiveCount = 0;
+                            tickerContainer.currentSegments = [];
+                            tickerContainer.currentSegmentIndex = -1;
+                            tickerContainer.currentDuration = next.duration;
                         }
                         
                         tickerContainer.currentState = next.state;
-                        tickerContainer.currentDuration = next.duration;
-                        
                         switchAnim.targetText = tickerContainer.currentTargetText;
                         switchAnim.restart();
                     }

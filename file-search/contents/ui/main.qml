@@ -148,6 +148,7 @@ PlasmoidItem {
         logic: controller
         rssPlaceholderCycling: Plasmoid.configuration.rssPlaceholderCycling
         rssFrequency: Plasmoid.configuration.rssFrequency
+        maxChars: root.maxChars
         
         onToggleExpanded: root.expanded = !root.expanded
     }
