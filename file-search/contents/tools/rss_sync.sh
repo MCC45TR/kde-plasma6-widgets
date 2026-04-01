@@ -3,7 +3,7 @@
 # Arka planda çalışarak arayüz donmalarını engeller.
 # Kullanım: ./rss_sync.sh <cache_dir> <url> <name> <max_entries>
 
-# file:// önekini temizle (KDE bazen tam URL döndürür)
+# Clean file:// prefix from cache dir path
 CACHE_DIR=$(echo "$1" | sed -E 's|^file:/*|/|')
 URL="$2"
 NAME="$3"
@@ -21,69 +21,92 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 
 # Python ile güvenli çekme ve ayrıştırma
-# Tek tırnak içinde shell değişkeni kullanmıyoruz, argüman olarak geçiyoruz.
 python3 -c '
-import sys, os, urllib.request, re, json, base64, html
+import sys, os, urllib.request, re, json, base64, html, xml.etree.ElementTree as ET
 
-def unescape_html(text):
-    if not text: return ""
-    return html.unescape(text)
+def clean_html(raw_html):
+    if not raw_html: return ""
+    # Remove HTML tags and keep text
+    cleanr = re.compile("<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});")
+    cleantext = re.sub(cleanr, " ", raw_html)
+    # Also handle standard HTML entities
+    return html.unescape(cleantext).strip()
+
+def find_node_recursive(node, tag_names):
+    # Search for a tag ignoring namespace
+    tag_names_lower = [t.lower() for t in tag_names]
+    for child in node.iter():
+        local_tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
+        if local_tag.lower() in tag_names_lower:
+            return child
+    return None
+
+def get_deep_text(node, tag_names):
+    # Find tag and return text or CDATA content
+    found = find_node_recursive(node, tag_names)
+    if found is not None:
+        text = (found.text or "").strip()
+        if not text and len(found) > 0:
+            # Fallback: get all inner text
+            text = "".join(found.itertext()).strip()
+        return text
+    return ""
+
+def get_attr_recursive(node, tag_names, attr_name):
+    tag_names_lower = [t.lower() for t in tag_names]
+    for child in node.iter():
+        local_tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
+        if local_tag.lower() in tag_names_lower:
+            val = child.get(attr_name)
+            if val: return val
+    return ""
 
 def parse_rss(xml, source_name):
     entries = []
-    # Genişletilmiş regex setleri
-    item_pattern = re.compile(r"<(item|entry)>([\s\S]*?)</\1>", re.IGNORECASE)
-    title_pattern = re.compile(r"<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?</title>", re.IGNORECASE)
-    link_pattern = re.compile(r"<(link|guid|id)(?:[^>]*href=\"([^\"]+)\")?>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?</\1>", re.IGNORECASE)
-    date_pattern = re.compile(r"<(pubDate|dc:date|updated|published)>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?</\1>", re.IGNORECASE)
-    desc_pattern = re.compile(r"<(description|summary)>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?</\1>", re.IGNORECASE)
-    content_pattern = re.compile(r"<(content:encoded|content)>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?</\1>", re.IGNORECASE)
-    image_pattern = re.compile(r"<(media:content|enclosure|img)[^>]*url=\"([^\"]+)\"[^>]*>", re.IGNORECASE)
-    image_src_pattern = re.compile(r"<img[^>]*src=\"([^\"]+)\"[^>]*>", re.IGNORECASE)
-
-    for match in item_pattern.finditer(xml):
-        item_content = match.group(2)
-        title_match = title_pattern.search(item_content)
-        if title_match:
-            try:
-                title_raw = title_match.group(1).strip()
-                title = unescape_html(re.sub(r"<[^>]*>?", "", title_raw))
-                
-                link_match = link_pattern.search(item_content)
-                link = ""
-                if link_match:
-                    link = link_match.group(2) or link_match.group(3) or ""
-                    link = link.strip()
-                
-                date_match = date_pattern.search(item_content)
-                date_str = date_match.group(2).strip() if date_match else ""
-                
-                # Resim çekme
-                image_url = ""
-                img_match = image_pattern.search(item_content)
-                if img_match:
-                    image_url = img_match.group(2)
-                else:
-                    img_src_match = image_src_pattern.search(item_content)
-                    if img_src_match:
-                        image_url = img_src_match.group(1)
-                
-                desc_match = desc_pattern.search(item_content)
-                desc_raw = desc_match.group(2).strip() if desc_match else ""
-                desc = unescape_html(re.sub(r"<[^>]*>?", "", desc_raw))
-                
-                full_match = content_pattern.search(item_content)
-                full_raw = full_match.group(2).strip() if full_match else ""
-                full = unescape_html(re.sub(r"<[^>]*>?", "", full_raw))
-                
-                if not image_url and desc_raw:
-                    img_desc_match = image_src_pattern.search(desc_raw)
-                    if img_desc_match:
-                        image_url = img_desc_match.group(1)
-                
-                # Format subtext date
-                date_part = date_str.replace(" +0000", "").replace("T", " ").split(".")[0]
-                
+    try:
+        # XML cleaning for common Turkish news site errors (unescaped &)
+        xml_cleaned = re.sub(r"&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[a-fA-F0-9]+);)", "&amp;", xml)
+        root = ET.fromstring(xml_cleaned)
+        
+        # Support both RSS <item> and Atom <entry>
+        item_nodes = root.findall(".//item") or root.findall(".//{http://www.w3.org/2005/Atom}entry") or root.findall(".//entry")
+        
+        for node in item_nodes:
+            # 1. Title
+            title = clean_html(get_deep_text(node, ["title"]))
+            
+            # 2. Link
+            link = get_deep_text(node, ["link", "guid"]) or ""
+            if not link:
+                # Try Atom style link attribute
+                for child in node.iter():
+                    if child.tag.endswith("link"):
+                        link = child.get("href") or ""
+                        if link: break
+            
+            # 3. Date
+            date_str = get_deep_text(node, ["pubDate", "updated", "published", "date", "dc:date"]) or ""
+            date_part = date_str.replace(" +0000", "").replace("T", " ").split(".")[0] if date_str else ""
+            
+            # 4. Content
+            desc_raw = get_deep_text(node, ["description", "summary"]) or ""
+            full_raw = get_deep_text(node, ["content:encoded", "encoded", "content"]) or ""
+            
+            desc = clean_html(desc_raw)
+            full = clean_html(full_raw)
+            
+            # Fallback title if missing
+            if not title:
+                title = (desc[:50] + "...") if len(desc) > 50 else (desc or "Haber")
+            
+            # 5. Image extraction (media:content, enclosure, media:thumbnail, or <img> in content)
+            image_url = get_attr_recursive(node, ["media:content", "enclosure", "media:thumbnail", "image"], "url")
+            if not image_url:
+                # Parse <img> tags from content
+                img_match = re.search(r"<img[^>]*src=\"([^\"]+)\"[^>]*>", desc_raw + full_raw, re.IGNORECASE)
+                if img_match: image_url = img_match.group(1)
+            
+            if title:
                 entries.append({
                     "display": title,
                     "decoration": "news-subscribe",
@@ -92,25 +115,28 @@ def parse_rss(xml, source_name):
                     "subtext": f"{source_name} | {date_part}",
                     "description": desc[:300] + "..." if len(desc) > 300 else desc,
                     "fullContent": full or desc,
-                    "imageUrl": image_url,
+                    "imageUrl": image_url or "",
                     "indexedContent": f"{title} {desc} {full}",
                     "duplicateId": f"rss:{link}",
                     "rawDate": date_str,
                     "index": -1
                 })
-            except Exception:
-                continue
+    except Exception as e:
+        print(f"DEBUG: XML Parse error: {str(e)}", flush=True)
+        return []
+        
     return entries
 
-def get_hash(url_str):
+def get_hash(s):
     h = 0
-    for char in url_str:
+    for char in s:
         h = ((h << 5) - h) + ord(char)
         h &= 0xFFFFFFFF
+    if h > 0x7FFFFFFF:
+        h -= 0x100000000
     return abs(h)
 
 if len(sys.argv) < 5:
-    print("FAIL: Missing arguments")
     sys.exit(1)
 
 cache_dir, url, name, max_entries = sys.argv[1:5]
@@ -119,11 +145,17 @@ max_entries = int(max_entries)
 try:
     print("FETCHING: START", flush=True)
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) FileSearchWidget/1.0"})
-    with urllib.request.urlopen(req, timeout=20) as response:
-        xml = response.read().decode("utf-8", errors="ignore")
-        print("FETCHING: OK", flush=True)
+    with urllib.request.urlopen(req, timeout=25) as response:
+        charset = response.info().get_content_charset() or "utf-8"
+        xml_bytes = response.read()
+        try:
+            xml = xml_bytes.decode(charset)
+        except:
+            xml = xml_bytes.decode("utf-8", errors="ignore")
         
+        print("FETCHING: OK", flush=True)
         print("PARSING: START", flush=True)
+        
         entries = parse_rss(xml, name)[:max_entries]
         count = len(entries)
         print(f"PARSING: OK ({count} items)", flush=True)

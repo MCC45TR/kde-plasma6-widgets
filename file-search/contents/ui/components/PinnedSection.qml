@@ -17,6 +17,7 @@ Item {
     
     // Collapsed state
     property bool isExpanded: true
+    property bool animateHeight: false
     
     // Localization function removed (using global i18n)
     
@@ -99,7 +100,10 @@ Item {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onClicked: pinnedSectionRoot.isExpanded = !pinnedSectionRoot.isExpanded
+                onClicked: {
+                    pinnedSectionRoot.animateHeight = true
+                    pinnedSectionRoot.isExpanded = !pinnedSectionRoot.isExpanded
+                }
             }
         }
         
@@ -124,9 +128,11 @@ Item {
             clip: true
             
             Behavior on Layout.preferredHeight {
+                enabled: pinnedSectionRoot.animateHeight
                 NumberAnimation { 
                     duration: Kirigami.Units.shortDuration
                     easing.type: Easing.OutCubic 
+                    onFinished: pinnedSectionRoot.animateHeight = false
                 }
             }
             

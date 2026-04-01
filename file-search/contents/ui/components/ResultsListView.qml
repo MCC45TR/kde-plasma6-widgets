@@ -99,8 +99,15 @@ ScrollView {
                                           (modelData.duplicateId && modelData.duplicateId.toString().startsWith("rss:"))
             property bool isExpanded: isRSS && resultsListRoot.rssExpandableCards && !!resultsListRoot.expandedItems[modelData.duplicateId]
 
+            property bool animateHeight: false
+
             Behavior on height {
-                NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
+                enabled: delegateRoot.animateHeight
+                NumberAnimation { 
+                    duration: 250; 
+                    easing.type: Easing.InOutQuad 
+                    onFinished: delegateRoot.animateHeight = false
+                }
             }
 
             property bool previewActive: resultsListRoot.previewEnabled && !isRSS && resultMouseArea.containsMouse
@@ -230,19 +237,32 @@ ScrollView {
                             Layout.fillWidth: true
                             spacing: 8
                             
-                            Button {
-                                text: delegateRoot.isExpanded ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberi Oku") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Genişlet")
-                                icon.name: delegateRoot.isExpanded ? "internet-services" : "window-restore"
+                            // Haberi Oku - Karo Tasarımı (Primary Action)
+                            Rectangle {
                                 Layout.preferredHeight: 32
-                                onClicked: {
-                                    if (delegateRoot.isExpanded) {
-                                        if (modelData.url) Qt.openUrlExternally(modelData.url)
-                                    } else {
-                                        toggleExpansion()
+                                Layout.preferredWidth: 120
+                                color: Qt.rgba(resultsListRoot.accentColor.r, resultsListRoot.accentColor.g, resultsListRoot.accentColor.b, 0.4)
+                                radius: 6
+                                visible: delegateRoot.isExpanded
+                                
+                                RowLayout {
+                                    anchors.centerIn: parent
+                                    spacing: 6
+                                    Kirigami.Icon { source: "internet-services"; implicitWidth: 16; implicitHeight: 16 }
+                                    Text {
+                                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberi Oku")
+                                        color: resultsListRoot.textColor
+                                        font.bold: true
+                                        font.pixelSize: 11
                                     }
                                 }
+                                
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: if (modelData.url) Qt.openUrlExternally(modelData.url)
+                                }
                             }
-                            
+
                             Button {
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Paylaş")
                                 icon.name: "edit-copy"
@@ -254,13 +274,22 @@ ScrollView {
 
                             Item { Layout.fillWidth: true }
                             
-                            Kirigami.Icon {
-                                source: delegateRoot.isExpanded ? "arrow-up" : "arrow-down"
-                                implicitWidth: 16
-                                implicitHeight: 16
-                                color: resultsListRoot.textColor
-                                opacity: 0.5
+                            // Genişlet/Daralt Butonu (Sağ Alt)
+                            Button {
+                                icon.name: delegateRoot.isExpanded ? "arrow-up" : "arrow-down"
+                                Layout.preferredWidth: 32
+                                Layout.preferredHeight: 32
+                                flat: true
                                 visible: resultsListRoot.rssExpandableCards
+                                onClicked: {
+                                    delegateRoot.animateHeight = true
+                                    toggleExpansion()
+                                }
+                                
+                                background: Rectangle {
+                                    color: parent.hovered ? Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.1) : "transparent"
+                                    radius: 16
+                                }
                             }
                         }
                     }
@@ -268,6 +297,7 @@ ScrollView {
             }
 
             function toggleExpansion() {
+                delegateRoot.animateHeight = true
                 var matchId = modelData.duplicateId || modelData.display || ""
                 var newExpanded = {}
                 // We need to trigger a property change for the expandedItems
@@ -301,6 +331,7 @@ ScrollView {
                         }, mouse.x + delegateRoot.x, mouse.y + delegateRoot.y)
                     } else {
                         if (isRSS && resultsListRoot.rssExpandableCards) {
+                            delegateRoot.animateHeight = true
                             var newExpanded = {}
                             Object.assign(newExpanded, resultsListRoot.expandedItems)
                             newExpanded[matchId] = !newExpanded[matchId]

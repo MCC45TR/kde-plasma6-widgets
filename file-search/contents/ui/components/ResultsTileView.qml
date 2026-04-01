@@ -107,7 +107,7 @@ FocusScope {
     
     function columnsInRow() {
         var itemWidth = tileWidth + 8 // tile width + spacing
-        return Math.max(1, Math.floor(width / itemWidth))
+        return Math.max(1, Math.floor(resultsTileRoot.width / itemWidth))
     }
     
     // Calculate current column position
@@ -340,7 +340,7 @@ FocusScope {
         
         Column {
             id: tileCategoryList
-            width: parent.width
+            width: resultsTileRoot.width - 24
             spacing: 16
             
             Repeater {
@@ -354,6 +354,7 @@ FocusScope {
                 property int catIdx: index
                 property bool isCollapsed: resultsTileRoot.collapsedCategories[modelData.categoryName] || false
                 property bool isWide: resultsTileRoot.isWideCategory(modelData.categoryName)
+                property bool animateHeight: false
                 
                 // Category Header (Clickable to collapse/expand)
                 Rectangle {
@@ -396,7 +397,10 @@ FocusScope {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: resultsTileRoot.toggleCategory(modelData.categoryName)
+                        onClicked: {
+                            categoryDelegate.animateHeight = true
+                            resultsTileRoot.toggleCategory(modelData.categoryName)
+                        }
                     }
                 }
                 
@@ -407,7 +411,12 @@ FocusScope {
                     clip: true
                     
                     Behavior on height {
-                        NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                        enabled: categoryDelegate.animateHeight
+                        NumberAnimation { 
+                            duration: 200; 
+                            easing.type: Easing.InOutQuad
+                            onFinished: categoryDelegate.animateHeight = false
+                        }
                     }
                     
                     Flow {

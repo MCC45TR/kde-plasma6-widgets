@@ -90,8 +90,8 @@ FocusScope {
     }
     
     function columnsInRow() {
-        var itemWidth = iconSize + 48
-        return Math.max(1, Math.floor(width / itemWidth))
+        var itemWidth = tileWidth + 8 // tile width + spacing
+        return Math.max(1, Math.floor(historyTile.width / itemWidth))
     }
     
     // Calculate current column position
@@ -345,7 +345,7 @@ FocusScope {
         
         Column {
             id: tileView
-            width: parent.width
+            width: historyTile.width - 24
             spacing: 8
             
             Repeater {
@@ -358,6 +358,7 @@ FocusScope {
                 
                 property int catIdx: index
                 property bool isCollapsed: historyTile.collapsedCategories[modelData.categoryName] || false
+                property bool animateHeight: false
                 
                 // Category Header (Clickable)
                 Rectangle {
@@ -399,18 +400,26 @@ FocusScope {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: historyTile.toggleCategory(modelData.categoryName)
+                        onClicked: {
+                            histCategoryDelegate.animateHeight = true
+                            historyTile.toggleCategory(modelData.categoryName)
+                        }
                     }
                 }
                 
                 // Tile Flow (Animated collapse/expand - matches PinnedSection style)
                 Item {
-                    width: parent.width
+                    width: histCategoryDelegate.width
                     height: histCategoryDelegate.isCollapsed ? 0 : histCategoryFlow.implicitHeight
                     clip: true
                     
                     Behavior on height {
-                        NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                        enabled: histCategoryDelegate.animateHeight
+                        NumberAnimation { 
+                            duration: 200; 
+                            easing.type: Easing.InOutQuad
+                            onFinished: histCategoryDelegate.animateHeight = false
+                        }
                     }
                     
                     Flow {

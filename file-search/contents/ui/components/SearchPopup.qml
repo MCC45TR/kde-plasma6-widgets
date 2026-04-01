@@ -721,6 +721,7 @@ Item {
                     }
                 }
             }
+            width: parent.width
         }
     }
 
@@ -769,6 +770,7 @@ Item {
                  resultsContextMenu.historyItem = item
                  resultsContextMenu.popup()
              }
+             anchors.fill: parent
         }
     }
     
@@ -813,6 +815,7 @@ Item {
              onTabPressed: cycleFocusSection(true)
              onShiftTabPressed: cycleFocusSection(false)
              onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
+             anchors.fill: parent
         }
     }
 
@@ -834,6 +837,7 @@ Item {
             viewMode: getEffectiveQuery(popupRoot.searchText) === "clock:" ? "clock" : "date"
             showClock: popupRoot.prefixDateShowClock
             showEvents: popupRoot.prefixDateShowEvents
+            anchors.fill: parent
         }
     }
 
@@ -865,6 +869,7 @@ Item {
                 else searchBar.setText(prefix)
                 // Focus input?
             }
+            anchors.fill: parent
         }
     }
     
@@ -884,6 +889,7 @@ Item {
         sourceComponent: WeatherView {
             // WeatherView handles its own fetching on visible
             plasmoidConfig: popupRoot.plasmoidConfig
+            anchors.fill: parent
         }
     }
 
@@ -913,6 +919,7 @@ Item {
                 popupRoot.preventClosing = prevent
                 popupRoot.requestPreventClosing(prevent) // Forward to main just in case
             }
+            anchors.fill: parent
         }
     }
     
