@@ -64,6 +64,7 @@ ScrollView {
         model: resultsListRoot.flatSortedData
         spacing: 4
         currentIndex: resultsListRoot.currentIndex
+        cacheBuffer: 2000
         
         highlight: Rectangle {
             color: Qt.rgba(resultsListRoot.accentColor.r, resultsListRoot.accentColor.g, resultsListRoot.accentColor.b, 0.15)
@@ -145,7 +146,7 @@ ScrollView {
                             
                             Kirigami.Icon {
                                 anchors.fill: parent
-                                source: modelData.decoration || (isRSS ? "news-subscribe" : "application-x-executable")
+                                source: (isRSS && modelData.sourceIcon) ? modelData.sourceIcon : (modelData.decoration || (isRSS ? "news-subscribe" : "application-x-executable"))
                                 color: isRSS ? resultsListRoot.accentColor : resultsListRoot.textColor
                             }
                         }
@@ -409,7 +410,7 @@ ScrollView {
         Column {
             anchors.centerIn: parent
             spacing: 10
-            visible: resultsListViewRoot.flatSortedData.length === 0 && (resultsListViewRoot.searchText.length > 0 || resultsListViewRoot.activeFilter !== "All")
+            visible: resultsListRoot.flatSortedData.length === 0 && resultsListRoot.searchText.length > 0
 
             BusyIndicator {
                 anchors.horizontalCenter: parent.horizontalCenter

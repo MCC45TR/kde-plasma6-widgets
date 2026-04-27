@@ -122,8 +122,17 @@ Item {
                         shouldKeep = (lowerCategory.indexOf("klasör") !== -1 || lowerCategory.indexOf("folder") !== -1 || lowerCategory.indexOf("yerler") !== -1 ||
                                      lowerCategory.indexOf("place") !== -1 || lowerDecoration.indexOf("folder") !== -1 || lowerUrl.endsWith("/"));
                     } else if (activeFilterLower === "apps") {
-                        shouldKeep = (lowerCategory.indexOf("uygulama") !== -1 || lowerCategory.indexOf("application") !== -1 || lowerCategory.indexOf("app") !== -1 ||
-                                     lowerCategory.indexOf("program") !== -1 || lowerDecoration.indexOf("app") !== -1 || lowerUrl.endsWith(".desktop"));
+                        shouldKeep = (lowerCategory.indexOf("app") !== -1 || lowerCategory.indexOf("uygulama") !== -1 || lowerCategory.indexOf("program") !== -1 ||
+                                      lowerCategory.indexOf("ayar") !== -1 || lowerCategory.indexOf("setting") !== -1 ||
+                                      lowerCategory.indexOf("oyun") !== -1 || lowerCategory.indexOf("game") !== -1 ||
+                                      lowerCategory.indexOf("ofis") !== -1 || lowerCategory.indexOf("office") !== -1 ||
+                                      lowerCategory.indexOf("sistem") !== -1 || lowerCategory.indexOf("system") !== -1 ||
+                                      lowerCategory.indexOf("araç") !== -1 || lowerCategory.indexOf("util") !== -1 ||
+                                      lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("grafik") !== -1 || lowerCategory.indexOf("graphic") !== -1 ||
+                                      lowerCategory.indexOf("geliştirme") !== -1 || lowerCategory.indexOf("develop") !== -1 ||
+                                      lowerCategory.indexOf("ortam") !== -1 || lowerCategory.indexOf("multimedia") !== -1 ||
+                                      lowerCategory.indexOf("eğitim") !== -1 || lowerCategory.indexOf("educat") !== -1 ||
+                                      lowerUrl.endsWith(".desktop") || (item.duplicateId && item.duplicateId.toString().indexOf(".desktop") !== -1));
                     } else if (activeFilterLower === "web") {
                         shouldKeep = (lowerCategory.indexOf("web") !== -1 || lowerCategory.indexOf("bookmark") !== -1 || lowerCategory.indexOf("yer imi") !== -1 ||
                                      lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("browser") !== -1 || lowerDecoration.indexOf("globe") !== -1 ||

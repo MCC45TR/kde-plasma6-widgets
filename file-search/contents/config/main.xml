@@ -10,7 +10,7 @@
   <group name="Panel">
     <entry name="displayMode" type="Int">
       <default>1</default>
-      <label>Display Mode: 0=Button, 1=Medium, 2=Wide, 3=Extra Wide</label>
+      <label>Display Mode: 0=Button, 1=Medium, 2=Wide, 3=Extra Wide, 4=Ultra Wide</label>
     </entry>
     <entry name="showSearchButton" type="Bool">
       <default>true</default>

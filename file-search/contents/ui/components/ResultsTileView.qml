@@ -447,7 +447,7 @@ FocusScope {
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
                             property string previewPath: PreviewUtils.getLocalPreviewPath(modelData.url || "")
                             property string previewFileType: PreviewUtils.getFileTypeLabel(modelData.url || "")
-                            property string previewSource: ((tileMouseArea.containsMouse || tileDelegate.isSelected || resultsTileRoot.previewForceVisible) && !categoryDelegate.isWide && !tileDelegate.isExpanded)
+                            property string previewSource: (!categoryDelegate.isWide && !tileDelegate.isExpanded)
                                 ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings)
                                 : ""
                             
@@ -519,7 +519,7 @@ FocusScope {
                                             
                                             Kirigami.Icon {
                                                 anchors.fill: parent
-                                                source: modelData.decoration || "application-x-executable"
+                                                source: (tileDelegate.isRSS && modelData.sourceIcon) ? modelData.sourceIcon : (modelData.decoration || "application-x-executable")
                                                 color: resultsTileRoot.textColor
                                                 visible: previewImageGrid.status !== Image.Ready
                                             }
@@ -590,7 +590,7 @@ FocusScope {
                                             Layout.fillWidth: true
                                             
                                             Kirigami.Icon {
-                                                source: modelData.decoration || "application-x-executable"
+                                                source: (tileDelegate.isRSS && modelData.sourceIcon) ? modelData.sourceIcon : (modelData.decoration || "application-x-executable")
                                                 Layout.preferredWidth: resultsTileRoot.iconSize
                                                 Layout.preferredHeight: resultsTileRoot.iconSize
                                                 color: resultsTileRoot.textColor
@@ -833,7 +833,7 @@ FocusScope {
     Column {
         anchors.centerIn: parent
         spacing: 10
-        visible: resultsTileRoot.categorizedData.length === 0 && (resultsTileRoot.searchText.length > 0 || resultsTileRoot.activeFilter !== "All")
+        visible: resultsTileRoot.categorizedData.length === 0 && resultsTileRoot.searchText.length > 0
 
         BusyIndicator {
             anchors.horizontalCenter: parent.horizontalCenter

@@ -27,6 +27,7 @@ Item {
     property bool rssPlaceholderCycling: true
     property bool rssShowFullHeadline: true
     property int rssFrequency: 3
+    property bool isUltraWideMode: false
     required property int maxChars
     
     // Signals
@@ -74,8 +75,8 @@ Item {
         
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? 10 : 0
-            anchors.rightMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? (compactRoot.showSearchButton ? 4 : 10) : 0
+            anchors.leftMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? 10 : 0
+            anchors.rightMargin: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? (compactRoot.showSearchButton ? 4 : 10) : 0
             spacing: 6
             
             // Display text (Static when searching, Hidden when ticker is running)
@@ -87,7 +88,7 @@ Item {
                 color: compactRoot.textColor
                 font.pixelSize: compactRoot.responsiveFontSize
                 font.family: "Roboto Condensed"
-                horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? Text.AlignLeft : Text.AlignHCenter
+                horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? Text.AlignLeft : Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
                 visible: compactRoot.searchTextLength > 0 // Only show static text when user is typing
@@ -103,7 +104,7 @@ Item {
                 
                 property var recentIndices: []
                 property var recentSources: []
-                property string defaultText: compactRoot.isExtraWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yap...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama"))
+                property string defaultText: (compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yap...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama"))
                 
                 property var rssTitles: {
                     var list = []
@@ -149,33 +150,72 @@ Item {
                 
                 property var currentSegments: []
                 property int currentSegmentIndex: 0
+                property int currentDuration: getInitialDuration()
+                
+                TextMetrics {
+                    id: segmentMetrics
+                    font.family: "Roboto Condensed"
+                    font.pixelSize: compactRoot.responsiveFontSize
+                }
                 
                 function splitIntoSegments(text, max) {
-                    if (!text || text.length <= max) return [text || ""];
+                    if (!text) return [""];
+                    
+                    var availableWidth = tickerContainer.width - 10;
+                    if (availableWidth <= 0) availableWidth = 200;
+                    
+                    segmentMetrics.text = text;
+                    if (segmentMetrics.width <= availableWidth) return [text];
                     
                     if (!compactRoot.rssShowFullHeadline) {
-                        return [text.substring(0, max - 3).trim() + "..."];
+                        var truncated = text;
+                        while (truncated.length > 3) {
+                            segmentMetrics.text = truncated + "...";
+                            if (segmentMetrics.width <= availableWidth) break;
+                            truncated = truncated.substring(0, truncated.length - 1);
+                        }
+                        return [truncated + "..."];
                     }
                     
                     var segments = [];
-                    var chunk = max - 4; // Leave space for ".." at both ends if needed
+                    var words = text.split(" ");
+                    var currentSegment = "";
+                    var isFirst = true;
                     
-                    for (var i = 0; i < text.length; i += chunk) {
-                        var sub = text.substring(i, i + chunk).trim();
-                        var isFirst = (i === 0);
-                        var isLast = (i + chunk >= text.length);
+                    for (var i = 0; i < words.length; i++) {
+                        var nextWord = words[i];
+                        var testText = (isFirst ? "" : "..") + (currentSegment ? currentSegment + " " : "") + nextWord + (i < words.length - 1 ? ".." : "");
                         
-                        var res = "";
-                        if (!isFirst) res += "..";
-                        res += sub;
-                        if (!isLast) res += "..";
-                        
-                        segments.push(res);
+                        segmentMetrics.text = testText;
+                        if (segmentMetrics.width <= availableWidth) {
+                            currentSegment += (currentSegment ? " " : "") + nextWord;
+                        } else {
+                            if (currentSegment === "") {
+                                // Single word too long? Force split it
+                                var wordPart = nextWord;
+                                while (wordPart.length > 1) {
+                                    wordPart = wordPart.substring(0, wordPart.length - 1);
+                                    segmentMetrics.text = (isFirst ? "" : "..") + wordPart + "..";
+                                    if (segmentMetrics.width <= availableWidth) break;
+                                }
+                                segments.push((isFirst ? "" : "..") + wordPart + "..");
+                                words[i] = nextWord.substring(wordPart.length);
+                                i--; // Process remaining part of the word
+                            } else {
+                                segments.push((isFirst ? "" : "..") + currentSegment + "..");
+                                currentSegment = nextWord;
+                                isFirst = false;
+                            }
+                        }
                     }
+                    
+                    if (currentSegment !== "") {
+                        segments.push((isFirst ? "" : "..") + currentSegment);
+                    }
+                    
                     return segments;
                 }
 
-                property int currentDuration: getInitialDuration()
                 property string currentTargetText: {
                     if (currentState === "placeholder") return defaultText;
                     if (currentSegments.length > 0 && currentSegmentIndex >= 0 && currentSegmentIndex < currentSegments.length) {
@@ -190,7 +230,7 @@ Item {
                     anchors.right: parent.right
                     height: parent.height
                     verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode) ? Text.AlignLeft : Text.AlignHCenter
+                    horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? Text.AlignLeft : Text.AlignHCenter
                     text: tickerContainer.currentTargetText
                     elide: Text.ElideRight
                     opacity: 0.35
@@ -351,7 +391,8 @@ Item {
                             
                             tickerContainer.currentRssIndex = nextIdx;
                             // Prepare segments for new title
-                            var fullTitle = tickerContainer.rssTitles[nextIdx].text;
+                            var tickerItem = tickerContainer.rssTitles[nextIdx];
+                            var fullTitle = "[" + (tickerItem.source || "RSS") + "] " + tickerItem.text;
                             tickerContainer.currentSegments = tickerContainer.splitIntoSegments(fullTitle, compactRoot.maxChars);
                             tickerContainer.currentSegmentIndex = 0;
                             tickerContainer.currentDuration = (tickerContainer.currentSegments.length > 1) ? 4000 : next.duration;
@@ -376,12 +417,12 @@ Item {
             // Search Icon Button (Wide and Extra Wide Mode only)
             Rectangle {
                 id: searchIconButton
-                Layout.preferredWidth: ((compactRoot.isWideMode || compactRoot.isExtraWideMode) && compactRoot.showSearchButton) ? (mainButton.height - 6) : 0
+                Layout.preferredWidth: ((compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) && compactRoot.showSearchButton) ? (mainButton.height - 6) : 0
                 Layout.preferredHeight: mainButton.height - 6
                 Layout.alignment: Qt.AlignVCenter
                 radius: compactRoot.panelRadius === 0 ? width / 2 : (compactRoot.panelRadius === 1 ? 8 : (compactRoot.panelRadius === 2 ? 4 : 0))
                 color: compactRoot.showSearchButtonBackground ? compactRoot.accentColor : "transparent"
-                visible: (compactRoot.isWideMode || compactRoot.isExtraWideMode) && compactRoot.showSearchButton
+                visible: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) && compactRoot.showSearchButton
                 
                 Behavior on Layout.preferredWidth { NumberAnimation { duration: 200 } }
                 

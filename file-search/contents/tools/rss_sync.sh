@@ -22,15 +22,51 @@ fi
 
 # Python ile güvenli çekme ve ayrıştırma
 python3 -c '
-import sys, os, urllib.request, re, json, base64, html, xml.etree.ElementTree as ET
+import sys, os, urllib.request, re, json, base64, html, datetime, xml.etree.ElementTree as ET
 
 def clean_html(raw_html):
     if not raw_html: return ""
+    # Remove junk markers often found in news feeds
+    junk = ["Devamını oku", "Haberin devamı", "Tıklayın", "İşte detaylar", "Read more", "Full story"]
+    clean_text = raw_html
+    for j in junk:
+        clean_text = re.sub(r"(?i)" + j + r".*", "", clean_text)
+    
     # Remove HTML tags and keep text
     cleanr = re.compile("<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});")
-    cleantext = re.sub(cleanr, " ", raw_html)
-    # Also handle standard HTML entities
+    cleantext = re.sub(cleanr, " ", clean_text)
     return html.unescape(cleantext).strip()
+
+def normalize_date(date_str):
+    if not date_str: return ""
+    # Try common formats
+    formats = [
+        "%a, %d %b %Y %H:%M:%S %z",
+        "%a, %d %b %Y %H:%M:%S %Z",
+        "%Y-%m-%dT%H:%M:%S%z",
+        "%Y-%m-%dT%H:%M:%S.%f%z",
+        "%Y-%m-%d %H:%M:%S",
+        "%d.%m.%Y %H:%M:%S",
+        "%Y/%m/%d %H:%M:%S"
+    ]
+    for fmt in formats:
+        try:
+            dt = datetime.datetime.strptime(date_str, fmt)
+            return dt.strftime("%Y-%m-%d %H:%M")
+        except:
+            continue
+    # Fallback cleaning
+    return date_str.replace(" +0000", "").replace("T", " ").split(".")[0]
+
+def get_favicon(url):
+    try:
+        from urllib.parse import urlparse
+        domain = urlparse(url).netloc
+        if domain:
+            return f"https://www.google.com/s2/favicons?domain={domain}\u0026sz=64"
+    except:
+        pass
+    return ""
 
 def find_node_recursive(node, tag_names):
     # Search for a tag ignoring namespace
@@ -61,11 +97,12 @@ def get_attr_recursive(node, tag_names, attr_name):
             if val: return val
     return ""
 
-def parse_rss(xml, source_name):
+def parse_rss(xml, source_name, source_url):
     entries = []
+    source_favicon = get_favicon(source_url)
     try:
-        # XML cleaning for common Turkish news site errors (unescaped &)
-        xml_cleaned = re.sub(r"&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[a-fA-F0-9]+);)", "&amp;", xml)
+        # XML cleaning for common Turkish news site errors (unescaped \u0026)
+        xml_cleaned = re.sub(r"\u0026(?!(?:amp|lt|gt|quot|apos|#\d+|#x[a-fA-F0-9]+);)", "\u0026amp;", xml)
         root = ET.fromstring(xml_cleaned)
         
         # Support both RSS <item> and Atom <entry>
@@ -86,7 +123,7 @@ def parse_rss(xml, source_name):
             
             # 3. Date
             date_str = get_deep_text(node, ["pubDate", "updated", "published", "date", "dc:date"]) or ""
-            date_part = date_str.replace(" +0000", "").replace("T", " ").split(".")[0] if date_str else ""
+            date_norm = normalize_date(date_str)
             
             # 4. Content
             desc_raw = get_deep_text(node, ["description", "summary"]) or ""
@@ -99,11 +136,11 @@ def parse_rss(xml, source_name):
             if not title:
                 title = (desc[:50] + "...") if len(desc) > 50 else (desc or "Haber")
             
-            # 5. Image extraction (media:content, enclosure, media:thumbnail, or <img> in content)
+            # 5. Image extraction (media:content, enclosure, media:thumbnail, or \u003cimg\u003e in content)
             image_url = get_attr_recursive(node, ["media:content", "enclosure", "media:thumbnail", "image"], "url")
             if not image_url:
-                # Parse <img> tags from content
-                img_match = re.search(r"<img[^>]*src=\"([^\"]+)\"[^>]*>", desc_raw + full_raw, re.IGNORECASE)
+                # Parse \u003cimg\u003e tags from content
+                img_match = re.search(r"\u003cimg[^\u003e]*src=\"([^\"]+)\"[^\u003e]*\u003e", desc_raw + full_raw, re.IGNORECASE)
                 if img_match: image_url = img_match.group(1)
             
             if title:
@@ -112,10 +149,11 @@ def parse_rss(xml, source_name):
                     "decoration": "news-subscribe",
                     "category": "RSS",
                     "url": link,
-                    "subtext": f"{source_name} | {date_part}",
+                    "subtext": f"{source_name} | {date_norm}",
                     "description": desc[:300] + "..." if len(desc) > 300 else desc,
                     "fullContent": full or desc,
                     "imageUrl": image_url or "",
+                    "sourceIcon": source_favicon,
                     "indexedContent": f"{title} {desc} {full}",
                     "duplicateId": f"rss:{link}",
                     "rawDate": date_str,
@@ -131,12 +169,12 @@ def get_hash(s):
     h = 0
     for char in s:
         h = ((h << 5) - h) + ord(char)
-        h &= 0xFFFFFFFF
-    if h > 0x7FFFFFFF:
+        h \u0026= 0xFFFFFFFF
+    if h \u003e 0x7FFFFFFF:
         h -= 0x100000000
     return abs(h)
 
-if len(sys.argv) < 5:
+if len(sys.argv) \u003c 5:
     sys.exit(1)
 
 cache_dir, url, name, max_entries = sys.argv[1:5]
@@ -156,7 +194,7 @@ try:
         print("FETCHING: OK", flush=True)
         print("PARSING: START", flush=True)
         
-        entries = parse_rss(xml, name)[:max_entries]
+        entries = parse_rss(xml, name, url)[:max_entries]
         count = len(entries)
         print(f"PARSING: OK ({count} items)", flush=True)
         

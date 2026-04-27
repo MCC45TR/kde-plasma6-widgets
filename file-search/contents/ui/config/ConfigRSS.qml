@@ -645,12 +645,35 @@ Item {
                 Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Popular Presets") 
                 Layout.fillWidth: true
             }
+
+            QQC2.TextField {
+                id: presetSearchField
+                placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search presets (e.g. News, Tech, TR, Linux)...")
+                Layout.fillWidth: true
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.rightMargin: Kirigami.Units.gridUnit
+                onTextChanged: {
+                    // Force refresh cards visibility
+                }
+            }
             
             Repeater {
                 model: presetSources
                 delegate: Kirigami.AbstractCard {
+                    id: presetCard
+                    property string searchText: presetSearchField.text.toLowerCase()
+                    property bool sectionMatches: modelData.section.toLowerCase().indexOf(searchText) !== -1
+                    
                     Layout.fillWidth: true
-                    visible: modelData ? !!modelData.items && modelData.items.length > 0 : false
+                    visible: {
+                        if (!modelData || !modelData.items) return false;
+                        if (searchText.length === 0) return true;
+                        if (sectionMatches) return true;
+                        for (var i = 0; i < modelData.items.length; i++) {
+                            if (modelData.items[i].name.toLowerCase().indexOf(searchText) !== -1) return true;
+                        }
+                        return false;
+                    }
                     contentItem: ColumnLayout {
                         QQC2.Label { 
                             text: modelData.section
@@ -664,6 +687,7 @@ Item {
                                 model: modelData.items
                                 delegate: QQC2.Button {
                                     id: presetBtn
+                                    visible: presetCard.searchText.length === 0 || presetCard.sectionMatches || modelData.name.toLowerCase().indexOf(presetCard.searchText) !== -1
                                     property bool isSelected: !!isPresetSelected(modelData.url)
                                     text: modelData.name
                                     icon.name: isSelected ? "checkmark" : "list-add"
@@ -718,6 +742,37 @@ Item {
                                 }
                             }
 
+                            // Source Icon (Favicon)
+                            Item {
+                                width: 32
+                                height: 32
+                                Layout.alignment: Qt.AlignVCenter
+                                
+                                Rectangle {
+                                    anchors.fill: parent
+                                    radius: 4
+                                    color: Kirigami.Theme.backgroundColor
+                                    border.width: 1
+                                    border.color: Kirigami.Theme.focusColor
+                                    opacity: 0.3
+                                }
+
+                                Image {
+                                    anchors.fill: parent
+                                    anchors.margins: 4
+                                    source: "https://www.google.com/s2/favicons?domain=" + (modelData.url ? modelData.url.split("/")[2] : "") + "&sz=64"
+                                    fillMode: Image.PreserveAspectFit
+                                    asynchronous: true
+                                    
+                                    Kirigami.Icon {
+                                        anchors.fill: parent
+                                        source: "news-subscribe"
+                                        visible: parent.status !== Image.Ready
+                                        opacity: 0.5
+                                    }
+                                }
+                            }
+
                             QQC2.TextField {
                                 placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Name")
                                 text: modelData.name
@@ -731,9 +786,16 @@ Item {
                                 Layout.fillWidth: true
                             }
                             QQC2.Button {
-                                icon.name: "network-connect"
+                                icon.name: testResults[index] === "testing" ? "view-refresh" : "network-connect"
                                 onClicked: testSource(modelData.url, index)
                                 flat: true
+                                
+                                RotationAnimation on icon.name {
+                                    running: testResults[index] === "testing"
+                                    loops: Animation.Infinite
+                                    from: 0; to: 360; duration: 1000
+                                    enabled: testResults[index] === "testing"
+                                }
                             }
                             QQC2.Button {
                                 icon.name: "list-remove"

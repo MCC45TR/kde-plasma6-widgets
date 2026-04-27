@@ -31,10 +31,11 @@ PlasmoidItem {
     readonly property bool isMediumMode: isInPanel && displayMode === 1
     readonly property bool isWideMode: isInPanel && displayMode === 2
     readonly property bool isExtraWideMode: isInPanel && displayMode === 3
+    readonly property bool isUltraWideMode: isInPanel && displayMode === 4
 
     // ===== LAYOUT CALCULATIONS =====
-    readonly property real textContentWidth: isButtonMode ? 0 : (textMetrics.width + ((isWideMode || isExtraWideMode) ? (height + 30) : 20))
-    readonly property real baseWidth: isButtonMode ? height : (isExtraWideMode ? (height * 6) : ((isWideMode) ? (height * 4) : 70))
+    readonly property real textContentWidth: isButtonMode ? 0 : (textMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (height + 30) : 20))
+    readonly property real baseWidth: isButtonMode ? height : (isUltraWideMode ? (height * 9) : (isExtraWideMode ? (height * 6) : ((isWideMode) ? (height * 4) : 70)))
     
     Layout.preferredWidth: Math.max(baseWidth, textContentWidth, placeholderContentWidth)
     Layout.preferredHeight: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 38
@@ -44,10 +45,11 @@ PlasmoidItem {
     // Character limits
     readonly property int maxCharsWide: 65
     readonly property int maxCharsMedium: 35
-    readonly property int maxChars: isWideMode ? maxCharsWide : maxCharsMedium
+    readonly property int maxCharsUltra: 110
+    readonly property int maxChars: isUltraWideMode ? maxCharsUltra : (isWideMode ? maxCharsWide : maxCharsMedium)
     
     // Truncated text for display
-    readonly property string placeholderText: isExtraWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : (isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
+    readonly property string placeholderText: (isExtraWideMode || isUltraWideMode) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : (isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
     readonly property string rawSearchText: searchText.length > 0 ? searchText : placeholderText
     readonly property string truncatedText: rawSearchText.length > maxChars ? rawSearchText.substring(0, maxChars) + "..." : rawSearchText
     
@@ -65,7 +67,7 @@ PlasmoidItem {
         text: root.placeholderText
     }
     
-    readonly property real placeholderContentWidth: isButtonMode ? 0 : (placeholderMetrics.width + ((isWideMode || isExtraWideMode) ? (height + 30) : 20))
+    readonly property real placeholderContentWidth: isButtonMode ? 0 : (placeholderMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (height + 30) : 20))
     
     // No background - transparent
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
@@ -123,6 +125,12 @@ PlasmoidItem {
             checkable: true
             checked: root.displayMode === 3
             onTriggered: Plasmoid.configuration.displayMode = 3
+        },
+        PlasmaCore.Action {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Ultra Wide Mode (Maximum Coverage)")
+            checkable: true
+            checked: root.displayMode === 4
+            onTriggered: Plasmoid.configuration.displayMode = 4
         }
     ]
 
@@ -133,6 +141,7 @@ PlasmoidItem {
         isButtonMode: root.isButtonMode
         isWideMode: root.isWideMode
         isExtraWideMode: root.isExtraWideMode
+        isUltraWideMode: root.isUltraWideMode
         expanded: root.expanded
         truncatedText: root.truncatedText
         responsiveFontSize: root.responsiveFontSize

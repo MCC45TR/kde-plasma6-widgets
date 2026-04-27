@@ -197,7 +197,8 @@ Item {
                             i18nd("plasma_applet_com.mcc45tr.filesearch", "Button Mode (Icon only)"), 
                             i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium Mode (Text)"), 
                             i18nd("plasma_applet_com.mcc45tr.filesearch", "Wide Mode (Search Bar)"), 
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Extra Wide Mode")
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Extra Wide Mode"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Ultra Wide Mode")
                         ]
                         Layout.fillWidth: true
                     }
