@@ -12,8 +12,8 @@ QQC.Menu {
     // Helper: Check if item is a folder
     readonly property bool isFolder: {
         if (!historyItem) return false
-        var cat = historyItem.category || ""
-        return (cat === "Yerler" || cat === "Places" || cat === "Klasörler" || cat === "Folders")
+        var cat = (historyItem.category || "").toLowerCase()
+        return (cat.indexOf("place") !== -1 || cat.indexOf("folder") !== -1 || cat.indexOf("yerler") !== -1 || cat.indexOf("klasör") !== -1)
     }
 
     // Helper: Get Match ID for pinning
@@ -31,7 +31,7 @@ QQC.Menu {
             if (historyItem) {
                 var disp = historyItem.display || ""
                 var dec = historyItem.decoration || "application-x-executable"
-                var cat = historyItem.category || "Diğer"
+                var cat = historyItem.category || "Other"
                 var path = historyItem.filePath || ""
                 
                 logic.togglePin({

@@ -13,7 +13,7 @@ Item {
     
     // Search text for similarity scoring
     property string searchText: ""
-    property string activeFilter: "Tümü"
+    property string activeFilter: "All"
     property int maxResults: 20
     property string lastRefreshSignature: ""
     
@@ -97,7 +97,7 @@ Item {
                 if (!item)
                     continue;
 
-                var cat = item.category || "Diğer";
+                var cat = item.category || "Other";
                 if (!CategoryManager.isCategoryVisible(categorySettings, cat))
                     continue;
 
@@ -107,28 +107,28 @@ Item {
                 var lowerUrl = urlString.toLowerCase();
                 var ext = PreviewUtils.getExtension(urlString);
 
-                if (dataManager.activeFilter !== "Tümü") {
+                if (dataManager.activeFilter !== "All") {
                     var shouldKeep = false;
 
-                    if (activeFilterLower === "belgeler") {
+                    if (activeFilterLower === "docs") {
                         shouldKeep = (lowerCategory.indexOf("belge") !== -1 || lowerCategory.indexOf("document") !== -1 || lowerCategory.indexOf("text") !== -1 ||
                                      lowerDecoration.indexOf("document") !== -1 || lowerDecoration.indexOf("text") !== -1 || PreviewUtils.isDocumentLikeExtension(ext));
-                    } else if (activeFilterLower === "resimler") {
+                    } else if (activeFilterLower === "images") {
                         shouldKeep = (lowerCategory.indexOf("resim") !== -1 || lowerCategory.indexOf("image") !== -1 || lowerCategory.indexOf("picture") !== -1 ||
                                      lowerCategory.indexOf("photo") !== -1 || lowerCategory.indexOf("görsel") !== -1 || lowerCategory.indexOf("görüntü") !== -1 ||
                                      lowerDecoration.indexOf("image") !== -1 || lowerDecoration.indexOf("photo") !== -1 || lowerDecoration.indexOf("picture") !== -1 ||
                                      PreviewUtils.isImageExtension(ext));
-                    } else if (activeFilterLower === "klasörler") {
+                    } else if (activeFilterLower === "folders") {
                         shouldKeep = (lowerCategory.indexOf("klasör") !== -1 || lowerCategory.indexOf("folder") !== -1 || lowerCategory.indexOf("yerler") !== -1 ||
                                      lowerCategory.indexOf("place") !== -1 || lowerDecoration.indexOf("folder") !== -1 || lowerUrl.endsWith("/"));
-                    } else if (activeFilterLower === "uygulamalar") {
+                    } else if (activeFilterLower === "apps") {
                         shouldKeep = (lowerCategory.indexOf("uygulama") !== -1 || lowerCategory.indexOf("application") !== -1 || lowerCategory.indexOf("app") !== -1 ||
                                      lowerCategory.indexOf("program") !== -1 || lowerDecoration.indexOf("app") !== -1 || lowerUrl.endsWith(".desktop"));
                     } else if (activeFilterLower === "web") {
                         shouldKeep = (lowerCategory.indexOf("web") !== -1 || lowerCategory.indexOf("bookmark") !== -1 || lowerCategory.indexOf("yer imi") !== -1 ||
                                      lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("browser") !== -1 || lowerDecoration.indexOf("globe") !== -1 ||
                                      lowerDecoration.indexOf("web") !== -1 || lowerUrl.startsWith("http") || lowerUrl.startsWith("www"));
-                    } else if (activeFilterLower === "haberler" || activeFilterLower === "rss") {
+                    } else if (activeFilterLower === "rss") {
                         shouldKeep = (lowerCategory.indexOf("haber") !== -1 || lowerCategory.indexOf("news") !== -1 || lowerCategory.indexOf("rss") !== -1 || lowerDecoration.indexOf("news") !== -1);
                     }
 
@@ -157,7 +157,7 @@ Item {
 
         var activeF = dataManager.activeFilter;
         // RSS logic: Include if in RSS mode OR if RSS is enabled and a relevant filter is active
-        if (isRSSOnlyMode || (logic.rssEnabled && (activeF === "Tümü" || activeF === "All" || activeF === "Web" || activeF === "RSS" || activeF === "Haberler"))) {
+        if (isRSSOnlyMode || (logic.rssEnabled && (activeF === "All" || activeF === "Web" || activeF === "RSS"))) {
             for (var r = 0; r < rssItems.length; r++) {
                 var rssEntry = rssItems[r];
                 if (isRSSOnlyMode && rssQuery.length > 0) {
@@ -217,8 +217,8 @@ Item {
         for (var k = 0; k < displayOrder.length; k++) {
             var catName = displayOrder[k];
             var items = groups[catName];
-            var isAppCategory = (catName === "Uygulamalar" || catName === "Applications");
-            var isRSSCategory = (catName === "RSS" || catName === "Haberler");
+            var isAppCategory = (catName.toLowerCase().indexOf("app") !== -1 || catName.toLowerCase().indexOf("uygulama") !== -1);
+            var isRSSCategory = (catName === "RSS" || catName.toLowerCase().indexOf("haber") !== -1 || catName.toLowerCase().indexOf("news") !== -1);
 
             // Don't merge RSS or Applications into "Other Results" even if there is only one
             if (items.length <= 1 && !isAppCategory && !isRSSCategory) {

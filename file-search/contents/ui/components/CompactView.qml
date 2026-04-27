@@ -178,8 +178,8 @@ Item {
                 property int currentDuration: getInitialDuration()
                 property string currentTargetText: {
                     if (currentState === "placeholder") return defaultText;
-                    if (currentSegments.length > 0 && currentSegmentIndex >= 0) {
-                        return currentSegments[currentSegmentIndex];
+                    if (currentSegments.length > 0 && currentSegmentIndex >= 0 && currentSegmentIndex < currentSegments.length) {
+                        return currentSegments[currentSegmentIndex] || defaultText;
                     }
                     return defaultText;
                 }

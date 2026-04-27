@@ -257,7 +257,7 @@ FocusScope {
                 else if (subtext.indexOf("file://") === 0) filePath = subtext
             }
             
-            itemClicked(data.index, data.display || "", data.decoration || "application-x-executable", data.category || "Diğer", matchId, filePath)
+            itemClicked(data.index, data.display || "", data.decoration || "application-x-executable", data.category || "Other", matchId, filePath)
         }
     }
     
@@ -552,7 +552,7 @@ FocusScope {
                                             width: tileDelegate.width - 16
                                             text: {
                                                 var cat = modelData.category || ""
-                                                var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings");
+                                                var isApp = (cat.toLowerCase().indexOf("app") !== -1 || cat.toLowerCase().indexOf("uygulama") !== -1 || cat === "System Settings");
                                                 if (isApp) return modelData.subtext || "";
                                                 
                                                 var path = (modelData.url && modelData.url.toString) ? modelData.url.toString() : "";
@@ -726,7 +726,7 @@ FocusScope {
                                         
                                         if (mouse.button === Qt.RightButton) {
                                             var cat = modelData.category || ""
-                                            var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings")
+                                            var isApp = (cat.toLowerCase().indexOf("app") !== -1 || cat.toLowerCase().indexOf("uygulama") !== -1 || cat === "System Settings")
                                             
                                             resultsTileRoot.itemRightClicked({
                                                 display: modelData.display || "",
@@ -738,7 +738,7 @@ FocusScope {
                                                 uuid: ""
                                             }, mouse.x + tileDelegate.x, mouse.y + tileDelegate.y)
                                         } else {
-                                            resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Diğer", matchId, filePath)
+                                            resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Other", matchId, filePath)
                                         }
                                     }
                                 }
@@ -833,7 +833,7 @@ FocusScope {
     Column {
         anchors.centerIn: parent
         spacing: 10
-        visible: resultsTileRoot.categorizedData.length === 0 && (resultsTileRoot.searchText.length > 0 || resultsTileRoot.activeFilter !== "Tümü")
+        visible: resultsTileRoot.categorizedData.length === 0 && (resultsTileRoot.searchText.length > 0 || resultsTileRoot.activeFilter !== "All")
 
         BusyIndicator {
             anchors.horizontalCenter: parent.horizontalCenter

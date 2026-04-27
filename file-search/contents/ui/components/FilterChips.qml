@@ -9,12 +9,24 @@ Item {
     property color textColor
     property color accentColor
     property color bgColor
-    property string activeFilter: "Tümü"
+    property string activeFilter: "All"
     property bool breezeStyle: false
     
     signal filterSelected(string filterName)
     
     implicitHeight: 32
+
+    // Internal keys → Display names mapping
+    // Internal keys are always English, UI display uses i18nd()
+    readonly property var filterModel: [
+        { key: "All",     label: i18nd("plasma_applet_com.mcc45tr.filesearch", "All") },
+        { key: "Apps",    label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Apps") },
+        { key: "Docs",    label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Docs") },
+        { key: "Images",  label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Images") },
+        { key: "Folders", label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Folders") },
+        { key: "Web",     label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Web") },
+        { key: "RSS",     label: "RSS" }
+    ]
     
     Flickable {
         anchors.fill: parent
@@ -32,22 +44,14 @@ Item {
             Behavior on x { NumberAnimation { duration: 150 } }
             
             Repeater {
-                model: [
-                    i18nd("plasma_applet_com.mcc45tr.filesearch", "All"),
-                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Apps"),
-                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Docs"),
-                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Images"),
-                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Folders"),
-                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Web"),
-                    "RSS"
-                ]
+                model: filterChipsRoot.filterModel
                 delegate: Rectangle {
                     id: chip
                     width: chipText.implicitWidth + 24
                     height: 24
                     radius: 12
                     
-                    property bool isActive: modelData === filterChipsRoot.activeFilter
+                    property bool isActive: modelData.key === filterChipsRoot.activeFilter
                     property bool isHovered: chipMouseArea.containsMouse
                     
                     color: filterChipsRoot.breezeStyle ? 
@@ -64,7 +68,7 @@ Item {
                     Text {
                         id: chipText
                         anchors.centerIn: parent
-                        text: modelData
+                        text: modelData.label
                         color: filterChipsRoot.breezeStyle ?
                                (chip.isActive ? filterChipsRoot.accentColor : filterChipsRoot.textColor) :
                                (chip.isActive ? Kirigami.Theme.backgroundColor : filterChipsRoot.textColor)
@@ -78,7 +82,7 @@ Item {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            filterChipsRoot.filterSelected(modelData)
+                            filterChipsRoot.filterSelected(modelData.key)
                         }
                     }
                 }

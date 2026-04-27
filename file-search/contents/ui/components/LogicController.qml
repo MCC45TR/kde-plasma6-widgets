@@ -69,7 +69,6 @@ Item {
     property bool isSyncing: false
 
     // Signals
-    // Signals
     signal historyForceUpdate()
 
     // Config validation
@@ -504,13 +503,7 @@ Item {
     }
     
     function getScriptPath() {
-        var path = "";
-        if (typeof plasmoid !== "undefined") {
-            path = plasmoid.file("tools/rss_sync.sh").toString();
-        } else {
-            path = Qt.resolvedUrl("../../tools/rss_sync.sh").toString();
-        }
-        
+        var path = Qt.resolvedUrl("../../tools/rss_sync.sh").toString();
         if (path.indexOf("file://") === 0) {
             return path.replace(/^file:\/\/\/?/, "/");
         }
@@ -660,7 +653,7 @@ Item {
                 // If decoration is broken (QIcon()) or missing
                 if (decoration === "QIcon()" || decoration === "") {
                     // Set default folder icon temporarily if it's likely a folder
-                    var isFolder = (category === "Yerler" || category === "Places" || category === "Klasörler");
+                    var isFolder = (category.toLowerCase().indexOf("place") !== -1 || category.toLowerCase().indexOf("folder") !== -1 || category.toLowerCase().indexOf("yerler") !== -1 || category.toLowerCase().indexOf("klasör") !== -1);
                     if (isFolder) {
                         HistoryManager.updateItemIcon(searchHistory, uuid, "folder");
                         saveHistory();

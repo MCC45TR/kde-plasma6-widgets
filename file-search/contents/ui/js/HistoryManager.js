@@ -17,7 +17,7 @@ function generateUUID() {
 function detectSourceType(category, isApp, filePath) {
     if (isApp) {
         return "app"
-    } else if (category && (category.indexOf("Calculate") >= 0 || category.indexOf("Hesapla") >= 0)) {
+    } else if (category && (category.toLowerCase().indexOf("calc") >= 0 || category.toLowerCase().indexOf("hesap") >= 0)) {
         return "calculator"
     } else if (filePath && filePath.length > 0) {
         return "file"
@@ -57,14 +57,18 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
 
     // Determine naturally if it's an application based on category or file path
     var catLower = (category || "").toString().toLowerCase()
-    var isApp = catLower === "uygulamalar" || catLower === "applications" || catLower === "apps" ||
-        catLower === "sistem ayarları" || catLower === "system settings" || catLower === "settings" || catLower === "ayarlar" ||
-        catLower === "games" || catLower === "oyunlar" || catLower === "office" || catLower === "ofis" || 
-        catLower === "internet" || catLower === "graphics" || catLower === "grafik" || catLower === "development" || catLower === "geliştirme" ||
-        catLower === "multimedia" || catLower === "çoklu ortam" || catLower === "education" || catLower === "eğitim" ||
-        catLower === "utilities" || catLower === "araçlar" || catLower === "system" || catLower === "sistem" ||
-        (filePath && filePath.toString().indexOf(".desktop") !== -1) ||
-        (matchId && matchId.toString().indexOf(".desktop") !== -1)
+    var isApp = catLower.indexOf("app") !== -1 || catLower.indexOf("uygulama") !== -1 || catLower.indexOf("program") !== -1 ||
+                catLower.indexOf("ayar") !== -1 || catLower.indexOf("setting") !== -1 ||
+                catLower.indexOf("oyun") !== -1 || catLower.indexOf("game") !== -1 ||
+                catLower.indexOf("ofis") !== -1 || catLower.indexOf("office") !== -1 ||
+                catLower.indexOf("sistem") !== -1 || catLower.indexOf("system") !== -1 ||
+                catLower.indexOf("araç") !== -1 || catLower.indexOf("util") !== -1 ||
+                catLower.indexOf("internet") !== -1 || catLower.indexOf("grafik") !== -1 || catLower.indexOf("graphic") !== -1 ||
+                catLower.indexOf("geliştirme") !== -1 || catLower.indexOf("develop") !== -1 ||
+                catLower.indexOf("ortam") !== -1 || catLower.indexOf("multimedia") !== -1 ||
+                catLower.indexOf("eğitim") !== -1 || catLower.indexOf("educat") !== -1 ||
+                (filePath && filePath.toString().indexOf(".desktop") !== -1) ||
+                (matchId && matchId.toString().indexOf(".desktop") !== -1)
 
     // Fix missing or invalid filePath for apps if matchId contains .desktop
     // This fixes the issue where apps appear in history but don't launch directly
@@ -105,7 +109,7 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
         uuid: generateUUID(),
         display: display,
         decoration: decoration || "application-x-executable",
-        category: category || "Diğer",
+        category: category || "Other",
         isApplication: isApp,
         matchId: matchId || "",
         filePath: filePath || "",

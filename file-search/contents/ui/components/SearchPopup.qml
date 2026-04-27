@@ -31,7 +31,7 @@ Item {
             requestSearchTextUpdate("")
             searchBar.clear()
             hiddenSearchInput.text = ""
-            activeFilter = "Tümü"
+            activeFilter = "All"
         }
     }
     
@@ -86,7 +86,7 @@ Item {
     }
     
     // Active filter from chips
-    property string activeFilter: "Tümü"
+    property string activeFilter: "All"
     
     // Layout
     Layout.preferredWidth: 500
@@ -112,7 +112,7 @@ Item {
         logic: popupRoot.logic
         searchText: popupRoot.searchText
         activeFilter: popupRoot.activeFilter
-        maxResults: popupRoot.activeFilter === "Tümü" 
+        maxResults: popupRoot.activeFilter === "All" 
             ? (popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.maxResults || 20) : 20)
             : 450
         
@@ -126,7 +126,7 @@ Item {
         id: resultsModel
         // Use debounced query string to prevent stutter during rapid typing
         queryString: popupRoot.delayedQueryString
-        limit: popupRoot.activeFilter === "Tümü"
+        limit: popupRoot.activeFilter === "All"
             ? (popupRoot.plasmoidConfig ? Math.max(10, popupRoot.plasmoidConfig.maxResults || 20) : 20)
             : 450
     }
@@ -188,34 +188,20 @@ Item {
     // ===== FUNCTIONS =====
     
     function getFilteredQuery(text, filter) {
-        if (filter === "Tümü") return text || "";
-        
-        var queryText = text || "";
-        var prefix = "";
-        
-        if (filter === "Belgeler" || filter === "Resimler" || filter === "Klasörler") {
-            prefix = "baloo: ";
-        } else if (filter === "Uygulamalar") {
-            prefix = "services: ";
-        } else if (filter === "Web") {
-            prefix = "bookmarks: ";
-        } else {
-            return queryText;
-        }
-        
-        return prefix + queryText;
+        // Backend prefixes (like "services:" or "baloo:") are unreliable across different Plasma versions and locales.
+        // We rely entirely on TileDataManager to filter the results locally based on activeFilter.
+        // This ensures consistent results because Milou fetches up to 450 items when a filter is active.
+        return text || "";
     }
 
     function getBackendQuery(text, filter) {
         var effectiveQuery = getEffectiveQuery(text)
-        if (!effectiveQuery && filter === "Tümü") return ""
+        if (!effectiveQuery && filter === "All") return ""
 
         var lower = effectiveQuery.toLowerCase()
         if (lower.startsWith("rss:")) return ""
 
-        if (effectiveQuery === "date:" || effectiveQuery === "clock:" ||
-            effectiveQuery === "power:" || effectiveQuery === "help:" ||
-            effectiveQuery === "weather:") {
+        if (isCommandOnlyQuery(effectiveQuery)) {
             return ""
         }
 
@@ -269,7 +255,7 @@ Item {
             return;
         }
 
-        var isApp = (category === "Uygulamalar" || category === "Applications") || (filePath && filePath.toString().indexOf(".desktop") > 0);
+        var isApp = (category.toLowerCase().indexOf("app") !== -1 || category.toLowerCase().indexOf("uygulama") !== -1) || (filePath && filePath.toString().indexOf(".desktop") > 0);
         var idx = resultsModel.index(index, 0);
         
         // FORCE RUN for command queries (gg:, help:, etc.) to avoid treating them as files
@@ -329,7 +315,6 @@ Item {
         }
     }
 
-    // Navigation Helpers
     // Navigation Helpers
     function moveSelectionUp() {
         if (searchText.length === 0) {
@@ -605,7 +590,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 12
-        asynchronous: false
+        asynchronous: true
         active: popupRoot.expanded && popupRoot.searchText.length > 0 && !isTileView
         
         sourceComponent: PrimaryResultPreview {
@@ -630,12 +615,12 @@ Item {
         anchors.top: (primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready) 
                      ? primaryResultPreviewLoader.bottom 
                      : filterChipsWrapper.bottom
-        anchors.topMargin: (active && isVisible) ? 8 : 8
+        anchors.topMargin: 8
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        asynchronous: false
+        asynchronous: true
         active: popupRoot.expanded && popupRoot.searchText.length > 0 && !popupRoot.isRssOnlyQuery
         sourceComponent: QueryHints {
             searchText: popupRoot.searchText
@@ -665,7 +650,7 @@ Item {
         anchors.right: parent.right
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        asynchronous: false
+        asynchronous: true
         
         property var items: logic.visiblePinnedItems
         active: showPinnedBar && !popupRoot.isRssOnlyQuery
@@ -747,7 +732,7 @@ Item {
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && !isTileView && (searchText.length > 0 || activeFilter !== "Tümü") && !isCommandOnlyQuery(searchText)
+        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
         
         sourceComponent: ResultsListView {
              resultsModel: resultsModel
@@ -791,7 +776,7 @@ Item {
         anchors.bottomMargin: 12
 
         asynchronous: true
-        active: popupRoot.expanded && isTileView && (searchText.length > 0 || activeFilter !== "Tümü") && !isCommandOnlyQuery(searchText)
+        active: popupRoot.expanded && isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
         
         sourceComponent: ResultsTileView {
              categorizedData: tileData.categorizedData
@@ -941,9 +926,33 @@ Item {
          asynchronous: true
          anchors.bottomMargin: 12
          
-         active: popupRoot.expanded && searchText.length === 0 && activeFilter === "Tümü"
+         active: popupRoot.expanded && searchText.length === 0
          
-         property var categorizedHistory: (logic.historyVersion >= 0 && logic.searchHistory.length > 0) ? HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other")) : []
+         property var categorizedHistory: {
+             if (!(logic.historyVersion >= 0 && logic.searchHistory.length > 0)) return [];
+             var hist = logic.searchHistory;
+             if (activeFilter !== "All") {
+                 var filtered = [];
+                 var filterLower = activeFilter.toLowerCase();
+                 for (var i = 0; i < hist.length; i++) {
+                     var item = hist[i];
+                     var catLower = (item.category || "").toLowerCase();
+                     var decLower = (item.decoration || "").toLowerCase();
+                     var urlLower = (item.filePath || "").toLowerCase();
+                     var shouldKeep = false;
+                     
+                     if (filterLower === "apps" && item.isApplication) shouldKeep = true;
+                     else if (filterLower === "docs" && (catLower.indexOf("belge") !== -1 || catLower.indexOf("doc") !== -1)) shouldKeep = true;
+                     else if (filterLower === "images" && (catLower.indexOf("resim") !== -1 || catLower.indexOf("image") !== -1 || decLower.indexOf("image") !== -1)) shouldKeep = true;
+                     else if (filterLower === "folders" && (catLower.indexOf("klasör") !== -1 || catLower.indexOf("folder") !== -1 || catLower.indexOf("place") !== -1)) shouldKeep = true;
+                     else if (filterLower === "web" && (catLower.indexOf("web") !== -1 || catLower.indexOf("internet") !== -1)) shouldKeep = true;
+                     
+                     if (shouldKeep) filtered.push(item);
+                 }
+                 hist = filtered;
+             }
+             return HistoryManager.categorizeHistory(hist, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other"));
+         }
          
          sourceComponent: Item {
              anchors.fill: parent

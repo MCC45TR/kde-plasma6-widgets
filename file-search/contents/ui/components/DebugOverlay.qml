@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as Plasma5Support
+import "../js/RSSManager.js" as RSSManager
 
 Rectangle {
     id: root
@@ -158,8 +159,7 @@ Rectangle {
                 }
                 
                 var content = JSON.stringify(dumpData, null, 2)
-                var encoded = unescape(encodeURIComponent(content))
-                var b64 = (typeof btoa === 'function') ? btoa(encoded) : Qt.btoa(encoded)
+                var b64 = RSSManager.encodeBase64(content)
                 var cmd = 'sh -c "echo ' + b64 + ' | base64 -d > $HOME/' + filename + '"'
                 
                 executableDataSource.connectedSources = [cmd]
