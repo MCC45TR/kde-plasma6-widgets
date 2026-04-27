@@ -112,7 +112,9 @@ Item {
         logic: popupRoot.logic
         searchText: popupRoot.searchText
         activeFilter: popupRoot.activeFilter
-        maxResults: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.maxResults || 20) : 20
+        maxResults: popupRoot.activeFilter === "Tümü" 
+            ? (popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.maxResults || 20) : 20)
+            : 450
         
         onCategorizedDataChanged: {
              // propagated automatically to bindings
@@ -126,7 +128,7 @@ Item {
         queryString: popupRoot.delayedQueryString
         limit: popupRoot.activeFilter === "Tümü"
             ? (popupRoot.plasmoidConfig ? Math.max(10, popupRoot.plasmoidConfig.maxResults || 20) : 20)
-            : 400
+            : 450
     }
     
     // Debounce the query string update to Milou
@@ -186,10 +188,11 @@ Item {
     // ===== FUNCTIONS =====
     
     function getFilteredQuery(text, filter) {
-        if (!text || filter === "Tümü") return text;
+        if (filter === "Tümü") return text || "";
         
+        var queryText = text || "";
         var prefix = "";
-        // Force specific runners with space to ensure they are parsed as providers
+        
         if (filter === "Belgeler" || filter === "Resimler" || filter === "Klasörler") {
             prefix = "baloo: ";
         } else if (filter === "Uygulamalar") {
@@ -197,15 +200,15 @@ Item {
         } else if (filter === "Web") {
             prefix = "bookmarks: ";
         } else {
-            return text;
+            return queryText;
         }
         
-        return prefix + text;
+        return prefix + queryText;
     }
 
     function getBackendQuery(text, filter) {
         var effectiveQuery = getEffectiveQuery(text)
-        if (!effectiveQuery) return ""
+        if (!effectiveQuery && filter === "Tümü") return ""
 
         var lower = effectiveQuery.toLowerCase()
         if (lower.startsWith("rss:")) return ""
@@ -587,6 +590,7 @@ Item {
                 
                 onFilterSelected: (name) => {
                     popupRoot.activeFilter = name;
+                    queryDebouncer.restart();
                     tileData.startSearch();
                 }
             }
@@ -743,7 +747,7 @@ Item {
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
+        active: popupRoot.expanded && !isTileView && (searchText.length > 0 || activeFilter !== "Tümü") && !isCommandOnlyQuery(searchText)
         
         sourceComponent: ResultsListView {
              resultsModel: resultsModel
@@ -787,7 +791,7 @@ Item {
         anchors.bottomMargin: 12
 
         asynchronous: true
-        active: popupRoot.expanded && isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
+        active: popupRoot.expanded && isTileView && (searchText.length > 0 || activeFilter !== "Tümü") && !isCommandOnlyQuery(searchText)
         
         sourceComponent: ResultsTileView {
              categorizedData: tileData.categorizedData
@@ -937,7 +941,7 @@ Item {
          asynchronous: true
          anchors.bottomMargin: 12
          
-         active: popupRoot.expanded && searchText.length === 0
+         active: popupRoot.expanded && searchText.length === 0 && activeFilter === "Tümü"
          
          property var categorizedHistory: (logic.historyVersion >= 0 && logic.searchHistory.length > 0) ? HistoryManager.categorizeHistory(logic.searchHistory, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other")) : []
          

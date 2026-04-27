@@ -409,7 +409,7 @@ ScrollView {
         Column {
             anchors.centerIn: parent
             spacing: 10
-            visible: resultsList.count === 0 && resultsListRoot.searchText.length > 0
+            visible: resultsListViewRoot.flatSortedData.length === 0 && (resultsListViewRoot.searchText.length > 0 || resultsListViewRoot.activeFilter !== "Tümü")
 
             BusyIndicator {
                 anchors.horizontalCenter: parent.horizontalCenter

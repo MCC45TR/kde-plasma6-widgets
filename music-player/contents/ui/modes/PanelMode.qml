@@ -26,7 +26,7 @@ Item {
     property bool showArtist: true
     property bool autoFontSize: true
     property int manualFontSize: 12
-    property int layoutMode: 0 // 0: Left, 1: Right, 2: Center
+    property int layoutMode: 2 // 0: Left, 1: Right, 2: Center
     property bool scrollingText: true
     property bool dynamicWidth: true
     property bool autoButtonSize: true
@@ -205,7 +205,9 @@ Item {
             
             ColumnLayout {
                 id: textColumn
-                anchors.fill: parent
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
                 spacing: 0
                 
                 // Font Logic - Cached

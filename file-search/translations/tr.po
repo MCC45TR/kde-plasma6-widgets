@@ -1831,3 +1831,12 @@ msgstr ""
 
 #~ msgid "BIOS"
 #~ msgstr "BIOS"
+
+msgid "Show RSS titles in placeholder cycling"
+msgstr "RSS başlıklarını arama kutusunda döngüye al"
+
+msgid "Show full headlines (split into segments)"
+msgstr "Haber başlıklarının tamamını göster (parçalara ayırarak)"
+
+msgid "News Features:"
+msgstr "Haber Özellikleri:"

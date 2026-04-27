@@ -32,6 +32,8 @@ Item {
     property bool cfg_rssExpandableCardsDefault: true
     property bool cfg_rssPlaceholderCycling: true
     property bool cfg_rssPlaceholderCyclingDefault: true
+    property bool cfg_rssShowFullHeadline: true
+    property bool cfg_rssShowFullHeadlineDefault: true
     property int cfg_rssFrequency: 3
     property int cfg_rssFrequencyDefault: 3
     
@@ -821,6 +823,12 @@ Item {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show RSS titles in placeholder cycling")
                     checked: cfg_rssPlaceholderCycling
                     onCheckedChanged: cfg_rssPlaceholderCycling = checked
+                }
+
+                QQC2.CheckBox {
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show full headlines (split into segments)")
+                    checked: cfg_rssShowFullHeadline
+                    onCheckedChanged: cfg_rssShowFullHeadline = checked
                 }
 
                 QQC2.SpinBox {

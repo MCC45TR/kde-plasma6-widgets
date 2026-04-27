@@ -147,6 +147,7 @@ PlasmoidItem {
         
         logic: controller
         rssPlaceholderCycling: Plasmoid.configuration.rssPlaceholderCycling
+        rssShowFullHeadline: Plasmoid.configuration.rssShowFullHeadline
         rssFrequency: Plasmoid.configuration.rssFrequency
         maxChars: root.maxChars
         

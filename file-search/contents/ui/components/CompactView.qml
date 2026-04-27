@@ -25,6 +25,7 @@ Item {
     // New properties for animated ticker
     property var logic: null
     property bool rssPlaceholderCycling: true
+    property bool rssShowFullHeadline: true
     property int rssFrequency: 3
     required property int maxChars
     
@@ -151,6 +152,10 @@ Item {
                 
                 function splitIntoSegments(text, max) {
                     if (!text || text.length <= max) return [text || ""];
+                    
+                    if (!compactRoot.rssShowFullHeadline) {
+                        return [text.substring(0, max - 3).trim() + "..."];
+                    }
                     
                     var segments = [];
                     var chunk = max - 4; // Leave space for ".." at both ends if needed

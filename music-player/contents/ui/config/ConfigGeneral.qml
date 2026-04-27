@@ -212,29 +212,27 @@ Item {
             highlighted: playerCombo.highlightedIndex === index
         }
         contentItem: Item {
-            implicitWidth: contentRow.implicitWidth
-            implicitHeight: contentRow.implicitHeight
-            RowLayout {
-                id: contentRow
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 30
-                spacing: 10
-                Kirigami.Icon {
-                    source: playerCombo.currentIndex >= 0 && appListModel.count > playerCombo.currentIndex
-                        ? (appListModel.get(playerCombo.currentIndex).icon || "multimedia-player")
-                        : "multimedia-player"
-                    Layout.preferredWidth: 22
-                    Layout.preferredHeight: 22
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                }
-                Label {
-                    text: playerCombo.displayText
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
-                }
+            implicitHeight: 32
+            Kirigami.Icon {
+                id: closedIcon
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                width: 22
+                height: 22
+                source: playerCombo.currentIndex >= 0 && playerCombo.currentIndex < appListModel.count 
+                    ? appListModel.get(playerCombo.currentIndex).icon 
+                    : "multimedia-player"
+            }
+            Label {
+                anchors.left: closedIcon.right
+                anchors.leftMargin: 8
+                anchors.right: parent.right
+                anchors.rightMargin: 28
+                anchors.verticalCenter: parent.verticalCenter
+                text: playerCombo.currentText
+                elide: Text.ElideRight
+                color: Kirigami.Theme.textColor
             }
         }
         onCurrentIndexChanged: {
@@ -246,34 +244,29 @@ Item {
             }
         }
     }
-    Item {
+    ColumnLayout {
+        id: statusColumn
         Kirigami.FormData.label: i18n("Selected Player:")
-        Kirigami.FormData.isSection: false
         Layout.fillWidth: true
-        Layout.preferredHeight: statusColumn.implicitHeight
-        ColumnLayout {
-            id: statusColumn
-            anchors.fill: parent
-            spacing: 5
-            Label {
-                Layout.fillWidth: true
-                wrapMode: Text.Wrap
-                font.bold: true
-                color: Kirigami.Theme.positiveTextColor
-                text: {
-                    var count = Math.max(0, appListModel.count - 1)
-                    if (count <= 0) return i18n("⚠ No active players")
-                    return i18n("✓ %1 active players found", count)
-                }
+        spacing: 5
+        Label {
+            Layout.fillWidth: true
+            wrapMode: Text.Wrap
+            font.bold: true
+            color: Kirigami.Theme.positiveTextColor
+            text: {
+                var count = Math.max(0, appListModel.count - 1)
+                if (count <= 0) return i18n("⚠ No active players")
+                return i18n("✓ %1 active players found", count)
             }
-            Label {
-                Layout.fillWidth: true
-                wrapMode: Text.Wrap
-                opacity: 0.7
-                text: cfg_preferredPlayer === "" 
-                    ? i18n("All media sources are tracked.")
-                    : i18n("Only \"%1\" is tracked.", cfg_preferredPlayer)
-            }
+        }
+        Label {
+            Layout.fillWidth: true
+            wrapMode: Text.Wrap
+            opacity: 0.7
+            text: cfg_preferredPlayer === "" 
+                ? i18n("All media sources are tracked.")
+                : i18n("Only \"%1\" is tracked.", cfg_preferredPlayer)
         }
     }
     CheckBox {

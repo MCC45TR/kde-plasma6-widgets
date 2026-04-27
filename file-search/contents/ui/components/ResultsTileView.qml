@@ -833,7 +833,7 @@ FocusScope {
     Column {
         anchors.centerIn: parent
         spacing: 10
-        visible: resultsTileRoot.categorizedData.length === 0
+        visible: resultsTileRoot.categorizedData.length === 0 && (resultsTileRoot.searchText.length > 0 || resultsTileRoot.activeFilter !== "Tümü")
 
         BusyIndicator {
             anchors.horizontalCenter: parent.horizontalCenter
