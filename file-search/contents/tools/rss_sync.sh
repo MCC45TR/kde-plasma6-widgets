@@ -63,7 +63,7 @@ def get_favicon(url):
         from urllib.parse import urlparse
         domain = urlparse(url).netloc
         if domain:
-            return f"https://www.google.com/s2/favicons?domain={domain}\u0026sz=64"
+            return f"https://www.google.com/s2/favicons?domain={domain}&sz=64"
     except:
         pass
     return ""
@@ -101,8 +101,8 @@ def parse_rss(xml, source_name, source_url):
     entries = []
     source_favicon = get_favicon(source_url)
     try:
-        # XML cleaning for common Turkish news site errors (unescaped \u0026)
-        xml_cleaned = re.sub(r"\u0026(?!(?:amp|lt|gt|quot|apos|#\d+|#x[a-fA-F0-9]+);)", "\u0026amp;", xml)
+        # XML cleaning for common Turkish news site errors (unescaped &)
+        xml_cleaned = re.sub(r"&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[a-fA-F0-9]+);)", "&amp;", xml)
         root = ET.fromstring(xml_cleaned)
         
         # Support both RSS <item> and Atom <entry>
@@ -136,11 +136,11 @@ def parse_rss(xml, source_name, source_url):
             if not title:
                 title = (desc[:50] + "...") if len(desc) > 50 else (desc or "Haber")
             
-            # 5. Image extraction (media:content, enclosure, media:thumbnail, or \u003cimg\u003e in content)
+            # 5. Image extraction (media:content, enclosure, media:thumbnail, or <img> in content)
             image_url = get_attr_recursive(node, ["media:content", "enclosure", "media:thumbnail", "image"], "url")
             if not image_url:
-                # Parse \u003cimg\u003e tags from content
-                img_match = re.search(r"\u003cimg[^\u003e]*src=\"([^\"]+)\"[^\u003e]*\u003e", desc_raw + full_raw, re.IGNORECASE)
+                # Parse <img> tags from content
+                img_match = re.search(r"<img[^>]*src=\"([^\"]+)\"[^>]*>", desc_raw + full_raw, re.IGNORECASE)
                 if img_match: image_url = img_match.group(1)
             
             if title:
@@ -169,12 +169,12 @@ def get_hash(s):
     h = 0
     for char in s:
         h = ((h << 5) - h) + ord(char)
-        h \u0026= 0xFFFFFFFF
-    if h \u003e 0x7FFFFFFF:
+        h &= 0xFFFFFFFF
+    if h > 0x7FFFFFFF:
         h -= 0x100000000
     return abs(h)
 
-if len(sys.argv) \u003c 5:
+if len(sys.argv) < 5:
     sys.exit(1)
 
 cache_dir, url, name, max_entries = sys.argv[1:5]

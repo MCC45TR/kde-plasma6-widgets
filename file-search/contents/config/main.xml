@@ -226,6 +226,10 @@
       <default>true</default>
       <label>Allow RSS cards to expand for more details</label>
     </entry>
+    <entry name="rssShowSource" type="Bool">
+      <default>true</default>
+      <label>Show RSS source name in panel ticker</label>
+    </entry>
     <entry name="rssShowFullHeadline" type="Bool">
       <default>true</default>
       <label>Show full headline by segmenting long titles</label>

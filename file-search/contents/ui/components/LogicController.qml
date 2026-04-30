@@ -703,7 +703,10 @@ Item {
                 // Fallback for partial source matches
                 for (var key in callbacks) {
                     if (source.indexOf(key) !== -1 || key.indexOf(source) !== -1) {
-                         callbacks[key](stdout);
+                        var cb = callbacks[key];
+                        if (typeof cb === "function") {
+                            cb(stdout);
+                        }
                         if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1 || data["exit code"] !== undefined) {
                             delete callbacks[key];
                             disconnectSource(source);

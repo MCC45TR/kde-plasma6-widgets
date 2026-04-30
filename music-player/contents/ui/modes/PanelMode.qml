@@ -232,6 +232,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: titleMetrics.height
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
+                    implicitWidth: 0
                     visible: panelMode.showTitle
                     clip: true
  
@@ -279,12 +280,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         elide: parent.shouldScroll ? Text.ElideNone : Text.ElideRight
 
-                        Binding {
-                            target: titleSteppedText
-                            property: "text"
-                            value: titleItem.shouldScroll ? titleSteppedText._charDisplayText : titleMetrics.text
-                            delayed: true
-                        }
+                        text: titleItem.shouldScroll ? _charDisplayText : titleMetrics.text
  
                         property string _charDisplayText: titleMetrics.text
                         property int _scrollIndex: 0
@@ -311,6 +307,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: artistMetrics.height
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
+                    implicitWidth: 0
                     visible: panelMode.showArtist && panelMode.artist && panelMode.artist.trim() !== ""
                     clip: true
  
@@ -361,12 +358,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         elide: parent.shouldScroll ? Text.ElideNone : Text.ElideRight
 
-                        Binding {
-                            target: artistSteppedText
-                            property: "text"
-                            value: artistItem.shouldScroll ? artistSteppedText._charDisplayText : artistMetrics.text
-                            delayed: true
-                        }
+                        text: artistItem.shouldScroll ? _charDisplayText : artistMetrics.text
  
                         property string _charDisplayText: artistMetrics.text
                         property int _scrollIndex: 0

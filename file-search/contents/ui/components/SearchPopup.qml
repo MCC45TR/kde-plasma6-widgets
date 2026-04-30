@@ -277,6 +277,9 @@ Item {
     }
     
     function handleHistoryClick(item) {
+        // Move clicked item to top of history
+        logic.addToHistory(item.display, item.decoration, item.category, item.matchId, item.filePath, item.sourceType, item.queryText);
+
         // If it's a known file or application path, open/run it directly and instantly
         if (item.filePath && item.filePath.toString().length > 0) {
              if (item.filePath.toString().indexOf(".desktop") !== -1) {

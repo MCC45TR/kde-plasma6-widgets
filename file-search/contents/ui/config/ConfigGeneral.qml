@@ -69,6 +69,7 @@ Item {
     property string cfg_cachedBootEntries
     property alias cfg_rssPlaceholderCycling: rssPlaceholderCyclingCheck.checked
     property alias cfg_rssFrequency: rssFreqCombo.currentIndex
+    property alias cfg_rssShowSource: rssShowSourceCheck.checked
     
     // Other (Defined to prevent warnings)
     property string cfg_pinnedItems
@@ -112,6 +113,7 @@ Item {
     property string cfg_searchHistoryDefault
     property string cfg_cachedBootEntriesDefault
     property bool cfg_rssPlaceholderCyclingDefault
+    property bool cfg_rssShowSourceDefault
     property string cfg_pinnedItemsDefault
     property string cfg_categorySettingsDefault
     property bool cfg_debugOverlayDefault
@@ -220,14 +222,14 @@ Item {
                         id: showSearchButtonCheck
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Icon")
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show search icon and button in panel")
-                        enabled: displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3
+                        enabled: displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4
                     }
 
                     CheckBox {
                         id: showSearchButtonBackgroundCheck
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show background tile (colored square)")
                         leftPadding: 32
-                        enabled: showSearchButtonCheck.checked && (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3)
+                        enabled: showSearchButtonCheck.checked && (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4)
                         opacity: enabled ? 1.0 : 0.5
                     }
 
@@ -238,6 +240,14 @@ Item {
                         enabled: displayModeCombo.currentIndex !== 0
                     }
                     
+                    CheckBox {
+                        id: rssShowSourceCheck
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show RSS source name in panel ticker")
+                        leftPadding: 32
+                        enabled: rssPlaceholderCyclingCheck.checked && rssPlaceholderCyclingCheck.enabled
+                        opacity: enabled ? 1.0 : 0.5
+                    }
+
                     ComboBox {
                         id: rssFreqCombo
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "RSS Frequency")
@@ -331,7 +341,7 @@ Item {
                         // Text/Bar Mode
                         Rectangle {
                             anchors.left: parent.left
-                            width: displayModeCombo.currentIndex === 1 ? 70 : (displayModeCombo.currentIndex === 3 ? 260 : 180)
+                            width: displayModeCombo.currentIndex === 1 ? 70 : (displayModeCombo.currentIndex === 4 ? 340 : (displayModeCombo.currentIndex === 3 ? 260 : 180))
                             height: 36
                             radius: panelRadiusCombo.currentIndex === 0 ? height / 2 : (panelRadiusCombo.currentIndex === 1 ? 12 : (panelRadiusCombo.currentIndex === 2 ? 6 : 0))
                             color: Kirigami.Theme.backgroundColor
@@ -352,7 +362,7 @@ Item {
                                     Layout.fillHeight: true
                                     clip: true
                                     
-                                    property string defaultTxt: displayModeCombo.currentIndex === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search") : (displayModeCombo.currentIndex === 3 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search..."))
+                                    property string defaultTxt: displayModeCombo.currentIndex === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search") : ((displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search..."))
                                     property string rssMockTxt: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haber başlığı")
                                     property int currentIndex: 0
                                     property var allTitles: ["", ""]
@@ -457,11 +467,11 @@ Item {
                                     }
                                 }
                                                                 Rectangle {
-                                        Layout.preferredWidth: ((displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3) && cfg_showSearchButton) ? 28 : 0
+                                        Layout.preferredWidth: ((displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4) && cfg_showSearchButton) ? 28 : 0
                                         Layout.preferredHeight: 28
                                         radius: panelRadiusCombo.currentIndex === 0 ? height / 2 : (panelRadiusCombo.currentIndex === 1 ? 8 : (panelRadiusCombo.currentIndex === 2 ? 4 : 0))
                                         color: cfg_showSearchButtonBackground ? Kirigami.Theme.highlightColor : "transparent"
-                                        visible: (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3) && cfg_showSearchButton
+                                        visible: (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4) && cfg_showSearchButton
                                         
                                         Kirigami.Icon {
                                             anchors.centerIn: parent

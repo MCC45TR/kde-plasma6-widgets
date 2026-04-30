@@ -24,10 +24,10 @@ function _manualAtob(input) {
     input = input.replace(/=+$/, "");
     var output = "";
     for (var i = 0; i < input.length; i += 4) {
-        var a = _b64chars.indexOf(input.charAt(i));
-        var b = _b64chars.indexOf(input.charAt(i + 1));
-        var c = _b64chars.indexOf(input.charAt(i + 2));
-        var d = _b64chars.indexOf(input.charAt(i + 3));
+        var a = input.charAt(i) ? _b64chars.indexOf(input.charAt(i)) : -1;
+        var b = input.charAt(i + 1) ? _b64chars.indexOf(input.charAt(i + 1)) : -1;
+        var c = input.charAt(i + 2) ? _b64chars.indexOf(input.charAt(i + 2)) : -1;
+        var d = input.charAt(i + 3) ? _b64chars.indexOf(input.charAt(i + 3)) : -1;
 
         output += String.fromCharCode((a << 2) | (b >> 4));
         if (c !== -1 && c !== 64) output += String.fromCharCode(((b & 15) << 4) | (c >> 2));

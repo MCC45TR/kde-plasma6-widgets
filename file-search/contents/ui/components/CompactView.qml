@@ -27,6 +27,7 @@ Item {
     property bool rssPlaceholderCycling: true
     property bool rssShowFullHeadline: true
     property int rssFrequency: 3
+    property bool rssShowSource: true
     property bool isUltraWideMode: false
     required property int maxChars
     
@@ -392,7 +393,7 @@ Item {
                             tickerContainer.currentRssIndex = nextIdx;
                             // Prepare segments for new title
                             var tickerItem = tickerContainer.rssTitles[nextIdx];
-                            var fullTitle = "[" + (tickerItem.source || "RSS") + "] " + tickerItem.text;
+                            var fullTitle = compactRoot.rssShowSource ? ("[" + (tickerItem.source || "RSS") + "] " + tickerItem.text) : tickerItem.text;
                             tickerContainer.currentSegments = tickerContainer.splitIntoSegments(fullTitle, compactRoot.maxChars);
                             tickerContainer.currentSegmentIndex = 0;
                             tickerContainer.currentDuration = (tickerContainer.currentSegments.length > 1) ? 4000 : next.duration;
