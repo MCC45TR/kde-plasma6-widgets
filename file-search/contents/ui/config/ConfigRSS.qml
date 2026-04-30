@@ -37,13 +37,89 @@ Item {
     property int cfg_rssFrequency: 3
     property int cfg_rssFrequencyDefault: 3
     
-    // Dummy properties to satisfy Plasma's automatic config injection (if needed by other tabs)
-    // These help avoid 'Setting initial properties failed' warnings
-    property string title: ""
-    property int cfg_displayMode: 0
-    property int cfg_userProfile: 0
-    property bool cfg_showSearchButton: true
-    property bool cfg_weatherEnabled: true
+    // =========================================================================
+    // CONFIGURATION PROPERTIES (Matching main.xml for Plasma 6 injection)
+    // =========================================================================
+    
+    // All keys must be present in every config tab to avoid "cfg_... not found" warnings
+    property int cfg_displayMode
+    property int cfg_panelRadius
+    property int cfg_panelHeight
+    property bool cfg_showSearchButton
+    property bool cfg_showSearchButtonBackground
+    property int cfg_userProfile
+    property int cfg_viewMode
+    property int cfg_scrollBarStyle
+    property int cfg_iconSize
+    property int cfg_listIconSize
+    property int cfg_minResults
+    property int cfg_maxResults
+    property bool cfg_smartResultLimit
+    property bool cfg_showPinnedBar
+    property bool cfg_autoMinimizePinned
+    property int cfg_compactPinnedView
+    property int cfg_filterChipStyle
+    property string cfg_previewSettings
+    property bool cfg_previewEnabled
+    property bool cfg_prefixDateShowClock
+    property bool cfg_prefixDateShowEvents
+    property bool cfg_prefixPowerShowHibernate
+    property bool cfg_prefixPowerShowSleep
+    property bool cfg_showBootOptions
+    property string cfg_cachedBootEntries
+    property bool cfg_weatherEnabled
+    property string cfg_weatherUnits
+    property bool cfg_weatherUseSystemUnits
+    property int cfg_weatherRefreshInterval
+    property real cfg_weatherLastUpdate
+    property string cfg_weatherCache
+    property int cfg_searchAlgorithm
+    property string cfg_searchHistory
+    property string cfg_categorySettings
+    property string cfg_pinnedItems
+    property bool cfg_debugOverlay
+    property string cfg_telemetryData
+    // RSS properties are already defined above (lines 13-38)
+
+    // Default Properties (Matching main.xml for completeness)
+    property int cfg_displayModeDefault
+    property int cfg_panelRadiusDefault
+    property int cfg_panelHeightDefault
+    property bool cfg_showSearchButtonDefault
+    property bool cfg_showSearchButtonBackgroundDefault
+    property int cfg_userProfileDefault
+    property int cfg_viewModeDefault
+    property int cfg_scrollBarStyleDefault
+    property int cfg_iconSizeDefault
+    property int cfg_listIconSizeDefault
+    property int cfg_minResultsDefault
+    property int cfg_maxResultsDefault
+    property bool cfg_smartResultLimitDefault
+    property bool cfg_showPinnedBarDefault
+    property bool cfg_autoMinimizePinnedDefault
+    property int cfg_compactPinnedViewDefault
+    property int cfg_filterChipStyleDefault
+    property string cfg_previewSettingsDefault
+    property bool cfg_previewEnabledDefault
+    property bool cfg_prefixDateShowClockDefault
+    property bool cfg_prefixDateShowEventsDefault
+    property bool cfg_prefixPowerShowHibernateDefault
+    property bool cfg_prefixPowerShowSleepDefault
+    property bool cfg_showBootOptionsDefault
+    property string cfg_cachedBootEntriesDefault
+    property bool cfg_weatherEnabledDefault
+    property string cfg_weatherUnitsDefault
+    property bool cfg_weatherUseSystemUnitsDefault
+    property int cfg_weatherRefreshIntervalDefault
+    property real cfg_weatherLastUpdateDefault
+    property string cfg_weatherCacheDefault
+    property int cfg_searchAlgorithmDefault
+    property string cfg_searchHistoryDefault
+    property string cfg_categorySettingsDefault
+    property string cfg_pinnedItemsDefault
+    property bool cfg_debugOverlayDefault
+    property string cfg_telemetryDataDefault
+    // RSS Defaults are already defined above (lines 13-38)
 
     // Access to the main logic controller for background tasks
     property var logic: {

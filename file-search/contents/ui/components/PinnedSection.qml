@@ -243,6 +243,8 @@ Item {
                     
                     sourceComponent: Flow {
                         id: tileFlow
+                        width: Math.floor(parent.width / (pinnedSectionRoot.tileWidth + 8)) * (pinnedSectionRoot.tileWidth + 8) - 8
+                        anchors.horizontalCenter: parent.horizontalCenter
                         spacing: 8
                         
                         Repeater {

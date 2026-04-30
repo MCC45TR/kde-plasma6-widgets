@@ -421,8 +421,9 @@ FocusScope {
                     
                     Flow {
                         id: categoryFlow
-                        anchors.left: parent.left
-                        anchors.right: parent.right
+                        // Calculate width to fit an exact number of tiles to allow centering
+                        width: categoryDelegate.isWide ? parent.width : (Math.floor(parent.width / (resultsTileRoot.tileWidth + 8)) * (resultsTileRoot.tileWidth + 8) - 8)
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
                         spacing: 8
                     

@@ -424,8 +424,8 @@ FocusScope {
                     
                     Flow {
                         id: histCategoryFlow
-                        anchors.left: parent.left
-                        anchors.right: parent.right
+                        width: Math.floor(parent.width / (historyTile.tileWidth + 8)) * (historyTile.tileWidth + 8) - 8
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
                         spacing: 8
                     

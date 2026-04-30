@@ -23,21 +23,18 @@ Item {
     property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Appearance")
     
     // =========================================================================
-    // CONFIGURATION PROPERTIES
+    // CONFIGURATION PROPERTIES (Matching main.xml for Plasma 6 injection)
     // =========================================================================
     
-    // Panel (General + Power)
+    // Panel Group
     property alias cfg_displayMode: displayModeCombo.currentIndex
     property alias cfg_panelRadius: panelRadiusCombo.currentIndex
     property int cfg_panelHeight
-
-    property alias cfg_showBootOptions: showBootOptionsSearch.checked
     property alias cfg_showSearchButton: showSearchButtonCheck.checked
     property alias cfg_showSearchButtonBackground: showSearchButtonBackgroundCheck.checked
     property int cfg_userProfile
     
-    // Popup (View + Search Limits)
-    property alias cfg_filterChipStyle: filterChipCombo.currentIndex
+    // Popup Group
     property alias cfg_viewMode: viewModeCombo.currentIndex
     property alias cfg_scrollBarStyle: scrollBarCombo.currentIndex
     property int cfg_iconSize
@@ -48,46 +45,59 @@ Item {
     property alias cfg_showPinnedBar: showPinnedBarCheck.checked
     property alias cfg_autoMinimizePinned: autoMinimizePinnedCheck.checked
     property alias cfg_compactPinnedView: tileViewModeCombo.currentIndex
-    property int cfg_searchAlgorithm 
+    property alias cfg_filterChipStyle: filterChipCombo.currentIndex
     
-    // Preview
+    // Preview Group
     property string cfg_previewSettings
     property alias cfg_previewEnabled: masterPreviewSwitch.checked
     
-    // Prefix
+    // Prefix Group
     property alias cfg_prefixDateShowClock: prefixDateClock.checked
     property alias cfg_prefixDateShowEvents: prefixDateEvents.checked
-    property alias cfg_weatherEnabled: weatherEnabledCheck.checked
-    property alias cfg_weatherUseSystemUnits: useSystemUnitsCheck.checked
-    property int cfg_weatherRefreshInterval
-
     property alias cfg_prefixPowerShowHibernate: showHibernateCheck.checked
     property alias cfg_prefixPowerShowSleep: prefixPowerSleep.checked
-    
-    // Placeholder (Search History & Others) - defined to prevent warnings
-    property string cfg_searchHistory
+    property alias cfg_showBootOptions: showBootOptionsSearch.checked
     property string cfg_cachedBootEntries
+    
+    // Weather Group
+    property alias cfg_weatherEnabled: weatherEnabledCheck.checked
+    property string cfg_weatherUnits
+    property alias cfg_weatherUseSystemUnits: useSystemUnitsCheck.checked
+    property int cfg_weatherRefreshInterval
+    property real cfg_weatherLastUpdate
+    property string cfg_weatherCache
+    
+    // Placeholder Group
+    property int cfg_searchAlgorithm
+    property string cfg_searchHistory
+    
+    // Categories Group
+    property string cfg_categorySettings
+    property string cfg_pinnedItems
+    
+    // Debug Group
+    property bool cfg_debugOverlay
+    property string cfg_telemetryData
+    
+    // RSS Group
+    property bool cfg_rssEnabled
+    property string cfg_rssSources
+    property int cfg_rssMaxEntries
+    property int cfg_rssSyncInterval
+    property string cfg_rssCache
+    property real cfg_rssLastSyncAll
     property alias cfg_rssPlaceholderCycling: rssPlaceholderCyclingCheck.checked
     property alias cfg_rssFrequency: rssFreqCombo.currentIndex
+    property bool cfg_rssShowImages
+    property bool cfg_rssExpandableCards
     property alias cfg_rssShowSource: rssShowSourceCheck.checked
-    
-    // Other (Defined to prevent warnings)
-    property string cfg_pinnedItems
-    property string cfg_categorySettings
-    property bool cfg_debugOverlay
+    property bool cfg_rssShowFullHeadline
 
-    property string cfg_telemetryData
-
-    // Missing non-default properties
-    property string cfg_weatherUnits
-    property double cfg_weatherLastUpdate
-    property string cfg_weatherCache
-
-    // Default Properties (Matching main.xml to prevent errors)
+    // Default Properties (Matching main.xml for completeness)
     property int cfg_displayModeDefault
     property int cfg_panelRadiusDefault
     property int cfg_panelHeightDefault
-    property bool cfg_showBootOptionsDefault
+    property bool cfg_showSearchButtonDefault
     property int cfg_userProfileDefault
     property int cfg_viewModeDefault
     property int cfg_iconSizeDefault
@@ -121,8 +131,17 @@ Item {
     property string cfg_weatherCacheDefault
     property string cfg_weatherLastUpdateDefault
     property string cfg_weatherUnitsDefault
-    property bool cfg_showSearchButtonDefault
     property bool cfg_showSearchButtonBackgroundDefault
+    property bool cfg_rssEnabledDefault
+    property string cfg_rssSourcesDefault
+    property int cfg_rssMaxEntriesDefault
+    property int cfg_rssSyncIntervalDefault
+    property string cfg_rssCacheDefault
+    property real cfg_rssLastSyncAllDefault
+    property bool cfg_rssShowImagesDefault
+    property bool cfg_rssExpandableCardsDefault
+    property bool cfg_rssShowFullHeadlineDefault
+    property int cfg_rssFrequencyDefault
 
     // Internal
     property var previewSettings: ({})

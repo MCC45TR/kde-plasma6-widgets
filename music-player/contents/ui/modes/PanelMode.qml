@@ -138,8 +138,6 @@ Item {
             }
         }
  
-        // Spacers removed - buttons now anchor to edges in all modes
- 
         // --- LEFT CONTROL GROUP (Visible in Right & Center Modes) ---
         Loader {
             id: leftControlsLoader
@@ -211,15 +209,6 @@ Item {
                 spacing: 0
                 
                 // Font Logic - Cached
-                readonly property int calculatedPixelSize: panelMode.autoFontSize 
-                    ? Math.max(5, Math.min(panelMode.height * 0.5, 16)) 
-                    : panelMode.manualFontSize
-                
-                readonly property int artistPixelSize: panelMode.autoFontSize
-                    ? Math.max(5, Math.min(panelMode.height * 0.4, 13))
-                    : Math.max(5, panelMode.manualFontSize - 2)
-                
-                // Text Alignment - Cached
                 readonly property int textAlign: {
                     if (panelMode.layoutMode === 1) return Text.AlignRight
                     if (panelMode.layoutMode === 2) return Text.AlignHCenter
@@ -232,11 +221,10 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: titleMetrics.height
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
-                    implicitWidth: 0
                     visible: panelMode.showTitle
                     clip: true
- 
-                    readonly property bool overflows: titleMetrics.advanceWidth > parent.width
+  
+                    readonly property bool overflows: titleMetrics.advanceWidth > width
                     readonly property bool shouldScroll: panelMode.scrollingText && overflows
  
                     // Smooth Scroll Layer
@@ -260,7 +248,6 @@ Item {
                         }
  
                         NumberAnimation on x {
-                            id: titleSmoothAnim
                             from: 0
                             to: -(titleMetrics.advanceWidth + titleSmoothRow.spacing)
                             duration: (titleMetrics.advanceWidth + titleSmoothRow.spacing) * (panelMode.scrollingSpeed === 1 ? 40 : (panelMode.scrollingSpeed === 2 ? 60 : 30))
@@ -268,7 +255,7 @@ Item {
                             running: titleSmoothRow.visible
                         }
                     }
- 
+                    
                     // Stepped Scroll / Static Layer
                     Text {
                         id: titleSteppedText
@@ -278,25 +265,40 @@ Item {
                         font: titleMetrics.font
                         horizontalAlignment: textColumn.textAlign
                         verticalAlignment: Text.AlignVCenter
-                        elide: parent.shouldScroll ? Text.ElideNone : Text.ElideRight
-
+                        elide: titleItem.shouldScroll ? Text.ElideNone : Text.ElideRight
+ 
                         text: titleItem.shouldScroll ? _charDisplayText : titleMetrics.text
  
                         property string _charDisplayText: titleMetrics.text
                         property int _scrollIndex: 0
-                        property string _scrollBuffer: titleMetrics.text + "   •   "
+                        property string _scrollBuffer: ""
+ 
+                        function resetScroll() {
+                            _scrollIndex = 0
+                            _scrollBuffer = titleMetrics.text + "   •   "
+                            _charDisplayText = _scrollBuffer
+                        }
  
                         function updateScroll() {
+                            if (_scrollBuffer.length === 0) resetScroll()
                             _scrollIndex = (_scrollIndex + 1) % _scrollBuffer.length
                             _charDisplayText = _scrollBuffer.substring(_scrollIndex) + _scrollBuffer.substring(0, _scrollIndex)
                         }
  
+                        Component.onCompleted: resetScroll()
+                        onVisibleChanged: if (visible) resetScroll()
+                        
+                        Connections {
+                            target: panelMode
+                            function onTitleChanged() { titleSteppedText.resetScroll() }
+                        }
+  
                         Timer {
                             interval: panelMode.scrollInterval
                             running: titleSteppedText.visible && titleItem.shouldScroll && !panelMode.smoothScrolling
                             repeat: true
                             onTriggered: titleSteppedText.updateScroll()
-                            onRunningChanged: if (!running) titleSteppedText._scrollIndex = 0
+                            onRunningChanged: if (!running) titleSteppedText.resetScroll()
                         }
                     }
                 }
@@ -307,11 +309,10 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: artistMetrics.height
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
-                    implicitWidth: 0
                     visible: panelMode.showArtist && panelMode.artist && panelMode.artist.trim() !== ""
                     clip: true
- 
-                    readonly property bool overflows: artistMetrics.advanceWidth > parent.width
+  
+                    readonly property bool overflows: artistMetrics.advanceWidth > width
                     readonly property bool shouldScroll: panelMode.scrollingText && overflows
  
                     // Smooth Scroll Layer
@@ -337,7 +338,6 @@ Item {
                         }
  
                         NumberAnimation on x {
-                            id: artistSmoothAnim
                             from: 0
                             to: -(artistMetrics.advanceWidth + artistSmoothRow.spacing)
                             duration: (artistMetrics.advanceWidth + artistSmoothRow.spacing) * (panelMode.scrollingSpeed === 1 ? 40 : (panelMode.scrollingSpeed === 2 ? 60 : 30))
@@ -356,31 +356,46 @@ Item {
                         font: artistMetrics.font
                         horizontalAlignment: textColumn.textAlign
                         verticalAlignment: Text.AlignVCenter
-                        elide: parent.shouldScroll ? Text.ElideNone : Text.ElideRight
-
+                        elide: artistItem.shouldScroll ? Text.ElideNone : Text.ElideRight
+ 
                         text: artistItem.shouldScroll ? _charDisplayText : artistMetrics.text
  
                         property string _charDisplayText: artistMetrics.text
                         property int _scrollIndex: 0
-                        property string _scrollBuffer: artistMetrics.text + "   •   "
+                        property string _scrollBuffer: ""
+ 
+                        function resetScroll() {
+                            _scrollIndex = 0
+                            _scrollBuffer = artistMetrics.text + "   •   "
+                            _charDisplayText = _scrollBuffer
+                        }
  
                         function updateScroll() {
+                            if (_scrollBuffer.length === 0) resetScroll()
                             _scrollIndex = (_scrollIndex + 1) % _scrollBuffer.length
                             _charDisplayText = _scrollBuffer.substring(_scrollIndex) + _scrollBuffer.substring(0, _scrollIndex)
                         }
  
+                        Component.onCompleted: resetScroll()
+                        onVisibleChanged: if (visible) resetScroll()
+ 
+                        Connections {
+                            target: panelMode
+                            function onArtistChanged() { artistSteppedText.resetScroll() }
+                        }
+  
                         Timer {
                             interval: panelMode.scrollInterval
                             running: artistSteppedText.visible && artistItem.shouldScroll && !panelMode.smoothScrolling
                             repeat: true
                             onTriggered: artistSteppedText.updateScroll()
-                            onRunningChanged: if (!running) artistSteppedText._scrollIndex = 0
+                            onRunningChanged: if (!running) artistSteppedText.resetScroll()
                         }
                     }
                 }
             }
             
-            // Middle Click Area
+            // Click Area
             MouseArea {
                 anchors.fill: parent
                 z: 10

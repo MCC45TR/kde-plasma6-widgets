@@ -27,6 +27,8 @@ Item {
     property int cfg_listItemHeightDefault
     property int cfg_viewMode
     property int cfg_viewModeDefault
+    property bool cfg_panelDefaultsApplied
+    property bool cfg_panelDefaultsAppliedDefault: false
     
     onCfg_cachedBootEntriesChanged: refreshModel()
     onCfg_customEntryRulesChanged: refreshModel()

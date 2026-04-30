@@ -97,7 +97,7 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
             item.category = category || item.category
             item.sourceType = detectedSourceType
 
-            console.log("FileSearch [History]: Updated Item ->", JSON.stringify(item, null, 2))
+            // console.log("FileSearch [History]: Updated Item ->", JSON.stringify(item, null, 2))
 
             newHistory.unshift(item)
             return newHistory
@@ -118,7 +118,7 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
         timestamp: Date.now()
     }
 
-    console.log("FileSearch [History]: Added New Item ->", JSON.stringify(newItem, null, 2))
+    // console.log("FileSearch [History]: Added New Item ->", JSON.stringify(newItem, null, 2))
 
     // Add new item
     newHistory.unshift(newItem)

@@ -21,17 +21,20 @@ function _manualBtoa(input) {
 }
 
 function _manualAtob(input) {
-    input = input.replace(/=+$/, "");
+    input = input.replace(/\s/g, "").replace(/=+$/, "");
     var output = "";
-    for (var i = 0; i < input.length; i += 4) {
-        var a = input.charAt(i) ? _b64chars.indexOf(input.charAt(i)) : -1;
-        var b = input.charAt(i + 1) ? _b64chars.indexOf(input.charAt(i + 1)) : -1;
-        var c = input.charAt(i + 2) ? _b64chars.indexOf(input.charAt(i + 2)) : -1;
-        var d = input.charAt(i + 3) ? _b64chars.indexOf(input.charAt(i + 3)) : -1;
-
-        output += String.fromCharCode((a << 2) | (b >> 4));
-        if (c !== -1 && c !== 64) output += String.fromCharCode(((b & 15) << 4) | (c >> 2));
-        if (d !== -1 && d !== 64) output += String.fromCharCode(((c & 3) << 6) | d);
+    var bits = 0;
+    var value = 0;
+    for (var i = 0; i < input.length; i++) {
+        var c = _b64chars.indexOf(input.charAt(i));
+        if (c === -1 || c === 64) continue;
+        value = (value << 6) | c;
+        bits += 6;
+        if (bits >= 8) {
+            bits -= 8;
+            output += String.fromCharCode((value >> bits) & 0xFF);
+            value &= (1 << bits) - 1;
+        }
     }
     return output;
 }
@@ -40,7 +43,11 @@ function decodeBase64(str) {
     if (!str) return "";
     try {
         var decoded = _manualAtob(str);
-        return decodeURIComponent(escape(decoded));
+        try {
+            return decodeURIComponent(escape(decoded));
+        } catch (e) {
+            return decoded;
+        }
     } catch (e) {
         console.warn("RSSManager: Failed to decode base64:", e);
         return "";

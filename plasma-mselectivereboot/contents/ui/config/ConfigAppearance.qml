@@ -64,6 +64,8 @@ Item {
     // Defaults needed for KCM logic
     property double cfg_backgroundOpacityDefault
     property int cfg_edgeMarginDefault
+    property bool cfg_panelDefaultsApplied
+    property bool cfg_panelDefaultsAppliedDefault: false
 
     // Logic for loading entries from the config page
     Plasma5Support.DataSource {

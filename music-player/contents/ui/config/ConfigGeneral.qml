@@ -14,8 +14,16 @@ Item {
     property string cfg_preferredPlayerDefault: ""
     property bool cfg_showPlayerBadge
     property bool cfg_showPlayerBadgeDefault: false
+    property bool cfg_autoHideWhenInactive
+    property bool cfg_autoHideWhenInactiveDefault: false
+    property bool cfg_hideWhenNotPlaying
+    property bool cfg_hideWhenNotPlayingDefault: false
+    property bool cfg_mouseWheelVolume
+    property bool cfg_mouseWheelVolumeDefault: true
+    property int cfg_volumeControlMode
+    property int cfg_volumeControlModeDefault: 0
 
-    // Appearance config shadow properties
+    // Appearance Group Shadow Properties
     property int cfg_edgeMargin
     property int cfg_edgeMarginDefault: 10
     property double cfg_backgroundOpacity
@@ -30,6 +38,8 @@ Item {
     property bool cfg_panelAutoFontSizeDefault: true
     property bool cfg_panelScrollingText
     property bool cfg_panelScrollingTextDefault: true
+    property bool cfg_panelSmoothScrolling
+    property bool cfg_panelSmoothScrollingDefault: false
     property int cfg_panelMaxWidth
     property int cfg_panelMaxWidthDefault: 350
     property int cfg_panelScrollingSpeed
@@ -52,18 +62,12 @@ Item {
     property bool cfg_showLoopButtonDefault: false
     property bool cfg_showSeekButtons
     property bool cfg_showSeekButtonsDefault: true
-    property bool cfg_autoHideWhenInactive
-    property bool cfg_autoHideWhenInactiveDefault: false
-    property bool cfg_hideWhenNotPlaying
-    property bool cfg_hideWhenNotPlayingDefault: false
     property bool cfg_showVolumeSlider
     property bool cfg_showVolumeSliderDefault: false
     property bool cfg_panelShowAlbumArt
     property bool cfg_panelShowAlbumArtDefault: false
     property int cfg_widgetRadius
     property int cfg_widgetRadiusDefault: 20
-    property bool cfg_mouseWheelVolume
-    property int cfg_volumeControlMode
 
     property string title: i18n("General")
 
