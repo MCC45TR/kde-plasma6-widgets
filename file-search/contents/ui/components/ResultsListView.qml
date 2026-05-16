@@ -319,6 +319,7 @@ ScrollView {
                 onClicked: (mouse) => {
                     var matchId = modelData.duplicateId || modelData.display || ""
                     var filePath = (modelData.url || "").toString()
+                    var modelIndex = (modelData.index !== undefined && modelData.index !== null) ? modelData.index : index
                     
                     if (mouse.button === Qt.RightButton) {
                         resultsListRoot.itemRightClicked({
@@ -340,7 +341,7 @@ ScrollView {
                         } else if (isRSS && filePath.length > 0) {
                             Qt.openUrlExternally(filePath)
                         } else {
-                            resultsListRoot.itemClicked(index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Other", matchId, filePath)
+                            resultsListRoot.itemClicked(modelIndex, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Other", matchId, filePath)
                         }
                     }
                 }

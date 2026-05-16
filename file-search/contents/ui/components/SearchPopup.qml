@@ -32,6 +32,9 @@ Item {
             searchBar.clear()
             hiddenSearchInput.text = ""
             activeFilter = "All"
+            pendingHistoryRun = false
+            pendingHistoryMatchId = ""
+            pendingHistoryDisplay = ""
         }
     }
     
@@ -97,6 +100,9 @@ Item {
     property int focusSection: 0
     property string activeBackend: "Milou"
     property bool isLoadingResults: false
+    property bool pendingHistoryRun: false
+    property string pendingHistoryMatchId: ""
+    property string pendingHistoryDisplay: ""
     
     // Context Menu for Results
     HistoryContextMenu {
@@ -181,6 +187,7 @@ Item {
         function onRefreshVersionChanged() {
             popupRoot.isLoadingResults = false
             loadingFallbackTimer.stop()
+            popupRoot.tryRunPendingHistory()
         }
     }
     
@@ -280,18 +287,26 @@ Item {
         logic.addToHistory(item.display, item.decoration, item.category, item.matchId, item.filePath, item.sourceType, item.queryText);
 
         // If it's a known file or application path, open/run it directly and instantly
-        if (item.filePath && item.filePath.toString().length > 0) {
-             if (item.filePath.toString().indexOf(".desktop") !== -1) {
+           var directPath = item.filePath || item.url || ""
+           if (directPath && directPath.toString().length > 0) {
+               if (directPath.toString().indexOf(".desktop") !== -1) {
                   // Direct application launch via safe helper
-                  logic.launchApp(item.filePath);
+                   logic.launchApp(directPath);
              } else {
                   // Standard file open
-                  Qt.openUrlExternally(item.filePath);
+                   Qt.openUrlExternally(directPath);
              }
              requestExpandChange(false);
              requestSearchTextUpdate("");
              return;
         }
+
+           if (item.matchId && item.matchId.toString().indexOf(".desktop") !== -1) {
+               logic.launchApp(item.matchId.toString())
+               requestExpandChange(false);
+               requestSearchTextUpdate("");
+               return;
+           }
 
         // Only fall back to search-run-timer for pure search strings (without stored paths)
         var searchTerm = item.display || item.queryText || "";
@@ -300,6 +315,7 @@ Item {
         if (!isButtonMode) hiddenSearchInput.text = searchTerm;
         else searchBar.setText(searchTerm);
         
+        queueHistoryRun(item)
         historyRunTimer.start();
     }
     
@@ -308,13 +324,55 @@ Item {
         interval: 400
         repeat: false
         onTriggered: {
-            if (tileData.resultCount > 0) {
-                var idx = resultsModel.index(0, 0);
-                resultsModel.run(idx);
-                requestSearchTextUpdate("");
-                requestExpandChange(false);
+            popupRoot.tryRunPendingHistory()
+        }
+    }
+
+    function queueHistoryRun(item) {
+        pendingHistoryRun = true
+        pendingHistoryMatchId = item && item.matchId ? item.matchId.toString() : ""
+        pendingHistoryDisplay = item && item.display ? item.display.toString() : ""
+    }
+
+    function tryRunPendingHistory() {
+        if (!pendingHistoryRun) return
+        if (!tileData || tileData.resultCount <= 0) return
+
+        var items = tileData.flatSortedData || []
+        var target = null
+        for (var i = 0; i < items.length; i++) {
+            var it = items[i]
+            if (pendingHistoryMatchId && it.duplicateId === pendingHistoryMatchId) {
+                target = it
+                break
             }
         }
+        if (!target && pendingHistoryDisplay) {
+            for (var j = 0; j < items.length; j++) {
+                var cand = items[j]
+                if (cand.display === pendingHistoryDisplay) {
+                    target = cand
+                    break
+                }
+            }
+        }
+        if (!target) {
+            target = items.length > 0 ? items[0] : null
+        }
+        if (!target) return
+
+        pendingHistoryRun = false
+        pendingHistoryMatchId = ""
+        pendingHistoryDisplay = ""
+
+        handleResultClick(
+            target.index,
+            target.display || "",
+            target.decoration || "application-x-executable",
+            target.category || "Other",
+            target.duplicateId || target.display || "",
+            target.url || ""
+        )
     }
 
     // Navigation Helpers

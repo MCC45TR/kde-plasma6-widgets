@@ -133,13 +133,13 @@ Item {
     // Launch a .desktop application safely
     function launchApp(filePath) {
         if (!filePath) return
-        runShellCommand("kioclient6 exec " + shellEscape(filePath.toString()))
+        runShellCommand("kioclient exec " + shellEscape(filePath.toString()))
     }
 
     // Show file/app properties dialog safely
     function showProperties(filePath) {
         if (!filePath) return
-        runShellCommand("kioclient6 openProperties " + shellEscape(filePath.toString()))
+        runShellCommand("kioclient openProperties " + shellEscape(filePath.toString()))
     }
 
     function runShellCommand(cmd) {
@@ -175,7 +175,7 @@ Item {
             return ;
 
         var path = url.toString();
-        var cmd = "kioclient6 move " + shellEscape(path) + " trash:/";
+        var cmd = "kioclient move " + shellEscape(path) + " trash:/";
         runShellCommand(cmd);
     }
 
