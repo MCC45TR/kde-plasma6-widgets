@@ -494,12 +494,13 @@ Item {
         anchors.right: parent.right
         anchors.margins: 12
         visible: isButtonMode
-        placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Here")
         resultCount: tileData.resultCount
         resultsModel: resultsModel
         logic: popupRoot.logic
         rssPlaceholderCycling: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssPlaceholderCycling || false) : false
         rssFrequency: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssFrequency !== undefined ? popupRoot.plasmoidConfig.rssFrequency : 3) : 3
+        rssShowFullHeadline: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssShowFullHeadline !== undefined ? popupRoot.plasmoidConfig.rssShowFullHeadline : true) : true
+        rssShowSource: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssShowSource || false) : false
         
         onTextUpdated: (newText) => {
              if (isButtonMode && newText !== popupRoot.searchText) {
