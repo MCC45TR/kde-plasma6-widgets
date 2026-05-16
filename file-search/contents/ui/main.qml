@@ -3,7 +3,6 @@ import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
-// localized import removed
 import "components" as Components
 
 PlasmoidItem {
@@ -93,7 +92,6 @@ PlasmoidItem {
     Components.LogicController {
         id: controller
         plasmoidConfig: Plasmoid.configuration
-        // trFunc removed
     }
     
     // ===== LOCALIZATION =====
@@ -186,7 +184,6 @@ PlasmoidItem {
         // Pass panel status for styling decisions
         isInPanel: root.isInPanel
         
-        // trFunc removed
         
         showDebug: Plasmoid.configuration.debugOverlay && Plasmoid.configuration.userProfile === 1
         showBootOptions: Plasmoid.configuration.showBootOptions

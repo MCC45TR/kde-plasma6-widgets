@@ -125,7 +125,21 @@ Item {
         saveHistory();
     }
 
-    function executeCommand(command) {
+    // Shell escape helper - delegates to Utils.shellEscape
+    function shellEscape(str) {
+        return Utils.shellEscape(str)
+    }
+
+    // Launch a .desktop application safely
+    function launchApp(filePath) {
+        if (!filePath) return
+        runShellCommand("kioclient6 exec " + shellEscape(filePath.toString()))
+    }
+
+    // Show file/app properties dialog safely
+    function showProperties(filePath) {
+        if (!filePath) return
+        runShellCommand("kioclient6 openProperties " + shellEscape(filePath.toString()))
     }
 
     function runShellCommand(cmd) {
@@ -142,7 +156,7 @@ Item {
 
         var path = url.toString();
         // Use D-Bus to open file manager and select the item
-        var cmd = "dbus-send --session --dest=org.freedesktop.FileManager1 /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems array:string:\"" + path + "\" string:\"\"";
+        var cmd = "dbus-send --session --dest=org.freedesktop.FileManager1 /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems array:string:" + shellEscape(path) + " string:\"\"";
         runShellCommand(cmd);
     }
 
@@ -151,7 +165,8 @@ Item {
             return ;
 
         // Using a reliable shell command for clipboard since QML clipboard is restricted in some environments
-        var cmd = "echo -n '" + text.replace(/'/g, "'\\''") + "' | xclip -selection clipboard || echo -n '" + text.replace(/'/g, "'\\''") + "' | wl-copy";
+        var escaped = shellEscape(text);
+        var cmd = "echo -n " + escaped + " | xclip -selection clipboard || echo -n " + escaped + " | wl-copy";
         runShellCommand(cmd);
     }
 
@@ -160,7 +175,7 @@ Item {
             return ;
 
         var path = url.toString();
-        var cmd = "kioclient6 move \"" + path + "\" trash:/";
+        var cmd = "kioclient6 move " + shellEscape(path) + " trash:/";
         runShellCommand(cmd);
     }
 
@@ -173,7 +188,7 @@ Item {
         if (path.indexOf(".") !== -1 && path.lastIndexOf("/") < path.lastIndexOf("."))
             path = path.substring(0, path.lastIndexOf("/"));
 
-        var cmd = "konsole --workdir \"" + path + "\"";
+        var cmd = "konsole --workdir " + shellEscape(path);
         runShellCommand(cmd);
     }
 
@@ -381,7 +396,7 @@ Item {
     }
 
     function clearRssCache() {
-        var cmd = "rm -rf \"" + rssCacheBase + "\" && mkdir -p \"" + rssCacheBase + "\"";
+        var cmd = "rm -rf " + shellEscape(rssCacheBase) + " && mkdir -p " + shellEscape(rssCacheBase);
         executable.connectSource(cmd);
         rssCache = [];
         rssTickerEntries = [];
@@ -401,7 +416,7 @@ Item {
             return ;
         }
         var path = getSourceFilePath(url);
-        var cmd = "cat \"" + path + "\"";
+        var cmd = "cat " + shellEscape(path);
         
         executable.callbacks[cmd] = function(stdout) {
             var raw = stdout.trim();
@@ -457,8 +472,9 @@ Item {
 
         if (!isSyncing) {
             isSyncing = true;
+            // Start queue processing. Only restart the timer - do NOT manually
+            // call triggered() as that causes the first item to be processed twice.
             processQueueTimer.restart();
-            processQueueTimer.triggered();
         }
     }
 
@@ -469,7 +485,7 @@ Item {
 
         var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
-        var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
+        var cmd = "sh " + shellEscape(scriptPath) + " " + shellEscape(rssCacheBase) + " " + shellEscape(source.url) + " " + shellEscape(source.name) + " " + shellEscape(String(max));
         
         executable.callbacks[cmd] = function(stdout) {
             if (stdout.indexOf("SUCCESS") !== -1) {
@@ -490,7 +506,7 @@ Item {
 
         var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
-        var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
+        var cmd = "sh " + shellEscape(scriptPath) + " " + shellEscape(rssCacheBase) + " " + shellEscape(source.url) + " " + shellEscape(source.name) + " " + shellEscape(String(max));
         
         executable.callbacks[cmd] = function(stdout) {
             var lines = stdout.split("\n");
@@ -545,7 +561,7 @@ Item {
 
                 var path = getSourceFilePath(url);
                 // Unique command to avoid callback collision
-                var cmd = "cat \"" + path + "\" #batch_" + batchId + "_" + index;
+                var cmd = "cat " + shellEscape(path) + " #batch_" + batchId + "_" + index;
                 
                 executable.callbacks[cmd] = function(stdout) {
                     var raw = stdout.trim();
@@ -580,27 +596,6 @@ Item {
             hash |= 0;
         }
         return Math.abs(hash);
-    }
-
-    function fetchRSS(source, callback) {
-        if (!source.url) {
-            callback([]);
-            return ;
-        }
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var entries = parseRSS(xhr.responseText, source.name);
-                    var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
-                    callback(entries.slice(0, max));
-                } else {
-                    callback([]);
-                }
-            }
-        };
-        xhr.open("GET", source.url);
-        xhr.send();
     }
 
     function parseRSS(xml, sourceName) {

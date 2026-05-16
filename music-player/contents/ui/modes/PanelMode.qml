@@ -48,7 +48,8 @@ Item {
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
     readonly property int scrollInterval: scrollingSpeed === 1 ? 300 : (scrollingSpeed === 2 ? 400 : 200)
     
-    readonly property int calculatedButtonSize: autoButtonSize ? Math.min(panelMode.height * 0.9, 36) : buttonSize
+    readonly property int safeHeight: Math.max(1, panelMode.height)
+    readonly property int calculatedButtonSize: autoButtonSize ? Math.min(safeHeight * 0.9, 36) : buttonSize
     
     // Dynamic Width Calculation
     readonly property int controlsWidth: {
@@ -68,7 +69,7 @@ Item {
         if (!dynamicWidth) return maxWidth
         var textW = calculatedTextWidth
         var ctrlW = controlsWidth
-        var artW = showAlbumArt ? (Math.min(panelMode.height, 28) + 6) : 0
+        var artW = showAlbumArt ? (Math.min(safeHeight, 28) + 6) : 0
         var spacing = showPanelControls ? 20 : 10
         var total = textW + ctrlW + artW + spacing + 30
         return Math.max(total, 100)
@@ -82,7 +83,7 @@ Item {
         font.family: "Roboto Condensed"
         font.bold: true
         font.pixelSize: panelMode.autoFontSize 
-            ? Math.max(5, Math.min(panelMode.height * 0.5, 16)) 
+            ? Math.max(5, Math.min(safeHeight * 0.5, 16)) 
             : panelMode.manualFontSize
         text: panelMode.title || i18n("No Media")
     }
@@ -91,7 +92,7 @@ Item {
         id: artistMetrics
         font.family: "Roboto Condensed"
         font.pixelSize: panelMode.autoFontSize
-            ? Math.max(5, Math.min(panelMode.height * 0.4, 13))
+            ? Math.max(5, Math.min(safeHeight * 0.4, 13))
             : Math.max(5, panelMode.manualFontSize - 2)
         text: panelMode.artist || ""
     }
@@ -106,8 +107,8 @@ Item {
         Item {
             visible: panelMode.showAlbumArt
             Layout.alignment: Qt.AlignVCenter
-            Layout.preferredWidth: visible ? Math.min(panelMode.height, 28) : 0
-            Layout.preferredHeight: Math.min(panelMode.height, 28)
+            Layout.preferredWidth: visible ? Math.min(safeHeight, 28) : 0
+            Layout.preferredHeight: Math.min(safeHeight, 28)
  
             Rectangle {
                 id: artThumb
@@ -143,7 +144,7 @@ Item {
             id: leftControlsLoader
             active: panelMode.showPanelControls && (panelMode.layoutMode === 1 || panelMode.layoutMode === 2)
             Layout.alignment: Qt.AlignVCenter
-            Layout.preferredHeight: Math.min(panelMode.height, 36)
+            Layout.preferredHeight: Math.min(safeHeight, 36)
             Layout.preferredWidth: item ? (panelMode.layoutMode === 2 ? Layout.preferredHeight : item.implicitWidth) : 0
             
             sourceComponent: Item {
@@ -220,6 +221,7 @@ Item {
                     id: titleItem
                     Layout.fillWidth: true
                     Layout.preferredHeight: titleMetrics.height
+                    implicitWidth: 0
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
                     visible: panelMode.showTitle
                     clip: true
@@ -269,13 +271,13 @@ Item {
  
                         text: titleItem.shouldScroll ? _charDisplayText : titleMetrics.text
  
-                        property string _charDisplayText: titleMetrics.text
+                        property string _charDisplayText: ""
                         property int _scrollIndex: 0
                         property string _scrollBuffer: ""
  
                         function resetScroll() {
                             _scrollIndex = 0
-                            _scrollBuffer = titleMetrics.text + "   •   "
+                            _scrollBuffer = (titleMetrics.text || "") + "   •   "
                             _charDisplayText = _scrollBuffer
                         }
  
@@ -308,6 +310,7 @@ Item {
                     id: artistItem
                     Layout.fillWidth: true
                     Layout.preferredHeight: artistMetrics.height
+                    implicitWidth: 0
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
                     visible: panelMode.showArtist && panelMode.artist && panelMode.artist.trim() !== ""
                     clip: true
@@ -360,13 +363,13 @@ Item {
  
                         text: artistItem.shouldScroll ? _charDisplayText : artistMetrics.text
  
-                        property string _charDisplayText: artistMetrics.text
+                        property string _charDisplayText: ""
                         property int _scrollIndex: 0
                         property string _scrollBuffer: ""
  
                         function resetScroll() {
                             _scrollIndex = 0
-                            _scrollBuffer = artistMetrics.text + "   •   "
+                            _scrollBuffer = (artistMetrics.text || "") + "   •   "
                             _charDisplayText = _scrollBuffer
                         }
  
@@ -415,7 +418,7 @@ Item {
             id: rightControlsLoader
             active: panelMode.showPanelControls && (panelMode.layoutMode === 0 || panelMode.layoutMode === 2)
             Layout.alignment: Qt.AlignVCenter
-            Layout.preferredHeight: Math.min(panelMode.height, 36)
+            Layout.preferredHeight: Math.min(safeHeight, 36)
             Layout.preferredWidth: item ? (panelMode.layoutMode === 2 ? Layout.preferredHeight : item.implicitWidth) : 0
             
             sourceComponent: Item {

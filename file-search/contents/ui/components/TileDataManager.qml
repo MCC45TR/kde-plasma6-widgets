@@ -56,8 +56,8 @@ Item {
     
     function refreshGroups() {
         var rssItems = (logic.rssCache && Array.isArray(logic.rssCache)) ? logic.rssCache : [];
-        var firstItem = rawDataProxy.count > 0 ? rawDataProxy.itemAt(0) : null;
-        var lastItem = rawDataProxy.count > 0 ? rawDataProxy.itemAt(rawDataProxy.count - 1) : null;
+        var firstItem = rawDataProxy.count > 0 ? rawDataProxy.objectAt(0) : null;
+        var lastItem = rawDataProxy.count > 0 ? rawDataProxy.objectAt(rawDataProxy.count - 1) : null;
         var signature = [
             searchText,
             activeFilter,
@@ -93,7 +93,7 @@ Item {
 
         if (!isRSSOnlyMode) {
             for (var i = 0; i < rawDataProxy.count; i++) {
-                var item = rawDataProxy.itemAt(i);
+                var item = rawDataProxy.objectAt(i);
                 if (!item)
                     continue;
 
@@ -281,11 +281,10 @@ Item {
         onTriggered: dataManager.refreshGroups()
     }
 
-    Repeater {
+    Instantiator {
         id: rawDataProxy
         model: dataManager.resultsModel
-        visible: false
-        delegate: Item {
+        delegate: QtObject {
             property int itemIndex: index
             // Role name fallback for different Milou/Plasma versions
             property var category: (model.category !== undefined ? model.category : (model.matchCategory !== undefined ? model.matchCategory : (model.categoryName !== undefined ? model.categoryName : "")))

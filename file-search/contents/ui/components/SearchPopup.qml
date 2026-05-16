@@ -65,7 +65,6 @@ Item {
     readonly property bool compactPinnedItems: compactTileMode === 1 || compactTileMode === 2
     readonly property bool compactHistoryItems: compactTileMode === 1 || compactTileMode === 3
 
-    // property var trFunc removed
     
     // Signals to Main
     signal requestSearchTextUpdate(string text)
@@ -283,8 +282,8 @@ Item {
         // If it's a known file or application path, open/run it directly and instantly
         if (item.filePath && item.filePath.toString().length > 0) {
              if (item.filePath.toString().indexOf(".desktop") !== -1) {
-                  // Direct application launch via kioclient
-                  logic.runShellCommand("kioclient exec '" + item.filePath + "'");
+                  // Direct application launch via safe helper
+                  logic.launchApp(item.filePath);
              } else {
                   // Standard file open
                   Qt.openUrlExternally(item.filePath);
@@ -630,7 +629,7 @@ Item {
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
             bgColor: popupRoot.bgColor
-            // trFunc removed
+
             logic: popupRoot.logic
             plasmoidConfig: popupRoot.plasmoidConfig
             
@@ -669,12 +668,12 @@ Item {
             isSearching: popupRoot.searchText.length > 0
             compactPinnedView: popupRoot.compactPinnedItems
             breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
-            // trFunc removed
+
             
             onItemClicked: (item) => {
                 if (item.filePath) {
                      if (item.filePath.toString().indexOf(".desktop") !== -1) {
-                          logic.runShellCommand("kioclient exec '" + item.filePath + "'");
+                          logic.launchApp(item.filePath);
                      } else {
                           Qt.openUrlExternally(item.filePath);
                      }
@@ -698,7 +697,7 @@ Item {
             onCopyPathRequested: (item) => {
                 if (item.filePath) {
                     var path = item.filePath.toString().replace("file://", "")
-                    logic.runShellCommand("echo -n '" + path + "' | xclip -selection clipboard")
+                    logic.copyToClipboard(path)
                 }
             }
             
@@ -743,7 +742,7 @@ Item {
              listIconSize: popupRoot.listIconSize
              textColor: popupRoot.textColor
              accentColor: popupRoot.accentColor
-            // trFunc removed
+
              searchText: popupRoot.searchText
              isLoading: popupRoot.isLoadingResults
              previewEnabled: popupRoot.previewEnabled
@@ -786,7 +785,7 @@ Item {
              iconSize: popupRoot.iconSize
              textColor: popupRoot.textColor
              accentColor: popupRoot.accentColor
-             // trFunc removed
+
              searchText: popupRoot.searchText
              isLoading: popupRoot.isLoadingResults
              previewEnabled: popupRoot.previewEnabled
@@ -849,7 +848,7 @@ Item {
         sourceComponent: HelpView {
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
-            // trFunc removed
+
             
             onAidSelected: (prefix) => {
                 // When selecting from Help, we put the LOCALIZED prefix in the box if possible?
@@ -986,7 +985,7 @@ Item {
                  textColor: popupRoot.textColor
                  accentColor: popupRoot.accentColor
                  formatTimeFunc: logic.formatHistoryTime
-                 // trFunc removed
+
                  logic: popupRoot.logic
                  previewEnabled: popupRoot.previewEnabled
                  previewSettings: popupRoot.previewSettings
@@ -1005,7 +1004,7 @@ Item {
                  iconSize: popupRoot.iconSize
                  textColor: popupRoot.textColor
                  accentColor: popupRoot.accentColor
-                 // trFunc removed
+
                  logic: popupRoot.logic
                  previewSettings: popupRoot.previewSettings
                  scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
@@ -1039,7 +1038,7 @@ Item {
               displayModeName: isButtonMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Button") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Mode")
               totalSearches: logic.telemetryStats.totalSearches || 0
               avgLatency: logic.telemetryStats.averageLatency || 0
-              // trFunc removed
+
          }
     }
 

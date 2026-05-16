@@ -421,9 +421,15 @@ FocusScope {
                     
                     Flow {
                         id: categoryFlow
-                        // Calculate width to fit an exact number of tiles to allow centering
-                        width: categoryDelegate.isWide ? parent.width : (Math.floor(parent.width / (resultsTileRoot.tileWidth + 8)) * (resultsTileRoot.tileWidth + 8) - 8)
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        // Calculate exact width to enable horizontal centering
+                        width: {
+                            var avail = parent.width > 0 ? parent.width : (resultsTileRoot.width - 24);
+                            var colW = resultsTileRoot.tileWidth + 8;
+                            var cols = Math.floor(avail / colW);
+                            if (cols <= 0) return avail;
+                            return categoryDelegate.isWide ? avail : (cols * colW - 8);
+                        }
+                        x: (parent.width - width) / 2
                         anchors.top: parent.top
                         spacing: 8
                     

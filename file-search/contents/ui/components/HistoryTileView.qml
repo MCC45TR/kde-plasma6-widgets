@@ -424,8 +424,14 @@ FocusScope {
                     
                     Flow {
                         id: histCategoryFlow
-                        width: Math.floor(parent.width / (historyTile.tileWidth + 8)) * (historyTile.tileWidth + 8) - 8
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: {
+                            var avail = parent.width > 0 ? parent.width : (historyTile.width - 24);
+                            var colW = historyTile.tileWidth + 8;
+                            var cols = Math.floor(avail / colW);
+                            if (cols <= 0) return avail;
+                            return cols * colW - 8;
+                        }
+                        x: (parent.width - width) / 2
                         anchors.top: parent.top
                         spacing: 8
                     

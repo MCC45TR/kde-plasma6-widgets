@@ -24,6 +24,7 @@ available_widgets=(
 "app-menu"
 "msi-control"
 "AFAD-earthquick-reports"
+"dynamic-color-scheme"
 )
 # Get script directory (works on any computer)
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

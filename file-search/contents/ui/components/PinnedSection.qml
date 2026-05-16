@@ -191,7 +191,6 @@ Item {
                                         isPinned: true
                                         accentColor: pinnedSectionRoot.accentColor
                                         textColor: pinnedSectionRoot.textColor
-                                        // trFunc removed
                                         
                                         onToggled: {
                                             pinnedSectionRoot.unpinClicked(modelData.matchId)
@@ -243,8 +242,14 @@ Item {
                     
                     sourceComponent: Flow {
                         id: tileFlow
-                        width: Math.floor(parent.width / (pinnedSectionRoot.tileWidth + 8)) * (pinnedSectionRoot.tileWidth + 8) - 8
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: {
+                            var avail = parent.width > 0 ? parent.width : (pinnedSectionRoot.width - 24);
+                            var colW = pinnedSectionRoot.tileWidth + 8;
+                            var cols = Math.floor(avail / colW);
+                            if (cols <= 0) return avail;
+                            return cols * colW - 8;
+                        }
+                        x: (parent.width - width) / 2
                         spacing: 8
                         
                         Repeater {

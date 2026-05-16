@@ -14,16 +14,42 @@ function generateUUID() {
 }
 
 // Detect source type from category (duplicated from utils.js)
+// NOTE: Keep in sync with utils.js detectSourceType
 function detectSourceType(category, isApp, filePath) {
     if (isApp) {
         return "app"
-    } else if (category && (category.toLowerCase().indexOf("calc") >= 0 || category.toLowerCase().indexOf("hesap") >= 0)) {
+    } else if (category && (category.indexOf("Calculate") >= 0 || category.indexOf("Hesapla") >= 0 ||
+               category.toLowerCase().indexOf("calc") >= 0 || category.toLowerCase().indexOf("hesap") >= 0)) {
         return "calculator"
     } else if (filePath && filePath.length > 0) {
         return "file"
     } else {
         return "krunner"
     }
+}
+
+// Centralized app category detection (duplicated from utils.js)
+// NOTE: Keep in sync with utils.js isAppCategory
+function isAppCategory(category, filePath, matchId) {
+    if (!category) return false
+    var catLower = category.toString().toLowerCase()
+    var isApp = catLower.indexOf("app") !== -1 || catLower.indexOf("uygulama") !== -1 || catLower.indexOf("program") !== -1 ||
+                catLower.indexOf("ayar") !== -1 || catLower.indexOf("setting") !== -1 ||
+                catLower.indexOf("oyun") !== -1 || catLower.indexOf("game") !== -1 ||
+                catLower.indexOf("ofis") !== -1 || catLower.indexOf("office") !== -1 ||
+                catLower.indexOf("sistem") !== -1 || catLower.indexOf("system") !== -1 ||
+                catLower.indexOf("araç") !== -1 || catLower.indexOf("util") !== -1 ||
+                catLower.indexOf("internet") !== -1 || catLower.indexOf("grafik") !== -1 || catLower.indexOf("graphic") !== -1 ||
+                catLower.indexOf("geliştirme") !== -1 || catLower.indexOf("develop") !== -1 ||
+                catLower.indexOf("ortam") !== -1 || catLower.indexOf("multimedia") !== -1 ||
+                catLower.indexOf("eğitim") !== -1 || catLower.indexOf("educat") !== -1
+    if (!isApp && filePath) {
+        isApp = filePath.toString().indexOf(".desktop") !== -1
+    }
+    if (!isApp && matchId) {
+        isApp = matchId.toString().indexOf(".desktop") !== -1
+    }
+    return isApp
 }
 
 // Load history from configuration with migration support
@@ -55,20 +81,8 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
     // Clone array to trigger Update
     var newHistory = historyArray.slice(0)
 
-    // Determine naturally if it's an application based on category or file path
-    var catLower = (category || "").toString().toLowerCase()
-    var isApp = catLower.indexOf("app") !== -1 || catLower.indexOf("uygulama") !== -1 || catLower.indexOf("program") !== -1 ||
-                catLower.indexOf("ayar") !== -1 || catLower.indexOf("setting") !== -1 ||
-                catLower.indexOf("oyun") !== -1 || catLower.indexOf("game") !== -1 ||
-                catLower.indexOf("ofis") !== -1 || catLower.indexOf("office") !== -1 ||
-                catLower.indexOf("sistem") !== -1 || catLower.indexOf("system") !== -1 ||
-                catLower.indexOf("araç") !== -1 || catLower.indexOf("util") !== -1 ||
-                catLower.indexOf("internet") !== -1 || catLower.indexOf("grafik") !== -1 || catLower.indexOf("graphic") !== -1 ||
-                catLower.indexOf("geliştirme") !== -1 || catLower.indexOf("develop") !== -1 ||
-                catLower.indexOf("ortam") !== -1 || catLower.indexOf("multimedia") !== -1 ||
-                catLower.indexOf("eğitim") !== -1 || catLower.indexOf("educat") !== -1 ||
-                (filePath && filePath.toString().indexOf(".desktop") !== -1) ||
-                (matchId && matchId.toString().indexOf(".desktop") !== -1)
+    // Use centralized app detection
+    var isApp = isAppCategory(category, filePath, matchId)
 
     // Fix missing or invalid filePath for apps if matchId contains .desktop
     // This fixes the issue where apps appear in history but don't launch directly

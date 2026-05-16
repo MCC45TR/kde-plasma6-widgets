@@ -207,12 +207,18 @@ Item {
         execSource.connectSource(cmd)
     }
 
+    // Shell escape helper for safe command construction
+    function shellEscape(str) {
+        if (str === undefined || str === null) return "''"
+        return "'" + str.toString().replace(/'/g, "'\\''") + "'"
+    }
+
     function rebootToEntry(id) {
         var cmd = ""
         if (id === "auto-reboot-to-firmware-setup") {
             cmd = "systemctl reboot --firmware-setup"
         } else {
-            cmd = "systemctl reboot --boot-loader-entry=\"" + id + "\""
+            cmd = "systemctl reboot --boot-loader-entry=" + shellEscape(id)
         }
         executeCommand(cmd)
     }
