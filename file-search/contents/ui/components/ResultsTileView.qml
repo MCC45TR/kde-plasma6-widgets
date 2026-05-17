@@ -290,6 +290,16 @@ FocusScope {
     // Compact tile view mode
     property bool compactTileView: false
     
+    // Cached localized strings to prevent repeated i18nd calls during rendering
+    readonly property string locCategory: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category")
+    readonly property string locFileType: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type")
+    readonly property string locPath: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path")
+    readonly property string locSpacePreview: i18nd("plasma_applet_com.mcc45tr.filesearch", "Space to preview")
+    readonly property string locReadBrowser: i18nd("plasma_applet_com.mcc45tr.filesearch", "Read in Browser")
+    readonly property string locSearching: i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
+    readonly property string locNoResults: i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
+    readonly property string locTypeToSearch: i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
+    
     // Computed tile dimensions for grid items
     readonly property real tileWidth: compactTileView ? (iconSize + 16) : (iconSize + 40)
     readonly property real tileHeight: compactTileView ? (iconSize + 40) : (iconSize + 50)
@@ -671,7 +681,7 @@ FocusScope {
                                             RowLayout {
                                                 Layout.fillWidth: true
                                                 Button {
-                                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Read in Browser")
+                                                    text: resultsTileRoot.locReadBrowser
                                                     icon.name: "internet-services"
                                                     onClicked: resultsTileRoot.activateCurrentItem()
                                                 }
@@ -784,7 +794,7 @@ FocusScope {
                                         
                                         // Category
                                         Text {
-                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
+                                            text: resultsTileRoot.locCategory + ": " + (modelData.category || "")
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             visible: (modelData.category || "").length > 0
@@ -793,7 +803,7 @@ FocusScope {
                                         // File Type (from extension)
                                         Text {
                                             property string fileExt: tileDelegate.previewFileType
-                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + fileExt
+                                            text: resultsTileRoot.locFileType + ": " + fileExt
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             visible: fileExt.length > 0
@@ -801,7 +811,7 @@ FocusScope {
                                         
                                         // Path
                                         Text {
-                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + tileDelegate.previewPath
+                                            text: resultsTileRoot.locPath + ": " + tileDelegate.previewPath
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             wrapMode: Text.WrapAnywhere
@@ -811,7 +821,7 @@ FocusScope {
                                         
                                         // Shortcut hint
                                         Text {
-                                            text: "💡 " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Space to preview")
+                                            text: "💡 " + resultsTileRoot.locSpacePreview
                                             font.pixelSize: 9
                                             font.italic: true
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
@@ -850,8 +860,8 @@ FocusScope {
 
         Text {
             text: resultsTileRoot.searchText.length > 0
-                ? (resultsTileRoot.isLoading ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found"))
-                : i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
+                ? (resultsTileRoot.isLoading ? resultsTileRoot.locSearching : resultsTileRoot.locNoResults)
+                : resultsTileRoot.locTypeToSearch
             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
             font.pixelSize: 12
         }

@@ -266,8 +266,16 @@ Item {
             var catItems = result[p].items;
             for (var q = 0; q < catItems.length; q++) {
                 var groupedItem = catItems[q];
-                groupedItem.category = groupedCategoryName;
-                flatList.push(groupedItem);
+                // CRITICAL FIX: Create a shallow copy to prevent modifying shared/cached objects
+                // (like rssCache entries). Direct mutation causes QML V4 engine crashes (segfaults).
+                var itemCopy = {};
+                for (var key in groupedItem) {
+                    if (groupedItem.hasOwnProperty(key)) {
+                        itemCopy[key] = groupedItem[key];
+                    }
+                }
+                itemCopy.category = groupedCategoryName;
+                flatList.push(itemCopy);
             }
         }
 

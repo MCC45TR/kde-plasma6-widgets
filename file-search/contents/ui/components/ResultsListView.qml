@@ -83,7 +83,7 @@ ScrollView {
                 anchors.left: parent.left
                 anchors.leftMargin: 4
                 anchors.verticalCenter: parent.verticalCenter
-                text: section === "RSS" ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberler") : section
+                text: section === "RSS" ? resultsListRoot.locNews : section
                 font.pixelSize: 11
                 font.bold: true
                 color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.6)
@@ -96,7 +96,7 @@ ScrollView {
             height: isRSS ? rssCardLayout.implicitHeight + 24 : (modelData.subtext ? 48 : 36)
             
             readonly property bool isRSS: modelData.category === "RSS" || 
-                                          modelData.category === i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberler") || 
+                                          modelData.category === resultsListRoot.locNews || 
                                           (modelData.duplicateId && modelData.duplicateId.toString().startsWith("rss:"))
             property bool isExpanded: isRSS && resultsListRoot.rssExpandableCards && !!resultsListRoot.expandedItems[modelData.duplicateId]
 
@@ -251,7 +251,7 @@ ScrollView {
                                     spacing: 6
                                     Kirigami.Icon { source: "internet-services"; implicitWidth: 16; implicitHeight: 16 }
                                     Text {
-                                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberi Oku")
+                                        text: resultsListRoot.locReadNews
                                         color: resultsListRoot.textColor
                                         font.bold: true
                                         font.pixelSize: 11
@@ -265,7 +265,7 @@ ScrollView {
                             }
 
                             Button {
-                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Paylaş")
+                                text: resultsListRoot.locShare
                                 icon.name: "edit-copy"
                                 flat: true
                                 visible: delegateRoot.isExpanded
@@ -375,21 +375,21 @@ ScrollView {
                     }
 
                     Text {
-                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
+                        text: resultsListRoot.locCategory + ": " + (modelData.category || "")
                         font.pixelSize: 10
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         visible: (modelData.category || "").length > 0
                     }
 
                     Text {
-                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + delegateRoot.previewFileType
+                        text: resultsListRoot.locFileType + ": " + delegateRoot.previewFileType
                         font.pixelSize: 10
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         visible: delegateRoot.previewFileType.length > 0
                     }
 
                     Text {
-                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + delegateRoot.previewPath
+                        text: resultsListRoot.locPath + ": " + delegateRoot.previewPath
                         font.pixelSize: 10
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         wrapMode: Text.WrapAnywhere
@@ -421,14 +421,27 @@ ScrollView {
 
             Text {
                 text: resultsListRoot.isLoading
-                    ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
-                    : i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
+                    ? locSearching
+                    : locNoResults
                 color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
                 font.pixelSize: 12
             }
         }
     }
     
+    // Performance optimization: limit how many results are animated at once
+    property int maxAnimatedResults: 15
+    
+    // Cached localized strings to prevent repeated i18nd calls during rendering
+    readonly property string locCategory: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category")
+    readonly property string locFileType: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type")
+    readonly property string locPath: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path")
+    readonly property string locNews: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberler")
+    readonly property string locReadNews: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberi Oku")
+    readonly property string locShare: i18nd("plasma_applet_com.mcc45tr.filesearch", "Paylaş")
+    readonly property string locSearching: i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
+    readonly property string locNoResults: i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
+
     property int count: resultsList.count
     
     function moveUp() {
