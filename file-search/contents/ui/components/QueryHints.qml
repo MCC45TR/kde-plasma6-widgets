@@ -73,6 +73,34 @@ Rectangle {
     // Helper for date formatting
     property var currentLocale: Qt.locale(Qt.locale().name.substring(0, 2))
     
+    // ===== CACHED LOCALIZED PREFIX MAP (computed once at startup) =====
+    // Avoids calling i18nd() inside detectHint() on every keystroke
+    readonly property var _localizedPrefixMap: {
+        var map = {};
+        for (var i = 0; i < knownPrefixes.length; i++) {
+            var p = knownPrefixes[i];
+            if (p.localeBase) {
+                var locKeyVal = i18nd("plasma_applet_com.mcc45tr.filesearch", p.localeBase);
+                if (locKeyVal && locKeyVal !== p.localeBase) {
+                    var suffix = "";
+                    if (p.prefix.endsWith(":")) suffix = ":";
+                    else if (p.prefix.endsWith(" ")) suffix = " ";
+                    else if (p.prefix.endsWith(":/")) suffix = ":/";
+                    map[p.prefix] = (locKeyVal + suffix).toLowerCase();
+                } else {
+                    map[p.prefix] = "";
+                }
+            }
+        }
+        return map;
+    }
+    // Cached i18n strings used in detectHint error paths
+    readonly property string _unknownPrefixText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unknown prefix")
+    readonly property string _tryText: i18nd("plasma_applet_com.mcc45tr.filesearch", "try")
+    readonly property string _searchPrefixesText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Prefixes")
+    readonly property string _browseCalendarText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Browse calendar")
+    readonly property string _manNotInstalledText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Man pages not installed")
+    
     function getTimelineMonthOptions() {
         var options = [];
         var today = new Date();
@@ -147,7 +175,7 @@ Rectangle {
             return {
                 show: true,
                 isPrefixMenu: true,
-                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Prefixes"),
+                text: _searchPrefixesText,
                 icon: "help-about",
                 isError: false
             }
@@ -155,7 +183,7 @@ Rectangle {
 
         var lowerQuery = query.toLowerCase()
         
-        // 1. Check for known prefixes (both English keys and Localized keys)
+        // 1. Check for known prefixes using cached locale map
         var bestMatch = null;
         var bestLen = -1;
         var matchedPrefix = ""; 
@@ -163,35 +191,17 @@ Rectangle {
         for (var i = 0; i < knownPrefixes.length; i++) {
              var p = knownPrefixes[i]
              
-             // Skip the ':' menu trigger itself during normal prefix matching
              if (p.prefix === ":") continue;
              
-             // Check if disabled by config (weather)
              if (p.prefix === "weather:" && plasmoidConfig && !plasmoidConfig.weatherEnabled) {
                  continue;
              }
              
-             // Check standard prefix
              var standardP = p.prefix.toLowerCase();
              
-             // Check localized prefix (simple approximation using i18n of the localeBase)
-             // This assumes the translated "file" corresponds to the prefix.
-             // e.g. i18nd("plasma_applet_com.mcc45tr.filesearch", "file") -> "dosya". user types "dosya:/"
-             var localizedP = "";
-             if (p.localeBase) {
-                 var locKeyVal = i18nd("plasma_applet_com.mcc45tr.filesearch", p.localeBase); // e.g. "dosya"
-                 if (locKeyVal && locKeyVal !== p.localeBase) {
-                      // Reconstruct suffix style
-                      var suffix = "";
-                      if (p.prefix.endsWith(":")) suffix = ":";
-                      else if (p.prefix.endsWith(" ")) suffix = " ";
-                      else if (p.prefix.endsWith(":/")) suffix = ":/";
-                      
-                      localizedP = (locKeyVal + suffix).toLowerCase();
-                 }
-             }
+             // Use pre-computed localized prefix from cache
+             var localizedP = _localizedPrefixMap[p.prefix] || "";
              
-             // Check match against standard
              if (lowerQuery.startsWith(standardP)) {
                  if (standardP.length > bestLen) {
                      bestMatch = p;
@@ -200,8 +210,7 @@ Rectangle {
                  }
              }
              
-             // Check match against localized
-             if (localizedP && localizedP.length > 0 && lowerQuery.startsWith(localizedP)) {
+             if (localizedP.length > 0 && lowerQuery.startsWith(localizedP)) {
                  if (localizedP.length > bestLen) {
                      bestMatch = p;
                      bestLen = localizedP.length;
@@ -231,7 +240,7 @@ Rectangle {
                   if (slashes >= 3) {
                        return {
                             show: true,
-                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Browse calendar"),
+                            text: _browseCalendarText,
                             icon: "view-calendar-day",
                             isError: false,
                             prefix: query, 
@@ -241,7 +250,7 @@ Rectangle {
                   
                    return {
                         show: true,
-                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Browse calendar"),
+                        text: _browseCalendarText,
                         icon: "view-calendar-month",
                         isError: false,
                         prefix: matchedPrefix,
@@ -255,7 +264,7 @@ Rectangle {
              
              // Check for Man page installation
              if (bestMatch.prefix === "man:/" && logic && !logic.manInstalled) {
-                 return { show: true, text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Man pages not installed"), icon: "dialog-error", isError: true, prefix: matchedPrefix }
+                 return { show: true, text: _manNotInstalledText, icon: "dialog-error", isError: true, prefix: matchedPrefix }
              }
              
              var baseHint = bestMatch.hint;
@@ -296,12 +305,12 @@ Rectangle {
                  var kp = knownPrefixes[k];
                  if (kp.prefix.toLowerCase().startsWith(potentialPrefix)) isKnown = true;
                  
+                 // Use cached localized prefix map instead of i18nd
                  if (kp.localeBase) {
-                     var locK = i18nd("plasma_applet_com.mcc45tr.filesearch", kp.localeBase);
-                     if (locK) {
-                        var safeLocK = locK.toLowerCase();
-                        if ((safeLocK + ":").startsWith(potentialPrefix)) isKnown = true;
-                        if ((safeLocK + " ").startsWith(potentialPrefix)) isKnown = true;
+                     var cachedLoc = _localizedPrefixMap[kp.prefix];
+                     if (cachedLoc) {
+                        if (cachedLoc.startsWith(potentialPrefix)) isKnown = true;
+                        if (cachedLoc.replace(":", " ").startsWith(potentialPrefix)) isKnown = true;
                      }
                  }
                  if (isKnown) break;
@@ -310,7 +319,7 @@ Rectangle {
             if (!isKnown && potentialPrefix !== "file:" && potentialPrefix !== "http:" && potentialPrefix !== "https:") {
                 return {
                     show: true,
-                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unknown prefix") + ": " + potentialPrefix + " (" + i18nd("plasma_applet_com.mcc45tr.filesearch", "try") + " 'help:')",
+                    text: _unknownPrefixText + ": " + potentialPrefix + " (" + _tryText + " 'help:')",
                     icon: "dialog-warning",
                     isError: true,
                     isPrefixMenu: false,

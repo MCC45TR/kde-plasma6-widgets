@@ -87,6 +87,23 @@ Item {
         return plasmoidConfig ? (plasmoidConfig.viewMode === 1) : true
     }
     
+    // ===== CACHED LOCALIZED PREFIXES (computed once at startup) =====
+    // These avoid calling i18nd() on every keystroke
+    readonly property string _locDate: i18nd("plasma_applet_com.mcc45tr.filesearch", "date")
+    readonly property string _locClock: i18nd("plasma_applet_com.mcc45tr.filesearch", "clock")
+    readonly property string _locWeather: i18nd("plasma_applet_com.mcc45tr.filesearch", "weather")
+    readonly property string _locPower: i18nd("plasma_applet_com.mcc45tr.filesearch", "power")
+    readonly property string _locHelp: i18nd("plasma_applet_com.mcc45tr.filesearch", "help")
+    readonly property string _locUnit: i18nd("plasma_applet_com.mcc45tr.filesearch", "unit")
+    readonly property string _locKill: i18nd("plasma_applet_com.mcc45tr.filesearch", "kill")
+    readonly property string _locSpell: i18nd("plasma_applet_com.mcc45tr.filesearch", "spell")
+    readonly property string _locShell: i18nd("plasma_applet_com.mcc45tr.filesearch", "shell")
+    readonly property bool _canShowWeather: plasmoidConfig && plasmoidConfig.weatherEnabled
+
+    // ===== CACHED QUERY RESULTS (recomputed once per searchText change) =====
+    readonly property string effectiveQuery: _computeEffectiveQuery(searchText)
+    readonly property bool isCommandOnly: _computeIsCommandOnly(searchText)
+
     // Active filter from chips
     property string activeFilter: "All"
     
@@ -201,17 +218,17 @@ Item {
     }
 
     function getBackendQuery(text, filter) {
-        var effectiveQuery = getEffectiveQuery(text)
-        if (!effectiveQuery && filter === "All") return ""
+        var eq = popupRoot.effectiveQuery
+        if (!eq && filter === "All") return ""
 
-        var lower = effectiveQuery.toLowerCase()
+        var lower = eq.toLowerCase()
         if (lower.startsWith("rss:")) return ""
 
-        if (isCommandOnlyQuery(effectiveQuery)) {
+        if (popupRoot.isCommandOnly) {
             return ""
         }
 
-        return getFilteredQuery(effectiveQuery, filter)
+        return getFilteredQuery(eq, filter)
     }
     
     // Background for Desktop Mode (Matte)
@@ -425,70 +442,66 @@ Item {
     }
     
     // Command Query Helper
-    function isCommandOnlyQuery(text) {
+    // Uses cached locale strings — no i18nd() calls per invocation
+    function _computeIsCommandOnly(text) {
         if (!text) return false;
         var t = text.toLowerCase();
-        var canShowWeather = plasmoidConfig && plasmoidConfig.weatherEnabled
-        var locWeather = i18nd("plasma_applet_com.mcc45tr.filesearch", "weather")
-        var isWeather = canShowWeather && (t === "weather:" || (locWeather && t === locWeather + ":"))
+        var isWeather = _canShowWeather && (t === "weather:" || (_locWeather && t === _locWeather + ":"))
         
-        // Only specific full-view modes hide the results list
         return isWeather || t === "date:" || t === "clock:" || t === "power:" || t === "help:" || 
-               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "date") + ":" || 
-               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "clock") + ":" || 
-               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "power") + ":" || 
-               t === i18nd("plasma_applet_com.mcc45tr.filesearch", "help") + ":";
+               (_locDate && t === _locDate + ":") || 
+               (_locClock && t === _locClock + ":") || 
+               (_locPower && t === _locPower + ":") || 
+               (_locHelp && t === _locHelp + ":");
     }
 
-    function getEffectiveQuery(text) {
+    // Uses cached locale strings — no i18nd() calls per invocation
+    function _computeEffectiveQuery(text) {
         if (!text) return ""
         var t = text
-        
-        // Map localized prefixes back to internal English prefixes or strip them
+        var lower = t.toLowerCase()
         
         // 1. Check for "unit:"
-        if (t.toLowerCase().startsWith("unit:")) return t.substring(5).trim()
-        // Localized
-        var locUnit = i18nd("plasma_applet_com.mcc45tr.filesearch", "unit")
-        if (locUnit && t.toLowerCase().startsWith(locUnit + ":")) return t.substring(locUnit.length + 1).trim()
+        if (lower.startsWith("unit:")) return t.substring(5).trim()
+        if (_locUnit && lower.startsWith(_locUnit + ":")) return t.substring(_locUnit.length + 1).trim()
         
-        // 2. Check for "date:" or "clock:"
-        var locDate = i18nd("plasma_applet_com.mcc45tr.filesearch", "date")
-        var locClock = i18nd("plasma_applet_com.mcc45tr.filesearch", "clock")
+        // 2. Check for "clock:" then "date:"
+        if (lower === "clock:" || (_locClock && lower === _locClock + ":")) return "clock:"
+        if (lower === "date:" || (_locDate && lower === _locDate + ":")) return "date:"
         
-        // Check for "clock:"
-        if (t.toLowerCase() === "clock:" || (locClock && t.toLowerCase() === locClock + ":")) return "clock:"
+        // 3. Check for "weather:"
+        if (_canShowWeather && (lower === "weather:" || (_locWeather && lower === _locWeather + ":"))) return "weather:"
         
-        // Check for "date:"
-        if (t.toLowerCase() === "date:" || (locDate && t.toLowerCase() === locDate + ":")) return "date:"
-        
-        // Check for "weather:"
-        var canShowWeather = plasmoidConfig && plasmoidConfig.weatherEnabled
-        var locWeather = i18nd("plasma_applet_com.mcc45tr.filesearch", "weather")
-        if (canShowWeather && (t.toLowerCase() === "weather:" || (locWeather && t.toLowerCase() === locWeather + ":"))) return "weather:"
-        
-        // 3. Check for "help:"
-        var locHelp = i18nd("plasma_applet_com.mcc45tr.filesearch", "help")
-        if (locHelp && t.toLowerCase() === locHelp + ":") return "help:"
+        // 4. Check for "help:"
+        if (lower === "help:" || (_locHelp && lower === _locHelp + ":")) return "help:"
 
-        // 4. Check for "kill"
-        var locKill = i18nd("plasma_applet_com.mcc45tr.filesearch", "kill")
-        if (locKill && t.toLowerCase().startsWith(locKill + " ")) return "kill " + t.substring(locKill.length + 1)
+        // 5. Check for "kill"
+        if (lower.startsWith("kill ") || (_locKill && lower.startsWith(_locKill + " "))) {
+            var killPrefix = lower.startsWith("kill ") ? "kill" : _locKill;
+            return "kill " + t.substring(killPrefix.length + 1)
+        }
 
-        // 5. Check for "spell"
-        var locSpell = i18nd("plasma_applet_com.mcc45tr.filesearch", "spell")
-        if (locSpell && t.toLowerCase().startsWith(locSpell + " ")) return "spell " + t.substring(locSpell.length + 1)
+        // 6. Check for "spell"
+        if (lower.startsWith("spell ") || (_locSpell && lower.startsWith(_locSpell + " "))) {
+            var spellPrefix = lower.startsWith("spell ") ? "spell" : _locSpell;
+            return "spell " + t.substring(spellPrefix.length + 1)
+        }
         
-        // 6. Check for "shell:"
-        var locShell = i18nd("plasma_applet_com.mcc45tr.filesearch", "shell")
-        if (locShell && t.toLowerCase().startsWith(locShell + ":")) return "shell:" + t.substring(locShell.length + 1)
+        // 7. Check for "shell:"
+        if (lower.startsWith("shell:") || (_locShell && lower.startsWith(_locShell + ":"))) {
+            var shellPrefix = lower.startsWith("shell:") ? "shell" : _locShell;
+            return "shell:" + t.substring(shellPrefix.length + 1)
+        }
         
-        // 7. Check for "power:"
-        var locPower = i18nd("plasma_applet_com.mcc45tr.filesearch", "power")
-        if (t.toLowerCase() === "power:" || (locPower && t.toLowerCase() === locPower + ":")) return "power:"
+        // 8. Check for "power:"
+        if (lower === "power:" || (_locPower && lower === _locPower + ":")) return "power:"
 
         return t
     }
+
+    // Legacy wrappers for backward compatibility (e.g. handleResultClick)
+    function isCommandOnlyQuery(text) { return _computeIsCommandOnly(text) }
+    function getEffectiveQuery(text) { return _computeEffectiveQuery(text) }
 
     // ===== UI COMPONENTS =====
     
@@ -611,7 +624,7 @@ Item {
         
         property bool isVisible: {
             var hintsVisible = queryHintsLoader.active && queryHintsLoader.item && queryHintsLoader.item.visible;
-            return popupRoot.expanded && popupRoot.searchText.length > 0 && !popupRoot.isRssOnlyQuery && !isCommandOnlyQuery(popupRoot.searchText) && !hintsVisible;
+            return popupRoot.expanded && popupRoot.searchText.length > 0 && !popupRoot.isRssOnlyQuery && !popupRoot.isCommandOnly && !hintsVisible;
         }
         
         anchors.topMargin: isVisible ? 10 : 0
@@ -793,7 +806,7 @@ Item {
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
+        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !popupRoot.isCommandOnly
         
         sourceComponent: ResultsListView {
              resultsModel: resultsModel
@@ -837,7 +850,7 @@ Item {
         anchors.bottomMargin: 12
 
         asynchronous: true
-        active: popupRoot.expanded && isTileView && searchText.length > 0 && !isCommandOnlyQuery(searchText)
+        active: popupRoot.expanded && isTileView && searchText.length > 0 && !popupRoot.isCommandOnly
         
         sourceComponent: ResultsTileView {
              categorizedData: tileData.categorizedData
@@ -880,11 +893,11 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && (getEffectiveQuery(searchText) === "date:" || getEffectiveQuery(searchText) === "clock:")
+        active: popupRoot.expanded && (popupRoot.effectiveQuery === "date:" || popupRoot.effectiveQuery === "clock:")
         
         sourceComponent: DateView {
             textColor: popupRoot.textColor
-            viewMode: getEffectiveQuery(popupRoot.searchText) === "clock:" ? "clock" : "date"
+            viewMode: popupRoot.effectiveQuery === "clock:" ? "clock" : "date"
             showClock: popupRoot.prefixDateShowClock
             showEvents: popupRoot.prefixDateShowEvents
             anchors.fill: parent
@@ -902,7 +915,7 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && getEffectiveQuery(searchText) === "help:"
+        active: popupRoot.expanded && popupRoot.effectiveQuery === "help:"
         
         sourceComponent: HelpView {
             textColor: popupRoot.textColor
@@ -934,7 +947,7 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && getEffectiveQuery(searchText) === "weather:"
+        active: popupRoot.expanded && popupRoot.effectiveQuery === "weather:"
         
         sourceComponent: WeatherView {
             // WeatherView handles its own fetching on visible
@@ -954,7 +967,7 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && getEffectiveQuery(searchText) === "power:"
+        active: popupRoot.expanded && popupRoot.effectiveQuery === "power:"
         
         sourceComponent: PowerView {
             textColor: popupRoot.textColor

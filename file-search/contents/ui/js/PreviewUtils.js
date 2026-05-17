@@ -111,7 +111,8 @@ function getPreviewSource(urlOrPath, previewEnabled, settings) {
     if (!isPreviewTypeEnabled(ext, settings))
         return "";
 
-    return "image://preview/" + path;
+    // Use file:// URL for local image previews (image://preview/ is not available in widget context)
+    return "file://" + path;
 }
 
 function getFileTypeLabel(urlOrPath) {

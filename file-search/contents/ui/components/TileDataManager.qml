@@ -49,6 +49,8 @@ Item {
     // Internal state
     property real searchStartTime: 0
     readonly property var fileOnlyCategories: ["Files", "Dosyalar", "Folders", "Klasörler", "Documents", "Belgeler", "Images", "Resimler", "Audio", "Ses", "Video", "Videolar", "Places", "Yerler"]
+    // Cached i18n string to avoid calling i18nd() on every refresh cycle
+    readonly property string _otherResultsLabel: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results")
     
     function startSearch() {
         searchStartTime = new Date().getTime()
@@ -251,7 +253,7 @@ Item {
 
         if (otherItems.length > 0) {
             result.push({
-                categoryName: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results"),
+                categoryName: _otherResultsLabel,
                 items: otherItems
             });
         }
@@ -277,7 +279,7 @@ Item {
     // Debounce timer for refreshGroups to prevent excessive updates
     Timer {
         id: refreshDebouncer
-        interval: 150
+        interval: 250
         onTriggered: dataManager.refreshGroups()
     }
 
@@ -296,7 +298,6 @@ Item {
             property var duplicateId: model.duplicateId || ""
         }
         onCountChanged: {
-            dataManager.resultCount = count
             refreshDebouncer.restart()
             
             // Latency Measurement
