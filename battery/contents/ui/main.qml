@@ -106,6 +106,8 @@ PlasmoidItem {
     readonly property int switchRadius: Math.max(0, computedRadius - contentGap)
 
 
+    readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || Plasmoid.formFactor === PlasmaCore.Types.Vertical
+
     fullRepresentation: Item {
         id: fullRep
         anchors.fill: parent
@@ -113,10 +115,7 @@ PlasmoidItem {
         // Background
         Rectangle {
             anchors.fill: parent
-            anchors.margins: root.edgeMargin
-            // "Widgetin kenar boşlukları ... @[Plasma6Widgets/weather] widgetine bak"
-             // Weather uses margin 0 if panel, else 'edgeMargin'.
-             // Assuming desktop widget for now based on size descriptions.
+            anchors.margins: root.isPanel ? 0 : root.edgeMargin
             
             radius: root.computedRadius
             color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, root.computedOpacity)

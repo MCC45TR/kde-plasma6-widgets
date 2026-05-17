@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import QtQuick.Shapes
 
 Item {
@@ -106,26 +107,24 @@ Item {
                     // Spacer
                     Item { Layout.preferredHeight: 10 }
                     
-                    Text {
+                    PlasmaComponents.Label {
                         text: mainDevice ? "%" + mainDevice.percentage : "--"
                         font.pixelSize: 64
 
                         font.weight: Font.Light
-                        color: Kirigami.Theme.textColor
                     }
                     
-                    Text {
+                    PlasmaComponents.Label {
                         text: hostName.toUpperCase().replace(/\n/g, "")
                         font.pixelSize: 18
                         font.bold: true
-                        color: Kirigami.Theme.textColor
                         opacity: 0.8
                         Layout.maximumWidth: parent.width - 40
                         elide: Text.ElideRight
                     }
                     
                     // Time-to-Event
-                    Text {
+                    PlasmaComponents.Label {
                         text: timeToEvent
                         visible: timeToEvent.length > 0
                         font.pixelSize: 14
@@ -148,7 +147,7 @@ Item {
                                 radius: 12
                                 color: currentPowerProfile === modelData ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
                                 
-                                Text {
+                                PlasmaComponents.Label {
                                     anchors.centerIn: parent
                                     text: modelData === "power-saver" ? "🔋" : (modelData === "balanced" ? "⚖️" : "⚡")
                                     font.pixelSize: 12

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import QtQuick.Shapes
 import Qt5Compat.GraphicalEffects
 import "Formatter.js" as Formatter
@@ -62,7 +63,7 @@ Item {
             }
             
             // 2. Middle: Hostname + Battery Percentage
-            Text {
+            PlasmaComponents.Label {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
@@ -72,7 +73,6 @@ Item {
                     return hostName + " (" + batt + "%)"
                 }
                 
-                color: Kirigami.Theme.textColor
                 font.pixelSize: 12
                  // Matching other views
                 elide: Text.ElideRight

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import QtQuick.Shapes
 import Qt5Compat.GraphicalEffects
 import "Formatter.js" as Formatter
@@ -162,7 +163,7 @@ import "Formatter.js" as Formatter
                                 text: (root.viewMode === "big" ? "%" : "") + (mainDevice ? mainDevice.percentage : "")
                             }
 
-                            Text {
+                            PlasmaComponents.Label {
                                 id: percentText
                                 visible: true
                                 
@@ -176,7 +177,6 @@ import "Formatter.js" as Formatter
                                 anchors.topMargin: root.viewMode === "big" ? 5 : 0
                                 anchors.rightMargin: root.viewMode === "big" ? 10 : 0
                                 
-                                color: Kirigami.Theme.textColor
                                 // Larger font for tall and big modes
                                 font.pixelSize: (root.viewMode === "big" || root.viewMode === "tall") ? 48 : deviceIcon.height * 0.8
                                 font.weight: Font.Normal
@@ -213,16 +213,16 @@ import "Formatter.js" as Formatter
                                 anchors.rightMargin: root.viewMode === "big" ? 10 : 0
                                 spacing: 0
                                 
-                                Text {
+                                PlasmaComponents.Label {
                                     text: hostName.toUpperCase().replace(/\n/g, " ")
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
+                                    opacity: 0.9
                                     font.pixelSize: root.viewMode === "big" ? 16 : (deviceInfoCard.height < 60 ? 14 : 20)
                                     font.bold: true
                                     width: parent.width
                                     elide: Text.ElideRight
                                 }
                                 
-                                Text {
+                                PlasmaComponents.Label {
                                     text: {
                                         var duration = Formatter.formatDuration(remainingMsec)
                                         if (mainDevice && mainDevice.isCharging) {
@@ -231,7 +231,7 @@ import "Formatter.js" as Formatter
                                             return i18nc("Time remaining", "Remaining: %1", duration)
                                         }
                                     }
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.7)
+                                    opacity: 0.7
                                     font.pixelSize: 12
                                     font.bold: false
                                     visible: remainingMsec > 0

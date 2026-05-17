@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import QtQuick.Shapes
 import Qt5Compat.GraphicalEffects
 import "Formatter.js" as Formatter
@@ -154,7 +155,7 @@ import "Formatter.js" as Formatter
                                 text: (mainDevice ? mainDevice.percentage : "")
                             }
 
-                            Text {
+                            PlasmaComponents.Label {
                                 id: widePercentText
                                 visible: true
                                 anchors.left: deviceIcon.right
@@ -162,7 +163,6 @@ import "Formatter.js" as Formatter
                                 anchors.right: parent.right
                                 anchors.leftMargin: 5
                                 
-                                color: Kirigami.Theme.textColor
                                 font.pixelSize: deviceIcon.height * 0.8
                                  
                                 font.weight: Font.Light
@@ -186,16 +186,16 @@ import "Formatter.js" as Formatter
                                 anchors.topMargin: -5
                                 spacing: 0
                                 
-                                Text {
+                                PlasmaComponents.Label {
                                     text: hostName.toUpperCase().replace(/\n/g, " ")
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
+                                    opacity: 0.9
                                     font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
                                     font.bold: true
                                     width: parent.width
                                     elide: Text.ElideRight
                                 }
                                 
-                                Text {
+                                PlasmaComponents.Label {
                                     text: {
                                         var duration = Formatter.formatDuration(remainingMsec)
                                         if (mainDevice && mainDevice.isCharging) {
@@ -204,7 +204,7 @@ import "Formatter.js" as Formatter
                                             return i18nc("Time remaining", "Remaining: %1", duration)
                                         }
                                     }
-                                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.7)
+                                    opacity: 0.7
                                     font.pixelSize: 12
                                     font.bold: false
                                     visible: remainingMsec > 0
@@ -226,7 +226,7 @@ import "Formatter.js" as Formatter
                             spacing: 4
                             Layout.fillWidth: true // Constrain to parent width
                             
-                            Text {
+                            PlasmaComponents.Label {
                                 id: percentageText
                                 property bool usePercent: true
                                 
@@ -247,7 +247,6 @@ import "Formatter.js" as Formatter
                                     
                                     return "%" + mainDevice.percentage
                                 }
-                                color: Kirigami.Theme.textColor
                                 font.pixelSize: Math.max(36, deviceInfoCard.height * 0.40) // Target size
                                  
                                 font.weight: Font.Light
@@ -269,10 +268,10 @@ import "Formatter.js" as Formatter
                         }
                         
                         // Hostname
-                        Text {
+                        PlasmaComponents.Label {
                             visible: false // Not visible in wide mode
                             text: hostName.toUpperCase().replace(/\n/g, " ")
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.9)
+                            opacity: 0.9
                             font.pixelSize: deviceInfoCard.height < 60 ? 14 : 20
                             font.bold: true
                             wrapMode: Text.Wrap
@@ -282,7 +281,7 @@ import "Formatter.js" as Formatter
                         }
                         
                         // Estimated Time Remaining (below hostname)
-                        Text {
+                        PlasmaComponents.Label {
                             visible: false // Not visible in wide mode, kept for potential future use
                             text: {
                                 var duration = Formatter.formatDuration(remainingMsec)
@@ -292,7 +291,7 @@ import "Formatter.js" as Formatter
                                     return i18nc("Time remaining", "Remaining: %1", duration)
                                 }
                             }
-                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
+                            opacity: 0.6
                             font.pixelSize: deviceInfoCard.height < 60 ? 12 : 14
                             Layout.fillWidth: true
                         }
