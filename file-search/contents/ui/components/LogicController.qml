@@ -196,38 +196,30 @@ Item {
         if (!folderPath || folderPath.toString().indexOf("file://") !== 0)
             return ;
 
-        var request = new XMLHttpRequest();
-        // Add .directory to path. Ensure no double slash if path ends with /
-        var path = folderPath.toString();
+        var path = folderPath.toString().replace(/^file:\/\/\/?/, "/");
         if (path.slice(-1) === "/")
             path = path.slice(0, -1);
 
-        var url = path + "/.directory";
-        request.open("GET", url);
-        request.onreadystatechange = function() {
-            if (request.readyState === XMLHttpRequest.DONE) {
-                if (request.status === 200 || request.status === 0) {
-                    var content = request.responseText;
-                    // Look for Icon=...
-                    var lines = content.split('\n');
-                    for (var i = 0; i < lines.length; i++) {
-                        var line = lines[i].trim();
-                        if (line.indexOf("Icon=") === 0) {
-                            var iconName = line.substring(5).trim();
-                            if (iconName.length > 0) {
-                                // Debug: console.log("FileSearch [Icon]: Found custom icon:", iconName);
-                                if (HistoryManager.updateItemIcon(logicRoot.searchHistory, uuid, iconName)) {
-                                    logicRoot.saveHistory();
-                                    logicRoot.historyForceUpdate();
-                                }
-                                return ;
-                            }
+        var dotDirPath = path + "/.directory";
+        var cmd = "cat " + shellEscape(dotDirPath) + " 2>/dev/null";
+        
+        executable.callbacks[cmd] = function(stdout) {
+            var lines = stdout.split('\n');
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].trim();
+                if (line.indexOf("Icon=") === 0) {
+                    var iconName = line.substring(5).trim();
+                    if (iconName.length > 0) {
+                        if (HistoryManager.updateItemIcon(logicRoot.searchHistory, uuid, iconName)) {
+                            logicRoot.saveHistory();
+                            logicRoot.historyForceUpdate();
                         }
+                        return ;
                     }
                 }
             }
         };
-        request.send();
+        executable.connectSource(cmd);
     }
 
     // ===== PINNED FUNCTIONS =====
@@ -604,7 +596,6 @@ Item {
 
     onHistoryForceUpdate: historyVersion++ // Increment version to trigger bindings
     Component.onCompleted: {
-        console.log("FileSearch: LogicController initialized");
         loadHistory();
         loadPinned();
         loadCategorySettings();

@@ -531,7 +531,6 @@ FocusScope {
                                             
                                             var path = modelData.filePath ? modelData.filePath.toString() : (modelData.url ? modelData.url.toString() : "");
                                             if (path && path.length > 0) {
-                                                var ext = PreviewUtils.getExtension(path);
                                                 path = path.replace("file://", "");
                                                 if (path.endsWith("/")) path = path.slice(0, -1);
                                                 var parts = path.split("/");

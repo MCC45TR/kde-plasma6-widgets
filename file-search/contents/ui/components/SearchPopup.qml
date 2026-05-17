@@ -647,7 +647,7 @@ Item {
     Loader {
         id: primaryResultPreviewLoader
         anchors.top: filterChipsWrapper.bottom
-        anchors.topMargin: (active && isVisible) ? 8 : 0
+        anchors.topMargin: (active && filterChipsWrapper.isVisible) ? 8 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 12

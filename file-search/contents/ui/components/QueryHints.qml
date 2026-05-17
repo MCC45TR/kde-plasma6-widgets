@@ -139,7 +139,7 @@ Rectangle {
     
     function detectHint(query) {
         if (!query || query.length === 0) {
-            return { show: false, text: "", icon: "", isError: false, isPrefixMenu: false }
+            return { show: false, text: "", icon: "", isError: false, isPrefixMenu: false, options: undefined }
         }
         
         // Full prefix menu trigger
@@ -280,6 +280,7 @@ Rectangle {
                 text: baseHint,
                 icon: bestMatch.icon,
                 isError: false,
+                isPrefixMenu: false,
                 prefix: matchedPrefix,
                 options: bestMatch.options
              }
@@ -311,12 +312,14 @@ Rectangle {
                     show: true,
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unknown prefix") + ": " + potentialPrefix + " (" + i18nd("plasma_applet_com.mcc45tr.filesearch", "try") + " 'help:')",
                     icon: "dialog-warning",
-                    isError: true
+                    isError: true,
+                    isPrefixMenu: false,
+                    options: undefined
                 }
             }
         }
         
-        return { show: false, text: "", icon: "", isError: false }
+        return { show: false, text: "", icon: "", isError: false, isPrefixMenu: false, options: undefined }
     }
     
     // Read-only helper for view mode

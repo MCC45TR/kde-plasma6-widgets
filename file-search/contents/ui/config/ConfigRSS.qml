@@ -593,8 +593,7 @@ Item {
         } else if (line.indexOf("saved OK") !== -1) {
             updateLastLog(index, line, "ok")
         } else {
-            // Generic line, maybe part of larger stdout
-            console.log("RSS Config [Sync Log]: " + line)
+            // Generic sync output line (suppressed for release)
         }
     }
 
@@ -899,7 +898,7 @@ Item {
                                     Repeater {
                                         model: [10, 15, 30, 45, 60, 120, 180, 240, 300, 360, 480, 600, 720, 1440]
                                         QQC2.MenuItem {
-                                            text: modelData >= 60 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 hours", modelData/60) : i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 mins", modelData)
+                                            text: modelData >= 60 ? configRSS.i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 hours", modelData/60) : configRSS.i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 mins", modelData)
                                             onTriggered: updateSource(index, "syncInterval", modelData)
                                         }
                                     }

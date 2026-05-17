@@ -388,7 +388,6 @@ Item {
                                     
                                     onDefaultTxtChanged: {
                                         allTitles = [defaultTxt, rssMockTxt];
-                                        if (currentIndex === 0) previewCurrentLabel.text = allTitles[0];
                                     }
                                     
                                     Component.onCompleted: {
