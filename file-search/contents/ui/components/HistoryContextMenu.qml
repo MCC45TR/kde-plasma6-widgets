@@ -12,8 +12,8 @@ QQC.Menu {
     // Helper: Check if item is a folder
     readonly property bool isFolder: {
         if (!historyItem) return false
-        var cat = historyItem.category || ""
-        return (cat === "Yerler" || cat === "Places" || cat === "Klasörler" || cat === "Folders")
+        var cat = (historyItem.category || "").toLowerCase()
+        return (cat.indexOf("place") !== -1 || cat.indexOf("folder") !== -1 || cat.indexOf("yerler") !== -1 || cat.indexOf("klasör") !== -1)
     }
 
     // Helper: Get Match ID for pinning
@@ -31,7 +31,7 @@ QQC.Menu {
             if (historyItem) {
                 var disp = historyItem.display || ""
                 var dec = historyItem.decoration || "application-x-executable"
-                var cat = historyItem.category || "Diğer"
+                var cat = historyItem.category || "Other"
                 var path = historyItem.filePath || ""
                 
                 logic.togglePin({
@@ -54,7 +54,7 @@ QQC.Menu {
         onTriggered: {
             if (historyItem && historyItem.filePath) {
                 if (historyItem.filePath.toString().indexOf(".desktop") !== -1) {
-                    logic.runShellCommand("kioclient6 exec \"" + historyItem.filePath + "\"")
+                    logic.launchApp(historyItem.filePath)
                 } else {
                     Qt.openUrlExternally(historyItem.filePath)
                 }
@@ -120,7 +120,7 @@ QQC.Menu {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Properties")
         icon.name: "document-properties"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
-        onTriggered: logic.runShellCommand("kioclient6 openProperties \"" + historyItem.filePath + "\"")
+        onTriggered: logic.showProperties(historyItem.filePath)
     }
 
     QQC.MenuSeparator { visible: !!(historyItem && historyItem.isApplication) }
@@ -130,7 +130,7 @@ QQC.Menu {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Edit Application...")
         icon.name: "configure"
         visible: !!(historyItem && historyItem.isApplication && historyItem.filePath)
-        onTriggered: logic.runShellCommand("kioclient6 openProperties \"" + historyItem.filePath + "\"")
+        onTriggered: logic.showProperties(historyItem.filePath)
     }
 
     QQC.MenuSeparator { visible: !!(historyItem && historyItem.uuid) }

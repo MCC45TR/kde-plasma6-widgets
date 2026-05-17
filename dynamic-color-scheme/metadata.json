@@ -1,0 +1,39 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "mcc45tr@gmail.com",
+                "Name": "MCC45TR"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "Automatically switches Plasma color schemes and Konsole profiles based on time, sun position, or manual interaction.",
+        "Description[tr]": "Zamana, güneş konumuna veya manuel seçime göre Plasma renk şemalarını ve Konsole profillerini otomatik değiştirir.",
+        "EnabledByDefault": true,
+        "Icon": "preferences-desktop-color",
+        "Id": "com.mcc45tr.dynamiccolorscheme",
+        "License": "GPL-2.0+",
+        "Name": "Dynamic Color Scheme",
+        "Name[tr]": "Dinamik Renk Şeması",
+        "Version": "1.0",
+        "Website": "https://github.com/mcc45tr/Plasma6Widgets"
+    },
+    "X-Plasma-ConfigModel": [
+        {
+            "Key": "General",
+            "Name": "General",
+            "Name[tr]": "Genel",
+            "Source": "ui/config/ConfigGeneral.qml"
+        },
+        {
+            "Key": "Location",
+            "Name": "Location & Time",
+            "Name[tr]": "Konum ve Zaman",
+            "Source": "ui/config/configLocation.qml"
+        }
+    ]
+}

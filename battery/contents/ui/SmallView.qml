@@ -36,7 +36,7 @@ import "Formatter.js" as Formatter
         id: deviceList
         anchors.fill: parent
         anchors.margins: root.contentGap
-        spacing: 5
+        spacing: Kirigami.Units.smallSpacing
         snapMode: ListView.SnapToItem
         clip: true
         

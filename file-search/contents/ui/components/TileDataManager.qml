@@ -13,7 +13,7 @@ Item {
     
     // Search text for similarity scoring
     property string searchText: ""
-    property string activeFilter: "Tümü"
+    property string activeFilter: "All"
     property int maxResults: 20
     property string lastRefreshSignature: ""
     
@@ -49,6 +49,8 @@ Item {
     // Internal state
     property real searchStartTime: 0
     readonly property var fileOnlyCategories: ["Files", "Dosyalar", "Folders", "Klasörler", "Documents", "Belgeler", "Images", "Resimler", "Audio", "Ses", "Video", "Videolar", "Places", "Yerler"]
+    // Cached i18n string to avoid calling i18nd() on every refresh cycle
+    readonly property string _otherResultsLabel: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results")
     
     function startSearch() {
         searchStartTime = new Date().getTime()
@@ -56,8 +58,8 @@ Item {
     
     function refreshGroups() {
         var rssItems = (logic.rssCache && Array.isArray(logic.rssCache)) ? logic.rssCache : [];
-        var firstItem = rawDataProxy.count > 0 ? rawDataProxy.itemAt(0) : null;
-        var lastItem = rawDataProxy.count > 0 ? rawDataProxy.itemAt(rawDataProxy.count - 1) : null;
+        var firstItem = rawDataProxy.count > 0 ? rawDataProxy.objectAt(0) : null;
+        var lastItem = rawDataProxy.count > 0 ? rawDataProxy.objectAt(rawDataProxy.count - 1) : null;
         var signature = [
             searchText,
             activeFilter,
@@ -93,11 +95,11 @@ Item {
 
         if (!isRSSOnlyMode) {
             for (var i = 0; i < rawDataProxy.count; i++) {
-                var item = rawDataProxy.itemAt(i);
+                var item = rawDataProxy.objectAt(i);
                 if (!item)
                     continue;
 
-                var cat = item.category || "Diğer";
+                var cat = item.category || "Other";
                 if (!CategoryManager.isCategoryVisible(categorySettings, cat))
                     continue;
 
@@ -107,28 +109,37 @@ Item {
                 var lowerUrl = urlString.toLowerCase();
                 var ext = PreviewUtils.getExtension(urlString);
 
-                if (dataManager.activeFilter !== "Tümü") {
+                if (dataManager.activeFilter !== "All") {
                     var shouldKeep = false;
 
-                    if (activeFilterLower === "belgeler") {
+                    if (activeFilterLower === "docs") {
                         shouldKeep = (lowerCategory.indexOf("belge") !== -1 || lowerCategory.indexOf("document") !== -1 || lowerCategory.indexOf("text") !== -1 ||
                                      lowerDecoration.indexOf("document") !== -1 || lowerDecoration.indexOf("text") !== -1 || PreviewUtils.isDocumentLikeExtension(ext));
-                    } else if (activeFilterLower === "resimler") {
+                    } else if (activeFilterLower === "images") {
                         shouldKeep = (lowerCategory.indexOf("resim") !== -1 || lowerCategory.indexOf("image") !== -1 || lowerCategory.indexOf("picture") !== -1 ||
                                      lowerCategory.indexOf("photo") !== -1 || lowerCategory.indexOf("görsel") !== -1 || lowerCategory.indexOf("görüntü") !== -1 ||
                                      lowerDecoration.indexOf("image") !== -1 || lowerDecoration.indexOf("photo") !== -1 || lowerDecoration.indexOf("picture") !== -1 ||
                                      PreviewUtils.isImageExtension(ext));
-                    } else if (activeFilterLower === "klasörler") {
+                    } else if (activeFilterLower === "folders") {
                         shouldKeep = (lowerCategory.indexOf("klasör") !== -1 || lowerCategory.indexOf("folder") !== -1 || lowerCategory.indexOf("yerler") !== -1 ||
                                      lowerCategory.indexOf("place") !== -1 || lowerDecoration.indexOf("folder") !== -1 || lowerUrl.endsWith("/"));
-                    } else if (activeFilterLower === "uygulamalar") {
-                        shouldKeep = (lowerCategory.indexOf("uygulama") !== -1 || lowerCategory.indexOf("application") !== -1 || lowerCategory.indexOf("app") !== -1 ||
-                                     lowerCategory.indexOf("program") !== -1 || lowerDecoration.indexOf("app") !== -1 || lowerUrl.endsWith(".desktop"));
+                    } else if (activeFilterLower === "apps") {
+                        shouldKeep = (lowerCategory.indexOf("app") !== -1 || lowerCategory.indexOf("uygulama") !== -1 || lowerCategory.indexOf("program") !== -1 ||
+                                      lowerCategory.indexOf("ayar") !== -1 || lowerCategory.indexOf("setting") !== -1 ||
+                                      lowerCategory.indexOf("oyun") !== -1 || lowerCategory.indexOf("game") !== -1 ||
+                                      lowerCategory.indexOf("ofis") !== -1 || lowerCategory.indexOf("office") !== -1 ||
+                                      lowerCategory.indexOf("sistem") !== -1 || lowerCategory.indexOf("system") !== -1 ||
+                                      lowerCategory.indexOf("araç") !== -1 || lowerCategory.indexOf("util") !== -1 ||
+                                      lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("grafik") !== -1 || lowerCategory.indexOf("graphic") !== -1 ||
+                                      lowerCategory.indexOf("geliştirme") !== -1 || lowerCategory.indexOf("develop") !== -1 ||
+                                      lowerCategory.indexOf("ortam") !== -1 || lowerCategory.indexOf("multimedia") !== -1 ||
+                                      lowerCategory.indexOf("eğitim") !== -1 || lowerCategory.indexOf("educat") !== -1 ||
+                                      lowerUrl.endsWith(".desktop") || (item.duplicateId && item.duplicateId.toString().indexOf(".desktop") !== -1));
                     } else if (activeFilterLower === "web") {
                         shouldKeep = (lowerCategory.indexOf("web") !== -1 || lowerCategory.indexOf("bookmark") !== -1 || lowerCategory.indexOf("yer imi") !== -1 ||
                                      lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("browser") !== -1 || lowerDecoration.indexOf("globe") !== -1 ||
                                      lowerDecoration.indexOf("web") !== -1 || lowerUrl.startsWith("http") || lowerUrl.startsWith("www"));
-                    } else if (activeFilterLower === "haberler" || activeFilterLower === "rss") {
+                    } else if (activeFilterLower === "rss") {
                         shouldKeep = (lowerCategory.indexOf("haber") !== -1 || lowerCategory.indexOf("news") !== -1 || lowerCategory.indexOf("rss") !== -1 || lowerDecoration.indexOf("news") !== -1);
                     }
 
@@ -157,7 +168,7 @@ Item {
 
         var activeF = dataManager.activeFilter;
         // RSS logic: Include if in RSS mode OR if RSS is enabled and a relevant filter is active
-        if (isRSSOnlyMode || (logic.rssEnabled && (activeF === "Tümü" || activeF === "All" || activeF === "Web" || activeF === "RSS" || activeF === "Haberler"))) {
+        if (isRSSOnlyMode || (logic.rssEnabled && (activeF === "All" || activeF === "Web" || activeF === "RSS"))) {
             for (var r = 0; r < rssItems.length; r++) {
                 var rssEntry = rssItems[r];
                 if (isRSSOnlyMode && rssQuery.length > 0) {
@@ -217,8 +228,8 @@ Item {
         for (var k = 0; k < displayOrder.length; k++) {
             var catName = displayOrder[k];
             var items = groups[catName];
-            var isAppCategory = (catName === "Uygulamalar" || catName === "Applications");
-            var isRSSCategory = (catName === "RSS" || catName === "Haberler");
+            var isAppCategory = (catName.toLowerCase().indexOf("app") !== -1 || catName.toLowerCase().indexOf("uygulama") !== -1);
+            var isRSSCategory = (catName === "RSS" || catName.toLowerCase().indexOf("haber") !== -1 || catName.toLowerCase().indexOf("news") !== -1);
 
             // Don't merge RSS or Applications into "Other Results" even if there is only one
             if (items.length <= 1 && !isAppCategory && !isRSSCategory) {
@@ -242,7 +253,7 @@ Item {
 
         if (otherItems.length > 0) {
             result.push({
-                categoryName: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results"),
+                categoryName: _otherResultsLabel,
                 items: otherItems
             });
         }
@@ -255,8 +266,16 @@ Item {
             var catItems = result[p].items;
             for (var q = 0; q < catItems.length; q++) {
                 var groupedItem = catItems[q];
-                groupedItem.category = groupedCategoryName;
-                flatList.push(groupedItem);
+                // CRITICAL FIX: Create a shallow copy to prevent modifying shared/cached objects
+                // (like rssCache entries). Direct mutation causes QML V4 engine crashes (segfaults).
+                var itemCopy = {};
+                for (var key in groupedItem) {
+                    if (groupedItem.hasOwnProperty(key)) {
+                        itemCopy[key] = groupedItem[key];
+                    }
+                }
+                itemCopy.category = groupedCategoryName;
+                flatList.push(itemCopy);
             }
         }
 
@@ -268,15 +287,14 @@ Item {
     // Debounce timer for refreshGroups to prevent excessive updates
     Timer {
         id: refreshDebouncer
-        interval: 150
+        interval: 250
         onTriggered: dataManager.refreshGroups()
     }
 
-    Repeater {
+    Instantiator {
         id: rawDataProxy
         model: dataManager.resultsModel
-        visible: false
-        delegate: Item {
+        delegate: QtObject {
             property int itemIndex: index
             // Role name fallback for different Milou/Plasma versions
             property var category: (model.category !== undefined ? model.category : (model.matchCategory !== undefined ? model.matchCategory : (model.categoryName !== undefined ? model.categoryName : "")))
@@ -288,7 +306,6 @@ Item {
             property var duplicateId: model.duplicateId || ""
         }
         onCountChanged: {
-            dataManager.resultCount = count
             refreshDebouncer.restart()
             
             // Latency Measurement

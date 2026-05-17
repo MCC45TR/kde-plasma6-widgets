@@ -10,7 +10,7 @@
   <group name="Panel">
     <entry name="displayMode" type="Int">
       <default>1</default>
-      <label>Display Mode: 0=Button, 1=Medium, 2=Wide, 3=Extra Wide</label>
+      <label>Display Mode: 0=Button, 1=Medium, 2=Wide, 3=Extra Wide, 4=Ultra Wide</label>
     </entry>
     <entry name="showSearchButton" type="Bool">
       <default>true</default>
@@ -217,6 +217,22 @@
     <entry name="rssFrequency" type="Int">
       <default>3</default>
       <label>Frequency of RSS placeholder cycles</label>
+    </entry>
+    <entry name="rssShowImages" type="Bool">
+      <default>true</default>
+      <label>Show images in RSS result cards</label>
+    </entry>
+    <entry name="rssExpandableCards" type="Bool">
+      <default>true</default>
+      <label>Allow RSS cards to expand for more details</label>
+    </entry>
+    <entry name="rssShowSource" type="Bool">
+      <default>true</default>
+      <label>Show RSS source name in panel ticker</label>
+    </entry>
+    <entry name="rssShowFullHeadline" type="Bool">
+      <default>true</default>
+      <label>Show full headline by segmenting long titles</label>
     </entry>
   </group>
 

@@ -80,7 +80,7 @@
       <label>Manual Font Size in Panel</label>
     </entry>
     <entry name="panelLayoutMode" type="Int">
-      <default>0</default>
+      <default>2</default>
       <label>Panel Layout Mode (0: Left, 1: Right, 2: Center)</label>
     </entry>
     <entry name="panelAutoButtonSize" type="Bool">

@@ -17,6 +17,7 @@ Item {
     
     // Collapsed state
     property bool isExpanded: true
+    property bool animateHeight: false
     
     // Localization function removed (using global i18n)
     
@@ -99,7 +100,10 @@ Item {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onClicked: pinnedSectionRoot.isExpanded = !pinnedSectionRoot.isExpanded
+                onClicked: {
+                    pinnedSectionRoot.animateHeight = true
+                    pinnedSectionRoot.isExpanded = !pinnedSectionRoot.isExpanded
+                }
             }
         }
         
@@ -124,9 +128,11 @@ Item {
             clip: true
             
             Behavior on Layout.preferredHeight {
+                enabled: pinnedSectionRoot.animateHeight
                 NumberAnimation { 
                     duration: Kirigami.Units.shortDuration
                     easing.type: Easing.OutCubic 
+                    onFinished: pinnedSectionRoot.animateHeight = false
                 }
             }
             
@@ -185,7 +191,6 @@ Item {
                                         isPinned: true
                                         accentColor: pinnedSectionRoot.accentColor
                                         textColor: pinnedSectionRoot.textColor
-                                        // trFunc removed
                                         
                                         onToggled: {
                                             pinnedSectionRoot.unpinClicked(modelData.matchId)
@@ -237,6 +242,14 @@ Item {
                     
                     sourceComponent: Flow {
                         id: tileFlow
+                        width: {
+                            var avail = parent.width > 0 ? parent.width : (pinnedSectionRoot.width - 24);
+                            var colW = pinnedSectionRoot.tileWidth + 8;
+                            var cols = Math.floor(avail / colW);
+                            if (cols <= 0) return avail;
+                            return cols * colW - 8;
+                        }
+                        x: (parent.width - width) / 2
                         spacing: 8
                         
                         Repeater {

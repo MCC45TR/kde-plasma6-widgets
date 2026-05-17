@@ -45,13 +45,13 @@ Item {
                 root.requestPreventClosing(false)
                 authSafetyTimer.stop()
                 try {
-                    console.log("[PowerView] Captured Boot Entries (Sudo): " + fullData)
+                    // Boot entries captured
                     var entries = JSON.parse(fullData)
                     root.processEntries(entries)
                     root.isLoading = false
                     
                     if (sourceName.indexOf("pkexec") !== -1) {
-                         console.log("[PowerView] Saving to config cache...")
+                         // Saving to config cache
                          if (root.plasmoidConfig) {
                              root.plasmoidConfig.cachedBootEntries = fullData
                              try { Plasmoid.configuration.cachedBootEntries = fullData } catch(e) {} // Fallback/Sync
@@ -105,7 +105,7 @@ Item {
 
         if (cached && cached.length > 0) {
             try {
-                console.log("[PowerView] Loading from config cache")
+                // Loading from config cache
                 var rawCached = JSON.parse(cached)
                 root.processEntries(rawCached)
                 return
@@ -207,12 +207,18 @@ Item {
         execSource.connectSource(cmd)
     }
 
+    // Shell escape helper for safe command construction
+    function shellEscape(str) {
+        if (str === undefined || str === null) return "''"
+        return "'" + str.toString().replace(/'/g, "'\\''") + "'"
+    }
+
     function rebootToEntry(id) {
         var cmd = ""
         if (id === "auto-reboot-to-firmware-setup") {
             cmd = "systemctl reboot --firmware-setup"
         } else {
-            cmd = "systemctl reboot --boot-loader-entry=\"" + id + "\""
+            cmd = "systemctl reboot --boot-loader-entry=" + shellEscape(id)
         }
         executeCommand(cmd)
     }

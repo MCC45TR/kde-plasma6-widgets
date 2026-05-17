@@ -84,11 +84,11 @@ PlasmoidItem {
         // Header
         RowLayout {
             Layout.fillWidth: true
-            Layout.margins: 10
+            Layout.margins: Kirigami.Units.largeSpacing
             
-            PlasmaComponents.Label {
+            Kirigami.Heading {
                 text: "AFAD Son Depremler"
-                font.bold: true
+                level: 2
             }
             
             Item { Layout.fillWidth: true }
@@ -104,6 +104,10 @@ PlasmoidItem {
                 display: PlasmaComponents.Button.IconOnly
                 onClicked: refreshData()
                 enabled: !isLoading
+                
+                PlasmaComponents.ToolTip {
+                    text: i18n("Refresh")
+                }
             }
         }
         

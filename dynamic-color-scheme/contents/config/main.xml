@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="mode" type="Int">
+      <default>0</default>
+      <label>Mode (0: 2-mode, 1: 4-mode)</label>
+    </entry>
+    <entry name="trigger" type="Int">
+      <default>0</default>
+      <label>Trigger Type (0: Manual, 1: Time, 2: Sun)</label>
+    </entry>
+    
+    <entry name="schemeLight" type="String">
+      <default>BreezeLight</default>
+      <label>Light Scheme (2-mode)</label>
+    </entry>
+    <entry name="schemeDark" type="String">
+      <default>BreezeDark</default>
+      <label>Dark Scheme (2-mode)</label>
+    </entry>
+
+    <entry name="schemeNight" type="String">
+      <default>BreezeDark</default>
+      <label>Night Scheme (4-mode)</label>
+    </entry>
+    <entry name="schemeMorning" type="String">
+      <default>BreezeLight</default>
+      <label>Morning Scheme (4-mode)</label>
+    </entry>
+    <entry name="schemeNoon" type="String">
+      <default>BreezeLight</default>
+      <label>Noon Scheme (4-mode)</label>
+    </entry>
+    <entry name="schemeEvening" type="String">
+      <default>BreezeDark</default>
+      <label>Evening Scheme (4-mode)</label>
+    </entry>
+
+    <entry name="konsoleLight" type="String">
+      <default>Breeze</default>
+      <label>Light Konsole Profile (2-mode)</label>
+    </entry>
+    <entry name="konsoleDark" type="String">
+      <default>Breeze</default>
+      <label>Dark Konsole Profile (2-mode)</label>
+    </entry>
+
+    <entry name="konsoleNight" type="String">
+      <default>Breeze</default>
+      <label>Night Konsole Profile (4-mode)</label>
+    </entry>
+    <entry name="konsoleMorning" type="String">
+      <default>Breeze</default>
+      <label>Morning Konsole Profile (4-mode)</label>
+    </entry>
+    <entry name="konsoleNoon" type="String">
+      <default>Breeze</default>
+      <label>Noon Konsole Profile (4-mode)</label>
+    </entry>
+    <entry name="konsoleEvening" type="String">
+      <default>Breeze</default>
+      <label>Evening Konsole Profile (4-mode)</label>
+    </entry>
+
+    <entry name="latitude" type="Double">
+      <default>0.0</default>
+      <label>Latitude</label>
+    </entry>
+    <entry name="longitude" type="Double">
+      <default>0.0</default>
+      <label>Longitude</label>
+    </entry>
+
+    <entry name="timeMorning" type="String">
+      <default>06:00</default>
+      <label>Morning Start Time</label>
+    </entry>
+    <entry name="timeNoon" type="String">
+      <default>12:00</default>
+      <label>Noon Start Time</label>
+    </entry>
+    <entry name="timeEvening" type="String">
+      <default>18:00</default>
+      <label>Evening Start Time</label>
+    </entry>
+    <entry name="timeNight" type="String">
+      <default>22:00</default>
+      <label>Night Start Time</label>
+    </entry>
+  </group>
+</kcfg>

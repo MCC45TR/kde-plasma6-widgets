@@ -11,6 +11,7 @@ Kirigami.ScrollablePage {
     property double cfg_backgroundOpacity
     
     property bool cfg_showDigitalClock
+    property int cfg_timeFormat
     property bool cfg_useCustomFont
     property string cfg_customFontFamily
     
@@ -26,6 +27,7 @@ Kirigami.ScrollablePage {
     readonly property int cfg_clockStyleDefault: 2
     readonly property double cfg_backgroundOpacityDefault: 1.0
     readonly property bool cfg_showDigitalClockDefault: false
+    readonly property int cfg_timeFormatDefault: 0
     readonly property bool cfg_useCustomFontDefault: false
     readonly property string cfg_customFontFamilyDefault: ""
     readonly property bool cfg_fontAutoAdjustDefault: true
@@ -63,6 +65,13 @@ Kirigami.ScrollablePage {
                 // Keep showDigitalClock sync'd for internal usage if needed/migration
                 cfg_showDigitalClock = (currentIndex !== 0)
             }
+        }
+
+        ComboBox {
+            Kirigami.FormData.label: i18n("Time Format:")
+            model: [i18n("System Default"), i18n("12 Hour"), i18n("24 Hour")]
+            currentIndex: cfg_timeFormat
+            onActivated: cfg_timeFormat = currentIndex
         }
 
         ComboBox {

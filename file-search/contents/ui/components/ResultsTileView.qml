@@ -27,6 +27,11 @@ FocusScope {
     property bool previewEnabled: true
     property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
     
+    // RSS settings from config
+    property bool rssShowImages: true
+    property bool rssExpandableCards: true
+    property var expandedItems: ({})
+    
     // Navigation state
     property int currentCategoryIndex: 0
     property int currentItemIndex: 0
@@ -102,7 +107,7 @@ FocusScope {
     
     function columnsInRow() {
         var itemWidth = tileWidth + 8 // tile width + spacing
-        return Math.max(1, Math.floor(width / itemWidth))
+        return Math.max(1, Math.floor(resultsTileRoot.width / itemWidth))
     }
     
     // Calculate current column position
@@ -252,7 +257,7 @@ FocusScope {
                 else if (subtext.indexOf("file://") === 0) filePath = subtext
             }
             
-            itemClicked(data.index, data.display || "", data.decoration || "application-x-executable", data.category || "Diğer", matchId, filePath)
+            itemClicked(data.index, data.display || "", data.decoration || "application-x-executable", data.category || "Other", matchId, filePath)
         }
     }
     
@@ -284,6 +289,16 @@ FocusScope {
     
     // Compact tile view mode
     property bool compactTileView: false
+    
+    // Cached localized strings to prevent repeated i18nd calls during rendering
+    readonly property string locCategory: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category")
+    readonly property string locFileType: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type")
+    readonly property string locPath: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path")
+    readonly property string locSpacePreview: i18nd("plasma_applet_com.mcc45tr.filesearch", "Space to preview")
+    readonly property string locReadBrowser: i18nd("plasma_applet_com.mcc45tr.filesearch", "Read in Browser")
+    readonly property string locSearching: i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
+    readonly property string locNoResults: i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
+    readonly property string locTypeToSearch: i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
     
     // Computed tile dimensions for grid items
     readonly property real tileWidth: compactTileView ? (iconSize + 16) : (iconSize + 40)
@@ -335,7 +350,7 @@ FocusScope {
         
         Column {
             id: tileCategoryList
-            width: parent.width
+            width: resultsTileRoot.width - 24
             spacing: 16
             
             Repeater {
@@ -349,6 +364,7 @@ FocusScope {
                 property int catIdx: index
                 property bool isCollapsed: resultsTileRoot.collapsedCategories[modelData.categoryName] || false
                 property bool isWide: resultsTileRoot.isWideCategory(modelData.categoryName)
+                property bool animateHeight: false
                 
                 // Category Header (Clickable to collapse/expand)
                 Rectangle {
@@ -391,7 +407,10 @@ FocusScope {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: resultsTileRoot.toggleCategory(modelData.categoryName)
+                        onClicked: {
+                            categoryDelegate.animateHeight = true
+                            resultsTileRoot.toggleCategory(modelData.categoryName)
+                        }
                     }
                 }
                 
@@ -402,13 +421,25 @@ FocusScope {
                     clip: true
                     
                     Behavior on height {
-                        NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                        enabled: categoryDelegate.animateHeight
+                        NumberAnimation { 
+                            duration: 200; 
+                            easing.type: Easing.InOutQuad
+                            onFinished: categoryDelegate.animateHeight = false
+                        }
                     }
                     
                     Flow {
                         id: categoryFlow
-                        anchors.left: parent.left
-                        anchors.right: parent.right
+                        // Calculate exact width to enable horizontal centering
+                        width: {
+                            var avail = parent.width > 0 ? parent.width : (resultsTileRoot.width - 24);
+                            var colW = resultsTileRoot.tileWidth + 8;
+                            var cols = Math.floor(avail / colW);
+                            if (cols <= 0) return avail;
+                            return categoryDelegate.isWide ? avail : (cols * colW - 8);
+                        }
+                        x: (parent.width - width) / 2
                         anchors.top: parent.top
                         spacing: 8
                     
@@ -417,21 +448,30 @@ FocusScope {
                         
                         delegate: Item {
                             id: tileDelegate
+                            property bool isRSS: modelData.category === "RSS"
+                            property bool isExpanded: isRSS && resultsTileRoot.rssExpandableCards && !!resultsTileRoot.expandedItems[modelData.duplicateId]
+                            
                             // Wide vs Grid sizing
-                            width: categoryDelegate.isWide ? parent.width : resultsTileRoot.tileWidth
-                            height: categoryDelegate.isWide ? Math.max(50, resultsTileRoot.iconSize + 16) : resultsTileRoot.tileHeight
+                            width: (categoryDelegate.isWide || tileDelegate.isExpanded) ? parent.width : resultsTileRoot.tileWidth
+                            height: (categoryDelegate.isWide || tileDelegate.isExpanded) ? (tileContent.implicitHeight + 16) : resultsTileRoot.tileHeight
+                            
+                            Layout.fillWidth: categoryDelegate.isWide || tileDelegate.isExpanded
+                            
+                            Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+                            Behavior on height { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
                             
                             property int itemIdx: index
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
                             property string previewPath: PreviewUtils.getLocalPreviewPath(modelData.url || "")
                             property string previewFileType: PreviewUtils.getFileTypeLabel(modelData.url || "")
-                            property string previewSource: ((tileMouseArea.containsMouse || tileDelegate.isSelected || resultsTileRoot.previewForceVisible) && !categoryDelegate.isWide)
+                            property string previewSource: (!categoryDelegate.isWide && !tileDelegate.isExpanded)
                                 ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings)
                                 : ""
                             
                             Rectangle {
                                 id: tileBg
                                 anchors.fill: parent
+                                anchors.bottomMargin: (categoryDelegate.isWide || tileDelegate.isExpanded) ? 8 : 0
                                 radius: 8
                                 color: {
                                     if (tileDelegate.isSelected) 
@@ -470,12 +510,19 @@ FocusScope {
                                 }
                                 
                                 // Content Loader (Grid vs Horizontal Layout)
-                                Loader {
+                                Item {
+                                    id: tileContent
                                     anchors.fill: parent
-                                    anchors.margins: 6
-                                    sourceComponent: categoryDelegate.isWide ? wideLayoutComp : gridLayoutComp
+                                    anchors.margins: 8
+                                    implicitHeight: loader.item ? loader.item.implicitHeight : 50
+                                    
+                                    Loader {
+                                        id: loader
+                                        anchors.fill: parent
+                                        sourceComponent: (categoryDelegate.isWide || tileDelegate.isExpanded) ? wideLayoutComp : gridLayoutComp
+                                    }
                                 }
-                                
+                            }    
                                 Component {
                                     id: gridLayoutComp
                                     Column {
@@ -489,7 +536,7 @@ FocusScope {
                                             
                                             Kirigami.Icon {
                                                 anchors.fill: parent
-                                                source: modelData.decoration || "application-x-executable"
+                                                source: (tileDelegate.isRSS && modelData.sourceIcon) ? modelData.sourceIcon : (modelData.decoration || "application-x-executable")
                                                 color: resultsTileRoot.textColor
                                                 visible: previewImageGrid.status !== Image.Ready
                                             }
@@ -522,7 +569,7 @@ FocusScope {
                                             width: tileDelegate.width - 16
                                             text: {
                                                 var cat = modelData.category || ""
-                                                var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings");
+                                                var isApp = (cat.toLowerCase().indexOf("app") !== -1 || cat.toLowerCase().indexOf("uygulama") !== -1 || cat === "System Settings");
                                                 if (isApp) return modelData.subtext || "";
                                                 
                                                 var path = (modelData.url && modelData.url.toString) ? modelData.url.toString() : "";
@@ -551,36 +598,100 @@ FocusScope {
                                 
                                 Component {
                                     id: wideLayoutComp
-                                    RowLayout {
+                                    ColumnLayout {
+                                        id: wideLayout
                                         spacing: 12
                                         
-                                        Kirigami.Icon {
-                                            source: modelData.decoration || "application-x-executable"
-                                            Layout.preferredWidth: resultsTileRoot.iconSize
-                                            Layout.preferredHeight: resultsTileRoot.iconSize
-                                            color: resultsTileRoot.textColor
-                                        }
-                                        
-                                        ColumnLayout {
+                                        RowLayout {
+                                            spacing: 12
                                             Layout.fillWidth: true
-                                            spacing: 2
                                             
-                                            Text {
-                                                text: modelData.display || ""
-                                                font.pixelSize: 14 // Larger font for wide cards
-                                                font.bold: true
+                                            Kirigami.Icon {
+                                                source: (tileDelegate.isRSS && modelData.sourceIcon) ? modelData.sourceIcon : (modelData.decoration || "application-x-executable")
+                                                Layout.preferredWidth: resultsTileRoot.iconSize
+                                                Layout.preferredHeight: resultsTileRoot.iconSize
                                                 color: resultsTileRoot.textColor
-                                                Layout.fillWidth: true
-                                                elide: Text.ElideRight
+                                                visible: !tileDelegate.isExpanded // Show icon only when not expanded
                                             }
                                             
-                                            Text {
-                                                text: modelData.subtext || ""
-                                                font.pixelSize: 11
-                                                color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                            ColumnLayout {
                                                 Layout.fillWidth: true
-                                                elide: Text.ElideRight
+                                                spacing: 2
+                                                
+                                                Text {
+                                                    text: modelData.display || ""
+                                                    font.pixelSize: tileDelegate.isExpanded ? 16 : 14
+                                                    font.bold: true
+                                                    color: resultsTileRoot.textColor
+                                                    Layout.fillWidth: true
+                                                    elide: tileDelegate.isExpanded ? Text.ElideNone : Text.ElideRight
+                                                    wrapMode: tileDelegate.isExpanded ? Text.Wrap : Text.NoWrap
+                                                }
+                                                
+                                                Text {
+                                                    text: modelData.subtext || ""
+                                                    font.pixelSize: 11
+                                                    color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                                    Layout.fillWidth: true
+                                                    elide: Text.ElideRight
+                                                    visible: text.length > 0 && !tileDelegate.isExpanded
+                                                }
+                                            }
+
+                                            // Close/Shrink button for RSS
+                                            Kirigami.Icon {
+                                                source: "window-restore"
+                                                Layout.preferredWidth: 16
+                                                Layout.preferredHeight: 16
+                                                color: resultsTileRoot.textColor
+                                                opacity: 0.5
+                                                visible: tileDelegate.isExpanded
+                                            }
+                                        }
+
+                                        // Expanded Content
+                                        ColumnLayout {
+                                            Layout.fillWidth: true
+                                            visible: tileDelegate.isExpanded
+                                            spacing: 12
+                                            
+                                            // Image
+                                            Image {
+                                                id: expandedImage
+                                                source: (tileDelegate.isExpanded && resultsTileRoot.rssShowImages) ? (modelData.imageUrl || "") : ""
+                                                Layout.fillWidth: true
+                                                Layout.preferredHeight: source.length > 0 ? Math.min(250, implicitHeight) : 0
+                                                fillMode: Image.PreserveAspectFit
+                                                visible: source.length > 0
+                                                asynchronous: true
+                                                cache: true
+                                            }
+                                            
+                                            // Full Text
+                                            Text {
+                                                text: modelData.fullContent || modelData.description || ""
+                                                Layout.fillWidth: true
+                                                wrapMode: Text.Wrap
+                                                font.pixelSize: 13
+                                                color: resultsTileRoot.textColor
+                                                opacity: 0.9
                                                 visible: text.length > 0
+                                            }
+
+                                            RowLayout {
+                                                Layout.fillWidth: true
+                                                Button {
+                                                    text: resultsTileRoot.locReadBrowser
+                                                    icon.name: "internet-services"
+                                                    onClicked: resultsTileRoot.activateCurrentItem()
+                                                }
+                                                Label {
+                                                    text: modelData.subtext || ""
+                                                    font.pixelSize: 10
+                                                    opacity: 0.6
+                                                    Layout.fillWidth: true
+                                                    horizontalAlignment: Text.AlignRight
+                                                }
                                             }
                                         }
                                     }
@@ -599,6 +710,24 @@ FocusScope {
                                     
                                     onClicked: (mouse) => {
                                         var matchId = modelData.duplicateId || modelData.display || ""
+                                        
+                                        // Expansion logic for RSS
+                                        if (tileDelegate.isRSS && resultsTileRoot.rssExpandableCards) {
+                                            if (mouse.button === Qt.LeftButton) {
+                                                var newExpanded = {}
+                                                // Option 1: Only one expanded at a time
+                                                // var currentVal = resultsTileRoot.expandedItems[matchId]
+                                                // newExpanded[matchId] = !currentVal
+                                                
+                                                // Option 2: Allow multiple (but keep local state simple)
+                                                Object.assign(newExpanded, resultsTileRoot.expandedItems)
+                                                newExpanded[matchId] = !newExpanded[matchId]
+                                                
+                                                resultsTileRoot.expandedItems = newExpanded
+                                                return;
+                                            }
+                                        }
+
                                         var filePath = (modelData.url && modelData.url.toString) ? modelData.url.toString() : (modelData.url || "")
                                         var subtext = modelData.subtext || ""
                                         var urls = modelData.urls || []
@@ -614,7 +743,7 @@ FocusScope {
                                         
                                         if (mouse.button === Qt.RightButton) {
                                             var cat = modelData.category || ""
-                                            var isApp = (cat === "Uygulamalar" || cat === "Applications" || cat === "System Settings")
+                                            var isApp = (cat.toLowerCase().indexOf("app") !== -1 || cat.toLowerCase().indexOf("uygulama") !== -1 || cat === "System Settings")
                                             
                                             resultsTileRoot.itemRightClicked({
                                                 display: modelData.display || "",
@@ -626,7 +755,7 @@ FocusScope {
                                                 uuid: ""
                                             }, mouse.x + tileDelegate.x, mouse.y + tileDelegate.y)
                                         } else {
-                                            resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Diğer", matchId, filePath)
+                                            resultsTileRoot.itemClicked(modelData.index, modelData.display || "", modelData.decoration || "application-x-executable", modelData.category || "Other", matchId, filePath)
                                         }
                                     }
                                 }
@@ -665,7 +794,7 @@ FocusScope {
                                         
                                         // Category
                                         Text {
-                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
+                                            text: resultsTileRoot.locCategory + ": " + (modelData.category || "")
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             visible: (modelData.category || "").length > 0
@@ -674,7 +803,7 @@ FocusScope {
                                         // File Type (from extension)
                                         Text {
                                             property string fileExt: tileDelegate.previewFileType
-                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + fileExt
+                                            text: resultsTileRoot.locFileType + ": " + fileExt
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             visible: fileExt.length > 0
@@ -682,7 +811,7 @@ FocusScope {
                                         
                                         // Path
                                         Text {
-                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + tileDelegate.previewPath
+                                            text: resultsTileRoot.locPath + ": " + tileDelegate.previewPath
                                             font.pixelSize: 10
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                             wrapMode: Text.WrapAnywhere
@@ -692,7 +821,7 @@ FocusScope {
                                         
                                         // Shortcut hint
                                         Text {
-                                            text: "💡 " + i18nd("plasma_applet_com.mcc45tr.filesearch", "Space to preview")
+                                            text: "💡 " + resultsTileRoot.locSpacePreview
                                             font.pixelSize: 9
                                             font.italic: true
                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
@@ -710,19 +839,18 @@ FocusScope {
                             }
                         }
                     }
-                    }
                 }
-            }
             }
         }
     }
+}
     
     
     // Empty state
     Column {
         anchors.centerIn: parent
         spacing: 10
-        visible: resultsTileRoot.categorizedData.length === 0
+        visible: resultsTileRoot.categorizedData.length === 0 && resultsTileRoot.searchText.length > 0
 
         BusyIndicator {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -732,8 +860,8 @@ FocusScope {
 
         Text {
             text: resultsTileRoot.searchText.length > 0
-                ? (resultsTileRoot.isLoading ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found"))
-                : i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
+                ? (resultsTileRoot.isLoading ? resultsTileRoot.locSearching : resultsTileRoot.locNoResults)
+                : resultsTileRoot.locTypeToSearch
             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
             font.pixelSize: 12
         }

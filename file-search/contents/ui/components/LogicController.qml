@@ -58,11 +58,16 @@ Item {
     property var rssCache: []
     property var rssTickerEntries: []
     readonly property bool rssEnabled: plasmoidConfig.rssEnabled || false
-    readonly property string rssCacheBase: StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss"
+    readonly property string rssCacheBase: {
+        var path = StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss";
+        if (path.indexOf("file://") === 0) {
+            return path.replace(/^file:\/\/\/?/, "/");
+        }
+        return path;
+    }
     property var syncQueue: []
     property bool isSyncing: false
 
-    // Signals
     // Signals
     signal historyForceUpdate()
 
@@ -120,7 +125,21 @@ Item {
         saveHistory();
     }
 
-    function executeCommand(command) {
+    // Shell escape helper - delegates to Utils.shellEscape
+    function shellEscape(str) {
+        return Utils.shellEscape(str)
+    }
+
+    // Launch a .desktop application safely
+    function launchApp(filePath) {
+        if (!filePath) return
+        runShellCommand("kioclient exec " + shellEscape(filePath.toString()))
+    }
+
+    // Show file/app properties dialog safely
+    function showProperties(filePath) {
+        if (!filePath) return
+        runShellCommand("kioclient openProperties " + shellEscape(filePath.toString()))
     }
 
     function runShellCommand(cmd) {
@@ -137,7 +156,7 @@ Item {
 
         var path = url.toString();
         // Use D-Bus to open file manager and select the item
-        var cmd = "dbus-send --session --dest=org.freedesktop.FileManager1 /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems array:string:\"" + path + "\" string:\"\"";
+        var cmd = "dbus-send --session --dest=org.freedesktop.FileManager1 /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems array:string:" + shellEscape(path) + " string:\"\"";
         runShellCommand(cmd);
     }
 
@@ -146,7 +165,8 @@ Item {
             return ;
 
         // Using a reliable shell command for clipboard since QML clipboard is restricted in some environments
-        var cmd = "echo -n '" + text.replace(/'/g, "'\\''") + "' | xclip -selection clipboard || echo -n '" + text.replace(/'/g, "'\\''") + "' | wl-copy";
+        var escaped = shellEscape(text);
+        var cmd = "echo -n " + escaped + " | xclip -selection clipboard || echo -n " + escaped + " | wl-copy";
         runShellCommand(cmd);
     }
 
@@ -155,7 +175,7 @@ Item {
             return ;
 
         var path = url.toString();
-        var cmd = "kioclient6 move \"" + path + "\" trash:/";
+        var cmd = "kioclient move " + shellEscape(path) + " trash:/";
         runShellCommand(cmd);
     }
 
@@ -168,7 +188,7 @@ Item {
         if (path.indexOf(".") !== -1 && path.lastIndexOf("/") < path.lastIndexOf("."))
             path = path.substring(0, path.lastIndexOf("/"));
 
-        var cmd = "konsole --workdir \"" + path + "\"";
+        var cmd = "konsole --workdir " + shellEscape(path);
         runShellCommand(cmd);
     }
 
@@ -176,38 +196,30 @@ Item {
         if (!folderPath || folderPath.toString().indexOf("file://") !== 0)
             return ;
 
-        var request = new XMLHttpRequest();
-        // Add .directory to path. Ensure no double slash if path ends with /
-        var path = folderPath.toString();
+        var path = folderPath.toString().replace(/^file:\/\/\/?/, "/");
         if (path.slice(-1) === "/")
             path = path.slice(0, -1);
 
-        var url = path + "/.directory";
-        request.open("GET", url);
-        request.onreadystatechange = function() {
-            if (request.readyState === XMLHttpRequest.DONE) {
-                if (request.status === 200 || request.status === 0) {
-                    var content = request.responseText;
-                    // Look for Icon=...
-                    var lines = content.split('\n');
-                    for (var i = 0; i < lines.length; i++) {
-                        var line = lines[i].trim();
-                        if (line.indexOf("Icon=") === 0) {
-                            var iconName = line.substring(5).trim();
-                            if (iconName.length > 0) {
-                                // Debug: console.log("FileSearch [Icon]: Found custom icon:", iconName);
-                                if (HistoryManager.updateItemIcon(logicRoot.searchHistory, uuid, iconName)) {
-                                    logicRoot.saveHistory();
-                                    logicRoot.historyForceUpdate();
-                                }
-                                return ;
-                            }
+        var dotDirPath = path + "/.directory";
+        var cmd = "cat " + shellEscape(dotDirPath) + " 2>/dev/null";
+        
+        executable.callbacks[cmd] = function(stdout) {
+            var lines = stdout.split('\n');
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].trim();
+                if (line.indexOf("Icon=") === 0) {
+                    var iconName = line.substring(5).trim();
+                    if (iconName.length > 0) {
+                        if (HistoryManager.updateItemIcon(logicRoot.searchHistory, uuid, iconName)) {
+                            logicRoot.saveHistory();
+                            logicRoot.historyForceUpdate();
                         }
+                        return ;
                     }
                 }
             }
         };
-        request.send();
+        executable.connectSource(cmd);
     }
 
     // ===== PINNED FUNCTIONS =====
@@ -376,7 +388,7 @@ Item {
     }
 
     function clearRssCache() {
-        var cmd = "rm -rf \"" + rssCacheBase + "\" && mkdir -p \"" + rssCacheBase + "\"";
+        var cmd = "rm -rf " + shellEscape(rssCacheBase) + " && mkdir -p " + shellEscape(rssCacheBase);
         executable.connectSource(cmd);
         rssCache = [];
         rssTickerEntries = [];
@@ -396,7 +408,7 @@ Item {
             return ;
         }
         var path = getSourceFilePath(url);
-        var cmd = "cat \"" + path + "\"";
+        var cmd = "cat " + shellEscape(path);
         
         executable.callbacks[cmd] = function(stdout) {
             var raw = stdout.trim();
@@ -452,8 +464,9 @@ Item {
 
         if (!isSyncing) {
             isSyncing = true;
+            // Start queue processing. Only restart the timer - do NOT manually
+            // call triggered() as that causes the first item to be processed twice.
             processQueueTimer.restart();
-            processQueueTimer.triggered();
         }
     }
 
@@ -462,9 +475,9 @@ Item {
         if (!source || !source.url)
             return ;
 
-        var scriptPath = plasmoid.file("tools/rss_sync.sh");
+        var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
-        var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
+        var cmd = "sh " + shellEscape(scriptPath) + " " + shellEscape(rssCacheBase) + " " + shellEscape(source.url) + " " + shellEscape(source.name) + " " + shellEscape(String(max));
         
         executable.callbacks[cmd] = function(stdout) {
             if (stdout.indexOf("SUCCESS") !== -1) {
@@ -483,9 +496,9 @@ Item {
             return;
         }
 
-        var scriptPath = plasmoid.file("tools/rss_sync.sh");
+        var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
-        var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + source.url + "\" \"" + source.name + "\" \"" + max + "\"";
+        var cmd = "sh " + shellEscape(scriptPath) + " " + shellEscape(rssCacheBase) + " " + shellEscape(source.url) + " " + shellEscape(source.name) + " " + shellEscape(String(max));
         
         executable.callbacks[cmd] = function(stdout) {
             var lines = stdout.split("\n");
@@ -495,6 +508,14 @@ Item {
             }
         };
         executable.connectSource(cmd);
+    }
+    
+    function getScriptPath() {
+        var path = Qt.resolvedUrl("../../tools/rss_sync.sh").toString();
+        if (path.indexOf("file://") === 0) {
+            return path.replace(/^file:\/\/\/?/, "/");
+        }
+        return path;
     }
 
     function syncAllRSS() {
@@ -532,7 +553,7 @@ Item {
 
                 var path = getSourceFilePath(url);
                 // Unique command to avoid callback collision
-                var cmd = "cat \"" + path + "\" #batch_" + batchId + "_" + index;
+                var cmd = "cat " + shellEscape(path) + " #batch_" + batchId + "_" + index;
                 
                 executable.callbacks[cmd] = function(stdout) {
                     var raw = stdout.trim();
@@ -569,34 +590,12 @@ Item {
         return Math.abs(hash);
     }
 
-    function fetchRSS(source, callback) {
-        if (!source.url) {
-            callback([]);
-            return ;
-        }
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var entries = parseRSS(xhr.responseText, source.name);
-                    var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
-                    callback(entries.slice(0, max));
-                } else {
-                    callback([]);
-                }
-            }
-        };
-        xhr.open("GET", source.url);
-        xhr.send();
-    }
-
     function parseRSS(xml, sourceName) {
         return RSSManager.parseRSS(xml, sourceName);
     }
 
     onHistoryForceUpdate: historyVersion++ // Increment version to trigger bindings
     Component.onCompleted: {
-        console.log("FileSearch: LogicController initialized");
         loadHistory();
         loadPinned();
         loadCategorySettings();
@@ -640,7 +639,7 @@ Item {
                 // If decoration is broken (QIcon()) or missing
                 if (decoration === "QIcon()" || decoration === "") {
                     // Set default folder icon temporarily if it's likely a folder
-                    var isFolder = (category === "Yerler" || category === "Places" || category === "Klasörler");
+                    var isFolder = (category.toLowerCase().indexOf("place") !== -1 || category.toLowerCase().indexOf("folder") !== -1 || category.toLowerCase().indexOf("yerler") !== -1 || category.toLowerCase().indexOf("klasör") !== -1);
                     if (isFolder) {
                         HistoryManager.updateItemIcon(searchHistory, uuid, "folder");
                         saveHistory();
@@ -669,18 +668,39 @@ Item {
     Plasma5Support.DataSource {
         id: executable
 
-        property var callbacks: ({
-        })
+        property var callbacks: ({})
 
         engine: "executable"
         connectedSources: []
         onNewData: (source, data) => {
-            if (callbacks[source]) {
-                var stdout = data["stdout"] || "";
-                callbacks[source](stdout);
-                delete callbacks[source];
+            var stdout = data["stdout"] || "";
+            var lines = stdout.split("\n");
+            
+            var callback = callbacks[source];
+            if (callback) {
+                callback(stdout); // Keeping compatibility with single-string callbacks
+                
+                // Final state checks
+                if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1 || data["exit code"] !== undefined) {
+                    delete callbacks[source];
+                    disconnectSource(source);
+                }
+            } else {
+                // Fallback for partial source matches
+                for (var key in callbacks) {
+                    if (source.indexOf(key) !== -1 || key.indexOf(source) !== -1) {
+                        var cb = callbacks[key];
+                        if (typeof cb === "function") {
+                            cb(stdout);
+                        }
+                        if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1 || data["exit code"] !== undefined) {
+                            delete callbacks[key];
+                            disconnectSource(source);
+                        }
+                        break;
+                    }
+                }
             }
-            disconnectSource(source);
         }
     }
 

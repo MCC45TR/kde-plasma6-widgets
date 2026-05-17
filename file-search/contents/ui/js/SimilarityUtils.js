@@ -1,51 +1,10 @@
-// SimilarityUtils.js - String similarity utilities for File Search Widget
-// Provides Levenshtein distance and similarity scoring for search result ranking
+// SimilarityUtils.js - Lightweight string similarity utilities for File Search Widget
+// Optimized for real-time search result ranking without expensive algorithms
 
 /**
- * Calculate Levenshtein distance between two strings
- * @param {string} str1 - First string
- * @param {string} str2 - Second string
- * @returns {number} - Edit distance
- */
-function levenshteinDistance(str1, str2) {
-    var s1 = str1.toLowerCase();
-    var s2 = str2.toLowerCase();
-
-    if (s1.length === 0) return s2.length;
-    if (s2.length === 0) return s1.length;
-
-    var matrix = [];
-
-    // Initialize first column
-    for (var i = 0; i <= s1.length; i++) {
-        matrix[i] = [i];
-    }
-
-    // Initialize first row
-    for (var j = 0; j <= s2.length; j++) {
-        matrix[0][j] = j;
-    }
-
-    // Fill in the rest of the matrix
-    for (var i = 1; i <= s1.length; i++) {
-        for (var j = 1; j <= s2.length; j++) {
-            if (s1.charAt(i - 1) === s2.charAt(j - 1)) {
-                matrix[i][j] = matrix[i - 1][j - 1];
-            } else {
-                matrix[i][j] = Math.min(
-                    matrix[i - 1][j - 1] + 1, // substitution
-                    matrix[i][j - 1] + 1,     // insertion
-                    matrix[i - 1][j] + 1      // deletion
-                );
-            }
-        }
-    }
-
-    return matrix[s1.length][s2.length];
-}
-
-/**
- * Calculate normalized similarity score (0-1, higher is more similar)
+ * Fast similarity score (0-1, higher is more similar)
+ * Uses indexOf-based matching instead of Levenshtein distance for performance.
+ * This is called inside sort comparators, so it must be O(1) or O(n) at most.
  * @param {string} query - Search query
  * @param {string} target - Target string to compare
  * @returns {number} - Similarity score between 0 and 1
@@ -56,26 +15,43 @@ function similarityScore(query, target) {
     var q = query.toLowerCase();
     var t = target.toLowerCase();
 
-    // Exact match bonus
+    // Exact match
     if (t === q) return 1.0;
 
-    // Starts with bonus
+    // Starts with query
     if (t.indexOf(q) === 0) return 0.95;
 
-    // Contains bonus
-    if (t.indexOf(q) !== -1) return 0.85;
+    // Contains query as substring
+    var idx = t.indexOf(q);
+    if (idx !== -1) {
+        // Earlier position = better match
+        return 0.85 - (idx * 0.01);
+    }
 
-    // Levenshtein-based similarity
-    var distance = levenshteinDistance(q, t);
-    var maxLen = Math.max(q.length, t.length);
-    var similarity = 1 - (distance / maxLen);
+    // Check if all query characters appear in order (fuzzy match)
+    var qi = 0;
+    for (var ti = 0; ti < t.length && qi < q.length; ti++) {
+        if (t.charAt(ti) === q.charAt(qi)) qi++;
+    }
+    if (qi === q.length) {
+        // All chars found in order — weak match
+        return 0.3 + (q.length / t.length) * 0.3;
+    }
 
-    return Math.max(0, similarity);
+    // Word-initial match: check if query matches first letters of words
+    var words = t.split(/[\s\-_\.]+/);
+    var initials = "";
+    for (var w = 0; w < words.length; w++) {
+        if (words[w].length > 0) initials += words[w].charAt(0);
+    }
+    if (initials.indexOf(q) !== -1) return 0.6;
+
+    return 0;
 }
 
 /**
  * Sort results by similarity to query text
- * Results with higher similarity come first
+ * Pre-computes scores to avoid redundant calculation during sort
  * @param {Array} results - Array of result objects with 'display' property
  * @param {string} queryText - The search query
  * @returns {Array} - Sorted results
@@ -83,20 +59,30 @@ function similarityScore(query, target) {
 function sortBySimilarity(results, queryText) {
     if (!queryText || queryText.length === 0) return results;
 
-    return results.slice().sort(function (a, b) {
-        var displayA = a.display || a.name || "";
-        var displayB = b.display || b.name || "";
+    // Pre-compute scores (avoids recalculating in comparator)
+    var scored = new Array(results.length);
+    for (var i = 0; i < results.length; i++) {
+        var displayText = results[i].display || results[i].name || "";
+        scored[i] = {
+            item: results[i],
+            score: similarityScore(queryText, displayText)
+        };
+    }
 
-        var scoreA = similarityScore(queryText, displayA);
-        var scoreB = similarityScore(queryText, displayB);
-
-        return scoreB - scoreA; // Higher score first
+    scored.sort(function (a, b) {
+        return b.score - a.score;
     });
+
+    var sorted = new Array(scored.length);
+    for (var j = 0; j < scored.length; j++) {
+        sorted[j] = scored[j].item;
+    }
+    return sorted;
 }
 
 /**
  * Combined priority and similarity sort
- * First sorts by category priority, then by similarity within same priority
+ * Pre-computes all scores before sorting to avoid O(n² * m) complexity
  * @param {Array} results - Array of result objects
  * @param {string} queryText - The search query
  * @param {Object} categorySettings - Category settings with priorities
@@ -106,40 +92,48 @@ function sortBySimilarity(results, queryText) {
 function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPriorityFunc) {
     if (!results || results.length === 0) return results;
 
-    return results.slice().sort(function (a, b) {
-        var catA = a.category || "Other";
-        var catB = b.category || "Other";
+    var hasQuery = queryText && queryText.length > 0;
 
-        var prioA = getPriorityFunc(categorySettings, catA);
-        var prioB = getPriorityFunc(categorySettings, catB);
+    // Pre-compute all scores and priorities ONCE
+    var scored = new Array(results.length);
+    for (var i = 0; i < results.length; i++) {
+        var item = results[i];
+        var cat = item.category || "Other";
+        var prio = getPriorityFunc(categorySettings, cat);
+        var score = 0;
 
-        // First, sort by priority
-        if (prioA !== prioB) {
-            return prioA - prioB;
+        if (hasQuery) {
+            var displayText = item.display || item.name || "";
+            score = similarityScore(queryText, displayText);
+
+            // For RSS feeds, also check indexed content (weighted less)
+            if (cat === "RSS" && item.indexedContent) {
+                var contentScore = similarityScore(queryText, item.indexedContent);
+                if (contentScore * 0.8 > score) {
+                    score = contentScore * 0.8;
+                }
+            }
         }
 
-        // Same priority, sort by similarity
-        if (queryText && queryText.length > 0) {
-            var displayA = a.display || a.name || "";
-            var displayB = b.display || b.name || "";
+        scored[i] = {
+            item: item,
+            priority: prio,
+            score: score
+        };
+    }
 
-            var scoreA = similarityScore(queryText, displayA);
-            var scoreB = similarityScore(queryText, displayB);
-            
-            // For RSS feeds, also check the indexed content (description + partial content)
-            if (a.category === "RSS" && a.indexedContent) {
-                var contentScoreA = similarityScore(queryText, a.indexedContent);
-                // Weight content matches slightly less than title matches (0.8x)
-                scoreA = Math.max(scoreA, contentScoreA * 0.8);
-            }
-            if (b.category === "RSS" && b.indexedContent) {
-                var contentScoreB = similarityScore(queryText, b.indexedContent);
-                scoreB = Math.max(scoreB, contentScoreB * 0.8);
-            }
-
-            return scoreB - scoreA; // Higher score first
+    scored.sort(function (a, b) {
+        // First sort by priority
+        if (a.priority !== b.priority) {
+            return a.priority - b.priority;
         }
-
-        return 0; // Preserve original order
+        // Then by pre-computed score
+        return b.score - a.score;
     });
+
+    var sorted = new Array(scored.length);
+    for (var j = 0; j < scored.length; j++) {
+        sorted[j] = scored[j].item;
+    }
+    return sorted;
 }

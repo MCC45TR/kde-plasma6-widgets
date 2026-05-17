@@ -14,8 +14,16 @@ Item {
     property string cfg_preferredPlayerDefault: ""
     property bool cfg_showPlayerBadge
     property bool cfg_showPlayerBadgeDefault: false
+    property bool cfg_autoHideWhenInactive
+    property bool cfg_autoHideWhenInactiveDefault: false
+    property bool cfg_hideWhenNotPlaying
+    property bool cfg_hideWhenNotPlayingDefault: false
+    property bool cfg_mouseWheelVolume
+    property bool cfg_mouseWheelVolumeDefault: true
+    property int cfg_volumeControlMode
+    property int cfg_volumeControlModeDefault: 0
 
-    // Appearance config shadow properties
+    // Appearance Group Shadow Properties
     property int cfg_edgeMargin
     property int cfg_edgeMarginDefault: 10
     property double cfg_backgroundOpacity
@@ -30,6 +38,8 @@ Item {
     property bool cfg_panelAutoFontSizeDefault: true
     property bool cfg_panelScrollingText
     property bool cfg_panelScrollingTextDefault: true
+    property bool cfg_panelSmoothScrolling
+    property bool cfg_panelSmoothScrollingDefault: false
     property int cfg_panelMaxWidth
     property int cfg_panelMaxWidthDefault: 350
     property int cfg_panelScrollingSpeed
@@ -52,18 +62,12 @@ Item {
     property bool cfg_showLoopButtonDefault: false
     property bool cfg_showSeekButtons
     property bool cfg_showSeekButtonsDefault: true
-    property bool cfg_autoHideWhenInactive
-    property bool cfg_autoHideWhenInactiveDefault: false
-    property bool cfg_hideWhenNotPlaying
-    property bool cfg_hideWhenNotPlayingDefault: false
     property bool cfg_showVolumeSlider
     property bool cfg_showVolumeSliderDefault: false
     property bool cfg_panelShowAlbumArt
     property bool cfg_panelShowAlbumArtDefault: false
     property int cfg_widgetRadius
     property int cfg_widgetRadiusDefault: 20
-    property bool cfg_mouseWheelVolume
-    property int cfg_volumeControlMode
 
     property string title: i18n("General")
 
@@ -212,29 +216,27 @@ Item {
             highlighted: playerCombo.highlightedIndex === index
         }
         contentItem: Item {
-            implicitWidth: contentRow.implicitWidth
-            implicitHeight: contentRow.implicitHeight
-            RowLayout {
-                id: contentRow
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 30
-                spacing: 10
-                Kirigami.Icon {
-                    source: playerCombo.currentIndex >= 0 && appListModel.count > playerCombo.currentIndex
-                        ? (appListModel.get(playerCombo.currentIndex).icon || "multimedia-player")
-                        : "multimedia-player"
-                    Layout.preferredWidth: 22
-                    Layout.preferredHeight: 22
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                }
-                Label {
-                    text: playerCombo.displayText
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
-                }
+            implicitHeight: 32
+            Kirigami.Icon {
+                id: closedIcon
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                width: 22
+                height: 22
+                source: playerCombo.currentIndex >= 0 && playerCombo.currentIndex < appListModel.count 
+                    ? appListModel.get(playerCombo.currentIndex).icon 
+                    : "multimedia-player"
+            }
+            Label {
+                anchors.left: closedIcon.right
+                anchors.leftMargin: 8
+                anchors.right: parent.right
+                anchors.rightMargin: 28
+                anchors.verticalCenter: parent.verticalCenter
+                text: playerCombo.currentText
+                elide: Text.ElideRight
+                color: Kirigami.Theme.textColor
             }
         }
         onCurrentIndexChanged: {
@@ -246,34 +248,29 @@ Item {
             }
         }
     }
-    Item {
+    ColumnLayout {
+        id: statusColumn
         Kirigami.FormData.label: i18n("Selected Player:")
-        Kirigami.FormData.isSection: false
         Layout.fillWidth: true
-        Layout.preferredHeight: statusColumn.implicitHeight
-        ColumnLayout {
-            id: statusColumn
-            anchors.fill: parent
-            spacing: 5
-            Label {
-                Layout.fillWidth: true
-                wrapMode: Text.Wrap
-                font.bold: true
-                color: Kirigami.Theme.positiveTextColor
-                text: {
-                    var count = Math.max(0, appListModel.count - 1)
-                    if (count <= 0) return i18n("⚠ No active players")
-                    return i18n("✓ %1 active players found", count)
-                }
+        spacing: 5
+        Label {
+            Layout.fillWidth: true
+            wrapMode: Text.Wrap
+            font.bold: true
+            color: Kirigami.Theme.positiveTextColor
+            text: {
+                var count = Math.max(0, appListModel.count - 1)
+                if (count <= 0) return i18n("⚠ No active players")
+                return i18n("✓ %1 active players found", count)
             }
-            Label {
-                Layout.fillWidth: true
-                wrapMode: Text.Wrap
-                opacity: 0.7
-                text: cfg_preferredPlayer === "" 
-                    ? i18n("All media sources are tracked.")
-                    : i18n("Only \"%1\" is tracked.", cfg_preferredPlayer)
-            }
+        }
+        Label {
+            Layout.fillWidth: true
+            wrapMode: Text.Wrap
+            opacity: 0.7
+            text: cfg_preferredPlayer === "" 
+                ? i18n("All media sources are tracked.")
+                : i18n("Only \"%1\" is tracked.", cfg_preferredPlayer)
         }
     }
     CheckBox {

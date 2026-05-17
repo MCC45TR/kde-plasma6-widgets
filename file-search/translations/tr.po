@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-30 00:28+0300\n"
-"PO-Revision-Date: 2026-01-18 16:42\n"
+"PO-Revision-Date: 2026-04-01 03:00+0300\n"
 "Last-Translator: Auto Generator <auto@bot>\n"
 "Language-Team: tr\n"
 "Language: tr\n"
@@ -1831,3 +1831,12 @@ msgstr ""
 
 #~ msgid "BIOS"
 #~ msgstr "BIOS"
+
+msgid "Show RSS titles in placeholder cycling"
+msgstr "RSS başlıklarını arama kutusunda döngüye al"
+
+msgid "Show full headlines (split into segments)"
+msgstr "Haber başlıklarının tamamını göster (parçalara ayırarak)"
+
+msgid "News Features:"
+msgstr "Haber Özellikleri:"

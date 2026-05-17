@@ -14,6 +14,15 @@
       <default>false</default>
       <label>Show Digital Clock</label>
     </entry>
+    <entry name="timeFormat" type="Enum">
+      <label>Time Format</label>
+      <choices>
+        <choice name="SystemDefault"/>
+        <choice name="Format12Hour"/>
+        <choice name="Format24Hour"/>
+      </choices>
+      <default>SystemDefault</default>
+    </entry>
     <entry name="useCustomFont" type="Bool">
       <default>false</default>
       <label>Use Custom Font</label>

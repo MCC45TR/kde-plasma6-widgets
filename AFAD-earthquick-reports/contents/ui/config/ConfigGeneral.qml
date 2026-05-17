@@ -27,7 +27,7 @@ Item {
         Kirigami.FormLayout {
             width: scrollView.availableWidth
 
-            PlasmaComponents.SpinBox {
+            SpinBox {
                 id: minMagSpin
                 Kirigami.FormData.label: i18n("Minimum Magnitude:")
                 from: 0
@@ -48,7 +48,7 @@ Item {
                 }
             }
 
-            PlasmaComponents.ComboBox {
+            ComboBox {
                 id: timeRangeCombo
                 Kirigami.FormData.label: i18n("Time Range:")
                 model: [
@@ -64,7 +64,7 @@ Item {
                 valueRole: "value"
             }
 
-            PlasmaComponents.SpinBox {
+            SpinBox {
                 id: limitSpin
                 Kirigami.FormData.label: i18n("Max Reports:")
                 from: 10
@@ -73,7 +73,7 @@ Item {
                 editable: true
             }
 
-            PlasmaComponents.SpinBox {
+            SpinBox {
                 id: intervalSpin
                 Kirigami.FormData.label: i18n("Update Interval (min):")
                 from: 1

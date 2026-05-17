@@ -26,7 +26,7 @@ Item {
     property bool showArtist: true
     property bool autoFontSize: true
     property int manualFontSize: 12
-    property int layoutMode: 0 // 0: Left, 1: Right, 2: Center
+    property int layoutMode: 2 // 0: Left, 1: Right, 2: Center
     property bool scrollingText: true
     property bool dynamicWidth: true
     property bool autoButtonSize: true
@@ -48,7 +48,8 @@ Item {
     readonly property color controlButtonBgColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
     readonly property int scrollInterval: scrollingSpeed === 1 ? 300 : (scrollingSpeed === 2 ? 400 : 200)
     
-    readonly property int calculatedButtonSize: autoButtonSize ? Math.min(panelMode.height * 0.9, 36) : buttonSize
+    readonly property int safeHeight: Math.max(1, panelMode.height)
+    readonly property int calculatedButtonSize: autoButtonSize ? Math.min(safeHeight * 0.9, 36) : buttonSize
     
     // Dynamic Width Calculation
     readonly property int controlsWidth: {
@@ -68,7 +69,7 @@ Item {
         if (!dynamicWidth) return maxWidth
         var textW = calculatedTextWidth
         var ctrlW = controlsWidth
-        var artW = showAlbumArt ? (Math.min(panelMode.height, 28) + 6) : 0
+        var artW = showAlbumArt ? (Math.min(safeHeight, 28) + 6) : 0
         var spacing = showPanelControls ? 20 : 10
         var total = textW + ctrlW + artW + spacing + 30
         return Math.max(total, 100)
@@ -82,7 +83,7 @@ Item {
         font.family: "Roboto Condensed"
         font.bold: true
         font.pixelSize: panelMode.autoFontSize 
-            ? Math.max(5, Math.min(panelMode.height * 0.5, 16)) 
+            ? Math.max(5, Math.min(safeHeight * 0.5, 16)) 
             : panelMode.manualFontSize
         text: panelMode.title || i18n("No Media")
     }
@@ -91,7 +92,7 @@ Item {
         id: artistMetrics
         font.family: "Roboto Condensed"
         font.pixelSize: panelMode.autoFontSize
-            ? Math.max(5, Math.min(panelMode.height * 0.4, 13))
+            ? Math.max(5, Math.min(safeHeight * 0.4, 13))
             : Math.max(5, panelMode.manualFontSize - 2)
         text: panelMode.artist || ""
     }
@@ -106,8 +107,8 @@ Item {
         Item {
             visible: panelMode.showAlbumArt
             Layout.alignment: Qt.AlignVCenter
-            Layout.preferredWidth: visible ? Math.min(panelMode.height, 28) : 0
-            Layout.preferredHeight: Math.min(panelMode.height, 28)
+            Layout.preferredWidth: visible ? Math.min(safeHeight, 28) : 0
+            Layout.preferredHeight: Math.min(safeHeight, 28)
  
             Rectangle {
                 id: artThumb
@@ -138,14 +139,12 @@ Item {
             }
         }
  
-        // Spacers removed - buttons now anchor to edges in all modes
- 
         // --- LEFT CONTROL GROUP (Visible in Right & Center Modes) ---
         Loader {
             id: leftControlsLoader
             active: panelMode.showPanelControls && (panelMode.layoutMode === 1 || panelMode.layoutMode === 2)
             Layout.alignment: Qt.AlignVCenter
-            Layout.preferredHeight: Math.min(panelMode.height, 36)
+            Layout.preferredHeight: Math.min(safeHeight, 36)
             Layout.preferredWidth: item ? (panelMode.layoutMode === 2 ? Layout.preferredHeight : item.implicitWidth) : 0
             
             sourceComponent: Item {
@@ -205,19 +204,12 @@ Item {
             
             ColumnLayout {
                 id: textColumn
-                anchors.fill: parent
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
                 spacing: 0
                 
                 // Font Logic - Cached
-                readonly property int calculatedPixelSize: panelMode.autoFontSize 
-                    ? Math.max(5, Math.min(panelMode.height * 0.5, 16)) 
-                    : panelMode.manualFontSize
-                
-                readonly property int artistPixelSize: panelMode.autoFontSize
-                    ? Math.max(5, Math.min(panelMode.height * 0.4, 13))
-                    : Math.max(5, panelMode.manualFontSize - 2)
-                
-                // Text Alignment - Cached
                 readonly property int textAlign: {
                     if (panelMode.layoutMode === 1) return Text.AlignRight
                     if (panelMode.layoutMode === 2) return Text.AlignHCenter
@@ -229,11 +221,12 @@ Item {
                     id: titleItem
                     Layout.fillWidth: true
                     Layout.preferredHeight: titleMetrics.height
+                    implicitWidth: 0
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
                     visible: panelMode.showTitle
                     clip: true
- 
-                    readonly property bool overflows: titleMetrics.advanceWidth > parent.width
+  
+                    readonly property bool overflows: titleMetrics.advanceWidth > width
                     readonly property bool shouldScroll: panelMode.scrollingText && overflows
  
                     // Smooth Scroll Layer
@@ -257,7 +250,6 @@ Item {
                         }
  
                         NumberAnimation on x {
-                            id: titleSmoothAnim
                             from: 0
                             to: -(titleMetrics.advanceWidth + titleSmoothRow.spacing)
                             duration: (titleMetrics.advanceWidth + titleSmoothRow.spacing) * (panelMode.scrollingSpeed === 1 ? 40 : (panelMode.scrollingSpeed === 2 ? 60 : 30))
@@ -265,7 +257,7 @@ Item {
                             running: titleSmoothRow.visible
                         }
                     }
- 
+                    
                     // Stepped Scroll / Static Layer
                     Text {
                         id: titleSteppedText
@@ -275,30 +267,40 @@ Item {
                         font: titleMetrics.font
                         horizontalAlignment: textColumn.textAlign
                         verticalAlignment: Text.AlignVCenter
-                        elide: parent.shouldScroll ? Text.ElideNone : Text.ElideRight
-
-                        Binding {
-                            target: titleSteppedText
-                            property: "text"
-                            value: titleItem.shouldScroll ? titleSteppedText._charDisplayText : titleMetrics.text
-                            delayed: true
+                        elide: titleItem.shouldScroll ? Text.ElideNone : Text.ElideRight
+ 
+                        text: titleItem.shouldScroll ? _charDisplayText : titleMetrics.text
+ 
+                        property string _charDisplayText: ""
+                        property int _scrollIndex: 0
+                        property string _scrollBuffer: ""
+ 
+                        function resetScroll() {
+                            _scrollIndex = 0
+                            _scrollBuffer = (titleMetrics.text || "") + "   •   "
+                            _charDisplayText = _scrollBuffer
                         }
  
-                        property string _charDisplayText: titleMetrics.text
-                        property int _scrollIndex: 0
-                        property string _scrollBuffer: titleMetrics.text + "   •   "
- 
                         function updateScroll() {
+                            if (_scrollBuffer.length === 0) resetScroll()
                             _scrollIndex = (_scrollIndex + 1) % _scrollBuffer.length
                             _charDisplayText = _scrollBuffer.substring(_scrollIndex) + _scrollBuffer.substring(0, _scrollIndex)
                         }
  
+                        Component.onCompleted: resetScroll()
+                        onVisibleChanged: if (visible) resetScroll()
+                        
+                        Connections {
+                            target: panelMode
+                            function onTitleChanged() { titleSteppedText.resetScroll() }
+                        }
+  
                         Timer {
                             interval: panelMode.scrollInterval
                             running: titleSteppedText.visible && titleItem.shouldScroll && !panelMode.smoothScrolling
                             repeat: true
                             onTriggered: titleSteppedText.updateScroll()
-                            onRunningChanged: if (!running) titleSteppedText._scrollIndex = 0
+                            onRunningChanged: if (!running) titleSteppedText.resetScroll()
                         }
                     }
                 }
@@ -308,11 +310,12 @@ Item {
                     id: artistItem
                     Layout.fillWidth: true
                     Layout.preferredHeight: artistMetrics.height
+                    implicitWidth: 0
                     Layout.alignment: panelMode.layoutMode === 1 ? Qt.AlignRight : (panelMode.layoutMode === 2 ? Qt.AlignHCenter : Qt.AlignLeft)
                     visible: panelMode.showArtist && panelMode.artist && panelMode.artist.trim() !== ""
                     clip: true
- 
-                    readonly property bool overflows: artistMetrics.advanceWidth > parent.width
+  
+                    readonly property bool overflows: artistMetrics.advanceWidth > width
                     readonly property bool shouldScroll: panelMode.scrollingText && overflows
  
                     // Smooth Scroll Layer
@@ -338,7 +341,6 @@ Item {
                         }
  
                         NumberAnimation on x {
-                            id: artistSmoothAnim
                             from: 0
                             to: -(artistMetrics.advanceWidth + artistSmoothRow.spacing)
                             duration: (artistMetrics.advanceWidth + artistSmoothRow.spacing) * (panelMode.scrollingSpeed === 1 ? 40 : (panelMode.scrollingSpeed === 2 ? 60 : 30))
@@ -357,36 +359,46 @@ Item {
                         font: artistMetrics.font
                         horizontalAlignment: textColumn.textAlign
                         verticalAlignment: Text.AlignVCenter
-                        elide: parent.shouldScroll ? Text.ElideNone : Text.ElideRight
-
-                        Binding {
-                            target: artistSteppedText
-                            property: "text"
-                            value: artistItem.shouldScroll ? artistSteppedText._charDisplayText : artistMetrics.text
-                            delayed: true
+                        elide: artistItem.shouldScroll ? Text.ElideNone : Text.ElideRight
+ 
+                        text: artistItem.shouldScroll ? _charDisplayText : artistMetrics.text
+ 
+                        property string _charDisplayText: ""
+                        property int _scrollIndex: 0
+                        property string _scrollBuffer: ""
+ 
+                        function resetScroll() {
+                            _scrollIndex = 0
+                            _scrollBuffer = (artistMetrics.text || "") + "   •   "
+                            _charDisplayText = _scrollBuffer
                         }
  
-                        property string _charDisplayText: artistMetrics.text
-                        property int _scrollIndex: 0
-                        property string _scrollBuffer: artistMetrics.text + "   •   "
- 
                         function updateScroll() {
+                            if (_scrollBuffer.length === 0) resetScroll()
                             _scrollIndex = (_scrollIndex + 1) % _scrollBuffer.length
                             _charDisplayText = _scrollBuffer.substring(_scrollIndex) + _scrollBuffer.substring(0, _scrollIndex)
                         }
  
+                        Component.onCompleted: resetScroll()
+                        onVisibleChanged: if (visible) resetScroll()
+ 
+                        Connections {
+                            target: panelMode
+                            function onArtistChanged() { artistSteppedText.resetScroll() }
+                        }
+  
                         Timer {
                             interval: panelMode.scrollInterval
                             running: artistSteppedText.visible && artistItem.shouldScroll && !panelMode.smoothScrolling
                             repeat: true
                             onTriggered: artistSteppedText.updateScroll()
-                            onRunningChanged: if (!running) artistSteppedText._scrollIndex = 0
+                            onRunningChanged: if (!running) artistSteppedText.resetScroll()
                         }
                     }
                 }
             }
             
-            // Middle Click Area
+            // Click Area
             MouseArea {
                 anchors.fill: parent
                 z: 10
@@ -406,7 +418,7 @@ Item {
             id: rightControlsLoader
             active: panelMode.showPanelControls && (panelMode.layoutMode === 0 || panelMode.layoutMode === 2)
             Layout.alignment: Qt.AlignVCenter
-            Layout.preferredHeight: Math.min(panelMode.height, 36)
+            Layout.preferredHeight: Math.min(safeHeight, 36)
             Layout.preferredWidth: item ? (panelMode.layoutMode === 2 ? Layout.preferredHeight : item.implicitWidth) : 0
             
             sourceComponent: Item {

@@ -220,7 +220,7 @@ function fetchIpAndWeather(config, callback) {
                 try {
                     var data = JSON.parse(xhr.responseText)
                     if (data.city) {
-                        console.log("Detected location from IP: " + data.city)
+                        // Location detected from IP
                         // Create a new config with the detected city
                         var newConfig = {
                             apiKey: config.apiKey,
@@ -231,15 +231,15 @@ function fetchIpAndWeather(config, callback) {
                         // Proceed to fetch weather with detected city
                         fetchWeatherInternal(newConfig, callback)
                     } else {
-                        console.log("Could not detect city from IP, falling back to default.")
+                        // IP detection returned no city, using default
                         fetchWeatherInternal(config, callback)
                     }
                 } catch (e) {
-                    console.log("Failed to parse IP info: " + e)
+                    // IP info parse error
                     fetchWeatherInternal(config, callback)
                 }
             } else {
-                console.log("IP detection failed: " + xhr.status)
+                // IP detection request failed
                 fetchWeatherInternal(config, callback)
             }
         }
@@ -255,7 +255,7 @@ function fetchWeatherInternal(config, callback) {
     var units = config.units || "metric"
     var provider = config.provider || "openmeteo"
 
-    console.log("Fetching weather using provider: " + provider)
+    // Fetching weather using provider
 
     if (provider === "openweathermap") {
         if (apiKey) {

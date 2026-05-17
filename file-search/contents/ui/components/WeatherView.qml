@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import "WeatherService.js" as WeatherService
-import "IconMapper.js" as IconMapper
+import "WeatherIconMapper.js" as IconMapper
 
 // LogicController must be injected or accessible
 Item {

@@ -1,21 +1,17 @@
 // CategoryManager.js - Category settings management for File Search Widget
 // Handles visibility, priority, and custom icons for categories
 
-// Default category priorities (lower = higher priority)
-var defaultPriorities = {
-    "Applications": 1,
-    "Uygulamalar": 1,
-    "Files": 2,
-    "Dosyalar": 2,
-    "Documents": 3,
-    "Belgeler": 3,
-    "Folders": 4,
-    "Klasörler": 4,
-    "Calculator": 5,
-    "Hesap Makinesi": 5,
-    "Web": 6,
-    "Other": 100,
-    "Diğer": 100
+// Dynamic priority matching (lower = higher priority)
+function getDefaultPriority(cat) {
+    var lower = (cat || "").toLowerCase()
+    if (lower.indexOf("app") !== -1 || lower.indexOf("uygulama") !== -1 || lower.indexOf("program") !== -1) return 1
+    if (lower.indexOf("file") !== -1 || lower.indexOf("dosya") !== -1) return 2
+    if (lower.indexOf("doc") !== -1 || lower.indexOf("belge") !== -1) return 3
+    if (lower.indexOf("folder") !== -1 || lower.indexOf("klasör") !== -1 || lower.indexOf("place") !== -1 || lower.indexOf("yerler") !== -1) return 4
+    if (lower.indexOf("calc") !== -1 || lower.indexOf("hesap") !== -1 || lower.indexOf("math") !== -1) return 5
+    if (lower.indexOf("web") !== -1 || lower.indexOf("browser") !== -1 || lower.indexOf("internet") !== -1) return 6
+    if (lower.indexOf("other") !== -1 || lower.indexOf("diğer") !== -1) return 100
+    return 50
 }
 
 // Load category settings from configuration
@@ -39,7 +35,7 @@ function ensureCategoryExists(settings, categoryName) {
     if (!settings[categoryName]) {
         settings[categoryName] = {
             visible: true,
-            priority: defaultPriorities[categoryName] || 50,
+            priority: getDefaultPriority(categoryName),
             icon: null
         }
     }
@@ -88,7 +84,7 @@ function getCategoryPriority(settings, categoryName) {
     if (settings[categoryName] && typeof settings[categoryName].priority === 'number') {
         return settings[categoryName].priority
     }
-    return defaultPriorities[categoryName] || 50
+    return getDefaultPriority(categoryName)
 }
 
 // Set custom icon for category

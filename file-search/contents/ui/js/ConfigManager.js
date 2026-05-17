@@ -13,7 +13,8 @@ var DISPLAY_MODES = {
     BUTTON: 0,
     MEDIUM: 1,
     WIDE: 2,
-    EXTRA_WIDE: 3
+    EXTRA_WIDE: 3,
+    ULTRA_WIDE: 4
 };
 
 // View mode definitions
@@ -60,7 +61,7 @@ function getProfileDefaults(profileId) {
 
 // Validate display mode
 function isValidDisplayMode(mode) {
-    return mode >= 0 && mode <= 3;
+    return mode >= 0 && mode <= 4;
 }
 
 // Validate view mode

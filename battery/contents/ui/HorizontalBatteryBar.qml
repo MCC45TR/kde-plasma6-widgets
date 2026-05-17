@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 Item {
     id: root
@@ -57,7 +58,7 @@ Item {
         anchors.rightMargin: 5
         anchors.topMargin: 0
         anchors.bottomMargin: 0
-        spacing: 0
+        spacing: Kirigami.Units.smallSpacing
         
         Kirigami.Icon {
             source: root.deviceIcon
@@ -67,11 +68,10 @@ Item {
             color: Kirigami.Theme.textColor
         }
         
-        Text {
+        PlasmaComponents.Label {
             text: root.height >= 60 ? i18n("%1\n%2%", root.deviceName, root.percentage) : i18n("%1 (%2%)", root.deviceName, root.percentage)
             font.bold: true
             font.pixelSize: Math.max(10, Math.min(root.height * 0.35, 16))
-            color: Kirigami.Theme.textColor
             elide: Text.ElideRight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter

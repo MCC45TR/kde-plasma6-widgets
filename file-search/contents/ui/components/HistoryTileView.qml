@@ -90,8 +90,8 @@ FocusScope {
     }
     
     function columnsInRow() {
-        var itemWidth = iconSize + 48
-        return Math.max(1, Math.floor(width / itemWidth))
+        var itemWidth = tileWidth + 8 // tile width + spacing
+        return Math.max(1, Math.floor(historyTile.width / itemWidth))
     }
     
     // Calculate current column position
@@ -345,7 +345,7 @@ FocusScope {
         
         Column {
             id: tileView
-            width: parent.width
+            width: historyTile.width - 24
             spacing: 8
             
             Repeater {
@@ -358,6 +358,7 @@ FocusScope {
                 
                 property int catIdx: index
                 property bool isCollapsed: historyTile.collapsedCategories[modelData.categoryName] || false
+                property bool animateHeight: false
                 
                 // Category Header (Clickable)
                 Rectangle {
@@ -399,24 +400,38 @@ FocusScope {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: historyTile.toggleCategory(modelData.categoryName)
+                        onClicked: {
+                            histCategoryDelegate.animateHeight = true
+                            historyTile.toggleCategory(modelData.categoryName)
+                        }
                     }
                 }
                 
                 // Tile Flow (Animated collapse/expand - matches PinnedSection style)
                 Item {
-                    width: parent.width
+                    width: histCategoryDelegate.width
                     height: histCategoryDelegate.isCollapsed ? 0 : histCategoryFlow.implicitHeight
                     clip: true
                     
                     Behavior on height {
-                        NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                        enabled: histCategoryDelegate.animateHeight
+                        NumberAnimation { 
+                            duration: 200; 
+                            easing.type: Easing.InOutQuad
+                            onFinished: histCategoryDelegate.animateHeight = false
+                        }
                     }
                     
                     Flow {
                         id: histCategoryFlow
-                        anchors.left: parent.left
-                        anchors.right: parent.right
+                        width: {
+                            var avail = parent.width > 0 ? parent.width : (historyTile.width - 24);
+                            var colW = historyTile.tileWidth + 8;
+                            var cols = Math.floor(avail / colW);
+                            if (cols <= 0) return avail;
+                            return cols * colW - 8;
+                        }
+                        x: (parent.width - width) / 2
                         anchors.top: parent.top
                         spacing: 8
                     
@@ -516,7 +531,6 @@ FocusScope {
                                             
                                             var path = modelData.filePath ? modelData.filePath.toString() : (modelData.url ? modelData.url.toString() : "");
                                             if (path && path.length > 0) {
-                                                var ext = PreviewUtils.getExtension(path);
                                                 path = path.replace("file://", "");
                                                 if (path.endsWith("/")) path = path.slice(0, -1);
                                                 var parts = path.split("/");

@@ -597,7 +597,7 @@ PlasmoidItem {
                 active: root.visible || root.expanded // Only load when visible
                 
                 source: {
-                    switch (fullRep.currentMode) {
+                    switch (currentMode) {
                         case "compact": return "modes/CompactMode.qml"
                         case "wide": return "modes/WideMode.qml"
                         case "largeSquare": return "modes/LargeSquareMode.qml"

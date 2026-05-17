@@ -98,3 +98,37 @@ function getShortParentName(filePath) {
     }
     return ""
 }
+
+// Shell escape - wraps a string in single quotes with proper escaping.
+// Prevents command injection when passing user-controlled values to shell commands.
+// Single quotes prevent all interpretation except for embedded single quotes,
+// which are handled by ending the quote, adding an escaped quote, and reopening.
+function shellEscape(str) {
+    if (str === undefined || str === null) return "''"
+    return "'" + str.toString().replace(/'/g, "'\\''") + "'"
+}
+
+// Centralized app category detection.
+// Used by HistoryManager, TileDataManager, SearchPopup to avoid duplicated logic.
+// Checks both English and Turkish category names and .desktop file indicators.
+function isAppCategory(category, filePath, matchId) {
+    if (!category) return false
+    var catLower = category.toString().toLowerCase()
+    var isApp = catLower.indexOf("app") !== -1 || catLower.indexOf("uygulama") !== -1 || catLower.indexOf("program") !== -1 ||
+                catLower.indexOf("ayar") !== -1 || catLower.indexOf("setting") !== -1 ||
+                catLower.indexOf("oyun") !== -1 || catLower.indexOf("game") !== -1 ||
+                catLower.indexOf("ofis") !== -1 || catLower.indexOf("office") !== -1 ||
+                catLower.indexOf("sistem") !== -1 || catLower.indexOf("system") !== -1 ||
+                catLower.indexOf("araç") !== -1 || catLower.indexOf("util") !== -1 ||
+                catLower.indexOf("internet") !== -1 || catLower.indexOf("grafik") !== -1 || catLower.indexOf("graphic") !== -1 ||
+                catLower.indexOf("geliştirme") !== -1 || catLower.indexOf("develop") !== -1 ||
+                catLower.indexOf("ortam") !== -1 || catLower.indexOf("multimedia") !== -1 ||
+                catLower.indexOf("eğitim") !== -1 || catLower.indexOf("educat") !== -1
+    if (!isApp && filePath) {
+        isApp = filePath.toString().indexOf(".desktop") !== -1
+    }
+    if (!isApp && matchId) {
+        isApp = matchId.toString().indexOf(".desktop") !== -1
+    }
+    return isApp
+}
