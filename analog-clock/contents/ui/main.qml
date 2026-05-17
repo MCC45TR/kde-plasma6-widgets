@@ -212,6 +212,9 @@ PlasmoidItem {
         
         property bool isHovered: style === 1 ? true : (style === 2 ? false : hoverState)
         
+        // Time format: 0=Auto, 1=12h, 2=24h
+        property int timeFormat: Plasmoid.configuration.timeFormat !== undefined ? Plasmoid.configuration.timeFormat : 0
+        
         // Radius for the circular arrangement of numbers
         readonly property real numberRadius: (Math.min(clockFace.width, clockFace.height) - 20) / 2 - 20
 
@@ -239,23 +242,15 @@ PlasmoidItem {
                 
                 Behavior on opacity { NumberAnimation { duration: 200 } }
 
-                // Index 0 is 12 o'clock, 15 is 3 o'clock, etc.
-                // Warp the angle based on aspect ratio
                 readonly property real angleDeg: root.getProjectedAngle(index * 6)
                 
-                // Calculate tick height as difference between outer and inner rounded rectangle
-                readonly property real outerInset: clockFace.tickInset  // 10px margin from background
+                readonly property real outerInset: clockFace.tickInset  
                 readonly property real baseInnerGap: (index % 5 === 0) ? (15 * (1.0 + (Plasmoid.configuration.hourMarkerRatio || 0) * 0.25)) : 15
                 readonly property real innerInset: outerInset + baseInnerGap
                 
-                // Outer edge position (where tick tip touches)
                 readonly property real outerDist: root.calculateRayLengthWithInset(angleDeg, outerInset)
-                // Inner edge position (where tick base ends)
                 readonly property real innerDist: root.calculateRayLengthWithInset(angleDeg, innerInset)
-                // Tick height is the difference
                 readonly property real tickHeight: Math.max(2, outerDist - innerDist)
-                
-                // Position tick centered between outer and inner
                 readonly property real dist: (outerDist + innerDist) / 2
                 
                 x: clockFace.width/2 + Math.sin(angleDeg * Math.PI / 180) * dist - width/2
@@ -264,18 +259,12 @@ PlasmoidItem {
                 width: 4
                 height: 4 
                 
-                // Visual Tick (Rectangle)
                 Rectangle {
                    anchors.centerIn: parent
-                   // Dynamic Tick Size: thicker at cardinal points (0, 15, 30, 45) if enabled
-                   width: (index % 5 === 0 && (Plasmoid.configuration.boldHourMarkers === true)) ? 4 : 2
-                   // Length constant as requested
+                   width: (index % 5 === 0 && Plasmoid.configuration.boldHourMarkers) ? 4 : 2
                    height: tickItem.tickHeight
-                   
                    rotation: tickItem.angleDeg
                    
-                   // Color Logic: Lit up if passed. 
-                   // Note: 'index' corresponds to time-seconds.
                    color: index <= root.currentTime.getSeconds() ? Kirigami.Theme.highlightColor : Kirigami.Theme.disabledTextColor
                    
                    Behavior on color {
@@ -314,16 +303,16 @@ PlasmoidItem {
                     
                     text: {
                         var h = index === 0 ? 12 : index
-                        // Check AM/PM context
+                        
+                        if (clockFace.timeFormat === 1) return h.toString() // 12-hour
+                        
+                        // Default / 24-hour mode
                         var hour = root.currentTime.getHours()
                         
                         if (hour >= 12) {
-                            // PM Mode: 12..23
                             if (h === 12) return "12"
                             return (h + 12).toString()
                         } else {
-                            // AM Mode: 0..11 (Display 12..11)
-                            // 00:xx is displayed as 12
                             return h.toString()
                         }
                     }
@@ -521,7 +510,19 @@ PlasmoidItem {
             property bool isVertical: root.height > (root.width * 1.1)
             
             // Time Components
-            property string hourText: Qt.formatTime(root.currentTime, "HH")
+            property bool use24h: {
+                if (clockFace.timeFormat === 1) return false;
+                if (clockFace.timeFormat === 2) return true;
+                // System default fallback: use 24h
+                return true; 
+            }
+            
+            property string hourText: {
+                if (use24h) return Qt.formatTime(root.currentTime, "HH")
+                var h = root.currentTime.getHours() % 12
+                if (h === 0) h = 12
+                return h.toString()
+            }
             property string minText: Qt.formatTime(root.currentTime, "mm")
             
             // Font Settings
