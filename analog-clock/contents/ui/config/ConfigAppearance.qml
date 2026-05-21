@@ -23,6 +23,9 @@ Kirigami.ScrollablePage {
     property int cfg_widgetRadius
     property int cfg_modernDisplayMode
     
+    property bool cfg_useSystemAccentColor
+    property string cfg_customAccentColor
+    
     // Default Values (Requested by Environment)
     readonly property int cfg_clockStyleDefault: 2
     readonly property double cfg_backgroundOpacityDefault: 1.0
@@ -41,6 +44,8 @@ Kirigami.ScrollablePage {
     readonly property int cfg_modernDisplayModeDefault: 0
     readonly property double cfg_fontSizeRatioDefault: 1.0
     readonly property double cfg_letterSpacingRatioDefault: 0.0
+    readonly property bool cfg_useSystemAccentColorDefault: true
+    readonly property string cfg_customAccentColorDefault: "#1d99f3"
     
     property int cfg_hourMarkerRatio
     property bool cfg_boldHourMarkers
@@ -127,6 +132,187 @@ Kirigami.ScrollablePage {
                 else if (currentIndex === 4) page.cfg_widgetRadius = 40
                 else if (currentIndex === 5) page.cfg_widgetRadius = 50
                 else if (currentIndex === 6) page.cfg_widgetRadius = -1
+            }
+        }
+        
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Colors")
+        }
+
+        CheckBox {
+            Kirigami.FormData.label: i18n("Accent Color:")
+            text: i18n("Use system accent color")
+            checked: cfg_useSystemAccentColor
+            onCheckedChanged: cfg_useSystemAccentColor = checked
+        }
+
+        RowLayout {
+            visible: !cfg_useSystemAccentColor
+            Kirigami.FormData.label: i18n("Custom Color:")
+
+            TextField {
+                id: hexInput
+                text: cfg_customAccentColor
+                onTextChanged: {
+                    if (text.match(/^#[0-9A-Fa-f]{6}$/) || text.match(/^#[0-9A-Fa-f]{8}$/)) {
+                        cfg_customAccentColor = text;
+                    }
+                }
+            }
+        }
+
+        Item {
+            id: colorPickerItem
+            visible: !cfg_useSystemAccentColor
+            Kirigami.FormData.label: "" // Align under custom color
+            
+            implicitWidth: 250 
+            implicitHeight: 150
+            Layout.preferredWidth: 250
+            Layout.preferredHeight: 150
+            
+            property color parsedColor: cfg_customAccentColor
+            property real currentHue: isNaN(parsedColor.hsvHue) ? 0.0 : parsedColor.hsvHue
+            property real currentSat: isNaN(parsedColor.hsvSaturation) ? 0.0 : parsedColor.hsvSaturation
+            property real currentVal: isNaN(parsedColor.hsvValue) ? 0.0 : parsedColor.hsvValue
+
+            RowLayout {
+                anchors.fill: parent
+                spacing: 10
+                
+                Item {
+                    id: hsArea
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    
+                    Rectangle {
+                        anchors.fill: parent
+                        gradient: Gradient {
+                            orientation: Gradient.Horizontal
+                            GradientStop { position: 0.0; color: "#ff0000" }
+                            GradientStop { position: 0.166; color: "#ff00ff" }
+                            GradientStop { position: 0.333; color: "#0000ff" }
+                            GradientStop { position: 0.5; color: "#00ffff" }
+                            GradientStop { position: 0.666; color: "#00ff00" }
+                            GradientStop { position: 0.833; color: "#ffff00" }
+                            GradientStop { position: 1.0; color: "#ff0000" }
+                        }
+                    }
+                    Rectangle {
+                        anchors.fill: parent
+                        gradient: Gradient {
+                            orientation: Gradient.Vertical
+                            GradientStop { position: 0.0; color: "transparent" }
+                            GradientStop { position: 1.0; color: "#ffffff" }
+                        }
+                    }
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "#000000"
+                        opacity: 1.0 - colorPickerItem.currentVal
+                    }
+                    
+                    Rectangle {
+                        x: (1.0 - colorPickerItem.currentHue) * parent.width - width/2
+                        y: (1.0 - colorPickerItem.currentSat) * parent.height - height/2
+                        width: 14
+                        height: 14
+                        color: "transparent"
+                        
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: 2; height: 14; color: "black"
+                        }
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: 14; height: 2; color: "black"
+                        }
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        function updateHS(mouse) {
+                            var newH = 1.0 - Math.max(0.0, Math.min(1.0, mouse.x / width));
+                            var newS = 1.0 - Math.max(0.0, Math.min(1.0, mouse.y / height));
+                            var newColor = Qt.hsva(newH, newS, colorPickerItem.currentVal, 1.0);
+                            cfg_customAccentColor = newColor.toString();
+                            hexInput.text = newColor.toString();
+                        }
+                        onPressed: mouse => updateHS(mouse)
+                        onPositionChanged: mouse => updateHS(mouse)
+                    }
+                }
+                
+                Item {
+                    id: vArea
+                    Layout.preferredWidth: 20
+                    Layout.fillHeight: true
+                    
+                    Rectangle {
+                        anchors.fill: parent
+                        gradient: Gradient {
+                            orientation: Gradient.Vertical
+                            GradientStop { position: 0.0; color: Qt.hsva(colorPickerItem.currentHue, colorPickerItem.currentSat, 1.0, 1.0) }
+                            GradientStop { position: 1.0; color: "#000000" }
+                        }
+                    }
+                    
+                    Item {
+                        x: parent.width
+                        y: (1.0 - colorPickerItem.currentVal) * parent.height - height/2
+                        width: 10
+                        height: 10
+                        Rectangle {
+                            width: 8; height: 8
+                            rotation: 45
+                            color: "white"
+                            border.color: "black"
+                            border.width: 1
+                            x: 4
+                            y: 1
+                        }
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        function updateV(mouse) {
+                            var newV = 1.0 - Math.max(0.0, Math.min(1.0, mouse.y / height));
+                            var newColor = Qt.hsva(colorPickerItem.currentHue, colorPickerItem.currentSat, newV, 1.0);
+                            cfg_customAccentColor = newColor.toString();
+                            hexInput.text = newColor.toString();
+                        }
+                        onPressed: mouse => updateV(mouse)
+                        onPositionChanged: mouse => updateV(mouse)
+                    }
+                }
+            }
+        }
+
+        GridLayout {
+            visible: !cfg_useSystemAccentColor
+            columns: 8
+            Kirigami.FormData.label: "" // Aligned under custom color
+
+            Repeater {
+                model: ["#1d99f3", "#da4453", "#f67400", "#fdbc4b", "#27ae60", "#1abc9c", "#9b59b6", "#bdc3c7"]
+                Rectangle {
+                    width: 24
+                    height: 24
+                    radius: 12
+                    color: modelData
+                    border.color: cfg_customAccentColor === modelData ? Kirigami.Theme.textColor : "transparent"
+                    border.width: 2
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            cfg_customAccentColor = modelData;
+                            hexInput.text = modelData;
+                        }
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
             }
         }
         

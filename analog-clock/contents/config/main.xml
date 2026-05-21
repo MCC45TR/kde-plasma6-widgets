@@ -116,5 +116,13 @@
       <min>-5.0</min>
       <max>20.0</max>
     </entry>
+    <entry name="useSystemAccentColor" type="Bool">
+      <default>true</default>
+      <label>Use System Accent Color</label>
+    </entry>
+    <entry name="customAccentColor" type="String">
+      <default>#1d99f3</default>
+      <label>Custom Accent Color</label>
+    </entry>
   </group>
 </kcfg>

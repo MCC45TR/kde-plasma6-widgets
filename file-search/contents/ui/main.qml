@@ -158,7 +158,6 @@ PlasmoidItem {
         rssShowFullHeadline: Plasmoid.configuration.rssShowFullHeadline
         rssShowSource: Plasmoid.configuration.rssShowSource
         rssFrequency: Plasmoid.configuration.rssFrequency
-        maxChars: root.maxChars
         
         onToggleExpanded: root.expanded = !root.expanded
     }
@@ -177,7 +176,6 @@ PlasmoidItem {
         viewMode: root.viewMode
         iconSize: root.iconSize
         listIconSize: root.listIconSize
-        maxChars: root.maxChars
         
         textColor: root.textColor
         accentColor: root.accentColor

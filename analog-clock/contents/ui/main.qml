@@ -24,6 +24,11 @@ PlasmoidItem {
         root.currentTime = new Date()
     }
     
+    // Custom Accent Color Logic
+    property bool useSystemAccentColor: Plasmoid.configuration.useSystemAccentColor !== undefined ? Plasmoid.configuration.useSystemAccentColor : true
+    property string customAccentColor: Plasmoid.configuration.customAccentColor || "#1d99f3"
+    property color accentColor: useSystemAccentColor ? Kirigami.Theme.highlightColor : customAccentColor
+    
     // Updated 24.12.27: Math for Squircle/Rounded Rectangle
     property int baseRadius: Plasmoid.configuration.widgetRadius !== undefined ? Plasmoid.configuration.widgetRadius : 20
     property real cornerRadius: baseRadius === -1 ? Math.max(width, height) / 2 : baseRadius
@@ -265,7 +270,7 @@ PlasmoidItem {
                    height: tickItem.tickHeight
                    rotation: tickItem.angleDeg
                    
-                   color: index <= root.currentTime.getSeconds() ? Kirigami.Theme.highlightColor : Kirigami.Theme.disabledTextColor
+                   color: index <= root.currentTime.getSeconds() ? root.accentColor : Kirigami.Theme.disabledTextColor
                    
                    Behavior on color {
                        ColorAnimation { duration: 150 }
@@ -441,7 +446,7 @@ PlasmoidItem {
             Rectangle {
                 anchors.fill: parent
                 radius: width/2
-                color: Kirigami.Theme.highlightColor
+                color: root.accentColor
                 opacity: 0.8
             }
         }
