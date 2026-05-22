@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-18 22:43+0300\n"
+"POT-Creation-Date: 2026-05-23 02:06+0300\n"
 "PO-Revision-Date: 2026-01-22 12:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: ja\n"
@@ -12,529 +12,332 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
+#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
 msgid "Appearance"
 msgstr "外観"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-msgid "Categories"
-msgstr "カテゴリ"
-
-#: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
-msgid "Debug"
-msgstr "デバッグ"
-
-#: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
-msgid "Help"
-msgstr "ヘルプ"
-
-#: contents/ui/config/ConfigGeneral.qml:80
-msgid "Panel"
-msgstr "パネル"
-
-#: contents/ui/config/ConfigGeneral.qml:84
-msgid "Popup"
-msgstr "ポップアップ"
-
-#: contents/ui/config/ConfigGeneral.qml:88
-#: contents/ui/config/ConfigPreview.qml:9
-msgid "Preview"
-msgstr "プレビュー"
-
-#: contents/ui/config/ConfigGeneral.qml:92
-#: contents/ui/config/ConfigPrefix.qml:9
-msgid "Prefixes"
-msgstr "プレフィックス"
-
-#: contents/ui/config/ConfigGeneral.qml:96
-msgid "Placeholder"
-msgstr "プレースホルダ"
-
-#: contents/ui/config/ConfigGeneral.qml:114
-msgid "Panel Appearance"
-msgstr "パネルの外観"
-
-#: contents/ui/config/ConfigGeneral.qml:120
-#: contents/ui/config/ConfigDebug.qml:123
-msgid "Display Mode"
-msgstr "表示モード"
-
-#: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
-msgid "Button Mode (Icon only)"
-msgstr "ボタンモード (アイコンのみ)"
-
-#: contents/ui/config/ConfigGeneral.qml:123
-msgid "Medium Mode (Text)"
-msgstr "中間モード (テキスト)"
-
-#: contents/ui/config/ConfigGeneral.qml:124
-msgid "Wide Mode (Search Bar)"
-msgstr "ワイドモード (検索バー)"
-
-#: contents/ui/config/ConfigGeneral.qml:125
-msgid "Extra Wide Mode"
-msgstr "極ワイドモード"
-
-#: contents/ui/config/ConfigGeneral.qml:132
-msgid "Panel Preview"
-msgstr "パネルプレビュー"
-
-#: contents/ui/config/ConfigGeneral.qml:176
-#: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:49
+#: contents/ui/config/ConfigSearch.qml:9
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search"
 msgstr "検索"
 
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Start searching..."
-msgstr "検索を開始..."
-
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Search..."
-msgstr "検索..."
-
-#: contents/ui/config/ConfigGeneral.qml:204
-msgid "Power Options"
-msgstr "電源オプション"
-
-#: contents/ui/config/ConfigGeneral.qml:205
-msgid "Show boot options in Reboot button"
-msgstr "再起動ボタンにブートオプションを表示"
-
-#: contents/ui/config/ConfigGeneral.qml:213
-msgid "Results View"
-msgstr "結果ビュー"
-
-#: contents/ui/config/ConfigGeneral.qml:219
-#: contents/ui/config/ConfigDebug.qml:129
-msgid "View Mode"
-msgstr "表示モード"
-
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "List View"
-msgstr "リスト表示"
-
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "Tile View"
-msgstr "タイル表示"
-
-#: contents/ui/config/ConfigGeneral.qml:227
-#: contents/ui/config/ConfigDebug.qml:138
-msgid "List Icon Size"
-msgstr "リストアイコンサイズ"
-
-#: contents/ui/config/ConfigGeneral.qml:235
-#: contents/ui/config/ConfigDebug.qml:135
-msgid "Tile Icon Size"
-msgstr "タイルアイコンサイズ"
-
-#: contents/ui/config/ConfigGeneral.qml:243
-#: contents/ui/config/ConfigCategories.qml:170
-msgid "Result Limits"
-msgstr "結果制限"
-
-#: contents/ui/config/ConfigGeneral.qml:249
-#: contents/ui/config/ConfigCategories.qml:175
-msgid "Min Results"
-msgstr "最小結果数"
-
-#: contents/ui/config/ConfigGeneral.qml:256
-#: contents/ui/config/ConfigCategories.qml:184
-msgid "Max Results"
-msgstr "最大結果数"
-
-#: contents/ui/config/ConfigGeneral.qml:263
-msgid "Smartly limit results based on relevance"
-msgstr "関連性に基づいて結果をスマートに制限"
-
-#: contents/ui/config/ConfigGeneral.qml:264
-msgid "Dynamic Limit"
-msgstr "動的制限"
-
-#: contents/ui/config/ConfigGeneral.qml:272
-#: contents/ui/config/ConfigSearch.qml:19
-#: contents/ui/config/ConfigPreview.qml:112
-msgid "Enable File Previews"
-msgstr "ファイルプレビューを有効化"
-
-#: contents/ui/config/ConfigGeneral.qml:273
-msgid "Master Switch"
-msgstr "マスタースイッチ"
-
-#: contents/ui/config/ConfigGeneral.qml:278
-#: contents/ui/config/ConfigPreview.qml:134
-msgid "Preview Types"
-msgstr "プレビューの種類"
-
-#: contents/ui/config/ConfigGeneral.qml:283
-#: contents/ui/config/ConfigPreview.qml:159
-msgid "Images"
-msgstr "画像"
-
-#: contents/ui/config/ConfigGeneral.qml:289
-#: contents/ui/config/ConfigPreview.qml:197
-msgid "Videos"
-msgstr "ビデオ"
-
-#: contents/ui/config/ConfigGeneral.qml:295
-#: contents/ui/config/ConfigPreview.qml:235
-msgid "Text Files"
-msgstr "テキストファイル"
-
-#: contents/ui/config/ConfigGeneral.qml:301
-#: contents/ui/config/ConfigPreview.qml:273
-msgid "Documents"
-msgstr "ドキュメント"
-
-#: contents/ui/config/ConfigGeneral.qml:311
-#: contents/ui/config/ConfigPrefix.qml:29
-msgid "Date View (date:)"
-msgstr "日付表示 (date:)"
-
-#: contents/ui/config/ConfigGeneral.qml:316
-#: contents/ui/config/ConfigPrefix.qml:36
-msgid "Show Large Clock"
-msgstr "大きな時計を表示"
-
-#: contents/ui/config/ConfigGeneral.qml:320
-#: contents/ui/config/ConfigPrefix.qml:43
-msgid "Show Calendar Events"
-msgstr "カレンダーイベントを表示"
-
-#: contents/ui/config/ConfigGeneral.qml:323
-#: contents/ui/config/ConfigPrefix.qml:50
-msgid "Power View (power:)"
-msgstr "電源表示 (power:)"
-
-#: contents/ui/config/ConfigGeneral.qml:328
-#: contents/ui/config/ConfigPrefix.qml:58
-msgid "Show Sleep Button"
-msgstr "スリープボタンを表示"
-
-#: contents/ui/config/ConfigGeneral.qml:332
-#: contents/ui/config/ConfigPrefix.qml:65
-msgid "Show Hibernate Button"
-msgstr "休止状態ボタンを表示"
-
-#: contents/ui/config/ConfigGeneral.qml:337
-#: contents/ui/config/ConfigPrefix.qml:72
-msgid "Available Prefixes Reference"
-msgstr "利用可能なプレフィックスのリファレンス"
-
-#: contents/ui/config/ConfigGeneral.qml:341
-#: contents/ui/config/ConfigPrefix.qml:76
-msgid ""
-"These prefixes can be used to perform specific actions directly from the "
-"search bar."
-msgstr ""
-"これらのプレフィックスを使用して、検索バーから直接特定のアクションを実行できます。"
-
-#: contents/ui/config/ConfigGeneral.qml:363
-#: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
-#: contents/ui/config/ConfigPrefix.get(1):98
-msgid "List files modified today"
-msgstr "今日変更されたファイルを一覧表示"
-
-#: contents/ui/config/ConfigGeneral.qml:375
-#: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
-#: contents/ui/config/ConfigPrefix.qml:110
-msgid "Search on Google"
-msgstr "Googleで検索"
-
-#: contents/ui/config/ConfigGeneral.qml:387
-#: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
-#: contents/ui/config/ConfigPrefix.qml:122
-msgid "Search on DuckDuckGo"
-msgstr "DuckDuckGoで検索"
-
-#: contents/ui/config/ConfigGeneral.qml:399
-#: contents/ui/config/ConfigPrefix.qml:134
-msgid "Show calendar and date information"
-msgstr "カレンダーと日付情報を表示"
-
-#: contents/ui/config/ConfigGeneral.qml:411
-#: contents/ui/config/ConfigPrefix.qml:146
-msgid "Show large clock"
-msgstr "大きな時計を表示"
-
-#: contents/ui/config/ConfigGeneral.qml:423
-msgid "Show power management options"
-msgstr "電源管理オプションを表示"
-
-#: contents/ui/config/ConfigGeneral.qml:435
-#: contents/ui/config/ConfigPrefix.qml:170
-msgid "Show this help screen"
-msgstr "このヘルプ画面を表示"
-
-#: contents/ui/config/ConfigGeneral.qml:447
-#: contents/ui/config/ConfigPrefix.get(1):182
-msgid "Terminate running processes"
-msgstr "実行中のプロセスを終了"
-
-#: contents/ui/config/ConfigGeneral.qml:459
-#: contents/ui/config/ConfigPrefix.qml:194
-msgid "Check spelling of a word"
-msgstr "単語のスペルを確認"
-
-#: contents/ui/config/ConfigGeneral.qml:471
-#: contents/ui/config/ConfigPrefix.qml:206
-msgid "Execute shell commands"
-msgstr "シェルコマンドを実行"
-
-#: contents/ui/config/ConfigGeneral.qml:483
-msgid "Convert units (requires KRunner)"
-msgstr "単位を変換 (KRunnerが必要)"
-
-#: contents/ui/config/ConfigGeneral.qml:493
-#: contents/ui/config/ConfigSearch.qml:13
-msgid "Search Settings"
-msgstr "検索設定"
-
-#: contents/ui/config/ConfigGeneral.qml:497
-#: contents/ui/config/ConfigCategories.qml:150
-msgid "Search Algorithm"
-msgstr "検索アルゴリズム"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Fuzzy"
-msgstr "曖昧"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Exact"
-msgstr "完全一致"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Starts With"
-msgstr "前方一致"
-
-#: contents/ui/config/ConfigSearch.qml:24
-msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr ""
-"ホバーでファイルプレビューを表示 (Ctrl+Spaceでも可能)"
-
-#: contents/ui/config/ConfigSearch.qml:33
-msgid "Search Behavior"
-msgstr "検索動作"
-
-#: contents/ui/config/ConfigSearch.qml:37
-msgid "You can use the following KRunner commands and prefixes:"
-msgstr "以下のKRunnerコマンドとプレフィックスを使用できます:"
-
-#: contents/ui/config/ConfigSearch.qml:51
-msgid "Prefix"
-msgstr "プレフィックス"
-
-#: contents/ui/config/ConfigSearch.qml:56
-msgid "Description"
-msgstr "説明"
-
-#: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
-msgid "Terminate processes"
-msgstr "プロセスを終了"
-
-#: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
-msgid "Check spelling"
-msgstr "スペルチェック"
-
-#: contents/ui/config/ConfigSearch.qml:78
-msgid "Search Unicode characters"
-msgstr "Unicode文字を検索"
-
-#: contents/ui/config/ConfigDebug.qml:68
-msgid ""
-"This tab is only active in Developer mode. Change profile in General "
-"settings."
-msgstr ""
-"このタブは開発者モードでのみ有効です。全般設定でプロファイルを変更してください。"
-
-#: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-msgid "Debug Settings"
-msgstr "デバッグ設定"
-
-#: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
-#: contents/ui/components/DebugOverlay.qml:57
-msgid "Debug Overlay"
-msgstr "デバッグオーバーレイ"
-
-#: contents/ui/config/ConfigDebug.qml:91
-msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr "ウィジェットにデバッグ情報を表示"
-
-#: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
-msgid "Debug Data"
-msgstr "デバッグデータ"
-
-#: contents/ui/config/ConfigDebug.qml:111
-msgid "Timestamp"
-msgstr "タイムスタンプ"
-
-#: contents/ui/config/ConfigDebug.qml:114
-msgid "Locale"
-msgstr "ロケール"
-
-#: contents/ui/config/ConfigDebug.qml:117
-msgid "User Profile"
-msgstr "ユーザープロファイル"
-
-#: contents/ui/config/ConfigDebug.qml:141
-msgid "Enable Preview"
-msgstr "プレビューを有効化"
-
-#: contents/ui/config/ConfigDebug.qml:147
-msgid "History Count"
-msgstr "履歴数"
-
-#: contents/ui/config/ConfigDebug.qml:153
-msgid "items"
-msgstr "個"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/config/ConfigDebug.qml:165
-msgid "Telemetry"
-msgstr "テレメトリ"
-
-#: contents/ui/config/ConfigDebug.qml:174
-#: contents/ui/components/DebugOverlay.qml:100
-msgid "Total Searches"
-msgstr "合計検索数"
-
-#: contents/ui/config/ConfigDebug.qml:185
-#: contents/ui/components/DebugOverlay.qml:103
-msgid "Avg Latency"
-msgstr "平均レイテンシ"
-
-#: contents/ui/config/ConfigDebug.qml:198
-#: contents/ui/config/ConfigDebug.qml:200
-msgid "History Sample"
-msgstr "履歴サンプル"
-
-#: contents/ui/config/ConfigDebug.qml:207
-msgid ""
-"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
-"is sent to the internet."
-msgstr ""
-"プライバシーに関する通知: すべてのデバッグおよびテレメトリデータは"
-"ローカルにのみ保存されます。インターネットには送信されません。"
-
-#: contents/ui/config/ConfigDebug.qml:281
-msgid "History is empty"
-msgstr "履歴は空です"
-
-#: contents/ui/config/ConfigHelp.qml:49
-msgid "Keyboard Shortcuts"
-msgstr "キーボードショートカット"
-
-#: contents/ui/config/ConfigHelp.qml:53
-msgid "Navigate between results"
-msgstr "結果間を移動"
-
-#: contents/ui/config/ConfigHelp.qml:59
-msgid "Navigate between sections"
-msgstr "セクション間を移動"
-
-#: contents/ui/config/ConfigHelp.qml:65
-msgid "List / Tile view"
-msgstr "リスト / タイル表示"
-
-#: contents/ui/config/ConfigHelp.qml:71
-msgid "Toggle file preview"
-msgstr "ファイルプレビューを切り替え"
-
-#: contents/ui/config/ConfigHelp.get(1):77
-msgid "Open selected item"
-msgstr "選択したアイテムを開く"
-
-#: contents/ui/config/ConfigHelp.qml:83
-msgid "Close widget"
-msgstr "ウィジェットを閉じる"
-
-#: contents/ui/config/ConfigHelp.qml:90
-msgid "Search Prefixes"
-msgstr "検索プレフィックス"
-
-#: contents/ui/config/ConfigHelp.qml:125
-msgid "User Profiles"
-msgstr "ユーザープロファイル"
-
-#: contents/ui/config/ConfigHelp.qml:129
-msgid "A simplified interface with essential features."
-msgstr "基本的な機能を備えたシンプルなインターフェース。"
-
-#: contents/ui/config/ConfigHelp.qml:135
-msgid "Debug tab active, developer features enabled."
-msgstr "デバッグタブが有効で、開発者機能が有効化されています。"
-
-#: contents/ui/config/ConfigHelp.qml:141
-msgid "All features active, advanced settings available."
-msgstr "すべての機能が有効で、詳細設定が利用可能です。"
-
-#: contents/ui/config/ConfigCategories.qml:145
+#: contents/config/config.qml:17
+msgid "RSS"
+msgstr "RSS"
+
+#: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
+msgid "Debug"
+msgstr "デバッグ"
+
+#: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
+#: contents/ui/components/QueryHints.qml:70
+msgid "Help"
+msgstr "ヘルプ"
+
+#: contents/ui/config/ConfigCategories.qml:212
 msgid "Algorithm Settings"
 msgstr "アルゴリズム設定"
 
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Fuzzy Match"
-msgstr "曖昧一致"
+#: contents/ui/config/ConfigCategories.qml:217
+msgid "Search Algorithm"
+msgstr "検索アルゴリズム"
 
-#: contents/ui/config/ConfigCategories.qml:151
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Fuzzy Match"
+msgstr "あいまい一致"
+
+#: contents/ui/config/ConfigCategories.qml:218
 msgid "Exact Match"
 msgstr "完全一致"
 
-#: contents/ui/config/ConfigCategories.qml:162
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Starts With"
+msgstr "で始まる"
+
+#: contents/ui/config/ConfigCategories.qml:229
 msgid "Dynamic Result Count"
-msgstr "動的な結果数"
+msgstr "ダイナミック結果数"
 
-#: contents/ui/config/ConfigCategories.qml:163
+#: contents/ui/config/ConfigCategories.qml:230
 msgid "Automatically limit displayed results based on relevance score"
-msgstr "関連性スコアに基づいて表示結果を自動的に制限"
+msgstr "関連度スコアに基づいて表示結果を自動的に制限する"
 
-#: contents/ui/config/ConfigCategories.qml:195
+#: contents/ui/config/ConfigCategories.qml:237
+msgid "Result Limits"
+msgstr "結果の制限"
+
+#: contents/ui/config/ConfigCategories.qml:242
+msgid "Min Results"
+msgstr "最小結果数"
+
+#: contents/ui/config/ConfigCategories.qml:251
+msgid "Max Results"
+msgstr "最大結果数"
+
+#: contents/ui/config/ConfigCategories.qml:262
 msgid "Prioritized Categories"
 msgstr "優先カテゴリ"
 
-#: contents/ui/config/ConfigCategories.qml:199
+#: contents/ui/config/ConfigCategories.qml:266
 msgid "Use buttons to reorder categories or move between sections"
-msgstr "ボタンを使用してカテゴリの順序変更やセクション間の移動を行います"
+msgstr "ボタンを使用してカテゴリを並べ替えたりセクション間を移動します"
 
-#: contents/ui/config/ConfigCategories.qml:208
+#: contents/ui/config/ConfigCategories.qml:275
 msgid "Priority"
 msgstr "優先度"
 
-#: contents/ui/config/ConfigCategories.qml:299
+#: contents/ui/config/ConfigCategories.qml:366
 msgid "Move to Combined"
-msgstr "「結合」へ移動"
+msgstr "結合へ移動"
 
-#: contents/ui/config/ConfigCategories.qml:314
+#: contents/ui/config/ConfigCategories.qml:381
 msgid "Show Together (Merged)"
-msgstr "まとめて表示 (マージ)"
+msgstr "一緒に表示 (結合)"
 
-#: contents/ui/config/ConfigCategories.qml:318
+#: contents/ui/config/ConfigCategories.qml:385
 msgid "Categories in this section will be grouped together"
 msgstr "このセクションのカテゴリはグループ化されます"
 
-#: contents/ui/config/ConfigCategories.qml:339
+#: contents/ui/config/ConfigCategories.qml:401
 msgid "No combined categories"
 msgstr "結合されたカテゴリはありません"
 
-#: contents/ui/config/ConfigCategories.qml:398
+#: contents/ui/config/ConfigCategories.qml:466
 msgid "Move to Separate"
 msgstr "「分離」へ移動"
 
-#: contents/ui/config/ConfigCategories.get(1):413
+#: contents/ui/config/ConfigCategories.qml:481
 msgid "Category Settings Information"
 msgstr "カテゴリ設定情報"
 
-#: contents/ui/config/ConfigCategories.qml:417
+#: contents/ui/config/ConfigCategories.qml:485
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
-msgstr ""
-"変更は即座に適用されます。非表示のカテゴリは検索結果に表示されません。"
-"優先度によって表示順序が決まります。"
+msgstr "変更は即座に適用されます。非表示のカテゴリは表示されません。優先度で順序が決まります。"
 
-#: contents/ui/config/ConfigCategories.qml:417
+#: contents/ui/config/ConfigCategories.qml:485
 msgid "Lower number = higher priority"
-msgstr "数字が小さいほど優先度が高くなります"
+msgstr "小さい数値 = 高い優先度"
+
+#: contents/ui/config/ConfigDebug.qml:102
+msgid ""
+"This tab is only active in Developer mode. Change profile in General "
+"settings."
+msgstr "このタブは開発者モードでのみ有効です。全般設定でプロファイルを作成してください。"
+
+#: contents/ui/config/ConfigDebug.qml:111
+msgid "Debug Settings"
+msgstr "デバッグ設定"
+
+#: contents/ui/config/ConfigDebug.qml:117
+#: contents/ui/config/ConfigDebug.qml:176
+#: contents/ui/components/DebugOverlay.qml:58
+msgid "Debug Overlay"
+msgstr "デバッグオーバーレイ"
+
+#: contents/ui/config/ConfigDebug.qml:124
+msgid "Show debug info on widget (active mode, item count, index source)"
+msgstr "ウィジェットにデバッグ情報を表示"
+
+#: contents/ui/config/ConfigDebug.qml:133
+msgid "Debug Data"
+msgstr "デバッグデータ"
+
+#: contents/ui/config/ConfigDebug.qml:143
+msgid "Timestamp"
+msgstr "タイムスタンプ"
+
+#: contents/ui/config/ConfigDebug.qml:146
+msgid "Locale"
+msgstr "ロケール"
+
+#: contents/ui/config/ConfigDebug.qml:149
+msgid "User Profile"
+msgstr "ユーザープロファイル"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Minimal"
+msgstr "最小"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Developer"
+msgstr "開発者"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Power User"
+msgstr "パワーユーザー"
+
+#: contents/ui/config/ConfigDebug.qml:155
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "Display Mode"
+msgstr "表示モード"
+
+#: contents/ui/config/ConfigDebug.qml:157
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Button"
+msgstr "ボタン"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Medium"
+msgstr "中"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Wide"
+msgstr "ワイド"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Extra Wide"
+msgstr "エキストラワイド"
+
+#: contents/ui/config/ConfigDebug.qml:161
+#: contents/ui/config/ConfigGeneral.qml:517
+msgid "View Mode"
+msgstr "表示モード"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "List"
+msgstr "リスト表示"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "Tile"
+msgstr "タイル表示"
+
+#: contents/ui/config/ConfigDebug.qml:167
+#: contents/ui/config/ConfigGeneral.qml:544
+msgid "Tile Icon Size"
+msgstr "タイルアイコンサイズ"
+
+#: contents/ui/config/ConfigDebug.qml:170
+#: contents/ui/config/ConfigGeneral.qml:536
+msgid "List Icon Size"
+msgstr "リストアイコンサイズ"
+
+#: contents/ui/config/ConfigDebug.qml:173
+msgid "Enable Preview"
+msgstr "プレビューを有効化"
+
+#: contents/ui/config/ConfigDebug.qml:179
+msgid "History Count"
+msgstr "履歴数"
+
+#: contents/ui/config/ConfigDebug.qml:185
+msgid "items"
+msgstr "項目"
+
+#: contents/ui/config/ConfigDebug.qml:196
+msgid "Telemetry"
+msgstr "テレメトリ"
+
+#: contents/ui/config/ConfigDebug.qml:205
+#: contents/ui/components/DebugOverlay.qml:101
+msgid "Total Searches"
+msgstr "合計検索数"
+
+#: contents/ui/config/ConfigDebug.qml:216
+#: contents/ui/components/DebugOverlay.qml:104
+msgid "Avg Latency"
+msgstr "平均レイテンシ"
+
+#: contents/ui/config/ConfigDebug.qml:230
+msgid "History Sample"
+msgstr "履歴サンプル"
+
+#: contents/ui/config/ConfigDebug.qml:237
+msgid ""
+"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
+"is sent to the internet."
+msgstr "プライバシーに関する注意: すべてのデバッグデータはローカルのみに保存され、インターネットには送信されません。"
+
+#: contents/ui/config/ConfigDebug.qml:311
+msgid "History is empty"
+msgstr "履歴は空です"
+
+#: contents/ui/config/ConfigHelp.qml:85
+msgid "Keyboard Shortcuts"
+msgstr "キーボードショートカット"
+
+#: contents/ui/config/ConfigHelp.qml:89
+msgid "Navigate between results"
+msgstr "結果間を移動"
+
+#: contents/ui/config/ConfigHelp.qml:95
+msgid "Navigate between sections"
+msgstr "セクション間を移動"
+
+#: contents/ui/config/ConfigHelp.qml:101
+msgid "List / Tile view"
+msgstr "リスト / タイル表示"
+
+#: contents/ui/config/ConfigHelp.qml:107
+msgid "Toggle file preview"
+msgstr "ファイルのプレビューを切り替え"
+
+#: contents/ui/config/ConfigHelp.qml:113
+msgid "Open selected item"
+msgstr "選択した項目を開く"
+
+#: contents/ui/config/ConfigHelp.qml:119
+msgid "Close widget"
+msgstr "ウィジェットを閉じる"
+
+#: contents/ui/config/ConfigHelp.qml:126
+#: contents/ui/components/QueryHints.qml:31
+#: contents/ui/components/QueryHints.qml:100
+msgid "Search Prefixes"
+msgstr "検索プレフィックス"
+
+#: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
+#: contents/ui/config/ConfigPrefix.qml:214
+#: contents/ui/config/ConfigGeneral.qml:1002
+msgid "List files modified today"
+msgstr "本日変更されたファイルの一覧"
+
+#: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
+#: contents/ui/config/ConfigPrefix.qml:226
+#: contents/ui/config/ConfigGeneral.qml:1015
+msgid "Search on Google"
+msgstr "Googleで検索"
+
+#: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
+#: contents/ui/config/ConfigPrefix.qml:238
+#: contents/ui/config/ConfigGeneral.qml:1028
+msgid "Search on DuckDuckGo"
+msgstr "DuckDuckGoで検索"
+
+#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
+msgid "Terminate processes"
+msgstr "プロセスを強制終了"
+
+#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
+msgid "Check spelling"
+msgstr "スペルチェック"
+
+#: contents/ui/config/ConfigHelp.qml:161
+msgid "User Profiles"
+msgstr "ユーザープロファイル"
+
+#: contents/ui/config/ConfigHelp.qml:165
+msgid "A simplified interface with essential features."
+msgstr "主要機能のみのシンプルなインターフェース。"
+
+#: contents/ui/config/ConfigHelp.qml:171
+msgid "Debug tab active, developer features enabled."
+msgstr "デバッグタブが有効で、開発者機能が利用可能です。"
+
+#: contents/ui/config/ConfigHelp.qml:177
+msgid "All features active, advanced settings available."
+msgstr "すべての機能が有効で、詳細設定が利用可能です。"
+
+#: contents/ui/config/ConfigPreview.qml:9
+#: contents/ui/config/ConfigGeneral.qml:187
+#: contents/ui/config/ConfigGeneral.qml:596
+msgid "Preview"
+msgstr "プレビュー"
 
 #: contents/ui/config/ConfigPreview.qml:97
 msgid "Preview Settings"
@@ -542,60 +345,977 @@ msgstr "プレビュー設定"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr "ファイルタイプごとのプレビュー有効/無効設定。"
+msgstr "ファイルタイプごとにプレビューの有効/無効を切り替えます。"
 
-#: contents/ui/config/ConfigPreview.qml:126
+#: contents/ui/config/ConfigPreview.qml:112
+#: contents/ui/config/ConfigSearch.qml:19
+#: contents/ui/config/ConfigGeneral.qml:701
+msgid "Enable File Previews"
+msgstr "ファイルのプレビューを有効化"
+
+#: contents/ui/config/ConfigPreview.qml:125
 msgid "Enabled"
 msgstr "有効"
 
-#: contents/ui/config/ConfigPreview.qml:126
+#: contents/ui/config/ConfigPreview.qml:125
 msgid "Disabled"
 msgstr "無効"
 
-#: contents/ui/config/ConfigPreview.qml:307
+#: contents/ui/config/ConfigPreview.qml:133
+#: contents/ui/config/ConfigGeneral.qml:707
+msgid "Preview Types"
+msgstr "プレビューの種類"
+
+#: contents/ui/config/ConfigPreview.qml:158
+#: contents/ui/config/ConfigGeneral.qml:725
+#: contents/ui/components/FilterChips.qml:25
+#: contents/ui/components/QueryHints.qml:53
+msgid "Images"
+msgstr "画像"
+
+#: contents/ui/config/ConfigPreview.qml:196
+#: contents/ui/config/ConfigGeneral.qml:762
+msgid "Videos"
+msgstr "動画"
+
+#: contents/ui/config/ConfigPreview.qml:234
+#: contents/ui/config/ConfigGeneral.qml:799
+msgid "Text Files"
+msgstr "テキストファイル"
+
+#: contents/ui/config/ConfigPreview.qml:272
+#: contents/ui/config/ConfigGeneral.qml:646
+#: contents/ui/config/ConfigGeneral.qml:836
+#: contents/ui/components/QueryHints.qml:52
+msgid "Documents"
+msgstr "ドキュメント"
+
+#: contents/ui/config/ConfigPreview.qml:276
+msgid "Icon only"
+msgstr "アイコンのみ"
+
+#: contents/ui/config/ConfigPreview.qml:306
 msgid "Performance Information"
 msgstr "パフォーマンス情報"
 
-#: contents/ui/config/ConfigPreview.qml:312
+#: contents/ui/config/ConfigPreview.qml:311
 msgid "Video and document previews may increase memory usage."
-msgstr "ビデオやドキュメントのプレビューはメモリ使用量を増やす可能性があります。"
+msgstr "動画やドキュメントのプレビューはメモリ使用量を増やす可能性があります。"
 
-#: contents/ui/config/ConfigPrefix.qml:24
+#: contents/ui/config/ConfigSearch.qml:13
+msgid "Search Settings"
+msgstr "検索設定"
+
+#: contents/ui/config/ConfigSearch.qml:24
+msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
+msgstr "ホバー時にファイルのプレビューを表示 (Ctrl+Spaceでも可)"
+
+#: contents/ui/config/ConfigSearch.qml:33
+msgid "Search Behavior"
+msgstr "検索動作"
+
+#: contents/ui/config/ConfigSearch.qml:37
+msgid "You can use the following KRunner commands and prefixes:"
+msgstr "以下のKRunnerコマンドと接頭辞を使用できます:"
+
+#: contents/ui/config/ConfigSearch.qml:51
+msgid "Prefix"
+msgstr "接頭辞"
+
+#: contents/ui/config/ConfigSearch.qml:56
+msgid "Description"
+msgstr "説明"
+
+#: contents/ui/config/ConfigSearch.qml:78
+msgid "Search Unicode characters"
+msgstr "Unicode文字を検索"
+
+#: contents/ui/config/ConfigPrefix.qml:10
+#: contents/ui/config/ConfigGeneral.qml:191
+msgid "Prefixes"
+msgstr "接頭辞"
+
+#: contents/ui/config/ConfigPrefix.qml:40
 msgid "Prefix View Settings"
-msgstr "プレフィックス表示設定"
+msgstr "接頭辞表示の設定"
 
-#: contents/ui/config/ConfigPrefix.qml:158
+#: contents/ui/config/ConfigPrefix.qml:45
+#: contents/ui/config/ConfigGeneral.qml:855
+msgid "Date View (date:)"
+msgstr "日付表示 (date:)"
+
+#: contents/ui/config/ConfigPrefix.qml:52
+#: contents/ui/config/ConfigGeneral.qml:860
+msgid "Show Large Clock"
+msgstr "大きな時計を表示"
+
+#: contents/ui/config/ConfigPrefix.qml:59
+#: contents/ui/config/ConfigGeneral.qml:864
+msgid "Show Calendar Events"
+msgstr "カレンダーの予定を表示"
+
+#: contents/ui/config/ConfigPrefix.qml:66
+#: contents/ui/config/ConfigGeneral.qml:869
+msgid "Weather View (weather:)"
+msgstr "天気表示 (weather:)"
+
+#: contents/ui/config/ConfigPrefix.qml:74
+#: contents/ui/config/ConfigGeneral.qml:875
+msgid "Enable Weather Prefix"
+msgstr "天気プレフィックスを有効化"
+
+#: contents/ui/config/ConfigPrefix.qml:87
+#: contents/ui/config/ConfigGeneral.qml:888
+msgid "Use System Units"
+msgstr "システム単位を使用"
+
+#: contents/ui/config/ConfigPrefix.qml:96
+#: contents/ui/config/ConfigGeneral.qml:897
+msgid "Refresh Interval:"
+msgstr "更新間隔:"
+
+#: contents/ui/config/ConfigPrefix.qml:102
+#: contents/ui/config/ConfigGeneral.qml:903
+msgid "Every Search"
+msgstr "検索ごと"
+
+#: contents/ui/config/ConfigPrefix.qml:103
+#: contents/ui/config/ConfigGeneral.qml:904
+msgid "15 Minutes"
+msgstr "15分"
+
+#: contents/ui/config/ConfigPrefix.qml:104
+#: contents/ui/config/ConfigGeneral.qml:905
+msgid "30 Minutes"
+msgstr "30分"
+
+#: contents/ui/config/ConfigPrefix.qml:105
+#: contents/ui/config/ConfigGeneral.qml:906
+msgid "1 Hour"
+msgstr "1時間"
+
+#: contents/ui/config/ConfigPrefix.qml:125
+#: contents/ui/config/ConfigGeneral.qml:926
+msgid "(If time since last update > interval)"
+msgstr "(前回の更新から間隔が経過している場合)"
+
+#: contents/ui/config/ConfigPrefix.qml:134
+#: contents/ui/config/ConfigGeneral.qml:933
+msgid "Power View (power:)"
+msgstr "電源表示 (power:)"
+
+#: contents/ui/config/ConfigPrefix.qml:142
+#: contents/ui/config/ConfigGeneral.qml:938
+msgid "Show Sleep Button"
+msgstr "スリープボタンを表示"
+
+#: contents/ui/config/ConfigPrefix.qml:149
+#: contents/ui/config/ConfigGeneral.qml:942
+msgid "Show Hibernate Button"
+msgstr "休眠ボタンを表示"
+
+#: contents/ui/config/ConfigPrefix.qml:160
+#: contents/ui/config/ConfigGeneral.qml:951
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(スワップ容量がRAMより小さいか、見つかりません)"
+
+#: contents/ui/config/ConfigPrefix.qml:170
+#: contents/ui/config/ConfigGeneral.qml:959
+msgid "Show boot options in Reboot button"
+msgstr "再起動ボタンにブートオプションを表示"
+
+#: contents/ui/config/ConfigPrefix.qml:180
+#: contents/ui/config/ConfigGeneral.qml:967
+msgid "Note: Systemd boot is required for this feature"
+msgstr "注意: この機能にはSystemdブートが必要です"
+
+#: contents/ui/config/ConfigPrefix.qml:188
+#: contents/ui/config/ConfigGeneral.qml:975
+msgid "Available Prefixes Reference"
+msgstr "利用可能な接頭辞のリファレンス"
+
+#: contents/ui/config/ConfigPrefix.qml:192
+#: contents/ui/config/ConfigGeneral.qml:979
+msgid ""
+"These prefixes can be used to perform specific actions directly from the "
+"search bar."
+msgstr "これらの接頭辞を使用して、検索バーから直接特定のアクションを実行できます。"
+
+#: contents/ui/config/ConfigPrefix.qml:250
+#: contents/ui/config/ConfigGeneral.qml:1041
+msgid "Show calendar and date information"
+msgstr "カレンダーと日付の情報を表示"
+
+#: contents/ui/config/ConfigPrefix.qml:262
+#: contents/ui/config/ConfigGeneral.qml:1054
+msgid "Show large clock"
+msgstr "大きな時計を表示"
+
+#: contents/ui/config/ConfigPrefix.qml:274
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr "電源管理オプション (終了、再起動など) を表示"
+msgstr "電源管理オプションを表示 (シャットダウン、再起動など)"
 
-#: contents/ui/config/ConfigPrefix.qml:218
+#: contents/ui/config/ConfigPrefix.qml:286
+msgid "Show current weather"
+msgstr "現在の天気を表示"
+
+#: contents/ui/config/ConfigPrefix.qml:298
+#: contents/ui/config/ConfigGeneral.qml:1080
+msgid "Show this help screen"
+msgstr "このヘルプ画面を表示"
+
+#: contents/ui/config/ConfigPrefix.qml:310
+#: contents/ui/config/ConfigGeneral.qml:1093
+msgid "Terminate running processes"
+msgstr "実行中のプロセスを終了"
+
+#: contents/ui/config/ConfigPrefix.qml:322
+#: contents/ui/config/ConfigGeneral.qml:1106
+msgid "Check spelling of a word"
+msgstr "単語のスペルをチェック"
+
+#: contents/ui/config/ConfigPrefix.qml:334
+#: contents/ui/config/ConfigGeneral.qml:1119
+msgid "Execute shell commands"
+msgstr "シェルコマンドを実行"
+
+#: contents/ui/config/ConfigPrefix.qml:346
 msgid "Convert units (requires KRunner installed)"
-msgstr "単位を変換 (KRunnerが必要です)"
+msgstr "単位変換 (KRunnerが必要)"
 
-#: contents/ui/config/ConfigPrefix.qml:228
+#: contents/ui/config/ConfigPrefix.qml:356
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr "注意: 一部のプレフィックスはインストールされているKRunnerランナーに依存します。"
+msgstr "注意: 一部の接頭辞はインストールされているKRunnerに依存します。"
 
-#: contents/ui/components/QueryHints.qml:40
+#: contents/ui/config/ConfigGeneral.qml:178
+msgid "Panel"
+msgstr "パネル"
+
+#: contents/ui/config/ConfigGeneral.qml:182
+msgid "Popup"
+msgstr "ポップアップ"
+
+#: contents/ui/config/ConfigGeneral.qml:210
+msgid "Panel Appearance"
+msgstr "パネルの外観"
+
+#: contents/ui/config/ConfigGeneral.qml:218 contents/ui/main.qml:104
+msgid "Button Mode (Icon only)"
+msgstr "ボタンモード (アイコンのみ)"
+
+#: contents/ui/config/ConfigGeneral.qml:219
+msgid "Medium Mode (Text)"
+msgstr "中モード (テキスト)"
+
+#: contents/ui/config/ConfigGeneral.qml:220
+msgid "Wide Mode (Search Bar)"
+msgstr "ワイドモード (検索バー)"
+
+#: contents/ui/config/ConfigGeneral.qml:221
+msgid "Extra Wide Mode"
+msgstr "エキストラワイドモード"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Ultra Wide Mode"
+msgstr "ウルトラワイドモード"
+
+#: contents/ui/config/ConfigGeneral.qml:229
+msgid "Edge Appearance"
+msgstr "エッジの外観"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Round corners"
+msgstr "角を丸く"
+
+#: contents/ui/config/ConfigGeneral.qml:233
+msgid "Slightly round"
+msgstr "やや丸く"
+
+#: contents/ui/config/ConfigGeneral.qml:234
+msgid "Less round"
+msgstr "角を鋭く"
+
+#: contents/ui/config/ConfigGeneral.qml:235
+msgid "Square corners"
+msgstr "角を鋭角に"
+
+#: contents/ui/config/ConfigGeneral.qml:242
+msgid "Search Icon"
+msgstr "検索アイコン"
+
+#: contents/ui/config/ConfigGeneral.qml:243
+msgid "Show search icon and button in panel"
+msgstr "パネルに検索アイコンとボタンを表示"
+
+#: contents/ui/config/ConfigGeneral.qml:249
+msgid "Show background tile (colored square)"
+msgstr "背景タイルを表示 (色付きの正方形)"
+
+#: contents/ui/config/ConfigGeneral.qml:257
+msgid "Show animated RSS titles in panel search bar"
+msgstr "検索バーにアニメーションRSSタイトルを表示"
+
+#: contents/ui/config/ConfigGeneral.qml:258
+msgid "RSS Titles"
+msgstr "RSSタイトル"
+
+#: contents/ui/config/ConfigGeneral.qml:264
+msgid "Show RSS source name in panel ticker"
+msgstr "パネルにRSSソース名を表示"
+
+#: contents/ui/config/ConfigGeneral.qml:272
+msgid "RSS Frequency"
+msgstr "RSS更新頻度"
+
+#: contents/ui/config/ConfigGeneral.qml:275
+msgid "Always"
+msgstr "常に"
+
+#: contents/ui/config/ConfigGeneral.qml:276
+msgid "Very Frequent"
+msgstr "非常に頻繁"
+
+#: contents/ui/config/ConfigGeneral.qml:277
+msgid "Frequent"
+msgstr "頻繁"
+
+#: contents/ui/config/ConfigGeneral.qml:278
+msgid "Normal"
+msgstr "通常"
+
+#: contents/ui/config/ConfigGeneral.qml:279
+msgid "Less Frequent"
+msgstr "やや頻繁"
+
+#: contents/ui/config/ConfigGeneral.qml:280
+msgid "Rare"
+msgstr "まれ"
+
+#: contents/ui/config/ConfigGeneral.qml:281
+msgid "Only when new"
+msgstr "新規のみ"
+
+#: contents/ui/config/ConfigGeneral.qml:286
+msgid "Panel Height"
+msgstr "パネルの高さ"
+
+#: contents/ui/config/ConfigGeneral.qml:291
+msgid "Automatic"
+msgstr "自動"
+
+#: contents/ui/config/ConfigGeneral.qml:336
+msgid "Panel Preview"
+msgstr "パネルプレビュー"
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
+msgid "Start searching..."
+msgstr "検索を開始..."
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
+msgid "Search..."
+msgstr "検索..."
+
+#: contents/ui/config/ConfigGeneral.qml:385
+msgid "News Headline"
+msgstr "ニュース見出し"
+
+#: contents/ui/config/ConfigGeneral.qml:511
+msgid "Results View"
+msgstr "結果ビュー"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "List View"
+msgstr "リスト表示"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "Tile View"
+msgstr "タイル表示"
+
+#: contents/ui/config/ConfigGeneral.qml:524
+msgid "Scroll Bar"
+msgstr "スクロールバー"
+
+#: contents/ui/config/ConfigGeneral.qml:526
+msgid "System Default"
+msgstr "システムデフォルト"
+
+#: contents/ui/config/ConfigGeneral.qml:527
+msgid "Minimal (Custom)"
+msgstr "最小限 (カスタム)"
+
+#: contents/ui/config/ConfigGeneral.qml:528
+msgid "Hidden"
+msgstr "非表示"
+
+#: contents/ui/config/ConfigGeneral.qml:552
+#: contents/ui/components/PinnedSection.qml:85
+msgid "Pinned Items"
+msgstr "ピン留めされた項目"
+
+#: contents/ui/config/ConfigGeneral.qml:557
+msgid "Show pinned items bar"
+msgstr "ピン留めされたアイテム"
+
+#: contents/ui/config/ConfigGeneral.qml:563
+msgid "Minimize automatically when searching"
+msgstr "検索時に自動的に最小化する"
+
+#: contents/ui/config/ConfigGeneral.qml:572
+msgid "Tile Size Mode"
+msgstr "タイルアイコンサイズ"
+
+#: contents/ui/config/ConfigGeneral.qml:575
+msgid "Normal (wide tiles)"
+msgstr "通常 (ワイドタイル)"
+
+#: contents/ui/config/ConfigGeneral.qml:576
+msgid "Compact (all small)"
+msgstr "コンパクト (すべて小)"
+
+#: contents/ui/config/ConfigGeneral.qml:577
+msgid "Only pinned compact"
+msgstr "ピン留めのみコンパクト"
+
+#: contents/ui/config/ConfigGeneral.qml:578
+msgid "Only history/results compact"
+msgstr "履歴/結果のみコンパクト"
+
+#: contents/ui/config/ConfigGeneral.qml:586
+msgid "Filter Chip Style"
+msgstr "フィルターチップスタイル"
+
+#: contents/ui/config/ConfigGeneral.qml:588
+msgid "Current Appearance (Filled)"
+msgstr "現在の外観 (塗りつぶし)"
+
+#: contents/ui/config/ConfigGeneral.qml:589
+msgid "Breeze Appearance (Outline)"
+msgstr "Breeze外観 (アウトライン)"
+
+#: contents/ui/config/ConfigGeneral.qml:625
+msgid "System Settings"
+msgstr "検索設定"
+
+#: contents/ui/config/ConfigGeneral.qml:669
+msgid "Settings"
+msgstr "デバッグ設定"
+
+#: contents/ui/config/ConfigGeneral.qml:684
+#: contents/ui/components/FilterChips.qml:24
+msgid "Docs"
+msgstr "ドキュメント"
+
+#: contents/ui/config/ConfigGeneral.qml:702
+msgid "Show/Hide Previews"
+msgstr "プレビューを表示/非表示"
+
+#: contents/ui/config/ConfigGeneral.qml:1067
+msgid "Show power management options"
+msgstr "電源管理オプションを表示"
+
+#: contents/ui/config/ConfigGeneral.qml:1132
+msgid "Convert units (requires KRunner)"
+msgstr "単位変換 (KRunnerが必要)"
+
+#: contents/ui/config/ConfigRSS.qml:235
+msgid "Arch & Linux News"
+msgstr "Arch & Linux ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:245
+msgid "Security Bulletins"
+msgstr "セキュリティ情報"
+
+#: contents/ui/config/ConfigRSS.qml:254
+msgid "Türkiye News"
+msgstr "トルコ ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:268
+msgid "Azerbaijan News"
+msgstr "アゼルバイジャン ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:276
+msgid "Bangladesh News"
+msgstr "バングラデシュ ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:283
+msgid "Czech Republic"
+msgstr "チェコ共和国"
+
+#: contents/ui/config/ConfigRSS.qml:290
+msgid "Germany News"
+msgstr "ドイツ ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:297
+msgid "Greece News"
+msgstr "ギリシャ ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:306
+msgid "Spain & Mexico"
+msgstr "スペイン & メキシコ"
+
+#: contents/ui/config/ConfigRSS.qml:314
+msgid "Iran News"
+msgstr "イラン ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:321
+msgid "France News"
+msgstr "フランス ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:329
+msgid "India News (Hindi)"
+msgstr "インド ニュース (ヒンディー語)"
+
+#: contents/ui/config/ConfigRSS.qml:336
+msgid "Armenia News"
+msgstr "アルメニア ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:343
+msgid "Indonesia News"
+msgstr "インドネシア ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:350
+msgid "Italy News"
+msgstr "イタリア ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:358
+msgid "Japan News"
+msgstr "日本 ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:365
+msgid "Brazil & Portugal"
+msgstr "ブラジル & ポルトガル"
+
+#: contents/ui/config/ConfigRSS.qml:372
+msgid "Romania News"
+msgstr "ルーマニア ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:380
+msgid "Russia News"
+msgstr "ロシア ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:387
+msgid "Pakistan News"
+msgstr "パキスタン ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:394
+msgid "China News"
+msgstr "中国 ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:401
+msgid "USA & UK News"
+msgstr "米英ニュース"
+
+#: contents/ui/config/ConfigRSS.qml:410
+msgid "World News"
+msgstr "ワールドニュース"
+
+#: contents/ui/config/ConfigRSS.qml:459
+msgid "New Source"
+msgstr "新規ソース"
+
+#: contents/ui/config/ConfigRSS.qml:544
+msgid "Invalid URL"
+msgstr "無効なURL"
+
+#: contents/ui/config/ConfigRSS.qml:551
+msgid "Starting background sync..."
+msgstr "バックグラウンド同期を開始中..."
+
+#: contents/ui/config/ConfigRSS.qml:564
+msgid "Script not found at: %1"
+msgstr "スクリプトが見つかりません: %1"
+
+#: contents/ui/config/ConfigRSS.qml:584
+msgid "Sync: SUCCESS"
+msgstr "同期: 成功"
+
+#: contents/ui/config/ConfigRSS.qml:658
+msgid "Never"
+msgstr "なし"
+
+#: contents/ui/config/ConfigRSS.qml:674
+msgid "Enable RSS: Show feed updates in search results"
+msgstr "RSSを有効化: 検索結果にフィード更新を表示"
+
+#: contents/ui/config/ConfigRSS.qml:686
+msgid "Sync All Sources"
+msgstr "すべてのソースを同期"
+
+#: contents/ui/config/ConfigRSS.qml:693
+msgid "Clear Cache Folder"
+msgstr "キャッシュフォルダをクリア"
+
+#: contents/ui/config/ConfigRSS.qml:702
+msgid "Last full sync: %1"
+msgstr "最終完全同期: %1"
+
+#: contents/ui/config/ConfigRSS.qml:713
+msgid "Show images in results"
+msgstr "結果に画像を表示"
+
+#: contents/ui/config/ConfigRSS.qml:719
+msgid "Expand cards on click"
+msgstr "クリックでカードを展開"
+
+#: contents/ui/config/ConfigRSS.qml:727
+msgid "Popular Presets"
+msgstr "人気のプリセット"
+
+#: contents/ui/config/ConfigRSS.qml:733
+msgid "Search presets (e.g. News, Tech, TR, Linux)..."
+msgstr "プリセットを検索 (例: ニュース, 技術, TR, Linux)..."
+
+#: contents/ui/config/ConfigRSS.qml:795
+msgid "RSS Sources (Max 30)"
+msgstr "RSSソース (最大30)"
+
+#: contents/ui/config/ConfigRSS.qml:859
+msgid "Name"
+msgstr "名前"
+
+#: contents/ui/config/ConfigRSS.qml:865
+msgid "URL"
+msgstr "URL"
+
+#: contents/ui/config/ConfigRSS.qml:891
+msgid "Entries:"
+msgstr "エントリ:"
+
+#: contents/ui/config/ConfigRSS.qml:897
+msgid "Interval:"
+msgstr "間隔:"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1h"
+msgstr "%1時間"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1m"
+msgstr "%1分"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 hours"
+msgstr "%1 時間"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 mins"
+msgstr "%1 分"
+
+#: contents/ui/config/ConfigRSS.qml:918
+msgid "Last sync: %1"
+msgstr "最終同期: %1"
+
+#: contents/ui/config/ConfigRSS.qml:952
+msgid "Add Custom Source"
+msgstr "カスタムソースを追加"
+
+#: contents/ui/config/ConfigRSS.qml:966
+msgid "News Features:"
+msgstr "ニュース機能:"
+
+#: contents/ui/config/ConfigRSS.qml:967
+msgid "Show RSS titles in placeholder cycling"
+msgstr "プレースホルダにRSSタイトルを交互表示"
+
+#: contents/ui/config/ConfigRSS.qml:973
+msgid "Show full headlines (split into segments)"
+msgstr "完全な見出しを表示 (セグメント分割)"
+
+#: contents/ui/config/ConfigRSS.qml:979
+msgid "Default Interval:"
+msgstr "デフォルトの間隔:"
+
+#: contents/ui/config/ConfigRSS.qml:986
+msgid "Default Entries:"
+msgstr "デフォルトのエントリ:"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinnedSection.qml:436
+msgid "Unpin"
+msgstr "ピン留め解除"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+msgid "Pin"
+msgstr "ピン留め"
+
 #: contents/ui/components/HelpView.qml:16
+#: contents/ui/components/QueryHints.qml:38
 msgid "Timeline View"
 msgstr "タイムライン表示"
+
+#: contents/ui/components/HelpView.qml:17
+#: contents/ui/components/QueryHints.qml:55
+#: contents/ui/components/SearchPopup.qml:1028
+msgid "Applications"
+msgstr "アプリケーション"
+
+#: contents/ui/components/HelpView.qml:18
+msgid "File Path Search"
+msgstr "ファイルパス検索"
+
+#: contents/ui/components/HelpView.qml:19
+msgid "Google Search"
+msgstr "Google検索"
+
+#: contents/ui/components/HelpView.qml:20
+msgid "DuckDuckGo Search"
+msgstr "DuckDuckGo 検索"
+
+#: contents/ui/components/HelpView.qml:21
+msgid "Wikipedia Search"
+msgstr "Wikipedia 検索"
+
+#: contents/ui/components/HelpView.qml:22
+#: contents/ui/components/QueryHints.qml:66
+msgid "Bookmarks"
+msgstr "ブックマーク"
+
+#: contents/ui/components/HelpView.qml:23
+#: contents/ui/components/QueryHints.qml:69
+msgid "Man Pages"
+msgstr "マニュアルページ"
+
+#: contents/ui/components/HelpView.qml:24
+msgid "Kill Process"
+msgstr "プロセスを終了"
+
+#: contents/ui/components/HelpView.qml:25
+msgid "Spell Check"
+msgstr "スペルチェック"
+
+#: contents/ui/components/HelpView.qml:26
+msgid "Dictionary Definition"
+msgstr "辞書の定義"
+
+#: contents/ui/components/HelpView.qml:27
+#: contents/ui/components/QueryHints.qml:60
+msgid "Unit Converter"
+msgstr "単位変換"
+
+#: contents/ui/components/HelpView.qml:28
+msgid "Shell Commands"
+msgstr "シェルコマンド"
+
+#: contents/ui/components/HelpView.qml:29
+msgid "Power Management"
+msgstr "電源管理"
+
+#: contents/ui/components/HelpView.qml:30
+msgid "System Services"
+msgstr "システムサービス"
+
+#: contents/ui/components/HelpView.qml:31
+msgid "Unicode Characters"
+msgstr "Unicode文字"
+
+#: contents/ui/components/HelpView.qml:32
+msgid "Date and Time"
+msgstr "日付と時刻"
+
+#: contents/ui/components/HelpView.qml:33
+msgid "Help & Shortcuts"
+msgstr "ヘルプとショートカット"
+
+#: contents/ui/components/HistoryListView.qml:38
+#: contents/ui/components/HistoryTileView.qml:246
+msgid "Recent Searches"
+msgstr "最近の検索"
+
+#: contents/ui/components/HistoryListView.qml:58
+#: contents/ui/components/HistoryTileView.qml:266
+msgid "Clear History"
+msgstr "履歴をクリア"
+
+#: contents/ui/components/HistoryListView.qml:286
+#: contents/ui/components/HistoryTileView.qml:597
+#: contents/ui/components/ResultsTileView.qml:301
+msgid "Type to search"
+msgstr "入力して検索"
+
+#: contents/ui/components/DebugOverlay.qml:41
+msgid "Saved!"
+msgstr "保存完了！"
+
+#: contents/ui/components/DebugOverlay.qml:49
+#: contents/ui/components/DebugOverlay.qml:119
+msgid "Save Dump"
+msgstr "ダンプを保存"
+
+#: contents/ui/components/DebugOverlay.qml:78
+msgid "Backend"
+msgstr "バックエンド"
+
+#: contents/ui/components/DebugOverlay.qml:81
+msgid "Items"
+msgstr "項目"
+
+#: contents/ui/components/DebugOverlay.qml:84
+msgid "Latency"
+msgstr "レイテンシ"
+
+#: contents/ui/components/DebugOverlay.qml:91
+msgid "View"
+msgstr "表示"
+
+#: contents/ui/components/DebugOverlay.qml:94
+msgid "Display"
+msgstr "ディスプレイ"
+
+#: contents/ui/components/FilterChips.qml:22
+msgid "All"
+msgstr "すべて"
+
+#: contents/ui/components/FilterChips.qml:23
+msgid "Apps"
+msgstr "アプリ"
+
+#: contents/ui/components/FilterChips.qml:26
+msgid "Folders"
+msgstr "フォルダ"
+
+#: contents/ui/components/FilterChips.qml:27
+msgid "Web"
+msgstr "ウェブ"
+
+#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/PinnedSection.qml:402
+msgid "Open"
+msgstr "開く"
+
+#: contents/ui/components/HistoryContextMenu.qml:69
+#: contents/ui/components/PinnedSection.qml:412
+msgid "Copy Path"
+msgstr "パスをコピー"
+
+#: contents/ui/components/HistoryContextMenu.qml:85
+msgid "Open in Terminal"
+msgstr "ターミナルで開く"
+
+#: contents/ui/components/HistoryContextMenu.qml:97
+#: contents/ui/components/PinnedSection.qml:423
+msgid "Open Containing Folder"
+msgstr "保存先フォルダを開く"
+
+#: contents/ui/components/HistoryContextMenu.qml:107
+msgid "Move to Trash"
+msgstr "ゴミ箱に移動"
+
+#: contents/ui/components/HistoryContextMenu.qml:120
+msgid "Properties"
+msgstr "プロパティ"
+
+#: contents/ui/components/HistoryContextMenu.qml:130
+msgid "Edit Application..."
+msgstr "アプリを編集..."
+
+#: contents/ui/components/HistoryContextMenu.qml:140
+msgid "Remove from History"
+msgstr "履歴から削除"
+
+#: contents/ui/components/PinnedSection.qml:225
+msgid "Right-click items to pin them"
+msgstr "右クリックでピン留め"
+
+#: contents/ui/components/PinnedSection.qml:383
+msgid "Drag to reorder"
+msgstr "ドラッグして並べ替え"
+
+#: contents/ui/components/PowerView.qml:254
+msgid "Hibernate"
+msgstr "ハイバネーション"
+
+#: contents/ui/components/PowerView.qml:258
+msgid "(Press again to hibernate)"
+msgstr "(もう一度押すと休眠)"
+
+#: contents/ui/components/PowerView.qml:267
+msgid "Sleep"
+msgstr "スリープ"
+
+#: contents/ui/components/PowerView.qml:271
+msgid "(Press again to sleep)"
+msgstr "(もう一度押すとスリープ)"
+
+#: contents/ui/components/PowerView.qml:279
+msgid "Reboot"
+msgstr "再起動"
+
+#: contents/ui/components/PowerView.qml:283
+msgid "(Press again to reboot)"
+msgstr "(もう一度押すと再起動)"
+
+#: contents/ui/components/PowerView.qml:303
+msgid "Shutdown"
+msgstr "シャットダウン"
+
+#: contents/ui/components/PowerView.qml:307
+msgid "(Press again to shutdown)"
+msgstr "(もう一度押すとシャットダウン)"
+
+#: contents/ui/components/PowerView.qml:444
+msgid "Refresh"
+msgstr "更新"
+
+#: contents/ui/components/PowerView.qml:472
+msgid "Scan for boot entries"
+msgstr "ブートエントリをスキャン"
+
+#: contents/ui/components/PowerView.qml:498
+msgid "Lock Screen"
+msgstr "画面をロック"
+
+#: contents/ui/components/PowerView.qml:508
+msgid "Log Out"
+msgstr "ログアウト"
+
+#: contents/ui/components/PowerView.qml:512
+msgid "(Press again to log out)"
+msgstr "(もう一度押すとログアウト)"
+
+#: contents/ui/components/PowerView.qml:520
+msgid "Switch User"
+msgstr "ユーザーを切り替え"
+
+#: contents/ui/components/PowerView.qml:524
+msgid "(Press again to switch)"
+msgstr "(もう一度押すと切り替え)"
+
+#: contents/ui/components/PowerView.qml:532
+msgid "Save Session"
+msgstr "セッションを保存"
+
+#: contents/ui/components/PowerView.qml:551
+msgid "(Press again)"
+msgstr "(もう一度押す)"
+
+#: contents/ui/components/QueryHints.qml:32
+msgid "Show all available search filters"
+msgstr "すべての利用可能な検索フィルターを表示"
+
+#: contents/ui/components/QueryHints.qml:39
+msgid "Browse files by date (Today, Yesterday, etc.)"
+msgstr "日付でファイルを閲覧 (今日、昨日など)"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
 msgstr "カレンダー"
 
 #: contents/ui/components/QueryHints.qml:44
-#: contents/ui/components/QueryHints.get(1):128
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:154
+#: contents/ui/components/QueryHints.qml:162
 msgid "Today"
 msgstr "今日"
 
 #: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:129
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:155
+#: contents/ui/components/QueryHints.qml:162
 msgid "Yesterday"
 msgstr "昨日"
 
@@ -607,444 +1327,323 @@ msgstr "今週"
 msgid "This Month"
 msgstr "今月"
 
+#: contents/ui/components/QueryHints.qml:50
+msgid "File Path"
+msgstr "ファイルパス"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "Search via absolute file path"
+msgstr "絶対ファイルパスで検索"
+
 #: contents/ui/components/QueryHints.qml:51
-msgid "Files modified today"
-msgstr "今日変更されたファイル"
+msgid "File Index"
+msgstr "ファイルインデックス"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "Search exclusively in Baloo file index"
+msgstr "Balooファイルインデックスのみを検索"
 
 #: contents/ui/components/QueryHints.qml:52
-msgid "Files modified yesterday"
-msgstr "昨日変更されたファイル"
+msgid "Search only document files"
+msgstr "ドキュメントファイルのみ検索"
 
 #: contents/ui/components/QueryHints.qml:53
-msgid "Files modified this week"
-msgstr "今週変更されたファイル"
+msgid "Search only image files"
+msgstr "画像ファイルのみ検索"
 
-#: contents/ui/components/QueryHints.qml:54
-msgid "Files modified this month"
-msgstr "今月変更されたファイル"
+#: contents/ui/components/QueryHints.qml:55
+msgid "Search for installed applications"
+msgstr "インストール済みアプリを検索"
 
 #: contents/ui/components/QueryHints.qml:56
-#: contents/ui/components/HelpView.qml:18
-msgid "File Path Search"
-msgstr "ファイルパス検索"
+msgid "Services"
+msgstr "サービス"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Search system background services"
+msgstr "システムバックグラウンドサービスを検索"
 
 #: contents/ui/components/QueryHints.qml:57
-#: contents/ui/components/HelpView.qml:23
-msgid "Man Pages"
-msgstr "Manページ"
+msgid "Shell"
+msgstr "シェル"
 
-#: contents/ui/components/QueryHints.qml:58
-#: contents/ui/components/HelpView.qml:19
-msgid "Google Search"
-msgstr "Google検索"
+#: contents/ui/components/QueryHints.qml:57
+msgid "Execute shell commands directly"
+msgstr "シェルコマンドを直接実行"
 
 #: contents/ui/components/QueryHints.qml:59
-#: contents/ui/components/HelpView.qml:20
-msgid "DuckDuckGo Search"
-msgstr "DuckDuckGo検索"
+msgid "Calculator"
+msgstr "電卓"
 
-#: contents/ui/components/QueryHints.get(1):60
-#: contents/ui/components/HelpView.qml:21
-msgid "Wikipedia Search"
-msgstr "Wikipedia検索"
+#: contents/ui/components/QueryHints.qml:59
+msgid "Perform mathematical calculations"
+msgstr "数学的な計算を実行"
+
+#: contents/ui/components/QueryHints.qml:60
+msgid "Convert between weights, distances, etc."
+msgstr "重さや距離などを変換"
 
 #: contents/ui/components/QueryHints.qml:61
-#: contents/ui/components/HelpView.qml:24
-msgid "Kill Process"
-msgstr "プロセスの強制終了"
+msgid "Spelling"
+msgstr "スペル"
 
-#: contents/ui/components/QueryHints.qml:62
-#: contents/ui/components/HelpView.qml:25
-msgid "Spell Check"
-msgstr "スペルチェック"
+#: contents/ui/components/QueryHints.qml:61
+msgid "Check word spelling"
+msgstr "単語のスペルをチェック"
 
 #: contents/ui/components/QueryHints.qml:63
-#: contents/ui/components/HelpView.qml:31
-msgid "Unicode Characters"
-msgstr "Unicode文字"
+msgid "Google"
+msgstr "Google"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Search the web using Google"
+msgstr "Googleでウェブ検索"
 
 #: contents/ui/components/QueryHints.qml:64
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
-#: contents/ui/components/HelpView.qml:17
-msgid "Applications"
-msgstr "アプリケーション"
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "Search the web using DuckDuckGo"
+msgstr "DuckDuckGoでウェブ検索"
 
 #: contents/ui/components/QueryHints.qml:65
-#: contents/ui/components/HelpView.qml:28
-msgid "Shell Commands"
-msgstr "シェルコマンド"
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Search Wikipedia articles"
+msgstr "Wikipedia記事を検索"
 
 #: contents/ui/components/QueryHints.qml:66
-#: contents/ui/components/HelpView.qml:22
-msgid "Bookmarks"
-msgstr "ブックマーク"
+msgid "Search browser bookmarks"
+msgstr "ブックマークを検索"
 
 #: contents/ui/components/QueryHints.qml:67
-#: contents/ui/components/HelpView.qml:29
-msgid "Power Management"
-msgstr "電源管理"
+msgid "RSS Feeds"
+msgstr "RSSフィード"
 
-#: contents/ui/components/QueryHints.qml:68
-#: contents/ui/components/HelpView.qml:30
-msgid "System Services"
-msgstr "システムサービス"
+#: contents/ui/components/QueryHints.qml:67
+msgid "Search exclusively in RSS news feeds"
+msgstr "RSSニュースフィードのみを検索"
 
 #: contents/ui/components/QueryHints.qml:69
-#: contents/ui/components/HelpView.qml:32
-msgid "Date and Time"
-msgstr "日付と時刻"
+msgid "Browse system manual pages"
+msgstr "システムマニュアルページを閲覧"
 
 #: contents/ui/components/QueryHints.qml:70
-#: contents/ui/components/HelpView.qml:26
-msgid "Dictionary Definition"
-msgstr "辞書の定義"
+msgid "Show widget documentation"
+msgstr "ウィジェットのドキュメントを表示"
 
-#: contents/ui/components/QueryHints.qml:71
-#: contents/ui/components/HelpView.qml:27
-msgid "Unit Converter"
-msgstr "単位変換"
-
-#: contents/ui/components/HelpView.get(1):33
-msgid "Help & Shortcuts"
-msgstr "ヘルプとショートカット"
-
-#: contents/ui/components/QueryHints.qml:130
-#: contents/ui/components/QueryHints.qml:136
-msgid "Two days ago"
-msgstr "一昨日"
-
-#: contents/ui/components/QueryHints.qml:217
-#: contents/ui/components/QueryHints.qml:227
-msgid "Browse calendar"
-msgstr "カレンダーを閲覧"
-
-#: contents/ui/components/QueryHints.qml:241
-msgid "Man pages not installed"
-msgstr "Manページがインストールされていません"
-
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:98
 msgid "Unknown prefix"
-msgstr "不明なプレフィックス"
+msgstr "不明な接頭辞"
 
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:99
 msgid "try"
 msgstr "試す"
 
-#: contents/ui/components/DebugOverlay.qml:40
-msgid "Saved!"
-msgstr "保存しました！"
+#: contents/ui/components/QueryHints.qml:101
+msgid "Browse calendar"
+msgstr "カレンダーを閲覧"
 
-#: contents/ui/components/DebugOverlay.qml:48
-#: contents/ui/components/DebugOverlay.qml:118
-msgid "Save Dump"
-msgstr "ダンプを保存"
+#: contents/ui/components/QueryHints.qml:102
+msgid "Man pages not installed"
+msgstr "Manページがインストールされていません"
 
-#: contents/ui/components/DebugOverlay.qml:77
-msgid "Backend"
-msgstr "バックエンド"
+#: contents/ui/components/QueryHints.qml:156
+#: contents/ui/components/QueryHints.qml:162
+msgid "Two days ago"
+msgstr "一昨日"
 
-#: contents/ui/components/DebugOverlay.qml:80
-msgid "Items"
-msgstr "アイテム"
+#: contents/ui/components/QueryHints.qml:367
+msgid "Available Search Prefixes"
+msgstr "利用可能な検索接頭辞"
 
-#: contents/ui/components/DebugOverlay.qml:83
-msgid "Latency"
-msgstr "レイテンシ"
+#: contents/ui/components/ResultsListView.qml:436
+#: contents/ui/components/ResultsTileView.qml:294
+msgid "Category"
+msgstr "カテゴリ"
 
-#: contents/ui/components/DebugOverlay.qml:90
-msgid "View"
-msgstr "表示"
+#: contents/ui/components/ResultsListView.qml:437
+#: contents/ui/components/ResultsTileView.qml:295
+msgid "File Type"
+msgstr "ファイルタイプ"
 
-#: contents/ui/components/DebugOverlay.qml:93
-msgid "Display"
-msgstr "ディスプレイ"
+#: contents/ui/components/ResultsListView.qml:438
+#: contents/ui/components/ResultsTileView.qml:296
+msgid "Path"
+msgstr "パス"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/PinnedSection.qml:376
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Unpin"
-msgstr "ピン留め解除"
+#: contents/ui/components/ResultsListView.qml:439
+msgid "News"
+msgstr "ニュース"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Pin"
-msgstr "ピン留め"
+#: contents/ui/components/ResultsListView.qml:440
+msgid "Read News"
+msgstr "ニュースを読む"
 
-#: contents/ui/components/PinnedSection.qml:71
-msgid "Pinned Items"
-msgstr "ピン留めされたアイテム"
+#: contents/ui/components/ResultsListView.qml:441
+msgid "Share"
+msgstr "共有"
 
-#: contents/ui/components/PinnedSection.qml:323
-msgid "Drag to reorder"
-msgstr "ドラッグして並べ替え"
+#: contents/ui/components/ResultsListView.qml:442
+#: contents/ui/components/ResultsTileView.qml:299
+msgid "Searching..."
+msgstr "検索中..."
 
-#: contents/ui/components/PinnedSection.qml:342
-#: contents/ui/components/HistoryContextMenu.qml:52
-msgid "Open"
-msgstr "開く"
-
-#: contents/ui/components/PinnedSection.get(1):352
-msgid "Copy Path"
-msgstr "パスをコピー"
-
-#: contents/ui/components/PinnedSection.qml:363
-#: contents/ui/components/HistoryContextMenu.qml:101
-msgid "Open Containing Folder"
-msgstr "親フォルダを開く"
-
-#: contents/ui/components/HistoryListView.qml:34
-#: contents/ui/components/HistoryTileView.qml:243
-msgid "Recent Searches"
-msgstr "最近の検索"
-
-#: contents/ui/components/HistoryListView.qml:54
-#: contents/ui/components/HistoryTileView.qml:263
-msgid "Clear History"
-msgstr "履歴を消去"
-
-#: contents/ui/components/ResultsListView.qml:330
+#: contents/ui/components/ResultsListView.qml:443
+#: contents/ui/components/ResultsTileView.qml:300
 msgid "No results found"
 msgstr "結果が見つかりません"
 
-#: contents/ui/components/ResultsListView.qml:330
-msgid "Type to start searching"
-msgstr "入力して検索を開始"
+#: contents/ui/components/ResultsTileView.qml:297
+msgid "Space to preview"
+msgstr "スペースでプレビュー"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:269
+#: contents/ui/components/ResultsTileView.qml:298
+msgid "Read in Browser"
+msgstr "ブラウザで読む"
+
+#: contents/ui/components/SearchPopup.qml:92
 msgid "date"
 msgstr "日付"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:270
+#: contents/ui/components/SearchPopup.qml:93
 msgid "clock"
 msgstr "時計"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:295
+#: contents/ui/components/SearchPopup.qml:94
+msgid "weather"
+msgstr "天気"
+
+#: contents/ui/components/SearchPopup.qml:95
 msgid "power"
 msgstr "電源"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:279
+#: contents/ui/components/SearchPopup.qml:96
 msgid "help"
 msgstr "ヘルプ"
 
-#: contents/ui/components/SearchPopup.qml:265
+#: contents/ui/components/SearchPopup.qml:97
 msgid "unit"
 msgstr "単位"
 
-#: contents/ui/components/SearchPopup.qml:283
+#: contents/ui/components/SearchPopup.qml:98
 msgid "kill"
 msgstr "終了"
 
-#: contents/ui/components/SearchPopup.qml:287
+#: contents/ui/components/SearchPopup.qml:99
 msgid "spell"
 msgstr "スペル"
 
-#: contents/ui/components/SearchPopup.qml:291
+#: contents/ui/components/SearchPopup.qml:100
 msgid "shell"
 msgstr "シェル"
 
-#: contents/ui/components/SearchPopup.qml:367
-msgid "Search Here"
-msgstr "ここで検索"
-
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
+#: contents/ui/components/SearchPopup.qml:1028
 msgid "Other"
 msgstr "その他"
 
-#: contents/ui/components/HistoryContextMenu.qml:69
-msgid "Copy Location"
-msgstr "場所をコピー"
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Mode"
+msgstr "モード"
 
-#: contents/ui/components/HistoryContextMenu.get(1):85
-msgid "Open in Terminal"
-msgstr "ターミナルで開く"
+#: contents/ui/components/TileDataManager.qml:53
+msgid "Other Results"
+msgstr "他の結果"
 
-#: contents/ui/components/HistoryContextMenu.qml:111
-msgid "Move to Trash"
-msgstr "ゴミ箱に移動"
+#: contents/ui/components/WeatherView.qml:57
+msgid "Unknown error"
+msgstr "不明なエラー"
 
-#: contents/ui/components/HistoryContextMenu.qml:124
-msgid "Properties"
-msgstr "プロパティ"
+#: contents/ui/components/WeatherView.qml:80
+msgid "Loading Weather..."
+msgstr "天気を読み込み中..."
 
-#: contents/ui/components/HistoryContextMenu.qml:134
-msgid "Edit Application..."
-msgstr "アプリケーションを編集..."
+#: contents/ui/components/WeatherView.qml:91
+msgid "Retry"
+msgstr "再試行"
 
-#: contents/ui/components/HistoryContextMenu.qml:144
-msgid "Remove from History"
-msgstr "履歴から削除"
-
-#: contents/ui/components/PowerView.qml:133
-msgid "Hibernate"
-msgstr "休止状態"
-
-#: contents/ui/components/PowerView.qml:137
-msgid "(Press again to hibernate)"
-msgstr "(もう一度押すと休止)"
-
-#: contents/ui/components/PowerView.qml:146
-msgid "Sleep"
-msgstr "スリープ"
-
-#: contents/ui/components/PowerView.qml:150
-msgid "(Press again to sleep)"
-msgstr "(もう一度押すとスリープ)"
-
-#: contents/ui/components/PowerView.qml:158
-msgid "Reboot"
-msgstr "再起動"
-
-#: contents/ui/components/PowerView.qml:162
-msgid "(Press again to reboot)"
-msgstr "(もう一度押すと再起動)"
-
-#: contents/ui/components/PowerView.qml:180
-msgid "Shutdown"
-msgstr "シャットダウン"
-
-#: contents/ui/components/PowerView.qml:184
-msgid "(Press again to shutdown)"
-msgstr "(もう一度押すとシャットダウン)"
-
-#: contents/ui/components/PowerView.qml:278
-msgid "Authorize to list entries"
-msgstr "一覧表示を許可"
-
-#: contents/ui/components/PowerView.qml:299
-msgid "Lock Screen"
-msgstr "画面をロック"
-
-#: contents/ui/components/PowerView.qml:309
-msgid "Log Out"
-msgstr "ログアウト"
-
-#: contents/ui/components/PowerView.qml:313
-msgid "(Press again to log out)"
-msgstr "(もう一度押すとログアウト)"
-
-#: contents/ui/components/PowerView.qml:321
-msgid "Switch User"
-msgstr "ユーザーを切り替え"
-
-#: contents/ui/components/PowerView.qml:325
-msgid "(Press again to switch)"
-msgstr "(もう一度押すと切り替え)"
-
-#: contents/ui/components/PowerView.qml:333
-msgid "Save Session"
-msgstr "セッションを保存"
-
-#: contents/ui/components/PowerView.qml:352
-msgid "(Press again)"
-msgstr "(もう一度押す)"
-
-#: contents/ui/main.get(1):96
+#: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"
-msgstr "中間モード (ボタンのみ)"
+msgstr "中モード (ボタンのみ)"
 
-#: contents/ui/main.qml:102
+#: contents/ui/main.qml:116
 msgid "Wide Mode (Search bar + icon)"
-msgstr "ワイドモード (検索バー+アイコン)"
+msgstr "ワイドモード (検索バー + アイコン)"
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:122
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "極ワイドモード (ワイド+長いプレースホルダ)"
+msgstr "エキストラワイドモード (ワイド + 長いプレースホルダ)"
 
-msgid "Show/Hide Previews"
-msgstr "プレビューを表示/非表示"
+#: contents/ui/main.qml:128
+msgid "Ultra Wide Mode (Maximum Coverage)"
+msgstr "ウルトラワイドモード (最大カバレッジ)"
 
-msgid "Edge Appearance"
-msgstr "エッジの外観"
+#~ msgid "Smartly limit results based on relevance"
+#~ msgstr "関連性に基づいて結果をスマートに制限"
 
-msgid "Round corners"
-msgstr "角を丸くする"
+#~ msgid "Dynamic Limit"
+#~ msgstr "動的制限"
 
-msgid "Slightly round"
-msgstr "少し丸く"
+#~ msgid "Master Switch"
+#~ msgstr "マスタースイッチ"
 
-msgid "Less round"
-msgstr "控えめに丸く"
+#~ msgid "Fuzzy"
+#~ msgstr "曖昧"
 
-msgid "Square corners"
-msgstr "四角い角"
+#~ msgid "Exact"
+#~ msgstr "完全一致"
 
-msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(スワップが不足しているか見つかりません)"
+#~ msgid "Files modified today"
+#~ msgstr "今日変更されたファイル"
 
-msgid "Note: Systemd boot is required for this feature"
-msgstr "注意: この機能にはSystemd bootが必要です"
+#~ msgid "Files modified yesterday"
+#~ msgstr "昨日変更されたファイル"
 
-msgid "Scan for boot entries"
-msgstr "ブートエントリをスキャン"
+#~ msgid "Files modified this week"
+#~ msgstr "今週変更されたファイル"
 
-msgid "Result Count"
-msgstr "結果数"
+#~ msgid "Files modified this month"
+#~ msgstr "今月変更されたファイル"
 
-msgid "Priority Ranking"
-msgstr "優先順位"
+#~ msgid "Search Here"
+#~ msgstr "ここで検索"
 
-msgid "Show Together"
-msgstr "まとめて表示"
+#~ msgid "Copy Location"
+#~ msgstr "場所をコピー"
 
-msgid "Corner Roundness"
-msgstr "角の丸み"
+#~ msgid "Authorize to list entries"
+#~ msgstr "一覧表示を許可"
 
-msgid "Square"
-msgstr "四角"
+#~ msgid "Result Count"
+#~ msgstr "結果数"
 
-msgid "Slightly Rounded"
-msgstr "少し丸い"
+#~ msgid "Priority Ranking"
+#~ msgstr "優先順位"
 
-msgid "Moderately Rounded"
-msgstr "適度に丸い"
+#~ msgid "Corner Roundness"
+#~ msgstr "角の丸み"
 
-msgid "Fully Rounded"
-msgstr "完全に丸い"
+#~ msgid "Square"
+#~ msgstr "四角"
 
-msgid "Minimize automatically when searching"
-msgstr "検索時自動的に最小化"
+#~ msgid "Slightly Rounded"
+#~ msgstr "少し丸い"
 
-msgid "Search on Wikipedia"
-msgstr "Wikipediaで検索"
+#~ msgid "Moderately Rounded"
+#~ msgstr "適度に丸い"
 
-msgid "Minimal - A simplified interface with essential features."
-msgstr "Minimal - 最小限の機能を備えたシンプルなインターフェース。"
+#~ msgid "Fully Rounded"
+#~ msgstr "完全に丸い"
 
-msgid "Developer - Debug tab active, developer features enabled."
-msgstr "Developer - デバッグタブと開発者向け機能が有効。"
+#~ msgid "Minimal - A simplified interface with essential features."
+#~ msgstr "Minimal - 最小限の機能を備えたシンプルなインターフェース。"
 
-msgid "Power User - All features active, advanced settings available."
-msgstr "Power User - 全機能が有効で、詳細設定が可能。"
+#~ msgid "Developer - Debug tab active, developer features enabled."
+#~ msgstr "Developer - デバッグタブと開発者向け機能が有効。"
 
-msgid "Weather View (weather:)"
-msgstr "天気表示 (weather:)"
+#~ msgid "Power User - All features active, advanced settings available."
+#~ msgstr "Power User - 全機能が有効で、詳細設定が可能。"
 
-msgid "Use System Units"
-msgstr "システム単位を使用"
-
-msgid "Refresh Interval:"
-msgstr "更新間隔:"
-
-msgid "Every Search"
-msgstr "検索ごと"
-
-msgid "15 Minutes"
-msgstr "15分"
-
-msgid "30 Minutes"
-msgstr "30分"
-
-msgid "1 Hour"
-msgstr "1時間"
-
-msgid "(If time since last update > interval)"
-msgstr "(前回の更新から間隔が経過している場合)"
-
-msgid "Enable Weather Prefix"
-msgstr "天気プレフィックスを有効化"

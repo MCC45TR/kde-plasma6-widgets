@@ -40,7 +40,7 @@ PlasmaExtras.SearchField {
         textColor: Kirigami.Theme.textColor
         fontSize: root.font.pixelSize
         fontFamily: root.font.family
-        defaultText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...")
+        defaultText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...")
         horizontalAlignment: Text.AlignLeft
         
         rightMarginValue: searchIconRight.width + 24

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-18 22:43+0300\n"
+"POT-Creation-Date: 2026-05-23 02:06+0300\n"
 "PO-Revision-Date: 2026-01-22 12:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: bn\n"
@@ -12,524 +12,332 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
+#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
 msgid "Appearance"
 msgstr "চেহারা"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-msgid "Categories"
-msgstr "বিভাগসমূহ"
-
-#: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
-msgid "Debug"
-msgstr "ডিবাগ"
-
-#: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
-msgid "Help"
-msgstr "সহায়তা"
-
-#: contents/ui/config/ConfigGeneral.qml:80
-msgid "Panel"
-msgstr "প্যানেল"
-
-#: contents/ui/config/ConfigGeneral.qml:84
-msgid "Popup"
-msgstr "পপআপ"
-
-#: contents/ui/config/ConfigGeneral.qml:88
-#: contents/ui/config/ConfigPreview.qml:9
-msgid "Preview"
-msgstr "পূর্বরূপ"
-
-#: contents/ui/config/ConfigGeneral.qml:92
-#: contents/ui/config/ConfigPrefix.qml:9
-msgid "Prefixes"
-msgstr "প্রিফিক্সসমূহ"
-
-#: contents/ui/config/ConfigGeneral.qml:96
-msgid "Placeholder"
-msgstr "প্লেসহোল্ডার"
-
-#: contents/ui/config/ConfigGeneral.qml:114
-msgid "Panel Appearance"
-msgstr "প্যানেল চেহারা"
-
-#: contents/ui/config/ConfigGeneral.qml:120
-#: contents/ui/config/ConfigDebug.qml:123
-msgid "Display Mode"
-msgstr "প্রদর্শন মোড"
-
-#: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
-msgid "Button Mode (Icon only)"
-msgstr "বোতাম মোড (শুধু আইকন)"
-
-#: contents/ui/config/ConfigGeneral.qml:123
-msgid "Medium Mode (Text)"
-msgstr "মাঝারি মোড (টেক্সট)"
-
-#: contents/ui/config/ConfigGeneral.qml:124
-msgid "Wide Mode (Search Bar)"
-msgstr "প্রশস্ত মোড (সার্চ বার)"
-
-#: contents/ui/config/ConfigGeneral.qml:125
-msgid "Extra Wide Mode"
-msgstr "অতিরিক্ত প্রশস্ত মোড"
-
-#: contents/ui/config/ConfigGeneral.qml:132
-msgid "Panel Preview"
-msgstr "প্যানেল পূর্বরূপ"
-
-#: contents/ui/config/ConfigGeneral.qml:176
-#: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:49
+#: contents/ui/config/ConfigSearch.qml:9
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search"
 msgstr "অনুসন্ধান"
 
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Start searching..."
-msgstr "অনুসন্ধান শুরু করুন..."
-
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Search..."
-msgstr "অনুসন্ধান..."
-
-#: contents/ui/config/ConfigGeneral.qml:204
-msgid "Power Options"
-msgstr "পাওয়ার অপশন"
-
-#: contents/ui/config/ConfigGeneral.qml:205
-msgid "Show boot options in Reboot button"
-msgstr "রিবুট বোতামে বুট অপশন দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:213
-msgid "Results View"
-msgstr "ফলাফল ভিউ"
-
-#: contents/ui/config/ConfigGeneral.qml:219
-#: contents/ui/config/ConfigDebug.qml:129
-msgid "View Mode"
-msgstr "ভিউ মোড"
-
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "List View"
-msgstr "তালিকা ভিউ"
-
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "Tile View"
-msgstr "টাইল ভিউ"
-
-#: contents/ui/config/ConfigGeneral.qml:227
-#: contents/ui/config/ConfigDebug.qml:138
-msgid "List Icon Size"
-msgstr "তালিকা আইকন আকার"
-
-#: contents/ui/config/ConfigGeneral.qml:235
-#: contents/ui/config/ConfigDebug.qml:135
-msgid "Tile Icon Size"
-msgstr "টাইল আইকন আকার"
-
-#: contents/ui/config/ConfigGeneral.qml:243
-#: contents/ui/config/ConfigCategories.qml:170
-msgid "Result Limits"
-msgstr "ফলাফল সীমা"
-
-#: contents/ui/config/ConfigGeneral.qml:249
-#: contents/ui/config/ConfigCategories.qml:175
-msgid "Min Results"
-msgstr "ন্যূনতম ফলাফল"
-
-#: contents/ui/config/ConfigGeneral.qml:256
-#: contents/ui/config/ConfigCategories.qml:184
-msgid "Max Results"
-msgstr "সর্বোচ্চ ফলাফল"
-
-#: contents/ui/config/ConfigGeneral.qml:263
-msgid "Smartly limit results based on relevance"
-msgstr "প্রাসঙ্গিকতার ভিত্তিতে বুদ্ধিমত্তার সাথে ফলাফল সীমিত করুন"
-
-#: contents/ui/config/ConfigGeneral.qml:264
-msgid "Dynamic Limit"
-msgstr "গতিশীল সীমা"
-
-#: contents/ui/config/ConfigGeneral.qml:272
-#: contents/ui/config/ConfigSearch.qml:19
-#: contents/ui/config/ConfigPreview.qml:112
-msgid "Enable File Previews"
-msgstr "ফাইল পূর্বরূপ সক্ষম করুন"
-
-#: contents/ui/config/ConfigGeneral.qml:273
-msgid "Master Switch"
-msgstr "মাস্টার সুইচ"
-
-#: contents/ui/config/ConfigGeneral.qml:278
-#: contents/ui/config/ConfigPreview.qml:134
-msgid "Preview Types"
-msgstr "পূর্বরূপের প্রকার"
-
-#: contents/ui/config/ConfigGeneral.qml:283
-#: contents/ui/config/ConfigPreview.qml:159
-msgid "Images"
-msgstr "ছবি"
-
-#: contents/ui/config/ConfigGeneral.qml:289
-#: contents/ui/config/ConfigPreview.qml:197
-msgid "Videos"
-msgstr "ভিডিও"
-
-#: contents/ui/config/ConfigGeneral.qml:295
-#: contents/ui/config/ConfigPreview.qml:235
-msgid "Text Files"
-msgstr "টেক্সট ফাইল"
-
-#: contents/ui/config/ConfigGeneral.qml:301
-#: contents/ui/config/ConfigPreview.qml:273
-msgid "Documents"
-msgstr "নথি"
-
-#: contents/ui/config/ConfigGeneral.qml:311
-#: contents/ui/config/ConfigPrefix.qml:29
-msgid "Date View (date:)"
-msgstr "তারিখ ভিউ (date:)"
-
-#: contents/ui/config/ConfigGeneral.qml:316
-#: contents/ui/config/ConfigPrefix.qml:36
-msgid "Show Large Clock"
-msgstr "বড় ঘড়ি দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:320
-#: contents/ui/config/ConfigPrefix.qml:43
-msgid "Show Calendar Events"
-msgstr "ক্যালেন্ডার ইভেন্ট দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:323
-#: contents/ui/config/ConfigPrefix.qml:50
-msgid "Power View (power:)"
-msgstr "পাওয়ার ভিউ (power:)"
-
-#: contents/ui/config/ConfigGeneral.qml:328
-#: contents/ui/config/ConfigPrefix.qml:58
-msgid "Show Sleep Button"
-msgstr "স্লিপ বোতাম দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:332
-#: contents/ui/config/ConfigPrefix.qml:65
-msgid "Show Hibernate Button"
-msgstr "হাইবারনেট বোতাম দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:337
-#: contents/ui/config/ConfigPrefix.qml:72
-msgid "Available Prefixes Reference"
-msgstr "উপলব্ধ প্রিফিক্স রেফারেন্স"
-
-#: contents/ui/config/ConfigGeneral.qml:341
-#: contents/ui/config/ConfigPrefix.qml:76
-msgid ""
-"These prefixes can be used to perform specific actions directly from the "
-"search bar."
-msgstr "অনুসন্ধান বার থেকে সরাসরি নির্দিষ্ট কাজ করতে এই প্রিফিক্সগুলো ব্যবহার করা যাবে।"
-
-#: contents/ui/config/ConfigGeneral.qml:363
-#: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
-#: contents/ui/config/ConfigPrefix.qml:98
-msgid "List files modified today"
-msgstr "আজ পরিবর্তিত ফাইলগুলোর তালিকা দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:375
-#: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
-#: contents/ui/config/ConfigPrefix.qml:110
-msgid "Search on Google"
-msgstr "গুগলে অনুসন্ধান করুন"
-
-#: contents/ui/config/ConfigGeneral.qml:387
-#: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
-#: contents/ui/config/ConfigPrefix.qml:122
-msgid "Search on DuckDuckGo"
-msgstr "ডাকডাকগো-তে অনুসন্ধান করুন"
-
-#: contents/ui/config/ConfigGeneral.qml:399
-#: contents/ui/config/ConfigPrefix.qml:134
-msgid "Show calendar and date information"
-msgstr "ক্যালেন্ডার এবং তারিখের তথ্য দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:411
-#: contents/ui/config/ConfigPrefix.qml:146
-msgid "Show large clock"
-msgstr "বড় ঘড়ি দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:423
-msgid "Show power management options"
-msgstr "পাওয়ার ম্যানেজমেন্ট অপশন দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:435
-#: contents/ui/config/ConfigPrefix.qml:170
-msgid "Show this help screen"
-msgstr "এই সহায়তা স্ক্রিন দেখান"
-
-#: contents/ui/config/ConfigGeneral.qml:447
-#: contents/ui/config/ConfigPrefix.qml:182
-msgid "Terminate running processes"
-msgstr "চলমান প্রসেসগুলো বন্ধ করুন"
-
-#: contents/ui/config/ConfigGeneral.qml:459
-#: contents/ui/config/ConfigPrefix.qml:194
-msgid "Check spelling of a word"
-msgstr "শব্দের বানান চেক করুন"
-
-#: contents/ui/config/ConfigGeneral.qml:471
-#: contents/ui/config/ConfigPrefix.qml:206
-msgid "Execute shell commands"
-msgstr "শেল কমান্ড কার্যকর করুন"
-
-#: contents/ui/config/ConfigGeneral.qml:483
-msgid "Convert units (requires KRunner)"
-msgstr "একক রূপান্তর (KRunner প্রয়োজন)"
-
-#: contents/ui/config/ConfigGeneral.qml:493
-#: contents/ui/config/ConfigSearch.qml:13
-msgid "Search Settings"
-msgstr "অনুসন্ধান সেটিংস"
-
-#: contents/ui/config/ConfigGeneral.qml:497
-#: contents/ui/config/ConfigCategories.qml:150
-msgid "Search Algorithm"
-msgstr "অনুসন্ধান অ্যালগরিদম"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Fuzzy"
-msgstr "ফাজি"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Exact"
-msgstr "সঠিক"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Starts With"
-msgstr "দিয়ে শুরু হয়"
-
-#: contents/ui/config/ConfigSearch.qml:24
-msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr "হোভার করলে ফাইলের পূর্বরূপ দেখান (Ctrl+Space দিয়েও করা যেতে পারে)"
-
-#: contents/ui/config/ConfigSearch.qml:33
-msgid "Search Behavior"
-msgstr "অনুসন্ধান আচরণ"
-
-#: contents/ui/config/ConfigSearch.qml:37
-msgid "You can use the following KRunner commands and prefixes:"
-msgstr "আপনি নিচের KRunner কমান্ড এবং প্রিফিক্সগুলো ব্যবহার করতে পারেন:"
-
-#: contents/ui/config/ConfigSearch.qml:51
-msgid "Prefix"
-msgstr "প্রিফিক্স"
-
-#: contents/ui/config/ConfigSearch.qml:56
-msgid "Description"
-msgstr "বর্ণনা"
-
-#: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
-msgid "Terminate processes"
-msgstr "প্রসেসগুলো বন্ধ করুন"
-
-#: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
-msgid "Check spelling"
-msgstr "বানান চেক"
-
-#: contents/ui/config/ConfigSearch.qml:78
-msgid "Search Unicode characters"
-msgstr "ইউনিকোড অক্ষর অনুসন্ধান করুন"
-
-#: contents/ui/config/ConfigDebug.qml:68
-msgid ""
-"This tab is only active in Developer mode. Change profile in General "
-"settings."
-msgstr "এই ট্যাবটি কেবল ডেভেলপার মোডে সক্রিয়। সাধারণ সেটিংসে প্রোফাইল পরিবর্তন করুন।"
-
-#: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-msgid "Debug Settings"
-msgstr "ডিবাগ সেটিংস"
-
-#: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
-#: contents/ui/components/DebugOverlay.qml:57
-msgid "Debug Overlay"
-msgstr "ডিবাগ ওভারলে"
-
-#: contents/ui/config/ConfigDebug.qml:91
-msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr "উইজেটে ডিবাগ তথ্য দেখান"
-
-#: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
-msgid "Debug Data"
-msgstr "ডিবাগ তথ্য"
-
-#: contents/ui/config/ConfigDebug.qml:111
-msgid "Timestamp"
-msgstr "টাইমস্ট্যাম্প"
-
-#: contents/ui/config/ConfigDebug.qml:114
-msgid "Locale"
-msgstr "লোকেল"
-
-#: contents/ui/config/ConfigDebug.qml:117
-msgid "User Profile"
-msgstr "ইউজার প্রোফাইল"
-
-#: contents/ui/config/ConfigDebug.qml:141
-msgid "Enable Preview"
-msgstr "পূর্বরূপ সক্ষম করুন"
-
-#: contents/ui/config/ConfigDebug.qml:147
-msgid "History Count"
-msgstr "ইতিহাস সংখ্যা"
-
-#: contents/ui/config/ConfigDebug.qml:153
-msgid "items"
-msgstr "আইটেমসমূহ"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/config/ConfigDebug.qml:165
-msgid "Telemetry"
-msgstr "টেলিমিত্রি"
-
-#: contents/ui/config/ConfigDebug.qml:174
-#: contents/ui/components/DebugOverlay.qml:100
-msgid "Total Searches"
-msgstr "মোট অনুসন্ধান"
-
-#: contents/ui/config/ConfigDebug.qml:185
-#: contents/ui/components/DebugOverlay.qml:103
-msgid "Avg Latency"
-msgstr "গড় লেটেন্সি"
-
-#: contents/ui/config/ConfigDebug.qml:198
-#: contents/ui/config/ConfigDebug.qml:200
-msgid "History Sample"
-msgstr "ইতিহাস নমুনা"
-
-#: contents/ui/config/ConfigDebug.qml:207
-msgid ""
-"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
-"is sent to the internet."
-msgstr "গোপনীয়তা বিজ্ঞপ্তি: সমস্ত ডিবাগ এবং টেলিমিত্রি তথ্য কেবল স্থানীয়ভাবে জমা হয়। ইন্টারনেটে কোনো তথ্য পাঠানো হয় না।"
-
-#: contents/ui/config/ConfigDebug.qml:281
-msgid "History is empty"
-msgstr "ইতিহাস খালি"
-
-#: contents/ui/config/ConfigHelp.qml:49
-msgid "Keyboard Shortcuts"
-msgstr "কীবোর্ড শর্টকাটসমূহ"
-
-#: contents/ui/config/ConfigHelp.qml:53
-msgid "Navigate between results"
-msgstr "ফলাফলের মধ্যে নেভিগেট করুন"
-
-#: contents/ui/config/ConfigHelp.qml:59
-msgid "Navigate between sections"
-msgstr "বিভাগগুলোর মধ্যে নেভিগেট করুন"
-
-#: contents/ui/config/ConfigHelp.qml:65
-msgid "List / Tile view"
-msgstr "তালিকা / টাইল ভিউ"
-
-#: contents/ui/config/ConfigHelp.qml:71
-msgid "Toggle file preview"
-msgstr "ফাইল পূর্বরূপ টগল করুন"
-
-#: contents/ui/config/ConfigHelp.qml:77
-msgid "Open selected item"
-msgstr "নির্বাচিত আইটেম খুলুন"
-
-#: contents/ui/config/ConfigHelp.qml:83
-msgid "Close widget"
-msgstr "উইজেট বন্ধ করুন"
-
-#: contents/ui/config/ConfigHelp.qml:90
-msgid "Search Prefixes"
-msgstr "অনুসন্ধান প্রিফিক্সসমূহ"
-
-#: contents/ui/config/ConfigHelp.qml:125
-msgid "User Profiles"
-msgstr "ইউজার প্রোফাইলসমূহ"
-
-#: contents/ui/config/ConfigHelp.qml:129
-msgid "A simplified interface with essential features."
-msgstr "প্রয়োজনীয় বৈশিষ্ট্যসহ একটি সরল ইন্টারফেস।"
-
-#: contents/ui/config/ConfigHelp.qml:135
-msgid "Debug tab active, developer features enabled."
-msgstr "ডিবাগ ট্যাব সক্রিয়, ডেভেলপার বৈশিষ্ট্য সক্ষম।"
-
-#: contents/ui/config/ConfigHelp.qml:141
-msgid "All features active, advanced settings available."
-msgstr "সব বৈশিষ্ট্য সক্রিয়, উন্নত সেটিংস উপলব্ধ।"
-
-#: contents/ui/config/ConfigCategories.qml:145
+#: contents/config/config.qml:17
+msgid "RSS"
+msgstr "RSS"
+
+#: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
+msgid "Debug"
+msgstr "ডিবাগ"
+
+#: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
+#: contents/ui/components/QueryHints.qml:70
+msgid "Help"
+msgstr "সাহায্য"
+
+#: contents/ui/config/ConfigCategories.qml:212
 msgid "Algorithm Settings"
 msgstr "অ্যালগরিদম সেটিংস"
 
-#: contents/ui/config/ConfigCategories.qml:151
+#: contents/ui/config/ConfigCategories.qml:217
+msgid "Search Algorithm"
+msgstr "অনুসন্ধান অ্যালগরিদম"
+
+#: contents/ui/config/ConfigCategories.qml:218
 msgid "Fuzzy Match"
-msgstr "ফাজি ম্যাচ"
+msgstr "অস্পষ্ট মিল"
 
-#: contents/ui/config/ConfigCategories.qml:151
+#: contents/ui/config/ConfigCategories.qml:218
 msgid "Exact Match"
-msgstr "সঠিক ম্যাচ"
+msgstr "সঠিক মিল"
 
-#: contents/ui/config/ConfigCategories.qml:162
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Starts With"
+msgstr "শুরু হয়"
+
+#: contents/ui/config/ConfigCategories.qml:229
 msgid "Dynamic Result Count"
-msgstr "গতিশীল ফলাফল সংখ্যা"
+msgstr "গতিশীল ফলাফল গণনা"
 
-#: contents/ui/config/ConfigCategories.qml:163
+#: contents/ui/config/ConfigCategories.qml:230
 msgid "Automatically limit displayed results based on relevance score"
-msgstr "প্রাসঙ্গিকতা স্কোরের ভিত্তিতে বুদ্ধিমত্তার সাথে ফলাফল সীমিত করুন"
+msgstr "প্রাসঙ্গিকতা স্কোরের উপর ভিত্তি করে প্রদর্শিত ফলাফল স্বয়ংক্রিয়ভাবে সীমাবদ্ধ করুন"
 
-#: contents/ui/config/ConfigCategories.qml:195
+#: contents/ui/config/ConfigCategories.qml:237
+msgid "Result Limits"
+msgstr "ফলাফল সীমা"
+
+#: contents/ui/config/ConfigCategories.qml:242
+msgid "Min Results"
+msgstr "সর্বনিম্ন ফলাফল"
+
+#: contents/ui/config/ConfigCategories.qml:251
+msgid "Max Results"
+msgstr "সর্বোচ্চ ফলাফল"
+
+#: contents/ui/config/ConfigCategories.qml:262
 msgid "Prioritized Categories"
 msgstr "অগ্রাধিকারপ্রাপ্ত বিভাগসমূহ"
 
-#: contents/ui/config/ConfigCategories.qml:199
+#: contents/ui/config/ConfigCategories.qml:266
 msgid "Use buttons to reorder categories or move between sections"
-msgstr "বিভাগগুলো পুনর্গঠন করতে বা বিভাগের মধ্যে সরাতে বোতাম ব্যবহার করুন"
+msgstr "বিভাগগুলি পুনরায় সাজাতে বা বিভাগগুলির মধ্যে সরাতে বোতামগুলি ব্যবহার করুন"
 
-#: contents/ui/config/ConfigCategories.qml:208
+#: contents/ui/config/ConfigCategories.qml:275
 msgid "Priority"
 msgstr "অগ্রাধিকার"
 
-#: contents/ui/config/ConfigCategories.qml:299
+#: contents/ui/config/ConfigCategories.qml:366
 msgid "Move to Combined"
-msgstr "সম্মিলিত ভাগে সরান"
+msgstr "সম্মিলিত তে সরান"
 
-#: contents/ui/config/ConfigCategories.qml:314
+#: contents/ui/config/ConfigCategories.qml:381
 msgid "Show Together (Merged)"
-msgstr "একসাথে দেখান (মার্জ করা)"
+msgstr "একত্রে দেখান (একত্রিত)"
 
-#: contents/ui/config/ConfigCategories.qml:318
+#: contents/ui/config/ConfigCategories.qml:385
 msgid "Categories in this section will be grouped together"
-msgstr "এই বিভাগের বিষয়গুলো একসাথে গ্রুপ করা হবে"
+msgstr "এই বিভাগের বিভাগগুলি একসাথে গ্রুপ করা হবে"
 
-#: contents/ui/config/ConfigCategories.qml:339
+#: contents/ui/config/ConfigCategories.qml:401
 msgid "No combined categories"
-msgstr "কোনো সম্মিলিত বিভাগ নেই"
+msgstr "কোন সম্মিলিত বিভাগ নেই"
 
-#: contents/ui/config/ConfigCategories.qml:398
+#: contents/ui/config/ConfigCategories.qml:466
 msgid "Move to Separate"
 msgstr "আলাদা ভাগে সরান"
 
-#: contents/ui/config/ConfigCategories.qml:413
+#: contents/ui/config/ConfigCategories.qml:481
 msgid "Category Settings Information"
 msgstr "বিভাগ সেটিংস তথ্য"
 
-#: contents/ui/config/ConfigCategories.qml:417
+#: contents/ui/config/ConfigCategories.qml:485
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
-msgstr ""
-"পরিবর্তনগুলো অবিলম্বে কার্যকর হয়। লুকানো বিভাগগুলো অনুসন্ধানে আসবে না। অগ্রাধিকার "
-"প্রদর্শনের ক্রম নির্ধারণ করে।"
+msgstr "পরিবর্তনগুলি অবিলম্বে প্রয়োগ করা হয়। লুকানো বিভাগগুলি অনুসন্ধানের ফলাফলে প্রদর্শিত হবে না। অগ্রাধিকার প্রদর্শনের ক্রম নির্ধারণ করে।"
 
-#: contents/ui/config/ConfigCategories.qml:417
+#: contents/ui/config/ConfigCategories.qml:485
 msgid "Lower number = higher priority"
 msgstr "কম সংখ্যা = উচ্চ অগ্রাধিকার"
+
+#: contents/ui/config/ConfigDebug.qml:102
+msgid ""
+"This tab is only active in Developer mode. Change profile in General "
+"settings."
+msgstr "এই ট্যাবটি কেবল বিকাশকারী মোডে সক্রিয়। সাধারণ সেটিংসে প্রোফাইল পরিবর্তন করুন।"
+
+#: contents/ui/config/ConfigDebug.qml:111
+msgid "Debug Settings"
+msgstr "ডিবাগ সেটিংস"
+
+#: contents/ui/config/ConfigDebug.qml:117
+#: contents/ui/config/ConfigDebug.qml:176
+#: contents/ui/components/DebugOverlay.qml:58
+msgid "Debug Overlay"
+msgstr "ডিবাগ ওভারলে"
+
+#: contents/ui/config/ConfigDebug.qml:124
+msgid "Show debug info on widget (active mode, item count, index source)"
+msgstr "উইজেটে ডিবাগ তথ্য দেখান (সক্রিয় মোড, আইটেম সংখ্যা, সূচক উৎস)"
+
+#: contents/ui/config/ConfigDebug.qml:133
+msgid "Debug Data"
+msgstr "ডিবাগ তথ্য"
+
+#: contents/ui/config/ConfigDebug.qml:143
+msgid "Timestamp"
+msgstr "টাইমস্ট্যাম্প"
+
+#: contents/ui/config/ConfigDebug.qml:146
+msgid "Locale"
+msgstr "লোকেল"
+
+#: contents/ui/config/ConfigDebug.qml:149
+msgid "User Profile"
+msgstr "ইউজার প্রোফাইল"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Minimal"
+msgstr "ন্যূনতম"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Developer"
+msgstr "বিকাশকারী"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Power User"
+msgstr "পাওয়ার ইউজার"
+
+#: contents/ui/config/ConfigDebug.qml:155
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "Display Mode"
+msgstr "প্রদর্শন মোড"
+
+#: contents/ui/config/ConfigDebug.qml:157
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Button"
+msgstr "বোতাম"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Medium"
+msgstr "মাঝারি"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Wide"
+msgstr "প্রশস্ত"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Extra Wide"
+msgstr "অতিরিক্ত প্রশস্ত"
+
+#: contents/ui/config/ConfigDebug.qml:161
+#: contents/ui/config/ConfigGeneral.qml:517
+msgid "View Mode"
+msgstr "ভিউ মোড"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "List"
+msgstr "তালিকা ভিউ"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "Tile"
+msgstr "টাইল ভিউ"
+
+#: contents/ui/config/ConfigDebug.qml:167
+#: contents/ui/config/ConfigGeneral.qml:544
+msgid "Tile Icon Size"
+msgstr "টাইল আইকন আকার"
+
+#: contents/ui/config/ConfigDebug.qml:170
+#: contents/ui/config/ConfigGeneral.qml:536
+msgid "List Icon Size"
+msgstr "তালিকা আইকন আকার"
+
+#: contents/ui/config/ConfigDebug.qml:173
+msgid "Enable Preview"
+msgstr "প্রিভিউ সক্ষম করুন"
+
+#: contents/ui/config/ConfigDebug.qml:179
+msgid "History Count"
+msgstr "ইতিহাস গণনা"
+
+#: contents/ui/config/ConfigDebug.qml:185
+msgid "items"
+msgstr "আইটেম"
+
+#: contents/ui/config/ConfigDebug.qml:196
+msgid "Telemetry"
+msgstr "টেলিমেট্রি"
+
+#: contents/ui/config/ConfigDebug.qml:205
+#: contents/ui/components/DebugOverlay.qml:101
+msgid "Total Searches"
+msgstr "মোট অনুসন্ধান"
+
+#: contents/ui/config/ConfigDebug.qml:216
+#: contents/ui/components/DebugOverlay.qml:104
+msgid "Avg Latency"
+msgstr "গড় লেটেন্সি"
+
+#: contents/ui/config/ConfigDebug.qml:230
+msgid "History Sample"
+msgstr "ইতিহাসের নমুনা"
+
+#: contents/ui/config/ConfigDebug.qml:237
+msgid ""
+"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
+"is sent to the internet."
+msgstr "গোপনীয়তা নোটিশ: সমস্ত ডিবাগ এবং টেলিমেট্রি ডেটা শুধুমাত্র স্থানীয়ভাবে সংরক্ষণ করা হয়। ইন্টারনেটে কোন ডাটা পাঠানো হয় না।"
+
+#: contents/ui/config/ConfigDebug.qml:311
+msgid "History is empty"
+msgstr "ইতিহাস খালি"
+
+#: contents/ui/config/ConfigHelp.qml:85
+msgid "Keyboard Shortcuts"
+msgstr "কীবোর্ড শর্টকাটসমূহ"
+
+#: contents/ui/config/ConfigHelp.qml:89
+msgid "Navigate between results"
+msgstr "ফলাফলের মধ্যে নেভিগেট করুন"
+
+#: contents/ui/config/ConfigHelp.qml:95
+msgid "Navigate between sections"
+msgstr "বিভাগগুলির মধ্যে নেভিগেট করুন"
+
+#: contents/ui/config/ConfigHelp.qml:101
+msgid "List / Tile view"
+msgstr "তালিকা / টাইল ভিউ"
+
+#: contents/ui/config/ConfigHelp.qml:107
+msgid "Toggle file preview"
+msgstr "ফাইল প্রিভিউ টগল করুন"
+
+#: contents/ui/config/ConfigHelp.qml:113
+msgid "Open selected item"
+msgstr "নির্বাচিত আইটেম খুলুন"
+
+#: contents/ui/config/ConfigHelp.qml:119
+msgid "Close widget"
+msgstr "উইজেট বন্ধ করুন"
+
+#: contents/ui/config/ConfigHelp.qml:126
+#: contents/ui/components/QueryHints.qml:31
+#: contents/ui/components/QueryHints.qml:100
+msgid "Search Prefixes"
+msgstr "অনুসন্ধান প্রিফিক্সসমূহ"
+
+#: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
+#: contents/ui/config/ConfigPrefix.qml:214
+#: contents/ui/config/ConfigGeneral.qml:1002
+msgid "List files modified today"
+msgstr "আজ পরিবর্তিত ফাইলগুলির তালিকা করুন"
+
+#: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
+#: contents/ui/config/ConfigPrefix.qml:226
+#: contents/ui/config/ConfigGeneral.qml:1015
+msgid "Search on Google"
+msgstr "Google-এ অনুসন্ধান করুন"
+
+#: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
+#: contents/ui/config/ConfigPrefix.qml:238
+#: contents/ui/config/ConfigGeneral.qml:1028
+msgid "Search on DuckDuckGo"
+msgstr "DuckDuckGo-তে অনুসন্ধান করুন"
+
+#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
+msgid "Terminate processes"
+msgstr "প্রসেস শেষ করুন"
+
+#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
+msgid "Check spelling"
+msgstr "বানান পরীক্ষা করুন"
+
+#: contents/ui/config/ConfigHelp.qml:161
+msgid "User Profiles"
+msgstr "ইউজার প্রোফাইলসমূহ"
+
+#: contents/ui/config/ConfigHelp.qml:165
+msgid "A simplified interface with essential features."
+msgstr "প্রয়োজনীয় বৈশিষ্ট্য সহ একটি সরলীকৃত ইন্টারফেস।"
+
+#: contents/ui/config/ConfigHelp.qml:171
+msgid "Debug tab active, developer features enabled."
+msgstr "ডিবাগ ট্যাব সক্রিয়, বিকাশকারী বৈশিষ্ট্যগুলি সক্ষম।"
+
+#: contents/ui/config/ConfigHelp.qml:177
+msgid "All features active, advanced settings available."
+msgstr "সব বৈশিষ্ট্য সক্রিয়, উন্নত সেটিংস উপলব্ধ।"
+
+#: contents/ui/config/ConfigPreview.qml:9
+#: contents/ui/config/ConfigGeneral.qml:187
+#: contents/ui/config/ConfigGeneral.qml:596
+msgid "Preview"
+msgstr "প্রিভিউ"
 
 #: contents/ui/config/ConfigPreview.qml:97
 msgid "Preview Settings"
@@ -537,60 +345,977 @@ msgstr "পূর্বরূপ সেটিংস"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr "বিভিন্ন ফাইলের প্রকারের জন্য পূর্বরূপ সক্ষম বা অক্ষম করুন।"
+msgstr "বিভিন্ন ফাইল ধরণের জন্য ফাইল প্রিভিউ সক্ষম বা নিষ্ক্রিয় করুন।"
 
-#: contents/ui/config/ConfigPreview.qml:126
+#: contents/ui/config/ConfigPreview.qml:112
+#: contents/ui/config/ConfigSearch.qml:19
+#: contents/ui/config/ConfigGeneral.qml:701
+msgid "Enable File Previews"
+msgstr "ফাইল প্রিভিউ সক্ষম করুন"
+
+#: contents/ui/config/ConfigPreview.qml:125
 msgid "Enabled"
-msgstr "সক্ষম"
+msgstr "সক্রিয়"
 
-#: contents/ui/config/ConfigPreview.qml:126
+#: contents/ui/config/ConfigPreview.qml:125
 msgid "Disabled"
-msgstr "অক্ষম"
+msgstr "নিষ্ক্রিয়"
 
-#: contents/ui/config/ConfigPreview.qml:307
+#: contents/ui/config/ConfigPreview.qml:133
+#: contents/ui/config/ConfigGeneral.qml:707
+msgid "Preview Types"
+msgstr "প্রিভিউ প্রকারভেদ"
+
+#: contents/ui/config/ConfigPreview.qml:158
+#: contents/ui/config/ConfigGeneral.qml:725
+#: contents/ui/components/FilterChips.qml:25
+#: contents/ui/components/QueryHints.qml:53
+msgid "Images"
+msgstr "ছবি"
+
+#: contents/ui/config/ConfigPreview.qml:196
+#: contents/ui/config/ConfigGeneral.qml:762
+msgid "Videos"
+msgstr "ভিডিও"
+
+#: contents/ui/config/ConfigPreview.qml:234
+#: contents/ui/config/ConfigGeneral.qml:799
+msgid "Text Files"
+msgstr "টেক্সট ফাইল"
+
+#: contents/ui/config/ConfigPreview.qml:272
+#: contents/ui/config/ConfigGeneral.qml:646
+#: contents/ui/config/ConfigGeneral.qml:836
+#: contents/ui/components/QueryHints.qml:52
+msgid "Documents"
+msgstr "নথি"
+
+#: contents/ui/config/ConfigPreview.qml:276
+msgid "Icon only"
+msgstr "শুধু আইকন"
+
+#: contents/ui/config/ConfigPreview.qml:306
 msgid "Performance Information"
-msgstr "পারফরম্যান্স তথ্য"
+msgstr "কর্মক্ষমতা তথ্য"
 
-#: contents/ui/config/ConfigPreview.qml:312
+#: contents/ui/config/ConfigPreview.qml:311
 msgid "Video and document previews may increase memory usage."
-msgstr "ভিডিও এবং নথির পূর্বরূপ মেমরির ব্যবহার বাড়াতে পারে।"
+msgstr "ভিডিও এবং ডকুমেন্ট প্রিভিউ মেমরি ব্যবহার বাড়িয়ে তুলতে পারে।"
 
-#: contents/ui/config/ConfigPrefix.qml:24
+#: contents/ui/config/ConfigSearch.qml:13
+msgid "Search Settings"
+msgstr "অনুসন্ধান সেটিংস"
+
+#: contents/ui/config/ConfigSearch.qml:24
+msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
+msgstr "হোভারে ফাইল প্রিভিউ দেখান (Ctrl+Space দিয়েও করা যেতে পারে)"
+
+#: contents/ui/config/ConfigSearch.qml:33
+msgid "Search Behavior"
+msgstr "অনুসন্ধান আচরণ"
+
+#: contents/ui/config/ConfigSearch.qml:37
+msgid "You can use the following KRunner commands and prefixes:"
+msgstr "আপনি নিম্নলিখিত KRunner কমান্ড এবং উপসর্গগুলি ব্যবহার করতে পারেন:"
+
+#: contents/ui/config/ConfigSearch.qml:51
+msgid "Prefix"
+msgstr "উপসর্গ"
+
+#: contents/ui/config/ConfigSearch.qml:56
+msgid "Description"
+msgstr "বর্ণনা"
+
+#: contents/ui/config/ConfigSearch.qml:78
+msgid "Search Unicode characters"
+msgstr "ইউনিকোড অক্ষর অনুসন্ধান করুন"
+
+#: contents/ui/config/ConfigPrefix.qml:10
+#: contents/ui/config/ConfigGeneral.qml:191
+msgid "Prefixes"
+msgstr "উপসর্গসমূহ"
+
+#: contents/ui/config/ConfigPrefix.qml:40
 msgid "Prefix View Settings"
-msgstr "প্রিফিক্স ভিউ সেটিংস"
+msgstr "উপসর্গ ভিউ সেটিংস"
 
-#: contents/ui/config/ConfigPrefix.qml:158
+#: contents/ui/config/ConfigPrefix.qml:45
+#: contents/ui/config/ConfigGeneral.qml:855
+msgid "Date View (date:)"
+msgstr "তারিখ ভিউ (date:)"
+
+#: contents/ui/config/ConfigPrefix.qml:52
+#: contents/ui/config/ConfigGeneral.qml:860
+msgid "Show Large Clock"
+msgstr "বড় ঘড়ি দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:59
+#: contents/ui/config/ConfigGeneral.qml:864
+msgid "Show Calendar Events"
+msgstr "ক্যালেন্ডার ইভেন্টগুলি দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:66
+#: contents/ui/config/ConfigGeneral.qml:869
+msgid "Weather View (weather:)"
+msgstr "আবহাওয়া ভিউ (weather:)"
+
+#: contents/ui/config/ConfigPrefix.qml:74
+#: contents/ui/config/ConfigGeneral.qml:875
+msgid "Enable Weather Prefix"
+msgstr "আবহাওয়া প্রিফিক্স সক্ষম করুন"
+
+#: contents/ui/config/ConfigPrefix.qml:87
+#: contents/ui/config/ConfigGeneral.qml:888
+msgid "Use System Units"
+msgstr "সিস্টেম একক ব্যবহার করুন"
+
+#: contents/ui/config/ConfigPrefix.qml:96
+#: contents/ui/config/ConfigGeneral.qml:897
+msgid "Refresh Interval:"
+msgstr "রিফ্রেশ ব্যবধান:"
+
+#: contents/ui/config/ConfigPrefix.qml:102
+#: contents/ui/config/ConfigGeneral.qml:903
+msgid "Every Search"
+msgstr "প্রতিটি অনুসন্ধান"
+
+#: contents/ui/config/ConfigPrefix.qml:103
+#: contents/ui/config/ConfigGeneral.qml:904
+msgid "15 Minutes"
+msgstr "১৫ মিনিট"
+
+#: contents/ui/config/ConfigPrefix.qml:104
+#: contents/ui/config/ConfigGeneral.qml:905
+msgid "30 Minutes"
+msgstr "৩০ মিনিট"
+
+#: contents/ui/config/ConfigPrefix.qml:105
+#: contents/ui/config/ConfigGeneral.qml:906
+msgid "1 Hour"
+msgstr "১ ঘণ্টা"
+
+#: contents/ui/config/ConfigPrefix.qml:125
+#: contents/ui/config/ConfigGeneral.qml:926
+msgid "(If time since last update > interval)"
+msgstr "(যদি শেষ আপডেটের পর থেকে সময় > ব্যবধান)"
+
+#: contents/ui/config/ConfigPrefix.qml:134
+#: contents/ui/config/ConfigGeneral.qml:933
+msgid "Power View (power:)"
+msgstr "পাওয়ার ভিউ (power:)"
+
+#: contents/ui/config/ConfigPrefix.qml:142
+#: contents/ui/config/ConfigGeneral.qml:938
+msgid "Show Sleep Button"
+msgstr "স্লিপ বোতাম দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:149
+#: contents/ui/config/ConfigGeneral.qml:942
+msgid "Show Hibernate Button"
+msgstr "হাইবারনেট বোতাম দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:160
+#: contents/ui/config/ConfigGeneral.qml:951
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(সোয়াপ পার্টিশন র্যামের চেয়ে ছোট বা সোয়াপ পাওয়া যায়নি)"
+
+#: contents/ui/config/ConfigPrefix.qml:170
+#: contents/ui/config/ConfigGeneral.qml:959
+msgid "Show boot options in Reboot button"
+msgstr "রিবুট বোতামে বুট অপশন দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:180
+#: contents/ui/config/ConfigGeneral.qml:967
+msgid "Note: Systemd boot is required for this feature"
+msgstr "দ্রষ্টব্য: এই বৈশিষ্ট্যের জন্য Systemd বুট প্রয়োজন"
+
+#: contents/ui/config/ConfigPrefix.qml:188
+#: contents/ui/config/ConfigGeneral.qml:975
+msgid "Available Prefixes Reference"
+msgstr "উপলব্ধ উপসর্গ রেফারেন্স"
+
+#: contents/ui/config/ConfigPrefix.qml:192
+#: contents/ui/config/ConfigGeneral.qml:979
+msgid ""
+"These prefixes can be used to perform specific actions directly from the "
+"search bar."
+msgstr "এই উপসর্গগুলি সরাসরি অনুসন্ধান বার থেকে নির্দিষ্ট পদক্ষেপগুলি সম্পাদন করতে ব্যবহার করা যেতে পারে।"
+
+#: contents/ui/config/ConfigPrefix.qml:250
+#: contents/ui/config/ConfigGeneral.qml:1041
+msgid "Show calendar and date information"
+msgstr "ক্যালেন্ডার এবং তারিখের তথ্য দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:262
+#: contents/ui/config/ConfigGeneral.qml:1054
+msgid "Show large clock"
+msgstr "بڑی گھڑی دکھائیں"
+
+#: contents/ui/config/ConfigPrefix.qml:274
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr "পাওয়ার ম্যানেজমেন্ট অপশন দেখান (শাটডাউন, রিবুট ইত্যাদি)"
+msgstr "বিদ্যুৎ সাশ্রয় বিকল্পগুলি দেখান"
 
-#: contents/ui/config/ConfigPrefix.qml:218
+#: contents/ui/config/ConfigPrefix.qml:286
+msgid "Show current weather"
+msgstr "বর্তমান আবহাওয়া দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:298
+#: contents/ui/config/ConfigGeneral.qml:1080
+msgid "Show this help screen"
+msgstr "এই সাহায্য স্ক্রীন দেখান"
+
+#: contents/ui/config/ConfigPrefix.qml:310
+#: contents/ui/config/ConfigGeneral.qml:1093
+msgid "Terminate running processes"
+msgstr "চলমান প্রসেস শেষ করুন"
+
+#: contents/ui/config/ConfigPrefix.qml:322
+#: contents/ui/config/ConfigGeneral.qml:1106
+msgid "Check spelling of a word"
+msgstr "একটি শব্দের বানান পরীক্ষা করুন"
+
+#: contents/ui/config/ConfigPrefix.qml:334
+#: contents/ui/config/ConfigGeneral.qml:1119
+msgid "Execute shell commands"
+msgstr "শেল কমান্ড চালান"
+
+#: contents/ui/config/ConfigPrefix.qml:346
 msgid "Convert units (requires KRunner installed)"
-msgstr "একক রূপান্তর (KRunner ইনস্টল থাকা প্রয়োজন)"
+msgstr "ইউনিট রূপান্তর করুন (KRunner ইনস্টল থাকা প্রয়োজন)"
 
-#: contents/ui/config/ConfigPrefix.qml:228
+#: contents/ui/config/ConfigPrefix.qml:356
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr "দ্রষ্টব্য: কিছু প্রিফিক্স (যেমন ইউনিট রূপান্তর) ইনস্টল করা KRunner এর উপর নির্ভর করে।"
+msgstr "দ্রষ্টব্য: কিছু উপসর্গ (যেমন ইউনিট রূপান্তর) ইনস্টল করা KRunner রানারদের উপর নির্ভর করে।"
 
-#: contents/ui/components/QueryHints.qml:40
+#: contents/ui/config/ConfigGeneral.qml:178
+msgid "Panel"
+msgstr "প্যানেল"
+
+#: contents/ui/config/ConfigGeneral.qml:182
+msgid "Popup"
+msgstr "পপআপ"
+
+#: contents/ui/config/ConfigGeneral.qml:210
+msgid "Panel Appearance"
+msgstr "প্যানেল চেহারা"
+
+#: contents/ui/config/ConfigGeneral.qml:218 contents/ui/main.qml:104
+msgid "Button Mode (Icon only)"
+msgstr "বোতাম মোড (শুধু আইকন)"
+
+#: contents/ui/config/ConfigGeneral.qml:219
+msgid "Medium Mode (Text)"
+msgstr "মাঝারি মোড (লেখা)"
+
+#: contents/ui/config/ConfigGeneral.qml:220
+msgid "Wide Mode (Search Bar)"
+msgstr "প্রশস্ত মোড (অনুসন্ধান বার)"
+
+#: contents/ui/config/ConfigGeneral.qml:221
+msgid "Extra Wide Mode"
+msgstr "অতিরিক্ত প্রশস্ত মোড"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Ultra Wide Mode"
+msgstr "আল্ট্রা ওয়াইড মোড"
+
+#: contents/ui/config/ConfigGeneral.qml:229
+msgid "Edge Appearance"
+msgstr "প্রান্তের চেহারা"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Round corners"
+msgstr "বৃত্তাকার কোণ"
+
+#: contents/ui/config/ConfigGeneral.qml:233
+msgid "Slightly round"
+msgstr "সামান্য বৃত্তাকার"
+
+#: contents/ui/config/ConfigGeneral.qml:234
+msgid "Less round"
+msgstr "কম বৃত্তাকার"
+
+#: contents/ui/config/ConfigGeneral.qml:235
+msgid "Square corners"
+msgstr "বর্গাকার কোণ"
+
+#: contents/ui/config/ConfigGeneral.qml:242
+msgid "Search Icon"
+msgstr "অনুসন্ধান আইকন"
+
+#: contents/ui/config/ConfigGeneral.qml:243
+msgid "Show search icon and button in panel"
+msgstr "প্যানেলে অনুসন্ধান আইকন এবং বোতাম দেখান"
+
+#: contents/ui/config/ConfigGeneral.qml:249
+msgid "Show background tile (colored square)"
+msgstr "ব্যাকগ্রাউন্ড টাইল দেখান (রঙিন বর্গক্ষেত্র)"
+
+#: contents/ui/config/ConfigGeneral.qml:257
+msgid "Show animated RSS titles in panel search bar"
+msgstr "প্যানেল অনুসন্ধান বারে অ্যানিমেটেড আরএসএস শিরোনাম দেখান"
+
+#: contents/ui/config/ConfigGeneral.qml:258
+msgid "RSS Titles"
+msgstr "আরএসএস শিরোনাম"
+
+#: contents/ui/config/ConfigGeneral.qml:264
+msgid "Show RSS source name in panel ticker"
+msgstr "প্যানেল টিকারে আরএসএস উৎসের নাম দেখান"
+
+#: contents/ui/config/ConfigGeneral.qml:272
+msgid "RSS Frequency"
+msgstr "আরএসএস ফ্রিকোয়েন্সি"
+
+#: contents/ui/config/ConfigGeneral.qml:275
+msgid "Always"
+msgstr "সবসময়"
+
+#: contents/ui/config/ConfigGeneral.qml:276
+msgid "Very Frequent"
+msgstr "খুব ঘনঘন"
+
+#: contents/ui/config/ConfigGeneral.qml:277
+msgid "Frequent"
+msgstr "ঘনঘন"
+
+#: contents/ui/config/ConfigGeneral.qml:278
+msgid "Normal"
+msgstr "স্বাভাবিক"
+
+#: contents/ui/config/ConfigGeneral.qml:279
+msgid "Less Frequent"
+msgstr "কম ঘনঘন"
+
+#: contents/ui/config/ConfigGeneral.qml:280
+msgid "Rare"
+msgstr "দুর্লভ"
+
+#: contents/ui/config/ConfigGeneral.qml:281
+msgid "Only when new"
+msgstr "শুধু নতুন হলে"
+
+#: contents/ui/config/ConfigGeneral.qml:286
+msgid "Panel Height"
+msgstr "প্যানেলের উচ্চতা"
+
+#: contents/ui/config/ConfigGeneral.qml:291
+msgid "Automatic"
+msgstr "স্বয়ংক্রিয়"
+
+#: contents/ui/config/ConfigGeneral.qml:336
+msgid "Panel Preview"
+msgstr "প্যানেল প্রিভিউ"
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
+msgid "Start searching..."
+msgstr "অনুসন্ধান শুরু করুন..."
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
+msgid "Search..."
+msgstr "অনুসন্ধান..."
+
+#: contents/ui/config/ConfigGeneral.qml:385
+msgid "News Headline"
+msgstr "খবরের শিরোনাম"
+
+#: contents/ui/config/ConfigGeneral.qml:511
+msgid "Results View"
+msgstr "ফলাফল ভিউ"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "List View"
+msgstr "তালিকা ভিউ"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "Tile View"
+msgstr "টাইল ভিউ"
+
+#: contents/ui/config/ConfigGeneral.qml:524
+msgid "Scroll Bar"
+msgstr "স্ক্রোল বার"
+
+#: contents/ui/config/ConfigGeneral.qml:526
+msgid "System Default"
+msgstr "সিস্টেম ডিফল্ট"
+
+#: contents/ui/config/ConfigGeneral.qml:527
+msgid "Minimal (Custom)"
+msgstr "ন্যূনতম (কাস্টম)"
+
+#: contents/ui/config/ConfigGeneral.qml:528
+msgid "Hidden"
+msgstr "লুকানো"
+
+#: contents/ui/config/ConfigGeneral.qml:552
+#: contents/ui/components/PinnedSection.qml:85
+msgid "Pinned Items"
+msgstr "পিন করা আইটেম"
+
+#: contents/ui/config/ConfigGeneral.qml:557
+msgid "Show pinned items bar"
+msgstr "পিন করা আইটেমসমূহ"
+
+#: contents/ui/config/ConfigGeneral.qml:563
+msgid "Minimize automatically when searching"
+msgstr "অনুসন্ধান করার সময় স্বয়ংক্রিয়ভাবে ছোট করুন"
+
+#: contents/ui/config/ConfigGeneral.qml:572
+msgid "Tile Size Mode"
+msgstr "টাইল আইকন আকার"
+
+#: contents/ui/config/ConfigGeneral.qml:575
+msgid "Normal (wide tiles)"
+msgstr "স্বাভাবিক (প্রশস্ত টাইলস)"
+
+#: contents/ui/config/ConfigGeneral.qml:576
+msgid "Compact (all small)"
+msgstr "কম্প্যাক্ট (সব ছোট)"
+
+#: contents/ui/config/ConfigGeneral.qml:577
+msgid "Only pinned compact"
+msgstr "শুধু পিন করা কম্প্যাক্ট"
+
+#: contents/ui/config/ConfigGeneral.qml:578
+msgid "Only history/results compact"
+msgstr "শুধু ইতিহাস/ফলাফল কম্প্যাক্ট"
+
+#: contents/ui/config/ConfigGeneral.qml:586
+msgid "Filter Chip Style"
+msgstr "ফিল্টার চিপ স্টাইল"
+
+#: contents/ui/config/ConfigGeneral.qml:588
+msgid "Current Appearance (Filled)"
+msgstr "বর্তমান চেহারা (ভরাট)"
+
+#: contents/ui/config/ConfigGeneral.qml:589
+msgid "Breeze Appearance (Outline)"
+msgstr "ব্রিজ চেহারা (আউটলাইন)"
+
+#: contents/ui/config/ConfigGeneral.qml:625
+msgid "System Settings"
+msgstr "অনুসন্ধান সেটিংস"
+
+#: contents/ui/config/ConfigGeneral.qml:669
+msgid "Settings"
+msgstr "ডিবাগ সেটিংস"
+
+#: contents/ui/config/ConfigGeneral.qml:684
+#: contents/ui/components/FilterChips.qml:24
+msgid "Docs"
+msgstr "নথি"
+
+#: contents/ui/config/ConfigGeneral.qml:702
+msgid "Show/Hide Previews"
+msgstr "প্রিভিউ দেখান/লুকান"
+
+#: contents/ui/config/ConfigGeneral.qml:1067
+msgid "Show power management options"
+msgstr "পাওয়ার ম্যানেজমেন্ট অপশন দেখান"
+
+#: contents/ui/config/ConfigGeneral.qml:1132
+msgid "Convert units (requires KRunner)"
+msgstr "ইউনিট রূপান্তর করুন (KRunner প্রয়োজন)"
+
+#: contents/ui/config/ConfigRSS.qml:235
+msgid "Arch & Linux News"
+msgstr "আর্চ এবং লিনাক্স খবর"
+
+#: contents/ui/config/ConfigRSS.qml:245
+msgid "Security Bulletins"
+msgstr "নিরাপত্তা বুলেটিন"
+
+#: contents/ui/config/ConfigRSS.qml:254
+msgid "Türkiye News"
+msgstr "তুরস্কের খবর"
+
+#: contents/ui/config/ConfigRSS.qml:268
+msgid "Azerbaijan News"
+msgstr "আজারবাইজান খবর"
+
+#: contents/ui/config/ConfigRSS.qml:276
+msgid "Bangladesh News"
+msgstr "বাংলাদেশ খবর"
+
+#: contents/ui/config/ConfigRSS.qml:283
+msgid "Czech Republic"
+msgstr "চেক প্রজাতন্ত্র"
+
+#: contents/ui/config/ConfigRSS.qml:290
+msgid "Germany News"
+msgstr "জার্মানির খবর"
+
+#: contents/ui/config/ConfigRSS.qml:297
+msgid "Greece News"
+msgstr "গ্রিসের খবর"
+
+#: contents/ui/config/ConfigRSS.qml:306
+msgid "Spain & Mexico"
+msgstr "স্পেন এবং মেক্সিকো"
+
+#: contents/ui/config/ConfigRSS.qml:314
+msgid "Iran News"
+msgstr "ইরানের খবর"
+
+#: contents/ui/config/ConfigRSS.qml:321
+msgid "France News"
+msgstr "ফ্রান্সের খবর"
+
+#: contents/ui/config/ConfigRSS.qml:329
+msgid "India News (Hindi)"
+msgstr "ভারতের খবর (হিন্দি)"
+
+#: contents/ui/config/ConfigRSS.qml:336
+msgid "Armenia News"
+msgstr "আর্মেনিয়ার খবর"
+
+#: contents/ui/config/ConfigRSS.qml:343
+msgid "Indonesia News"
+msgstr "ইন্ডোনেশিয়ার খবর"
+
+#: contents/ui/config/ConfigRSS.qml:350
+msgid "Italy News"
+msgstr "ইতালির খবর"
+
+#: contents/ui/config/ConfigRSS.qml:358
+msgid "Japan News"
+msgstr "জাপানের খবর"
+
+#: contents/ui/config/ConfigRSS.qml:365
+msgid "Brazil & Portugal"
+msgstr "ব্রাজিল এবং পর্তুগাল"
+
+#: contents/ui/config/ConfigRSS.qml:372
+msgid "Romania News"
+msgstr "রোমানিয়ার খবর"
+
+#: contents/ui/config/ConfigRSS.qml:380
+msgid "Russia News"
+msgstr "রাশিয়ার খবর"
+
+#: contents/ui/config/ConfigRSS.qml:387
+msgid "Pakistan News"
+msgstr "পাকিস্তানের খবর"
+
+#: contents/ui/config/ConfigRSS.qml:394
+msgid "China News"
+msgstr "চীনের খবর"
+
+#: contents/ui/config/ConfigRSS.qml:401
+msgid "USA & UK News"
+msgstr "মার্কিন যুক্তরাষ্ট্র এবং যুক্তরাজ্য খবর"
+
+#: contents/ui/config/ConfigRSS.qml:410
+msgid "World News"
+msgstr "বিশ্ব সংবাদ"
+
+#: contents/ui/config/ConfigRSS.qml:459
+msgid "New Source"
+msgstr "নতুন উৎস"
+
+#: contents/ui/config/ConfigRSS.qml:544
+msgid "Invalid URL"
+msgstr "অকার্যকর ইউআরএল"
+
+#: contents/ui/config/ConfigRSS.qml:551
+msgid "Starting background sync..."
+msgstr "ব্যাকগ্রাউন্ড সিঙ্ক শুরু হচ্ছে..."
+
+#: contents/ui/config/ConfigRSS.qml:564
+msgid "Script not found at: %1"
+msgstr "স্ক্রিপ্ট এখানে পাওয়া যায়নি: %1"
+
+#: contents/ui/config/ConfigRSS.qml:584
+msgid "Sync: SUCCESS"
+msgstr "সিঙ্ক: সফল"
+
+#: contents/ui/config/ConfigRSS.qml:658
+msgid "Never"
+msgstr "কখনই না"
+
+#: contents/ui/config/ConfigRSS.qml:674
+msgid "Enable RSS: Show feed updates in search results"
+msgstr "RSS সক্ষম করুন: অনুসন্ধান ফলাফলে ফিড আপডেট দেখান"
+
+#: contents/ui/config/ConfigRSS.qml:686
+msgid "Sync All Sources"
+msgstr "সব উৎস সিঙ্ক করুন"
+
+#: contents/ui/config/ConfigRSS.qml:693
+msgid "Clear Cache Folder"
+msgstr "ক্যাশে ফোল্ডার মুছুন"
+
+#: contents/ui/config/ConfigRSS.qml:702
+msgid "Last full sync: %1"
+msgstr "শেষ পূর্ণ সিঙ্ক: %1"
+
+#: contents/ui/config/ConfigRSS.qml:713
+msgid "Show images in results"
+msgstr "ফলাফলে ছবি দেখান"
+
+#: contents/ui/config/ConfigRSS.qml:719
+msgid "Expand cards on click"
+msgstr "ক্লিক করলে কার্ড প্রসারিত করুন"
+
+#: contents/ui/config/ConfigRSS.qml:727
+msgid "Popular Presets"
+msgstr "জনপ্রিয় প্রিসেট"
+
+#: contents/ui/config/ConfigRSS.qml:733
+msgid "Search presets (e.g. News, Tech, TR, Linux)..."
+msgstr "অনুসন্ধান প্রিসেট (যেমন খবর, প্রযুক্তি, TR, লিনাক্স)..."
+
+#: contents/ui/config/ConfigRSS.qml:795
+msgid "RSS Sources (Max 30)"
+msgstr "RSS উৎস (সর্বোচ্চ ৩০)"
+
+#: contents/ui/config/ConfigRSS.qml:859
+msgid "Name"
+msgstr "নাম"
+
+#: contents/ui/config/ConfigRSS.qml:865
+msgid "URL"
+msgstr "URL"
+
+#: contents/ui/config/ConfigRSS.qml:891
+msgid "Entries:"
+msgstr "এন্ট্রি:"
+
+#: contents/ui/config/ConfigRSS.qml:897
+msgid "Interval:"
+msgstr "ব্যবধান:"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1h"
+msgstr "%1ঘণ্টা"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1m"
+msgstr "%1মি"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 hours"
+msgstr "%1 ঘণ্টা"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 mins"
+msgstr "%1 মিনিট"
+
+#: contents/ui/config/ConfigRSS.qml:918
+msgid "Last sync: %1"
+msgstr "শেষ সিঙ্ক: %1"
+
+#: contents/ui/config/ConfigRSS.qml:952
+msgid "Add Custom Source"
+msgstr "কাস্টম উৎস যোগ করুন"
+
+#: contents/ui/config/ConfigRSS.qml:966
+msgid "News Features:"
+msgstr "খবরের বৈশিষ্ট্যসমূহ:"
+
+#: contents/ui/config/ConfigRSS.qml:967
+msgid "Show RSS titles in placeholder cycling"
+msgstr "প্লেসহোল্ডার সাইক্লিংয়ে আরএসএস শিরোনাম দেখান"
+
+#: contents/ui/config/ConfigRSS.qml:973
+msgid "Show full headlines (split into segments)"
+msgstr "সম্পূর্ণ শিরোনাম দেখান (বিভাগে বিভক্ত)"
+
+#: contents/ui/config/ConfigRSS.qml:979
+msgid "Default Interval:"
+msgstr "ডিফল্ট ব্যবধান:"
+
+#: contents/ui/config/ConfigRSS.qml:986
+msgid "Default Entries:"
+msgstr "ডিফল্ট এন্ট্রি:"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinnedSection.qml:436
+msgid "Unpin"
+msgstr "আনপিন করুন"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+msgid "Pin"
+msgstr "পিন করুন"
+
 #: contents/ui/components/HelpView.qml:16
+#: contents/ui/components/QueryHints.qml:38
 msgid "Timeline View"
 msgstr "টাইমলাইন ভিউ"
+
+#: contents/ui/components/HelpView.qml:17
+#: contents/ui/components/QueryHints.qml:55
+#: contents/ui/components/SearchPopup.qml:1028
+msgid "Applications"
+msgstr "অ্যাপ্লিকেশনসমূহ"
+
+#: contents/ui/components/HelpView.qml:18
+msgid "File Path Search"
+msgstr "ফাইলের পথ অনুসন্ধান"
+
+#: contents/ui/components/HelpView.qml:19
+msgid "Google Search"
+msgstr "গুগল অনুসন্ধান"
+
+#: contents/ui/components/HelpView.qml:20
+msgid "DuckDuckGo Search"
+msgstr "DuckDuckGo অনুসন্ধান"
+
+#: contents/ui/components/HelpView.qml:21
+msgid "Wikipedia Search"
+msgstr "উইকিপিডিয়া অনুসন্ধান"
+
+#: contents/ui/components/HelpView.qml:22
+#: contents/ui/components/QueryHints.qml:66
+msgid "Bookmarks"
+msgstr "বুকমার্কসমূহ"
+
+#: contents/ui/components/HelpView.qml:23
+#: contents/ui/components/QueryHints.qml:69
+msgid "Man Pages"
+msgstr "ম্যান পেজ"
+
+#: contents/ui/components/HelpView.qml:24
+msgid "Kill Process"
+msgstr "প্রসেস বন্ধ করুন"
+
+#: contents/ui/components/HelpView.qml:25
+msgid "Spell Check"
+msgstr "বানান পরীক্ষা"
+
+#: contents/ui/components/HelpView.qml:26
+msgid "Dictionary Definition"
+msgstr "অভিধান সংজ্ঞা"
+
+#: contents/ui/components/HelpView.qml:27
+#: contents/ui/components/QueryHints.qml:60
+msgid "Unit Converter"
+msgstr "ইউনিট কনভার্টার"
+
+#: contents/ui/components/HelpView.qml:28
+msgid "Shell Commands"
+msgstr "শেল কমান্ডসমূহ"
+
+#: contents/ui/components/HelpView.qml:29
+msgid "Power Management"
+msgstr "পাওয়ার ম্যানেজমেন্ট"
+
+#: contents/ui/components/HelpView.qml:30
+msgid "System Services"
+msgstr "সিস্টেম সার্ভিসসমূহ"
+
+#: contents/ui/components/HelpView.qml:31
+msgid "Unicode Characters"
+msgstr "ইউনিকোড অক্ষর"
+
+#: contents/ui/components/HelpView.qml:32
+msgid "Date and Time"
+msgstr "তারিখ এবং সময়"
+
+#: contents/ui/components/HelpView.qml:33
+msgid "Help & Shortcuts"
+msgstr "সহায়তা এবং শর্টকাটস"
+
+#: contents/ui/components/HistoryListView.qml:38
+#: contents/ui/components/HistoryTileView.qml:246
+msgid "Recent Searches"
+msgstr "সাম্প্রতিক অনুসন্ধান"
+
+#: contents/ui/components/HistoryListView.qml:58
+#: contents/ui/components/HistoryTileView.qml:266
+msgid "Clear History"
+msgstr "ইতিহাস মুছুন"
+
+#: contents/ui/components/HistoryListView.qml:286
+#: contents/ui/components/HistoryTileView.qml:597
+#: contents/ui/components/ResultsTileView.qml:301
+msgid "Type to search"
+msgstr "অনুসন্ধান করতে টাইপ করুন"
+
+#: contents/ui/components/DebugOverlay.qml:41
+msgid "Saved!"
+msgstr "সংরক্ষিত!"
+
+#: contents/ui/components/DebugOverlay.qml:49
+#: contents/ui/components/DebugOverlay.qml:119
+msgid "Save Dump"
+msgstr "ডাম্প সংরক্ষণ করুন"
+
+#: contents/ui/components/DebugOverlay.qml:78
+msgid "Backend"
+msgstr "ব্যাকএন্ড"
+
+#: contents/ui/components/DebugOverlay.qml:81
+msgid "Items"
+msgstr "আইটেম"
+
+#: contents/ui/components/DebugOverlay.qml:84
+msgid "Latency"
+msgstr "লেটেন্সি"
+
+#: contents/ui/components/DebugOverlay.qml:91
+msgid "View"
+msgstr "ভিউ"
+
+#: contents/ui/components/DebugOverlay.qml:94
+msgid "Display"
+msgstr "প্রদর্শন"
+
+#: contents/ui/components/FilterChips.qml:22
+msgid "All"
+msgstr "সব"
+
+#: contents/ui/components/FilterChips.qml:23
+msgid "Apps"
+msgstr "অ্যাপস"
+
+#: contents/ui/components/FilterChips.qml:26
+msgid "Folders"
+msgstr "ফোল্ডার"
+
+#: contents/ui/components/FilterChips.qml:27
+msgid "Web"
+msgstr "ওয়েব"
+
+#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/PinnedSection.qml:402
+msgid "Open"
+msgstr "খুলুন"
+
+#: contents/ui/components/HistoryContextMenu.qml:69
+#: contents/ui/components/PinnedSection.qml:412
+msgid "Copy Path"
+msgstr "পথ কপি করুন"
+
+#: contents/ui/components/HistoryContextMenu.qml:85
+msgid "Open in Terminal"
+msgstr "টার্মিনালে খুলুন"
+
+#: contents/ui/components/HistoryContextMenu.qml:97
+#: contents/ui/components/PinnedSection.qml:423
+msgid "Open Containing Folder"
+msgstr "ধারণকারী ফোল্ডার খুলুন"
+
+#: contents/ui/components/HistoryContextMenu.qml:107
+msgid "Move to Trash"
+msgstr "আবর্জনায় সরান"
+
+#: contents/ui/components/HistoryContextMenu.qml:120
+msgid "Properties"
+msgstr "বৈশিষ্ট্য"
+
+#: contents/ui/components/HistoryContextMenu.qml:130
+msgid "Edit Application..."
+msgstr "অ্যাপ্লিকেশন সম্পাদনা করুন..."
+
+#: contents/ui/components/HistoryContextMenu.qml:140
+msgid "Remove from History"
+msgstr "ইতিহাস থেকে সরান"
+
+#: contents/ui/components/PinnedSection.qml:225
+msgid "Right-click items to pin them"
+msgstr "পিন করতে ডান ক্লিক করুন"
+
+#: contents/ui/components/PinnedSection.qml:383
+msgid "Drag to reorder"
+msgstr "পুনরায় সাজাতে টানুন"
+
+#: contents/ui/components/PowerView.qml:254
+msgid "Hibernate"
+msgstr "হাইবারনেট"
+
+#: contents/ui/components/PowerView.qml:258
+msgid "(Press again to hibernate)"
+msgstr "(হাইবারনেট করতে আবার চাপুন)"
+
+#: contents/ui/components/PowerView.qml:267
+msgid "Sleep"
+msgstr "স্লিপ"
+
+#: contents/ui/components/PowerView.qml:271
+msgid "(Press again to sleep)"
+msgstr "(স্লিপ করতে আবার চাপুন)"
+
+#: contents/ui/components/PowerView.qml:279
+msgid "Reboot"
+msgstr "রিবুট"
+
+#: contents/ui/components/PowerView.qml:283
+msgid "(Press again to reboot)"
+msgstr "(রিবুট করতে আবার চাপুন)"
+
+#: contents/ui/components/PowerView.qml:303
+msgid "Shutdown"
+msgstr "বন্ধ করুন"
+
+#: contents/ui/components/PowerView.qml:307
+msgid "(Press again to shutdown)"
+msgstr "(বন্ধ করতে আবার চাপুন)"
+
+#: contents/ui/components/PowerView.qml:444
+msgid "Refresh"
+msgstr "রিফ্রেশ"
+
+#: contents/ui/components/PowerView.qml:472
+msgid "Scan for boot entries"
+msgstr "বুট এন্ট্রি স্ক্যান করুন"
+
+#: contents/ui/components/PowerView.qml:498
+msgid "Lock Screen"
+msgstr "স্ক্রিন লক করুন"
+
+#: contents/ui/components/PowerView.qml:508
+msgid "Log Out"
+msgstr "লগ আউট"
+
+#: contents/ui/components/PowerView.qml:512
+msgid "(Press again to log out)"
+msgstr "(লগ আউট করতে আবার চাপুন)"
+
+#: contents/ui/components/PowerView.qml:520
+msgid "Switch User"
+msgstr "ব্যবহারকারী পরিবর্তন"
+
+#: contents/ui/components/PowerView.qml:524
+msgid "(Press again to switch)"
+msgstr "(পরিবর্তন করতে আবার চাপুন)"
+
+#: contents/ui/components/PowerView.qml:532
+msgid "Save Session"
+msgstr "সেশন সংরক্ষণ করুন"
+
+#: contents/ui/components/PowerView.qml:551
+msgid "(Press again)"
+msgstr "(আবার চাপুন)"
+
+#: contents/ui/components/QueryHints.qml:32
+msgid "Show all available search filters"
+msgstr "সমস্ত উপলব্ধ অনুসন্ধান ফিল্টার দেখান"
+
+#: contents/ui/components/QueryHints.qml:39
+msgid "Browse files by date (Today, Yesterday, etc.)"
+msgstr "তারিখ অনুসারে ফাইল ব্রাউজ করুন (আজ, গতকাল, ইত্যাদি)"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
 msgstr "ক্যালেন্ডার"
 
 #: contents/ui/components/QueryHints.qml:44
-#: contents/ui/components/QueryHints.qml:128
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:154
+#: contents/ui/components/QueryHints.qml:162
 msgid "Today"
 msgstr "আজ"
 
 #: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:129
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:155
+#: contents/ui/components/QueryHints.qml:162
 msgid "Yesterday"
 msgstr "গতকাল"
 
@@ -602,444 +1327,323 @@ msgstr "এই সপ্তাহ"
 msgid "This Month"
 msgstr "এই মাস"
 
+#: contents/ui/components/QueryHints.qml:50
+msgid "File Path"
+msgstr "ফাইলের পথ"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "Search via absolute file path"
+msgstr "পরম ফাইল পথের মাধ্যমে অনুসন্ধান করুন"
+
 #: contents/ui/components/QueryHints.qml:51
-msgid "Files modified today"
-msgstr "আজ পরিবর্তিত ফাইলসমূহ"
+msgid "File Index"
+msgstr "ফাইল ইনডেক্স"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "Search exclusively in Baloo file index"
+msgstr "একচেটিয়াভাবে Baloo ফাইল ইনডেক্সে অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:52
-msgid "Files modified yesterday"
-msgstr "গতকাল পরিবর্তিত ফাইলসমূহ"
+msgid "Search only document files"
+msgstr "শুধু ডকুমেন্ট ফাইল অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:53
-msgid "Files modified this week"
-msgstr "এই সপ্তাহে পরিবর্তিত ফাইলসমূহ"
+msgid "Search only image files"
+msgstr "শুধু ইমেজ ফাইল অনুসন্ধান করুন"
 
-#: contents/ui/components/QueryHints.qml:54
-msgid "Files modified this month"
-msgstr "এই মাসে পরিবর্তিত ফাইলসমূহ"
+#: contents/ui/components/QueryHints.qml:55
+msgid "Search for installed applications"
+msgstr "ইনস্টল করা অ্যাপ্লিকেশন অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:56
-#: contents/ui/components/HelpView.qml:18
-msgid "File Path Search"
-msgstr "ফাইল পাথ অনুসন্ধান"
+msgid "Services"
+msgstr "সার্ভিস"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Search system background services"
+msgstr "সিস্টেম ব্যাকগ্রাউন্ড সার্ভিস অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:57
-#: contents/ui/components/HelpView.qml:23
-msgid "Man Pages"
-msgstr "ম্যান পেজ"
+msgid "Shell"
+msgstr "শেল"
 
-#: contents/ui/components/QueryHints.qml:58
-#: contents/ui/components/HelpView.qml:19
-msgid "Google Search"
-msgstr "গুগল অনুসন্ধান"
+#: contents/ui/components/QueryHints.qml:57
+msgid "Execute shell commands directly"
+msgstr "সরাসরি শেল কমান্ড চালান"
 
 #: contents/ui/components/QueryHints.qml:59
-#: contents/ui/components/HelpView.qml:20
-msgid "DuckDuckGo Search"
-msgstr "ডাকডাকগো অনুসন্ধান"
+msgid "Calculator"
+msgstr "ক্যালকুলেটর"
+
+#: contents/ui/components/QueryHints.qml:59
+msgid "Perform mathematical calculations"
+msgstr "গাণিতিক গণনা সম্পাদন করুন"
 
 #: contents/ui/components/QueryHints.qml:60
-#: contents/ui/components/HelpView.qml:21
-msgid "Wikipedia Search"
-msgstr "উইকিপিডিয়া অনুসন্ধান"
+msgid "Convert between weights, distances, etc."
+msgstr "ওজন, দূরত্ব, ইত্যাদির মধ্যে রূপান্তর করুন"
 
 #: contents/ui/components/QueryHints.qml:61
-#: contents/ui/components/HelpView.qml:24
-msgid "Kill Process"
-msgstr "প্রসেস বন্ধ করুন"
+msgid "Spelling"
+msgstr "বানান"
 
-#: contents/ui/components/QueryHints.qml:62
-#: contents/ui/components/HelpView.qml:25
-msgid "Spell Check"
-msgstr "বানান চেক"
+#: contents/ui/components/QueryHints.qml:61
+msgid "Check word spelling"
+msgstr "শব্দ বানান চেক করুন"
 
 #: contents/ui/components/QueryHints.qml:63
-#: contents/ui/components/HelpView.qml:31
-msgid "Unicode Characters"
-msgstr "ইউনিকোড অক্ষরসমূহ"
+msgid "Google"
+msgstr "Google"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Search the web using Google"
+msgstr "Google ব্যবহার করে ওয়েব অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:64
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
-#: contents/ui/components/HelpView.qml:17
-msgid "Applications"
-msgstr "অ্যাপ্লিকেশনসমূহ"
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "Search the web using DuckDuckGo"
+msgstr "DuckDuckGo ব্যবহার করে ওয়েব অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:65
-#: contents/ui/components/HelpView.qml:28
-msgid "Shell Commands"
-msgstr "শেল কমান্ডসমূহ"
+msgid "Wikipedia"
+msgstr "উইকিপিডিয়া"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Search Wikipedia articles"
+msgstr "উইকিপিডিয়া নিবন্ধ অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:66
-#: contents/ui/components/HelpView.qml:22
-msgid "Bookmarks"
-msgstr "বুকমার্কসমূহ"
+msgid "Search browser bookmarks"
+msgstr "ব্রাউজার বুকমার্ক অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:67
-#: contents/ui/components/HelpView.qml:29
-msgid "Power Management"
-msgstr "পাওয়ার ম্যানেজমেন্ট"
+msgid "RSS Feeds"
+msgstr "আরএসএস ফিড"
 
-#: contents/ui/components/QueryHints.qml:68
-#: contents/ui/components/HelpView.qml:30
-msgid "System Services"
-msgstr "সিস্টেম সার্ভিসসমূহ"
+#: contents/ui/components/QueryHints.qml:67
+msgid "Search exclusively in RSS news feeds"
+msgstr "একচেটিয়াভাবে আরএসএস সংবাদ ফিডগুলিতে অনুসন্ধান করুন"
 
 #: contents/ui/components/QueryHints.qml:69
-#: contents/ui/components/HelpView.qml:32
-msgid "Date and Time"
-msgstr "তারিখ এবং সময়"
+msgid "Browse system manual pages"
+msgstr "সিস্টেম ম্যানুয়াল পৃষ্ঠাগুলি ব্রাউज করুন"
 
 #: contents/ui/components/QueryHints.qml:70
-#: contents/ui/components/HelpView.qml:26
-msgid "Dictionary Definition"
-msgstr "অভিধান সংজ্ঞা"
+msgid "Show widget documentation"
+msgstr "উইজেট ডকুমেন্টেশন দেখান"
 
-#: contents/ui/components/QueryHints.qml:71
-#: contents/ui/components/HelpView.qml:27
-msgid "Unit Converter"
-msgstr "ইউনিট কনভার্টার"
-
-#: contents/ui/components/HelpView.qml:33
-msgid "Help & Shortcuts"
-msgstr "সহায়তা এবং শর্টকাটস"
-
-#: contents/ui/components/QueryHints.qml:130
-#: contents/ui/components/QueryHints.qml:136
-msgid "Two days ago"
-msgstr "দুই দিন আগে"
-
-#: contents/ui/components/QueryHints.qml:217
-#: contents/ui/components/QueryHints.qml:227
-msgid "Browse calendar"
-msgstr "ক্যালেন্ডার ব্রাউজ করুন"
-
-#: contents/ui/components/QueryHints.qml:241
-msgid "Man pages not installed"
-msgstr "ম্যান পেজ ইনস্টল করা নেই"
-
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:98
 msgid "Unknown prefix"
-msgstr "অজানা প্রিফিক্স"
+msgstr "অজানা উপসর্গ"
 
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:99
 msgid "try"
 msgstr "চেষ্টা করুন"
 
-#: contents/ui/components/DebugOverlay.qml:40
-msgid "Saved!"
-msgstr "সংরক্ষিত!"
+#: contents/ui/components/QueryHints.qml:101
+msgid "Browse calendar"
+msgstr "ক্যালেন্ডার ব্রাউজ করুন"
 
-#: contents/ui/components/DebugOverlay.qml:48
-#: contents/ui/components/DebugOverlay.qml:118
-msgid "Save Dump"
-msgstr "ডাম্প সংরক্ষণ"
+#: contents/ui/components/QueryHints.qml:102
+msgid "Man pages not installed"
+msgstr "ম্যান পেজ ইনস্টল করা নেই"
 
-#: contents/ui/components/DebugOverlay.qml:77
-msgid "Backend"
-msgstr "ব্যাকএন্ড"
+#: contents/ui/components/QueryHints.qml:156
+#: contents/ui/components/QueryHints.qml:162
+msgid "Two days ago"
+msgstr "দুই দিন আগে"
 
-#: contents/ui/components/DebugOverlay.qml:80
-msgid "Items"
-msgstr "আইটেমসমূহ"
+#: contents/ui/components/QueryHints.qml:367
+msgid "Available Search Prefixes"
+msgstr "উপলব্ধ অনুসন্ধান প্রিসেট"
 
-#: contents/ui/components/DebugOverlay.qml:83
-msgid "Latency"
-msgstr "লেটেন্সি"
+#: contents/ui/components/ResultsListView.qml:436
+#: contents/ui/components/ResultsTileView.qml:294
+msgid "Category"
+msgstr "বিভাগ"
 
-#: contents/ui/components/DebugOverlay.qml:90
-msgid "View"
-msgstr "ভিউ"
+#: contents/ui/components/ResultsListView.qml:437
+#: contents/ui/components/ResultsTileView.qml:295
+msgid "File Type"
+msgstr "ফাইলের ধরন"
 
-#: contents/ui/components/DebugOverlay.qml:93
-msgid "Display"
-msgstr "প্রদর্শন"
+#: contents/ui/components/ResultsListView.qml:438
+#: contents/ui/components/ResultsTileView.qml:296
+msgid "Path"
+msgstr "পথ"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/PinnedSection.qml:376
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Unpin"
-msgstr "আনপিন করুন"
+#: contents/ui/components/ResultsListView.qml:439
+msgid "News"
+msgstr "খবর"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Pin"
-msgstr "পিন করুন"
+#: contents/ui/components/ResultsListView.qml:440
+msgid "Read News"
+msgstr "খবর পড়ুন"
 
-#: contents/ui/components/PinnedSection.qml:71
-msgid "Pinned Items"
-msgstr "পিন করা আইটেমসমূহ"
+#: contents/ui/components/ResultsListView.qml:441
+msgid "Share"
+msgstr "শেয়ার করুন"
 
-#: contents/ui/components/PinnedSection.qml:323
-msgid "Drag to reorder"
-msgstr "পুনর্গঠন করতে টানুন"
+#: contents/ui/components/ResultsListView.qml:442
+#: contents/ui/components/ResultsTileView.qml:299
+msgid "Searching..."
+msgstr "অনুসন্ধান করা হচ্ছে..."
 
-#: contents/ui/components/PinnedSection.qml:342
-#: contents/ui/components/HistoryContextMenu.qml:52
-msgid "Open"
-msgstr "খুলুন"
-
-#: contents/ui/components/PinnedSection.qml:352
-msgid "Copy Path"
-msgstr "পাথ কপি করুন"
-
-#: contents/ui/components/PinnedSection.qml:363
-#: contents/ui/components/HistoryContextMenu.qml:101
-msgid "Open Containing Folder"
-msgstr "ধারণকারী ফোল্ডার খুলুন"
-
-#: contents/ui/components/HistoryListView.qml:34
-#: contents/ui/components/HistoryTileView.qml:243
-msgid "Recent Searches"
-msgstr "সাম্প্রতিক অনুসন্ধানসমূহ"
-
-#: contents/ui/components/HistoryListView.qml:54
-#: contents/ui/components/HistoryTileView.qml:263
-msgid "Clear History"
-msgstr "ইতিহাস পরিষ্কার করুন"
-
-#: contents/ui/components/ResultsListView.qml:330
+#: contents/ui/components/ResultsListView.qml:443
+#: contents/ui/components/ResultsTileView.qml:300
 msgid "No results found"
-msgstr "কোনো ফলাফল পাওয়া যায়নি"
+msgstr "কোন ফলাফল পাওয়া যায়নি"
 
-#: contents/ui/components/ResultsListView.qml:330
-msgid "Type to start searching"
-msgstr "অনুসন্ধান শুরু করতে টাইপ করুন"
+#: contents/ui/components/ResultsTileView.qml:297
+msgid "Space to preview"
+msgstr "প্রিভিউ করতে স্পেস চাপুন"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:269
+#: contents/ui/components/ResultsTileView.qml:298
+msgid "Read in Browser"
+msgstr "ব্রাউজারে পড়ুন"
+
+#: contents/ui/components/SearchPopup.qml:92
 msgid "date"
 msgstr "তারিখ"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:270
+#: contents/ui/components/SearchPopup.qml:93
 msgid "clock"
 msgstr "ঘড়ি"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:295
+#: contents/ui/components/SearchPopup.qml:94
+msgid "weather"
+msgstr "আবহাওয়া"
+
+#: contents/ui/components/SearchPopup.qml:95
 msgid "power"
-msgstr "শক্তি"
+msgstr "পাওয়ার"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:279
+#: contents/ui/components/SearchPopup.qml:96
 msgid "help"
-msgstr "সহায়তা"
+msgstr "সাহায্য"
 
-#: contents/ui/components/SearchPopup.qml:265
+#: contents/ui/components/SearchPopup.qml:97
 msgid "unit"
-msgstr "একক"
+msgstr "ইউনিট"
 
-#: contents/ui/components/SearchPopup.qml:283
+#: contents/ui/components/SearchPopup.qml:98
 msgid "kill"
-msgstr "বন্ধ করা"
+msgstr "কিল"
 
-#: contents/ui/components/SearchPopup.qml:287
+#: contents/ui/components/SearchPopup.qml:99
 msgid "spell"
 msgstr "বানান"
 
-#: contents/ui/components/SearchPopup.qml:291
+#: contents/ui/components/SearchPopup.qml:100
 msgid "shell"
 msgstr "শেল"
 
-#: contents/ui/components/SearchPopup.qml:367
-msgid "Search Here"
-msgstr "এখানে অনুসন্ধান করুন"
-
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
+#: contents/ui/components/SearchPopup.qml:1028
 msgid "Other"
 msgstr "অন্যান্য"
 
-#: contents/ui/components/HistoryContextMenu.qml:69
-msgid "Copy Location"
-msgstr "অবস্থান কপি করুন"
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Mode"
+msgstr "মোড"
 
-#: contents/ui/components/HistoryContextMenu.qml:85
-msgid "Open in Terminal"
-msgstr "টার্মিনাল এ খুলুন"
+#: contents/ui/components/TileDataManager.qml:53
+msgid "Other Results"
+msgstr "অন্যান্য ফলাফল"
 
-#: contents/ui/components/HistoryContextMenu.qml:111
-msgid "Move to Trash"
-msgstr "ট্র্যাশে সরান"
+#: contents/ui/components/WeatherView.qml:57
+msgid "Unknown error"
+msgstr "অজানা ত্রুটি"
 
-#: contents/ui/components/HistoryContextMenu.qml:124
-msgid "Properties"
-msgstr "বৈশিষ্ট্য"
+#: contents/ui/components/WeatherView.qml:80
+msgid "Loading Weather..."
+msgstr "আবহাওয়া লোড হচ্ছে..."
 
-#: contents/ui/components/HistoryContextMenu.qml:134
-msgid "Edit Application..."
-msgstr "অ্যাপ্লিকেশন সংশোধন..."
+#: contents/ui/components/WeatherView.qml:91
+msgid "Retry"
+msgstr "पुনরায় চেষ্টা করুন"
 
-#: contents/ui/components/HistoryContextMenu.qml:144
-msgid "Remove from History"
-msgstr "ইতিহাস থেকে সরান"
-
-#: contents/ui/components/PowerView.qml:133
-msgid "Hibernate"
-msgstr "হাইবারনেট"
-
-#: contents/ui/components/PowerView.qml:137
-msgid "(Press again to hibernate)"
-msgstr "(হাইবারনেট করতে আবার চাপুন)"
-
-#: contents/ui/components/PowerView.qml:146
-msgid "Sleep"
-msgstr "স্লিপ"
-
-#: contents/ui/components/PowerView.qml:150
-msgid "(Press again to sleep)"
-msgstr "(স্লিপ করতে আবার চাপুন)"
-
-#: contents/ui/components/PowerView.qml:158
-msgid "Reboot"
-msgstr "রিবুট"
-
-#: contents/ui/components/PowerView.qml:162
-msgid "(Press again to reboot)"
-msgstr "(রিবুট করতে আবার চাপুন)"
-
-#: contents/ui/components/PowerView.qml:180
-msgid "Shutdown"
-msgstr "শাটডাউন"
-
-#: contents/ui/components/PowerView.qml:184
-msgid "(Press again to shutdown)"
-msgstr "(শাটডাউন করতে আবার চাপুন)"
-
-#: contents/ui/components/PowerView.qml:278
-msgid "Authorize to list entries"
-msgstr "এন্ট্রি দেখানোর অনুমতি দিন"
-
-#: contents/ui/components/PowerView.qml:299
-msgid "Lock Screen"
-msgstr "স্ক্রিন লক"
-
-#: contents/ui/components/PowerView.qml:309
-msgid "Log Out"
-msgstr "লগ আউট"
-
-#: contents/ui/components/PowerView.qml:313
-msgid "(Press again to log out)"
-msgstr "(লগ আউট করতে আবার চাপুন)"
-
-#: contents/ui/components/PowerView.qml:321
-msgid "Switch User"
-msgstr "ব্যবহারকারী পরিবর্তন"
-
-#: contents/ui/components/PowerView.qml:325
-msgid "(Press again to switch)"
-msgstr "(পরিবর্তন করতে আবার চাপুন)"
-
-#: contents/ui/components/PowerView.qml:333
-msgid "Save Session"
-msgstr "সেশন সংরক্ষণ"
-
-#: contents/ui/components/PowerView.qml:352
-msgid "(Press again)"
-msgstr "(আবার চাপুন)"
-
-#: contents/ui/main.qml:96
+#: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"
 msgstr "মাঝারি মোড (শুধু বোতাম)"
 
-#: contents/ui/main.qml:102
+#: contents/ui/main.qml:116
 msgid "Wide Mode (Search bar + icon)"
-msgstr "প্রশস্ত মোড (সার্চ বার + আইকন)"
+msgstr "প্রশস্ত মোড (অনুসন্ধan বার + আইকন)"
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:122
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "অতিরিক্ত প্রশস্ত মোড (প্রশস্ত + লম্বা প্লেসহোল্ডার)"
+msgstr "অতিরিক্ত প্রশস্ত মোড (প্রশস্ত + দীর্ঘ স্থানধারক)"
 
-msgid "Show/Hide Previews"
-msgstr "পূর্বরূপ দেখান/লুকান"
+#: contents/ui/main.qml:128
+msgid "Ultra Wide Mode (Maximum Coverage)"
+msgstr "আল্ট্রা ওয়াইড মোড (সর্বোচ্চ কভারেজ)"
 
-msgid "Edge Appearance"
-msgstr "প্রান্ত চেহারা"
+#~ msgid "Smartly limit results based on relevance"
+#~ msgstr "প্রাসঙ্গিকতার ভিত্তিতে বুদ্ধিমত্তার সাথে ফলাফল সীমিত করুন"
 
-msgid "Round corners"
-msgstr "গোলাকার কোণ"
+#~ msgid "Dynamic Limit"
+#~ msgstr "গতিশীল সীমা"
 
-msgid "Slightly round"
-msgstr "সামান্য গোলাকার"
+#~ msgid "Master Switch"
+#~ msgstr "মাস্টার সুইচ"
 
-msgid "Less round"
-msgstr "কম গোলাকার"
+#~ msgid "Fuzzy"
+#~ msgstr "ফাজি"
 
-msgid "Square corners"
-msgstr "চতুর্ভুজ কোণ"
+#~ msgid "Exact"
+#~ msgstr "সঠিক"
 
-msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(সোয়াপ পার্টিশন র‍্যামের চেয়ে ছোট অথবা সোয়াপ পাওয়া যায়নি)"
+#~ msgid "Files modified today"
+#~ msgstr "আজ পরিবর্তিত ফাইলসমূহ"
 
-msgid "Note: Systemd boot is required for this feature"
-msgstr "দ্রষ্টব্য: এই বৈশিষ্ট্যের জন্য Systemd বুট প্রয়োজন"
+#~ msgid "Files modified yesterday"
+#~ msgstr "গতকাল পরিবর্তিত ফাইলসমূহ"
 
-msgid "Scan for boot entries"
-msgstr "বুট এন্ট্রির জন্য স্ক্যান করুন"
+#~ msgid "Files modified this week"
+#~ msgstr "এই সপ্তাহে পরিবর্তিত ফাইলসমূহ"
 
-msgid "Result Count"
-msgstr "ফলাফল সংখ্যা"
+#~ msgid "Files modified this month"
+#~ msgstr "এই মাসে পরিবর্তিত ফাইলসমূহ"
 
-msgid "Priority Ranking"
-msgstr "অগ্রাধিকার র‍্যাঙ্কিং"
+#~ msgid "Search Here"
+#~ msgstr "এখানে অনুসন্ধান করুন"
 
-msgid "Show Together"
-msgstr "একসাথে দেখান"
+#~ msgid "Copy Location"
+#~ msgstr "অবস্থান কপি করুন"
 
-msgid "Corner Roundness"
-msgstr "কোণের গোলাকারত্ব"
+#~ msgid "Authorize to list entries"
+#~ msgstr "এন্ট্রি দেখানোর অনুমতি দিন"
 
-msgid "Square"
-msgstr "চতুর্ভুজ"
+#~ msgid "Result Count"
+#~ msgstr "ফলাফল সংখ্যা"
 
-msgid "Slightly Rounded"
-msgstr "সামান্য গোলাকার"
+#~ msgid "Priority Ranking"
+#~ msgstr "অগ্রাধিকার র‍্যাঙ্কিং"
 
-msgid "Moderately Rounded"
-msgstr "মাঝারি গোলাকার"
+#~ msgid "Corner Roundness"
+#~ msgstr "কোণের গোলাকারত্ব"
 
-msgid "Fully Rounded"
-msgstr "পুরোপুরি গোলাকার"
+#~ msgid "Square"
+#~ msgstr "চতুর্ভুজ"
 
-msgid "Minimize automatically when searching"
-msgstr "অনুসন্ধান করার সময় স্বয়ংক্রিয়ভাবে মিনিমাইজ করুন"
+#~ msgid "Slightly Rounded"
+#~ msgstr "সামান্য গোলাকার"
 
-msgid "Search on Wikipedia"
-msgstr "উইকিপিডিয়ায় অনুসন্ধান করুন"
+#~ msgid "Moderately Rounded"
+#~ msgstr "মাঝারি গোলাকার"
 
-msgid "Minimal - A simplified interface with essential features."
-msgstr "মিনিমাল - প্রয়োজনীয় বৈশিষ্ট্যসহ একটি সরল ইন্টারফেস।"
+#~ msgid "Fully Rounded"
+#~ msgstr "পুরোপুরি গোলাকার"
 
-msgid "Developer - Debug tab active, developer features enabled."
-msgstr "ডেভেলপার - ডিবাগ ট্যাব সক্রিয়, ডেভেলপার বৈশিষ্ট্য সক্ষম।"
+#~ msgid "Minimal - A simplified interface with essential features."
+#~ msgstr "মিনিমাল - প্রয়োজনীয় বৈশিষ্ট্যসহ একটি সরল ইন্টারফেস।"
 
-msgid "Power User - All features active, advanced settings available."
-msgstr "পাওয়ার ইউজার - সব বৈশিষ্ট্য সক্রিয়, উন্নত সেটিংস উপলব্ধ।"
+#~ msgid "Developer - Debug tab active, developer features enabled."
+#~ msgstr "ডেভেলপার - ডিবাগ ট্যাব সক্রিয়, ডেভেলপার বৈশিষ্ট্য সক্ষম।"
 
-msgid "Weather View (weather:)"
-msgstr "আবহাওয়া ভিউ (weather:)"
+#~ msgid "Power User - All features active, advanced settings available."
+#~ msgstr "পাওয়ার ইউজার - সব বৈশিষ্ট্য সক্রিয়, উন্নত সেটিংস উপলব্ধ।"
 
-msgid "Use System Units"
-msgstr "সিস্টেম একক ব্যবহার করুন"
-
-msgid "Refresh Interval:"
-msgstr "রিফ্রেশ ব্যবধান:"
-
-msgid "Every Search"
-msgstr "প্রতিটি অনুসন্ধান"
-
-msgid "15 Minutes"
-msgstr "১৫ মিনিট"
-
-msgid "30 Minutes"
-msgstr "৩০ মিনিট"
-
-msgid "1 Hour"
-msgstr "১ ঘণ্টা"
-
-msgid "(If time since last update > interval)"
-msgstr "(যদি শেষ আপডেটের পর থেকে সময় > ব্যবধান)"
-
-msgid "Enable Weather Prefix"
-msgstr "আবহাওয়া প্রিফিক্স সক্ষম করুন"

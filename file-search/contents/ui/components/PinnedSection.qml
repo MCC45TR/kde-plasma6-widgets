@@ -222,7 +222,7 @@ Item {
                     visible: active
                     
                     sourceComponent: Text {
-                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Öğeleri sabitlemek için üzerlerine sağ tıklayın")
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Right-click items to pin them")
                         color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.8)
                         font.pixelSize: 10
                         wrapMode: Text.Wrap

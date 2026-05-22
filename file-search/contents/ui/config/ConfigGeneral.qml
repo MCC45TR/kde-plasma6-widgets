@@ -272,13 +272,13 @@ Item {
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "RSS Frequency")
                         enabled: rssPlaceholderCyclingCheck.checked && rssPlaceholderCyclingCheck.enabled
                         model: [
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Always (Hep)"),
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Very Frequent (Çok Sık)"),
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Frequent (Sık)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Always"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Very Frequent"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Frequent"),
                             i18nd("plasma_applet_com.mcc45tr.filesearch", "Normal"),
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Less (Daha az)"),
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Rare (Az)"),
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Only when new (Sadece yeni)")
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Less Frequent"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Rare"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Only when new")
                         ]
                     }
 
@@ -382,7 +382,7 @@ Item {
                                     clip: true
                                     
                                     property string defaultTxt: displayModeCombo.currentIndex === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search") : ((displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search..."))
-                                    property string rssMockTxt: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haber başlığı")
+                                    property string rssMockTxt: i18nd("plasma_applet_com.mcc45tr.filesearch", "News Headline")
                                     property int currentIndex: 0
                                     property var allTitles: ["", ""]
                                     

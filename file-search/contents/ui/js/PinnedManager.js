@@ -45,7 +45,7 @@ function pinItem(pinnedArray, item, activityId) {
         uuid: generateUUID(),
         display: item.display || "",
         decoration: item.decoration || "application-x-executable",
-        category: item.category || "Diğer",
+        category: item.category || "Other",
         matchId: item.matchId || item.display,
         filePath: item.filePath || item.url || "",
         activityId: activityId || "global", // "global" means all activities

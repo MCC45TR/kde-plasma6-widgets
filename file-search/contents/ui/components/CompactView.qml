@@ -111,7 +111,7 @@ Item {
                 textColor: compactRoot.textColor
                 fontSize: compactRoot.responsiveFontSize
                 fontFamily: "Roboto Condensed"
-                defaultText: (compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yapmaya başla...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama yap...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Arama"))
+                defaultText: (compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
                 horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? Text.AlignLeft : Text.AlignHCenter
                 
                 rightMarginValue: 0

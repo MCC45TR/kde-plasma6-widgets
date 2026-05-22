@@ -112,7 +112,7 @@ Item {
     }
 
     function formatHistoryTime(timestamp) {
-        return Utils.formatHistoryTime(timestamp, i18n);
+        return Utils.formatHistoryTime(timestamp, function(s) { return i18nd("plasma_applet_com.mcc45tr.filesearch", s); });
     }
 
     function clearHistory() {

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-30 00:28+0300\n"
+"POT-Creation-Date: 2026-05-23 02:06+0300\n"
 "PO-Revision-Date: 2026-04-01 03:00+0300\n"
 "Last-Translator: Auto Generator <auto@bot>\n"
 "Language-Team: tr\n"
@@ -12,135 +12,1038 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: contents/ui/main.qml:49 contents/ui/config/ConfigGeneral.qml:354
-msgid "Start searching..."
-msgstr "Arama yapmaya başla..."
+#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
+msgid "Appearance"
+msgstr "Görünüm"
 
-#: contents/ui/main.qml:49 contents/ui/config/ConfigGeneral.qml:354
-msgid "Search..."
-msgstr "Arama yap..."
-
-#: contents/ui/main.qml:49 contents/ui/config/ConfigCategories.qml:10
-#: contents/ui/config/ConfigGeneral.qml:354
-#: contents/ui/config/ConfigSearch.qml:9 contents/config/config.qml:11
+#: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
+#: contents/ui/config/ConfigSearch.qml:9
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search"
 msgstr "Ara"
 
-#: contents/ui/main.qml:103 contents/ui/config/ConfigGeneral.qml:197
-#, fuzzy
-msgid "Button Mode (Icon only)"
-msgstr ""
-"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
-"#-#\n"
-"Düğme Modu (Sadece ikon)\n"
-"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
-"#-#\n"
-"Buton Modu (Sadece İkon)"
+#: contents/config/config.qml:17
+msgid "RSS"
+msgstr "RSS"
 
-#: contents/ui/main.qml:109
-msgid "Medium Mode (Button only)"
-msgstr "Orta Mod (Sadece buton)"
+#: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
+msgid "Debug"
+msgstr "Hata Ayıklama"
 
-#: contents/ui/main.qml:115
-msgid "Wide Mode (Search bar + icon)"
-msgstr "Geniş Mod (Arama çubuğu + ikon)"
+#: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
+#: contents/ui/components/QueryHints.qml:70
+msgid "Help"
+msgstr "Yardım"
 
-#: contents/ui/main.qml:121
-msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "Ekstra Geniş Mod (Geniş + Uzun Placeholder)"
+#: contents/ui/config/ConfigCategories.qml:212
+msgid "Algorithm Settings"
+msgstr "Algoritma Ayarları"
 
-#: contents/ui/components/CompactView.qml:104
-#: contents/ui/components/SearchBar.qml:34
-msgid "Arama yapmaya başla..."
-msgstr "Arama yapmaya başla..."
+#: contents/ui/config/ConfigCategories.qml:217
+msgid "Search Algorithm"
+msgstr "Arama Algoritması"
 
-#: contents/ui/components/CompactView.qml:104
-msgid "Arama yap..."
-msgstr "Arama yap..."
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Fuzzy Match"
+msgstr "Bulanık Eşleşme"
 
-#: contents/ui/components/CompactView.qml:104
-msgid "Arama"
-msgstr "Arama"
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Exact Match"
+msgstr "Tam Eşleşme"
 
-#: contents/ui/components/DebugOverlay.qml:40
-msgid "Saved!"
-msgstr "Kaydedildi!"
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Starts With"
+msgstr "Başlar"
 
-#: contents/ui/components/DebugOverlay.qml:48
-#: contents/ui/components/DebugOverlay.qml:118
-msgid "Save Dump"
-msgstr "Verileri Kaydet"
+#: contents/ui/config/ConfigCategories.qml:229
+msgid "Dynamic Result Count"
+msgstr "Dinamik Sonuç Sayısı"
 
-#: contents/ui/components/DebugOverlay.qml:57
+#: contents/ui/config/ConfigCategories.qml:230
+msgid "Automatically limit displayed results based on relevance score"
+msgstr "Görüntülenen sonuçları alaka düzeyine göre otomatik sınırla"
+
+#: contents/ui/config/ConfigCategories.qml:237
+msgid "Result Limits"
+msgstr "Sonuç Sınırları"
+
+#: contents/ui/config/ConfigCategories.qml:242
+msgid "Min Results"
+msgstr "Minimum Sonuç"
+
+#: contents/ui/config/ConfigCategories.qml:251
+msgid "Max Results"
+msgstr "Maksimum Sonuç"
+
+#: contents/ui/config/ConfigCategories.qml:262
+msgid "Prioritized Categories"
+msgstr "Öncelikli Kategoriler"
+
+#: contents/ui/config/ConfigCategories.qml:266
+msgid "Use buttons to reorder categories or move between sections"
+msgstr "Kategorileri yeniden sıralamak veya bölümler arasında taşımak için butonları kullanın"
+
+#: contents/ui/config/ConfigCategories.qml:275
+msgid "Priority"
+msgstr "Öncelik"
+
+#: contents/ui/config/ConfigCategories.qml:366
+msgid "Move to Combined"
+msgstr "Birleşiğe Taşı"
+
+#: contents/ui/config/ConfigCategories.qml:381
+msgid "Show Together (Merged)"
+msgstr "Birlikte Göster (Birleşik)"
+
+#: contents/ui/config/ConfigCategories.qml:385
+msgid "Categories in this section will be grouped together"
+msgstr "Bu bölümdeki kategoriler birlikte gruplandırılacaktır"
+
+#: contents/ui/config/ConfigCategories.qml:401
+msgid "No combined categories"
+msgstr "Birleşik kategori yok"
+
+#: contents/ui/config/ConfigCategories.qml:466
+msgid "Move to Separate"
+msgstr "Ayrık'a Taşı"
+
+#: contents/ui/config/ConfigCategories.qml:481
+msgid "Category Settings Information"
+msgstr "Kategori Ayarları Bilgisi"
+
+#: contents/ui/config/ConfigCategories.qml:485
+msgid ""
+"Changes are applied immediately. Hidden categories will not appear in search "
+"results. Priority determines display order."
+msgstr "Değişiklikler anında uygulanır. Gizli kategoriler arama sonuçlarında görünmez. Öncelik, görüntüleme sırasını belirler."
+
+#: contents/ui/config/ConfigCategories.qml:485
+msgid "Lower number = higher priority"
+msgstr "Küçük sayı = yüksek öncelik"
+
+#: contents/ui/config/ConfigDebug.qml:102
+msgid ""
+"This tab is only active in Developer mode. Change profile in General "
+"settings."
+msgstr "Bu sekme yalnızca Geliştirici modunda etkindir. Profili Genel ayarlardan değiştirin."
+
+#: contents/ui/config/ConfigDebug.qml:111
+msgid "Debug Settings"
+msgstr "Debug Ayarları"
+
 #: contents/ui/config/ConfigDebug.qml:117
 #: contents/ui/config/ConfigDebug.qml:176
-#, fuzzy
+#: contents/ui/components/DebugOverlay.qml:58
 msgid "Debug Overlay"
-msgstr ""
-"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
-"#-#\n"
-"Debug Overlay\n"
-"#-#-#-#-#  plasma_applet_com.mcc45tr.filesearch.po (file-search 1.0)  #-#-#-"
-"#-#\n"
-"Hata Ayıklama Katmanı"
+msgstr "Hata Ayıklama Katmanı"
 
-#: contents/ui/components/DebugOverlay.qml:77
-msgid "Backend"
-msgstr "Arama Motoru"
+#: contents/ui/config/ConfigDebug.qml:124
+msgid "Show debug info on widget (active mode, item count, index source)"
+msgstr "Widget üzerinde hata ayıklama bilgilerini göster (aktif mod, öğe sayısı, dizin kaynağı)"
 
-#: contents/ui/components/DebugOverlay.qml:80
-msgid "Items"
-msgstr "Öğeler"
+#: contents/ui/config/ConfigDebug.qml:133
+msgid "Debug Data"
+msgstr "Hata Ayıklama Verisi"
 
-#: contents/ui/components/DebugOverlay.qml:83
-msgid "Latency"
-msgstr "Gecikme"
+#: contents/ui/config/ConfigDebug.qml:143
+msgid "Timestamp"
+msgstr "Zaman Damgası"
 
-#: contents/ui/components/DebugOverlay.qml:90
-msgid "View"
-msgstr "Görünüm"
+#: contents/ui/config/ConfigDebug.qml:146
+msgid "Locale"
+msgstr "Bölgesel Ayar"
 
-#: contents/ui/components/DebugOverlay.qml:93
-msgid "Display"
-msgstr "Ekran"
+#: contents/ui/config/ConfigDebug.qml:149
+msgid "User Profile"
+msgstr "Kullanıcı Profili"
 
-#: contents/ui/components/DebugOverlay.qml:100
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Minimal"
+msgstr "Minimal"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Developer"
+msgstr "Geliştirici"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Power User"
+msgstr "Gelişmiş Kullanıcı"
+
+#: contents/ui/config/ConfigDebug.qml:155
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "Display Mode"
+msgstr "Ekran Modu"
+
+#: contents/ui/config/ConfigDebug.qml:157
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Button"
+msgstr "Buton"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Medium"
+msgstr "Orta"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Wide"
+msgstr "Geniş"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Extra Wide"
+msgstr "Ekstra Geniş"
+
+#: contents/ui/config/ConfigDebug.qml:161
+#: contents/ui/config/ConfigGeneral.qml:517
+msgid "View Mode"
+msgstr "Görünüm Modu"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "List"
+msgstr "Liste Görünümü"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "Tile"
+msgstr "Döşeme Görünümü"
+
+#: contents/ui/config/ConfigDebug.qml:167
+#: contents/ui/config/ConfigGeneral.qml:544
+msgid "Tile Icon Size"
+msgstr "Döşeme İkon Boyutu"
+
+#: contents/ui/config/ConfigDebug.qml:170
+#: contents/ui/config/ConfigGeneral.qml:536
+msgid "List Icon Size"
+msgstr "Liste İkon Boyutu"
+
+#: contents/ui/config/ConfigDebug.qml:173
+msgid "Enable Preview"
+msgstr "Önizlemeyi Etkinleştir"
+
+#: contents/ui/config/ConfigDebug.qml:179
+msgid "History Count"
+msgstr "Geçmiş Sayısı"
+
+#: contents/ui/config/ConfigDebug.qml:185
+msgid "items"
+msgstr "öğeler"
+
+#: contents/ui/config/ConfigDebug.qml:196
+msgid "Telemetry"
+msgstr "Telemetri"
+
 #: contents/ui/config/ConfigDebug.qml:205
+#: contents/ui/components/DebugOverlay.qml:101
 msgid "Total Searches"
 msgstr "Toplam Arama"
 
-#: contents/ui/components/DebugOverlay.qml:103
 #: contents/ui/config/ConfigDebug.qml:216
+#: contents/ui/components/DebugOverlay.qml:104
 msgid "Avg Latency"
 msgstr "Ortalama Gecikme"
 
-#: contents/ui/components/FilterChips.qml:33
-msgid "All"
-msgstr "Tümü"
+#: contents/ui/config/ConfigDebug.qml:230
+msgid "History Sample"
+msgstr "Geçmiş Örneği"
 
-#: contents/ui/components/FilterChips.qml:34
-msgid "Apps"
-msgstr "Uygulamalar"
+#: contents/ui/config/ConfigDebug.qml:237
+msgid ""
+"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
+"is sent to the internet."
+msgstr "Gizlilik Bildirimi: Tüm hata ayıklama ve telemetri verileri sadece YEREL olarak saklanır. İnternete hiçbir veri gönderilmez."
 
-#: contents/ui/components/FilterChips.qml:35
-#: contents/ui/config/ConfigGeneral.qml:655
-msgid "Docs"
-msgstr "Belgeler"
+#: contents/ui/config/ConfigDebug.qml:311
+msgid "History is empty"
+msgstr "Geçmiş boş"
 
-#: contents/ui/components/FilterChips.qml:36
-#: contents/ui/components/QueryHints.qml:53
-#: contents/ui/config/ConfigGeneral.qml:696
+#: contents/ui/config/ConfigHelp.qml:85
+msgid "Keyboard Shortcuts"
+msgstr "Klavye Kısayolları"
+
+#: contents/ui/config/ConfigHelp.qml:89
+msgid "Navigate between results"
+msgstr "Sonuçlar arasında gezin"
+
+#: contents/ui/config/ConfigHelp.qml:95
+msgid "Navigate between sections"
+msgstr "Bölümler arasında gezin"
+
+#: contents/ui/config/ConfigHelp.qml:101
+msgid "List / Tile view"
+msgstr "Liste / Döşeme görünümü"
+
+#: contents/ui/config/ConfigHelp.qml:107
+msgid "Toggle file preview"
+msgstr "Dosya önizlemesini aç/kapat"
+
+#: contents/ui/config/ConfigHelp.qml:113
+msgid "Open selected item"
+msgstr "Seçili öğeyi aç"
+
+#: contents/ui/config/ConfigHelp.qml:119
+msgid "Close widget"
+msgstr "Araç takımını kapat"
+
+#: contents/ui/config/ConfigHelp.qml:126
+#: contents/ui/components/QueryHints.qml:31
+#: contents/ui/components/QueryHints.qml:100
+msgid "Search Prefixes"
+msgstr "Arama Prefix'leri"
+
+#: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
+#: contents/ui/config/ConfigPrefix.qml:214
+#: contents/ui/config/ConfigGeneral.qml:1002
+msgid "List files modified today"
+msgstr "Bugün değiştirilen dosyaları listele"
+
+#: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
+#: contents/ui/config/ConfigPrefix.qml:226
+#: contents/ui/config/ConfigGeneral.qml:1015
+msgid "Search on Google"
+msgstr "Google'da Ara"
+
+#: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
+#: contents/ui/config/ConfigPrefix.qml:238
+#: contents/ui/config/ConfigGeneral.qml:1028
+msgid "Search on DuckDuckGo"
+msgstr "DuckDuckGo'da Ara"
+
+#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
+msgid "Terminate processes"
+msgstr "İşlemleri sonlandır"
+
+#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
+msgid "Check spelling"
+msgstr "Yazım denetimi"
+
+#: contents/ui/config/ConfigHelp.qml:161
+msgid "User Profiles"
+msgstr "Kullanıcı Profilleri"
+
+#: contents/ui/config/ConfigHelp.qml:165
+msgid "A simplified interface with essential features."
+msgstr "Temel özelliklere sahip basitleştirilmiş bir arayüz."
+
+#: contents/ui/config/ConfigHelp.qml:171
+msgid "Debug tab active, developer features enabled."
+msgstr "Hata ayıklama sekmesi etkin, geliştirici özellikleri açık."
+
+#: contents/ui/config/ConfigHelp.qml:177
+msgid "All features active, advanced settings available."
+msgstr "Tüm özellikler aktif, gelişmiş ayarlar kullanılabilir."
+
+#: contents/ui/config/ConfigPreview.qml:9
+#: contents/ui/config/ConfigGeneral.qml:187
+#: contents/ui/config/ConfigGeneral.qml:596
+msgid "Preview"
+msgstr "Önizleme"
+
+#: contents/ui/config/ConfigPreview.qml:97
+msgid "Preview Settings"
+msgstr "Prefix Görünüm Ayarları"
+
+#: contents/ui/config/ConfigPreview.qml:103
+msgid "Enable or disable file previews for different file types."
+msgstr "Farklı dosya türleri için dosya önizlemelerini etkinleştirin veya devre dışı bırakın."
+
+#: contents/ui/config/ConfigPreview.qml:112
+#: contents/ui/config/ConfigSearch.qml:19
+#: contents/ui/config/ConfigGeneral.qml:701
+msgid "Enable File Previews"
+msgstr "Dosya Önizlemelerini Etkinleştir"
+
+#: contents/ui/config/ConfigPreview.qml:125
+msgid "Enabled"
+msgstr "Etkin"
+
+#: contents/ui/config/ConfigPreview.qml:125
+msgid "Disabled"
+msgstr "Devre Dışı"
+
+#: contents/ui/config/ConfigPreview.qml:133
+#: contents/ui/config/ConfigGeneral.qml:707
+msgid "Preview Types"
+msgstr "Önizleme Türleri"
+
 #: contents/ui/config/ConfigPreview.qml:158
+#: contents/ui/config/ConfigGeneral.qml:725
+#: contents/ui/components/FilterChips.qml:25
+#: contents/ui/components/QueryHints.qml:53
 msgid "Images"
 msgstr "Resimler"
 
-#: contents/ui/components/FilterChips.qml:37
-msgid "Folders"
-msgstr "Klasörler"
+#: contents/ui/config/ConfigPreview.qml:196
+#: contents/ui/config/ConfigGeneral.qml:762
+msgid "Videos"
+msgstr "Videolar"
 
-#: contents/ui/components/FilterChips.qml:38
-msgid "Web"
-msgstr "Web"
+#: contents/ui/config/ConfigPreview.qml:234
+#: contents/ui/config/ConfigGeneral.qml:799
+msgid "Text Files"
+msgstr "Metin Dosyaları"
+
+#: contents/ui/config/ConfigPreview.qml:272
+#: contents/ui/config/ConfigGeneral.qml:646
+#: contents/ui/config/ConfigGeneral.qml:836
+#: contents/ui/components/QueryHints.qml:52
+msgid "Documents"
+msgstr "Belgeler"
+
+#: contents/ui/config/ConfigPreview.qml:276
+msgid "Icon only"
+msgstr "Sadece simge"
+
+#: contents/ui/config/ConfigPreview.qml:306
+msgid "Performance Information"
+msgstr "Performans Bilgisi"
+
+#: contents/ui/config/ConfigPreview.qml:311
+msgid "Video and document previews may increase memory usage."
+msgstr "Video ve belge önizlemeleri bellek kullanımını artırabilir."
+
+#: contents/ui/config/ConfigSearch.qml:13
+msgid "Search Settings"
+msgstr "Arama Ayarları"
+
+#: contents/ui/config/ConfigSearch.qml:24
+msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
+msgstr "Üzerine gelindiğinde dosya önizlemelerini göster (Ctrl+Space ile de tetiklenebilir)"
+
+#: contents/ui/config/ConfigSearch.qml:33
+msgid "Search Behavior"
+msgstr "Arama Davranışı"
+
+#: contents/ui/config/ConfigSearch.qml:37
+msgid "You can use the following KRunner commands and prefixes:"
+msgstr "Aşağıdaki KRunner komutlarını ve öneklerini kullanabilirsiniz:"
+
+#: contents/ui/config/ConfigSearch.qml:51
+msgid "Prefix"
+msgstr "Önek"
+
+#: contents/ui/config/ConfigSearch.qml:56
+msgid "Description"
+msgstr "Açıklama"
+
+#: contents/ui/config/ConfigSearch.qml:78
+msgid "Search Unicode characters"
+msgstr "Unicode karakterleri ara"
+
+#: contents/ui/config/ConfigPrefix.qml:10
+#: contents/ui/config/ConfigGeneral.qml:191
+msgid "Prefixes"
+msgstr "Önekler"
+
+#: contents/ui/config/ConfigPrefix.qml:40
+msgid "Prefix View Settings"
+msgstr "Önek Görünüm Ayarları"
+
+#: contents/ui/config/ConfigPrefix.qml:45
+#: contents/ui/config/ConfigGeneral.qml:855
+msgid "Date View (date:)"
+msgstr "Tarih Görünümü (date:)"
+
+#: contents/ui/config/ConfigPrefix.qml:52
+#: contents/ui/config/ConfigGeneral.qml:860
+msgid "Show Large Clock"
+msgstr "Büyük Saati Göster"
+
+#: contents/ui/config/ConfigPrefix.qml:59
+#: contents/ui/config/ConfigGeneral.qml:864
+msgid "Show Calendar Events"
+msgstr "Takvim Etkinliklerini Göster"
+
+#: contents/ui/config/ConfigPrefix.qml:66
+#: contents/ui/config/ConfigGeneral.qml:869
+msgid "Weather View (weather:)"
+msgstr "Hava Durumu Görünümü (hava:)"
+
+#: contents/ui/config/ConfigPrefix.qml:74
+#: contents/ui/config/ConfigGeneral.qml:875
+msgid "Enable Weather Prefix"
+msgstr "Hava Durumu Önekini Etkinleştir"
+
+#: contents/ui/config/ConfigPrefix.qml:87
+#: contents/ui/config/ConfigGeneral.qml:888
+msgid "Use System Units"
+msgstr "Sistem Birimlerini Kullan"
+
+#: contents/ui/config/ConfigPrefix.qml:96
+#: contents/ui/config/ConfigGeneral.qml:897
+msgid "Refresh Interval:"
+msgstr "Yenileme Sıklığı:"
+
+#: contents/ui/config/ConfigPrefix.qml:102
+#: contents/ui/config/ConfigGeneral.qml:903
+msgid "Every Search"
+msgstr "Her Aramada"
+
+#: contents/ui/config/ConfigPrefix.qml:103
+#: contents/ui/config/ConfigGeneral.qml:904
+msgid "15 Minutes"
+msgstr "15 Dakika"
+
+#: contents/ui/config/ConfigPrefix.qml:104
+#: contents/ui/config/ConfigGeneral.qml:905
+msgid "30 Minutes"
+msgstr "30 Dakika"
+
+#: contents/ui/config/ConfigPrefix.qml:105
+#: contents/ui/config/ConfigGeneral.qml:906
+msgid "1 Hour"
+msgstr "1 Saat"
+
+#: contents/ui/config/ConfigPrefix.qml:125
+#: contents/ui/config/ConfigGeneral.qml:926
+msgid "(If time since last update > interval)"
+msgstr "(Eğer son güncellemeden geçen süre > aralık)"
+
+#: contents/ui/config/ConfigPrefix.qml:134
+#: contents/ui/config/ConfigGeneral.qml:933
+msgid "Power View (power:)"
+msgstr "Güç Görünümü (power:)"
+
+#: contents/ui/config/ConfigPrefix.qml:142
+#: contents/ui/config/ConfigGeneral.qml:938
+msgid "Show Sleep Button"
+msgstr "Uyku Butonunu Göster"
+
+#: contents/ui/config/ConfigPrefix.qml:149
+#: contents/ui/config/ConfigGeneral.qml:942
+msgid "Show Hibernate Button"
+msgstr "Hazırda Beklet Butonunu Göster"
+
+#: contents/ui/config/ConfigPrefix.qml:160
+#: contents/ui/config/ConfigGeneral.qml:951
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(Swap alanı RAM'den küçük veya swap bulunamadı)"
+
+#: contents/ui/config/ConfigPrefix.qml:170
+#: contents/ui/config/ConfigGeneral.qml:959
+msgid "Show boot options in Reboot button"
+msgstr "Yeniden Başlat butonunda önyükleme seçeneklerini göster"
+
+#: contents/ui/config/ConfigPrefix.qml:180
+#: contents/ui/config/ConfigGeneral.qml:967
+msgid "Note: Systemd boot is required for this feature"
+msgstr "Not: Bu özellik için Systemd Boot gereklidir"
+
+#: contents/ui/config/ConfigPrefix.qml:188
+#: contents/ui/config/ConfigGeneral.qml:975
+msgid "Available Prefixes Reference"
+msgstr "Kullanılabilir Önekler Referansı"
+
+#: contents/ui/config/ConfigPrefix.qml:192
+#: contents/ui/config/ConfigGeneral.qml:979
+msgid ""
+"These prefixes can be used to perform specific actions directly from the "
+"search bar."
+msgstr "Bu önekler, doğrudan arama çubuğundan belirli eylemleri gerçekleştirmek için kullanılabilir."
+
+#: contents/ui/config/ConfigPrefix.qml:250
+#: contents/ui/config/ConfigGeneral.qml:1041
+msgid "Show calendar and date information"
+msgstr "Takvim ve tarih bilgilerini göster"
+
+#: contents/ui/config/ConfigPrefix.qml:262
+#: contents/ui/config/ConfigGeneral.qml:1054
+msgid "Show large clock"
+msgstr "Büyük saati göster"
+
+#: contents/ui/config/ConfigPrefix.qml:274
+msgid "Show power management options (Shutdown, Reboot, etc.)"
+msgstr "Güç yönetimi seçeneklerini göster (Kapat, Yeniden Başlat vb.)"
+
+#: contents/ui/config/ConfigPrefix.qml:286
+msgid "Show current weather"
+msgstr "Mevcut hava durumunu göster"
+
+#: contents/ui/config/ConfigPrefix.qml:298
+#: contents/ui/config/ConfigGeneral.qml:1080
+msgid "Show this help screen"
+msgstr "Bu yardım ekranını göster"
+
+#: contents/ui/config/ConfigPrefix.qml:310
+#: contents/ui/config/ConfigGeneral.qml:1093
+msgid "Terminate running processes"
+msgstr "Çalışan işlemleri sonlandır"
+
+#: contents/ui/config/ConfigPrefix.qml:322
+#: contents/ui/config/ConfigGeneral.qml:1106
+msgid "Check spelling of a word"
+msgstr "Bir kelimenin yazımını kontrol et"
+
+#: contents/ui/config/ConfigPrefix.qml:334
+#: contents/ui/config/ConfigGeneral.qml:1119
+msgid "Execute shell commands"
+msgstr "Kabuk komutlarını çalıştır"
+
+#: contents/ui/config/ConfigPrefix.qml:346
+msgid "Convert units (requires KRunner installed)"
+msgstr "Birimleri dönüştür (KRunner yüklü olmalıdır)"
+
+#: contents/ui/config/ConfigPrefix.qml:356
+msgid ""
+"Note: Some prefixes (like unit conversion) depend on installed KRunner "
+"runners."
+msgstr "Not: Bazı önekler (birim dönüştürme gibi) yüklü KRunner eklentilerine bağlıdır."
+
+#: contents/ui/config/ConfigGeneral.qml:178
+msgid "Panel"
+msgstr "Panel"
+
+#: contents/ui/config/ConfigGeneral.qml:182
+msgid "Popup"
+msgstr "Açılır Pencere"
+
+#: contents/ui/config/ConfigGeneral.qml:210
+msgid "Panel Appearance"
+msgstr "Panel Görünümü"
+
+#: contents/ui/config/ConfigGeneral.qml:218 contents/ui/main.qml:104
+msgid "Button Mode (Icon only)"
+msgstr "Buton Modu (Sadece Simge)"
+
+#: contents/ui/config/ConfigGeneral.qml:219
+msgid "Medium Mode (Text)"
+msgstr "Orta Mod (Metin)"
+
+#: contents/ui/config/ConfigGeneral.qml:220
+msgid "Wide Mode (Search Bar)"
+msgstr "Geniş Mod (Arama Çubuğu)"
+
+#: contents/ui/config/ConfigGeneral.qml:221
+msgid "Extra Wide Mode"
+msgstr "Ekstra Geniş Mod"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Ultra Wide Mode"
+msgstr "Ultra Geniş Mod"
+
+#: contents/ui/config/ConfigGeneral.qml:229
+msgid "Edge Appearance"
+msgstr "Kenar Görünümü"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Round corners"
+msgstr "Yuvarlak köşeler"
+
+#: contents/ui/config/ConfigGeneral.qml:233
+msgid "Slightly round"
+msgstr "Hafif yuvarlak"
+
+#: contents/ui/config/ConfigGeneral.qml:234
+msgid "Less round"
+msgstr "Daha az yuvarlak"
+
+#: contents/ui/config/ConfigGeneral.qml:235
+msgid "Square corners"
+msgstr "Kare köşeler"
+
+#: contents/ui/config/ConfigGeneral.qml:242
+msgid "Search Icon"
+msgstr "Arama Simgesi"
+
+#: contents/ui/config/ConfigGeneral.qml:243
+msgid "Show search icon and button in panel"
+msgstr "Panelde arama simgesini ve butonunu göster"
+
+#: contents/ui/config/ConfigGeneral.qml:249
+msgid "Show background tile (colored square)"
+msgstr "Arka plan döşemesini göster (renkli kare)"
+
+#: contents/ui/config/ConfigGeneral.qml:257
+msgid "Show animated RSS titles in panel search bar"
+msgstr "Panel arama çubuğunda animasyonlu RSS başlıklarını göster"
+
+#: contents/ui/config/ConfigGeneral.qml:258
+msgid "RSS Titles"
+msgstr "RSS Başlıkları"
+
+#: contents/ui/config/ConfigGeneral.qml:264
+msgid "Show RSS source name in panel ticker"
+msgstr "Panel bandında RSS kaynak adını göster"
+
+#: contents/ui/config/ConfigGeneral.qml:272
+msgid "RSS Frequency"
+msgstr "RSS Sıklığı"
+
+#: contents/ui/config/ConfigGeneral.qml:275
+msgid "Always"
+msgstr "Her Zaman"
+
+#: contents/ui/config/ConfigGeneral.qml:276
+msgid "Very Frequent"
+msgstr "Çok Sık"
+
+#: contents/ui/config/ConfigGeneral.qml:277
+msgid "Frequent"
+msgstr "Sık"
+
+#: contents/ui/config/ConfigGeneral.qml:278
+msgid "Normal"
+msgstr "Normal"
+
+#: contents/ui/config/ConfigGeneral.qml:279
+msgid "Less Frequent"
+msgstr "Seyrek"
+
+#: contents/ui/config/ConfigGeneral.qml:280
+msgid "Rare"
+msgstr "Çok Seyrek"
+
+#: contents/ui/config/ConfigGeneral.qml:281
+msgid "Only when new"
+msgstr "Yalnızca Yeni Olduğunda"
+
+#: contents/ui/config/ConfigGeneral.qml:286
+msgid "Panel Height"
+msgstr "Panel Yüksekliği"
+
+#: contents/ui/config/ConfigGeneral.qml:291
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: contents/ui/config/ConfigGeneral.qml:336
+msgid "Panel Preview"
+msgstr "Panel Önizleme"
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
+msgid "Start searching..."
+msgstr "Aramaya başla..."
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
+msgid "Search..."
+msgstr "Ara..."
+
+#: contents/ui/config/ConfigGeneral.qml:385
+msgid "News Headline"
+msgstr "Haber Başlığı"
+
+#: contents/ui/config/ConfigGeneral.qml:511
+msgid "Results View"
+msgstr "Sonuç Görünümü"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "List View"
+msgstr "Liste Görünümü"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "Tile View"
+msgstr "Döşeme Görünümü"
+
+#: contents/ui/config/ConfigGeneral.qml:524
+msgid "Scroll Bar"
+msgstr "Kaydırma Çubuğu"
+
+#: contents/ui/config/ConfigGeneral.qml:526
+msgid "System Default"
+msgstr "Sistem Varsayılanı"
+
+#: contents/ui/config/ConfigGeneral.qml:527
+msgid "Minimal (Custom)"
+msgstr "Minimal (Özel)"
+
+#: contents/ui/config/ConfigGeneral.qml:528
+msgid "Hidden"
+msgstr "Gizli"
+
+#: contents/ui/config/ConfigGeneral.qml:552
+#: contents/ui/components/PinnedSection.qml:85
+msgid "Pinned Items"
+msgstr "Pinned Items"
+
+#: contents/ui/config/ConfigGeneral.qml:557
+msgid "Show pinned items bar"
+msgstr "Sabitlenmiş öğeler çubuğunu göster"
+
+#: contents/ui/config/ConfigGeneral.qml:563
+msgid "Minimize automatically when searching"
+msgstr "Ararken otomatik olarak küçült"
+
+#: contents/ui/config/ConfigGeneral.qml:572
+msgid "Tile Size Mode"
+msgstr "Döşeme Boyut Modu"
+
+#: contents/ui/config/ConfigGeneral.qml:575
+msgid "Normal (wide tiles)"
+msgstr "Normal (geniş döşemeler)"
+
+#: contents/ui/config/ConfigGeneral.qml:576
+msgid "Compact (all small)"
+msgstr "Kompakt (hepsi küçük)"
+
+#: contents/ui/config/ConfigGeneral.qml:577
+msgid "Only pinned compact"
+msgstr "Sadece sabitlenmişler kompakt"
+
+#: contents/ui/config/ConfigGeneral.qml:578
+msgid "Only history/results compact"
+msgstr "Sadece geçmiş/sonuçlar kompakt"
+
+#: contents/ui/config/ConfigGeneral.qml:586
+msgid "Filter Chip Style"
+msgstr "Filtre Çipi Stili"
+
+#: contents/ui/config/ConfigGeneral.qml:588
+msgid "Current Appearance (Filled)"
+msgstr "Mevcut Görünüm (Dolu)"
+
+#: contents/ui/config/ConfigGeneral.qml:589
+msgid "Breeze Appearance (Outline)"
+msgstr "Breeze Görünümü (Dış Hatlı)"
+
+#: contents/ui/config/ConfigGeneral.qml:625
+msgid "System Settings"
+msgstr "Sistem Ayarları"
+
+#: contents/ui/config/ConfigGeneral.qml:669
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: contents/ui/config/ConfigGeneral.qml:684
+#: contents/ui/components/FilterChips.qml:24
+msgid "Docs"
+msgstr "Belgeler"
+
+#: contents/ui/config/ConfigGeneral.qml:702
+msgid "Show/Hide Previews"
+msgstr "Önizlemeleri Göster/Gizle"
+
+#: contents/ui/config/ConfigGeneral.qml:1067
+msgid "Show power management options"
+msgstr "Güç yönetimi seçeneklerini göster"
+
+#: contents/ui/config/ConfigGeneral.qml:1132
+msgid "Convert units (requires KRunner)"
+msgstr "Birimleri dönüştür (KRunner gerektirir)"
+
+#: contents/ui/config/ConfigRSS.qml:235
+msgid "Arch & Linux News"
+msgstr "Arch & Linux Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:245
+msgid "Security Bulletins"
+msgstr "Güvenlik Bültenleri"
+
+#: contents/ui/config/ConfigRSS.qml:254
+msgid "Türkiye News"
+msgstr "Türkiye Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:268
+msgid "Azerbaijan News"
+msgstr "Azerbaycan Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:276
+msgid "Bangladesh News"
+msgstr "Bangladeş Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:283
+msgid "Czech Republic"
+msgstr "Çek Cumhuriyeti"
+
+#: contents/ui/config/ConfigRSS.qml:290
+msgid "Germany News"
+msgstr "Almanya Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:297
+msgid "Greece News"
+msgstr "Yunanistan Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:306
+msgid "Spain & Mexico"
+msgstr "İspanya & Meksika"
+
+#: contents/ui/config/ConfigRSS.qml:314
+msgid "Iran News"
+msgstr "İran Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:321
+msgid "France News"
+msgstr "Fransa Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:329
+msgid "India News (Hindi)"
+msgstr "Hindistan Haberleri (Hintçe)"
+
+#: contents/ui/config/ConfigRSS.qml:336
+msgid "Armenia News"
+msgstr "Ermenistan Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:343
+msgid "Indonesia News"
+msgstr "Endonezya Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:350
+msgid "Italy News"
+msgstr "İtalya Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:358
+msgid "Japan News"
+msgstr "Japonya Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:365
+msgid "Brazil & Portugal"
+msgstr "Brezilya & Portekiz"
+
+#: contents/ui/config/ConfigRSS.qml:372
+msgid "Romania News"
+msgstr "Romanya Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:380
+msgid "Russia News"
+msgstr "Rusya Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:387
+msgid "Pakistan News"
+msgstr "Pakistan Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:394
+msgid "China News"
+msgstr "Çin Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:401
+msgid "USA & UK News"
+msgstr "ABD & İngiltere Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:410
+msgid "World News"
+msgstr "Dünya Haberleri"
+
+#: contents/ui/config/ConfigRSS.qml:459
+msgid "New Source"
+msgstr "Yeni Kaynak"
+
+#: contents/ui/config/ConfigRSS.qml:544
+msgid "Invalid URL"
+msgstr "Geçersiz URL"
+
+#: contents/ui/config/ConfigRSS.qml:551
+msgid "Starting background sync..."
+msgstr "Arka plan senkronizasyonu başlatılıyor..."
+
+#: contents/ui/config/ConfigRSS.qml:564
+msgid "Script not found at: %1"
+msgstr "Betik şurada bulunamadı: %1"
+
+#: contents/ui/config/ConfigRSS.qml:584
+msgid "Sync: SUCCESS"
+msgstr "Senkronizasyon: BAŞARILI"
+
+#: contents/ui/config/ConfigRSS.qml:658
+msgid "Never"
+msgstr "Asla"
+
+#: contents/ui/config/ConfigRSS.qml:674
+msgid "Enable RSS: Show feed updates in search results"
+msgstr "RSS Etkinleştir: Arama sonuçlarında akış güncellemelerini göster"
+
+#: contents/ui/config/ConfigRSS.qml:686
+msgid "Sync All Sources"
+msgstr "Tüm Kaynakları Senkronize Et"
+
+#: contents/ui/config/ConfigRSS.qml:693
+msgid "Clear Cache Folder"
+msgstr "Önbellek Klasörünü Temizle"
+
+#: contents/ui/config/ConfigRSS.qml:702
+msgid "Last full sync: %1"
+msgstr "Son tam senkronizasyon: %1"
+
+#: contents/ui/config/ConfigRSS.qml:713
+msgid "Show images in results"
+msgstr "Sonuçlarda resimleri göster"
+
+#: contents/ui/config/ConfigRSS.qml:719
+msgid "Expand cards on click"
+msgstr "Tıklandığında kartları genişlet"
+
+#: contents/ui/config/ConfigRSS.qml:727
+msgid "Popular Presets"
+msgstr "Popüler Şablonlar"
+
+#: contents/ui/config/ConfigRSS.qml:733
+msgid "Search presets (e.g. News, Tech, TR, Linux)..."
+msgstr "Şablonları ara (örn. Haber, Teknoloji, TR, Linux)..."
+
+#: contents/ui/config/ConfigRSS.qml:795
+msgid "RSS Sources (Max 30)"
+msgstr "RSS Kaynakları (Maks 30)"
+
+#: contents/ui/config/ConfigRSS.qml:859
+msgid "Name"
+msgstr "İsim"
+
+#: contents/ui/config/ConfigRSS.qml:865
+msgid "URL"
+msgstr "URL"
+
+#: contents/ui/config/ConfigRSS.qml:891
+msgid "Entries:"
+msgstr "Öğeler:"
+
+#: contents/ui/config/ConfigRSS.qml:897
+msgid "Interval:"
+msgstr "Aralık:"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1h"
+msgstr "%1sa"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1m"
+msgstr "%1dk"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 hours"
+msgstr "%1 saat"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 mins"
+msgstr "%1 dk"
+
+#: contents/ui/config/ConfigRSS.qml:918
+msgid "Last sync: %1"
+msgstr "Son senkronizasyon: %1"
+
+#: contents/ui/config/ConfigRSS.qml:952
+msgid "Add Custom Source"
+msgstr "Özel Kaynak Ekle"
+
+#: contents/ui/config/ConfigRSS.qml:966
+msgid "News Features:"
+msgstr "Haber Özellikleri:"
+
+#: contents/ui/config/ConfigRSS.qml:967
+msgid "Show RSS titles in placeholder cycling"
+msgstr "Yer tutucu döngüsünde RSS başlıklarını göster"
+
+#: contents/ui/config/ConfigRSS.qml:973
+msgid "Show full headlines (split into segments)"
+msgstr "Tam başlıkları göster (parçalara ayırarak)"
+
+#: contents/ui/config/ConfigRSS.qml:979
+msgid "Default Interval:"
+msgstr "Varsayılan Aralık:"
+
+#: contents/ui/config/ConfigRSS.qml:986
+msgid "Default Entries:"
+msgstr "Varsayılan Öğe Sayısı:"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinnedSection.qml:436
+msgid "Unpin"
+msgstr "Unpin"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+msgid "Pin"
+msgstr "Pin"
 
 #: contents/ui/components/HelpView.qml:16
 #: contents/ui/components/QueryHints.qml:38
@@ -149,13 +1052,13 @@ msgstr "Zaman Çizelgesi"
 
 #: contents/ui/components/HelpView.qml:17
 #: contents/ui/components/QueryHints.qml:55
-#: contents/ui/components/SearchPopup.qml:859
+#: contents/ui/components/SearchPopup.qml:1028
 msgid "Applications"
 msgstr "Uygulamalar"
 
 #: contents/ui/components/HelpView.qml:18
 msgid "File Path Search"
-msgstr "Dosya Yolu Arama"
+msgstr "Dosya Yolu Araması"
 
 #: contents/ui/components/HelpView.qml:19
 msgid "Google Search"
@@ -163,11 +1066,11 @@ msgstr "Google Arama"
 
 #: contents/ui/components/HelpView.qml:20
 msgid "DuckDuckGo Search"
-msgstr "DuckDuckGo Arama"
+msgstr "DuckDuckGo Araması"
 
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr "Wikipedia Arama"
+msgstr "Wikipedia Araması"
 
 #: contents/ui/components/HelpView.qml:22
 #: contents/ui/components/QueryHints.qml:66
@@ -177,11 +1080,11 @@ msgstr "Yer İmleri"
 #: contents/ui/components/HelpView.qml:23
 #: contents/ui/components/QueryHints.qml:69
 msgid "Man Pages"
-msgstr "Kılavuz Sayfaları (Man)"
+msgstr "Kılavuz (Man) Sayfaları"
 
 #: contents/ui/components/HelpView.qml:24
-msgid "Brazil & Portugal"
-msgstr "Brezilya ve Portekiz"
+msgid "Kill Process"
+msgstr "Süreci Sonlandır (Kill)"
 
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
@@ -210,7 +1113,7 @@ msgstr "Sistem Servisleri"
 
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr "Unicode Karakterler"
+msgstr "Unicode Karakterleri"
 
 #: contents/ui/components/HelpView.qml:32
 msgid "Date and Time"
@@ -220,175 +1123,199 @@ msgstr "Tarih ve Saat"
 msgid "Help & Shortcuts"
 msgstr "Yardım ve Kısayollar"
 
-#: contents/ui/components/HistoryContextMenu.qml:27
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/PinnedSection.qml:401
-msgid "Unpin"
-msgstr "Sabitlemeyi Kaldır"
-
-#: contents/ui/components/HistoryContextMenu.qml:27
-#: contents/ui/components/PinButton.qml:68
-msgid "Pin"
-msgstr "Sabitle"
-
-#: contents/ui/components/HistoryContextMenu.qml:52
-#: contents/ui/components/PinnedSection.qml:367
-msgid "Open"
-msgstr "Aç"
-
-#: contents/ui/components/HistoryContextMenu.qml:69
-#: contents/ui/components/PinnedSection.qml:377
-msgid "Copy Path"
-msgstr "Yolu Kopyala"
-
-#: contents/ui/components/HistoryContextMenu.qml:85
-msgid "Open in Terminal"
-msgstr "Terminalde Aç"
-
-#: contents/ui/components/HistoryContextMenu.qml:97
-#: contents/ui/components/PinnedSection.qml:388
-msgid "Open Containing Folder"
-msgstr "Bulunduğu Klasörü Aç"
-
-#: contents/ui/components/HistoryContextMenu.qml:107
-msgid "Move to Trash"
-msgstr "Çöp Kutusuna Taşı"
-
-#: contents/ui/components/HistoryContextMenu.qml:120
-msgid "Properties"
-msgstr "Özellikler"
-
-#: contents/ui/components/HistoryContextMenu.qml:130
-msgid "Edit Application..."
-msgstr "Uygulamayı Düzenle..."
-
-#: contents/ui/components/HistoryContextMenu.qml:140
-msgid "Remove from History"
-msgstr "Geçmişten Kaldır"
-
-#: contents/ui/components/HistoryListView.qml:36
-#: contents/ui/components/HistoryTileView.qml:244
+#: contents/ui/components/HistoryListView.qml:38
+#: contents/ui/components/HistoryTileView.qml:246
 msgid "Recent Searches"
-msgstr "Son Aramalar"
+msgstr "Recent Searches"
 
-#: contents/ui/components/HistoryListView.qml:56
-#: contents/ui/components/HistoryTileView.qml:264
+#: contents/ui/components/HistoryListView.qml:58
+#: contents/ui/components/HistoryTileView.qml:266
 msgid "Clear History"
-msgstr "Geçmişi Sil"
+msgstr "Clear History"
 
-#: contents/ui/components/HistoryListView.qml:296
-#: contents/ui/components/HistoryTileView.qml:603
-#: contents/ui/components/ResultsTileView.qml:796
+#: contents/ui/components/HistoryListView.qml:286
+#: contents/ui/components/HistoryTileView.qml:597
+#: contents/ui/components/ResultsTileView.qml:301
 msgid "Type to search"
 msgstr "Aramak için yazın"
 
-#: contents/ui/components/PinnedSection.qml:84
-#: contents/ui/config/ConfigGeneral.qml:523
-msgid "Pinned Items"
-msgstr "Sabitlenmiş Öğeler"
+#: contents/ui/components/DebugOverlay.qml:41
+msgid "Saved!"
+msgstr "Kaydedildi!"
 
-#: contents/ui/components/PinnedSection.qml:348
+#: contents/ui/components/DebugOverlay.qml:49
+#: contents/ui/components/DebugOverlay.qml:119
+msgid "Save Dump"
+msgstr "Veri Dökümünü Kaydet"
+
+#: contents/ui/components/DebugOverlay.qml:78
+msgid "Backend"
+msgstr "Arka Uç"
+
+#: contents/ui/components/DebugOverlay.qml:81
+msgid "Items"
+msgstr "Öğeler"
+
+#: contents/ui/components/DebugOverlay.qml:84
+msgid "Latency"
+msgstr "Gecikme"
+
+#: contents/ui/components/DebugOverlay.qml:91
+msgid "View"
+msgstr "Görünüm"
+
+#: contents/ui/components/DebugOverlay.qml:94
+msgid "Display"
+msgstr "Ekran"
+
+#: contents/ui/components/FilterChips.qml:22
+msgid "All"
+msgstr "Hepsi"
+
+#: contents/ui/components/FilterChips.qml:23
+msgid "Apps"
+msgstr "Uygulamalar"
+
+#: contents/ui/components/FilterChips.qml:26
+msgid "Folders"
+msgstr "Klasörler"
+
+#: contents/ui/components/FilterChips.qml:27
+msgid "Web"
+msgstr "Web"
+
+#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/PinnedSection.qml:402
+msgid "Open"
+msgstr "Open"
+
+#: contents/ui/components/HistoryContextMenu.qml:69
+#: contents/ui/components/PinnedSection.qml:412
+msgid "Copy Path"
+msgstr "Copy Path"
+
+#: contents/ui/components/HistoryContextMenu.qml:85
+msgid "Open in Terminal"
+msgstr "Open in Terminal"
+
+#: contents/ui/components/HistoryContextMenu.qml:97
+#: contents/ui/components/PinnedSection.qml:423
+msgid "Open Containing Folder"
+msgstr "Open Containing Folder"
+
+#: contents/ui/components/HistoryContextMenu.qml:107
+msgid "Move to Trash"
+msgstr "Move to Trash"
+
+#: contents/ui/components/HistoryContextMenu.qml:120
+msgid "Properties"
+msgstr "Properties"
+
+#: contents/ui/components/HistoryContextMenu.qml:130
+msgid "Edit Application..."
+msgstr "Edit Application..."
+
+#: contents/ui/components/HistoryContextMenu.qml:140
+msgid "Remove from History"
+msgstr "Remove from History"
+
+#: contents/ui/components/PinnedSection.qml:225
+msgid "Right-click items to pin them"
+msgstr "Öğeleri sabitlemek için sağ tıklayın"
+
+#: contents/ui/components/PinnedSection.qml:383
 msgid "Drag to reorder"
-msgstr "Sıralamak için sürükleyin"
+msgstr "Drag to reorder"
 
-#: contents/ui/components/PowerView.qml:248
+#: contents/ui/components/PowerView.qml:254
 msgid "Hibernate"
-msgstr "Derin Uyut"
+msgstr "Hazırda Beklet (Hibernate)"
 
-#: contents/ui/components/PowerView.qml:252
+#: contents/ui/components/PowerView.qml:258
 msgid "(Press again to hibernate)"
 msgstr "(Derin uyku için tekrar basın)"
 
-#: contents/ui/components/PowerView.qml:261
+#: contents/ui/components/PowerView.qml:267
 msgid "Sleep"
-msgstr "Uyut"
+msgstr "Uyu"
 
-#: contents/ui/components/PowerView.qml:265
+#: contents/ui/components/PowerView.qml:271
 msgid "(Press again to sleep)"
 msgstr "(Uyutmak için tekrar basın)"
 
-#: contents/ui/components/PowerView.qml:273
+#: contents/ui/components/PowerView.qml:279
 msgid "Reboot"
 msgstr "Yeniden Başlat"
 
-#: contents/ui/components/PowerView.qml:277
-#, fuzzy
+#: contents/ui/components/PowerView.qml:283
 msgid "(Press again to reboot)"
-msgstr "(Çıkış yapmak için tekrar basın)"
+msgstr "(Yeniden başlatmak için tekrar basın)"
 
-#: contents/ui/components/PowerView.qml:297
+#: contents/ui/components/PowerView.qml:303
 msgid "Shutdown"
 msgstr "Kapat"
 
-#: contents/ui/components/PowerView.qml:301
-#, fuzzy
+#: contents/ui/components/PowerView.qml:307
 msgid "(Press again to shutdown)"
-msgstr "(Değiştirmek için tekrar basın)"
+msgstr "(Kapatmak için tekrar basın)"
 
-#: contents/ui/components/PowerView.qml:438
+#: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
 msgstr "Yenile"
 
-#: contents/ui/components/PowerView.qml:466
+#: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
-msgstr "Boot girdilerini tara"
+msgstr "Önyükleme girdilerini tara"
 
-#: contents/ui/components/PowerView.qml:492
+#: contents/ui/components/PowerView.qml:498
 msgid "Lock Screen"
 msgstr "Ekranı Kilitle"
 
-#: contents/ui/components/PowerView.qml:502
+#: contents/ui/components/PowerView.qml:508
 msgid "Log Out"
 msgstr "Oturumu Kapat"
 
-#: contents/ui/components/PowerView.qml:506
+#: contents/ui/components/PowerView.qml:512
 msgid "(Press again to log out)"
-msgstr "(Çıkış yapmak için tekrar basın)"
+msgstr "(Oturumu kapatmak için tekrar basın)"
 
-#: contents/ui/components/PowerView.qml:514
+#: contents/ui/components/PowerView.qml:520
 msgid "Switch User"
 msgstr "Kullanıcı Değiştir"
 
-#: contents/ui/components/PowerView.qml:518
+#: contents/ui/components/PowerView.qml:524
 msgid "(Press again to switch)"
 msgstr "(Değiştirmek için tekrar basın)"
 
-#: contents/ui/components/PowerView.qml:526
+#: contents/ui/components/PowerView.qml:532
 msgid "Save Session"
 msgstr "Oturumu Kaydet"
 
-#: contents/ui/components/PowerView.qml:545
-#, fuzzy
+#: contents/ui/components/PowerView.qml:551
 msgid "(Press again)"
-msgstr "(Uyutmak için tekrar basın)"
-
-#: contents/ui/components/QueryHints.qml:31
-#: contents/ui/components/QueryHints.qml:150
-#: contents/ui/config/ConfigHelp.qml:126
-msgid "Search Prefixes"
-msgstr "Arama Prefix'leri"
+msgstr "(Tekrar basın)"
 
 #: contents/ui/components/QueryHints.qml:32
 msgid "Show all available search filters"
-msgstr "Tüm mevcut arama filtrelerini göster"
+msgstr "Kullanılabilir tüm arama filtrelerini göster"
 
 #: contents/ui/components/QueryHints.qml:39
 msgid "Browse files by date (Today, Yesterday, etc.)"
-msgstr "Dosyalara tarihe göre göz at (Bugün, Dün, vb.)"
+msgstr "Dosyalara tarihe göre göz at (Bugün, Dün vb.)"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
 msgstr "Takvim"
 
 #: contents/ui/components/QueryHints.qml:44
-#: contents/ui/components/QueryHints.qml:126
-#: contents/ui/components/QueryHints.qml:134
+#: contents/ui/components/QueryHints.qml:154
+#: contents/ui/components/QueryHints.qml:162
 msgid "Today"
 msgstr "Bugün"
 
 #: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:127
-#: contents/ui/components/QueryHints.qml:134
+#: contents/ui/components/QueryHints.qml:155
+#: contents/ui/components/QueryHints.qml:162
 msgid "Yesterday"
 msgstr "Dün"
 
@@ -401,63 +1328,48 @@ msgid "This Month"
 msgstr "Bu Ay"
 
 #: contents/ui/components/QueryHints.qml:50
-#, fuzzy
 msgid "File Path"
-msgstr "Dosya yolu"
+msgstr "Dosya Yolu"
 
 #: contents/ui/components/QueryHints.qml:50
 msgid "Search via absolute file path"
 msgstr "Mutlak dosya yolu ile ara"
 
 #: contents/ui/components/QueryHints.qml:51
-#, fuzzy
 msgid "File Index"
-msgstr "Dosya Türü"
+msgstr "Dosya Dizini"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Search exclusively in Baloo file index"
-msgstr "Sadece Baloo dosya indeksinde ara"
+msgstr "Yalnızca Baloo dosya dizininde ara"
 
 #: contents/ui/components/QueryHints.qml:52
-#: contents/ui/config/ConfigGeneral.qml:617
-#: contents/ui/config/ConfigGeneral.qml:807
-#: contents/ui/config/ConfigPreview.qml:272
-msgid "Documents"
-msgstr "Belgeler"
-
-#: contents/ui/components/QueryHints.qml:52
-#, fuzzy
 msgid "Search only document files"
-msgstr "Google'da Ara"
+msgstr "Yalnızca belge dosyalarını ara"
 
 #: contents/ui/components/QueryHints.qml:53
-#, fuzzy
 msgid "Search only image files"
-msgstr "Google'da Ara"
+msgstr "Yalnızca resim dosyalarını ara"
 
 #: contents/ui/components/QueryHints.qml:55
-#, fuzzy
 msgid "Search for installed applications"
-msgstr "Uygulamayı sonlandır"
+msgstr "Yüklü uygulamaları ara"
 
 #: contents/ui/components/QueryHints.qml:56
-#, fuzzy
 msgid "Services"
-msgstr "servisler"
+msgstr "Servisler"
 
 #: contents/ui/components/QueryHints.qml:56
 msgid "Search system background services"
 msgstr "Sistem arka plan servislerini ara"
 
 #: contents/ui/components/QueryHints.qml:57
-#, fuzzy
 msgid "Shell"
-msgstr "komut"
+msgstr "Kabuk"
 
 #: contents/ui/components/QueryHints.qml:57
-#, fuzzy
 msgid "Execute shell commands directly"
-msgstr "Kabuk komutlarını çalıştır"
+msgstr "Kabuk komutlarını doğrudan çalıştır"
 
 #: contents/ui/components/QueryHints.qml:59
 msgid "Calculator"
@@ -469,51 +1381,43 @@ msgstr "Matematiksel hesaplamalar yap"
 
 #: contents/ui/components/QueryHints.qml:60
 msgid "Convert between weights, distances, etc."
-msgstr "Ağırlık, mesafe vb. arasında dönüştürme yap"
+msgstr "Ağırlıklar, mesafeler vb. arasında dönüştürün"
 
 #: contents/ui/components/QueryHints.qml:61
-#, fuzzy
 msgid "Spelling"
-msgstr "Yazım denetimi yap"
+msgstr "Yazım"
 
 #: contents/ui/components/QueryHints.qml:61
-#, fuzzy
 msgid "Check word spelling"
-msgstr "Yazım denetimi yap"
+msgstr "Kelime yazımını kontrol et"
 
 #: contents/ui/components/QueryHints.qml:63
-#, fuzzy
 msgid "Google"
-msgstr "Google Arama"
+msgstr "Google"
 
 #: contents/ui/components/QueryHints.qml:63
-#, fuzzy
 msgid "Search the web using Google"
-msgstr "Google'da Ara"
+msgstr "Google kullanarak web'de ara"
 
 #: contents/ui/components/QueryHints.qml:64
-#, fuzzy
 msgid "DuckDuckGo"
-msgstr "DuckDuckGo Arama"
+msgstr "DuckDuckGo"
 
 #: contents/ui/components/QueryHints.qml:64
-#, fuzzy
 msgid "Search the web using DuckDuckGo"
-msgstr "DuckDuckGo'da Ara"
+msgstr "DuckDuckGo kullanarak web'de ara"
 
 #: contents/ui/components/QueryHints.qml:65
-#, fuzzy
 msgid "Wikipedia"
-msgstr "Wikipedia Arama"
+msgstr "Wikipedia"
 
 #: contents/ui/components/QueryHints.qml:65
-#, fuzzy
 msgid "Search Wikipedia articles"
-msgstr "Wikipedia'da Ara"
+msgstr "Wikipedia makalelerini ara"
 
 #: contents/ui/components/QueryHints.qml:66
 msgid "Search browser bookmarks"
-msgstr "Tarayıcı yer imlerini ara"
+msgstr "Tarayıcı yer işaretlerini ara"
 
 #: contents/ui/components/QueryHints.qml:67
 msgid "RSS Feeds"
@@ -521,1055 +1425,200 @@ msgstr "RSS Akışları"
 
 #: contents/ui/components/QueryHints.qml:67
 msgid "Search exclusively in RSS news feeds"
-msgstr "Sadece RSS haber akışlarında ara"
+msgstr "Yalnızca RSS haber akışlarında ara"
 
 #: contents/ui/components/QueryHints.qml:69
 msgid "Browse system manual pages"
-msgstr "Sistem kılavuz sayfalarına göz at"
-
-#: contents/ui/components/QueryHints.qml:70 contents/ui/config/ConfigHelp.qml:9
-#: contents/config/config.qml:29
-msgid "Help"
-msgstr "Yardım"
+msgstr "Sistem kılavuz (man) sayfalarına göz at"
 
 #: contents/ui/components/QueryHints.qml:70
-#, fuzzy
 msgid "Show widget documentation"
-msgstr "Derin Uyut Butonunu Göster"
+msgstr "Widget dokümantasyonunu göster"
 
-#: contents/ui/components/QueryHints.qml:128
-#: contents/ui/components/QueryHints.qml:134
-msgid "Two days ago"
-msgstr "İki gün önce"
-
-#: contents/ui/components/QueryHints.qml:234
-#: contents/ui/components/QueryHints.qml:244
-#, fuzzy
-msgid "Browse calendar"
-msgstr "Takvim"
-
-#: contents/ui/components/QueryHints.qml:258
-#, fuzzy
-msgid "Man pages not installed"
-msgstr "Man paketi yüklü değil"
-
-#: contents/ui/components/QueryHints.qml:312
+#: contents/ui/components/QueryHints.qml:98
 msgid "Unknown prefix"
 msgstr "Bilinmeyen önek"
 
-#: contents/ui/components/QueryHints.qml:312
-#, fuzzy
+#: contents/ui/components/QueryHints.qml:99
 msgid "try"
-msgstr "Deneyin"
+msgstr "deneyin"
 
-#: contents/ui/components/QueryHints.qml:355
-#, fuzzy
+#: contents/ui/components/QueryHints.qml:101
+msgid "Browse calendar"
+msgstr "Takvime göz at"
+
+#: contents/ui/components/QueryHints.qml:102
+msgid "Man pages not installed"
+msgstr "Man paketi yüklü değil"
+
+#: contents/ui/components/QueryHints.qml:156
+#: contents/ui/components/QueryHints.qml:162
+msgid "Two days ago"
+msgstr "İki gün önce"
+
+#: contents/ui/components/QueryHints.qml:367
 msgid "Available Search Prefixes"
-msgstr "Arama Prefix'leri"
+msgstr "Kullanılabilir Arama Önekleri"
 
-#: contents/ui/components/ResultsListView.qml:67
-msgid "Haberler"
-msgstr "Haberler"
-
-#: contents/ui/components/ResultsListView.qml:194
-msgid "Haberi Oku"
-msgstr "Haberi Oku"
-
-#: contents/ui/components/ResultsListView.qml:200
-msgid "Paylaş"
-msgstr "Paylaş"
-
-#: contents/ui/components/ResultsListView.qml:246
-#: contents/ui/components/ResultsTileView.qml:796
-msgid "No results found"
-msgstr "Sonuç bulunamadı"
-
-#: contents/ui/components/ResultsListView.qml:246
-msgid "Type to start searching"
-msgstr "Aramak için yazmaya başlayın"
-
-#: contents/ui/components/ResultsTileView.qml:735
+#: contents/ui/components/ResultsListView.qml:436
+#: contents/ui/components/ResultsTileView.qml:294
 msgid "Category"
 msgstr "Kategori"
 
-#: contents/ui/components/ResultsTileView.qml:749
+#: contents/ui/components/ResultsListView.qml:437
+#: contents/ui/components/ResultsTileView.qml:295
 msgid "File Type"
 msgstr "Dosya Türü"
 
-#: contents/ui/components/ResultsTileView.qml:757
+#: contents/ui/components/ResultsListView.qml:438
+#: contents/ui/components/ResultsTileView.qml:296
 msgid "Path"
 msgstr "Yol"
 
-#: contents/ui/components/ResultsTileView.qml:767
+#: contents/ui/components/ResultsListView.qml:439
+msgid "News"
+msgstr "Haberler"
+
+#: contents/ui/components/ResultsListView.qml:440
+msgid "Read News"
+msgstr "Haberi Oku"
+
+#: contents/ui/components/ResultsListView.qml:441
+msgid "Share"
+msgstr "Paylaş"
+
+#: contents/ui/components/ResultsListView.qml:442
+#: contents/ui/components/ResultsTileView.qml:299
+msgid "Searching..."
+msgstr "Aranıyor..."
+
+#: contents/ui/components/ResultsListView.qml:443
+#: contents/ui/components/ResultsTileView.qml:300
+msgid "No results found"
+msgstr "Sonuç bulunamadı"
+
+#: contents/ui/components/ResultsTileView.qml:297
 msgid "Space to preview"
 msgstr "Önizleme için Boşluk"
 
-#: contents/ui/components/SearchPopup.qml:309
-#: contents/ui/components/SearchPopup.qml:344
-msgid "weather"
-msgstr "hava"
+#: contents/ui/components/ResultsTileView.qml:298
+msgid "Read in Browser"
+msgstr "Tarayıcıda Oku"
 
-#: contents/ui/components/SearchPopup.qml:314
-#: contents/ui/components/SearchPopup.qml:333
+#: contents/ui/components/SearchPopup.qml:92
 msgid "date"
 msgstr "tarih"
 
-#: contents/ui/components/SearchPopup.qml:315
-#: contents/ui/components/SearchPopup.qml:334
+#: contents/ui/components/SearchPopup.qml:93
 msgid "clock"
 msgstr "saat"
 
-#: contents/ui/components/SearchPopup.qml:316
-#: contents/ui/components/SearchPopup.qml:364
+#: contents/ui/components/SearchPopup.qml:94
+msgid "weather"
+msgstr "hava durumu"
+
+#: contents/ui/components/SearchPopup.qml:95
 msgid "power"
 msgstr "güç"
 
-#: contents/ui/components/SearchPopup.qml:317
-#: contents/ui/components/SearchPopup.qml:348
+#: contents/ui/components/SearchPopup.qml:96
 msgid "help"
 msgstr "yardım"
 
-#: contents/ui/components/SearchPopup.qml:329
+#: contents/ui/components/SearchPopup.qml:97
 msgid "unit"
 msgstr "birim"
 
-#: contents/ui/components/SearchPopup.qml:352
+#: contents/ui/components/SearchPopup.qml:98
 msgid "kill"
 msgstr "sonlandır"
 
-#: contents/ui/components/SearchPopup.qml:356
+#: contents/ui/components/SearchPopup.qml:99
 msgid "spell"
 msgstr "yazım"
 
-#: contents/ui/components/SearchPopup.qml:360
+#: contents/ui/components/SearchPopup.qml:100
 msgid "shell"
-msgstr "komut"
+msgstr "kabuk"
 
-#: contents/ui/components/SearchPopup.qml:432
-msgid "Search Here"
-msgstr "Dosya, klasör ve uygulamaları ara..."
-
-#: contents/ui/components/SearchPopup.qml:859
+#: contents/ui/components/SearchPopup.qml:1028
 msgid "Other"
 msgstr "Diğer"
 
-#: contents/ui/components/SearchPopup.qml:937
-#: contents/ui/config/ConfigDebug.qml:163
-#, fuzzy
-msgid "Tile"
-msgstr "Döşeme Görünümü"
-
-#: contents/ui/components/SearchPopup.qml:937
-#: contents/ui/config/ConfigDebug.qml:163
-#, fuzzy
-msgid "List"
-msgstr "Liste Görünümü"
-
-#: contents/ui/components/SearchPopup.qml:938
-#: contents/ui/config/ConfigDebug.qml:157
-msgid "Button"
-msgstr "Buton"
-
-#: contents/ui/components/SearchPopup.qml:938
-#, fuzzy
+#: contents/ui/components/SearchPopup.qml:1110
 msgid "Mode"
-msgstr "Görünüm Modu"
+msgstr "Mod"
 
-#: contents/ui/components/TileDataManager.qml:209
+#: contents/ui/components/TileDataManager.qml:53
 msgid "Other Results"
 msgstr "Diğer Sonuçlar"
 
 #: contents/ui/components/WeatherView.qml:57
-#, fuzzy
 msgid "Unknown error"
-msgstr "Bilinmeyen önek"
+msgstr "Bilinmeyen hata"
 
 #: contents/ui/components/WeatherView.qml:80
 msgid "Loading Weather..."
-msgstr "Hava Durumu Yükleniyor..."
+msgstr "Hava durumu yükleniyor..."
 
 #: contents/ui/components/WeatherView.qml:91
 msgid "Retry"
 msgstr "Yeniden Dene"
 
-#: contents/ui/config/ConfigCategories.qml:212
-msgid "Algorithm Settings"
-msgstr "Algoritma Ayarları"
+#: contents/ui/main.qml:110
+msgid "Medium Mode (Button only)"
+msgstr "Orta Mod (Sadece Buton)"
 
-#: contents/ui/config/ConfigCategories.qml:217
-msgid "Search Algorithm"
-msgstr "Arama Algoritması"
+#: contents/ui/main.qml:116
+msgid "Wide Mode (Search bar + icon)"
+msgstr "Geniş Mod (Arama Çubuğu + Simge)"
 
-#: contents/ui/config/ConfigCategories.qml:218
-msgid "Fuzzy Match"
-msgstr "Bulanık Eşleşme (Fuzzy)"
+#: contents/ui/main.qml:122
+msgid "Extra Wide Mode (Wide + Long Placeholder)"
+msgstr "Ekstra Geniş Mod (Geniş + Uzun Yer Tutucu)"
 
-#: contents/ui/config/ConfigCategories.qml:218
-msgid "Exact Match"
-msgstr "Tam Eşleşme"
+#: contents/ui/main.qml:128
+msgid "Ultra Wide Mode (Maximum Coverage)"
+msgstr "Ultra Geniş Mod (Maksimum Kapsama)"
 
-#: contents/ui/config/ConfigCategories.qml:218
-msgid "Starts With"
-msgstr "İle Başlayan"
+#~ msgid "Arama yapmaya başla..."
+#~ msgstr "Arama yapmaya başla..."
 
-#: contents/ui/config/ConfigCategories.qml:229
-msgid "Dynamic Result Count"
-msgstr "Dinamik Sonuç Sayısı"
+#~ msgid "Arama yap..."
+#~ msgstr "Arama yap..."
 
-#: contents/ui/config/ConfigCategories.qml:230
-msgid "Automatically limit displayed results based on relevance score"
-msgstr "Sonuçları alaka düzeyine göre otomatik sınırla"
+#~ msgid "Arama"
+#~ msgstr "Arama"
 
-#: contents/ui/config/ConfigCategories.qml:237
-msgid "Result Limits"
-msgstr "Sonuç Sınırları"
+#~ msgid "Haberler"
+#~ msgstr "Haberler"
 
-#: contents/ui/config/ConfigCategories.qml:242
-msgid "Min Results"
-msgstr "Min Sonuç"
+#~ msgid "Haberi Oku"
+#~ msgstr "Haberi Oku"
 
-#: contents/ui/config/ConfigCategories.qml:251
-msgid "Max Results"
-msgstr "Max Sonuç"
+#~ msgid "Paylaş"
+#~ msgstr "Paylaş"
 
-#: contents/ui/config/ConfigCategories.qml:262
-msgid "Prioritized Categories"
-msgstr "Öncelikli Kategoriler"
+#~ msgid "Type to start searching"
+#~ msgstr "Aramak için yazmaya başlayın"
 
-#: contents/ui/config/ConfigCategories.qml:266
-msgid "Use buttons to reorder categories or move between sections"
-msgstr ""
-"Kategorileri yeniden sıralamak veya bölümler arası taşımak için butonları "
-"kullanın"
+#~ msgid "Search Here"
+#~ msgstr "Dosya, klasör ve uygulamaları ara..."
 
-#: contents/ui/config/ConfigCategories.qml:275
-msgid "Priority"
-msgstr "Öncelik"
+#~ msgid "Less (Daha az)"
+#~ msgstr "Daha az"
 
-#: contents/ui/config/ConfigCategories.qml:366
-msgid "Move to Combined"
-msgstr "Birleşik'e Taşı"
+#~ msgid "Haber başlığı"
+#~ msgstr "Haber başlığı"
 
-#: contents/ui/config/ConfigCategories.qml:381
-msgid "Show Together (Merged)"
-msgstr "Birlikte Göster (Birleşik)"
+#~ msgid "Turkey TV"
+#~ msgstr "Türkiye TV"
 
-#: contents/ui/config/ConfigCategories.qml:385
-msgid "Categories in this section will be grouped together"
-msgstr "Bu bölümdeki kategoriler tek bir grup altında birleştirilir"
-
-#: contents/ui/config/ConfigCategories.qml:401
-msgid "No combined categories"
-msgstr "Birleştirilmiş kategori yok"
-
-#: contents/ui/config/ConfigCategories.qml:466
-msgid "Move to Separate"
-msgstr "Ayrık'a Taşı"
-
-#: contents/ui/config/ConfigCategories.qml:481
-msgid "Category Settings Information"
-msgstr "Kategori Ayarları Bilgisi"
-
-#: contents/ui/config/ConfigCategories.qml:485
-msgid ""
-"Changes are applied immediately. Hidden categories will not appear in search "
-"results. Priority determines display order."
-msgstr ""
-"Değişiklikler anında uygulanır. Gizlenen kategoriler arama sonuçlarında "
-"görünmez. Öncelik, görüntüleme sırasını belirler."
-
-#: contents/ui/config/ConfigCategories.qml:485
-msgid "Lower number = higher priority"
-msgstr "Düşük sayı = yüksek öncelik"
-
-#: contents/ui/config/ConfigDebug.qml:9 contents/config/config.qml:24
-msgid "Debug"
-msgstr "Hata Ayıklama"
-
-#: contents/ui/config/ConfigDebug.qml:102
-msgid ""
-"This tab is only active in Developer mode. Change profile in General "
-"settings."
-msgstr ""
-"Bu sekme sadece Geliştirici modunda etkindir. Profili Genel ayarlarından "
-"değiştirin."
-
-#: contents/ui/config/ConfigDebug.qml:111
-msgid "Debug Settings"
-msgstr "Debug Ayarları"
-
-#: contents/ui/config/ConfigDebug.qml:124
-msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr ""
-"Widget üzerinde debug bilgilerini göster (aktif mod, öğe sayısı, index "
-"kaynağı)"
-
-#: contents/ui/config/ConfigDebug.qml:133
-msgid "Debug Data"
-msgstr "Debug Verileri"
-
-#: contents/ui/config/ConfigDebug.qml:143
-msgid "Timestamp"
-msgstr "Zaman Damgası"
-
-#: contents/ui/config/ConfigDebug.qml:146
-msgid "Locale"
-msgstr "Yerel"
-
-#: contents/ui/config/ConfigDebug.qml:149
-msgid "User Profile"
-msgstr "Kullanıcı Profili"
-
-#: contents/ui/config/ConfigDebug.qml:151
-msgid "Minimal"
-msgstr "Minimal"
-
-#: contents/ui/config/ConfigDebug.qml:151
-msgid "Developer"
-msgstr "Geliştirici"
-
-#: contents/ui/config/ConfigDebug.qml:151
-#, fuzzy
-msgid "Power User"
-msgstr "Güçlü Kullanıcı"
-
-#: contents/ui/config/ConfigDebug.qml:155
-#: contents/ui/config/ConfigGeneral.qml:195
-msgid "Display Mode"
-msgstr "Ekran Modu"
-
-#: contents/ui/config/ConfigDebug.qml:157
-msgid "Medium"
-msgstr "Orta"
-
-#: contents/ui/config/ConfigDebug.qml:157
-msgid "Wide"
-msgstr "Geniş"
-
-#: contents/ui/config/ConfigDebug.qml:157
-#, fuzzy
-msgid "Extra Wide"
-msgstr "Ekstra Geniş Mod"
-
-#: contents/ui/config/ConfigDebug.qml:161
-#: contents/ui/config/ConfigGeneral.qml:488
-msgid "View Mode"
-msgstr "Görünüm Modu"
-
-#: contents/ui/config/ConfigDebug.qml:167
-#: contents/ui/config/ConfigGeneral.qml:515
-msgid "Tile Icon Size"
-msgstr "Döşeme İkon Boyutu"
-
-#: contents/ui/config/ConfigDebug.qml:170
-#: contents/ui/config/ConfigGeneral.qml:507
-msgid "List Icon Size"
-msgstr "Liste İkon Boyutu"
-
-#: contents/ui/config/ConfigDebug.qml:173
-#, fuzzy
-msgid "Enable Preview"
-msgstr "Dosya Önizlemesi"
-
-#: contents/ui/config/ConfigDebug.qml:179
-msgid "History Count"
-msgstr "Geçmiş Sayısı"
-
-#: contents/ui/config/ConfigDebug.qml:185
-#, fuzzy
-msgid "items"
-msgstr "Öğeler"
-
-#: contents/ui/config/ConfigDebug.qml:196
-msgid "Telemetry"
-msgstr "Telemetri"
-
-#: contents/ui/config/ConfigDebug.qml:230
-msgid "History Sample"
-msgstr "Geçmiş Örnekleri"
-
-#: contents/ui/config/ConfigDebug.qml:237
-msgid ""
-"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
-"is sent to the internet."
-msgstr ""
-"Gizlilik Bildirimi: Tüm hata ayıklama ve telemetri verileri SADECE yerel "
-"olarak saklanır. İnternete hiçbir veri gönderilmez."
-
-#: contents/ui/config/ConfigDebug.qml:311
-#, fuzzy
-msgid "History is empty"
-msgstr "Geçmiş Örnekleri"
-
-#: contents/ui/config/ConfigGeneral.qml:23 contents/config/config.qml:6
-msgid "Appearance"
-msgstr "Görünüm"
-
-#: contents/ui/config/ConfigGeneral.qml:157
-#, fuzzy
-msgid "Panel"
-msgstr "Panel Görünümü"
-
-#: contents/ui/config/ConfigGeneral.qml:161
-msgid "Popup"
-msgstr "Açılır Pencere"
-
-#: contents/ui/config/ConfigGeneral.qml:166
-#: contents/ui/config/ConfigGeneral.qml:567
-#: contents/ui/config/ConfigPreview.qml:9
-#, fuzzy
-msgid "Preview"
-msgstr "Önizlemeler"
-
-#: contents/ui/config/ConfigGeneral.qml:170
-#: contents/ui/config/ConfigPrefix.qml:10
-msgid "Prefixes"
-msgstr "Prefixler"
-
-#: contents/ui/config/ConfigGeneral.qml:189
-msgid "Panel Appearance"
-msgstr "Panel Görünümü"
-
-#: contents/ui/config/ConfigGeneral.qml:198
-msgid "Medium Mode (Text)"
-msgstr "Orta Mod (Metin)"
-
-#: contents/ui/config/ConfigGeneral.qml:199
-msgid "Wide Mode (Search Bar)"
-msgstr "Geniş Mod (Arama Çubuğu)"
-
-#: contents/ui/config/ConfigGeneral.qml:200
-msgid "Extra Wide Mode"
-msgstr "Ekstra Geniş Mod"
-
-#: contents/ui/config/ConfigGeneral.qml:207
-msgid "Edge Appearance"
-msgstr "Kenar Görünümü"
-
-#: contents/ui/config/ConfigGeneral.qml:210
-msgid "Round corners"
-msgstr "Yuvarlak kenarlar"
-
-#: contents/ui/config/ConfigGeneral.qml:211
-msgid "Slightly round"
-msgstr "Az yuvarlak"
-
-#: contents/ui/config/ConfigGeneral.qml:212
-msgid "Less round"
-msgstr "Daha az yuvarlak"
-
-#: contents/ui/config/ConfigGeneral.qml:213
-msgid "Square corners"
-msgstr "Kare kenarlar"
-
-#: contents/ui/config/ConfigGeneral.qml:220
-#, fuzzy
-msgid "Search Icon"
-msgstr "İkon Seç"
-
-#: contents/ui/config/ConfigGeneral.qml:221
-msgid "Show search icon and button in panel"
-msgstr "Panelde arama ikonunu ve butonunu göster"
-
-#: contents/ui/config/ConfigGeneral.qml:227
-msgid "Show background tile (colored square)"
-msgstr "Arka plan döşemesini göster (renkli kare)"
-
-#: contents/ui/config/ConfigGeneral.qml:235
-msgid "Show animated RSS titles in panel search bar"
-msgstr "Panel arama çubuğunda animasyonlu RSS başlıklarını göster"
-
-#: contents/ui/config/ConfigGeneral.qml:236
-msgid "RSS Titles"
-msgstr "RSS Başlıkları"
-
-#: contents/ui/config/ConfigGeneral.qml:242
-msgid "RSS Frequency"
-msgstr "RSS Sıklığı"
-
-#: contents/ui/config/ConfigGeneral.qml:245
-msgid "India News (Hindi)"
-msgstr "Hindistan Haberleri (Hintçe)"
-
-#: contents/ui/config/ConfigGeneral.qml:246
-msgid "Very Frequent (Çok Sık)"
-msgstr "Çok Sık"
-
-#: contents/ui/config/ConfigGeneral.qml:247
-msgid "Frequent (Sık)"
-msgstr "Sık"
-
-#: contents/ui/config/ConfigGeneral.qml:248
-msgid "Normal"
-msgstr "Normal"
-
-#: contents/ui/config/ConfigGeneral.qml:249
-msgid "Less (Daha az)"
-msgstr "Daha az"
-
-#: contents/ui/config/ConfigGeneral.qml:250
-msgid "Rare (Az)"
-msgstr "Az"
-
-#: contents/ui/config/ConfigGeneral.qml:251
-msgid "Only when new (Sadece yeni)"
-msgstr "Sadece yeni olduğunda"
-
-#: contents/ui/config/ConfigGeneral.qml:256
-#, fuzzy
-msgid "Panel Height"
-msgstr "Panel Önizleme"
-
-#: contents/ui/config/ConfigGeneral.qml:261
-msgid "Automatic"
-msgstr "Otomatik"
-
-#: contents/ui/config/ConfigGeneral.qml:306
-msgid "Panel Preview"
-msgstr "Panel Önizleme"
-
-#: contents/ui/config/ConfigGeneral.qml:355
-msgid "Haber başlığı"
-msgstr "Haber başlığı"
-
-#: contents/ui/config/ConfigGeneral.qml:482
-msgid "Results View"
-msgstr "Sonuç Görünümü"
-
-#: contents/ui/config/ConfigGeneral.qml:489
-msgid "List View"
-msgstr "Liste Görünümü"
-
-#: contents/ui/config/ConfigGeneral.qml:489
-msgid "Tile View"
-msgstr "Döşeme Görünümü"
-
-#: contents/ui/config/ConfigGeneral.qml:495
-msgid "Scroll Bar"
-msgstr "Kaydırma Çubuğu"
-
-#: contents/ui/config/ConfigGeneral.qml:497
-#, fuzzy
-msgid "System Default"
-msgstr "Sistem Ayarları"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-#, fuzzy
-msgid "Minimal (Custom)"
-msgstr "Minimal"
-
-#: contents/ui/config/ConfigGeneral.qml:499
-msgid "Hidden"
-msgstr "Gizli"
-
-#: contents/ui/config/ConfigGeneral.qml:528
-msgid "Show pinned items bar"
-msgstr "Sabitlenmiş öğeler çubuğunu göster"
-
-#: contents/ui/config/ConfigGeneral.qml:534
-msgid "Minimize automatically when searching"
-msgstr "Arama yapıldığında otomatik olarak küçült"
-
-#: contents/ui/config/ConfigGeneral.qml:543
-msgid "Tile Size Mode"
-msgstr "Döşeme Boyut Modu"
-
-#: contents/ui/config/ConfigGeneral.qml:546
-msgid "Normal (wide tiles)"
-msgstr "Normal (geniş karolar)"
-
-#: contents/ui/config/ConfigGeneral.qml:547
-msgid "Compact (all small)"
-msgstr "Kompakt (tamamı küçük)"
-
-#: contents/ui/config/ConfigGeneral.qml:548
-msgid "Only pinned compact"
-msgstr "Sadece sabitlenmiş kompakt"
-
-#: contents/ui/config/ConfigGeneral.qml:549
-msgid "Only history/results compact"
-msgstr "Sadece geçmiş/sonuçlar kompakt"
-
-#: contents/ui/config/ConfigGeneral.qml:557
-msgid "Filter Chip Style"
-msgstr "Filtre Çipi Stili"
-
-#: contents/ui/config/ConfigGeneral.qml:559
-msgid "Current Appearance (Filled)"
-msgstr "Mevcut Görünüm (Dolu)"
-
-#: contents/ui/config/ConfigGeneral.qml:560
-msgid "Breeze Appearance (Outline)"
-msgstr "Breeze Görünümü (Anahat)"
-
-#: contents/ui/config/ConfigGeneral.qml:596
-msgid "System Settings"
-msgstr "Sistem Ayarları"
-
-#: contents/ui/config/ConfigGeneral.qml:640
-msgid "Settings"
-msgstr "Ayarlar"
-
-#: contents/ui/config/ConfigGeneral.qml:672
-#: contents/ui/config/ConfigPreview.qml:112
-#: contents/ui/config/ConfigSearch.qml:19
-msgid "Enable File Previews"
-msgstr "Dosya Önizlemelerini Etkinleştir"
-
-#: contents/ui/config/ConfigGeneral.qml:673
-msgid "Show/Hide Previews"
-msgstr "Önizlemeleri göster/kapat"
-
-#: contents/ui/config/ConfigGeneral.qml:678
-#: contents/ui/config/ConfigPreview.qml:133
-msgid "Preview Types"
-msgstr "Önizleme Türleri"
-
-#: contents/ui/config/ConfigGeneral.qml:733
-#: contents/ui/config/ConfigPreview.qml:196
-msgid "Videos"
-msgstr "Videolar"
-
-#: contents/ui/config/ConfigGeneral.qml:770
-#: contents/ui/config/ConfigPreview.qml:234
-msgid "Text Files"
-msgstr "Metin Dosyaları"
-
-#: contents/ui/config/ConfigGeneral.qml:826
-#: contents/ui/config/ConfigPrefix.qml:45
-msgid "Date View (date:)"
-msgstr "Tarih Görünümü (date:)"
-
-#: contents/ui/config/ConfigGeneral.qml:831
-#: contents/ui/config/ConfigPrefix.qml:52
-msgid "Show Large Clock"
-msgstr "Dev Saati Göster"
-
-#: contents/ui/config/ConfigGeneral.qml:835
-#: contents/ui/config/ConfigPrefix.qml:59
-msgid "Show Calendar Events"
-msgstr "Takvim Etkinliklerini Göster"
-
-#: contents/ui/config/ConfigGeneral.qml:840
-#: contents/ui/config/ConfigPrefix.qml:66
-msgid "Weather View (weather:)"
-msgstr "Hava Durumu Görünümü (hava:)"
-
-#: contents/ui/config/ConfigGeneral.qml:846
-#: contents/ui/config/ConfigPrefix.qml:74
-msgid "Enable Weather Prefix"
-msgstr "Hava Durumu Önekini Etkinleştir"
-
-#: contents/ui/config/ConfigGeneral.qml:859
-#: contents/ui/config/ConfigPrefix.qml:87
-msgid "Use System Units"
-msgstr "Sistem Birimlerini Kullan"
-
-#: contents/ui/config/ConfigGeneral.qml:868
-#: contents/ui/config/ConfigPrefix.qml:96
-msgid "Refresh Interval:"
-msgstr "Yenileme Sıklığı:"
-
-#: contents/ui/config/ConfigGeneral.qml:874
-#: contents/ui/config/ConfigPrefix.qml:102
-msgid "Every Search"
-msgstr "Her Aramada"
-
-#: contents/ui/config/ConfigGeneral.qml:875
-#: contents/ui/config/ConfigPrefix.qml:103
-msgid "15 Minutes"
-msgstr "15 Dakika"
-
-#: contents/ui/config/ConfigGeneral.qml:876
-#: contents/ui/config/ConfigPrefix.qml:104
-msgid "30 Minutes"
-msgstr "30 Dakika"
-
-#: contents/ui/config/ConfigGeneral.qml:877
-#: contents/ui/config/ConfigPrefix.qml:105
-msgid "1 Hour"
-msgstr "1 Saat"
-
-#: contents/ui/config/ConfigGeneral.qml:897
-#: contents/ui/config/ConfigPrefix.qml:125
-msgid "(If time since last update > interval)"
-msgstr "(Eğer son güncellemeden geçen süre > aralık)"
-
-#: contents/ui/config/ConfigGeneral.qml:904
-#: contents/ui/config/ConfigPrefix.qml:134
-msgid "Power View (power:)"
-msgstr "Güç Görünümü (power:)"
-
-#: contents/ui/config/ConfigGeneral.qml:909
-#: contents/ui/config/ConfigPrefix.qml:142
-msgid "Show Sleep Button"
-msgstr "Uyut Butonunu Göster"
-
-#: contents/ui/config/ConfigGeneral.qml:913
-#: contents/ui/config/ConfigPrefix.qml:149
-msgid "Show Hibernate Button"
-msgstr "Derin Uyut Butonunu Göster"
-
-#: contents/ui/config/ConfigGeneral.qml:922
-#: contents/ui/config/ConfigPrefix.qml:160
-msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(Swap birimi boyutu RAM boyutundan düşük veya swap birimi yok)"
-
-#: contents/ui/config/ConfigGeneral.qml:930
-#: contents/ui/config/ConfigPrefix.qml:170
-msgid "Show boot options in Reboot button"
-msgstr "Yeniden Başlat butonunda boot seçeneklerini göster"
-
-#: contents/ui/config/ConfigGeneral.qml:938
-#: contents/ui/config/ConfigPrefix.qml:180
-msgid "Note: Systemd boot is required for this feature"
-msgstr "Not: Bu özellik için Systemd Boot gereklidir"
-
-#: contents/ui/config/ConfigGeneral.qml:946
-#: contents/ui/config/ConfigPrefix.qml:188
-msgid "Available Prefixes Reference"
-msgstr "Mevcut Prefix Referansları"
-
-#: contents/ui/config/ConfigGeneral.qml:950
-#: contents/ui/config/ConfigPrefix.qml:192
-msgid ""
-"These prefixes can be used to perform specific actions directly from the "
-"search bar."
-msgstr ""
-"Bu önekler, doğrudan arama çubuğundan belirli işlemleri gerçekleştirmek için "
-"kullanılabilir."
-
-#: contents/ui/config/ConfigGeneral.qml:973
-#: contents/ui/config/ConfigHelp.qml:130
-#: contents/ui/config/ConfigPrefix.qml:214
-#: contents/ui/config/ConfigSearch.qml:63
-msgid "List files modified today"
-msgstr "Bugün değiştirilen dosyaları listele"
-
-#: contents/ui/config/ConfigGeneral.qml:986
-#: contents/ui/config/ConfigHelp.qml:136
-#: contents/ui/config/ConfigPrefix.qml:226
-#: contents/ui/config/ConfigSearch.qml:66
-msgid "Search on Google"
-msgstr "Google'da Ara"
-
-#: contents/ui/config/ConfigGeneral.qml:999
-#: contents/ui/config/ConfigHelp.qml:142
-#: contents/ui/config/ConfigPrefix.qml:238
-#: contents/ui/config/ConfigSearch.qml:69
-msgid "Search on DuckDuckGo"
-msgstr "DuckDuckGo'da Ara"
-
-#: contents/ui/config/ConfigGeneral.qml:1012
-#: contents/ui/config/ConfigPrefix.qml:250
-msgid "Show calendar and date information"
-msgstr "Takvim ve tarih bilgisini göster"
-
-#: contents/ui/config/ConfigGeneral.qml:1025
-#: contents/ui/config/ConfigPrefix.qml:262
-msgid "Show large clock"
-msgstr "Büyük saati göster"
-
-#: contents/ui/config/ConfigGeneral.qml:1038
-msgid "Show power management options"
-msgstr "Güç yönetimi seçeneklerini göster"
-
-#: contents/ui/config/ConfigGeneral.qml:1051
-#: contents/ui/config/ConfigPrefix.qml:298
-msgid "Show this help screen"
-msgstr "Bu yardım ekranını göster"
-
-#: contents/ui/config/ConfigGeneral.qml:1064
-#: contents/ui/config/ConfigPrefix.qml:310
-msgid "Terminate running processes"
-msgstr "Çalışan işlemleri sonlandır"
-
-#: contents/ui/config/ConfigGeneral.qml:1077
-#: contents/ui/config/ConfigPrefix.qml:322
-msgid "Check spelling of a word"
-msgstr "Kelimelerin yazımını kontrol et"
-
-#: contents/ui/config/ConfigGeneral.qml:1090
-#: contents/ui/config/ConfigPrefix.qml:334
-msgid "Execute shell commands"
-msgstr "Kabuk komutlarını çalıştır"
-
-#: contents/ui/config/ConfigGeneral.qml:1103
-msgid "Convert units (requires KRunner)"
-msgstr "Birimleri dönüştür (KRunner gereklidir)"
-
-#: contents/ui/config/ConfigHelp.qml:85
-msgid "Keyboard Shortcuts"
-msgstr "Klavye Kısayolları"
-
-#: contents/ui/config/ConfigHelp.qml:89
-msgid "Navigate between results"
-msgstr "Sonuçlar arasında gezin"
-
-#: contents/ui/config/ConfigHelp.qml:95
-#, fuzzy
-msgid "Navigate between sections"
-msgstr "Sonuçlar arasında gezin"
-
-#: contents/ui/config/ConfigHelp.qml:101
-msgid "List / Tile view"
-msgstr "Liste / Döşeme görünümü"
-
-#: contents/ui/config/ConfigHelp.qml:107
-msgid "Toggle file preview"
-msgstr "Dosya önizlemesini aç/kapat"
-
-#: contents/ui/config/ConfigHelp.qml:113
-msgid "Open selected item"
-msgstr "Seçili öğeyi aç"
-
-#: contents/ui/config/ConfigHelp.qml:119
-msgid "Close widget"
-msgstr "Widget'ı kapat"
-
-#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
-msgid "Terminate processes"
-msgstr "İşlemleri sonlandır"
-
-#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
-msgid "Czech Republic"
-msgstr "Çek Cumhuriyeti"
-
-#: contents/ui/config/ConfigHelp.qml:161
-msgid "User Profiles"
-msgstr "Kullanıcı Profilleri"
-
-#: contents/ui/config/ConfigHelp.qml:165
-msgid "A simplified interface with essential features."
-msgstr "Temel özelliklere sahip basitleştirilmiş bir arayüz."
-
-#: contents/ui/config/ConfigHelp.qml:171
-msgid "Debug tab active, developer features enabled."
-msgstr "Hata ayıklama sekmesi aktif, geliştirici özellikleri etkin."
-
-#: contents/ui/config/ConfigHelp.qml:177
-msgid "All features active, advanced settings available."
-msgstr "Tüm özellikler etkin, gelişmiş ayarlar mevcut."
-
-#: contents/ui/config/ConfigPrefix.qml:40
-msgid "Prefix View Settings"
-msgstr "Prefix Görünüm Ayarları"
-
-#: contents/ui/config/ConfigPrefix.qml:274
-msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr "Güç yönetimi seçeneklerini göster (Kapat, Yeniden Başlat vb.)"
-
-#: contents/ui/config/ConfigPrefix.qml:286
-msgid "Show current weather"
-msgstr "Hava durumunu göster"
-
-#: contents/ui/config/ConfigPrefix.qml:346
-msgid "Convert units (requires KRunner installed)"
-msgstr "Birimleri dönüştür (KRunner gereklidir)"
-
-#: contents/ui/config/ConfigPrefix.qml:356
-msgid ""
-"Note: Some prefixes (like unit conversion) depend on installed KRunner "
-"runners."
-msgstr ""
-"Not: Bazı önekler (birim dönüştürme gibi) yüklü KRunner eklentilerine "
-"bağlıdır."
-
-#: contents/ui/config/ConfigPreview.qml:97
-#, fuzzy
-msgid "Preview Settings"
-msgstr "Prefix Görünüm Ayarları"
-
-#: contents/ui/config/ConfigPreview.qml:103
-msgid "Enable or disable file previews for different file types."
-msgstr "Farklı dosya türleri için dosya önizlemelerini etkinleştir veya devre dışı bırak."
-
-#: contents/ui/config/ConfigPreview.qml:125
-msgid "Enabled"
-msgstr "Etkin"
-
-#: contents/ui/config/ConfigPreview.qml:125
-msgid "Disabled"
-msgstr "Devre Dışı"
-
-#: contents/ui/config/ConfigPreview.qml:276
-msgid "Icon only"
-msgstr "Sadece ikon"
-
-#: contents/ui/config/ConfigPreview.qml:306
-#, fuzzy
-msgid "Performance Information"
-msgstr "Önizleme Bilgisi"
-
-#: contents/ui/config/ConfigPreview.qml:311
-msgid "Video and document previews may increase memory usage."
-msgstr "Video ve belge önizlemeleri bellek kullanımını artırabilir."
-
-#: contents/ui/config/ConfigRSS.qml:136
-msgid "Arch & Linux News"
-msgstr "Arch & Linux Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:146
-msgid "Security Bulletins"
-msgstr "Güvenlik Bültenleri"
-
-#: contents/ui/config/ConfigRSS.qml:155
-msgid "Turkey TV"
-msgstr "Türkiye TV"
-
-#: contents/ui/config/ConfigRSS.qml:162
-msgid "Germany News"
-msgstr "Almanya Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:169
-msgid "Türkiye News"
-msgstr "Türkiye Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:176
-msgid "Spain & Mexico"
-msgstr "İspanya ve Meksika"
-
-#: contents/ui/config/ConfigRSS.qml:183
-msgid "Armenia News"
-msgstr "Ermenistan Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:190
-msgid "Greece News"
-msgstr "Yunanistan Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:197
-msgid "Azerbaijan News"
-msgstr "Azerbaycan Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:204
-msgid "UK & World News"
-msgstr "İngiltere & Dünya Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:211
-msgid "World News"
-msgstr "Dünya Haberleri"
-
-#: contents/ui/config/ConfigRSS.qml:260
-msgid "RSS Sources"
-msgstr "RSS Kaynakları"
-
-#: contents/ui/config/ConfigRSS.qml:384
-msgid "Enable RSS Feed"
-msgstr "RSS Akışını Etkinleştir"
-
-#: contents/ui/config/ConfigRSS.qml:385
-msgid "Show RSS feed updates in search results"
-msgstr "Arama sonuçlarında RSS akış güncellemelerini göster"
-
-#: contents/ui/config/ConfigRSS.qml:393
-msgid "Popular Presets"
-msgstr "Popüler Hazır Ayarlar"
-
-#: contents/ui/config/ConfigRSS.qml:436
-msgid "RSS Sources (Max 5)"
-msgstr "RSS Kaynakları (Maks 5)"
-
-#: contents/ui/config/ConfigRSS.qml:469
-msgid "Never"
-msgstr "Asla"
-
-#: contents/ui/config/ConfigRSS.qml:475
-msgid "URL"
-msgstr "URL"
-
-#: contents/ui/config/ConfigRSS.qml:494
-msgid "Entries:"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:505
-msgid "Haber Özellikleri:"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:506
-msgid "Önizlemede RSS başlıkları"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:512
-msgid "Maksimum Haber (Kaynak Başına):"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:521
-#, fuzzy
-msgid "Interval:"
-msgstr "Yenileme Sıklığı:"
-
-#: contents/ui/config/ConfigRSS.qml:524
-msgid "%1h"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:524
-msgid "%1m"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:532
-msgid "%1 hours"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:532
-msgid "%1 mins"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:569
-msgid "Add Custom Source"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:577
-msgid "Global Defaults"
-msgstr ""
-
-#: contents/ui/config/ConfigRSS.qml:584
-#, fuzzy
-msgid "Default Interval:"
-msgstr "Yenileme Sıklığı:"
-
-#: contents/ui/config/ConfigRSS.qml:590
-msgid "Default Entries:"
-msgstr ""
-
-#: contents/ui/config/ConfigSearch.qml:13
-msgid "Search Settings"
-msgstr "Arama Ayarları"
-
-#: contents/ui/config/ConfigSearch.qml:24
-#, fuzzy
-msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr "Hover ile dosya bilgisi göster (Ctrl+Space ile de tetiklenebilir)"
-
-#: contents/ui/config/ConfigSearch.qml:33
-msgid "Search Behavior"
-msgstr "Arama Davranışı"
-
-#: contents/ui/config/ConfigSearch.qml:37
-msgid "You can use the following KRunner commands and prefixes:"
-msgstr "Aşağıdaki KRunner komutlarını ve öneklerini kullanabilirsiniz:"
-
-#: contents/ui/config/ConfigSearch.qml:51
-msgid "Prefix"
-msgstr "Önek"
-
-#: contents/ui/config/ConfigSearch.qml:56
-msgid "Description"
-msgstr "Açıklama"
-
-#: contents/ui/config/ConfigSearch.qml:78
-#, fuzzy
-msgid "Search Unicode characters"
-msgstr "Unicode karakter"
-
-#: contents/config/config.qml:17
-msgid "RSS"
-msgstr ""
+#~ msgid "Enable RSS Feed"
+#~ msgstr "RSS Akışını Etkinleştir"
 
 #~ msgid "Categories"
 #~ msgstr "Kategoriler"
-
-#~ msgid "Placeholder"
-#~ msgstr "Yer Tutucu"
 
 #, fuzzy
 #~ msgid "Smartly limit results based on relevance"
@@ -1765,9 +1814,6 @@ msgstr ""
 #~ msgid "No history"
 #~ msgstr "Geçmiş boş"
 
-#~ msgid "Right-click to unpin"
-#~ msgstr "Kaldırmak için sağ tıklayın"
-
 #~ msgid "Category Settings"
 #~ msgstr "Kategori Ayarları"
 
@@ -1832,11 +1878,3 @@ msgstr ""
 #~ msgid "BIOS"
 #~ msgstr "BIOS"
 
-msgid "Show RSS titles in placeholder cycling"
-msgstr "RSS başlıklarını arama kutusunda döngüye al"
-
-msgid "Show full headlines (split into segments)"
-msgstr "Haber başlıklarının tamamını göster (parçalara ayırarak)"
-
-msgid "News Features:"
-msgstr "Haber Özellikleri:"

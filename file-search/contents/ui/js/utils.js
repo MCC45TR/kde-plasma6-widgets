@@ -23,7 +23,7 @@ function formatHistoryTime(timestamp, trFunc) {
     
     // Today
     if (now.toDateString() === then.toDateString()) {
-        return (trFunc ? trFunc("today") : "Today") + " " + timeStr
+        return (trFunc ? trFunc("Today") : "Today") + " " + timeStr
     }
     
     // Within last 6 days

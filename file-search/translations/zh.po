@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-18 22:43+0300\n"
+"POT-Creation-Date: 2026-05-23 02:06+0300\n"
 "PO-Revision-Date: 2026-01-22 12:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: zh\n"
@@ -12,303 +12,403 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
+#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
 msgid "Appearance"
 msgstr "外观"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-msgid "Categories"
-msgstr "类别"
-
-#: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
-msgid "Debug"
-msgstr "调试"
-
-#: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
-msgid "Help"
-msgstr "帮助"
-
-#: contents/ui/config/ConfigGeneral.qml:80
-msgid "Panel"
-msgstr "面板"
-
-#: contents/ui/config/ConfigGeneral.qml:84
-msgid "Popup"
-msgstr "弹出窗口"
-
-#: contents/ui/config/ConfigGeneral.qml:88
-#: contents/ui/config/ConfigPreview.qml:9
-msgid "Preview"
-msgstr "预览"
-
-#: contents/ui/config/ConfigGeneral.qml:92
-#: contents/ui/config/ConfigPrefix.qml:9
-msgid "Prefixes"
-msgstr "前缀"
-
-#: contents/ui/config/ConfigGeneral.qml:96
-msgid "Placeholder"
-msgstr "占位符"
-
-#: contents/ui/config/ConfigGeneral.qml:114
-msgid "Panel Appearance"
-msgstr "面板外观"
-
-#: contents/ui/config/ConfigGeneral.qml:120
-#: contents/ui/config/ConfigDebug.qml:123
-msgid "Display Mode"
-msgstr "显示模式"
-
-#: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
-msgid "Button Mode (Icon only)"
-msgstr "按钮模式 (仅图标)"
-
-#: contents/ui/config/ConfigGeneral.qml:123
-msgid "Medium Mode (Text)"
-msgstr "中等模式 (文本)"
-
-#: contents/ui/config/ConfigGeneral.qml:124
-msgid "Wide Mode (Search Bar)"
-msgstr "宽模式 (搜索栏)"
-
-#: contents/ui/config/ConfigGeneral.qml:125
-msgid "Extra Wide Mode"
-msgstr "超宽模式"
-
-#: contents/ui/config/ConfigGeneral.qml:132
-msgid "Panel Preview"
-msgstr "面板预览"
-
-#: contents/ui/config/ConfigGeneral.qml:176
-#: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:49
+#: contents/ui/config/ConfigSearch.qml:9
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search"
 msgstr "搜索"
 
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Start searching..."
-msgstr "开始搜索..."
+#: contents/config/config.qml:17
+msgid "RSS"
+msgstr "RSS"
 
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Search..."
-msgstr "搜索..."
+#: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
+msgid "Debug"
+msgstr "调试"
 
-#: contents/ui/config/ConfigGeneral.qml:204
-msgid "Power Options"
-msgstr "电源选项"
+#: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
+#: contents/ui/components/QueryHints.qml:70
+msgid "Help"
+msgstr "帮助"
 
-#: contents/ui/config/ConfigGeneral.qml:205
-msgid "Show boot options in Reboot button"
-msgstr "在重启按钮中显示引导选项"
+#: contents/ui/config/ConfigCategories.qml:212
+msgid "Algorithm Settings"
+msgstr "算法设置"
 
-#: contents/ui/config/ConfigGeneral.qml:213
-msgid "Results View"
-msgstr "结果视图"
+#: contents/ui/config/ConfigCategories.qml:217
+msgid "Search Algorithm"
+msgstr "搜索算法"
 
-#: contents/ui/config/ConfigGeneral.qml:219
-#: contents/ui/config/ConfigDebug.qml:129
-msgid "View Mode"
-msgstr "视图模式"
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Fuzzy Match"
+msgstr "模糊匹配"
 
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "List View"
-msgstr "列表视图"
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Exact Match"
+msgstr "精确匹配"
 
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "Tile View"
-msgstr "平铺视图"
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Starts With"
+msgstr "以此开始"
 
-#: contents/ui/config/ConfigGeneral.get(1):227
-#: contents/ui/config/ConfigDebug.qml:138
-msgid "List Icon Size"
-msgstr "列表图标大小"
+#: contents/ui/config/ConfigCategories.qml:229
+msgid "Dynamic Result Count"
+msgstr "动态结果数量"
 
-#: contents/ui/config/ConfigGeneral.qml:235
-#: contents/ui/config/ConfigDebug.qml:135
-msgid "Tile Icon Size"
-msgstr "平铺图标大小"
+#: contents/ui/config/ConfigCategories.qml:230
+msgid "Automatically limit displayed results based on relevance score"
+msgstr "根据相关度得分自动限制显示的结果"
 
-#: contents/ui/config/ConfigGeneral.qml:243
-#: contents/ui/config/ConfigCategories.qml:170
+#: contents/ui/config/ConfigCategories.qml:237
 msgid "Result Limits"
 msgstr "结果限制"
 
-#: contents/ui/config/ConfigGeneral.qml:249
-#: contents/ui/config/ConfigCategories.qml:175
+#: contents/ui/config/ConfigCategories.qml:242
 msgid "Min Results"
-msgstr "最小结果"
+msgstr "最小结果数"
 
-#: contents/ui/config/ConfigGeneral.qml:256
-#: contents/ui/config/ConfigCategories.qml:184
+#: contents/ui/config/ConfigCategories.qml:251
 msgid "Max Results"
-msgstr "最大结果"
+msgstr "最大结果数"
 
-#: contents/ui/config/ConfigGeneral.qml:263
-msgid "Smartly limit results based on relevance"
-msgstr "基于相关性智能限制结果"
+#: contents/ui/config/ConfigCategories.qml:262
+msgid "Prioritized Categories"
+msgstr "优先类别"
 
-#: contents/ui/config/ConfigGeneral.qml:264
-msgid "Dynamic Limit"
-msgstr "动态限制"
+#: contents/ui/config/ConfigCategories.qml:266
+msgid "Use buttons to reorder categories or move between sections"
+msgstr "使用按钮重新排序类别或在各部分之间移动"
 
-#: contents/ui/config/ConfigGeneral.qml:272
-#: contents/ui/config/ConfigSearch.qml:19
-#: contents/ui/config/ConfigPreview.qml:112
-msgid "Enable File Previews"
-msgstr "启用文件预览"
+#: contents/ui/config/ConfigCategories.qml:275
+msgid "Priority"
+msgstr "优先级"
 
-#: contents/ui/config/ConfigGeneral.qml:273
-msgid "Master Switch"
-msgstr "总开关"
+#: contents/ui/config/ConfigCategories.qml:366
+msgid "Move to Combined"
+msgstr "移至合并"
 
-#: contents/ui/config/ConfigGeneral.qml:278
-#: contents/ui/config/ConfigPreview.qml:134
-msgid "Preview Types"
-msgstr "预览类型"
+#: contents/ui/config/ConfigCategories.qml:381
+msgid "Show Together (Merged)"
+msgstr "合并显示"
 
-#: contents/ui/config/ConfigGeneral.qml:283
-#: contents/ui/config/ConfigPreview.qml:159
-msgid "Images"
-msgstr "图像"
+#: contents/ui/config/ConfigCategories.qml:385
+msgid "Categories in this section will be grouped together"
+msgstr "此部分中的类别将归为一组"
 
-#: contents/ui/config/ConfigGeneral.qml:289
-#: contents/ui/config/ConfigPreview.qml:197
-msgid "Videos"
-msgstr "视频"
+#: contents/ui/config/ConfigCategories.qml:401
+msgid "No combined categories"
+msgstr "无合并类别"
 
-#: contents/ui/config/ConfigGeneral.qml:295
-#: contents/ui/config/ConfigPreview.qml:235
-msgid "Text Files"
-msgstr "文本文件"
+#: contents/ui/config/ConfigCategories.qml:466
+msgid "Move to Separate"
+msgstr "移至独立栏"
 
-#: contents/ui/config/ConfigGeneral.qml:301
-#: contents/ui/config/ConfigPreview.qml:273
-msgid "Documents"
-msgstr "文档"
+#: contents/ui/config/ConfigCategories.qml:481
+msgid "Category Settings Information"
+msgstr "类别设置信息"
 
-#: contents/ui/config/ConfigGeneral.qml:311
-#: contents/ui/config/ConfigPrefix.qml:29
-msgid "Date View (date:)"
-msgstr "日期视图 (date:)"
-
-#: contents/ui/config/ConfigGeneral.qml:316
-#: contents/ui/config/ConfigPrefix.qml:36
-msgid "Show Large Clock"
-msgstr "显示大时钟"
-
-#: contents/ui/config/ConfigGeneral.qml:320
-#: contents/ui/config/ConfigPrefix.qml:43
-msgid "Show Calendar Events"
-msgstr "显示日历事件"
-
-#: contents/ui/config/ConfigGeneral.qml:323
-#: contents/ui/config/ConfigPrefix.qml:50
-msgid "Power View (power:)"
-msgstr "电源视图 (power:)"
-
-#: contents/ui/config/ConfigGeneral.qml:328
-#: contents/ui/config/ConfigPrefix.qml:58
-msgid "Show Sleep Button"
-msgstr "显示睡眠按钮"
-
-#: contents/ui/config/ConfigGeneral.qml:332
-#: contents/ui/config/ConfigPrefix.qml:65
-msgid "Show Hibernate Button"
-msgstr "显示休眠按钮"
-
-#: contents/ui/config/ConfigGeneral.qml:337
-#: contents/ui/config/ConfigPrefix.qml:72
-msgid "Available Prefixes Reference"
-msgstr "可用前缀参考"
-
-#: contents/ui/config/ConfigGeneral.qml:341
-#: contents/ui/config/ConfigPrefix.qml:76
+#: contents/ui/config/ConfigCategories.qml:485
 msgid ""
-"These prefixes can be used to perform specific actions directly from the "
-"search bar."
-msgstr "这些前缀可用于直接从搜索栏执行特定操作。"
+"Changes are applied immediately. Hidden categories will not appear in search "
+"results. Priority determines display order."
+msgstr "更改会立即应用。隐藏的类别不会出现在搜索结果中。优先级决定显示顺序。"
 
-#: contents/ui/config/ConfigGeneral.qml:363
-#: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
-#: contents/ui/config/ConfigPrefix.qml:98
+#: contents/ui/config/ConfigCategories.qml:485
+msgid "Lower number = higher priority"
+msgstr "数字越小 = 优先级越高"
+
+#: contents/ui/config/ConfigDebug.qml:102
+msgid ""
+"This tab is only active in Developer mode. Change profile in General "
+"settings."
+msgstr "此选项卡仅在开发者模式下启用。在常规设置中更改配置文件。"
+
+#: contents/ui/config/ConfigDebug.qml:111
+msgid "Debug Settings"
+msgstr "调试设置"
+
+#: contents/ui/config/ConfigDebug.qml:117
+#: contents/ui/config/ConfigDebug.qml:176
+#: contents/ui/components/DebugOverlay.qml:58
+msgid "Debug Overlay"
+msgstr "调试覆盖图"
+
+#: contents/ui/config/ConfigDebug.qml:124
+msgid "Show debug info on widget (active mode, item count, index source)"
+msgstr "在小部件上显示调试信息 (活动模式、项目数、索引源)"
+
+#: contents/ui/config/ConfigDebug.qml:133
+msgid "Debug Data"
+msgstr "调试数据"
+
+#: contents/ui/config/ConfigDebug.qml:143
+msgid "Timestamp"
+msgstr "时间戳"
+
+#: contents/ui/config/ConfigDebug.qml:146
+msgid "Locale"
+msgstr "区域"
+
+#: contents/ui/config/ConfigDebug.qml:149
+msgid "User Profile"
+msgstr "用户配置文件"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Minimal"
+msgstr "极简"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Developer"
+msgstr "开发者"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Power User"
+msgstr "高级用户"
+
+#: contents/ui/config/ConfigDebug.qml:155
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "Display Mode"
+msgstr "显示模式"
+
+#: contents/ui/config/ConfigDebug.qml:157
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Button"
+msgstr "按钮"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Medium"
+msgstr "中等"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Wide"
+msgstr "宽"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Extra Wide"
+msgstr "超宽"
+
+#: contents/ui/config/ConfigDebug.qml:161
+#: contents/ui/config/ConfigGeneral.qml:517
+msgid "View Mode"
+msgstr "视图模式"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "List"
+msgstr "列表视图"
+
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "Tile"
+msgstr "平铺视图"
+
+#: contents/ui/config/ConfigDebug.qml:167
+#: contents/ui/config/ConfigGeneral.qml:544
+msgid "Tile Icon Size"
+msgstr "平铺图标大小"
+
+#: contents/ui/config/ConfigDebug.qml:170
+#: contents/ui/config/ConfigGeneral.qml:536
+msgid "List Icon Size"
+msgstr "列表图标大小"
+
+#: contents/ui/config/ConfigDebug.qml:173
+msgid "Enable Preview"
+msgstr "启用预览"
+
+#: contents/ui/config/ConfigDebug.qml:179
+msgid "History Count"
+msgstr "历史记录计数"
+
+#: contents/ui/config/ConfigDebug.qml:185
+msgid "items"
+msgstr "项目"
+
+#: contents/ui/config/ConfigDebug.qml:196
+msgid "Telemetry"
+msgstr "遥测"
+
+#: contents/ui/config/ConfigDebug.qml:205
+#: contents/ui/components/DebugOverlay.qml:101
+msgid "Total Searches"
+msgstr "总搜索次数"
+
+#: contents/ui/config/ConfigDebug.qml:216
+#: contents/ui/components/DebugOverlay.qml:104
+msgid "Avg Latency"
+msgstr "平均延迟"
+
+#: contents/ui/config/ConfigDebug.qml:230
+msgid "History Sample"
+msgstr "历史记录示例"
+
+#: contents/ui/config/ConfigDebug.qml:237
+msgid ""
+"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
+"is sent to the internet."
+msgstr "隐私声明：所有调试和遥测数据仅保存在本地。不会向互联网发送任何数据。"
+
+#: contents/ui/config/ConfigDebug.qml:311
+msgid "History is empty"
+msgstr "历史记录为空"
+
+#: contents/ui/config/ConfigHelp.qml:85
+msgid "Keyboard Shortcuts"
+msgstr "键盘快捷键"
+
+#: contents/ui/config/ConfigHelp.qml:89
+msgid "Navigate between results"
+msgstr "在结果之间导航"
+
+#: contents/ui/config/ConfigHelp.qml:95
+msgid "Navigate between sections"
+msgstr "在各部分之间导航"
+
+#: contents/ui/config/ConfigHelp.qml:101
+msgid "List / Tile view"
+msgstr "列表/平铺视图"
+
+#: contents/ui/config/ConfigHelp.qml:107
+msgid "Toggle file preview"
+msgstr "切换文件预览"
+
+#: contents/ui/config/ConfigHelp.qml:113
+msgid "Open selected item"
+msgstr "打开所选项目"
+
+#: contents/ui/config/ConfigHelp.qml:119
+msgid "Close widget"
+msgstr "关闭小部件"
+
+#: contents/ui/config/ConfigHelp.qml:126
+#: contents/ui/components/QueryHints.qml:31
+#: contents/ui/components/QueryHints.qml:100
+msgid "Search Prefixes"
+msgstr "搜索前缀"
+
+#: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
+#: contents/ui/config/ConfigPrefix.qml:214
+#: contents/ui/config/ConfigGeneral.qml:1002
 msgid "List files modified today"
 msgstr "列出今天修改的文件"
 
-#: contents/ui/config/ConfigGeneral.qml:375
-#: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
-#: contents/ui/config/ConfigPrefix.qml:110
+#: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
+#: contents/ui/config/ConfigPrefix.qml:226
+#: contents/ui/config/ConfigGeneral.qml:1015
 msgid "Search on Google"
 msgstr "在 Google 上搜索"
 
-#: contents/ui/config/ConfigGeneral.qml:387
-#: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
-#: contents/ui/config/ConfigPrefix.qml:122
+#: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
+#: contents/ui/config/ConfigPrefix.qml:238
+#: contents/ui/config/ConfigGeneral.qml:1028
 msgid "Search on DuckDuckGo"
 msgstr "在 DuckDuckGo 上搜索"
 
-#: contents/ui/config/ConfigGeneral.qml:399
-#: contents/ui/config/ConfigPrefix.qml:134
-msgid "Show calendar and date information"
-msgstr "显示日历和日期信息"
+#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
+msgid "Terminate processes"
+msgstr "终止进程"
 
-#: contents/ui/config/ConfigGeneral.qml:411
-#: contents/ui/config/ConfigPrefix.qml:146
-msgid "Show large clock"
-msgstr "显示大时钟"
+#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
+msgid "Check spelling"
+msgstr "拼写检查"
 
-#: contents/ui/config/ConfigGeneral.qml:423
-msgid "Show power management options"
-msgstr "显示电源管理选项"
+#: contents/ui/config/ConfigHelp.qml:161
+msgid "User Profiles"
+msgstr "用户配置文件"
 
-#: contents/ui/config/ConfigGeneral.get(1):435
-#: contents/ui/config/ConfigPrefix.qml:170
-msgid "Show this help screen"
-msgstr "显示此帮助屏幕"
+#: contents/ui/config/ConfigHelp.qml:165
+msgid "A simplified interface with essential features."
+msgstr "包含基本功能的简化界面。"
 
-#: contents/ui/config/ConfigGeneral.qml:447
-#: contents/ui/config/ConfigPrefix.get(1):182
-msgid "Terminate running processes"
-msgstr "终止运行中的进程"
+#: contents/ui/config/ConfigHelp.qml:171
+msgid "Debug tab active, developer features enabled."
+msgstr "调试选项卡已启用，开发者功能已激活。"
 
-#: contents/ui/config/ConfigGeneral.qml:459
-#: contents/ui/config/ConfigPrefix.qml:194
-msgid "Check spelling of a word"
-msgstr "检查单词拼写"
+#: contents/ui/config/ConfigHelp.qml:177
+msgid "All features active, advanced settings available."
+msgstr "所有功能均处于活动状态，提供高级设置。"
 
-#: contents/ui/config/ConfigGeneral.qml:471
-#: contents/ui/config/ConfigPrefix.qml:206
-msgid "Execute shell commands"
-msgstr "执行 shell 命令"
+#: contents/ui/config/ConfigPreview.qml:9
+#: contents/ui/config/ConfigGeneral.qml:187
+#: contents/ui/config/ConfigGeneral.qml:596
+msgid "Preview"
+msgstr "预览"
 
-#: contents/ui/config/ConfigGeneral.qml:483
-msgid "Convert units (requires KRunner)"
-msgstr "转换单位 (需要 KRunner)"
+#: contents/ui/config/ConfigPreview.qml:97
+msgid "Preview Settings"
+msgstr "预览设置"
 
-#: contents/ui/config/ConfigGeneral.qml:493
+#: contents/ui/config/ConfigPreview.qml:103
+msgid "Enable or disable file previews for different file types."
+msgstr "启用或禁用不同文件类型的文件预览。"
+
+#: contents/ui/config/ConfigPreview.qml:112
+#: contents/ui/config/ConfigSearch.qml:19
+#: contents/ui/config/ConfigGeneral.qml:701
+msgid "Enable File Previews"
+msgstr "启用文件预览"
+
+#: contents/ui/config/ConfigPreview.qml:125
+msgid "Enabled"
+msgstr "已启用"
+
+#: contents/ui/config/ConfigPreview.qml:125
+msgid "Disabled"
+msgstr "已禁用"
+
+#: contents/ui/config/ConfigPreview.qml:133
+#: contents/ui/config/ConfigGeneral.qml:707
+msgid "Preview Types"
+msgstr "预览类型"
+
+#: contents/ui/config/ConfigPreview.qml:158
+#: contents/ui/config/ConfigGeneral.qml:725
+#: contents/ui/components/FilterChips.qml:25
+#: contents/ui/components/QueryHints.qml:53
+msgid "Images"
+msgstr "图片"
+
+#: contents/ui/config/ConfigPreview.qml:196
+#: contents/ui/config/ConfigGeneral.qml:762
+msgid "Videos"
+msgstr "视频"
+
+#: contents/ui/config/ConfigPreview.qml:234
+#: contents/ui/config/ConfigGeneral.qml:799
+msgid "Text Files"
+msgstr "文本文件"
+
+#: contents/ui/config/ConfigPreview.qml:272
+#: contents/ui/config/ConfigGeneral.qml:646
+#: contents/ui/config/ConfigGeneral.qml:836
+#: contents/ui/components/QueryHints.qml:52
+msgid "Documents"
+msgstr "文档"
+
+#: contents/ui/config/ConfigPreview.qml:276
+msgid "Icon only"
+msgstr "仅限图标"
+
+#: contents/ui/config/ConfigPreview.qml:306
+msgid "Performance Information"
+msgstr "性能信息"
+
+#: contents/ui/config/ConfigPreview.qml:311
+msgid "Video and document previews may increase memory usage."
+msgstr "视频和文档预览可能会增加内存使用量。"
+
 #: contents/ui/config/ConfigSearch.qml:13
 msgid "Search Settings"
 msgstr "搜索设置"
 
-#: contents/ui/config/ConfigGeneral.qml:497
-#: contents/ui/config/ConfigCategories.qml:150
-msgid "Search Algorithm"
-msgstr "搜索算法"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Fuzzy"
-msgstr "模糊"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Exact"
-msgstr "精确"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-#: contents/ui/config/ConfigCategories.get(1):151
-msgid "Starts With"
-msgstr "以此开始"
-
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr "悬停时显示文件预览 (也可通过 Ctrl+Space 触发)"
+msgstr "悬停时显示文件预览 (也可以使用 Ctrl+Space 触发)"
 
 #: contents/ui/config/ConfigSearch.qml:33
 msgid "Search Behavior"
@@ -316,7 +416,7 @@ msgstr "搜索行为"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr "你可以使用以下 KRunner 命令和前缀："
+msgstr "您可以使用以下 KRunner 命令和前缀:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
@@ -326,270 +426,896 @@ msgstr "前缀"
 msgid "Description"
 msgstr "描述"
 
-#: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
-msgid "Terminate processes"
-msgstr "终止进程"
-
-#: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.qml:118
-msgid "Check spelling"
-msgstr "拼写检查"
-
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
 msgstr "搜索 Unicode 字符"
 
-#: contents/ui/config/ConfigDebug.qml:68
-msgid ""
-"This tab is only active in Developer mode. Change profile in General "
-"settings."
-msgstr "此选项卡仅在开发者模式下有效。请在常规设置中更改配置文件。"
+#: contents/ui/config/ConfigPrefix.qml:10
+#: contents/ui/config/ConfigGeneral.qml:191
+msgid "Prefixes"
+msgstr "前缀"
 
-#: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-msgid "Debug Settings"
-msgstr "调试设置"
-
-#: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
-#: contents/ui/components/DebugOverlay.qml:57
-msgid "Debug Overlay"
-msgstr "调试覆盖层"
-
-#: contents/ui/config/ConfigDebug.qml:91
-msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr "在小部件上显示调试信息"
-
-#: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
-msgid "Debug Data"
-msgstr "调试数据"
-
-#: contents/ui/config/ConfigDebug.qml:111
-msgid "Timestamp"
-msgstr "时间戳"
-
-#: contents/ui/config/ConfigDebug.qml:114
-msgid "Locale"
-msgstr "区域设置"
-
-#: contents/ui/config/ConfigDebug.qml:117
-msgid "User Profile"
-msgstr "用户配置文件"
-
-#: contents/ui/config/ConfigDebug.qml:141
-msgid "Enable Preview"
-msgstr "启用预览"
-
-#: contents/ui/config/ConfigDebug.qml:147
-msgid "History Count"
-msgstr "历史记录计数"
-
-#: contents/ui/config/ConfigDebug.qml:153
-msgid "items"
-msgstr "项"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/config/ConfigDebug.qml:165
-msgid "Telemetry"
-msgstr "遥测"
-
-#: contents/ui/config/ConfigDebug.qml:174
-#: contents/ui/components/DebugOverlay.qml:100
-msgid "Total Searches"
-msgstr "总搜索次数"
-
-#: contents/ui/config/ConfigDebug.qml:185
-#: contents/ui/components/DebugOverlay.qml:103
-msgid "Avg Latency"
-msgstr "平均延迟"
-
-#: contents/ui/config/ConfigDebug.qml:198
-#: contents/ui/config/ConfigDebug.qml:200
-msgid "History Sample"
-msgstr "历史样本"
-
-#: contents/ui/config/ConfigDebug.qml:207
-msgid ""
-"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
-"is sent to the internet."
-msgstr ""
-"隐私提示：所有调试和遥测数据仅存储在本地。不会向互联网发送任何数据。"
-
-#: contents/ui/config/ConfigDebug.qml:281
-msgid "History is empty"
-msgstr "历史记录为空"
-
-#: contents/ui/config/ConfigHelp.qml:49
-msgid "Keyboard Shortcuts"
-msgstr "键盘快捷键"
-
-#: contents/ui/config/ConfigHelp.qml:53
-msgid "Navigate between results"
-msgstr "在结果之间导航"
-
-#: contents/ui/config/ConfigHelp.qml:59
-msgid "Navigate between sections"
-msgstr "在各个部分之间导航"
-
-#: contents/ui/config/ConfigHelp.qml:65
-msgid "List / Tile view"
-msgstr "列表/平铺视图"
-
-#: contents/ui/config/ConfigHelp.qml:71
-msgid "Toggle file preview"
-msgstr "切换文件预览"
-
-#: contents/ui/config/ConfigHelp.qml:77
-msgid "Open selected item"
-msgstr "打开所选项目"
-
-#: contents/ui/config/ConfigHelp.qml:83
-msgid "Close widget"
-msgstr "关闭小部件"
-
-#: contents/ui/config/ConfigHelp.qml:90
-msgid "Search Prefixes"
-msgstr "搜索前缀"
-
-#: contents/ui/config/ConfigHelp.qml:125
-msgid "User Profiles"
-msgstr "用户配置文件"
-
-#: contents/ui/config/ConfigHelp.qml:129
-msgid "A simplified interface with essential features."
-msgstr "具有基本功能的简化界面。"
-
-#: contents/ui/config/ConfigHelp.qml:135
-msgid "Debug tab active, developer features enabled."
-msgstr "调试选项卡已激活，已启用开发者功能。"
-
-#: contents/ui/config/ConfigHelp.qml:141
-msgid "All features active, advanced settings available."
-msgstr "所有功能已激活，提供高级设置。"
-
-#: contents/ui/config/ConfigCategories.qml:145
-msgid "Algorithm Settings"
-msgstr "算法设置"
-
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Fuzzy Match"
-msgstr "模糊匹配"
-
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Exact Match"
-msgstr "精确匹配"
-
-#: contents/ui/config/ConfigCategories.qml:162
-msgid "Dynamic Result Count"
-msgstr "动态结果计数"
-
-#: contents/ui/config/ConfigCategories.qml:163
-msgid "Automatically limit displayed results based on relevance score"
-msgstr "根据相关性分数自动限制显示的结果"
-
-#: contents/ui/config/ConfigCategories.qml:195
-msgid "Prioritized Categories"
-msgstr "优先类别"
-
-#: contents/ui/config/ConfigCategories.qml:199
-msgid "Use buttons to reorder categories or move between sections"
-msgstr "使用按钮重新排序类别或在各部分之间移动"
-
-#: contents/ui/config/ConfigCategories.qml:208
-msgid "Priority"
-msgstr "优先级"
-
-#: contents/ui/config/ConfigCategories.qml:299
-msgid "Move to Combined"
-msgstr "移至合并栏"
-
-#: contents/ui/config/ConfigCategories.qml:314
-msgid "Show Together (Merged)"
-msgstr "一起显示 (合并)"
-
-#: contents/ui/config/ConfigCategories.qml:318
-msgid "Categories in this section will be grouped together"
-msgstr "此部分中的类别将归为一组"
-
-#: contents/ui/config/ConfigCategories.qml:339
-msgid "No combined categories"
-msgstr "未发现合并类别"
-
-#: contents/ui/config/ConfigCategories.qml:398
-msgid "Move to Separate"
-msgstr "移至独立栏"
-
-#: contents/ui/config/ConfigCategories.qml:413
-msgid "Category Settings Information"
-msgstr "类别设置信息"
-
-#: contents/ui/config/ConfigCategories.qml:417
-msgid ""
-"Changes are applied immediately. Hidden categories will not appear in search "
-"results. Priority determines display order."
-msgstr "更该立即生效。隐藏的类别不会出现在搜索结果中。优先级决定显示顺序。"
-
-#: contents/ui/config/ConfigCategories.qml:417
-msgid "Lower number = higher priority"
-msgstr "较小的数值 = 较高的优先级"
-
-#: contents/ui/config/ConfigPreview.qml:97
-msgid "Preview Settings"
-msgstr "预览设置"
-
-#: contents/ui/config/ConfigPreview.qml:103
-msgid "Enable or disable file previews for different file types."
-msgstr "启用或禁用不同文件类型的预览。"
-
-#: contents/ui/config/ConfigPreview.qml:126
-msgid "Enabled"
-msgstr "已启用"
-
-#: contents/ui/config/ConfigPreview.qml:126
-msgid "Disabled"
-msgstr "已禁用"
-
-#: contents/ui/config/ConfigPreview.qml:307
-msgid "Performance Information"
-msgstr "性能信息"
-
-#: contents/ui/config/ConfigPreview.qml:312
-msgid "Video and document previews may increase memory usage."
-msgstr "视频和文档预览可能会增加内存占用。"
-
-#: contents/ui/config/ConfigPrefix.qml:24
+#: contents/ui/config/ConfigPrefix.qml:40
 msgid "Prefix View Settings"
 msgstr "前缀视图设置"
 
-#: contents/ui/config/ConfigPrefix.qml:158
+#: contents/ui/config/ConfigPrefix.qml:45
+#: contents/ui/config/ConfigGeneral.qml:855
+msgid "Date View (date:)"
+msgstr "日期视图 (date:)"
+
+#: contents/ui/config/ConfigPrefix.qml:52
+#: contents/ui/config/ConfigGeneral.qml:860
+msgid "Show Large Clock"
+msgstr "显示大时钟"
+
+#: contents/ui/config/ConfigPrefix.qml:59
+#: contents/ui/config/ConfigGeneral.qml:864
+msgid "Show Calendar Events"
+msgstr "显示日历事件"
+
+#: contents/ui/config/ConfigPrefix.qml:66
+#: contents/ui/config/ConfigGeneral.qml:869
+msgid "Weather View (weather:)"
+msgstr "天气视图 (weather:)"
+
+#: contents/ui/config/ConfigPrefix.qml:74
+#: contents/ui/config/ConfigGeneral.qml:875
+msgid "Enable Weather Prefix"
+msgstr "启用天气前缀"
+
+#: contents/ui/config/ConfigPrefix.qml:87
+#: contents/ui/config/ConfigGeneral.qml:888
+msgid "Use System Units"
+msgstr "使用系统单位"
+
+#: contents/ui/config/ConfigPrefix.qml:96
+#: contents/ui/config/ConfigGeneral.qml:897
+msgid "Refresh Interval:"
+msgstr "刷新间隔："
+
+#: contents/ui/config/ConfigPrefix.qml:102
+#: contents/ui/config/ConfigGeneral.qml:903
+msgid "Every Search"
+msgstr "每次搜索"
+
+#: contents/ui/config/ConfigPrefix.qml:103
+#: contents/ui/config/ConfigGeneral.qml:904
+msgid "15 Minutes"
+msgstr "15 分钟"
+
+#: contents/ui/config/ConfigPrefix.qml:104
+#: contents/ui/config/ConfigGeneral.qml:905
+msgid "30 Minutes"
+msgstr "30 分钟"
+
+#: contents/ui/config/ConfigPrefix.qml:105
+#: contents/ui/config/ConfigGeneral.qml:906
+msgid "1 Hour"
+msgstr "1 小时"
+
+#: contents/ui/config/ConfigPrefix.qml:125
+#: contents/ui/config/ConfigGeneral.qml:926
+msgid "(If time since last update > interval)"
+msgstr "(如果距上次更新时长 > 间隔时)"
+
+#: contents/ui/config/ConfigPrefix.qml:134
+#: contents/ui/config/ConfigGeneral.qml:933
+msgid "Power View (power:)"
+msgstr "电源视图 (power:)"
+
+#: contents/ui/config/ConfigPrefix.qml:142
+#: contents/ui/config/ConfigGeneral.qml:938
+msgid "Show Sleep Button"
+msgstr "显示睡眠按钮"
+
+#: contents/ui/config/ConfigPrefix.qml:149
+#: contents/ui/config/ConfigGeneral.qml:942
+msgid "Show Hibernate Button"
+msgstr "显示休眠按钮"
+
+#: contents/ui/config/ConfigPrefix.qml:160
+#: contents/ui/config/ConfigGeneral.qml:951
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(交换分区小于内存或未找到交换)"
+
+#: contents/ui/config/ConfigPrefix.qml:170
+#: contents/ui/config/ConfigGeneral.qml:959
+msgid "Show boot options in Reboot button"
+msgstr "在重启按钮中显示引导选项"
+
+#: contents/ui/config/ConfigPrefix.qml:180
+#: contents/ui/config/ConfigGeneral.qml:967
+msgid "Note: Systemd boot is required for this feature"
+msgstr "注意: 此功能需要 Systemd 引导"
+
+#: contents/ui/config/ConfigPrefix.qml:188
+#: contents/ui/config/ConfigGeneral.qml:975
+msgid "Available Prefixes Reference"
+msgstr "可用前缀参考"
+
+#: contents/ui/config/ConfigPrefix.qml:192
+#: contents/ui/config/ConfigGeneral.qml:979
+msgid ""
+"These prefixes can be used to perform specific actions directly from the "
+"search bar."
+msgstr "这些前缀可用于直接从搜索栏执行特定操作。"
+
+#: contents/ui/config/ConfigPrefix.qml:250
+#: contents/ui/config/ConfigGeneral.qml:1041
+msgid "Show calendar and date information"
+msgstr "显示日历和日期信息"
+
+#: contents/ui/config/ConfigPrefix.qml:262
+#: contents/ui/config/ConfigGeneral.qml:1054
+msgid "Show large clock"
+msgstr "显示大时钟"
+
+#: contents/ui/config/ConfigPrefix.qml:274
 msgid "Show power management options (Shutdown, Reboot, etc.)"
 msgstr "显示电源管理选项 (关机、重启等)"
 
-#: contents/ui/config/ConfigPrefix.qml:218
+#: contents/ui/config/ConfigPrefix.qml:286
+msgid "Show current weather"
+msgstr "显示当前天气"
+
+#: contents/ui/config/ConfigPrefix.qml:298
+#: contents/ui/config/ConfigGeneral.qml:1080
+msgid "Show this help screen"
+msgstr "显示此帮助屏幕"
+
+#: contents/ui/config/ConfigPrefix.qml:310
+#: contents/ui/config/ConfigGeneral.qml:1093
+msgid "Terminate running processes"
+msgstr "终止正在运行的进程"
+
+#: contents/ui/config/ConfigPrefix.qml:322
+#: contents/ui/config/ConfigGeneral.qml:1106
+msgid "Check spelling of a word"
+msgstr "检查单词的拼写"
+
+#: contents/ui/config/ConfigPrefix.qml:334
+#: contents/ui/config/ConfigGeneral.qml:1119
+msgid "Execute shell commands"
+msgstr "执行终端命令"
+
+#: contents/ui/config/ConfigPrefix.qml:346
 msgid "Convert units (requires KRunner installed)"
 msgstr "转换单位 (需要安装 KRunner)"
 
-#: contents/ui/config/ConfigPrefix.qml:228
+#: contents/ui/config/ConfigPrefix.qml:356
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr "提示：某些前缀 (如单位转换) 取决于安装的 KRunner 组件。"
+msgstr "注意: 某些前缀 (如单位转换) 取决于已安装的 KRunner 运行器。"
 
-#: contents/ui/components/QueryHints.qml:40
+#: contents/ui/config/ConfigGeneral.qml:178
+msgid "Panel"
+msgstr "面板"
+
+#: contents/ui/config/ConfigGeneral.qml:182
+msgid "Popup"
+msgstr "弹出窗口"
+
+#: contents/ui/config/ConfigGeneral.qml:210
+msgid "Panel Appearance"
+msgstr "面板外观"
+
+#: contents/ui/config/ConfigGeneral.qml:218 contents/ui/main.qml:104
+msgid "Button Mode (Icon only)"
+msgstr "按钮模式 (仅图标)"
+
+#: contents/ui/config/ConfigGeneral.qml:219
+msgid "Medium Mode (Text)"
+msgstr "中等模式 (文本)"
+
+#: contents/ui/config/ConfigGeneral.qml:220
+msgid "Wide Mode (Search Bar)"
+msgstr "宽模式 (搜索栏)"
+
+#: contents/ui/config/ConfigGeneral.qml:221
+msgid "Extra Wide Mode"
+msgstr "超宽模式"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Ultra Wide Mode"
+msgstr "超宽模式"
+
+#: contents/ui/config/ConfigGeneral.qml:229
+msgid "Edge Appearance"
+msgstr "边缘外观"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Round corners"
+msgstr "圆角"
+
+#: contents/ui/config/ConfigGeneral.qml:233
+msgid "Slightly round"
+msgstr "稍微圆角"
+
+#: contents/ui/config/ConfigGeneral.qml:234
+msgid "Less round"
+msgstr "较少圆角"
+
+#: contents/ui/config/ConfigGeneral.qml:235
+msgid "Square corners"
+msgstr "直角"
+
+#: contents/ui/config/ConfigGeneral.qml:242
+msgid "Search Icon"
+msgstr "搜索图标"
+
+#: contents/ui/config/ConfigGeneral.qml:243
+msgid "Show search icon and button in panel"
+msgstr "在面板中显示搜索图标和按钮"
+
+#: contents/ui/config/ConfigGeneral.qml:249
+msgid "Show background tile (colored square)"
+msgstr "显示背景平铺 (有色方块)"
+
+#: contents/ui/config/ConfigGeneral.qml:257
+msgid "Show animated RSS titles in panel search bar"
+msgstr "在面板搜索栏中显示动态 RSS 标题"
+
+#: contents/ui/config/ConfigGeneral.qml:258
+msgid "RSS Titles"
+msgstr "RSS 标题"
+
+#: contents/ui/config/ConfigGeneral.qml:264
+msgid "Show RSS source name in panel ticker"
+msgstr "在面板中显示 RSS 源名称"
+
+#: contents/ui/config/ConfigGeneral.qml:272
+msgid "RSS Frequency"
+msgstr "RSS 更新频率"
+
+#: contents/ui/config/ConfigGeneral.qml:275
+msgid "Always"
+msgstr "总是"
+
+#: contents/ui/config/ConfigGeneral.qml:276
+msgid "Very Frequent"
+msgstr "非常频繁"
+
+#: contents/ui/config/ConfigGeneral.qml:277
+msgid "Frequent"
+msgstr "频繁"
+
+#: contents/ui/config/ConfigGeneral.qml:278
+msgid "Normal"
+msgstr "正常"
+
+#: contents/ui/config/ConfigGeneral.qml:279
+msgid "Less Frequent"
+msgstr "较少"
+
+#: contents/ui/config/ConfigGeneral.qml:280
+msgid "Rare"
+msgstr "罕见"
+
+#: contents/ui/config/ConfigGeneral.qml:281
+msgid "Only when new"
+msgstr "仅限全新"
+
+#: contents/ui/config/ConfigGeneral.qml:286
+msgid "Panel Height"
+msgstr "面板高度"
+
+#: contents/ui/config/ConfigGeneral.qml:291
+msgid "Automatic"
+msgstr "自动"
+
+#: contents/ui/config/ConfigGeneral.qml:336
+msgid "Panel Preview"
+msgstr "面板预览"
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
+msgid "Start searching..."
+msgstr "开始搜索..."
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
+msgid "Search..."
+msgstr "搜索..."
+
+#: contents/ui/config/ConfigGeneral.qml:385
+msgid "News Headline"
+msgstr "新闻标题"
+
+#: contents/ui/config/ConfigGeneral.qml:511
+msgid "Results View"
+msgstr "结果视图"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "List View"
+msgstr "列表视图"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "Tile View"
+msgstr "平铺视图"
+
+#: contents/ui/config/ConfigGeneral.qml:524
+msgid "Scroll Bar"
+msgstr "滚动条"
+
+#: contents/ui/config/ConfigGeneral.qml:526
+msgid "System Default"
+msgstr "系统默认"
+
+#: contents/ui/config/ConfigGeneral.qml:527
+msgid "Minimal (Custom)"
+msgstr "极简 (自定义)"
+
+#: contents/ui/config/ConfigGeneral.qml:528
+msgid "Hidden"
+msgstr "已隐藏"
+
+#: contents/ui/config/ConfigGeneral.qml:552
+#: contents/ui/components/PinnedSection.qml:85
+msgid "Pinned Items"
+msgstr "固定项目"
+
+#: contents/ui/config/ConfigGeneral.qml:557
+msgid "Show pinned items bar"
+msgstr "固定项目"
+
+#: contents/ui/config/ConfigGeneral.qml:563
+msgid "Minimize automatically when searching"
+msgstr "搜索时自动最小化"
+
+#: contents/ui/config/ConfigGeneral.qml:572
+msgid "Tile Size Mode"
+msgstr "平铺图标大小"
+
+#: contents/ui/config/ConfigGeneral.qml:575
+msgid "Normal (wide tiles)"
+msgstr "常规 (宽平铺)"
+
+#: contents/ui/config/ConfigGeneral.qml:576
+msgid "Compact (all small)"
+msgstr "紧凑 (全部小)"
+
+#: contents/ui/config/ConfigGeneral.qml:577
+msgid "Only pinned compact"
+msgstr "仅固定项紧凑"
+
+#: contents/ui/config/ConfigGeneral.qml:578
+msgid "Only history/results compact"
+msgstr "仅历史/结果紧凑"
+
+#: contents/ui/config/ConfigGeneral.qml:586
+msgid "Filter Chip Style"
+msgstr "过滤标签样式"
+
+#: contents/ui/config/ConfigGeneral.qml:588
+msgid "Current Appearance (Filled)"
+msgstr "当前外观 (填充)"
+
+#: contents/ui/config/ConfigGeneral.qml:589
+msgid "Breeze Appearance (Outline)"
+msgstr "Breeze 外观 (轮廓)"
+
+#: contents/ui/config/ConfigGeneral.qml:625
+msgid "System Settings"
+msgstr "搜索设置"
+
+#: contents/ui/config/ConfigGeneral.qml:669
+msgid "Settings"
+msgstr "调试设置"
+
+#: contents/ui/config/ConfigGeneral.qml:684
+#: contents/ui/components/FilterChips.qml:24
+msgid "Docs"
+msgstr "文档"
+
+#: contents/ui/config/ConfigGeneral.qml:702
+msgid "Show/Hide Previews"
+msgstr "显示/隐藏预览"
+
+#: contents/ui/config/ConfigGeneral.qml:1067
+msgid "Show power management options"
+msgstr "显示电源管理选项"
+
+#: contents/ui/config/ConfigGeneral.qml:1132
+msgid "Convert units (requires KRunner)"
+msgstr "转换单位 (需要 KRunner)"
+
+#: contents/ui/config/ConfigRSS.qml:235
+msgid "Arch & Linux News"
+msgstr "Arch 和 Linux 新闻"
+
+#: contents/ui/config/ConfigRSS.qml:245
+msgid "Security Bulletins"
+msgstr "安全公告"
+
+#: contents/ui/config/ConfigRSS.qml:254
+msgid "Türkiye News"
+msgstr "土耳其新闻"
+
+#: contents/ui/config/ConfigRSS.qml:268
+msgid "Azerbaijan News"
+msgstr "阿塞拜疆新闻"
+
+#: contents/ui/config/ConfigRSS.qml:276
+msgid "Bangladesh News"
+msgstr "孟加拉国新闻"
+
+#: contents/ui/config/ConfigRSS.qml:283
+msgid "Czech Republic"
+msgstr "捷克"
+
+#: contents/ui/config/ConfigRSS.qml:290
+msgid "Germany News"
+msgstr "德国新闻"
+
+#: contents/ui/config/ConfigRSS.qml:297
+msgid "Greece News"
+msgstr "希腊新闻"
+
+#: contents/ui/config/ConfigRSS.qml:306
+msgid "Spain & Mexico"
+msgstr "西班牙和墨西哥"
+
+#: contents/ui/config/ConfigRSS.qml:314
+msgid "Iran News"
+msgstr "伊朗新闻"
+
+#: contents/ui/config/ConfigRSS.qml:321
+msgid "France News"
+msgstr "法国新闻"
+
+#: contents/ui/config/ConfigRSS.qml:329
+msgid "India News (Hindi)"
+msgstr "印度新闻 (印地语)"
+
+#: contents/ui/config/ConfigRSS.qml:336
+msgid "Armenia News"
+msgstr "亚美尼亚新闻"
+
+#: contents/ui/config/ConfigRSS.qml:343
+msgid "Indonesia News"
+msgstr "印度尼西亚新闻"
+
+#: contents/ui/config/ConfigRSS.qml:350
+msgid "Italy News"
+msgstr "意大利新闻"
+
+#: contents/ui/config/ConfigRSS.qml:358
+msgid "Japan News"
+msgstr "日本新闻"
+
+#: contents/ui/config/ConfigRSS.qml:365
+msgid "Brazil & Portugal"
+msgstr "巴西和葡萄牙"
+
+#: contents/ui/config/ConfigRSS.qml:372
+msgid "Romania News"
+msgstr "罗马尼亚新闻"
+
+#: contents/ui/config/ConfigRSS.qml:380
+msgid "Russia News"
+msgstr "俄罗斯新闻"
+
+#: contents/ui/config/ConfigRSS.qml:387
+msgid "Pakistan News"
+msgstr "巴基斯坦新闻"
+
+#: contents/ui/config/ConfigRSS.qml:394
+msgid "China News"
+msgstr "中国新闻"
+
+#: contents/ui/config/ConfigRSS.qml:401
+msgid "USA & UK News"
+msgstr "美英新闻"
+
+#: contents/ui/config/ConfigRSS.qml:410
+msgid "World News"
+msgstr "国际新闻"
+
+#: contents/ui/config/ConfigRSS.qml:459
+msgid "New Source"
+msgstr "新来源"
+
+#: contents/ui/config/ConfigRSS.qml:544
+msgid "Invalid URL"
+msgstr "无效 URL"
+
+#: contents/ui/config/ConfigRSS.qml:551
+msgid "Starting background sync..."
+msgstr "正在启动后台同步..."
+
+#: contents/ui/config/ConfigRSS.qml:564
+msgid "Script not found at: %1"
+msgstr "脚本未找到: %1"
+
+#: contents/ui/config/ConfigRSS.qml:584
+msgid "Sync: SUCCESS"
+msgstr "同步: 成功"
+
+#: contents/ui/config/ConfigRSS.qml:658
+msgid "Never"
+msgstr "从不"
+
+#: contents/ui/config/ConfigRSS.qml:674
+msgid "Enable RSS: Show feed updates in search results"
+msgstr "启用 RSS: 在搜索结果中显示订阅源更新"
+
+#: contents/ui/config/ConfigRSS.qml:686
+msgid "Sync All Sources"
+msgstr "同步所有来源"
+
+#: contents/ui/config/ConfigRSS.qml:693
+msgid "Clear Cache Folder"
+msgstr "清除缓存文件夹"
+
+#: contents/ui/config/ConfigRSS.qml:702
+msgid "Last full sync: %1"
+msgstr "上次完整同步: %1"
+
+#: contents/ui/config/ConfigRSS.qml:713
+msgid "Show images in results"
+msgstr "在结果中显示图片"
+
+#: contents/ui/config/ConfigRSS.qml:719
+msgid "Expand cards on click"
+msgstr "点击时展开卡片"
+
+#: contents/ui/config/ConfigRSS.qml:727
+msgid "Popular Presets"
+msgstr "常用预设"
+
+#: contents/ui/config/ConfigRSS.qml:733
+msgid "Search presets (e.g. News, Tech, TR, Linux)..."
+msgstr "搜索预设 (如 新闻、科技、TR、Linux)..."
+
+#: contents/ui/config/ConfigRSS.qml:795
+msgid "RSS Sources (Max 30)"
+msgstr "RSS 来源 (最多30个)"
+
+#: contents/ui/config/ConfigRSS.qml:859
+msgid "Name"
+msgstr "名称"
+
+#: contents/ui/config/ConfigRSS.qml:865
+msgid "URL"
+msgstr "URL"
+
+#: contents/ui/config/ConfigRSS.qml:891
+msgid "Entries:"
+msgstr "项目:"
+
+#: contents/ui/config/ConfigRSS.qml:897
+msgid "Interval:"
+msgstr "间隔:"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1h"
+msgstr "%1小时"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1m"
+msgstr "%1分钟"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 hours"
+msgstr "%1 小时"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 mins"
+msgstr "%1 分钟"
+
+#: contents/ui/config/ConfigRSS.qml:918
+msgid "Last sync: %1"
+msgstr "上次同步: %1"
+
+#: contents/ui/config/ConfigRSS.qml:952
+msgid "Add Custom Source"
+msgstr "添加自定义来源"
+
+#: contents/ui/config/ConfigRSS.qml:966
+msgid "News Features:"
+msgstr "新闻功能:"
+
+#: contents/ui/config/ConfigRSS.qml:967
+msgid "Show RSS titles in placeholder cycling"
+msgstr "在占位符循环中显示 RSS 标题"
+
+#: contents/ui/config/ConfigRSS.qml:973
+msgid "Show full headlines (split into segments)"
+msgstr "显示完整标题 (拆分为段)"
+
+#: contents/ui/config/ConfigRSS.qml:979
+msgid "Default Interval:"
+msgstr "默认间隔:"
+
+#: contents/ui/config/ConfigRSS.qml:986
+msgid "Default Entries:"
+msgstr "默认项目数:"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinnedSection.qml:436
+msgid "Unpin"
+msgstr "取消固定"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+msgid "Pin"
+msgstr "固定"
+
 #: contents/ui/components/HelpView.qml:16
+#: contents/ui/components/QueryHints.qml:38
 msgid "Timeline View"
 msgstr "时间线视图"
+
+#: contents/ui/components/HelpView.qml:17
+#: contents/ui/components/QueryHints.qml:55
+#: contents/ui/components/SearchPopup.qml:1028
+msgid "Applications"
+msgstr "应用程序"
+
+#: contents/ui/components/HelpView.qml:18
+msgid "File Path Search"
+msgstr "文件路径搜索"
+
+#: contents/ui/components/HelpView.qml:19
+msgid "Google Search"
+msgstr "Google 搜索"
+
+#: contents/ui/components/HelpView.qml:20
+msgid "DuckDuckGo Search"
+msgstr "DuckDuckGo 搜索"
+
+#: contents/ui/components/HelpView.qml:21
+msgid "Wikipedia Search"
+msgstr "维基百科搜索"
+
+#: contents/ui/components/HelpView.qml:22
+#: contents/ui/components/QueryHints.qml:66
+msgid "Bookmarks"
+msgstr "书签"
+
+#: contents/ui/components/HelpView.qml:23
+#: contents/ui/components/QueryHints.qml:69
+msgid "Man Pages"
+msgstr "手册页"
+
+#: contents/ui/components/HelpView.qml:24
+msgid "Kill Process"
+msgstr "杀死进程"
+
+#: contents/ui/components/HelpView.qml:25
+msgid "Spell Check"
+msgstr "拼写检查"
+
+#: contents/ui/components/HelpView.qml:26
+msgid "Dictionary Definition"
+msgstr "词典定义"
+
+#: contents/ui/components/HelpView.qml:27
+#: contents/ui/components/QueryHints.qml:60
+msgid "Unit Converter"
+msgstr "单位转换器"
+
+#: contents/ui/components/HelpView.qml:28
+msgid "Shell Commands"
+msgstr "Shell 命令"
+
+#: contents/ui/components/HelpView.qml:29
+msgid "Power Management"
+msgstr "电源管理"
+
+#: contents/ui/components/HelpView.qml:30
+msgid "System Services"
+msgstr "系统服务"
+
+#: contents/ui/components/HelpView.qml:31
+msgid "Unicode Characters"
+msgstr "Unicode 字符"
+
+#: contents/ui/components/HelpView.qml:32
+msgid "Date and Time"
+msgstr "日期和时间"
+
+#: contents/ui/components/HelpView.qml:33
+msgid "Help & Shortcuts"
+msgstr "帮助与快捷键"
+
+#: contents/ui/components/HistoryListView.qml:38
+#: contents/ui/components/HistoryTileView.qml:246
+msgid "Recent Searches"
+msgstr "最近的搜索"
+
+#: contents/ui/components/HistoryListView.qml:58
+#: contents/ui/components/HistoryTileView.qml:266
+msgid "Clear History"
+msgstr "清除历史记录"
+
+#: contents/ui/components/HistoryListView.qml:286
+#: contents/ui/components/HistoryTileView.qml:597
+#: contents/ui/components/ResultsTileView.qml:301
+msgid "Type to search"
+msgstr "输入以搜索"
+
+#: contents/ui/components/DebugOverlay.qml:41
+msgid "Saved!"
+msgstr "已保存！"
+
+#: contents/ui/components/DebugOverlay.qml:49
+#: contents/ui/components/DebugOverlay.qml:119
+msgid "Save Dump"
+msgstr "保存转储"
+
+#: contents/ui/components/DebugOverlay.qml:78
+msgid "Backend"
+msgstr "后端"
+
+#: contents/ui/components/DebugOverlay.qml:81
+msgid "Items"
+msgstr "项目"
+
+#: contents/ui/components/DebugOverlay.qml:84
+msgid "Latency"
+msgstr "延迟"
+
+#: contents/ui/components/DebugOverlay.qml:91
+msgid "View"
+msgstr "视图"
+
+#: contents/ui/components/DebugOverlay.qml:94
+msgid "Display"
+msgstr "显示"
+
+#: contents/ui/components/FilterChips.qml:22
+msgid "All"
+msgstr "全部"
+
+#: contents/ui/components/FilterChips.qml:23
+msgid "Apps"
+msgstr "应用"
+
+#: contents/ui/components/FilterChips.qml:26
+msgid "Folders"
+msgstr "文件夹"
+
+#: contents/ui/components/FilterChips.qml:27
+msgid "Web"
+msgstr "网页"
+
+#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/PinnedSection.qml:402
+msgid "Open"
+msgstr "打开"
+
+#: contents/ui/components/HistoryContextMenu.qml:69
+#: contents/ui/components/PinnedSection.qml:412
+msgid "Copy Path"
+msgstr "复制路径"
+
+#: contents/ui/components/HistoryContextMenu.qml:85
+msgid "Open in Terminal"
+msgstr "在终端中打开"
+
+#: contents/ui/components/HistoryContextMenu.qml:97
+#: contents/ui/components/PinnedSection.qml:423
+msgid "Open Containing Folder"
+msgstr "打开所在文件夹"
+
+#: contents/ui/components/HistoryContextMenu.qml:107
+msgid "Move to Trash"
+msgstr "移至回收站"
+
+#: contents/ui/components/HistoryContextMenu.qml:120
+msgid "Properties"
+msgstr "属性"
+
+#: contents/ui/components/HistoryContextMenu.qml:130
+msgid "Edit Application..."
+msgstr "编辑应用程序..."
+
+#: contents/ui/components/HistoryContextMenu.qml:140
+msgid "Remove from History"
+msgstr "从历史记录中删除"
+
+#: contents/ui/components/PinnedSection.qml:225
+msgid "Right-click items to pin them"
+msgstr "右键单击以固定"
+
+#: contents/ui/components/PinnedSection.qml:383
+msgid "Drag to reorder"
+msgstr "拖动以重新排序"
+
+#: contents/ui/components/PowerView.qml:254
+msgid "Hibernate"
+msgstr "休眠"
+
+#: contents/ui/components/PowerView.qml:258
+msgid "(Press again to hibernate)"
+msgstr "(再次按下以休眠)"
+
+#: contents/ui/components/PowerView.qml:267
+msgid "Sleep"
+msgstr "睡眠"
+
+#: contents/ui/components/PowerView.qml:271
+msgid "(Press again to sleep)"
+msgstr "(再次按下以睡眠)"
+
+#: contents/ui/components/PowerView.qml:279
+msgid "Reboot"
+msgstr "重启"
+
+#: contents/ui/components/PowerView.qml:283
+msgid "(Press again to reboot)"
+msgstr "(再次按下以重启)"
+
+#: contents/ui/components/PowerView.qml:303
+msgid "Shutdown"
+msgstr "关机"
+
+#: contents/ui/components/PowerView.qml:307
+msgid "(Press again to shutdown)"
+msgstr "(再次按下以关机)"
+
+#: contents/ui/components/PowerView.qml:444
+msgid "Refresh"
+msgstr "刷新"
+
+#: contents/ui/components/PowerView.qml:472
+msgid "Scan for boot entries"
+msgstr "扫描引导条目"
+
+#: contents/ui/components/PowerView.qml:498
+msgid "Lock Screen"
+msgstr "锁定屏幕"
+
+#: contents/ui/components/PowerView.qml:508
+msgid "Log Out"
+msgstr "注销"
+
+#: contents/ui/components/PowerView.qml:512
+msgid "(Press again to log out)"
+msgstr "(再次按下以注销)"
+
+#: contents/ui/components/PowerView.qml:520
+msgid "Switch User"
+msgstr "切换用户"
+
+#: contents/ui/components/PowerView.qml:524
+msgid "(Press again to switch)"
+msgstr "(再次按下以切换)"
+
+#: contents/ui/components/PowerView.qml:532
+msgid "Save Session"
+msgstr "保存会话"
+
+#: contents/ui/components/PowerView.qml:551
+msgid "(Press again)"
+msgstr "(再次按下)"
+
+#: contents/ui/components/QueryHints.qml:32
+msgid "Show all available search filters"
+msgstr "显示所有可用搜索过滤器"
+
+#: contents/ui/components/QueryHints.qml:39
+msgid "Browse files by date (Today, Yesterday, etc.)"
+msgstr "按日期浏览文件 (今天、昨天等)"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
 msgstr "日历"
 
 #: contents/ui/components/QueryHints.qml:44
-#: contents/ui/components/QueryHints.qml:128
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:154
+#: contents/ui/components/QueryHints.qml:162
 msgid "Today"
 msgstr "今天"
 
 #: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:129
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:155
+#: contents/ui/components/QueryHints.qml:162
 msgid "Yesterday"
 msgstr "昨天"
 
@@ -601,444 +1327,323 @@ msgstr "本周"
 msgid "This Month"
 msgstr "本月"
 
+#: contents/ui/components/QueryHints.qml:50
+msgid "File Path"
+msgstr "文件路径"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "Search via absolute file path"
+msgstr "通过绝对文件路径搜索"
+
 #: contents/ui/components/QueryHints.qml:51
-msgid "Files modified today"
-msgstr "今天修改的文件"
+msgid "File Index"
+msgstr "文件索引"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "Search exclusively in Baloo file index"
+msgstr "仅在 Baloo 文件索引中搜索"
 
 #: contents/ui/components/QueryHints.qml:52
-msgid "Files modified yesterday"
-msgstr "昨天修改的文件"
+msgid "Search only document files"
+msgstr "仅搜索文档文件"
 
 #: contents/ui/components/QueryHints.qml:53
-msgid "Files modified this week"
-msgstr "本周修改的文件"
+msgid "Search only image files"
+msgstr "仅搜索图片文件"
 
-#: contents/ui/components/QueryHints.qml:54
-msgid "Files modified this month"
-msgstr "本月修改的文件"
+#: contents/ui/components/QueryHints.qml:55
+msgid "Search for installed applications"
+msgstr "搜索已安装的应用程序"
 
 #: contents/ui/components/QueryHints.qml:56
-#: contents/ui/components/HelpView.get(1):18
-msgid "File Path Search"
-msgstr "文件路径搜索"
+msgid "Services"
+msgstr "服务"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Search system background services"
+msgstr "搜索系统后台服务"
 
 #: contents/ui/components/QueryHints.qml:57
-#: contents/ui/components/HelpView.qml:23
-msgid "Man Pages"
-msgstr "Man 手册页"
+msgid "Shell"
+msgstr "终端"
 
-#: contents/ui/components/QueryHints.qml:58
-#: contents/ui/components/HelpView.qml:19
-msgid "Google Search"
-msgstr "Google 搜索"
+#: contents/ui/components/QueryHints.qml:57
+msgid "Execute shell commands directly"
+msgstr "直接执行终端命令"
 
 #: contents/ui/components/QueryHints.qml:59
-#: contents/ui/components/HelpView.get(1):20
-msgid "DuckDuckGo Search"
-msgstr "DuckDuckGo 搜索"
+msgid "Calculator"
+msgstr "计算器"
+
+#: contents/ui/components/QueryHints.qml:59
+msgid "Perform mathematical calculations"
+msgstr "进行数学计算"
 
 #: contents/ui/components/QueryHints.qml:60
-#: contents/ui/components/HelpView.qml:21
-msgid "Wikipedia Search"
-msgstr "维基百科搜索"
+msgid "Convert between weights, distances, etc."
+msgstr "在重量、距离等之间进行转换"
 
 #: contents/ui/components/QueryHints.qml:61
-#: contents/ui/components/HelpView.qml:24
-msgid "Kill Process"
-msgstr "结束进程"
+msgid "Spelling"
+msgstr "拼写"
 
-#: contents/ui/components/QueryHints.qml:62
-#: contents/ui/components/HelpView.qml:25
-msgid "Spell Check"
-msgstr "拼写检查"
+#: contents/ui/components/QueryHints.qml:61
+msgid "Check word spelling"
+msgstr "检查单词拼写"
 
 #: contents/ui/components/QueryHints.qml:63
-#: contents/ui/components/HelpView.qml:31
-msgid "Unicode Characters"
-msgstr "Unicode 字符"
+msgid "Google"
+msgstr "Google"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Search the web using Google"
+msgstr "使用 Google 搜索网页"
 
 #: contents/ui/components/QueryHints.qml:64
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
-#: contents/ui/components/HelpView.qml:17
-msgid "Applications"
-msgstr "应用程序"
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "Search the web using DuckDuckGo"
+msgstr "使用 DuckDuckGo 搜索网页"
 
 #: contents/ui/components/QueryHints.qml:65
-#: contents/ui/components/HelpView.qml:28
-msgid "Shell Commands"
-msgstr "Shell 命令"
+msgid "Wikipedia"
+msgstr "维基百科"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Search Wikipedia articles"
+msgstr "搜索维基百科文章"
 
 #: contents/ui/components/QueryHints.qml:66
-#: contents/ui/components/HelpView.qml:22
-msgid "Bookmarks"
-msgstr "书签"
+msgid "Search browser bookmarks"
+msgstr "搜索浏览器书签"
 
 #: contents/ui/components/QueryHints.qml:67
-#: contents/ui/components/HelpView.qml:29
-msgid "Power Management"
-msgstr "电源管理"
+msgid "RSS Feeds"
+msgstr "RSS 订阅源"
 
-#: contents/ui/components/QueryHints.qml:68
-#: contents/ui/components/HelpView.qml:30
-msgid "System Services"
-msgstr "系统服务"
+#: contents/ui/components/QueryHints.qml:67
+msgid "Search exclusively in RSS news feeds"
+msgstr "仅在 RSS 新闻源中搜索"
 
 #: contents/ui/components/QueryHints.qml:69
-#: contents/ui/components/HelpView.qml:32
-msgid "Date and Time"
-msgstr "日期和时间"
+msgid "Browse system manual pages"
+msgstr "浏览系统手册页"
 
 #: contents/ui/components/QueryHints.qml:70
-#: contents/ui/components/HelpView.qml:26
-msgid "Dictionary Definition"
-msgstr "词典定义"
+msgid "Show widget documentation"
+msgstr "显示小部件文档"
 
-#: contents/ui/components/QueryHints.qml:71
-#: contents/ui/components/HelpView.qml:27
-msgid "Unit Converter"
-msgstr "单位转换器"
-
-#: contents/ui/components/HelpView.qml:33
-msgid "Help & Shortcuts"
-msgstr "帮助与快捷键"
-
-#: contents/ui/components/QueryHints.qml:130
-#: contents/ui/components/QueryHints.qml:136
-msgid "Two days ago"
-msgstr "两天前"
-
-#: contents/ui/components/QueryHints.qml:217
-#: contents/ui/components/QueryHints.qml:227
-msgid "Browse calendar"
-msgstr "浏览日历"
-
-#: contents/ui/components/QueryHints.qml:241
-msgid "Man pages not installed"
-msgstr "未安装 Man 手册页包"
-
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:98
 msgid "Unknown prefix"
 msgstr "未知前缀"
 
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:99
 msgid "try"
 msgstr "尝试"
 
-#: contents/ui/components/DebugOverlay.qml:40
-msgid "Saved!"
-msgstr "已保存！"
+#: contents/ui/components/QueryHints.qml:101
+msgid "Browse calendar"
+msgstr "浏览日历"
 
-#: contents/ui/components/DebugOverlay.qml:48
-#: contents/ui/components/DebugOverlay.qml:118
-msgid "Save Dump"
-msgstr "保存转储"
+#: contents/ui/components/QueryHints.qml:102
+msgid "Man pages not installed"
+msgstr "未安装 Man 手册页包"
 
-#: contents/ui/components/DebugOverlay.qml:77
-msgid "Backend"
-msgstr "后端"
+#: contents/ui/components/QueryHints.qml:156
+#: contents/ui/components/QueryHints.qml:162
+msgid "Two days ago"
+msgstr "两天前"
 
-#: contents/ui/components/DebugOverlay.qml:80
-msgid "Items"
-msgstr "项目"
+#: contents/ui/components/QueryHints.qml:367
+msgid "Available Search Prefixes"
+msgstr "可用搜索前缀"
 
-#: contents/ui/components/DebugOverlay.qml:83
-msgid "Latency"
-msgstr "延迟"
+#: contents/ui/components/ResultsListView.qml:436
+#: contents/ui/components/ResultsTileView.qml:294
+msgid "Category"
+msgstr "类别"
 
-#: contents/ui/components/DebugOverlay.qml:90
-msgid "View"
-msgstr "视图"
+#: contents/ui/components/ResultsListView.qml:437
+#: contents/ui/components/ResultsTileView.qml:295
+msgid "File Type"
+msgstr "文件类型"
 
-#: contents/ui/components/DebugOverlay.qml:93
-msgid "Display"
-msgstr "显示"
+#: contents/ui/components/ResultsListView.qml:438
+#: contents/ui/components/ResultsTileView.qml:296
+msgid "Path"
+msgstr "路径"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/PinnedSection.qml:376
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Unpin"
-msgstr "取消固定"
+#: contents/ui/components/ResultsListView.qml:439
+msgid "News"
+msgstr "新闻"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Pin"
-msgstr "固定"
+#: contents/ui/components/ResultsListView.qml:440
+msgid "Read News"
+msgstr "阅读新闻"
 
-#: contents/ui/components/PinnedSection.qml:71
-msgid "Pinned Items"
-msgstr "固定项目"
+#: contents/ui/components/ResultsListView.qml:441
+msgid "Share"
+msgstr "分享"
 
-#: contents/ui/components/PinnedSection.qml:323
-msgid "Drag to reorder"
-msgstr "拖动以重新排序"
+#: contents/ui/components/ResultsListView.qml:442
+#: contents/ui/components/ResultsTileView.qml:299
+msgid "Searching..."
+msgstr "搜索中..."
 
-#: contents/ui/components/PinnedSection.qml:342
-#: contents/ui/components/HistoryContextMenu.qml:52
-msgid "Open"
-msgstr "打开"
-
-#: contents/ui/components/PinnedSection.qml:352
-msgid "Copy Path"
-msgstr "复制路径"
-
-#: contents/ui/components/PinnedSection.qml:363
-#: contents/ui/components/HistoryContextMenu.qml:101
-msgid "Open Containing Folder"
-msgstr "打开包含文件夹"
-
-#: contents/ui/components/HistoryListView.qml:34
-#: contents/ui/components/HistoryTileView.qml:243
-msgid "Recent Searches"
-msgstr "最近搜索"
-
-#: contents/ui/components/HistoryListView.qml:54
-#: contents/ui/components/HistoryTileView.qml:263
-msgid "Clear History"
-msgstr "清除历史记录"
-
-#: contents/ui/components/ResultsListView.qml:330
+#: contents/ui/components/ResultsListView.qml:443
+#: contents/ui/components/ResultsTileView.qml:300
 msgid "No results found"
-msgstr "未发现结果"
+msgstr "未找到结果"
 
-#: contents/ui/components/ResultsListView.qml:330
-msgid "Type to start searching"
-msgstr "输入以开始搜索"
+#: contents/ui/components/ResultsTileView.qml:297
+msgid "Space to preview"
+msgstr "空格键预览"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:269
+#: contents/ui/components/ResultsTileView.qml:298
+msgid "Read in Browser"
+msgstr "在浏览器中阅读"
+
+#: contents/ui/components/SearchPopup.qml:92
 msgid "date"
 msgstr "日期"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:270
+#: contents/ui/components/SearchPopup.qml:93
 msgid "clock"
 msgstr "时钟"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:295
-msgid "power"
-msgstr "能源"
+#: contents/ui/components/SearchPopup.qml:94
+msgid "weather"
+msgstr "天气"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:279
+#: contents/ui/components/SearchPopup.qml:95
+msgid "power"
+msgstr "电源"
+
+#: contents/ui/components/SearchPopup.qml:96
 msgid "help"
 msgstr "帮助"
 
-#: contents/ui/components/SearchPopup.qml:265
+#: contents/ui/components/SearchPopup.qml:97
 msgid "unit"
 msgstr "单位"
 
-#: contents/ui/components/SearchPopup.qml:283
+#: contents/ui/components/SearchPopup.qml:98
 msgid "kill"
-msgstr "结束"
+msgstr "杀死"
 
-#: contents/ui/components/SearchPopup.qml:287
+#: contents/ui/components/SearchPopup.qml:99
 msgid "spell"
 msgstr "拼写"
 
-#: contents/ui/components/SearchPopup.qml:291
+#: contents/ui/components/SearchPopup.qml:100
 msgid "shell"
-msgstr "外壳"
+msgstr "终端"
 
-#: contents/ui/components/SearchPopup.qml:367
-msgid "Search Here"
-msgstr "在此搜索"
-
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
+#: contents/ui/components/SearchPopup.qml:1028
 msgid "Other"
 msgstr "其他"
 
-#: contents/ui/components/HistoryContextMenu.qml:69
-msgid "Copy Location"
-msgstr "复制位置"
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Mode"
+msgstr "模式"
 
-#: contents/ui/components/HistoryContextMenu.qml:85
-msgid "Open in Terminal"
-msgstr "在终端中打开"
+#: contents/ui/components/TileDataManager.qml:53
+msgid "Other Results"
+msgstr "其他结果"
 
-#: contents/ui/components/HistoryContextMenu.qml:111
-msgid "Move to Trash"
-msgstr "移至回收站"
+#: contents/ui/components/WeatherView.qml:57
+msgid "Unknown error"
+msgstr "未知错误"
 
-#: contents/ui/components/HistoryContextMenu.qml:124
-msgid "Properties"
-msgstr "属性"
+#: contents/ui/components/WeatherView.qml:80
+msgid "Loading Weather..."
+msgstr "正在加载天气..."
 
-#: contents/ui/components/HistoryContextMenu.qml:134
-msgid "Edit Application..."
-msgstr "编辑应用程序..."
+#: contents/ui/components/WeatherView.qml:91
+msgid "Retry"
+msgstr "重试"
 
-#: contents/ui/components/HistoryContextMenu.qml:144
-msgid "Remove from History"
-msgstr "从历史记录中移除"
-
-#: contents/ui/components/PowerView.qml:133
-msgid "Hibernate"
-msgstr "休眠"
-
-#: contents/ui/components/PowerView.qml:137
-msgid "(Press again to hibernate)"
-msgstr "(再次点击以休眠)"
-
-#: contents/ui/components/PowerView.qml:146
-msgid "Sleep"
-msgstr "睡眠"
-
-#: contents/ui/components/PowerView.qml:150
-msgid "(Press again to sleep)"
-msgstr "(再次点击以睡眠)"
-
-#: contents/ui/components/PowerView.qml:158
-msgid "Reboot"
-msgstr "重启"
-
-#: contents/ui/components/PowerView.qml:162
-msgid "(Press again to reboot)"
-msgstr "(再次点击以重启)"
-
-#: contents/ui/components/PowerView.qml:180
-msgid "Shutdown"
-msgstr "关机"
-
-#: contents/ui/components/PowerView.qml:184
-msgid "(Press again to shutdown)"
-msgstr "(再次点击以关机)"
-
-#: contents/ui/components/PowerView.qml:278
-msgid "Authorize to list entries"
-msgstr "授权列出条目"
-
-#: contents/ui/components/PowerView.qml:299
-msgid "Lock Screen"
-msgstr "锁定屏幕"
-
-#: contents/ui/components/PowerView.qml:309
-msgid "Log Out"
-msgstr "注销"
-
-#: contents/ui/components/PowerView.qml:313
-msgid "(Press again to log out)"
-msgstr "(再次点击以注销)"
-
-#: contents/ui/components/PowerView.qml:321
-msgid "Switch User"
-msgstr "切换用户"
-
-#: contents/ui/components/PowerView.qml:325
-msgid "(Press again to switch)"
-msgstr "(再次点击以切换)"
-
-#: contents/ui/components/PowerView.qml:333
-msgid "Save Session"
-msgstr "保存会话"
-
-#: contents/ui/components/PowerView.qml:352
-msgid "(Press again)"
-msgstr "(再次点击)"
-
-#: contents/ui/main.qml:96
+#: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"
 msgstr "中等模式 (仅按钮)"
 
-#: contents/ui/main.qml:102
+#: contents/ui/main.qml:116
 msgid "Wide Mode (Search bar + icon)"
 msgstr "宽模式 (搜索栏 + 图标)"
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:122
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "超宽模式 (宽模式 + 长占位符)"
+msgstr "超宽模式 (宽 + 长占位符)"
 
-msgid "Show/Hide Previews"
-msgstr "显示/隐藏预览"
+#: contents/ui/main.qml:128
+msgid "Ultra Wide Mode (Maximum Coverage)"
+msgstr "超宽模式 (最大覆盖)"
 
-msgid "Edge Appearance"
-msgstr "边缘外观"
+#~ msgid "Smartly limit results based on relevance"
+#~ msgstr "基于相关性智能限制结果"
 
-msgid "Round corners"
-msgstr "圆角"
+#~ msgid "Dynamic Limit"
+#~ msgstr "动态限制"
 
-msgid "Slightly round"
-msgstr "微圆"
+#~ msgid "Master Switch"
+#~ msgstr "总开关"
 
-msgid "Less round"
-msgstr "较少圆角"
+#~ msgid "Fuzzy"
+#~ msgstr "模糊"
 
-msgid "Square corners"
-msgstr "直角"
+#~ msgid "Exact"
+#~ msgstr "精确"
 
-msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(交换分区过小或未发现)"
+#~ msgid "Files modified today"
+#~ msgstr "今天修改的文件"
 
-msgid "Note: Systemd boot is required for this feature"
-msgstr "提示：此功能需要 Systemd boot"
+#~ msgid "Files modified yesterday"
+#~ msgstr "昨天修改的文件"
 
-msgid "Scan for boot entries"
-msgstr "扫描引导条目"
+#~ msgid "Files modified this week"
+#~ msgstr "本周修改的文件"
 
-msgid "Result Count"
-msgstr "结果计数"
+#~ msgid "Files modified this month"
+#~ msgstr "本月修改的文件"
 
-msgid "Priority Ranking"
-msgstr "优先级排名"
+#~ msgid "Search Here"
+#~ msgstr "在此搜索"
 
-msgid "Show Together"
-msgstr "一起显示"
+#~ msgid "Copy Location"
+#~ msgstr "复制位置"
 
-msgid "Corner Roundness"
-msgstr "圆角弧度"
+#~ msgid "Authorize to list entries"
+#~ msgstr "授权列出条目"
 
-msgid "Square"
-msgstr "直角"
+#~ msgid "Result Count"
+#~ msgstr "结果计数"
 
-msgid "Slightly Rounded"
-msgstr "略微圆角"
+#~ msgid "Priority Ranking"
+#~ msgstr "优先级排名"
 
-msgid "Moderately Rounded"
-msgstr "中度圆角"
+#~ msgid "Corner Roundness"
+#~ msgstr "圆角弧度"
 
-msgid "Fully Rounded"
-msgstr "全圆角"
+#~ msgid "Square"
+#~ msgstr "直角"
 
-msgid "Minimize automatically when searching"
-msgstr "搜索时自动最小化"
+#~ msgid "Slightly Rounded"
+#~ msgstr "略微圆角"
 
-msgid "Search on Wikipedia"
-msgstr "在维基百科上搜索"
+#~ msgid "Moderately Rounded"
+#~ msgstr "中度圆角"
 
-msgid "Minimal - A simplified interface with essential features."
-msgstr "极简 - 具有核心功能的简化界面。"
+#~ msgid "Fully Rounded"
+#~ msgstr "全圆角"
 
-msgid "Developer - Debug tab active, developer features enabled."
-msgstr "开发者 - 激活调试栏，启用开发者功能。"
+#~ msgid "Minimal - A simplified interface with essential features."
+#~ msgstr "极简 - 具有核心功能的简化界面。"
 
-msgid "Power User - All features active, advanced settings available."
-msgstr "高级用户 - 激活所有功能，提供高级设置。"
+#~ msgid "Developer - Debug tab active, developer features enabled."
+#~ msgstr "开发者 - 激活调试栏，启用开发者功能。"
 
-msgid "Weather View (weather:)"
-msgstr "天气视图 (weather:)"
+#~ msgid "Power User - All features active, advanced settings available."
+#~ msgstr "高级用户 - 激活所有功能，提供高级设置。"
 
-msgid "Use System Units"
-msgstr "使用系统单位"
-
-msgid "Refresh Interval:"
-msgstr "刷新间隔："
-
-msgid "Every Search"
-msgstr "每次搜索"
-
-msgid "15 Minutes"
-msgstr "15 分钟"
-
-msgid "30 Minutes"
-msgstr "30 分钟"
-
-msgid "1 Hour"
-msgstr "1 小时"
-
-msgid "(If time since last update > interval)"
-msgstr "(如果距上次更新时长 > 间隔时)"
-
-msgid "Enable Weather Prefix"
-msgstr "启用天气前缀"

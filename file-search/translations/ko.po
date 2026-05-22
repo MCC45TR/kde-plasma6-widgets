@@ -1,28 +1,31 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: file-search 1.0\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-23 02:06+0300\n"
-"PO-Revision-Date: 2026-01-22 12:00+0300\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: ro\n"
-"Language: ro\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && "
-"n%100<20)) ? 1 : 2);\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
 msgid "Appearance"
-msgstr "Aspect"
+msgstr "외관"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
 #: contents/ui/config/ConfigSearch.qml:9
 #: contents/ui/config/ConfigGeneral.qml:384
 #: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search"
-msgstr "Caută"
+msgstr "검색"
 
 #: contents/config/config.qml:17
 msgid "RSS"
@@ -30,954 +33,954 @@ msgstr "RSS"
 
 #: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
 msgid "Debug"
-msgstr "Depanare"
+msgstr "디버그"
 
 #: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
 #: contents/ui/components/QueryHints.qml:70
 msgid "Help"
-msgstr "Ajutor"
+msgstr "도움말"
 
 #: contents/ui/config/ConfigCategories.qml:212
 msgid "Algorithm Settings"
-msgstr "Setări algoritm"
+msgstr "알고리즘 설정"
 
 #: contents/ui/config/ConfigCategories.qml:217
 msgid "Search Algorithm"
-msgstr "Algoritm căutare"
+msgstr "검색 알고리즘"
 
 #: contents/ui/config/ConfigCategories.qml:218
 msgid "Fuzzy Match"
-msgstr "Potrivire aproximativă"
+msgstr "퍼지 일치"
 
 #: contents/ui/config/ConfigCategories.qml:218
 msgid "Exact Match"
-msgstr "Potrivire exactă"
+msgstr "정확한 일치"
 
 #: contents/ui/config/ConfigCategories.qml:218
 msgid "Starts With"
-msgstr "Începe cu"
+msgstr "다음으로 시작"
 
 #: contents/ui/config/ConfigCategories.qml:229
 msgid "Dynamic Result Count"
-msgstr "Număr dinamic de rezultate"
+msgstr "동적 결과 수"
 
 #: contents/ui/config/ConfigCategories.qml:230
 msgid "Automatically limit displayed results based on relevance score"
-msgstr "Limitează automat rezultatele afișate pe baza scorului de relevanță"
+msgstr "관련성 점수에 따라 표시되는 결과를 자동으로 제한합니다."
 
 #: contents/ui/config/ConfigCategories.qml:237
 msgid "Result Limits"
-msgstr "Limite rezultate"
+msgstr "결과 제한"
 
 #: contents/ui/config/ConfigCategories.qml:242
 msgid "Min Results"
-msgstr "Rezultate minime"
+msgstr "최소 결과"
 
 #: contents/ui/config/ConfigCategories.qml:251
 msgid "Max Results"
-msgstr "Rezultate maxime"
+msgstr "최대 결과"
 
 #: contents/ui/config/ConfigCategories.qml:262
 msgid "Prioritized Categories"
-msgstr "Categorii prioritare"
+msgstr "우선순위 카테고리"
 
 #: contents/ui/config/ConfigCategories.qml:266
 msgid "Use buttons to reorder categories or move between sections"
-msgstr "Utilizează butoanele pentru reordonarea categoriilor sau mutare"
+msgstr "버튼을 사용하여 카테고리를 재정렬하거나 섹션 간 이동"
 
 #: contents/ui/config/ConfigCategories.qml:275
 msgid "Priority"
-msgstr "Prioritate"
+msgstr "우선순위"
 
 #: contents/ui/config/ConfigCategories.qml:366
 msgid "Move to Combined"
-msgstr "Mută în combinat"
+msgstr "통합으로 이동"
 
 #: contents/ui/config/ConfigCategories.qml:381
 msgid "Show Together (Merged)"
-msgstr "Arată împreună (Cumulat)"
+msgstr "함께 표시(병합)"
 
 #: contents/ui/config/ConfigCategories.qml:385
 msgid "Categories in this section will be grouped together"
-msgstr "Categoriile din această secțiune vor fi grupate împreună"
+msgstr "이 섹션의 카테고리는 함께 그룹화됩니다."
 
 #: contents/ui/config/ConfigCategories.qml:401
 msgid "No combined categories"
-msgstr "Fără categorii combinate"
+msgstr "결합된 카테고리가 없습니다."
 
 #: contents/ui/config/ConfigCategories.qml:466
 msgid "Move to Separate"
-msgstr "Mută la Separate"
+msgstr "별도의 항목으로 이동"
 
 #: contents/ui/config/ConfigCategories.qml:481
 msgid "Category Settings Information"
-msgstr "Informații setări categorii"
+msgstr "카테고리 설정 정보"
 
 #: contents/ui/config/ConfigCategories.qml:485
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
-msgstr "Modificările se aplică imediat. Categoriile ascunse nu apar. Prioritatea determină ordinea."
+msgstr "변경 사항은 즉시 적용됩니다. 숨겨진 카테고리는 검색 결과에 나타나지 않습니다. 우선순위는 표시 순서를 결정합니다."
 
 #: contents/ui/config/ConfigCategories.qml:485
 msgid "Lower number = higher priority"
-msgstr "Număr mai mic = prioritate mai mare"
+msgstr "낮은 숫자 = 높은 우선순위"
 
 #: contents/ui/config/ConfigDebug.qml:102
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
-msgstr "Acest tab este activ doar în modul dezvoltator. Schimbă profilul din setările generale."
+msgstr "이 탭은 개발자 모드에서만 활성화됩니다. 일반 설정에서 프로필을 변경하세요."
 
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Debug Settings"
-msgstr "Setări depanare"
+msgstr "디버그 설정"
 
 #: contents/ui/config/ConfigDebug.qml:117
 #: contents/ui/config/ConfigDebug.qml:176
 #: contents/ui/components/DebugOverlay.qml:58
 msgid "Debug Overlay"
-msgstr "Suprapunere depanare"
+msgstr "디버그 오버레이"
 
 #: contents/ui/config/ConfigDebug.qml:124
 msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr "Arată informații de depanare pe widget"
+msgstr "위젯에 디버그 정보 표시(활성 모드, 항목 수, 인덱스 소스)"
 
 #: contents/ui/config/ConfigDebug.qml:133
 msgid "Debug Data"
-msgstr "Date depanare"
+msgstr "디버그 데이터"
 
 #: contents/ui/config/ConfigDebug.qml:143
 msgid "Timestamp"
-msgstr "Marcaj de timp"
+msgstr "타임스탬프"
 
 #: contents/ui/config/ConfigDebug.qml:146
 msgid "Locale"
-msgstr "Setări regionale"
+msgstr "로케일"
 
 #: contents/ui/config/ConfigDebug.qml:149
 msgid "User Profile"
-msgstr "Profil utilizator"
+msgstr "사용자 프로필"
 
 #: contents/ui/config/ConfigDebug.qml:151
 msgid "Minimal"
-msgstr "Minimal"
+msgstr "최소"
 
 #: contents/ui/config/ConfigDebug.qml:151
 msgid "Developer"
-msgstr "Dezvoltator"
+msgstr "개발자"
 
 #: contents/ui/config/ConfigDebug.qml:151
 msgid "Power User"
-msgstr "Utilizator avansat"
+msgstr "고급 사용자"
 
 #: contents/ui/config/ConfigDebug.qml:155
 #: contents/ui/config/ConfigGeneral.qml:216
 msgid "Display Mode"
-msgstr "Mod afișare"
+msgstr "디스플레이 모드"
 
 #: contents/ui/config/ConfigDebug.qml:157
 #: contents/ui/components/SearchPopup.qml:1110
 msgid "Button"
-msgstr "Buton"
+msgstr "버튼"
 
 #: contents/ui/config/ConfigDebug.qml:157
 msgid "Medium"
-msgstr "Mediu"
+msgstr "중간"
 
 #: contents/ui/config/ConfigDebug.qml:157
 msgid "Wide"
-msgstr "Larg"
+msgstr "와이드"
 
 #: contents/ui/config/ConfigDebug.qml:157
 msgid "Extra Wide"
-msgstr "Extra larg"
+msgstr "엑스트라 와이드"
 
 #: contents/ui/config/ConfigDebug.qml:161
 #: contents/ui/config/ConfigGeneral.qml:517
 msgid "View Mode"
-msgstr "Mod vizualizare"
+msgstr "보기 모드"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/components/SearchPopup.qml:1109
 msgid "List"
-msgstr "Vizualizare listă"
+msgstr "목록"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/components/SearchPopup.qml:1109
 msgid "Tile"
-msgstr "Vizualizare dale"
+msgstr "타일"
 
 #: contents/ui/config/ConfigDebug.qml:167
 #: contents/ui/config/ConfigGeneral.qml:544
 msgid "Tile Icon Size"
-msgstr "Dimensiune pictograme dale"
+msgstr "타일 아이콘 크기"
 
 #: contents/ui/config/ConfigDebug.qml:170
 #: contents/ui/config/ConfigGeneral.qml:536
 msgid "List Icon Size"
-msgstr "Dimensiune pictograme listă"
+msgstr "목록 아이콘 크기"
 
 #: contents/ui/config/ConfigDebug.qml:173
 msgid "Enable Preview"
-msgstr "Activează previzualizarea"
+msgstr "미리보기 활성화"
 
 #: contents/ui/config/ConfigDebug.qml:179
 msgid "History Count"
-msgstr "Număr elemente istoric"
+msgstr "기록 개수"
 
 #: contents/ui/config/ConfigDebug.qml:185
 msgid "items"
-msgstr "elemente"
+msgstr "아이템"
 
 #: contents/ui/config/ConfigDebug.qml:196
 msgid "Telemetry"
-msgstr "Telemetrie"
+msgstr "원격 측정"
 
 #: contents/ui/config/ConfigDebug.qml:205
 #: contents/ui/components/DebugOverlay.qml:101
 msgid "Total Searches"
-msgstr "Total căutări"
+msgstr "총 검색수"
 
 #: contents/ui/config/ConfigDebug.qml:216
 #: contents/ui/components/DebugOverlay.qml:104
 msgid "Avg Latency"
-msgstr "Latență medie"
+msgstr "평균 지연 시간"
 
 #: contents/ui/config/ConfigDebug.qml:230
 msgid "History Sample"
-msgstr "Model istoric"
+msgstr "역사 샘플"
 
 #: contents/ui/config/ConfigDebug.qml:237
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
-msgstr "Notă privind confidențialitatea: Toate datele sunt stocate doar LOCAL. Nu se trimite nimic pe internet."
+msgstr "개인정보 보호정책: 모든 디버그 및 원격 측정 데이터는 로컬에만 저장됩니다. 데이터는 인터넷으로 전송되지 않습니다."
 
 #: contents/ui/config/ConfigDebug.qml:311
 msgid "History is empty"
-msgstr "Istoricul este gol"
+msgstr "기록이 비어 있습니다."
 
 #: contents/ui/config/ConfigHelp.qml:85
 msgid "Keyboard Shortcuts"
-msgstr "Scurtături tastatură"
+msgstr "키보드 단축키"
 
 #: contents/ui/config/ConfigHelp.qml:89
 msgid "Navigate between results"
-msgstr "Navighează între rezultate"
+msgstr "결과 간 이동"
 
 #: contents/ui/config/ConfigHelp.qml:95
 msgid "Navigate between sections"
-msgstr "Navighează între secțiuni"
+msgstr "섹션 간 탐색"
 
 #: contents/ui/config/ConfigHelp.qml:101
 msgid "List / Tile view"
-msgstr "Vizualizare Listă / Dale"
+msgstr "목록/타일 보기"
 
 #: contents/ui/config/ConfigHelp.qml:107
 msgid "Toggle file preview"
-msgstr "Comută previzualizarea fișierului"
+msgstr "파일 미리보기 전환"
 
 #: contents/ui/config/ConfigHelp.qml:113
 msgid "Open selected item"
-msgstr "Deschide elementul selectat"
+msgstr "선택한 항목 열기"
 
 #: contents/ui/config/ConfigHelp.qml:119
 msgid "Close widget"
-msgstr "Închide widgetul"
+msgstr "위젯 닫기"
 
 #: contents/ui/config/ConfigHelp.qml:126
 #: contents/ui/components/QueryHints.qml:31
 #: contents/ui/components/QueryHints.qml:100
 msgid "Search Prefixes"
-msgstr "Prefixe căutare"
+msgstr "접두사 검색"
 
 #: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
 #: contents/ui/config/ConfigPrefix.qml:214
 #: contents/ui/config/ConfigGeneral.qml:1002
 msgid "List files modified today"
-msgstr "Afișează fișierele modificate azi"
+msgstr "오늘 수정된 파일 목록"
 
 #: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
 #: contents/ui/config/ConfigPrefix.qml:226
 #: contents/ui/config/ConfigGeneral.qml:1015
 msgid "Search on Google"
-msgstr "Caută pe Google"
+msgstr "Google에서 검색"
 
 #: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
 #: contents/ui/config/ConfigPrefix.qml:238
 #: contents/ui/config/ConfigGeneral.qml:1028
 msgid "Search on DuckDuckGo"
-msgstr "Caută pe DuckDuckGo"
+msgstr "DuckDuckGo에서 검색하세요."
 
 #: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
 msgid "Terminate processes"
-msgstr "Termină procesele"
+msgstr "프로세스 종료"
 
 #: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
 msgid "Check spelling"
-msgstr "Verifică ortografia"
+msgstr "철자 확인"
 
 #: contents/ui/config/ConfigHelp.qml:161
 msgid "User Profiles"
-msgstr "Profiluri utilizator"
+msgstr "사용자 프로필"
 
 #: contents/ui/config/ConfigHelp.qml:165
 msgid "A simplified interface with essential features."
-msgstr "O interfață simplificată cu funcții esențiale."
+msgstr "필수 기능을 갖춘 단순화된 인터페이스입니다."
 
 #: contents/ui/config/ConfigHelp.qml:171
 msgid "Debug tab active, developer features enabled."
-msgstr "Tabul de depanare activ, funcțiile pentru dezvoltatori sunt activate."
+msgstr "디버그 탭이 활성화되어 있고 개발자 기능이 활성화되어 있습니다."
 
 #: contents/ui/config/ConfigHelp.qml:177
 msgid "All features active, advanced settings available."
-msgstr "Toate funcțiile sunt active, setări avansate disponibile."
+msgstr "모든 기능이 활성화되어 있으며 고급 설정이 가능합니다."
 
 #: contents/ui/config/ConfigPreview.qml:9
 #: contents/ui/config/ConfigGeneral.qml:187
 #: contents/ui/config/ConfigGeneral.qml:596
 msgid "Preview"
-msgstr "Previzualizare"
+msgstr "미리보기"
 
 #: contents/ui/config/ConfigPreview.qml:97
 msgid "Preview Settings"
-msgstr "Setări previzualizare"
+msgstr "미리보기 설정"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr "Activează sau dezactivează previzualizarea pentru diferite tipuri de fișiere."
+msgstr "다양한 파일 형식에 대한 파일 미리보기를 활성화하거나 비활성화합니다."
 
 #: contents/ui/config/ConfigPreview.qml:112
 #: contents/ui/config/ConfigSearch.qml:19
 #: contents/ui/config/ConfigGeneral.qml:701
 msgid "Enable File Previews"
-msgstr "Activează previzualizarea fișierelor"
+msgstr "파일 미리보기 활성화"
 
 #: contents/ui/config/ConfigPreview.qml:125
 msgid "Enabled"
-msgstr "Activat"
+msgstr "활성화됨"
 
 #: contents/ui/config/ConfigPreview.qml:125
 msgid "Disabled"
-msgstr "Dezactivat"
+msgstr "장애인"
 
 #: contents/ui/config/ConfigPreview.qml:133
 #: contents/ui/config/ConfigGeneral.qml:707
 msgid "Preview Types"
-msgstr "Tipuri de previzualizare"
+msgstr "미리보기 유형"
 
 #: contents/ui/config/ConfigPreview.qml:158
 #: contents/ui/config/ConfigGeneral.qml:725
 #: contents/ui/components/FilterChips.qml:25
 #: contents/ui/components/QueryHints.qml:53
 msgid "Images"
-msgstr "Imagini"
+msgstr "이미지"
 
 #: contents/ui/config/ConfigPreview.qml:196
 #: contents/ui/config/ConfigGeneral.qml:762
 msgid "Videos"
-msgstr "Videoclipuri"
+msgstr "비디오"
 
 #: contents/ui/config/ConfigPreview.qml:234
 #: contents/ui/config/ConfigGeneral.qml:799
 msgid "Text Files"
-msgstr "Fișiere text"
+msgstr "텍스트 파일"
 
 #: contents/ui/config/ConfigPreview.qml:272
 #: contents/ui/config/ConfigGeneral.qml:646
 #: contents/ui/config/ConfigGeneral.qml:836
 #: contents/ui/components/QueryHints.qml:52
 msgid "Documents"
-msgstr "Documente"
+msgstr "문서"
 
 #: contents/ui/config/ConfigPreview.qml:276
 msgid "Icon only"
-msgstr "Doar pictogramă"
+msgstr "아이콘만"
 
 #: contents/ui/config/ConfigPreview.qml:306
 msgid "Performance Information"
-msgstr "Informații despre performanță"
+msgstr "성능정보"
 
 #: contents/ui/config/ConfigPreview.qml:311
 msgid "Video and document previews may increase memory usage."
-msgstr "Previzualizările video și de documente pot crește utilizarea memoriei."
+msgstr "비디오 및 문서 미리보기로 인해 메모리 사용량이 늘어날 수 있습니다."
 
 #: contents/ui/config/ConfigSearch.qml:13
 msgid "Search Settings"
-msgstr "Setări căutare"
+msgstr "검색 설정"
 
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr "Arată previzualizările la trecerea mouse-ului (sau Ctrl+Spațiu)"
+msgstr "마우스를 올리면 파일 미리보기 표시(Ctrl+Space를 사용해도 실행할 수 있음)"
 
 #: contents/ui/config/ConfigSearch.qml:33
 msgid "Search Behavior"
-msgstr "Comportament căutare"
+msgstr "검색 행동"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr "Puteți folosi următoarele comenzi și prefixe KRunner:"
+msgstr "다음 KRunner 명령과 접두사를 사용할 수 있습니다:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
-msgstr "Prefix"
+msgstr "접두사"
 
 #: contents/ui/config/ConfigSearch.qml:56
 msgid "Description"
-msgstr "Descriere"
+msgstr "설명"
 
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
-msgstr "Caută caractere Unicode"
+msgstr "유니코드 문자 검색"
 
 #: contents/ui/config/ConfigPrefix.qml:10
 #: contents/ui/config/ConfigGeneral.qml:191
 msgid "Prefixes"
-msgstr "Prefixe"
+msgstr "접두사"
 
 #: contents/ui/config/ConfigPrefix.qml:40
 msgid "Prefix View Settings"
-msgstr "Setări vizualizare prefix"
+msgstr "접두사 보기 설정"
 
 #: contents/ui/config/ConfigPrefix.qml:45
 #: contents/ui/config/ConfigGeneral.qml:855
 msgid "Date View (date:)"
-msgstr "Vizualizare dată (date:)"
+msgstr "날짜 보기(날짜:)"
 
 #: contents/ui/config/ConfigPrefix.qml:52
 #: contents/ui/config/ConfigGeneral.qml:860
 msgid "Show Large Clock"
-msgstr "Arată ceas mare"
+msgstr "큰 시계 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:59
 #: contents/ui/config/ConfigGeneral.qml:864
 msgid "Show Calendar Events"
-msgstr "Arată evenimentele din calendar"
+msgstr "캘린더 이벤트 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:66
 #: contents/ui/config/ConfigGeneral.qml:869
 msgid "Weather View (weather:)"
-msgstr "Vizualizare vreme (weather:)"
+msgstr "날씨 보기(날씨:)"
 
 #: contents/ui/config/ConfigPrefix.qml:74
 #: contents/ui/config/ConfigGeneral.qml:875
 msgid "Enable Weather Prefix"
-msgstr "Activează prefixul meteo"
+msgstr "날씨 접두사 활성화"
 
 #: contents/ui/config/ConfigPrefix.qml:87
 #: contents/ui/config/ConfigGeneral.qml:888
 msgid "Use System Units"
-msgstr "Folosește unitățile sistemului"
+msgstr "시스템 단위 사용"
 
 #: contents/ui/config/ConfigPrefix.qml:96
 #: contents/ui/config/ConfigGeneral.qml:897
 msgid "Refresh Interval:"
-msgstr "Interval împrospătare:"
+msgstr "새로 고침 간격:"
 
 #: contents/ui/config/ConfigPrefix.qml:102
 #: contents/ui/config/ConfigGeneral.qml:903
 msgid "Every Search"
-msgstr "La fiecare căutare"
+msgstr "모든 검색"
 
 #: contents/ui/config/ConfigPrefix.qml:103
 #: contents/ui/config/ConfigGeneral.qml:904
 msgid "15 Minutes"
-msgstr "15 minute"
+msgstr "15분"
 
 #: contents/ui/config/ConfigPrefix.qml:104
 #: contents/ui/config/ConfigGeneral.qml:905
 msgid "30 Minutes"
-msgstr "30 minute"
+msgstr "30분"
 
 #: contents/ui/config/ConfigPrefix.qml:105
 #: contents/ui/config/ConfigGeneral.qml:906
 msgid "1 Hour"
-msgstr "1 oră"
+msgstr "1시간"
 
 #: contents/ui/config/ConfigPrefix.qml:125
 #: contents/ui/config/ConfigGeneral.qml:926
 msgid "(If time since last update > interval)"
-msgstr "(Dacă timpul de la ultima actualizare > interval)"
+msgstr "(마지막 업데이트 이후의 시간 > 간격인 경우)"
 
 #: contents/ui/config/ConfigPrefix.qml:134
 #: contents/ui/config/ConfigGeneral.qml:933
 msgid "Power View (power:)"
-msgstr "Vizualizare alimentare (power:)"
+msgstr "파워 뷰(power:)"
 
 #: contents/ui/config/ConfigPrefix.qml:142
 #: contents/ui/config/ConfigGeneral.qml:938
 msgid "Show Sleep Button"
-msgstr "Arată butonul de stare de veghe"
+msgstr "절전 버튼 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:149
 #: contents/ui/config/ConfigGeneral.qml:942
 msgid "Show Hibernate Button"
-msgstr "Arată butonul de hibernare"
+msgstr "최대 절전 모드 버튼 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:160
 #: contents/ui/config/ConfigGeneral.qml:951
 msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(Partiția swap este mai mică decât memoria RAM)"
+msgstr "(스왑 파티션 크기가 RAM보다 작거나 스왑을 찾을 수 없음)"
 
 #: contents/ui/config/ConfigPrefix.qml:170
 #: contents/ui/config/ConfigGeneral.qml:959
 msgid "Show boot options in Reboot button"
-msgstr "Arată opțiunile de boot în butonul de repornire"
+msgstr "재부팅 버튼에 부팅 옵션 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:180
 #: contents/ui/config/ConfigGeneral.qml:967
 msgid "Note: Systemd boot is required for this feature"
-msgstr "Notă: Este necesar boot-ul Systemd pentru această funcție"
+msgstr "참고: 이 기능을 사용하려면 Systemd 부팅이 필요합니다."
 
 #: contents/ui/config/ConfigPrefix.qml:188
 #: contents/ui/config/ConfigGeneral.qml:975
 msgid "Available Prefixes Reference"
-msgstr "Referință prefixe disponibile"
+msgstr "사용 가능한 접두사 참조"
 
 #: contents/ui/config/ConfigPrefix.qml:192
 #: contents/ui/config/ConfigGeneral.qml:979
 msgid ""
 "These prefixes can be used to perform specific actions directly from the "
 "search bar."
-msgstr "Aceste prefixe pot fi folosite pentru a efectua acțiuni direct din bara de căutare."
+msgstr "이러한 접두어를 사용하면 검색 창에서 직접 특정 작업을 수행할 수 있습니다."
 
 #: contents/ui/config/ConfigPrefix.qml:250
 #: contents/ui/config/ConfigGeneral.qml:1041
 msgid "Show calendar and date information"
-msgstr "Arată calendarul și informațiile despre dată"
+msgstr "달력 및 날짜 정보 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:262
 #: contents/ui/config/ConfigGeneral.qml:1054
 msgid "Show large clock"
-msgstr "Arată ceas mare"
+msgstr "큰 시계 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:274
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr "Arată opțiunile de alimentare (Oprire, Repornire etc.)"
+msgstr "전원 관리 옵션 표시(종료, 재부팅 등)"
 
 #: contents/ui/config/ConfigPrefix.qml:286
 msgid "Show current weather"
-msgstr "Arată vremea curentă"
+msgstr "현재 날씨 표시"
 
 #: contents/ui/config/ConfigPrefix.qml:298
 #: contents/ui/config/ConfigGeneral.qml:1080
 msgid "Show this help screen"
-msgstr "Arată acest ecran de ajutor"
+msgstr "이 도움말 화면을 표시하세요"
 
 #: contents/ui/config/ConfigPrefix.qml:310
 #: contents/ui/config/ConfigGeneral.qml:1093
 msgid "Terminate running processes"
-msgstr "Termină procesele în derulare"
+msgstr "실행 중인 프로세스 종료"
 
 #: contents/ui/config/ConfigPrefix.qml:322
 #: contents/ui/config/ConfigGeneral.qml:1106
 msgid "Check spelling of a word"
-msgstr "Verifică ortografia unui cuvânt"
+msgstr "단어의 철자를 확인하세요"
 
 #: contents/ui/config/ConfigPrefix.qml:334
 #: contents/ui/config/ConfigGeneral.qml:1119
 msgid "Execute shell commands"
-msgstr "Execută comenzi shell"
+msgstr "쉘 명령 실행"
 
 #: contents/ui/config/ConfigPrefix.qml:346
 msgid "Convert units (requires KRunner installed)"
-msgstr "Convertește unități (necesită KRunner instalat)"
+msgstr "단위 변환(KRunner 설치 필요)"
 
 #: contents/ui/config/ConfigPrefix.qml:356
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr "Notă: Unele prefixe depind de modulele KRunner instalate."
+msgstr "참고: 일부 접두어(예: 단위 변환)는 설치된 KRunner 러너에 따라 다릅니다."
 
 #: contents/ui/config/ConfigGeneral.qml:178
 msgid "Panel"
-msgstr "Panou"
+msgstr "패널"
 
 #: contents/ui/config/ConfigGeneral.qml:182
 msgid "Popup"
-msgstr "Popup"
+msgstr "팝업"
 
 #: contents/ui/config/ConfigGeneral.qml:210
 msgid "Panel Appearance"
-msgstr "Aspect panou"
+msgstr "패널 외관"
 
 #: contents/ui/config/ConfigGeneral.qml:218 contents/ui/main.qml:104
 msgid "Button Mode (Icon only)"
-msgstr "Mod buton (Doar pictogramă)"
+msgstr "버튼 모드(아이콘만)"
 
 #: contents/ui/config/ConfigGeneral.qml:219
 msgid "Medium Mode (Text)"
-msgstr "Mod mediu (Text)"
+msgstr "중간 모드(텍스트)"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "Wide Mode (Search Bar)"
-msgstr "Mod larg (Bară de căutare)"
+msgstr "와이드 모드(검색창)"
 
 #: contents/ui/config/ConfigGeneral.qml:221
 msgid "Extra Wide Mode"
-msgstr "Mod extra-larg"
+msgstr "엑스트라 와이드 모드"
 
 #: contents/ui/config/ConfigGeneral.qml:222
 msgid "Ultra Wide Mode"
-msgstr "Mod ultra-larg"
+msgstr "울트라 와이드 모드"
 
 #: contents/ui/config/ConfigGeneral.qml:229
 msgid "Edge Appearance"
-msgstr "Aspect margine"
+msgstr "가장자리 모양"
 
 #: contents/ui/config/ConfigGeneral.qml:232
 msgid "Round corners"
-msgstr "Colțuri rotunde"
+msgstr "둥근 모서리"
 
 #: contents/ui/config/ConfigGeneral.qml:233
 msgid "Slightly round"
-msgstr "Ușor rotund"
+msgstr "약간 둥글다"
 
 #: contents/ui/config/ConfigGeneral.qml:234
 msgid "Less round"
-msgstr "Mai puțin rotund"
+msgstr "덜 둥글게"
 
 #: contents/ui/config/ConfigGeneral.qml:235
 msgid "Square corners"
-msgstr "Colțuri drepte"
+msgstr "정사각형 모서리"
 
 #: contents/ui/config/ConfigGeneral.qml:242
 msgid "Search Icon"
-msgstr "Pictogramă căutare"
+msgstr "검색 아이콘"
 
 #: contents/ui/config/ConfigGeneral.qml:243
 msgid "Show search icon and button in panel"
-msgstr "Arată pictograma și butonul de căutare în panou"
+msgstr "패널에 검색 아이콘 및 버튼 표시"
 
 #: contents/ui/config/ConfigGeneral.qml:249
 msgid "Show background tile (colored square)"
-msgstr "Arată fundal mozaic (pătrat colorat)"
+msgstr "배경 타일 표시(색상 사각형)"
 
 #: contents/ui/config/ConfigGeneral.qml:257
 msgid "Show animated RSS titles in panel search bar"
-msgstr "Arată titluri RSS animate în bara de căutare"
+msgstr "패널 검색창에 애니메이션 RSS 제목 표시"
 
 #: contents/ui/config/ConfigGeneral.qml:258
 msgid "RSS Titles"
-msgstr "Titluri RSS"
+msgstr "RSS 제목"
 
 #: contents/ui/config/ConfigGeneral.qml:264
 msgid "Show RSS source name in panel ticker"
-msgstr "Arată numele sursei RSS în panou"
+msgstr "패널 티커에 RSS 소스 이름 표시"
 
 #: contents/ui/config/ConfigGeneral.qml:272
 msgid "RSS Frequency"
-msgstr "Frecvență RSS"
+msgstr "RSS 주파수"
 
 #: contents/ui/config/ConfigGeneral.qml:275
 msgid "Always"
-msgstr "Mereu"
+msgstr "항상"
 
 #: contents/ui/config/ConfigGeneral.qml:276
 msgid "Very Frequent"
-msgstr "Foarte frecvent"
+msgstr "매우 자주"
 
 #: contents/ui/config/ConfigGeneral.qml:277
 msgid "Frequent"
-msgstr "Frecvent"
+msgstr "자주"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 msgid "Normal"
-msgstr "Normal"
+msgstr "보통"
 
 #: contents/ui/config/ConfigGeneral.qml:279
 msgid "Less Frequent"
-msgstr "Mai puțin frecvent"
+msgstr "빈도가 낮음"
 
 #: contents/ui/config/ConfigGeneral.qml:280
 msgid "Rare"
-msgstr "Rareori"
+msgstr "희귀"
 
 #: contents/ui/config/ConfigGeneral.qml:281
 msgid "Only when new"
-msgstr "Doar când e nou"
+msgstr "신규일때만"
 
 #: contents/ui/config/ConfigGeneral.qml:286
 msgid "Panel Height"
-msgstr "Înălțime panou"
+msgstr "패널 높이"
 
 #: contents/ui/config/ConfigGeneral.qml:291
 msgid "Automatic"
-msgstr "Automat"
+msgstr "자동"
 
 #: contents/ui/config/ConfigGeneral.qml:336
 msgid "Panel Preview"
-msgstr "Previzualizare panou"
+msgstr "패널 미리보기"
 
 #: contents/ui/config/ConfigGeneral.qml:384
 #: contents/ui/components/CompactView.qml:114
 #: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
 msgid "Start searching..."
-msgstr "Începe căutarea..."
+msgstr "검색 시작..."
 
 #: contents/ui/config/ConfigGeneral.qml:384
 #: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search..."
-msgstr "Caută..."
+msgstr "검색..."
 
 #: contents/ui/config/ConfigGeneral.qml:385
 msgid "News Headline"
-msgstr "Titlu știre"
+msgstr "뉴스 헤드라인"
 
 #: contents/ui/config/ConfigGeneral.qml:511
 msgid "Results View"
-msgstr "Vizualizare rezultate"
+msgstr "결과보기"
 
 #: contents/ui/config/ConfigGeneral.qml:518
 msgid "List View"
-msgstr "Vizualizare listă"
+msgstr "목록 보기"
 
 #: contents/ui/config/ConfigGeneral.qml:518
 msgid "Tile View"
-msgstr "Vizualizare mozaic"
+msgstr "타일 뷰"
 
 #: contents/ui/config/ConfigGeneral.qml:524
 msgid "Scroll Bar"
-msgstr "Bară de derulare"
+msgstr "스크롤바"
 
 #: contents/ui/config/ConfigGeneral.qml:526
 msgid "System Default"
-msgstr "Implicit sistem"
+msgstr "시스템 기본값"
 
 #: contents/ui/config/ConfigGeneral.qml:527
 msgid "Minimal (Custom)"
-msgstr "Minimal (Personalizat)"
+msgstr "최소(사용자 정의)"
 
 #: contents/ui/config/ConfigGeneral.qml:528
 msgid "Hidden"
-msgstr "Ascuns"
+msgstr "숨겨진"
 
 #: contents/ui/config/ConfigGeneral.qml:552
 #: contents/ui/components/PinnedSection.qml:85
 msgid "Pinned Items"
-msgstr "Elemente fixate"
+msgstr "고정된 항목"
 
 #: contents/ui/config/ConfigGeneral.qml:557
 msgid "Show pinned items bar"
-msgstr "Elemente fixate"
+msgstr "고정된 항목 표시줄 표시"
 
 #: contents/ui/config/ConfigGeneral.qml:563
 msgid "Minimize automatically when searching"
-msgstr "Minimizează automat la căutare"
+msgstr "검색 시 자동으로 최소화"
 
 #: contents/ui/config/ConfigGeneral.qml:572
 msgid "Tile Size Mode"
-msgstr "Dimensiune pictograme dale"
+msgstr "타일 크기 모드"
 
 #: contents/ui/config/ConfigGeneral.qml:575
 msgid "Normal (wide tiles)"
-msgstr "Normal (mozaicuri late)"
+msgstr "일반(넓은 타일)"
 
 #: contents/ui/config/ConfigGeneral.qml:576
 msgid "Compact (all small)"
-msgstr "Compact (toate mici)"
+msgstr "콤팩트(모두 작음)"
 
 #: contents/ui/config/ConfigGeneral.qml:577
 msgid "Only pinned compact"
-msgstr "Doar cele fixate compact"
+msgstr "고정된 컴팩트 전용"
 
 #: contents/ui/config/ConfigGeneral.qml:578
 msgid "Only history/results compact"
-msgstr "Doar istoric/rezultate compact"
+msgstr "내역/결과만 압축"
 
 #: contents/ui/config/ConfigGeneral.qml:586
 msgid "Filter Chip Style"
-msgstr "Stil cip filtru"
+msgstr "필터 칩 스타일"
 
 #: contents/ui/config/ConfigGeneral.qml:588
 msgid "Current Appearance (Filled)"
-msgstr "Aspect curent (Plin)"
+msgstr "현재 모습(채워짐)"
 
 #: contents/ui/config/ConfigGeneral.qml:589
 msgid "Breeze Appearance (Outline)"
-msgstr "Aspect Breeze (Contur)"
+msgstr "브리즈 외관(개요)"
 
 #: contents/ui/config/ConfigGeneral.qml:625
 msgid "System Settings"
-msgstr "Setări căutare"
+msgstr "시스템 설정"
 
 #: contents/ui/config/ConfigGeneral.qml:669
 msgid "Settings"
-msgstr "Setări depanare"
+msgstr "설정"
 
 #: contents/ui/config/ConfigGeneral.qml:684
 #: contents/ui/components/FilterChips.qml:24
 msgid "Docs"
-msgstr "Documente"
+msgstr "문서"
 
 #: contents/ui/config/ConfigGeneral.qml:702
 msgid "Show/Hide Previews"
-msgstr "Arată/Ascunde previzualizările"
+msgstr "미리보기 표시/숨기기"
 
 #: contents/ui/config/ConfigGeneral.qml:1067
 msgid "Show power management options"
-msgstr "Arată opțiuni gestionare energie"
+msgstr "전원 관리 옵션 표시"
 
 #: contents/ui/config/ConfigGeneral.qml:1132
 msgid "Convert units (requires KRunner)"
-msgstr "Convertește unități (necesită KRunner)"
+msgstr "단위 변환(KRunner 필요)"
 
 #: contents/ui/config/ConfigRSS.qml:235
 msgid "Arch & Linux News"
-msgstr "Știri Arch & Linux"
+msgstr "아치 및 리눅스 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:245
 msgid "Security Bulletins"
-msgstr "Buletine de securitate"
+msgstr "보안 게시판"
 
 #: contents/ui/config/ConfigRSS.qml:254
 msgid "Türkiye News"
-msgstr "Știri Turcia"
+msgstr "터키 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:268
 msgid "Azerbaijan News"
-msgstr "Știri Azerbaidjan"
+msgstr "아제르바이잔 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:276
 msgid "Bangladesh News"
-msgstr "Știri Bangladesh"
+msgstr "방글라데시 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:283
 msgid "Czech Republic"
-msgstr "Cehia"
+msgstr "체코"
 
 #: contents/ui/config/ConfigRSS.qml:290
 msgid "Germany News"
-msgstr "Știri Germania"
+msgstr "독일 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:297
 msgid "Greece News"
-msgstr "Știri Grecia"
+msgstr "그리스 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:306
 msgid "Spain & Mexico"
-msgstr "Spania și Mexic"
+msgstr "스페인 및 멕시코"
 
 #: contents/ui/config/ConfigRSS.qml:314
 msgid "Iran News"
-msgstr "Știri Iran"
+msgstr "이란 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:321
 msgid "France News"
-msgstr "Știri Franța"
+msgstr "프랑스 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:329
 msgid "India News (Hindi)"
-msgstr "Știri India (Hindi)"
+msgstr "인도 뉴스(힌디어)"
 
 #: contents/ui/config/ConfigRSS.qml:336
 msgid "Armenia News"
-msgstr "Știri Armenia"
+msgstr "아르메니아 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:343
 msgid "Indonesia News"
-msgstr "Știri Indonezia"
+msgstr "인도네시아 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:350
 msgid "Italy News"
-msgstr "Știri Italia"
+msgstr "이탈리아 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:358
 msgid "Japan News"
-msgstr "Știri Japonia"
+msgstr "일본 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:365
 msgid "Brazil & Portugal"
-msgstr "Brazilia și Portugalia"
+msgstr "브라질 및 포르투갈"
 
 #: contents/ui/config/ConfigRSS.qml:372
 msgid "Romania News"
-msgstr "Știri România"
+msgstr "루마니아 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:380
 msgid "Russia News"
-msgstr "Știri Rusia"
+msgstr "러시아 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:387
 msgid "Pakistan News"
-msgstr "Știri Pakistan"
+msgstr "파키스탄 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:394
 msgid "China News"
-msgstr "Știri China"
+msgstr "중국 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:401
 msgid "USA & UK News"
-msgstr "Știri SUA și Marea Britanie"
+msgstr "미국 및 영국 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:410
 msgid "World News"
-msgstr "Știri externe"
+msgstr "월드 뉴스"
 
 #: contents/ui/config/ConfigRSS.qml:459
 msgid "New Source"
-msgstr "Sursă nouă"
+msgstr "새로운 소스"
 
 #: contents/ui/config/ConfigRSS.qml:544
 msgid "Invalid URL"
-msgstr "URL nevalid"
+msgstr "잘못된 URL"
 
 #: contents/ui/config/ConfigRSS.qml:551
 msgid "Starting background sync..."
-msgstr "Se pornește sincronizarea în fundal..."
+msgstr "백그라운드 동기화 시작 중..."
 
 #: contents/ui/config/ConfigRSS.qml:564
 msgid "Script not found at: %1"
-msgstr "Scriptul nu a fost găsit la: %1"
+msgstr "다음 위치에서 스크립트를 찾을 수 없습니다: %1"
 
 #: contents/ui/config/ConfigRSS.qml:584
 msgid "Sync: SUCCESS"
-msgstr "Sincronizare: REUȘITĂ"
+msgstr "동기화: 성공"
 
 #: contents/ui/config/ConfigRSS.qml:658
 msgid "Never"
-msgstr "Niciodată"
+msgstr "절대로"
 
 #: contents/ui/config/ConfigRSS.qml:674
 msgid "Enable RSS: Show feed updates in search results"
-msgstr "Activează RSS: Arată actualizările feed-ului în rezultate"
+msgstr "RSS 활성화: 검색 결과에 피드 업데이트 표시"
 
 #: contents/ui/config/ConfigRSS.qml:686
 msgid "Sync All Sources"
-msgstr "Sincronizează toate sursele"
+msgstr "모든 소스 동기화"
 
 #: contents/ui/config/ConfigRSS.qml:693
 msgid "Clear Cache Folder"
-msgstr "Șterge dosarul cache"
+msgstr "캐시 폴더 지우기"
 
 #: contents/ui/config/ConfigRSS.qml:702
 msgid "Last full sync: %1"
-msgstr "Ultima sincronizare completă: %1"
+msgstr "마지막 전체 동기화: %1"
 
 #: contents/ui/config/ConfigRSS.qml:713
 msgid "Show images in results"
-msgstr "Arată imagini în rezultate"
+msgstr "결과에 이미지 표시"
 
 #: contents/ui/config/ConfigRSS.qml:719
 msgid "Expand cards on click"
-msgstr "Extinde cardurile la clic"
+msgstr "클릭 시 카드 확장"
 
 #: contents/ui/config/ConfigRSS.qml:727
 msgid "Popular Presets"
-msgstr "Preseturi populare"
+msgstr "인기 있는 사전 설정"
 
 #: contents/ui/config/ConfigRSS.qml:733
 msgid "Search presets (e.g. News, Tech, TR, Linux)..."
-msgstr "Caută preseturi (de ex. Știri, Tech, TR, Linux)..."
+msgstr "검색 사전 설정(예: 뉴스, 기술, TR, Linux)..."
 
 #: contents/ui/config/ConfigRSS.qml:795
 msgid "RSS Sources (Max 30)"
-msgstr "Surse RSS (Max 30)"
+msgstr "RSS 소스(최대 30개)"
 
 #: contents/ui/config/ConfigRSS.qml:859
 msgid "Name"
-msgstr "Nume"
+msgstr "이름"
 
 #: contents/ui/config/ConfigRSS.qml:865
 msgid "URL"
@@ -985,669 +988,599 @@ msgstr "URL"
 
 #: contents/ui/config/ConfigRSS.qml:891
 msgid "Entries:"
-msgstr "Intrări:"
+msgstr "항목:"
 
 #: contents/ui/config/ConfigRSS.qml:897
 msgid "Interval:"
-msgstr "Interval:"
+msgstr "간격:"
 
 #: contents/ui/config/ConfigRSS.qml:900
 msgid "%1h"
-msgstr "%1h"
+msgstr "%1시간"
 
 #: contents/ui/config/ConfigRSS.qml:900
 msgid "%1m"
-msgstr "%1m"
+msgstr "%1분"
 
 #: contents/ui/config/ConfigRSS.qml:908
 msgid "%1 hours"
-msgstr "%1 ore"
+msgstr "%1시간"
 
 #: contents/ui/config/ConfigRSS.qml:908
 msgid "%1 mins"
-msgstr "%1 min"
+msgstr "%1분"
 
 #: contents/ui/config/ConfigRSS.qml:918
 msgid "Last sync: %1"
-msgstr "Ultima sincronizare: %1"
+msgstr "마지막 동기화: %1"
 
 #: contents/ui/config/ConfigRSS.qml:952
 msgid "Add Custom Source"
-msgstr "Adaugă sursă personalizată"
+msgstr "사용자 정의 소스 추가"
 
 #: contents/ui/config/ConfigRSS.qml:966
 msgid "News Features:"
-msgstr "Funcții știri:"
+msgstr "뉴스 기능:"
 
 #: contents/ui/config/ConfigRSS.qml:967
 msgid "Show RSS titles in placeholder cycling"
-msgstr "Arată titlurile RSS în indicator"
+msgstr "자리 표시자 순환에 RSS 제목 표시"
 
 #: contents/ui/config/ConfigRSS.qml:973
 msgid "Show full headlines (split into segments)"
-msgstr "Arată titluri complete (împărțite în segmente)"
+msgstr "전체 헤드라인 표시(세그먼트로 분할)"
 
 #: contents/ui/config/ConfigRSS.qml:979
 msgid "Default Interval:"
-msgstr "Interval implicit:"
+msgstr "기본 간격:"
 
 #: contents/ui/config/ConfigRSS.qml:986
 msgid "Default Entries:"
-msgstr "Intrări implicite:"
+msgstr "기본 항목:"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/HistoryContextMenu.qml:27
 #: contents/ui/components/PinnedSection.qml:436
 msgid "Unpin"
-msgstr "Anulează fixarea"
+msgstr "고정 해제"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Pin"
-msgstr "Fixează"
+msgstr "핀"
 
 #: contents/ui/components/HelpView.qml:16
 #: contents/ui/components/QueryHints.qml:38
 msgid "Timeline View"
-msgstr "Vizualizare cronologie"
+msgstr "타임라인 보기"
 
 #: contents/ui/components/HelpView.qml:17
 #: contents/ui/components/QueryHints.qml:55
 #: contents/ui/components/SearchPopup.qml:1028
 msgid "Applications"
-msgstr "Aplicații"
+msgstr "응용"
 
 #: contents/ui/components/HelpView.qml:18
 msgid "File Path Search"
-msgstr "Căutare după calea fișierului"
+msgstr "파일 경로 검색"
 
 #: contents/ui/components/HelpView.qml:19
 msgid "Google Search"
-msgstr "Căutare Google"
+msgstr "구글 검색"
 
 #: contents/ui/components/HelpView.qml:20
 msgid "DuckDuckGo Search"
-msgstr "Căutare DuckDuckGo"
+msgstr "덕덕고 검색"
 
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr "Căutare Wikipedia"
+msgstr "위키피디아 검색"
 
 #: contents/ui/components/HelpView.qml:22
 #: contents/ui/components/QueryHints.qml:66
 msgid "Bookmarks"
-msgstr "Marcaje"
+msgstr "북마크"
 
 #: contents/ui/components/HelpView.qml:23
 #: contents/ui/components/QueryHints.qml:69
 msgid "Man Pages"
-msgstr "Pagini man"
+msgstr "맨 페이지"
 
 #: contents/ui/components/HelpView.qml:24
 msgid "Kill Process"
-msgstr "Termină procesul"
+msgstr "프로세스 종료"
 
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
-msgstr "Verificare ortografică"
+msgstr "맞춤법 검사"
 
 #: contents/ui/components/HelpView.qml:26
 msgid "Dictionary Definition"
-msgstr "Definiție dicționar"
+msgstr "사전 정의"
 
 #: contents/ui/components/HelpView.qml:27
 #: contents/ui/components/QueryHints.qml:60
 msgid "Unit Converter"
-msgstr "Convertor unități"
+msgstr "단위 변환기"
 
 #: contents/ui/components/HelpView.qml:28
 msgid "Shell Commands"
-msgstr "Comenzi Shell"
+msgstr "쉘 명령"
 
 #: contents/ui/components/HelpView.qml:29
 msgid "Power Management"
-msgstr "Gestionare energie"
+msgstr "전원 관리"
 
 #: contents/ui/components/HelpView.qml:30
 msgid "System Services"
-msgstr "Servicii sistem"
+msgstr "시스템 서비스"
 
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr "Caractere Unicode"
+msgstr "유니코드 문자"
 
 #: contents/ui/components/HelpView.qml:32
 msgid "Date and Time"
-msgstr "Dată și oră"
+msgstr "날짜 및 시간"
 
 #: contents/ui/components/HelpView.qml:33
 msgid "Help & Shortcuts"
-msgstr "Ajutor și scurtături"
+msgstr "도움말 및 바로가기"
 
 #: contents/ui/components/HistoryListView.qml:38
 #: contents/ui/components/HistoryTileView.qml:246
 msgid "Recent Searches"
-msgstr "Căutări recente"
+msgstr "최근 검색"
 
 #: contents/ui/components/HistoryListView.qml:58
 #: contents/ui/components/HistoryTileView.qml:266
 msgid "Clear History"
-msgstr "Șterge istoricul"
+msgstr "기록 지우기"
 
 #: contents/ui/components/HistoryListView.qml:286
 #: contents/ui/components/HistoryTileView.qml:597
 #: contents/ui/components/ResultsTileView.qml:301
 msgid "Type to search"
-msgstr "Tastați pentru a căuta"
+msgstr "검색하려면 입력하세요."
 
 #: contents/ui/components/DebugOverlay.qml:41
 msgid "Saved!"
-msgstr "Salvat!"
+msgstr "저장되었습니다!"
 
 #: contents/ui/components/DebugOverlay.qml:49
 #: contents/ui/components/DebugOverlay.qml:119
 msgid "Save Dump"
-msgstr "Salvează dump"
+msgstr "덤프 저장"
 
 #: contents/ui/components/DebugOverlay.qml:78
 msgid "Backend"
-msgstr "Backend"
+msgstr "백엔드"
 
 #: contents/ui/components/DebugOverlay.qml:81
 msgid "Items"
-msgstr "Elemente"
+msgstr "품목"
 
 #: contents/ui/components/DebugOverlay.qml:84
 msgid "Latency"
-msgstr "Latență"
+msgstr "대기 시간"
 
 #: contents/ui/components/DebugOverlay.qml:91
 msgid "View"
-msgstr "Vizualizare"
+msgstr "보기"
 
 #: contents/ui/components/DebugOverlay.qml:94
 msgid "Display"
-msgstr "Afișaj"
+msgstr "디스플레이"
 
 #: contents/ui/components/FilterChips.qml:22
 msgid "All"
-msgstr "Toate"
+msgstr "모두"
 
 #: contents/ui/components/FilterChips.qml:23
 msgid "Apps"
-msgstr "Aplicații"
+msgstr "앱"
 
 #: contents/ui/components/FilterChips.qml:26
 msgid "Folders"
-msgstr "Dosare"
+msgstr "폴더"
 
 #: contents/ui/components/FilterChips.qml:27
 msgid "Web"
-msgstr "Web"
+msgstr "웹"
 
 #: contents/ui/components/HistoryContextMenu.qml:52
 #: contents/ui/components/PinnedSection.qml:402
 msgid "Open"
-msgstr "Deschide"
+msgstr "열기"
 
 #: contents/ui/components/HistoryContextMenu.qml:69
 #: contents/ui/components/PinnedSection.qml:412
 msgid "Copy Path"
-msgstr "Copiază calea"
+msgstr "경로 복사"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
-msgstr "Deschide în terminal"
+msgstr "터미널에서 열기"
 
 #: contents/ui/components/HistoryContextMenu.qml:97
 #: contents/ui/components/PinnedSection.qml:423
 msgid "Open Containing Folder"
-msgstr "Deschide dosarul părinte"
+msgstr "포함된 폴더 열기"
 
 #: contents/ui/components/HistoryContextMenu.qml:107
 msgid "Move to Trash"
-msgstr "Trimite la coș"
+msgstr "휴지통으로 이동"
 
 #: contents/ui/components/HistoryContextMenu.qml:120
 msgid "Properties"
-msgstr "Proprietăți"
+msgstr "속성"
 
 #: contents/ui/components/HistoryContextMenu.qml:130
 msgid "Edit Application..."
-msgstr "Editează aplicația..."
+msgstr "애플리케이션 편집..."
 
 #: contents/ui/components/HistoryContextMenu.qml:140
 msgid "Remove from History"
-msgstr "Elimină din istoric"
+msgstr "기록에서 제거"
 
 #: contents/ui/components/PinnedSection.qml:225
 msgid "Right-click items to pin them"
-msgstr "Click dreapta pentru a fixa"
+msgstr "항목을 마우스 오른쪽 버튼으로 클릭하여 고정하세요."
 
 #: contents/ui/components/PinnedSection.qml:383
 msgid "Drag to reorder"
-msgstr "Trageți pentru a reordona"
+msgstr "드래그하여 재정렬하세요."
 
 #: contents/ui/components/PowerView.qml:254
 msgid "Hibernate"
-msgstr "Hibernare"
+msgstr "최대 절전 모드"
 
 #: contents/ui/components/PowerView.qml:258
 msgid "(Press again to hibernate)"
-msgstr "(Apăsați din nou pentru hibernare)"
+msgstr "(최대 절전 모드로 전환하려면 다시 누르세요)"
 
 #: contents/ui/components/PowerView.qml:267
 msgid "Sleep"
-msgstr "Stare de veghe"
+msgstr "수면"
 
 #: contents/ui/components/PowerView.qml:271
 msgid "(Press again to sleep)"
-msgstr "(Apăsați din nou pentru stare de veghe)"
+msgstr "(다시 누르면 잠자기)"
 
 #: contents/ui/components/PowerView.qml:279
 msgid "Reboot"
-msgstr "Repornește"
+msgstr "재부팅"
 
 #: contents/ui/components/PowerView.qml:283
 msgid "(Press again to reboot)"
-msgstr "(Apăsați din nou pentru repornire)"
+msgstr "(재부팅하려면 다시 누르세요)"
 
 #: contents/ui/components/PowerView.qml:303
 msgid "Shutdown"
-msgstr "Oprește"
+msgstr "종료"
 
 #: contents/ui/components/PowerView.qml:307
 msgid "(Press again to shutdown)"
-msgstr "(Apăsați din nou pentru oprire)"
+msgstr "(다시 누르면 종료됩니다)"
 
 #: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
-msgstr "Reîmprospătează"
+msgstr "새로고침"
 
 #: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
-msgstr "Scanează intrări boot"
+msgstr "부팅 항목 검색"
 
 #: contents/ui/components/PowerView.qml:498
 msgid "Lock Screen"
-msgstr "Blochează ecranul"
+msgstr "잠금 화면"
 
 #: contents/ui/components/PowerView.qml:508
 msgid "Log Out"
-msgstr "Deconectare"
+msgstr "로그아웃"
 
 #: contents/ui/components/PowerView.qml:512
 msgid "(Press again to log out)"
-msgstr "(Apăsați din nou pentru deconectare)"
+msgstr "(로그아웃하려면 다시 누르세요)"
 
 #: contents/ui/components/PowerView.qml:520
 msgid "Switch User"
-msgstr "Comută utilizatorul"
+msgstr "사용자 전환"
 
 #: contents/ui/components/PowerView.qml:524
 msgid "(Press again to switch)"
-msgstr "(Apăsați din nou pentru comutare)"
+msgstr "(전환하려면 다시 누르세요)"
 
 #: contents/ui/components/PowerView.qml:532
 msgid "Save Session"
-msgstr "Salvează sesiunea"
+msgstr "세션 저장"
 
 #: contents/ui/components/PowerView.qml:551
 msgid "(Press again)"
-msgstr "(Apăsați din nou)"
+msgstr "(다시 누르세요)"
 
 #: contents/ui/components/QueryHints.qml:32
 msgid "Show all available search filters"
-msgstr "Arată toate filtrele de căutare disponibile"
+msgstr "사용 가능한 모든 검색 필터 표시"
 
 #: contents/ui/components/QueryHints.qml:39
 msgid "Browse files by date (Today, Yesterday, etc.)"
-msgstr "Răsfoiește fișierele după dată (Azi, Ieri etc.)"
+msgstr "날짜별로 파일 찾아보기(오늘, 어제 등)"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
-msgstr "Calendar"
+msgstr "달력"
 
 #: contents/ui/components/QueryHints.qml:44
 #: contents/ui/components/QueryHints.qml:154
 #: contents/ui/components/QueryHints.qml:162
 msgid "Today"
-msgstr "Astăzi"
+msgstr "오늘"
 
 #: contents/ui/components/QueryHints.qml:45
 #: contents/ui/components/QueryHints.qml:155
 #: contents/ui/components/QueryHints.qml:162
 msgid "Yesterday"
-msgstr "Ieri"
+msgstr "어제"
 
 #: contents/ui/components/QueryHints.qml:46
 msgid "This Week"
-msgstr "Săptămâna aceasta"
+msgstr "이번 주"
 
 #: contents/ui/components/QueryHints.qml:47
 msgid "This Month"
-msgstr "Luna aceasta"
+msgstr "이번 달"
 
 #: contents/ui/components/QueryHints.qml:50
 msgid "File Path"
-msgstr "Calea fișierului"
+msgstr "파일 경로"
 
 #: contents/ui/components/QueryHints.qml:50
 msgid "Search via absolute file path"
-msgstr "Caută după calea absolută"
+msgstr "절대 파일 경로를 통해 검색"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "File Index"
-msgstr "Index fișiere"
+msgstr "파일 인덱스"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Search exclusively in Baloo file index"
-msgstr "Caută exclusiv în indexul Baloo"
+msgstr "Baloo 파일 인덱스에서만 검색"
 
 #: contents/ui/components/QueryHints.qml:52
 msgid "Search only document files"
-msgstr "Caută doar documente"
+msgstr "문서파일만 검색"
 
 #: contents/ui/components/QueryHints.qml:53
 msgid "Search only image files"
-msgstr "Caută doar imagini"
+msgstr "이미지 파일만 검색"
 
 #: contents/ui/components/QueryHints.qml:55
 msgid "Search for installed applications"
-msgstr "Caută aplicații instalate"
+msgstr "설치된 애플리케이션 검색"
 
 #: contents/ui/components/QueryHints.qml:56
 msgid "Services"
-msgstr "Servicii"
+msgstr "서비스"
 
 #: contents/ui/components/QueryHints.qml:56
 msgid "Search system background services"
-msgstr "Caută servicii de fundal ale sistemului"
+msgstr "검색 시스템 백그라운드 서비스"
 
 #: contents/ui/components/QueryHints.qml:57
 msgid "Shell"
-msgstr "Shell"
+msgstr "쉘"
 
 #: contents/ui/components/QueryHints.qml:57
 msgid "Execute shell commands directly"
-msgstr "Execută comenzi shell direct"
+msgstr "쉘 명령을 직접 실행"
 
 #: contents/ui/components/QueryHints.qml:59
 msgid "Calculator"
-msgstr "Calculator"
+msgstr "계산기"
 
 #: contents/ui/components/QueryHints.qml:59
 msgid "Perform mathematical calculations"
-msgstr "Efectuează calcule matematice"
+msgstr "수학적 계산 수행"
 
 #: contents/ui/components/QueryHints.qml:60
 msgid "Convert between weights, distances, etc."
-msgstr "Convertește între greutăți, distanțe etc."
+msgstr "가중치, 거리 등을 변환합니다."
 
 #: contents/ui/components/QueryHints.qml:61
 msgid "Spelling"
-msgstr "Ortografie"
+msgstr "철자법"
 
 #: contents/ui/components/QueryHints.qml:61
 msgid "Check word spelling"
-msgstr "Verifică ortografia unui cuvânt"
+msgstr "단어 철자를 확인하세요."
 
 #: contents/ui/components/QueryHints.qml:63
 msgid "Google"
-msgstr "Google"
+msgstr "구글"
 
 #: contents/ui/components/QueryHints.qml:63
 msgid "Search the web using Google"
-msgstr "Caută pe web folosind Google"
+msgstr "Google을 사용하여 웹 검색"
 
 #: contents/ui/components/QueryHints.qml:64
 msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
+msgstr "오리오리고"
 
 #: contents/ui/components/QueryHints.qml:64
 msgid "Search the web using DuckDuckGo"
-msgstr "Caută pe web folosind DuckDuckGo"
+msgstr "DuckDuckGo를 사용하여 웹 검색"
 
 #: contents/ui/components/QueryHints.qml:65
 msgid "Wikipedia"
-msgstr "Wikipedia"
+msgstr "위키피디아"
 
 #: contents/ui/components/QueryHints.qml:65
 msgid "Search Wikipedia articles"
-msgstr "Caută articole pe Wikipedia"
+msgstr "위키피디아 기사 검색"
 
 #: contents/ui/components/QueryHints.qml:66
 msgid "Search browser bookmarks"
-msgstr "Caută semne de carte"
+msgstr "브라우저 북마크 검색"
 
 #: contents/ui/components/QueryHints.qml:67
 msgid "RSS Feeds"
-msgstr "Feed-uri RSS"
+msgstr "RSS 피드"
 
 #: contents/ui/components/QueryHints.qml:67
 msgid "Search exclusively in RSS news feeds"
-msgstr "Caută exclusiv în feed-uri RSS"
+msgstr "RSS 뉴스피드에서만 검색"
 
 #: contents/ui/components/QueryHints.qml:69
 msgid "Browse system manual pages"
-msgstr "Răsfoiește paginile de manual ale sistemului"
+msgstr "시스템 매뉴얼 페이지 찾아보기"
 
 #: contents/ui/components/QueryHints.qml:70
 msgid "Show widget documentation"
-msgstr "Arată documentația widgetului"
+msgstr "위젯 문서 표시"
 
 #: contents/ui/components/QueryHints.qml:98
 msgid "Unknown prefix"
-msgstr "Prefix necunoscut"
+msgstr "알 수 없는 접두사"
 
 #: contents/ui/components/QueryHints.qml:99
 msgid "try"
-msgstr "încearcă"
+msgstr "시도하다"
 
 #: contents/ui/components/QueryHints.qml:101
 msgid "Browse calendar"
-msgstr "Răsfoiește calendarul"
+msgstr "캘린더 찾아보기"
 
 #: contents/ui/components/QueryHints.qml:102
 msgid "Man pages not installed"
-msgstr "Paginile Man nu sunt instalate"
+msgstr "매뉴얼 페이지가 설치되지 않았습니다."
 
 #: contents/ui/components/QueryHints.qml:156
 #: contents/ui/components/QueryHints.qml:162
 msgid "Two days ago"
-msgstr "Acum două zile"
+msgstr "이틀 전"
 
 #: contents/ui/components/QueryHints.qml:367
 msgid "Available Search Prefixes"
-msgstr "Prefixe de căutare disponibile"
+msgstr "사용 가능한 검색 접두어"
 
 #: contents/ui/components/ResultsListView.qml:436
 #: contents/ui/components/ResultsTileView.qml:294
 msgid "Category"
-msgstr "Categorie"
+msgstr "카테고리"
 
 #: contents/ui/components/ResultsListView.qml:437
 #: contents/ui/components/ResultsTileView.qml:295
 msgid "File Type"
-msgstr "Tip fișier"
+msgstr "파일 유형"
 
 #: contents/ui/components/ResultsListView.qml:438
 #: contents/ui/components/ResultsTileView.qml:296
 msgid "Path"
-msgstr "Cale"
+msgstr "경로"
 
 #: contents/ui/components/ResultsListView.qml:439
 msgid "News"
-msgstr "Știri"
+msgstr "뉴스"
 
 #: contents/ui/components/ResultsListView.qml:440
 msgid "Read News"
-msgstr "Citește știri"
+msgstr "뉴스 읽기"
 
 #: contents/ui/components/ResultsListView.qml:441
 msgid "Share"
-msgstr "Partajează"
+msgstr "공유"
 
 #: contents/ui/components/ResultsListView.qml:442
 #: contents/ui/components/ResultsTileView.qml:299
 msgid "Searching..."
-msgstr "Se caută..."
+msgstr "검색 중..."
 
 #: contents/ui/components/ResultsListView.qml:443
 #: contents/ui/components/ResultsTileView.qml:300
 msgid "No results found"
-msgstr "Nu s-au găsit rezultate"
+msgstr "검색결과가 없습니다"
 
 #: contents/ui/components/ResultsTileView.qml:297
 msgid "Space to preview"
-msgstr "Spațiu pentru previzualizare"
+msgstr "미리 볼 수 있는 공간"
 
 #: contents/ui/components/ResultsTileView.qml:298
 msgid "Read in Browser"
-msgstr "Citește în browser"
+msgstr "브라우저에서 읽기"
 
 #: contents/ui/components/SearchPopup.qml:92
 msgid "date"
-msgstr "data"
+msgstr "날짜"
 
 #: contents/ui/components/SearchPopup.qml:93
 msgid "clock"
-msgstr "ceas"
+msgstr "시계"
 
 #: contents/ui/components/SearchPopup.qml:94
 msgid "weather"
-msgstr "vreme"
+msgstr "날씨"
 
 #: contents/ui/components/SearchPopup.qml:95
 msgid "power"
-msgstr "alimentare"
+msgstr "힘"
 
 #: contents/ui/components/SearchPopup.qml:96
 msgid "help"
-msgstr "ajutor"
+msgstr "도움"
 
 #: contents/ui/components/SearchPopup.qml:97
 msgid "unit"
-msgstr "unitate"
+msgstr "단위"
 
 #: contents/ui/components/SearchPopup.qml:98
 msgid "kill"
-msgstr "oprește"
+msgstr "죽이다"
 
 #: contents/ui/components/SearchPopup.qml:99
 msgid "spell"
-msgstr "silabisează"
+msgstr "철자"
 
 #: contents/ui/components/SearchPopup.qml:100
 msgid "shell"
-msgstr "shell"
+msgstr "껍질"
 
 #: contents/ui/components/SearchPopup.qml:1028
 msgid "Other"
-msgstr "Altele"
+msgstr "기타"
 
 #: contents/ui/components/SearchPopup.qml:1110
 msgid "Mode"
-msgstr "Mod"
+msgstr "모드"
 
 #: contents/ui/components/TileDataManager.qml:53
 msgid "Other Results"
-msgstr "Alte rezultate"
+msgstr "기타 결과"
 
 #: contents/ui/components/WeatherView.qml:57
 msgid "Unknown error"
-msgstr "Eroare necunoscută"
+msgstr "알 수 없는 오류"
 
 #: contents/ui/components/WeatherView.qml:80
 msgid "Loading Weather..."
-msgstr "Se încarcă vremea..."
+msgstr "날씨 로드 중..."
 
 #: contents/ui/components/WeatherView.qml:91
 msgid "Retry"
-msgstr "Reîncearcă"
+msgstr "재시도"
 
 #: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"
-msgstr "Mod mediu (Doar buton)"
+msgstr "중간 모드(버튼만)"
 
 #: contents/ui/main.qml:116
 msgid "Wide Mode (Search bar + icon)"
-msgstr "Mod larg (Bară + pictogramă)"
+msgstr "와이드 모드(검색창 + 아이콘)"
 
 #: contents/ui/main.qml:122
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "Mod extra-larg (Larg + Indicator lung)"
+msgstr "엑스트라 와이드 모드(와이드 + 긴 위치 표시자)"
 
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
-msgstr "Mod ultra-larg (Acoperire maximă)"
-
-#~ msgid "Smartly limit results based on relevance"
-#~ msgstr "Limitează inteligent rezultatele după relevanță"
-
-#~ msgid "Dynamic Limit"
-#~ msgstr "Limită dinamică"
-
-#~ msgid "Master Switch"
-#~ msgstr "Întrerupător principal"
-
-#~ msgid "Fuzzy"
-#~ msgstr "Fuzzy"
-
-#~ msgid "Exact"
-#~ msgstr "Exact"
-
-#~ msgid "Files modified today"
-#~ msgstr "Fișiere modificate astăzi"
-
-#~ msgid "Files modified yesterday"
-#~ msgstr "Fișiere modificate ieri"
-
-#~ msgid "Files modified this week"
-#~ msgstr "Fișiere modificate săptămâna aceasta"
-
-#~ msgid "Files modified this month"
-#~ msgstr "Fișiere modificate luna aceasta"
-
-#~ msgid "Type to start searching"
-#~ msgstr "Tastați pentru a începe căutarea"
-
-#~ msgid "Search Here"
-#~ msgstr "Caută aici"
-
-#~ msgid "Copy Location"
-#~ msgstr "Copiază locația"
-
-#~ msgid "Authorize to list entries"
-#~ msgstr "Autorizează pentru a lista"
-
-#~ msgid "Result Count"
-#~ msgstr "Număr rezultate"
-
-#~ msgid "Priority Ranking"
-#~ msgstr "Clasament prioritate"
-
-#~ msgid "Corner Roundness"
-#~ msgstr "Rotunjime colțuri"
-
-#~ msgid "Square"
-#~ msgstr "Drept"
-
-#~ msgid "Slightly Rounded"
-#~ msgstr "Ușor rotunjit"
-
-#~ msgid "Moderately Rounded"
-#~ msgstr "Moderat rotunjit"
-
-#~ msgid "Fully Rounded"
-#~ msgstr "Complet rotunjit"
-
-#~ msgid "Minimal - A simplified interface with essential features."
-#~ msgstr "Minimal - Interfață simplificată cu funcții esențiale."
-
-#~ msgid "Developer - Debug tab active, developer features enabled."
-#~ msgstr "Dezvoltator - Filă depanare activă."
-
-#~ msgid "Power User - All features active, advanced settings available."
-#~ msgstr "Utilizator avansat - Toate funcțiile active."
-
+msgstr "울트라 와이드 모드(최대 적용 범위)"

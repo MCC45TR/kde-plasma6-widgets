@@ -71,7 +71,7 @@ Rectangle {
     ]
     
     // Helper for date formatting
-    property var currentLocale: Qt.locale(Qt.locale().name.substring(0, 2))
+    property var currentLocale: Qt.locale()
     
     // ===== CACHED LOCALIZED PREFIX MAP (computed once at startup) =====
     // Avoids calling i18nd() inside detectHint() on every keystroke

@@ -436,9 +436,9 @@ ScrollView {
     readonly property string locCategory: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category")
     readonly property string locFileType: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type")
     readonly property string locPath: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path")
-    readonly property string locNews: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberler")
-    readonly property string locReadNews: i18nd("plasma_applet_com.mcc45tr.filesearch", "Haberi Oku")
-    readonly property string locShare: i18nd("plasma_applet_com.mcc45tr.filesearch", "Paylaş")
+    readonly property string locNews: i18nd("plasma_applet_com.mcc45tr.filesearch", "News")
+    readonly property string locReadNews: i18nd("plasma_applet_com.mcc45tr.filesearch", "Read News")
+    readonly property string locShare: i18nd("plasma_applet_com.mcc45tr.filesearch", "Share")
     readonly property string locSearching: i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
     readonly property string locNoResults: i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
 

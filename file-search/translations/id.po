@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: file-search 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-18 22:43+0300\n"
+"POT-Creation-Date: 2026-05-23 02:06+0300\n"
 "PO-Revision-Date: 2026-01-22 12:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: id\n"
@@ -12,304 +12,403 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:10
+#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
 msgid "Appearance"
 msgstr "Tampilan"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-msgid "Categories"
-msgstr "Kategori"
-
-#: contents/config/config.qml:16 contents/ui/config/ConfigDebug.qml:9
-msgid "Debug"
-msgstr "Debug"
-
-#: contents/config/config.qml:21 contents/ui/config/ConfigHelp.qml:9
-msgid "Help"
-msgstr "Bantuan"
-
-#: contents/ui/config/ConfigGeneral.qml:80
-msgid "Panel"
-msgstr "Panel"
-
-#: contents/ui/config/ConfigGeneral.qml:84
-msgid "Popup"
-msgstr "Popup"
-
-#: contents/ui/config/ConfigGeneral.qml:88
-#: contents/ui/config/ConfigPreview.qml:9
-msgid "Preview"
-msgstr "Pratinjau"
-
-#: contents/ui/config/ConfigGeneral.qml:92
-#: contents/ui/config/ConfigPrefix.qml:9
-msgid "Prefixes"
-msgstr "Awalan"
-
-#: contents/ui/config/ConfigGeneral.qml:96
-msgid "Placeholder"
-msgstr "Placeholder"
-
-#: contents/ui/config/ConfigGeneral.qml:114
-msgid "Panel Appearance"
-msgstr "Tampilan Panel"
-
-#: contents/ui/config/ConfigGeneral.qml:120
-#: contents/ui/config/ConfigDebug.qml:123
-msgid "Display Mode"
-msgstr "Mode Tampilan"
-
-#: contents/ui/config/ConfigGeneral.qml:122 contents/ui/main.qml:90
-msgid "Button Mode (Icon only)"
-msgstr "Mode Tombol (Hanya Ikon)"
-
-#: contents/ui/config/ConfigGeneral.qml:123
-msgid "Medium Mode (Text)"
-msgstr "Mode Sedang (Teks)"
-
-#: contents/ui/config/ConfigGeneral.qml:124
-msgid "Wide Mode (Search Bar)"
-msgstr "Mode Lebar (Batang Cari)"
-
-#: contents/ui/config/ConfigGeneral.qml:125
-msgid "Extra Wide Mode"
-msgstr "Mode Sangat Lebar"
-
-#: contents/ui/config/ConfigGeneral.qml:132
-msgid "Panel Preview"
-msgstr "Pratinjau Panel"
-
-#: contents/ui/config/ConfigGeneral.qml:176
-#: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:49
+#: contents/ui/config/ConfigSearch.qml:9
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search"
 msgstr "Cari"
 
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Start searching..."
-msgstr "Mulai mencari..."
+#: contents/config/config.qml:17
+msgid "RSS"
+msgstr "RSS"
 
-#: contents/ui/config/ConfigGeneral.qml:176 contents/ui/main.qml:49
-msgid "Search..."
-msgstr "Cari..."
+#: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
+msgid "Debug"
+msgstr "Debug"
 
-#: contents/ui/config/ConfigGeneral.qml:204
-msgid "Power Options"
-msgstr "Opsi Daya"
+#: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
+#: contents/ui/components/QueryHints.qml:70
+msgid "Help"
+msgstr "Bantuan"
 
-#: contents/ui/config/ConfigGeneral.get(1):205
-msgid "Show boot options in Reboot button"
-msgstr "Tampilkan opsi boot pada tombol Mulai Ulang"
+#: contents/ui/config/ConfigCategories.qml:212
+msgid "Algorithm Settings"
+msgstr "Pengaturan Algoritma"
 
-#: contents/ui/config/ConfigGeneral.qml:213
-msgid "Results View"
-msgstr "Tampilan Hasil"
+#: contents/ui/config/ConfigCategories.qml:217
+msgid "Search Algorithm"
+msgstr "Algoritma Pencarian"
 
-#: contents/ui/config/ConfigGeneral.qml:219
-#: contents/ui/config/ConfigDebug.qml:129
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Fuzzy Match"
+msgstr "Pencocokan Samar"
+
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Exact Match"
+msgstr "Kecocokan Persis"
+
+#: contents/ui/config/ConfigCategories.qml:218
+msgid "Starts With"
+msgstr "Dimulai Dengan"
+
+#: contents/ui/config/ConfigCategories.qml:229
+msgid "Dynamic Result Count"
+msgstr "Jumlah Hasil Dinamis"
+
+#: contents/ui/config/ConfigCategories.qml:230
+msgid "Automatically limit displayed results based on relevance score"
+msgstr "Membatasi hasil secara otomatis berdasarkan skor relevansi"
+
+#: contents/ui/config/ConfigCategories.qml:237
+msgid "Result Limits"
+msgstr "Batasan Hasil"
+
+#: contents/ui/config/ConfigCategories.qml:242
+msgid "Min Results"
+msgstr "Hasil Minimal"
+
+#: contents/ui/config/ConfigCategories.qml:251
+msgid "Max Results"
+msgstr "Hasil Maksimal"
+
+#: contents/ui/config/ConfigCategories.qml:262
+msgid "Prioritized Categories"
+msgstr "Kategori Prioritas"
+
+#: contents/ui/config/ConfigCategories.qml:266
+msgid "Use buttons to reorder categories or move between sections"
+msgstr "Gunakan tombol untuk mengurutkan kategori atau berpindah antar bagian"
+
+#: contents/ui/config/ConfigCategories.qml:275
+msgid "Priority"
+msgstr "Prioritas"
+
+#: contents/ui/config/ConfigCategories.qml:366
+msgid "Move to Combined"
+msgstr "Pindahkan ke Gabungan"
+
+#: contents/ui/config/ConfigCategories.qml:381
+msgid "Show Together (Merged)"
+msgstr "Tampilkan Bersama (Digabung)"
+
+#: contents/ui/config/ConfigCategories.qml:385
+msgid "Categories in this section will be grouped together"
+msgstr "Kategori di bagian ini akan dikelompokkan bersama"
+
+#: contents/ui/config/ConfigCategories.qml:401
+msgid "No combined categories"
+msgstr "Tidak ada kategori gabungan"
+
+#: contents/ui/config/ConfigCategories.qml:466
+msgid "Move to Separate"
+msgstr "Pindahkan ke Terpisah"
+
+#: contents/ui/config/ConfigCategories.qml:481
+msgid "Category Settings Information"
+msgstr "Informasi Pengaturan Kategori"
+
+#: contents/ui/config/ConfigCategories.qml:485
+msgid ""
+"Changes are applied immediately. Hidden categories will not appear in search "
+"results. Priority determines display order."
+msgstr "Perubahan langsung diterapkan. Kategori tersembunyi tidak akan muncul. Prioritas menentukan urutan."
+
+#: contents/ui/config/ConfigCategories.qml:485
+msgid "Lower number = higher priority"
+msgstr "Angka lebih rendah = prioritas lebih tinggi"
+
+#: contents/ui/config/ConfigDebug.qml:102
+msgid ""
+"This tab is only active in Developer mode. Change profile in General "
+"settings."
+msgstr "Tab ini hanya aktif di mode Pengembang. Ubah profil di Pengaturan Umum."
+
+#: contents/ui/config/ConfigDebug.qml:111
+msgid "Debug Settings"
+msgstr "Pengaturan Debug"
+
+#: contents/ui/config/ConfigDebug.qml:117
+#: contents/ui/config/ConfigDebug.qml:176
+#: contents/ui/components/DebugOverlay.qml:58
+msgid "Debug Overlay"
+msgstr "Hamparan Debug"
+
+#: contents/ui/config/ConfigDebug.qml:124
+msgid "Show debug info on widget (active mode, item count, index source)"
+msgstr "Tampilkan info debug di widget"
+
+#: contents/ui/config/ConfigDebug.qml:133
+msgid "Debug Data"
+msgstr "Data Debug"
+
+#: contents/ui/config/ConfigDebug.qml:143
+msgid "Timestamp"
+msgstr "Stempel Waktu"
+
+#: contents/ui/config/ConfigDebug.qml:146
+msgid "Locale"
+msgstr "Lokal"
+
+#: contents/ui/config/ConfigDebug.qml:149
+msgid "User Profile"
+msgstr "Profil Pengguna"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Minimal"
+msgstr "Minimalis"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Developer"
+msgstr "Pengembang"
+
+#: contents/ui/config/ConfigDebug.qml:151
+msgid "Power User"
+msgstr "Pengguna Ahli"
+
+#: contents/ui/config/ConfigDebug.qml:155
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "Display Mode"
+msgstr "Mode Tampilan"
+
+#: contents/ui/config/ConfigDebug.qml:157
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Button"
+msgstr "Tombol"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Medium"
+msgstr "Sedang"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Wide"
+msgstr "Lebar"
+
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Extra Wide"
+msgstr "Ekstra Lebar"
+
+#: contents/ui/config/ConfigDebug.qml:161
+#: contents/ui/config/ConfigGeneral.qml:517
 msgid "View Mode"
 msgstr "Mode Tampilan"
 
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "List View"
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "List"
 msgstr "Tampilan Daftar"
 
-#: contents/ui/config/ConfigGeneral.qml:220
-msgid "Tile View"
+#: contents/ui/config/ConfigDebug.qml:163
+#: contents/ui/components/SearchPopup.qml:1109
+msgid "Tile"
 msgstr "Tampilan Ubin"
 
-#: contents/ui/config/ConfigGeneral.qml:227
-#: contents/ui/config/ConfigDebug.qml:138
-msgid "List Icon Size"
-msgstr "Ukuran Ikon Daftar"
-
-#: contents/ui/config/ConfigGeneral.qml:235
-#: contents/ui/config/ConfigDebug.qml:135
+#: contents/ui/config/ConfigDebug.qml:167
+#: contents/ui/config/ConfigGeneral.qml:544
 msgid "Tile Icon Size"
 msgstr "Ukuran Ikon Ubin"
 
-#: contents/ui/config/ConfigGeneral.qml:243
-#: contents/ui/config/ConfigCategories.qml:170
-msgid "Result Limits"
-msgstr "Batas Hasil"
+#: contents/ui/config/ConfigDebug.qml:170
+#: contents/ui/config/ConfigGeneral.qml:536
+msgid "List Icon Size"
+msgstr "Ukuran Ikon Daftar"
 
-#: contents/ui/config/ConfigGeneral.qml:249
-#: contents/ui/config/ConfigCategories.qml:175
-msgid "Min Results"
-msgstr "Hasil Minimum"
+#: contents/ui/config/ConfigDebug.qml:173
+msgid "Enable Preview"
+msgstr "Aktifkan Pratinjau"
 
-#: contents/ui/config/ConfigGeneral.qml:256
-#: contents/ui/config/ConfigCategories.qml:184
-msgid "Max Results"
-msgstr "Hasil Maksimum"
+#: contents/ui/config/ConfigDebug.qml:179
+msgid "History Count"
+msgstr "Jumlah Riwayat"
 
-#: contents/ui/config/ConfigGeneral.qml:263
-msgid "Smartly limit results based on relevance"
-msgstr "Batasi hasil dengan cerdas berdasarkan relevansi"
+#: contents/ui/config/ConfigDebug.qml:185
+msgid "items"
+msgstr "item"
 
-#: contents/ui/config/ConfigGeneral.qml:264
-msgid "Dynamic Limit"
-msgstr "Batas Dinamis"
+#: contents/ui/config/ConfigDebug.qml:196
+msgid "Telemetry"
+msgstr "Telemetri"
 
-#: contents/ui/config/ConfigGeneral.qml:272
-#: contents/ui/config/ConfigSearch.qml:19
-#: contents/ui/config/ConfigPreview.qml:112
-msgid "Enable File Previews"
-msgstr "Aktifkan Pratinjau Berkas"
+#: contents/ui/config/ConfigDebug.qml:205
+#: contents/ui/components/DebugOverlay.qml:101
+msgid "Total Searches"
+msgstr "Total Pencarian"
 
-#: contents/ui/config/ConfigGeneral.qml:273
-msgid "Master Switch"
-msgstr "Sakelar Utama"
+#: contents/ui/config/ConfigDebug.qml:216
+#: contents/ui/components/DebugOverlay.qml:104
+msgid "Avg Latency"
+msgstr "Rata-rata Latensi"
 
-#: contents/ui/config/ConfigGeneral.qml:278
-#: contents/ui/config/ConfigPreview.qml:134
-msgid "Preview Types"
-msgstr "Tipe Pratinjau"
+#: contents/ui/config/ConfigDebug.qml:230
+msgid "History Sample"
+msgstr "Sampel Riwayat"
 
-#: contents/ui/config/ConfigGeneral.qml:283
-#: contents/ui/config/ConfigPreview.qml:159
-msgid "Images"
-msgstr "Gambar"
-
-#: contents/ui/config/ConfigGeneral.qml:289
-#: contents/ui/config/ConfigPreview.qml:197
-msgid "Videos"
-msgstr "Video"
-
-#: contents/ui/config/ConfigGeneral.qml:295
-#: contents/ui/config/ConfigPreview.qml:235
-msgid "Text Files"
-msgstr "Berkas Teks"
-
-#: contents/ui/config/ConfigGeneral.qml:301
-#: contents/ui/config/ConfigPreview.qml:273
-msgid "Documents"
-msgstr "Dokumen"
-
-#: contents/ui/config/ConfigGeneral.qml:311
-#: contents/ui/config/ConfigPrefix.qml:29
-msgid "Date View (date:)"
-msgstr "Tampilan Tanggal (date:)"
-
-#: contents/ui/config/ConfigGeneral.qml:316
-#: contents/ui/config/ConfigPrefix.qml:36
-msgid "Show Large Clock"
-msgstr "Tampilkan Jam Besar"
-
-#: contents/ui/config/ConfigGeneral.qml:320
-#: contents/ui/config/ConfigPrefix.qml:43
-msgid "Show Calendar Events"
-msgstr "Tampilkan Acara Kalender"
-
-#: contents/ui/config/ConfigGeneral.qml:323
-#: contents/ui/config/ConfigPrefix.qml:50
-msgid "Power View (power:)"
-msgstr "Tampilan Daya (power:)"
-
-#: contents/ui/config/ConfigGeneral.qml:328
-#: contents/ui/config/ConfigPrefix.qml:58
-msgid "Show Sleep Button"
-msgstr "Tampilkan Tombol Tidur"
-
-#: contents/ui/config/ConfigGeneral.qml:332
-#: contents/ui/config/ConfigPrefix.qml:65
-msgid "Show Hibernate Button"
-msgstr "Tampilkan Tombol Hibernasi"
-
-#: contents/ui/config/ConfigGeneral.qml:337
-#: contents/ui/config/ConfigPrefix.qml:72
-msgid "Available Prefixes Reference"
-msgstr "Referensi Awalan Tersedia"
-
-#: contents/ui/config/ConfigGeneral.qml:341
-#: contents/ui/config/ConfigPrefix.qml:76
+#: contents/ui/config/ConfigDebug.qml:237
 msgid ""
-"These prefixes can be used to perform specific actions directly from the "
-"search bar."
-msgstr ""
-"Awalan ini dapat digunakan untuk melakukan tindakan tertentu langsung dari batang cari."
+"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
+"is sent to the internet."
+msgstr "Pemberitahuan Privasi: Semua data disimpan secara LOKAL. Tidak ada data yang dikirim ke internet."
 
-#: contents/ui/config/ConfigGeneral.qml:363
-#: contents/ui/config/ConfigSearch.qml:63 contents/ui/config/ConfigHelp.qml:94
-#: contents/ui/config/ConfigPrefix.qml:98
+#: contents/ui/config/ConfigDebug.qml:311
+msgid "History is empty"
+msgstr "Riwayat kosong"
+
+#: contents/ui/config/ConfigHelp.qml:85
+msgid "Keyboard Shortcuts"
+msgstr "Pintasan Papan Tik"
+
+#: contents/ui/config/ConfigHelp.qml:89
+msgid "Navigate between results"
+msgstr "Navigasi antar hasil"
+
+#: contents/ui/config/ConfigHelp.qml:95
+msgid "Navigate between sections"
+msgstr "Navigasi antar bagian"
+
+#: contents/ui/config/ConfigHelp.qml:101
+msgid "List / Tile view"
+msgstr "Tampilan Daftar / Ubin"
+
+#: contents/ui/config/ConfigHelp.qml:107
+msgid "Toggle file preview"
+msgstr "Alihkan pratinjau berkas"
+
+#: contents/ui/config/ConfigHelp.qml:113
+msgid "Open selected item"
+msgstr "Buka item terpilih"
+
+#: contents/ui/config/ConfigHelp.qml:119
+msgid "Close widget"
+msgstr "Tutup widget"
+
+#: contents/ui/config/ConfigHelp.qml:126
+#: contents/ui/components/QueryHints.qml:31
+#: contents/ui/components/QueryHints.qml:100
+msgid "Search Prefixes"
+msgstr "Awalan Cari"
+
+#: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
+#: contents/ui/config/ConfigPrefix.qml:214
+#: contents/ui/config/ConfigGeneral.qml:1002
 msgid "List files modified today"
 msgstr "Daftar berkas yang diubah hari ini"
 
-#: contents/ui/config/ConfigGeneral.qml:375
-#: contents/ui/config/ConfigSearch.qml:66 contents/ui/config/ConfigHelp.qml:100
-#: contents/ui/config/ConfigPrefix.qml:110
+#: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
+#: contents/ui/config/ConfigPrefix.qml:226
+#: contents/ui/config/ConfigGeneral.qml:1015
 msgid "Search on Google"
 msgstr "Cari di Google"
 
-#: contents/ui/config/ConfigGeneral.qml:387
-#: contents/ui/config/ConfigSearch.qml:69 contents/ui/config/ConfigHelp.qml:106
-#: contents/ui/config/ConfigPrefix.get(1):122
+#: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
+#: contents/ui/config/ConfigPrefix.qml:238
+#: contents/ui/config/ConfigGeneral.qml:1028
 msgid "Search on DuckDuckGo"
 msgstr "Cari di DuckDuckGo"
 
-#: contents/ui/config/ConfigGeneral.qml:399
-#: contents/ui/config/ConfigPrefix.qml:134
-msgid "Show calendar and date information"
-msgstr "Tampilkan kalender dan info tanggal"
+#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
+msgid "Terminate processes"
+msgstr "Hentikan Proses"
 
-#: contents/ui/config/ConfigGeneral.qml:411
-#: contents/ui/config/ConfigPrefix.qml:146
-msgid "Show large clock"
-msgstr "Tampilkan jam besar"
+#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
+msgid "Check spelling"
+msgstr "Periksa ejaan"
 
-#: contents/ui/config/ConfigGeneral.qml:423
-msgid "Show power management options"
-msgstr "Tampilkan opsi manajemen daya"
+#: contents/ui/config/ConfigHelp.qml:161
+msgid "User Profiles"
+msgstr "Profil Pengguna"
 
-#: contents/ui/config/ConfigGeneral.qml:435
-#: contents/ui/config/ConfigPrefix.qml:170
-msgid "Show this help screen"
-msgstr "Tampilkan layar bantuan ini"
+#: contents/ui/config/ConfigHelp.qml:165
+msgid "A simplified interface with essential features."
+msgstr "Antarmuka sederhana dengan fitur penting."
 
-#: contents/ui/config/ConfigGeneral.qml:447
-#: contents/ui/config/ConfigPrefix.qml:182
-msgid "Terminate running processes"
-msgstr "Hentikan proses yang berjalan"
+#: contents/ui/config/ConfigHelp.qml:171
+msgid "Debug tab active, developer features enabled."
+msgstr "Tab debug aktif, fitur pengembang diaktifkan."
 
-#: contents/ui/config/ConfigGeneral.qml:459
-#: contents/ui/config/ConfigPrefix.qml:194
-msgid "Check spelling of a word"
-msgstr "Cek ejaan kata"
+#: contents/ui/config/ConfigHelp.qml:177
+msgid "All features active, advanced settings available."
+msgstr "Semua fitur aktif, pengaturan lanjutan tersedia."
 
-#: contents/ui/config/ConfigGeneral.qml:471
-#: contents/ui/config/ConfigPrefix.qml:206
-msgid "Execute shell commands"
-msgstr "Jalankan perintah shell"
+#: contents/ui/config/ConfigPreview.qml:9
+#: contents/ui/config/ConfigGeneral.qml:187
+#: contents/ui/config/ConfigGeneral.qml:596
+msgid "Preview"
+msgstr "Pratinjau"
 
-#: contents/ui/config/ConfigGeneral.qml:483
-msgid "Convert units (requires KRunner)"
-msgstr "Konversi unit (butuh KRunner)"
+#: contents/ui/config/ConfigPreview.qml:97
+msgid "Preview Settings"
+msgstr "Pengaturan Pratinjau"
 
-#: contents/ui/config/ConfigGeneral.qml:493
+#: contents/ui/config/ConfigPreview.qml:103
+msgid "Enable or disable file previews for different file types."
+msgstr "Aktifkan atau nonaktifkan pratinjau untuk tipe berkas berbeda."
+
+#: contents/ui/config/ConfigPreview.qml:112
+#: contents/ui/config/ConfigSearch.qml:19
+#: contents/ui/config/ConfigGeneral.qml:701
+msgid "Enable File Previews"
+msgstr "Aktifkan Pratinjau Berkas"
+
+#: contents/ui/config/ConfigPreview.qml:125
+msgid "Enabled"
+msgstr "Aktif"
+
+#: contents/ui/config/ConfigPreview.qml:125
+msgid "Disabled"
+msgstr "Nonaktif"
+
+#: contents/ui/config/ConfigPreview.qml:133
+#: contents/ui/config/ConfigGeneral.qml:707
+msgid "Preview Types"
+msgstr "Tipe Pratinjau"
+
+#: contents/ui/config/ConfigPreview.qml:158
+#: contents/ui/config/ConfigGeneral.qml:725
+#: contents/ui/components/FilterChips.qml:25
+#: contents/ui/components/QueryHints.qml:53
+msgid "Images"
+msgstr "Gambar"
+
+#: contents/ui/config/ConfigPreview.qml:196
+#: contents/ui/config/ConfigGeneral.qml:762
+msgid "Videos"
+msgstr "Video"
+
+#: contents/ui/config/ConfigPreview.qml:234
+#: contents/ui/config/ConfigGeneral.qml:799
+msgid "Text Files"
+msgstr "Berkas Teks"
+
+#: contents/ui/config/ConfigPreview.qml:272
+#: contents/ui/config/ConfigGeneral.qml:646
+#: contents/ui/config/ConfigGeneral.qml:836
+#: contents/ui/components/QueryHints.qml:52
+msgid "Documents"
+msgstr "Dokumen"
+
+#: contents/ui/config/ConfigPreview.qml:276
+msgid "Icon only"
+msgstr "Hanya Ikon"
+
+#: contents/ui/config/ConfigPreview.qml:306
+msgid "Performance Information"
+msgstr "Informasi Performa"
+
+#: contents/ui/config/ConfigPreview.qml:311
+msgid "Video and document previews may increase memory usage."
+msgstr "Pratinjau video dan dokumen dapat meningkatkan penggunaan memori."
+
 #: contents/ui/config/ConfigSearch.qml:13
 msgid "Search Settings"
 msgstr "Pengaturan Cari"
 
-#: contents/ui/config/ConfigGeneral.qml:497
-#: contents/ui/config/ConfigCategories.qml:150
-msgid "Search Algorithm"
-msgstr "Algoritma Cari"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Fuzzy"
-msgstr "Fuzzy"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-msgid "Exact"
-msgstr "Eksak"
-
-#: contents/ui/config/ConfigGeneral.qml:498
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Starts With"
-msgstr "Mulai Dengan"
-
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr "Tampilkan pratinjau berkas saat kursor di atasnya (bisa pakai Ctrl+Space)"
+msgstr "Tampilkan pratinjau saat melayang (bisa juga dengan Ctrl+Spasi)"
 
 #: contents/ui/config/ConfigSearch.qml:33
 msgid "Search Behavior"
@@ -317,7 +416,7 @@ msgstr "Perilaku Cari"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr "Anda bisa menggunakan perintah KRunner dan awalan berikut:"
+msgstr "Anda dapat menggunakan perintah dan awalan KRunner berikut:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
@@ -327,272 +426,896 @@ msgstr "Awalan"
 msgid "Description"
 msgstr "Deskripsi"
 
-#: contents/ui/config/ConfigSearch.qml:72 contents/ui/config/ConfigHelp.qml:112
-msgid "Terminate processes"
-msgstr "Hentikan proses"
-
-#: contents/ui/config/ConfigSearch.qml:75 contents/ui/config/ConfigHelp.get(1):118
-msgid "Check spelling"
-msgstr "Cek ejaan"
-
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
 msgstr "Cari karakter Unicode"
 
-#: contents/ui/config/ConfigDebug.qml:68
-msgid ""
-"This tab is only active in Developer mode. Change profile in General "
-"settings."
-msgstr "Tab ini hanya aktif di mode pengembang. Ubah profil di pengaturan umum."
+#: contents/ui/config/ConfigPrefix.qml:10
+#: contents/ui/config/ConfigGeneral.qml:191
+msgid "Prefixes"
+msgstr "Awalan"
 
-#: contents/ui/config/ConfigDebug.qml:76 contents/ui/config/ConfigDebug.qml:78
-msgid "Debug Settings"
-msgstr "Pengaturan Debug"
-
-#: contents/ui/config/ConfigDebug.qml:84 contents/ui/config/ConfigDebug.qml:144
-#: contents/ui/components/DebugOverlay.qml:57
-msgid "Debug Overlay"
-msgstr "Overlay Debug"
-
-#: contents/ui/config/ConfigDebug.qml:91
-msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr "Tampilkan info debug di widget"
-
-#: contents/ui/config/ConfigDebug.qml:99 contents/ui/config/ConfigDebug.qml:101
-msgid "Debug Data"
-msgstr "Data Debug"
-
-#: contents/ui/config/ConfigDebug.qml:111
-msgid "Timestamp"
-msgstr "Timestamp"
-
-#: contents/ui/config/ConfigDebug.qml:114
-msgid "Locale"
-msgstr "Lokal"
-
-#: contents/ui/config/ConfigDebug.qml:117
-msgid "User Profile"
-msgstr "Profil Pengguna"
-
-#: contents/ui/config/ConfigDebug.qml:141
-msgid "Enable Preview"
-msgstr "Aktifkan Pratinjau"
-
-#: contents/ui/config/ConfigDebug.qml:147
-msgid "History Count"
-msgstr "Jumlah Riwayat"
-
-#: contents/ui/config/ConfigDebug.qml:153
-msgid "items"
-msgstr "item"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/config/ConfigDebug.qml:165
-msgid "Telemetry"
-msgstr "Telemetri"
-
-#: contents/ui/config/ConfigDebug.get(1):174
-#: contents/ui/components/DebugOverlay.qml:100
-msgid "Total Searches"
-msgstr "Total Pencarian"
-
-#: contents/ui/config/ConfigDebug.qml:185
-#: contents/ui/components/DebugOverlay.qml:103
-msgid "Avg Latency"
-msgstr "Latensi Rata-rata"
-
-#: contents/ui/config/ConfigDebug.qml:198
-#: contents/ui/config/ConfigDebug.qml:200
-msgid "History Sample"
-msgstr "Sampel Riwayat"
-
-#: contents/ui/config/ConfigDebug.qml:207
-msgid ""
-"Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
-"is sent to the internet."
-msgstr ""
-"Pemberitahuan Privasi: Semua data debug dan telemetri disimpan LOKAL saja. Tidak ada data "
-"dikirim ke internet."
-
-#: contents/ui/config/ConfigDebug.qml:281
-msgid "History is empty"
-msgstr "Riwayat kosong"
-
-#: contents/ui/config/ConfigHelp.qml:49
-msgid "Keyboard Shortcuts"
-msgstr "Pintasan Papan Tik"
-
-#: contents/ui/config/ConfigHelp.qml:53
-msgid "Navigate between results"
-msgstr "Navigasi antar hasil"
-
-#: contents/ui/config/ConfigHelp.qml:59
-msgid "Navigate between sections"
-msgstr "Navigasi antar bagian"
-
-#: contents/ui/config/ConfigHelp.qml:65
-msgid "List / Tile view"
-msgstr "Tampilan Daftar / Ubin"
-
-#: contents/ui/config/ConfigHelp.get(1):71
-msgid "Toggle file preview"
-msgstr "Alihkan pratinjau berkas"
-
-#: contents/ui/config/ConfigHelp.qml:77
-msgid "Open selected item"
-msgstr "Buka item pilihan"
-
-#: contents/ui/config/ConfigHelp.qml:83
-msgid "Close widget"
-msgstr "Tutup widget"
-
-#: contents/ui/config/ConfigHelp.qml:90
-msgid "Search Prefixes"
-msgstr "Awalan Cari"
-
-#: contents/ui/config/ConfigHelp.qml:125
-msgid "User Profiles"
-msgstr "Profil Pengguna"
-
-#: contents/ui/config/ConfigHelp.qml:129
-msgid "A simplified interface with essential features."
-msgstr "Antarmuka yang disederhanakan dengan fitur penting."
-
-#: contents/ui/config/ConfigHelp.qml:135
-msgid "Debug tab active, developer features enabled."
-msgstr "Tab debug aktif, fitur pengembang diaktifkan."
-
-#: contents/ui/config/ConfigHelp.qml:141
-msgid "All features active, advanced settings available."
-msgstr "Semua fitur aktif, pengaturan lanjutan tersedia."
-
-#: contents/ui/config/ConfigCategories.qml:145
-msgid "Algorithm Settings"
-msgstr "Pengaturan Algoritma"
-
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Fuzzy Match"
-msgstr "Cocok Fuzzy"
-
-#: contents/ui/config/ConfigCategories.qml:151
-msgid "Exact Match"
-msgstr "Cocok Eksak"
-
-#: contents/ui/config/ConfigCategories.qml:162
-msgid "Dynamic Result Count"
-msgstr "Jumlah Hasil Dinamis"
-
-#: contents/ui/config/ConfigCategories.qml:163
-msgid "Automatically limit displayed results based on relevance score"
-msgstr "Otomatis batasi hasil berdasarkan skor relevansi"
-
-#: contents/ui/config/ConfigCategories.qml:195
-msgid "Prioritized Categories"
-msgstr "Kategori Terprioritaskan"
-
-#: contents/ui/config/ConfigCategories.qml:199
-msgid "Use buttons to reorder categories or move between sections"
-msgstr "Gunakan tombol untuk atur ulang kategori"
-
-#: contents/ui/config/ConfigCategories.qml:208
-msgid "Priority"
-msgstr "Prioritas"
-
-#: contents/ui/config/ConfigCategories.qml:299
-msgid "Move to Combined"
-msgstr "Pindahkan ke Gabungan"
-
-#: contents/ui/config/ConfigCategories.qml:314
-msgid "Show Together (Merged)"
-msgstr "Tampilkan Bersama (Digabung)"
-
-#: contents/ui/config/ConfigCategories.qml:318
-msgid "Categories in this section will be grouped together"
-msgstr "Kategori di bagian ini akan dikelompokkan bersama"
-
-#: contents/ui/config/ConfigCategories.qml:339
-msgid "No combined categories"
-msgstr "Tidak ada kategori gabungan"
-
-#: contents/ui/config/ConfigCategories.qml:398
-msgid "Move to Separate"
-msgstr "Pindahkan ke Terpisah"
-
-#: contents/ui/config/ConfigCategories.qml:413
-msgid "Category Settings Information"
-msgstr "Informasi Pengaturan Kategori"
-
-#: contents/ui/config/ConfigCategories.qml:417
-msgid ""
-"Changes are applied immediately. Hidden categories will not appear in search "
-"results. Priority determines display order."
-msgstr ""
-"Perubahan langsung diterapkan. Kategori tersembunyi tidak muncul di hasil cari. Prioritas menentukan urutan tampil."
-
-#: contents/ui/config/ConfigCategories.qml:417
-msgid "Lower number = higher priority"
-msgstr "Angka lebih kecil = prioritas lebih tinggi"
-
-#: contents/ui/config/ConfigPreview.qml:97
-msgid "Preview Settings"
-msgstr "Pengaturan Pratinjau"
-
-#: contents/ui/config/ConfigPreview.qml:103
-msgid "Enable or disable file previews for different file types."
-msgstr "Aktifkan atau matikan pratinjau berkas per tipe."
-
-#: contents/ui/config/ConfigPreview.qml:126
-msgid "Enabled"
-msgstr "Aktif"
-
-#: contents/ui/config/ConfigPreview.qml:126
-msgid "Disabled"
-msgstr "Mati"
-
-#: contents/ui/config/ConfigPreview.qml:307
-msgid "Performance Information"
-msgstr "Informasi Performa"
-
-#: contents/ui/config/ConfigPreview.qml:312
-msgid "Video and document previews may increase memory usage."
-msgstr "Pratinjau video dan dokumen bisa menambah penggunaan memori."
-
-#: contents/ui/config/ConfigPrefix.qml:24
+#: contents/ui/config/ConfigPrefix.qml:40
 msgid "Prefix View Settings"
 msgstr "Pengaturan Tampilan Awalan"
 
-#: contents/ui/config/ConfigPrefix.qml:158
+#: contents/ui/config/ConfigPrefix.qml:45
+#: contents/ui/config/ConfigGeneral.qml:855
+msgid "Date View (date:)"
+msgstr "Tampilan Tanggal (date:)"
+
+#: contents/ui/config/ConfigPrefix.qml:52
+#: contents/ui/config/ConfigGeneral.qml:860
+msgid "Show Large Clock"
+msgstr "Tampilkan Jam Besar"
+
+#: contents/ui/config/ConfigPrefix.qml:59
+#: contents/ui/config/ConfigGeneral.qml:864
+msgid "Show Calendar Events"
+msgstr "Tampilkan Acara Kalender"
+
+#: contents/ui/config/ConfigPrefix.qml:66
+#: contents/ui/config/ConfigGeneral.qml:869
+msgid "Weather View (weather:)"
+msgstr "Tampilan Cuaca (weather:)"
+
+#: contents/ui/config/ConfigPrefix.qml:74
+#: contents/ui/config/ConfigGeneral.qml:875
+msgid "Enable Weather Prefix"
+msgstr "Aktifkan Awalan Cuaca"
+
+#: contents/ui/config/ConfigPrefix.qml:87
+#: contents/ui/config/ConfigGeneral.qml:888
+msgid "Use System Units"
+msgstr "Gunakan Satuan Sistem"
+
+#: contents/ui/config/ConfigPrefix.qml:96
+#: contents/ui/config/ConfigGeneral.qml:897
+msgid "Refresh Interval:"
+msgstr "Interval Segarkan:"
+
+#: contents/ui/config/ConfigPrefix.qml:102
+#: contents/ui/config/ConfigGeneral.qml:903
+msgid "Every Search"
+msgstr "Setiap Mencari"
+
+#: contents/ui/config/ConfigPrefix.qml:103
+#: contents/ui/config/ConfigGeneral.qml:904
+msgid "15 Minutes"
+msgstr "15 Menit"
+
+#: contents/ui/config/ConfigPrefix.qml:104
+#: contents/ui/config/ConfigGeneral.qml:905
+msgid "30 Minutes"
+msgstr "30 Menit"
+
+#: contents/ui/config/ConfigPrefix.qml:105
+#: contents/ui/config/ConfigGeneral.qml:906
+msgid "1 Hour"
+msgstr "1 Jam"
+
+#: contents/ui/config/ConfigPrefix.qml:125
+#: contents/ui/config/ConfigGeneral.qml:926
+msgid "(If time since last update > interval)"
+msgstr "(Jika waktu sejak pembaruan terakhir > interval)"
+
+#: contents/ui/config/ConfigPrefix.qml:134
+#: contents/ui/config/ConfigGeneral.qml:933
+msgid "Power View (power:)"
+msgstr "Tampilan Daya (power:)"
+
+#: contents/ui/config/ConfigPrefix.qml:142
+#: contents/ui/config/ConfigGeneral.qml:938
+msgid "Show Sleep Button"
+msgstr "Tampilkan Tombol Tidur"
+
+#: contents/ui/config/ConfigPrefix.qml:149
+#: contents/ui/config/ConfigGeneral.qml:942
+msgid "Show Hibernate Button"
+msgstr "Tampilkan Tombol Hibernasi"
+
+#: contents/ui/config/ConfigPrefix.qml:160
+#: contents/ui/config/ConfigGeneral.qml:951
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(Ukuran partisi swap lebih kecil dari RAM atau tidak ditemukan)"
+
+#: contents/ui/config/ConfigPrefix.qml:170
+#: contents/ui/config/ConfigGeneral.qml:959
+msgid "Show boot options in Reboot button"
+msgstr "Tampilkan opsi boot di tombol Mulai Ulang"
+
+#: contents/ui/config/ConfigPrefix.qml:180
+#: contents/ui/config/ConfigGeneral.qml:967
+msgid "Note: Systemd boot is required for this feature"
+msgstr "Catatan: Boot Systemd diperlukan untuk fitur ini"
+
+#: contents/ui/config/ConfigPrefix.qml:188
+#: contents/ui/config/ConfigGeneral.qml:975
+msgid "Available Prefixes Reference"
+msgstr "Referensi Awalan Tersedia"
+
+#: contents/ui/config/ConfigPrefix.qml:192
+#: contents/ui/config/ConfigGeneral.qml:979
+msgid ""
+"These prefixes can be used to perform specific actions directly from the "
+"search bar."
+msgstr "Awalan ini dapat digunakan untuk melakukan aksi tertentu langsung dari bilah pencarian."
+
+#: contents/ui/config/ConfigPrefix.qml:250
+#: contents/ui/config/ConfigGeneral.qml:1041
+msgid "Show calendar and date information"
+msgstr "Tampilkan informasi kalender dan tanggal"
+
+#: contents/ui/config/ConfigPrefix.qml:262
+#: contents/ui/config/ConfigGeneral.qml:1054
+msgid "Show large clock"
+msgstr "Tampilkan jam besar"
+
+#: contents/ui/config/ConfigPrefix.qml:274
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr "Tampilkan opsi daya (Matikan, Mulai Ulang, dll.)"
+msgstr "Tampilkan opsi manajemen daya (Matikan, Mulai Ulang, dll)"
 
-#: contents/ui/config/ConfigPrefix.qml:218
+#: contents/ui/config/ConfigPrefix.qml:286
+msgid "Show current weather"
+msgstr "Tampilkan cuaca saat ini"
+
+#: contents/ui/config/ConfigPrefix.qml:298
+#: contents/ui/config/ConfigGeneral.qml:1080
+msgid "Show this help screen"
+msgstr "Tampilkan layar bantuan ini"
+
+#: contents/ui/config/ConfigPrefix.qml:310
+#: contents/ui/config/ConfigGeneral.qml:1093
+msgid "Terminate running processes"
+msgstr "Hentikan proses berjalan"
+
+#: contents/ui/config/ConfigPrefix.qml:322
+#: contents/ui/config/ConfigGeneral.qml:1106
+msgid "Check spelling of a word"
+msgstr "Periksa ejaan suatu kata"
+
+#: contents/ui/config/ConfigPrefix.qml:334
+#: contents/ui/config/ConfigGeneral.qml:1119
+msgid "Execute shell commands"
+msgstr "Jalankan perintah shell"
+
+#: contents/ui/config/ConfigPrefix.qml:346
 msgid "Convert units (requires KRunner installed)"
-msgstr "Konversi unit (butuh terinstal KRunner)"
+msgstr "Konversi satuan (butuh KRunner terinstal)"
 
-#: contents/ui/config/ConfigPrefix.get(1):228
+#: contents/ui/config/ConfigPrefix.qml:356
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
 msgstr "Catatan: Beberapa awalan bergantung pada runner KRunner yang terinstal."
 
-#: contents/ui/components/QueryHints.qml:40
+#: contents/ui/config/ConfigGeneral.qml:178
+msgid "Panel"
+msgstr "Panel"
+
+#: contents/ui/config/ConfigGeneral.qml:182
+msgid "Popup"
+msgstr "Popup"
+
+#: contents/ui/config/ConfigGeneral.qml:210
+msgid "Panel Appearance"
+msgstr "Tampilan Panel"
+
+#: contents/ui/config/ConfigGeneral.qml:218 contents/ui/main.qml:104
+msgid "Button Mode (Icon only)"
+msgstr "Mode Tombol (Hanya Ikon)"
+
+#: contents/ui/config/ConfigGeneral.qml:219
+msgid "Medium Mode (Text)"
+msgstr "Mode Sedang (Teks)"
+
+#: contents/ui/config/ConfigGeneral.qml:220
+msgid "Wide Mode (Search Bar)"
+msgstr "Mode Lebar (Bilah Pencarian)"
+
+#: contents/ui/config/ConfigGeneral.qml:221
+msgid "Extra Wide Mode"
+msgstr "Mode Ekstra Lebar"
+
+#: contents/ui/config/ConfigGeneral.qml:222
+msgid "Ultra Wide Mode"
+msgstr "Mode Ultra Lebar"
+
+#: contents/ui/config/ConfigGeneral.qml:229
+msgid "Edge Appearance"
+msgstr "Tampilan Tepi"
+
+#: contents/ui/config/ConfigGeneral.qml:232
+msgid "Round corners"
+msgstr "Sudut bulat"
+
+#: contents/ui/config/ConfigGeneral.qml:233
+msgid "Slightly round"
+msgstr "Agak bulat"
+
+#: contents/ui/config/ConfigGeneral.qml:234
+msgid "Less round"
+msgstr "Kurang bulat"
+
+#: contents/ui/config/ConfigGeneral.qml:235
+msgid "Square corners"
+msgstr "Sudut kotak"
+
+#: contents/ui/config/ConfigGeneral.qml:242
+msgid "Search Icon"
+msgstr "Ikon Cari"
+
+#: contents/ui/config/ConfigGeneral.qml:243
+msgid "Show search icon and button in panel"
+msgstr "Tampilkan ikon dan tombol cari di panel"
+
+#: contents/ui/config/ConfigGeneral.qml:249
+msgid "Show background tile (colored square)"
+msgstr "Tampilkan ubin latar belakang (kotak berwarna)"
+
+#: contents/ui/config/ConfigGeneral.qml:257
+msgid "Show animated RSS titles in panel search bar"
+msgstr "Tampilkan judul RSS animasi di bilah pencarian"
+
+#: contents/ui/config/ConfigGeneral.qml:258
+msgid "RSS Titles"
+msgstr "Judul RSS"
+
+#: contents/ui/config/ConfigGeneral.qml:264
+msgid "Show RSS source name in panel ticker"
+msgstr "Tampilkan nama sumber RSS di panel"
+
+#: contents/ui/config/ConfigGeneral.qml:272
+msgid "RSS Frequency"
+msgstr "Frekuensi RSS"
+
+#: contents/ui/config/ConfigGeneral.qml:275
+msgid "Always"
+msgstr "Selalu"
+
+#: contents/ui/config/ConfigGeneral.qml:276
+msgid "Very Frequent"
+msgstr "Sangat Sering"
+
+#: contents/ui/config/ConfigGeneral.qml:277
+msgid "Frequent"
+msgstr "Sering"
+
+#: contents/ui/config/ConfigGeneral.qml:278
+msgid "Normal"
+msgstr "Normal"
+
+#: contents/ui/config/ConfigGeneral.qml:279
+msgid "Less Frequent"
+msgstr "Kurang Sering"
+
+#: contents/ui/config/ConfigGeneral.qml:280
+msgid "Rare"
+msgstr "Jarang"
+
+#: contents/ui/config/ConfigGeneral.qml:281
+msgid "Only when new"
+msgstr "Hanya jika baru"
+
+#: contents/ui/config/ConfigGeneral.qml:286
+msgid "Panel Height"
+msgstr "Tinggi Panel"
+
+#: contents/ui/config/ConfigGeneral.qml:291
+msgid "Automatic"
+msgstr "Otomatis"
+
+#: contents/ui/config/ConfigGeneral.qml:336
+msgid "Panel Preview"
+msgstr "Pratinjau Panel"
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
+msgid "Start searching..."
+msgstr "Mulai mencari..."
+
+#: contents/ui/config/ConfigGeneral.qml:384
+#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
+msgid "Search..."
+msgstr "Cari..."
+
+#: contents/ui/config/ConfigGeneral.qml:385
+msgid "News Headline"
+msgstr "Headline Berita"
+
+#: contents/ui/config/ConfigGeneral.qml:511
+msgid "Results View"
+msgstr "Tampilan Hasil"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "List View"
+msgstr "Tampilan Daftar"
+
+#: contents/ui/config/ConfigGeneral.qml:518
+msgid "Tile View"
+msgstr "Tampilan Ubin"
+
+#: contents/ui/config/ConfigGeneral.qml:524
+msgid "Scroll Bar"
+msgstr "Bilah Gulir"
+
+#: contents/ui/config/ConfigGeneral.qml:526
+msgid "System Default"
+msgstr "Default Sistem"
+
+#: contents/ui/config/ConfigGeneral.qml:527
+msgid "Minimal (Custom)"
+msgstr "Minimalis (Kustom)"
+
+#: contents/ui/config/ConfigGeneral.qml:528
+msgid "Hidden"
+msgstr "Tersembunyi"
+
+#: contents/ui/config/ConfigGeneral.qml:552
+#: contents/ui/components/PinnedSection.qml:85
+msgid "Pinned Items"
+msgstr "Item Disematkan"
+
+#: contents/ui/config/ConfigGeneral.qml:557
+msgid "Show pinned items bar"
+msgstr "Item Tersemat"
+
+#: contents/ui/config/ConfigGeneral.qml:563
+msgid "Minimize automatically when searching"
+msgstr "Kecilkan otomatis saat mencari"
+
+#: contents/ui/config/ConfigGeneral.qml:572
+msgid "Tile Size Mode"
+msgstr "Ukuran Ikon Ubin"
+
+#: contents/ui/config/ConfigGeneral.qml:575
+msgid "Normal (wide tiles)"
+msgstr "Normal (ubin lebar)"
+
+#: contents/ui/config/ConfigGeneral.qml:576
+msgid "Compact (all small)"
+msgstr "Kompak (semua kecil)"
+
+#: contents/ui/config/ConfigGeneral.qml:577
+msgid "Only pinned compact"
+msgstr "Hanya disematkan kompak"
+
+#: contents/ui/config/ConfigGeneral.qml:578
+msgid "Only history/results compact"
+msgstr "Hanya riwayat/hasil kompak"
+
+#: contents/ui/config/ConfigGeneral.qml:586
+msgid "Filter Chip Style"
+msgstr "Gaya Chip Filter"
+
+#: contents/ui/config/ConfigGeneral.qml:588
+msgid "Current Appearance (Filled)"
+msgstr "Tampilan Terkini (Isi)"
+
+#: contents/ui/config/ConfigGeneral.qml:589
+msgid "Breeze Appearance (Outline)"
+msgstr "Tampilan Breeze (Garis)"
+
+#: contents/ui/config/ConfigGeneral.qml:625
+msgid "System Settings"
+msgstr "Pengaturan Cari"
+
+#: contents/ui/config/ConfigGeneral.qml:669
+msgid "Settings"
+msgstr "Pengaturan Debug"
+
+#: contents/ui/config/ConfigGeneral.qml:684
+#: contents/ui/components/FilterChips.qml:24
+msgid "Docs"
+msgstr "Dokumen"
+
+#: contents/ui/config/ConfigGeneral.qml:702
+msgid "Show/Hide Previews"
+msgstr "Tampilkan/Sembunyikan Pratinjau"
+
+#: contents/ui/config/ConfigGeneral.qml:1067
+msgid "Show power management options"
+msgstr "Tampilkan opsi manajemen daya"
+
+#: contents/ui/config/ConfigGeneral.qml:1132
+msgid "Convert units (requires KRunner)"
+msgstr "Konversi satuan (butuh KRunner)"
+
+#: contents/ui/config/ConfigRSS.qml:235
+msgid "Arch & Linux News"
+msgstr "Berita Arch & Linux"
+
+#: contents/ui/config/ConfigRSS.qml:245
+msgid "Security Bulletins"
+msgstr "Buletin Keamanan"
+
+#: contents/ui/config/ConfigRSS.qml:254
+msgid "Türkiye News"
+msgstr "Berita Turki"
+
+#: contents/ui/config/ConfigRSS.qml:268
+msgid "Azerbaijan News"
+msgstr "Berita Azerbaijan"
+
+#: contents/ui/config/ConfigRSS.qml:276
+msgid "Bangladesh News"
+msgstr "Berita Bangladesh"
+
+#: contents/ui/config/ConfigRSS.qml:283
+msgid "Czech Republic"
+msgstr "Republik Ceko"
+
+#: contents/ui/config/ConfigRSS.qml:290
+msgid "Germany News"
+msgstr "Berita Jerman"
+
+#: contents/ui/config/ConfigRSS.qml:297
+msgid "Greece News"
+msgstr "Berita Yunani"
+
+#: contents/ui/config/ConfigRSS.qml:306
+msgid "Spain & Mexico"
+msgstr "Spanyol & Meksiko"
+
+#: contents/ui/config/ConfigRSS.qml:314
+msgid "Iran News"
+msgstr "Berita Iran"
+
+#: contents/ui/config/ConfigRSS.qml:321
+msgid "France News"
+msgstr "Berita Prancis"
+
+#: contents/ui/config/ConfigRSS.qml:329
+msgid "India News (Hindi)"
+msgstr "Berita India (Hindi)"
+
+#: contents/ui/config/ConfigRSS.qml:336
+msgid "Armenia News"
+msgstr "Berita Armenia"
+
+#: contents/ui/config/ConfigRSS.qml:343
+msgid "Indonesia News"
+msgstr "Berita Indonesia"
+
+#: contents/ui/config/ConfigRSS.qml:350
+msgid "Italy News"
+msgstr "Berita Italia"
+
+#: contents/ui/config/ConfigRSS.qml:358
+msgid "Japan News"
+msgstr "Berita Jepang"
+
+#: contents/ui/config/ConfigRSS.qml:365
+msgid "Brazil & Portugal"
+msgstr "Brasil & Portugal"
+
+#: contents/ui/config/ConfigRSS.qml:372
+msgid "Romania News"
+msgstr "Berita Rumania"
+
+#: contents/ui/config/ConfigRSS.qml:380
+msgid "Russia News"
+msgstr "Berita Rusia"
+
+#: contents/ui/config/ConfigRSS.qml:387
+msgid "Pakistan News"
+msgstr "Berita Pakistan"
+
+#: contents/ui/config/ConfigRSS.qml:394
+msgid "China News"
+msgstr "Berita Cina"
+
+#: contents/ui/config/ConfigRSS.qml:401
+msgid "USA & UK News"
+msgstr "Berita AS & Inggris"
+
+#: contents/ui/config/ConfigRSS.qml:410
+msgid "World News"
+msgstr "Berita Dunia"
+
+#: contents/ui/config/ConfigRSS.qml:459
+msgid "New Source"
+msgstr "Sumber Baru"
+
+#: contents/ui/config/ConfigRSS.qml:544
+msgid "Invalid URL"
+msgstr "URL Tidak Valid"
+
+#: contents/ui/config/ConfigRSS.qml:551
+msgid "Starting background sync..."
+msgstr "Memulai sinkronisasi latar belakang..."
+
+#: contents/ui/config/ConfigRSS.qml:564
+msgid "Script not found at: %1"
+msgstr "Skrip tidak ditemukan di: %1"
+
+#: contents/ui/config/ConfigRSS.qml:584
+msgid "Sync: SUCCESS"
+msgstr "Sinkronisasi: BERHASIL"
+
+#: contents/ui/config/ConfigRSS.qml:658
+msgid "Never"
+msgstr "Tidak Pernah"
+
+#: contents/ui/config/ConfigRSS.qml:674
+msgid "Enable RSS: Show feed updates in search results"
+msgstr "Aktifkan RSS: Tampilkan pembaruan di hasil pencarian"
+
+#: contents/ui/config/ConfigRSS.qml:686
+msgid "Sync All Sources"
+msgstr "Sinkronkan Semua Sumber"
+
+#: contents/ui/config/ConfigRSS.qml:693
+msgid "Clear Cache Folder"
+msgstr "Bersihkan Folder Cache"
+
+#: contents/ui/config/ConfigRSS.qml:702
+msgid "Last full sync: %1"
+msgstr "Sinkronisasi penuh terakhir: %1"
+
+#: contents/ui/config/ConfigRSS.qml:713
+msgid "Show images in results"
+msgstr "Tampilkan gambar di hasil"
+
+#: contents/ui/config/ConfigRSS.qml:719
+msgid "Expand cards on click"
+msgstr "Perluas kartu saat diklik"
+
+#: contents/ui/config/ConfigRSS.qml:727
+msgid "Popular Presets"
+msgstr "Preset Populer"
+
+#: contents/ui/config/ConfigRSS.qml:733
+msgid "Search presets (e.g. News, Tech, TR, Linux)..."
+msgstr "Cari preset (misal Berita, Tech, TR, Linux)..."
+
+#: contents/ui/config/ConfigRSS.qml:795
+msgid "RSS Sources (Max 30)"
+msgstr "Sumber RSS (Maks 30)"
+
+#: contents/ui/config/ConfigRSS.qml:859
+msgid "Name"
+msgstr "Nama"
+
+#: contents/ui/config/ConfigRSS.qml:865
+msgid "URL"
+msgstr "URL"
+
+#: contents/ui/config/ConfigRSS.qml:891
+msgid "Entries:"
+msgstr "Entri:"
+
+#: contents/ui/config/ConfigRSS.qml:897
+msgid "Interval:"
+msgstr "Interval:"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1h"
+msgstr "%1j"
+
+#: contents/ui/config/ConfigRSS.qml:900
+msgid "%1m"
+msgstr "%1m"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 hours"
+msgstr "%1 jam"
+
+#: contents/ui/config/ConfigRSS.qml:908
+msgid "%1 mins"
+msgstr "%1 menit"
+
+#: contents/ui/config/ConfigRSS.qml:918
+msgid "Last sync: %1"
+msgstr "Sinkronisasi terakhir: %1"
+
+#: contents/ui/config/ConfigRSS.qml:952
+msgid "Add Custom Source"
+msgstr "Tambah Sumber Kustom"
+
+#: contents/ui/config/ConfigRSS.qml:966
+msgid "News Features:"
+msgstr "Fitur Berita:"
+
+#: contents/ui/config/ConfigRSS.qml:967
+msgid "Show RSS titles in placeholder cycling"
+msgstr "Tampilkan judul RSS di putaran penampung"
+
+#: contents/ui/config/ConfigRSS.qml:973
+msgid "Show full headlines (split into segments)"
+msgstr "Tampilkan judul lengkap (dibagi menjadi segmen)"
+
+#: contents/ui/config/ConfigRSS.qml:979
+msgid "Default Interval:"
+msgstr "Interval Default:"
+
+#: contents/ui/config/ConfigRSS.qml:986
+msgid "Default Entries:"
+msgstr "Entri Default:"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinnedSection.qml:436
+msgid "Unpin"
+msgstr "Lepas Semat"
+
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/HistoryContextMenu.qml:27
+msgid "Pin"
+msgstr "Sematkan"
+
 #: contents/ui/components/HelpView.qml:16
+#: contents/ui/components/QueryHints.qml:38
 msgid "Timeline View"
 msgstr "Tampilan Linimasa"
+
+#: contents/ui/components/HelpView.qml:17
+#: contents/ui/components/QueryHints.qml:55
+#: contents/ui/components/SearchPopup.qml:1028
+msgid "Applications"
+msgstr "Aplikasi"
+
+#: contents/ui/components/HelpView.qml:18
+msgid "File Path Search"
+msgstr "Pencarian Jalur Berkas"
+
+#: contents/ui/components/HelpView.qml:19
+msgid "Google Search"
+msgstr "Google Search"
+
+#: contents/ui/components/HelpView.qml:20
+msgid "DuckDuckGo Search"
+msgstr "Pencarian DuckDuckGo"
+
+#: contents/ui/components/HelpView.qml:21
+msgid "Wikipedia Search"
+msgstr "Pencarian Wikipedia"
+
+#: contents/ui/components/HelpView.qml:22
+#: contents/ui/components/QueryHints.qml:66
+msgid "Bookmarks"
+msgstr "Penanda"
+
+#: contents/ui/components/HelpView.qml:23
+#: contents/ui/components/QueryHints.qml:69
+msgid "Man Pages"
+msgstr "Halaman Panduan (Man)"
+
+#: contents/ui/components/HelpView.qml:24
+msgid "Kill Process"
+msgstr "Hentikan Proses"
+
+#: contents/ui/components/HelpView.qml:25
+msgid "Spell Check"
+msgstr "Pemeriksaan Ejaan"
+
+#: contents/ui/components/HelpView.qml:26
+msgid "Dictionary Definition"
+msgstr "Definisi Kamus"
+
+#: contents/ui/components/HelpView.qml:27
+#: contents/ui/components/QueryHints.qml:60
+msgid "Unit Converter"
+msgstr "Konverter Unit"
+
+#: contents/ui/components/HelpView.qml:28
+msgid "Shell Commands"
+msgstr "Perintah Shell"
+
+#: contents/ui/components/HelpView.qml:29
+msgid "Power Management"
+msgstr "Manajemen Daya"
+
+#: contents/ui/components/HelpView.qml:30
+msgid "System Services"
+msgstr "Layanan Sistem"
+
+#: contents/ui/components/HelpView.qml:31
+msgid "Unicode Characters"
+msgstr "Karakter Unicode"
+
+#: contents/ui/components/HelpView.qml:32
+msgid "Date and Time"
+msgstr "Tanggal dan Waktu"
+
+#: contents/ui/components/HelpView.qml:33
+msgid "Help & Shortcuts"
+msgstr "Bantuan & Pintasan"
+
+#: contents/ui/components/HistoryListView.qml:38
+#: contents/ui/components/HistoryTileView.qml:246
+msgid "Recent Searches"
+msgstr "Pencarian Terkini"
+
+#: contents/ui/components/HistoryListView.qml:58
+#: contents/ui/components/HistoryTileView.qml:266
+msgid "Clear History"
+msgstr "Bersihkan Riwayat"
+
+#: contents/ui/components/HistoryListView.qml:286
+#: contents/ui/components/HistoryTileView.qml:597
+#: contents/ui/components/ResultsTileView.qml:301
+msgid "Type to search"
+msgstr "Ketik untuk mencari"
+
+#: contents/ui/components/DebugOverlay.qml:41
+msgid "Saved!"
+msgstr "Disimpan!"
+
+#: contents/ui/components/DebugOverlay.qml:49
+#: contents/ui/components/DebugOverlay.qml:119
+msgid "Save Dump"
+msgstr "Simpan Dump"
+
+#: contents/ui/components/DebugOverlay.qml:78
+msgid "Backend"
+msgstr "Backend"
+
+#: contents/ui/components/DebugOverlay.qml:81
+msgid "Items"
+msgstr "Item"
+
+#: contents/ui/components/DebugOverlay.qml:84
+msgid "Latency"
+msgstr "Latensi"
+
+#: contents/ui/components/DebugOverlay.qml:91
+msgid "View"
+msgstr "Tampilan"
+
+#: contents/ui/components/DebugOverlay.qml:94
+msgid "Display"
+msgstr "Tampilan"
+
+#: contents/ui/components/FilterChips.qml:22
+msgid "All"
+msgstr "Semua"
+
+#: contents/ui/components/FilterChips.qml:23
+msgid "Apps"
+msgstr "Aplikasi"
+
+#: contents/ui/components/FilterChips.qml:26
+msgid "Folders"
+msgstr "Folder"
+
+#: contents/ui/components/FilterChips.qml:27
+msgid "Web"
+msgstr "Web"
+
+#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/PinnedSection.qml:402
+msgid "Open"
+msgstr "Buka"
+
+#: contents/ui/components/HistoryContextMenu.qml:69
+#: contents/ui/components/PinnedSection.qml:412
+msgid "Copy Path"
+msgstr "Salin Jalur"
+
+#: contents/ui/components/HistoryContextMenu.qml:85
+msgid "Open in Terminal"
+msgstr "Buka di Terminal"
+
+#: contents/ui/components/HistoryContextMenu.qml:97
+#: contents/ui/components/PinnedSection.qml:423
+msgid "Open Containing Folder"
+msgstr "Buka Folder Wadah"
+
+#: contents/ui/components/HistoryContextMenu.qml:107
+msgid "Move to Trash"
+msgstr "Pindahkan ke Tong Sampah"
+
+#: contents/ui/components/HistoryContextMenu.qml:120
+msgid "Properties"
+msgstr "Properti"
+
+#: contents/ui/components/HistoryContextMenu.qml:130
+msgid "Edit Application..."
+msgstr "Edit Aplikasi..."
+
+#: contents/ui/components/HistoryContextMenu.qml:140
+msgid "Remove from History"
+msgstr "Hapus dari Riwayat"
+
+#: contents/ui/components/PinnedSection.qml:225
+msgid "Right-click items to pin them"
+msgstr "Klik kanan untuk menyematkan"
+
+#: contents/ui/components/PinnedSection.qml:383
+msgid "Drag to reorder"
+msgstr "Geser untuk mengurutkan"
+
+#: contents/ui/components/PowerView.qml:254
+msgid "Hibernate"
+msgstr "Hibernasi"
+
+#: contents/ui/components/PowerView.qml:258
+msgid "(Press again to hibernate)"
+msgstr "(Tekan lagi untuk hibernasi)"
+
+#: contents/ui/components/PowerView.qml:267
+msgid "Sleep"
+msgstr "Tidur"
+
+#: contents/ui/components/PowerView.qml:271
+msgid "(Press again to sleep)"
+msgstr "(Tekan lagi untuk tidur)"
+
+#: contents/ui/components/PowerView.qml:279
+msgid "Reboot"
+msgstr "Mulai Ulang"
+
+#: contents/ui/components/PowerView.qml:283
+msgid "(Press again to reboot)"
+msgstr "(Tekan lagi untuk mulai ulang)"
+
+#: contents/ui/components/PowerView.qml:303
+msgid "Shutdown"
+msgstr "Matikan"
+
+#: contents/ui/components/PowerView.qml:307
+msgid "(Press again to shutdown)"
+msgstr "(Tekan lagi untuk mematikan)"
+
+#: contents/ui/components/PowerView.qml:444
+msgid "Refresh"
+msgstr "Segarkan"
+
+#: contents/ui/components/PowerView.qml:472
+msgid "Scan for boot entries"
+msgstr "Pindai entri boot"
+
+#: contents/ui/components/PowerView.qml:498
+msgid "Lock Screen"
+msgstr "Kunci Layar"
+
+#: contents/ui/components/PowerView.qml:508
+msgid "Log Out"
+msgstr "Keluar"
+
+#: contents/ui/components/PowerView.qml:512
+msgid "(Press again to log out)"
+msgstr "(Tekan lagi untuk keluar)"
+
+#: contents/ui/components/PowerView.qml:520
+msgid "Switch User"
+msgstr "Ganti Pengguna"
+
+#: contents/ui/components/PowerView.qml:524
+msgid "(Press again to switch)"
+msgstr "(Tekan lagi untuk beralih)"
+
+#: contents/ui/components/PowerView.qml:532
+msgid "Save Session"
+msgstr "Simpan Sesi"
+
+#: contents/ui/components/PowerView.qml:551
+msgid "(Press again)"
+msgstr "(Tekan lagi)"
+
+#: contents/ui/components/QueryHints.qml:32
+msgid "Show all available search filters"
+msgstr "Tampilkan semua filter pencarian"
+
+#: contents/ui/components/QueryHints.qml:39
+msgid "Browse files by date (Today, Yesterday, etc.)"
+msgstr "Telusuri berkas berdasarkan tanggal (Hari Ini, Kemarin, dll)"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
 msgstr "Kalender"
 
 #: contents/ui/components/QueryHints.qml:44
-#: contents/ui/components/QueryHints.qml:128
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:154
+#: contents/ui/components/QueryHints.qml:162
 msgid "Today"
 msgstr "Hari Ini"
 
 #: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:129
-#: contents/ui/components/QueryHints.qml:136
+#: contents/ui/components/QueryHints.qml:155
+#: contents/ui/components/QueryHints.qml:162
 msgid "Yesterday"
 msgstr "Kemarin"
 
@@ -604,444 +1327,323 @@ msgstr "Minggu Ini"
 msgid "This Month"
 msgstr "Bulan Ini"
 
+#: contents/ui/components/QueryHints.qml:50
+msgid "File Path"
+msgstr "Jalur Berkas"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "Search via absolute file path"
+msgstr "Cari melalui jalur berkas absolut"
+
 #: contents/ui/components/QueryHints.qml:51
-msgid "Files modified today"
-msgstr "Berkas diubah hari ini"
+msgid "File Index"
+msgstr "Indeks Berkas"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "Search exclusively in Baloo file index"
+msgstr "Cari hanya di indeks berkas Baloo"
 
 #: contents/ui/components/QueryHints.qml:52
-msgid "Files modified yesterday"
-msgstr "Berkas diubah kemarin"
+msgid "Search only document files"
+msgstr "Cari dokumen saja"
 
 #: contents/ui/components/QueryHints.qml:53
-msgid "Files modified this week"
-msgstr "Berkas diubah minggu ini"
+msgid "Search only image files"
+msgstr "Cari gambar saja"
 
-#: contents/ui/components/QueryHints.qml:54
-msgid "Files modified this month"
-msgstr "Berkas diubah bulan ini"
+#: contents/ui/components/QueryHints.qml:55
+msgid "Search for installed applications"
+msgstr "Cari aplikasi terinstal"
 
 #: contents/ui/components/QueryHints.qml:56
-#: contents/ui/components/HelpView.qml:18
-msgid "File Path Search"
-msgstr "Cari Jalur Berkas"
+msgid "Services"
+msgstr "Layanan"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Search system background services"
+msgstr "Cari layanan latar belakang sistem"
 
 #: contents/ui/components/QueryHints.qml:57
-#: contents/ui/components/HelpView.qml:23
-msgid "Man Pages"
-msgstr "Man Pages"
+msgid "Shell"
+msgstr "Shell"
 
-#: contents/ui/components/QueryHints.qml:58
-#: contents/ui/components/HelpView.qml:19
-msgid "Google Search"
-msgstr "Google Search"
+#: contents/ui/components/QueryHints.qml:57
+msgid "Execute shell commands directly"
+msgstr "Jalankan perintah shell secara langsung"
 
 #: contents/ui/components/QueryHints.qml:59
-#: contents/ui/components/HelpView.qml:20
-msgid "DuckDuckGo Search"
-msgstr "DuckDuckGo Search"
+msgid "Calculator"
+msgstr "Kalkulator"
+
+#: contents/ui/components/QueryHints.qml:59
+msgid "Perform mathematical calculations"
+msgstr "Lakukan perhitungan matematika"
 
 #: contents/ui/components/QueryHints.qml:60
-#: contents/ui/components/HelpView.qml:21
-msgid "Wikipedia Search"
-msgstr "Wikipedia Search"
+msgid "Convert between weights, distances, etc."
+msgstr "Konversi antara berat, jarak, dll"
 
 #: contents/ui/components/QueryHints.qml:61
-#: contents/ui/components/HelpView.qml:24
-msgid "Kill Process"
-msgstr "Hentikan Proses"
+msgid "Spelling"
+msgstr "Ejaan"
 
-#: contents/ui/components/QueryHints.qml:62
-#: contents/ui/components/HelpView.qml:25
-msgid "Spell Check"
-msgstr "Cek Ejaan"
+#: contents/ui/components/QueryHints.qml:61
+msgid "Check word spelling"
+msgstr "Periksa ejaan kata"
 
 #: contents/ui/components/QueryHints.qml:63
-#: contents/ui/components/HelpView.qml:31
-msgid "Unicode Characters"
-msgstr "Karakter Unicode"
+msgid "Google"
+msgstr "Google"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Search the web using Google"
+msgstr "Cari di web menggunakan Google"
 
 #: contents/ui/components/QueryHints.qml:64
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
-#: contents/ui/components/HelpView.qml:17
-msgid "Applications"
-msgstr "Aplikasi"
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "Search the web using DuckDuckGo"
+msgstr "Cari di web menggunakan DuckDuckGo"
 
 #: contents/ui/components/QueryHints.qml:65
-#: contents/ui/components/HelpView.qml:28
-msgid "Shell Commands"
-msgstr "Perintah Shell"
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Search Wikipedia articles"
+msgstr "Cari artikel Wikipedia"
 
 #: contents/ui/components/QueryHints.qml:66
-#: contents/ui/components/HelpView.qml:22
-msgid "Bookmarks"
-msgstr "Penanda"
+msgid "Search browser bookmarks"
+msgstr "Cari markah peramban"
 
 #: contents/ui/components/QueryHints.qml:67
-#: contents/ui/components/HelpView.get(1):29
-msgid "Power Management"
-msgstr "Manajemen Daya"
+msgid "RSS Feeds"
+msgstr "Feed RSS"
 
-#: contents/ui/components/QueryHints.qml:68
-#: contents/ui/components/HelpView.qml:30
-msgid "System Services"
-msgstr "Layanan Sistem"
+#: contents/ui/components/QueryHints.qml:67
+msgid "Search exclusively in RSS news feeds"
+msgstr "Cari hanya di feed berita RSS"
 
 #: contents/ui/components/QueryHints.qml:69
-#: contents/ui/components/HelpView.qml:32
-msgid "Date and Time"
-msgstr "Tanggal dan Waktu"
+msgid "Browse system manual pages"
+msgstr "Telusuri halaman panduan sistem"
 
 #: contents/ui/components/QueryHints.qml:70
-#: contents/ui/components/HelpView.qml:26
-msgid "Dictionary Definition"
-msgstr "Definisi Kamus"
+msgid "Show widget documentation"
+msgstr "Tampilkan dokumentasi widget"
 
-#: contents/ui/components/QueryHints.qml:71
-#: contents/ui/components/HelpView.qml:27
-msgid "Unit Converter"
-msgstr "Konverter Unit"
-
-#: contents/ui/components/HelpView.qml:33
-msgid "Help & Shortcuts"
-msgstr "Bantuan & Pintasan"
-
-#: contents/ui/components/QueryHints.qml:130
-#: contents/ui/components/QueryHints.qml:136
-msgid "Two days ago"
-msgstr "Dua hari lalu"
-
-#: contents/ui/components/QueryHints.qml:217
-#: contents/ui/components/QueryHints.qml:227
-msgid "Browse calendar"
-msgstr "Jelajah kalender"
-
-#: contents/ui/components/QueryHints.qml:241
-msgid "Man pages not installed"
-msgstr "Man pages tidak terinstal"
-
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:98
 msgid "Unknown prefix"
 msgstr "Awalan tidak dikenal"
 
-#: contents/ui/components/QueryHints.qml:295
+#: contents/ui/components/QueryHints.qml:99
 msgid "try"
 msgstr "coba"
 
-#: contents/ui/components/DebugOverlay.qml:40
-msgid "Saved!"
-msgstr "Tersimpan!"
+#: contents/ui/components/QueryHints.qml:101
+msgid "Browse calendar"
+msgstr "Telusuri kalender"
 
-#: contents/ui/components/DebugOverlay.qml:48
-#: contents/ui/components/DebugOverlay.qml:118
-msgid "Save Dump"
-msgstr "Simpan Dump"
+#: contents/ui/components/QueryHints.qml:102
+msgid "Man pages not installed"
+msgstr "Man pages tidak terinstal"
 
-#: contents/ui/components/DebugOverlay.get(1):77
-msgid "Backend"
-msgstr "Backend"
+#: contents/ui/components/QueryHints.qml:156
+#: contents/ui/components/QueryHints.qml:162
+msgid "Two days ago"
+msgstr "Dua hari lalu"
 
-#: contents/ui/components/DebugOverlay.qml:80
-msgid "Items"
-msgstr "Item"
+#: contents/ui/components/QueryHints.qml:367
+msgid "Available Search Prefixes"
+msgstr "Awalan Pencarian Tersedia"
 
-#: contents/ui/components/DebugOverlay.qml:83
-msgid "Latency"
-msgstr "Latensi"
+#: contents/ui/components/ResultsListView.qml:436
+#: contents/ui/components/ResultsTileView.qml:294
+msgid "Category"
+msgstr "Kategori"
 
-#: contents/ui/components/DebugOverlay.qml:90
-msgid "View"
-msgstr "Tampilan"
+#: contents/ui/components/ResultsListView.qml:437
+#: contents/ui/components/ResultsTileView.qml:295
+msgid "File Type"
+msgstr "Tipe Berkas"
 
-#: contents/ui/components/DebugOverlay.qml:93
-msgid "Display"
-msgstr "Display"
+#: contents/ui/components/ResultsListView.qml:438
+#: contents/ui/components/ResultsTileView.qml:296
+msgid "Path"
+msgstr "Jalur"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/PinnedSection.qml:376
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Unpin"
-msgstr "Lepaskan"
+#: contents/ui/components/ResultsListView.qml:439
+msgid "News"
+msgstr "Berita"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Pin"
-msgstr "Sematkan"
+#: contents/ui/components/ResultsListView.qml:440
+msgid "Read News"
+msgstr "Baca Berita"
 
-#: contents/ui/components/PinnedSection.qml:71
-msgid "Pinned Items"
-msgstr "Item Tersemat"
+#: contents/ui/components/ResultsListView.qml:441
+msgid "Share"
+msgstr "Bagikan"
 
-#: contents/ui/components/PinnedSection.qml:323
-msgid "Drag to reorder"
-msgstr "Seret untuk urutkan"
+#: contents/ui/components/ResultsListView.qml:442
+#: contents/ui/components/ResultsTileView.qml:299
+msgid "Searching..."
+msgstr "Mencari..."
 
-#: contents/ui/components/PinnedSection.qml:342
-#: contents/ui/components/HistoryContextMenu.qml:52
-msgid "Open"
-msgstr "Buka"
-
-#: contents/ui/components/PinnedSection.qml:352
-msgid "Copy Path"
-msgstr "Salin Jalur"
-
-#: contents/ui/components/PinnedSection.qml:363
-#: contents/ui/components/HistoryContextMenu.qml:101
-msgid "Open Containing Folder"
-msgstr "Buka Folder Berisi"
-
-#: contents/ui/components/HistoryListView.qml:34
-#: contents/ui/components/HistoryTileView.qml:243
-msgid "Recent Searches"
-msgstr "Pencarian Terbaru"
-
-#: contents/ui/components/HistoryListView.qml:54
-#: contents/ui/components/HistoryTileView.qml:263
-msgid "Clear History"
-msgstr "Bersihkan Riwayat"
-
-#: contents/ui/components/ResultsListView.qml:330
+#: contents/ui/components/ResultsListView.qml:443
+#: contents/ui/components/ResultsTileView.qml:300
 msgid "No results found"
-msgstr "Hasil tidak ditemukan"
+msgstr "Tidak ada hasil ditemukan"
 
-#: contents/ui/components/ResultsListView.qml:330
-msgid "Type to start searching"
-msgstr "Tik untuk mulai mencari"
+#: contents/ui/components/ResultsTileView.qml:297
+msgid "Space to preview"
+msgstr "Spasi untuk pratinjau"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:269
+#: contents/ui/components/ResultsTileView.qml:298
+msgid "Read in Browser"
+msgstr "Baca di Peramban"
+
+#: contents/ui/components/SearchPopup.qml:92
 msgid "date"
 msgstr "tanggal"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:270
+#: contents/ui/components/SearchPopup.qml:93
 msgid "clock"
 msgstr "jam"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:295
+#: contents/ui/components/SearchPopup.qml:94
+msgid "weather"
+msgstr "cuaca"
+
+#: contents/ui/components/SearchPopup.qml:95
 msgid "power"
 msgstr "daya"
 
-#: contents/ui/components/SearchPopup.qml:253
-#: contents/ui/components/SearchPopup.qml:279
+#: contents/ui/components/SearchPopup.qml:96
 msgid "help"
 msgstr "bantuan"
 
-#: contents/ui/components/SearchPopup.qml:265
+#: contents/ui/components/SearchPopup.qml:97
 msgid "unit"
-msgstr "unit"
+msgstr "satuan"
 
-#: contents/ui/components/SearchPopup.qml:283
+#: contents/ui/components/SearchPopup.qml:98
 msgid "kill"
-msgstr "kill"
+msgstr "matikan"
 
-#: contents/ui/components/SearchPopup.qml:287
+#: contents/ui/components/SearchPopup.qml:99
 msgid "spell"
-msgstr "ejaan"
+msgstr "eja"
 
-#: contents/ui/components/SearchPopup.qml:291
+#: contents/ui/components/SearchPopup.qml:100
 msgid "shell"
 msgstr "shell"
 
-#: contents/ui/components/SearchPopup.qml:367
-msgid "Search Here"
-msgstr "Cari di Sini"
-
-#: contents/ui/components/SearchPopup.qml:714
-#: contents/ui/components/SearchPopup.qml:720
+#: contents/ui/components/SearchPopup.qml:1028
 msgid "Other"
 msgstr "Lainnya"
 
-#: contents/ui/components/HistoryContextMenu.qml:69
-msgid "Copy Location"
-msgstr "Salin Lokasi"
+#: contents/ui/components/SearchPopup.qml:1110
+msgid "Mode"
+msgstr "Mode"
 
-#: contents/ui/components/HistoryContextMenu.qml:85
-msgid "Open in Terminal"
-msgstr "Buka di Terminal"
+#: contents/ui/components/TileDataManager.qml:53
+msgid "Other Results"
+msgstr "Hasil Lainnya"
 
-#: contents/ui/components/HistoryContextMenu.qml:111
-msgid "Move to Trash"
-msgstr "Pindahkan ke Sampah"
+#: contents/ui/components/WeatherView.qml:57
+msgid "Unknown error"
+msgstr "Kesalahan tidak dikenal"
 
-#: contents/ui/components/HistoryContextMenu.qml:124
-msgid "Properties"
-msgstr "Properti"
+#: contents/ui/components/WeatherView.qml:80
+msgid "Loading Weather..."
+msgstr "Memuat Cuaca..."
 
-#: contents/ui/components/HistoryContextMenu.qml:134
-msgid "Edit Application..."
-msgstr "Edit Aplikasi..."
+#: contents/ui/components/WeatherView.qml:91
+msgid "Retry"
+msgstr "Coba Lagi"
 
-#: contents/ui/components/HistoryContextMenu.get(1):144
-msgid "Remove from History"
-msgstr "Hapus dari Riwayat"
-
-#: contents/ui/components/PowerView.qml:133
-msgid "Hibernate"
-msgstr "Hibernasi"
-
-#: contents/ui/components/PowerView.qml:137
-msgid "(Press again to hibernate)"
-msgstr "(Tekan lagi untuk hibernasi)"
-
-#: contents/ui/components/PowerView.qml:146
-msgid "Sleep"
-msgstr "Tidur"
-
-#: contents/ui/components/PowerView.qml:150
-msgid "(Press again to sleep)"
-msgstr "(Tekan lagi untuk tidur)"
-
-#: contents/ui/components/PowerView.qml:158
-msgid "Reboot"
-msgstr "Mulai Ulang"
-
-#: contents/ui/components/PowerView.qml:162
-msgid "(Press again to reboot)"
-msgstr "(Tekan lagi untuk mulai ulang)"
-
-#: contents/ui/components/PowerView.qml:180
-msgid "Shutdown"
-msgstr "Matikan"
-
-#: contents/ui/components/PowerView.qml:184
-msgid "(Press again to shutdown)"
-msgstr "(Tekan lagi untuk matikan)"
-
-#: contents/ui/components/PowerView.qml:278
-msgid "Authorize to list entries"
-msgstr "Otorisasi untuk daftar entri"
-
-#: contents/ui/components/PowerView.qml:299
-msgid "Lock Screen"
-msgstr "Kunci Layar"
-
-#: contents/ui/components/PowerView.qml:309
-msgid "Log Out"
-msgstr "Keluar Sesi"
-
-#: contents/ui/components/PowerView.qml:313
-msgid "(Press again to log out)"
-msgstr "(Tekan lagi untuk keluar)"
-
-#: contents/ui/components/PowerView.qml:321
-msgid "Switch User"
-msgstr "Ganti Pengguna"
-
-#: contents/ui/components/PowerView.qml:325
-msgid "(Press again to switch)"
-msgstr "(Tekan lagi untuk ganti)"
-
-#: contents/ui/components/PowerView.qml:333
-msgid "Save Session"
-msgstr "Simpan Sesi"
-
-#: contents/ui/components/PowerView.qml:352
-msgid "(Press again)"
-msgstr "(Tekan lagi)"
-
-#: contents/ui/main.qml:96
+#: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"
 msgstr "Mode Sedang (Hanya Tombol)"
 
-#: contents/ui/main.qml:102
+#: contents/ui/main.qml:116
 msgid "Wide Mode (Search bar + icon)"
-msgstr "Mode Lebar (Batang cari + ikon)"
+msgstr "Mode Lebar (Bilah Pencarian + Ikon)"
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:122
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr "Mode Sangat Lebar (Lebar + Placeholder)"
+msgstr "Mode Ekstra Lebar (Lebar + Penampung Panjang)"
 
-msgid "Show/Hide Previews"
-msgstr "Tampilkan/Sembunyikan Pratinjau"
+#: contents/ui/main.qml:128
+msgid "Ultra Wide Mode (Maximum Coverage)"
+msgstr "Mode Ultra Lebar (Cakupan Maksimal)"
 
-msgid "Edge Appearance"
-msgstr "Tampilan Tepi"
+#~ msgid "Smartly limit results based on relevance"
+#~ msgstr "Batasi hasil dengan cerdas berdasarkan relevansi"
 
-msgid "Round corners"
-msgstr "Sudut membulat"
+#~ msgid "Dynamic Limit"
+#~ msgstr "Batas Dinamis"
 
-msgid "Slightly round"
-msgstr "Sedikit bulat"
+#~ msgid "Master Switch"
+#~ msgstr "Sakelar Utama"
 
-msgid "Less round"
-msgstr "Kurang bulat"
+#~ msgid "Fuzzy"
+#~ msgstr "Fuzzy"
 
-msgid "Square corners"
-msgstr "Sudut kotak"
+#~ msgid "Exact"
+#~ msgstr "Eksak"
 
-msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(Partisi swap lebih kecil dari RAM atau tidak ditemukan)"
+#~ msgid "Files modified today"
+#~ msgstr "Berkas diubah hari ini"
 
-msgid "Note: Systemd boot is required for this feature"
-msgstr "Catatan: Butuh Systemd boot untuk fitur ini"
+#~ msgid "Files modified yesterday"
+#~ msgstr "Berkas diubah kemarin"
 
-msgid "Scan for boot entries"
-msgstr "Pindai entri boot"
+#~ msgid "Files modified this week"
+#~ msgstr "Berkas diubah minggu ini"
 
-msgid "Result Count"
-msgstr "Jumlah Hasil"
+#~ msgid "Files modified this month"
+#~ msgstr "Berkas diubah bulan ini"
 
-msgid "Priority Ranking"
-msgstr "Peringkat Prioritas"
+#~ msgid "Search Here"
+#~ msgstr "Cari di Sini"
 
-msgid "Show Together"
-msgstr "Tampilkan Bersama"
+#~ msgid "Copy Location"
+#~ msgstr "Salin Lokasi"
 
-msgid "Corner Roundness"
-msgstr "Kebulatan Sudut"
+#~ msgid "Authorize to list entries"
+#~ msgstr "Otorisasi untuk daftar entri"
 
-msgid "Square"
-msgstr "Kotak"
+#~ msgid "Result Count"
+#~ msgstr "Jumlah Hasil"
 
-msgid "Slightly Rounded"
-msgstr "Sedikit Bulat"
+#~ msgid "Priority Ranking"
+#~ msgstr "Peringkat Prioritas"
 
-msgid "Moderately Rounded"
-msgstr "Cukup Bulat"
+#~ msgid "Corner Roundness"
+#~ msgstr "Kebulatan Sudut"
 
-msgid "Fully Rounded"
-msgstr "Sangat Bulat"
+#~ msgid "Square"
+#~ msgstr "Kotak"
 
-msgid "Minimize automatically when searching"
-msgstr "Minimalkan otomatis saat mencari"
+#~ msgid "Slightly Rounded"
+#~ msgstr "Sedikit Bulat"
 
-msgid "Search on Wikipedia"
-msgstr "Cari di Wikipedia"
+#~ msgid "Moderately Rounded"
+#~ msgstr "Cukup Bulat"
 
-msgid "Minimal - A simplified interface with essential features."
-msgstr "Minimal - Antarmuka simpel dengan fitur utama."
+#~ msgid "Fully Rounded"
+#~ msgstr "Sangat Bulat"
 
-msgid "Developer - Debug tab active, developer features enabled."
-msgstr "Developer - Tab debug aktif, fitur pengembang aktif."
+#~ msgid "Minimal - A simplified interface with essential features."
+#~ msgstr "Minimal - Antarmuka simpel dengan fitur utama."
 
-msgid "Power User - All features active, advanced settings available."
-msgstr "Power User - Semua fitur aktif, pengaturan lanjutan tersedia."
+#~ msgid "Developer - Debug tab active, developer features enabled."
+#~ msgstr "Developer - Tab debug aktif, fitur pengembang aktif."
 
-msgid "Weather View (weather:)"
-msgstr "Tampilan Cuaca (weather:)"
+#~ msgid "Power User - All features active, advanced settings available."
+#~ msgstr "Power User - Semua fitur aktif, pengaturan lanjutan tersedia."
 
-msgid "Use System Units"
-msgstr "Gunakan Satuan Sistem"
-
-msgid "Refresh Interval:"
-msgstr "Interval Segarkan:"
-
-msgid "Every Search"
-msgstr "Setiap Mencari"
-
-msgid "15 Minutes"
-msgstr "15 Menit"
-
-msgid "30 Minutes"
-msgstr "30 Menit"
-
-msgid "1 Hour"
-msgstr "1 Jam"
-
-msgid "(If time since last update > interval)"
-msgstr "(Jika waktu sejak pembaruan terakhir > interval)"
-
-msgid "Enable Weather Prefix"
-msgstr "Aktifkan Awalan Cuaca"
