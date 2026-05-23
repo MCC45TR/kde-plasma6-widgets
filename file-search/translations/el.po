@@ -1,29 +1,662 @@
 msgid ""
-msgstr "Project-Id-Version: file-search 1.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-23 02:06+0300\nPO-Revision-Date: 2026-01-22 12:00+0300\nLast-Translator: Automatically generated\nLanguage-Team: el\nLanguage: el\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+msgstr ""
+"Project-Id-Version: file-search 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:23+0300\n"
+"PO-Revision-Date: 2026-01-22 12:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: el\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
-msgid "Appearance"
-msgstr "Εμφάνιση"
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/components/SearchBar.qml:43
+#: contents/ui/config/ConfigGeneral.qml:384 contents/ui/main.qml:51
+msgid "Start searching..."
+msgstr "Έναρξη αναζήτησης..."
 
-#: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-#: contents/ui/config/ConfigSearch.qml:9
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/config/ConfigGeneral.qml:384 contents/ui/main.qml:51
+msgid "Search..."
+msgstr "Αναζήτηση..."
+
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/config/ConfigCategories.qml:10
 #: contents/ui/config/ConfigGeneral.qml:384
-#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
+#: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:51
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: contents/config/config.qml:17
-msgid "RSS"
-msgstr "RSS"
+#: contents/ui/components/DebugOverlay.qml:41
+msgid "Saved!"
+msgstr "Αποθηκεύτηκε!"
 
-#: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
-msgid "Debug"
-msgstr "Αποσφαλμάτωση"
+#: contents/ui/components/DebugOverlay.qml:49
+#: contents/ui/components/DebugOverlay.qml:119
+msgid "Save Dump"
+msgstr "Αποθήκευση dump"
 
-#: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
-#: contents/ui/components/QueryHints.qml:70
+#: contents/ui/components/DebugOverlay.qml:58
+#: contents/ui/config/ConfigDebug.qml:117
+#: contents/ui/config/ConfigDebug.qml:176
+msgid "Debug Overlay"
+msgstr "Επικάλυψη αποσφαλμάτωσης"
+
+#: contents/ui/components/DebugOverlay.qml:78
+msgid "Backend"
+msgstr "Backend"
+
+#: contents/ui/components/DebugOverlay.qml:81
+msgid "Items"
+msgstr "Αντικείμενα"
+
+#: contents/ui/components/DebugOverlay.qml:84
+msgid "Latency"
+msgstr "Καθυστέρηση"
+
+#: contents/ui/components/DebugOverlay.qml:91
+msgid "View"
+msgstr "Προβολή"
+
+#: contents/ui/components/DebugOverlay.qml:94
+msgid "Display"
+msgstr "Οθόνη"
+
+#: contents/ui/components/DebugOverlay.qml:101
+#: contents/ui/config/ConfigDebug.qml:205
+msgid "Total Searches"
+msgstr "Συνολικές Αναζητήσεις"
+
+#: contents/ui/components/DebugOverlay.qml:104
+#: contents/ui/config/ConfigDebug.qml:216
+msgid "Avg Latency"
+msgstr "Μέση καθυστέρηση"
+
+#: contents/ui/components/FilterChips.qml:22
+msgid "All"
+msgstr "Όλα"
+
+#: contents/ui/components/FilterChips.qml:23
+msgid "Apps"
+msgstr "Εφαρμογές"
+
+#: contents/ui/components/FilterChips.qml:24
+#: contents/ui/config/ConfigGeneral.qml:684
+msgid "Docs"
+msgstr "Έγγραφα"
+
+#: contents/ui/components/FilterChips.qml:25
+#: contents/ui/components/QueryHints.qml:53
+#: contents/ui/config/ConfigGeneral.qml:725
+#: contents/ui/config/ConfigPreview.qml:234
+msgid "Images"
+msgstr "Εικόνες"
+
+#: contents/ui/components/FilterChips.qml:26
+msgid "Folders"
+msgstr "Φάκελοι"
+
+#: contents/ui/components/FilterChips.qml:27
+msgid "Web"
+msgstr "Web"
+
+#: contents/ui/components/HelpView.qml:16
+#: contents/ui/components/QueryHints.qml:38
+msgid "Timeline View"
+msgstr "Προβολή Χρονολογίου"
+
+#: contents/ui/components/HelpView.qml:17
+#: contents/ui/components/QueryHints.qml:55
+#: contents/ui/components/SearchPopup.qml:1052
+#: contents/ui/config/ConfigGeneral.qml:873
+#: contents/ui/config/ConfigPreview.qml:386
+msgid "Applications"
+msgstr "Εφαρμογές"
+
+#: contents/ui/components/HelpView.qml:18
+msgid "File Path Search"
+msgstr "Αναζήτηση διαδρομής αρχείου"
+
+#: contents/ui/components/HelpView.qml:19
+msgid "Google Search"
+msgstr "Αναζήτηση Google"
+
+#: contents/ui/components/HelpView.qml:20
+msgid "DuckDuckGo Search"
+msgstr "Αναζήτηση DuckDuckGo"
+
+#: contents/ui/components/HelpView.qml:21
+msgid "Wikipedia Search"
+msgstr "Αναζήτηση στη Βικιπαίδεια"
+
+#: contents/ui/components/HelpView.qml:22
+#: contents/ui/components/QueryHints.qml:66
+msgid "Bookmarks"
+msgstr "Σελιδοδείκτες"
+
+#: contents/ui/components/HelpView.qml:23
+#: contents/ui/components/QueryHints.qml:69
+msgid "Man Pages"
+msgstr "Σελίδες Man"
+
+#: contents/ui/components/HelpView.qml:24
+msgid "Kill Process"
+msgstr "Τερματισμός διεργασίας"
+
+#: contents/ui/components/HelpView.qml:25
+msgid "Spell Check"
+msgstr "Έλεγχος ορθογραφίας"
+
+#: contents/ui/components/HelpView.qml:26
+msgid "Dictionary Definition"
+msgstr "Ορισμός Λεξικού"
+
+#: contents/ui/components/HelpView.qml:27
+#: contents/ui/components/QueryHints.qml:60
+msgid "Unit Converter"
+msgstr "Μετατροπέας Μονάδων"
+
+#: contents/ui/components/HelpView.qml:28
+msgid "Shell Commands"
+msgstr "Εντολές Κελύφους"
+
+#: contents/ui/components/HelpView.qml:29
+msgid "Power Management"
+msgstr "Διαχείριση Ενέργειας"
+
+#: contents/ui/components/HelpView.qml:30
+msgid "System Services"
+msgstr "Υπηρεσίες Συστήματος"
+
+#: contents/ui/components/HelpView.qml:31
+msgid "Unicode Characters"
+msgstr "Χαρακτήρες Unicode"
+
+#: contents/ui/components/HelpView.qml:32
+msgid "Date and Time"
+msgstr "Ημερομηνία και Ώρα"
+
+#: contents/ui/components/HelpView.qml:33
+msgid "Help & Shortcuts"
+msgstr "Βοήθεια & Συντομεύσεις"
+
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/PinnedSection.qml:436
+msgid "Unpin"
+msgstr "Ξεκαρφίτσωμα"
+
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinButton.qml:68
+msgid "Pin"
+msgstr "Καρφίτσωμα"
+
+#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/PinnedSection.qml:402
+msgid "Open"
+msgstr "Άνοιγμα"
+
+#: contents/ui/components/HistoryContextMenu.qml:69
+#: contents/ui/components/HistoryListView.qml:499
+#: contents/ui/components/HistoryTileView.qml:791
+#: contents/ui/components/PinnedSection.qml:412
+#: contents/ui/components/ResultsListView.qml:466
+#: contents/ui/components/ResultsTileView.qml:866
+msgid "Copy Path"
+msgstr "Αντιγραφή διαδρομής"
+
+#: contents/ui/components/HistoryContextMenu.qml:85
+msgid "Open in Terminal"
+msgstr "Άνοιγμα σε τερματικό"
+
+#: contents/ui/components/HistoryContextMenu.qml:97
+#: contents/ui/components/PinnedSection.qml:423
+msgid "Open Containing Folder"
+msgstr "Άνοιγμα φακέλου"
+
+#: contents/ui/components/HistoryContextMenu.qml:107
+msgid "Move to Trash"
+msgstr "Μετακίνηση στα απορρίμματα"
+
+#: contents/ui/components/HistoryContextMenu.qml:120
+msgid "Properties"
+msgstr "Ιδιότητες"
+
+#: contents/ui/components/HistoryContextMenu.qml:130
+msgid "Edit Application..."
+msgstr "Επεξεργασία εφαρμογής..."
+
+#: contents/ui/components/HistoryContextMenu.qml:140
+msgid "Remove from History"
+msgstr "Αφαίρεση από ιστορικό"
+
+#: contents/ui/components/HistoryListView.qml:92
+#: contents/ui/components/HistoryTileView.qml:249
+msgid "Recent Searches"
+msgstr "Πρόσφατες αναζητήσεις"
+
+#: contents/ui/components/HistoryListView.qml:112
+#: contents/ui/components/HistoryTileView.qml:269
+msgid "Clear History"
+msgstr "Καθαρισμός ιστορικού"
+
+#: contents/ui/components/HistoryListView.qml:281
+#: contents/ui/components/HistoryTileView.qml:495
+#: contents/ui/components/ResultsListView.qml:150
+#: contents/ui/components/ResultsTileView.qml:502
+msgid "Size"
+msgstr ""
+
+#: contents/ui/components/HistoryListView.qml:436
+#: contents/ui/components/HistoryListView.qml:566
+#: contents/ui/components/HistoryTileView.qml:728
+#: contents/ui/components/HistoryTileView.qml:858
+#: contents/ui/components/ResultsListView.qml:626
+#: contents/ui/components/ResultsTileView.qml:298
+msgid "Category"
+msgstr "Κατηγορία"
+
+#: contents/ui/components/HistoryListView.qml:443
+#: contents/ui/components/HistoryListView.qml:573
+#: contents/ui/components/HistoryTileView.qml:735
+#: contents/ui/components/HistoryTileView.qml:865
+#: contents/ui/components/ResultsListView.qml:627
+#: contents/ui/components/ResultsTileView.qml:299
+msgid "File Type"
+msgstr "Τύπος αρχείου"
+
+#: contents/ui/components/HistoryListView.qml:460
+#: contents/ui/components/HistoryListView.qml:580
+#: contents/ui/components/HistoryTileView.qml:752
+#: contents/ui/components/HistoryTileView.qml:872
+#: contents/ui/components/ResultsListView.qml:628
+#: contents/ui/components/ResultsTileView.qml:300
+msgid "Path"
+msgstr "Διαδρομή"
+
+#: contents/ui/components/HistoryListView.qml:507
+#: contents/ui/components/HistoryTileView.qml:799
+#: contents/ui/components/ResultsListView.qml:474
+#: contents/ui/components/ResultsTileView.qml:874
+msgid "Open Folder"
+msgstr ""
+
+#: contents/ui/components/HistoryListView.qml:620
+#: contents/ui/components/HistoryTileView.qml:918
+#: contents/ui/components/ResultsTileView.qml:305
+msgid "Type to search"
+msgstr "Πληκτρολογήστε για αναζήτηση"
+
+#: contents/ui/components/PinnedSection.qml:85
+#: contents/ui/config/ConfigGeneral.qml:552
+msgid "Pinned Items"
+msgstr "Καρφιτσωμένα αντικείμενα"
+
+#: contents/ui/components/PinnedSection.qml:225
+msgid "Right-click items to pin them"
+msgstr "Δεξί κλικ για καρφίτσωμα"
+
+#: contents/ui/components/PinnedSection.qml:383
+msgid "Drag to reorder"
+msgstr "Σύρετε για αναδιάταξη"
+
+#: contents/ui/components/PowerView.qml:254
+msgid "Hibernate"
+msgstr "Αδρανοποίηση"
+
+#: contents/ui/components/PowerView.qml:258
+msgid "(Press again to hibernate)"
+msgstr "(Πιέστε ξανά για αδρανοποίηση)"
+
+#: contents/ui/components/PowerView.qml:267
+msgid "Sleep"
+msgstr "Αναστολή"
+
+#: contents/ui/components/PowerView.qml:271
+msgid "(Press again to sleep)"
+msgstr "(Πιέστε ξανά για αναστολή)"
+
+#: contents/ui/components/PowerView.qml:279
+msgid "Reboot"
+msgstr "Επανεκκίνηση"
+
+#: contents/ui/components/PowerView.qml:283
+msgid "(Press again to reboot)"
+msgstr "(Πιέστε ξανά για επανεκκίνηση)"
+
+#: contents/ui/components/PowerView.qml:303
+msgid "Shutdown"
+msgstr "Τερματισμός"
+
+#: contents/ui/components/PowerView.qml:307
+msgid "(Press again to shutdown)"
+msgstr "(Πιέστε ξανά για τερματισμό)"
+
+#: contents/ui/components/PowerView.qml:444
+msgid "Refresh"
+msgstr "Ανανέωση"
+
+#: contents/ui/components/PowerView.qml:472
+msgid "Scan for boot entries"
+msgstr "Σάρωση για εγγραφές εκκίνησης"
+
+#: contents/ui/components/PowerView.qml:498
+msgid "Lock Screen"
+msgstr "Κλείδωμα οθόνης"
+
+#: contents/ui/components/PowerView.qml:508
+msgid "Log Out"
+msgstr "Αποσύνδεση"
+
+#: contents/ui/components/PowerView.qml:512
+msgid "(Press again to log out)"
+msgstr "(Πιέστε ξανά για αποσύνδεση)"
+
+#: contents/ui/components/PowerView.qml:520
+msgid "Switch User"
+msgstr "Αλλαγή χρήστη"
+
+#: contents/ui/components/PowerView.qml:524
+msgid "(Press again to switch)"
+msgstr "(Πιέστε ξανά για αλλαγή)"
+
+#: contents/ui/components/PowerView.qml:532
+msgid "Save Session"
+msgstr "Αποθήκευση συνεδρίας"
+
+#: contents/ui/components/PowerView.qml:551
+msgid "(Press again)"
+msgstr "(Πιέστε ξανά)"
+
+#: contents/ui/components/QueryHints.qml:31
+#: contents/ui/components/QueryHints.qml:119
+#: contents/ui/config/ConfigHelp.qml:126
+msgid "Search Prefixes"
+msgstr "Προθέματα Αναζήτησης"
+
+#: contents/ui/components/QueryHints.qml:32
+msgid "Show all available search filters"
+msgstr "Εμφάνιση όλων των φίλτρων αναζήτησης"
+
+#: contents/ui/components/QueryHints.qml:39
+msgid "Browse files by date (Today, Yesterday, etc.)"
+msgstr "Περιήγηση αρχείων ανά ημερομηνία (Σήμερα, Χθες κ.λπ.)"
+
+#: contents/ui/components/QueryHints.qml:43
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+#: contents/ui/components/QueryHints.qml:44
+#: contents/ui/components/QueryHints.qml:173
+#: contents/ui/components/QueryHints.qml:181
+msgid "Today"
+msgstr "Σήμερα"
+
+#: contents/ui/components/QueryHints.qml:45
+#: contents/ui/components/QueryHints.qml:174
+#: contents/ui/components/QueryHints.qml:181
+msgid "Yesterday"
+msgstr "Χθες"
+
+#: contents/ui/components/QueryHints.qml:46
+msgid "This Week"
+msgstr "Αυτή την εβδομάδα"
+
+#: contents/ui/components/QueryHints.qml:47
+msgid "This Month"
+msgstr "Αυτόν τον μήνα"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "File Path"
+msgstr "Διαδρομή αρχείου"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "Search via absolute file path"
+msgstr "Αναζήτηση μέσω απόλυτης διαδρομής"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "File Index"
+msgstr "Ευρετήριο αρχείων"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "Search exclusively in Baloo file index"
+msgstr "Αναζήτηση αποκλειστικά στο ευρετήριο Baloo"
+
+#: contents/ui/components/QueryHints.qml:52
+#: contents/ui/config/ConfigGeneral.qml:646
+#: contents/ui/config/ConfigGeneral.qml:836
+#: contents/ui/config/ConfigPreview.qml:348
+msgid "Documents"
+msgstr "Έγγραφα"
+
+#: contents/ui/components/QueryHints.qml:52
+msgid "Search only document files"
+msgstr "Αναζήτηση μόνο εγγράφων"
+
+#: contents/ui/components/QueryHints.qml:53
+msgid "Search only image files"
+msgstr "Αναζήτηση μόνο εικόνων"
+
+#: contents/ui/components/QueryHints.qml:55
+msgid "Search for installed applications"
+msgstr "Αναζήτηση για εγκατεστημένες εφαρμογές"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Services"
+msgstr "Υπηρεσίες"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Search system background services"
+msgstr "Αναζήτηση υπηρεσιών παρασκηνίου"
+
+#: contents/ui/components/QueryHints.qml:57
+msgid "Shell"
+msgstr "Κέλυφος"
+
+#: contents/ui/components/QueryHints.qml:57
+msgid "Execute shell commands directly"
+msgstr "Directe εκτέλεση εντολών κελύφους"
+
+#: contents/ui/components/QueryHints.qml:59
+msgid "Calculator"
+msgstr "Αριθμομηχανή"
+
+#: contents/ui/components/QueryHints.qml:59
+msgid "Perform mathematical calculations"
+msgstr "Εκτέλεση μαθηματικών υπολογισμών"
+
+#: contents/ui/components/QueryHints.qml:60
+msgid "Convert between weights, distances, etc."
+msgstr "Μετατροπή μεταξύ βαρών, αποστάσεων κ.λπ."
+
+#: contents/ui/components/QueryHints.qml:61
+msgid "Spelling"
+msgstr "Ορθογραφία"
+
+#: contents/ui/components/QueryHints.qml:61
+msgid "Check word spelling"
+msgstr "Έλεγχος ορθογραφίας λέξης"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Google"
+msgstr "Google"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Search the web using Google"
+msgstr "Αναζήτηση στον ιστό με Google"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "Search the web using DuckDuckGo"
+msgstr "Αναζήτηση στον ιστό με DuckDuckGo"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Wikipedia"
+msgstr "Βικιπαίδεια"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Search Wikipedia articles"
+msgstr "Αναζήτηση στη Βικιπαίδεια"
+
+#: contents/ui/components/QueryHints.qml:66
+msgid "Search browser bookmarks"
+msgstr "Αναζήτηση σελιδοδεικτών προγράμματος περιήγησης"
+
+#: contents/ui/components/QueryHints.qml:67
+msgid "RSS Feeds"
+msgstr "Ροές RSS"
+
+#: contents/ui/components/QueryHints.qml:67
+msgid "Search exclusively in RSS news feeds"
+msgstr "Αναζήτηση αποκλειστικά σε ροές RSS"
+
+#: contents/ui/components/QueryHints.qml:69
+msgid "Browse system manual pages"
+msgstr "Περιήγηση στις σελίδες εγχειριδίου συστήματος"
+
+#: contents/ui/components/QueryHints.qml:70 contents/ui/config/ConfigHelp.qml:9
 msgid "Help"
 msgstr "Βοήθεια"
+
+#: contents/ui/components/QueryHints.qml:70
+msgid "Show widget documentation"
+msgstr "Εμφάνιση τεκμηρίωσης γραφικού συστατικού"
+
+#: contents/ui/components/QueryHints.qml:117
+msgid "Unknown prefix"
+msgstr "Άγνωστο πρόθεμα"
+
+#: contents/ui/components/QueryHints.qml:118
+msgid "try"
+msgstr "δοκιμάστε"
+
+#: contents/ui/components/QueryHints.qml:120
+msgid "Browse calendar"
+msgstr "Περιήγηση ημερολογίου"
+
+#: contents/ui/components/QueryHints.qml:121
+msgid "Man pages not installed"
+msgstr "Οι σελίδες man δεν είναι εγκατεστημένες"
+
+#: contents/ui/components/QueryHints.qml:175
+#: contents/ui/components/QueryHints.qml:181
+msgid "Two days ago"
+msgstr "Πριν δύο ημέρες"
+
+#: contents/ui/components/QueryHints.qml:380
+msgid "Available Search Prefixes"
+msgstr "Διαθέσιμα προθέματα αναζήτησης"
+
+#: contents/ui/components/ResultsListView.qml:629
+msgid "News"
+msgstr "Νέα"
+
+#: contents/ui/components/ResultsListView.qml:630
+msgid "Read News"
+msgstr "Διάβασμα νέων"
+
+#: contents/ui/components/ResultsListView.qml:631
+msgid "Share"
+msgstr "Κοινοποίηση"
+
+#: contents/ui/components/ResultsListView.qml:632
+#: contents/ui/components/ResultsTileView.qml:303
+msgid "Searching..."
+msgstr "Αναζήτηση..."
+
+#: contents/ui/components/ResultsListView.qml:633
+#: contents/ui/components/ResultsTileView.qml:304
+msgid "No results found"
+msgstr "Δεν βρέθηκαν αποτελέσματα"
+
+#: contents/ui/components/ResultsTileView.qml:301
+msgid "Space to preview"
+msgstr "Διάστημα για προεπισκόπηση"
+
+#: contents/ui/components/ResultsTileView.qml:302
+msgid "Read in Browser"
+msgstr "Ανάγνωση στο πρόγραμμα περιήγησης"
+
+#: contents/ui/components/SearchPopup.qml:96
+msgid "date"
+msgstr "ημερομηνία"
+
+#: contents/ui/components/SearchPopup.qml:97
+msgid "clock"
+msgstr "ρολόι"
+
+#: contents/ui/components/SearchPopup.qml:98
+msgid "weather"
+msgstr "καιρός"
+
+#: contents/ui/components/SearchPopup.qml:99
+msgid "power"
+msgstr "ενέργεια"
+
+#: contents/ui/components/SearchPopup.qml:100
+msgid "help"
+msgstr "βοήθεια"
+
+#: contents/ui/components/SearchPopup.qml:101
+msgid "unit"
+msgstr "μονάδα"
+
+#: contents/ui/components/SearchPopup.qml:102
+msgid "kill"
+msgstr "τερματισμός"
+
+#: contents/ui/components/SearchPopup.qml:103
+msgid "spell"
+msgstr "ορθογραφία"
+
+#: contents/ui/components/SearchPopup.qml:104
+msgid "shell"
+msgstr "κέλυφος"
+
+#: contents/ui/components/SearchPopup.qml:1052
+msgid "Other"
+msgstr "Άλλα"
+
+#: contents/ui/components/SearchPopup.qml:1142
+#: contents/ui/config/ConfigDebug.qml:163
+msgid "Tile"
+msgstr "Προβολή Πλακιδίων"
+
+#: contents/ui/components/SearchPopup.qml:1142
+#: contents/ui/config/ConfigDebug.qml:163
+msgid "List"
+msgstr "Προβολή Λίστας"
+
+#: contents/ui/components/SearchPopup.qml:1143
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Button"
+msgstr "Κουμπί"
+
+#: contents/ui/components/SearchPopup.qml:1143
+msgid "Mode"
+msgstr "Λειτουργία"
+
+#: contents/ui/components/TileDataManager.qml:53
+msgid "Other Results"
+msgstr "Άλλα αποτελέσματα"
+
+#: contents/ui/components/WeatherView.qml:57
+msgid "Unknown error"
+msgstr "Άγνωστο σφάλμα"
+
+#: contents/ui/components/WeatherView.qml:80
+msgid "Loading Weather..."
+msgstr "Φόρτωση καιρού..."
+
+#: contents/ui/components/WeatherView.qml:91
+msgid "Retry"
+msgstr "Δοκιμάστε ξανά"
 
 #: contents/ui/config/ConfigCategories.qml:212
 msgid "Algorithm Settings"
@@ -105,11 +738,17 @@ msgstr "Πληροφορίες Ρυθμίσεων Κατηγορίας"
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
-msgstr "Οι αλλαγές εφαρμόζονται αμέσως. Οι κρυφές κατηγορίες δεν εμφανίζονται. Η προτεραιότητα καθορίζει τη σειρά."
+msgstr ""
+"Οι αλλαγές εφαρμόζονται αμέσως. Οι κρυφές κατηγορίες δεν εμφανίζονται. Η "
+"προτεραιότητα καθορίζει τη σειρά."
 
 #: contents/ui/config/ConfigCategories.qml:485
 msgid "Lower number = higher priority"
 msgstr "Χαμηλότερος αριθμός = υψηλότερη προτεραιότητα"
+
+#: contents/ui/config/ConfigDebug.qml:9
+msgid "Debug"
+msgstr "Αποσφαλμάτωση"
 
 #: contents/ui/config/ConfigDebug.qml:102
 msgid ""
@@ -120,12 +759,6 @@ msgstr "Αυτή η καρτέλα είναι ενεργή μόνο σε λει�
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Debug Settings"
 msgstr "Ρυθμίσεις Αποσφαλμάτωσης"
-
-#: contents/ui/config/ConfigDebug.qml:117
-#: contents/ui/config/ConfigDebug.qml:176
-#: contents/ui/components/DebugOverlay.qml:58
-msgid "Debug Overlay"
-msgstr "Επικάλυψη αποσφαλμάτωσης"
 
 #: contents/ui/config/ConfigDebug.qml:124
 msgid "Show debug info on widget (active mode, item count, index source)"
@@ -165,11 +798,6 @@ msgid "Display Mode"
 msgstr "Λειτουργία οθόνης"
 
 #: contents/ui/config/ConfigDebug.qml:157
-#: contents/ui/components/SearchPopup.qml:1110
-msgid "Button"
-msgstr "Κουμπί"
-
-#: contents/ui/config/ConfigDebug.qml:157
 msgid "Medium"
 msgstr "Μεσαίο"
 
@@ -185,16 +813,6 @@ msgstr "Εξαιρετικά ευρύ"
 #: contents/ui/config/ConfigGeneral.qml:517
 msgid "View Mode"
 msgstr "Λειτουργία προβολής"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/components/SearchPopup.qml:1109
-msgid "List"
-msgstr "Προβολή Λίστας"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/components/SearchPopup.qml:1109
-msgid "Tile"
-msgstr "Προβολή Πλακιδίων"
 
 #: contents/ui/config/ConfigDebug.qml:167
 #: contents/ui/config/ConfigGeneral.qml:544
@@ -222,16 +840,6 @@ msgstr "αντικείμενα"
 msgid "Telemetry"
 msgstr "Τηλεμετρία"
 
-#: contents/ui/config/ConfigDebug.qml:205
-#: contents/ui/components/DebugOverlay.qml:101
-msgid "Total Searches"
-msgstr "Συνολικές Αναζητήσεις"
-
-#: contents/ui/config/ConfigDebug.qml:216
-#: contents/ui/components/DebugOverlay.qml:104
-msgid "Avg Latency"
-msgstr "Μέση καθυστέρηση"
-
 #: contents/ui/config/ConfigDebug.qml:230
 msgid "History Sample"
 msgstr "Δείγμα ιστορικού"
@@ -240,343 +848,17 @@ msgstr "Δείγμα ιστορικού"
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
-msgstr "Σημείωση απορρήτου: Όλα τα δεδομένα αποθηκεύονται τοπικά. Κανένα δεδομένο δεν στέλνεται στο διαδίκτυο."
+msgstr ""
+"Σημείωση απορρήτου: Όλα τα δεδομένα αποθηκεύονται τοπικά. Κανένα δεδομένο "
+"δεν στέλνεται στο διαδίκτυο."
 
 #: contents/ui/config/ConfigDebug.qml:311
 msgid "History is empty"
 msgstr "Το ιστορικό είναι άδειο"
 
-#: contents/ui/config/ConfigHelp.qml:85
-msgid "Keyboard Shortcuts"
-msgstr "Συντομεύσεις Πληκτρολογίου"
-
-#: contents/ui/config/ConfigHelp.qml:89
-msgid "Navigate between results"
-msgstr "Πλοήγηση μεταξύ αποτελεσμάτων"
-
-#: contents/ui/config/ConfigHelp.qml:95
-msgid "Navigate between sections"
-msgstr "Πλοήγηση μεταξύ ενοτήτων"
-
-#: contents/ui/config/ConfigHelp.qml:101
-msgid "List / Tile view"
-msgstr "Προβολή Λίστας / Πλακιδίων"
-
-#: contents/ui/config/ConfigHelp.qml:107
-msgid "Toggle file preview"
-msgstr "Εναλλαγή προεπισκόπησης αρχείου"
-
-#: contents/ui/config/ConfigHelp.qml:113
-msgid "Open selected item"
-msgstr "Άνοιγμα επιλεγμένου αντικειμένου"
-
-#: contents/ui/config/ConfigHelp.qml:119
-msgid "Close widget"
-msgstr "Κλείσιμο γραφικού συστατικού"
-
-#: contents/ui/config/ConfigHelp.qml:126
-#: contents/ui/components/QueryHints.qml:31
-#: contents/ui/components/QueryHints.qml:100
-msgid "Search Prefixes"
-msgstr "Προθέματα Αναζήτησης"
-
-#: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
-#: contents/ui/config/ConfigPrefix.qml:214
-#: contents/ui/config/ConfigGeneral.qml:1002
-msgid "List files modified today"
-msgstr "Λίστα αρχείων που τροποποιήθηκαν σήμερα"
-
-#: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
-#: contents/ui/config/ConfigPrefix.qml:226
-#: contents/ui/config/ConfigGeneral.qml:1015
-msgid "Search on Google"
-msgstr "Αναζήτηση στο Google"
-
-#: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
-#: contents/ui/config/ConfigPrefix.qml:238
-#: contents/ui/config/ConfigGeneral.qml:1028
-msgid "Search on DuckDuckGo"
-msgstr "Αναζήτηση στο DuckDuckGo"
-
-#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
-msgid "Terminate processes"
-msgstr "Τερματισμός διεργασιών"
-
-#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
-msgid "Check spelling"
-msgstr "Έλεγχος ορθογραφίας"
-
-#: contents/ui/config/ConfigHelp.qml:161
-msgid "User Profiles"
-msgstr "Προφίλ Χρήστη"
-
-#: contents/ui/config/ConfigHelp.qml:165
-msgid "A simplified interface with essential features."
-msgstr "Μια απλοποιημένη διεπαφή με βασικές λειτουργίες."
-
-#: contents/ui/config/ConfigHelp.qml:171
-msgid "Debug tab active, developer features enabled."
-msgstr "Καρτέλα αποσφαλμάτωσης ενεργή, δυνατότητες προγραμματιστή."
-
-#: contents/ui/config/ConfigHelp.qml:177
-msgid "All features active, advanced settings available."
-msgstr "Όλα τα χαρακτηριστικά ενεργά, διαθέσιμες προηγμένες ρυθμίσεις."
-
-#: contents/ui/config/ConfigPreview.qml:9
-#: contents/ui/config/ConfigGeneral.qml:187
-#: contents/ui/config/ConfigGeneral.qml:596
-msgid "Preview"
-msgstr "Προεπισκόπηση"
-
-#: contents/ui/config/ConfigPreview.qml:97
-msgid "Preview Settings"
-msgstr "Ρυθμίσεις Προεπισκόπησης"
-
-#: contents/ui/config/ConfigPreview.qml:103
-msgid "Enable or disable file previews for different file types."
-msgstr "Ενεργοποίηση/απενεργοποίηση προεπισκόπησης για τύπους αρχείων."
-
-#: contents/ui/config/ConfigPreview.qml:112
-#: contents/ui/config/ConfigSearch.qml:19
-#: contents/ui/config/ConfigGeneral.qml:701
-msgid "Enable File Previews"
-msgstr "Ενεργοποίηση προεπισκόπησης αρχείων"
-
-#: contents/ui/config/ConfigPreview.qml:125
-msgid "Enabled"
-msgstr "Ενεργοποιημένο"
-
-#: contents/ui/config/ConfigPreview.qml:125
-msgid "Disabled"
-msgstr "Απενεργοποιημένο"
-
-#: contents/ui/config/ConfigPreview.qml:133
-#: contents/ui/config/ConfigGeneral.qml:707
-msgid "Preview Types"
-msgstr "Τύποι προεπισκόπησης"
-
-#: contents/ui/config/ConfigPreview.qml:158
-#: contents/ui/config/ConfigGeneral.qml:725
-#: contents/ui/components/FilterChips.qml:25
-#: contents/ui/components/QueryHints.qml:53
-msgid "Images"
-msgstr "Εικόνες"
-
-#: contents/ui/config/ConfigPreview.qml:196
-#: contents/ui/config/ConfigGeneral.qml:762
-msgid "Videos"
-msgstr "Βίντεο"
-
-#: contents/ui/config/ConfigPreview.qml:234
-#: contents/ui/config/ConfigGeneral.qml:799
-msgid "Text Files"
-msgstr "Αρχεία Κειμένου"
-
-#: contents/ui/config/ConfigPreview.qml:272
-#: contents/ui/config/ConfigGeneral.qml:646
-#: contents/ui/config/ConfigGeneral.qml:836
-#: contents/ui/components/QueryHints.qml:52
-msgid "Documents"
-msgstr "Έγγραφα"
-
-#: contents/ui/config/ConfigPreview.qml:276
-msgid "Icon only"
-msgstr "Μόνο εικονίδιο"
-
-#: contents/ui/config/ConfigPreview.qml:306
-msgid "Performance Information"
-msgstr "Πληροφορίες απόδοσης"
-
-#: contents/ui/config/ConfigPreview.qml:311
-msgid "Video and document previews may increase memory usage."
-msgstr "Η προεπισκόπηση βίντεο και εγγράφων μπορεί να αυξήσει τη μνήμη."
-
-#: contents/ui/config/ConfigSearch.qml:13
-msgid "Search Settings"
-msgstr "Ρυθμίσεις Αναζήτησης"
-
-#: contents/ui/config/ConfigSearch.qml:24
-msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr "Προεπισκόπηση αρχείων στο πέρασμα (και με Ctrl+Space)"
-
-#: contents/ui/config/ConfigSearch.qml:33
-msgid "Search Behavior"
-msgstr "Συμπεριφορά Αναζήτησης"
-
-#: contents/ui/config/ConfigSearch.qml:37
-msgid "You can use the following KRunner commands and prefixes:"
-msgstr "Μπορείτε να χρησιμοποιήσετε τις εντολές KRunner:"
-
-#: contents/ui/config/ConfigSearch.qml:51
-msgid "Prefix"
-msgstr "Πρόθεμα"
-
-#: contents/ui/config/ConfigSearch.qml:56
-msgid "Description"
-msgstr "Περιγραφή"
-
-#: contents/ui/config/ConfigSearch.qml:78
-msgid "Search Unicode characters"
-msgstr "Αναζήτηση χαρακτήρων Unicode"
-
-#: contents/ui/config/ConfigPrefix.qml:10
-#: contents/ui/config/ConfigGeneral.qml:191
-msgid "Prefixes"
-msgstr "Προθέματα"
-
-#: contents/ui/config/ConfigPrefix.qml:40
-msgid "Prefix View Settings"
-msgstr "Ρυθμίσεις προβολής προθεμάτων"
-
-#: contents/ui/config/ConfigPrefix.qml:45
-#: contents/ui/config/ConfigGeneral.qml:855
-msgid "Date View (date:)"
-msgstr "Προβολή ημερομηνίας (date:)"
-
-#: contents/ui/config/ConfigPrefix.qml:52
-#: contents/ui/config/ConfigGeneral.qml:860
-msgid "Show Large Clock"
-msgstr "Εμφάνιση μεγάλου ρολογιού"
-
-#: contents/ui/config/ConfigPrefix.qml:59
-#: contents/ui/config/ConfigGeneral.qml:864
-msgid "Show Calendar Events"
-msgstr "Εμφάνιση συμβάντων ημερολογίου"
-
-#: contents/ui/config/ConfigPrefix.qml:66
-#: contents/ui/config/ConfigGeneral.qml:869
-msgid "Weather View (weather:)"
-msgstr "Προβολή Καιρού (weather:)"
-
-#: contents/ui/config/ConfigPrefix.qml:74
-#: contents/ui/config/ConfigGeneral.qml:875
-msgid "Enable Weather Prefix"
-msgstr "Ενεργοποίηση Προθέματος Καιρού"
-
-#: contents/ui/config/ConfigPrefix.qml:87
-#: contents/ui/config/ConfigGeneral.qml:888
-msgid "Use System Units"
-msgstr "Χρήση Μονάδων Συστήματος"
-
-#: contents/ui/config/ConfigPrefix.qml:96
-#: contents/ui/config/ConfigGeneral.qml:897
-msgid "Refresh Interval:"
-msgstr "Διάστημα Ανανέωσης:"
-
-#: contents/ui/config/ConfigPrefix.qml:102
-#: contents/ui/config/ConfigGeneral.qml:903
-msgid "Every Search"
-msgstr "Σε Κάθε Αναζήτηση"
-
-#: contents/ui/config/ConfigPrefix.qml:103
-#: contents/ui/config/ConfigGeneral.qml:904
-msgid "15 Minutes"
-msgstr "15 Λεπτά"
-
-#: contents/ui/config/ConfigPrefix.qml:104
-#: contents/ui/config/ConfigGeneral.qml:905
-msgid "30 Minutes"
-msgstr "30 Λεπτά"
-
-#: contents/ui/config/ConfigPrefix.qml:105
-#: contents/ui/config/ConfigGeneral.qml:906
-msgid "1 Hour"
-msgstr "1 Ώρα"
-
-#: contents/ui/config/ConfigPrefix.qml:125
-#: contents/ui/config/ConfigGeneral.qml:926
-msgid "(If time since last update > interval)"
-msgstr "(Εάν ο χρόνος από την τελευταία ενημέρωση > διάστημα)"
-
-#: contents/ui/config/ConfigPrefix.qml:134
-#: contents/ui/config/ConfigGeneral.qml:933
-msgid "Power View (power:)"
-msgstr "Προβολή ενέργειας (power:)"
-
-#: contents/ui/config/ConfigPrefix.qml:142
-#: contents/ui/config/ConfigGeneral.qml:938
-msgid "Show Sleep Button"
-msgstr "Εμφάνιση κουμπιού αναστολής"
-
-#: contents/ui/config/ConfigPrefix.qml:149
-#: contents/ui/config/ConfigGeneral.qml:942
-msgid "Show Hibernate Button"
-msgstr "Εμφάνιση κουμπιού αδρανοποίησης"
-
-#: contents/ui/config/ConfigPrefix.qml:160
-#: contents/ui/config/ConfigGeneral.qml:951
-msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(Το swap είναι μικρότερο από τη RAM ή δεν βρέθηκε swap)"
-
-#: contents/ui/config/ConfigPrefix.qml:170
-#: contents/ui/config/ConfigGeneral.qml:959
-msgid "Show boot options in Reboot button"
-msgstr "Εμφάνιση επιλογών εκκίνησης στο κουμπί επανεκκίνησης"
-
-#: contents/ui/config/ConfigPrefix.qml:180
-#: contents/ui/config/ConfigGeneral.qml:967
-msgid "Note: Systemd boot is required for this feature"
-msgstr "Σημείωση: Απαιτείται εκκίνηση Systemd για αυτή τη λειτουργία"
-
-#: contents/ui/config/ConfigPrefix.qml:188
-#: contents/ui/config/ConfigGeneral.qml:975
-msgid "Available Prefixes Reference"
-msgstr "Αναφορά διαθέσιμων προθεμάτων"
-
-#: contents/ui/config/ConfigPrefix.qml:192
-#: contents/ui/config/ConfigGeneral.qml:979
-msgid ""
-"These prefixes can be used to perform specific actions directly from the "
-"search bar."
-msgstr "Αυτά τα προθέματα εκτελούν συγκεκριμένες ενέργειες απευθείας από τη γραμμή αναζήτησης."
-
-#: contents/ui/config/ConfigPrefix.qml:250
-#: contents/ui/config/ConfigGeneral.qml:1041
-msgid "Show calendar and date information"
-msgstr "Εμφάνιση πληροφοριών ημερολογίου και ημερομηνίας"
-
-#: contents/ui/config/ConfigPrefix.qml:262
-#: contents/ui/config/ConfigGeneral.qml:1054
-msgid "Show large clock"
-msgstr "Εμφάνιση μεγάλου ρολογιού"
-
-#: contents/ui/config/ConfigPrefix.qml:274
-msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr "Εμφάνιση επιλογών ενέργειας (Τερματισμός, Επανεκκίνηση κ.λπ.)"
-
-#: contents/ui/config/ConfigPrefix.qml:286
-msgid "Show current weather"
-msgstr "Εμφάνιση τρέχοντος καιρού"
-
-#: contents/ui/config/ConfigPrefix.qml:298
-#: contents/ui/config/ConfigGeneral.qml:1080
-msgid "Show this help screen"
-msgstr "Εμφάνιση αυτής της οθόνης βοήθειας"
-
-#: contents/ui/config/ConfigPrefix.qml:310
-#: contents/ui/config/ConfigGeneral.qml:1093
-msgid "Terminate running processes"
-msgstr "Τερματισμός τρεχουσών διεργασιών"
-
-#: contents/ui/config/ConfigPrefix.qml:322
-#: contents/ui/config/ConfigGeneral.qml:1106
-msgid "Check spelling of a word"
-msgstr "Έλεγχος ορθογραφίας μιας λέξης"
-
-#: contents/ui/config/ConfigPrefix.qml:334
-#: contents/ui/config/ConfigGeneral.qml:1119
-msgid "Execute shell commands"
-msgstr "Εκτέλεση εντολών κελύφους"
-
-#: contents/ui/config/ConfigPrefix.qml:346
-msgid "Convert units (requires KRunner installed)"
-msgstr "Μετατροπή μονάδων (απαιτείται εγκατεστημένο KRunner)"
-
-#: contents/ui/config/ConfigPrefix.qml:356
-msgid ""
-"Note: Some prefixes (like unit conversion) depend on installed KRunner "
-"runners."
-msgstr "Σημείωση: Ορισμένα προθέματα εξαρτώνται από εγκατεστημένα KRunner."
+#: contents/ui/config/ConfigGeneral.qml:23
+msgid "Appearance"
+msgstr "Εμφάνιση"
 
 #: contents/ui/config/ConfigGeneral.qml:178
 msgid "Panel"
@@ -585,6 +867,17 @@ msgstr "Πίνακας"
 #: contents/ui/config/ConfigGeneral.qml:182
 msgid "Popup"
 msgstr "Αναδυόμενο"
+
+#: contents/ui/config/ConfigGeneral.qml:187
+#: contents/ui/config/ConfigGeneral.qml:596
+#: contents/ui/config/ConfigPreview.qml:9
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#: contents/ui/config/ConfigGeneral.qml:191
+#: contents/ui/config/ConfigPrefix.qml:10
+msgid "Prefixes"
+msgstr "Προθέματα"
 
 #: contents/ui/config/ConfigGeneral.qml:210
 msgid "Panel Appearance"
@@ -698,17 +991,6 @@ msgstr "Αυτόματα"
 msgid "Panel Preview"
 msgstr "Προεπισκόπηση πίνακα"
 
-#: contents/ui/config/ConfigGeneral.qml:384
-#: contents/ui/components/CompactView.qml:114
-#: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
-msgid "Start searching..."
-msgstr "Έναρξη αναζήτησης..."
-
-#: contents/ui/config/ConfigGeneral.qml:384
-#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
-msgid "Search..."
-msgstr "Αναζήτηση..."
-
 #: contents/ui/config/ConfigGeneral.qml:385
 msgid "News Headline"
 msgstr "Τίτλος νέων"
@@ -740,11 +1022,6 @@ msgstr "Ελάχιστο (Προσαρμοσμένο)"
 #: contents/ui/config/ConfigGeneral.qml:528
 msgid "Hidden"
 msgstr "Κρυφό"
-
-#: contents/ui/config/ConfigGeneral.qml:552
-#: contents/ui/components/PinnedSection.qml:85
-msgid "Pinned Items"
-msgstr "Καρφιτσωμένα αντικείμενα"
 
 #: contents/ui/config/ConfigGeneral.qml:557
 msgid "Show pinned items bar"
@@ -794,765 +1071,613 @@ msgstr "Ρυθμίσεις Αναζήτησης"
 msgid "Settings"
 msgstr "Ρυθμίσεις Αποσφαλμάτωσης"
 
-#: contents/ui/config/ConfigGeneral.qml:684
-#: contents/ui/components/FilterChips.qml:24
-msgid "Docs"
-msgstr "Έγγραφα"
+#: contents/ui/config/ConfigGeneral.qml:701
+#: contents/ui/config/ConfigPreview.qml:118
+#: contents/ui/config/ConfigSearch.qml:19
+msgid "Enable File Previews"
+msgstr "Ενεργοποίηση προεπισκόπησης αρχείων"
 
 #: contents/ui/config/ConfigGeneral.qml:702
 msgid "Show/Hide Previews"
 msgstr "Εμφάνιση/Απόκρυψη προεπισκοπήσεων"
 
-#: contents/ui/config/ConfigGeneral.qml:1067
+#: contents/ui/config/ConfigGeneral.qml:707
+#: contents/ui/config/ConfigPreview.qml:209
+msgid "Preview Types"
+msgstr "Τύποι προεπισκόπησης"
+
+#: contents/ui/config/ConfigGeneral.qml:762
+#: contents/ui/config/ConfigPreview.qml:272
+msgid "Videos"
+msgstr "Βίντεο"
+
+#: contents/ui/config/ConfigGeneral.qml:799
+#: contents/ui/config/ConfigPreview.qml:310
+msgid "Text Files"
+msgstr "Αρχεία Κειμένου"
+
+#: contents/ui/config/ConfigGeneral.qml:879
+#: contents/ui/config/ConfigPreview.qml:390
+msgid "Desktop shortcuts and launcher commands"
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml:892
+#: contents/ui/config/ConfigPrefix.qml:52
+msgid "Date View (date:)"
+msgstr "Προβολή ημερομηνίας (date:)"
+
+#: contents/ui/config/ConfigGeneral.qml:897
+#: contents/ui/config/ConfigPrefix.qml:59
+msgid "Show Large Clock"
+msgstr "Εμφάνιση μεγάλου ρολογιού"
+
+#: contents/ui/config/ConfigGeneral.qml:901
+#: contents/ui/config/ConfigPrefix.qml:66
+msgid "Show Calendar Events"
+msgstr "Εμφάνιση συμβάντων ημερολογίου"
+
+#: contents/ui/config/ConfigGeneral.qml:906
+#: contents/ui/config/ConfigPrefix.qml:73
+msgid "Weather View (weather:)"
+msgstr "Προβολή Καιρού (weather:)"
+
+#: contents/ui/config/ConfigGeneral.qml:912
+#: contents/ui/config/ConfigPrefix.qml:81
+msgid "Enable Weather Prefix"
+msgstr "Ενεργοποίηση Προθέματος Καιρού"
+
+#: contents/ui/config/ConfigGeneral.qml:925
+#: contents/ui/config/ConfigPrefix.qml:94
+msgid "Use System Units"
+msgstr "Χρήση Μονάδων Συστήματος"
+
+#: contents/ui/config/ConfigGeneral.qml:934
+#: contents/ui/config/ConfigPrefix.qml:103
+msgid "Refresh Interval:"
+msgstr "Διάστημα Ανανέωσης:"
+
+#: contents/ui/config/ConfigGeneral.qml:940
+#: contents/ui/config/ConfigPrefix.qml:109
+msgid "Every Search"
+msgstr "Σε Κάθε Αναζήτηση"
+
+#: contents/ui/config/ConfigGeneral.qml:941
+#: contents/ui/config/ConfigPrefix.qml:110
+msgid "15 Minutes"
+msgstr "15 Λεπτά"
+
+#: contents/ui/config/ConfigGeneral.qml:942
+#: contents/ui/config/ConfigPrefix.qml:111
+msgid "30 Minutes"
+msgstr "30 Λεπτά"
+
+#: contents/ui/config/ConfigGeneral.qml:943
+#: contents/ui/config/ConfigPrefix.qml:112
+msgid "1 Hour"
+msgstr "1 Ώρα"
+
+#: contents/ui/config/ConfigGeneral.qml:963
+#: contents/ui/config/ConfigPrefix.qml:132
+msgid "(If time since last update > interval)"
+msgstr "(Εάν ο χρόνος από την τελευταία ενημέρωση > διάστημα)"
+
+#: contents/ui/config/ConfigGeneral.qml:970
+#: contents/ui/config/ConfigPrefix.qml:141
+msgid "Power View (power:)"
+msgstr "Προβολή ενέργειας (power:)"
+
+#: contents/ui/config/ConfigGeneral.qml:975
+#: contents/ui/config/ConfigPrefix.qml:149
+msgid "Show Sleep Button"
+msgstr "Εμφάνιση κουμπιού αναστολής"
+
+#: contents/ui/config/ConfigGeneral.qml:979
+#: contents/ui/config/ConfigPrefix.qml:156
+msgid "Show Hibernate Button"
+msgstr "Εμφάνιση κουμπιού αδρανοποίησης"
+
+#: contents/ui/config/ConfigGeneral.qml:988
+#: contents/ui/config/ConfigPrefix.qml:167
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(Το swap είναι μικρότερο από τη RAM ή δεν βρέθηκε swap)"
+
+#: contents/ui/config/ConfigGeneral.qml:996
+#: contents/ui/config/ConfigPrefix.qml:177
+msgid "Show boot options in Reboot button"
+msgstr "Εμφάνιση επιλογών εκκίνησης στο κουμπί επανεκκίνησης"
+
+#: contents/ui/config/ConfigGeneral.qml:1004
+#: contents/ui/config/ConfigPrefix.qml:187
+msgid "Note: Systemd boot is required for this feature"
+msgstr "Σημείωση: Απαιτείται εκκίνηση Systemd για αυτή τη λειτουργία"
+
+#: contents/ui/config/ConfigGeneral.qml:1012
+#: contents/ui/config/ConfigPrefix.qml:237
+msgid "Available Prefixes Reference"
+msgstr "Αναφορά διαθέσιμων προθεμάτων"
+
+#: contents/ui/config/ConfigGeneral.qml:1016
+#: contents/ui/config/ConfigPrefix.qml:241
+msgid ""
+"These prefixes can be used to perform specific actions directly from the "
+"search bar."
+msgstr ""
+"Αυτά τα προθέματα εκτελούν συγκεκριμένες ενέργειες απευθείας από τη γραμμή "
+"αναζήτησης."
+
+#: contents/ui/config/ConfigGeneral.qml:1039
+#: contents/ui/config/ConfigHelp.qml:130
+#: contents/ui/config/ConfigPrefix.qml:263
+#: contents/ui/config/ConfigSearch.qml:63
+msgid "List files modified today"
+msgstr "Λίστα αρχείων που τροποποιήθηκαν σήμερα"
+
+#: contents/ui/config/ConfigGeneral.qml:1052
+#: contents/ui/config/ConfigHelp.qml:136
+#: contents/ui/config/ConfigPrefix.qml:275
+#: contents/ui/config/ConfigSearch.qml:66
+msgid "Search on Google"
+msgstr "Αναζήτηση στο Google"
+
+#: contents/ui/config/ConfigGeneral.qml:1065
+#: contents/ui/config/ConfigHelp.qml:142
+#: contents/ui/config/ConfigPrefix.qml:287
+#: contents/ui/config/ConfigSearch.qml:69
+msgid "Search on DuckDuckGo"
+msgstr "Αναζήτηση στο DuckDuckGo"
+
+#: contents/ui/config/ConfigGeneral.qml:1078
+#: contents/ui/config/ConfigPrefix.qml:299
+msgid "Show calendar and date information"
+msgstr "Εμφάνιση πληροφοριών ημερολογίου και ημερομηνίας"
+
+#: contents/ui/config/ConfigGeneral.qml:1091
+#: contents/ui/config/ConfigPrefix.qml:311
+msgid "Show large clock"
+msgstr "Εμφάνιση μεγάλου ρολογιού"
+
+#: contents/ui/config/ConfigGeneral.qml:1104
 msgid "Show power management options"
 msgstr "Εμφάνιση επιλογών διαχείρισης ενέργειας"
 
-#: contents/ui/config/ConfigGeneral.qml:1132
+#: contents/ui/config/ConfigGeneral.qml:1117
+#: contents/ui/config/ConfigPrefix.qml:347
+msgid "Show this help screen"
+msgstr "Εμφάνιση αυτής της οθόνης βοήθειας"
+
+#: contents/ui/config/ConfigGeneral.qml:1130
+#: contents/ui/config/ConfigPrefix.qml:359
+msgid "Terminate running processes"
+msgstr "Τερματισμός τρεχουσών διεργασιών"
+
+#: contents/ui/config/ConfigGeneral.qml:1143
+#: contents/ui/config/ConfigPrefix.qml:371
+msgid "Check spelling of a word"
+msgstr "Έλεγχος ορθογραφίας μιας λέξης"
+
+#: contents/ui/config/ConfigGeneral.qml:1156
+#: contents/ui/config/ConfigPrefix.qml:383
+msgid "Execute shell commands"
+msgstr "Εκτέλεση εντολών κελύφους"
+
+#: contents/ui/config/ConfigGeneral.qml:1169
 msgid "Convert units (requires KRunner)"
 msgstr "Μετατροπή μονάδων (απαιτεί KRunner)"
 
-#: contents/ui/config/ConfigRSS.qml:235
+#: contents/ui/config/ConfigHelp.qml:85
+msgid "Keyboard Shortcuts"
+msgstr "Συντομεύσεις Πληκτρολογίου"
+
+#: contents/ui/config/ConfigHelp.qml:89
+msgid "Navigate between results"
+msgstr "Πλοήγηση μεταξύ αποτελεσμάτων"
+
+#: contents/ui/config/ConfigHelp.qml:95
+msgid "Navigate between sections"
+msgstr "Πλοήγηση μεταξύ ενοτήτων"
+
+#: contents/ui/config/ConfigHelp.qml:101
+msgid "List / Tile view"
+msgstr "Προβολή Λίστας / Πλακιδίων"
+
+#: contents/ui/config/ConfigHelp.qml:107
+msgid "Toggle file preview"
+msgstr "Εναλλαγή προεπισκόπησης αρχείου"
+
+#: contents/ui/config/ConfigHelp.qml:113
+msgid "Open selected item"
+msgstr "Άνοιγμα επιλεγμένου αντικειμένου"
+
+#: contents/ui/config/ConfigHelp.qml:119
+msgid "Close widget"
+msgstr "Κλείσιμο γραφικού συστατικού"
+
+#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
+msgid "Terminate processes"
+msgstr "Τερματισμός διεργασιών"
+
+#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
+msgid "Check spelling"
+msgstr "Έλεγχος ορθογραφίας"
+
+#: contents/ui/config/ConfigHelp.qml:161
+msgid "User Profiles"
+msgstr "Προφίλ Χρήστη"
+
+#: contents/ui/config/ConfigHelp.qml:165
+msgid "A simplified interface with essential features."
+msgstr "Μια απλοποιημένη διεπαφή με βασικές λειτουργίες."
+
+#: contents/ui/config/ConfigHelp.qml:171
+msgid "Debug tab active, developer features enabled."
+msgstr "Καρτέλα αποσφαλμάτωσης ενεργή, δυνατότητες προγραμματιστή."
+
+#: contents/ui/config/ConfigHelp.qml:177
+msgid "All features active, advanced settings available."
+msgstr "Όλα τα χαρακτηριστικά ενεργά, διαθέσιμες προηγμένες ρυθμίσεις."
+
+#: contents/ui/config/ConfigPrefix.qml:47
+msgid "Prefix View Settings"
+msgstr "Ρυθμίσεις προβολής προθεμάτων"
+
+#: contents/ui/config/ConfigPrefix.qml:195
+msgid "Active Search Prefixes"
+msgstr ""
+
+#: contents/ui/config/ConfigPrefix.qml:199
+msgid "Enable Shell Command execution (shell:)"
+msgstr ""
+
+#: contents/ui/config/ConfigPrefix.qml:205
+msgid "Enable Timeline search (timeline:)"
+msgstr ""
+
+#: contents/ui/config/ConfigPrefix.qml:211
+msgid "Enable Web search (gg:, dd:)"
+msgstr ""
+
+#: contents/ui/config/ConfigPrefix.qml:217
+msgid "Enable Kill Process (kill)"
+msgstr ""
+
+#: contents/ui/config/ConfigPrefix.qml:223
+msgid "Enable Spell Check (spell)"
+msgstr ""
+
+#: contents/ui/config/ConfigPrefix.qml:229
+msgid "Enable Unit Conversion (unit:)"
+msgstr ""
+
+#: contents/ui/config/ConfigPrefix.qml:323
+msgid "Show power management options (Shutdown, Reboot, etc.)"
+msgstr "Εμφάνιση επιλογών ενέργειας (Τερματισμός, Επανεκκίνηση κ.λπ.)"
+
+#: contents/ui/config/ConfigPrefix.qml:335
+msgid "Show current weather"
+msgstr "Εμφάνιση τρέχοντος καιρού"
+
+#: contents/ui/config/ConfigPrefix.qml:395
+msgid "Convert units (requires KRunner installed)"
+msgstr "Μετατροπή μονάδων (απαιτείται εγκατεστημένο KRunner)"
+
+#: contents/ui/config/ConfigPrefix.qml:405
+msgid ""
+"Note: Some prefixes (like unit conversion) depend on installed KRunner "
+"runners."
+msgstr "Σημείωση: Ορισμένα προθέματα εξαρτώνται από εγκατεστημένα KRunner."
+
+#: contents/ui/config/ConfigPreview.qml:103
+msgid "Preview Settings"
+msgstr "Ρυθμίσεις Προεπισκόπησης"
+
+#: contents/ui/config/ConfigPreview.qml:109
+msgid "Enable or disable file previews for different file types."
+msgstr "Ενεργοποίηση/απενεργοποίηση προεπισκόπησης για τύπους αρχείων."
+
+#: contents/ui/config/ConfigPreview.qml:131
+msgid "Enabled"
+msgstr "Ενεργοποιημένο"
+
+#: contents/ui/config/ConfigPreview.qml:131
+msgid "Disabled"
+msgstr "Απενεργοποιημένο"
+
+#: contents/ui/config/ConfigPreview.qml:139
+msgid "Display Locations"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:150
+msgid "Show in Search Results"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:157
+msgid "Show in Search History"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:166
+msgid "Preview Style & Appearance"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:177
+msgid "Preview Mode:"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:181
+msgid "Hover Tooltip Popup"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:182
+msgid "Inline Expand Card"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:192
+msgid "Inline Thumbnail Size:"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:196
+msgid "Small (64px)"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:197
+msgid "Medium (120px)"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:198
+msgid "Large (200px)"
+msgstr ""
+
+#: contents/ui/config/ConfigPreview.qml:352
+msgid "Icon only"
+msgstr "Μόνο εικονίδιο"
+
+#: contents/ui/config/ConfigPreview.qml:420
+msgid "Performance Information"
+msgstr "Πληροφορίες απόδοσης"
+
+#: contents/ui/config/ConfigPreview.qml:425
+msgid "Video and document previews may increase memory usage."
+msgstr "Η προεπισκόπηση βίντεο και εγγράφων μπορεί να αυξήσει τη μνήμη."
+
+#: contents/ui/config/ConfigRSS.qml:244
 msgid "Arch & Linux News"
 msgstr "Νέα Arch & Linux"
 
-#: contents/ui/config/ConfigRSS.qml:245
+#: contents/ui/config/ConfigRSS.qml:254
 msgid "Security Bulletins"
 msgstr "Δελτία ασφαλείας"
 
-#: contents/ui/config/ConfigRSS.qml:254
+#: contents/ui/config/ConfigRSS.qml:263
 msgid "Türkiye News"
 msgstr "Νέα Τουρκίας"
 
-#: contents/ui/config/ConfigRSS.qml:268
+#: contents/ui/config/ConfigRSS.qml:277
 msgid "Azerbaijan News"
 msgstr "Νέα Αζερμπαϊτζάν"
 
-#: contents/ui/config/ConfigRSS.qml:276
+#: contents/ui/config/ConfigRSS.qml:285
 msgid "Bangladesh News"
 msgstr "Νέα Μπαγκλαντές"
 
-#: contents/ui/config/ConfigRSS.qml:283
+#: contents/ui/config/ConfigRSS.qml:292
 msgid "Czech Republic"
 msgstr "Τσεχία"
 
-#: contents/ui/config/ConfigRSS.qml:290
+#: contents/ui/config/ConfigRSS.qml:299
 msgid "Germany News"
 msgstr "Νέα Γερμανίας"
 
-#: contents/ui/config/ConfigRSS.qml:297
+#: contents/ui/config/ConfigRSS.qml:306
 msgid "Greece News"
 msgstr "Νέα Ελλάδας"
 
-#: contents/ui/config/ConfigRSS.qml:306
+#: contents/ui/config/ConfigRSS.qml:315
 msgid "Spain & Mexico"
 msgstr "Ισπανία & Μεξικό"
 
-#: contents/ui/config/ConfigRSS.qml:314
+#: contents/ui/config/ConfigRSS.qml:323
 msgid "Iran News"
 msgstr "Νέα Ιράν"
 
-#: contents/ui/config/ConfigRSS.qml:321
+#: contents/ui/config/ConfigRSS.qml:330
 msgid "France News"
 msgstr "Νέα Γαλλίας"
 
-#: contents/ui/config/ConfigRSS.qml:329
+#: contents/ui/config/ConfigRSS.qml:338
 msgid "India News (Hindi)"
 msgstr "Νέα Ινδίας (Χίντι)"
 
-#: contents/ui/config/ConfigRSS.qml:336
+#: contents/ui/config/ConfigRSS.qml:345
 msgid "Armenia News"
 msgstr "Νέα Αρμενίας"
 
-#: contents/ui/config/ConfigRSS.qml:343
+#: contents/ui/config/ConfigRSS.qml:352
 msgid "Indonesia News"
 msgstr "Νέα Ινδονησίας"
 
-#: contents/ui/config/ConfigRSS.qml:350
+#: contents/ui/config/ConfigRSS.qml:359
 msgid "Italy News"
 msgstr "Νέα Ιταλίας"
 
-#: contents/ui/config/ConfigRSS.qml:358
+#: contents/ui/config/ConfigRSS.qml:367
 msgid "Japan News"
 msgstr "Νέα Ιαπωνίας"
 
-#: contents/ui/config/ConfigRSS.qml:365
+#: contents/ui/config/ConfigRSS.qml:374
 msgid "Brazil & Portugal"
 msgstr "Βραζιλία & Πορτογαλία"
 
-#: contents/ui/config/ConfigRSS.qml:372
+#: contents/ui/config/ConfigRSS.qml:381
 msgid "Romania News"
 msgstr "Νέα Ρουμανίας"
 
-#: contents/ui/config/ConfigRSS.qml:380
+#: contents/ui/config/ConfigRSS.qml:389
 msgid "Russia News"
 msgstr "Νέα Ρωσίας"
 
-#: contents/ui/config/ConfigRSS.qml:387
+#: contents/ui/config/ConfigRSS.qml:396
 msgid "Pakistan News"
 msgstr "Νέα Πακιστάν"
 
-#: contents/ui/config/ConfigRSS.qml:394
+#: contents/ui/config/ConfigRSS.qml:403
 msgid "China News"
 msgstr "Νέα Κίνας"
 
-#: contents/ui/config/ConfigRSS.qml:401
+#: contents/ui/config/ConfigRSS.qml:410
 msgid "USA & UK News"
 msgstr "Νέα ΗΠΑ & ΗΒ"
 
-#: contents/ui/config/ConfigRSS.qml:410
+#: contents/ui/config/ConfigRSS.qml:419
 msgid "World News"
 msgstr "Παγκόσμια νέα"
 
-#: contents/ui/config/ConfigRSS.qml:459
+#: contents/ui/config/ConfigRSS.qml:468
 msgid "New Source"
 msgstr "Νέα πηγή"
 
-#: contents/ui/config/ConfigRSS.qml:544
+#: contents/ui/config/ConfigRSS.qml:548
 msgid "Invalid URL"
 msgstr "Μη έγκυρο URL"
 
-#: contents/ui/config/ConfigRSS.qml:551
+#: contents/ui/config/ConfigRSS.qml:555
 msgid "Starting background sync..."
 msgstr "Έναρξη συγχρονισμού παρασκηνίου..."
 
-#: contents/ui/config/ConfigRSS.qml:564
+#: contents/ui/config/ConfigRSS.qml:568
 msgid "Script not found at: %1"
 msgstr "Το σคριπτ δεν βρέθηκε στο: %1"
 
-#: contents/ui/config/ConfigRSS.qml:584
+#: contents/ui/config/ConfigRSS.qml:588
 msgid "Sync: SUCCESS"
 msgstr "Συγχρονισμός: Επιτυχής"
 
-#: contents/ui/config/ConfigRSS.qml:658
+#: contents/ui/config/ConfigRSS.qml:662
 msgid "Never"
 msgstr "Ποτέ"
 
-#: contents/ui/config/ConfigRSS.qml:674
+#: contents/ui/config/ConfigRSS.qml:678
 msgid "Enable RSS: Show feed updates in search results"
 msgstr "Ενεργοποίηση RSS: Εμφάνιση ενημερώσεων στα αποτελέσματα"
 
-#: contents/ui/config/ConfigRSS.qml:686
+#: contents/ui/config/ConfigRSS.qml:690
 msgid "Sync All Sources"
 msgstr "Συγχρονισμός όλων των πηγών"
 
-#: contents/ui/config/ConfigRSS.qml:693
+#: contents/ui/config/ConfigRSS.qml:697
 msgid "Clear Cache Folder"
 msgstr "Καθαρισμός φακέλου προσωρινής μνήμης"
 
-#: contents/ui/config/ConfigRSS.qml:702
+#: contents/ui/config/ConfigRSS.qml:706
 msgid "Last full sync: %1"
 msgstr "Τελευταίος πλήρης συγχρονισμός: %1"
 
-#: contents/ui/config/ConfigRSS.qml:713
+#: contents/ui/config/ConfigRSS.qml:717
 msgid "Show images in results"
 msgstr "Εμφάνιση εικόνων στα αποτελέσματα"
 
-#: contents/ui/config/ConfigRSS.qml:719
+#: contents/ui/config/ConfigRSS.qml:723
 msgid "Expand cards on click"
 msgstr "Ανάπτυξη καρτών με κλικ"
 
-#: contents/ui/config/ConfigRSS.qml:727
+#: contents/ui/config/ConfigRSS.qml:731
 msgid "Popular Presets"
 msgstr "Δημοφιλείς προεπιλογές"
 
-#: contents/ui/config/ConfigRSS.qml:733
+#: contents/ui/config/ConfigRSS.qml:737
 msgid "Search presets (e.g. News, Tech, TR, Linux)..."
 msgstr "Αναζήτηση προεπιλογών (π.χ. Νέα, Τεχνολογία, TR, Linux)..."
 
-#: contents/ui/config/ConfigRSS.qml:795
+#: contents/ui/config/ConfigRSS.qml:799
 msgid "RSS Sources (Max 30)"
 msgstr "Πηγές RSS (Έως 30)"
 
-#: contents/ui/config/ConfigRSS.qml:859
+#: contents/ui/config/ConfigRSS.qml:863
 msgid "Name"
 msgstr "Όνομα"
 
-#: contents/ui/config/ConfigRSS.qml:865
+#: contents/ui/config/ConfigRSS.qml:869
 msgid "URL"
 msgstr "URL"
 
-#: contents/ui/config/ConfigRSS.qml:891
+#: contents/ui/config/ConfigRSS.qml:896
 msgid "Entries:"
 msgstr "Καταχωρίσεις:"
 
-#: contents/ui/config/ConfigRSS.qml:897
+#: contents/ui/config/ConfigRSS.qml:902
 msgid "Interval:"
 msgstr "Διάστημα:"
 
-#: contents/ui/config/ConfigRSS.qml:900
+#: contents/ui/config/ConfigRSS.qml:905
 msgid "%1h"
 msgstr "%1ώ"
 
-#: contents/ui/config/ConfigRSS.qml:900
+#: contents/ui/config/ConfigRSS.qml:905
+#, fuzzy, c-format
 msgid "%1m"
 msgstr "%1λ"
 
-#: contents/ui/config/ConfigRSS.qml:908
+#: contents/ui/config/ConfigRSS.qml:913
 msgid "%1 hours"
 msgstr "%1 ώρες"
 
-#: contents/ui/config/ConfigRSS.qml:908
+#: contents/ui/config/ConfigRSS.qml:913
 msgid "%1 mins"
 msgstr "%1 λεπτά"
 
-#: contents/ui/config/ConfigRSS.qml:918
+#: contents/ui/config/ConfigRSS.qml:923
 msgid "Last sync: %1"
 msgstr "Τελευταίος συγχρονισμός: %1"
 
-#: contents/ui/config/ConfigRSS.qml:952
+#: contents/ui/config/ConfigRSS.qml:957
 msgid "Add Custom Source"
 msgstr "Προσθήκη προσαρμοσμένης πηγής"
 
-#: contents/ui/config/ConfigRSS.qml:966
+#: contents/ui/config/ConfigRSS.qml:971
 msgid "News Features:"
 msgstr "Λειτουργίες νέων:"
 
-#: contents/ui/config/ConfigRSS.qml:967
+#: contents/ui/config/ConfigRSS.qml:972
 msgid "Show RSS titles in placeholder cycling"
 msgstr "Εμφάνιση τίτλων RSS στο πλαίσιο"
 
-#: contents/ui/config/ConfigRSS.qml:973
+#: contents/ui/config/ConfigRSS.qml:978
 msgid "Show full headlines (split into segments)"
 msgstr "Εμφάνιση ολόκληρων τίτλων (χωρισμένων σε τμήματα)"
 
-#: contents/ui/config/ConfigRSS.qml:979
+#: contents/ui/config/ConfigRSS.qml:984
 msgid "Default Interval:"
 msgstr "Προεπιλεγμένο διάστημα:"
 
-#: contents/ui/config/ConfigRSS.qml:986
+#: contents/ui/config/ConfigRSS.qml:991
 msgid "Default Entries:"
 msgstr "Προεπιλεγμένες καταχωρίσεις:"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-#: contents/ui/components/PinnedSection.qml:436
-msgid "Unpin"
-msgstr "Ξεκαρφίτσωμα"
-
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Pin"
-msgstr "Καρφίτσωμα"
-
-#: contents/ui/components/HelpView.qml:16
-#: contents/ui/components/QueryHints.qml:38
-msgid "Timeline View"
-msgstr "Προβολή Χρονολογίου"
-
-#: contents/ui/components/HelpView.qml:17
-#: contents/ui/components/QueryHints.qml:55
-#: contents/ui/components/SearchPopup.qml:1028
-msgid "Applications"
-msgstr "Εφαρμογές"
-
-#: contents/ui/components/HelpView.qml:18
-msgid "File Path Search"
-msgstr "Αναζήτηση διαδρομής αρχείου"
-
-#: contents/ui/components/HelpView.qml:19
-msgid "Google Search"
-msgstr "Αναζήτηση Google"
-
-#: contents/ui/components/HelpView.qml:20
-msgid "DuckDuckGo Search"
-msgstr "Αναζήτηση DuckDuckGo"
-
-#: contents/ui/components/HelpView.qml:21
-msgid "Wikipedia Search"
-msgstr "Αναζήτηση στη Βικιπαίδεια"
-
-#: contents/ui/components/HelpView.qml:22
-#: contents/ui/components/QueryHints.qml:66
-msgid "Bookmarks"
-msgstr "Σελιδοδείκτες"
-
-#: contents/ui/components/HelpView.qml:23
-#: contents/ui/components/QueryHints.qml:69
-msgid "Man Pages"
-msgstr "Σελίδες Man"
-
-#: contents/ui/components/HelpView.qml:24
-msgid "Kill Process"
-msgstr "Τερματισμός διεργασίας"
-
-#: contents/ui/components/HelpView.qml:25
-msgid "Spell Check"
-msgstr "Έλεγχος ορθογραφίας"
-
-#: contents/ui/components/HelpView.qml:26
-msgid "Dictionary Definition"
-msgstr "Ορισμός Λεξικού"
-
-#: contents/ui/components/HelpView.qml:27
-#: contents/ui/components/QueryHints.qml:60
-msgid "Unit Converter"
-msgstr "Μετατροπέας Μονάδων"
-
-#: contents/ui/components/HelpView.qml:28
-msgid "Shell Commands"
-msgstr "Εντολές Κελύφους"
-
-#: contents/ui/components/HelpView.qml:29
-msgid "Power Management"
-msgstr "Διαχείριση Ενέργειας"
-
-#: contents/ui/components/HelpView.qml:30
-msgid "System Services"
-msgstr "Υπηρεσίες Συστήματος"
-
-#: contents/ui/components/HelpView.qml:31
-msgid "Unicode Characters"
-msgstr "Χαρακτήρες Unicode"
-
-#: contents/ui/components/HelpView.qml:32
-msgid "Date and Time"
-msgstr "Ημερομηνία και Ώρα"
-
-#: contents/ui/components/HelpView.qml:33
-msgid "Help & Shortcuts"
-msgstr "Βοήθεια & Συντομεύσεις"
-
-#: contents/ui/components/HistoryListView.qml:38
-#: contents/ui/components/HistoryTileView.qml:246
-msgid "Recent Searches"
-msgstr "Πρόσφατες αναζητήσεις"
-
-#: contents/ui/components/HistoryListView.qml:58
-#: contents/ui/components/HistoryTileView.qml:266
-msgid "Clear History"
-msgstr "Καθαρισμός ιστορικού"
-
-#: contents/ui/components/HistoryListView.qml:286
-#: contents/ui/components/HistoryTileView.qml:597
-#: contents/ui/components/ResultsTileView.qml:301
-msgid "Type to search"
-msgstr "Πληκτρολογήστε για αναζήτηση"
-
-#: contents/ui/components/DebugOverlay.qml:41
-msgid "Saved!"
-msgstr "Αποθηκεύτηκε!"
-
-#: contents/ui/components/DebugOverlay.qml:49
-#: contents/ui/components/DebugOverlay.qml:119
-msgid "Save Dump"
-msgstr "Αποθήκευση dump"
-
-#: contents/ui/components/DebugOverlay.qml:78
-msgid "Backend"
-msgstr "Backend"
-
-#: contents/ui/components/DebugOverlay.qml:81
-msgid "Items"
-msgstr "Αντικείμενα"
-
-#: contents/ui/components/DebugOverlay.qml:84
-msgid "Latency"
-msgstr "Καθυστέρηση"
-
-#: contents/ui/components/DebugOverlay.qml:91
-msgid "View"
-msgstr "Προβολή"
-
-#: contents/ui/components/DebugOverlay.qml:94
-msgid "Display"
-msgstr "Οθόνη"
-
-#: contents/ui/components/FilterChips.qml:22
-msgid "All"
-msgstr "Όλα"
-
-#: contents/ui/components/FilterChips.qml:23
-msgid "Apps"
-msgstr "Εφαρμογές"
-
-#: contents/ui/components/FilterChips.qml:26
-msgid "Folders"
-msgstr "Φάκελοι"
-
-#: contents/ui/components/FilterChips.qml:27
-msgid "Web"
-msgstr "Web"
-
-#: contents/ui/components/HistoryContextMenu.qml:52
-#: contents/ui/components/PinnedSection.qml:402
-msgid "Open"
-msgstr "Άνοιγμα"
-
-#: contents/ui/components/HistoryContextMenu.qml:69
-#: contents/ui/components/PinnedSection.qml:412
-msgid "Copy Path"
-msgstr "Αντιγραφή διαδρομής"
-
-#: contents/ui/components/HistoryContextMenu.qml:85
-msgid "Open in Terminal"
-msgstr "Άνοιγμα σε τερματικό"
-
-#: contents/ui/components/HistoryContextMenu.qml:97
-#: contents/ui/components/PinnedSection.qml:423
-msgid "Open Containing Folder"
-msgstr "Άνοιγμα φακέλου"
-
-#: contents/ui/components/HistoryContextMenu.qml:107
-msgid "Move to Trash"
-msgstr "Μετακίνηση στα απορρίμματα"
-
-#: contents/ui/components/HistoryContextMenu.qml:120
-msgid "Properties"
-msgstr "Ιδιότητες"
-
-#: contents/ui/components/HistoryContextMenu.qml:130
-msgid "Edit Application..."
-msgstr "Επεξεργασία εφαρμογής..."
-
-#: contents/ui/components/HistoryContextMenu.qml:140
-msgid "Remove from History"
-msgstr "Αφαίρεση από ιστορικό"
-
-#: contents/ui/components/PinnedSection.qml:225
-msgid "Right-click items to pin them"
-msgstr "Δεξί κλικ για καρφίτσωμα"
-
-#: contents/ui/components/PinnedSection.qml:383
-msgid "Drag to reorder"
-msgstr "Σύρετε για αναδιάταξη"
-
-#: contents/ui/components/PowerView.qml:254
-msgid "Hibernate"
-msgstr "Αδρανοποίηση"
-
-#: contents/ui/components/PowerView.qml:258
-msgid "(Press again to hibernate)"
-msgstr "(Πιέστε ξανά για αδρανοποίηση)"
-
-#: contents/ui/components/PowerView.qml:267
-msgid "Sleep"
-msgstr "Αναστολή"
-
-#: contents/ui/components/PowerView.qml:271
-msgid "(Press again to sleep)"
-msgstr "(Πιέστε ξανά για αναστολή)"
-
-#: contents/ui/components/PowerView.qml:279
-msgid "Reboot"
-msgstr "Επανεκκίνηση"
-
-#: contents/ui/components/PowerView.qml:283
-msgid "(Press again to reboot)"
-msgstr "(Πιέστε ξανά για επανεκκίνηση)"
-
-#: contents/ui/components/PowerView.qml:303
-msgid "Shutdown"
-msgstr "Τερματισμός"
-
-#: contents/ui/components/PowerView.qml:307
-msgid "(Press again to shutdown)"
-msgstr "(Πιέστε ξανά για τερματισμό)"
-
-#: contents/ui/components/PowerView.qml:444
-msgid "Refresh"
-msgstr "Ανανέωση"
-
-#: contents/ui/components/PowerView.qml:472
-msgid "Scan for boot entries"
-msgstr "Σάρωση για εγγραφές εκκίνησης"
-
-#: contents/ui/components/PowerView.qml:498
-msgid "Lock Screen"
-msgstr "Κλείδωμα οθόνης"
-
-#: contents/ui/components/PowerView.qml:508
-msgid "Log Out"
-msgstr "Αποσύνδεση"
-
-#: contents/ui/components/PowerView.qml:512
-msgid "(Press again to log out)"
-msgstr "(Πιέστε ξανά για αποσύνδεση)"
-
-#: contents/ui/components/PowerView.qml:520
-msgid "Switch User"
-msgstr "Αλλαγή χρήστη"
-
-#: contents/ui/components/PowerView.qml:524
-msgid "(Press again to switch)"
-msgstr "(Πιέστε ξανά για αλλαγή)"
-
-#: contents/ui/components/PowerView.qml:532
-msgid "Save Session"
-msgstr "Αποθήκευση συνεδρίας"
-
-#: contents/ui/components/PowerView.qml:551
-msgid "(Press again)"
-msgstr "(Πιέστε ξανά)"
-
-#: contents/ui/components/QueryHints.qml:32
-msgid "Show all available search filters"
-msgstr "Εμφάνιση όλων των φίλτρων αναζήτησης"
-
-#: contents/ui/components/QueryHints.qml:39
-msgid "Browse files by date (Today, Yesterday, etc.)"
-msgstr "Περιήγηση αρχείων ανά ημερομηνία (Σήμερα, Χθες κ.λπ.)"
-
-#: contents/ui/components/QueryHints.qml:43
-msgid "Calendar"
-msgstr "Ημερολόγιο"
-
-#: contents/ui/components/QueryHints.qml:44
-#: contents/ui/components/QueryHints.qml:154
-#: contents/ui/components/QueryHints.qml:162
-msgid "Today"
-msgstr "Σήμερα"
-
-#: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:155
-#: contents/ui/components/QueryHints.qml:162
-msgid "Yesterday"
-msgstr "Χθες"
-
-#: contents/ui/components/QueryHints.qml:46
-msgid "This Week"
-msgstr "Αυτή την εβδομάδα"
-
-#: contents/ui/components/QueryHints.qml:47
-msgid "This Month"
-msgstr "Αυτόν τον μήνα"
-
-#: contents/ui/components/QueryHints.qml:50
-msgid "File Path"
-msgstr "Διαδρομή αρχείου"
-
-#: contents/ui/components/QueryHints.qml:50
-msgid "Search via absolute file path"
-msgstr "Αναζήτηση μέσω απόλυτης διαδρομής"
-
-#: contents/ui/components/QueryHints.qml:51
-msgid "File Index"
-msgstr "Ευρετήριο αρχείων"
-
-#: contents/ui/components/QueryHints.qml:51
-msgid "Search exclusively in Baloo file index"
-msgstr "Αναζήτηση αποκλειστικά στο ευρετήριο Baloo"
-
-#: contents/ui/components/QueryHints.qml:52
-msgid "Search only document files"
-msgstr "Αναζήτηση μόνο εγγράφων"
-
-#: contents/ui/components/QueryHints.qml:53
-msgid "Search only image files"
-msgstr "Αναζήτηση μόνο εικόνων"
-
-#: contents/ui/components/QueryHints.qml:55
-msgid "Search for installed applications"
-msgstr "Αναζήτηση για εγκατεστημένες εφαρμογές"
-
-#: contents/ui/components/QueryHints.qml:56
-msgid "Services"
-msgstr "Υπηρεσίες"
-
-#: contents/ui/components/QueryHints.qml:56
-msgid "Search system background services"
-msgstr "Αναζήτηση υπηρεσιών παρασκηνίου"
-
-#: contents/ui/components/QueryHints.qml:57
-msgid "Shell"
-msgstr "Κέλυφος"
-
-#: contents/ui/components/QueryHints.qml:57
-msgid "Execute shell commands directly"
-msgstr "Directe εκτέλεση εντολών κελύφους"
-
-#: contents/ui/components/QueryHints.qml:59
-msgid "Calculator"
-msgstr "Αριθμομηχανή"
-
-#: contents/ui/components/QueryHints.qml:59
-msgid "Perform mathematical calculations"
-msgstr "Εκτέλεση μαθηματικών υπολογισμών"
-
-#: contents/ui/components/QueryHints.qml:60
-msgid "Convert between weights, distances, etc."
-msgstr "Μετατροπή μεταξύ βαρών, αποστάσεων κ.λπ."
-
-#: contents/ui/components/QueryHints.qml:61
-msgid "Spelling"
-msgstr "Ορθογραφία"
-
-#: contents/ui/components/QueryHints.qml:61
-msgid "Check word spelling"
-msgstr "Έλεγχος ορθογραφίας λέξης"
-
-#: contents/ui/components/QueryHints.qml:63
-msgid "Google"
-msgstr "Google"
-
-#: contents/ui/components/QueryHints.qml:63
-msgid "Search the web using Google"
-msgstr "Αναζήτηση στον ιστό με Google"
-
-#: contents/ui/components/QueryHints.qml:64
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-#: contents/ui/components/QueryHints.qml:64
-msgid "Search the web using DuckDuckGo"
-msgstr "Αναζήτηση στον ιστό με DuckDuckGo"
-
-#: contents/ui/components/QueryHints.qml:65
-msgid "Wikipedia"
-msgstr "Βικιπαίδεια"
-
-#: contents/ui/components/QueryHints.qml:65
-msgid "Search Wikipedia articles"
-msgstr "Αναζήτηση στη Βικιπαίδεια"
-
-#: contents/ui/components/QueryHints.qml:66
-msgid "Search browser bookmarks"
-msgstr "Αναζήτηση σελιδοδεικτών προγράμματος περιήγησης"
-
-#: contents/ui/components/QueryHints.qml:67
-msgid "RSS Feeds"
-msgstr "Ροές RSS"
-
-#: contents/ui/components/QueryHints.qml:67
-msgid "Search exclusively in RSS news feeds"
-msgstr "Αναζήτηση αποκλειστικά σε ροές RSS"
-
-#: contents/ui/components/QueryHints.qml:69
-msgid "Browse system manual pages"
-msgstr "Περιήγηση στις σελίδες εγχειριδίου συστήματος"
-
-#: contents/ui/components/QueryHints.qml:70
-msgid "Show widget documentation"
-msgstr "Εμφάνιση τεκμηρίωσης γραφικού συστατικού"
-
-#: contents/ui/components/QueryHints.qml:98
-msgid "Unknown prefix"
-msgstr "Άγνωστο πρόθεμα"
-
-#: contents/ui/components/QueryHints.qml:99
-msgid "try"
-msgstr "δοκιμάστε"
-
-#: contents/ui/components/QueryHints.qml:101
-msgid "Browse calendar"
-msgstr "Περιήγηση ημερολογίου"
-
-#: contents/ui/components/QueryHints.qml:102
-msgid "Man pages not installed"
-msgstr "Οι σελίδες man δεν είναι εγκατεστημένες"
-
-#: contents/ui/components/QueryHints.qml:156
-#: contents/ui/components/QueryHints.qml:162
-msgid "Two days ago"
-msgstr "Πριν δύο ημέρες"
-
-#: contents/ui/components/QueryHints.qml:367
-msgid "Available Search Prefixes"
-msgstr "Διαθέσιμα προθέματα αναζήτησης"
-
-#: contents/ui/components/ResultsListView.qml:436
-#: contents/ui/components/ResultsTileView.qml:294
-msgid "Category"
-msgstr "Κατηγορία"
-
-#: contents/ui/components/ResultsListView.qml:437
-#: contents/ui/components/ResultsTileView.qml:295
-msgid "File Type"
-msgstr "Τύπος αρχείου"
-
-#: contents/ui/components/ResultsListView.qml:438
-#: contents/ui/components/ResultsTileView.qml:296
-msgid "Path"
-msgstr "Διαδρομή"
-
-#: contents/ui/components/ResultsListView.qml:439
-msgid "News"
-msgstr "Νέα"
-
-#: contents/ui/components/ResultsListView.qml:440
-msgid "Read News"
-msgstr "Διάβασμα νέων"
-
-#: contents/ui/components/ResultsListView.qml:441
-msgid "Share"
-msgstr "Κοινοποίηση"
-
-#: contents/ui/components/ResultsListView.qml:442
-#: contents/ui/components/ResultsTileView.qml:299
-msgid "Searching..."
-msgstr "Αναζήτηση..."
-
-#: contents/ui/components/ResultsListView.qml:443
-#: contents/ui/components/ResultsTileView.qml:300
-msgid "No results found"
-msgstr "Δεν βρέθηκαν αποτελέσματα"
-
-#: contents/ui/components/ResultsTileView.qml:297
-msgid "Space to preview"
-msgstr "Διάστημα για προεπισκόπηση"
-
-#: contents/ui/components/ResultsTileView.qml:298
-msgid "Read in Browser"
-msgstr "Ανάγνωση στο πρόγραμμα περιήγησης"
-
-#: contents/ui/components/SearchPopup.qml:92
-msgid "date"
-msgstr "ημερομηνία"
-
-#: contents/ui/components/SearchPopup.qml:93
-msgid "clock"
-msgstr "ρολόι"
-
-#: contents/ui/components/SearchPopup.qml:94
-msgid "weather"
-msgstr "καιρός"
-
-#: contents/ui/components/SearchPopup.qml:95
-msgid "power"
-msgstr "ενέργεια"
-
-#: contents/ui/components/SearchPopup.qml:96
-msgid "help"
-msgstr "βοήθεια"
-
-#: contents/ui/components/SearchPopup.qml:97
-msgid "unit"
-msgstr "μονάδα"
-
-#: contents/ui/components/SearchPopup.qml:98
-msgid "kill"
-msgstr "τερματισμός"
-
-#: contents/ui/components/SearchPopup.qml:99
-msgid "spell"
-msgstr "ορθογραφία"
-
-#: contents/ui/components/SearchPopup.qml:100
-msgid "shell"
-msgstr "κέλυφος"
-
-#: contents/ui/components/SearchPopup.qml:1028
-msgid "Other"
-msgstr "Άλλα"
-
-#: contents/ui/components/SearchPopup.qml:1110
-msgid "Mode"
-msgstr "Λειτουργία"
-
-#: contents/ui/components/TileDataManager.qml:53
-msgid "Other Results"
-msgstr "Άλλα αποτελέσματα"
-
-#: contents/ui/components/WeatherView.qml:57
-msgid "Unknown error"
-msgstr "Άγνωστο σφάλμα"
-
-#: contents/ui/components/WeatherView.qml:80
-msgid "Loading Weather..."
-msgstr "Φόρτωση καιρού..."
-
-#: contents/ui/components/WeatherView.qml:91
-msgid "Retry"
-msgstr "Δοκιμάστε ξανά"
+#: contents/ui/config/ConfigSearch.qml:13
+msgid "Search Settings"
+msgstr "Ρυθμίσεις Αναζήτησης"
+
+#: contents/ui/config/ConfigSearch.qml:24
+msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
+msgstr "Προεπισκόπηση αρχείων στο πέρασμα (και με Ctrl+Space)"
+
+#: contents/ui/config/ConfigSearch.qml:33
+msgid "Search Behavior"
+msgstr "Συμπεριφορά Αναζήτησης"
+
+#: contents/ui/config/ConfigSearch.qml:37
+msgid "You can use the following KRunner commands and prefixes:"
+msgstr "Μπορείτε να χρησιμοποιήσετε τις εντολές KRunner:"
+
+#: contents/ui/config/ConfigSearch.qml:51
+msgid "Prefix"
+msgstr "Πρόθεμα"
+
+#: contents/ui/config/ConfigSearch.qml:56
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: contents/ui/config/ConfigSearch.qml:78
+msgid "Search Unicode characters"
+msgstr "Αναζήτηση χαρακτήρων Unicode"
 
 #: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"
@@ -1569,6 +1694,9 @@ msgstr "Εξαιρετικά ευρεία λειτουργία (Ευρύ + Μα�
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
 msgstr "Υπερ-ευρεία λειτουργία (Μέγιστη κάλυψη)"
+
+#~ msgid "RSS"
+#~ msgstr "RSS"
 
 #~ msgid "Smartly limit results based on relevance"
 #~ msgstr "Έξυπνος περιορισμός αποτελεσμάτων βάσει συνάφειας"

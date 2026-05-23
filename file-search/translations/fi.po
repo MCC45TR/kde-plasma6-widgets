@@ -4,31 +4,663 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-23 02:06+0300\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nLanguage: fi\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:23+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
-msgid "Appearance"
-msgstr "Ulkonäkö"
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/components/SearchBar.qml:43
+#: contents/ui/config/ConfigGeneral.qml:384 contents/ui/main.qml:51
+msgid "Start searching..."
+msgstr "Aloita haku..."
 
-#: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
-#: contents/ui/config/ConfigSearch.qml:9
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/config/ConfigGeneral.qml:384 contents/ui/main.qml:51
+msgid "Search..."
+msgstr "Hae..."
+
+#: contents/ui/components/CompactView.qml:114
+#: contents/ui/config/ConfigCategories.qml:10
 #: contents/ui/config/ConfigGeneral.qml:384
-#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
+#: contents/ui/config/ConfigSearch.qml:9 contents/ui/main.qml:51
 msgid "Search"
 msgstr "Etsi"
 
-#: contents/config/config.qml:17
-msgid "RSS"
-msgstr "RSS"
+#: contents/ui/components/DebugOverlay.qml:41
+msgid "Saved!"
+msgstr "Tallennettu!"
 
-#: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
-msgid "Debug"
-msgstr "Debug"
+#: contents/ui/components/DebugOverlay.qml:49
+#: contents/ui/components/DebugOverlay.qml:119
+msgid "Save Dump"
+msgstr "Tallenna kaatopaikka"
 
-#: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
-#: contents/ui/components/QueryHints.qml:70
+#: contents/ui/components/DebugOverlay.qml:58
+#: contents/ui/config/ConfigDebug.qml:117
+#: contents/ui/config/ConfigDebug.qml:176
+msgid "Debug Overlay"
+msgstr "Virheenkorjauspeittokuva"
+
+#: contents/ui/components/DebugOverlay.qml:78
+msgid "Backend"
+msgstr "Backend"
+
+#: contents/ui/components/DebugOverlay.qml:81
+msgid "Items"
+msgstr "Tuotteet"
+
+#: contents/ui/components/DebugOverlay.qml:84
+msgid "Latency"
+msgstr "Latenssi"
+
+#: contents/ui/components/DebugOverlay.qml:91
+msgid "View"
+msgstr "Näytä"
+
+#: contents/ui/components/DebugOverlay.qml:94
+msgid "Display"
+msgstr "Näyttö"
+
+#: contents/ui/components/DebugOverlay.qml:101
+#: contents/ui/config/ConfigDebug.qml:205
+msgid "Total Searches"
+msgstr "Haut yhteensä"
+
+#: contents/ui/components/DebugOverlay.qml:104
+#: contents/ui/config/ConfigDebug.qml:216
+msgid "Avg Latency"
+msgstr "Keskimääräinen viive"
+
+#: contents/ui/components/FilterChips.qml:22
+msgid "All"
+msgstr "Kaikki"
+
+#: contents/ui/components/FilterChips.qml:23
+msgid "Apps"
+msgstr "Sovellukset"
+
+#: contents/ui/components/FilterChips.qml:24
+#: contents/ui/config/ConfigGeneral.qml:684
+msgid "Docs"
+msgstr "Asiakirjat"
+
+#: contents/ui/components/FilterChips.qml:25
+#: contents/ui/components/QueryHints.qml:53
+#: contents/ui/config/ConfigGeneral.qml:725
+#: contents/ui/config/ConfigPreview.qml:234
+msgid "Images"
+msgstr "Kuvat"
+
+#: contents/ui/components/FilterChips.qml:26
+msgid "Folders"
+msgstr "Kansiot"
+
+#: contents/ui/components/FilterChips.qml:27
+msgid "Web"
+msgstr "Web"
+
+#: contents/ui/components/HelpView.qml:16
+#: contents/ui/components/QueryHints.qml:38
+msgid "Timeline View"
+msgstr "Aikajananäkymä"
+
+#: contents/ui/components/HelpView.qml:17
+#: contents/ui/components/QueryHints.qml:55
+#: contents/ui/components/SearchPopup.qml:1052
+#: contents/ui/config/ConfigGeneral.qml:873
+#: contents/ui/config/ConfigPreview.qml:386
+msgid "Applications"
+msgstr "Sovellukset"
+
+#: contents/ui/components/HelpView.qml:18
+msgid "File Path Search"
+msgstr "Tiedostopolun haku"
+
+#: contents/ui/components/HelpView.qml:19
+msgid "Google Search"
+msgstr "Google-haku"
+
+#: contents/ui/components/HelpView.qml:20
+msgid "DuckDuckGo Search"
+msgstr "DuckDuckGo Search"
+
+#: contents/ui/components/HelpView.qml:21
+msgid "Wikipedia Search"
+msgstr "Wikipedia haku"
+
+#: contents/ui/components/HelpView.qml:22
+#: contents/ui/components/QueryHints.qml:66
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#: contents/ui/components/HelpView.qml:23
+#: contents/ui/components/QueryHints.qml:69
+msgid "Man Pages"
+msgstr "Man-sivut"
+
+#: contents/ui/components/HelpView.qml:24
+msgid "Kill Process"
+msgstr "Tappoprosessi"
+
+#: contents/ui/components/HelpView.qml:25
+msgid "Spell Check"
+msgstr "Oikeinkirjoituksen tarkistus"
+
+#: contents/ui/components/HelpView.qml:26
+msgid "Dictionary Definition"
+msgstr "Sanakirjan määritelmä"
+
+#: contents/ui/components/HelpView.qml:27
+#: contents/ui/components/QueryHints.qml:60
+msgid "Unit Converter"
+msgstr "Yksikkömuunnin"
+
+#: contents/ui/components/HelpView.qml:28
+msgid "Shell Commands"
+msgstr "Shell-komennot"
+
+#: contents/ui/components/HelpView.qml:29
+msgid "Power Management"
+msgstr "Virranhallinta"
+
+#: contents/ui/components/HelpView.qml:30
+msgid "System Services"
+msgstr "Järjestelmäpalvelut"
+
+#: contents/ui/components/HelpView.qml:31
+msgid "Unicode Characters"
+msgstr "Unicode-merkit"
+
+#: contents/ui/components/HelpView.qml:32
+msgid "Date and Time"
+msgstr "Päivämäärä ja aika"
+
+#: contents/ui/components/HelpView.qml:33
+msgid "Help & Shortcuts"
+msgstr "Ohjeet ja pikakuvakkeet"
+
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinButton.qml:68
+#: contents/ui/components/PinnedSection.qml:436
+msgid "Unpin"
+msgstr "Irrota kiinnitys"
+
+#: contents/ui/components/HistoryContextMenu.qml:27
+#: contents/ui/components/PinButton.qml:68
+msgid "Pin"
+msgstr "Pin"
+
+#: contents/ui/components/HistoryContextMenu.qml:52
+#: contents/ui/components/PinnedSection.qml:402
+msgid "Open"
+msgstr "Avaa"
+
+#: contents/ui/components/HistoryContextMenu.qml:69
+#: contents/ui/components/HistoryListView.qml:499
+#: contents/ui/components/HistoryTileView.qml:791
+#: contents/ui/components/PinnedSection.qml:412
+#: contents/ui/components/ResultsListView.qml:466
+#: contents/ui/components/ResultsTileView.qml:866
+msgid "Copy Path"
+msgstr "Kopioi polku"
+
+#: contents/ui/components/HistoryContextMenu.qml:85
+msgid "Open in Terminal"
+msgstr "Avaa terminaalissa"
+
+#: contents/ui/components/HistoryContextMenu.qml:97
+#: contents/ui/components/PinnedSection.qml:423
+msgid "Open Containing Folder"
+msgstr "Avaa Sisältää-kansio"
+
+#: contents/ui/components/HistoryContextMenu.qml:107
+msgid "Move to Trash"
+msgstr "Siirrä roskakoriin"
+
+#: contents/ui/components/HistoryContextMenu.qml:120
+msgid "Properties"
+msgstr "Ominaisuudet"
+
+#: contents/ui/components/HistoryContextMenu.qml:130
+msgid "Edit Application..."
+msgstr "Muokkaa sovellusta..."
+
+#: contents/ui/components/HistoryContextMenu.qml:140
+msgid "Remove from History"
+msgstr "Poista historiasta"
+
+#: contents/ui/components/HistoryListView.qml:92
+#: contents/ui/components/HistoryTileView.qml:249
+msgid "Recent Searches"
+msgstr "Viimeaikaiset haut"
+
+#: contents/ui/components/HistoryListView.qml:112
+#: contents/ui/components/HistoryTileView.qml:269
+msgid "Clear History"
+msgstr "Tyhjennä historia"
+
+#: contents/ui/components/HistoryListView.qml:281
+#: contents/ui/components/HistoryTileView.qml:495
+#: contents/ui/components/ResultsListView.qml:150
+#: contents/ui/components/ResultsTileView.qml:502
+msgid "Size"
+msgstr "Koko"
+
+#: contents/ui/components/HistoryListView.qml:436
+#: contents/ui/components/HistoryListView.qml:566
+#: contents/ui/components/HistoryTileView.qml:728
+#: contents/ui/components/HistoryTileView.qml:858
+#: contents/ui/components/ResultsListView.qml:626
+#: contents/ui/components/ResultsTileView.qml:298
+msgid "Category"
+msgstr "Luokka"
+
+#: contents/ui/components/HistoryListView.qml:443
+#: contents/ui/components/HistoryListView.qml:573
+#: contents/ui/components/HistoryTileView.qml:735
+#: contents/ui/components/HistoryTileView.qml:865
+#: contents/ui/components/ResultsListView.qml:627
+#: contents/ui/components/ResultsTileView.qml:299
+msgid "File Type"
+msgstr "Tiedostotyyppi"
+
+#: contents/ui/components/HistoryListView.qml:460
+#: contents/ui/components/HistoryListView.qml:580
+#: contents/ui/components/HistoryTileView.qml:752
+#: contents/ui/components/HistoryTileView.qml:872
+#: contents/ui/components/ResultsListView.qml:628
+#: contents/ui/components/ResultsTileView.qml:300
+msgid "Path"
+msgstr "Polku"
+
+#: contents/ui/components/HistoryListView.qml:507
+#: contents/ui/components/HistoryTileView.qml:799
+#: contents/ui/components/ResultsListView.qml:474
+#: contents/ui/components/ResultsTileView.qml:874
+msgid "Open Folder"
+msgstr "Avaa kansio"
+
+#: contents/ui/components/HistoryListView.qml:620
+#: contents/ui/components/HistoryTileView.qml:918
+#: contents/ui/components/ResultsTileView.qml:305
+msgid "Type to search"
+msgstr "Hae kirjoittamalla"
+
+#: contents/ui/components/PinnedSection.qml:85
+#: contents/ui/config/ConfigGeneral.qml:552
+msgid "Pinned Items"
+msgstr "Kiinnitetyt kohteet"
+
+#: contents/ui/components/PinnedSection.qml:225
+msgid "Right-click items to pin them"
+msgstr "Napsauta kohteita hiiren kakkospainikkeella kiinnittääksesi ne"
+
+#: contents/ui/components/PinnedSection.qml:383
+msgid "Drag to reorder"
+msgstr "Järjestä uudelleen vetämällä"
+
+#: contents/ui/components/PowerView.qml:254
+msgid "Hibernate"
+msgstr "Lepotila"
+
+#: contents/ui/components/PowerView.qml:258
+msgid "(Press again to hibernate)"
+msgstr "(Paina uudelleen siirtyäksesi lepotilaan)"
+
+#: contents/ui/components/PowerView.qml:267
+msgid "Sleep"
+msgstr "Nuku"
+
+#: contents/ui/components/PowerView.qml:271
+msgid "(Press again to sleep)"
+msgstr "(Paina uudelleen mennäksesi nukkumaan)"
+
+#: contents/ui/components/PowerView.qml:279
+msgid "Reboot"
+msgstr "Käynnistä uudelleen"
+
+#: contents/ui/components/PowerView.qml:283
+msgid "(Press again to reboot)"
+msgstr "(Paina uudelleen käynnistääksesi uudelleen)"
+
+#: contents/ui/components/PowerView.qml:303
+msgid "Shutdown"
+msgstr "Sammutus"
+
+#: contents/ui/components/PowerView.qml:307
+msgid "(Press again to shutdown)"
+msgstr "(Paina uudelleen sammuttaaksesi)"
+
+#: contents/ui/components/PowerView.qml:444
+msgid "Refresh"
+msgstr "Päivitä"
+
+#: contents/ui/components/PowerView.qml:472
+msgid "Scan for boot entries"
+msgstr "Etsi käynnistysmerkinnät"
+
+#: contents/ui/components/PowerView.qml:498
+msgid "Lock Screen"
+msgstr "Lukitusnäyttö"
+
+#: contents/ui/components/PowerView.qml:508
+msgid "Log Out"
+msgstr "Kirjaudu ulos"
+
+#: contents/ui/components/PowerView.qml:512
+msgid "(Press again to log out)"
+msgstr "(Paina uudelleen kirjautuaksesi ulos)"
+
+#: contents/ui/components/PowerView.qml:520
+msgid "Switch User"
+msgstr "Vaihda käyttäjää"
+
+#: contents/ui/components/PowerView.qml:524
+msgid "(Press again to switch)"
+msgstr "(Paina uudelleen vaihtaaksesi)"
+
+#: contents/ui/components/PowerView.qml:532
+msgid "Save Session"
+msgstr "Tallenna istunto"
+
+#: contents/ui/components/PowerView.qml:551
+msgid "(Press again)"
+msgstr "(Paina uudelleen)"
+
+#: contents/ui/components/QueryHints.qml:31
+#: contents/ui/components/QueryHints.qml:119
+#: contents/ui/config/ConfigHelp.qml:126
+msgid "Search Prefixes"
+msgstr "Haku etuliitteet"
+
+#: contents/ui/components/QueryHints.qml:32
+msgid "Show all available search filters"
+msgstr "Näytä kaikki käytettävissä olevat hakusuodattimet"
+
+#: contents/ui/components/QueryHints.qml:39
+msgid "Browse files by date (Today, Yesterday, etc.)"
+msgstr "Selaa tiedostoja päivämäärän mukaan (tänään, eilen jne.)"
+
+#: contents/ui/components/QueryHints.qml:43
+msgid "Calendar"
+msgstr "Kalenteri"
+
+#: contents/ui/components/QueryHints.qml:44
+#: contents/ui/components/QueryHints.qml:173
+#: contents/ui/components/QueryHints.qml:181
+msgid "Today"
+msgstr "Tänään"
+
+#: contents/ui/components/QueryHints.qml:45
+#: contents/ui/components/QueryHints.qml:174
+#: contents/ui/components/QueryHints.qml:181
+msgid "Yesterday"
+msgstr "eilen"
+
+#: contents/ui/components/QueryHints.qml:46
+msgid "This Week"
+msgstr "Tällä viikolla"
+
+#: contents/ui/components/QueryHints.qml:47
+msgid "This Month"
+msgstr "Tässä kuussa"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "File Path"
+msgstr "Tiedoston polku"
+
+#: contents/ui/components/QueryHints.qml:50
+msgid "Search via absolute file path"
+msgstr "Hae absoluuttisen tiedostopolun kautta"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "File Index"
+msgstr "Tiedoston hakemisto"
+
+#: contents/ui/components/QueryHints.qml:51
+msgid "Search exclusively in Baloo file index"
+msgstr "Hae yksinomaan Baloo-tiedostohakemistosta"
+
+#: contents/ui/components/QueryHints.qml:52
+#: contents/ui/config/ConfigGeneral.qml:646
+#: contents/ui/config/ConfigGeneral.qml:836
+#: contents/ui/config/ConfigPreview.qml:348
+msgid "Documents"
+msgstr "Asiakirjat"
+
+#: contents/ui/components/QueryHints.qml:52
+msgid "Search only document files"
+msgstr "Hae vain asiakirjatiedostoja"
+
+#: contents/ui/components/QueryHints.qml:53
+msgid "Search only image files"
+msgstr "Hae vain kuvatiedostoja"
+
+#: contents/ui/components/QueryHints.qml:55
+msgid "Search for installed applications"
+msgstr "Etsi asennettuja sovelluksia"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Services"
+msgstr "Palvelut"
+
+#: contents/ui/components/QueryHints.qml:56
+msgid "Search system background services"
+msgstr "Hakujärjestelmän taustapalvelut"
+
+#: contents/ui/components/QueryHints.qml:57
+msgid "Shell"
+msgstr "Shell"
+
+#: contents/ui/components/QueryHints.qml:57
+msgid "Execute shell commands directly"
+msgstr "Suorita komentotulkkikomennot suoraan"
+
+#: contents/ui/components/QueryHints.qml:59
+msgid "Calculator"
+msgstr "Laskin"
+
+#: contents/ui/components/QueryHints.qml:59
+msgid "Perform mathematical calculations"
+msgstr "Suorita matemaattiset laskelmat"
+
+#: contents/ui/components/QueryHints.qml:60
+msgid "Convert between weights, distances, etc."
+msgstr "Muunna painojen, etäisyyksien jne. välillä."
+
+#: contents/ui/components/QueryHints.qml:61
+msgid "Spelling"
+msgstr "Oikeinkirjoitus"
+
+#: contents/ui/components/QueryHints.qml:61
+msgid "Check word spelling"
+msgstr "Tarkista sanan oikeinkirjoitus"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Google"
+msgstr "Google"
+
+#: contents/ui/components/QueryHints.qml:63
+msgid "Search the web using Google"
+msgstr "Hae verkosta Googlen avulla"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: contents/ui/components/QueryHints.qml:64
+msgid "Search the web using DuckDuckGo"
+msgstr "Hae verkosta DuckDuckGon avulla"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+#: contents/ui/components/QueryHints.qml:65
+msgid "Search Wikipedia articles"
+msgstr "Hae Wikipedia-artikkeleita"
+
+#: contents/ui/components/QueryHints.qml:66
+msgid "Search browser bookmarks"
+msgstr "Hae selaimen kirjanmerkkejä"
+
+#: contents/ui/components/QueryHints.qml:67
+msgid "RSS Feeds"
+msgstr "RSS-syötteet"
+
+#: contents/ui/components/QueryHints.qml:67
+msgid "Search exclusively in RSS news feeds"
+msgstr "Hae yksinomaan RSS-uutissyötteistä"
+
+#: contents/ui/components/QueryHints.qml:69
+msgid "Browse system manual pages"
+msgstr "Selaa järjestelmän ohjesivuja"
+
+#: contents/ui/components/QueryHints.qml:70 contents/ui/config/ConfigHelp.qml:9
 msgid "Help"
 msgstr "Apua"
+
+#: contents/ui/components/QueryHints.qml:70
+msgid "Show widget documentation"
+msgstr "Näytä widgetin dokumentaatio"
+
+#: contents/ui/components/QueryHints.qml:117
+msgid "Unknown prefix"
+msgstr "Tuntematon etuliite"
+
+#: contents/ui/components/QueryHints.qml:118
+msgid "try"
+msgstr "yritä"
+
+#: contents/ui/components/QueryHints.qml:120
+msgid "Browse calendar"
+msgstr "Selaa kalenteria"
+
+#: contents/ui/components/QueryHints.qml:121
+msgid "Man pages not installed"
+msgstr "Man-sivuja ei ole asennettu"
+
+#: contents/ui/components/QueryHints.qml:175
+#: contents/ui/components/QueryHints.qml:181
+msgid "Two days ago"
+msgstr "Kaksi päivää sitten"
+
+#: contents/ui/components/QueryHints.qml:380
+msgid "Available Search Prefixes"
+msgstr "Käytettävissä olevat hakuetuliitteet"
+
+#: contents/ui/components/ResultsListView.qml:629
+msgid "News"
+msgstr "Uutiset"
+
+#: contents/ui/components/ResultsListView.qml:630
+msgid "Read News"
+msgstr "Lue Uutisia"
+
+#: contents/ui/components/ResultsListView.qml:631
+msgid "Share"
+msgstr "Jaa"
+
+#: contents/ui/components/ResultsListView.qml:632
+#: contents/ui/components/ResultsTileView.qml:303
+msgid "Searching..."
+msgstr "Haetaan..."
+
+#: contents/ui/components/ResultsListView.qml:633
+#: contents/ui/components/ResultsTileView.qml:304
+msgid "No results found"
+msgstr "Tuloksia ei löytynyt"
+
+#: contents/ui/components/ResultsTileView.qml:301
+msgid "Space to preview"
+msgstr "Esikatselutila"
+
+#: contents/ui/components/ResultsTileView.qml:302
+msgid "Read in Browser"
+msgstr "Lue selaimessa"
+
+#: contents/ui/components/SearchPopup.qml:96
+msgid "date"
+msgstr "päivämäärä"
+
+#: contents/ui/components/SearchPopup.qml:97
+msgid "clock"
+msgstr "kello"
+
+#: contents/ui/components/SearchPopup.qml:98
+msgid "weather"
+msgstr "sää"
+
+#: contents/ui/components/SearchPopup.qml:99
+msgid "power"
+msgstr "tehoa"
+
+#: contents/ui/components/SearchPopup.qml:100
+msgid "help"
+msgstr "apua"
+
+#: contents/ui/components/SearchPopup.qml:101
+msgid "unit"
+msgstr "yksikkö"
+
+#: contents/ui/components/SearchPopup.qml:102
+msgid "kill"
+msgstr "tappaa"
+
+#: contents/ui/components/SearchPopup.qml:103
+msgid "spell"
+msgstr "loitsu"
+
+#: contents/ui/components/SearchPopup.qml:104
+msgid "shell"
+msgstr "kuori"
+
+#: contents/ui/components/SearchPopup.qml:1052
+msgid "Other"
+msgstr "muu"
+
+#: contents/ui/components/SearchPopup.qml:1142
+#: contents/ui/config/ConfigDebug.qml:163
+msgid "Tile"
+msgstr "Laatta"
+
+#: contents/ui/components/SearchPopup.qml:1142
+#: contents/ui/config/ConfigDebug.qml:163
+msgid "List"
+msgstr "Luettelo"
+
+#: contents/ui/components/SearchPopup.qml:1143
+#: contents/ui/config/ConfigDebug.qml:157
+msgid "Button"
+msgstr "Painike"
+
+#: contents/ui/components/SearchPopup.qml:1143
+msgid "Mode"
+msgstr "tila"
+
+#: contents/ui/components/TileDataManager.qml:53
+msgid "Other Results"
+msgstr "Muut tulokset"
+
+#: contents/ui/components/WeatherView.qml:57
+msgid "Unknown error"
+msgstr "Tuntematon virhe"
+
+#: contents/ui/components/WeatherView.qml:80
+msgid "Loading Weather..."
+msgstr "Ladataan säätä..."
+
+#: contents/ui/components/WeatherView.qml:91
+msgid "Retry"
+msgstr "Yritä uudelleen"
 
 #: contents/ui/config/ConfigCategories.qml:212
 msgid "Algorithm Settings"
@@ -116,6 +748,10 @@ msgstr "Muutokset otetaan käyttöön välittömästi. Piilotetut luokat eivät 
 msgid "Lower number = higher priority"
 msgstr "Pienempi numero = korkeampi prioriteetti"
 
+#: contents/ui/config/ConfigDebug.qml:9
+msgid "Debug"
+msgstr "Debug"
+
 #: contents/ui/config/ConfigDebug.qml:102
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
@@ -125,12 +761,6 @@ msgstr "Tämä välilehti on aktiivinen vain kehittäjätilassa. Vaihda profiili
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Debug Settings"
 msgstr "Virheenkorjausasetukset"
-
-#: contents/ui/config/ConfigDebug.qml:117
-#: contents/ui/config/ConfigDebug.qml:176
-#: contents/ui/components/DebugOverlay.qml:58
-msgid "Debug Overlay"
-msgstr "Virheenkorjauspeittokuva"
 
 #: contents/ui/config/ConfigDebug.qml:124
 msgid "Show debug info on widget (active mode, item count, index source)"
@@ -170,11 +800,6 @@ msgid "Display Mode"
 msgstr "Näyttötila"
 
 #: contents/ui/config/ConfigDebug.qml:157
-#: contents/ui/components/SearchPopup.qml:1110
-msgid "Button"
-msgstr "Painike"
-
-#: contents/ui/config/ConfigDebug.qml:157
 msgid "Medium"
 msgstr "Keskikokoinen"
 
@@ -190,16 +815,6 @@ msgstr "Erittäin leveä"
 #: contents/ui/config/ConfigGeneral.qml:517
 msgid "View Mode"
 msgstr "Näytä tila"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/components/SearchPopup.qml:1109
-msgid "List"
-msgstr "Luettelo"
-
-#: contents/ui/config/ConfigDebug.qml:163
-#: contents/ui/components/SearchPopup.qml:1109
-msgid "Tile"
-msgstr "Laatta"
 
 #: contents/ui/config/ConfigDebug.qml:167
 #: contents/ui/config/ConfigGeneral.qml:544
@@ -227,16 +842,6 @@ msgstr "kohteita"
 msgid "Telemetry"
 msgstr "Telemetria"
 
-#: contents/ui/config/ConfigDebug.qml:205
-#: contents/ui/components/DebugOverlay.qml:101
-msgid "Total Searches"
-msgstr "Haut yhteensä"
-
-#: contents/ui/config/ConfigDebug.qml:216
-#: contents/ui/components/DebugOverlay.qml:104
-msgid "Avg Latency"
-msgstr "Keskimääräinen viive"
-
 #: contents/ui/config/ConfigDebug.qml:230
 msgid "History Sample"
 msgstr "Historia näyte"
@@ -251,337 +856,9 @@ msgstr "Tietosuojailmoitus: Kaikki virheenkorjaus- ja telemetriatiedot tallennet
 msgid "History is empty"
 msgstr "Historia on tyhjä"
 
-#: contents/ui/config/ConfigHelp.qml:85
-msgid "Keyboard Shortcuts"
-msgstr "Pikanäppäimet"
-
-#: contents/ui/config/ConfigHelp.qml:89
-msgid "Navigate between results"
-msgstr "Navigoi tulosten välillä"
-
-#: contents/ui/config/ConfigHelp.qml:95
-msgid "Navigate between sections"
-msgstr "Navigoi osien välillä"
-
-#: contents/ui/config/ConfigHelp.qml:101
-msgid "List / Tile view"
-msgstr "Luettelo/laattanäkymä"
-
-#: contents/ui/config/ConfigHelp.qml:107
-msgid "Toggle file preview"
-msgstr "Vaihda tiedoston esikatselu"
-
-#: contents/ui/config/ConfigHelp.qml:113
-msgid "Open selected item"
-msgstr "Avaa valittu kohde"
-
-#: contents/ui/config/ConfigHelp.qml:119
-msgid "Close widget"
-msgstr "Sulje widget"
-
-#: contents/ui/config/ConfigHelp.qml:126
-#: contents/ui/components/QueryHints.qml:31
-#: contents/ui/components/QueryHints.qml:100
-msgid "Search Prefixes"
-msgstr "Haku etuliitteet"
-
-#: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
-#: contents/ui/config/ConfigPrefix.qml:214
-#: contents/ui/config/ConfigGeneral.qml:1002
-msgid "List files modified today"
-msgstr "Listaa tänään muokatut tiedostot"
-
-#: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
-#: contents/ui/config/ConfigPrefix.qml:226
-#: contents/ui/config/ConfigGeneral.qml:1015
-msgid "Search on Google"
-msgstr "Hae Googlesta"
-
-#: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
-#: contents/ui/config/ConfigPrefix.qml:238
-#: contents/ui/config/ConfigGeneral.qml:1028
-msgid "Search on DuckDuckGo"
-msgstr "Hae DuckDuckGosta"
-
-#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
-msgid "Terminate processes"
-msgstr "Lopeta prosessit"
-
-#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
-msgid "Check spelling"
-msgstr "Tarkista oikeinkirjoitus"
-
-#: contents/ui/config/ConfigHelp.qml:161
-msgid "User Profiles"
-msgstr "Käyttäjäprofiilit"
-
-#: contents/ui/config/ConfigHelp.qml:165
-msgid "A simplified interface with essential features."
-msgstr "Yksinkertaistettu käyttöliittymä tärkeillä ominaisuuksilla."
-
-#: contents/ui/config/ConfigHelp.qml:171
-msgid "Debug tab active, developer features enabled."
-msgstr "Vianetsintä-välilehti aktiivinen, kehittäjäominaisuudet käytössä."
-
-#: contents/ui/config/ConfigHelp.qml:177
-msgid "All features active, advanced settings available."
-msgstr "Kaikki ominaisuudet käytössä, lisäasetukset saatavilla."
-
-#: contents/ui/config/ConfigPreview.qml:9
-#: contents/ui/config/ConfigGeneral.qml:187
-#: contents/ui/config/ConfigGeneral.qml:596
-msgid "Preview"
-msgstr "Esikatselu"
-
-#: contents/ui/config/ConfigPreview.qml:97
-msgid "Preview Settings"
-msgstr "Esikatseluasetukset"
-
-#: contents/ui/config/ConfigPreview.qml:103
-msgid "Enable or disable file previews for different file types."
-msgstr "Ota käyttöön tai poista käytöstä tiedostojen esikatselut eri tiedostotyypeille."
-
-#: contents/ui/config/ConfigPreview.qml:112
-#: contents/ui/config/ConfigSearch.qml:19
-#: contents/ui/config/ConfigGeneral.qml:701
-msgid "Enable File Previews"
-msgstr "Ota tiedostojen esikatselu käyttöön"
-
-#: contents/ui/config/ConfigPreview.qml:125
-msgid "Enabled"
-msgstr "Käytössä"
-
-#: contents/ui/config/ConfigPreview.qml:125
-msgid "Disabled"
-msgstr "Ei käytössä"
-
-#: contents/ui/config/ConfigPreview.qml:133
-#: contents/ui/config/ConfigGeneral.qml:707
-msgid "Preview Types"
-msgstr "Esikatselun tyypit"
-
-#: contents/ui/config/ConfigPreview.qml:158
-#: contents/ui/config/ConfigGeneral.qml:725
-#: contents/ui/components/FilterChips.qml:25
-#: contents/ui/components/QueryHints.qml:53
-msgid "Images"
-msgstr "Kuvat"
-
-#: contents/ui/config/ConfigPreview.qml:196
-#: contents/ui/config/ConfigGeneral.qml:762
-msgid "Videos"
-msgstr "Videot"
-
-#: contents/ui/config/ConfigPreview.qml:234
-#: contents/ui/config/ConfigGeneral.qml:799
-msgid "Text Files"
-msgstr "Tekstitiedostot"
-
-#: contents/ui/config/ConfigPreview.qml:272
-#: contents/ui/config/ConfigGeneral.qml:646
-#: contents/ui/config/ConfigGeneral.qml:836
-#: contents/ui/components/QueryHints.qml:52
-msgid "Documents"
-msgstr "Asiakirjat"
-
-#: contents/ui/config/ConfigPreview.qml:276
-msgid "Icon only"
-msgstr "Vain kuvake"
-
-#: contents/ui/config/ConfigPreview.qml:306
-msgid "Performance Information"
-msgstr "Suorituskykytiedot"
-
-#: contents/ui/config/ConfigPreview.qml:311
-msgid "Video and document previews may increase memory usage."
-msgstr "Videoiden ja asiakirjojen esikatselu saattaa lisätä muistin käyttöä."
-
-#: contents/ui/config/ConfigSearch.qml:13
-msgid "Search Settings"
-msgstr "Hakuasetukset"
-
-#: contents/ui/config/ConfigSearch.qml:24
-msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr "Näytä tiedostojen esikatselut hiirellä (voidaan käynnistää myös Ctrl+välilyönnillä)"
-
-#: contents/ui/config/ConfigSearch.qml:33
-msgid "Search Behavior"
-msgstr "Hakukäyttäytyminen"
-
-#: contents/ui/config/ConfigSearch.qml:37
-msgid "You can use the following KRunner commands and prefixes:"
-msgstr "Voit käyttää seuraavia KRunner-komentoja ja etuliitteitä:"
-
-#: contents/ui/config/ConfigSearch.qml:51
-msgid "Prefix"
-msgstr "Etuliite"
-
-#: contents/ui/config/ConfigSearch.qml:56
-msgid "Description"
-msgstr "Kuvaus"
-
-#: contents/ui/config/ConfigSearch.qml:78
-msgid "Search Unicode characters"
-msgstr "Etsi Unicode-merkkejä"
-
-#: contents/ui/config/ConfigPrefix.qml:10
-#: contents/ui/config/ConfigGeneral.qml:191
-msgid "Prefixes"
-msgstr "Etuliitteet"
-
-#: contents/ui/config/ConfigPrefix.qml:40
-msgid "Prefix View Settings"
-msgstr "Etuliitenäkymän asetukset"
-
-#: contents/ui/config/ConfigPrefix.qml:45
-#: contents/ui/config/ConfigGeneral.qml:855
-msgid "Date View (date:)"
-msgstr "Päivämääränäkymä (päivämäärä:)"
-
-#: contents/ui/config/ConfigPrefix.qml:52
-#: contents/ui/config/ConfigGeneral.qml:860
-msgid "Show Large Clock"
-msgstr "Näytä suuri kello"
-
-#: contents/ui/config/ConfigPrefix.qml:59
-#: contents/ui/config/ConfigGeneral.qml:864
-msgid "Show Calendar Events"
-msgstr "Näytä kalenteritapahtumat"
-
-#: contents/ui/config/ConfigPrefix.qml:66
-#: contents/ui/config/ConfigGeneral.qml:869
-msgid "Weather View (weather:)"
-msgstr "Säänäkymä (sää:)"
-
-#: contents/ui/config/ConfigPrefix.qml:74
-#: contents/ui/config/ConfigGeneral.qml:875
-msgid "Enable Weather Prefix"
-msgstr "Ota Weather-etuliite käyttöön"
-
-#: contents/ui/config/ConfigPrefix.qml:87
-#: contents/ui/config/ConfigGeneral.qml:888
-msgid "Use System Units"
-msgstr "Käytä järjestelmäyksiköitä"
-
-#: contents/ui/config/ConfigPrefix.qml:96
-#: contents/ui/config/ConfigGeneral.qml:897
-msgid "Refresh Interval:"
-msgstr "Päivitysväli:"
-
-#: contents/ui/config/ConfigPrefix.qml:102
-#: contents/ui/config/ConfigGeneral.qml:903
-msgid "Every Search"
-msgstr "Jokainen haku"
-
-#: contents/ui/config/ConfigPrefix.qml:103
-#: contents/ui/config/ConfigGeneral.qml:904
-msgid "15 Minutes"
-msgstr "15 minuuttia"
-
-#: contents/ui/config/ConfigPrefix.qml:104
-#: contents/ui/config/ConfigGeneral.qml:905
-msgid "30 Minutes"
-msgstr "30 minuuttia"
-
-#: contents/ui/config/ConfigPrefix.qml:105
-#: contents/ui/config/ConfigGeneral.qml:906
-msgid "1 Hour"
-msgstr "1 tunti"
-
-#: contents/ui/config/ConfigPrefix.qml:125
-#: contents/ui/config/ConfigGeneral.qml:926
-msgid "(If time since last update > interval)"
-msgstr "(Jos aika edellisestä päivityksestä > intervalli)"
-
-#: contents/ui/config/ConfigPrefix.qml:134
-#: contents/ui/config/ConfigGeneral.qml:933
-msgid "Power View (power:)"
-msgstr "Power View (teho:)"
-
-#: contents/ui/config/ConfigPrefix.qml:142
-#: contents/ui/config/ConfigGeneral.qml:938
-msgid "Show Sleep Button"
-msgstr "Näytä unipainike"
-
-#: contents/ui/config/ConfigPrefix.qml:149
-#: contents/ui/config/ConfigGeneral.qml:942
-msgid "Show Hibernate Button"
-msgstr "Näytä Hibernate-painike"
-
-#: contents/ui/config/ConfigPrefix.qml:160
-#: contents/ui/config/ConfigGeneral.qml:951
-msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr "(Swap-osion koko on pienempi kuin RAM tai swap-osiota ei löydy)"
-
-#: contents/ui/config/ConfigPrefix.qml:170
-#: contents/ui/config/ConfigGeneral.qml:959
-msgid "Show boot options in Reboot button"
-msgstr "Näytä käynnistysasetukset uudelleenkäynnistyspainikkeessa"
-
-#: contents/ui/config/ConfigPrefix.qml:180
-#: contents/ui/config/ConfigGeneral.qml:967
-msgid "Note: Systemd boot is required for this feature"
-msgstr "Huomautus: Tätä ominaisuutta varten tarvitaan järjestelmäkäynnistys"
-
-#: contents/ui/config/ConfigPrefix.qml:188
-#: contents/ui/config/ConfigGeneral.qml:975
-msgid "Available Prefixes Reference"
-msgstr "Saatavilla olevat etuliitteet"
-
-#: contents/ui/config/ConfigPrefix.qml:192
-#: contents/ui/config/ConfigGeneral.qml:979
-msgid ""
-"These prefixes can be used to perform specific actions directly from the "
-"search bar."
-msgstr "Näitä etuliitteitä voidaan käyttää tiettyjen toimien suorittamiseen suoraan hakupalkista."
-
-#: contents/ui/config/ConfigPrefix.qml:250
-#: contents/ui/config/ConfigGeneral.qml:1041
-msgid "Show calendar and date information"
-msgstr "Näytä kalenteri- ja päivämäärätiedot"
-
-#: contents/ui/config/ConfigPrefix.qml:262
-#: contents/ui/config/ConfigGeneral.qml:1054
-msgid "Show large clock"
-msgstr "Näytä suuri kello"
-
-#: contents/ui/config/ConfigPrefix.qml:274
-msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr "Näytä virranhallintavaihtoehdot (sammutus, uudelleenkäynnistys jne.)"
-
-#: contents/ui/config/ConfigPrefix.qml:286
-msgid "Show current weather"
-msgstr "Näytä nykyinen sää"
-
-#: contents/ui/config/ConfigPrefix.qml:298
-#: contents/ui/config/ConfigGeneral.qml:1080
-msgid "Show this help screen"
-msgstr "Näytä tämä ohjenäyttö"
-
-#: contents/ui/config/ConfigPrefix.qml:310
-#: contents/ui/config/ConfigGeneral.qml:1093
-msgid "Terminate running processes"
-msgstr "Lopeta käynnissä olevat prosessit"
-
-#: contents/ui/config/ConfigPrefix.qml:322
-#: contents/ui/config/ConfigGeneral.qml:1106
-msgid "Check spelling of a word"
-msgstr "Tarkista sanan oikeinkirjoitus"
-
-#: contents/ui/config/ConfigPrefix.qml:334
-#: contents/ui/config/ConfigGeneral.qml:1119
-msgid "Execute shell commands"
-msgstr "Suorita shell-komentoja"
-
-#: contents/ui/config/ConfigPrefix.qml:346
-msgid "Convert units (requires KRunner installed)"
-msgstr "Muunna yksiköt (vaatii KRunnerin asennettuna)"
-
-#: contents/ui/config/ConfigPrefix.qml:356
-msgid ""
-"Note: Some prefixes (like unit conversion) depend on installed KRunner "
-"runners."
-msgstr "Huomautus: Jotkut etuliitteet (kuten yksikkömuunnos) riippuvat asennetuista KRunner-ajoista."
+#: contents/ui/config/ConfigGeneral.qml:23
+msgid "Appearance"
+msgstr "Ulkonäkö"
 
 #: contents/ui/config/ConfigGeneral.qml:178
 msgid "Panel"
@@ -590,6 +867,17 @@ msgstr "Paneeli"
 #: contents/ui/config/ConfigGeneral.qml:182
 msgid "Popup"
 msgstr "Ponnahdusikkuna"
+
+#: contents/ui/config/ConfigGeneral.qml:187
+#: contents/ui/config/ConfigGeneral.qml:596
+#: contents/ui/config/ConfigPreview.qml:9
+msgid "Preview"
+msgstr "Esikatselu"
+
+#: contents/ui/config/ConfigGeneral.qml:191
+#: contents/ui/config/ConfigPrefix.qml:10
+msgid "Prefixes"
+msgstr "Etuliitteet"
 
 #: contents/ui/config/ConfigGeneral.qml:210
 msgid "Panel Appearance"
@@ -703,17 +991,6 @@ msgstr "Automaattinen"
 msgid "Panel Preview"
 msgstr "Paneelin esikatselu"
 
-#: contents/ui/config/ConfigGeneral.qml:384
-#: contents/ui/components/CompactView.qml:114
-#: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
-msgid "Start searching..."
-msgstr "Aloita haku..."
-
-#: contents/ui/config/ConfigGeneral.qml:384
-#: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
-msgid "Search..."
-msgstr "Hae..."
-
 #: contents/ui/config/ConfigGeneral.qml:385
 msgid "News Headline"
 msgstr "Uutisotsikko"
@@ -745,11 +1022,6 @@ msgstr "Minimaalinen (muokattu)"
 #: contents/ui/config/ConfigGeneral.qml:528
 msgid "Hidden"
 msgstr "Piilotettu"
-
-#: contents/ui/config/ConfigGeneral.qml:552
-#: contents/ui/components/PinnedSection.qml:85
-msgid "Pinned Items"
-msgstr "Kiinnitetyt kohteet"
 
 #: contents/ui/config/ConfigGeneral.qml:557
 msgid "Show pinned items bar"
@@ -799,765 +1071,611 @@ msgstr "Järjestelmäasetukset"
 msgid "Settings"
 msgstr "Asetukset"
 
-#: contents/ui/config/ConfigGeneral.qml:684
-#: contents/ui/components/FilterChips.qml:24
-msgid "Docs"
-msgstr "Asiakirjat"
+#: contents/ui/config/ConfigGeneral.qml:701
+#: contents/ui/config/ConfigPreview.qml:118
+#: contents/ui/config/ConfigSearch.qml:19
+msgid "Enable File Previews"
+msgstr "Ota tiedostojen esikatselu käyttöön"
 
 #: contents/ui/config/ConfigGeneral.qml:702
 msgid "Show/Hide Previews"
 msgstr "Näytä/piilota esikatselut"
 
-#: contents/ui/config/ConfigGeneral.qml:1067
+#: contents/ui/config/ConfigGeneral.qml:707
+#: contents/ui/config/ConfigPreview.qml:209
+msgid "Preview Types"
+msgstr "Esikatselun tyypit"
+
+#: contents/ui/config/ConfigGeneral.qml:762
+#: contents/ui/config/ConfigPreview.qml:272
+msgid "Videos"
+msgstr "Videot"
+
+#: contents/ui/config/ConfigGeneral.qml:799
+#: contents/ui/config/ConfigPreview.qml:310
+msgid "Text Files"
+msgstr "Tekstitiedostot"
+
+#: contents/ui/config/ConfigGeneral.qml:879
+#: contents/ui/config/ConfigPreview.qml:390
+msgid "Desktop shortcuts and launcher commands"
+msgstr "Työpöydän pikakuvakkeet ja käynnistyskomennot"
+
+#: contents/ui/config/ConfigGeneral.qml:892
+#: contents/ui/config/ConfigPrefix.qml:52
+msgid "Date View (date:)"
+msgstr "Päivämääränäkymä (päivämäärä:)"
+
+#: contents/ui/config/ConfigGeneral.qml:897
+#: contents/ui/config/ConfigPrefix.qml:59
+msgid "Show Large Clock"
+msgstr "Näytä suuri kello"
+
+#: contents/ui/config/ConfigGeneral.qml:901
+#: contents/ui/config/ConfigPrefix.qml:66
+msgid "Show Calendar Events"
+msgstr "Näytä kalenteritapahtumat"
+
+#: contents/ui/config/ConfigGeneral.qml:906
+#: contents/ui/config/ConfigPrefix.qml:73
+msgid "Weather View (weather:)"
+msgstr "Säänäkymä (sää:)"
+
+#: contents/ui/config/ConfigGeneral.qml:912
+#: contents/ui/config/ConfigPrefix.qml:81
+msgid "Enable Weather Prefix"
+msgstr "Ota Weather-etuliite käyttöön"
+
+#: contents/ui/config/ConfigGeneral.qml:925
+#: contents/ui/config/ConfigPrefix.qml:94
+msgid "Use System Units"
+msgstr "Käytä järjestelmäyksiköitä"
+
+#: contents/ui/config/ConfigGeneral.qml:934
+#: contents/ui/config/ConfigPrefix.qml:103
+msgid "Refresh Interval:"
+msgstr "Päivitysväli:"
+
+#: contents/ui/config/ConfigGeneral.qml:940
+#: contents/ui/config/ConfigPrefix.qml:109
+msgid "Every Search"
+msgstr "Jokainen haku"
+
+#: contents/ui/config/ConfigGeneral.qml:941
+#: contents/ui/config/ConfigPrefix.qml:110
+msgid "15 Minutes"
+msgstr "15 minuuttia"
+
+#: contents/ui/config/ConfigGeneral.qml:942
+#: contents/ui/config/ConfigPrefix.qml:111
+msgid "30 Minutes"
+msgstr "30 minuuttia"
+
+#: contents/ui/config/ConfigGeneral.qml:943
+#: contents/ui/config/ConfigPrefix.qml:112
+msgid "1 Hour"
+msgstr "1 tunti"
+
+#: contents/ui/config/ConfigGeneral.qml:963
+#: contents/ui/config/ConfigPrefix.qml:132
+msgid "(If time since last update > interval)"
+msgstr "(Jos aika edellisestä päivityksestä > intervalli)"
+
+#: contents/ui/config/ConfigGeneral.qml:970
+#: contents/ui/config/ConfigPrefix.qml:141
+msgid "Power View (power:)"
+msgstr "Power View (teho:)"
+
+#: contents/ui/config/ConfigGeneral.qml:975
+#: contents/ui/config/ConfigPrefix.qml:149
+msgid "Show Sleep Button"
+msgstr "Näytä unipainike"
+
+#: contents/ui/config/ConfigGeneral.qml:979
+#: contents/ui/config/ConfigPrefix.qml:156
+msgid "Show Hibernate Button"
+msgstr "Näytä Hibernate-painike"
+
+#: contents/ui/config/ConfigGeneral.qml:988
+#: contents/ui/config/ConfigPrefix.qml:167
+msgid "(Swap partition size is smaller than RAM or no swap found)"
+msgstr "(Swap-osion koko on pienempi kuin RAM tai swap-osiota ei löydy)"
+
+#: contents/ui/config/ConfigGeneral.qml:996
+#: contents/ui/config/ConfigPrefix.qml:177
+msgid "Show boot options in Reboot button"
+msgstr "Näytä käynnistysasetukset uudelleenkäynnistyspainikkeessa"
+
+#: contents/ui/config/ConfigGeneral.qml:1004
+#: contents/ui/config/ConfigPrefix.qml:187
+msgid "Note: Systemd boot is required for this feature"
+msgstr "Huomautus: Tätä ominaisuutta varten tarvitaan järjestelmäkäynnistys"
+
+#: contents/ui/config/ConfigGeneral.qml:1012
+#: contents/ui/config/ConfigPrefix.qml:237
+msgid "Available Prefixes Reference"
+msgstr "Saatavilla olevat etuliitteet"
+
+#: contents/ui/config/ConfigGeneral.qml:1016
+#: contents/ui/config/ConfigPrefix.qml:241
+msgid ""
+"These prefixes can be used to perform specific actions directly from the "
+"search bar."
+msgstr "Näitä etuliitteitä voidaan käyttää tiettyjen toimien suorittamiseen suoraan hakupalkista."
+
+#: contents/ui/config/ConfigGeneral.qml:1039
+#: contents/ui/config/ConfigHelp.qml:130
+#: contents/ui/config/ConfigPrefix.qml:263
+#: contents/ui/config/ConfigSearch.qml:63
+msgid "List files modified today"
+msgstr "Listaa tänään muokatut tiedostot"
+
+#: contents/ui/config/ConfigGeneral.qml:1052
+#: contents/ui/config/ConfigHelp.qml:136
+#: contents/ui/config/ConfigPrefix.qml:275
+#: contents/ui/config/ConfigSearch.qml:66
+msgid "Search on Google"
+msgstr "Hae Googlesta"
+
+#: contents/ui/config/ConfigGeneral.qml:1065
+#: contents/ui/config/ConfigHelp.qml:142
+#: contents/ui/config/ConfigPrefix.qml:287
+#: contents/ui/config/ConfigSearch.qml:69
+msgid "Search on DuckDuckGo"
+msgstr "Hae DuckDuckGosta"
+
+#: contents/ui/config/ConfigGeneral.qml:1078
+#: contents/ui/config/ConfigPrefix.qml:299
+msgid "Show calendar and date information"
+msgstr "Näytä kalenteri- ja päivämäärätiedot"
+
+#: contents/ui/config/ConfigGeneral.qml:1091
+#: contents/ui/config/ConfigPrefix.qml:311
+msgid "Show large clock"
+msgstr "Näytä suuri kello"
+
+#: contents/ui/config/ConfigGeneral.qml:1104
 msgid "Show power management options"
 msgstr "Näytä virranhallintavaihtoehdot"
 
-#: contents/ui/config/ConfigGeneral.qml:1132
+#: contents/ui/config/ConfigGeneral.qml:1117
+#: contents/ui/config/ConfigPrefix.qml:347
+msgid "Show this help screen"
+msgstr "Näytä tämä ohjenäyttö"
+
+#: contents/ui/config/ConfigGeneral.qml:1130
+#: contents/ui/config/ConfigPrefix.qml:359
+msgid "Terminate running processes"
+msgstr "Lopeta käynnissä olevat prosessit"
+
+#: contents/ui/config/ConfigGeneral.qml:1143
+#: contents/ui/config/ConfigPrefix.qml:371
+msgid "Check spelling of a word"
+msgstr "Tarkista sanan oikeinkirjoitus"
+
+#: contents/ui/config/ConfigGeneral.qml:1156
+#: contents/ui/config/ConfigPrefix.qml:383
+msgid "Execute shell commands"
+msgstr "Suorita shell-komentoja"
+
+#: contents/ui/config/ConfigGeneral.qml:1169
 msgid "Convert units (requires KRunner)"
 msgstr "Muunna yksiköt (vaatii KRunnerin)"
 
-#: contents/ui/config/ConfigRSS.qml:235
+#: contents/ui/config/ConfigHelp.qml:85
+msgid "Keyboard Shortcuts"
+msgstr "Pikanäppäimet"
+
+#: contents/ui/config/ConfigHelp.qml:89
+msgid "Navigate between results"
+msgstr "Navigoi tulosten välillä"
+
+#: contents/ui/config/ConfigHelp.qml:95
+msgid "Navigate between sections"
+msgstr "Navigoi osien välillä"
+
+#: contents/ui/config/ConfigHelp.qml:101
+msgid "List / Tile view"
+msgstr "Luettelo/laattanäkymä"
+
+#: contents/ui/config/ConfigHelp.qml:107
+msgid "Toggle file preview"
+msgstr "Vaihda tiedoston esikatselu"
+
+#: contents/ui/config/ConfigHelp.qml:113
+msgid "Open selected item"
+msgstr "Avaa valittu kohde"
+
+#: contents/ui/config/ConfigHelp.qml:119
+msgid "Close widget"
+msgstr "Sulje widget"
+
+#: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
+msgid "Terminate processes"
+msgstr "Lopeta prosessit"
+
+#: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
+msgid "Check spelling"
+msgstr "Tarkista oikeinkirjoitus"
+
+#: contents/ui/config/ConfigHelp.qml:161
+msgid "User Profiles"
+msgstr "Käyttäjäprofiilit"
+
+#: contents/ui/config/ConfigHelp.qml:165
+msgid "A simplified interface with essential features."
+msgstr "Yksinkertaistettu käyttöliittymä tärkeillä ominaisuuksilla."
+
+#: contents/ui/config/ConfigHelp.qml:171
+msgid "Debug tab active, developer features enabled."
+msgstr "Vianetsintä-välilehti aktiivinen, kehittäjäominaisuudet käytössä."
+
+#: contents/ui/config/ConfigHelp.qml:177
+msgid "All features active, advanced settings available."
+msgstr "Kaikki ominaisuudet käytössä, lisäasetukset saatavilla."
+
+#: contents/ui/config/ConfigPrefix.qml:47
+msgid "Prefix View Settings"
+msgstr "Etuliitenäkymän asetukset"
+
+#: contents/ui/config/ConfigPrefix.qml:195
+msgid "Active Search Prefixes"
+msgstr "Aktiiviset haun etuliitteet"
+
+#: contents/ui/config/ConfigPrefix.qml:199
+msgid "Enable Shell Command execution (shell:)"
+msgstr "Ota käyttöön Shell Command -suoritus (shell:)"
+
+#: contents/ui/config/ConfigPrefix.qml:205
+msgid "Enable Timeline search (timeline:)"
+msgstr "Ota aikajanahaku käyttöön (aikajana:)"
+
+#: contents/ui/config/ConfigPrefix.qml:211
+msgid "Enable Web search (gg:, dd:)"
+msgstr "Ota verkkohaku käyttöön (gg:, dd:)"
+
+#: contents/ui/config/ConfigPrefix.qml:217
+msgid "Enable Kill Process (kill)"
+msgstr "Ota tappoprosessi käyttöön (tappaa)"
+
+#: contents/ui/config/ConfigPrefix.qml:223
+msgid "Enable Spell Check (spell)"
+msgstr "Ota oikeinkirjoituksen tarkistus käyttöön (oikoluku)"
+
+#: contents/ui/config/ConfigPrefix.qml:229
+msgid "Enable Unit Conversion (unit:)"
+msgstr "Ota yksikkömuunnos käyttöön (yksikkö:)"
+
+#: contents/ui/config/ConfigPrefix.qml:323
+msgid "Show power management options (Shutdown, Reboot, etc.)"
+msgstr "Näytä virranhallintavaihtoehdot (sammutus, uudelleenkäynnistys jne.)"
+
+#: contents/ui/config/ConfigPrefix.qml:335
+msgid "Show current weather"
+msgstr "Näytä nykyinen sää"
+
+#: contents/ui/config/ConfigPrefix.qml:395
+msgid "Convert units (requires KRunner installed)"
+msgstr "Muunna yksiköt (vaatii KRunnerin asennettuna)"
+
+#: contents/ui/config/ConfigPrefix.qml:405
+msgid ""
+"Note: Some prefixes (like unit conversion) depend on installed KRunner "
+"runners."
+msgstr "Huomautus: Jotkut etuliitteet (kuten yksikkömuunnos) riippuvat asennetuista KRunner-ajoista."
+
+#: contents/ui/config/ConfigPreview.qml:103
+msgid "Preview Settings"
+msgstr "Esikatseluasetukset"
+
+#: contents/ui/config/ConfigPreview.qml:109
+msgid "Enable or disable file previews for different file types."
+msgstr "Ota käyttöön tai poista käytöstä tiedostojen esikatselut eri tiedostotyypeille."
+
+#: contents/ui/config/ConfigPreview.qml:131
+msgid "Enabled"
+msgstr "Käytössä"
+
+#: contents/ui/config/ConfigPreview.qml:131
+msgid "Disabled"
+msgstr "Ei käytössä"
+
+#: contents/ui/config/ConfigPreview.qml:139
+msgid "Display Locations"
+msgstr "Näytä sijainnit"
+
+#: contents/ui/config/ConfigPreview.qml:150
+msgid "Show in Search Results"
+msgstr "Näytä hakutuloksissa"
+
+#: contents/ui/config/ConfigPreview.qml:157
+msgid "Show in Search History"
+msgstr "Näytä hakuhistoriassa"
+
+#: contents/ui/config/ConfigPreview.qml:166
+msgid "Preview Style & Appearance"
+msgstr "Esikatsele tyyliä ja ulkonäköä"
+
+#: contents/ui/config/ConfigPreview.qml:177
+msgid "Preview Mode:"
+msgstr "Esikatselutila:"
+
+#: contents/ui/config/ConfigPreview.qml:181
+msgid "Hover Tooltip Popup"
+msgstr "Hover Tooltip Popup"
+
+#: contents/ui/config/ConfigPreview.qml:182
+msgid "Inline Expand Card"
+msgstr "Sisäänrakennettu laajennuskortti"
+
+#: contents/ui/config/ConfigPreview.qml:192
+msgid "Inline Thumbnail Size:"
+msgstr "Upotettu pikkukuvan koko:"
+
+#: contents/ui/config/ConfigPreview.qml:196
+msgid "Small (64px)"
+msgstr "Pieni (64 kuvapistettä)"
+
+#: contents/ui/config/ConfigPreview.qml:197
+msgid "Medium (120px)"
+msgstr "Keskikokoinen (120 kuvapistettä)"
+
+#: contents/ui/config/ConfigPreview.qml:198
+msgid "Large (200px)"
+msgstr "Suuri (200 kuvapistettä)"
+
+#: contents/ui/config/ConfigPreview.qml:352
+msgid "Icon only"
+msgstr "Vain kuvake"
+
+#: contents/ui/config/ConfigPreview.qml:420
+msgid "Performance Information"
+msgstr "Suorituskykytiedot"
+
+#: contents/ui/config/ConfigPreview.qml:425
+msgid "Video and document previews may increase memory usage."
+msgstr "Videoiden ja asiakirjojen esikatselu saattaa lisätä muistin käyttöä."
+
+#: contents/ui/config/ConfigRSS.qml:244
 msgid "Arch & Linux News"
 msgstr "Arch & Linux -uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:245
+#: contents/ui/config/ConfigRSS.qml:254
 msgid "Security Bulletins"
 msgstr "Turvatiedotteet"
 
-#: contents/ui/config/ConfigRSS.qml:254
+#: contents/ui/config/ConfigRSS.qml:263
 msgid "Türkiye News"
 msgstr "Turkkiye News"
 
-#: contents/ui/config/ConfigRSS.qml:268
+#: contents/ui/config/ConfigRSS.qml:277
 msgid "Azerbaijan News"
 msgstr "Azerbaidžanin uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:276
+#: contents/ui/config/ConfigRSS.qml:285
 msgid "Bangladesh News"
 msgstr "Bangladeshin uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:283
+#: contents/ui/config/ConfigRSS.qml:292
 msgid "Czech Republic"
 msgstr "Tšekin tasavalta"
 
-#: contents/ui/config/ConfigRSS.qml:290
+#: contents/ui/config/ConfigRSS.qml:299
 msgid "Germany News"
 msgstr "Saksan uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:297
+#: contents/ui/config/ConfigRSS.qml:306
 msgid "Greece News"
 msgstr "Kreikan uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:306
+#: contents/ui/config/ConfigRSS.qml:315
 msgid "Spain & Mexico"
 msgstr "Espanja & Meksiko"
 
-#: contents/ui/config/ConfigRSS.qml:314
+#: contents/ui/config/ConfigRSS.qml:323
 msgid "Iran News"
 msgstr "Iranin uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:321
+#: contents/ui/config/ConfigRSS.qml:330
 msgid "France News"
 msgstr "Ranskan uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:329
+#: contents/ui/config/ConfigRSS.qml:338
 msgid "India News (Hindi)"
 msgstr "Intian uutiset (hindi)"
 
-#: contents/ui/config/ConfigRSS.qml:336
+#: contents/ui/config/ConfigRSS.qml:345
 msgid "Armenia News"
 msgstr "Armenian uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:343
+#: contents/ui/config/ConfigRSS.qml:352
 msgid "Indonesia News"
 msgstr "Indonesian uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:350
+#: contents/ui/config/ConfigRSS.qml:359
 msgid "Italy News"
 msgstr "Italian uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:358
+#: contents/ui/config/ConfigRSS.qml:367
 msgid "Japan News"
 msgstr "Japanin uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:365
+#: contents/ui/config/ConfigRSS.qml:374
 msgid "Brazil & Portugal"
 msgstr "Brasilia ja Portugali"
 
-#: contents/ui/config/ConfigRSS.qml:372
+#: contents/ui/config/ConfigRSS.qml:381
 msgid "Romania News"
 msgstr "Romanian uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:380
+#: contents/ui/config/ConfigRSS.qml:389
 msgid "Russia News"
 msgstr "Venäjän uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:387
+#: contents/ui/config/ConfigRSS.qml:396
 msgid "Pakistan News"
 msgstr "Pakistanin uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:394
+#: contents/ui/config/ConfigRSS.qml:403
 msgid "China News"
 msgstr "Kiinan uutiset"
 
-#: contents/ui/config/ConfigRSS.qml:401
+#: contents/ui/config/ConfigRSS.qml:410
 msgid "USA & UK News"
 msgstr "Uutiset USA:sta ja Isosta-Britanniasta"
 
-#: contents/ui/config/ConfigRSS.qml:410
+#: contents/ui/config/ConfigRSS.qml:419
 msgid "World News"
 msgstr "Maailman uutisia"
 
-#: contents/ui/config/ConfigRSS.qml:459
+#: contents/ui/config/ConfigRSS.qml:468
 msgid "New Source"
 msgstr "Uusi lähde"
 
-#: contents/ui/config/ConfigRSS.qml:544
+#: contents/ui/config/ConfigRSS.qml:548
 msgid "Invalid URL"
 msgstr "Virheellinen URL-osoite"
 
-#: contents/ui/config/ConfigRSS.qml:551
+#: contents/ui/config/ConfigRSS.qml:555
 msgid "Starting background sync..."
 msgstr "Aloitetaan taustasynkronointia..."
 
-#: contents/ui/config/ConfigRSS.qml:564
+#: contents/ui/config/ConfigRSS.qml:568
 msgid "Script not found at: %1"
 msgstr "Skriptiä ei löydy osoitteesta: %1"
 
-#: contents/ui/config/ConfigRSS.qml:584
+#: contents/ui/config/ConfigRSS.qml:588
 msgid "Sync: SUCCESS"
 msgstr "Synkronointi: SUCCESS"
 
-#: contents/ui/config/ConfigRSS.qml:658
+#: contents/ui/config/ConfigRSS.qml:662
 msgid "Never"
 msgstr "Ei koskaan"
 
-#: contents/ui/config/ConfigRSS.qml:674
+#: contents/ui/config/ConfigRSS.qml:678
 msgid "Enable RSS: Show feed updates in search results"
 msgstr "Ota RSS käyttöön: Näytä syötepäivitykset hakutuloksissa"
 
-#: contents/ui/config/ConfigRSS.qml:686
+#: contents/ui/config/ConfigRSS.qml:690
 msgid "Sync All Sources"
 msgstr "Synkronoi kaikki lähteet"
 
-#: contents/ui/config/ConfigRSS.qml:693
+#: contents/ui/config/ConfigRSS.qml:697
 msgid "Clear Cache Folder"
 msgstr "Tyhjennä välimuistikansio"
 
-#: contents/ui/config/ConfigRSS.qml:702
+#: contents/ui/config/ConfigRSS.qml:706
 msgid "Last full sync: %1"
 msgstr "Viimeisin täydellinen synkronointi: %1"
 
-#: contents/ui/config/ConfigRSS.qml:713
+#: contents/ui/config/ConfigRSS.qml:717
 msgid "Show images in results"
 msgstr "Näytä kuvat tuloksissa"
 
-#: contents/ui/config/ConfigRSS.qml:719
+#: contents/ui/config/ConfigRSS.qml:723
 msgid "Expand cards on click"
 msgstr "Laajenna kortit napsauttamalla"
 
-#: contents/ui/config/ConfigRSS.qml:727
+#: contents/ui/config/ConfigRSS.qml:731
 msgid "Popular Presets"
 msgstr "Suositut esiasetukset"
 
-#: contents/ui/config/ConfigRSS.qml:733
+#: contents/ui/config/ConfigRSS.qml:737
 msgid "Search presets (e.g. News, Tech, TR, Linux)..."
 msgstr "Hae esiasetuksia (esim. News, Tech, TR, Linux)..."
 
-#: contents/ui/config/ConfigRSS.qml:795
+#: contents/ui/config/ConfigRSS.qml:799
 msgid "RSS Sources (Max 30)"
 msgstr "RSS-lähteet (enintään 30)"
 
-#: contents/ui/config/ConfigRSS.qml:859
+#: contents/ui/config/ConfigRSS.qml:863
 msgid "Name"
 msgstr "Nimi"
 
-#: contents/ui/config/ConfigRSS.qml:865
+#: contents/ui/config/ConfigRSS.qml:869
 msgid "URL"
 msgstr "URL-osoite"
 
-#: contents/ui/config/ConfigRSS.qml:891
+#: contents/ui/config/ConfigRSS.qml:896
 msgid "Entries:"
 msgstr "Merkinnät:"
 
-#: contents/ui/config/ConfigRSS.qml:897
+#: contents/ui/config/ConfigRSS.qml:902
 msgid "Interval:"
 msgstr "Aikaväli:"
 
-#: contents/ui/config/ConfigRSS.qml:900
+#: contents/ui/config/ConfigRSS.qml:905
 msgid "%1h"
 msgstr "%1h"
 
-#: contents/ui/config/ConfigRSS.qml:900
+#: contents/ui/config/ConfigRSS.qml:905
+#, c-format
 msgid "%1m"
 msgstr "%1m"
 
-#: contents/ui/config/ConfigRSS.qml:908
+#: contents/ui/config/ConfigRSS.qml:913
 msgid "%1 hours"
 msgstr "%1 tuntia"
 
-#: contents/ui/config/ConfigRSS.qml:908
+#: contents/ui/config/ConfigRSS.qml:913
 msgid "%1 mins"
 msgstr "%1min"
 
-#: contents/ui/config/ConfigRSS.qml:918
+#: contents/ui/config/ConfigRSS.qml:923
 msgid "Last sync: %1"
 msgstr "Viimeisin synkronointi: %1"
 
-#: contents/ui/config/ConfigRSS.qml:952
+#: contents/ui/config/ConfigRSS.qml:957
 msgid "Add Custom Source"
 msgstr "Lisää mukautettu lähde"
 
-#: contents/ui/config/ConfigRSS.qml:966
+#: contents/ui/config/ConfigRSS.qml:971
 msgid "News Features:"
 msgstr "Uutisominaisuudet:"
 
-#: contents/ui/config/ConfigRSS.qml:967
+#: contents/ui/config/ConfigRSS.qml:972
 msgid "Show RSS titles in placeholder cycling"
 msgstr "Näytä RSS-otsikot paikkamerkkipyöräilyssä"
 
-#: contents/ui/config/ConfigRSS.qml:973
+#: contents/ui/config/ConfigRSS.qml:978
 msgid "Show full headlines (split into segments)"
 msgstr "Näytä täydelliset otsikot (jaettu osiin)"
 
-#: contents/ui/config/ConfigRSS.qml:979
+#: contents/ui/config/ConfigRSS.qml:984
 msgid "Default Interval:"
 msgstr "Oletusväli:"
 
-#: contents/ui/config/ConfigRSS.qml:986
+#: contents/ui/config/ConfigRSS.qml:991
 msgid "Default Entries:"
 msgstr "Oletusmerkinnät:"
 
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-#: contents/ui/components/PinnedSection.qml:436
-msgid "Unpin"
-msgstr "Irrota kiinnitys"
-
-#: contents/ui/components/PinButton.qml:68
-#: contents/ui/components/HistoryContextMenu.qml:27
-msgid "Pin"
-msgstr "Pin"
-
-#: contents/ui/components/HelpView.qml:16
-#: contents/ui/components/QueryHints.qml:38
-msgid "Timeline View"
-msgstr "Aikajananäkymä"
-
-#: contents/ui/components/HelpView.qml:17
-#: contents/ui/components/QueryHints.qml:55
-#: contents/ui/components/SearchPopup.qml:1028
-msgid "Applications"
-msgstr "Sovellukset"
-
-#: contents/ui/components/HelpView.qml:18
-msgid "File Path Search"
-msgstr "Tiedostopolun haku"
-
-#: contents/ui/components/HelpView.qml:19
-msgid "Google Search"
-msgstr "Google-haku"
-
-#: contents/ui/components/HelpView.qml:20
-msgid "DuckDuckGo Search"
-msgstr "DuckDuckGo Search"
-
-#: contents/ui/components/HelpView.qml:21
-msgid "Wikipedia Search"
-msgstr "Wikipedia haku"
-
-#: contents/ui/components/HelpView.qml:22
-#: contents/ui/components/QueryHints.qml:66
-msgid "Bookmarks"
-msgstr "Kirjanmerkit"
-
-#: contents/ui/components/HelpView.qml:23
-#: contents/ui/components/QueryHints.qml:69
-msgid "Man Pages"
-msgstr "Man-sivut"
-
-#: contents/ui/components/HelpView.qml:24
-msgid "Kill Process"
-msgstr "Tappoprosessi"
-
-#: contents/ui/components/HelpView.qml:25
-msgid "Spell Check"
-msgstr "Oikeinkirjoituksen tarkistus"
-
-#: contents/ui/components/HelpView.qml:26
-msgid "Dictionary Definition"
-msgstr "Sanakirjan määritelmä"
-
-#: contents/ui/components/HelpView.qml:27
-#: contents/ui/components/QueryHints.qml:60
-msgid "Unit Converter"
-msgstr "Yksikkömuunnin"
-
-#: contents/ui/components/HelpView.qml:28
-msgid "Shell Commands"
-msgstr "Shell-komennot"
-
-#: contents/ui/components/HelpView.qml:29
-msgid "Power Management"
-msgstr "Virranhallinta"
-
-#: contents/ui/components/HelpView.qml:30
-msgid "System Services"
-msgstr "Järjestelmäpalvelut"
-
-#: contents/ui/components/HelpView.qml:31
-msgid "Unicode Characters"
-msgstr "Unicode-merkit"
-
-#: contents/ui/components/HelpView.qml:32
-msgid "Date and Time"
-msgstr "Päivämäärä ja aika"
-
-#: contents/ui/components/HelpView.qml:33
-msgid "Help & Shortcuts"
-msgstr "Ohjeet ja pikakuvakkeet"
-
-#: contents/ui/components/HistoryListView.qml:38
-#: contents/ui/components/HistoryTileView.qml:246
-msgid "Recent Searches"
-msgstr "Viimeaikaiset haut"
-
-#: contents/ui/components/HistoryListView.qml:58
-#: contents/ui/components/HistoryTileView.qml:266
-msgid "Clear History"
-msgstr "Tyhjennä historia"
-
-#: contents/ui/components/HistoryListView.qml:286
-#: contents/ui/components/HistoryTileView.qml:597
-#: contents/ui/components/ResultsTileView.qml:301
-msgid "Type to search"
-msgstr "Hae kirjoittamalla"
-
-#: contents/ui/components/DebugOverlay.qml:41
-msgid "Saved!"
-msgstr "Tallennettu!"
-
-#: contents/ui/components/DebugOverlay.qml:49
-#: contents/ui/components/DebugOverlay.qml:119
-msgid "Save Dump"
-msgstr "Tallenna kaatopaikka"
-
-#: contents/ui/components/DebugOverlay.qml:78
-msgid "Backend"
-msgstr "Backend"
-
-#: contents/ui/components/DebugOverlay.qml:81
-msgid "Items"
-msgstr "Tuotteet"
-
-#: contents/ui/components/DebugOverlay.qml:84
-msgid "Latency"
-msgstr "Latenssi"
-
-#: contents/ui/components/DebugOverlay.qml:91
-msgid "View"
-msgstr "Näytä"
-
-#: contents/ui/components/DebugOverlay.qml:94
-msgid "Display"
-msgstr "Näyttö"
-
-#: contents/ui/components/FilterChips.qml:22
-msgid "All"
-msgstr "Kaikki"
-
-#: contents/ui/components/FilterChips.qml:23
-msgid "Apps"
-msgstr "Sovellukset"
-
-#: contents/ui/components/FilterChips.qml:26
-msgid "Folders"
-msgstr "Kansiot"
-
-#: contents/ui/components/FilterChips.qml:27
-msgid "Web"
-msgstr "Web"
-
-#: contents/ui/components/HistoryContextMenu.qml:52
-#: contents/ui/components/PinnedSection.qml:402
-msgid "Open"
-msgstr "Avaa"
-
-#: contents/ui/components/HistoryContextMenu.qml:69
-#: contents/ui/components/PinnedSection.qml:412
-msgid "Copy Path"
-msgstr "Kopioi polku"
-
-#: contents/ui/components/HistoryContextMenu.qml:85
-msgid "Open in Terminal"
-msgstr "Avaa terminaalissa"
-
-#: contents/ui/components/HistoryContextMenu.qml:97
-#: contents/ui/components/PinnedSection.qml:423
-msgid "Open Containing Folder"
-msgstr "Avaa Sisältää-kansio"
-
-#: contents/ui/components/HistoryContextMenu.qml:107
-msgid "Move to Trash"
-msgstr "Siirrä roskakoriin"
-
-#: contents/ui/components/HistoryContextMenu.qml:120
-msgid "Properties"
-msgstr "Ominaisuudet"
-
-#: contents/ui/components/HistoryContextMenu.qml:130
-msgid "Edit Application..."
-msgstr "Muokkaa sovellusta..."
-
-#: contents/ui/components/HistoryContextMenu.qml:140
-msgid "Remove from History"
-msgstr "Poista historiasta"
-
-#: contents/ui/components/PinnedSection.qml:225
-msgid "Right-click items to pin them"
-msgstr "Napsauta kohteita hiiren kakkospainikkeella kiinnittääksesi ne"
-
-#: contents/ui/components/PinnedSection.qml:383
-msgid "Drag to reorder"
-msgstr "Järjestä uudelleen vetämällä"
-
-#: contents/ui/components/PowerView.qml:254
-msgid "Hibernate"
-msgstr "Lepotila"
-
-#: contents/ui/components/PowerView.qml:258
-msgid "(Press again to hibernate)"
-msgstr "(Paina uudelleen siirtyäksesi lepotilaan)"
-
-#: contents/ui/components/PowerView.qml:267
-msgid "Sleep"
-msgstr "Nuku"
-
-#: contents/ui/components/PowerView.qml:271
-msgid "(Press again to sleep)"
-msgstr "(Paina uudelleen mennäksesi nukkumaan)"
-
-#: contents/ui/components/PowerView.qml:279
-msgid "Reboot"
-msgstr "Käynnistä uudelleen"
-
-#: contents/ui/components/PowerView.qml:283
-msgid "(Press again to reboot)"
-msgstr "(Paina uudelleen käynnistääksesi uudelleen)"
-
-#: contents/ui/components/PowerView.qml:303
-msgid "Shutdown"
-msgstr "Sammutus"
-
-#: contents/ui/components/PowerView.qml:307
-msgid "(Press again to shutdown)"
-msgstr "(Paina uudelleen sammuttaaksesi)"
-
-#: contents/ui/components/PowerView.qml:444
-msgid "Refresh"
-msgstr "Päivitä"
-
-#: contents/ui/components/PowerView.qml:472
-msgid "Scan for boot entries"
-msgstr "Etsi käynnistysmerkinnät"
-
-#: contents/ui/components/PowerView.qml:498
-msgid "Lock Screen"
-msgstr "Lukitusnäyttö"
-
-#: contents/ui/components/PowerView.qml:508
-msgid "Log Out"
-msgstr "Kirjaudu ulos"
-
-#: contents/ui/components/PowerView.qml:512
-msgid "(Press again to log out)"
-msgstr "(Paina uudelleen kirjautuaksesi ulos)"
-
-#: contents/ui/components/PowerView.qml:520
-msgid "Switch User"
-msgstr "Vaihda käyttäjää"
-
-#: contents/ui/components/PowerView.qml:524
-msgid "(Press again to switch)"
-msgstr "(Paina uudelleen vaihtaaksesi)"
-
-#: contents/ui/components/PowerView.qml:532
-msgid "Save Session"
-msgstr "Tallenna istunto"
-
-#: contents/ui/components/PowerView.qml:551
-msgid "(Press again)"
-msgstr "(Paina uudelleen)"
-
-#: contents/ui/components/QueryHints.qml:32
-msgid "Show all available search filters"
-msgstr "Näytä kaikki käytettävissä olevat hakusuodattimet"
-
-#: contents/ui/components/QueryHints.qml:39
-msgid "Browse files by date (Today, Yesterday, etc.)"
-msgstr "Selaa tiedostoja päivämäärän mukaan (tänään, eilen jne.)"
-
-#: contents/ui/components/QueryHints.qml:43
-msgid "Calendar"
-msgstr "Kalenteri"
-
-#: contents/ui/components/QueryHints.qml:44
-#: contents/ui/components/QueryHints.qml:154
-#: contents/ui/components/QueryHints.qml:162
-msgid "Today"
-msgstr "Tänään"
-
-#: contents/ui/components/QueryHints.qml:45
-#: contents/ui/components/QueryHints.qml:155
-#: contents/ui/components/QueryHints.qml:162
-msgid "Yesterday"
-msgstr "eilen"
-
-#: contents/ui/components/QueryHints.qml:46
-msgid "This Week"
-msgstr "Tällä viikolla"
-
-#: contents/ui/components/QueryHints.qml:47
-msgid "This Month"
-msgstr "Tässä kuussa"
-
-#: contents/ui/components/QueryHints.qml:50
-msgid "File Path"
-msgstr "Tiedoston polku"
-
-#: contents/ui/components/QueryHints.qml:50
-msgid "Search via absolute file path"
-msgstr "Hae absoluuttisen tiedostopolun kautta"
-
-#: contents/ui/components/QueryHints.qml:51
-msgid "File Index"
-msgstr "Tiedoston hakemisto"
-
-#: contents/ui/components/QueryHints.qml:51
-msgid "Search exclusively in Baloo file index"
-msgstr "Hae yksinomaan Baloo-tiedostohakemistosta"
-
-#: contents/ui/components/QueryHints.qml:52
-msgid "Search only document files"
-msgstr "Hae vain asiakirjatiedostoja"
-
-#: contents/ui/components/QueryHints.qml:53
-msgid "Search only image files"
-msgstr "Hae vain kuvatiedostoja"
-
-#: contents/ui/components/QueryHints.qml:55
-msgid "Search for installed applications"
-msgstr "Etsi asennettuja sovelluksia"
-
-#: contents/ui/components/QueryHints.qml:56
-msgid "Services"
-msgstr "Palvelut"
-
-#: contents/ui/components/QueryHints.qml:56
-msgid "Search system background services"
-msgstr "Hakujärjestelmän taustapalvelut"
-
-#: contents/ui/components/QueryHints.qml:57
-msgid "Shell"
-msgstr "Shell"
-
-#: contents/ui/components/QueryHints.qml:57
-msgid "Execute shell commands directly"
-msgstr "Suorita komentotulkkikomennot suoraan"
-
-#: contents/ui/components/QueryHints.qml:59
-msgid "Calculator"
-msgstr "Laskin"
-
-#: contents/ui/components/QueryHints.qml:59
-msgid "Perform mathematical calculations"
-msgstr "Suorita matemaattiset laskelmat"
-
-#: contents/ui/components/QueryHints.qml:60
-msgid "Convert between weights, distances, etc."
-msgstr "Muunna painojen, etäisyyksien jne. välillä."
-
-#: contents/ui/components/QueryHints.qml:61
-msgid "Spelling"
-msgstr "Oikeinkirjoitus"
-
-#: contents/ui/components/QueryHints.qml:61
-msgid "Check word spelling"
-msgstr "Tarkista sanan oikeinkirjoitus"
-
-#: contents/ui/components/QueryHints.qml:63
-msgid "Google"
-msgstr "Google"
-
-#: contents/ui/components/QueryHints.qml:63
-msgid "Search the web using Google"
-msgstr "Hae verkosta Googlen avulla"
-
-#: contents/ui/components/QueryHints.qml:64
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-#: contents/ui/components/QueryHints.qml:64
-msgid "Search the web using DuckDuckGo"
-msgstr "Hae verkosta DuckDuckGon avulla"
-
-#: contents/ui/components/QueryHints.qml:65
-msgid "Wikipedia"
-msgstr "Wikipedia"
-
-#: contents/ui/components/QueryHints.qml:65
-msgid "Search Wikipedia articles"
-msgstr "Hae Wikipedia-artikkeleita"
-
-#: contents/ui/components/QueryHints.qml:66
-msgid "Search browser bookmarks"
-msgstr "Hae selaimen kirjanmerkkejä"
-
-#: contents/ui/components/QueryHints.qml:67
-msgid "RSS Feeds"
-msgstr "RSS-syötteet"
-
-#: contents/ui/components/QueryHints.qml:67
-msgid "Search exclusively in RSS news feeds"
-msgstr "Hae vain RSS-uutissyötteistä"
-
-#: contents/ui/components/QueryHints.qml:69
-msgid "Browse system manual pages"
-msgstr "Selaa järjestelmän ohjesivuja"
-
-#: contents/ui/components/QueryHints.qml:70
-msgid "Show widget documentation"
-msgstr "Näytä widgetin dokumentaatio"
-
-#: contents/ui/components/QueryHints.qml:98
-msgid "Unknown prefix"
-msgstr "Tuntematon etuliite"
-
-#: contents/ui/components/QueryHints.qml:99
-msgid "try"
-msgstr "yritä"
-
-#: contents/ui/components/QueryHints.qml:101
-msgid "Browse calendar"
-msgstr "Selaa kalenteria"
-
-#: contents/ui/components/QueryHints.qml:102
-msgid "Man pages not installed"
-msgstr "Man-sivuja ei ole asennettu"
-
-#: contents/ui/components/QueryHints.qml:156
-#: contents/ui/components/QueryHints.qml:162
-msgid "Two days ago"
-msgstr "Kaksi päivää sitten"
-
-#: contents/ui/components/QueryHints.qml:367
-msgid "Available Search Prefixes"
-msgstr "Käytettävissä olevat hakuetuliitteet"
-
-#: contents/ui/components/ResultsListView.qml:436
-#: contents/ui/components/ResultsTileView.qml:294
-msgid "Category"
-msgstr "Luokka"
-
-#: contents/ui/components/ResultsListView.qml:437
-#: contents/ui/components/ResultsTileView.qml:295
-msgid "File Type"
-msgstr "Tiedostotyyppi"
-
-#: contents/ui/components/ResultsListView.qml:438
-#: contents/ui/components/ResultsTileView.qml:296
-msgid "Path"
-msgstr "Polku"
-
-#: contents/ui/components/ResultsListView.qml:439
-msgid "News"
-msgstr "Uutiset"
-
-#: contents/ui/components/ResultsListView.qml:440
-msgid "Read News"
-msgstr "Lue Uutisia"
-
-#: contents/ui/components/ResultsListView.qml:441
-msgid "Share"
-msgstr "Jaa"
-
-#: contents/ui/components/ResultsListView.qml:442
-#: contents/ui/components/ResultsTileView.qml:299
-msgid "Searching..."
-msgstr "Haetaan..."
-
-#: contents/ui/components/ResultsListView.qml:443
-#: contents/ui/components/ResultsTileView.qml:300
-msgid "No results found"
-msgstr "Tuloksia ei löytynyt"
-
-#: contents/ui/components/ResultsTileView.qml:297
-msgid "Space to preview"
-msgstr "Esikatselutila"
-
-#: contents/ui/components/ResultsTileView.qml:298
-msgid "Read in Browser"
-msgstr "Lue selaimessa"
-
-#: contents/ui/components/SearchPopup.qml:92
-msgid "date"
-msgstr "päivämäärä"
-
-#: contents/ui/components/SearchPopup.qml:93
-msgid "clock"
-msgstr "kello"
-
-#: contents/ui/components/SearchPopup.qml:94
-msgid "weather"
-msgstr "sää"
-
-#: contents/ui/components/SearchPopup.qml:95
-msgid "power"
-msgstr "tehoa"
-
-#: contents/ui/components/SearchPopup.qml:96
-msgid "help"
-msgstr "apua"
-
-#: contents/ui/components/SearchPopup.qml:97
-msgid "unit"
-msgstr "yksikkö"
-
-#: contents/ui/components/SearchPopup.qml:98
-msgid "kill"
-msgstr "tappaa"
-
-#: contents/ui/components/SearchPopup.qml:99
-msgid "spell"
-msgstr "loitsu"
-
-#: contents/ui/components/SearchPopup.qml:100
-msgid "shell"
-msgstr "kuori"
-
-#: contents/ui/components/SearchPopup.qml:1028
-msgid "Other"
-msgstr "muu"
-
-#: contents/ui/components/SearchPopup.qml:1110
-msgid "Mode"
-msgstr "tila"
-
-#: contents/ui/components/TileDataManager.qml:53
-msgid "Other Results"
-msgstr "Muut tulokset"
-
-#: contents/ui/components/WeatherView.qml:57
-msgid "Unknown error"
-msgstr "Tuntematon virhe"
-
-#: contents/ui/components/WeatherView.qml:80
-msgid "Loading Weather..."
-msgstr "Ladataan säätä..."
-
-#: contents/ui/components/WeatherView.qml:91
-msgid "Retry"
-msgstr "Yritä uudelleen"
+#: contents/ui/config/ConfigSearch.qml:13
+msgid "Search Settings"
+msgstr "Hakuasetukset"
+
+#: contents/ui/config/ConfigSearch.qml:24
+msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
+msgstr "Näytä tiedostojen esikatselut hiirellä (voidaan käynnistää myös Ctrl+välilyönnillä)"
+
+#: contents/ui/config/ConfigSearch.qml:33
+msgid "Search Behavior"
+msgstr "Hakukäyttäytyminen"
+
+#: contents/ui/config/ConfigSearch.qml:37
+msgid "You can use the following KRunner commands and prefixes:"
+msgstr "Voit käyttää seuraavia KRunner-komentoja ja etuliitteitä:"
+
+#: contents/ui/config/ConfigSearch.qml:51
+msgid "Prefix"
+msgstr "Etuliite"
+
+#: contents/ui/config/ConfigSearch.qml:56
+msgid "Description"
+msgstr "Kuvaus"
+
+#: contents/ui/config/ConfigSearch.qml:78
+msgid "Search Unicode characters"
+msgstr "Etsi Unicode-merkkejä"
 
 #: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"

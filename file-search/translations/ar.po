@@ -3,1575 +3,1584 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-23 02:06+0300\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nLanguage: \nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 02:06+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
 msgid "Appearance"
-msgstr ""
+msgstr "مظهر"
 
 #: contents/config/config.qml:11 contents/ui/config/ConfigCategories.qml:10
 #: contents/ui/config/ConfigSearch.qml:9
 #: contents/ui/config/ConfigGeneral.qml:384
 #: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search"
-msgstr ""
+msgstr "يبحث"
 
 #: contents/config/config.qml:17
 msgid "RSS"
-msgstr ""
+msgstr "آر إس إس"
 
 #: contents/config/config.qml:24 contents/ui/config/ConfigDebug.qml:9
 msgid "Debug"
-msgstr ""
+msgstr "تصحيح"
 
 #: contents/config/config.qml:29 contents/ui/config/ConfigHelp.qml:9
 #: contents/ui/components/QueryHints.qml:70
 msgid "Help"
-msgstr ""
+msgstr "يساعد"
 
 #: contents/ui/config/ConfigCategories.qml:212
 msgid "Algorithm Settings"
-msgstr ""
+msgstr "إعدادات الخوارزمية"
 
 #: contents/ui/config/ConfigCategories.qml:217
 msgid "Search Algorithm"
-msgstr ""
+msgstr "خوارزمية البحث"
 
 #: contents/ui/config/ConfigCategories.qml:218
 msgid "Fuzzy Match"
-msgstr ""
+msgstr "مباراة غامضة"
 
 #: contents/ui/config/ConfigCategories.qml:218
 msgid "Exact Match"
-msgstr ""
+msgstr "المطابقة التامة"
 
 #: contents/ui/config/ConfigCategories.qml:218
 msgid "Starts With"
-msgstr ""
+msgstr "يبدأ ب"
 
 #: contents/ui/config/ConfigCategories.qml:229
 msgid "Dynamic Result Count"
-msgstr ""
+msgstr "عدد النتائج الديناميكية"
 
 #: contents/ui/config/ConfigCategories.qml:230
 msgid "Automatically limit displayed results based on relevance score"
-msgstr ""
+msgstr "تحديد النتائج المعروضة تلقائيًا بناءً على درجة الصلة"
 
 #: contents/ui/config/ConfigCategories.qml:237
 msgid "Result Limits"
-msgstr ""
+msgstr "حدود النتيجة"
 
 #: contents/ui/config/ConfigCategories.qml:242
 msgid "Min Results"
-msgstr ""
+msgstr "نتائج دقيقة"
 
 #: contents/ui/config/ConfigCategories.qml:251
 msgid "Max Results"
-msgstr ""
+msgstr "النتائج القصوى"
 
 #: contents/ui/config/ConfigCategories.qml:262
 msgid "Prioritized Categories"
-msgstr ""
+msgstr "الفئات ذات الأولوية"
 
 #: contents/ui/config/ConfigCategories.qml:266
 msgid "Use buttons to reorder categories or move between sections"
-msgstr ""
+msgstr "استخدم الأزرار لإعادة ترتيب الفئات أو التنقل بين الأقسام"
 
 #: contents/ui/config/ConfigCategories.qml:275
 msgid "Priority"
-msgstr ""
+msgstr "أولوية"
 
 #: contents/ui/config/ConfigCategories.qml:366
 msgid "Move to Combined"
-msgstr ""
+msgstr "الانتقال إلى مجتمعة"
 
 #: contents/ui/config/ConfigCategories.qml:381
 msgid "Show Together (Merged)"
-msgstr ""
+msgstr "عرض معًا (مدمج)"
 
 #: contents/ui/config/ConfigCategories.qml:385
 msgid "Categories in this section will be grouped together"
-msgstr ""
+msgstr "سيتم تجميع الفئات في هذا القسم معًا"
 
 #: contents/ui/config/ConfigCategories.qml:401
 msgid "No combined categories"
-msgstr ""
+msgstr "لا توجد فئات مدمجة"
 
 #: contents/ui/config/ConfigCategories.qml:466
 msgid "Move to Separate"
-msgstr ""
+msgstr "الانتقال إلى منفصل"
 
 #: contents/ui/config/ConfigCategories.qml:481
 msgid "Category Settings Information"
-msgstr ""
+msgstr "معلومات إعدادات الفئة"
 
 #: contents/ui/config/ConfigCategories.qml:485
 msgid ""
 "Changes are applied immediately. Hidden categories will not appear in search "
 "results. Priority determines display order."
-msgstr ""
+msgstr "يتم تطبيق التغييرات على الفور. لن تظهر الفئات المخفية في نتائج البحث. الأولوية تحدد ترتيب العرض."
 
 #: contents/ui/config/ConfigCategories.qml:485
 msgid "Lower number = higher priority"
-msgstr ""
+msgstr "الرقم الأقل = الأولوية الأعلى"
 
 #: contents/ui/config/ConfigDebug.qml:102
 msgid ""
 "This tab is only active in Developer mode. Change profile in General "
 "settings."
-msgstr ""
+msgstr "علامة التبويب هذه نشطة فقط في وضع المطور. تغيير الملف الشخصي في الإعدادات العامة."
 
 #: contents/ui/config/ConfigDebug.qml:111
 msgid "Debug Settings"
-msgstr ""
+msgstr "إعدادات التصحيح"
 
 #: contents/ui/config/ConfigDebug.qml:117
 #: contents/ui/config/ConfigDebug.qml:176
 #: contents/ui/components/DebugOverlay.qml:58
 msgid "Debug Overlay"
-msgstr ""
+msgstr "تراكب التصحيح"
 
 #: contents/ui/config/ConfigDebug.qml:124
 msgid "Show debug info on widget (active mode, item count, index source)"
-msgstr ""
+msgstr "إظهار معلومات التصحيح على عنصر واجهة المستخدم (الوضع النشط، عدد العناصر، مصدر الفهرس)"
 
 #: contents/ui/config/ConfigDebug.qml:133
 msgid "Debug Data"
-msgstr ""
+msgstr "تصحيح البيانات"
 
 #: contents/ui/config/ConfigDebug.qml:143
 msgid "Timestamp"
-msgstr ""
+msgstr "الطابع الزمني"
 
 #: contents/ui/config/ConfigDebug.qml:146
 msgid "Locale"
-msgstr ""
+msgstr "لغة"
 
 #: contents/ui/config/ConfigDebug.qml:149
 msgid "User Profile"
-msgstr ""
+msgstr "ملف تعريف المستخدم"
 
 #: contents/ui/config/ConfigDebug.qml:151
 msgid "Minimal"
-msgstr ""
+msgstr "الحد الأدنى"
 
 #: contents/ui/config/ConfigDebug.qml:151
 msgid "Developer"
-msgstr ""
+msgstr "المطور"
 
 #: contents/ui/config/ConfigDebug.qml:151
 msgid "Power User"
-msgstr ""
+msgstr "مستخدم قوي"
 
 #: contents/ui/config/ConfigDebug.qml:155
 #: contents/ui/config/ConfigGeneral.qml:216
 msgid "Display Mode"
-msgstr ""
+msgstr "وضع العرض"
 
 #: contents/ui/config/ConfigDebug.qml:157
 #: contents/ui/components/SearchPopup.qml:1110
 msgid "Button"
-msgstr ""
+msgstr "زر"
 
 #: contents/ui/config/ConfigDebug.qml:157
 msgid "Medium"
-msgstr ""
+msgstr "واسطة"
 
 #: contents/ui/config/ConfigDebug.qml:157
 msgid "Wide"
-msgstr ""
+msgstr "واسع"
 
 #: contents/ui/config/ConfigDebug.qml:157
 msgid "Extra Wide"
-msgstr ""
+msgstr "واسعة جدًا"
 
 #: contents/ui/config/ConfigDebug.qml:161
 #: contents/ui/config/ConfigGeneral.qml:517
 msgid "View Mode"
-msgstr ""
+msgstr "وضع العرض"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/components/SearchPopup.qml:1109
 msgid "List"
-msgstr ""
+msgstr "قائمة"
 
 #: contents/ui/config/ConfigDebug.qml:163
 #: contents/ui/components/SearchPopup.qml:1109
 msgid "Tile"
-msgstr ""
+msgstr "بلاط"
 
 #: contents/ui/config/ConfigDebug.qml:167
 #: contents/ui/config/ConfigGeneral.qml:544
 msgid "Tile Icon Size"
-msgstr ""
+msgstr "حجم أيقونة البلاط"
 
 #: contents/ui/config/ConfigDebug.qml:170
 #: contents/ui/config/ConfigGeneral.qml:536
 msgid "List Icon Size"
-msgstr ""
+msgstr "حجم أيقونة القائمة"
 
 #: contents/ui/config/ConfigDebug.qml:173
 msgid "Enable Preview"
-msgstr ""
+msgstr "تمكين المعاينة"
 
 #: contents/ui/config/ConfigDebug.qml:179
 msgid "History Count"
-msgstr ""
+msgstr "عدد التاريخ"
 
 #: contents/ui/config/ConfigDebug.qml:185
 msgid "items"
-msgstr ""
+msgstr "أغراض"
 
 #: contents/ui/config/ConfigDebug.qml:196
 msgid "Telemetry"
-msgstr ""
+msgstr "القياس عن بعد"
 
 #: contents/ui/config/ConfigDebug.qml:205
 #: contents/ui/components/DebugOverlay.qml:101
 msgid "Total Searches"
-msgstr ""
+msgstr "إجمالي عمليات البحث"
 
 #: contents/ui/config/ConfigDebug.qml:216
 #: contents/ui/components/DebugOverlay.qml:104
 msgid "Avg Latency"
-msgstr ""
+msgstr "متوسط ​​الكمون"
 
 #: contents/ui/config/ConfigDebug.qml:230
 msgid "History Sample"
-msgstr ""
+msgstr "عينة التاريخ"
 
 #: contents/ui/config/ConfigDebug.qml:237
 msgid ""
 "Privacy Notice: All debug and telemetry data is stored LOCALLY only. No data "
 "is sent to the internet."
-msgstr ""
+msgstr "إشعار الخصوصية: يتم تخزين جميع بيانات التصحيح والقياس عن بعد محليًا فقط. لا يتم إرسال أي بيانات إلى الإنترنت."
 
 #: contents/ui/config/ConfigDebug.qml:311
 msgid "History is empty"
-msgstr ""
+msgstr "التاريخ فارغ"
 
 #: contents/ui/config/ConfigHelp.qml:85
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "اختصارات لوحة المفاتيح"
 
 #: contents/ui/config/ConfigHelp.qml:89
 msgid "Navigate between results"
-msgstr ""
+msgstr "التنقل بين النتائج"
 
 #: contents/ui/config/ConfigHelp.qml:95
 msgid "Navigate between sections"
-msgstr ""
+msgstr "التنقل بين الأقسام"
 
 #: contents/ui/config/ConfigHelp.qml:101
 msgid "List / Tile view"
-msgstr ""
+msgstr "عرض القائمة / البلاط"
 
 #: contents/ui/config/ConfigHelp.qml:107
 msgid "Toggle file preview"
-msgstr ""
+msgstr "تبديل معاينة الملف"
 
 #: contents/ui/config/ConfigHelp.qml:113
 msgid "Open selected item"
-msgstr ""
+msgstr "فتح العنصر المحدد"
 
 #: contents/ui/config/ConfigHelp.qml:119
 msgid "Close widget"
-msgstr ""
+msgstr "إغلاق القطعة"
 
 #: contents/ui/config/ConfigHelp.qml:126
 #: contents/ui/components/QueryHints.qml:31
 #: contents/ui/components/QueryHints.qml:100
 msgid "Search Prefixes"
-msgstr ""
+msgstr "بادئات البحث"
 
 #: contents/ui/config/ConfigHelp.qml:130 contents/ui/config/ConfigSearch.qml:63
 #: contents/ui/config/ConfigPrefix.qml:214
 #: contents/ui/config/ConfigGeneral.qml:1002
 msgid "List files modified today"
-msgstr ""
+msgstr "قائمة الملفات المعدلة اليوم"
 
 #: contents/ui/config/ConfigHelp.qml:136 contents/ui/config/ConfigSearch.qml:66
 #: contents/ui/config/ConfigPrefix.qml:226
 #: contents/ui/config/ConfigGeneral.qml:1015
 msgid "Search on Google"
-msgstr ""
+msgstr "ابحث في جوجل"
 
 #: contents/ui/config/ConfigHelp.qml:142 contents/ui/config/ConfigSearch.qml:69
 #: contents/ui/config/ConfigPrefix.qml:238
 #: contents/ui/config/ConfigGeneral.qml:1028
 msgid "Search on DuckDuckGo"
-msgstr ""
+msgstr "ابحث في دك دك جو"
 
 #: contents/ui/config/ConfigHelp.qml:148 contents/ui/config/ConfigSearch.qml:72
 msgid "Terminate processes"
-msgstr ""
+msgstr "إنهاء العمليات"
 
 #: contents/ui/config/ConfigHelp.qml:154 contents/ui/config/ConfigSearch.qml:75
 msgid "Check spelling"
-msgstr ""
+msgstr "التدقيق الإملائي"
 
 #: contents/ui/config/ConfigHelp.qml:161
 msgid "User Profiles"
-msgstr ""
+msgstr "ملفات تعريف المستخدمين"
 
 #: contents/ui/config/ConfigHelp.qml:165
 msgid "A simplified interface with essential features."
-msgstr ""
+msgstr "واجهة مبسطة مع الميزات الأساسية."
 
 #: contents/ui/config/ConfigHelp.qml:171
 msgid "Debug tab active, developer features enabled."
-msgstr ""
+msgstr "علامة التبويب \"تصحيح الأخطاء\" نشطة، وتم تمكين ميزات المطورين."
 
 #: contents/ui/config/ConfigHelp.qml:177
 msgid "All features active, advanced settings available."
-msgstr ""
+msgstr "جميع الميزات نشطة، والإعدادات المتقدمة المتاحة."
 
 #: contents/ui/config/ConfigPreview.qml:9
 #: contents/ui/config/ConfigGeneral.qml:187
 #: contents/ui/config/ConfigGeneral.qml:596
 msgid "Preview"
-msgstr ""
+msgstr "معاينة"
 
 #: contents/ui/config/ConfigPreview.qml:97
 msgid "Preview Settings"
-msgstr ""
+msgstr "إعدادات المعاينة"
 
 #: contents/ui/config/ConfigPreview.qml:103
 msgid "Enable or disable file previews for different file types."
-msgstr ""
+msgstr "تمكين أو تعطيل معاينات الملفات لأنواع الملفات المختلفة."
 
 #: contents/ui/config/ConfigPreview.qml:112
 #: contents/ui/config/ConfigSearch.qml:19
 #: contents/ui/config/ConfigGeneral.qml:701
 msgid "Enable File Previews"
-msgstr ""
+msgstr "تمكين معاينة الملفات"
 
 #: contents/ui/config/ConfigPreview.qml:125
 msgid "Enabled"
-msgstr ""
+msgstr "ممكّن"
 
 #: contents/ui/config/ConfigPreview.qml:125
 msgid "Disabled"
-msgstr ""
+msgstr "عاجز"
 
 #: contents/ui/config/ConfigPreview.qml:133
 #: contents/ui/config/ConfigGeneral.qml:707
 msgid "Preview Types"
-msgstr ""
+msgstr "أنواع المعاينة"
 
 #: contents/ui/config/ConfigPreview.qml:158
 #: contents/ui/config/ConfigGeneral.qml:725
 #: contents/ui/components/FilterChips.qml:25
 #: contents/ui/components/QueryHints.qml:53
 msgid "Images"
-msgstr ""
+msgstr "الصور"
 
 #: contents/ui/config/ConfigPreview.qml:196
 #: contents/ui/config/ConfigGeneral.qml:762
 msgid "Videos"
-msgstr ""
+msgstr "فيديوهات"
 
 #: contents/ui/config/ConfigPreview.qml:234
 #: contents/ui/config/ConfigGeneral.qml:799
 msgid "Text Files"
-msgstr ""
+msgstr "ملفات نصية"
 
 #: contents/ui/config/ConfigPreview.qml:272
 #: contents/ui/config/ConfigGeneral.qml:646
 #: contents/ui/config/ConfigGeneral.qml:836
 #: contents/ui/components/QueryHints.qml:52
 msgid "Documents"
-msgstr ""
+msgstr "وثائق"
 
 #: contents/ui/config/ConfigPreview.qml:276
 msgid "Icon only"
-msgstr ""
+msgstr "أيقونة فقط"
 
 #: contents/ui/config/ConfigPreview.qml:306
 msgid "Performance Information"
-msgstr ""
+msgstr "معلومات الأداء"
 
 #: contents/ui/config/ConfigPreview.qml:311
 msgid "Video and document previews may increase memory usage."
-msgstr ""
+msgstr "قد تؤدي معاينات الفيديو والمستندات إلى زيادة استخدام الذاكرة."
 
 #: contents/ui/config/ConfigSearch.qml:13
 msgid "Search Settings"
-msgstr ""
+msgstr "إعدادات البحث"
 
 #: contents/ui/config/ConfigSearch.qml:24
 msgid "Show file previews on hover (can also be triggered with Ctrl+Space)"
-msgstr ""
+msgstr "إظهار معاينات الملفات عند التمرير (يمكن تشغيلها أيضًا باستخدام Ctrl+Space)"
 
 #: contents/ui/config/ConfigSearch.qml:33
 msgid "Search Behavior"
-msgstr ""
+msgstr "سلوك البحث"
 
 #: contents/ui/config/ConfigSearch.qml:37
 msgid "You can use the following KRunner commands and prefixes:"
-msgstr ""
+msgstr "يمكنك استخدام أوامر وبادئات KRunner التالية:"
 
 #: contents/ui/config/ConfigSearch.qml:51
 msgid "Prefix"
-msgstr ""
+msgstr "بادئة"
 
 #: contents/ui/config/ConfigSearch.qml:56
 msgid "Description"
-msgstr ""
+msgstr "وصف"
 
 #: contents/ui/config/ConfigSearch.qml:78
 msgid "Search Unicode characters"
-msgstr ""
+msgstr "البحث عن أحرف Unicode"
 
 #: contents/ui/config/ConfigPrefix.qml:10
 #: contents/ui/config/ConfigGeneral.qml:191
 msgid "Prefixes"
-msgstr ""
+msgstr "البادئات"
 
 #: contents/ui/config/ConfigPrefix.qml:40
 msgid "Prefix View Settings"
-msgstr ""
+msgstr "إعدادات عرض البادئة"
 
 #: contents/ui/config/ConfigPrefix.qml:45
 #: contents/ui/config/ConfigGeneral.qml:855
 msgid "Date View (date:)"
-msgstr ""
+msgstr "عرض التاريخ (التاريخ:)"
 
 #: contents/ui/config/ConfigPrefix.qml:52
 #: contents/ui/config/ConfigGeneral.qml:860
 msgid "Show Large Clock"
-msgstr ""
+msgstr "عرض الساعة الكبيرة"
 
 #: contents/ui/config/ConfigPrefix.qml:59
 #: contents/ui/config/ConfigGeneral.qml:864
 msgid "Show Calendar Events"
-msgstr ""
+msgstr "عرض أحداث التقويم"
 
 #: contents/ui/config/ConfigPrefix.qml:66
 #: contents/ui/config/ConfigGeneral.qml:869
 msgid "Weather View (weather:)"
-msgstr ""
+msgstr "عرض الطقس (الطقس :)"
 
 #: contents/ui/config/ConfigPrefix.qml:74
 #: contents/ui/config/ConfigGeneral.qml:875
 msgid "Enable Weather Prefix"
-msgstr ""
+msgstr "تمكين بادئة الطقس"
 
 #: contents/ui/config/ConfigPrefix.qml:87
 #: contents/ui/config/ConfigGeneral.qml:888
 msgid "Use System Units"
-msgstr ""
+msgstr "استخدام وحدات النظام"
 
 #: contents/ui/config/ConfigPrefix.qml:96
 #: contents/ui/config/ConfigGeneral.qml:897
 msgid "Refresh Interval:"
-msgstr ""
+msgstr "الفاصل الزمني للتحديث:"
 
 #: contents/ui/config/ConfigPrefix.qml:102
 #: contents/ui/config/ConfigGeneral.qml:903
 msgid "Every Search"
-msgstr ""
+msgstr "كل بحث"
 
 #: contents/ui/config/ConfigPrefix.qml:103
 #: contents/ui/config/ConfigGeneral.qml:904
 msgid "15 Minutes"
-msgstr ""
+msgstr "15 دقيقة"
 
 #: contents/ui/config/ConfigPrefix.qml:104
 #: contents/ui/config/ConfigGeneral.qml:905
 msgid "30 Minutes"
-msgstr ""
+msgstr "30 دقيقة"
 
 #: contents/ui/config/ConfigPrefix.qml:105
 #: contents/ui/config/ConfigGeneral.qml:906
 msgid "1 Hour"
-msgstr ""
+msgstr "1 ساعة"
 
 #: contents/ui/config/ConfigPrefix.qml:125
 #: contents/ui/config/ConfigGeneral.qml:926
 msgid "(If time since last update > interval)"
-msgstr ""
+msgstr "(إذا كان الوقت منذ آخر تحديث > الفاصل الزمني)"
 
 #: contents/ui/config/ConfigPrefix.qml:134
 #: contents/ui/config/ConfigGeneral.qml:933
 msgid "Power View (power:)"
-msgstr ""
+msgstr "عرض الطاقة (الطاقة :)"
 
 #: contents/ui/config/ConfigPrefix.qml:142
 #: contents/ui/config/ConfigGeneral.qml:938
 msgid "Show Sleep Button"
-msgstr ""
+msgstr "إظهار زر النوم"
 
 #: contents/ui/config/ConfigPrefix.qml:149
 #: contents/ui/config/ConfigGeneral.qml:942
 msgid "Show Hibernate Button"
-msgstr ""
+msgstr "إظهار زر السبات"
 
 #: contents/ui/config/ConfigPrefix.qml:160
 #: contents/ui/config/ConfigGeneral.qml:951
 msgid "(Swap partition size is smaller than RAM or no swap found)"
-msgstr ""
+msgstr "(حجم قسم المبادلة أصغر من ذاكرة الوصول العشوائي أو لم يتم العثور على مبادلة)"
 
 #: contents/ui/config/ConfigPrefix.qml:170
 #: contents/ui/config/ConfigGeneral.qml:959
 msgid "Show boot options in Reboot button"
-msgstr ""
+msgstr "إظهار خيارات التمهيد في زر إعادة التشغيل"
 
 #: contents/ui/config/ConfigPrefix.qml:180
 #: contents/ui/config/ConfigGeneral.qml:967
 msgid "Note: Systemd boot is required for this feature"
-msgstr ""
+msgstr "ملاحظة: يلزم تشغيل Systemd لهذه الميزة"
 
 #: contents/ui/config/ConfigPrefix.qml:188
 #: contents/ui/config/ConfigGeneral.qml:975
 msgid "Available Prefixes Reference"
-msgstr ""
+msgstr "مرجع البادئات المتاحة"
 
 #: contents/ui/config/ConfigPrefix.qml:192
 #: contents/ui/config/ConfigGeneral.qml:979
 msgid ""
 "These prefixes can be used to perform specific actions directly from the "
 "search bar."
-msgstr ""
+msgstr "يمكن استخدام هذه البادئات لتنفيذ إجراءات محددة مباشرةً من شريط البحث."
 
 #: contents/ui/config/ConfigPrefix.qml:250
 #: contents/ui/config/ConfigGeneral.qml:1041
 msgid "Show calendar and date information"
-msgstr ""
+msgstr "عرض معلومات التقويم والتاريخ"
 
 #: contents/ui/config/ConfigPrefix.qml:262
 #: contents/ui/config/ConfigGeneral.qml:1054
 msgid "Show large clock"
-msgstr ""
+msgstr "عرض الساعة الكبيرة"
 
 #: contents/ui/config/ConfigPrefix.qml:274
 msgid "Show power management options (Shutdown, Reboot, etc.)"
-msgstr ""
+msgstr "إظهار خيارات إدارة الطاقة (إيقاف التشغيل، إعادة التشغيل، وما إلى ذلك)"
 
 #: contents/ui/config/ConfigPrefix.qml:286
 msgid "Show current weather"
-msgstr ""
+msgstr "عرض الطقس الحالي"
 
 #: contents/ui/config/ConfigPrefix.qml:298
 #: contents/ui/config/ConfigGeneral.qml:1080
 msgid "Show this help screen"
-msgstr ""
+msgstr "إظهار شاشة المساعدة هذه"
 
 #: contents/ui/config/ConfigPrefix.qml:310
 #: contents/ui/config/ConfigGeneral.qml:1093
 msgid "Terminate running processes"
-msgstr ""
+msgstr "إنهاء العمليات الجارية"
 
 #: contents/ui/config/ConfigPrefix.qml:322
 #: contents/ui/config/ConfigGeneral.qml:1106
 msgid "Check spelling of a word"
-msgstr ""
+msgstr "التدقيق الإملائي للكلمة"
 
 #: contents/ui/config/ConfigPrefix.qml:334
 #: contents/ui/config/ConfigGeneral.qml:1119
 msgid "Execute shell commands"
-msgstr ""
+msgstr "تنفيذ أوامر الصدفة"
 
 #: contents/ui/config/ConfigPrefix.qml:346
 msgid "Convert units (requires KRunner installed)"
-msgstr ""
+msgstr "تحويل الوحدات (يتطلب تثبيت KRunner)"
 
 #: contents/ui/config/ConfigPrefix.qml:356
 msgid ""
 "Note: Some prefixes (like unit conversion) depend on installed KRunner "
 "runners."
-msgstr ""
+msgstr "ملحوظة: بعض البادئات (مثل تحويل الوحدات) تعتمد على مشغلات KRunner المثبتة."
 
 #: contents/ui/config/ConfigGeneral.qml:178
 msgid "Panel"
-msgstr ""
+msgstr "لوحة"
 
 #: contents/ui/config/ConfigGeneral.qml:182
 msgid "Popup"
-msgstr ""
+msgstr "يظهر فجأة"
 
 #: contents/ui/config/ConfigGeneral.qml:210
 msgid "Panel Appearance"
-msgstr ""
+msgstr "مظهر اللوحة"
 
 #: contents/ui/config/ConfigGeneral.qml:218 contents/ui/main.qml:104
 msgid "Button Mode (Icon only)"
-msgstr ""
+msgstr "وضع الزر (أيقونة فقط)"
 
 #: contents/ui/config/ConfigGeneral.qml:219
 msgid "Medium Mode (Text)"
-msgstr ""
+msgstr "الوضع المتوسط ​​(نص)"
 
 #: contents/ui/config/ConfigGeneral.qml:220
 msgid "Wide Mode (Search Bar)"
-msgstr ""
+msgstr "الوضع العريض (شريط البحث)"
 
 #: contents/ui/config/ConfigGeneral.qml:221
 msgid "Extra Wide Mode"
-msgstr ""
+msgstr "وضع واسع جدًا"
 
 #: contents/ui/config/ConfigGeneral.qml:222
 msgid "Ultra Wide Mode"
-msgstr ""
+msgstr "وضع فائق الاتساع"
 
 #: contents/ui/config/ConfigGeneral.qml:229
 msgid "Edge Appearance"
-msgstr ""
+msgstr "مظهر الحافة"
 
 #: contents/ui/config/ConfigGeneral.qml:232
 msgid "Round corners"
-msgstr ""
+msgstr "زوايا مستديرة"
 
 #: contents/ui/config/ConfigGeneral.qml:233
 msgid "Slightly round"
-msgstr ""
+msgstr "مستديرة قليلاً"
 
 #: contents/ui/config/ConfigGeneral.qml:234
 msgid "Less round"
-msgstr ""
+msgstr "أقل جولة"
 
 #: contents/ui/config/ConfigGeneral.qml:235
 msgid "Square corners"
-msgstr ""
+msgstr "زوايا مربعة"
 
 #: contents/ui/config/ConfigGeneral.qml:242
 msgid "Search Icon"
-msgstr ""
+msgstr "أيقونة البحث"
 
 #: contents/ui/config/ConfigGeneral.qml:243
 msgid "Show search icon and button in panel"
-msgstr ""
+msgstr "إظهار رمز البحث والزر في اللوحة"
 
 #: contents/ui/config/ConfigGeneral.qml:249
 msgid "Show background tile (colored square)"
-msgstr ""
+msgstr "إظهار بلاط الخلفية (مربع ملون)"
 
 #: contents/ui/config/ConfigGeneral.qml:257
 msgid "Show animated RSS titles in panel search bar"
-msgstr ""
+msgstr "إظهار عناوين RSS المتحركة في شريط بحث اللوحة"
 
 #: contents/ui/config/ConfigGeneral.qml:258
 msgid "RSS Titles"
-msgstr ""
+msgstr "عناوين آر إس إس"
 
 #: contents/ui/config/ConfigGeneral.qml:264
 msgid "Show RSS source name in panel ticker"
-msgstr ""
+msgstr "إظهار اسم مصدر RSS في شريط اللوحة"
 
 #: contents/ui/config/ConfigGeneral.qml:272
 msgid "RSS Frequency"
-msgstr ""
+msgstr "تردد آر إس إس"
 
 #: contents/ui/config/ConfigGeneral.qml:275
 msgid "Always"
-msgstr ""
+msgstr "دائماً"
 
 #: contents/ui/config/ConfigGeneral.qml:276
 msgid "Very Frequent"
-msgstr ""
+msgstr "متكرر جدًا"
 
 #: contents/ui/config/ConfigGeneral.qml:277
 msgid "Frequent"
-msgstr ""
+msgstr "متكرر"
 
 #: contents/ui/config/ConfigGeneral.qml:278
 msgid "Normal"
-msgstr ""
+msgstr "طبيعي"
 
 #: contents/ui/config/ConfigGeneral.qml:279
 msgid "Less Frequent"
-msgstr ""
+msgstr "أقل تكرارا"
 
 #: contents/ui/config/ConfigGeneral.qml:280
 msgid "Rare"
-msgstr ""
+msgstr "نادر"
 
 #: contents/ui/config/ConfigGeneral.qml:281
 msgid "Only when new"
-msgstr ""
+msgstr "فقط عندما تكون جديدة"
 
 #: contents/ui/config/ConfigGeneral.qml:286
 msgid "Panel Height"
-msgstr ""
+msgstr "ارتفاع اللوحة"
 
 #: contents/ui/config/ConfigGeneral.qml:291
 msgid "Automatic"
-msgstr ""
+msgstr "تلقائي"
 
 #: contents/ui/config/ConfigGeneral.qml:336
 msgid "Panel Preview"
-msgstr ""
+msgstr "معاينة اللوحة"
 
 #: contents/ui/config/ConfigGeneral.qml:384
 #: contents/ui/components/CompactView.qml:114
 #: contents/ui/components/SearchBar.qml:43 contents/ui/main.qml:51
 msgid "Start searching..."
-msgstr ""
+msgstr "ابدأ بالبحث..."
 
 #: contents/ui/config/ConfigGeneral.qml:384
 #: contents/ui/components/CompactView.qml:114 contents/ui/main.qml:51
 msgid "Search..."
-msgstr ""
+msgstr "يبحث..."
 
 #: contents/ui/config/ConfigGeneral.qml:385
 msgid "News Headline"
-msgstr ""
+msgstr "عنوان الأخبار"
 
 #: contents/ui/config/ConfigGeneral.qml:511
 msgid "Results View"
-msgstr ""
+msgstr "عرض النتائج"
 
 #: contents/ui/config/ConfigGeneral.qml:518
 msgid "List View"
-msgstr ""
+msgstr "عرض القائمة"
 
 #: contents/ui/config/ConfigGeneral.qml:518
 msgid "Tile View"
-msgstr ""
+msgstr "عرض البلاط"
 
 #: contents/ui/config/ConfigGeneral.qml:524
 msgid "Scroll Bar"
-msgstr ""
+msgstr "شريط التمرير"
 
 #: contents/ui/config/ConfigGeneral.qml:526
 msgid "System Default"
-msgstr ""
+msgstr "النظام الافتراضي"
 
 #: contents/ui/config/ConfigGeneral.qml:527
 msgid "Minimal (Custom)"
-msgstr ""
+msgstr "الحد الأدنى (مخصص)"
 
 #: contents/ui/config/ConfigGeneral.qml:528
 msgid "Hidden"
-msgstr ""
+msgstr "مختفي"
 
 #: contents/ui/config/ConfigGeneral.qml:552
 #: contents/ui/components/PinnedSection.qml:85
 msgid "Pinned Items"
-msgstr ""
+msgstr "العناصر المثبتة"
 
 #: contents/ui/config/ConfigGeneral.qml:557
 msgid "Show pinned items bar"
-msgstr ""
+msgstr "إظهار شريط العناصر المثبتة"
 
 #: contents/ui/config/ConfigGeneral.qml:563
 msgid "Minimize automatically when searching"
-msgstr ""
+msgstr "تصغير تلقائيا عند البحث"
 
 #: contents/ui/config/ConfigGeneral.qml:572
 msgid "Tile Size Mode"
-msgstr ""
+msgstr "وضع حجم البلاط"
 
 #: contents/ui/config/ConfigGeneral.qml:575
 msgid "Normal (wide tiles)"
-msgstr ""
+msgstr "عادي (بلاط عريض)"
 
 #: contents/ui/config/ConfigGeneral.qml:576
 msgid "Compact (all small)"
-msgstr ""
+msgstr "مدمجة (جميعها صغيرة)"
 
 #: contents/ui/config/ConfigGeneral.qml:577
 msgid "Only pinned compact"
-msgstr ""
+msgstr "المدمجة المثبتة فقط"
 
 #: contents/ui/config/ConfigGeneral.qml:578
 msgid "Only history/results compact"
-msgstr ""
+msgstr "فقط التاريخ/النتائج مضغوطة"
 
 #: contents/ui/config/ConfigGeneral.qml:586
 msgid "Filter Chip Style"
-msgstr ""
+msgstr "نمط رقاقة التصفية"
 
 #: contents/ui/config/ConfigGeneral.qml:588
 msgid "Current Appearance (Filled)"
-msgstr ""
+msgstr "المظهر الحالي (مملوء)"
 
 #: contents/ui/config/ConfigGeneral.qml:589
 msgid "Breeze Appearance (Outline)"
-msgstr ""
+msgstr "مظهر النسيم (المخطط التفصيلي)"
 
 #: contents/ui/config/ConfigGeneral.qml:625
 msgid "System Settings"
-msgstr ""
+msgstr "إعدادات النظام"
 
 #: contents/ui/config/ConfigGeneral.qml:669
 msgid "Settings"
-msgstr ""
+msgstr "إعدادات"
 
 #: contents/ui/config/ConfigGeneral.qml:684
 #: contents/ui/components/FilterChips.qml:24
 msgid "Docs"
-msgstr ""
+msgstr "المستندات"
 
 #: contents/ui/config/ConfigGeneral.qml:702
 msgid "Show/Hide Previews"
-msgstr ""
+msgstr "إظهار/إخفاء المعاينات"
 
 #: contents/ui/config/ConfigGeneral.qml:1067
 msgid "Show power management options"
-msgstr ""
+msgstr "عرض خيارات إدارة الطاقة"
 
 #: contents/ui/config/ConfigGeneral.qml:1132
 msgid "Convert units (requires KRunner)"
-msgstr ""
+msgstr "تحويل الوحدات (يتطلب KRunner)"
 
 #: contents/ui/config/ConfigRSS.qml:235
 msgid "Arch & Linux News"
-msgstr ""
+msgstr "أخبار آرتش ولينكس"
 
 #: contents/ui/config/ConfigRSS.qml:245
 msgid "Security Bulletins"
-msgstr ""
+msgstr "نشرات أمنية"
 
 #: contents/ui/config/ConfigRSS.qml:254
 msgid "Türkiye News"
-msgstr ""
+msgstr "أخبار تركيا"
 
 #: contents/ui/config/ConfigRSS.qml:268
 msgid "Azerbaijan News"
-msgstr ""
+msgstr "أخبار أذربيجان"
 
 #: contents/ui/config/ConfigRSS.qml:276
 msgid "Bangladesh News"
-msgstr ""
+msgstr "أخبار بنغلاديش"
 
 #: contents/ui/config/ConfigRSS.qml:283
 msgid "Czech Republic"
-msgstr ""
+msgstr "الجمهورية التشيكية"
 
 #: contents/ui/config/ConfigRSS.qml:290
 msgid "Germany News"
-msgstr ""
+msgstr "أخبار ألمانيا"
 
 #: contents/ui/config/ConfigRSS.qml:297
 msgid "Greece News"
-msgstr ""
+msgstr "أخبار اليونان"
 
 #: contents/ui/config/ConfigRSS.qml:306
 msgid "Spain & Mexico"
-msgstr ""
+msgstr "اسبانيا والمكسيك"
 
 #: contents/ui/config/ConfigRSS.qml:314
 msgid "Iran News"
-msgstr ""
+msgstr "أخبار إيران"
 
 #: contents/ui/config/ConfigRSS.qml:321
 msgid "France News"
-msgstr ""
+msgstr "أخبار فرنسا"
 
 #: contents/ui/config/ConfigRSS.qml:329
 msgid "India News (Hindi)"
-msgstr ""
+msgstr "أخبار الهند (الهندية)"
 
 #: contents/ui/config/ConfigRSS.qml:336
 msgid "Armenia News"
-msgstr ""
+msgstr "أخبار أرمينيا"
 
 #: contents/ui/config/ConfigRSS.qml:343
 msgid "Indonesia News"
-msgstr ""
+msgstr "أخبار اندونيسيا"
 
 #: contents/ui/config/ConfigRSS.qml:350
 msgid "Italy News"
-msgstr ""
+msgstr "أخبار إيطاليا"
 
 #: contents/ui/config/ConfigRSS.qml:358
 msgid "Japan News"
-msgstr ""
+msgstr "أخبار اليابان"
 
 #: contents/ui/config/ConfigRSS.qml:365
 msgid "Brazil & Portugal"
-msgstr ""
+msgstr "البرازيل والبرتغال"
 
 #: contents/ui/config/ConfigRSS.qml:372
 msgid "Romania News"
-msgstr ""
+msgstr "أخبار رومانيا"
 
 #: contents/ui/config/ConfigRSS.qml:380
 msgid "Russia News"
-msgstr ""
+msgstr "أخبار روسيا"
 
 #: contents/ui/config/ConfigRSS.qml:387
 msgid "Pakistan News"
-msgstr ""
+msgstr "أخبار باكستان"
 
 #: contents/ui/config/ConfigRSS.qml:394
 msgid "China News"
-msgstr ""
+msgstr "أخبار الصين"
 
 #: contents/ui/config/ConfigRSS.qml:401
 msgid "USA & UK News"
-msgstr ""
+msgstr "أخبار الولايات المتحدة الأمريكية والمملكة المتحدة"
 
 #: contents/ui/config/ConfigRSS.qml:410
 msgid "World News"
-msgstr ""
+msgstr "أخبار العالم"
 
 #: contents/ui/config/ConfigRSS.qml:459
 msgid "New Source"
-msgstr ""
+msgstr "مصدر جديد"
 
 #: contents/ui/config/ConfigRSS.qml:544
 msgid "Invalid URL"
-msgstr ""
+msgstr "عنوان URL غير صالح"
 
 #: contents/ui/config/ConfigRSS.qml:551
 msgid "Starting background sync..."
-msgstr ""
+msgstr "جارٍ بدء مزامنة الخلفية..."
 
 #: contents/ui/config/ConfigRSS.qml:564
 msgid "Script not found at: %1"
-msgstr ""
+msgstr "لم يتم العثور على البرنامج النصي في: %1"
 
 #: contents/ui/config/ConfigRSS.qml:584
 msgid "Sync: SUCCESS"
-msgstr ""
+msgstr "المزامنة: النجاح"
 
 #: contents/ui/config/ConfigRSS.qml:658
 msgid "Never"
-msgstr ""
+msgstr "أبداً"
 
 #: contents/ui/config/ConfigRSS.qml:674
 msgid "Enable RSS: Show feed updates in search results"
-msgstr ""
+msgstr "تمكين RSS: عرض تحديثات الموجز في نتائج البحث"
 
 #: contents/ui/config/ConfigRSS.qml:686
 msgid "Sync All Sources"
-msgstr ""
+msgstr "مزامنة كافة المصادر"
 
 #: contents/ui/config/ConfigRSS.qml:693
 msgid "Clear Cache Folder"
-msgstr ""
+msgstr "مسح مجلد ذاكرة التخزين المؤقت"
 
 #: contents/ui/config/ConfigRSS.qml:702
 msgid "Last full sync: %1"
-msgstr ""
+msgstr "آخر مزامنة كاملة: %1"
 
 #: contents/ui/config/ConfigRSS.qml:713
 msgid "Show images in results"
-msgstr ""
+msgstr "إظهار الصور في النتائج"
 
 #: contents/ui/config/ConfigRSS.qml:719
 msgid "Expand cards on click"
-msgstr ""
+msgstr "قم بتوسيع البطاقات عند النقر"
 
 #: contents/ui/config/ConfigRSS.qml:727
 msgid "Popular Presets"
-msgstr ""
+msgstr "الإعدادات المسبقة الشعبية"
 
 #: contents/ui/config/ConfigRSS.qml:733
 msgid "Search presets (e.g. News, Tech, TR, Linux)..."
-msgstr ""
+msgstr "إعدادات البحث المسبقة (مثل الأخبار والتكنولوجيا وTR وLinux)..."
 
 #: contents/ui/config/ConfigRSS.qml:795
 msgid "RSS Sources (Max 30)"
-msgstr ""
+msgstr "مصادر RSS (الحد الأقصى 30)"
 
 #: contents/ui/config/ConfigRSS.qml:859
 msgid "Name"
-msgstr ""
+msgstr "اسم"
 
 #: contents/ui/config/ConfigRSS.qml:865
 msgid "URL"
-msgstr ""
+msgstr "عنوان URL"
 
 #: contents/ui/config/ConfigRSS.qml:891
 msgid "Entries:"
-msgstr ""
+msgstr "الإدخالات:"
 
 #: contents/ui/config/ConfigRSS.qml:897
 msgid "Interval:"
-msgstr ""
+msgstr "فاصلة:"
 
 #: contents/ui/config/ConfigRSS.qml:900
 msgid "%1h"
-msgstr ""
+msgstr "%1h"
 
 #: contents/ui/config/ConfigRSS.qml:900
 msgid "%1m"
-msgstr ""
+msgstr "%1 مليون"
 
 #: contents/ui/config/ConfigRSS.qml:908
 msgid "%1 hours"
-msgstr ""
+msgstr "%1 ساعة"
 
 #: contents/ui/config/ConfigRSS.qml:908
 msgid "%1 mins"
-msgstr ""
+msgstr "%1 دقيقة"
 
 #: contents/ui/config/ConfigRSS.qml:918
 msgid "Last sync: %1"
-msgstr ""
+msgstr "آخر مزامنة: %1"
 
 #: contents/ui/config/ConfigRSS.qml:952
 msgid "Add Custom Source"
-msgstr ""
+msgstr "إضافة مصدر مخصص"
 
 #: contents/ui/config/ConfigRSS.qml:966
 msgid "News Features:"
-msgstr ""
+msgstr "ميزات الأخبار:"
 
 #: contents/ui/config/ConfigRSS.qml:967
 msgid "Show RSS titles in placeholder cycling"
-msgstr ""
+msgstr "إظهار عناوين RSS في دورة العناصر النائبة"
 
 #: contents/ui/config/ConfigRSS.qml:973
 msgid "Show full headlines (split into segments)"
-msgstr ""
+msgstr "إظهار العناوين الكاملة (مقسمة إلى أجزاء)"
 
 #: contents/ui/config/ConfigRSS.qml:979
 msgid "Default Interval:"
-msgstr ""
+msgstr "الفاصل الزمني الافتراضي:"
 
 #: contents/ui/config/ConfigRSS.qml:986
 msgid "Default Entries:"
-msgstr ""
+msgstr "الإدخالات الافتراضية:"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/HistoryContextMenu.qml:27
 #: contents/ui/components/PinnedSection.qml:436
 msgid "Unpin"
-msgstr ""
+msgstr "إزالة التثبيت"
 
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/HistoryContextMenu.qml:27
 msgid "Pin"
-msgstr ""
+msgstr "دبوس"
 
 #: contents/ui/components/HelpView.qml:16
 #: contents/ui/components/QueryHints.qml:38
 msgid "Timeline View"
-msgstr ""
+msgstr "عرض الجدول الزمني"
 
 #: contents/ui/components/HelpView.qml:17
 #: contents/ui/components/QueryHints.qml:55
 #: contents/ui/components/SearchPopup.qml:1028
 msgid "Applications"
-msgstr ""
+msgstr "التطبيقات"
 
 #: contents/ui/components/HelpView.qml:18
 msgid "File Path Search"
-msgstr ""
+msgstr "بحث مسار الملف"
 
 #: contents/ui/components/HelpView.qml:19
 msgid "Google Search"
-msgstr ""
+msgstr "بحث جوجل"
 
 #: contents/ui/components/HelpView.qml:20
 msgid "DuckDuckGo Search"
-msgstr ""
+msgstr "بحث دك دك جو"
 
 #: contents/ui/components/HelpView.qml:21
 msgid "Wikipedia Search"
-msgstr ""
+msgstr "بحث ويكيبيديا"
 
 #: contents/ui/components/HelpView.qml:22
 #: contents/ui/components/QueryHints.qml:66
 msgid "Bookmarks"
-msgstr ""
+msgstr "الإشارات المرجعية"
 
 #: contents/ui/components/HelpView.qml:23
 #: contents/ui/components/QueryHints.qml:69
 msgid "Man Pages"
-msgstr ""
+msgstr "صفحات الرجل"
 
 #: contents/ui/components/HelpView.qml:24
 msgid "Kill Process"
-msgstr ""
+msgstr "عملية القتل"
 
 #: contents/ui/components/HelpView.qml:25
 msgid "Spell Check"
-msgstr ""
+msgstr "التدقيق الإملائي"
 
 #: contents/ui/components/HelpView.qml:26
 msgid "Dictionary Definition"
-msgstr ""
+msgstr "تعريف القاموس"
 
 #: contents/ui/components/HelpView.qml:27
 #: contents/ui/components/QueryHints.qml:60
 msgid "Unit Converter"
-msgstr ""
+msgstr "محول الوحدات"
 
 #: contents/ui/components/HelpView.qml:28
 msgid "Shell Commands"
-msgstr ""
+msgstr "أوامر شل"
 
 #: contents/ui/components/HelpView.qml:29
 msgid "Power Management"
-msgstr ""
+msgstr "إدارة الطاقة"
 
 #: contents/ui/components/HelpView.qml:30
 msgid "System Services"
-msgstr ""
+msgstr "خدمات النظام"
 
 #: contents/ui/components/HelpView.qml:31
 msgid "Unicode Characters"
-msgstr ""
+msgstr "أحرف يونيكود"
 
 #: contents/ui/components/HelpView.qml:32
 msgid "Date and Time"
-msgstr ""
+msgstr "التاريخ والوقت"
 
 #: contents/ui/components/HelpView.qml:33
 msgid "Help & Shortcuts"
-msgstr ""
+msgstr "المساعدة والاختصارات"
 
 #: contents/ui/components/HistoryListView.qml:38
 #: contents/ui/components/HistoryTileView.qml:246
 msgid "Recent Searches"
-msgstr ""
+msgstr "عمليات البحث الأخيرة"
 
 #: contents/ui/components/HistoryListView.qml:58
 #: contents/ui/components/HistoryTileView.qml:266
 msgid "Clear History"
-msgstr ""
+msgstr "مسح التاريخ"
 
 #: contents/ui/components/HistoryListView.qml:286
 #: contents/ui/components/HistoryTileView.qml:597
 #: contents/ui/components/ResultsTileView.qml:301
 msgid "Type to search"
-msgstr ""
+msgstr "اكتب للبحث"
 
 #: contents/ui/components/DebugOverlay.qml:41
 msgid "Saved!"
-msgstr ""
+msgstr "أنقذ!"
 
 #: contents/ui/components/DebugOverlay.qml:49
 #: contents/ui/components/DebugOverlay.qml:119
 msgid "Save Dump"
-msgstr ""
+msgstr "حفظ تفريغ"
 
 #: contents/ui/components/DebugOverlay.qml:78
 msgid "Backend"
-msgstr ""
+msgstr "الخلفية"
 
 #: contents/ui/components/DebugOverlay.qml:81
 msgid "Items"
-msgstr ""
+msgstr "أغراض"
 
 #: contents/ui/components/DebugOverlay.qml:84
 msgid "Latency"
-msgstr ""
+msgstr "كمون"
 
 #: contents/ui/components/DebugOverlay.qml:91
 msgid "View"
-msgstr ""
+msgstr "منظر"
 
 #: contents/ui/components/DebugOverlay.qml:94
 msgid "Display"
-msgstr ""
+msgstr "عرض"
 
 #: contents/ui/components/FilterChips.qml:22
 msgid "All"
-msgstr ""
+msgstr "الجميع"
 
 #: contents/ui/components/FilterChips.qml:23
 msgid "Apps"
-msgstr ""
+msgstr "تطبيقات"
 
 #: contents/ui/components/FilterChips.qml:26
 msgid "Folders"
-msgstr ""
+msgstr "المجلدات"
 
 #: contents/ui/components/FilterChips.qml:27
 msgid "Web"
-msgstr ""
+msgstr "ويب"
 
 #: contents/ui/components/HistoryContextMenu.qml:52
 #: contents/ui/components/PinnedSection.qml:402
 msgid "Open"
-msgstr ""
+msgstr "يفتح"
 
 #: contents/ui/components/HistoryContextMenu.qml:69
 #: contents/ui/components/PinnedSection.qml:412
 msgid "Copy Path"
-msgstr ""
+msgstr "نسخ المسار"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
-msgstr ""
+msgstr "فتح في المحطة الطرفية"
 
 #: contents/ui/components/HistoryContextMenu.qml:97
 #: contents/ui/components/PinnedSection.qml:423
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "فتح المجلد الذي يحتوي على"
 
 #: contents/ui/components/HistoryContextMenu.qml:107
 msgid "Move to Trash"
-msgstr ""
+msgstr "الانتقال إلى سلة المهملات"
 
 #: contents/ui/components/HistoryContextMenu.qml:120
 msgid "Properties"
-msgstr ""
+msgstr "ملكيات"
 
 #: contents/ui/components/HistoryContextMenu.qml:130
 msgid "Edit Application..."
-msgstr ""
+msgstr "تحرير التطبيق..."
 
 #: contents/ui/components/HistoryContextMenu.qml:140
 msgid "Remove from History"
-msgstr ""
+msgstr "إزالة من التاريخ"
 
 #: contents/ui/components/PinnedSection.qml:225
 msgid "Right-click items to pin them"
-msgstr ""
+msgstr "انقر بزر الماوس الأيمن فوق العناصر لتثبيتها"
 
 #: contents/ui/components/PinnedSection.qml:383
 msgid "Drag to reorder"
-msgstr ""
+msgstr "اسحب لإعادة الترتيب"
 
 #: contents/ui/components/PowerView.qml:254
 msgid "Hibernate"
-msgstr ""
+msgstr "السبات"
 
 #: contents/ui/components/PowerView.qml:258
 msgid "(Press again to hibernate)"
-msgstr ""
+msgstr "(اضغط مرة أخرى للإسبات)"
 
 #: contents/ui/components/PowerView.qml:267
 msgid "Sleep"
-msgstr ""
+msgstr "ينام"
 
 #: contents/ui/components/PowerView.qml:271
 msgid "(Press again to sleep)"
-msgstr ""
+msgstr "(اضغط مرة أخرى للنوم)"
 
 #: contents/ui/components/PowerView.qml:279
 msgid "Reboot"
-msgstr ""
+msgstr "إعادة التشغيل"
 
 #: contents/ui/components/PowerView.qml:283
 msgid "(Press again to reboot)"
-msgstr ""
+msgstr "(اضغط مرة أخرى لإعادة التشغيل)"
 
 #: contents/ui/components/PowerView.qml:303
 msgid "Shutdown"
-msgstr ""
+msgstr "اغلق"
 
 #: contents/ui/components/PowerView.qml:307
 msgid "(Press again to shutdown)"
-msgstr ""
+msgstr "(اضغط مرة أخرى لإيقاف التشغيل)"
 
 #: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
-msgstr ""
+msgstr "ينعش"
 
 #: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
-msgstr ""
+msgstr "البحث عن إدخالات التمهيد"
 
 #: contents/ui/components/PowerView.qml:498
 msgid "Lock Screen"
-msgstr ""
+msgstr "قفل الشاشة"
 
 #: contents/ui/components/PowerView.qml:508
 msgid "Log Out"
-msgstr ""
+msgstr "تسجيل الخروج"
 
 #: contents/ui/components/PowerView.qml:512
 msgid "(Press again to log out)"
-msgstr ""
+msgstr "(اضغط مرة أخرى لتسجيل الخروج)"
 
 #: contents/ui/components/PowerView.qml:520
 msgid "Switch User"
-msgstr ""
+msgstr "تبديل المستخدم"
 
 #: contents/ui/components/PowerView.qml:524
 msgid "(Press again to switch)"
-msgstr ""
+msgstr "(اضغط مرة أخرى للتبديل)"
 
 #: contents/ui/components/PowerView.qml:532
 msgid "Save Session"
-msgstr ""
+msgstr "حفظ الجلسة"
 
 #: contents/ui/components/PowerView.qml:551
 msgid "(Press again)"
-msgstr ""
+msgstr "(اضغط مرة أخرى)"
 
 #: contents/ui/components/QueryHints.qml:32
 msgid "Show all available search filters"
-msgstr ""
+msgstr "إظهار جميع مرشحات البحث المتاحة"
 
 #: contents/ui/components/QueryHints.qml:39
 msgid "Browse files by date (Today, Yesterday, etc.)"
-msgstr ""
+msgstr "تصفح الملفات حسب التاريخ (اليوم، أمس، الخ.)"
 
 #: contents/ui/components/QueryHints.qml:43
 msgid "Calendar"
-msgstr ""
+msgstr "تقويم"
 
 #: contents/ui/components/QueryHints.qml:44
 #: contents/ui/components/QueryHints.qml:154
 #: contents/ui/components/QueryHints.qml:162
 msgid "Today"
-msgstr ""
+msgstr "اليوم"
 
 #: contents/ui/components/QueryHints.qml:45
 #: contents/ui/components/QueryHints.qml:155
 #: contents/ui/components/QueryHints.qml:162
 msgid "Yesterday"
-msgstr ""
+msgstr "أمس"
 
 #: contents/ui/components/QueryHints.qml:46
 msgid "This Week"
-msgstr ""
+msgstr "هذا الاسبوع"
 
 #: contents/ui/components/QueryHints.qml:47
 msgid "This Month"
-msgstr ""
+msgstr "هذا الشهر"
 
 #: contents/ui/components/QueryHints.qml:50
 msgid "File Path"
-msgstr ""
+msgstr "مسار الملف"
 
 #: contents/ui/components/QueryHints.qml:50
 msgid "Search via absolute file path"
-msgstr ""
+msgstr "البحث عبر مسار الملف المطلق"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "File Index"
-msgstr ""
+msgstr "فهرس الملف"
 
 #: contents/ui/components/QueryHints.qml:51
 msgid "Search exclusively in Baloo file index"
-msgstr ""
+msgstr "البحث حصريًا في فهرس ملفات Baloo"
 
 #: contents/ui/components/QueryHints.qml:52
 msgid "Search only document files"
-msgstr ""
+msgstr "البحث في ملفات المستندات فقط"
 
 #: contents/ui/components/QueryHints.qml:53
 msgid "Search only image files"
-msgstr ""
+msgstr "البحث في ملفات الصور فقط"
 
 #: contents/ui/components/QueryHints.qml:55
 msgid "Search for installed applications"
-msgstr ""
+msgstr "البحث عن التطبيقات المثبتة"
 
 #: contents/ui/components/QueryHints.qml:56
 msgid "Services"
-msgstr ""
+msgstr "خدمات"
 
 #: contents/ui/components/QueryHints.qml:56
 msgid "Search system background services"
-msgstr ""
+msgstr "خدمات خلفية نظام البحث"
 
 #: contents/ui/components/QueryHints.qml:57
 msgid "Shell"
-msgstr ""
+msgstr "صدَفَة"
 
 #: contents/ui/components/QueryHints.qml:57
 msgid "Execute shell commands directly"
-msgstr ""
+msgstr "تنفيذ أوامر الصدفة مباشرة"
 
 #: contents/ui/components/QueryHints.qml:59
 msgid "Calculator"
-msgstr ""
+msgstr "آلة حاسبة"
 
 #: contents/ui/components/QueryHints.qml:59
 msgid "Perform mathematical calculations"
-msgstr ""
+msgstr "إجراء الحسابات الرياضية"
 
 #: contents/ui/components/QueryHints.qml:60
 msgid "Convert between weights, distances, etc."
-msgstr ""
+msgstr "التحويل بين الأوزان والمسافات وما إلى ذلك."
 
 #: contents/ui/components/QueryHints.qml:61
 msgid "Spelling"
-msgstr ""
+msgstr "تهجئة"
 
 #: contents/ui/components/QueryHints.qml:61
 msgid "Check word spelling"
-msgstr ""
+msgstr "التحقق من تهجئة الكلمة"
 
 #: contents/ui/components/QueryHints.qml:63
 msgid "Google"
-msgstr ""
+msgstr "جوجل"
 
 #: contents/ui/components/QueryHints.qml:63
 msgid "Search the web using Google"
-msgstr ""
+msgstr "ابحث في الويب باستخدام جوجل"
 
 #: contents/ui/components/QueryHints.qml:64
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "دك دك جو"
 
 #: contents/ui/components/QueryHints.qml:64
 msgid "Search the web using DuckDuckGo"
-msgstr ""
+msgstr "ابحث في الويب باستخدام DuckDuckGo"
 
 #: contents/ui/components/QueryHints.qml:65
 msgid "Wikipedia"
-msgstr ""
+msgstr "ويكيبيديا"
 
 #: contents/ui/components/QueryHints.qml:65
 msgid "Search Wikipedia articles"
-msgstr ""
+msgstr "بحث في مقالات ويكيبيديا"
 
 #: contents/ui/components/QueryHints.qml:66
 msgid "Search browser bookmarks"
-msgstr ""
+msgstr "البحث في الإشارات المرجعية للمتصفح"
 
 #: contents/ui/components/QueryHints.qml:67
 msgid "RSS Feeds"
-msgstr ""
+msgstr "خلاصات RSS"
 
 #: contents/ui/components/QueryHints.qml:67
 msgid "Search exclusively in RSS news feeds"
-msgstr ""
+msgstr "البحث حصريًا في خلاصات أخبار RSS"
 
 #: contents/ui/components/QueryHints.qml:69
 msgid "Browse system manual pages"
-msgstr ""
+msgstr "تصفح صفحات دليل النظام"
 
 #: contents/ui/components/QueryHints.qml:70
 msgid "Show widget documentation"
-msgstr ""
+msgstr "عرض وثائق القطعة"
 
 #: contents/ui/components/QueryHints.qml:98
 msgid "Unknown prefix"
-msgstr ""
+msgstr "بادئة غير معروفة"
 
 #: contents/ui/components/QueryHints.qml:99
 msgid "try"
-msgstr ""
+msgstr "يحاول"
 
 #: contents/ui/components/QueryHints.qml:101
 msgid "Browse calendar"
-msgstr ""
+msgstr "تصفح التقويم"
 
 #: contents/ui/components/QueryHints.qml:102
 msgid "Man pages not installed"
-msgstr ""
+msgstr "صفحات الرجل غير مثبتة"
 
 #: contents/ui/components/QueryHints.qml:156
 #: contents/ui/components/QueryHints.qml:162
 msgid "Two days ago"
-msgstr ""
+msgstr "منذ يومين"
 
 #: contents/ui/components/QueryHints.qml:367
 msgid "Available Search Prefixes"
-msgstr ""
+msgstr "بادئات البحث المتاحة"
 
 #: contents/ui/components/ResultsListView.qml:436
 #: contents/ui/components/ResultsTileView.qml:294
 msgid "Category"
-msgstr ""
+msgstr "فئة"
 
 #: contents/ui/components/ResultsListView.qml:437
 #: contents/ui/components/ResultsTileView.qml:295
 msgid "File Type"
-msgstr ""
+msgstr "نوع الملف"
 
 #: contents/ui/components/ResultsListView.qml:438
 #: contents/ui/components/ResultsTileView.qml:296
 msgid "Path"
-msgstr ""
+msgstr "طريق"
 
 #: contents/ui/components/ResultsListView.qml:439
 msgid "News"
-msgstr ""
+msgstr "أخبار"
 
 #: contents/ui/components/ResultsListView.qml:440
 msgid "Read News"
-msgstr ""
+msgstr "قراءة الأخبار"
 
 #: contents/ui/components/ResultsListView.qml:441
 msgid "Share"
-msgstr ""
+msgstr "يشارك"
 
 #: contents/ui/components/ResultsListView.qml:442
 #: contents/ui/components/ResultsTileView.qml:299
 msgid "Searching..."
-msgstr ""
+msgstr "جارٍ البحث..."
 
 #: contents/ui/components/ResultsListView.qml:443
 #: contents/ui/components/ResultsTileView.qml:300
 msgid "No results found"
-msgstr ""
+msgstr "لم يتم العثور على نتائج"
 
 #: contents/ui/components/ResultsTileView.qml:297
 msgid "Space to preview"
-msgstr ""
+msgstr "مساحة للمعاينة"
 
 #: contents/ui/components/ResultsTileView.qml:298
 msgid "Read in Browser"
-msgstr ""
+msgstr "القراءة في المتصفح"
 
 #: contents/ui/components/SearchPopup.qml:92
 msgid "date"
-msgstr ""
+msgstr "تاريخ"
 
 #: contents/ui/components/SearchPopup.qml:93
 msgid "clock"
-msgstr ""
+msgstr "ساعة"
 
 #: contents/ui/components/SearchPopup.qml:94
 msgid "weather"
-msgstr ""
+msgstr "طقس"
 
 #: contents/ui/components/SearchPopup.qml:95
 msgid "power"
-msgstr ""
+msgstr "قوة"
 
 #: contents/ui/components/SearchPopup.qml:96
 msgid "help"
-msgstr ""
+msgstr "يساعد"
 
 #: contents/ui/components/SearchPopup.qml:97
 msgid "unit"
-msgstr ""
+msgstr "وحدة"
 
 #: contents/ui/components/SearchPopup.qml:98
 msgid "kill"
-msgstr ""
+msgstr "قتل"
 
 #: contents/ui/components/SearchPopup.qml:99
 msgid "spell"
-msgstr ""
+msgstr "يتهجى"
 
 #: contents/ui/components/SearchPopup.qml:100
 msgid "shell"
-msgstr ""
+msgstr "صدَفَة"
 
 #: contents/ui/components/SearchPopup.qml:1028
 msgid "Other"
-msgstr ""
+msgstr "آخر"
 
 #: contents/ui/components/SearchPopup.qml:1110
 msgid "Mode"
-msgstr ""
+msgstr "وضع"
 
 #: contents/ui/components/TileDataManager.qml:53
 msgid "Other Results"
-msgstr ""
+msgstr "نتائج أخرى"
 
 #: contents/ui/components/WeatherView.qml:57
 msgid "Unknown error"
-msgstr ""
+msgstr "خطأ غير معروف"
 
 #: contents/ui/components/WeatherView.qml:80
 msgid "Loading Weather..."
-msgstr ""
+msgstr "جارٍ تحميل الطقس..."
 
 #: contents/ui/components/WeatherView.qml:91
 msgid "Retry"
-msgstr ""
+msgstr "أعد المحاولة"
 
 #: contents/ui/main.qml:110
 msgid "Medium Mode (Button only)"
-msgstr ""
+msgstr "الوضع المتوسط ​​(الزر فقط)"
 
 #: contents/ui/main.qml:116
 msgid "Wide Mode (Search bar + icon)"
-msgstr ""
+msgstr "الوضع العريض (شريط البحث + الأيقونة)"
 
 #: contents/ui/main.qml:122
 msgid "Extra Wide Mode (Wide + Long Placeholder)"
-msgstr ""
+msgstr "الوضع العريض للغاية (عنصر نائب عريض + طويل)"
 
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
-msgstr ""
+msgstr "وضع فائق الاتساع (أقصى تغطية)"
