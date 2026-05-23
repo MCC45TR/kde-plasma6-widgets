@@ -376,7 +376,8 @@ Item {
         });
         
         rssCache = combined;
-        plasmoidConfig.rssCache = JSON.stringify(combined);
+        // Optimization: Do NOT serialize the massive RSS cache string back to plasmoidConfig
+        // to prevent Plasma shell stutters during synchronous KConfig writing.
         if (markAsFresh)
             plasmoidConfig.rssLastSyncAll = new Date().getTime();
         
@@ -392,7 +393,8 @@ Item {
         executable.connectSource(cmd);
         rssCache = [];
         rssTickerEntries = [];
-        plasmoidConfig.rssCache = "[]";
+        // Set to empty string instead of writing JSON array representation to KConfig
+        plasmoidConfig.rssCache = "";
         plasmoidConfig.rssLastSyncAll = 0;
         
         // Reset lastSync for all sources
@@ -408,38 +410,45 @@ Item {
             return ;
         }
         var path = getSourceFilePath(url);
-        var cmd = "cat " + shellEscape(path);
         
-        executable.callbacks[cmd] = function(stdout) {
-            var raw = stdout.trim();
-            if (!raw) {
-                callback([]);
-                return;
-            }
-            
-            try {
-                // Attempt base64 decode first
-                var decodedJson = RSSManager.decodeBase64(raw);
-                if (decodedJson && (decodedJson.indexOf("[") !== -1 || decodedJson.indexOf("{") !== -1)) {
-                    var data = JSON.parse(decodedJson);
-                    callback(Array.isArray(data) ? data : []);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 0) {
+                    var raw = xhr.responseText.trim();
+                    if (!raw) {
+                        callback([]);
+                        return;
+                    }
+                    
+                    try {
+                        // Attempt base64 decode first
+                        var decodedJson = RSSManager.decodeBase64(raw);
+                        if (decodedJson && (decodedJson.indexOf("[") !== -1 || decodedJson.indexOf("{") !== -1)) {
+                            var data = JSON.parse(decodedJson);
+                            callback(Array.isArray(data) ? data : []);
+                        } else {
+                            // Try parsing raw if base64 didn't look like JSON
+                            var rawData = JSON.parse(raw);
+                            callback(Array.isArray(rawData) ? rawData : []);
+                        }
+                    } catch (e) {
+                        // Final attempt: raw JSON
+                        try {
+                            var rawData2 = JSON.parse(raw);
+                            callback(Array.isArray(rawData2) ? rawData2 : []);
+                        } catch (e2) {
+                            console.warn("LogicController: Failed to read/parse RSS cache for", url);
+                            callback([]);
+                        }
+                    }
                 } else {
-                    // Try parsing raw if base64 didn't look like JSON
-                    var rawData = JSON.parse(raw);
-                    callback(Array.isArray(rawData) ? rawData : []);
-                }
-            } catch (e) {
-                // Final attempt: raw JSON
-                try {
-                    var rawData2 = JSON.parse(raw);
-                    callback(Array.isArray(rawData2) ? rawData2 : []);
-                } catch (e2) {
-                    console.warn("LogicController: Failed to read/parse RSS cache for", url);
                     callback([]);
                 }
             }
         };
-        executable.connectSource(cmd);
+        xhr.open("GET", "file://" + path);
+        xhr.send();
     }
 
     function checkAndSyncRSS() {
@@ -535,48 +544,21 @@ Item {
         if (totalSources === 0) {
             rssCache = [];
             rssTickerEntries = [];
-            plasmoidConfig.rssCache = "[]";
             return ;
         }
-
-        // Use a unique ID to track this specific batch of requests
-        var batchId = Date.now();
 
         for (var i = 0; i < totalSources; i++) {
             (function(index) {
                 var url = rssSources[index].url;
-                if (!url) {
-                    completedCount++;
-                    if (completedCount === totalSources) finalizeUpdate(combined, markAsFresh);
-                    return;
-                }
-
-                var path = getSourceFilePath(url);
-                // Unique command to avoid callback collision
-                var cmd = "cat " + shellEscape(path) + " #batch_" + batchId + "_" + index;
-                
-                executable.callbacks[cmd] = function(stdout) {
-                    var raw = stdout.trim();
-                    if (raw) {
-                        try {
-                            var entries = [];
-                            var decodedJson = RSSManager.decodeBase64(raw);
-                            if (decodedJson && (decodedJson.indexOf("[") !== -1 || decodedJson.indexOf("{") !== -1)) {
-                                entries = JSON.parse(decodedJson);
-                            } else {
-                                entries = JSON.parse(raw);
-                            }
-                            if (Array.isArray(entries)) {
-                                combined = combined.concat(entries);
-                            }
-                        } catch (e) {
-                            console.warn("LogicController: Failed to parse cache for", url);
-                        }
+                loadSourceEntries(url, function(entries) {
+                    if (entries && Array.isArray(entries)) {
+                        combined = combined.concat(entries);
                     }
                     completedCount++;
-                    if (completedCount === totalSources) finalizeUpdate(combined, markAsFresh);
-                };
-                executable.connectSource(cmd);
+                    if (completedCount === totalSources) {
+                        finalizeUpdate(combined, markAsFresh);
+                    }
+                });
             })(i);
         }
     }
@@ -592,6 +574,35 @@ Item {
 
     function parseRSS(xml, sourceName) {
         return RSSManager.parseRSS(xml, sourceName);
+    }
+
+    // Runs a non-blocking stat + head command to retrieve both file size
+    // and the first 20KB of local text files securely without RAM/CPU overhead.
+    function readLocalTextSnippet(filePath, callback) {
+        var path = filePath.toString();
+        if (path.startsWith("file://")) path = path.substring(7);
+        path = path.trim();
+        if (!path) {
+            callback("", 0);
+            return;
+        }
+        var cmd = "stat -c %s " + shellEscape(path) + " && echo '---SIZE_END---' && head -c 20000 " + shellEscape(path);
+        executable.callbacks[cmd] = function(stdout) {
+            var delimiter = "---SIZE_END---";
+            var idx = stdout.indexOf(delimiter);
+            if (idx !== -1) {
+                var sizePart = stdout.substring(0, idx).trim();
+                var contentPart = stdout.substring(idx + delimiter.length);
+                if (contentPart.startsWith("\n")) {
+                    contentPart = contentPart.substring(1);
+                }
+                var bytes = parseInt(sizePart, 10) || 0;
+                callback(contentPart, bytes);
+            } else {
+                callback(stdout, 0);
+            }
+        };
+        executable.connectSource(cmd);
     }
 
     onHistoryForceUpdate: historyVersion++ // Increment version to trigger bindings

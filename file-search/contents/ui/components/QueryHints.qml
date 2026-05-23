@@ -70,6 +70,25 @@ Rectangle {
         { prefix: "help:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show widget documentation"), icon: "help-about", category: "Help", localeBase: "help" }
     ]
     
+    // Filtered list of known prefixes based on settings
+    readonly property var activePrefixes: {
+        var list = [];
+        for (var i = 0; i < knownPrefixes.length; i++) {
+            var p = knownPrefixes[i];
+            if (p.prefix === ":") continue; // Skip trigger
+            
+            if (p.prefix === "weather:" && plasmoidConfig && !plasmoidConfig.weatherEnabled) continue;
+            if (p.prefix === "timeline:/" && plasmoidConfig && plasmoidConfig.prefixTimelineEnabled === false) continue;
+            if (p.prefix === "shell:" && plasmoidConfig && plasmoidConfig.prefixShellEnabled === false) continue;
+            if (p.prefix === "unit:" && plasmoidConfig && plasmoidConfig.prefixUnitEnabled === false) continue;
+            if (p.prefix === "spell " && plasmoidConfig && plasmoidConfig.prefixSpellEnabled === false) continue;
+            if ((p.prefix === "gg:" || p.prefix === "dd:") && plasmoidConfig && plasmoidConfig.prefixWebSearchEnabled === false) continue;
+            
+            list.push(p);
+        }
+        return list;
+    }
+    
     // Helper for date formatting
     property var currentLocale: Qt.locale()
     
@@ -188,14 +207,8 @@ Rectangle {
         var bestLen = -1;
         var matchedPrefix = ""; 
         
-        for (var i = 0; i < knownPrefixes.length; i++) {
-             var p = knownPrefixes[i]
-             
-             if (p.prefix === ":") continue;
-             
-             if (p.prefix === "weather:" && plasmoidConfig && !plasmoidConfig.weatherEnabled) {
-                 continue;
-             }
+        for (var i = 0; i < activePrefixes.length; i++) {
+             var p = activePrefixes[i]
              
              var standardP = p.prefix.toLowerCase();
              
@@ -301,8 +314,8 @@ Rectangle {
             var potentialPrefix = query.substring(0, colonIndex + 1).toLowerCase()
             
             var isKnown = false;
-            for (var k = 0; k < knownPrefixes.length; k++) {
-                 var kp = knownPrefixes[k];
+            for (var k = 0; k < activePrefixes.length; k++) {
+                 var kp = activePrefixes[k];
                  if (kp.prefix.toLowerCase().startsWith(potentialPrefix)) isKnown = true;
                  
                  // Use cached localized prefix map instead of i18nd
@@ -399,7 +412,7 @@ Rectangle {
         GridView {
             id: prefixGrid
             anchors.fill: parent
-            model: queryHints.knownPrefixes.slice(1) // Skip the trigger itself
+            model: queryHints.activePrefixes
             cellWidth: isTileView ? 110 : width
             cellHeight: isTileView ? 80 : 50
             

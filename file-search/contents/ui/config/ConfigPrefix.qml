@@ -20,6 +20,13 @@ Kirigami.FormLayout {
     property string cfg_weatherUnits: "metric"
     property bool cfg_weatherUseSystemUnits: true
     property int cfg_weatherRefreshInterval: 15
+    // Prefix enablement toggles
+    property bool cfg_prefixShellEnabled: true
+    property bool cfg_prefixTimelineEnabled: true
+    property bool cfg_prefixWebSearchEnabled: true
+    property bool cfg_prefixKillEnabled: true
+    property bool cfg_prefixSpellEnabled: true
+    property bool cfg_prefixUnitEnabled: true
 
 
     PlasmaSupport.DataSource {
@@ -162,9 +169,9 @@ Kirigami.FormLayout {
         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
         Layout.fillWidth: true
     }
-
+ 
     readonly property bool canReboot: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanReboot"] : true
-
+ 
     CheckBox {
         id: showBootOptionsSearch
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show boot options in Reboot button")
@@ -182,6 +189,48 @@ Kirigami.FormLayout {
         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
         Layout.fillWidth: true
     }
+
+    Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Active Search Prefixes")
+    }
+
+    CheckBox {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Shell Command execution (shell:)")
+        checked: cfg_prefixShellEnabled
+        onToggled: cfg_prefixShellEnabled = checked
+    }
+
+    CheckBox {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Timeline search (timeline:)")
+        checked: cfg_prefixTimelineEnabled
+        onToggled: cfg_prefixTimelineEnabled = checked
+    }
+
+    CheckBox {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Web search (gg:, dd:)")
+        checked: cfg_prefixWebSearchEnabled
+        onToggled: cfg_prefixWebSearchEnabled = checked
+    }
+
+    CheckBox {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Kill Process (kill)")
+        checked: cfg_prefixKillEnabled
+        onToggled: cfg_prefixKillEnabled = checked
+    }
+
+    CheckBox {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Spell Check (spell)")
+        checked: cfg_prefixSpellEnabled
+        onToggled: cfg_prefixSpellEnabled = checked
+    }
+
+    CheckBox {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enable Unit Conversion (unit:)")
+        checked: cfg_prefixUnitEnabled
+        onToggled: cfg_prefixUnitEnabled = checked
+    }
+    
     
     Kirigami.Separator {
         Kirigami.FormData.isSection: true

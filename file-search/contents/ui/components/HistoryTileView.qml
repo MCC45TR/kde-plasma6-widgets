@@ -16,6 +16,9 @@ FocusScope {
     required property color accentColor
     required property bool previewEnabled
     required property var previewSettings
+    property bool previewShowHistory: true
+    property int previewInlineMode: 1
+    property int previewSize: 1
     required property var logic
     
     // Signals
@@ -440,11 +443,62 @@ FocusScope {
                         
                         Item {
                             id: histTileDelegate
-                            width: historyTile.tileWidth
-                            height: historyTile.tileHeight
+                            property bool isPreviewAvailable: PreviewUtils.isPreviewAvailable(modelData.filePath || modelData.url || "", modelData.category || "", historyTile.previewSettings)
+                            property bool showInlinePreview: historyTile.previewEnabled && historyTile.previewShowHistory && historyTile.previewInlineMode === 1 && isPreviewAvailable && histTileDelegate.isSelected
+                            
+                            // Wide vs Grid sizing
+                            width: showInlinePreview ? parent.width : historyTile.tileWidth
+                            height: showInlinePreview ? (wideContent.implicitHeight + 16) : historyTile.tileHeight
+                            
+                            Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+                            Behavior on height { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
                             
                             property int itemIdx: index
                             property bool isSelected: historyTile.isItemSelected(histCategoryDelegate.catIdx, itemIdx)
+                            
+                            readonly property bool previewActive: historyTile.previewEnabled && isPreviewAvailable && (historyTile.previewInlineMode === 0 ? histTileMouseArea.containsMouse : histTileDelegate.isSelected)
+                            readonly property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.filePath || modelData.url || "") : ""
+                            readonly property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.filePath || modelData.url || "") : ""
+                            readonly property string previewSource: previewActive
+                                ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyTile.previewEnabled, historyTile.previewSettings)
+                                : ""
+
+                            onShowInlinePreviewChanged: {
+                                if (showInlinePreview) {
+                                    if (isTextFile) {
+                                        loadTextSnippet();
+                                    }
+                                }
+                            }
+
+                            property bool isTextFile: {
+                                if (!previewPath) return false;
+                                var ext = previewPath.split('.').pop().toLowerCase();
+                                var txtExts = ['txt', 'js', 'py', 'qml', 'html', 'css', 'json', 'md', 'sh', 'c', 'cpp', 'h', 'hpp', 'rs', 'go', 'java', 'xml', 'yml', 'yaml', 'ini', 'conf', 'log'];
+                                return txtExts.indexOf(ext) !== -1;
+                            }
+
+                            function loadTextSnippet() {
+                                if (!previewPath) return;
+                                var xhr = new XMLHttpRequest();
+                                xhr.onreadystatechange = function() {
+                                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                                        if (xhr.status === 200 || xhr.status === 0) {
+                                            var lines = xhr.responseText.split('\n').slice(0, 5).join('\n');
+                                            textSnippet.text = lines;
+                                            
+                                            var bytes = xhr.responseText.length;
+                                            var sizeStr = "";
+                                            if (bytes < 1024) sizeStr = bytes + " B";
+                                            else if (bytes < 1048576) sizeStr = (bytes / 1024).toFixed(1) + " KB";
+                                            else sizeStr = (bytes / 1048576).toFixed(1) + " MB";
+                                            fileSizeText.text = "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Size") + ":</b> " + sizeStr;
+                                        }
+                                    }
+                                }
+                                xhr.open("GET", (modelData.filePath || modelData.url || "").toString());
+                                xhr.send();
+                            }
                             
                             Rectangle {
                                 id: histTileBg
@@ -481,6 +535,7 @@ FocusScope {
                                 Column {
                                     anchors.centerIn: parent
                                     spacing: 6
+                                    visible: !histTileDelegate.showInlinePreview
                                     
                                     // Icon Container
                                     Item {
@@ -548,6 +603,213 @@ FocusScope {
                                         visible: text.length > 0
                                     }
                                 }
+
+                                ColumnLayout {
+                                    id: wideContent
+                                    anchors.left: parent.left
+                                    anchors.right: parent.right
+                                    anchors.top: parent.top
+                                    anchors.margins: 8
+                                    spacing: 8
+                                    visible: histTileDelegate.showInlinePreview
+
+                                    RowLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 12
+
+                                        Kirigami.Icon {
+                                            source: modelData.decoration || "application-x-executable"
+                                            Layout.preferredWidth: historyTile.iconSize
+                                            Layout.preferredHeight: historyTile.iconSize
+                                            color: historyTile.textColor
+                                        }
+
+                                        ColumnLayout {
+                                            Layout.fillWidth: true
+                                            spacing: 2
+
+                                            Text {
+                                                text: modelData.display || ""
+                                                font.pixelSize: 14
+                                                font.bold: true
+                                                color: historyTile.textColor
+                                                Layout.fillWidth: true
+                                                elide: Text.ElideRight
+                                            }
+
+                                            Text {
+                                                text: {
+                                                    if (modelData.isApplication) return "";
+                                                    var path = modelData.filePath ? modelData.filePath.toString() : (modelData.url ? modelData.url.toString() : "");
+                                                    if (path && path.length > 0) {
+                                                        path = path.replace("file://", "");
+                                                        path = path.replace(/^\/home\/[^\/]+\//, "");
+                                                        return path;
+                                                    }
+                                                    return "";
+                                                }
+                                                font.pixelSize: 11
+                                                color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
+                                                Layout.fillWidth: true
+                                                elide: Text.ElideMiddle
+                                                visible: text.length > 0
+                                            }
+                                        }
+                                    }
+
+                                    // Inline Preview Card
+                                    ColumnLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 8
+                                        Layout.topMargin: 8
+
+                                        Rectangle {
+                                            Layout.fillWidth: true
+                                            Layout.preferredHeight: 1
+                                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.15)
+                                        }
+
+                                        RowLayout {
+                                            Layout.fillWidth: true
+                                            spacing: 12
+                                            Layout.leftMargin: 4
+                                            Layout.rightMargin: 4
+
+                                            // Left Column: Thumbnail or large icon
+                                            Item {
+                                                id: thumbContainer
+                                                Layout.preferredWidth: historyTile.previewSize === 0 ? 64 : (historyTile.previewSize === 1 ? 120 : 200)
+                                                Layout.preferredHeight: historyTile.previewSize === 0 ? 48 : (historyTile.previewSize === 1 ? 90 : 150)
+                                                visible: histTileDelegate.previewSource.length > 0 || histTileDelegate.previewFileType.length > 0
+
+                                                // Background fallback placeholder
+                                                Rectangle {
+                                                    anchors.fill: parent
+                                                    color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.05)
+                                                    radius: 4
+                                                }
+
+                                                Kirigami.Icon {
+                                                    anchors.centerIn: parent
+                                                    implicitWidth: 32
+                                                    implicitHeight: 32
+                                                    source: modelData.decoration || "application-x-executable"
+                                                    color: historyTile.textColor
+                                                    opacity: 0.3
+                                                    visible: imgPreview.status !== Image.Ready
+                                                }
+
+                                                Image {
+                                                    id: imgPreview
+                                                    anchors.fill: parent
+                                                    source: histTileDelegate.previewSource
+                                                    fillMode: Image.PreserveAspectFit
+                                                    visible: source.length > 0
+                                                    cache: true
+                                                    asynchronous: true
+                                                }
+                                            }
+
+                                            // Right Column: Metadata
+                                            ColumnLayout {
+                                                Layout.fillWidth: true
+                                                spacing: 4
+
+                                                Text {
+                                                    text: modelData.display || ""
+                                                    color: historyTile.textColor
+                                                    font.bold: true
+                                                    font.pixelSize: 12
+                                                    elide: Text.ElideRight
+                                                    Layout.fillWidth: true
+                                                }
+
+                                                Text {
+                                                    text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ":</b> " + (modelData.category || "Other")
+                                                    color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
+                                                    font.pixelSize: 10
+                                                    textFormat: Text.StyledText
+                                                }
+
+                                                Text {
+                                                    text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ":</b> " + histTileDelegate.previewFileType
+                                                    color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
+                                                    font.pixelSize: 10
+                                                    visible: histTileDelegate.previewFileType.length > 0
+                                                    textFormat: Text.StyledText
+                                                }
+
+                                                Text {
+                                                    id: fileSizeText
+                                                    text: ""
+                                                    color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
+                                                    font.pixelSize: 10
+                                                    visible: text.length > 0
+                                                    textFormat: Text.StyledText
+                                                }
+
+                                                Text {
+                                                    text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ":</b> " + histTileDelegate.previewPath
+                                                    color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.5)
+                                                    font.pixelSize: 9
+                                                    wrapMode: Text.WrapAnywhere
+                                                    Layout.fillWidth: true
+                                                    textFormat: Text.StyledText
+                                                }
+                                            }
+                                        }
+
+                                        // Text File Snippet Preview
+                                        Rectangle {
+                                            id: textSnippetBox
+                                            Layout.fillWidth: true
+                                            Layout.preferredHeight: textSnippet.implicitHeight + 12
+                                            color: Qt.rgba(0, 0, 0, 0.2)
+                                            radius: 4
+                                            border.width: 1
+                                            border.color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.1)
+                                            visible: histTileDelegate.isTextFile && textSnippet.text.length > 0
+
+                                            Text {
+                                                id: textSnippet
+                                                anchors.fill: parent
+                                                anchors.margins: 6
+                                                text: ""
+                                                color: historyTile.textColor
+                                                font.family: "Monospace"
+                                                font.pixelSize: 10
+                                                wrapMode: Text.Wrap
+                                            }
+                                        }
+
+                                        // Quick Actions
+                                        RowLayout {
+                                            Layout.fillWidth: true
+                                            spacing: 10
+
+                                            Button {
+                                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
+                                                icon.name: "edit-copy"
+                                                flat: true
+                                                Layout.preferredHeight: 28
+                                                onClicked: if (historyTile.logic) historyTile.logic.copyToClipboard(histTileDelegate.previewPath)
+                                            }
+
+                                            Button {
+                                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Folder")
+                                                icon.name: "folder-open"
+                                                flat: true
+                                                Layout.preferredHeight: 28
+                                                visible: histTileDelegate.previewPath.length > 0 && histTileDelegate.previewPath.includes("/")
+                                                onClicked: {
+                                                    if (historyTile.logic && histTileDelegate.previewPath) {
+                                                        historyTile.logic.openContainingFolder(histTileDelegate.previewPath)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 
                                 MouseArea {
                                     id: histTileMouseArea
@@ -562,6 +824,65 @@ FocusScope {
                                         } else {
                                             historyTile.itemClicked(modelData)
                                         }
+                                    }
+                                }
+
+                                ToolTip {
+                                    visible: historyTile.previewInlineMode === 0 && histTileDelegate.previewSource.length > 0 && histTileMouseArea.containsMouse
+                                    delay: 500
+                                    timeout: 10000
+                                    x: histTileDelegate.width + 4
+                                    y: 0
+
+                                    contentItem: Column {
+                                        spacing: 6
+
+                                        Text {
+                                            text: modelData.display || ""
+                                            font.bold: true
+                                            font.pixelSize: 12
+                                            color: historyTile.textColor
+                                        }
+
+                                        Image {
+                                            source: histTileDelegate.previewSource
+                                            width: source.length > 0 ? 150 : 0
+                                            height: source.length > 0 ? 100 : 0
+                                            fillMode: Image.PreserveAspectFit
+                                            visible: source.length > 0
+                                            cache: true
+                                            asynchronous: true
+                                        }
+
+                                        Text {
+                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
+                                            font.pixelSize: 10
+                                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
+                                            visible: (modelData.category || "").length > 0
+                                        }
+
+                                        Text {
+                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + histTileDelegate.previewFileType
+                                            font.pixelSize: 10
+                                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
+                                            visible: histTileDelegate.previewFileType.length > 0
+                                        }
+
+                                        Text {
+                                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + histTileDelegate.previewPath
+                                            font.pixelSize: 10
+                                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
+                                            wrapMode: Text.WrapAnywhere
+                                            width: 300
+                                            visible: histTileDelegate.previewPath.length > 0
+                                        }
+                                    }
+
+                                    background: Rectangle {
+                                        color: Kirigami.Theme.backgroundColor
+                                        border.color: historyTile.accentColor
+                                        border.width: 1
+                                        radius: 6
                                     }
                                 }
                             }

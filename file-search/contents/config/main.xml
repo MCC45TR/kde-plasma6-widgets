@@ -87,11 +87,27 @@
   <group name="Preview">
     <entry name="previewEnabled" type="Bool">
       <default>true</default>
-      <label>Enable file preview on hover</label>
+      <label>Enable file preview</label>
     </entry>
     <entry name="previewSettings" type="String">
-      <default>{"images": true, "videos": false, "text": false, "documents": false}</default>
+      <default>{"images": false, "videos": false, "text": false, "documents": false, "applications": false}</default>
       <label>Preview settings for different file types (JSON)</label>
+    </entry>
+    <entry name="previewShowResults" type="Bool">
+      <default>true</default>
+      <label>Show preview in search results</label>
+    </entry>
+    <entry name="previewShowHistory" type="Bool">
+      <default>true</default>
+      <label>Show preview in search history</label>
+    </entry>
+    <entry name="previewInlineMode" type="Int">
+      <default>1</default>
+      <label>Preview Mode: 0=Hover Tooltip, 1=Inline Card</label>
+    </entry>
+    <entry name="previewSize" type="Int">
+      <default>1</default>
+      <label>Inline thumbnail size: 0=Small, 1=Medium, 2=Large</label>
     </entry>
   </group>
 
@@ -120,6 +136,30 @@
     <entry name="cachedBootEntries" type="String">
       <default></default>
       <label>Cached boot entries (JSON)</label>
+    </entry>
+    <entry name="prefixShellEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable Shell Command execution prefix</label>
+    </entry>
+    <entry name="prefixTimelineEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable Timeline search prefix</label>
+    </entry>
+    <entry name="prefixWebSearchEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable Web Search prefix</label>
+    </entry>
+    <entry name="prefixKillEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable Kill Process prefix</label>
+    </entry>
+    <entry name="prefixSpellEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable Spell Check prefix</label>
+    </entry>
+    <entry name="prefixUnitEnabled" type="Bool">
+      <default>true</default>
+      <label>Enable Unit Conversion prefix</label>
     </entry>
   </group>
 

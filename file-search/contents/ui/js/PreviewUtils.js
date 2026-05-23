@@ -1,14 +1,16 @@
 var IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"];
 var VIDEO_EXTENSIONS = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg", "m4v"];
-var TEXT_EXTENSIONS = ["txt", "md", "log", "ini", "cfg", "conf", "json", "xml", "yml", "yaml", "qml", "js", "ts", "py", "cpp", "c", "cc", "h", "hpp", "sh", "desktop"];
+var TEXT_EXTENSIONS = ["txt", "md", "log", "ini", "cfg", "conf", "json", "xml", "yml", "yaml", "qml", "js", "ts", "py", "cpp", "c", "cc", "h", "hpp", "sh"];
 var DOCUMENT_EXTENSIONS = ["pdf", "odt", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "ods", "odp", "csv", "cbz", "epub"];
+var APPLICATION_EXTENSIONS = ["desktop"];
 
 function normalizeSettings(settings) {
     return {
         images: !!(settings && settings.images),
         videos: !!(settings && settings.videos),
         text: !!(settings && settings.text),
-        documents: !!(settings && settings.documents)
+        documents: !!(settings && settings.documents),
+        applications: !!(settings && settings.applications)
     };
 }
 
@@ -96,7 +98,21 @@ function isPreviewTypeEnabled(ext, settings) {
         return normalized.text;
     if (isDocumentExtension(ext))
         return normalized.documents;
+    if (containsExt(APPLICATION_EXTENSIONS, ext))
+        return normalized.applications;
     return false;
+}
+
+function isPreviewAvailable(urlOrPath, category, settings) {
+    var path = getLocalPreviewPath(urlOrPath);
+    if (!path && category !== "Applications")
+        return false;
+
+    var ext = getExtension(path);
+    if (category === "Applications" || ext === "desktop") {
+        return !!(settings && settings.applications);
+    }
+    return isPreviewTypeEnabled(ext, settings);
 }
 
 function getPreviewSource(urlOrPath, previewEnabled, settings) {

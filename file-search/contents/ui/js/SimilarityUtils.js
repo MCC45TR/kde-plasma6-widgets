@@ -3,18 +3,12 @@
 
 /**
  * Fast similarity score (0-1, higher is more similar)
- * Uses indexOf-based matching instead of Levenshtein distance for performance.
- * This is called inside sort comparators, so it must be O(1) or O(n) at most.
- * @param {string} query - Search query
- * @param {string} target - Target string to compare
+ * Pre-lowercased version for optimal performance inside loops.
+ * @param {string} q - Pre-lowercased search query
+ * @param {string} t - Pre-lowercased target string to compare
  * @returns {number} - Similarity score between 0 and 1
  */
-function similarityScore(query, target) {
-    if (!query || !target) return 0;
-
-    var q = query.toLowerCase();
-    var t = target.toLowerCase();
-
+function similarityScoreParsed(q, t) {
     // Exact match
     if (t === q) return 1.0;
 
@@ -50,6 +44,17 @@ function similarityScore(query, target) {
 }
 
 /**
+ * Public API wrapper for backward compatibility.
+ * @param {string} query - Search query
+ * @param {string} target - Target string to compare
+ * @returns {number} - Similarity score
+ */
+function similarityScore(query, target) {
+    if (!query || !target) return 0;
+    return similarityScoreParsed(query.toLowerCase(), target.toLowerCase());
+}
+
+/**
  * Sort results by similarity to query text
  * Pre-computes scores to avoid redundant calculation during sort
  * @param {Array} results - Array of result objects with 'display' property
@@ -59,13 +64,15 @@ function similarityScore(query, target) {
 function sortBySimilarity(results, queryText) {
     if (!queryText || queryText.length === 0) return results;
 
+    var q = queryText.toLowerCase();
+
     // Pre-compute scores (avoids recalculating in comparator)
     var scored = new Array(results.length);
     for (var i = 0; i < results.length; i++) {
-        var displayText = results[i].display || results[i].name || "";
+        var displayText = (results[i].display || results[i].name || "").toLowerCase();
         scored[i] = {
             item: results[i],
-            score: similarityScore(queryText, displayText)
+            score: similarityScoreParsed(q, displayText)
         };
     }
 
@@ -93,6 +100,7 @@ function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPr
     if (!results || results.length === 0) return results;
 
     var hasQuery = queryText && queryText.length > 0;
+    var q = hasQuery ? queryText.toLowerCase() : "";
 
     // Pre-compute all scores and priorities ONCE
     var scored = new Array(results.length);
@@ -103,12 +111,13 @@ function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPr
         var score = 0;
 
         if (hasQuery) {
-            var displayText = item.display || item.name || "";
-            score = similarityScore(queryText, displayText);
+            var displayText = (item.display || item.name || "").toLowerCase();
+            score = similarityScoreParsed(q, displayText);
 
             // For RSS feeds, also check indexed content (weighted less)
             if (cat === "RSS" && item.indexedContent) {
-                var contentScore = similarityScore(queryText, item.indexedContent);
+                var contentText = item.indexedContent.toLowerCase();
+                var contentScore = similarityScoreParsed(q, contentText);
                 if (contentScore * 0.8 > score) {
                     score = contentScore * 0.8;
                 }

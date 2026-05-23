@@ -13,6 +13,12 @@ Item {
     property string cfg_previewSettingsDefault
     property alias cfg_previewEnabled: masterPreviewSwitch.checked
     property bool cfg_previewEnabledDefault
+    
+    // New preview options properties
+    property bool cfg_previewShowResults: true
+    property bool cfg_previewShowHistory: true
+    property int cfg_previewInlineMode: 1
+    property int cfg_previewSize: 1
 
     // Other Config Properties (to silence warnings)
     property int cfg_displayMode
@@ -62,17 +68,17 @@ Item {
     // Load settings when config property changes
     onCfg_previewSettingsChanged: {
         try {
-            previewSettings = JSON.parse(cfg_previewSettings || '{"images": true, "videos": false, "text": false, "documents": false}')
+            previewSettings = JSON.parse(cfg_previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
         } catch (e) {
-            previewSettings = {"images": true, "videos": false, "text": false, "documents": false}
+            previewSettings = {"images": false, "videos": false, "text": false, "documents": false, "applications": false}
         }
     }
     
     Component.onCompleted: {
         try {
-            previewSettings = JSON.parse(cfg_previewSettings || '{"images": true, "videos": false, "text": false, "documents": false}')
+            previewSettings = JSON.parse(cfg_previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
         } catch (e) {
-            previewSettings = {"images": true, "videos": false, "text": false, "documents": false}
+            previewSettings = {"images": false, "videos": false, "text": false, "documents": false, "applications": false}
         }
     }
     
@@ -124,6 +130,76 @@ Item {
                 Label {
                     text: masterPreviewSwitch.checked ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Enabled") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Disabled")
                     opacity: 0.7
+                }
+            }
+        }
+        
+        // Preview Locations
+        GroupBox {
+            title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Display Locations")
+            Layout.fillWidth: true
+            enabled: masterPreviewSwitch.checked
+            opacity: enabled ? 1.0 : 0.5
+
+            RowLayout {
+                anchors.fill: parent
+                spacing: 20
+
+                CheckBox {
+                    id: previewResultsCheck
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show in Search Results")
+                    checked: cfg_previewShowResults
+                    onToggled: cfg_previewShowResults = checked
+                }
+
+                CheckBox {
+                    id: previewHistoryCheck
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show in Search History")
+                    checked: cfg_previewShowHistory
+                    onToggled: cfg_previewShowHistory = checked
+                }
+            }
+        }
+
+        // Preview Style & Size
+        GroupBox {
+            title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview Style & Appearance")
+            Layout.fillWidth: true
+            enabled: masterPreviewSwitch.checked
+            opacity: enabled ? 1.0 : 0.5
+
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 10
+
+                RowLayout {
+                    spacing: 10
+                    Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Preview Mode:") }
+                    ComboBox {
+                        id: inlineModeCombo
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Hover Tooltip Popup"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Inline Expand Card")
+                        ]
+                        currentIndex: cfg_previewInlineMode
+                        onActivated: cfg_previewInlineMode = index
+                    }
+                }
+
+                RowLayout {
+                    spacing: 10
+                    visible: cfg_previewInlineMode === 1
+                    Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Inline Thumbnail Size:") }
+                    ComboBox {
+                        id: previewSizeCombo
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Small (64px)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium (120px)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Large (200px)")
+                        ]
+                        currentIndex: cfg_previewSize
+                        onActivated: cfg_previewSize = index
+                    }
                 }
             }
         }
@@ -282,6 +358,44 @@ Item {
                     Switch {
                         checked: previewSettings.documents || false
                         onToggled: updateSetting("documents", checked)
+                    }
+                }
+                
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 1
+                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
+                }
+                
+                // Applications
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 12
+                    
+                    Kirigami.Icon {
+                        source: "system-run"
+                        Layout.preferredWidth: 24
+                        Layout.preferredHeight: 24
+                    }
+                    
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 2
+                        
+                        Label {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications")
+                            font.bold: true
+                        }
+                        Label {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Desktop shortcuts and launcher commands")
+                            font.pixelSize: 10
+                            opacity: 0.6
+                        }
+                    }
+                    
+                    Switch {
+                        checked: previewSettings.applications || false
+                        onToggled: updateSetting("applications", checked)
                     }
                 }
             }

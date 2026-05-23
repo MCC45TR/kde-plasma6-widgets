@@ -152,9 +152,9 @@ Item {
     // Init Logic
     Component.onCompleted: {
         try {
-            previewSettings = JSON.parse(cfg_previewSettings || '{"images": true, "videos": false, "text": false, "documents": false}')
+            previewSettings = JSON.parse(cfg_previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
         } catch (e) {
-            previewSettings = {"images": true, "videos": false, "text": false, "documents": false}
+            previewSettings = {"images": false, "videos": false, "text": false, "documents": false, "applications": false}
         }
     }
     
@@ -840,6 +840,43 @@ Item {
                             }
                             Label {
                                 text: "pdf, doc, docx, odt, ods, odp, ppt, pptx, xls, xlsx, kkra, cbz"
+                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize * 0.9
+                                color: Kirigami.Theme.textColor
+                                opacity: 0.6
+                                Layout.leftMargin: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+                            }
+                        }
+                    }
+                    
+                    Rectangle {
+                        Layout.fillWidth: true
+                        height: 1
+                        color: Kirigami.Theme.textColor
+                        opacity: 0.1
+                        Layout.topMargin: Kirigami.Units.smallSpacing
+                        Layout.bottomMargin: Kirigami.Units.smallSpacing
+                    }
+
+                    // Applications
+                    RowLayout {
+                        spacing: Kirigami.Units.largeSpacing
+                        Kirigami.Icon {
+                            source: "system-run"
+                            Layout.preferredWidth: 32
+                            Layout.preferredHeight: 32
+                            Layout.alignment: Qt.AlignTop
+                            Layout.topMargin: 4
+                        }
+                        ColumnLayout {
+                            spacing: 0
+                            CheckBox {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications")
+                                checked: previewSettings.applications || false
+                                onToggled: updatePreviewSetting("applications", checked)
+                                enabled: masterPreviewSwitch.checked
+                            }
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Desktop shortcuts and launcher commands")
                                 font.pixelSize: Kirigami.Theme.smallFont.pixelSize * 0.9
                                 color: Kirigami.Theme.textColor
                                 opacity: 0.6

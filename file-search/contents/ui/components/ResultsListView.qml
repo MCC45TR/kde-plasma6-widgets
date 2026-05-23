@@ -16,7 +16,10 @@ ScrollView {
     
     // Preview control - bound from config
     property bool previewEnabled: true
-    property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
+    property var previewSettings: ({"images": false, "videos": false, "text": false, "documents": false, "applications": false})
+    property bool previewShowResults: true
+    property int previewInlineMode: 1
+    property int previewSize: 1
     
     // Logic controller for context menu actions
     property var logic: null
@@ -93,7 +96,7 @@ ScrollView {
         delegate: Item {
             id: delegateRoot
             width: resultsList.width
-            height: isRSS ? rssCardLayout.implicitHeight + 24 : (modelData.subtext ? 48 : 36)
+            height: isRSS ? rssCardLayout.implicitHeight + 24 : (rssCardLayout.implicitHeight + 12)
             
             readonly property bool isRSS: modelData.category === "RSS" || 
                                           modelData.category === resultsListRoot.locNews || 
@@ -111,16 +114,48 @@ ScrollView {
                 }
             }
 
-            property bool previewActive: resultsListRoot.previewEnabled && !isRSS && resultMouseArea.containsMouse
+            property bool isPreviewAvailable: PreviewUtils.isPreviewAvailable(modelData.url || "", modelData.category || "", resultsListRoot.previewSettings)
+            property bool previewActive: resultsListRoot.previewEnabled && !isRSS && isPreviewAvailable && (resultsListRoot.previewInlineMode === 0 ? resultMouseArea.containsMouse : (resultsList.currentIndex === index))
+            property bool showInlinePreview: resultsListRoot.previewEnabled && resultsListRoot.previewShowResults && resultsListRoot.previewInlineMode === 1 && !isRSS && isPreviewAvailable && (resultsList.currentIndex === index)
             property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.url || "") : ""
             property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsListRoot.previewEnabled, resultsListRoot.previewSettings) : ""
-            property string previewFileType: PreviewUtils.getFileTypeLabel(modelData.url || "")
+            property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.url || "") : ""
             
+            onShowInlinePreviewChanged: {
+                delegateRoot.animateHeight = true;
+                if (showInlinePreview) {
+                    if (isTextFile) {
+                        loadTextSnippet();
+                    }
+                }
+            }
+
+            property bool isTextFile: {
+                if (!previewPath) return false;
+                var ext = previewPath.split('.').pop().toLowerCase();
+                var txtExts = ['txt', 'js', 'py', 'qml', 'html', 'css', 'json', 'md', 'sh', 'c', 'cpp', 'h', 'hpp', 'rs', 'go', 'java', 'xml', 'yml', 'yaml', 'ini', 'conf', 'log'];
+                return txtExts.indexOf(ext) !== -1;
+            }
+
+            function loadTextSnippet() {
+                if (!previewPath || !logic) return;
+                logic.readLocalTextSnippet(previewPath, function(content, bytes) {
+                    var lines = content.split('\n').slice(0, 5).join('\n');
+                    textSnippet.text = lines;
+                    
+                    var sizeStr = "";
+                    if (bytes < 1024) sizeStr = bytes + " B";
+                    else if (bytes < 1048576) sizeStr = (bytes / 1024).toFixed(1) + " KB";
+                    else sizeStr = (bytes / 1048576).toFixed(1) + " MB";
+                    fileSizeText.text = "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Size") + ":</b> " + sizeStr;
+                });
+            }
+
             // Background Container
             Rectangle {
                 anchors.fill: parent
                 anchors.margins: isRSS ? 4 : 0
-                color: resultMouseArea.containsMouse ? Qt.rgba(resultsListRoot.accentColor.r, resultsListRoot.accentColor.g, resultsListRoot.accentColor.b, 0.15) : 
+                color: (resultMouseArea.containsMouse || (resultsList.currentIndex === index && !isRSS)) ? Qt.rgba(resultsListRoot.accentColor.r, resultsListRoot.accentColor.g, resultsListRoot.accentColor.b, 0.15) : 
                        (isRSS ? Qt.rgba(resultsListRoot.accentColor.r, resultsListRoot.accentColor.g, resultsListRoot.accentColor.b, 0.05) : "transparent")
                 radius: isRSS ? 12 : 4
                 border.width: (isRSS || resultsList.currentIndex === index) ? 1 : 0
@@ -178,7 +213,7 @@ ScrollView {
                                 Layout.fillWidth: true
                             }
                         }
-
+ 
                         // Right side icons
                         Kirigami.Icon {
                             source: "pin"
@@ -223,7 +258,7 @@ ScrollView {
                             asynchronous: true
                             cache: true
                         }
-
+ 
                         Text {
                             text: resultsListRoot.rssMetaLine(modelData)
                             color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
@@ -263,7 +298,7 @@ ScrollView {
                                     onClicked: if (modelData.url) Qt.openUrlExternally(modelData.url)
                                 }
                             }
-
+ 
                             Button {
                                 text: resultsListRoot.locShare
                                 icon.name: "edit-copy"
@@ -272,7 +307,7 @@ ScrollView {
                                 Layout.preferredHeight: 32
                                 onClicked: logic.copyToClipboard(modelData.url)
                             }
-
+ 
                             Item { Layout.fillWidth: true }
                             
                             // Genişlet/Daralt Butonu (Sağ Alt)
@@ -290,6 +325,161 @@ ScrollView {
                                 background: Rectangle {
                                     color: parent.hovered ? Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.1) : "transparent"
                                     radius: 16
+                                }
+                            }
+                        }
+                    }
+
+                    // Native Inline Preview Card
+                    ColumnLayout {
+                        id: inlinePreviewCard
+                        Layout.fillWidth: true
+                        visible: delegateRoot.showInlinePreview
+                        spacing: 8
+                        Layout.topMargin: 8
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 1
+                            color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.15)
+                        }
+
+                        RowLayout {
+                            Layout.fillWidth: true
+                            spacing: 12
+                            Layout.leftMargin: 4
+                            Layout.rightMargin: 4
+
+                            // Left Column: Thumbnail or large icon
+                            Item {
+                                id: thumbContainer
+                                Layout.preferredWidth: resultsListRoot.previewSize === 0 ? 64 : (resultsListRoot.previewSize === 1 ? 120 : 200)
+                                Layout.preferredHeight: resultsListRoot.previewSize === 0 ? 48 : (resultsListRoot.previewSize === 1 ? 90 : 150)
+                                visible: delegateRoot.previewSource.length > 0 || delegateRoot.previewFileType.length > 0
+
+                                // Background fallback placeholder
+                                Rectangle {
+                                    anchors.fill: parent
+                                    color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.05)
+                                    radius: 4
+                                }
+
+                                Kirigami.Icon {
+                                    anchors.centerIn: parent
+                                    implicitWidth: 32
+                                    implicitHeight: 32
+                                    source: modelData.decoration || "application-x-executable"
+                                    color: resultsListRoot.textColor
+                                    opacity: 0.3
+                                    visible: imgPreview.status !== Image.Ready
+                                }
+
+                                Image {
+                                    id: imgPreview
+                                    anchors.fill: parent
+                                    source: delegateRoot.previewSource
+                                    fillMode: Image.PreserveAspectFit
+                                    visible: source.length > 0
+                                    cache: true
+                                    asynchronous: true
+                                }
+                            }
+
+                            // Right Column: Metadata
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 4
+
+                                Text {
+                                    text: modelData.display || ""
+                                    color: resultsListRoot.textColor
+                                    font.bold: true
+                                    font.pixelSize: 12
+                                    elide: Text.ElideRight
+                                    Layout.fillWidth: true
+                                }
+
+                                Text {
+                                    text: "<b>" + resultsListRoot.locCategory + ":</b> " + (modelData.category || "Other")
+                                    color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
+                                    font.pixelSize: 10
+                                    textFormat: Text.StyledText
+                                }
+
+                                Text {
+                                    text: "<b>" + resultsListRoot.locFileType + ":</b> " + delegateRoot.previewFileType
+                                    color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
+                                    font.pixelSize: 10
+                                    visible: delegateRoot.previewFileType.length > 0
+                                    textFormat: Text.StyledText
+                                }
+
+                                Text {
+                                    id: fileSizeText
+                                    text: ""
+                                    color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
+                                    font.pixelSize: 10
+                                    visible: text.length > 0
+                                    textFormat: Text.StyledText
+                                }
+
+                                Text {
+                                    text: "<b>" + resultsListRoot.locPath + ":</b> " + delegateRoot.previewPath
+                                    color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
+                                    font.pixelSize: 9
+                                    wrapMode: Text.WrapAnywhere
+                                    Layout.fillWidth: true
+                                    textFormat: Text.StyledText
+                                }
+                            }
+                        }
+
+                        // Text File Snippet Preview
+                        Rectangle {
+                            id: textSnippetBox
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: textSnippet.implicitHeight + 12
+                            color: Qt.rgba(0, 0, 0, 0.2)
+                            radius: 4
+                            border.width: 1
+                            border.color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.1)
+                            visible: delegateRoot.isTextFile && textSnippet.text.length > 0
+
+                            Text {
+                                id: textSnippet
+                                anchors.fill: parent
+                                anchors.margins: 6
+                                text: ""
+                                color: resultsListRoot.textColor
+                                font.family: "Monospace"
+                                font.pixelSize: 10
+                                wrapMode: Text.Wrap
+                            }
+                        }
+
+                        // Quick Actions
+                        RowLayout {
+                            Layout.fillWidth: true
+                            spacing: 10
+
+                            Button {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
+                                icon.name: "edit-copy"
+                                flat: true
+                                Layout.preferredHeight: 28
+                                onClicked: if (resultsListRoot.logic) resultsListRoot.logic.copyToClipboard(delegateRoot.previewPath)
+                            }
+
+                            Button {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Folder")
+                                icon.name: "folder-open"
+                                flat: true
+                                Layout.preferredHeight: 28
+                                visible: delegateRoot.previewPath.length > 0 && delegateRoot.previewPath.includes("/")
+                                onClicked: {
+                                    if (resultsListRoot.logic && delegateRoot.previewPath) {
+                                        resultsListRoot.logic.openContainingFolder(delegateRoot.previewPath)
+                                    }
                                 }
                             }
                         }
@@ -348,7 +538,7 @@ ScrollView {
             }
 
             ToolTip {
-                visible: delegateRoot.previewSource.length > 0
+                visible: resultsListRoot.previewInlineMode === 0 && delegateRoot.previewSource.length > 0
                 delay: 400
                 timeout: 10000
                 x: delegateRoot.width + 4

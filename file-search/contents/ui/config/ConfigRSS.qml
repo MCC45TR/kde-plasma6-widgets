@@ -54,17 +54,26 @@ Item {
     property int cfg_listIconSize
     property int cfg_minResults
     property int cfg_maxResults
-    property bool cfg_smartResultLimit
     property bool cfg_showPinnedBar
     property bool cfg_autoMinimizePinned
     property int cfg_compactPinnedView
     property int cfg_filterChipStyle
     property string cfg_previewSettings
     property bool cfg_previewEnabled
+    property bool cfg_previewShowResults
+    property bool cfg_previewShowHistory
+    property int cfg_previewInlineMode
+    property int cfg_previewSize
     property bool cfg_prefixDateShowClock
     property bool cfg_prefixDateShowEvents
     property bool cfg_prefixPowerShowHibernate
     property bool cfg_prefixPowerShowSleep
+    property bool cfg_prefixShellEnabled
+    property bool cfg_prefixTimelineEnabled
+    property bool cfg_prefixWebSearchEnabled
+    property bool cfg_prefixKillEnabled
+    property bool cfg_prefixSpellEnabled
+    property bool cfg_prefixUnitEnabled
     property bool cfg_showBootOptions
     property string cfg_cachedBootEntries
     property bool cfg_weatherEnabled
@@ -79,6 +88,7 @@ Item {
     property string cfg_pinnedItems
     property bool cfg_debugOverlay
     property string cfg_telemetryData
+    property bool cfg_rssShowSource
     // RSS properties are already defined above (lines 13-38)
 
     // Default Properties (Matching main.xml for completeness)
@@ -94,7 +104,6 @@ Item {
     property int cfg_listIconSizeDefault
     property int cfg_minResultsDefault
     property int cfg_maxResultsDefault
-    property bool cfg_smartResultLimitDefault
     property bool cfg_showPinnedBarDefault
     property bool cfg_autoMinimizePinnedDefault
     property int cfg_compactPinnedViewDefault
@@ -491,12 +500,7 @@ Item {
         }
     }
 
-    function addLog(index, msg, status) {
-        var logs = testLogs[index] || []
-        logs.push({msg: msg, status: status})
-        testLogs[index] = logs
-        testLogs = JSON.parse(JSON.stringify(testLogs))
-    }
+
 
     function clearLogs(index) {
         var logs = testLogs
@@ -872,11 +876,12 @@ Item {
                                 onClicked: testSource(modelData.url, index)
                                 flat: true
                                 
-                                RotationAnimation on icon.name {
+                                QQC2.BusyIndicator {
+                                    anchors.centerIn: parent
+                                    width: parent.height * 0.6
+                                    height: width
                                     running: testResults[index] === "testing"
-                                    loops: Animation.Infinite
-                                    from: 0; to: 360; duration: 1000
-                                    enabled: testResults[index] === "testing"
+                                    visible: running
                                 }
                             }
                             QQC2.Button {

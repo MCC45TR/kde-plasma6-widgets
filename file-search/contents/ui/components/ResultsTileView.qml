@@ -26,6 +26,9 @@ FocusScope {
     // Preview settings from config
     property bool previewEnabled: true
     property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
+    property bool previewShowResults: true
+    property int previewInlineMode: 1
+    property int previewSize: 1
     
     // RSS settings from config
     property bool rssShowImages: true
@@ -36,6 +39,7 @@ FocusScope {
     property int currentCategoryIndex: 0
     property int currentItemIndex: 0
     property var collapsedCategories: ({})
+    property var logic: null
     
     // Computed flat list for keyboard navigation
     property var flatItemList: {
@@ -449,24 +453,55 @@ FocusScope {
                         delegate: Item {
                             id: tileDelegate
                             property bool isRSS: modelData.category === "RSS"
-                            property bool isExpanded: isRSS && resultsTileRoot.rssExpandableCards && !!resultsTileRoot.expandedItems[modelData.duplicateId]
-                            
+                            property bool isPreviewAvailable: PreviewUtils.isPreviewAvailable(modelData.url || "", modelData.category || "", resultsTileRoot.previewSettings)
+                            property bool showInlinePreview: resultsTileRoot.previewEnabled && resultsTileRoot.previewShowResults && resultsTileRoot.previewInlineMode === 1 && !isRSS && isPreviewAvailable && tileDelegate.isSelected
+                            property bool isExpanded: (isRSS && resultsTileRoot.rssExpandableCards && !!resultsTileRoot.expandedItems[modelData.duplicateId]) || showInlinePreview
+                             
                             // Wide vs Grid sizing
                             width: (categoryDelegate.isWide || tileDelegate.isExpanded) ? parent.width : resultsTileRoot.tileWidth
                             height: (categoryDelegate.isWide || tileDelegate.isExpanded) ? (tileContent.implicitHeight + 16) : resultsTileRoot.tileHeight
-                            
+                             
                             Layout.fillWidth: categoryDelegate.isWide || tileDelegate.isExpanded
-                            
+                             
                             Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
                             Behavior on height { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
-                            
+                             
                             property int itemIdx: index
                             property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
-                            property string previewPath: PreviewUtils.getLocalPreviewPath(modelData.url || "")
-                            property string previewFileType: PreviewUtils.getFileTypeLabel(modelData.url || "")
-                            property string previewSource: (!categoryDelegate.isWide && !tileDelegate.isExpanded)
-                                ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings)
-                                : ""
+                             
+                            property bool previewActive: resultsTileRoot.previewEnabled && isPreviewAvailable && (resultsTileRoot.previewInlineMode === 0 ? tileMouseArea.containsMouse : tileDelegate.isSelected)
+                            property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.url || "") : ""
+                            property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.url || "") : ""
+                            property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings) : ""
+
+                            onShowInlinePreviewChanged: {
+                                if (showInlinePreview) {
+                                    if (isTextFile) {
+                                        loadTextSnippet();
+                                    }
+                                }
+                            }
+
+                            property bool isTextFile: {
+                                if (!previewPath) return false;
+                                var ext = previewPath.split('.').pop().toLowerCase();
+                                var txtExts = ['txt', 'js', 'py', 'qml', 'html', 'css', 'json', 'md', 'sh', 'c', 'cpp', 'h', 'hpp', 'rs', 'go', 'java', 'xml', 'yml', 'yaml', 'ini', 'conf', 'log'];
+                                return txtExts.indexOf(ext) !== -1;
+                            }
+
+                            function loadTextSnippet() {
+                                if (!previewPath || !resultsTileRoot.logic) return;
+                                resultsTileRoot.logic.readLocalTextSnippet(previewPath, function(content, bytes) {
+                                    var lines = content.split('\n').slice(0, 5).join('\n');
+                                    textSnippet.text = lines;
+                                    
+                                    var sizeStr = "";
+                                    if (bytes < 1024) sizeStr = bytes + " B";
+                                    else if (bytes < 1048576) sizeStr = (bytes / 1024).toFixed(1) + " KB";
+                                    else sizeStr = (bytes / 1048576).toFixed(1) + " MB";
+                                    fileSizeText.text = "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Size") + ":</b> " + sizeStr;
+                                });
+                            }
                             
                             Rectangle {
                                 id: tileBg
@@ -611,7 +646,7 @@ FocusScope {
                                                 Layout.preferredWidth: resultsTileRoot.iconSize
                                                 Layout.preferredHeight: resultsTileRoot.iconSize
                                                 color: resultsTileRoot.textColor
-                                                visible: !tileDelegate.isExpanded // Show icon only when not expanded
+                                                visible: !tileDelegate.isExpanded || !tileDelegate.isRSS
                                             }
                                             
                                             ColumnLayout {
@@ -645,14 +680,14 @@ FocusScope {
                                                 Layout.preferredHeight: 16
                                                 color: resultsTileRoot.textColor
                                                 opacity: 0.5
-                                                visible: tileDelegate.isExpanded
+                                                visible: tileDelegate.isExpanded && tileDelegate.isRSS
                                             }
                                         }
 
-                                        // Expanded Content
+                                        // Expanded RSS Content
                                         ColumnLayout {
                                             Layout.fillWidth: true
-                                            visible: tileDelegate.isExpanded
+                                            visible: tileDelegate.isExpanded && tileDelegate.isRSS
                                             spacing: 12
                                             
                                             // Image
@@ -691,6 +726,161 @@ FocusScope {
                                                     opacity: 0.6
                                                     Layout.fillWidth: true
                                                     horizontalAlignment: Text.AlignRight
+                                                }
+                                            }
+                                        }
+
+                                        // Native Inline Preview Card for files
+                                        ColumnLayout {
+                                            id: inlinePreviewCard
+                                            Layout.fillWidth: true
+                                            visible: tileDelegate.showInlinePreview
+                                            spacing: 8
+                                            Layout.topMargin: 8
+
+                                            Rectangle {
+                                                Layout.fillWidth: true
+                                                Layout.preferredHeight: 1
+                                                color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.15)
+                                            }
+
+                                            RowLayout {
+                                                Layout.fillWidth: true
+                                                spacing: 12
+                                                Layout.leftMargin: 4
+                                                Layout.rightMargin: 4
+
+                                                // Left Column: Thumbnail or large icon
+                                                Item {
+                                                    id: thumbContainer
+                                                    Layout.preferredWidth: resultsTileRoot.previewSize === 0 ? 64 : (resultsTileRoot.previewSize === 1 ? 120 : 200)
+                                                    Layout.preferredHeight: resultsTileRoot.previewSize === 0 ? 48 : (resultsTileRoot.previewSize === 1 ? 90 : 150)
+                                                    visible: tileDelegate.previewSource.length > 0 || tileDelegate.previewFileType.length > 0
+
+                                                    // Background fallback placeholder
+                                                    Rectangle {
+                                                        anchors.fill: parent
+                                                        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.05)
+                                                        radius: 4
+                                                    }
+
+                                                    Kirigami.Icon {
+                                                        anchors.centerIn: parent
+                                                        implicitWidth: 32
+                                                        implicitHeight: 32
+                                                        source: modelData.decoration || "application-x-executable"
+                                                        color: resultsTileRoot.textColor
+                                                        opacity: 0.3
+                                                        visible: imgPreview.status !== Image.Ready
+                                                    }
+
+                                                    Image {
+                                                        id: imgPreview
+                                                        anchors.fill: parent
+                                                        source: tileDelegate.previewSource
+                                                        fillMode: Image.PreserveAspectFit
+                                                        visible: source.length > 0
+                                                        cache: true
+                                                        asynchronous: true
+                                                    }
+                                                }
+
+                                                // Right Column: Metadata
+                                                ColumnLayout {
+                                                    Layout.fillWidth: true
+                                                    spacing: 4
+
+                                                    Text {
+                                                        text: modelData.display || ""
+                                                        color: resultsTileRoot.textColor
+                                                        font.bold: true
+                                                        font.pixelSize: 12
+                                                        elide: Text.ElideRight
+                                                        Layout.fillWidth: true
+                                                    }
+
+                                                    Text {
+                                                        text: "<b>" + resultsTileRoot.locCategory + ":</b> " + (modelData.category || "Other")
+                                                        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                                        font.pixelSize: 10
+                                                        textFormat: Text.StyledText
+                                                    }
+
+                                                    Text {
+                                                        text: "<b>" + resultsTileRoot.locFileType + ":</b> " + tileDelegate.previewFileType
+                                                        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                                        font.pixelSize: 10
+                                                        visible: tileDelegate.previewFileType.length > 0
+                                                        textFormat: Text.StyledText
+                                                    }
+
+                                                    Text {
+                                                        id: fileSizeText
+                                                        text: ""
+                                                        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
+                                                        font.pixelSize: 10
+                                                        visible: text.length > 0
+                                                        textFormat: Text.StyledText
+                                                    }
+
+                                                    Text {
+                                                        text: "<b>" + resultsTileRoot.locPath + ":</b> " + tileDelegate.previewPath
+                                                        color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
+                                                        font.pixelSize: 9
+                                                        wrapMode: Text.WrapAnywhere
+                                                        Layout.fillWidth: true
+                                                        textFormat: Text.StyledText
+                                                    }
+                                                }
+                                            }
+
+                                            // Text File Snippet Preview
+                                            Rectangle {
+                                                id: textSnippetBox
+                                                Layout.fillWidth: true
+                                                Layout.preferredHeight: textSnippet.implicitHeight + 12
+                                                color: Qt.rgba(0, 0, 0, 0.2)
+                                                radius: 4
+                                                border.width: 1
+                                                border.color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.1)
+                                                visible: tileDelegate.isTextFile && textSnippet.text.length > 0
+
+                                                Text {
+                                                    id: textSnippet
+                                                    anchors.fill: parent
+                                                    anchors.margins: 6
+                                                    text: ""
+                                                    color: resultsTileRoot.textColor
+                                                    font.family: "Monospace"
+                                                    font.pixelSize: 10
+                                                    wrapMode: Text.Wrap
+                                                }
+                                            }
+
+                                            // Quick Actions
+                                            RowLayout {
+                                                Layout.fillWidth: true
+                                                spacing: 10
+
+                                                Button {
+                                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
+                                                    icon.name: "edit-copy"
+                                                    flat: true
+                                                    Layout.preferredHeight: 28
+                                                    onClicked: if (resultsTileRoot.logic) resultsTileRoot.logic.copyToClipboard(tileDelegate.previewPath)
+                                                }
+
+                                                Button {
+                                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Folder")
+                                                    icon.name: "folder-open"
+                                                    flat: true
+                                                    Layout.preferredHeight: 28
+                                                    visible: tileDelegate.previewPath.length > 0 && tileDelegate.previewPath.includes("/")
+                                                    onClicked: {
+                                                        if (resultsTileRoot.logic && tileDelegate.previewPath) {
+                                                            resultsTileRoot.logic.openContainingFolder(tileDelegate.previewPath)
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -760,10 +950,9 @@ FocusScope {
                                     }
                                 }
                                 
-                                // File Preview Tooltip
                                 ToolTip {
                                     id: previewTooltip
-                                    visible: tileDelegate.previewSource.length > 0 && (tileMouseArea.containsMouse || (tileDelegate.isSelected && resultsTileRoot.previewForceVisible))
+                                    visible: resultsTileRoot.previewInlineMode === 0 && tileDelegate.previewSource.length > 0 && (tileMouseArea.containsMouse || (tileDelegate.isSelected && resultsTileRoot.previewForceVisible))
                                     delay: tileDelegate.isSelected && resultsTileRoot.previewForceVisible ? 0 : 500
                                     timeout: 10000
                                     x: tileDelegate.width + 4

@@ -1,16 +1,5 @@
 msgid ""
-msgstr ""
-"Project-Id-Version: file-search 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-23 02:06+0300\n"
-"PO-Revision-Date: 2026-01-22 12:00+0300\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: pt\n"
-"Language: pt\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+msgstr "Project-Id-Version: file-search 1.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-23 02:06+0300\nPO-Revision-Date: 2026-01-22 12:00+0300\nLast-Translator: Automatically generated\nLanguage-Team: pt\nLanguage: pt\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: contents/config/config.qml:6 contents/ui/config/ConfigGeneral.qml:23
 msgid "Appearance"
@@ -1646,4 +1635,3 @@ msgstr "Modo ultra-largo (Cobertura máxima)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Power User - Todas as funções, definições avançadas."
-

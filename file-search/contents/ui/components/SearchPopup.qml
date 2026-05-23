@@ -51,7 +51,11 @@ Item {
     property bool showDebug: false
     property bool showBootOptions: false
     property bool previewEnabled: true
-    property var previewSettings: ({"images": true, "videos": false, "text": false, "documents": false})
+    property bool previewShowResults: true
+    property bool previewShowHistory: true
+    property int previewInlineMode: 1
+    property int previewSize: 1
+    property var previewSettings: ({"images": false, "videos": false, "text": false, "documents": false, "applications": false})
     
     // Prefix Settings
     property bool prefixDateShowClock: true
@@ -99,6 +103,12 @@ Item {
     readonly property string _locSpell: i18nd("plasma_applet_com.mcc45tr.filesearch", "spell")
     readonly property string _locShell: i18nd("plasma_applet_com.mcc45tr.filesearch", "shell")
     readonly property bool _canShowWeather: plasmoidConfig && plasmoidConfig.weatherEnabled
+    readonly property bool _prefixShellEnabled: plasmoidConfig ? (plasmoidConfig.prefixShellEnabled !== undefined ? plasmoidConfig.prefixShellEnabled : true) : true
+    readonly property bool _prefixTimelineEnabled: plasmoidConfig ? (plasmoidConfig.prefixTimelineEnabled !== undefined ? plasmoidConfig.prefixTimelineEnabled : true) : true
+    readonly property bool _prefixWebSearchEnabled: plasmoidConfig ? (plasmoidConfig.prefixWebSearchEnabled !== undefined ? plasmoidConfig.prefixWebSearchEnabled : true) : true
+    readonly property bool _prefixKillEnabled: plasmoidConfig ? (plasmoidConfig.prefixKillEnabled !== undefined ? plasmoidConfig.prefixKillEnabled : true) : true
+    readonly property bool _prefixSpellEnabled: plasmoidConfig ? (plasmoidConfig.prefixSpellEnabled !== undefined ? plasmoidConfig.prefixSpellEnabled : true) : true
+    readonly property bool _prefixUnitEnabled: plasmoidConfig ? (plasmoidConfig.prefixUnitEnabled !== undefined ? plasmoidConfig.prefixUnitEnabled : true) : true
 
     // ===== CACHED QUERY RESULTS (recomputed once per searchText change) =====
     readonly property string effectiveQuery: _computeEffectiveQuery(searchText)
@@ -462,8 +472,10 @@ Item {
         var lower = t.toLowerCase()
         
         // 1. Check for "unit:"
-        if (lower.startsWith("unit:")) return t.substring(5).trim()
-        if (_locUnit && lower.startsWith(_locUnit + ":")) return t.substring(_locUnit.length + 1).trim()
+        if (_prefixUnitEnabled) {
+            if (lower.startsWith("unit:")) return t.substring(5).trim()
+            if (_locUnit && lower.startsWith(_locUnit + ":")) return t.substring(_locUnit.length + 1).trim()
+        }
         
         // 2. Check for "clock:" then "date:"
         if (lower === "clock:" || (_locClock && lower === _locClock + ":")) return "clock:"
@@ -476,21 +488,27 @@ Item {
         if (lower === "help:" || (_locHelp && lower === _locHelp + ":")) return "help:"
 
         // 5. Check for "kill"
-        if (lower.startsWith("kill ") || (_locKill && lower.startsWith(_locKill + " "))) {
-            var killPrefix = lower.startsWith("kill ") ? "kill" : _locKill;
-            return "kill " + t.substring(killPrefix.length + 1)
+        if (_prefixKillEnabled) {
+            if (lower.startsWith("kill ") || (_locKill && lower.startsWith(_locKill + " "))) {
+                var killPrefix = lower.startsWith("kill ") ? "kill" : _locKill;
+                return "kill " + t.substring(killPrefix.length + 1)
+            }
         }
 
         // 6. Check for "spell"
-        if (lower.startsWith("spell ") || (_locSpell && lower.startsWith(_locSpell + " "))) {
-            var spellPrefix = lower.startsWith("spell ") ? "spell" : _locSpell;
-            return "spell " + t.substring(spellPrefix.length + 1)
+        if (_prefixSpellEnabled) {
+            if (lower.startsWith("spell ") || (_locSpell && lower.startsWith(_locSpell + " "))) {
+                var spellPrefix = lower.startsWith("spell ") ? "spell" : _locSpell;
+                return "spell " + t.substring(spellPrefix.length + 1)
+            }
         }
         
         // 7. Check for "shell:"
-        if (lower.startsWith("shell:") || (_locShell && lower.startsWith(_locShell + ":"))) {
-            var shellPrefix = lower.startsWith("shell:") ? "shell" : _locShell;
-            return "shell:" + t.substring(shellPrefix.length + 1)
+        if (_prefixShellEnabled) {
+            if (lower.startsWith("shell:") || (_locShell && lower.startsWith(_locShell + ":"))) {
+                var shellPrefix = lower.startsWith("shell:") ? "shell" : _locShell;
+                return "shell:" + t.substring(shellPrefix.length + 1)
+            }
         }
         
         // 8. Check for "power:"
@@ -521,8 +539,8 @@ Item {
              if (isTileView && tileResultsLoader.item) {
                  tileResultsLoader.item.activateCurrentItem();
                  return;
-             } else if (searchText.length === 0 && historyLoader.item && isTileView) {
-                 // History Tile View activation
+             } else if (searchText.length === 0 && historyLoader.item) {
+                 // History View activation (tile or list)
                  if (historyLoader.item.activateCurrentItem) { // If exposed
                      historyLoader.item.activateCurrentItem();
                      return;
@@ -818,6 +836,9 @@ Item {
              searchText: popupRoot.searchText
              isLoading: popupRoot.isLoadingResults
              previewEnabled: popupRoot.previewEnabled
+             previewShowResults: popupRoot.previewShowResults
+             previewInlineMode: popupRoot.previewInlineMode
+             previewSize: popupRoot.previewSize
              previewSettings: popupRoot.previewSettings
              logic: popupRoot.logic
              
@@ -861,6 +882,9 @@ Item {
              searchText: popupRoot.searchText
              isLoading: popupRoot.isLoadingResults
              previewEnabled: popupRoot.previewEnabled
+             previewShowResults: popupRoot.previewShowResults
+             previewInlineMode: popupRoot.previewInlineMode
+             previewSize: popupRoot.previewSize
              previewSettings: popupRoot.previewSettings
              scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
              compactTileView: popupRoot.compactHistoryItems
@@ -1033,9 +1057,11 @@ Item {
              // Helper to route navigation
              function moveUp() { 
                  if (isTileView) histTileView.moveUp();
+                 else histListView.moveUp();
              }
              function moveDown() { 
                  if (isTileView) histTileView.moveDown();
+                 else histListView.moveDown();
              }
              function moveLeft() { 
                  if (isTileView) histTileView.moveLeft();
@@ -1045,10 +1071,11 @@ Item {
              }
              function activateCurrentItem() {
                  if (isTileView) histTileView.activateCurrentItem();
+                 else histListView.activateCurrentItem();
              }
 
              // History List
-                             HistoryListView {
+             HistoryListView {
                  id: histListView
                  anchors.fill: parent
                  visible: !isTileView
@@ -1060,6 +1087,9 @@ Item {
 
                  logic: popupRoot.logic
                  previewEnabled: popupRoot.previewEnabled
+                 previewShowHistory: popupRoot.previewShowHistory
+                 previewInlineMode: popupRoot.previewInlineMode
+                 previewSize: popupRoot.previewSize
                  previewSettings: popupRoot.previewSettings
                  
                  onItemClicked: (item) => handleHistoryClick(item)
@@ -1070,6 +1100,9 @@ Item {
              HistoryTileView {
                  id: histTileView
                  previewEnabled: popupRoot.previewEnabled
+                 previewShowHistory: popupRoot.previewShowHistory
+                 previewInlineMode: popupRoot.previewInlineMode
+                 previewSize: popupRoot.previewSize
                  anchors.fill: parent
                  visible: isTileView
                  categorizedHistory: historyLoader.categorizedHistory

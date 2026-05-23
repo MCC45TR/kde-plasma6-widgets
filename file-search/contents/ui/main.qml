@@ -191,11 +191,15 @@ PlasmoidItem {
         autoMinimizePinned: Plasmoid.configuration.autoMinimizePinned
         compactTileMode: Plasmoid.configuration.compactPinnedView
         previewEnabled: Plasmoid.configuration.previewEnabled
+        previewShowResults: Plasmoid.configuration.previewShowResults !== undefined ? Plasmoid.configuration.previewShowResults : true
+        previewShowHistory: Plasmoid.configuration.previewShowHistory !== undefined ? Plasmoid.configuration.previewShowHistory : true
+        previewInlineMode: Plasmoid.configuration.previewInlineMode !== undefined ? Plasmoid.configuration.previewInlineMode : 1
+        previewSize: Plasmoid.configuration.previewSize !== undefined ? Plasmoid.configuration.previewSize : 1
         previewSettings: {
             try {
-                return JSON.parse(Plasmoid.configuration.previewSettings || '{"images": true, "videos": false, "text": false, "documents": false}')
+                return JSON.parse(Plasmoid.configuration.previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
             } catch (e) {
-                return {"images": true, "videos": false, "text": false, "documents": false}
+                return {"images": false, "videos": false, "text": false, "documents": false, "applications": false}
             }
         }
 
