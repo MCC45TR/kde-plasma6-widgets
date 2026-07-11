@@ -5,9 +5,40 @@ import QtCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as Plasma5Support
 import "../js/RSSManager.js" as RSSManager
+import "../js/utils.js" as Utils
 
 Item {
     id: configRSS
+
+    // Weather configuration
+    property string cfg_weatherProvider
+    property string cfg_weatherProviderDefault
+    property string cfg_weatherLocationMode
+    property string cfg_weatherLocationModeDefault
+    property string cfg_weatherLocation
+    property string cfg_weatherLocationDefault
+    property string cfg_weatherApiKey
+    property string cfg_weatherApiKeyDefault
+    property string cfg_weatherApiKey2
+    property string cfg_weatherApiKey2Default
+    property int cfg_weatherUpdateTrigger
+    property int cfg_weatherUpdateTriggerDefault
+    // Shared configuration defaults
+    property bool cfg_previewShowResultsDefault
+    property bool cfg_previewShowHistoryDefault
+    property int cfg_previewInlineModeDefault
+    property int cfg_previewSizeDefault
+    property bool cfg_prefixShellEnabledDefault
+    property bool cfg_prefixTimelineEnabledDefault
+    property bool cfg_prefixWebSearchEnabledDefault
+    property bool cfg_prefixKillEnabledDefault
+    property bool cfg_prefixSpellEnabledDefault
+    property bool cfg_prefixUnitEnabledDefault
+    property bool cfg_rssShowSourceDefault
+    property var title
+    property var titleDefault
+    property int maxHistoryItems
+    property int maxHistoryItemsDefault
     
     // Properties matching main.xml (KConfig handles cfg_ prefix)
     property bool cfg_rssEnabled
@@ -36,6 +67,8 @@ Item {
     property bool cfg_rssShowFullHeadlineDefault: true
     property int cfg_rssFrequency: 3
     property int cfg_rssFrequencyDefault: 3
+    property int cfg_weatherFrequency: 2
+    property int cfg_weatherFrequencyDefault: 2
     
     // =========================================================================
     // CONFIGURATION PROPERTIES (Matching main.xml for Plasma 6 injection)
@@ -89,6 +122,12 @@ Item {
     property bool cfg_debugOverlay
     property string cfg_telemetryData
     property bool cfg_rssShowSource
+    property bool cfg_weatherPlaceholderCycling
+    property bool cfg_weatherPlaceholderCyclingDefault
+    property string cfg_weatherIconPack
+    property string cfg_weatherIconPackDefault
+    property string cfg_weatherViewMode
+    property string cfg_weatherViewModeDefault
     // RSS properties are already defined above (lines 13-38)
 
     // Default Properties (Matching main.xml for completeness)
@@ -151,6 +190,7 @@ Item {
 
     // RSS Configuration UI State (Internal)
     property var rssSources: []
+    property int rssSourcesRevision: 0
     property var testLogs: ({})    // { index: [{msg: string, status: string}] }
     property var testResults: ({}) // { index: "success" | "error" | "testing" }
 
@@ -184,39 +224,53 @@ Item {
         return path;
     }
 
-    readonly property string rssCacheBase: (StandardPaths.writableLocation(StandardPaths.CacheLocation) + "/com.mcc45tr.filesearch/rss").replace(/^file:\/\/\/?/, "/")
+    readonly property string rssCacheBase: (StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.cache/com.mcc45tr.filesearch/rss").replace(/^file:\/\/\/?/, "/")
+
+    function runExecutable(cmd, callback) {
+        var uniqueCmd = cmd + " #uniq_" + Date.now() + "_" + Math.floor(Math.random() * 1000000);
+        executable.callbacks[uniqueCmd] = callback;
+        executable.connectSource(uniqueCmd);
+        return uniqueCmd;
+    }
 
     Plasma5Support.DataSource {
         id: executable
         engine: "executable"
         connectedSources: []
         property var callbacks: ({})
+        property var processedIndex: ({})
         onNewData: (source, data) => {
             var stdout = (data["stdout"] || "") + (data["stderr"] || "") // Merge stderr for debugging
-            var lines = stdout.split("\n")
+            var exitCode = data["exit code"]
+            var isFinished = (exitCode !== undefined)
             
-            var callback = callbacks[source]
-            if (!callback) {
-                // Fallback for partial source matches
-                for (var key in callbacks) {
-                    if (source.indexOf(key) !== -1) {
-                        callback = callbacks[key]
-                        break
+            var offset = processedIndex[source] || 0
+            if (stdout.length > offset) {
+                var newPart = stdout.substring(offset)
+                processedIndex[source] = stdout.length
+                
+                var lines = newPart.split("\n")
+                var callback = callbacks[source]
+
+                if (callback) {
+                    for (var i = 0; i < lines.length; i++) {
+                        var line = lines[i].trim()
+                        if (line) {
+                            callback(line, source, isFinished, exitCode)
+                        }
                     }
                 }
             }
-
-            if (callback) {
-                for (var i = 0; i < lines.length; i++) {
-                    var line = lines[i].trim()
-                    if (line) callback(line, source)
+            
+            if (isFinished) {
+                var cb = callbacks[source]
+                if (cb && stdout.length <= offset) {
+                    cb("", source, true, exitCode)
                 }
                 
-                // Final state checks: SUCCESS, FAIL:, or execution finished (exit code)
-                if (stdout.indexOf("SUCCESS") !== -1 || stdout.indexOf("FAIL:") !== -1 || data["exit code"] !== undefined) {
-                    delete callbacks[source]
-                    disconnectSource(source)
-                }
+                delete callbacks[source]
+                delete processedIndex[source]
+                disconnectSource(source)
             }
         }
     }
@@ -495,7 +549,9 @@ Item {
     function updateSource(index, key, value) {
         if (rssSources[index]) {
             rssSources[index][key] = value
-            rssSources = JSON.parse(JSON.stringify(rssSources)) 
+            // Replacing this array recreates every Repeater delegate and drops
+            // focus from the TextField on every keystroke.
+            rssSourcesRevision++
             saveSources()
         }
     }
@@ -517,7 +573,10 @@ Item {
         var path = RSSManager.getSourceFilePath(url, base)
         var json = JSON.stringify(entries)
         var base64Json = RSSManager.encodeBase64(json)
-        executable.connectSource("mkdir -p '" + base + "' && (echo '" + base64Json + "' > '" + path + "')")
+        var cmd = "mkdir -p " + Utils.shellEscape(base)
+                + " && printf '%s' " + Utils.shellEscape(base64Json)
+                + " > " + Utils.shellEscape(path)
+        runExecutable(cmd, function() {})
     }
 
     function updateCombinedCache(entriesBySource, markAsFresh) {
@@ -544,42 +603,61 @@ Item {
     }
 
     function syncSource(url, index, onComplete) {
-        if (!url || url.indexOf("http") !== 0) {
+        if (!Utils.isHttpUrl(url)) {
             addLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Invalid URL"), "fail")
             if (onComplete) onComplete(false, [])
             return
         }
 
         testResults[index] = "testing"
+        testResults = Object.assign({}, testResults)
         testLogs[index] = []
         addLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Starting background sync..."), "testing")
+
+        var completed = false
+        function safeOnComplete(success) {
+            if (completed) return
+            completed = true
+            if (onComplete) onComplete(success)
+        }
 
         var l = logic
         if (l) {
             l.syncSourceBackground(index, function(line, source) {
                 processSyncLine(index, line, true)
-                if (line === "SUCCESS" && onComplete) onComplete(true)
-                else if (line.indexOf("FAIL:") === 0 && onComplete) onComplete(false)
+                if (line === "SUCCESS") safeOnComplete(true)
+                else if (line.indexOf("FAIL:") === 0) safeOnComplete(false)
             })
         } else {
             // Standalone sync logic using local executable DataSource
             var scriptPath = getScriptPath()
             if (!scriptPath || scriptPath === "undefined" || scriptPath.indexOf("rss_sync.sh") === -1) {
-                 addLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Script not found at: %1", scriptPath), "fail")
-                 testResults[index] = "error"
-                 if (onComplete) onComplete(false)
-                 return
+                  addLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Script not found at: %1", scriptPath), "fail")
+                   testResults[index] = "error"
+                   testResults = Object.assign({}, testResults)
+                   safeOnComplete(false)
+                   return
             }
             
             var max = rssSources[index].maxEntries || cfg_rssMaxEntries || 10
-            var cmd = "sh \"" + scriptPath + "\" \"" + rssCacheBase + "\" \"" + url + "\" \"" + rssSources[index].name + "\" \"" + max + "\""
+            var cmd = "sh " + Utils.shellEscape(scriptPath)
+                    + " " + Utils.shellEscape(rssCacheBase)
+                    + " " + Utils.shellEscape(url)
+                    + " " + Utils.shellEscape(rssSources[index].name || "")
+                    + " " + Utils.shellEscape(String(max))
             
-            executable.callbacks[cmd] = function(line, source) {
-                processSyncLine(index, line)
-                if (line === "SUCCESS" && onComplete) onComplete(true)
-                else if (line.indexOf("FAIL:") === 0 && onComplete) onComplete(false)
-            }
-            executable.connectSource(cmd)
+            runExecutable(cmd, function(line, source, isFinished, exitCode) {
+                if (line) {
+                    processSyncLine(index, line)
+                }
+                if (isFinished) {
+                    if (exitCode === 0) {
+                        safeOnComplete(true)
+                    } else {
+                        safeOnComplete(false)
+                    }
+                }
+            })
         }
     }
 
@@ -587,6 +665,7 @@ Item {
         if (line === "SUCCESS") {
             updateLastLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Sync: SUCCESS"), "ok")
             testResults[index] = "success"
+            testResults = Object.assign({}, testResults)
             updateSource(index, "lastSync", Date.now())
             cfg_rssLastSyncAll = Date.now()
             if (useLogic && logic) {
@@ -597,6 +676,7 @@ Item {
         } else if (line.indexOf("FAIL:") === 0) {
             updateLastLog(index, line.replace("FAIL:", "Sync: FAIL -"), "fail")
             testResults[index] = "error"
+            testResults = Object.assign({}, testResults)
         } else if (line.indexOf(": START") !== -1) {
             addLog(index, line.replace(": START", "..."), "testing")
         } else if (line.indexOf(": OK") !== -1) {
@@ -621,18 +701,21 @@ Item {
             return
         }
 
-        var remaining = rssSources.length
-        for (var i = 0; i < rssSources.length; i++) {
-            (function(sourceIndex) {
-                var sourceUrl = rssSources[sourceIndex].url
-                syncSource(sourceUrl, sourceIndex, function(success) {
-                    remaining--
-                    if (remaining === 0 && logic) {
-                        logic.updateCombinedCache(true)
-                    }
-                })
-            })(i)
+        var index = 0;
+        function syncNext() {
+            if (index >= rssSources.length) return;
+            var sourceUrl = rssSources[index].url;
+            var currentIndex = index;
+            index++;
+            
+            syncSource(sourceUrl, currentIndex, function(success) {
+                if (success && logic) {
+                    logic.updateCombinedCache(true);
+                }
+                syncNext();
+            });
         }
+        syncNext();
     }
 
     function clearCacheFolder() {
@@ -646,7 +729,8 @@ Item {
         } else {
             // Fallback if logic is missing
             var base = rssCacheBase
-            executable.connectSource("rm -rf \"" + base + "\" && mkdir -p \"" + base + "\"")
+            var cmd = "rm -rf \"" + base + "\" && mkdir -p \"" + base + "\""
+            runExecutable(cmd, function() {})
             cfg_rssCache = "[]"
             cfg_rssLastSyncAll = 0
             for (var i = 0; i < rssSources.length; i++) {
@@ -828,7 +912,8 @@ Item {
                                 }
                             }
 
-                            // Source Icon (Favicon)
+                            // Local icon: do not disclose private/custom feed
+                            // hostnames to a third-party favicon service.
                             Item {
                                 width: 32
                                 height: 32
@@ -843,19 +928,11 @@ Item {
                                     opacity: 0.3
                                 }
 
-                                Image {
+                                Kirigami.Icon {
                                     anchors.fill: parent
                                     anchors.margins: 4
-                                    source: "https://www.google.com/s2/favicons?domain=" + (modelData.url ? modelData.url.split("/")[2] : "") + "&sz=64"
-                                    fillMode: Image.PreserveAspectFit
-                                    asynchronous: true
-                                    
-                                    Kirigami.Icon {
-                                        anchors.fill: parent
-                                        source: "news-subscribe"
-                                        visible: parent.status !== Image.Ready
-                                        opacity: 0.5
-                                    }
+                                    source: "news-subscribe"
+                                    opacity: 0.7
                                 }
                             }
 
@@ -901,7 +978,10 @@ Item {
                             }
                             QQC2.Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Interval:") }
                             QQC2.Button {
-                                property int currentVal: modelData.syncInterval || (cfg_rssSyncInterval || 60)
+                                property int currentVal: {
+                                    var revision = rssSourcesRevision
+                                    return modelData.syncInterval || (cfg_rssSyncInterval || 60)
+                                }
                                 text: currentVal >= 60 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "%1h", Math.floor(currentVal/60)) : i18nd("plasma_applet_com.mcc45tr.filesearch", "%1m", currentVal)
                                 onClicked: intervalMenu.open()
                                 flat: true
@@ -910,7 +990,7 @@ Item {
                                     Repeater {
                                         model: [10, 15, 30, 45, 60, 120, 180, 240, 300, 360, 480, 600, 720, 1440]
                                         QQC2.MenuItem {
-                                            text: modelData >= 60 ? configRSS.i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 hours", modelData/60) : configRSS.i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 mins", modelData)
+                                            text: modelData >= 60 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 hours", modelData/60) : i18nd("plasma_applet_com.mcc45tr.filesearch", "%1 mins", modelData)
                                             onTriggered: updateSource(index, "syncInterval", modelData)
                                         }
                                     }
@@ -920,7 +1000,10 @@ Item {
                             Item { Layout.fillWidth: true }
 
                             QQC2.Label {
-                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Last sync: %1", formatLastSync(modelData.lastSync))
+                                text: {
+                                    var revision = rssSourcesRevision
+                                    return i18nd("plasma_applet_com.mcc45tr.filesearch", "Last sync: %1", formatLastSync(modelData.lastSync))
+                                }
                                 opacity: 0.75
                             }
                         }
@@ -972,6 +1055,12 @@ Item {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show RSS titles in placeholder cycling")
                     checked: cfg_rssPlaceholderCycling
                     onCheckedChanged: cfg_rssPlaceholderCycling = checked
+                }
+
+                QQC2.CheckBox {
+                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show weather in placeholder cycling")
+                    checked: cfg_weatherPlaceholderCycling
+                    onCheckedChanged: cfg_weatherPlaceholderCycling = checked
                 }
 
                 QQC2.CheckBox {

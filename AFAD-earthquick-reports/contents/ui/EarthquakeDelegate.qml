@@ -8,7 +8,7 @@ PlasmaComponents.ItemDelegate {
     id: delegate
     width: ListView.view.width
     
-    // We can use the contentItem to layout the custom delegate content
+    // Use contentItem for the custom delegate layout.
     contentItem: RowLayout {
         spacing: Kirigami.Units.largeSpacing
 

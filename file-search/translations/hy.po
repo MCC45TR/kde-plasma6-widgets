@@ -1766,3 +1766,159 @@ msgstr "Ուլտրա լայն ռեժիմ (Առավելագույն ծածկու�
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Փորձառու օգտատեր - Բոլոր ֆունկցիաները ակտիվ են:"
+
+
+msgid "Weather Provider"
+msgstr "Եղանակի մատակարար"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (անվճար, բանալի չի պահանջվում)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (պահանջվում է բանալի)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (պահանջվում է բանալի)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API բանալի."
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Մուտքագրեք ձեր OpenWeatherMap API բանալին"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API բանալի."
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Մուտքագրեք ձեր WeatherAPI.com բանալին"
+
+
+msgid "Location"
+msgstr "Գտնվելու վայրը"
+
+
+msgid "Auto-detect from IP"
+msgstr "Ավտոմատ հայտնաբերում IP-ից"
+
+
+msgid "Enter manually"
+msgstr "Մուտքագրեք ձեռքով"
+
+
+msgid "City 1:"
+msgstr "Քաղաք 1."
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Օրինակ՝ Երևան, Լոնդոն, Փարիզ"
+
+
+msgid "Loading weather data..."
+msgstr "Եղանակի տվյալների բեռնում..."
+
+
+msgid "Clear"
+msgstr "Պարզ"
+
+
+msgid "Mainly Clear"
+msgstr "Հիմնականում պարզ"
+
+
+msgid "Partly Cloudy"
+msgstr "Մասնակի ամպամած"
+
+
+msgid "Overcast"
+msgstr "Ամպամած"
+
+
+msgid "Fog"
+msgstr "Մառախուղ"
+
+
+msgid "Drizzle"
+msgstr "Մաղող անձրև"
+
+
+msgid "Freezing Drizzle"
+msgstr "Սառչող մաղող անձրև"
+
+
+msgid "Rain"
+msgstr "Անձրև"
+
+
+msgid "Freezing Rain"
+msgstr "Սառչող անձրև"
+
+
+msgid "Snow"
+msgstr "Ձյուն"
+
+
+msgid "Snow Grains"
+msgstr "Ձյան հատիկներ"
+
+
+msgid "Rain Showers"
+msgstr "Տեղատարափ անձրև"
+
+
+msgid "Snow Showers"
+msgstr "Տեղատարափ ձյուն"
+
+
+msgid "Thunderstorm"
+msgstr "Ամպրոպ"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Ամպրոպ և կարկուտ"
+
+
+msgid "Unknown"
+msgstr "Անհայտ"
+
+
+msgid "Cloudy"
+msgstr "Ամպամած"
+
+
+msgid "Mist"
+msgstr "Մշուշ"
+
+
+msgid "Smoke"
+msgstr "Ծուխ"
+
+
+msgid "Haze"
+msgstr "Մշուշ"
+
+
+msgid "Dust"
+msgstr "Փոշի"
+
+
+msgid "Sand"
+msgstr "Ավազ"
+
+
+msgid "Ash"
+msgstr "Մոխիր"
+
+
+msgid "Squall"
+msgstr "Պորտկում"
+
+
+msgid "Tornado"
+msgstr "Տորնադո"

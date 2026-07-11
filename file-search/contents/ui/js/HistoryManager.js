@@ -28,30 +28,6 @@ function detectSourceType(category, isApp, filePath) {
     }
 }
 
-// Centralized app category detection (duplicated from utils.js)
-// NOTE: Keep in sync with utils.js isAppCategory
-function isAppCategory(category, filePath, matchId) {
-    if (!category) return false
-    var catLower = category.toString().toLowerCase()
-    var isApp = catLower.indexOf("app") !== -1 || catLower.indexOf("uygulama") !== -1 || catLower.indexOf("program") !== -1 ||
-                catLower.indexOf("ayar") !== -1 || catLower.indexOf("setting") !== -1 ||
-                catLower.indexOf("oyun") !== -1 || catLower.indexOf("game") !== -1 ||
-                catLower.indexOf("ofis") !== -1 || catLower.indexOf("office") !== -1 ||
-                catLower.indexOf("sistem") !== -1 || catLower.indexOf("system") !== -1 ||
-                catLower.indexOf("araç") !== -1 || catLower.indexOf("util") !== -1 ||
-                catLower.indexOf("internet") !== -1 || catLower.indexOf("grafik") !== -1 || catLower.indexOf("graphic") !== -1 ||
-                catLower.indexOf("geliştirme") !== -1 || catLower.indexOf("develop") !== -1 ||
-                catLower.indexOf("ortam") !== -1 || catLower.indexOf("multimedia") !== -1 ||
-                catLower.indexOf("eğitim") !== -1 || catLower.indexOf("educat") !== -1
-    if (!isApp && filePath) {
-        isApp = filePath.toString().indexOf(".desktop") !== -1
-    }
-    if (!isApp && matchId) {
-        isApp = matchId.toString().indexOf(".desktop") !== -1
-    }
-    return isApp
-}
-
 // Load history from configuration with migration support
 function loadHistory(configValue) {
     try {
@@ -77,12 +53,11 @@ function loadHistory(configValue) {
 }
 
 // Add item to history with deduplication
-function addToHistory(historyArray, display, decoration, category, matchId, filePath, sourceType, queryText, maxItems) {
+function addToHistory(historyArray, display, decoration, category, matchId, filePath, sourceType, queryText, maxItems, isApp) {
     // Clone array to trigger Update
     var newHistory = historyArray.slice(0)
 
-    // Use centralized app detection
-    var isApp = isAppCategory(category, filePath, matchId)
+    isApp = !!isApp
 
     // Fix missing or invalid filePath for apps if matchId contains .desktop
     // This fixes the issue where apps appear in history but don't launch directly
@@ -96,10 +71,14 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
     // Determine source type
     var detectedSourceType = sourceType || detectSourceType(category, isApp, filePath)
 
-    // Deduplication: Check if already exists (by matchId or display)
+    // Deduplicate by stable identity. Display text is only a fallback when
+    // neither side has an identity/path; same-named files may be distinct.
     for (var i = 0; i < newHistory.length; i++) {
         var existing = newHistory[i]
-        if ((matchId && existing.matchId === matchId) || existing.display === display) {
+        var sameId = matchId && existing.matchId && existing.matchId === matchId
+        var samePath = filePath && existing.filePath && existing.filePath === filePath
+        var displayFallback = !matchId && !existing.matchId && !filePath && !existing.filePath && existing.display === display
+        if (sameId || samePath || displayFallback) {
             // Move to top and update timestamp
             var item = newHistory.splice(i, 1)[0]
             item.timestamp = Date.now()
@@ -138,8 +117,10 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
     newHistory.unshift(newItem)
 
     // Limit to max items
-    if (newHistory.length > maxItems) {
-        newHistory = newHistory.slice(0, maxItems)
+    var safeMax = Number(maxItems)
+    if (!isFinite(safeMax) || safeMax < 1) safeMax = 30
+    if (newHistory.length > safeMax) {
+        newHistory = newHistory.slice(0, safeMax)
     }
 
     return newHistory
@@ -173,11 +154,14 @@ function categorizeHistory(historyArray, appLabel, otherLabel) {
 function updateItemIcon(historyArray, uuid, newIcon) {
     for (var i = 0; i < historyArray.length; i++) {
         if (historyArray[i].uuid === uuid) {
-            historyArray[i].decoration = newIcon;
-            return true;
+            var updated = historyArray.slice()
+            var item = Object.assign({}, updated[i])
+            item.decoration = newIcon
+            updated[i] = item
+            return updated
         }
     }
-    return false;
+    return null;
 }
 
 // Clear all history

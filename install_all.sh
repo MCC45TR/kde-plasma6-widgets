@@ -108,7 +108,7 @@ if [ ${#install_targets[@]} -eq 0 ]; then
     install_targets=("${available_widgets[@]}")
 else
     # Remove duplicates from install_targets potentially
-    # (Simple bash way or ignore it, kpackagetool handles re-install fine)
+    # kpackagetool handles existing installations.
     echo "Installing specific widgets: ${install_targets[*]}"
 fi
 

@@ -4,6 +4,7 @@ import "../js/CategoryManager.js" as CategoryManager
 import "../js/PreviewUtils.js" as PreviewUtils
 import "../js/SimilarityUtils.js" as SimilarityUtils
 import "../js/IconMapper.js" as IconMapper
+import "../js/utils.js" as Utils
 
 Item {
     id: dataManager
@@ -16,28 +17,35 @@ Item {
     property string activeFilter: "All"
     property int maxResults: 20
     property string lastRefreshSignature: ""
-    
-    onSearchTextChanged: {
-        refreshDebouncer.restart()
-    }
-    
-    onActiveFilterChanged: {
-        refreshDebouncer.restart()
-    }
+    property var itemMetadataCache: ({})
+    property int itemMetadataCacheSize: 0
+    property int metadataUseCounter: 0
+    property int metadataCacheHits: 0
+    property int metadataCacheMisses: 0
+    property int queryCacheHitsStart: 0
+    property int queryCacheMissesStart: 0
+    readonly property int itemMetadataCacheLimit: 768
+    readonly property int itemMetadataCacheSlack: 64
     
     Connections {
         target: logic
         function onRssCacheChanged() {
+            dataManager.rssRevision++
+            refreshDebouncer.restart()
+        }
+        function onCategorySettingsChanged() {
+            dataManager.settingsRevision++
+            dataManager.clearMetadataCache()
             refreshDebouncer.restart()
         }
     }
 
     Connections {
         target: resultsModel
-        function onRowsInserted() { refreshDebouncer.restart() }
-        function onRowsRemoved() { refreshDebouncer.restart() }
-        function onModelReset() { refreshDebouncer.restart() }
-        function onDataChanged() { refreshDebouncer.restart() }
+        function onRowsInserted() { dataManager.noteModelEvent() }
+        function onRowsRemoved() { dataManager.noteModelEvent() }
+        function onModelReset() { dataManager.noteModelEvent() }
+        function onDataChanged() { dataManager.noteModelEvent() }
     }
     
     property var categorizedData: []
@@ -45,6 +53,15 @@ Item {
     property int resultCount: 0
     property int lastLatency: 0
     property int refreshVersion: 0
+    property int activeQueryGeneration: 0
+    property int lastRecordedQueryGeneration: -1
+    property int modelRevision: 0
+    property int rssRevision: 0
+    property int settingsRevision: 0
+    property real queryIssuedAt: 0
+    property real firstModelEventAt: 0
+    property real lastModelEventAt: 0
+    property var lastPerformanceTrace: ({})
     
     // Internal state
     property real searchStartTime: 0
@@ -52,11 +69,125 @@ Item {
     // Cached i18n string to avoid calling i18nd() on every refresh cycle
     readonly property string _otherResultsLabel: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results")
     
-    function startSearch() {
-        searchStartTime = new Date().getTime()
+    function beginSearch(generation, startedAt) {
+        activeQueryGeneration = generation;
+        searchStartTime = startedAt || Date.now();
+        queryIssuedAt = 0;
+        firstModelEventAt = 0;
+        lastModelEventAt = 0;
+        queryCacheHitsStart = metadataCacheHits;
+        queryCacheMissesStart = metadataCacheMisses;
+    }
+
+    function markQueryIssued(generation) {
+        if (generation !== activeQueryGeneration)
+            return;
+        queryIssuedAt = Date.now();
+        refreshDebouncer.restart();
+    }
+
+    function noteModelEvent() {
+        var now = Date.now();
+        modelRevision++;
+        if (firstModelEventAt === 0)
+            firstModelEventAt = now;
+        lastModelEventAt = now;
+        refreshDebouncer.restart();
+    }
+
+    function clearMetadataCache() {
+        itemMetadataCache = ({});
+        itemMetadataCacheSize = 0;
+        metadataUseCounter = 0;
+        metadataCacheHits = 0;
+        metadataCacheMisses = 0;
+        queryCacheHitsStart = 0;
+        queryCacheMissesStart = 0;
+    }
+
+    function trimMetadataCache() {
+        if (itemMetadataCacheSize <= itemMetadataCacheLimit + itemMetadataCacheSlack)
+            return;
+
+        var entries = [];
+        for (var key in itemMetadataCache)
+            entries.push({ key: key, lastUsed: itemMetadataCache[key].lastUsed });
+        entries.sort(function(a, b) { return a.lastUsed - b.lastUsed; });
+
+        var removeCount = itemMetadataCacheSize - itemMetadataCacheLimit;
+        for (var i = 0; i < removeCount; i++)
+            delete itemMetadataCache[entries[i].key];
+        itemMetadataCacheSize -= removeCount;
+    }
+
+    function metadataForItem(item, includeIndexedContent) {
+        var category = (item.category || "Other").toString();
+        var display = (item.display || item.name || "").toString();
+        var url = (item.url || "").toString();
+        var decoration = (item.decoration || "").toString();
+        var duplicateId = (item.duplicateId || "").toString();
+        var indexedContent = (item.indexedContent || "").toString();
+        var key = duplicateId || url || (category + "\u001f" + display);
+        var indexedLength = indexedContent.length;
+        var indexedHead = indexedLength > 0 ? indexedContent.substring(0, 64) : "";
+        var indexedTail = indexedLength > 64 ? indexedContent.substring(indexedLength - 64) : indexedHead;
+        var cached = itemMetadataCache[key];
+        if (cached
+                && cached.sourceDisplay === display
+                && cached.sourceCategory === category
+                && cached.sourceUrl === url
+                && cached.sourceDecoration === decoration
+                && cached.indexedLength === indexedLength
+                && cached.indexedHead === indexedHead
+                && cached.indexedTail === indexedTail) {
+            metadataCacheHits++;
+            if (includeIndexedContent && !cached.indexedNormalized) {
+                cached.lowerIndexedContent = indexedContent.toLocaleLowerCase().replace(/\u0307/g, "");
+                cached.indexedNormalized = true;
+            }
+            cached.lastUsed = ++metadataUseCounter;
+            return cached;
+        }
+
+        metadataCacheMisses++;
+        var metadata = {
+            sourceDisplay: display,
+            sourceCategory: category,
+            sourceUrl: url,
+            sourceDecoration: decoration,
+            indexedLength: indexedLength,
+            indexedHead: indexedHead,
+            indexedTail: indexedTail,
+            lowerDisplay: display.toLocaleLowerCase().replace(/\u0307/g, ""),
+            lowerCategory: category.toLocaleLowerCase().replace(/\u0307/g, ""),
+            lowerUrl: url.toLowerCase(),
+            lowerDecoration: decoration.toLowerCase(),
+            lowerIndexedContent: includeIndexedContent && indexedContent ? indexedContent.toLocaleLowerCase().replace(/\u0307/g, "") : "",
+            indexedNormalized: !!includeIndexedContent || !indexedContent,
+            extension: PreviewUtils.getExtension(url),
+            categoryVisible: CategoryManager.isCategoryVisible(logic.categorySettings || {}, category),
+            categoryPriority: CategoryManager.getCategoryPriority(logic.categorySettings || {}, category),
+            mappedDecoration: IconMapper.getIconForUrl(url, decoration, category),
+            lastUsed: ++metadataUseCounter
+        };
+        if (!cached)
+            itemMetadataCacheSize++;
+        itemMetadataCache[key] = metadata;
+        trimMetadataCache();
+        return metadata;
+    }
+
+    function copyWithMetadata(item, metadata) {
+        var copy = Object.assign({}, item);
+        copy._normalizedDisplay = metadata.lowerDisplay;
+        copy._normalizedIndexedContent = metadata.lowerIndexedContent;
+        copy._categoryPriority = metadata.categoryPriority;
+        return copy;
     }
     
     function refreshGroups() {
+        var refreshStartedAt = Date.now();
+        var generation = activeQueryGeneration;
         var rssItems = (logic.rssCache && Array.isArray(logic.rssCache)) ? logic.rssCache : [];
         var firstItem = rawDataProxy.count > 0 ? rawDataProxy.objectAt(0) : null;
         var lastItem = rawDataProxy.count > 0 ? rawDataProxy.objectAt(rawDataProxy.count - 1) : null;
@@ -64,6 +195,9 @@ Item {
             searchText,
             activeFilter,
             maxResults,
+            modelRevision,
+            rssRevision,
+            settingsRevision,
             rawDataProxy.count,
             firstItem ? (firstItem.display || "") : "",
             firstItem ? (firstItem.url || "") : "",
@@ -100,16 +234,17 @@ Item {
                     continue;
 
                 var cat = item.category || "Other";
-                if (!CategoryManager.isCategoryVisible(categorySettings, cat))
+                var metadata = metadataForItem(item, false);
+                if (!metadata.categoryVisible)
                     continue;
 
                 var urlString = (item.url || "").toString();
-                var lowerCategory = cat.toLowerCase();
-                var lowerDecoration = (item.decoration || "").toString().toLowerCase();
-                var lowerUrl = urlString.toLowerCase();
-                var ext = PreviewUtils.getExtension(urlString);
 
                 if (dataManager.activeFilter !== "All") {
+                    var lowerCategory = metadata.lowerCategory;
+                    var lowerDecoration = metadata.lowerDecoration;
+                    var lowerUrl = metadata.lowerUrl;
+                    var ext = metadata.extension;
                     var shouldKeep = false;
 
                     if (activeFilterLower === "docs") {
@@ -155,13 +290,16 @@ Item {
 
                 rawItems.push({
                     display: item.display || "",
-                    decoration: IconMapper.getIconForUrl(urlString, item.decoration || "", cat),
+                    decoration: metadata.mappedDecoration,
                     category: cat,
                     url: urlString,
                     urls: item.urls || [],
                     subtext: item.subtext || "",
                     duplicateId: item.duplicateId || "",
-                    index: item.itemIndex
+                    index: item.itemIndex,
+                    _normalizedDisplay: metadata.lowerDisplay,
+                    _normalizedIndexedContent: metadata.lowerIndexedContent,
+                    _categoryPriority: metadata.categoryPriority
                 });
             }
         }
@@ -171,15 +309,16 @@ Item {
         if (isRSSOnlyMode || (logic.rssEnabled && (activeF === "All" || activeF === "Web" || activeF === "RSS"))) {
             for (var r = 0; r < rssItems.length; r++) {
                 var rssEntry = rssItems[r];
+                var rssMetadata = metadataForItem(rssEntry, isRSSOnlyMode);
                 if (isRSSOnlyMode && rssQuery.length > 0) {
-                    var title = (rssEntry.display || "").toLowerCase();
-                    var content = (rssEntry.indexedContent || "").toLowerCase();
+                    var title = rssMetadata.lowerDisplay;
+                    var content = rssMetadata.lowerIndexedContent;
                     if (title.indexOf(rssQuery) === -1 && content.indexOf(rssQuery) === -1)
                         continue;
                 }
 
-                if (CategoryManager.isCategoryVisible(categorySettings, rssEntry.category))
-                    rawItems.push(rssEntry);
+                if (rssMetadata.categoryVisible)
+                    rawItems.push(copyWithMetadata(rssEntry, rssMetadata));
             }
         }
 
@@ -187,13 +326,18 @@ Item {
         if (isRSSOnlyMode && rssQuery.length === 0 && rawItems.length === 0)
             rawItems = rssItems.slice();
 
+        var scanCompletedAt = Date.now();
+
+        var effectiveMaxResults = isRSSOnlyMode ? 400 : maxResults;
         if (isRSSOnlyMode) {
             if (rssQuery && rssQuery.length > 3) {
                 rawItems = SimilarityUtils.sortByPriorityAndSimilarity(
                     rawItems,
                     rssQuery,
                     categorySettings,
-                    CategoryManager.getCategoryPriority
+                    CategoryManager.getCategoryPriority,
+                    effectiveMaxResults,
+                    true
                 );
             }
         } else if (searchText && searchText.length > 0) {
@@ -201,13 +345,15 @@ Item {
                 rawItems,
                 searchText,
                 categorySettings,
-                CategoryManager.getCategoryPriority
+                CategoryManager.getCategoryPriority,
+                effectiveMaxResults,
+                false
             );
         } else {
             rawItems = CategoryManager.applyPriorityToResults(rawItems, categorySettings);
         }
+        var sortCompletedAt = Date.now();
 
-        var effectiveMaxResults = isRSSOnlyMode ? 400 : maxResults;
         if (effectiveMaxResults > 0 && rawItems.length > effectiveMaxResults)
             rawItems = rawItems.slice(0, effectiveMaxResults);
 
@@ -228,7 +374,7 @@ Item {
         for (var k = 0; k < displayOrder.length; k++) {
             var catName = displayOrder[k];
             var items = groups[catName];
-            var isAppCategory = (catName.toLowerCase().indexOf("app") !== -1 || catName.toLowerCase().indexOf("uygulama") !== -1);
+            var isAppCategory = Utils.isAppCategory(catName);
             var isRSSCategory = (catName === "RSS" || catName.toLowerCase().indexOf("haber") !== -1 || catName.toLowerCase().indexOf("news") !== -1);
 
             // Don't merge RSS or Applications into "Other Results" even if there is only one
@@ -266,28 +412,57 @@ Item {
             var catItems = result[p].items;
             for (var q = 0; q < catItems.length; q++) {
                 var groupedItem = catItems[q];
-                // CRITICAL FIX: Create a shallow copy to prevent modifying shared/cached objects
-                // (like rssCache entries). Direct mutation causes QML V4 engine crashes (segfaults).
-                var itemCopy = {};
-                for (var key in groupedItem) {
-                    if (groupedItem.hasOwnProperty(key)) {
-                        itemCopy[key] = groupedItem[key];
-                    }
-                }
-                itemCopy.category = groupedCategoryName;
-                flatList.push(itemCopy);
+                groupedItem.sectionCategory = groupedCategoryName;
+                flatList.push(groupedItem);
             }
         }
 
         flatSortedData = flatList;
         resultCount = flatList.length;
         refreshVersion++;
+
+        var refreshCompletedAt = Date.now();
+        lastPerformanceTrace = {
+            generation: generation,
+            resultCount: flatList.length,
+            modelCount: rawDataProxy.count,
+            rssCount: rssItems.length,
+            metadataCacheHits: metadataCacheHits - queryCacheHitsStart,
+            metadataCacheMisses: metadataCacheMisses - queryCacheMissesStart,
+            metadataCacheSize: itemMetadataCacheSize,
+            rssCacheRebuildCount: logic.rssCacheRebuildCount || 0,
+            previewQueueLength: logic.snippetQueue ? logic.snippetQueue.length : 0,
+            previewActiveRequests: logic.snippetActiveRequests || 0,
+            inputToIssueMs: queryIssuedAt > 0 && searchStartTime > 0 ? queryIssuedAt - searchStartTime : -1,
+            backendToFirstRowMs: firstModelEventAt > 0 && queryIssuedAt > 0 ? firstModelEventAt - queryIssuedAt : -1,
+            modelSettleMs: lastModelEventAt > 0 && firstModelEventAt > 0 ? lastModelEventAt - firstModelEventAt : -1,
+            scanMs: scanCompletedAt - refreshStartedAt,
+            sortMs: sortCompletedAt - scanCompletedAt,
+            groupAndPublishMs: refreshCompletedAt - sortCompletedAt,
+            refreshMs: refreshCompletedAt - refreshStartedAt,
+            endToEndMs: searchStartTime > 0 ? refreshCompletedAt - searchStartTime : -1
+        };
+        if (logic.debugEnabled)
+            console.info("FileSearch performance:", JSON.stringify(lastPerformanceTrace));
+
+        var completedGeneration = generation;
+        var startedAt = searchStartTime;
+        Qt.callLater(function() {
+            if (completedGeneration !== activeQueryGeneration
+                    || completedGeneration === lastRecordedQueryGeneration
+                    || startedAt <= 0)
+                return;
+            lastRecordedQueryGeneration = completedGeneration;
+            lastLatency = Date.now() - startedAt;
+            logic.updateTelemetry(lastLatency);
+            searchStartTime = 0;
+        });
     }
 
     // Debounce timer for refreshGroups to prevent excessive updates
     Timer {
         id: refreshDebouncer
-        interval: 250
+        interval: 60
         onTriggered: dataManager.refreshGroups()
     }
 
@@ -305,19 +480,6 @@ Item {
             property var subtext: model.subtext || ""
             property var duplicateId: model.duplicateId || ""
         }
-        onCountChanged: {
-            refreshDebouncer.restart()
-            
-            // Latency Measurement
-            if (dataManager.searchStartTime > 0) {
-                var now = new Date().getTime()
-                var latency = now - dataManager.searchStartTime
-                if (latency > 0 && latency < 5000) {
-                    dataManager.lastLatency = latency
-                    dataManager.logic.updateTelemetry(latency)
-                    dataManager.searchStartTime = 0
-                }
-            }
-        }
+        onCountChanged: dataManager.noteModelEvent()
     }
 }

@@ -258,33 +258,27 @@ Item {
                             }
 
                             readonly property bool isTextFile: {
-                                if (!previewPath) return false;
-                                var ext = previewPath.split('.').pop().toLowerCase();
-                                var txtExts = ['txt', 'js', 'py', 'qml', 'html', 'css', 'json', 'md', 'sh', 'c', 'cpp', 'h', 'hpp', 'rs', 'go', 'java', 'xml', 'yml', 'yaml', 'ini', 'conf', 'log'];
-                                return txtExts.indexOf(ext) !== -1;
+                                return PreviewUtils.isTextExtension(PreviewUtils.getExtension(previewPath));
                             }
+                            property int snippetRequestToken: 0
 
                             function loadTextSnippet() {
-                                if (!previewPath) return;
-                                var xhr = new XMLHttpRequest();
-                                xhr.onreadystatechange = function() {
-                                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                                        if (xhr.status === 200 || xhr.status === 0) {
-                                            var lines = xhr.responseText.split('\n').slice(0, 5).join('\n');
+                                if (!previewPath || !historyList.logic) return;
+                                var token = ++snippetRequestToken
+                                historyList.logic.readLocalTextSnippet(previewPath, function(content, bytes) {
+                                        if (token === snippetRequestToken) {
+                                            var lines = content.split('\n').slice(0, 5).join('\n');
                                             textSnippet.text = lines;
-                                            
-                                            var bytes = xhr.responseText.length;
+
                                             var sizeStr = "";
                                             if (bytes < 1024) sizeStr = bytes + " B";
                                             else if (bytes < 1048576) sizeStr = (bytes / 1024).toFixed(1) + " KB";
                                             else sizeStr = (bytes / 1048576).toFixed(1) + " MB";
-                                            fileSizeText.text = "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Size") + ":</b> " + sizeStr;
+                                            fileSizeText.text = i18nd("plasma_applet_com.mcc45tr.filesearch", "Size") + ": " + sizeStr;
                                         }
-                                    }
-                                }
-                                xhr.open("GET", (modelData.filePath || modelData.url || "").toString());
-                                xhr.send();
+                                })
                             }
+                            Component.onDestruction: snippetRequestToken++
 
                             ColumnLayout {
                                 id: mainLayout
@@ -433,18 +427,18 @@ Item {
                                             }
 
                                             Text {
-                                                text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ":</b> " + (modelData.category || "Other")
+                                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "Other")
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                                 font.pixelSize: 10
-                                                textFormat: Text.StyledText
+                                                textFormat: Text.PlainText
                                             }
 
                                             Text {
-                                                text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ":</b> " + historyItemDelegate.previewFileType
+                                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + historyItemDelegate.previewFileType
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                                 font.pixelSize: 10
                                                 visible: historyItemDelegate.previewFileType.length > 0
-                                                textFormat: Text.StyledText
+                                                textFormat: Text.PlainText
                                             }
 
                                             Text {
@@ -453,16 +447,16 @@ Item {
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                                 font.pixelSize: 10
                                                 visible: text.length > 0
-                                                textFormat: Text.StyledText
+                                                textFormat: Text.PlainText
                                             }
 
                                             Text {
-                                                text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ":</b> " + historyItemDelegate.previewPath
+                                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + historyItemDelegate.previewPath
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
                                                 font.pixelSize: 9
                                                 wrapMode: Text.WrapAnywhere
                                                 Layout.fillWidth: true
-                                                textFormat: Text.StyledText
+                                                textFormat: Text.PlainText
                                             }
                                         }
                                     }

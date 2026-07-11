@@ -5,6 +5,84 @@ import org.kde.kirigami as Kirigami
 
 Kirigami.FormLayout {
     id: configHelp
+
+    // Weather configuration
+    property string cfg_weatherProvider
+    property string cfg_weatherProviderDefault
+    property string cfg_weatherLocationMode
+    property string cfg_weatherLocationModeDefault
+    property string cfg_weatherLocation
+    property string cfg_weatherLocationDefault
+    property string cfg_weatherApiKey
+    property string cfg_weatherApiKeyDefault
+    property string cfg_weatherApiKey2
+    property string cfg_weatherApiKey2Default
+    property int cfg_weatherUpdateTrigger
+    property int cfg_weatherUpdateTriggerDefault
+    // Shared configuration properties
+    property bool cfg_showSearchButton
+    property bool cfg_showSearchButtonDefault
+    property bool cfg_showSearchButtonBackground
+    property bool cfg_showSearchButtonBackgroundDefault
+    property int cfg_compactPinnedView
+    property int cfg_compactPinnedViewDefault
+    property int cfg_filterChipStyle
+    property int cfg_filterChipStyleDefault
+    property bool cfg_previewShowResults
+    property bool cfg_previewShowResultsDefault
+    property bool cfg_previewShowHistory
+    property bool cfg_previewShowHistoryDefault
+    property int cfg_previewInlineMode
+    property int cfg_previewInlineModeDefault
+    property int cfg_previewSize
+    property int cfg_previewSizeDefault
+    property bool cfg_prefixShellEnabled
+    property bool cfg_prefixShellEnabledDefault
+    property bool cfg_prefixTimelineEnabled
+    property bool cfg_prefixTimelineEnabledDefault
+    property bool cfg_prefixWebSearchEnabled
+    property bool cfg_prefixWebSearchEnabledDefault
+    property bool cfg_prefixKillEnabled
+    property bool cfg_prefixKillEnabledDefault
+    property bool cfg_prefixSpellEnabled
+    property bool cfg_prefixSpellEnabledDefault
+    property bool cfg_prefixUnitEnabled
+    property bool cfg_prefixUnitEnabledDefault
+    property bool cfg_rssEnabled
+    property bool cfg_rssEnabledDefault
+    property string cfg_rssSources
+    property string cfg_rssSourcesDefault
+    property int cfg_rssMaxEntries
+    property int cfg_rssMaxEntriesDefault
+    property int cfg_rssSyncInterval
+    property int cfg_rssSyncIntervalDefault
+    property string cfg_rssCache
+    property string cfg_rssCacheDefault
+    property double cfg_rssLastSyncAll
+    property double cfg_rssLastSyncAllDefault
+    property bool cfg_rssPlaceholderCycling
+    property bool cfg_rssPlaceholderCyclingDefault
+    property bool cfg_weatherPlaceholderCycling
+    property bool cfg_weatherPlaceholderCyclingDefault
+    property string cfg_weatherIconPack
+    property string cfg_weatherIconPackDefault
+    property string cfg_weatherViewMode
+    property string cfg_weatherViewModeDefault
+    property int cfg_rssFrequency
+    property int cfg_rssFrequencyDefault
+    property int cfg_weatherFrequency
+    property int cfg_weatherFrequencyDefault
+    property bool cfg_rssShowImages
+    property bool cfg_rssShowImagesDefault
+    property bool cfg_rssExpandableCards
+    property bool cfg_rssExpandableCardsDefault
+    property bool cfg_rssShowSource
+    property bool cfg_rssShowSourceDefault
+    property bool cfg_rssShowFullHeadline
+    property bool cfg_rssShowFullHeadlineDefault
+    property var titleDefault
+    property int maxHistoryItems
+    property int maxHistoryItemsDefault
     
     property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help")
     

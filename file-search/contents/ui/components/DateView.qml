@@ -16,11 +16,15 @@ Item {
     
     // Timer to update time
     Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: updateTime()
+        id: minuteTimer
+        interval: 60000 - (Date.now() % 60000) + 25
+        repeat: false
+        onTriggered: {
+            root.updateTime()
+            interval = 60000
+            repeat = true
+            restart()
+        }
     }
     
     property string timeStr: ""
@@ -39,13 +43,11 @@ Item {
     
     property var currentDate: new Date()
     
-    Component.onCompleted: updateTime()
+    Component.onCompleted: {
+        updateTime()
+        minuteTimer.start()
+    }
 
-    // Font Loaders
-    FontLoader { id: barlowMedium; source: "../../fonts/BarlowCondensed-Medium.ttf" }
-    FontLoader { id: barlowLight; source: "../../fonts/BarlowCondensed-Light.ttf" }
-    FontLoader { id: barlowLightItalic; source: "../../fonts/BarlowCondensed-LightItalic.ttf" }
-    
     // --- CALENDAR LOGIC ---
     property var weekdayLabels: {
         var labels = []
@@ -140,7 +142,7 @@ Item {
                         font.pixelSize: 80 
                         font.weight: Font.Light
                         font.italic: true
-                        font.family: barlowLightItalic.name
+                        font.family: "Barlow Condensed"
                         color: root.textColor
                     }
                 }
@@ -153,7 +155,7 @@ Item {
                     
                     font.pixelSize: 42
                     font.weight: Font.Medium
-                    font.family: barlowMedium.name
+                    font.family: "Barlow Condensed"
                     color: root.textColor
                 }
 
@@ -165,7 +167,7 @@ Item {
                     
                     font.pixelSize: 24
                     font.weight: Font.Light
-                    font.family: barlowLight.name
+                    font.family: "Barlow Condensed"
                     color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.85)
                 }
             }

@@ -1770,3 +1770,159 @@ msgstr "Mod ultra-larg (Acoperire maximă)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Utilizator avansat - Toate funcțiile active."
+
+
+msgid "Weather Provider"
+msgstr "Furnizor de vreme"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratuit, nu este necesară o cheie)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Cheie necesară)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Cheie necesară)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Cheie API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Introduceți cheia API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Cheie API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Introduceți cheia WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Locație"
+
+
+msgid "Auto-detect from IP"
+msgstr "Detectare automată prin IP"
+
+
+msgid "Enter manually"
+msgstr "Introducere manuală"
+
+
+msgid "City 1:"
+msgstr "Orașul 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Ex: București, Cluj-Napoca, Londra"
+
+
+msgid "Loading weather data..."
+msgstr "Se încarcă datele meteo..."
+
+
+msgid "Clear"
+msgstr "Senin"
+
+
+msgid "Mainly Clear"
+msgstr "Predominant senin"
+
+
+msgid "Partly Cloudy"
+msgstr "Parțial noros"
+
+
+msgid "Overcast"
+msgstr "Acoperit"
+
+
+msgid "Fog"
+msgstr "Ceață"
+
+
+msgid "Drizzle"
+msgstr "Burniță"
+
+
+msgid "Freezing Drizzle"
+msgstr "Burniță înghețată"
+
+
+msgid "Rain"
+msgstr "Ploaie"
+
+
+msgid "Freezing Rain"
+msgstr "Ploaie înghețată"
+
+
+msgid "Snow"
+msgstr "Zăpadă"
+
+
+msgid "Snow Grains"
+msgstr "Zăpadă grăunțoasă"
+
+
+msgid "Rain Showers"
+msgstr "Averse de ploaie"
+
+
+msgid "Snow Showers"
+msgstr "Averse de zăpadă"
+
+
+msgid "Thunderstorm"
+msgstr "Furtună"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Furtună cu grindină"
+
+
+msgid "Unknown"
+msgstr "Necunoscut"
+
+
+msgid "Cloudy"
+msgstr "Noros"
+
+
+msgid "Mist"
+msgstr "Pâclă"
+
+
+msgid "Smoke"
+msgstr "Fum"
+
+
+msgid "Haze"
+msgstr "Pâclă"
+
+
+msgid "Dust"
+msgstr "Praf"
+
+
+msgid "Sand"
+msgstr "Nisip"
+
+
+msgid "Ash"
+msgstr "Cenușă"
+
+
+msgid "Squall"
+msgstr "Vijelie"
+
+
+msgid "Tornado"
+msgstr "Tornadă"

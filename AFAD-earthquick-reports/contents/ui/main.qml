@@ -40,7 +40,7 @@ PlasmoidItem {
             }
             
             if (data) {
-                // Sort by date DESC (AFAD usually returns newest first, but let's be sure)
+                // Enforce newest-first order independently of the API response.
                 data.sort(function(a, b) {
                     return new Date(b.date) - new Date(a.date);
                 });

@@ -2,8 +2,7 @@ import QtQuick
 import QtQuick.Shapes
 import org.kde.kirigami as Kirigami
 
-// SunProgressGauge - Displays sunrise/sunset arc with current sun position
-// TODO: Not yet integrated into UI - add to WeatherDetailsView or LargeModeLayout
+// Reusable sunrise and sunset progress gauge.
 Item {
     id: gaugeRoot
     
@@ -51,7 +50,7 @@ Item {
         return (nowTime - riseTime) / (setTime - riseTime)
     }
     
-    // Is it currently daytime?
+    // Daylight state excludes the exact sunrise and sunset boundaries.
     readonly property bool isDaytime: sunProgress > 0 && sunProgress < 1
     
     // Format time for display

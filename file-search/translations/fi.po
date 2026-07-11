@@ -1692,3 +1692,159 @@ msgstr "Extra Wide -tila (leveä + pitkä paikkamerkki)"
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
 msgstr "Ultra Wide Mode (maksimaalinen peitto)"
+
+
+msgid "Weather Provider"
+msgstr "Sääpalvelu"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Maksuton, ei avainta)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Vaatii avaimen)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Vaatii avaimen)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API-avain:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Syötä OpenWeatherMap API-avaimesi"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API-avain:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Syötä WeatherAPI.com-avaimesi"
+
+
+msgid "Location"
+msgstr "Sijainti"
+
+
+msgid "Auto-detect from IP"
+msgstr "Tunnista automaattisesti IP-osoitteesta"
+
+
+msgid "Enter manually"
+msgstr "Syötä manuaalisesti"
+
+
+msgid "City 1:"
+msgstr "Kaupunki 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Esim: Ankara, Istanbul, Lontoo"
+
+
+msgid "Loading weather data..."
+msgstr "Ladataan säätietoja..."
+
+
+msgid "Clear"
+msgstr "Selkeää"
+
+
+msgid "Mainly Clear"
+msgstr "Melkein selkeää"
+
+
+msgid "Partly Cloudy"
+msgstr "Puolipilvistä"
+
+
+msgid "Overcast"
+msgstr "Pilvistä"
+
+
+msgid "Fog"
+msgstr "Sumua"
+
+
+msgid "Drizzle"
+msgstr "Tihkusadetta"
+
+
+msgid "Freezing Drizzle"
+msgstr "Jäätävää tihkusadetta"
+
+
+msgid "Rain"
+msgstr "Sadetta"
+
+
+msgid "Freezing Rain"
+msgstr "Jäätävää sadetta"
+
+
+msgid "Snow"
+msgstr "Lumisadetta"
+
+
+msgid "Snow Grains"
+msgstr "Lumijyviä"
+
+
+msgid "Rain Showers"
+msgstr "Sadekuuroja"
+
+
+msgid "Snow Showers"
+msgstr "Lumikuuroja"
+
+
+msgid "Thunderstorm"
+msgstr "Ukkosta"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Ukkosta ja rakeita"
+
+
+msgid "Unknown"
+msgstr "Tuntematon"
+
+
+msgid "Cloudy"
+msgstr "Pilvistä"
+
+
+msgid "Mist"
+msgstr "Usvua"
+
+
+msgid "Smoke"
+msgstr "Savua"
+
+
+msgid "Haze"
+msgstr "Autere"
+
+
+msgid "Dust"
+msgstr "Pölyä"
+
+
+msgid "Sand"
+msgstr "Hiekkaa"
+
+
+msgid "Ash"
+msgstr "Tuhkaa"
+
+
+msgid "Squall"
+msgstr "Puhuri"
+
+
+msgid "Tornado"
+msgstr "Tornado"

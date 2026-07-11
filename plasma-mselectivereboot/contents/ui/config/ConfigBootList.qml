@@ -16,7 +16,7 @@ Item {
     property string cfg_cachedBootEntries: ""
     property string cfg_cachedBootEntriesDefault: ""
     
-    // Dummy properties for KCM compatibility
+    // Compatibility properties required by KCM.
     property double cfg_backgroundOpacity
     property double cfg_backgroundOpacityDefault
     property string cfg_cachedBootloader

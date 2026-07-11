@@ -467,42 +467,30 @@ PlasmoidItem {
             Behavior on width { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
         }
 
-        // Digital Clock
+        // Digital clock
         Item {
             id: digitalClock
-            z: 0 // Below hands
+            z: 0
             anchors.centerIn: parent
-            width: parent.width * 0.6 // Approximate inner area
+            width: parent.width * 0.6
             height: parent.height * 0.6
             
-            // Configuration
-            property int style: Plasmoid.configuration.clockStyle !== undefined ? Plasmoid.configuration.clockStyle : 0 // 0=Auto, 1=Classic, 2=Modern
+            // 0: auto, 1: classic, 2: modern
+            property int style: Plasmoid.configuration.clockStyle !== undefined ? Plasmoid.configuration.clockStyle : 0
             
-            // Logic for Small Square (Only Hour)
-            // Ratio approx 1.0 (between 0.9 and 1.1) AND width is small (< 180)
+            // Compact square faces display only the hour.
             property bool isSmallSquare: (root.width / root.height > 0.9 && root.width / root.height < 1.1) && (root.width < 180)
             
-            // Show condition: 
-            // 1. Config says showDigitalClock is TRUE
-            // 2. AND we are NOT in Classic Mode (Style 1 forces analog-only look usually, but let's respect the digital clock toggle too)
-            //    Actually, let's say Classic Mode HIDES the central digital clock generally to look like a real clock.
-            //    Unless user explicitly wants it. Let's keep existing logic: showDigitalClock controls it.
-            //    BUT, if style is Classic, we might prefer hiding it. 
-            //    Let's stick to the toggle: if 'showDigitalClock' is true, we show it.
-            
+            // Classic and analog modes hide the central digital display.
             property bool show: {
-                if (style === 1) return false; // Classic never shows digital
-                if (clockFace.modernDisplayMode === 0) return false; // Analog mode: no digital
-                return true; // Hybrid and DigitalOnly both show digital
+                if (style === 1) return false;
+                if (clockFace.modernDisplayMode === 0) return false;
+                return true;
             }
             
             visible: show
             
-            // Interaction Logic: Hide when hovered (switching to detailed analog mode), UNLESS style is modern?
-            // If Style is Classic (1), we are always in "detailed analog mode" so digital is hidden anyway (logic above).
-            // If Style is Modern (2), we likely want digital clock to persist even on hover? Or maybe not.
-            // Let's keep the boolean isHovered logic for standard Auto mode.
-            
+            // Reveal the detailed analog face while the pointer is over the clock.
             readonly property bool isHovered: clockFace.isHovered
             
             opacity: (show && !isHovered) ? 1.0 : 0.0
@@ -511,7 +499,7 @@ PlasmoidItem {
             Behavior on opacity { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
             Behavior on scale { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
             
-            // Layout Logic: Vertical if height is > 10% larger than width
+            // Use the vertical layout when height exceeds width by more than 10%.
             property bool isVertical: root.height > (root.width * 1.1)
             
             // Time Components

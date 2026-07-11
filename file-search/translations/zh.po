@@ -1757,3 +1757,159 @@ msgstr "超宽模式 (最大覆盖)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "高级用户 - 激活所有功能，提供高级设置。"
+
+
+msgid "Weather Provider"
+msgstr "天气数据源"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (免费，无需密钥)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (需要密钥)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (需要密钥)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API 密钥："
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "输入您的 OpenWeatherMap API 密钥"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API 密钥："
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "输入您的 WeatherAPI.com 密钥"
+
+
+msgid "Location"
+msgstr "位置"
+
+
+msgid "Auto-detect from IP"
+msgstr "通过 IP 自动检测"
+
+
+msgid "Enter manually"
+msgstr "手动输入"
+
+
+msgid "City 1:"
+msgstr "城市 1："
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "例：北京, 上海, 伦敦"
+
+
+msgid "Loading weather data..."
+msgstr "正在加载天气数据..."
+
+
+msgid "Clear"
+msgstr "晴朗"
+
+
+msgid "Mainly Clear"
+msgstr "大部晴朗"
+
+
+msgid "Partly Cloudy"
+msgstr "局部多云"
+
+
+msgid "Overcast"
+msgstr "阴天"
+
+
+msgid "Fog"
+msgstr "雾"
+
+
+msgid "Drizzle"
+msgstr "毛毛雨"
+
+
+msgid "Freezing Drizzle"
+msgstr "冻毛毛雨"
+
+
+msgid "Rain"
+msgstr "雨"
+
+
+msgid "Freezing Rain"
+msgstr "冻雨"
+
+
+msgid "Snow"
+msgstr "雪"
+
+
+msgid "Snow Grains"
+msgstr "米雪"
+
+
+msgid "Rain Showers"
+msgstr "阵雨"
+
+
+msgid "Snow Showers"
+msgstr "阵雪"
+
+
+msgid "Thunderstorm"
+msgstr "雷暴"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "雷阵雨伴有冰雹"
+
+
+msgid "Unknown"
+msgstr "未知"
+
+
+msgid "Cloudy"
+msgstr "多云"
+
+
+msgid "Mist"
+msgstr "薄雾"
+
+
+msgid "Smoke"
+msgstr "烟雾"
+
+
+msgid "Haze"
+msgstr "霾"
+
+
+msgid "Dust"
+msgstr "浮尘"
+
+
+msgid "Sand"
+msgstr "扬沙"
+
+
+msgid "Ash"
+msgstr "火山灰"
+
+
+msgid "Squall"
+msgstr "飑"
+
+
+msgid "Tornado"
+msgstr "龙卷风"

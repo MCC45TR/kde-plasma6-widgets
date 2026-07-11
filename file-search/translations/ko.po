@@ -1703,3 +1703,159 @@ msgstr "울트라 와이드 모드(최대 적용 범위)"
 
 #~ msgid "RSS"
 #~ msgstr "RSS"
+
+
+msgid "Weather Provider"
+msgstr "날씨 제공업체"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (무료, 키 불필요)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (키 필요)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (키 필요)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API 키:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMap API 키를 입력하세요"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API 키:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.com 키를 입력하세요"
+
+
+msgid "Location"
+msgstr "위치"
+
+
+msgid "Auto-detect from IP"
+msgstr "IP에서 자동 감지"
+
+
+msgid "Enter manually"
+msgstr "수동 입력"
+
+
+msgid "City 1:"
+msgstr "도시 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "예: 앙카라, 이스탄불, 런던"
+
+
+msgid "Loading weather data..."
+msgstr "날씨 데이터 불러오는 중..."
+
+
+msgid "Clear"
+msgstr "맑음"
+
+
+msgid "Mainly Clear"
+msgstr "대체로 맑음"
+
+
+msgid "Partly Cloudy"
+msgstr "구름 조금"
+
+
+msgid "Overcast"
+msgstr "흐림"
+
+
+msgid "Fog"
+msgstr "안개"
+
+
+msgid "Drizzle"
+msgstr "이슬비"
+
+
+msgid "Freezing Drizzle"
+msgstr "빙결성 이슬비"
+
+
+msgid "Rain"
+msgstr "비"
+
+
+msgid "Freezing Rain"
+msgstr "빙결성 비"
+
+
+msgid "Snow"
+msgstr "눈"
+
+
+msgid "Snow Grains"
+msgstr "싸락눈"
+
+
+msgid "Rain Showers"
+msgstr "소나기"
+
+
+msgid "Snow Showers"
+msgstr "소나기성 눈"
+
+
+msgid "Thunderstorm"
+msgstr "뇌우"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "우박을 동반한 뇌우"
+
+
+msgid "Unknown"
+msgstr "알 수 없음"
+
+
+msgid "Cloudy"
+msgstr "구름 많음"
+
+
+msgid "Mist"
+msgstr "엷은 안개"
+
+
+msgid "Smoke"
+msgstr "연기"
+
+
+msgid "Haze"
+msgstr "실안개"
+
+
+msgid "Dust"
+msgstr "먼지"
+
+
+msgid "Sand"
+msgstr "모래풍랑"
+
+
+msgid "Ash"
+msgstr "화산재"
+
+
+msgid "Squall"
+msgstr "스콜"
+
+
+msgid "Tornado"
+msgstr "토네이도"

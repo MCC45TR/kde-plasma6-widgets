@@ -25,7 +25,6 @@ Item {
     
     // Animation for low battery (<15%)
     // "progress bars ... blink animation 1.0 to 0.5 opacity, 200ms duration, 3s wait"
-    // Since we apply this to the bar itself
     property real barOpacity: 1.0
     
     SequentialAnimation {
@@ -37,26 +36,11 @@ Item {
         PauseAnimation { duration: 3000 }
     }
     
-    // Reset opacity if not running
     onPercentageChanged: {
         if (percentage >= 15) barOpacity = 1.0
     }
 
-    // Layout
-    // We need to support vertical (Large/Small?) and horizontal (Broad) usage? 
-    // The visual provided shows:
-    // Broad Mode: Horizontal Bars? No, Broad mode image shows vertical bars next to each other? 
-    // Wait, let's look at the images again.
-    // Image 1: Square, big percentage text, big icon.
-    // Image 2: Wide/Broad. Vertical bars on the left, Main info on right.
-    // Image 3: Large (Tall?). Vertical bars.
-    
-    // It seems the "Bar" itself is a vertical column or horizontal row depending on context?
-    // Actually, looking at "Wide" (Image 2): It has 3 vertical bars + Main Text.
-    // Looking at "Large" (Image 3): It has 3 vertical bars (very tall).
-    
-    // So distinct feature: the battery bar is a vertical fill bar.
-    
+    // Battery levels use a vertical fill in every supported layout.
     property real radiusTopLeft: 4
     property real radiusTopRight: 4
     property real radiusBottomLeft: 4

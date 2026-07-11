@@ -385,7 +385,7 @@ Item {
     // BluezQt Device.Type enum values:
     // 0: Uncategorized, 1: Computer, 2: Phone, 3: Network, 4: AudioVideo,
     // 5: Peripheral, 6: Imaging, 7: Wearable, 8: Toy, 9: Health
-    // We also check iconName and deviceName for more specific types
+    // Refine device types using their icon and display names.
     function getBluetoothIcon(deviceType, iconName, deviceName) {
         var icon = (iconName || "").toLowerCase()
         var name = (deviceName || "").toLowerCase()

@@ -1,9 +1,11 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Window
 import org.kde.kirigami as Kirigami
 import org.kde.milou as Milou
 import "../js/HistoryManager.js" as HistoryManager
+import "../js/utils.js" as Utils
 import org.kde.plasma.plasmoid
 
 Item {
@@ -47,6 +49,7 @@ Item {
     property color textColor
     property color accentColor
     property color bgColor
+    property string fontFamily: Kirigami.Theme.defaultFont.family
     
     property bool showDebug: false
     property bool showBootOptions: false
@@ -93,15 +96,16 @@ Item {
     
     // ===== CACHED LOCALIZED PREFIXES (computed once at startup) =====
     // These avoid calling i18nd() on every keystroke
-    readonly property string _locDate: i18nd("plasma_applet_com.mcc45tr.filesearch", "date")
-    readonly property string _locClock: i18nd("plasma_applet_com.mcc45tr.filesearch", "clock")
-    readonly property string _locWeather: i18nd("plasma_applet_com.mcc45tr.filesearch", "weather")
-    readonly property string _locPower: i18nd("plasma_applet_com.mcc45tr.filesearch", "power")
-    readonly property string _locHelp: i18nd("plasma_applet_com.mcc45tr.filesearch", "help")
-    readonly property string _locUnit: i18nd("plasma_applet_com.mcc45tr.filesearch", "unit")
-    readonly property string _locKill: i18nd("plasma_applet_com.mcc45tr.filesearch", "kill")
-    readonly property string _locSpell: i18nd("plasma_applet_com.mcc45tr.filesearch", "spell")
-    readonly property string _locShell: i18nd("plasma_applet_com.mcc45tr.filesearch", "shell")
+    readonly property string _locDate: i18nd("plasma_applet_com.mcc45tr.filesearch", "date").toLowerCase()
+    readonly property string _locClock: i18nd("plasma_applet_com.mcc45tr.filesearch", "clock").toLowerCase()
+    readonly property string _locWeather: i18nd("plasma_applet_com.mcc45tr.filesearch", "weather").toLowerCase()
+    readonly property string _locPower: i18nd("plasma_applet_com.mcc45tr.filesearch", "power").toLowerCase()
+    readonly property string _locHelp: i18nd("plasma_applet_com.mcc45tr.filesearch", "help").toLowerCase()
+    readonly property string _locUnit: i18nd("plasma_applet_com.mcc45tr.filesearch", "unit").toLowerCase()
+    readonly property string _locKill: i18nd("plasma_applet_com.mcc45tr.filesearch", "kill").toLowerCase()
+    readonly property string _locSpell: i18nd("plasma_applet_com.mcc45tr.filesearch", "spell").toLowerCase()
+    readonly property string _locShell: i18nd("plasma_applet_com.mcc45tr.filesearch", "shell").toLowerCase()
+    readonly property string _locCalendar: i18nd("plasma_applet_com.mcc45tr.filesearch", "Calendar").toLowerCase()
     readonly property bool _canShowWeather: plasmoidConfig && plasmoidConfig.weatherEnabled
     readonly property bool _prefixShellEnabled: plasmoidConfig ? (plasmoidConfig.prefixShellEnabled !== undefined ? plasmoidConfig.prefixShellEnabled : true) : true
     readonly property bool _prefixTimelineEnabled: plasmoidConfig ? (plasmoidConfig.prefixTimelineEnabled !== undefined ? plasmoidConfig.prefixTimelineEnabled : true) : true
@@ -113,6 +117,25 @@ Item {
     // ===== CACHED QUERY RESULTS (recomputed once per searchText change) =====
     readonly property string effectiveQuery: _computeEffectiveQuery(searchText)
     readonly property bool isCommandOnly: _computeIsCommandOnly(searchText)
+    readonly property bool queryMayHaveHint: {
+        var value = searchText.trim();
+        return value === ":"
+            || value.indexOf(":") !== -1
+            || value.startsWith("#")
+            || value.toLowerCase().startsWith("spell ")
+            || (_locSpell && value.toLowerCase().startsWith(_locSpell + " "));
+    }
+    readonly property bool hasPrimaryResult: {
+        if (tileData.resultCount <= 0)
+            return false;
+        var category = resultsModel.data(resultsModel.index(0, 0), resultsModel.CategoryRole) || "";
+        return category.indexOf("Calculate") >= 0
+            || category.indexOf("Hesapla") >= 0
+            || category.indexOf("Unit") >= 0
+            || category.indexOf("Birim") >= 0
+            || category.indexOf("Currency") >= 0
+            || category.indexOf("Döviz") >= 0;
+    }
 
     // Active filter from chips
     property string activeFilter: "All"
@@ -127,6 +150,8 @@ Item {
     property int focusSection: 0
     property string activeBackend: "Milou"
     property bool isLoadingResults: false
+    property int searchGeneration: 0
+    readonly property int filteredResultLimit: 120
     property bool pendingHistoryRun: false
     property string pendingHistoryMatchId: ""
     property string pendingHistoryDisplay: ""
@@ -146,7 +171,7 @@ Item {
         activeFilter: popupRoot.activeFilter
         maxResults: popupRoot.activeFilter === "All" 
             ? (popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.maxResults || 20) : 20)
-            : 450
+            : popupRoot.filteredResultLimit
         
         onCategorizedDataChanged: {
              // propagated automatically to bindings
@@ -160,16 +185,17 @@ Item {
         queryString: popupRoot.delayedQueryString
         limit: popupRoot.activeFilter === "All"
             ? (popupRoot.plasmoidConfig ? Math.max(10, popupRoot.plasmoidConfig.maxResults || 20) : 20)
-            : 450
+            : popupRoot.filteredResultLimit
     }
     
     // Debounce the query string update to Milou
     property string delayedQueryString: ""
     Timer {
         id: queryDebouncer
-        interval: 90
+        interval: 60
         repeat: false
         onTriggered: {
+            tileData.markQueryIssued(popupRoot.searchGeneration)
             popupRoot.delayedQueryString = getBackendQuery(popupRoot.searchText, popupRoot.activeFilter)
         }
     }
@@ -182,6 +208,8 @@ Item {
     }
     
     onSearchTextChanged: {
+        searchGeneration++
+        tileData.beginSearch(searchGeneration, Date.now())
         popupRoot.isLoadingResults = searchText.length > 0
         if (searchText.length > 0) loadingFallbackTimer.restart()
         else loadingFallbackTimer.stop()
@@ -204,6 +232,8 @@ Item {
     }
     
     onActiveFilterChanged: {
+        searchGeneration++
+        tileData.beginSearch(searchGeneration, Date.now())
         popupRoot.isLoadingResults = searchText.length > 0
         if (searchText.length > 0) loadingFallbackTimer.restart()
         queryDebouncer.restart()
@@ -222,7 +252,7 @@ Item {
     
     function getFilteredQuery(text, filter) {
         // Backend prefixes (like "services:" or "baloo:") are unreliable across different Plasma versions and locales.
-        // We rely entirely on TileDataManager to filter the results locally based on activeFilter.
+        // TileDataManager applies activeFilter locally.
         // This ensures consistent results because Milou fetches up to 450 items when a filter is active.
         return text || "";
     }
@@ -281,14 +311,14 @@ Item {
         // Handle non-milou results (like RSS)
         if (index === -1) {
             if (filePath && filePath.toString().length > 0) {
-                Qt.openUrlExternally(filePath);
+                if (Utils.isSafeExternalUrl(filePath)) Qt.openUrlExternally(filePath);
             }
             requestSearchTextUpdate("");
             requestExpandChange(false);
             return;
         }
 
-        var isApp = (category.toLowerCase().indexOf("app") !== -1 || category.toLowerCase().indexOf("uygulama") !== -1) || (filePath && filePath.toString().indexOf(".desktop") > 0);
+        var isApp = Utils.isAppCategory(category, filePath, matchId);
         var idx = resultsModel.index(index, 0);
         
         // FORCE RUN for command queries (gg:, help:, etc.) to avoid treating them as files
@@ -299,7 +329,7 @@ Item {
              resultsModel.run(idx);
         } else if (filePath && filePath.length > 0 && filePath.toString().indexOf("http") !== 0) {
              // For files, open externally
-             Qt.openUrlExternally(filePath);
+             if (Utils.isSafeExternalUrl(filePath)) Qt.openUrlExternally(filePath);
         } else {
              // For bookmarks or others, use Milou run
              resultsModel.run(idx);
@@ -321,7 +351,7 @@ Item {
                    logic.launchApp(directPath);
              } else {
                   // Standard file open
-                   Qt.openUrlExternally(directPath);
+                   if (Utils.isSafeExternalUrl(directPath)) Qt.openUrlExternally(directPath);
              }
              requestExpandChange(false);
              requestSearchTextUpdate("");
@@ -384,7 +414,10 @@ Item {
             }
         }
         if (!target) {
-            target = items.length > 0 ? items[0] : null
+            pendingHistoryRun = false
+            pendingHistoryMatchId = ""
+            pendingHistoryDisplay = ""
+            return
         }
         if (!target) return
 
@@ -456,9 +489,16 @@ Item {
     function _computeIsCommandOnly(text) {
         if (!text) return false;
         var t = text.toLowerCase();
-        var isWeather = _canShowWeather && (t === "weather:" || (_locWeather && t === _locWeather + ":"))
         
-        return isWeather || t === "date:" || t === "clock:" || t === "power:" || t === "help:" || 
+        var isWeather = _canShowWeather && (
+            t === "weather:" || t.startsWith("weather:") ||
+            (_locWeather && (t === _locWeather + ":" || t.startsWith(_locWeather + ":"))) ||
+            t === "hava:" || t.startsWith("hava:")
+        );
+        
+        var isCalendar = t === "calendar:" || (_locCalendar && t === _locCalendar + ":")
+        
+        return isWeather || isCalendar || t === "date:" || t === "clock:" || t === "power:" || t === "help:" || 
                (_locDate && t === _locDate + ":") || 
                (_locClock && t === _locClock + ":") || 
                (_locPower && t === _locPower + ":") || 
@@ -477,12 +517,23 @@ Item {
             if (_locUnit && lower.startsWith(_locUnit + ":")) return t.substring(_locUnit.length + 1).trim()
         }
         
-        // 2. Check for "clock:" then "date:"
+        // 2. Check for "clock:" then "date:" / "calendar:"
         if (lower === "clock:" || (_locClock && lower === _locClock + ":")) return "clock:"
-        if (lower === "date:" || (_locDate && lower === _locDate + ":")) return "date:"
+        if (lower === "date:" || (_locDate && lower === _locDate + ":") || 
+            lower === "calendar:" || (_locCalendar && lower === _locCalendar + ":")) return "date:"
         
         // 3. Check for "weather:"
-        if (_canShowWeather && (lower === "weather:" || (_locWeather && lower === _locWeather + ":"))) return "weather:"
+        if (_canShowWeather) {
+            if (lower === "weather:" || lower.startsWith("weather:")) {
+                return "weather:" + t.substring(8).trim()
+            }
+            if (_locWeather && (lower === _locWeather + ":" || lower.startsWith(_locWeather + ":"))) {
+                return "weather:" + t.substring(_locWeather.length + 1).trim()
+            }
+            if (lower === "hava:" || lower.startsWith("hava:")) {
+                return "weather:" + t.substring(5).trim()
+            }
+        }
         
         // 4. Check for "help:"
         if (lower === "help:" || (_locHelp && lower === _locHelp + ":")) return "help:"
@@ -491,7 +542,7 @@ Item {
         if (_prefixKillEnabled) {
             if (lower.startsWith("kill ") || (_locKill && lower.startsWith(_locKill + " "))) {
                 var killPrefix = lower.startsWith("kill ") ? "kill" : _locKill;
-                return "kill " + t.substring(killPrefix.length + 1)
+                return "kill " + t.substring(killPrefix.length + 1).trim()
             }
         }
 
@@ -499,7 +550,7 @@ Item {
         if (_prefixSpellEnabled) {
             if (lower.startsWith("spell ") || (_locSpell && lower.startsWith(_locSpell + " "))) {
                 var spellPrefix = lower.startsWith("spell ") ? "spell" : _locSpell;
-                return "spell " + t.substring(spellPrefix.length + 1)
+                return "spell " + t.substring(spellPrefix.length + 1).trim()
             }
         }
         
@@ -507,7 +558,7 @@ Item {
         if (_prefixShellEnabled) {
             if (lower.startsWith("shell:") || (_locShell && lower.startsWith(_locShell + ":"))) {
                 var shellPrefix = lower.startsWith("shell:") ? "shell" : _locShell;
-                return "shell:" + t.substring(shellPrefix.length + 1)
+                return "shell:" + t.substring(shellPrefix.length + 1).trim()
             }
         }
         
@@ -531,24 +582,18 @@ Item {
         currentIndex: resultsListLoader.active ? resultsListLoader.item.currentIndex : 0 // approximate
         
         onTextUpdated: (newText) => {
-            tileData.startSearch();
             requestSearchTextUpdate(newText);
         }
         onSearchSubmitted: (idx) => {
-             // Dispatch based on view mode
+             // Dispatch to the active results view.
              if (isTileView && tileResultsLoader.item) {
                  tileResultsLoader.item.activateCurrentItem();
                  return;
              } else if (searchText.length === 0 && historyLoader.item) {
-                 // History View activation (tile or list)
-                 if (historyLoader.item.activateCurrentItem) { // If exposed
+                 if (historyLoader.item.activateCurrentItem) {
                      historyLoader.item.activateCurrentItem();
                      return;
                  }
-                 // Actually historyLoader wrapper doesn't have activateCurrentItem, 
-                 // but we can add it or access inner.
-                 // Let's rely on focus being there OR add helper.
-                 // For now let's handle Results Tile View explicitly here.
              }
 
              if (tileData.resultCount > 0) {
@@ -588,13 +633,13 @@ Item {
         logic: popupRoot.logic
         rssPlaceholderCycling: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssPlaceholderCycling || false) : false
         rssFrequency: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssFrequency !== undefined ? popupRoot.plasmoidConfig.rssFrequency : 3) : 3
+        weatherFrequency: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.weatherFrequency !== undefined ? popupRoot.plasmoidConfig.weatherFrequency : 2) : 2
         rssShowFullHeadline: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssShowFullHeadline !== undefined ? popupRoot.plasmoidConfig.rssShowFullHeadline : true) : true
         rssShowSource: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssShowSource || false) : false
         
         onTextUpdated: (newText) => {
              if (isButtonMode && newText !== popupRoot.searchText) {
                  requestSearchTextUpdate(newText);
-                 tileData.startSearch();
              }
         }
         
@@ -668,7 +713,6 @@ Item {
                 onFilterSelected: (name) => {
                     popupRoot.activeFilter = name;
                     queryDebouncer.restart();
-                    tileData.startSearch();
                 }
             }
         }
@@ -683,7 +727,7 @@ Item {
         anchors.right: parent.right
         anchors.margins: 12
         asynchronous: true
-        active: popupRoot.expanded && popupRoot.searchText.length > 0 && !isTileView
+        active: popupRoot.expanded && popupRoot.hasPrimaryResult && !isTileView
         
         sourceComponent: PrimaryResultPreview {
             resultsModel: popupRoot.resultsModel
@@ -713,7 +757,7 @@ Item {
         anchors.leftMargin: 12
         anchors.rightMargin: 12
         asynchronous: true
-        active: popupRoot.expanded && popupRoot.searchText.length > 0 && !popupRoot.isRssOnlyQuery
+        active: popupRoot.expanded && popupRoot.queryMayHaveHint && !popupRoot.isRssOnlyQuery
         sourceComponent: QueryHints {
             searchText: popupRoot.searchText
             textColor: popupRoot.textColor
@@ -745,7 +789,7 @@ Item {
         asynchronous: true
         
         property var items: logic.visiblePinnedItems
-        active: showPinnedBar && !popupRoot.isRssOnlyQuery
+        active: popupRoot.expanded && showPinnedBar && !popupRoot.isRssOnlyQuery
         
         // Connections removed as binding handles updates now
         
@@ -765,7 +809,7 @@ Item {
                      if (item.filePath.toString().indexOf(".desktop") !== -1) {
                           logic.launchApp(item.filePath);
                      } else {
-                          Qt.openUrlExternally(item.filePath);
+                          if (Utils.isSafeExternalUrl(item.filePath)) Qt.openUrlExternally(item.filePath);
                      }
                 } else {
                     requestSearchTextUpdate(item.display);
@@ -779,8 +823,8 @@ Item {
             onUnpinClicked: (matchId) => logic.unpinItem(matchId)
             
             // Drag-drop reorder
-            onReorderRequested: (fromIndex, toIndex) => {
-                logic.reorderPinnedItems(fromIndex, toIndex)
+            onReorderRequested: (fromUuid, toUuid) => {
+                logic.reorderPinnedItems(fromUuid, toUuid)
             }
             
             // Context menu actions
@@ -798,7 +842,7 @@ Item {
                     var lastSlash = path.lastIndexOf("/")
                     if (lastSlash > 0) {
                         var parentDir = path.substring(0, lastSlash)
-                        Qt.openUrlExternally(parentDir)
+                        if (Utils.isSafeExternalUrl(parentDir)) Qt.openUrlExternally(parentDir)
                     }
                 }
             }
@@ -947,14 +991,10 @@ Item {
 
             
             onAidSelected: (prefix) => {
-                // When selecting from Help, we put the LOCALIZED prefix in the box if possible?
-                // Or just the standard one? 
-                // Let's use standard for now or what comes from HelpView (which we will update to be localized?)
-                // If HelpView sends "birim:", we put "birim:".
+                // HelpView returns the prefix in the active locale.
                 requestSearchTextUpdate(prefix)
                 if (!isButtonMode) hiddenSearchInput.text = prefix
                 else searchBar.setText(prefix)
-                // Focus input?
             }
             anchors.fill: parent
         }
@@ -971,12 +1011,19 @@ Item {
         anchors.margins: 12
         anchors.bottomMargin: 12
         
-        active: popupRoot.expanded && popupRoot.effectiveQuery === "weather:"
+        active: popupRoot.expanded && popupRoot.effectiveQuery.startsWith("weather:")
         
         sourceComponent: WeatherView {
             // WeatherView handles its own fetching on visible
             plasmoidConfig: popupRoot.plasmoidConfig
             anchors.fill: parent
+            queryCity: {
+                var eq = popupRoot.effectiveQuery;
+                if (eq.startsWith("weather:")) {
+                    return eq.substring(8).trim();
+                }
+                return "";
+            }
         }
     }
 
@@ -1027,7 +1074,7 @@ Item {
          active: popupRoot.expanded && searchText.length === 0
          
          property var categorizedHistory: {
-             if (!(logic.historyVersion >= 0 && logic.searchHistory.length > 0)) return [];
+             if (logic.searchHistory.length === 0) return [];
              var hist = logic.searchHistory;
              if (activeFilter !== "All") {
                  var filtered = [];
@@ -1056,71 +1103,72 @@ Item {
              anchors.fill: parent
              // Helper to route navigation
              function moveUp() { 
-                 if (isTileView) histTileView.moveUp();
-                 else histListView.moveUp();
+                 var view = isTileView ? histTileLoader.item : histListLoader.item;
+                 if (view) view.moveUp();
              }
              function moveDown() { 
-                 if (isTileView) histTileView.moveDown();
-                 else histListView.moveDown();
+                 var view = isTileView ? histTileLoader.item : histListLoader.item;
+                 if (view) view.moveDown();
              }
              function moveLeft() { 
-                 if (isTileView) histTileView.moveLeft();
+                 if (histTileLoader.item) histTileLoader.item.moveLeft();
              }
              function moveRight() { 
-                 if (isTileView) histTileView.moveRight();
+                 if (histTileLoader.item) histTileLoader.item.moveRight();
              }
              function activateCurrentItem() {
-                 if (isTileView) histTileView.activateCurrentItem();
-                 else histListView.activateCurrentItem();
+                 var view = isTileView ? histTileLoader.item : histListLoader.item;
+                 if (view) view.activateCurrentItem();
              }
 
              // History List
-             HistoryListView {
-                 id: histListView
+             Loader {
+                 id: histListLoader
                  anchors.fill: parent
-                 visible: !isTileView
-                 categorizedHistory: historyLoader.categorizedHistory
-                 listIconSize: popupRoot.listIconSize
-                 textColor: popupRoot.textColor
-                 accentColor: popupRoot.accentColor
-                 formatTimeFunc: logic.formatHistoryTime
-
-                 logic: popupRoot.logic
-                 previewEnabled: popupRoot.previewEnabled
-                 previewShowHistory: popupRoot.previewShowHistory
-                 previewInlineMode: popupRoot.previewInlineMode
-                 previewSize: popupRoot.previewSize
-                 previewSettings: popupRoot.previewSettings
-                 
-                 onItemClicked: (item) => handleHistoryClick(item)
-                 onClearClicked: logic.clearHistory()
+                 asynchronous: true
+                 active: !isTileView
+                 sourceComponent: HistoryListView {
+                     categorizedHistory: historyLoader.categorizedHistory
+                     listIconSize: popupRoot.listIconSize
+                     textColor: popupRoot.textColor
+                     accentColor: popupRoot.accentColor
+                     formatTimeFunc: logic.formatHistoryTime
+                     logic: popupRoot.logic
+                     previewEnabled: popupRoot.previewEnabled
+                     previewShowHistory: popupRoot.previewShowHistory
+                     previewInlineMode: popupRoot.previewInlineMode
+                     previewSize: popupRoot.previewSize
+                     previewSettings: popupRoot.previewSettings
+                     onItemClicked: (item) => handleHistoryClick(item)
+                     onClearClicked: logic.clearHistory()
+                 }
              }
              
              // History Tile
-             HistoryTileView {
-                 id: histTileView
-                 previewEnabled: popupRoot.previewEnabled
-                 previewShowHistory: popupRoot.previewShowHistory
-                 previewInlineMode: popupRoot.previewInlineMode
-                 previewSize: popupRoot.previewSize
+             Loader {
+                 id: histTileLoader
                  anchors.fill: parent
-                 visible: isTileView
-                 categorizedHistory: historyLoader.categorizedHistory
-                 iconSize: popupRoot.iconSize
-                 textColor: popupRoot.textColor
-                 accentColor: popupRoot.accentColor
-
-                 logic: popupRoot.logic
-                 previewSettings: popupRoot.previewSettings
-                 scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
-                 compactTileView: popupRoot.compactHistoryItems
-                 
-                 onItemClicked: (item) => handleHistoryClick(item)
-                 onClearClicked: logic.clearHistory()
-                 
-                 onTabPressed: cycleFocusSection(true)
-                 onShiftTabPressed: cycleFocusSection(false)
-                 onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
+                 asynchronous: true
+                 active: isTileView
+                 sourceComponent: HistoryTileView {
+                     previewEnabled: popupRoot.previewEnabled
+                     previewShowHistory: popupRoot.previewShowHistory
+                     previewInlineMode: popupRoot.previewInlineMode
+                     previewSize: popupRoot.previewSize
+                     categorizedHistory: historyLoader.categorizedHistory
+                     iconSize: popupRoot.iconSize
+                     textColor: popupRoot.textColor
+                     accentColor: popupRoot.accentColor
+                     logic: popupRoot.logic
+                     previewSettings: popupRoot.previewSettings
+                     scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
+                     compactTileView: popupRoot.compactHistoryItems
+                     onItemClicked: (item) => handleHistoryClick(item)
+                     onClearClicked: logic.clearHistory()
+                     onTabPressed: cycleFocusSection(true)
+                     onShiftTabPressed: cycleFocusSection(false)
+                     onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
+                 }
              }
          }
     }
@@ -1143,8 +1191,92 @@ Item {
               displayModeName: isButtonMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Button") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Mode")
               totalSearches: logic.telemetryStats.totalSearches || 0
               avgLatency: logic.telemetryStats.averageLatency || 0
+              performanceTrace: tileData.lastPerformanceTrace
 
          }
+    }
+
+    Component {
+        id: articleWindowComponent
+        Window {
+            id: artWin
+            width: 650
+            height: 550
+            title: articleTitle
+            visible: true
+            
+            property string articleTitle: ""
+            property string articleText: ""
+            property string articleUrl: ""
+            
+            color: popupRoot.bgColor
+            
+            Shortcut {
+                sequence: "Escape"
+                onActivated: artWin.close()
+            }
+            
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 16
+                spacing: 12
+                
+                Text {
+                    text: artWin.articleTitle
+                    color: popupRoot.textColor
+                    font.bold: true
+                    font.pixelSize: 18
+                    font.family: popupRoot.fontFamily
+                    wrapMode: Text.WordWrap
+                    Layout.fillWidth: true
+                }
+                
+                ScrollView {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    clip: true
+                    
+                    TextArea {
+                        text: artWin.articleText
+                        color: popupRoot.textColor
+                        font.pixelSize: 14
+                        font.family: popupRoot.fontFamily
+                        wrapMode: Text.WordWrap
+                        readOnly: true
+                        selectByMouse: true
+                        background: null
+                    }
+                }
+                
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 8
+                    
+                    Button {
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open in Browser")
+                        icon.name: "internet-services"
+                        onClicked: {
+                            if (Utils.isSafeExternalUrl(artWin.articleUrl)) Qt.openUrlExternally(artWin.articleUrl)
+                        }
+                    }
+                    
+                    Item { Layout.fillWidth: true }
+                    
+                    Button {
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Close")
+                        onClicked: artWin.close()
+                    }
+                }
+            }
+        }
+    }
+
+    function showArticleInWindow(title, text, url) {
+        articleWindowComponent.createObject(popupRoot, {
+            articleTitle: title,
+            articleText: text,
+            articleUrl: url
+        });
     }
 
     Component.onCompleted: {

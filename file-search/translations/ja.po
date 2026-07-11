@@ -1764,3 +1764,159 @@ msgstr "ウルトラワイドモード (最大カバレッジ)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Power User - 全機能が有効で、詳細設定が可能。"
+
+
+msgid "Weather Provider"
+msgstr "お天気プロバイダー"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (無料、キー不要)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (キーが必要)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (キーが必要)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap APIキー:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMapのAPIキーを入力してください"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com APIキー:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.comのキーを入力してください"
+
+
+msgid "Location"
+msgstr "場所"
+
+
+msgid "Auto-detect from IP"
+msgstr "IPから自動検出"
+
+
+msgid "Enter manually"
+msgstr "手動で入力"
+
+
+msgid "City 1:"
+msgstr "都市 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "例: 東京, 大阪, ロンドン"
+
+
+msgid "Loading weather data..."
+msgstr "気象データを読み込み中..."
+
+
+msgid "Clear"
+msgstr "快晴"
+
+
+msgid "Mainly Clear"
+msgstr "晴れ"
+
+
+msgid "Partly Cloudy"
+msgstr "時々曇り"
+
+
+msgid "Overcast"
+msgstr "曇天"
+
+
+msgid "Fog"
+msgstr "霧"
+
+
+msgid "Drizzle"
+msgstr "霧雨"
+
+
+msgid "Freezing Drizzle"
+msgstr "着氷性の霧雨"
+
+
+msgid "Rain"
+msgstr "雨"
+
+
+msgid "Freezing Rain"
+msgstr "着氷性の雨"
+
+
+msgid "Snow"
+msgstr "雪"
+
+
+msgid "Snow Grains"
+msgstr "霧雪"
+
+
+msgid "Rain Showers"
+msgstr "にわか雨"
+
+
+msgid "Snow Showers"
+msgstr "にわか雪"
+
+
+msgid "Thunderstorm"
+msgstr "雷雨"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "ひょうを伴う雷雨"
+
+
+msgid "Unknown"
+msgstr "不明"
+
+
+msgid "Cloudy"
+msgstr "曇り"
+
+
+msgid "Mist"
+msgstr "霞"
+
+
+msgid "Smoke"
+msgstr "煙"
+
+
+msgid "Haze"
+msgstr "煙霧"
+
+
+msgid "Dust"
+msgstr "砂塵"
+
+
+msgid "Sand"
+msgstr "砂"
+
+
+msgid "Ash"
+msgstr "火山灰"
+
+
+msgid "Squall"
+msgstr "スコール"
+
+
+msgid "Tornado"
+msgstr "竜巻"

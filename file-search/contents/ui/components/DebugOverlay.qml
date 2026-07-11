@@ -22,6 +22,7 @@ Rectangle {
     property int totalSearches: 0
     property int avgLatency: 0
     property var telemetryDataRaw: "{}" // Passed from parent if needed
+    property var performanceTrace: ({})
     
     color: Qt.rgba(0, 0, 0, 0.85)
     radius: 6
@@ -94,6 +95,21 @@ Rectangle {
             Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Display") + ":"; color: "white"; font.pixelSize: 10 }
             Label { text: root.displayModeName; color: "white"; font.pixelSize: 10 }
 
+            Label { text: "Input → query:"; color: "white"; font.pixelSize: 9 }
+            Label { text: (root.performanceTrace.inputToIssueMs ?? -1) + " ms"; color: "white"; font.pixelSize: 9 }
+
+            Label { text: "Backend → first row:"; color: "white"; font.pixelSize: 9 }
+            Label { text: (root.performanceTrace.backendToFirstRowMs ?? -1) + " ms"; color: "white"; font.pixelSize: 9 }
+
+            Label { text: "Scan / sort:"; color: "white"; font.pixelSize: 9 }
+            Label { text: (root.performanceTrace.scanMs ?? -1) + " / " + (root.performanceTrace.sortMs ?? -1) + " ms"; color: "white"; font.pixelSize: 9 }
+
+            Label { text: "Refresh total:"; color: "white"; font.pixelSize: 9 }
+            Label { text: (root.performanceTrace.refreshMs ?? -1) + " ms"; color: "white"; font.pixelSize: 9 }
+
+            Label { text: "Cache hit / miss:"; color: "white"; font.pixelSize: 9 }
+            Label { text: (root.performanceTrace.metadataCacheHits ?? 0) + " / " + (root.performanceTrace.metadataCacheMisses ?? 0); color: "white"; font.pixelSize: 9 }
+
             // Divider
             Item { Layout.columnSpan: 2; height: 4; width: 1 }
 
@@ -153,6 +169,7 @@ Rectangle {
                         total: root.totalSearches,
                         avgLatency: root.avgLatency
                     },
+                    performance: root.performanceTrace,
                     system: {
                         locale: Qt.locale().name
                     }

@@ -188,6 +188,46 @@
       <default>{}</default>
       <label>Cached weather data (JSON)</label>
     </entry>
+    <entry name="weatherProvider" type="String">
+      <default>openmeteo</default>
+      <label>Weather Provider</label>
+    </entry>
+    <entry name="weatherLocationMode" type="String">
+      <default>auto</default>
+      <label>Location Mode (auto or manual)</label>
+    </entry>
+    <entry name="weatherLocation" type="String">
+      <default></default>
+      <label>Manual Weather Location</label>
+    </entry>
+    <entry name="weatherApiKey" type="String">
+      <default></default>
+      <label>Legacy OpenWeatherMap API key (migrated to KWallet)</label>
+    </entry>
+    <entry name="weatherApiKey2" type="String">
+      <default></default>
+      <label>Legacy WeatherAPI.com API key (migrated to KWallet)</label>
+    </entry>
+    <entry name="weatherUpdateTrigger" type="Int">
+      <default>0</default>
+      <label>Trigger value to force weather update</label>
+    </entry>
+    <entry name="weatherPlaceholderCycling" type="Bool">
+      <default>true</default>
+      <label>Show weather in placeholder cycling</label>
+    </entry>
+    <entry name="weatherFrequency" type="Int">
+      <default>2</default>
+      <label>Frequency of weather placeholder cycles</label>
+    </entry>
+    <entry name="weatherIconPack" type="String">
+      <default>default</default>
+      <label>Weather Icon Pack</label>
+    </entry>
+    <entry name="weatherViewMode" type="String">
+      <default>large</default>
+      <label>Weather Prefix View Mode</label>
+    </entry>
   </group>
 
   <!-- Tab 5: Placeholder (Search Settings) -->

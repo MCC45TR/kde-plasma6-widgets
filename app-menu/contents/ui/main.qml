@@ -10,7 +10,7 @@ PlasmoidItem {
     // Use full representation for the popup
     fullRepresentation: FullRepresentation {}
 
-    // propertity for configured icon
+    // Configured panel icon.
     readonly property string icon: Plasmoid.configuration.icon || "start-here-kde"
 
     // Use a simple icon for the panel (compact) representation

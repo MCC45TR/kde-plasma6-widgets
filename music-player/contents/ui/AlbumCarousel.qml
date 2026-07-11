@@ -81,11 +81,9 @@ Item {
             Behavior on anchors.leftMargin { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
             Behavior on anchors.rightMargin { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
             
-            // Logic: Hovering left -> Huge left margin? No, hovering Left means we want to see the Left button.
-            // So we must shrink the card from the Left. i.e., increase Left Margin.
+            // Inset the hovered edge to reveal its navigation button.
             anchors.leftMargin: carouselRoot.leftHovered ? 50 : 0
             
-            // Hovering right -> Shrink from Right.
             anchors.rightMargin: carouselRoot.rightHovered ? 50 : 0
             
             radius: 20
@@ -130,7 +128,6 @@ Item {
                  visible: carouselRoot.trackLength > 0
                  
                  // Reuse your seek bar and text logic here...
-                 // Simplification for brevity in this structure test
                  Text {
                      anchors.centerIn: parent
                      text: carouselRoot.trackTitle

@@ -141,7 +141,7 @@ ColumnLayout {
                         font.family: "Roboto Condensed"
                         font.pixelSize: Math.round(11 * calendarLayout.fontScale)
                         font.weight: cellData.isToday ? Font.Bold : Font.Normal
-                        // Change text color if selected (handled below or via condition)
+                        // Reflect the selected date in the text color.
                         readonly property bool isSelected: {
                              if (!calendarLayout.selectedDate) return false
                              return cellData.date.getFullYear() === calendarLayout.selectedDate.getFullYear() &&
@@ -161,7 +161,7 @@ ColumnLayout {
             id: animatedSelectionRect
             // Use this invisible Item to track state ("column" vs "date")
             // Reusing the id 'columnHighlighter' conceptually to store the index state, 
-            // but the visual is THIS rect.
+            // This rectangle provides the visible selection state.
             Item {
                 id: columnHighlighter
                 property int columnIndex: -1

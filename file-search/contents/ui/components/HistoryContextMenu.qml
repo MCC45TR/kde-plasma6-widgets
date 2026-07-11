@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
+import "../js/utils.js" as Utils
 
 QQC.Menu {
     id: root
@@ -19,7 +20,7 @@ QQC.Menu {
     // Helper: Get Match ID for pinning
     readonly property string matchId: {
         if (!historyItem) return ""
-        return (historyItem.duplicateId !== undefined ? historyItem.duplicateId : historyItem.display) || ""
+        return historyItem.matchId || historyItem.display || ""
     }
     
     // ===== PIN / UNPIN =====
@@ -56,7 +57,7 @@ QQC.Menu {
                 if (historyItem.filePath.toString().indexOf(".desktop") !== -1) {
                     logic.launchApp(historyItem.filePath)
                 } else {
-                    Qt.openUrlExternally(historyItem.filePath)
+                    if (Utils.isSafeExternalUrl(historyItem.filePath)) Qt.openUrlExternally(historyItem.filePath)
                 }
             }
         }
@@ -109,6 +110,7 @@ QQC.Menu {
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
         onTriggered: {
             logic.moveToTrash(historyItem.filePath)
+            if (logic.isPinned(matchId)) logic.unpinItem(matchId)
             if (historyItem.uuid) {
                 logic.removeFromHistory(historyItem.uuid)
             }

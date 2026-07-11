@@ -1764,3 +1764,159 @@ msgstr "Ультраширокий режим (Максимум покрытия
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Опытный пользователь - Все функции, расширенные настройки."
+
+
+msgid "Weather Provider"
+msgstr "Поставщик погоды"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (бесплатно, ключ не требуется)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (требуется ключ)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (требуется ключ)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Ключ API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Введите ключ API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Ключ API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Введите ключ API WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Местоположение"
+
+
+msgid "Auto-detect from IP"
+msgstr "Автоопределение по IP"
+
+
+msgid "Enter manually"
+msgstr "Ввести вручную"
+
+
+msgid "City 1:"
+msgstr "Город 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Прим: Москва, Санкт-Петербург, Лондон"
+
+
+msgid "Loading weather data..."
+msgstr "Загрузка данных о погоде..."
+
+
+msgid "Clear"
+msgstr "Ясно"
+
+
+msgid "Mainly Clear"
+msgstr "Преимущественно ясно"
+
+
+msgid "Partly Cloudy"
+msgstr "Переменная облачность"
+
+
+msgid "Overcast"
+msgstr "Пасмурно"
+
+
+msgid "Fog"
+msgstr "Туман"
+
+
+msgid "Drizzle"
+msgstr "Морось"
+
+
+msgid "Freezing Drizzle"
+msgstr "Ледяная морось"
+
+
+msgid "Rain"
+msgstr "Дождь"
+
+
+msgid "Freezing Rain"
+msgstr "Ледяной дождь"
+
+
+msgid "Snow"
+msgstr "Снег"
+
+
+msgid "Snow Grains"
+msgstr "Снежная крупа"
+
+
+msgid "Rain Showers"
+msgstr "Ливень"
+
+
+msgid "Snow Showers"
+msgstr "Снегопад"
+
+
+msgid "Thunderstorm"
+msgstr "Гроза"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Гроза с градом"
+
+
+msgid "Unknown"
+msgstr "Неизвестно"
+
+
+msgid "Cloudy"
+msgstr "Облачно"
+
+
+msgid "Mist"
+msgstr "Дымка"
+
+
+msgid "Smoke"
+msgstr "Дым"
+
+
+msgid "Haze"
+msgstr "Мгла"
+
+
+msgid "Dust"
+msgstr "Пыль"
+
+
+msgid "Sand"
+msgstr "Песок"
+
+
+msgid "Ash"
+msgstr "Пепел"
+
+
+msgid "Squall"
+msgstr "Шквал"
+
+
+msgid "Tornado"
+msgstr "Торнадо"

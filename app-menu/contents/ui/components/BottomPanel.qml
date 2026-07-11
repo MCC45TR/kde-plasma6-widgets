@@ -76,7 +76,7 @@ Item {
             }
         }
         
-        // Spacer if needed (ScrollView takes space, but we want Power Button pinned right)
+        // Keep the power button pinned to the right.
         // ScrollView Layout.fillWidth triggers expansion.
         
         // Power Button

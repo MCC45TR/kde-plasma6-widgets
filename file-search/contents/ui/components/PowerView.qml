@@ -15,7 +15,6 @@ Item {
     property var bootEntries: []
     property bool bootEntriesVisible: false
     property bool canHibernate: false
-    property bool isBootctlInstalled: false
     property bool showBootOptions: false
     property bool showHibernate: false
     property bool showSleep: true
@@ -37,7 +36,7 @@ Item {
                 root.cmdDataBuffer[sourceName] += data["stdout"]
             }
             
-            // We try to process immediately, assuming small JSON comes fast or in one chunk.
+            // Parse the accumulated response as soon as it is complete.
             var fullData = root.cmdDataBuffer[sourceName]
             
             if (sourceName && sourceName.indexOf("bootctl list") !== -1) {
@@ -54,7 +53,6 @@ Item {
                          // Saving to config cache
                          if (root.plasmoidConfig) {
                              root.plasmoidConfig.cachedBootEntries = fullData
-                             try { Plasmoid.configuration.cachedBootEntries = fullData } catch(e) {} // Fallback/Sync
                          } else {
                              try { Plasmoid.configuration.cachedBootEntries = fullData } catch(e) {}
                          }
@@ -62,16 +60,11 @@ Item {
                     execSource.disconnectSource(sourceName)
                     delete root.cmdDataBuffer[sourceName]
                 } catch(e) {
-                    // Incomplete JSON, wait for more? 
+                    // Wait for the remaining JSON payload.
                 }
             } else if (sourceName && sourceName.indexOf("CanHibernate") !== -1 && data["stdout"]) {
                 var res = data["stdout"].trim()
                 root.canHibernate = (res === "yes")
-                execSource.disconnectSource(sourceName)
-            } else if (sourceName && sourceName.indexOf("checkBootctl") !== -1) {
-                if(data["stdout"] && data["stdout"].trim().length > 0) {
-                     root.isBootctlInstalled = true
-                }
                 execSource.disconnectSource(sourceName)
             }
         }
@@ -80,7 +73,7 @@ Item {
     // Signal to main window to prevent closing during auth
     signal requestPreventClosing(bool prevent)
     
-    // Safety timer to ensure we don't lock the popup open forever if something goes wrong
+    // Release the popup if authentication does not complete in time.
     Timer {
          id: authSafetyTimer
          interval: 10000 // Reduced to 10s for loading timeout
@@ -113,7 +106,7 @@ Item {
                 console.error("[PowerView] Cache corrupt")
             }
         }
-        // If no cache, we stop loading. User must click "Scan" to trigger auth load.
+        // Without a cache, scanning explicitly starts the authenticated load.
         root.isLoading = false
     }
 
@@ -187,16 +180,9 @@ Item {
         execSource.connectSource("qdbus org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.CanHibernate")
     }
 
-    function checkBootctl() {
-        execSource.connectSource("bash -c 'command -v bootctl'")
-    }
-    
     Component.onCompleted: {
-        // loadEntries() // Called by onVisibleChanged or manually if needed, but let's call it here too?
-        // Actually, if we rely on onVisibleChanged, it might be better, but main.qml loads this always?
         loadEntries()
         checkHibernate()
-        checkBootctl()
     }
     
     Component.onDestruction: {
@@ -316,7 +302,7 @@ Item {
                 Layout.fillWidth: true
                 visible: true // implicitHeight controls visibility
                 // Animation for height
-                // Show if toggled ON via reboot button, OR if we have no entries (to show scan button)
+                // Show requested boot options or the initial scan action.
                 property bool shouldShow: root.bootEntriesVisible || root.bootEntries.length === 0
                 implicitHeight: shouldShow ? (Math.max(bootFlow.implicitHeight, 40) + 20) : 0
                 Behavior on implicitHeight { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
@@ -450,7 +436,7 @@ Item {
                         }
                     }
 
-                    // Scan Button - Visible if NO entries, OR if we have entries but user wants to refresh/scan
+                    // Offer the initial scan and manual refresh from the same action.
                     Rectangle {
                         visible: (root.bootEntries.length === 0) && !root.isLoading
                         width: bootFlow.width - 12

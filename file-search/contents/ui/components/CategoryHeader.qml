@@ -3,14 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-// Category Header with separator line
-// NOTE: This component is currently NOT USED. Consider using it in 
-// ResultsTileView/HistoryTileView to replace inline category headers,
-// or remove it in a future cleanup.
+// Reusable category heading with a separator.
 RowLayout {
     id: root
     
-    // Required properties
     required property string categoryName
     required property color textColor
     

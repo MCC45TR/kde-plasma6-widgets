@@ -1717,3 +1717,159 @@ msgstr "Tryb ultraszerokokątny (maksymalny zasięg)"
 
 #~ msgid "RSS"
 #~ msgstr "RSS"
+
+
+msgid "Weather Provider"
+msgstr "Dostawca pogody"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Darmowy, klucz niewymagany)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Klucz wymagany)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Klucz wymagany)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Klucz API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Wpisz swój klucz API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Klucz API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Wpisz swój klucz WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Lokalizacja"
+
+
+msgid "Auto-detect from IP"
+msgstr "Wykrywaj automatycznie z IP"
+
+
+msgid "Enter manually"
+msgstr "Wpisz ręcznie"
+
+
+msgid "City 1:"
+msgstr "Miasto 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Np: Ankara, Stambuł, Londyn"
+
+
+msgid "Loading weather data..."
+msgstr "Ładowanie danych pogodowych..."
+
+
+msgid "Clear"
+msgstr "Czyste niebo"
+
+
+msgid "Mainly Clear"
+msgstr "Przeważnie pogodnie"
+
+
+msgid "Partly Cloudy"
+msgstr "Zachmurzenie umiarkowane"
+
+
+msgid "Overcast"
+msgstr "Zachmurzenie całkowite"
+
+
+msgid "Fog"
+msgstr "Mgła"
+
+
+msgid "Drizzle"
+msgstr "Mżawka"
+
+
+msgid "Freezing Drizzle"
+msgstr "Marznąca mżawka"
+
+
+msgid "Rain"
+msgstr "Deszcz"
+
+
+msgid "Freezing Rain"
+msgstr "Marznący deszcz"
+
+
+msgid "Snow"
+msgstr "Śnieg"
+
+
+msgid "Snow Grains"
+msgstr "Śnieg ziarnisty"
+
+
+msgid "Rain Showers"
+msgstr "Przelotne opady deszczu"
+
+
+msgid "Snow Showers"
+msgstr "Przelotne opady śniegu"
+
+
+msgid "Thunderstorm"
+msgstr "Burza"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Burza z gradem"
+
+
+msgid "Unknown"
+msgstr "Nieznana"
+
+
+msgid "Cloudy"
+msgstr "Pochmurno"
+
+
+msgid "Mist"
+msgstr "Zamglenie"
+
+
+msgid "Smoke"
+msgstr "Dym"
+
+
+msgid "Haze"
+msgstr "Zadymienie"
+
+
+msgid "Dust"
+msgstr "Pył"
+
+
+msgid "Sand"
+msgstr "Piasek"
+
+
+msgid "Ash"
+msgstr "Popiół"
+
+
+msgid "Squall"
+msgstr "Szkwał"
+
+
+msgid "Tornado"
+msgstr "Tornado"

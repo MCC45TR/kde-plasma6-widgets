@@ -25,36 +25,31 @@ Item {
     property bool showChargingIcon: true
     property bool pillGeometry: false
 
-    // Design Tokens (Passed from Main via BigView)
+    // Layout settings provided by the parent view
     property int backgroundRadius: 20
     property double opacityValue: 1.0
     property int barRadius: 10
     property int switchRadius: 10
     property int contentGap: 4 
 
-    // Background Rectangle covering the whole view
     Rectangle {
         id: bgRect
         anchors.fill: parent
         radius: root.backgroundRadius
-        color: Kirigami.Theme.backgroundColor // Or transparent if main handles it? 
-        // Based on previous code, the inner rectangle had this color. 
-        // If main.qml has a background, this might be redundant or needed for the "card" look.
-        // Let's assume we want a card look.
+        color: Kirigami.Theme.backgroundColor
         
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: root.contentGap
             spacing: 2
             
-            // 1. Top: Device Icon (Flexible Height)
+            // Device icon
             Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 
                 Kirigami.Icon {
                     anchors.centerIn: parent
-                    // Scale icon to fit, but leave space for text/switch
                     height: Math.min(parent.width, parent.height) * 1.0
                     width: height
                     source: mainDevice && mainDevice.deviceType === "desktop" ? "computer" : "computer-laptop"

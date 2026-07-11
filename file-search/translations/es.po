@@ -1771,3 +1771,159 @@ msgstr "Modo ultra ancho (Máxima cobertura)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Power User - Todas las funciones, ajustes avanzados."
+
+
+msgid "Weather Provider"
+msgstr "Proveedor meteorológico"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratis, no se requiere clave)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Se requiere clave)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Se requiere clave)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Clave API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Introduzca su clave API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Clave API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Introduzca su clave de WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Ubicación"
+
+
+msgid "Auto-detect from IP"
+msgstr "Autodetectar por IP"
+
+
+msgid "Enter manually"
+msgstr "Introducir manualmente"
+
+
+msgid "City 1:"
+msgstr "Ciudad 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Ej: Madrid, Barcelona, Londres"
+
+
+msgid "Loading weather data..."
+msgstr "Cargando datos meteorológicos..."
+
+
+msgid "Clear"
+msgstr "Despejado"
+
+
+msgid "Mainly Clear"
+msgstr "Mayormente despejado"
+
+
+msgid "Partly Cloudy"
+msgstr "Parcialmente nublado"
+
+
+msgid "Overcast"
+msgstr "Cubierto"
+
+
+msgid "Fog"
+msgstr "Niebla"
+
+
+msgid "Drizzle"
+msgstr "Llovizna"
+
+
+msgid "Freezing Drizzle"
+msgstr "Llovizna helada"
+
+
+msgid "Rain"
+msgstr "Lluvia"
+
+
+msgid "Freezing Rain"
+msgstr "Lluvia helada"
+
+
+msgid "Snow"
+msgstr "Nieve"
+
+
+msgid "Snow Grains"
+msgstr "Nieve granulada"
+
+
+msgid "Rain Showers"
+msgstr "Chubascos"
+
+
+msgid "Snow Showers"
+msgstr "Chubascos de nieve"
+
+
+msgid "Thunderstorm"
+msgstr "Tormenta"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Tormenta con granizo"
+
+
+msgid "Unknown"
+msgstr "Desconocido"
+
+
+msgid "Cloudy"
+msgstr "Nublado"
+
+
+msgid "Mist"
+msgstr "Neblina"
+
+
+msgid "Smoke"
+msgstr "Humo"
+
+
+msgid "Haze"
+msgstr "Calima"
+
+
+msgid "Dust"
+msgstr "Polvo"
+
+
+msgid "Sand"
+msgstr "Arena"
+
+
+msgid "Ash"
+msgstr "Ceniza"
+
+
+msgid "Squall"
+msgstr "Chubasco fuerte"
+
+
+msgid "Tornado"
+msgstr "Tornado"

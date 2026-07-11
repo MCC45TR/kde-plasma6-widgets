@@ -45,11 +45,6 @@ Item {
                 Layout.fillWidth: true
                 model: Qt.fontFamilies()
                 
-                // Optional: set initial index if possible, but bindings might handle it.
-                // If binding doesn't update index automatically on load, we might need onComponentCompleted.
-                // However, usually Plasma's config loader sets the property 'cfg_customFont', 
-                // and if alias is bound to currentText, updating cfg_customFont updates currentText.
-                // Check if ComboBox updates index when currentText changes. Standard QQC2 ComboBox does.
             }
         }
     }

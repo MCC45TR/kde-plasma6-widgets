@@ -337,7 +337,7 @@ msgstr "(बंद करने के लिए फिर से दबाए�
 
 #: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
-msgstr "रिफ्रेश"
+msgstr "ताज़ा करें"
 
 #: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
@@ -1761,3 +1761,159 @@ msgstr "अल्ट्रा वाइड मोड (अधिकतम कव�
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "पावर यूजर - सभी सुविधाएँ सक्रिय, उन्नत सेटिंग्स उपलब्ध।"
+
+
+msgid "Weather Provider"
+msgstr "मौसम प्रदाता"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (नि:शुल्क, कोई कुंजी आवश्यक नहीं)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (कुंजी आवश्यक)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (कुंजी आवश्यक)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API कुंजी:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "अपनी OpenWeatherMap API कुंजी दर्ज करें"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API कुंजी:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "अपनी WeatherAPI.com कुंजी दर्ज करें"
+
+
+msgid "Location"
+msgstr "स्थान"
+
+
+msgid "Auto-detect from IP"
+msgstr "IP से स्वतः पहचानें"
+
+
+msgid "Enter manually"
+msgstr "मैन्युअल रूप से दर्ज करें"
+
+
+msgid "City 1:"
+msgstr "शहर 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "उदा: दिल्ली, मुंबई, लंदन"
+
+
+msgid "Loading weather data..."
+msgstr "मौसम का डेटा लोड हो रहा है..."
+
+
+msgid "Clear"
+msgstr "साफ़"
+
+
+msgid "Mainly Clear"
+msgstr "मुख्य रूप से साफ़"
+
+
+msgid "Partly Cloudy"
+msgstr "आंशिक रूप से बादल"
+
+
+msgid "Overcast"
+msgstr "बादलों से घिरा"
+
+
+msgid "Fog"
+msgstr "धुंध"
+
+
+msgid "Drizzle"
+msgstr "बूंदाबांदी"
+
+
+msgid "Freezing Drizzle"
+msgstr "बर्फ़ीली बूंदाबांदी"
+
+
+msgid "Rain"
+msgstr "बारिश"
+
+
+msgid "Freezing Rain"
+msgstr "बर्फ़ीली बारिश"
+
+
+msgid "Snow"
+msgstr "बर्फ़बारी"
+
+
+msgid "Snow Grains"
+msgstr "बर्फ़ के दाने"
+
+
+msgid "Rain Showers"
+msgstr "झमाझम बारिश"
+
+
+msgid "Snow Showers"
+msgstr "झमाझम बर्फ़"
+
+
+msgid "Thunderstorm"
+msgstr "गरज के साथ बौछारें"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "ओलों के साथ तूफान"
+
+
+msgid "Unknown"
+msgstr "अज्ञात"
+
+
+msgid "Cloudy"
+msgstr "बादल"
+
+
+msgid "Mist"
+msgstr "कोहरा"
+
+
+msgid "Smoke"
+msgstr "धुआं"
+
+
+msgid "Haze"
+msgstr "धुंध"
+
+
+msgid "Dust"
+msgstr "धूल"
+
+
+msgid "Sand"
+msgstr "रेत"
+
+
+msgid "Ash"
+msgstr "राख"
+
+
+msgid "Squall"
+msgstr "अंधड़"
+
+
+msgid "Tornado"
+msgstr "बवंडर"

@@ -1765,3 +1765,159 @@ msgstr "Mode Ultra Lebar (Cakupan Maksimal)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Power User - Semua fitur aktif, pengaturan lanjutan tersedia."
+
+
+msgid "Weather Provider"
+msgstr "Penyedia Cuaca"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratis, Tidak Perlu Kunci)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Perlu Kunci)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Perlu Kunci)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Kunci API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Masukkan kunci API OpenWeatherMap Anda"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Kunci API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Masukkan kunci WeatherAPI.com Anda"
+
+
+msgid "Location"
+msgstr "Lokasi"
+
+
+msgid "Auto-detect from IP"
+msgstr "Deteksi otomatis dari IP"
+
+
+msgid "Enter manually"
+msgstr "Masukkan secara manual"
+
+
+msgid "City 1:"
+msgstr "Kota 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Misal: Jakarta, Surabaya, London"
+
+
+msgid "Loading weather data..."
+msgstr "Memuat data cuaca..."
+
+
+msgid "Clear"
+msgstr "Cerah"
+
+
+msgid "Mainly Clear"
+msgstr "Sebagian Besar Cerah"
+
+
+msgid "Partly Cloudy"
+msgstr "Berawan Sebagian"
+
+
+msgid "Overcast"
+msgstr "Mendung"
+
+
+msgid "Fog"
+msgstr "Kabut"
+
+
+msgid "Drizzle"
+msgstr "Gerimis"
+
+
+msgid "Freezing Drizzle"
+msgstr "Gerimis Beku"
+
+
+msgid "Rain"
+msgstr "Hujan"
+
+
+msgid "Freezing Rain"
+msgstr "Hujan Beku"
+
+
+msgid "Snow"
+msgstr "Salju"
+
+
+msgid "Snow Grains"
+msgstr "Butiran Salju"
+
+
+msgid "Rain Showers"
+msgstr "Hujan Lokal"
+
+
+msgid "Snow Showers"
+msgstr "Salju Lokal"
+
+
+msgid "Thunderstorm"
+msgstr "Badai Petir"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Badai Petir dengan Hujan Es"
+
+
+msgid "Unknown"
+msgstr "Tidak Diketahui"
+
+
+msgid "Cloudy"
+msgstr "Berawan"
+
+
+msgid "Mist"
+msgstr "Kabut Tipis"
+
+
+msgid "Smoke"
+msgstr "Asap"
+
+
+msgid "Haze"
+msgstr "Kabut Asap"
+
+
+msgid "Dust"
+msgstr "Debu"
+
+
+msgid "Sand"
+msgstr "Pasir"
+
+
+msgid "Ash"
+msgstr "Abu"
+
+
+msgid "Squall"
+msgstr "Angin Kencang"
+
+
+msgid "Tornado"
+msgstr "Tornado"

@@ -322,7 +322,7 @@ Item {
     }
     
     CheckBox {
-        text: i18n("Shuffle Button") + " (" + i18n("not working") + ")"
+        text: i18n("Shuffle Button")
         checked: configAppearance.cfg_showShuffleButton
         onCheckedChanged: configAppearance.cfg_showShuffleButton = checked
         enabled: {
@@ -335,7 +335,7 @@ Item {
     }
     
     CheckBox {
-        text: i18n("Loop/Repeat Button") + " (" + i18n("not working") + ")"
+        text: i18n("Loop/Repeat Button")
         checked: configAppearance.cfg_showLoopButton
         onCheckedChanged: configAppearance.cfg_showLoopButton = checked
         enabled: {

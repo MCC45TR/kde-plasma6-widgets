@@ -4,7 +4,13 @@
 // Dynamic priority matching (lower = higher priority)
 function getDefaultPriority(cat) {
     var lower = (cat || "").toLowerCase()
-    if (lower.indexOf("app") !== -1 || lower.indexOf("uygulama") !== -1 || lower.indexOf("program") !== -1) return 1
+    if (lower.indexOf("app") !== -1 || lower.indexOf("uygulama") !== -1 || lower.indexOf("program") !== -1 ||
+        lower.indexOf("ayar") !== -1 || lower.indexOf("setting") !== -1 || lower.indexOf("oyun") !== -1 ||
+        lower.indexOf("game") !== -1 || lower.indexOf("ofis") !== -1 || lower.indexOf("office") !== -1 ||
+        lower.indexOf("sistem") !== -1 || lower.indexOf("system") !== -1 || lower.indexOf("araç") !== -1 ||
+        lower.indexOf("util") !== -1 || lower.indexOf("grafik") !== -1 || lower.indexOf("graphic") !== -1 ||
+        lower.indexOf("geliştirme") !== -1 || lower.indexOf("develop") !== -1 || lower.indexOf("ortam") !== -1 ||
+        lower.indexOf("multimedia") !== -1 || lower.indexOf("eğitim") !== -1 || lower.indexOf("educat") !== -1) return 1
     if (lower.indexOf("file") !== -1 || lower.indexOf("dosya") !== -1) return 2
     if (lower.indexOf("doc") !== -1 || lower.indexOf("belge") !== -1) return 3
     if (lower.indexOf("folder") !== -1 || lower.indexOf("klasör") !== -1 || lower.indexOf("place") !== -1 || lower.indexOf("yerler") !== -1) return 4

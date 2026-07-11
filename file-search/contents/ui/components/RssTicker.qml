@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import org.kde.kirigami as Kirigami
+import "WeatherIconMapper.js" as WeatherIcons
 
 Item {
     id: tickerContainer
@@ -16,12 +18,22 @@ Item {
     
     property color textColor: "#ffffff"
     property int fontSize: 14
-    property string fontFamily: "Roboto Condensed"
+    property string fontFamily: Kirigami.Theme.defaultFont.family
     property string defaultText: "Arama"
     property int horizontalAlignment: Text.AlignLeft
     property int rightMarginValue: 0
     property real textOpacity: 0.35
     property bool isSearching: false // Stop ticker when typing
+    
+    // Weather properties
+    property bool weatherPlaceholderCycling: true
+    property int weatherFrequency: 2
+    property string weatherIconPack: "default"
+    property bool isUltraWideMode: false
+    property bool isMediumMode: false
+    
+    property bool isWeatherIconSlide: false
+    property string currentWeatherIconSource: ""
     
     // Internal State
     property var titleChunks: []
@@ -31,6 +43,9 @@ Item {
     property string currentTargetText: defaultText
     property int currentDuration: 3000
     property string currentState: rssFrequency === 0 ? "rss" : "placeholder"
+    property var stateQueue: []
+    property int cycleCounter: 0
+    property real lastWeatherShowTime: 0
     
     // Computed Properties
     property var rssTitles: {
@@ -57,29 +72,166 @@ Item {
         if (rssTitles.length > 0 && currentState === "placeholder" && !switchAnim.running) {
             if (currentRssIndex < 0) currentRssIndex = 0;
         }
+        recalculateChunks();
     }
     
     onWidthChanged: {
-        if (width > 0 && currentTargetText !== "") {
-            recalculateChunks();
-        }
+        if (width > 0 && currentTargetText !== "")
+            layoutDebouncer.restart();
     }
     
-    function recalculateChunks() {
-        var rawText = (currentState === "rss" && rssTitles.length > 0 && currentRssIndex >= 0) ? rssTitles[currentRssIndex].text : defaultText;
-        if (currentState === "rss" && rssShowSource && currentRssIndex >= 0) {
-            rawText = "[" + (rssTitles[currentRssIndex].source || "RSS") + "] " + rawText;
+    onDefaultTextChanged: recalculateChunks()
+    onCurrentStateChanged: {
+        recalculateChunks();
+        if (currentState === "weather") {
+            lastWeatherShowTime = Date.now();
         }
+    }
+
+    property string parsedWeatherCacheSource: ""
+    property var parsedWeatherCache: null
+
+    Timer {
+        id: layoutDebouncer
+        interval: 75
+        repeat: false
+        onTriggered: tickerContainer.recalculateChunks()
+    }
+    
+    function getWeatherData() {
+        var config = (logic && logic.plasmoidConfig) ? logic.plasmoidConfig : null;
+        if (!config || !config.weatherEnabled) return null;
+        
+        var cached = config.weatherCache || "";
+        if (cached === parsedWeatherCacheSource) return parsedWeatherCache;
+        parsedWeatherCacheSource = cached;
+        parsedWeatherCache = null;
+        if (cached && cached !== "{}" && cached !== "") {
+            try {
+                var result = JSON.parse(cached);
+                if (result && result.current) {
+                    parsedWeatherCache = result;
+                    return parsedWeatherCache;
+                }
+            } catch (e) {
+                console.warn("RssTicker: Failed to parse cached weather:", e);
+            }
+        }
+        return null;
+    }
+
+    function getFormattedTemp(current) {
+        var config = (logic && logic.plasmoidConfig) ? logic.plasmoidConfig : null;
+        var isMetric = true;
+        if (config) {
+            if (config.weatherUseSystemUnits) {
+                isMetric = Qt.locale().measurementSystem === Locale.MetricSystem;
+            } else {
+                isMetric = (config.weatherUnits || "metric") === "metric";
+            }
+        }
+        var unitSymbol = isMetric ? "°C" : "°F";
+        return current.temp + unitSymbol;
+    }
+
+    function getShortCity(locationStr) {
+        if (!locationStr) return "";
+        var parts = locationStr.split(",");
+        if (parts.length === 1) return parts[0].trim();
+        
+        var first = parts[0].trim();
+        var last = parts[parts.length - 1].trim();
+        
+        var countryIndicators = [
+            "türkiye", "turkey", "united states", "us", "usa", "germany", "deutschland", 
+            "france", "united kingdom", "uk", "italy", "italia", "spain", "españa", "canada", "england"
+        ];
+        var isFirstCountry = countryIndicators.indexOf(first.toLowerCase()) !== -1;
+        var isLastCountry = countryIndicators.indexOf(last.toLowerCase()) !== -1 || last.length === 2;
+        
+        if (isFirstCountry) {
+            return last;
+        } else if (isLastCountry) {
+            return first;
+        }
+        return first;
+    }
+
+    function getWeatherIconSource(current) {
+        if (!current) return "";
+        var config = (logic && logic.plasmoidConfig) ? logic.plasmoidConfig : null;
+        var isDark = ((textColor.r + textColor.g + textColor.b) / 3) < 0.5;
+        var provider = config ? (config.weatherProvider || "openmeteo") : "openmeteo";
+        var pack = config ? (config.weatherIconPack || "default") : "default";
+        var path = WeatherIcons.getIconPath(current.code, provider, isDark, pack);
+        if (path.indexOf("/") !== -1) {
+            return Qt.resolvedUrl(path);
+        }
+        return path;
+    }
+
+    function recalculateChunks() {
+        var rawText = "";
+        var weatherData = getWeatherData();
+        
+        if (currentState === "weather" && weatherData) {
+            var current = weatherData.current;
+            var city = getShortCity(current.location);
+            var temp = getFormattedTemp(current);
+            var cond = current.condition || current.description || "";
+            var condText = i18nd("plasma_applet_com.mcc45tr.filesearch", cond);
+            
+            // Resolve icon source for the icon slide
+            currentWeatherIconSource = getWeatherIconSource(current);
+            
+            if (isMediumMode) {
+                // In Medium Mode, the chunks are: City -> Temp -> Icon (or just Temp -> Icon if city is not short)
+                var showCity = (city !== "" && city.length <= 15);
+                if (showCity) {
+                    titleChunks = [city, temp, "WEATHER_ICON_PLACEHOLDER"];
+                } else {
+                    titleChunks = [temp, "WEATHER_ICON_PLACEHOLDER"];
+                }
+                currentChunkIndex = 0;
+                currentTargetText = titleChunks[0];
+                isWeatherIconSlide = false;
+                
+                // Trigger transition
+                switchAnim.targetText = currentTargetText;
+                switchAnim.restart();
+                return;
+            } else {
+                // In other modes, the text is: "City Temp Condition"
+                rawText = city + " " + temp + " " + condText;
+            }
+        } else if (currentState === "rss" && rssTitles.length > 0 && currentRssIndex >= 0) {
+            rawText = rssTitles[currentRssIndex].text;
+            if (rssShowSource) {
+                rawText = "[" + (rssTitles[currentRssIndex].source || "RSS") + "] " + rawText;
+            }
+        } else {
+            rawText = defaultText;
+        }
+        
+        isWeatherIconSlide = false; // Reset weather icon slide flag for text states
+        
         var availWidth = width - rightMarginValue;
+        // Shift left margin if leftWeatherIcon is shown
+        if (currentState === "weather" && !isMediumMode) {
+            availWidth -= (fontSize * 1.2 + 6);
+        }
         if (availWidth <= 50) availWidth = width > 50 ? width : 200;
         
         var newChunks = splitTextIntoChunks(rawText, availWidth);
         if (newChunks.length > 0 && newChunks[0] !== titleChunks[0]) {
+            var isInitial = titleChunks.length === 0;
             titleChunks = newChunks;
             currentChunkIndex = 0;
             currentTargetText = newChunks[0];
-            switchAnim.targetText = currentTargetText;
-            switchAnim.restart();
+            if (!isInitial) {
+                switchAnim.targetText = currentTargetText;
+                switchAnim.restart();
+            }
         }
     }
     
@@ -95,13 +247,20 @@ Item {
         if (!rssShowFullHeadline && currentState === "rss") {
             titleMetrics.text = text;
             if (titleMetrics.advanceWidth <= maxWidth) return [text];
-            var truncated = text;
-            while (truncated.length > 3) {
-                titleMetrics.text = truncated + "...";
-                if (titleMetrics.advanceWidth <= maxWidth) break;
-                truncated = truncated.substring(0, truncated.length - 1);
+            var low = 1;
+            var high = text.length;
+            var fit = 1;
+            while (low <= high) {
+                var mid = Math.floor((low + high) / 2);
+                titleMetrics.text = text.substring(0, mid) + "...";
+                if (titleMetrics.advanceWidth <= maxWidth) {
+                    fit = mid;
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
             }
-            return [truncated + "..."];
+            return [text.substring(0, fit) + "..."];
         }
         
         var targetWidth = maxWidth - 20; // 20px safety margin
@@ -172,16 +331,58 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.rightMargin: tickerContainer.rightMarginValue
+        anchors.leftMargin: 0
+        rightPadding: (tickerContainer.currentState === "weather" && !tickerContainer.isMediumMode) ? (tickerContainer.fontSize * 1.2 + 6) : 0
         height: parent.height
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: tickerContainer.horizontalAlignment
         text: tickerContainer.currentTargetText
+        textFormat: Text.PlainText
         elide: Text.ElideRight
         wrapMode: Text.NoWrap
         opacity: tickerContainer.textOpacity
         color: tickerContainer.textColor
         font.pixelSize: tickerContainer.fontSize
         font.family: tickerContainer.fontFamily
+        
+        Image {
+            id: currentCenterIconImage
+            anchors.centerIn: parent
+            width: tickerContainer.fontSize * 1.5
+            height: width
+            fillMode: Image.PreserveAspectFit
+            visible: tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && tickerContainer.isWeatherIconSlide && parent.text === "" && String(tickerContainer.currentWeatherIconSource).indexOf("/") !== -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
+        Kirigami.Icon {
+            id: currentCenterIconSystem
+            anchors.centerIn: parent
+            width: tickerContainer.fontSize * 1.5
+            height: width
+            visible: tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && tickerContainer.isWeatherIconSlide && parent.text === "" && String(tickerContainer.currentWeatherIconSource).indexOf("/") === -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
+        Image {
+            id: currentRightIconImage
+            anchors.left: parent.left
+            anchors.leftMargin: Math.min(parent.width - width, parent.contentWidth + 6)
+            anchors.verticalCenter: parent.verticalCenter
+            width: tickerContainer.fontSize * 1.2
+            height: width
+            fillMode: Image.PreserveAspectFit
+            visible: !tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && String(tickerContainer.currentWeatherIconSource).indexOf("/") !== -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
+        Kirigami.Icon {
+            id: currentRightIconSystem
+            anchors.left: parent.left
+            anchors.leftMargin: Math.min(parent.width - width, parent.contentWidth + 6)
+            anchors.verticalCenter: parent.verticalCenter
+            width: tickerContainer.fontSize * 1.2
+            height: width
+            visible: !tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && String(tickerContainer.currentWeatherIconSource).indexOf("/") === -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
     }
     
     Text {
@@ -189,17 +390,59 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.rightMargin: tickerContainer.rightMarginValue
+        anchors.leftMargin: 0
+        rightPadding: (tickerContainer.currentState === "weather" && !tickerContainer.isMediumMode) ? (tickerContainer.fontSize * 1.2 + 6) : 0
         height: parent.height
         y: -height
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: tickerContainer.horizontalAlignment
         text: ""
+        textFormat: Text.PlainText
         elide: Text.ElideRight
         wrapMode: Text.NoWrap
         opacity: 0
         color: tickerContainer.textColor
         font.pixelSize: tickerContainer.fontSize
         font.family: tickerContainer.fontFamily
+        
+        Image {
+            id: nextCenterIconImage
+            anchors.centerIn: parent
+            width: tickerContainer.fontSize * 1.5
+            height: width
+            fillMode: Image.PreserveAspectFit
+            visible: tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && tickerContainer.isWeatherIconSlide && parent.text === "" && String(tickerContainer.currentWeatherIconSource).indexOf("/") !== -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
+        Kirigami.Icon {
+            id: nextCenterIconSystem
+            anchors.centerIn: parent
+            width: tickerContainer.fontSize * 1.5
+            height: width
+            visible: tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && tickerContainer.isWeatherIconSlide && parent.text === "" && String(tickerContainer.currentWeatherIconSource).indexOf("/") === -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
+        Image {
+            id: nextRightIconImage
+            anchors.left: parent.left
+            anchors.leftMargin: Math.min(parent.width - width, parent.contentWidth + 6)
+            anchors.verticalCenter: parent.verticalCenter
+            width: tickerContainer.fontSize * 1.2
+            height: width
+            fillMode: Image.PreserveAspectFit
+            visible: !tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && String(tickerContainer.currentWeatherIconSource).indexOf("/") !== -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
+        Kirigami.Icon {
+            id: nextRightIconSystem
+            anchors.left: parent.left
+            anchors.leftMargin: Math.min(parent.width - width, parent.contentWidth + 6)
+            anchors.verticalCenter: parent.verticalCenter
+            width: tickerContainer.fontSize * 1.2
+            height: width
+            visible: !tickerContainer.isMediumMode && tickerContainer.currentState === "weather" && String(tickerContainer.currentWeatherIconSource).indexOf("/") === -1
+            source: visible ? tickerContainer.currentWeatherIconSource : ""
+        }
     }
     
     SequentialAnimation {
@@ -235,23 +478,93 @@ Item {
     }
     
     function computeNextState() {
-        if (rssTitles.length === 0) return { state: "placeholder", duration: 10000 };
+        var weatherData = getWeatherData();
+        var weatherAvailable = weatherPlaceholderCycling && (weatherData !== null);
+        var rssAvailable = rssPlaceholderCycling && (rssTitles.length > 0);
         var f = rssFrequency;
-        if (f === 0) return { state: "rss", duration: 10000 };
         
-        if (currentState === "placeholder") {
-            if (f === 6) {
-                var isNew = logic && logic.plasmoidConfig && (Date.now() - logic.plasmoidConfig.rssLastSyncAll < 300000);
-                if (!isNew) return { state: "placeholder", duration: 30000 };
-                return { state: "rss", duration: 10000 };
+        // 1. Process queue first
+        if (stateQueue.length > 0) {
+            var nextQueued = stateQueue.shift();
+            var dur = 10000;
+            if (nextQueued === "placeholder") {
+                var pDur = 20000;
+                if (f === 1) pDur = 10000;
+                if (f === 2) pDur = 15000;
+                if (f === 3) pDur = 20000;
+                if (f === 4) pDur = 50000;
+                if (f === 5) pDur = 300000;
+                if (f === 6) pDur = 10000;
+                dur = pDur;
             }
-            return { state: "rss", duration: 10000 };
+            return { state: nextQueued, duration: dur };
+        }
+        
+        // Helper to check weather frequency
+        function isWeatherDue(cycle) {
+            if (!weatherAvailable) return false;
+            var elapsedMs = Date.now() - lastWeatherShowTime;
+            var intervalMs = 1800000; // default 30 min (Normal)
+            if (weatherFrequency === 0) intervalMs = 60000;
+            else if (weatherFrequency === 1) intervalMs = 300000;
+            else if (weatherFrequency === 2) intervalMs = 1800000;
+            else if (weatherFrequency === 3) intervalMs = 3600000;
+            
+            return (elapsedMs >= intervalMs);
+        }
+
+        // 2. Medium Mode Logic (no RSS)
+        if (isMediumMode) {
+            if (currentState === "placeholder") {
+                cycleCounter++;
+                var weatherDueMedium = isWeatherDue(cycleCounter);
+                if (weatherDueMedium) {
+                    return { state: "weather", duration: 3000 };
+                } else {
+                    return { state: "placeholder", duration: 180000 };
+                }
+            } else if (currentState === "weather") {
+                return { state: "placeholder", duration: 180000 };
+            }
+            return { state: "placeholder", duration: 180000 };
+        }
+
+        // 3. Wide/Extra-Wide/Ultra-Wide modes
+        if (currentState === "placeholder") {
+            cycleCounter++;
+            var weatherDue = isWeatherDue(cycleCounter);
+            var rssDue = rssAvailable;
+            
+            if (rssDue && weatherDue) {
+                // Queue weather after the current RSS item.
+                stateQueue = ["weather"];
+                return { state: "rss", duration: 10000 };
+            } else if (rssDue) {
+                return { state: "rss", duration: 10000 };
+            } else if (weatherDue) {
+                return { state: "weather", duration: 10000 };
+            } else {
+                var pDuration = 20000;
+                if (f === 1) pDuration = 10000;
+                if (f === 2) pDuration = 15000;
+                if (f === 3) pDuration = 20000;
+                if (f === 4) pDuration = 50000;
+                if (f === 5) pDuration = 300000;
+                if (f === 6) pDuration = 10000;
+                return { state: "placeholder", duration: pDuration };
+            }
         }
         
         if (currentState === "rss") {
             var maxConsecutive = 1;
             if (f === 1) maxConsecutive = 5;
             if (f === 2) maxConsecutive = 2;
+            
+            // Queue weather when it becomes due during an RSS item.
+            var weatherDueNow = isWeatherDue(cycleCounter);
+            if (weatherDueNow && stateQueue.indexOf("weather") === -1) {
+                stateQueue.push("weather");
+            }
             
             if (rssConsecutiveCount >= maxConsecutive - 1) {
                 var pDuration = 20000;
@@ -261,22 +574,58 @@ Item {
                 if (f === 4) pDuration = 50000;
                 if (f === 5) pDuration = 300000;
                 if (f === 6) pDuration = 10000;
-                return { state: "placeholder", duration: pDuration };
+                
+                if (stateQueue.length > 0) {
+                    var nextState = stateQueue.shift();
+                    var dur = (nextState === "weather") ? 10000 : pDuration;
+                    return { state: nextState, duration: dur };
+                } else {
+                    return { state: "placeholder", duration: pDuration };
+                }
             } else {
                 return { state: "rss", duration: 10000 };
             }
         }
-        return { state: "placeholder", duration: 10000 };
+        
+        if (currentState === "weather") {
+            var pDuration2 = 20000;
+            if (f === 1) pDuration2 = 10000;
+            if (f === 2) pDuration2 = 15000;
+            if (f === 3) pDuration2 = 20000;
+            if (f === 4) pDuration2 = 50000;
+            if (f === 5) pDuration2 = 300000;
+            if (f === 6) pDuration2 = 10000;
+            
+            // While weather is showing, if RSS becomes due/available, queue it
+            if (rssAvailable && stateQueue.indexOf("rss") === -1) {
+                stateQueue.push("rss");
+            }
+            
+            if (stateQueue.length > 0) {
+                var nextState2 = stateQueue.shift();
+                var dur2 = (nextState2 === "rss") ? 10000 : pDuration2;
+                return { state: nextState2, duration: dur2 };
+            } else {
+                return { state: "placeholder", duration: pDuration2 };
+            }
+        }
+        
+        return { state: "placeholder", duration: 20000 };
     }
     
     Timer {
         id: cycleTimer
         interval: tickerContainer.currentDuration
-        running: tickerContainer.visible && !tickerContainer.isSearching
+        running: tickerContainer.visible && !tickerContainer.isSearching && (
+            (!tickerContainer.isMediumMode && tickerContainer.rssPlaceholderCycling && tickerContainer.rssTitles.length > 0) || 
+            (tickerContainer.weatherPlaceholderCycling && tickerContainer.getWeatherData() !== null)
+        )
         repeat: true
         triggeredOnStart: false
         
         onTriggered: {
+            var weatherData = tickerContainer.getWeatherData();
+            
             if (tickerContainer.titleChunks.length === 0) {
                 tickerContainer.recalculateChunks();
                 return;
@@ -285,7 +634,16 @@ Item {
             if (tickerContainer.currentChunkIndex < tickerContainer.titleChunks.length - 1) {
                 tickerContainer.currentChunkIndex++;
                 tickerContainer.currentDuration = 3000;
-                switchAnim.targetText = tickerContainer.titleChunks[tickerContainer.currentChunkIndex];
+                
+                var chunkText = tickerContainer.titleChunks[tickerContainer.currentChunkIndex];
+                if (chunkText === "WEATHER_ICON_PLACEHOLDER") {
+                    tickerContainer.isWeatherIconSlide = true;
+                    tickerContainer.currentTargetText = "";
+                } else {
+                    tickerContainer.isWeatherIconSlide = false;
+                    tickerContainer.currentTargetText = chunkText;
+                }
+                switchAnim.targetText = tickerContainer.currentTargetText;
                 switchAnim.restart();
                 return;
             }
@@ -325,24 +683,66 @@ Item {
                 tickerContainer.currentRssIndex = randomIndex;
                 var tickerItem = tickerContainer.rssTitles[randomIndex];
                 newRawText = tickerContainer.rssShowSource ? ("[" + (tickerItem.source || "RSS") + "] " + tickerItem.text) : tickerItem.text;
+            } else if (next.state === "weather" && weatherData) {
+                tickerContainer.rssConsecutiveCount = 0;
+                var current = weatherData.current;
+                var city = tickerContainer.getShortCity(current.location);
+                var temp = tickerContainer.getFormattedTemp(current);
+                var cond = current.condition || current.description || "";
+                var condText = i18nd("plasma_applet_com.mcc45tr.filesearch", cond);
+                
+                tickerContainer.currentWeatherIconSource = tickerContainer.getWeatherIconSource(current);
+                newRawText = city + " " + temp + " " + condText;
             } else {
                 tickerContainer.rssConsecutiveCount = 0;
                 newRawText = tickerContainer.defaultText;
             }
             
+            tickerContainer.currentState = next.state;
+            
             var availWidth = currentLabel.width;
             if (availWidth <= 50) availWidth = tickerContainer.width - tickerContainer.rightMarginValue;
             if (availWidth <= 50) availWidth = 200;
             
-            var newChunks = tickerContainer.splitTextIntoChunks(newRawText, availWidth);
+            var newChunks = [];
+            if (next.state === "weather" && tickerContainer.isMediumMode && weatherData) {
+                var current = weatherData.current;
+                var city = tickerContainer.getShortCity(current.location);
+                var temp = tickerContainer.getFormattedTemp(current);
+                tickerContainer.currentWeatherIconSource = tickerContainer.getWeatherIconSource(current);
+                
+                var showCity = (city !== "" && city.length <= 15);
+                if (showCity) {
+                    newChunks = [city, temp, "WEATHER_ICON_PLACEHOLDER"];
+                } else {
+                    newChunks = [temp, "WEATHER_ICON_PLACEHOLDER"];
+                }
+            } else {
+                newChunks = tickerContainer.splitTextIntoChunks(newRawText, availWidth);
+            }
+            
+            if (newChunks.length === 1 && newChunks[0] === currentLabel.text && tickerContainer.titleChunks.length <= 1) {
+                cycleTimer.interval = next.duration;
+                tickerContainer.currentDuration = next.duration;
+                tickerContainer.isWeatherIconSlide = false;
+                return;
+            }
+            
             tickerContainer.titleChunks = newChunks;
             tickerContainer.currentChunkIndex = 0;
-            tickerContainer.currentState = next.state;
             
             tickerContainer.currentDuration = (newChunks.length > 1) ? 3000 : next.duration;
             cycleTimer.interval = tickerContainer.currentDuration;
             
-            tickerContainer.currentTargetText = newChunks[0];
+            var firstChunk = newChunks[0];
+            if (firstChunk === "WEATHER_ICON_PLACEHOLDER") {
+                tickerContainer.isWeatherIconSlide = true;
+                tickerContainer.currentTargetText = "";
+            } else {
+                tickerContainer.isWeatherIconSlide = false;
+                tickerContainer.currentTargetText = firstChunk;
+            }
+            
             switchAnim.targetText = tickerContainer.currentTargetText;
             switchAnim.restart();
         }

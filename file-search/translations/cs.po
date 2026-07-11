@@ -1766,3 +1766,159 @@ msgstr "Ultra široký režim (Maximální pokrytí)"
 #~ msgstr ""
 #~ "Zkušený uživatel - Všechny funkce aktivní, pokročilá nastavení k "
 #~ "dispozici."
+
+
+msgid "Weather Provider"
+msgstr "Poskytovatel počasí"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Zdarma, nevyžaduje klíč)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Vyžaduje klíč)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Vyžaduje klíč)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Klíč API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Zadejte svůj klíč API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Klíč API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Zadejte svůj klíč WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Lokalita"
+
+
+msgid "Auto-detect from IP"
+msgstr "Automaticky zjistit z IP"
+
+
+msgid "Enter manually"
+msgstr "Zadat ručně"
+
+
+msgid "City 1:"
+msgstr "Město 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Např.: Praha, Brno, Londýn"
+
+
+msgid "Loading weather data..."
+msgstr "Načítání dat o počasí..."
+
+
+msgid "Clear"
+msgstr "Jasno"
+
+
+msgid "Mainly Clear"
+msgstr "Převážně jasno"
+
+
+msgid "Partly Cloudy"
+msgstr "Polojasno"
+
+
+msgid "Overcast"
+msgstr "Zataženo"
+
+
+msgid "Fog"
+msgstr "Mlha"
+
+
+msgid "Drizzle"
+msgstr "Mrholení"
+
+
+msgid "Freezing Drizzle"
+msgstr "Namrzající mrholení"
+
+
+msgid "Rain"
+msgstr "Déšť"
+
+
+msgid "Freezing Rain"
+msgstr "Namrzající déšť"
+
+
+msgid "Snow"
+msgstr "Sníh"
+
+
+msgid "Snow Grains"
+msgstr "Sněhová krupice"
+
+
+msgid "Rain Showers"
+msgstr "Dešťové přeháňky"
+
+
+msgid "Snow Showers"
+msgstr "Sněhové přeháňky"
+
+
+msgid "Thunderstorm"
+msgstr "Bouřka"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Bouřka s krupobitím"
+
+
+msgid "Unknown"
+msgstr "Neznámé"
+
+
+msgid "Cloudy"
+msgstr "Oblačno"
+
+
+msgid "Mist"
+msgstr "Opar"
+
+
+msgid "Smoke"
+msgstr "Kouř"
+
+
+msgid "Haze"
+msgstr "Zákal"
+
+
+msgid "Dust"
+msgstr "Prach"
+
+
+msgid "Sand"
+msgstr "Písek"
+
+
+msgid "Ash"
+msgstr "Popílek"
+
+
+msgid "Squall"
+msgstr "Hulava"
+
+
+msgid "Tornado"
+msgstr "Tornádo"

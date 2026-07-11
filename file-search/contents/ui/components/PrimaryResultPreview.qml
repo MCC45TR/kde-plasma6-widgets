@@ -19,7 +19,7 @@ Rectangle {
     
     height: visible ? 64 : 0
     visible: searchText.length > 0 && isPrimaryResult
-    color: Qt.rgba(accentColor.r, accentColor.g, accentColor.b, 0.15)
+    color: Qt.rgba(accentColor.r, accentColor.g, accentColor.b, resultMouse.containsMouse ? 0.25 : 0.15)
     radius: 10
     border.width: 1
     border.color: Qt.rgba(accentColor.r, accentColor.g, accentColor.b, 0.3)
@@ -94,12 +94,10 @@ Rectangle {
     }
     
     MouseArea {
+        id: resultMouse
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
-        
-        onEntered: root.color = Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.25)
-        onExited: root.color = Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.15)
         
         onClicked: {
             if (root.resultCount > 0) {

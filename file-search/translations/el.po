@@ -1767,3 +1767,159 @@ msgstr "Υπερ-ευρεία λειτουργία (Μέγιστη κάλυψη)
 #~ msgstr ""
 #~ "Προχωρημένος Χρήστης - Όλες οι δυνατότητες ενεργές, διαθέσιμες "
 #~ "προχωρημένες ρυθμίσεις."
+
+
+msgid "Weather Provider"
+msgstr "Πάροχος καιρού"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Δωρεάν, δεν απαιτείται κλειδί)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Απαιτείται κλειδί)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Απαιτείται κλειδί)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Κλειδί API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Εισαγάγετε το κλειδί API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Κλειδί API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Εισαγάγετε το κλειδί WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Τοποθεσία"
+
+
+msgid "Auto-detect from IP"
+msgstr "Αυτόματος εντοπισμός από IP"
+
+
+msgid "Enter manually"
+msgstr "Χειροκίνητη εισαγωγή"
+
+
+msgid "City 1:"
+msgstr "Πόλη 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Π.χ.: Αθήνα, Θεσσαλονίκη, Λονδίνο"
+
+
+msgid "Loading weather data..."
+msgstr "Φόρτωση δεδομένων καιρού..."
+
+
+msgid "Clear"
+msgstr "Αίθριος"
+
+
+msgid "Mainly Clear"
+msgstr "Κυρίως αίθριος"
+
+
+msgid "Partly Cloudy"
+msgstr "Μερικώς νεφελώδης"
+
+
+msgid "Overcast"
+msgstr "Νεφελώδης"
+
+
+msgid "Fog"
+msgstr "Ομίχλη"
+
+
+msgid "Drizzle"
+msgstr "Ψιχάλισμα"
+
+
+msgid "Freezing Drizzle"
+msgstr "Παγωμένο ψιχάλισμα"
+
+
+msgid "Rain"
+msgstr "Βροχή"
+
+
+msgid "Freezing Rain"
+msgstr "Παγωμένη βροχή"
+
+
+msgid "Snow"
+msgstr "Χιόνι"
+
+
+msgid "Snow Grains"
+msgstr "Χιονόκοκκοι"
+
+
+msgid "Rain Showers"
+msgstr "Όμβροι βροχής"
+
+
+msgid "Snow Showers"
+msgstr "Όμβροι χιονιού"
+
+
+msgid "Thunderstorm"
+msgstr "Καταιγίδα"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Καταιγίδα με χαλάζι"
+
+
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+
+msgid "Cloudy"
+msgstr "Συννεφιά"
+
+
+msgid "Mist"
+msgstr "Καταχνιά"
+
+
+msgid "Smoke"
+msgstr "Καπνός"
+
+
+msgid "Haze"
+msgstr "Θολή ατμόσφαιρα"
+
+
+msgid "Dust"
+msgstr "Σκόνη"
+
+
+msgid "Sand"
+msgstr "Άμμος"
+
+
+msgid "Ash"
+msgstr "Τέφρα"
+
+
+msgid "Squall"
+msgstr "Μπουρίνι"
+
+
+msgid "Tornado"
+msgstr "Σίφωνας"

@@ -42,7 +42,7 @@ Item {
             
             if (!isSnapshot) {
                 // Remove content in parentheses e.g. (KDE Plasma), (Workstation), (kernel version)
-                // BUT ONLY if it's not a snapshot, because for snapshots the info is in parentheses/brackets
+                // Snapshot titles keep their version details in parentheses or brackets.
                 t = t.replace(/\s*\(.*?\)/g, "")
                 t = t.replace(/\s*\[.*?\]/g, "")
             }
@@ -131,7 +131,7 @@ Item {
                             isFolder: true,
                             subEntries: snapshots
                         }
-                        // Insert at a reasonable position (e.g. at the end or before firmware)
+                        // Insert new groups before firmware entries when possible.
                         groupedFinal.push(folder)
                     }
                     return groupedFinal
@@ -258,8 +258,7 @@ Item {
                      }
                      if (updated) {
                          root.bootEntries = entries
-                         // We don't update cachedBootEntries with this processed data usually to keep raw source clean
-                         // but we could. For now let's just update runtime.
+                         // Preserve the raw cache and publish normalized entries for this session.
                          entriesLoaded(entries)
                      }
                  }

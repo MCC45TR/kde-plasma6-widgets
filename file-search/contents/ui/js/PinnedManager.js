@@ -17,7 +17,8 @@ function generateUUID() {
 function loadPinned(configValue) {
     try {
         var str = configValue || "[]"
-        return JSON.parse(str)
+        var loaded = JSON.parse(str)
+        return Array.isArray(loaded) ? loaded.slice(0, 100) : []
     } catch (e) {
         console.log("PinnedManager: Error loading pinned items:", e)
         return []
@@ -31,12 +32,13 @@ function savePinned(pinnedArray) {
 
 // Pin an item
 function pinItem(pinnedArray, item, activityId) {
+    var newArray = Array.isArray(pinnedArray) ? pinnedArray.slice() : []
     // Check if already pinned
-    for (var i = 0; i < pinnedArray.length; i++) {
-        var existing = pinnedArray[i]
+    for (var i = 0; i < newArray.length; i++) {
+        var existing = newArray[i]
         if (existing.matchId === item.matchId && existing.activityId === activityId) {
             // Already pinned for this activity
-            return pinnedArray
+            return newArray
         }
     }
 
@@ -53,8 +55,8 @@ function pinItem(pinnedArray, item, activityId) {
     }
 
     // Add to beginning
-    pinnedArray.unshift(pinnedItem)
-    return pinnedArray
+    newArray.unshift(pinnedItem)
+    return newArray.slice(0, 100)
 }
 
 // Unpin an item
@@ -120,6 +122,20 @@ function reorderPinned(pinnedArray, fromIndex, toIndex) {
     newArray.splice(toIndex, 0, item) // Insert at new position
 
     return newArray
+}
+
+function reorderPinnedById(pinnedArray, fromUuid, toUuid, activityId) {
+    if (!fromUuid || !toUuid || fromUuid === toUuid) return pinnedArray
+    var fromIndex = -1
+    var toIndex = -1
+    for (var i = 0; i < pinnedArray.length; i++) {
+        var item = pinnedArray[i]
+        var visible = item.activityId === "global" || item.activityId === activityId
+        if (!visible) continue
+        if (item.uuid === fromUuid) fromIndex = i
+        if (item.uuid === toUuid) toIndex = i
+    }
+    return reorderPinned(pinnedArray, fromIndex, toIndex)
 }
 
 // Move pinned item by matchId to a new index

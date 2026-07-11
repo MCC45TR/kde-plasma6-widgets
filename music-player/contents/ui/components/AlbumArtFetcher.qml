@@ -46,7 +46,7 @@ Item {
     function evalEffectiveUrl() {
         var newUrl = _resolveUrl()
         
-        // Anti-flicker: if new URL is empty but we have a cached one,
+        // Retain cached artwork briefly when the new URL is empty.
         // keep showing the cached art during transition
         if (newUrl === "" && _cachedArtUrl !== "") {
             // Only keep cache for a brief window (transition safety)
@@ -214,7 +214,7 @@ Item {
         if (album !== "") apiTimer.restart()
     }
     
-    // Clear online art only when track actually changes
+    // Clear online artwork only when the track changes.
     property string _trackIdentity: (artist || "") + "|" + (album || "") + "|" + (title || "")
     on_TrackIdentityChanged: {
         var newKey = _trackIdentity

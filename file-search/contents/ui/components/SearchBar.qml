@@ -17,6 +17,7 @@ PlasmaExtras.SearchField {
     property var logic: null
     property bool rssPlaceholderCycling: true
     property int rssFrequency: 3
+    property int weatherFrequency: 2
     property bool rssShowFullHeadline: true
     property bool rssShowSource: false
     
@@ -32,6 +33,7 @@ PlasmaExtras.SearchField {
         
         logic: root.logic
         rssFrequency: root.rssFrequency
+        weatherFrequency: root.weatherFrequency
         rssPlaceholderCycling: root.rssPlaceholderCycling
         rssShowFullHeadline: root.rssShowFullHeadline
         rssShowSource: root.rssShowSource

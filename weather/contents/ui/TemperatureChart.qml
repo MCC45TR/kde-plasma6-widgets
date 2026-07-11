@@ -2,8 +2,7 @@ import QtQuick
 import QtQuick.Shapes
 import org.kde.kirigami as Kirigami
 
-// TemperatureChart - Displays temperature/precipitation graph
-// TODO: Not yet integrated into UI - add to LargeModeLayout or ForecastDetailsView
+// Reusable temperature and precipitation chart.
 Item {
     id: chartRoot
 

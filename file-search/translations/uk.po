@@ -1717,3 +1717,159 @@ msgstr "Ультраширокий режим (максимальне покри
 
 #~ msgid "RSS"
 #~ msgstr "RSS"
+
+
+msgid "Weather Provider"
+msgstr "Постачальник погоди"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Безкоштовно, ключ не потрібен)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Потрібен ключ)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Потрібен ключ)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Ключ API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Введіть ваш ключ API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Ключ API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Введіть ваш ключ WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Місцезнаходження"
+
+
+msgid "Auto-detect from IP"
+msgstr "Визначати автоматично за IP"
+
+
+msgid "Enter manually"
+msgstr "Ввести вручну"
+
+
+msgid "City 1:"
+msgstr "Місто 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Напр: Анкара, Стамбул, Лондон"
+
+
+msgid "Loading weather data..."
+msgstr "Завантаження погодних даних..."
+
+
+msgid "Clear"
+msgstr "Ясно"
+
+
+msgid "Mainly Clear"
+msgstr "Переважно ясно"
+
+
+msgid "Partly Cloudy"
+msgstr "Мінлива хмарність"
+
+
+msgid "Overcast"
+msgstr "Суцільна хмарність"
+
+
+msgid "Fog"
+msgstr "Туман"
+
+
+msgid "Drizzle"
+msgstr "Мряка"
+
+
+msgid "Freezing Drizzle"
+msgstr "Переохолоджена мряка"
+
+
+msgid "Rain"
+msgstr "Дощ"
+
+
+msgid "Freezing Rain"
+msgstr "Переохолоджений дощ"
+
+
+msgid "Snow"
+msgstr "Сніг"
+
+
+msgid "Snow Grains"
+msgstr "Сніжна крупа"
+
+
+msgid "Rain Showers"
+msgstr "Злива"
+
+
+msgid "Snow Showers"
+msgstr "Сильний снігопад"
+
+
+msgid "Thunderstorm"
+msgstr "Гроза"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Гроза з градом"
+
+
+msgid "Unknown"
+msgstr "Невідомо"
+
+
+msgid "Cloudy"
+msgstr "Хмарно"
+
+
+msgid "Mist"
+msgstr "Серпанок"
+
+
+msgid "Smoke"
+msgstr "Дим"
+
+
+msgid "Haze"
+msgstr "Мгла"
+
+
+msgid "Dust"
+msgstr "Пил"
+
+
+msgid "Sand"
+msgstr "Пісок"
+
+
+msgid "Ash"
+msgstr "Попіл"
+
+
+msgid "Squall"
+msgstr "Шквал"
+
+
+msgid "Tornado"
+msgstr "Торнадо"

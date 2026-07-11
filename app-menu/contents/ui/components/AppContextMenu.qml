@@ -33,7 +33,7 @@ QQC.Menu {
         cmdSource.connectedSources = [cmd];
     }
     
-    // Pin logic (isolated so we don't need external logic objects)
+    // Keep pinning self-contained within the menu.
     function isPinned() {
         if (!actionItem || !actionItem.matchId) return false;
         var pins = PinnedManager.loadPinned(Plasmoid.configuration.pinnedItems);

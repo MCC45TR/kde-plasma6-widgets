@@ -1767,3 +1767,159 @@ msgstr "Ultrabreiter Modus (Maximale Abdeckung)"
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr ""
 #~ "Power-User - Alle Funktionen aktiv, erweiterte Einstellungen verfügbar."
+
+
+msgid "Weather Provider"
+msgstr "Wetteranbieter"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Kostenlos, kein Schlüssel erforderlich)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Schlüssel erforderlich)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Schlüssel erforderlich)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API-Schlüssel:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Geben Sie Ihren OpenWeatherMap API-Schlüssel ein"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API-Schlüssel:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Geben Sie Ihren WeatherAPI.com Schlüssel ein"
+
+
+msgid "Location"
+msgstr "Standort"
+
+
+msgid "Auto-detect from IP"
+msgstr "Automatisch über IP erkennen"
+
+
+msgid "Enter manually"
+msgstr "Manuell eingeben"
+
+
+msgid "City 1:"
+msgstr "Stadt 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Bsp: Ankara, Istanbul, London"
+
+
+msgid "Loading weather data..."
+msgstr "Wetterdaten werden geladen..."
+
+
+msgid "Clear"
+msgstr "Klar"
+
+
+msgid "Mainly Clear"
+msgstr "Überwiegend klar"
+
+
+msgid "Partly Cloudy"
+msgstr "Teilweise bewölkt"
+
+
+msgid "Overcast"
+msgstr "Bedeckt"
+
+
+msgid "Fog"
+msgstr "Nebel"
+
+
+msgid "Drizzle"
+msgstr "Nieselregen"
+
+
+msgid "Freezing Drizzle"
+msgstr "Gefrierender Nieselregen"
+
+
+msgid "Rain"
+msgstr "Regen"
+
+
+msgid "Freezing Rain"
+msgstr "Gefrierender Regen"
+
+
+msgid "Snow"
+msgstr "Schnee"
+
+
+msgid "Snow Grains"
+msgstr "Schneegriesel"
+
+
+msgid "Rain Showers"
+msgstr "Regenschauer"
+
+
+msgid "Snow Showers"
+msgstr "Schneeschauer"
+
+
+msgid "Thunderstorm"
+msgstr "Gewitter"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Gewitter mit Hagel"
+
+
+msgid "Unknown"
+msgstr "Unbekannt"
+
+
+msgid "Cloudy"
+msgstr "Bewölkt"
+
+
+msgid "Mist"
+msgstr "Dunst"
+
+
+msgid "Smoke"
+msgstr "Rauch"
+
+
+msgid "Haze"
+msgstr "Dunst"
+
+
+msgid "Dust"
+msgstr "Staub"
+
+
+msgid "Sand"
+msgstr "Sand"
+
+
+msgid "Ash"
+msgstr "Asche"
+
+
+msgid "Squall"
+msgstr "Böe"
+
+
+msgid "Tornado"
+msgstr "Tornado"

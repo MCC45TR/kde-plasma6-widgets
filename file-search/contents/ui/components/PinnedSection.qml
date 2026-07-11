@@ -24,7 +24,7 @@ Item {
     // Signals
     signal itemClicked(var item)
     signal unpinClicked(string matchId)
-    signal reorderRequested(int fromIndex, int toIndex)
+    signal reorderRequested(string fromUuid, string toUuid)
     signal openRequested(var item)
     signal copyPathRequested(var item)
     signal openLocationRequested(var item)
@@ -346,7 +346,9 @@ Item {
                                     onReleased: (mouse) => {
                                         if (pinnedSectionRoot.draggedIndex !== -1 && pinnedSectionRoot.dropTargetIndex !== -1) {
                                             if (pinnedSectionRoot.draggedIndex !== pinnedSectionRoot.dropTargetIndex) {
-                                                pinnedSectionRoot.reorderRequested(pinnedSectionRoot.draggedIndex, pinnedSectionRoot.dropTargetIndex)
+                                                var fromItem = pinnedSectionRoot.pinnedItems[pinnedSectionRoot.draggedIndex]
+                                                var toItem = pinnedSectionRoot.pinnedItems[pinnedSectionRoot.dropTargetIndex]
+                                                if (fromItem && toItem) pinnedSectionRoot.reorderRequested(fromItem.uuid, toItem.uuid)
                                             }
                                         }
                                         pinnedSectionRoot.draggedIndex = -1
@@ -361,7 +363,12 @@ Item {
                                         if (drag.active) {
                                             // Calculate drop target based on mouse position
                                             var globalPos = mapToItem(tileFlow, mouse.x, mouse.y)
-                                            var targetIndex = Math.floor(globalPos.x / (pinnedSectionRoot.iconSize + 24))
+                                            var cellWidth = pinnedSectionRoot.tileWidth + tileFlow.spacing
+                                            var cellHeight = pinnedSectionRoot.tileHeight + tileFlow.spacing
+                                            var columns = Math.max(1, Math.floor((tileFlow.width + tileFlow.spacing) / cellWidth))
+                                            var column = Math.max(0, Math.floor(globalPos.x / cellWidth))
+                                            var row = Math.max(0, Math.floor(globalPos.y / cellHeight))
+                                            var targetIndex = row * columns + column
                                             targetIndex = Math.max(0, Math.min(targetIndex, pinnedSectionRoot.pinnedItems.length - 1))
                                             pinnedSectionRoot.dropTargetIndex = targetIndex
                                         }

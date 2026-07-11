@@ -395,7 +395,7 @@ PlasmoidItem {
                 onClicked: (mouse) => { if (mouse.button === Qt.MiddleButton) root.fetchWeatherData() }
             }
         }
-    // Dummy function to provide strings for xgettext
+    // Keep translated condition strings discoverable by xgettext.
     function translationDummy() {
         i18n("Clear")
         i18n("Mainly Clear")

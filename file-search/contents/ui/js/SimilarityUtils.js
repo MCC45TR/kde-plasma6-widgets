@@ -1,6 +1,10 @@
 // SimilarityUtils.js - Lightweight string similarity utilities for File Search Widget
 // Optimized for real-time search result ranking without expensive algorithms
 
+function foldCase(value) {
+    return String(value || "").toLocaleLowerCase().replace(/\u0307/g, "");
+}
+
 /**
  * Fast similarity score (0-1, higher is more similar)
  * Pre-lowercased version for optimal performance inside loops.
@@ -12,14 +16,12 @@ function similarityScoreParsed(q, t) {
     // Exact match
     if (t === q) return 1.0;
 
-    // Starts with query
-    if (t.indexOf(q) === 0) return 0.95;
-
-    // Contains query as substring
+    // Contains query as substring (including starts with)
     var idx = t.indexOf(q);
+    if (idx === 0) return 0.95;
     if (idx !== -1) {
         // Earlier position = better match
-        return 0.85 - (idx * 0.01);
+        return Math.max(0.5, 0.85 - (idx * 0.01));
     }
 
     // Check if all query characters appear in order (fuzzy match)
@@ -33,10 +35,17 @@ function similarityScoreParsed(q, t) {
     }
 
     // Word-initial match: check if query matches first letters of words
-    var words = t.split(/[\s\-_\.]+/);
+    // Zero-allocation character-by-character scanner (O(L) time, O(1) space)
     var initials = "";
-    for (var w = 0; w < words.length; w++) {
-        if (words[w].length > 0) initials += words[w].charAt(0);
+    var inWord = false;
+    for (var i = 0; i < t.length; i++) {
+        var c = t.charAt(i);
+        if (c === " " || c === "-" || c === "_" || c === ".") {
+            inWord = false;
+        } else if (!inWord) {
+            initials += c;
+            inWord = true;
+        }
     }
     if (initials.indexOf(q) !== -1) return 0.6;
 
@@ -51,7 +60,7 @@ function similarityScoreParsed(q, t) {
  */
 function similarityScore(query, target) {
     if (!query || !target) return 0;
-    return similarityScoreParsed(query.toLowerCase(), target.toLowerCase());
+    return similarityScoreParsed(foldCase(query), foldCase(target));
 }
 
 /**
@@ -64,12 +73,12 @@ function similarityScore(query, target) {
 function sortBySimilarity(results, queryText) {
     if (!queryText || queryText.length === 0) return results;
 
-    var q = queryText.toLowerCase();
+    var q = foldCase(queryText);
 
     // Pre-compute scores (avoids recalculating in comparator)
     var scored = new Array(results.length);
     for (var i = 0; i < results.length; i++) {
-        var displayText = (results[i].display || results[i].name || "").toLowerCase();
+        var displayText = foldCase(results[i].display || results[i].name || "");
         scored[i] = {
             item: results[i],
             score: similarityScoreParsed(q, displayText)
@@ -96,30 +105,38 @@ function sortBySimilarity(results, queryText) {
  * @param {function} getPriorityFunc - Function to get priority for a category
  * @returns {Array} - Sorted results
  */
-function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPriorityFunc) {
+function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPriorityFunc, maxResults, includeRssContent) {
     if (!results || results.length === 0) return results;
 
     var hasQuery = queryText && queryText.length > 0;
-    var q = hasQuery ? queryText.toLowerCase() : "";
+    var q = hasQuery ? foldCase(queryText) : "";
 
     // Pre-compute all scores and priorities ONCE
     var scored = new Array(results.length);
     for (var i = 0; i < results.length; i++) {
         var item = results[i];
         var cat = item.category || "Other";
-        var prio = getPriorityFunc(categorySettings, cat);
+        var prio = (typeof item._categoryPriority === "number")
+            ? item._categoryPriority
+            : getPriorityFunc(categorySettings, cat);
         var score = 0;
 
         if (hasQuery) {
-            var displayText = (item.display || item.name || "").toLowerCase();
+            var displayText = item._normalizedDisplay !== undefined
+                ? item._normalizedDisplay
+                : foldCase(item.display || item.name || "");
             score = similarityScoreParsed(q, displayText);
 
             // For RSS feeds, also check indexed content (weighted less)
-            if (cat === "RSS" && item.indexedContent) {
-                var contentText = item.indexedContent.toLowerCase();
-                var contentScore = similarityScoreParsed(q, contentText);
-                if (contentScore * 0.8 > score) {
-                    score = contentScore * 0.8;
+            if (includeRssContent && cat === "RSS" && item.indexedContent) {
+                var contentText = item._normalizedIndexedContent !== undefined
+                    ? item._normalizedIndexedContent
+                    : item.indexedContent.toLowerCase();
+                if (contentText.indexOf(q) !== -1) {
+                    var contentScore = 0.5;
+                    if (contentScore > score) {
+                        score = contentScore;
+                    }
                 }
             }
         }
@@ -127,18 +144,75 @@ function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPr
         scored[i] = {
             item: item,
             priority: prio,
-            score: score
+            score: score,
+            order: i
         };
     }
 
-    scored.sort(function (a, b) {
-        // First sort by priority
+    function compareScored(a, b) {
         if (a.priority !== b.priority) {
             return a.priority - b.priority;
         }
-        // Then by pre-computed score
-        return b.score - a.score;
-    });
+        if (a.score !== b.score)
+            return b.score - a.score;
+        return a.order - b.order;
+    }
+
+    var limit = Number(maxResults) || 0;
+    if (limit > 0 && scored.length > limit) {
+        // Keep the worst retained item at heap[0]. Each new candidate then
+        // costs O(log limit), avoiding a full O(n log n) sort.
+        var heap = [];
+
+        function isWorse(a, b) {
+            return compareScored(a, b) > 0;
+        }
+
+        function pushHeap(value) {
+            heap.push(value);
+            var child = heap.length - 1;
+            while (child > 0) {
+                var parent = Math.floor((child - 1) / 2);
+                if (!isWorse(heap[child], heap[parent]))
+                    break;
+                var tmp = heap[parent];
+                heap[parent] = heap[child];
+                heap[child] = tmp;
+                child = parent;
+            }
+        }
+
+        function replaceWorst(value) {
+            heap[0] = value;
+            var parent = 0;
+            while (true) {
+                var left = parent * 2 + 1;
+                var right = left + 1;
+                var worst = parent;
+                if (left < heap.length && isWorse(heap[left], heap[worst]))
+                    worst = left;
+                if (right < heap.length && isWorse(heap[right], heap[worst]))
+                    worst = right;
+                if (worst === parent)
+                    break;
+                var tmp = heap[parent];
+                heap[parent] = heap[worst];
+                heap[worst] = tmp;
+                parent = worst;
+            }
+        }
+
+        for (var h = 0; h < scored.length; h++) {
+            if (heap.length < limit) {
+                pushHeap(scored[h]);
+            } else if (compareScored(scored[h], heap[0]) < 0) {
+                replaceWorst(scored[h]);
+            }
+        }
+        scored = heap;
+    }
+
+    scored.sort(compareScored);
 
     var sorted = new Array(scored.length);
     for (var j = 0; j < scored.length; j++) {

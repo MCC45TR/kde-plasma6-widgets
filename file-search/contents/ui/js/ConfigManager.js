@@ -71,12 +71,12 @@ function isValidViewMode(mode) {
 
 // Validate icon size (min 16, max 128)
 function isValidIconSize(size) {
-    return size >= 16 && size <= 128;
+    return [16, 22, 32, 48, 64, 128].indexOf(Number(size)) !== -1;
 }
 
-// Validate list icon size (min 12, max 64)
+// Validate list icon size
 function isValidListIconSize(size) {
-    return size >= 12 && size <= 64;
+    return [16, 22, 32, 48, 64, 128].indexOf(Number(size)) !== -1;
 }
 
 // Sanitize configuration object

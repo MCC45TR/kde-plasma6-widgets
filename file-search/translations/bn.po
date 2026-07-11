@@ -1766,3 +1766,159 @@ msgstr "আল্ট্রা ওয়াইড মোড (সর্বোচ�
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "পাওয়ার ইউজার - সব বৈশিষ্ট্য সক্রিয়, উন্নত সেটিংস উপলব্ধ।"
+
+
+msgid "Weather Provider"
+msgstr "আবহাওয়া প্রদানকারী"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (বিনামূল্যে, কোনো কি প্রয়োজন নেই)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (কি প্রয়োজন)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (কি প্রয়োজন)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API কি:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "আপনার OpenWeatherMap API কি লিখুন"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API কি:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "আপনার WeatherAPI.com কি লিখুন"
+
+
+msgid "Location"
+msgstr "অবস্থান"
+
+
+msgid "Auto-detect from IP"
+msgstr "IP থেকে স্বয়ংক্রিয়ভাবে সনাক্ত করুন"
+
+
+msgid "Enter manually"
+msgstr "ম্যানুয়ালি লিখুন"
+
+
+msgid "City 1:"
+msgstr "শহর ১:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "উদাঃ ঢাকা, কোলকাতা, লন্ডন"
+
+
+msgid "Loading weather data..."
+msgstr "আবহাওয়া তথ্য লোড হচ্ছে..."
+
+
+msgid "Clear"
+msgstr "পরিষ্কার"
+
+
+msgid "Mainly Clear"
+msgstr "প্রধানত পরিষ্কার"
+
+
+msgid "Partly Cloudy"
+msgstr "আংশিক মেঘলা"
+
+
+msgid "Overcast"
+msgstr "মেঘলা"
+
+
+msgid "Fog"
+msgstr "কুয়াশা"
+
+
+msgid "Drizzle"
+msgstr "গুঁড়ি গুঁড়ি বৃষ্টি"
+
+
+msgid "Freezing Drizzle"
+msgstr "হিমশীতল গুঁড়ি গুঁড়ি বৃষ্টি"
+
+
+msgid "Rain"
+msgstr "বৃষ্টি"
+
+
+msgid "Freezing Rain"
+msgstr "হিমশীতল বৃষ্টি"
+
+
+msgid "Snow"
+msgstr "তুষারপাত"
+
+
+msgid "Snow Grains"
+msgstr "তুষার দানা"
+
+
+msgid "Rain Showers"
+msgstr "বৃষ্টির ঝাপটা"
+
+
+msgid "Snow Showers"
+msgstr "তুষার ঝাপটা"
+
+
+msgid "Thunderstorm"
+msgstr "বজ্রবিদ্যুৎসহ ঝড়"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "শিলাবৃষ্টিসহ ঝড়"
+
+
+msgid "Unknown"
+msgstr "অজানা"
+
+
+msgid "Cloudy"
+msgstr "মেঘলা"
+
+
+msgid "Mist"
+msgstr "কুয়াশা"
+
+
+msgid "Smoke"
+msgstr "ধোঁয়া"
+
+
+msgid "Haze"
+msgstr "কুয়াশাচ্ছন্ন"
+
+
+msgid "Dust"
+msgstr "ধুলো"
+
+
+msgid "Sand"
+msgstr "বালি"
+
+
+msgid "Ash"
+msgstr "ছাই"
+
+
+msgid "Squall"
+msgstr "দমকা হাওয়া"
+
+
+msgid "Tornado"
+msgstr "টর্নেডো"

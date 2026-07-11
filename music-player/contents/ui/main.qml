@@ -250,13 +250,19 @@ PlasmoidItem {
         function onShuffleChanged() {
             var val = currentPlayer.shuffle
             console.log("[MPRIS] Shuffle changed from player:", val, typeof val)
-            root.shuffle = val === true || val === 1
+            root.shuffle = val === Mpris.ShuffleStatus.On
         }
         
         function onLoopStatusChanged() {
             var val = currentPlayer.loopStatus
             console.log("[MPRIS] LoopStatus changed from player:", val, typeof val)
-            root.loopStatus = Number(val) || 0
+            if (val === Mpris.LoopStatus.Track) {
+                root.loopStatus = 1
+            } else if (val === Mpris.LoopStatus.Playlist) {
+                root.loopStatus = 2
+            } else {
+                root.loopStatus = 0
+            }
         }
         
         // Immediately refresh art when player's art URL changes
@@ -280,8 +286,14 @@ PlasmoidItem {
             var sh = currentPlayer.shuffle
             var ls = currentPlayer.loopStatus
             console.log("[MPRIS] Player changed. Shuffle:", sh, typeof sh, "| LoopStatus:", ls, typeof ls)
-            root.shuffle = sh === true || sh === 1
-            root.loopStatus = Number(ls) || 0
+            root.shuffle = sh === Mpris.ShuffleStatus.On
+            if (ls === Mpris.LoopStatus.Track) {
+                root.loopStatus = 1
+            } else if (ls === Mpris.LoopStatus.Playlist) {
+                root.loopStatus = 2
+            } else {
+                root.loopStatus = 0
+            }
             root.currentPosition = currentPlayer.position || 0
         } else {
             root.shuffle = false
@@ -381,7 +393,7 @@ PlasmoidItem {
         var newShuffle = !root.shuffle
         console.log("[MPRIS] Toggle shuffle:", root.shuffle, "->", newShuffle)
         root.shuffle = newShuffle
-        currentPlayer.shuffle = newShuffle
+        currentPlayer.shuffle = newShuffle ? Mpris.ShuffleStatus.On : Mpris.ShuffleStatus.Off
     }
     
     function cycleLoopStatus() {
@@ -401,7 +413,16 @@ PlasmoidItem {
         
         console.log("[MPRIS] Cycle loop:", current, "->", newStatus)
         root.loopStatus = newStatus
-        currentPlayer.loopStatus = newStatus
+        
+        var newMprisStatus
+        if (newStatus === 1) {
+            newMprisStatus = Mpris.LoopStatus.Track
+        } else if (newStatus === 2) {
+            newMprisStatus = Mpris.LoopStatus.Playlist
+        } else {
+            newMprisStatus = Mpris.LoopStatus.None
+        }
+        currentPlayer.loopStatus = newMprisStatus
     }
 
     // ---------------------------------------------------------

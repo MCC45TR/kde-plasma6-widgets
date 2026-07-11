@@ -118,7 +118,7 @@ import "Formatter.js" as Formatter
                     Item {
                         // Square slot relative to height. 
                         // RowLayout height is effectively parent.height - 10 (margins).
-                        // We want this item to be square.
+                        // Keep device tiles square.
                         Layout.preferredWidth: height
                         Layout.fillHeight: true
                         

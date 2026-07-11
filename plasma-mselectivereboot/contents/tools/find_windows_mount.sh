@@ -3,7 +3,7 @@
 TARGET_MNT=""
 
 # Iterate over NTFS/fuseblk partitions
-# We use lsblk to find mountpoints
+# Discover mounted filesystems through lsblk.
 lsblk -rno MOUNTPOINT,FSTYPE | grep -E 'ntfs|fuseblk' | awk '{print $1}' | while read -r mnt; do
     if [ -z "$mnt" ]; then continue; fi
     

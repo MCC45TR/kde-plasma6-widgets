@@ -14,6 +14,7 @@ Item {
     required property bool expanded
     required property string truncatedText
     required property int responsiveFontSize
+    required property string fontFamily
     required property color bgColor
     required property color textColor
     required property color accentColor
@@ -27,9 +28,21 @@ Item {
     property bool rssPlaceholderCycling: true
     property bool rssShowFullHeadline: true
     property int rssFrequency: 3
+    property int weatherFrequency: 2
     property bool rssShowSource: true
     property bool isUltraWideMode: false
     required property int maxChars
+    
+    readonly property bool isMediumMode: !isButtonMode && !isWideMode && !isExtraWideMode && !isUltraWideMode
+    
+    readonly property bool showMediumModeWeatherTicker: compactRoot.isMediumMode && 
+        compactRoot.logic && 
+        compactRoot.logic.plasmoidConfig && 
+        compactRoot.logic.plasmoidConfig.weatherEnabled && 
+        compactRoot.logic.plasmoidConfig.weatherPlaceholderCycling && 
+        compactRoot.logic.plasmoidConfig.weatherCache && 
+        compactRoot.logic.plasmoidConfig.weatherCache !== "{}" && 
+        compactRoot.logic.plasmoidConfig.weatherCache !== ""
     
     // Signals
     signal toggleExpanded()
@@ -88,29 +101,36 @@ Item {
                 text: compactRoot.truncatedText
                 color: compactRoot.textColor
                 font.pixelSize: compactRoot.responsiveFontSize
-                font.family: "Roboto Condensed"
+                font.family: compactRoot.fontFamily
                 horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? Text.AlignLeft : Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
-                visible: compactRoot.searchTextLength > 0 // Only show static text when user is typing
+                visible: compactRoot.searchTextLength > 0 || (compactRoot.isMediumMode && !compactRoot.showMediumModeWeatherTicker)
             }
 
             RssTicker {
                 id: tickerContainer
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                visible: !compactRoot.isButtonMode && compactRoot.searchTextLength === 0
+                visible: !compactRoot.isButtonMode && compactRoot.searchTextLength === 0 && (!compactRoot.isMediumMode || compactRoot.showMediumModeWeatherTicker)
                 
                 logic: compactRoot.logic
                 rssFrequency: compactRoot.rssFrequency
+                weatherFrequency: compactRoot.weatherFrequency
                 rssPlaceholderCycling: compactRoot.rssPlaceholderCycling
                 rssShowFullHeadline: compactRoot.rssShowFullHeadline
                 rssShowSource: compactRoot.rssShowSource
                 maxChars: compactRoot.maxChars
                 
+                // Weather properties
+                weatherPlaceholderCycling: compactRoot.logic ? (compactRoot.logic.plasmoidConfig.weatherPlaceholderCycling ?? true) : true
+                weatherIconPack: compactRoot.logic ? (compactRoot.logic.plasmoidConfig.weatherIconPack ?? "default") : "default"
+                isMediumMode: compactRoot.isMediumMode
+                isUltraWideMode: compactRoot.isUltraWideMode
+                
                 textColor: compactRoot.textColor
                 fontSize: compactRoot.responsiveFontSize
-                fontFamily: "Roboto Condensed"
+                fontFamily: compactRoot.fontFamily
                 defaultText: (compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
                 horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? Text.AlignLeft : Text.AlignHCenter
                 

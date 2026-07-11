@@ -126,14 +126,7 @@ Item {
                                 name === i18n("Recent Documents");
                     }
                     
-                    // If hidden, it shouldn't take up space in SwipeView navigation ideally,
-                    // but SwipeView is index-based.
-                    // We just hide the content. Swiping to it might show a blank page, 
-                    // but since BottomPanel hides the button, user won't click to it.
-                    // If user swipes, they will see blank recent pages.
-                    // To truly skip, we'd need a filtered model. 
-                    // For now, visibility handling in BottomPanel prevents direct access.
-                    // Visually, we can just disable it.
+                    // Recent pages remain in the index-based SwipeView but are not directly accessible.
                     visible: !isRecent
                 }
             }

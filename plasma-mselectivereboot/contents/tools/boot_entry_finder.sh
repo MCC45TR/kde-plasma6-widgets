@@ -144,7 +144,7 @@ echo -n "{ \"bootloader\": \"$TARGET\", \"entries\": "
 case "$TARGET" in
     "systemd-boot")
         if command -v bootctl >/dev/null 2>&1; then
-            # We must ensure bootctl output is embedded as partial JSON
+            # Embed the bootctl output as a partial JSON document.
             bootctl list --json=short || echo "[]"
         else
             echo "[]"

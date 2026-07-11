@@ -437,7 +437,6 @@ Item {
                             
                             onValueChanged: {
                                 if (value === routineTime2Spin.value && routineTime2Toggle.checked) {
-                                    // Visual warning logic could go here, for now relying on user noticing
                                 }
                             }
                         }

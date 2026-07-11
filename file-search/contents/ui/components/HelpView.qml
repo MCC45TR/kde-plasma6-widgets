@@ -29,7 +29,11 @@ Item {
         { prefix: "power:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Power Management"), icon: "system-shutdown", key: "power", localeBase: "power" },
         { prefix: "services:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "System Services"), icon: "preferences-system", key: "services", localeBase: "services" },
         { prefix: "#", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unicode Characters"), icon: "character-set", example: "#happy -> 😀", localeBase: "unicode" },
-        { prefix: "date", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date and Time"), icon: "alarm-clock", example: "date -> 18.01.2026", key: "date", localeBase: "date" },
+        { prefix: "date:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date and Time"), icon: "alarm-clock", example: "date: -> 18.01.2026", key: "date", localeBase: "date" },
+        { prefix: "rss:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "RSS Feeds"), icon: "news-subscribe", example: "rss:kde -> 📰 RSS", localeBase: "rss" },
+        { prefix: "weather:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show current weather"), icon: "weather-many-clouds", example: "weather: -> ⛅ Weather", localeBase: "weather" },
+        { prefix: "calendar:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar"), icon: "view-calendar", example: "calendar: -> 📅 Calendar", localeBase: "Calendar" },
+        { prefix: "clock:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show large clock"), icon: "preferences-system-time", example: "clock: -> ⏰ Clock", localeBase: "clock" },
         { prefix: "help:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help & Shortcuts"), icon: "help-about", key: "help", localeBase: "help" }
     ]
 
@@ -61,7 +65,7 @@ Item {
                 property string displayPrefix: {
                     if (modelData.localeBase) {
                         var loc = i18nd("plasma_applet_com.mcc45tr.filesearch", modelData.localeBase)
-                        if (loc && loc !== modelData.localeBase) {
+                        if (loc) {
                             var suffix = ""
                             if (modelData.prefix.endsWith(":")) suffix = ":"
                             if (modelData.prefix.endsWith(" ")) suffix = " "
@@ -101,8 +105,6 @@ Item {
                         font.family: "Barlow Condensed"
                         color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.6)
                         elide: Text.ElideRight
-                        // Explicitly set alignment and width behavior if needed, 
-                        // but with Spacer below, it should stick to left.
                     }
                     
                     // Spacer to push example to right

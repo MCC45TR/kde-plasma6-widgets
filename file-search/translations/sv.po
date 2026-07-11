@@ -241,12 +241,12 @@ msgstr ""
 #: contents/ui/components/HistoryListView.qml:92
 #: contents/ui/components/HistoryTileView.qml:249
 msgid "Recent Searches"
-msgstr ""
+msgstr "Senaste sökningar"
 
 #: contents/ui/components/HistoryListView.qml:112
 #: contents/ui/components/HistoryTileView.qml:269
 msgid "Clear History"
-msgstr ""
+msgstr "Rensa historik"
 
 #: contents/ui/components/HistoryListView.qml:281
 #: contents/ui/components/HistoryTileView.qml:495
@@ -298,7 +298,7 @@ msgstr ""
 #: contents/ui/components/PinnedSection.qml:85
 #: contents/ui/config/ConfigGeneral.qml:552
 msgid "Pinned Items"
-msgstr ""
+msgstr "Fastnålade objekt"
 
 #: contents/ui/components/PinnedSection.qml:225
 msgid "Right-click items to pin them"
@@ -342,7 +342,7 @@ msgstr ""
 
 #: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
-msgstr ""
+msgstr "Uppdatera"
 
 #: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
@@ -1693,3 +1693,159 @@ msgstr ""
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
 msgstr ""
+
+
+msgid "Weather Provider"
+msgstr "Väderleverantör"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratis, ingen nyckel krävs)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Nyckel krävs)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Nyckel krävs)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API-nyckel:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Ange din OpenWeatherMap API-nyckel"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API-nyckel:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Ange din WeatherAPI.com-nyckel"
+
+
+msgid "Location"
+msgstr "Plats"
+
+
+msgid "Auto-detect from IP"
+msgstr "Identifiera automatiskt från IP"
+
+
+msgid "Enter manually"
+msgstr "Ange manuellt"
+
+
+msgid "City 1:"
+msgstr "Stad 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "T.ex. Ankara, Istanbul, London"
+
+
+msgid "Loading weather data..."
+msgstr "Laddar väderdata..."
+
+
+msgid "Clear"
+msgstr "Klart"
+
+
+msgid "Mainly Clear"
+msgstr "Mestadels klart"
+
+
+msgid "Partly Cloudy"
+msgstr "Växlande molnighet"
+
+
+msgid "Overcast"
+msgstr "Mulet"
+
+
+msgid "Fog"
+msgstr "Dimma"
+
+
+msgid "Drizzle"
+msgstr "Duggregn"
+
+
+msgid "Freezing Drizzle"
+msgstr "Underkylt duggregn"
+
+
+msgid "Rain"
+msgstr "Regn"
+
+
+msgid "Freezing Rain"
+msgstr "Underkylt regn"
+
+
+msgid "Snow"
+msgstr "Snö"
+
+
+msgid "Snow Grains"
+msgstr "Kornsnö"
+
+
+msgid "Rain Showers"
+msgstr "Regnskurar"
+
+
+msgid "Snow Showers"
+msgstr "Snöbyar"
+
+
+msgid "Thunderstorm"
+msgstr "Åska"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Åska med hagel"
+
+
+msgid "Unknown"
+msgstr "Okänt"
+
+
+msgid "Cloudy"
+msgstr "Molnigt"
+
+
+msgid "Mist"
+msgstr "Dis"
+
+
+msgid "Smoke"
+msgstr "Rök"
+
+
+msgid "Haze"
+msgstr "Torrdis"
+
+
+msgid "Dust"
+msgstr "Damm"
+
+
+msgid "Sand"
+msgstr "Sand"
+
+
+msgid "Ash"
+msgstr "Aska"
+
+
+msgid "Squall"
+msgstr "Byström"
+
+
+msgid "Tornado"
+msgstr "Tromb"

@@ -65,6 +65,13 @@ Rectangle {
         { prefix: "wp:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Wikipedia"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Wikipedia articles"), icon: "wikipedia", category: "Web", localeBase: "wikipedia" },
         { prefix: "b:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Bookmarks"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search browser bookmarks"), icon: "bookmarks", category: "Web", localeBase: "bookmarks" },
         { prefix: "rss:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "RSS Feeds"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search exclusively in RSS news feeds"), icon: "news-subscribe", category: "Web", localeBase: "rss" },
+        { prefix: "weather:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show current weather"), icon: "weather-many-clouds", category: "Utility", localeBase: "weather" },
+        { prefix: "calendar:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Calendar"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar"), icon: "view-calendar", category: "Utility", localeBase: "Calendar" },
+        { prefix: "clock:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Clock"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show large clock"), icon: "preferences-system-time", category: "Utility", localeBase: "clock" },
+        { prefix: "date:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar and date information"), icon: "view-calendar-day", category: "Utility", localeBase: "date" },
+        { prefix: "power:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Power"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show power management options"), icon: "system-shutdown", category: "System", localeBase: "power" },
+        { prefix: "define:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Define"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Check word definition"), icon: "accessories-dictionary", category: "Utility", localeBase: "define" },
+        { prefix: "#", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unicode Characters"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search unicode characters"), icon: "character-set", category: "Utility", localeBase: "unicode" },
         
         { prefix: "man:/", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Man Pages"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Browse system manual pages"), icon: "help-contents", category: "Help", localeBase: "man" },
         { prefix: "help:", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show widget documentation"), icon: "help-about", category: "Help", localeBase: "help" }
@@ -100,15 +107,13 @@ Rectangle {
             var p = knownPrefixes[i];
             if (p.localeBase) {
                 var locKeyVal = i18nd("plasma_applet_com.mcc45tr.filesearch", p.localeBase);
-                if (locKeyVal && locKeyVal !== p.localeBase) {
-                    var suffix = "";
-                    if (p.prefix.endsWith(":")) suffix = ":";
-                    else if (p.prefix.endsWith(" ")) suffix = " ";
-                    else if (p.prefix.endsWith(":/")) suffix = ":/";
-                    map[p.prefix] = (locKeyVal + suffix).toLowerCase();
-                } else {
-                    map[p.prefix] = "";
-                }
+                var suffix = "";
+                if (p.prefix.endsWith(":")) suffix = ":";
+                else if (p.prefix.endsWith(" ")) suffix = " ";
+                else if (p.prefix.endsWith(":/")) suffix = ":/";
+                map[p.prefix] = ((locKeyVal || p.localeBase) + suffix).toLowerCase();
+            } else {
+                map[p.prefix] = p.prefix.toLowerCase();
             }
         }
         return map;
@@ -116,6 +121,10 @@ Rectangle {
     // Cached i18n strings used in detectHint error paths
     readonly property string _unknownPrefixText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unknown prefix")
     readonly property string _tryText: i18nd("plasma_applet_com.mcc45tr.filesearch", "try")
+    readonly property string _locHelp: {
+        var val = i18nd("plasma_applet_com.mcc45tr.filesearch", "help");
+        return val ? val.toLowerCase() : "help";
+    }
     readonly property string _searchPrefixesText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Prefixes")
     readonly property string _browseCalendarText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Browse calendar")
     readonly property string _manNotInstalledText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Man pages not installed")
@@ -309,9 +318,9 @@ Rectangle {
         }
         
         // Unknown prefix detection
-        var colonIndex = query.indexOf(":")
-        if (colonIndex > 0 && colonIndex < 10) {
-            var potentialPrefix = query.substring(0, colonIndex + 1).toLowerCase()
+        var prefixMatch = query.match(/^([A-Za-z][A-Za-z0-9+.-]{0,31}:)/)
+        if (prefixMatch) {
+            var potentialPrefix = prefixMatch[1].toLowerCase()
             
             var isKnown = false;
             for (var k = 0; k < activePrefixes.length; k++) {
@@ -332,7 +341,7 @@ Rectangle {
             if (!isKnown && potentialPrefix !== "file:" && potentialPrefix !== "http:" && potentialPrefix !== "https:") {
                 return {
                     show: true,
-                    text: _unknownPrefixText + ": " + potentialPrefix + " (" + _tryText + " 'help:')",
+                    text: _unknownPrefixText + ": " + potentialPrefix + " (" + _tryText + " '" + _locHelp + ":')",
                     icon: "dialog-warning",
                     isError: true,
                     isPrefixMenu: false,

@@ -31,6 +31,7 @@ FocusScope {
     // Navigation state
     property var collapsedCategories: ({})
     property int selectedFlatIndex: 0
+    property string selectedUuid: ""
     
     // Computed flat list for keyboard navigation
     property var flatItemList: {
@@ -131,27 +132,24 @@ FocusScope {
         if (direction === 1) { // Down
              var nextRowIndex = currentItemIdx + cols
              
-             // Scan for target
              for (var i = selectedFlatIndex + 1; i < totalItems; i++) {
                  var nextItem = flatItemList[i]
                  
-                 // Case 1: Same category
                  if (nextItem.catIndex === currentCatIdx) {
                     if (nextItem.itemIndex === nextRowIndex) {
                         targetGlobalIndex = i
                         break
                     }
                  } 
-                 // Case 2: Changed category (Found start of next category)
                  else {
-                     // We hit the next category. Find item in row 0 matching currentCol.
+                     // Preserve the column when entering the next category.
                      var newCatIdx = nextItem.catIndex
                      var bestMatch = i // default to first item
                      
                      for (var j = i; j < totalItems; j++) {
                          var cand = flatItemList[j]
                          if (cand.catIndex !== newCatIdx) break; 
-                         if (cand.itemIndex >= cols) break; // Went past first row
+                         if (cand.itemIndex >= cols) break;
                          
                          if ((cand.itemIndex % cols) === currentCol) {
                              targetGlobalIndex = j
@@ -167,7 +165,7 @@ FocusScope {
              var prevRowIndex = currentItemIdx - cols
              
              if (prevRowIndex >= 0) {
-                 // Scan backwards for same cat
+                 // Move to the previous row in the current category.
                  for (var i = selectedFlatIndex - 1; i >= 0; i--) {
                      var prevItem = flatItemList[i]
                      if (prevItem.catIndex === currentCatIdx && prevItem.itemIndex === prevRowIndex) {
@@ -177,12 +175,11 @@ FocusScope {
                      if (prevItem.catIndex !== currentCatIdx) break; 
                  }
              } else {
-                 // Fell off top of category. Find last row of previous category.
+                 // Preserve the column in the final row of the previous category.
                  for (var i = selectedFlatIndex - 1; i >= 0; i--) {
                      var prevItem = flatItemList[i]
                      if (prevItem.catIndex !== currentCatIdx) {
                          var prevCatIdx = prevItem.catIndex
-                         // prevItem is the last item of prev category. 
                          var endpointRow = Math.floor(prevItem.itemIndex / cols)
                          var desiredIndex = endpointRow * cols + currentCol
                          
@@ -472,33 +469,27 @@ FocusScope {
                             }
 
                             property bool isTextFile: {
-                                if (!previewPath) return false;
-                                var ext = previewPath.split('.').pop().toLowerCase();
-                                var txtExts = ['txt', 'js', 'py', 'qml', 'html', 'css', 'json', 'md', 'sh', 'c', 'cpp', 'h', 'hpp', 'rs', 'go', 'java', 'xml', 'yml', 'yaml', 'ini', 'conf', 'log'];
-                                return txtExts.indexOf(ext) !== -1;
+                                return PreviewUtils.isTextExtension(PreviewUtils.getExtension(previewPath));
                             }
+                            property int snippetRequestToken: 0
 
                             function loadTextSnippet() {
-                                if (!previewPath) return;
-                                var xhr = new XMLHttpRequest();
-                                xhr.onreadystatechange = function() {
-                                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                                        if (xhr.status === 200 || xhr.status === 0) {
-                                            var lines = xhr.responseText.split('\n').slice(0, 5).join('\n');
+                                if (!previewPath || !historyTile.logic) return;
+                                var token = ++snippetRequestToken
+                                historyTile.logic.readLocalTextSnippet(previewPath, function(content, bytes) {
+                                        if (token === snippetRequestToken) {
+                                            var lines = content.split('\n').slice(0, 5).join('\n');
                                             textSnippet.text = lines;
-                                            
-                                            var bytes = xhr.responseText.length;
+
                                             var sizeStr = "";
                                             if (bytes < 1024) sizeStr = bytes + " B";
                                             else if (bytes < 1048576) sizeStr = (bytes / 1024).toFixed(1) + " KB";
                                             else sizeStr = (bytes / 1048576).toFixed(1) + " MB";
-                                            fileSizeText.text = "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Size") + ":</b> " + sizeStr;
+                                            fileSizeText.text = i18nd("plasma_applet_com.mcc45tr.filesearch", "Size") + ": " + sizeStr;
                                         }
-                                    }
-                                }
-                                xhr.open("GET", (modelData.filePath || modelData.url || "").toString());
-                                xhr.send();
+                                })
                             }
+                            Component.onDestruction: snippetRequestToken++
                             
                             Rectangle {
                                 id: histTileBg
@@ -725,18 +716,18 @@ FocusScope {
                                                 }
 
                                                 Text {
-                                                    text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ":</b> " + (modelData.category || "Other")
+                                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "Other")
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                                     font.pixelSize: 10
-                                                    textFormat: Text.StyledText
+                                                    textFormat: Text.PlainText
                                                 }
 
                                                 Text {
-                                                    text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ":</b> " + histTileDelegate.previewFileType
+                                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + histTileDelegate.previewFileType
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                                     font.pixelSize: 10
                                                     visible: histTileDelegate.previewFileType.length > 0
-                                                    textFormat: Text.StyledText
+                                                    textFormat: Text.PlainText
                                                 }
 
                                                 Text {
@@ -745,16 +736,16 @@ FocusScope {
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                                     font.pixelSize: 10
                                                     visible: text.length > 0
-                                                    textFormat: Text.StyledText
+                                                    textFormat: Text.PlainText
                                                 }
 
                                                 Text {
-                                                    text: "<b>" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ":</b> " + histTileDelegate.previewPath
+                                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + histTileDelegate.previewPath
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.5)
                                                     font.pixelSize: 9
                                                     wrapMode: Text.WrapAnywhere
                                                     Layout.fillWidth: true
-                                                    textFormat: Text.StyledText
+                                                    textFormat: Text.PlainText
                                                 }
                                             }
                                         }
@@ -895,9 +886,23 @@ FocusScope {
         }
     }
     
-    // Reset selection when data changes
+    onSelectedFlatIndexChanged: {
+        var selected = flatItemList[selectedFlatIndex]
+        selectedUuid = selected && selected.data ? (selected.data.uuid || "") : ""
+    }
+
+    // Preserve selection by stable identity when the backing array is rebuilt.
     onCategorizedHistoryChanged: {
-        selectedFlatIndex = 0
+        var nextIndex = 0
+        if (selectedUuid) {
+            for (var i = 0; i < flatItemList.length; i++) {
+                if (flatItemList[i].data && flatItemList[i].data.uuid === selectedUuid) {
+                    nextIndex = i
+                    break
+                }
+            }
+        }
+        selectedFlatIndex = Math.min(nextIndex, Math.max(0, flatItemList.length - 1))
     }
 
     // Empty State

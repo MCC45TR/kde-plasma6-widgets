@@ -236,12 +236,12 @@ msgstr "Remove from History"
 #: contents/ui/components/HistoryListView.qml:92
 #: contents/ui/components/HistoryTileView.qml:249
 msgid "Recent Searches"
-msgstr "Recent Searches"
+msgstr "Son Aramalar"
 
 #: contents/ui/components/HistoryListView.qml:112
 #: contents/ui/components/HistoryTileView.qml:269
 msgid "Clear History"
-msgstr "Clear History"
+msgstr "Geçmişi Temizle"
 
 #: contents/ui/components/HistoryListView.qml:281
 #: contents/ui/components/HistoryTileView.qml:495
@@ -293,7 +293,7 @@ msgstr "Aramak için yazın"
 #: contents/ui/components/PinnedSection.qml:85
 #: contents/ui/config/ConfigGeneral.qml:552
 msgid "Pinned Items"
-msgstr "Pinned Items"
+msgstr "Sabitlenen Öğeler"
 
 #: contents/ui/components/PinnedSection.qml:225
 msgid "Right-click items to pin them"
@@ -1707,8 +1707,7 @@ msgstr "Ekstra Geniş Mod (Geniş + Uzun Yer Tutucu)"
 msgid "Ultra Wide Mode (Maximum Coverage)"
 msgstr "Ultra Geniş Mod (Maksimum Kapsama)"
 
-#~ msgid "RSS"
-#~ msgstr "RSS"
+
 
 #~ msgid "Arama yapmaya başla..."
 #~ msgstr "Arama yapmaya başla..."
@@ -1971,8 +1970,7 @@ msgstr "Ultra Geniş Mod (Maksimum Kapsama)"
 #~ msgid "b"
 #~ msgstr "yerim"
 
-#~ msgid "define"
-#~ msgstr "tanımla"
+
 
 #~ msgid "file"
 #~ msgstr "dosya"
@@ -2003,3 +2001,221 @@ msgstr "Ultra Geniş Mod (Maksimum Kapsama)"
 
 #~ msgid "BIOS"
 #~ msgstr "BIOS"
+
+
+msgid "Weather Provider"
+msgstr "Hava Durumu Sağlayıcısı"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Ücretsiz, Anahtar Gerekmez)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Anahtar Gerekir)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Anahtar Gerekir)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API Anahtarı:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMap API anahtarınızı girin"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API Anahtarı:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.com anahtarınızı girin"
+
+
+msgid "Location"
+msgstr "Konum"
+
+
+msgid "Auto-detect from IP"
+msgstr "IP adresinden otomatik algıla"
+
+
+msgid "Enter manually"
+msgstr "Elle gir"
+
+
+msgid "City 1:"
+msgstr "Şehir 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Örn: Ankara, İstanbul, Londra"
+
+
+msgid "Loading weather data..."
+msgstr "Hava durumu verisi yükleniyor..."
+
+
+msgid "Clear"
+msgstr "Açık"
+
+
+msgid "Mainly Clear"
+msgstr "Çoğunlukla Açık"
+
+
+msgid "Partly Cloudy"
+msgstr "Parçalı Bulutlu"
+
+
+msgid "Overcast"
+msgstr "Kapalı"
+
+
+msgid "Fog"
+msgstr "Sisli"
+
+
+msgid "Drizzle"
+msgstr "Çiseleme"
+
+
+msgid "Freezing Drizzle"
+msgstr "Dondurucu Çiseleme"
+
+
+msgid "Rain"
+msgstr "Yağmurlu"
+
+
+msgid "Freezing Rain"
+msgstr "Dondurucu Yağmur"
+
+
+msgid "Snow"
+msgstr "Karlı"
+
+
+msgid "Snow Grains"
+msgstr "Kar Taneleri"
+
+
+msgid "Rain Showers"
+msgstr "Sağanak Yağış"
+
+
+msgid "Snow Showers"
+msgstr "Kar Sağanağı"
+
+
+msgid "Thunderstorm"
+msgstr "Gök Gürültülü Fırtına"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Dolu ile Gök Gürültülü Fırtına"
+
+
+msgid "Unknown"
+msgstr "Bilinmiyor"
+
+
+msgid "Cloudy"
+msgstr "Bulutlu"
+
+
+msgid "Mist"
+msgstr "Puslu"
+
+
+msgid "Smoke"
+msgstr "Dumanlı"
+
+
+msgid "Haze"
+msgstr "Hafif Pus"
+
+
+msgid "Dust"
+msgstr "Tozlu"
+
+
+msgid "Sand"
+msgstr "Kum Fırtınası"
+
+
+msgid "Ash"
+msgstr "Kül"
+
+
+msgid "Squall"
+msgstr "Sert Rüzgar"
+
+
+msgid "Tornado"
+msgstr "Hortum"
+
+
+msgid "Update Now"
+msgstr "Şimdi Güncelle"
+
+
+msgid "Weather"
+msgstr "Hava Durumu"
+
+msgid "Clock"
+msgstr "Saat"
+
+msgid "Date"
+msgstr "Tarih"
+
+msgid "Power"
+msgstr "Güç"
+
+msgid "Define"
+msgstr "Tanımla"
+
+msgid "define"
+msgstr "tanımla"
+
+msgid "rss"
+msgstr "rss"
+
+msgid "RSS"
+msgstr "RSS"
+
+msgid "Show weather forecast"
+msgstr "Hava durumu tahminini göster"
+
+msgid "Search RSS news feeds"
+msgstr "RSS haber kaynaklarını ara"
+
+msgid "Get word definition"
+msgstr "Kelime tanımını al"
+
+msgid "Very Frequent (1 min)"
+msgstr "Çok Sık (1 dk)"
+
+msgid "Frequent (5 min)"
+msgstr "Sık (5 dk)"
+
+msgid "Normal (30 min)"
+msgstr "Normal (30 dk)"
+
+msgid "Rare (1 hour)"
+msgstr "Az (1 saat)"
+
+msgid "City not found"
+msgstr "Şehir bulunamadı"
+
+msgid "Read in Window"
+msgstr "Pencerede Oku"
+
+msgid "Open in Browser"
+msgstr "Tarayıcıda Aç"
+
+msgid "Close"
+msgstr "Kapat"

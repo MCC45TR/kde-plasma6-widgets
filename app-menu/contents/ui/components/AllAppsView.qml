@@ -37,18 +37,14 @@ ScrollView {
             
             let char = name.charAt(0).toUpperCase()
             
-            // Check if it's a letter (including extended latin/turkish)
-            // Regex for letters: \p{L}. But JS regex support depends on engine.
-            // Simple check: toUpperCase != toLowerCase usually implies letter.
+            // Case conversion detects letters without relying on Unicode regex support.
             if (char.toLowerCase() === char.toUpperCase()) {
-                 // Likely number or symbol
+                 // Group numbers and symbols together.
                  char = "#"
             }
 
             
-            // Getting url role (often UserRole + 8 or 4 in Kicker, or we can just try to get it if possible)
-            // But since Kicker doesn't reliably expose it via simple Qt.UserRole in JS without roleNames,
-            // we'll rely on the original index if we need to interact with the model natively.
+            // Preserve the source index because Kicker does not expose URL roles consistently.
             
             if (!groups[char]) {
                 groups[char] = []

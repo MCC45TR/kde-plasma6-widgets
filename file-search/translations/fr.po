@@ -1768,3 +1768,159 @@ msgstr "Mode ultra-large (Couverture maximale)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Utilisateur avancé - Toutes fonctions, paramètres avancés."
+
+
+msgid "Weather Provider"
+msgstr "Fournisseur météo"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratuit, aucune clé requise)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Clé requise)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Clé requise)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Clé API OpenWeatherMap :"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Entrez votre clé API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Clé API WeatherAPI.com :"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Entrez votre clé API WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Lieu"
+
+
+msgid "Auto-detect from IP"
+msgstr "Détection auto par IP"
+
+
+msgid "Enter manually"
+msgstr "Entrer manuellement"
+
+
+msgid "City 1:"
+msgstr "Ville 1 :"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Ex : Paris, Lyon, Marseille"
+
+
+msgid "Loading weather data..."
+msgstr "Chargement des données météo..."
+
+
+msgid "Clear"
+msgstr "Clair"
+
+
+msgid "Mainly Clear"
+msgstr "Majoritairement clair"
+
+
+msgid "Partly Cloudy"
+msgstr "Partiellement nuageux"
+
+
+msgid "Overcast"
+msgstr "Couvert"
+
+
+msgid "Fog"
+msgstr "Brouillard"
+
+
+msgid "Drizzle"
+msgstr "Bruine"
+
+
+msgid "Freezing Drizzle"
+msgstr "Bruine verglaçante"
+
+
+msgid "Rain"
+msgstr "Pluie"
+
+
+msgid "Freezing Rain"
+msgstr "Pluie verglaçante"
+
+
+msgid "Snow"
+msgstr "Neige"
+
+
+msgid "Snow Grains"
+msgstr "Neige en grains"
+
+
+msgid "Rain Showers"
+msgstr "Averses de pluie"
+
+
+msgid "Snow Showers"
+msgstr "Averses de neige"
+
+
+msgid "Thunderstorm"
+msgstr "Orage"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Orage avec grêle"
+
+
+msgid "Unknown"
+msgstr "Inconnu"
+
+
+msgid "Cloudy"
+msgstr "Nuageux"
+
+
+msgid "Mist"
+msgstr "Brume"
+
+
+msgid "Smoke"
+msgstr "Fumée"
+
+
+msgid "Haze"
+msgstr "Brume sèche"
+
+
+msgid "Dust"
+msgstr "Poussière"
+
+
+msgid "Sand"
+msgstr "Sable"
+
+
+msgid "Ash"
+msgstr "Cendres"
+
+
+msgid "Squall"
+msgstr "Rafale"
+
+
+msgid "Tornado"
+msgstr "Tornade"

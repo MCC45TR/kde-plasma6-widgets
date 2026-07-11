@@ -157,7 +157,7 @@ PlasmoidItem {
     compactRepresentation: Item {
         id: compactRep
         
-        // Ensure we take the full height of the panel
+        // Fill the available panel height.
         Layout.preferredHeight: root.height
         Layout.fillHeight: true
         Layout.preferredWidth: Math.max(timeText.implicitWidth, dateText.implicitWidth) + 16

@@ -88,7 +88,7 @@ Item {
                     Behavior on Layout.preferredWidth { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                     Behavior on Layout.preferredHeight { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                     
-                    // We need a slight bottom padding to space out the rows properly. GridLayout handles spacing, but we use 0 spacing and cell heights.
+                    // Preserve row separation when GridLayout spacing is disabled.
                     
                     AppFolderCard {
                         id: folderCard

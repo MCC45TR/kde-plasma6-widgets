@@ -1771,3 +1771,159 @@ msgstr "Ultra geniş rejim (Maksimum əhatə)"
 #~ msgstr ""
 #~ "Güclü İstifadəçi - Bütün xüsusiyyətlər aktivdir, qabaqcıl tənzimləmələr "
 #~ "mövcuddur."
+
+
+msgid "Weather Provider"
+msgstr "Hava durumu təminatçısı"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Pulsuz, açar tələb olunmur)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Açar tələb olunur)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Açar tələb olunur)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API açarı:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMap API açarınızı daxil edin"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API açarı:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.com açarınızı daxil edin"
+
+
+msgid "Location"
+msgstr "Məkan"
+
+
+msgid "Auto-detect from IP"
+msgstr "IP-dən avtomatik aşkarla"
+
+
+msgid "Enter manually"
+msgstr "Əllə daxil edin"
+
+
+msgid "City 1:"
+msgstr "Şəhər 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Məs: Bakı, London, İstanbul"
+
+
+msgid "Loading weather data..."
+msgstr "Hava durumu məlumatları yüklənir..."
+
+
+msgid "Clear"
+msgstr "Açıq"
+
+
+msgid "Mainly Clear"
+msgstr "Əsasən açıq"
+
+
+msgid "Partly Cloudy"
+msgstr "Az buludlu"
+
+
+msgid "Overcast"
+msgstr "Tutqun"
+
+
+msgid "Fog"
+msgstr "Duman"
+
+
+msgid "Drizzle"
+msgstr "Çiskin"
+
+
+msgid "Freezing Drizzle"
+msgstr "Dondurucu çiskin"
+
+
+msgid "Rain"
+msgstr "Yağış"
+
+
+msgid "Freezing Rain"
+msgstr "Dondurucu yağış"
+
+
+msgid "Snow"
+msgstr "Qar"
+
+
+msgid "Snow Grains"
+msgstr "Qar dənələri"
+
+
+msgid "Rain Showers"
+msgstr "Yağışlı leysan"
+
+
+msgid "Snow Showers"
+msgstr "Qarlı leysan"
+
+
+msgid "Thunderstorm"
+msgstr "Tufan"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Dolu ilə tufan"
+
+
+msgid "Unknown"
+msgstr "Bilinmir"
+
+
+msgid "Cloudy"
+msgstr "Buludlu"
+
+
+msgid "Mist"
+msgstr "Duman"
+
+
+msgid "Smoke"
+msgstr "Tüstü"
+
+
+msgid "Haze"
+msgstr "Duman"
+
+
+msgid "Dust"
+msgstr "Toz"
+
+
+msgid "Sand"
+msgstr "Qum"
+
+
+msgid "Ash"
+msgstr "Kül"
+
+
+msgid "Squall"
+msgstr "Qasırğa"
+
+
+msgid "Tornado"
+msgstr "Tornado"

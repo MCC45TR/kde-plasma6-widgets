@@ -241,12 +241,12 @@ msgstr "从历史记录中删除"
 #: contents/ui/components/HistoryListView.qml:92
 #: contents/ui/components/HistoryTileView.qml:249
 msgid "Recent Searches"
-msgstr "最近的搜索"
+msgstr "Recent Searches"
 
 #: contents/ui/components/HistoryListView.qml:112
 #: contents/ui/components/HistoryTileView.qml:269
 msgid "Clear History"
-msgstr "清除历史记录"
+msgstr "Clear History"
 
 #: contents/ui/components/HistoryListView.qml:281
 #: contents/ui/components/HistoryTileView.qml:495
@@ -298,7 +298,7 @@ msgstr "输入以搜索"
 #: contents/ui/components/PinnedSection.qml:85
 #: contents/ui/config/ConfigGeneral.qml:552
 msgid "Pinned Items"
-msgstr "固定项目"
+msgstr "Pinned Items"
 
 #: contents/ui/components/PinnedSection.qml:225
 msgid "Right-click items to pin them"
@@ -342,7 +342,7 @@ msgstr "(Press again to shutdown)"
 
 #: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
-msgstr "刷新"
+msgstr "Refresh"
 
 #: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
@@ -1706,3 +1706,183 @@ msgstr "超宽模式 (最大覆盖)"
 
 #~ msgid "RSS"
 #~ msgstr "RSS"
+
+
+msgid "Weather Provider"
+msgstr "Weather Provider"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Free, No Key Required)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Key Required)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Key Required)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API Key:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Enter your OpenWeatherMap API key"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API Key:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Enter your WeatherAPI.com key"
+
+
+msgid "Location"
+msgstr "Location"
+
+
+msgid "Auto-detect from IP"
+msgstr "Auto-detect from IP"
+
+
+msgid "Enter manually"
+msgstr "Enter manually"
+
+
+msgid "City 1:"
+msgstr "City 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Ex: Ankara, Istanbul, London"
+
+
+msgid "Loading weather data..."
+msgstr "Loading weather data..."
+
+
+msgid "Clear"
+msgstr "Clear"
+
+
+msgid "Mainly Clear"
+msgstr "Mainly Clear"
+
+
+msgid "Partly Cloudy"
+msgstr "Partly Cloudy"
+
+
+msgid "Overcast"
+msgstr "Overcast"
+
+
+msgid "Fog"
+msgstr "Fog"
+
+
+msgid "Drizzle"
+msgstr "Drizzle"
+
+
+msgid "Freezing Drizzle"
+msgstr "Freezing Drizzle"
+
+
+msgid "Rain"
+msgstr "Rain"
+
+
+msgid "Freezing Rain"
+msgstr "Freezing Rain"
+
+
+msgid "Snow"
+msgstr "Snow"
+
+
+msgid "Snow Grains"
+msgstr "Snow Grains"
+
+
+msgid "Rain Showers"
+msgstr "Rain Showers"
+
+
+msgid "Snow Showers"
+msgstr "Snow Showers"
+
+
+msgid "Thunderstorm"
+msgstr "Thunderstorm"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Thunderstorm with Hail"
+
+
+msgid "Unknown"
+msgstr "Unknown"
+
+
+msgid "Cloudy"
+msgstr "Cloudy"
+
+
+msgid "Mist"
+msgstr "Mist"
+
+
+msgid "Smoke"
+msgstr "Smoke"
+
+
+msgid "Haze"
+msgstr "Haze"
+
+
+msgid "Dust"
+msgstr "Dust"
+
+
+msgid "Sand"
+msgstr "Sand"
+
+
+msgid "Ash"
+msgstr "Ash"
+
+
+msgid "Squall"
+msgstr "Squall"
+
+
+msgid "Tornado"
+msgstr "Tornado"
+
+msgid "Very Frequent (1 min)"
+msgstr "Very Frequent (1 min)"
+
+msgid "Frequent (5 min)"
+msgstr "Frequent (5 min)"
+
+msgid "Normal (30 min)"
+msgstr "Normal (30 min)"
+
+msgid "Rare (1 hour)"
+msgstr "Rare (1 hour)"
+
+msgid "City not found"
+msgstr "City not found"
+
+msgid "Read in Window"
+msgstr "Read in Window"
+
+msgid "Open in Browser"
+msgstr "Open in Browser"
+
+msgid "Close"
+msgstr "Close"

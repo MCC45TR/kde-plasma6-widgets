@@ -1265,7 +1265,7 @@ msgstr "(اضغط مرة أخرى لإيقاف التشغيل)"
 
 #: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
-msgstr "ينعش"
+msgstr "تحديث"
 
 #: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
@@ -1584,3 +1584,159 @@ msgstr "الوضع العريض للغاية (عنصر نائب عريض + طو�
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
 msgstr "وضع فائق الاتساع (أقصى تغطية)"
+
+
+msgid "Weather Provider"
+msgstr "مزود الطقس"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (مجاني، لا يتطلب مفتاح)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (يتطلب مفتاح)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (يتطلب مفتاح)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "مفتاح API لـ OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "أدخل مفتاح API لـ OpenWeatherMap الخاص بك"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "مفتاح API لـ WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "أدخل مفتاح WeatherAPI.com الخاص بك"
+
+
+msgid "Location"
+msgstr "الموقع"
+
+
+msgid "Auto-detect from IP"
+msgstr "الكشف التلقائي من خلال IP"
+
+
+msgid "Enter manually"
+msgstr "الإدخال يدويًا"
+
+
+msgid "City 1:"
+msgstr "المدينة 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "مثال: أنقرة، إسطنبول، لندن"
+
+
+msgid "Loading weather data..."
+msgstr "جاري تحميل بيانات الطقس..."
+
+
+msgid "Clear"
+msgstr "صافٍ"
+
+
+msgid "Mainly Clear"
+msgstr "صافٍ غالباً"
+
+
+msgid "Partly Cloudy"
+msgstr "غائم جزئياً"
+
+
+msgid "Overcast"
+msgstr "غائم كلياً"
+
+
+msgid "Fog"
+msgstr "ضباب"
+
+
+msgid "Drizzle"
+msgstr "رذاذ"
+
+
+msgid "Freezing Drizzle"
+msgstr "رذاذ متجمد"
+
+
+msgid "Rain"
+msgstr "مطر"
+
+
+msgid "Freezing Rain"
+msgstr "مطر متجمد"
+
+
+msgid "Snow"
+msgstr "ثلج"
+
+
+msgid "Snow Grains"
+msgstr "حبيبات ثلجية"
+
+
+msgid "Rain Showers"
+msgstr "زخات مطر"
+
+
+msgid "Snow Showers"
+msgstr "زخات ثلج"
+
+
+msgid "Thunderstorm"
+msgstr "عاصفة رعدية"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "عاصفة رعدية مصحوبة بالبرد"
+
+
+msgid "Unknown"
+msgstr "غير معروف"
+
+
+msgid "Cloudy"
+msgstr "غائم"
+
+
+msgid "Mist"
+msgstr "ضباب خفيف"
+
+
+msgid "Smoke"
+msgstr "دخان"
+
+
+msgid "Haze"
+msgstr "سديم"
+
+
+msgid "Dust"
+msgstr "غبار"
+
+
+msgid "Sand"
+msgstr "رمل"
+
+
+msgid "Ash"
+msgstr "رماد"
+
+
+msgid "Squall"
+msgstr "عاصفة مفاجئة"
+
+
+msgid "Tornado"
+msgstr "إعصار"

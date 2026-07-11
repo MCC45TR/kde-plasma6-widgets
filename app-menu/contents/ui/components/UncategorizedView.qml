@@ -5,13 +5,8 @@ import org.kde.kirigami as Kirigami
 ScrollView {
     id: root
     
-    // Logic to find the specific category model will be outside or passed in.
-    // For now, let's accept a model.
     property var categoryModel: null
-    
-    // If no model is provided (e.g. we couldn't find "Uncategorized"), show placeholder
-    
-    // width: availableWidth
+
     contentWidth: availableWidth
     
     GridView {
@@ -61,7 +56,7 @@ ScrollView {
         }
     }
     
-    // Fallback if empty/null
+    // Empty state
     Column {
         anchors.centerIn: parent
         spacing: 10

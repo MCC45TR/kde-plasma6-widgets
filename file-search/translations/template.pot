@@ -1693,3 +1693,159 @@ msgstr ""
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
 msgstr ""
+
+
+msgid "Weather Provider"
+msgstr ""
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr ""
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr ""
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr ""
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr ""
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr ""
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr ""
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr ""
+
+
+msgid "Location"
+msgstr ""
+
+
+msgid "Auto-detect from IP"
+msgstr ""
+
+
+msgid "Enter manually"
+msgstr ""
+
+
+msgid "City 1:"
+msgstr ""
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr ""
+
+
+msgid "Loading weather data..."
+msgstr ""
+
+
+msgid "Clear"
+msgstr ""
+
+
+msgid "Mainly Clear"
+msgstr ""
+
+
+msgid "Partly Cloudy"
+msgstr ""
+
+
+msgid "Overcast"
+msgstr ""
+
+
+msgid "Fog"
+msgstr ""
+
+
+msgid "Drizzle"
+msgstr ""
+
+
+msgid "Freezing Drizzle"
+msgstr ""
+
+
+msgid "Rain"
+msgstr ""
+
+
+msgid "Freezing Rain"
+msgstr ""
+
+
+msgid "Snow"
+msgstr ""
+
+
+msgid "Snow Grains"
+msgstr ""
+
+
+msgid "Rain Showers"
+msgstr ""
+
+
+msgid "Snow Showers"
+msgstr ""
+
+
+msgid "Thunderstorm"
+msgstr ""
+
+
+msgid "Thunderstorm with Hail"
+msgstr ""
+
+
+msgid "Unknown"
+msgstr ""
+
+
+msgid "Cloudy"
+msgstr ""
+
+
+msgid "Mist"
+msgstr ""
+
+
+msgid "Smoke"
+msgstr ""
+
+
+msgid "Haze"
+msgstr ""
+
+
+msgid "Dust"
+msgstr ""
+
+
+msgid "Sand"
+msgstr ""
+
+
+msgid "Ash"
+msgstr ""
+
+
+msgid "Squall"
+msgstr ""
+
+
+msgid "Tornado"
+msgstr ""

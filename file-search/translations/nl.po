@@ -1692,3 +1692,159 @@ msgstr "Extra brede modus (breed + lange tijdelijke aanduiding)"
 #: contents/ui/main.qml:128
 msgid "Ultra Wide Mode (Maximum Coverage)"
 msgstr "Ultrabrede modus (maximale dekking)"
+
+
+msgid "Weather Provider"
+msgstr "Weerprovider"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratis, geen sleutel vereist)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Sleutel vereist)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Sleutel vereist)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API-sleutel:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Voer uw OpenWeatherMap API-sleutel in"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API-sleutel:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Voer uw WeatherAPI.com-sleutel in"
+
+
+msgid "Location"
+msgstr "Locatie"
+
+
+msgid "Auto-detect from IP"
+msgstr "Automatisch detecteren via IP"
+
+
+msgid "Enter manually"
+msgstr "Handmatig invoeren"
+
+
+msgid "City 1:"
+msgstr "Stad 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Bijv: Ankara, Istanbul, Londen"
+
+
+msgid "Loading weather data..."
+msgstr "Weergegevens laden..."
+
+
+msgid "Clear"
+msgstr "Helder"
+
+
+msgid "Mainly Clear"
+msgstr "Vrijwel helder"
+
+
+msgid "Partly Cloudy"
+msgstr "Licht bewolkt"
+
+
+msgid "Overcast"
+msgstr "Geheel bewolkt"
+
+
+msgid "Fog"
+msgstr "Mist"
+
+
+msgid "Drizzle"
+msgstr "Motregen"
+
+
+msgid "Freezing Drizzle"
+msgstr "IJzel"
+
+
+msgid "Rain"
+msgstr "Regen"
+
+
+msgid "Freezing Rain"
+msgstr "IJzel"
+
+
+msgid "Snow"
+msgstr "Sneeuw"
+
+
+msgid "Snow Grains"
+msgstr "Motsneeuw"
+
+
+msgid "Rain Showers"
+msgstr "Regenbuien"
+
+
+msgid "Snow Showers"
+msgstr "Sneeuwbuien"
+
+
+msgid "Thunderstorm"
+msgstr "Onweer"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Onweer met hagel"
+
+
+msgid "Unknown"
+msgstr "Onbekend"
+
+
+msgid "Cloudy"
+msgstr "Bewolkt"
+
+
+msgid "Mist"
+msgstr "Nevel"
+
+
+msgid "Smoke"
+msgstr "Rook"
+
+
+msgid "Haze"
+msgstr "Waas"
+
+
+msgid "Dust"
+msgstr "Stof"
+
+
+msgid "Sand"
+msgstr "Zand"
+
+
+msgid "Ash"
+msgstr "As"
+
+
+msgid "Squall"
+msgstr "Windvlaag"
+
+
+msgid "Tornado"
+msgstr "Tornado"

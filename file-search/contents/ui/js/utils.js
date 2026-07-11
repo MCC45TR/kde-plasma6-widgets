@@ -108,6 +108,28 @@ function shellEscape(str) {
     return "'" + str.toString().replace(/'/g, "'\\''") + "'"
 }
 
+function isHttpUrl(value) {
+    return /^https?:\/\//i.test(String(value || ""))
+}
+
+function isSafeExternalUrl(value) {
+    var url = String(value || "").trim()
+    return url.indexOf("/") === 0
+        || /^file:\/\//i.test(url)
+        || /^https?:\/\//i.test(url)
+}
+
+function decodeLocalPath(value) {
+    var path = String(value || "")
+    if (path.indexOf("file://") === 0) path = path.substring(7)
+    try {
+        path = decodeURIComponent(path)
+    } catch (e) {
+        // Keep the original path when it contains a malformed percent escape.
+    }
+    return path
+}
+
 // Centralized app category detection.
 // Used by HistoryManager, TileDataManager, SearchPopup to avoid duplicated logic.
 // Checks both English and Turkish category names and .desktop file indicators.

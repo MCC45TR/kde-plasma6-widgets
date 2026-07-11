@@ -57,11 +57,11 @@ import "Formatter.js" as Formatter
                 var sp = ListView.view.spacing
                 var minH = 40
                 
-                // How many items can fully fit?
+                // Number of complete rows that fit in the available height.
                 var maxFit = Math.floor((totalH + sp) / (minH + sp))
                 maxFit = Math.max(1, maxFit)
                 
-                // If we have more items than fit, use maxFit to calculate height (triggers scroll)
+                // Limit visible rows to the available height and scroll the remainder.
                 // Otherwise use actual count to spread evenly
                 var effectiveCount = (itemCount > maxFit) ? maxFit : itemCount
                 

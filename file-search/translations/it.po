@@ -1768,3 +1768,159 @@ msgstr "Modalità ultra-ampia (Copertura massima)"
 
 #~ msgid "Power User - All features active, advanced settings available."
 #~ msgstr "Utente esperto - Tutte funzioni attive, impostazioni avanzate."
+
+
+msgid "Weather Provider"
+msgstr "Fornitore meteo"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Gratuito, nessuna chiave richiesta)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Chiave richiesta)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Chiave richiesta)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "Chiave API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "Inserisci la tua chiave API OpenWeatherMap"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "Chiave API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "Inserisci la tua chiave WeatherAPI.com"
+
+
+msgid "Location"
+msgstr "Posizione"
+
+
+msgid "Auto-detect from IP"
+msgstr "Rilevamento automatico da IP"
+
+
+msgid "Enter manually"
+msgstr "Inserisci manualmente"
+
+
+msgid "City 1:"
+msgstr "Città 1:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Es: Roma, Milano, Londra"
+
+
+msgid "Loading weather data..."
+msgstr "Caricamento dati meteo..."
+
+
+msgid "Clear"
+msgstr "Sereno"
+
+
+msgid "Mainly Clear"
+msgstr "Prevalentemente sereno"
+
+
+msgid "Partly Cloudy"
+msgstr "Parzialmente nuvoloso"
+
+
+msgid "Overcast"
+msgstr "Coperto"
+
+
+msgid "Fog"
+msgstr "Nebbia"
+
+
+msgid "Drizzle"
+msgstr "Pioggerella"
+
+
+msgid "Freezing Drizzle"
+msgstr "Pioggerella gelata"
+
+
+msgid "Rain"
+msgstr "Pioggia"
+
+
+msgid "Freezing Rain"
+msgstr "Pioggia gelata"
+
+
+msgid "Snow"
+msgstr "Neve"
+
+
+msgid "Snow Grains"
+msgstr "Neve granulosa"
+
+
+msgid "Rain Showers"
+msgstr "Rovescio di pioggia"
+
+
+msgid "Snow Showers"
+msgstr "Rovescio di neve"
+
+
+msgid "Thunderstorm"
+msgstr "Temporale"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "Temporale con grandine"
+
+
+msgid "Unknown"
+msgstr "Sconosciuto"
+
+
+msgid "Cloudy"
+msgstr "Nuvoloso"
+
+
+msgid "Mist"
+msgstr "Foschia"
+
+
+msgid "Smoke"
+msgstr "Fumo"
+
+
+msgid "Haze"
+msgstr "Caligine"
+
+
+msgid "Dust"
+msgstr "Polvere"
+
+
+msgid "Sand"
+msgstr "Sabbia"
+
+
+msgid "Ash"
+msgstr "Cenere"
+
+
+msgid "Squall"
+msgstr "Groppo"
+
+
+msgid "Tornado"
+msgstr "Tornado"

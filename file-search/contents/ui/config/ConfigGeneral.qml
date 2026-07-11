@@ -4,16 +4,136 @@ import QtQuick.Controls
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as PlasmaSupport
+import "../js/SecretStore.js" as SecretStore
+import "../js/utils.js" as Utils
+import "../js/ConfigManager.js" as ConfigManager
 
 
 Item {
     id: configGeneral
+
+    // Weather configuration
+    property string cfg_weatherProvider
+    property string cfg_weatherProviderDefault
+    property string cfg_weatherLocationMode
+    property string cfg_weatherLocationModeDefault
+    property string cfg_weatherLocation
+    property string cfg_weatherLocationDefault
+    property string cfg_weatherApiKey
+    property string cfg_weatherApiKeyDefault
+    property string cfg_weatherApiKey2
+    property string cfg_weatherApiKey2Default
+    property int cfg_weatherUpdateTrigger
+    property int cfg_weatherUpdateTriggerDefault
+    // Shared configuration properties
+    property bool cfg_previewShowResults
+    property bool cfg_previewShowResultsDefault
+    property bool cfg_previewShowHistory
+    property bool cfg_previewShowHistoryDefault
+    property int cfg_previewInlineMode
+    property int cfg_previewInlineModeDefault
+    property int cfg_previewSize
+    property int cfg_previewSizeDefault
+    property bool cfg_showBootOptionsDefault
+    property bool cfg_prefixShellEnabled
+    property bool cfg_prefixShellEnabledDefault
+    property bool cfg_prefixTimelineEnabled
+    property bool cfg_prefixTimelineEnabledDefault
+    property bool cfg_prefixWebSearchEnabled
+    property bool cfg_prefixWebSearchEnabledDefault
+    property bool cfg_prefixKillEnabled
+    property bool cfg_prefixKillEnabledDefault
+    property bool cfg_prefixSpellEnabled
+    property bool cfg_prefixSpellEnabledDefault
+    property bool cfg_prefixUnitEnabled
+    property bool cfg_prefixUnitEnabledDefault
+    property var titleDefault
+    property int maxHistoryItems
+    property int maxHistoryItemsDefault
     
     // Power Management Source
     PlasmaSupport.DataSource {
         id: pmSource
         engine: "powermanagement"
         connectedSources: ["PowerManagement"]
+    }
+
+    PlasmaSupport.DataSource {
+        id: secretProcess
+        engine: "executable"
+        connectedSources: []
+        property var callbacks: ({})
+        onNewData: (source, data) => {
+            if (data["exit code"] === undefined) return
+            var callback = callbacks[source]
+            if (callback) callback(data["exit code"] === 0, (data["stdout"] || "").replace(/\n$/, ""))
+            delete callbacks[source]
+            disconnectSource(source)
+        }
+    }
+
+    property string weatherApiKeyDraft: ""
+    property string weatherApiKey2Draft: ""
+    property string secretStorageError: ""
+    property bool weatherSecretsRequested: false
+
+    function secretScriptPath() {
+        return Utils.decodeLocalPath(Qt.resolvedUrl("../../tools/secret_store.sh"))
+    }
+
+    function runSecretAction(action, entry, value, callback) {
+        var command = "sh " + Utils.shellEscape(secretScriptPath())
+                + " " + Utils.shellEscape(action)
+                + " " + Utils.shellEscape(entry)
+        if (action === "write") command += " " + Utils.shellEscape(SecretStore.encodeUtf8(value))
+        command += " #secret_" + Date.now() + "_" + Math.floor(Math.random() * 1000000)
+        secretProcess.callbacks[command] = callback
+        secretProcess.connectSource(command)
+    }
+
+    function loadWeatherSecrets() {
+        if (weatherSecretsRequested) return
+        weatherSecretsRequested = true
+        var legacyOne = cfg_weatherApiKey || ""
+        var legacyTwo = cfg_weatherApiKey2 || ""
+        if (legacyOne) {
+            weatherApiKeyDraft = legacyOne
+            runSecretAction("write", "weatherApiKey", legacyOne, function(ok) {
+                if (ok) cfg_weatherApiKey = ""
+            })
+        } else {
+            runSecretAction("read", "weatherApiKey", "", function(ok, value) {
+                if (ok && !weatherApiKeyField.activeFocus) weatherApiKeyDraft = value
+            })
+        }
+        if (legacyTwo) {
+            weatherApiKey2Draft = legacyTwo
+            runSecretAction("write", "weatherApiKey2", legacyTwo, function(ok) {
+                if (ok) cfg_weatherApiKey2 = ""
+            })
+        } else {
+            runSecretAction("read", "weatherApiKey2", "", function(ok, value) {
+                if (ok && !weatherApiKey2Field.activeFocus) weatherApiKey2Draft = value
+            })
+        }
+    }
+
+    Timer {
+        id: weatherApiKeySaveTimer
+        interval: 300
+        repeat: false
+        onTriggered: runSecretAction("write", "weatherApiKey", weatherApiKeyDraft, function(ok) {
+            secretStorageError = ok ? "" : i18nd("plasma_applet_com.mcc45tr.filesearch", "Could not save the API key to KWallet")
+        })
+    }
+
+    Timer {
+        id: weatherApiKey2SaveTimer
+        interval: 300
+        repeat: false
+        onTriggered: runSecretAction("write", "weatherApiKey2", weatherApiKey2Draft, function(ok) {
+            secretStorageError = ok ? "" : i18nd("plasma_applet_com.mcc45tr.filesearch", "Could not save the API key to KWallet")
+        })
     }
     
     readonly property bool canHibernate: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanHibernate"] : false
@@ -66,6 +186,31 @@ Item {
     property int cfg_weatherRefreshInterval
     property real cfg_weatherLastUpdate
     property string cfg_weatherCache
+    property alias cfg_weatherPlaceholderCycling: weatherPlaceholderCyclingCheck.checked
+    property alias cfg_weatherFrequency: weatherFreqCombo.currentIndex
+    property string cfg_weatherIconPack
+    property bool cfg_weatherPlaceholderCyclingDefault
+    property string cfg_weatherIconPackDefault
+    property string cfg_weatherViewMode
+    property string cfg_weatherViewModeDefault
+    
+    onCfg_weatherIconPackChanged: {
+        if (typeof weatherIconPackCombo !== "undefined") {
+            var idx = weatherIconPackCombo.iconPacks.indexOf(cfg_weatherIconPack)
+            if (idx !== -1 && idx !== weatherIconPackCombo.currentIndex) {
+                weatherIconPackCombo.currentIndex = idx
+            }
+        }
+    }
+
+    onCfg_weatherViewModeChanged: {
+        if (typeof weatherViewModeCombo !== "undefined") {
+            var idx = weatherViewModeCombo.viewModes.indexOf(cfg_weatherViewMode || "large")
+            if (idx !== -1 && idx !== weatherViewModeCombo.currentIndex) {
+                weatherViewModeCombo.currentIndex = idx
+            }
+        }
+    }
     
     // Placeholder Group
     property int cfg_searchAlgorithm
@@ -131,6 +276,7 @@ Item {
     property string cfg_weatherCacheDefault
     property string cfg_weatherLastUpdateDefault
     property string cfg_weatherUnitsDefault
+    property int cfg_weatherFrequencyDefault
     property bool cfg_showSearchButtonBackgroundDefault
     property bool cfg_rssEnabledDefault
     property string cfg_rssSourcesDefault
@@ -155,6 +301,9 @@ Item {
             previewSettings = JSON.parse(cfg_previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
         } catch (e) {
             previewSettings = {"images": false, "videos": false, "text": false, "documents": false, "applications": false}
+        }
+        if (cfg_weatherApiKey || cfg_weatherApiKey2 || cfg_weatherProvider === "openweathermap" || cfg_weatherProvider === "weatherapi") {
+            loadWeatherSecrets()
         }
     }
     
@@ -206,6 +355,17 @@ Item {
                 
                 // TAB 1: PANEL
                 Kirigami.FormLayout {
+                    ComboBox {
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "User Profile")
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Minimal"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Developer"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Power User")
+                        ]
+                        currentIndex: Math.max(0, Math.min(2, cfg_userProfile))
+                        onActivated: cfg_userProfile = currentIndex
+                    }
+
                     Kirigami.Separator {
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Appearance")
                         Kirigami.FormData.isSection: true
@@ -265,6 +425,25 @@ Item {
                         leftPadding: 32
                         enabled: rssPlaceholderCyclingCheck.checked && rssPlaceholderCyclingCheck.enabled
                         opacity: enabled ? 1.0 : 0.5
+                    }
+
+                    CheckBox {
+                        id: weatherPlaceholderCyclingCheck
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show weather info in panel search bar")
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather Info")
+                        enabled: displayModeCombo.currentIndex !== 0
+                    }
+
+                    ComboBox {
+                        id: weatherFreqCombo
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather Frequency")
+                        enabled: weatherPlaceholderCyclingCheck.checked && weatherPlaceholderCyclingCheck.enabled
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Very Frequent (1 min)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Frequent (5 min)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Normal (30 min)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Rare (1 hour)")
+                        ]
                     }
 
                     ComboBox {
@@ -465,7 +644,7 @@ Item {
                                                 return 5000; // Mock rss duration 5s
                                             }
                                         }
-                                        running: true
+                                        running: navBar.currentIndex === 0
                                         repeat: true
                                         onTriggered: {
                                             if (!rssPlaceholderCyclingCheck.checked) {
@@ -537,7 +716,11 @@ Item {
                         model: ["16", "22", "32", "48", "64", "128"]
                         visible: viewModeCombo.currentIndex === 0
                         onActivated: cfg_listIconSize = parseInt(currentText)
-                        Component.onCompleted: currentIndex = model.indexOf(String(cfg_listIconSize))
+                        Component.onCompleted: {
+                            if (!ConfigManager.isValidListIconSize(cfg_listIconSize)) cfg_listIconSize = 22
+                            var idx = model.indexOf(String(cfg_listIconSize))
+                            if (idx >= 0) currentIndex = idx
+                        }
                     }
                      ComboBox {
                         id: tileIconSizeCombo
@@ -545,7 +728,11 @@ Item {
                         model: ["16", "22", "32", "48", "64", "128"]
                         visible: viewModeCombo.currentIndex === 1
                         onActivated: cfg_iconSize = parseInt(currentText)
-                        Component.onCompleted: currentIndex = model.indexOf(String(cfg_iconSize))
+                        Component.onCompleted: {
+                            if (!ConfigManager.isValidIconSize(cfg_iconSize)) cfg_iconSize = 48
+                            var idx = model.indexOf(String(cfg_iconSize))
+                            if (idx >= 0) currentIndex = idx
+                        }
                     }
                     
                     ColumnLayout {
@@ -929,6 +1116,190 @@ Item {
                         
                         RowLayout {
                             Layout.fillWidth: true
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather Provider")
+                            }
+                            ComboBox {
+                                id: weatherProviderCombo
+                                Layout.fillWidth: true
+                                model: [
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Open-Meteo (Free, No Key Required)"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "OpenWeatherMap (Key Required)"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "WeatherAPI.com (Key Required)")
+                                ]
+                                property var providers: ["openmeteo", "openweathermap", "weatherapi"]
+                                
+                                Component.onCompleted: {
+                                    var idx = providers.indexOf(cfg_weatherProvider || "openmeteo")
+                                    if (idx >= 0) currentIndex = idx
+                                }
+                                onActivated: {
+                                    cfg_weatherProvider = providers[index]
+                                    if (index > 0) loadWeatherSecrets()
+                                }
+                            }
+                        }
+
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Icon Pack:")
+                            }
+                            ComboBox {
+                                id: weatherIconPackCombo
+                                Layout.fillWidth: true
+                                model: [
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Default (Colorful SVG)"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "System Theme"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Google Weather v3 (Flat SVG)"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Google Weather v2 (Realistic PNG)"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Google Weather v1 (Classic PNG)")
+                                ]
+                                readonly property var iconPacks: ["default", "system", "google_v3", "google_v2", "google_v1"]
+                                
+                                Component.onCompleted: {
+                                    var idx = iconPacks.indexOf(cfg_weatherIconPack || "default")
+                                    if (idx >= 0) currentIndex = idx
+                                }
+                                onActivated: {
+                                    cfg_weatherIconPack = iconPacks[index]
+                                }
+                            }
+                        }
+
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather Prefix View Mode:")
+                            }
+                            ComboBox {
+                                id: weatherViewModeCombo
+                                Layout.fillWidth: true
+                                model: [
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Large Mode (Detailed Forecasts, Charts)"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Wide Mode (Horizontal Cards, Forecast Grid)"),
+                                    i18nd("plasma_applet_com.mcc45tr.filesearch", "Small Mode (Compact Temp & High/Low Stats)")
+                                ]
+                                readonly property var viewModes: ["large", "wide", "small"]
+                                
+                                Component.onCompleted: {
+                                    var idx = viewModes.indexOf(cfg_weatherViewMode || "large")
+                                    if (idx >= 0) currentIndex = idx
+                                }
+                                onActivated: {
+                                    cfg_weatherViewMode = viewModes[index]
+                                }
+                            }
+                        }
+
+                        // OpenWeatherMap Key
+                        RowLayout {
+                            Layout.fillWidth: true
+                            visible: weatherProviderCombo.currentIndex === 1
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "OpenWeatherMap API Key (KWallet):")
+                            }
+                            TextField {
+                                id: weatherApiKeyField
+                                Layout.fillWidth: true
+                                placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enter your OpenWeatherMap API key")
+                                echoMode: TextInput.Password
+                                text: configGeneral.weatherApiKeyDraft
+                                onTextChanged: {
+                                    if (focus) {
+                                        configGeneral.weatherApiKeyDraft = text
+                                        weatherApiKeySaveTimer.restart()
+                                    }
+                                }
+                                onEditingFinished: {
+                                    weatherApiKeySaveTimer.stop()
+                                    runSecretAction("write", "weatherApiKey", text, function(ok) {
+                                        secretStorageError = ok ? "" : i18nd("plasma_applet_com.mcc45tr.filesearch", "Could not save the API key to KWallet")
+                                    })
+                                }
+                            }
+                        }
+
+                        // WeatherAPI Key
+                        RowLayout {
+                            Layout.fillWidth: true
+                            visible: weatherProviderCombo.currentIndex === 2
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "WeatherAPI.com API Key (KWallet):")
+                            }
+                            TextField {
+                                id: weatherApiKey2Field
+                                Layout.fillWidth: true
+                                placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enter your WeatherAPI.com key")
+                                echoMode: TextInput.Password
+                                text: configGeneral.weatherApiKey2Draft
+                                onTextChanged: {
+                                    if (focus) {
+                                        configGeneral.weatherApiKey2Draft = text
+                                        weatherApiKey2SaveTimer.restart()
+                                    }
+                                }
+                                onEditingFinished: {
+                                    weatherApiKey2SaveTimer.stop()
+                                    runSecretAction("write", "weatherApiKey2", text, function(ok) {
+                                        secretStorageError = ok ? "" : i18nd("plasma_applet_com.mcc45tr.filesearch", "Could not save the API key to KWallet")
+                                    })
+                                }
+                            }
+                        }
+
+                        Label {
+                            Layout.fillWidth: true
+                            visible: configGeneral.secretStorageError.length > 0
+                            text: configGeneral.secretStorageError
+                            color: Kirigami.Theme.negativeTextColor
+                            wrapMode: Text.WordWrap
+                        }
+
+                        // Location Mode
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Location")
+                            }
+                            RadioButton {
+                                id: weatherAutoRadio
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Auto-detect from IP")
+                                checked: (cfg_weatherLocationMode || "auto") === "auto"
+                                onCheckedChanged: {
+                                    if (checked) cfg_weatherLocationMode = "auto"
+                                }
+                            }
+                            RadioButton {
+                                id: weatherManualRadio
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Enter manually")
+                                checked: cfg_weatherLocationMode === "manual"
+                                onCheckedChanged: {
+                                    if (checked) cfg_weatherLocationMode = "manual"
+                                }
+                            }
+                        }
+
+                        // Manual Location input
+                        RowLayout {
+                            Layout.fillWidth: true
+                            visible: weatherManualRadio.checked
+                            Label {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "City 1:")
+                            }
+                            TextField {
+                                id: weatherLocationField
+                                Layout.fillWidth: true
+                                placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Ex: Ankara, Istanbul, London")
+                                text: cfg_weatherLocation || ""
+                                onTextChanged: {
+                                    if (focus) cfg_weatherLocation = text
+                                }
+                            }
+                        }
+                        
+                        RowLayout {
+                            Layout.fillWidth: true
                             
                             Label { 
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh Interval:") 
@@ -963,6 +1334,17 @@ Item {
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "(If time since last update > interval)")
                                 font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                 color: Kirigami.Theme.disabledTextColor
+                            }
+                        }
+                        
+                        Button {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Update Now")
+                            icon.name: "view-refresh"
+                            onClicked: {
+                                cfg_weatherUpdateTrigger = cfg_weatherUpdateTrigger + 1
+                                if (typeof plasmoid !== "undefined") {
+                                    plasmoid.configuration.weatherUpdateTrigger = cfg_weatherUpdateTrigger
+                                }
                             }
                         }
                     } // End ColumnLayout
@@ -1166,9 +1548,61 @@ Item {
                             color: Kirigami.Theme.highlightColor
                         }
                         Label {
-                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Convert units (requires KRunner)")
-                                    Layout.fillWidth: true
-                                }
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Convert units (requires KRunner)")
+                            Layout.fillWidth: true
+                        }
+                        
+                        // weather:
+                        Kirigami.Icon { source: "weather-many-clouds"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
+                        Label { 
+                            text: "weather:city"
+                            font.family: "Monospace"
+                            font.bold: true
+                            color: Kirigami.Theme.highlightColor
+                        }
+                        Label {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show weather forecast")
+                            Layout.fillWidth: true
+                        }
+                        
+                        // calendar:
+                        Kirigami.Icon { source: "view-calendar"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
+                        Label { 
+                            text: "calendar:"
+                            font.family: "Monospace"
+                            font.bold: true
+                            color: Kirigami.Theme.highlightColor
+                        }
+                        Label {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show calendar")
+                            Layout.fillWidth: true
+                        }
+                        
+                        // rss:
+                        Kirigami.Icon { source: "news-subscribe"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
+                        Label { 
+                            text: "rss:search_term"
+                            font.family: "Monospace"
+                            font.bold: true
+                            color: Kirigami.Theme.highlightColor
+                        }
+                        Label {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search RSS news feeds")
+                            Layout.fillWidth: true
+                        }
+                        
+                        // define:
+                        Kirigami.Icon { source: "accessories-dictionary"; Layout.preferredWidth: 16; Layout.preferredHeight: 16 }
+                        Label { 
+                            text: "define:word"
+                            font.family: "Monospace"
+                            font.bold: true
+                            color: Kirigami.Theme.highlightColor
+                        }
+                        Label {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Get word definition")
+                            Layout.fillWidth: true
+                        }
                     }
                 }       
             }

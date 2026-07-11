@@ -29,7 +29,7 @@ PlasmoidItem {
         hoverEnabled: true
         onEntered: root.isHovering = true
         onExited: root.isHovering = false
-        // Let clicks pass through if needed, or handle them
+        // Preserve pointer handling across the full clock face.
         acceptedButtons: Qt.NoButton
     }
     
@@ -133,7 +133,7 @@ PlasmoidItem {
                    anchors.centerIn: parent
                    width: ((index % 5 === 0) ? 4 : 2) * (root.isWide ? 2 : 1)
                    height: root.isWide ? (clockFace.height * 0.06) : 15
-                   // Hide ticks in wide mode (Actually show on hover per request, always in Large)
+                   // Show ticks in large mode and on hover.
                    opacity: (root.isLarge || root.isHovering) ? 0.8 : 0
                    Behavior on opacity { NumberAnimation { duration: 300 } }
                    rotation: tickItem.angleDeg

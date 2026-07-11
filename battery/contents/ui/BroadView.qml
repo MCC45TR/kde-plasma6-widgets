@@ -94,7 +94,7 @@ Item {
                         }
                         
                         // Vertical Battery Icon with Charging Bolt
-                        // Using a standard icon for now, positioned next to laptop
+                        // Position the standard profile icon beside the laptop.
                         Kirigami.Icon {
                             Layout.preferredWidth: 32
                             Layout.preferredHeight: 32

@@ -33,14 +33,6 @@ function getLocalPreviewPath(urlOrPath) {
     if (value.indexOf("file://") === 0)
         value = value.substring(7);
 
-    var queryIndex = value.indexOf("?");
-    if (queryIndex !== -1)
-        value = value.substring(0, queryIndex);
-
-    var fragmentIndex = value.indexOf("#");
-    if (fragmentIndex !== -1)
-        value = value.substring(0, fragmentIndex);
-
     try {
         value = decodeURIComponent(value);
     } catch (e) {
@@ -56,7 +48,7 @@ function getExtension(pathOrUrl) {
 
     var lastSlash = path.lastIndexOf("/");
     var lastDot = path.lastIndexOf(".");
-    if (lastDot <= lastSlash)
+    if (lastDot <= lastSlash + 1)
         return "";
 
     return path.substring(lastDot + 1).toLowerCase();
@@ -128,7 +120,7 @@ function getPreviewSource(urlOrPath, previewEnabled, settings) {
         return "";
 
     // Use file:// URL for local image previews (image://preview/ is not available in widget context)
-    return "file://" + path;
+    return "file://" + encodeURI(path).replace(/#/g, "%23").replace(/\?/g, "%3F");
 }
 
 function getFileTypeLabel(urlOrPath) {

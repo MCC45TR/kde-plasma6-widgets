@@ -337,7 +337,7 @@ msgstr "(برای خاموش کردن دوباره فشار دهید)"
 
 #: contents/ui/components/PowerView.qml:444
 msgid "Refresh"
-msgstr "بروزرسانی"
+msgstr "به‌روزرسانی"
 
 #: contents/ui/components/PowerView.qml:472
 msgid "Scan for boot entries"
@@ -1715,3 +1715,159 @@ msgstr "حالت فوق عریض (حداکثر پوشش)"
 
 #~ msgid "Reset Statistics"
 #~ msgstr "بازنشانی آمار"
+
+
+msgid "Weather Provider"
+msgstr "تامین‌کننده هواشناسی"
+
+
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (رایگان، بدون نیاز به کلید)"
+
+
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (نیاز به کلید)"
+
+
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (نیاز به کلید)"
+
+
+msgid "OpenWeatherMap API Key:"
+msgstr "کلید API OpenWeatherMap:"
+
+
+msgid "Enter your OpenWeatherMap API key"
+msgstr "کلید API OpenWeatherMap خود را وارد کنید"
+
+
+msgid "WeatherAPI.com API Key:"
+msgstr "کلید API WeatherAPI.com:"
+
+
+msgid "Enter your WeatherAPI.com key"
+msgstr "کلید WeatherAPI.com خود را وارد کنید"
+
+
+msgid "Location"
+msgstr "مکان"
+
+
+msgid "Auto-detect from IP"
+msgstr "تشخیص خودکار از IP"
+
+
+msgid "Enter manually"
+msgstr "وارد کردن دستی"
+
+
+msgid "City 1:"
+msgstr "شهر ۱:"
+
+
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "مثال: تهران، مشهد، لندن"
+
+
+msgid "Loading weather data..."
+msgstr "درحال بارگذاری داده‌های هواشناسی..."
+
+
+msgid "Clear"
+msgstr "صاف"
+
+
+msgid "Mainly Clear"
+msgstr "عمدتاً صاف"
+
+
+msgid "Partly Cloudy"
+msgstr "نیمه ابری"
+
+
+msgid "Overcast"
+msgstr "تمام ابری"
+
+
+msgid "Fog"
+msgstr "مه"
+
+
+msgid "Drizzle"
+msgstr "باران ریز"
+
+
+msgid "Freezing Drizzle"
+msgstr "باران ریز منجمد"
+
+
+msgid "Rain"
+msgstr "باران"
+
+
+msgid "Freezing Rain"
+msgstr "باران منجمد"
+
+
+msgid "Snow"
+msgstr "برف"
+
+
+msgid "Snow Grains"
+msgstr "برف ریز"
+
+
+msgid "Rain Showers"
+msgstr "رگبار باران"
+
+
+msgid "Snow Showers"
+msgstr "رگبار برف"
+
+
+msgid "Thunderstorm"
+msgstr "رعد و برق"
+
+
+msgid "Thunderstorm with Hail"
+msgstr "رعد و برق همراه با تگرگ"
+
+
+msgid "Unknown"
+msgstr "نامشخص"
+
+
+msgid "Cloudy"
+msgstr "ابری"
+
+
+msgid "Mist"
+msgstr "غبار"
+
+
+msgid "Smoke"
+msgstr "دود"
+
+
+msgid "Haze"
+msgstr "مه دود"
+
+
+msgid "Dust"
+msgstr "گرد و غبار"
+
+
+msgid "Sand"
+msgstr "شن"
+
+
+msgid "Ash"
+msgstr "خاکستر"
+
+
+msgid "Squall"
+msgstr "تندباد"
+
+
+msgid "Tornado"
+msgstr "گردباد"

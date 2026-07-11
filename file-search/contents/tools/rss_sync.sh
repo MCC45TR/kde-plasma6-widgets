@@ -20,9 +20,14 @@ if ! command -v python3 >/dev/null 2>&1; then
     exit 1
 fi
 
-# Python ile güvenli çekme ve ayrıştırma
 python3 -c '
-import sys, os, urllib.request, re, json, base64, html, datetime, xml.etree.ElementTree as ET
+import sys, os, urllib.request, urllib.parse, re, json, base64, html, datetime, xml.etree.ElementTree as ET, socket
+try:
+    orig_getaddrinfo = socket.getaddrinfo
+    socket.getaddrinfo = lambda host, port, family=0, type=0, proto=0, flags=0: orig_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
+except:
+    pass
+
 
 def clean_html(raw_html):
     if not raw_html: return ""
@@ -58,16 +63,6 @@ def normalize_date(date_str):
     # Fallback cleaning
     return date_str.replace(" +0000", "").replace("T", " ").split(".")[0]
 
-def get_favicon(url):
-    try:
-        from urllib.parse import urlparse
-        domain = urlparse(url).netloc
-        if domain:
-            return f"https://www.google.com/s2/favicons?domain={domain}&sz=64"
-    except:
-        pass
-    return ""
-
 def find_node_recursive(node, tag_names):
     # Search for a tag ignoring namespace
     tag_names_lower = [t.lower() for t in tag_names]
@@ -99,7 +94,8 @@ def get_attr_recursive(node, tag_names, attr_name):
 
 def parse_rss(xml, source_name, source_url):
     entries = []
-    source_favicon = get_favicon(source_url)
+    # Do not disclose private/custom feed hostnames to a favicon service.
+    source_favicon = ""
     try:
         # XML cleaning for common Turkish news site errors (unescaped &)
         xml_cleaned = re.sub(r"&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[a-fA-F0-9]+);)", "&amp;", xml)
@@ -174,11 +170,81 @@ def get_hash(s):
         h -= 0x100000000
     return abs(h)
 
+def run_merge(cache_dir):
+    if cache_dir.startswith("file:"):
+        cache_dir = re.sub(r"^file:/*", "/", cache_dir)
+    combined = []
+    if os.path.exists(cache_dir):
+        for filename in os.listdir(cache_dir):
+            if filename.startswith("source_") and filename.endswith(".json"):
+                filepath = os.path.join(cache_dir, filename)
+                try:
+                    with open(filepath, "r") as f:
+                        content = f.read().strip()
+                    if content:
+                        try:
+                            decoded = base64.b64decode(content).decode("utf-8")
+                            data = json.loads(decoded)
+                        except Exception:
+                            data = json.loads(content)
+                        if isinstance(data, list):
+                            combined.extend(data)
+                except Exception:
+                    pass
+
+    def get_timestamp(entry):
+        raw_date = entry.get("rawDate", "")
+        if not raw_date:
+            return 0
+        formats = [
+            "%a, %d %b %Y %H:%M:%S %z",
+            "%a, %d %b %Y %H:%M:%S %Z",
+            "%Y-%m-%dT%H:%M:%S%z",
+            "%Y-%m-%dT%H:%M:%S.%f%z",
+            "%Y-%m-%d %H:%M:%S",
+            "%d.%m.%Y %H:%M:%S",
+            "%Y/%m/%d %H:%M:%S"
+        ]
+        for fmt in formats:
+            try:
+                dt = datetime.datetime.strptime(raw_date, fmt)
+                return dt.timestamp()
+            except:
+                continue
+        try:
+            dt = datetime.datetime.fromisoformat(raw_date.replace("Z", "+00:00"))
+            return dt.timestamp()
+        except:
+            pass
+        return 0
+
+    combined.sort(key=get_timestamp, reverse=True)
+    combined_path = os.path.join(cache_dir, "combined.json")
+    try:
+        with open(combined_path, "w") as f:
+            json.dump(combined, f)
+        print("MERGE: SUCCESS", flush=True)
+    except Exception as e:
+        print(f"MERGE: FAIL {str(e)}", flush=True)
+
+if len(sys.argv) > 2 and sys.argv[2] == "--merge":
+    run_merge(sys.argv[1])
+    sys.exit(0)
+
 if len(sys.argv) < 5:
     sys.exit(1)
 
 cache_dir, url, name, max_entries = sys.argv[1:5]
-max_entries = int(max_entries)
+try:
+    max_entries = max(1, min(50, int(max_entries)))
+except ValueError:
+    print("FAIL: invalid entry limit", flush=True)
+    sys.exit(1)
+
+parsed_url = urllib.parse.urlparse(url)
+if parsed_url.scheme not in ("http", "https"):
+    print("FAIL: unsupported URL scheme", flush=True)
+    sys.exit(1)
 
 try:
     print("FETCHING: START", flush=True)
@@ -205,6 +271,8 @@ try:
         with open(file_path, "w") as f:
             f.write(encoded)
         print(f"SAVING: {count} entries saved OK", flush=True)
+        
+        run_merge(cache_dir)
         print("SUCCESS", flush=True)
 except Exception as e:
     print(f"FAIL: {str(e)}", flush=True)

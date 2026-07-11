@@ -4,14 +4,24 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import "components" as Components
+import "components/WeatherService.js" as WeatherService
 
 PlasmoidItem {
     id: root
 
+    // Load bundled fonts with the root item so every lazily-created view can use
+    // them. Fall back to the desktop theme until the font is ready.
+    FontLoader { id: barlowMedium; source: "../fonts/BarlowCondensed-Medium.ttf" }
+    FontLoader { id: barlowLight; source: "../fonts/BarlowCondensed-Light.ttf" }
+    FontLoader { id: barlowLightItalic; source: "../fonts/BarlowCondensed-LightItalic.ttf" }
+    readonly property string uiFontFamily: barlowMedium.status === FontLoader.Ready
+        ? barlowMedium.name
+        : Kirigami.Theme.defaultFont.family
+
     // ===== CORE PROPERTIES =====
     property string searchText: ""
     property alias logic: controller
-    
+
     // Responsive font size based on height (40% of panel height)
     readonly property int responsiveFontSize: Math.max(10, Math.round(height * 0.4))
     
@@ -54,7 +64,7 @@ PlasmoidItem {
     
     TextMetrics {
         id: textMetrics
-        font.family: "Roboto Condensed"
+        font.family: root.uiFontFamily
         font.pixelSize: root.responsiveFontSize
         text: root.truncatedText
     }
@@ -143,6 +153,7 @@ PlasmoidItem {
         expanded: root.expanded
         truncatedText: root.truncatedText
         responsiveFontSize: root.responsiveFontSize
+        fontFamily: root.uiFontFamily
         maxChars: root.maxChars
         bgColor: root.bgColor
         textColor: root.textColor
@@ -158,6 +169,7 @@ PlasmoidItem {
         rssShowFullHeadline: Plasmoid.configuration.rssShowFullHeadline
         rssShowSource: Plasmoid.configuration.rssShowSource
         rssFrequency: Plasmoid.configuration.rssFrequency
+        weatherFrequency: Plasmoid.configuration.weatherFrequency
         
         onToggleExpanded: root.expanded = !root.expanded
     }
@@ -180,6 +192,7 @@ PlasmoidItem {
         textColor: root.textColor
         accentColor: root.accentColor
         bgColor: root.bgColor
+        fontFamily: root.uiFontFamily
         
         // Pass panel status for styling decisions
         isInPanel: root.isInPanel
@@ -208,5 +221,51 @@ PlasmoidItem {
         onRequestExpandChange: (exp) => root.expanded = exp
         onRequestViewModeChange: (mode) => Plasmoid.configuration.viewMode = mode
         onRequestPreventClosing: (prevent) => root.preventClosing = prevent
+    }
+
+    function refreshWeatherIfDue() {
+        var config = Plasmoid.configuration;
+        if (!config || !config.weatherEnabled || !config.weatherCache || config.weatherCache === "{}")
+            return;
+
+        var lastUpdate = config.weatherLastUpdate || 0;
+        var refreshInterval = config.weatherRefreshInterval !== undefined ? config.weatherRefreshInterval : 15;
+        var ageMs = Date.now() - lastUpdate;
+        if (ageMs <= refreshInterval * 60 * 1000 && ageMs >= 0)
+            return;
+
+        var units = config.weatherUseSystemUnits
+            ? (Qt.locale().measurementSystem === Locale.MetricSystem ? "metric" : "imperial")
+            : (config.weatherUnits || "metric");
+        var provider = config.weatherProvider || "openmeteo";
+        // Keyed providers retrieve credentials from KWallet when their view opens.
+        if (provider !== "openmeteo")
+            return;
+
+        var locationMode = config.weatherLocationMode || "auto";
+        var loc = config.weatherLocation || "";
+        WeatherService.fetchWeather({
+            location: locationMode === "auto" ? "" : loc,
+            autoDetect: locationMode === "auto",
+            units: units,
+            provider: provider,
+            apiKey: "",
+            apiKey2: "",
+            refreshInterval: refreshInterval
+        }, function(result) {
+            if (!result.success)
+                return;
+            config.weatherCache = JSON.stringify(result);
+            if (!result.fromCache)
+                config.weatherLastUpdate = Date.now();
+            config.weatherUpdateTrigger = (config.weatherUpdateTrigger || 0) + 1;
+        });
+    }
+
+    Connections {
+        target: controller
+        function onBackgroundMaintenanceRequested() {
+            root.refreshWeatherIfDue();
+        }
     }
 }
