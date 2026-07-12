@@ -189,21 +189,24 @@ PlasmoidItem {
     // Plasmoid Status (visibility) Logic
     // ---------------------------------------------------------
     function updateStatus() {
+        // Rule 2: Locked player is missing → hidden (autoHide option)
+        if (autoHideWhenInactive && preferredPlayer !== "" && !hasPlayer) {
+            Plasmoid.status = PlasmaCore.Types.HiddenStatus
+            return
+        }
+
+        // Rule 3: Nothing playing → hidden (hideWhenNotPlaying option)
+        if (hideWhenNotPlaying && !isPlaying) {
+            Plasmoid.status = PlasmaCore.Types.HiddenStatus
+            return
+        }
+        
         // Rule 1: Not in panel → always passive (desktop widget, no panel slot needed)
         if (!isInPanel) {
             Plasmoid.status = PlasmaCore.Types.PassiveStatus
             return
         }
-        // Rule 2: Locked player is missing → passive (autoHide option)
-        if (autoHideWhenInactive && preferredPlayer !== "" && !hasPlayer) {
-            Plasmoid.status = PlasmaCore.Types.PassiveStatus
-            return
-        }
-        // Rule 3: Nothing playing in panel → passive (hideWhenNotPlaying option)
-        if (hideWhenNotPlaying && !isPlaying) {
-            Plasmoid.status = PlasmaCore.Types.PassiveStatus
-            return
-        }
+
         // Otherwise: active
         Plasmoid.status = PlasmaCore.Types.ActiveStatus
     }
@@ -601,10 +604,13 @@ PlasmoidItem {
             return "compact"
         }
         
+        readonly property bool isEditMode: Plasmoid.userConfiguring || (Plasmoid.containment && Plasmoid.containment.corona && Plasmoid.containment.corona.editMode)
+        
         Rectangle {
             id: mainRect
             anchors.fill: parent
             anchors.margins: Plasmoid.configuration.edgeMargin !== undefined ? Plasmoid.configuration.edgeMargin : 10
+            visible: fullRep.isEditMode || (Plasmoid.status !== PlasmaCore.Types.HiddenStatus)
             color: root.isInPanel ? "transparent" : Kirigami.Theme.backgroundColor
             opacity: root.isInPanel ? 1 : root.cfg_backgroundOpacity
             radius: root.cfg_widgetRadius
