@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 // Reusable sunrise and sunset progress gauge.
 Item {
@@ -12,16 +13,22 @@ Item {
     
     // Configuration
     property color arcColor: Kirigami.Theme.highlightColor
-    property color sunColor: "#ffc107"
-    property color skyDayColor: "#87CEEB"
-    property color skyNightColor: "#1a1a2e"
+    property color sunColor: Kirigami.Theme.highlightColor
     property color textColor: Kirigami.Theme.textColor
-    property string fontFamily: "Roboto Condensed"
+    property string fontFamily: Kirigami.Theme.defaultFont.family
     property real arcWidth: 4
-    property int sunSize: 16
+    property int sunSize: Kirigami.Units.iconSizes.smallMedium
+    property date currentTime: new Date()
     
-    implicitWidth: 200
-    implicitHeight: 100
+    implicitWidth: Kirigami.Units.gridUnit * 11
+    implicitHeight: Kirigami.Units.gridUnit * 5.5
+
+    Timer {
+        interval: 60000
+        running: true
+        repeat: true
+        onTriggered: gaugeRoot.currentTime = new Date()
+    }
     
     // Parse time helper
     function parseTime(value) {
@@ -34,7 +41,6 @@ Item {
     
     // Current sun progress (0 = sunrise, 1 = sunset)
     readonly property real sunProgress: {
-        var now = new Date()
         var rise = parseTime(sunrise)
         var set = parseTime(sunset)
         
@@ -42,7 +48,7 @@ Item {
         
         var riseTime = rise.getTime()
         var setTime = set.getTime()
-        var nowTime = now.getTime()
+        var nowTime = currentTime.getTime()
         
         if (nowTime < riseTime) return 0  // Before sunrise
         if (nowTime > setTime) return 1   // After sunset
@@ -57,19 +63,17 @@ Item {
     function formatTime(value) {
         var d = parseTime(value)
         if (!d) return "--:--"
-        return d.getHours().toString().padStart(2, '0') + ":" + 
-               d.getMinutes().toString().padStart(2, '0')
+        return Qt.formatTime(d, Qt.locale().timeFormat(Locale.ShortFormat))
     }
     
     // Remaining daylight
     readonly property string remainingDaylight: {
         if (!isDaytime) return i18n("Night")
         
-        var now = new Date()
         var set = parseTime(sunset)
         if (!set) return "--"
-        
-        var diff = set.getTime() - now.getTime()
+
+        var diff = set.getTime() - currentTime.getTime()
         var hours = Math.floor(diff / (1000 * 60 * 60))
         var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
         
@@ -79,25 +83,9 @@ Item {
         return i18n("%1m left", minutes)
     }
     
-    // Background gradient representing sky
-    Rectangle {
+    // Use the active Plasma/Kirigami card surface instead of a fixed sky palette.
+    Kirigami.AbstractCard {
         anchors.fill: parent
-        radius: 8
-        gradient: Gradient {
-            GradientStop { 
-                position: 0.0
-                color: gaugeRoot.isDaytime ? 
-                    Qt.lighter(gaugeRoot.skyDayColor, 1.2) : 
-                    gaugeRoot.skyNightColor
-            }
-            GradientStop { 
-                position: 1.0
-                color: gaugeRoot.isDaytime ? 
-                    gaugeRoot.skyDayColor : 
-                    Qt.darker(gaugeRoot.skyNightColor, 1.3)
-            }
-        }
-        opacity: 0.2
     }
     
     // Arc container
@@ -105,8 +93,9 @@ Item {
         id: arcContainer
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 10
-        width: Math.min(parent.width - 40, 180)
+        anchors.topMargin: Kirigami.Units.largeSpacing
+        width: Math.min(parent.width - Kirigami.Units.largeSpacing * 4,
+                        Kirigami.Units.gridUnit * 10)
         height: width / 2
         
         // Horizon line
@@ -114,7 +103,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            height: 2
+            height: 1
             color: Qt.rgba(gaugeRoot.textColor.r, gaugeRoot.textColor.g, gaugeRoot.textColor.b, 0.3)
         }
         
@@ -169,11 +158,11 @@ Item {
         }
         
         // Sun indicator
-        Rectangle {
+        Kirigami.Icon {
             id: sunIndicator
             width: gaugeRoot.sunSize
             height: gaugeRoot.sunSize
-            radius: gaugeRoot.sunSize / 2
+            source: "weather-clear-symbolic"
             color: gaugeRoot.sunColor
             visible: gaugeRoot.isDaytime
             
@@ -186,27 +175,16 @@ Item {
                 return arcContainer.height - arcContainer.height * Math.sin(angle) - height / 2
             }
             
-            // Glow effect
-            Rectangle {
-                anchors.centerIn: parent
-                width: parent.width * 1.5
-                height: parent.height * 1.5
-                radius: width / 2
-                color: gaugeRoot.sunColor
-                opacity: 0.3
-                z: -1
-            }
-            
             Behavior on x { NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad } }
             Behavior on y { NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad } }
         }
-        
+
         // Moon indicator (when night)
-        Rectangle {
+        Kirigami.Icon {
             width: gaugeRoot.sunSize * 0.8
             height: gaugeRoot.sunSize * 0.8
-            radius: width / 2
-            color: "#e0e0e0"
+            source: "weather-clear-night-symbolic"
+            color: gaugeRoot.textColor
             visible: !gaugeRoot.isDaytime
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -arcContainer.height * 0.3
@@ -216,32 +194,34 @@ Item {
     // Time labels
     Row {
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 4
+        anchors.bottomMargin: Kirigami.Units.smallSpacing
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: 10
-        anchors.rightMargin: 10
+        anchors.leftMargin: Kirigami.Units.largeSpacing
+        anchors.rightMargin: Kirigami.Units.largeSpacing
         
         // Sunrise
         Column {
             width: parent.width / 3
-            spacing: 2
-            
-            Text {
-                text: "☀️"
-                font.pixelSize: 14
+            spacing: Kirigami.Units.smallSpacing / 2
+
+            Kirigami.Icon {
+                source: "weather-clear-symbolic"
+                width: Kirigami.Units.iconSizes.smallMedium
+                height: width
+                color: gaugeRoot.arcColor
             }
-            Text {
+            PlasmaComponents.Label {
                 text: gaugeRoot.formatTime(gaugeRoot.sunrise)
                 color: gaugeRoot.textColor
-                font.pixelSize: 11
+                font: Kirigami.Theme.defaultFont
                 font.family: gaugeRoot.fontFamily
-                font.bold: true
+                font.weight: Font.DemiBold
             }
-            Text {
+            PlasmaComponents.Label {
                 text: i18n("Sunrise")
                 color: gaugeRoot.textColor
-                font.pixelSize: 9
+                font: Kirigami.Theme.smallFont
                 font.family: gaugeRoot.fontFamily
                 opacity: 0.6
             }
@@ -250,20 +230,22 @@ Item {
         // Remaining daylight
         Column {
             width: parent.width / 3
-            spacing: 2
+            spacing: Kirigami.Units.smallSpacing / 2
             horizontalAlignment: Text.AlignHCenter
-            
-            Text {
-                text: gaugeRoot.isDaytime ? "🌤️" : "🌙"
-                font.pixelSize: 14
+
+            Kirigami.Icon {
+                source: gaugeRoot.isDaytime ? "weather-few-clouds-symbolic" : "weather-clear-night-symbolic"
+                width: Kirigami.Units.iconSizes.smallMedium
+                height: width
+                color: gaugeRoot.arcColor
                 anchors.horizontalCenter: parent.horizontalCenter
             }
-            Text {
+            PlasmaComponents.Label {
                 text: gaugeRoot.remainingDaylight
                 color: gaugeRoot.textColor
-                font.pixelSize: 11
+                font: Kirigami.Theme.defaultFont
                 font.family: gaugeRoot.fontFamily
-                font.bold: true
+                font.weight: Font.DemiBold
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
@@ -271,26 +253,28 @@ Item {
         // Sunset
         Column {
             width: parent.width / 3
-            spacing: 2
+            spacing: Kirigami.Units.smallSpacing / 2
             horizontalAlignment: Text.AlignRight
-            
-            Text {
-                text: "🌅"
-                font.pixelSize: 14
+
+            Kirigami.Icon {
+                source: "weather-clear-night-symbolic"
+                width: Kirigami.Units.iconSizes.smallMedium
+                height: width
+                color: gaugeRoot.arcColor
                 anchors.right: parent.right
             }
-            Text {
+            PlasmaComponents.Label {
                 text: gaugeRoot.formatTime(gaugeRoot.sunset)
                 color: gaugeRoot.textColor
-                font.pixelSize: 11
+                font: Kirigami.Theme.defaultFont
                 font.family: gaugeRoot.fontFamily
-                font.bold: true
+                font.weight: Font.DemiBold
                 anchors.right: parent.right
             }
-            Text {
+            PlasmaComponents.Label {
                 text: i18n("Sunset")
                 color: gaugeRoot.textColor
-                font.pixelSize: 9
+                font: Kirigami.Theme.smallFont
                 font.family: gaugeRoot.fontFamily
                 opacity: 0.6
                 anchors.right: parent.right

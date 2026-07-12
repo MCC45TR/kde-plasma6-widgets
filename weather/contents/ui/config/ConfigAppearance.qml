@@ -35,8 +35,6 @@ Item {
     property string cfg_units
     property bool cfg_useSystemUnits
     property int cfg_updateInterval
-    property string cfg_cachedWeather
-    property double cfg_lastUpdate
 
     property string cfg_apiKeyDefault
     property string cfg_apiKey2Default
@@ -48,8 +46,6 @@ Item {
     property string cfg_unitsDefault
     property bool cfg_useSystemUnitsDefault
     property int cfg_updateIntervalDefault
-    property string cfg_cachedWeatherDefault
-    property double cfg_lastUpdateDefault
     property string cfg_iconPackDefault
     property bool cfg_useCustomFontDefault
     property string cfg_customFontFamilyDefault
@@ -78,16 +74,6 @@ Item {
     property bool cfg_notifyTemperatureDropDefault
     property int cfg_notifyTemperatureThreshold
     property int cfg_notifyTemperatureThresholdDefault
-    property double cfg_lastRoutineNotify
-    property double cfg_lastRoutineNotifyDefault
-    property double cfg_lastSevereNotify
-    property double cfg_lastSevereNotifyDefault
-    property double cfg_lastRainNotify
-    property double cfg_lastRainNotifyDefault
-    property double cfg_lastTempNotify
-    property double cfg_lastTempNotifyDefault
-    property double cfg_triggerTestNotification
-    property double cfg_triggerTestNotificationDefault
     property bool cfg_notifyHighTemp
     property bool cfg_notifyHighTempDefault
     property int cfg_notifyHighTempThreshold
@@ -100,12 +86,6 @@ Item {
     property bool cfg_notifyWindDefault
     property int cfg_notifyWindThreshold
     property int cfg_notifyWindThresholdDefault
-    property double cfg_lastHighTempNotify
-    property double cfg_lastHighTempNotifyDefault
-    property double cfg_lastUvNotify
-    property double cfg_lastUvNotifyDefault
-    property double cfg_lastWindNotify
-    property double cfg_lastWindNotifyDefault
 
     property int cfg_notifyRoutineTime1
     property int cfg_notifyRoutineTime1Default
@@ -115,10 +95,6 @@ Item {
     property bool cfg_notifyRoutineTime2EnabledDefault
     property string cfg_notifyRoutineType
     property string cfg_notifyRoutineTypeDefault
-    property string cfg_lastRoutineDate1
-    property string cfg_lastRoutineDate1Default
-    property string cfg_lastRoutineDate2
-    property string cfg_lastRoutineDate2Default
 
     property var iconPacksModel: ["default", "system", "google_v3", "google_v2", "google_v1"]
     property var iconPacksLabels: [i18n("Default (Colorful SVG)"), i18n("System Theme"), i18n("Google Weather v3 (Flat SVG)"), i18n("Google Weather v2 (Realistic PNG)"), i18n("Google Weather v1 (Classic PNG)")]

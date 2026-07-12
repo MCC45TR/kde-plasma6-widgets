@@ -289,12 +289,12 @@ msgid "Stay safe and check local updates."
 msgstr "Resta al sicuro e controlla gli aggiornamenti locali."
 
 #: contents/ui/NotificationManager.qml:305
-msgid "📅 Today is %1 and %2° %3"
+msgid "Today is %1 and %2° %3"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:370
-msgid "📅 Weather Update"
-msgstr "📅 Aggiornamento meteo"
+msgid "Weather Update"
+msgstr "Aggiornamento meteo"
 
 #: contents/ui/NotificationManager.qml:370
 msgid "No significant changes for the rest of the day."
@@ -302,31 +302,31 @@ msgstr "Nessun cambiamento significativo per il resto della giornata."
 
 #: contents/ui/NotificationManager.qml:374
 #: contents/ui/config/ConfigNotifications.qml:217
-msgid "📅 Daily Weather Changes"
+msgid "Daily Weather Changes"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:410
-msgid "⚠️ Weather Alert"
+msgid "Weather Alert"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:414
 #: contents/ui/config/ConfigNotifications.qml:237
 #, fuzzy
-msgid "⛈️ Thunderstorm Warning"
+msgid "Thunderstorm Warning"
 msgstr "Temporale"
 
 #: contents/ui/NotificationManager.qml:417
 #: contents/ui/config/ConfigNotifications.qml:259
-msgid "❄️ Snow Warning"
+msgid "Snow Warning"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:420
 #: contents/ui/config/ConfigNotifications.qml:270
-msgid "🌫️ Dense Fog Warning"
+msgid "Dense Fog Warning"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:423
-msgid "🌧️ Heavy Rain Warning"
+msgid "Heavy Rain Warning"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:426
@@ -340,7 +340,7 @@ msgstr ""
 #: contents/ui/NotificationManager.qml:451
 #: contents/ui/config/ConfigNotifications.qml:248
 #, fuzzy
-msgid "🌧️ Rain Forecast"
+msgid "Rain Forecast"
 msgstr "Previsioni giornaliere"
 
 #: contents/ui/NotificationManager.qml:452
@@ -366,7 +366,7 @@ msgstr ""
 
 #: contents/ui/NotificationManager.qml:520
 #: contents/ui/config/ConfigNotifications.qml:314
-msgid "🥶 Low Temperature Alert"
+msgid "Low Temperature Alert"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:521
@@ -376,7 +376,7 @@ msgstr ""
 
 #: contents/ui/NotificationManager.qml:527
 #: contents/ui/config/ConfigNotifications.qml:303
-msgid "🔥 High Temperature Alert"
+msgid "High Temperature Alert"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:529
@@ -385,7 +385,7 @@ msgstr ""
 
 #: contents/ui/NotificationManager.qml:534
 #: contents/ui/config/ConfigNotifications.qml:292
-msgid "☀️ High UV Index Alert"
+msgid "High UV Index Alert"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:535
@@ -398,7 +398,7 @@ msgstr ""
 
 #: contents/ui/NotificationManager.qml:545
 #: contents/ui/config/ConfigNotifications.qml:281
-msgid "💨 Strong Wind Alert"
+msgid "Strong Wind Alert"
 msgstr ""
 
 #: contents/ui/NotificationManager.qml:546
@@ -427,7 +427,6 @@ msgid "%1h %2m left"
 msgstr "%1h %2m rimasti"
 
 #: contents/ui/SunProgressGauge.qml:80
-#, c-format
 msgid "%1m left"
 msgstr "%1m rimasti"
 
@@ -795,7 +794,7 @@ msgid ""
 msgstr ""
 
 #: contents/ui/config/ConfigNotifications.qml:224
-msgid "📅 Today is SUNDAY, 10°C Cloudy"
+msgid "Today is SUNDAY, 10°C Cloudy"
 msgstr ""
 
 #: contents/ui/config/ConfigNotifications.qml:225

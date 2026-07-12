@@ -11,13 +11,6 @@ import "IconMapper.js" as IconMapper
 PlasmoidItem {
     id: root
 
-    Timer {
-        interval: 2000
-        running: true
-        repeat: false
-        onTriggered: Plasmoid.internalAction("configure").trigger()
-    }
-
     Layout.preferredWidth: 400
     Layout.preferredHeight: 200
     Layout.minimumWidth: 200

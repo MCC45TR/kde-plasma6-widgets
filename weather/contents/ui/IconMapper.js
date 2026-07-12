@@ -50,7 +50,7 @@ function mapOpenWeatherIcon(code, iconCode, isNight) {
         if (code === 804) return "cloudy.svg"
     }
 
-    return isNight ? "clear_night.svg" : "clear_day.svg"
+    return "cloudy.svg"
 }
 
 function mapWeatherAPIIcon(code, isNight) {
@@ -85,7 +85,7 @@ function mapWeatherAPIIcon(code, isNight) {
     if (code === 1273 || code === 1276) return isNight ? "isolated_scattered_thunderstorms_night.svg" : "isolated_scattered_thunderstorms_day.svg"
     if (code === 1279 || code === 1282) return "strong_thunderstorms.svg"
 
-    return isNight ? "clear_night.svg" : "clear_day.svg"
+    return "cloudy.svg"
 }
 
 function mapOpenMeteoIcon(code, isNight) {
@@ -109,7 +109,7 @@ function mapOpenMeteoIcon(code, isNight) {
     if (code === 95) return "isolated_thunderstorms.svg"
     if (code === 96 || code === 99) return "strong_thunderstorms.svg"
 
-    return isNight ? "clear_night.svg" : "clear_day.svg"
+    return "cloudy.svg"
 }
 
 function getWeatherIcon(code, iconCode, provider, isNight) {
@@ -214,7 +214,7 @@ function mapToSystem(filename) {
     if (filename === "windy.svg") return "weather-windy"
     if (filename === "tornado.svg") return "weather-tornado"
 
-    return "weather-clear"
+    return "weather-overcast"
 }
 
 function getIconPath(code, iconCode, provider, isNight, iconPack) {

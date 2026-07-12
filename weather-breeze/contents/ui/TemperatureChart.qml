@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 // Reusable temperature and precipitation chart.
 Item {
@@ -14,14 +15,14 @@ Item {
     property string units: "metric"
     property color textColor: Kirigami.Theme.textColor
     property color accentColor: Kirigami.Theme.highlightColor
-    property color temperatureColor: "#ff6b6b"
-    property color precipitationColor: "#4dabf7"
-    property string fontFamily: "Roboto Condensed"
-    property int chartHeight: 120
-    property int labelHeight: 20
+    property color temperatureColor: Kirigami.Theme.negativeTextColor
+    property color precipitationColor: Kirigami.Theme.highlightColor
+    property string fontFamily: Kirigami.Theme.defaultFont.family
+    property int chartHeight: Kirigami.Units.gridUnit * 6
+    property int labelHeight: Kirigami.Units.gridUnit
     
     implicitHeight: chartHeight + labelHeight * 2
-    implicitWidth: 300
+    implicitWidth: Kirigami.Units.gridUnit * 16
     
     // Calculate min/max values
     readonly property real minTemp: {
@@ -70,22 +71,27 @@ Item {
         anchors.left: parent.left
         anchors.top: chartArea.top
         anchors.bottom: chartArea.bottom
-        width: 30
+        width: Kirigami.Units.gridUnit * 2
         
-        Text {
+        PlasmaComponents.Label {
+            id: maximumLabel
             text: Math.round(chartRoot.maxTemp) + "°"
             color: chartRoot.textColor
-            font.pixelSize: 10
+            font: Kirigami.Theme.smallFont
             font.family: chartRoot.fontFamily
             opacity: 0.7
         }
         
-        Item { height: parent.height - 30; width: 1 }
-        
-        Text {
+        Item {
+            width: 1
+            height: Math.max(0, parent.height - maximumLabel.implicitHeight - minimumLabel.implicitHeight)
+        }
+
+        PlasmaComponents.Label {
+            id: minimumLabel
             text: Math.round(chartRoot.minTemp) + "°"
             color: chartRoot.textColor
-            font.pixelSize: 10
+            font: Kirigami.Theme.smallFont
             font.family: chartRoot.fontFamily
             opacity: 0.7
         }
@@ -95,7 +101,7 @@ Item {
     Item {
         id: chartArea
         anchors.left: parent.left
-        anchors.leftMargin: 35
+        anchors.leftMargin: Kirigami.Units.gridUnit * 2
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: labelHeight
@@ -129,7 +135,7 @@ Item {
                     }
                     anchors.bottom: parent.bottom
                     color: Qt.rgba(chartRoot.precipitationColor.r, chartRoot.precipitationColor.g, chartRoot.precipitationColor.b, 0.3)
-                    radius: 2
+                    radius: Kirigami.Units.smallSpacing / 2
                 }
             }
         }
@@ -167,11 +173,11 @@ Item {
             model: chartRoot.forecastData
             
             Rectangle {
-                x: (index * chartArea.width / Math.max(1, chartRoot.forecastData.length - 1)) - 4
-                y: chartRoot.tempToY(modelData.temp) - 4
-                width: 8
-                height: 8
-                radius: 4
+                x: (index * chartArea.width / Math.max(1, chartRoot.forecastData.length - 1)) - width / 2
+                y: chartRoot.tempToY(modelData.temp) - height / 2
+                width: Kirigami.Units.smallSpacing
+                height: width
+                radius: width / 2
                 color: chartRoot.temperatureColor
                 border.width: 2
                 border.color: Kirigami.Theme.backgroundColor
@@ -182,18 +188,18 @@ Item {
     // X-axis labels (days/hours)
     Row {
         anchors.top: chartArea.bottom
-        anchors.topMargin: 4
+        anchors.topMargin: Kirigami.Units.smallSpacing
         anchors.left: chartArea.left
         anchors.right: chartArea.right
         
         Repeater {
             model: chartRoot.forecastData
             
-            Text {
+            PlasmaComponents.Label {
                 width: chartArea.width / (chartRoot.forecastData.length || 1)
                 text: modelData.time || Qt.locale().dayName(modelData.day, Locale.NarrowFormat)
                 color: chartRoot.textColor
-                font.pixelSize: 10
+                font: Kirigami.Theme.smallFont
                 font.family: chartRoot.fontFamily
                 horizontalAlignment: Text.AlignHCenter
                 opacity: 0.7
@@ -205,37 +211,37 @@ Item {
     Row {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: 16
+        spacing: Kirigami.Units.largeSpacing
         
         Row {
-            spacing: 4
+            spacing: Kirigami.Units.smallSpacing
             Rectangle {
-                width: 12; height: 3
+                width: Kirigami.Units.gridUnit; height: Math.max(2, Kirigami.Units.smallSpacing / 2)
                 color: chartRoot.temperatureColor
                 radius: 1
                 anchors.verticalCenter: parent.verticalCenter
             }
-            Text {
+            PlasmaComponents.Label {
                 text: i18n("Temperature")
                 color: chartRoot.textColor
-                font.pixelSize: 10
+                font: Kirigami.Theme.smallFont
                 opacity: 0.7
             }
         }
         
         Row {
-            spacing: 4
+            spacing: Kirigami.Units.smallSpacing
             visible: chartRoot.showPrecipitation
             Rectangle {
-                width: 12; height: 8
+                width: Kirigami.Units.gridUnit; height: Kirigami.Units.smallSpacing
                 color: Qt.rgba(chartRoot.precipitationColor.r, chartRoot.precipitationColor.g, chartRoot.precipitationColor.b, 0.3)
                 radius: 2
                 anchors.verticalCenter: parent.verticalCenter
             }
-            Text {
+            PlasmaComponents.Label {
                 text: i18n("Precipitation")
                 color: chartRoot.textColor
-                font.pixelSize: 10
+                font: Kirigami.Theme.smallFont
                 opacity: 0.7
             }
         }

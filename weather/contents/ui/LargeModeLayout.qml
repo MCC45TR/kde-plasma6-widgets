@@ -184,46 +184,6 @@ Item {
                 }
             }
 
-            // Air Quality Indicator (above forecast grid)
-            Row {
-                id: aqiRow
-                Layout.fillWidth: true
-                Layout.preferredHeight: visible ? 24 : 0
-                spacing: 8
-                visible: currentWeather && currentWeather.aqi !== undefined
-                
-                property var aqiInfo: currentWeather && currentWeather.aqi !== undefined ? 
-                    WeatherService.getAQIDescription(currentWeather.aqi, currentWeather.pm25, currentWeather.pm10) : null
-                
-                Rectangle {
-                    width: 8
-                    height: 8
-                    radius: 4
-                    color: aqiRow.aqiInfo ? aqiRow.aqiInfo.color : "transparent"
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                
-                Text {
-                    text: aqiRow.aqiInfo ? ("AQI " + aqiRow.aqiInfo.aqi + " • " + i18n(aqiRow.aqiInfo.level)) : ""
-                    color: Kirigami.Theme.textColor
-                    font.family: weatherRoot.activeFont.family
-                    font.pixelSize: 12
-                    font.bold: true
-                    opacity: 0.8
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                
-                Text {
-                    text: aqiRow.aqiInfo && aqiRow.aqiInfo.pm25 ? ("PM2.5: " + aqiRow.aqiInfo.pm25 + " µg/m³") : ""
-                    color: Kirigami.Theme.textColor
-                    font.family: weatherRoot.activeFont.family
-                    font.pixelSize: 11
-                    opacity: 0.5
-                    visible: text.length > 0
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
-
             DailyForecastView {
                 id: largeForecastGrid
                 Layout.fillWidth: true

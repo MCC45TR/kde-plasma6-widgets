@@ -1,454 +1,691 @@
 .pragma library
 
-var cache = {
-    current: null,
-    forecast: null,
-    timestamp: 0,
-    ttl: 5 * 60 * 1000
+// Provider adapters return one normalized contract:
+// - temperatures use the selected display unit
+// - wind speeds are always km/h
+// - visibility is always km
+// - sunrise, sunset and hourly timestamps are epoch milliseconds
+// - alert_code is a WMO-compatible code used by notification rules
+
+var CACHE_TTL_MS = 5 * 60 * 1000
+var LOCATION_CACHE_TTL_MS = 24 * 60 * 60 * 1000
+
+var caches = {}
+var activeRequests = {}
+var requestSerial = 0
+var geocodeCache = {}
+var ipLocationCache = { city: "", timestamp: 0 }
+
+function hasValue(value) {
+    return value !== undefined && value !== null
 }
 
-var currentProvider = "openweathermap"
+function clampForecastDays(value, maximum) {
+    var parsed = parseInt(value)
+    if (isNaN(parsed) || parsed < 1) parsed = 5
+    return Math.min(parsed, maximum)
+}
 
-function fetchOpenWeatherMap(apiKey, location, units, callback) {
-    var baseUrl = "https://api.openweathermap.org/data/2.5/"
+function normalizedLocation(location) {
+    return String(location || "").trim().toLowerCase()
+}
 
-    var currentUrl = baseUrl + "weather?q=" + encodeURIComponent(location) + "&appid=" + apiKey + "&units=" + units
+function cacheKeyForConfig(config) {
+    var provider = config.provider || "openmeteo"
+    var units = config.units || "metric"
+    var location = config.autoDetect ? "@auto" : normalizedLocation(config.location)
+    return provider + "|" + units + "|" + location + "|days=" + clampForecastDays(config.forecastDays, 16)
+}
 
-    var xhr = new XMLHttpRequest()
-    xhr.open("GET", currentUrl)
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                try {
-                    var data = JSON.parse(xhr.responseText)
-                    var current = {
-                        temp: Math.round(data.main.temp),
-                        feels_like: Math.round(data.main.feels_like),
-                        temp_min: Math.round(data.main.temp_min),
-                        temp_max: Math.round(data.main.temp_max),
-                        humidity: data.main.humidity,
-                        pressure: data.main.pressure,
-                        visibility: data.visibility ? Math.round(data.visibility / 1000) : null,
-                        wind_speed: data.wind ? Math.round(data.wind.speed * 3.6) : null,
-                        wind_deg: data.wind ? data.wind.deg : null,
-                        wind_gust: data.wind && data.wind.gust ? Math.round(data.wind.gust * 3.6) : null,
-                        clouds: data.clouds ? data.clouds.all : null,
-                        sunrise: data.sys && data.sys.sunrise ? data.sys.sunrise * 1000 : null,
-                        sunset: data.sys && data.sys.sunset ? data.sys.sunset * 1000 : null,
-                        condition: normalizeCondition(data.weather[0].main),
-                        description: data.weather[0].description,
-                        icon: data.weather[0].icon,
-                        code: data.weather[0].id,
-                        location: data.name,
-                        coord: { lat: data.coord.lat, lon: data.coord.lon },
-                        timestamp: Date.now()
-                    }
-
-                    var forecastUrl = baseUrl + "forecast?q=" + encodeURIComponent(location) + "&appid=" + apiKey + "&units=" + units
-                    var xhr2 = new XMLHttpRequest()
-                    xhr2.open("GET", forecastUrl)
-                    xhr2.onreadystatechange = function () {
-                        if (xhr2.readyState === XMLHttpRequest.DONE) {
-                            if (xhr2.status === 200) {
-                                try {
-                                    var forecastData = JSON.parse(xhr2.responseText)
-                                    var forecast = parseForecastOpenWeather(forecastData)
-                                    callback({ success: true, current: current, forecast: forecast, provider: "openweathermap" })
-                                } catch (e) {
-                                    callback({ success: false, error: "Failed to parse forecast: " + e })
-                                }
-                            } else {
-                                callback({ success: false, error: "Forecast API error: " + xhr2.status })
-                            }
-                        }
-                    }
-                    xhr2.send()
-                } catch (e) {
-                    callback({ success: false, error: "Failed to parse current weather: " + e })
-                }
-            } else if (xhr.status === 401) {
-                callback({ success: false, error: "Invalid API key", code: 401 })
-            } else {
-                callback({ success: false, error: "API error: " + xhr.status, code: xhr.status })
-            }
-        }
+function copyConfig(config) {
+    return {
+        apiKey: config.apiKey || "",
+        apiKey2: config.apiKey2 || "",
+        location: config.location || "",
+        units: config.units || "metric",
+        provider: config.provider || "openmeteo",
+        autoDetect: config.autoDetect === true,
+        forecastDays: config.forecastDays || 5,
+        forceRefresh: config.forceRefresh === true,
+        clientId: String(config.clientId || "default"),
+        _cacheKey: config._cacheKey,
+        _requestScope: config._requestScope,
+        _requestToken: config._requestToken
     }
-    xhr.send()
 }
 
-function parseAstroTime(dateStr, timeStr) {
+function finishRequest(xhr) {
+    if (xhr._mweatherComplete) return false
+    xhr._mweatherComplete = true
+    return true
+}
+
+function configureRequest(xhr, label, callback) {
+    // QML's XMLHttpRequest reports transport failures as DONE with status 0.
+    // The caller owns a watchdog Timer so a request that never reaches DONE
+    // cannot leave the widget in a permanent loading state.
+    xhr._mweatherLabel = label
+}
+
+function parseDateParts(value) {
+    var match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?/)
+    if (!match) return null
+    return {
+        year: parseInt(match[1]),
+        month: parseInt(match[2]),
+        day: parseInt(match[3]),
+        hour: parseInt(match[4] || "0"),
+        minute: parseInt(match[5] || "0"),
+        second: parseInt(match[6] || "0")
+    }
+}
+
+function parseLocationTime(value, utcOffsetSeconds) {
+    var parts = parseDateParts(value)
+    if (!parts) return NaN
+    return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second) - (utcOffsetSeconds || 0) * 1000
+}
+
+function dateKeyFromValue(value) {
+    var parts = parseDateParts(value)
+    if (!parts) return ""
+    return String(parts.year).padStart(4, "0") + "-" + String(parts.month).padStart(2, "0") + "-" + String(parts.day).padStart(2, "0")
+}
+
+function localDateKey(epochMs, utcOffsetSeconds) {
+    var shifted = new Date(epochMs + (utcOffsetSeconds || 0) * 1000)
+    return shifted.getUTCFullYear() + "-" + String(shifted.getUTCMonth() + 1).padStart(2, "0") + "-" + String(shifted.getUTCDate()).padStart(2, "0")
+}
+
+function localTimeLabel(epochMs, utcOffsetSeconds) {
+    var shifted = new Date(epochMs + (utcOffsetSeconds || 0) * 1000)
+    return String(shifted.getUTCHours()).padStart(2, "0") + ":" + String(shifted.getUTCMinutes()).padStart(2, "0")
+}
+
+function dayIndexForDateKey(dateKey) {
+    var parts = parseDateParts(dateKey)
+    if (!parts) return 0
+    return new Date(Date.UTC(parts.year, parts.month - 1, parts.day)).getUTCDay()
+}
+
+function parseAstroTime(dateStr, timeStr, utcOffsetSeconds) {
     if (!timeStr) return null
-    var parts = timeStr.match(/(\d+):(\d+) (AM|PM)/)
+    var parts = String(timeStr).match(/(\d+):(\d+)\s*(AM|PM)/i)
     if (!parts) return null
 
     var hours = parseInt(parts[1])
     var minutes = parseInt(parts[2])
-    var ampm = parts[3]
-
+    var ampm = parts[3].toUpperCase()
     if (ampm === "PM" && hours < 12) hours += 12
     if (ampm === "AM" && hours === 12) hours = 0
 
-    var d = new Date(dateStr)
-    d.setHours(hours, minutes, 0, 0)
-    return d.getTime()
+    return parseLocationTime(dateStr + "T" + String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0"), utcOffsetSeconds)
 }
 
-function fetchWeatherAPI(apiKey, location, callback) {
-    var baseUrl = "https://api.weatherapi.com/v1/"
-    var url = baseUrl + "forecast.json?key=" + apiKey + "&q=" + encodeURIComponent(location) + "&days=7&aqi=no&alerts=no"
+function windToKmh(speed, units) {
+    if (!hasValue(speed)) return null
+    if (units === "imperial") return Math.round(speed * 1.609344)
+    return Math.round(speed * 3.6)
+}
 
+function weatherApiUtcOffset(location) {
+    if (!location || !hasValue(location.localtime_epoch) || !location.localtime) return 0
+    var localAsUtc = parseLocationTime(String(location.localtime).replace(" ", "T"), 0)
+    if (isNaN(localAsUtc)) return 0
+    return Math.round(localAsUtc / 1000 - location.localtime_epoch)
+}
+
+function mapOpenWeatherAlertCode(code) {
+    if (code >= 200 && code < 300) return 95
+    if (code >= 300 && code < 400) return 53
+    if (code === 511) return 67
+    if (code >= 500 && code < 600) return code >= 502 ? 65 : 61
+    if (code >= 600 && code < 700) return code === 602 || code === 622 ? 75 : 71
+    if (code === 741) return 45
+    if (code >= 700 && code < 800) return 48
+    if (code === 800) return 0
+    if (code > 800) return code >= 803 ? 3 : 2
+    return -1
+}
+
+function mapWeatherApiAlertCode(code) {
+    if (code === 1000) return 0
+    if (code === 1003) return 2
+    if (code === 1006 || code === 1009) return 3
+    if (code === 1030 || code === 1135 || code === 1147) return 45
+    if (code === 1063 || (code >= 1150 && code <= 1201) || (code >= 1240 && code <= 1252)) return 61
+    if (code === 1066 || code === 1114 || code === 1117 || (code >= 1210 && code <= 1237) || (code >= 1255 && code <= 1264)) return 71
+    if (code === 1069 || code === 1072) return 57
+    if (code === 1087 || code >= 1273) return 95
+    return -1
+}
+
+function getWeatherApiCondition(code) {
+    var wmoCode = mapWeatherApiAlertCode(code)
+    if (wmoCode >= 0) return getOpenMeteoCondition(wmoCode)
+    return "Unknown"
+}
+
+function normalizeCondition(text) {
+    var value = String(text || "").trim().toLowerCase()
+    if (value === "clear") return "Clear"
+    if (value === "clouds" || value === "cloudy") return "Cloudy"
+    if (value === "mist") return "Mist"
+    if (value === "smoke") return "Smoke"
+    if (value === "haze") return "Haze"
+    if (value === "dust") return "Dust"
+    if (value === "sand") return "Sand"
+    if (value === "ash") return "Ash"
+    if (value === "squall") return "Squall"
+    if (value === "tornado") return "Tornado"
+    if (value.indexOf("thunder") !== -1) return "Thunderstorm"
+    if (value.indexOf("snow") !== -1) return "Snow"
+    if (value.indexOf("rain") !== -1) return "Rain"
+    if (value.indexOf("drizzle") !== -1) return "Drizzle"
+    if (value.indexOf("fog") !== -1) return "Fog"
+    if (value.indexOf("overcast") !== -1) return "Overcast"
+    if (value.indexOf("partly") !== -1) return "Partly Cloudy"
+    return "Unknown"
+}
+
+function fetchOpenWeatherMap(apiKey, location, units, callback) {
+    var baseUrl = "https://api.openweathermap.org/data/2.5/"
+    var currentUrl = baseUrl + "weather?q=" + encodeURIComponent(location) + "&appid=" + apiKey + "&units=" + units
     var xhr = new XMLHttpRequest()
-    xhr.open("GET", url)
+    configureRequest(xhr, "OpenWeatherMap", callback)
+    xhr.open("GET", currentUrl)
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                try {
-                    var data = JSON.parse(xhr.responseText)
-                    var today = data.forecast.forecastday[0]
-                    var current = {
-                        temp: Math.round(data.current.temp_c),
-                        feels_like: Math.round(data.current.feelslike_c),
-                        temp_min: Math.round(today.day.mintemp_c),
-                        temp_max: Math.round(today.day.maxtemp_c),
-                        sunrise: parseAstroTime(today.date, today.astro.sunrise),
-                        sunset: parseAstroTime(today.date, today.astro.sunset),
-                        condition: normalizeCondition(data.current.condition.text),
-                        description: data.current.condition.text,
-                        icon: "",
-                        code: data.current.condition.code,
-                        location: data.location.name,
-                        timestamp: Date.now()
-                    }
+        if (xhr.readyState !== XMLHttpRequest.DONE || !finishRequest(xhr)) return
+        if (xhr.status !== 200) {
+            callback({ success: false, error: xhr.status === 401 ? "Invalid API key" : (xhr.status === 0 ? "OpenWeatherMap network request failed" : "OpenWeatherMap API error: " + xhr.status), code: xhr.status })
+            return
+        }
 
-                    var forecast = parseForecastWeatherAPI(data.forecast.forecastday)
-                    callback({ success: true, current: current, forecast: forecast, provider: "weatherapi" })
-                } catch (e) {
-                    callback({ success: false, error: "Failed to parse WeatherAPI data: " + e })
-                }
-            } else if (xhr.status === 401 || xhr.status === 403) {
-                callback({ success: false, error: "Invalid API key", code: 401 })
-            } else {
-                callback({ success: false, error: "WeatherAPI error: " + xhr.status, code: xhr.status })
+        try {
+            var data = JSON.parse(xhr.responseText)
+            var timezoneOffset = data.timezone || 0
+            var currentCode = data.weather && data.weather.length ? data.weather[0].id : -1
+            var current = {
+                temp: Math.round(data.main.temp),
+                feels_like: Math.round(data.main.feels_like),
+                temp_min: Math.round(data.main.temp_min),
+                temp_max: Math.round(data.main.temp_max),
+                humidity: data.main.humidity,
+                pressure: data.main.pressure,
+                visibility: hasValue(data.visibility) ? Math.round(data.visibility / 1000) : null,
+                wind_speed: data.wind ? windToKmh(data.wind.speed, units) : null,
+                wind_deg: data.wind ? data.wind.deg : null,
+                wind_gust: data.wind && hasValue(data.wind.gust) ? windToKmh(data.wind.gust, units) : null,
+                clouds: data.clouds ? data.clouds.all : null,
+                sunrise: data.sys && hasValue(data.sys.sunrise) ? data.sys.sunrise * 1000 : null,
+                sunset: data.sys && hasValue(data.sys.sunset) ? data.sys.sunset * 1000 : null,
+                condition: normalizeCondition(data.weather && data.weather.length ? data.weather[0].main : ""),
+                description: normalizeCondition(data.weather && data.weather.length ? data.weather[0].main : ""),
+                icon: data.weather && data.weather.length ? data.weather[0].icon : "",
+                code: currentCode,
+                alert_code: mapOpenWeatherAlertCode(currentCode),
+                location: data.name,
+                coord: { lat: data.coord.lat, lon: data.coord.lon },
+                timezone_offset: timezoneOffset,
+                timestamp: hasValue(data.dt) ? data.dt * 1000 : Date.now()
             }
+
+            var forecastUrl = baseUrl + "forecast?q=" + encodeURIComponent(location) + "&appid=" + apiKey + "&units=" + units
+            var xhr2 = new XMLHttpRequest()
+            configureRequest(xhr2, "OpenWeatherMap forecast", callback)
+            xhr2.open("GET", forecastUrl)
+            xhr2.onreadystatechange = function () {
+                if (xhr2.readyState !== XMLHttpRequest.DONE || !finishRequest(xhr2)) return
+                if (xhr2.status !== 200) {
+                    callback({ success: false, error: xhr2.status === 0 ? "OpenWeatherMap forecast network request failed" : "OpenWeatherMap forecast API error: " + xhr2.status })
+                    return
+                }
+                try {
+                    var forecastData = JSON.parse(xhr2.responseText)
+                    callback({ success: true, current: current, forecast: parseForecastOpenWeather(forecastData, current, units), provider: "openweathermap" })
+                } catch (error) {
+                    console.warn("MWeather: failed to parse OpenWeatherMap forecast:", error)
+                    callback({ success: false, error: "Failed to parse OpenWeatherMap forecast data" })
+                }
+            }
+            xhr2.send()
+        } catch (error) {
+            console.warn("MWeather: failed to parse OpenWeatherMap current data:", error)
+            callback({ success: false, error: "Failed to parse OpenWeatherMap data" })
         }
     }
     xhr.send()
 }
 
-function fetchOpenMeteo(location, units, callback) {
-    var geocodeUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(location) + "&count=1&language=en&format=json"
+function fetchWeatherAPI(apiKey, location, units, forecastDays, callback) {
+    var days = clampForecastDays(forecastDays, 7)
+    var url = "https://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + encodeURIComponent(location) + "&days=" + days + "&aqi=no&alerts=no"
+    var xhr = new XMLHttpRequest()
+    configureRequest(xhr, "WeatherAPI.com", callback)
+    xhr.open("GET", url)
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== XMLHttpRequest.DONE || !finishRequest(xhr)) return
+        if (xhr.status !== 200) {
+            var invalidKey = xhr.status === 401 || xhr.status === 403
+            callback({ success: false, error: invalidKey ? "Invalid API key" : (xhr.status === 0 ? "WeatherAPI.com network request failed" : "WeatherAPI.com API error: " + xhr.status), code: xhr.status })
+            return
+        }
+
+        try {
+            var data = JSON.parse(xhr.responseText)
+            var today = data.forecast.forecastday[0]
+            var offset = weatherApiUtcOffset(data.location)
+            var useImperial = units === "imperial"
+            var currentCode = data.current.condition.code
+            var current = {
+                temp: Math.round(useImperial ? data.current.temp_f : data.current.temp_c),
+                feels_like: Math.round(useImperial ? data.current.feelslike_f : data.current.feelslike_c),
+                temp_min: Math.round(useImperial ? today.day.mintemp_f : today.day.mintemp_c),
+                temp_max: Math.round(useImperial ? today.day.maxtemp_f : today.day.maxtemp_c),
+                humidity: data.current.humidity,
+                pressure: Math.round(data.current.pressure_mb),
+                wind_speed: Math.round(data.current.wind_kph),
+                wind_deg: data.current.wind_degree,
+                wind_gust: hasValue(data.current.gust_kph) ? Math.round(data.current.gust_kph) : null,
+                clouds: data.current.cloud,
+                visibility: hasValue(data.current.vis_km) ? Math.round(data.current.vis_km) : null,
+                precipitation: data.current.precip_mm,
+                uv_index: hasValue(data.current.uv) ? Math.round(data.current.uv) : null,
+                sunrise: parseAstroTime(today.date, today.astro.sunrise, offset),
+                sunset: parseAstroTime(today.date, today.astro.sunset, offset),
+                condition: getWeatherApiCondition(currentCode),
+                description: getWeatherApiCondition(currentCode),
+                icon: "",
+                code: currentCode,
+                alert_code: mapWeatherApiAlertCode(currentCode),
+                location: data.location.name,
+                coord: { lat: data.location.lat, lon: data.location.lon },
+                timezone_offset: offset,
+                timestamp: hasValue(data.current.last_updated_epoch) ? data.current.last_updated_epoch * 1000 : Date.now()
+            }
+            var forecast = parseForecastWeatherAPI(data.forecast.forecastday, units, offset, Date.now())
+            callback({ success: true, current: current, forecast: forecast, provider: "weatherapi" })
+        } catch (error) {
+            console.warn("MWeather: failed to parse WeatherAPI.com data:", error)
+            callback({ success: false, error: "Failed to parse WeatherAPI.com data" })
+        }
+    }
+    xhr.send()
+}
+
+function fetchOpenMeteoAtPlace(place, units, forecastDays, callback) {
+    var lat = place.latitude
+    var lon = place.longitude
+    var days = clampForecastDays(forecastDays, 16)
+    var temperatureUnit = units === "imperial" ? "fahrenheit" : "celsius"
+    var weatherUrl = "https://api.open-meteo.com/v1/forecast?" +
+        "latitude=" + lat + "&longitude=" + lon +
+        "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,dew_point_2m" +
+        "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant,relative_humidity_2m_max" +
+        "&forecast_days=" + days +
+        "&hourly=temperature_2m,weather_code,precipitation,precipitation_probability&forecast_hours=48" +
+        "&timezone=auto&temperature_unit=" + temperatureUnit + "&wind_speed_unit=kmh"
 
     var xhr = new XMLHttpRequest()
-    xhr.open("GET", geocodeUrl)
+    configureRequest(xhr, "Open-Meteo forecast", callback)
+    xhr.open("GET", weatherUrl)
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                try {
-                    var geoData = JSON.parse(xhr.responseText)
-                    if (!geoData.results || geoData.results.length === 0) {
-                        callback({ success: false, error: "Location not found" })
-                        return
-                    }
-
-                    var place = geoData.results[0]
-                    var lat = place.latitude
-                    var lon = place.longitude
-                    var locationName = place.name
-
-                    var tempUnit = units === "imperial" ? "&temperature_unit=fahrenheit&wind_speed_unit=mph" : "&temperature_unit=celsius&wind_speed_unit=kmh"
-                    var weatherUrl = "https://api.open-meteo.com/v1/forecast?" +
-                        "latitude=" + lat + "&longitude=" + lon +
-                        "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,dew_point_2m" +
-                        "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,weather_code,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant,relative_humidity_2m_max" +
-                        "&forecast_days=" + (16) +
-                        "&hourly=temperature_2m,weather_code,precipitation,precipitation_probability&forecast_hours=48" +
-                        "&timezone=auto" +
-                        tempUnit
-
-                    var xhr2 = new XMLHttpRequest()
-                    xhr2.open("GET", weatherUrl)
-                    xhr2.onreadystatechange = function () {
-                        if (xhr2.readyState === XMLHttpRequest.DONE) {
-                            if (xhr2.status === 200) {
-                                try {
-                                    var data = JSON.parse(xhr2.responseText)
-
-                                    var current = {
-                                        temp: Math.round(data.current.temperature_2m),
-                                        feels_like: Math.round(data.current.apparent_temperature),
-                                        temp_min: Math.round(data.daily.temperature_2m_min[0]),
-                                        temp_max: Math.round(data.daily.temperature_2m_max[0]),
-                                        humidity: data.current.relative_humidity_2m,
-                                        pressure: Math.round(data.current.pressure_msl),
-                                        clouds: data.current.cloud_cover,
-                                        wind_speed: Math.round(data.current.wind_speed_10m),
-                                        wind_deg: data.current.wind_direction_10m,
-                                        wind_gust: data.current.wind_gusts_10m ? Math.round(data.current.wind_gusts_10m) : null,
-                                        precipitation: data.current.precipitation,
-                                        uv_index: data.daily.uv_index_max ? Math.round(data.daily.uv_index_max[0]) : null,
-                                        sunrise: data.daily.sunrise ? data.daily.sunrise[0] : null,
-                                        sunset: data.daily.sunset ? data.daily.sunset[0] : null,
-                                        weather_code: data.current.weather_code, /* Keep raw code for debugging/logic if needed */
-                                        visibility: data.current.visibility ? Math.round(data.current.visibility / 1000) : null,
-                                        dew_point: Math.round(data.current.dew_point_2m),
-                                        cloud_cover: data.current.cloud_cover,
-                                        description: getOpenMeteoCondition(data.current.weather_code),
-                                        condition: getOpenMeteoCondition(data.current.weather_code),
-                                        icon: "",
-                                        code: data.current.weather_code,
-                                        location: locationName,
-                                        coord: { lat: lat, lon: lon },
-                                        timestamp: Date.now()
-                                    }
-
-                                    var forecast = parseForecastOpenMeteo(data)
-                                    callback({ success: true, current: current, forecast: forecast, provider: "openmeteo" })
-                                } catch (e) {
-                                    callback({ success: false, error: "Failed to parse Open-Meteo data: " + e })
-                                }
-                            } else {
-                                callback({ success: false, error: "Open-Meteo API error: " + xhr2.status })
-                            }
-                        }
-                    }
-                    xhr2.send()
-                } catch (e) {
-                    callback({ success: false, error: "Geocoding error: " + e })
-                }
-            } else {
-                callback({ success: false, error: "Geocoding API error: " + xhr.status })
+        if (xhr.readyState !== XMLHttpRequest.DONE || !finishRequest(xhr)) return
+        if (xhr.status !== 200) {
+            callback({ success: false, error: xhr.status === 0 ? "Open-Meteo network request failed" : "Open-Meteo API error: " + xhr.status })
+            return
+        }
+        try {
+            var data = JSON.parse(xhr.responseText)
+            var offset = data.utc_offset_seconds || 0
+            var code = data.current.weather_code
+            var current = {
+                temp: Math.round(data.current.temperature_2m),
+                feels_like: Math.round(data.current.apparent_temperature),
+                temp_min: Math.round(data.daily.temperature_2m_min[0]),
+                temp_max: Math.round(data.daily.temperature_2m_max[0]),
+                humidity: data.current.relative_humidity_2m,
+                pressure: Math.round(data.current.pressure_msl),
+                clouds: data.current.cloud_cover,
+                wind_speed: Math.round(data.current.wind_speed_10m),
+                wind_deg: data.current.wind_direction_10m,
+                wind_gust: hasValue(data.current.wind_gusts_10m) ? Math.round(data.current.wind_gusts_10m) : null,
+                precipitation: data.current.precipitation,
+                uv_index: data.daily.uv_index_max ? Math.round(data.daily.uv_index_max[0]) : null,
+                sunrise: data.daily.sunrise ? parseLocationTime(data.daily.sunrise[0], offset) : null,
+                sunset: data.daily.sunset ? parseLocationTime(data.daily.sunset[0], offset) : null,
+                visibility: hasValue(data.current.visibility) ? Math.round(data.current.visibility / 1000) : null,
+                dew_point: Math.round(data.current.dew_point_2m),
+                description: getOpenMeteoCondition(code),
+                condition: getOpenMeteoCondition(code),
+                icon: "",
+                code: code,
+                alert_code: code,
+                location: place.name,
+                coord: { lat: lat, lon: lon },
+                timezone_offset: offset,
+                timestamp: data.current.time ? parseLocationTime(data.current.time, offset) : Date.now()
             }
+            callback({ success: true, current: current, forecast: parseForecastOpenMeteo(data, Date.now()), provider: "openmeteo" })
+        } catch (error) {
+            console.warn("MWeather: failed to parse Open-Meteo data:", error)
+            callback({ success: false, error: "Failed to parse Open-Meteo data" })
+        }
+    }
+    xhr.send()
+}
+
+function fetchOpenMeteo(location, units, forecastDays, callback) {
+    var key = normalizedLocation(location)
+    var cached = geocodeCache[key]
+    if (cached && Date.now() - cached.timestamp < LOCATION_CACHE_TTL_MS) {
+        fetchOpenMeteoAtPlace(cached.place, units, forecastDays, callback)
+        return
+    }
+
+    var url = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(location) + "&count=1&language=en&format=json"
+    var xhr = new XMLHttpRequest()
+    configureRequest(xhr, "Open-Meteo geocoding", callback)
+    xhr.open("GET", url)
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== XMLHttpRequest.DONE || !finishRequest(xhr)) return
+        if (xhr.status !== 200) {
+            callback({ success: false, error: xhr.status === 0 ? "Open-Meteo geocoding network request failed" : "Open-Meteo geocoding API error: " + xhr.status })
+            return
+        }
+        try {
+            var data = JSON.parse(xhr.responseText)
+            if (!data.results || data.results.length === 0) {
+                callback({ success: false, error: "Location not found" })
+                return
+            }
+            var place = data.results[0]
+            geocodeCache[key] = { place: place, timestamp: Date.now() }
+            fetchOpenMeteoAtPlace(place, units, forecastDays, callback)
+        } catch (error) {
+            console.warn("MWeather: failed to parse Open-Meteo geocoding data:", error)
+            callback({ success: false, error: "Failed to parse geocoding data" })
         }
     }
     xhr.send()
 }
 
 function fetchIpAndWeather(config, callback) {
+    if (ipLocationCache.city && Date.now() - ipLocationCache.timestamp < LOCATION_CACHE_TTL_MS) {
+        var cachedConfig = copyConfig(config)
+        cachedConfig.location = ipLocationCache.city
+        fetchWeatherInternal(cachedConfig, callback)
+        return
+    }
+
     var xhr = new XMLHttpRequest()
-    var url = "https://ipinfo.io/json"
-    xhr.open("GET", url)
+    configureRequest(xhr, "Automatic location detection", callback)
+    xhr.open("GET", "https://ipinfo.io/json")
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                try {
-                    var data = JSON.parse(xhr.responseText)
-                    if (data.city) {
-                        console.log("Detected location from IP: " + data.city)
-                        var newConfig = {
-                            apiKey: config.apiKey,
-                            apiKey2: config.apiKey2,
-                            location: data.city,
-                            units: config.units
-                        }
-                        fetchWeatherInternal(newConfig, callback)
-                    } else {
-                        console.log("Could not detect city from IP, falling back to default.")
-                        fetchWeatherInternal(config, callback)
-                    }
-                } catch (e) {
-                    console.log("Failed to parse IP info: " + e)
-                    fetchWeatherInternal(config, callback)
-                }
-            } else {
-                console.log("IP detection failed: " + xhr.status)
-                fetchWeatherInternal(config, callback)
+        if (xhr.readyState !== XMLHttpRequest.DONE || !finishRequest(xhr)) return
+        if (xhr.status !== 200) {
+            callback({ success: false, error: xhr.status === 0 ? "Automatic location detection network request failed" : "Automatic location detection failed: " + xhr.status })
+            return
+        }
+        try {
+            var data = JSON.parse(xhr.responseText)
+            if (!data.city) {
+                callback({ success: false, error: "Automatic location detection returned no city" })
+                return
             }
+            ipLocationCache = { city: data.city, timestamp: Date.now() }
+            var detectedConfig = copyConfig(config)
+            detectedConfig.location = data.city
+            fetchWeatherInternal(detectedConfig, callback)
+        } catch (error) {
+            console.warn("MWeather: failed to parse automatic location response:", error)
+            callback({ success: false, error: "Failed to parse automatic location response" })
         }
     }
     xhr.send()
 }
 
+function completeWeatherRequest(config, result, callback) {
+    if (!result.success) {
+        callback(result)
+        return
+    }
+
+    var requestedDays = clampForecastDays(config.forecastDays, 16)
+    if (result.forecast && result.forecast.daily) result.forecast.daily = result.forecast.daily.slice(0, requestedDays)
+    result.fetchedAt = Date.now()
+
+    if (activeRequests[config._requestScope] === config._requestToken) {
+        caches[config._cacheKey] = {
+            current: result.current,
+            forecast: result.forecast,
+            provider: result.provider,
+            timestamp: result.fetchedAt
+        }
+    }
+    callback(result)
+}
+
 function fetchWeatherInternal(config, callback) {
-    var apiKey = config.apiKey || ""
-    var apiKey2 = config.apiKey2 || ""
-    var location = config.location || ""
-    var units = config.units || "metric"
-    var provider = config.provider || "openmeteo"
-    var forecastDays = config.forecastDays || 12
-
-    console.log("Fetching weather using provider: " + provider + ", days: " + forecastDays)
-
-    if (provider === "openweathermap") {
-        if (apiKey) {
-            fetchOpenWeatherMap(apiKey, location, units, function (result) {
-                if (result.success) {
-                    cache.current = result.current
-                    cache.forecast = result.forecast
-                    cache.timestamp = Date.now()
-                    callback(result)
-                } else {
-                    callback(result)
-                }
-            })
-        } else {
-            callback({ success: false, error: "OpenWeatherMap API Key missing" })
-        }
+    var location = String(config.location || "").trim()
+    if (!location) {
+        callback({ success: false, error: "Please configure a location" })
         return
     }
 
-    if (provider === "weatherapi") {
-        if (apiKey2) {
-            fetchWeatherAPI(apiKey2, location, function (result) {
-                if (result.success) {
-                    cache.current = result.current
-                    cache.forecast = result.forecast
-                    cache.timestamp = Date.now()
-                    callback(result)
-                } else {
-                    callback(result)
-                }
-            })
-        } else {
-            callback({ success: false, error: "WeatherAPI.com API Key missing" })
+    var providerCallback = function (result) { completeWeatherRequest(config, result, callback) }
+    if (config.provider === "openweathermap") {
+        if (!config.apiKey) {
+            callback({ success: false, error: "OpenWeatherMap API key is missing" })
+            return
         }
+        fetchOpenWeatherMap(config.apiKey, location, config.units, providerCallback)
         return
     }
 
-    fetchOpenMeteo(location, units, function (result) {
-        if (result.success) {
-            cache.current = result.current
-            cache.forecast = result.forecast
-            cache.timestamp = Date.now()
+    if (config.provider === "weatherapi") {
+        if (!config.apiKey2) {
+            callback({ success: false, error: "WeatherAPI.com API key is missing" })
+            return
         }
+        fetchWeatherAPI(config.apiKey2, location, config.units, config.forecastDays, providerCallback)
+        return
+    }
 
-        if (result.success && result.forecast && result.forecast.daily) {
-            var finalResult = {
-                success: result.success,
-                current: result.current,
-                forecast: {
-                    daily: result.forecast.daily.slice(0, forecastDays),
-                    hourly: result.forecast.hourly
-                },
-                provider: result.provider
-            }
-            callback(finalResult)
-        } else {
-            callback(result)
-        }
-    })
+    fetchOpenMeteo(location, config.units, config.forecastDays, providerCallback)
 }
 
 function fetchWeather(config, callback) {
-    var now = Date.now()
+    var normalized = copyConfig(config)
+    normalized._cacheKey = cacheKeyForConfig(normalized)
+    normalized._requestScope = normalized._cacheKey + "|client=" + normalized.clientId
+    normalized._requestToken = ++requestSerial
+    activeRequests[normalized._requestScope] = normalized._requestToken
 
-    var forceRefresh = false
-    if (cache.current && cache.current.location && cache.current.location.indexOf(",") !== -1) {
-        forceRefresh = true
+    var cached = caches[normalized._cacheKey]
+    var requestedDays = clampForecastDays(normalized.forecastDays, 16)
+    if (!normalized.forceRefresh && cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+        callback({
+            success: true,
+            current: cached.current,
+            forecast: {
+                daily: cached.forecast.daily.slice(0, requestedDays),
+                hourly: cached.forecast.hourly
+            },
+            provider: cached.provider,
+            fetchedAt: cached.timestamp,
+            fromCache: true
+        })
+        return
     }
 
-    if (!forceRefresh && cache.current && cache.forecast && (now - cache.timestamp) < cache.ttl) {
-        var requestedDays = config.forecastDays || 5
-
-        if (cache.forecast.daily && cache.forecast.daily.length >= requestedDays) {
-            var result = {
-                success: true,
-                current: cache.current,
-                forecast: {
-                    daily: cache.forecast.daily.slice(0, requestedDays),
-                    hourly: cache.forecast.hourly
-                },
-                fromCache: true
-            }
-            callback(result)
-            return
-        }
-    }
-
-    if (!config.location || config.location === "Ankara") {
-        fetchIpAndWeather(config, callback)
-    } else {
-        fetchWeatherInternal(config, callback)
-    }
+    if (normalized.autoDetect) fetchIpAndWeather(normalized, callback)
+    else fetchWeatherInternal(normalized, callback)
 }
 
-function parseForecastOpenWeather(data) {
+function cancelRequest(config) {
+    var key = cacheKeyForConfig(config)
+    var scope = key + "|client=" + String(config.clientId || "default")
+    activeRequests[scope] = ++requestSerial
+}
+
+function parseForecastOpenWeather(data, current, units, nowMs) {
     var daily = []
     var hourly = []
-    var seenDays = {}
+    var dailyByKey = {}
+    var offset = data.city && data.city.timezone ? data.city.timezone : (current.timezone_offset || 0)
+    var now = hasValue(nowMs) ? nowMs : Date.now()
+    var todayKey = localDateKey(now, offset)
 
-    for (var i = 0; i < data.list.length && i < 40; i++) {
+    dailyByKey[todayKey] = {
+        day: dayIndexForDateKey(todayKey),
+        date: todayKey,
+        temp: current.temp,
+        temp_min: current.temp_min,
+        temp_max: current.temp_max,
+        code: current.code,
+        alert_code: current.alert_code,
+        condition: current.condition,
+        icon: current.icon,
+        timezone_offset: offset,
+        representativeDistance: 99,
+        hasDetails: false
+    }
+
+    for (var i = 0; i < data.list.length; i++) {
         var item = data.list[i]
-        var date = new Date(item.dt * 1000)
-        var dayKey = date.toDateString()
+        var timestamp = item.dt * 1000
+        var dayKey = localDateKey(timestamp, offset)
+        var shifted = new Date(timestamp + offset * 1000)
+        var hour = shifted.getUTCHours()
+        var rawCode = item.weather[0].id
 
-        if (hourly.length < 24) {
+        if (timestamp > now && hourly.length < 24) {
             hourly.push({
-                time: date.getHours() + ":00",
-                timestamp: date.getTime(),
+                time: localTimeLabel(timestamp, offset),
+                date: dayKey,
+                timestamp: timestamp,
+                interval_ms: 3 * 60 * 60 * 1000,
+                timezone_offset: offset,
                 temp: Math.round(item.main.temp),
-                code: item.weather[0].id,
+                code: rawCode,
+                alert_code: mapOpenWeatherAlertCode(rawCode),
                 condition: normalizeCondition(item.weather[0].main),
+                precipitation: item.rain && hasValue(item.rain["3h"]) ? item.rain["3h"] : 0,
+                precipitation_probability: hasValue(item.pop) ? Math.round(item.pop * 100) : 0,
                 icon: item.weather[0].icon
             })
         }
 
-        if (!seenDays[dayKey] && daily.length < 10) {
-            var hours = date.getHours()
-            if (hours >= 11 && hours <= 14) {
-                seenDays[dayKey] = true
-                daily.push({
-                    day: date.getDay(),
-                    temp: Math.round(item.main.temp),
-                    temp_min: Math.round(item.main.temp_min),
-                    temp_max: Math.round(item.main.temp_max),
-                    code: item.weather[0].id,
-                    condition: normalizeCondition(item.weather[0].main),
-                    icon: item.weather[0].icon
-                })
+        var entry = dailyByKey[dayKey]
+        if (!entry) {
+            entry = {
+                day: dayIndexForDateKey(dayKey),
+                date: dayKey,
+                temp: Math.round(item.main.temp),
+                temp_min: Math.round(item.main.temp_min),
+                temp_max: Math.round(item.main.temp_max),
+                code: rawCode,
+                alert_code: mapOpenWeatherAlertCode(rawCode),
+                condition: normalizeCondition(item.weather[0].main),
+                icon: item.weather[0].icon,
+                timezone_offset: offset,
+                representativeDistance: 99,
+                hasDetails: false
             }
+            dailyByKey[dayKey] = entry
+        }
+        entry.temp_min = Math.min(entry.temp_min, Math.round(item.main.temp_min))
+        entry.temp_max = Math.max(entry.temp_max, Math.round(item.main.temp_max))
+
+        var distance = Math.abs(hour - 12)
+        if (distance < entry.representativeDistance) {
+            entry.representativeDistance = distance
+            entry.temp = Math.round(item.main.temp)
+            entry.code = rawCode
+            entry.alert_code = mapOpenWeatherAlertCode(rawCode)
+            entry.condition = normalizeCondition(item.weather[0].main)
+            entry.icon = item.weather[0].icon
         }
     }
 
+    var keys = Object.keys(dailyByKey).sort()
+    for (var k = 0; k < keys.length; k++) {
+        var day = dailyByKey[keys[k]]
+        delete day.representativeDistance
+        daily.push(day)
+    }
     return { daily: daily, hourly: hourly }
 }
 
-function parseForecastWeatherAPI(forecastDays) {
+function parseForecastWeatherAPI(forecastDays, units, utcOffsetSeconds, nowMs) {
     var daily = []
     var hourly = []
+    var useImperial = units === "imperial"
+    var now = hasValue(nowMs) ? nowMs : Date.now()
 
-    for (var i = 0; i < forecastDays.length && i < 7; i++) {
+    for (var i = 0; i < forecastDays.length; i++) {
         var day = forecastDays[i]
-        var date = new Date(day.date)
-
+        var code = day.day.condition.code
         daily.push({
-            day: date.getDay(),
-            temp: Math.round(day.day.avgtemp_c),
-            temp_min: Math.round(day.day.mintemp_c),
-            temp_max: Math.round(day.day.maxtemp_c),
-            code: day.day.condition.code,
-            condition: normalizeCondition(day.day.condition.text),
-            icon: ""
+            day: dayIndexForDateKey(day.date),
+            date: day.date,
+            temp: Math.round(useImperial ? day.day.avgtemp_f : day.day.avgtemp_c),
+            temp_min: Math.round(useImperial ? day.day.mintemp_f : day.day.mintemp_c),
+            temp_max: Math.round(useImperial ? day.day.maxtemp_f : day.day.maxtemp_c),
+            humidity: hasValue(day.day.avghumidity) ? Math.round(day.day.avghumidity) : null,
+            wind_speed: hasValue(day.day.maxwind_kph) ? Math.round(day.day.maxwind_kph) : null,
+            uv_index: hasValue(day.day.uv) ? Math.round(day.day.uv) : null,
+            precipitation: hasValue(day.day.totalprecip_mm) ? day.day.totalprecip_mm : null,
+            precipitation_probability: hasValue(day.day.daily_chance_of_rain) ? day.day.daily_chance_of_rain : null,
+            sunrise: day.astro ? parseAstroTime(day.date, day.astro.sunrise, utcOffsetSeconds) : null,
+            sunset: day.astro ? parseAstroTime(day.date, day.astro.sunset, utcOffsetSeconds) : null,
+            code: code,
+            alert_code: mapWeatherApiAlertCode(code),
+            condition: getWeatherApiCondition(code),
+            icon: "",
+            timezone_offset: utcOffsetSeconds,
+            hasDetails: true
         })
 
-        if (i === 0 && day.hour) {
-            for (var h = 0; h < day.hour.length && hourly.length < 8; h += 3) {
-                var hour = day.hour[h]
-                var hourDate = new Date(hour.time)
-                hourly.push({
-                    time: hourDate.getHours() + ":00",
-                    timestamp: hourDate.getTime(),
-                    temp: Math.round(hour.temp_c),
-                    code: hour.condition.code,
-                    condition: normalizeCondition(hour.condition.text),
-                    icon: ""
-                })
-            }
+        if (!day.hour) continue
+        for (var h = 0; h < day.hour.length && hourly.length < 48; h++) {
+            var hour = day.hour[h]
+            var timestamp = hasValue(hour.time_epoch) ? hour.time_epoch * 1000 : parseLocationTime(hour.time, utcOffsetSeconds)
+            if (timestamp <= now) continue
+            var hourCode = hour.condition.code
+            hourly.push({
+                time: String(hour.time).slice(11, 16),
+                date: day.date,
+                timestamp: timestamp,
+                interval_ms: 60 * 60 * 1000,
+                timezone_offset: utcOffsetSeconds,
+                temp: Math.round(useImperial ? hour.temp_f : hour.temp_c),
+                code: hourCode,
+                alert_code: mapWeatherApiAlertCode(hourCode),
+                condition: getWeatherApiCondition(hourCode),
+                precipitation: hasValue(hour.precip_mm) ? hour.precip_mm : 0,
+                precipitation_probability: hasValue(hour.chance_of_rain) ? hour.chance_of_rain : 0,
+                icon: ""
+            })
         }
     }
-
     return { daily: daily, hourly: hourly }
 }
 
-function parseForecastOpenMeteo(data) {
+function parseForecastOpenMeteo(data, nowMs) {
     var daily = []
     var hourly = []
+    var offset = data.utc_offset_seconds || 0
+    var now = hasValue(nowMs) ? nowMs : Date.now()
 
     if (data.daily && data.daily.time) {
         for (var i = 0; i < data.daily.time.length; i++) {
-            var date = new Date(data.daily.time[i])
+            var dateKey = dateKeyFromValue(data.daily.time[i])
+            var code = data.daily.weather_code ? data.daily.weather_code[i] : -1
             daily.push({
-                day: date.getDay(),
-                date: data.daily.time[i],
+                day: dayIndexForDateKey(dateKey),
+                date: dateKey,
                 temp: Math.round((data.daily.temperature_2m_max[i] + data.daily.temperature_2m_min[i]) / 2),
                 temp_min: Math.round(data.daily.temperature_2m_min[i]),
                 temp_max: Math.round(data.daily.temperature_2m_max[i]),
@@ -461,34 +698,39 @@ function parseForecastOpenMeteo(data) {
                 precipitation: data.daily.precipitation_sum ? data.daily.precipitation_sum[i] : null,
                 precipitation_probability: data.daily.precipitation_probability_max ? data.daily.precipitation_probability_max[i] : null,
                 humidity: data.daily.relative_humidity_2m_max ? Math.round(data.daily.relative_humidity_2m_max[i]) : null,
-                sunrise: data.daily.sunrise ? data.daily.sunrise[i] : null,
-                sunset: data.daily.sunset ? data.daily.sunset[i] : null,
-                code: data.daily.weather_code ? data.daily.weather_code[i] : 0,
-                condition: getOpenMeteoCondition(data.daily.weather_code ? data.daily.weather_code[i] : 0),
+                sunrise: data.daily.sunrise ? parseLocationTime(data.daily.sunrise[i], offset) : null,
+                sunset: data.daily.sunset ? parseLocationTime(data.daily.sunset[i], offset) : null,
+                code: code,
+                alert_code: code,
+                condition: getOpenMeteoCondition(code),
                 icon: "",
+                timezone_offset: offset,
                 hasDetails: true
             })
         }
     }
 
     if (data.hourly && data.hourly.time) {
-        for (var h = 0; h < data.hourly.time.length && hourly.length < 24; h++) {
-            var hourDate = new Date(data.hourly.time[h])
-            if (hourDate > new Date()) {
-                hourly.push({
-                    time: hourDate.getHours() + ":00",
-                    timestamp: hourDate.getTime(),
-                    temp: Math.round(data.hourly.temperature_2m[h]),
-                    code: data.hourly.weather_code ? data.hourly.weather_code[h] : 0,
-                    condition: getOpenMeteoCondition(data.hourly.weather_code ? data.hourly.weather_code[h] : 0),
-                    precipitation: data.hourly.precipitation ? data.hourly.precipitation[h] : 0,
-                    precipitation_probability: data.hourly.precipitation_probability ? data.hourly.precipitation_probability[h] : 0,
-                    icon: ""
-                })
-            }
+        for (var h = 0; h < data.hourly.time.length && hourly.length < 48; h++) {
+            var timestamp = parseLocationTime(data.hourly.time[h], offset)
+            if (timestamp <= now) continue
+            var hourCode = data.hourly.weather_code ? data.hourly.weather_code[h] : -1
+            hourly.push({
+                time: String(data.hourly.time[h]).slice(11, 16),
+                date: dateKeyFromValue(data.hourly.time[h]),
+                timestamp: timestamp,
+                interval_ms: 60 * 60 * 1000,
+                timezone_offset: offset,
+                temp: Math.round(data.hourly.temperature_2m[h]),
+                code: hourCode,
+                alert_code: hourCode,
+                condition: getOpenMeteoCondition(hourCode),
+                precipitation: data.hourly.precipitation ? data.hourly.precipitation[h] : 0,
+                precipitation_probability: data.hourly.precipitation_probability ? data.hourly.precipitation_probability[h] : 0,
+                icon: ""
+            })
         }
     }
-
     return { daily: daily, hourly: hourly }
 }
 
@@ -511,108 +753,21 @@ function getOpenMeteoCondition(code) {
     return "Unknown"
 }
 
-function normalizeCondition(text) {
-    if (!text) return ""
-    var t = text.trim()
-    if (t === "Clouds") return "Cloudy"
-    return t
-}
-
-function getDayName(dayIndex) {
-    return dayIndex
-}
-
-function clearCache() {
-    cache.current = null
-    cache.forecast = null
-    cache.timestamp = 0
-}
-
-// Smart Clothing Suggestion based on weather conditions
 function getClothingSuggestion(current, units) {
     if (!current) return null
-
-    var temp = current.temp
-    var code = current.code || 0
-    var wind = current.wind_speed || 0
-    var isMetric = (units !== "imperial")
-
-    // Convert to Celsius for logic if imperial
-    var tempC = isMetric ? temp : Math.round((temp - 32) * 5 / 9)
-    var windKmh = isMetric ? wind : Math.round(wind * 1.60934)
-
+    var tempC = units === "imperial" ? Math.round((current.temp - 32) * 5 / 9) : current.temp
+    var windKmh = current.wind_speed || 0
+    var code = hasValue(current.alert_code) ? current.alert_code : current.code
     var suggestions = []
 
-    // Rain/Snow check (WMO codes)
-    var rainCodes = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82]
-    var snowCodes = [71, 73, 75, 77, 85, 86]
-    var stormCodes = [95, 96, 99]
+    if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].indexOf(code) >= 0) suggestions.push({ icon: "☔", text: "umbrella" })
+    if ([71, 73, 75, 77, 85, 86].indexOf(code) >= 0) suggestions.push({ icon: "🧤", text: "gloves" })
 
-    if (rainCodes.indexOf(code) >= 0 || stormCodes.indexOf(code) >= 0) {
-        suggestions.push({ icon: "☔", text: "umbrella" })
-    }
+    if (tempC <= 0) suggestions.push({ icon: "🧥", text: "heavy coat" })
+    else if (tempC <= 10) suggestions.push({ icon: "🧥", text: "coat" })
+    else if (tempC <= 18) suggestions.push({ icon: "🧶", text: "sweater" })
+    else if (tempC >= 30) suggestions.push({ icon: "🕶️", text: "sunglasses" })
 
-    if (snowCodes.indexOf(code) >= 0) {
-        suggestions.push({ icon: "🧤", text: "gloves" })
-    }
-
-    // Temperature-based suggestions
-    if (tempC <= 0) {
-        suggestions.push({ icon: "🧥", text: "heavy coat" })
-    } else if (tempC <= 10) {
-        suggestions.push({ icon: "🧥", text: "coat" })
-    } else if (tempC <= 18) {
-        suggestions.push({ icon: "🧶", text: "sweater" })
-    } else if (tempC >= 30) {
-        suggestions.push({ icon: "🕶️", text: "sunglasses" })
-    }
-
-    // Wind chill
-    if (windKmh > 40 && tempC < 15) {
-        suggestions.push({ icon: "💨", text: "windbreaker" })
-    }
-
+    if (windKmh > 40 && tempC < 15) suggestions.push({ icon: "💨", text: "windbreaker" })
     return suggestions.length > 0 ? suggestions : null
-}
-
-// AQI Description helper (for Open-Meteo AQI data)
-function getAQIDescription(aqi, pm25, pm10) {
-    if (!aqi && aqi !== 0) return null
-
-    var level, color, advice
-
-    if (aqi <= 50) {
-        level = "Good"
-        color = "#4caf50"
-        advice = "Air quality is satisfactory"
-    } else if (aqi <= 100) {
-        level = "Moderate"
-        color = "#ffeb3b"
-        advice = "Acceptable for most"
-    } else if (aqi <= 150) {
-        level = "Unhealthy for Sensitive"
-        color = "#ff9800"
-        advice = "Limit outdoor activity"
-    } else if (aqi <= 200) {
-        level = "Unhealthy"
-        color = "#f44336"
-        advice = "Reduce outdoor activity"
-    } else if (aqi <= 300) {
-        level = "Very Unhealthy"
-        color = "#9c27b0"
-        advice = "Avoid outdoor activity"
-    } else {
-        level = "Hazardous"
-        color = "#880e4f"
-        advice = "Stay indoors"
-    }
-
-    return {
-        aqi: aqi,
-        level: level,
-        color: color,
-        advice: advice,
-        pm25: pm25 || null,
-        pm10: pm10 || null
-    }
 }

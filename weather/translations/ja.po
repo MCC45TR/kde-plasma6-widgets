@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MWeather 1.1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-09 22:02+0300\n"
+"POT-Creation-Date: 2026-07-12 21:51+0300\n"
 "PO-Revision-Date: 2026-01-22 03:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -12,507 +12,363 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: contents/ui/DailyForecastView.qml:61
+#: contents/config/config.qml
+msgid "Weather"
+msgstr ""
+
+#: contents/config/config.qml contents/ui/config/ConfigAppearance.qml
+msgid "Appearance"
+msgstr "外観"
+
+#: contents/config/config.qml
+msgid "Notifications"
+msgstr ""
+
+#: contents/ui/DailyForecastView.qml
 msgid "Today"
 msgstr "今日"
 
-#: contents/ui/ForecastDetailsView.qml:102
-#: contents/ui/WeatherDetailsView.qml:101
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "Feels like"
 msgstr "体感温度"
 
-#: contents/ui/ForecastDetailsView.qml:121
-#: contents/ui/WeatherDetailsView.qml:119
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "Humidity"
 msgstr "湿度"
 
-#: contents/ui/ForecastDetailsView.qml:140
-#: contents/ui/WeatherDetailsView.qml:137
-#: contents/ui/config/ConfigNotifications.qml:278
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Wind"
 msgstr "風"
 
-#: contents/ui/ForecastDetailsView.qml:159
+#: contents/ui/ForecastDetailsView.qml
 msgid "Rain Chance"
 msgstr "降水確率"
 
-#: contents/ui/ForecastDetailsView.qml:185 contents/ui/TemperatureChart.qml:237
+#: contents/ui/ForecastDetailsView.qml
 msgid "Precipitation"
 msgstr "降水量"
 
-#: contents/ui/ForecastDetailsView.qml:204
-#: contents/ui/config/ConfigNotifications.qml:289
+#: contents/ui/ForecastDetailsView.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "UV Index"
 msgstr "UV指数"
 
-#: contents/ui/ForecastDetailsView.qml:231
-#: contents/ui/WeatherDetailsView.qml:281
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "Wind Direction"
 msgstr "風向"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "North"
 msgstr "北"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "North East"
 msgstr "北東"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "East"
 msgstr "東"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "South East"
 msgstr "南東"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "South"
 msgstr "南"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "South West"
 msgstr "南西"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "West"
 msgstr "西"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "North West"
 msgstr "北西"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "N"
 msgstr "北"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "NE"
 msgstr "北東"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "E"
 msgstr "東"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "SE"
 msgstr "南東"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "S"
 msgstr "南"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "SW"
 msgstr "南西"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "W"
 msgstr "西"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "NW"
 msgstr "北西"
 
-#: contents/ui/ForecastDetailsView.qml:286 contents/ui/SunProgressGauge.qml:292
+#: contents/ui/ForecastDetailsView.qml
 msgid "Sunset"
 msgstr "日の入り"
 
-#: contents/ui/ForecastDetailsView.qml:286 contents/ui/SunProgressGauge.qml:243
+#: contents/ui/ForecastDetailsView.qml
 msgid "Sunrise"
 msgstr "日の出"
 
-#: contents/ui/ForecastDetailsView.qml:313
+#: contents/ui/ForecastDetailsView.qml
 msgid "Tap to close"
 msgstr "タップして閉じる"
 
-#: contents/ui/ForecastDetailsView.qml:368
+#: contents/ui/ForecastDetailsView.qml
 msgid "Next week %1"
 msgstr "来週 %1"
 
-#: contents/ui/ForecastDetailsView.qml:370
+#: contents/ui/ForecastDetailsView.qml
 msgid "2 weeks later %1"
 msgstr "2週間後 %1"
 
-#: contents/ui/LargeModeLayout.qml:157 contents/ui/main.qml:116
-#: contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
+#: contents/ui/main.qml
 msgid "Hourly Forecast"
 msgstr "1時間ごとの予報"
 
-#: contents/ui/LargeModeLayout.qml:157 contents/ui/main.qml:116
-#: contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
+#: contents/ui/main.qml
 msgid "Daily Forecast"
 msgstr "日ごとの予報"
 
-#: contents/ui/main.qml:111 contents/ui/main.qml:331
-msgid "Refresh"
-msgstr "更新"
-
-#: contents/ui/main.qml:321
-msgid "Loading weather data..."
-msgstr "気象データを読み込み中..."
-
-#: contents/ui/main.qml:363
-msgid "Clear"
-msgstr "快晴"
-
-#: contents/ui/main.qml:364
-msgid "Mainly Clear"
-msgstr "晴れ"
-
-#: contents/ui/main.qml:365
-msgid "Partly Cloudy"
-msgstr "時々曇り"
-
-#: contents/ui/main.qml:366
-msgid "Overcast"
-msgstr "曇天"
-
-#: contents/ui/main.qml:367 contents/ui/config/ConfigNotifications.qml:267
-msgid "Fog"
-msgstr "霧"
-
-#: contents/ui/main.qml:368
-msgid "Drizzle"
-msgstr "霧雨"
-
-#: contents/ui/main.qml:369
-msgid "Freezing Drizzle"
-msgstr "着氷性の霧雨"
-
-#: contents/ui/main.qml:370 contents/ui/config/ConfigNotifications.qml:245
-msgid "Rain"
-msgstr "雨"
-
-#: contents/ui/main.qml:371
-msgid "Freezing Rain"
-msgstr "着氷性の雨"
-
-#: contents/ui/main.qml:372 contents/ui/config/ConfigNotifications.qml:256
-msgid "Snow"
-msgstr "雪"
-
-#: contents/ui/main.qml:373
-msgid "Snow Grains"
-msgstr "霧雪"
-
-#: contents/ui/main.qml:374
-msgid "Rain Showers"
-msgstr "にわか雨"
-
-#: contents/ui/main.qml:375
-msgid "Snow Showers"
-msgstr "にわか雪"
-
-#: contents/ui/main.qml:376
-msgid "Thunderstorm"
-msgstr "雷雨"
-
-#: contents/ui/main.qml:377
-msgid "Thunderstorm with Hail"
-msgstr "ひょうを伴う雷雨"
-
-#: contents/ui/main.qml:378
-msgid "Unknown"
-msgstr "不明"
-
-#: contents/ui/main.qml:379
-msgid "Cloudy"
-msgstr "曇り"
-
-#: contents/ui/main.qml:380
-msgid "Mist"
-msgstr "霞"
-
-#: contents/ui/main.qml:381
-msgid "Smoke"
-msgstr "煙"
-
-#: contents/ui/main.qml:382
-msgid "Haze"
-msgstr "煙霧"
-
-#: contents/ui/main.qml:383
-msgid "Dust"
-msgstr "砂塵"
-
-#: contents/ui/main.qml:384
-msgid "Sand"
-msgstr "砂"
-
-#: contents/ui/main.qml:385
-msgid "Ash"
-msgstr "火山灰"
-
-#: contents/ui/main.qml:386
-msgid "Squall"
-msgstr "スコール"
-
-#: contents/ui/main.qml:387
-msgid "Tornado"
-msgstr "竜巻"
-
-#: contents/ui/NotificationManager.qml:106
+#: contents/ui/NotificationManager.qml
 msgid "Visibility is low. Drive carefully."
 msgstr "視界不良です。運転に注意してください。"
 
-#: contents/ui/NotificationManager.qml:107
+#: contents/ui/NotificationManager.qml
 msgid "Roads may be slippery. Allow extra travel time."
 msgstr "路面が滑りやすくなっています。時間に余裕を持って移動してください。"
 
-#: contents/ui/NotificationManager.qml:108
+#: contents/ui/NotificationManager.qml
 msgid "Stay indoors and avoid open areas."
 msgstr "屋内に留まり、開けた場所は避けてください。"
 
-#: contents/ui/NotificationManager.qml:109
+#: contents/ui/NotificationManager.qml
 msgid "Heavy rain expected. Don't forget your umbrella!"
 msgstr "大雨が予想されます。傘を忘れずに！"
 
-#: contents/ui/NotificationManager.qml:110
+#: contents/ui/NotificationManager.qml
 msgid "Stay safe and check local updates."
 msgstr "安全を確保し、地域の最新情報を確認してください。"
 
-#: contents/ui/NotificationManager.qml:305
+#: contents/ui/NotificationManager.qml
 msgid "📅 Today is %1 and %2° %3"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:370
+#: contents/ui/NotificationManager.qml
 msgid "📅 Weather Update"
 msgstr "📅 天気予報の更新"
 
-#: contents/ui/NotificationManager.qml:370
+#: contents/ui/NotificationManager.qml
 msgid "No significant changes for the rest of the day."
 msgstr "今日はこの後、大きな天気の変化はありません。"
 
-#: contents/ui/NotificationManager.qml:374
-#: contents/ui/config/ConfigNotifications.qml:217
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "📅 Daily Weather Changes"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:410
+#: contents/ui/NotificationManager.qml
 msgid "⚠️ Weather Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:414
-#: contents/ui/config/ConfigNotifications.qml:237
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "⛈️ Thunderstorm Warning"
 msgstr "雷雨"
 
-#: contents/ui/NotificationManager.qml:417
-#: contents/ui/config/ConfigNotifications.qml:259
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "❄️ Snow Warning"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:420
-#: contents/ui/config/ConfigNotifications.qml:270
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "🌫️ Dense Fog Warning"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:423
+#: contents/ui/NotificationManager.qml
 msgid "🌧️ Heavy Rain Warning"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:426
+#: contents/ui/NotificationManager.qml
+msgid "%1 is occurring now"
+msgstr ""
+
+#: contents/ui/NotificationManager.qml
 msgid "%1 expected between %2 - %3"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:428
+#: contents/ui/NotificationManager.qml
+msgid "Temperature: %1%2"
+msgstr ""
+
+#: contents/ui/NotificationManager.qml
 msgid "Temperature: %1%2 → %3%4"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:451
-#: contents/ui/config/ConfigNotifications.qml:248
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "🌧️ Rain Forecast"
 msgstr "日ごとの予報"
 
-#: contents/ui/NotificationManager.qml:452
+#: contents/ui/NotificationManager.qml
 msgid "Rain expected between %1 - %2"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:455
-msgid "Temperature: %1%2"
-msgstr ""
-
-#: contents/ui/NotificationManager.qml:458
+#: contents/ui/NotificationManager.qml
 msgid "Chance of Rain: %1%"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:461
+#: contents/ui/NotificationManager.qml
 #, fuzzy
 msgid "Precipitation: %1 mm"
 msgstr "降水量"
 
-#: contents/ui/NotificationManager.qml:464
+#: contents/ui/NotificationManager.qml
 msgid "Don't forget your umbrella!"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:520
-#: contents/ui/config/ConfigNotifications.qml:314
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "🥶 Low Temperature Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:521
-#: contents/ui/NotificationManager.qml:528
+#: contents/ui/NotificationManager.qml
 msgid "Current temperature: %1%2"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:527
-#: contents/ui/config/ConfigNotifications.qml:303
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "🔥 High Temperature Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:529
+#: contents/ui/NotificationManager.qml
 msgid "Stay hydrated and avoid direct sunlight."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:534
-#: contents/ui/config/ConfigNotifications.qml:292
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "☀️ High UV Index Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:535
+#: contents/ui/NotificationManager.qml
 msgid "Current UV Index: %1"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:536
+#: contents/ui/NotificationManager.qml
 msgid "Use sunscreen and wear protective clothing."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:545
-#: contents/ui/config/ConfigNotifications.qml:281
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "💨 Strong Wind Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:546
+#: contents/ui/NotificationManager.qml
 msgid "Wind speed: %1 %2"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:547
+#: contents/ui/NotificationManager.qml
 msgid "Secure loose objects and drive carefully."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:558
-#: contents/ui/config/ConfigNotifications.qml:203
-msgid "Test Notification"
-msgstr ""
-
-#: contents/ui/NotificationManager.qml:558
-msgid "Weather data is missing, cannot generate full report."
-msgstr ""
-
-#: contents/ui/SunProgressGauge.qml:67
-msgid "Night"
-msgstr "夜"
-
-#: contents/ui/SunProgressGauge.qml:78
-msgid "%1h %2m left"
-msgstr "残り%1時間%2分"
-
-#: contents/ui/SunProgressGauge.qml:80
-#, c-format
-msgid "%1m left"
-msgstr "残り%1分"
-
-#: contents/ui/TemperatureChart.qml:220
-msgid "Temperature"
-msgstr "温度"
-
-#: contents/ui/WeatherDetailsView.qml:155
+#: contents/ui/WeatherDetailsView.qml
 msgid "Pressure"
 msgstr "気圧"
 
-#: contents/ui/WeatherDetailsView.qml:188
+#: contents/ui/WeatherDetailsView.qml
 msgid "Cloud Cover"
 msgstr "雲量"
 
-#: contents/ui/WeatherDetailsView.qml:206
+#: contents/ui/WeatherDetailsView.qml
 msgid "UV"
 msgstr "UV指数"
 
-#: contents/ui/WeatherDetailsView.qml:232
+#: contents/ui/WeatherDetailsView.qml
 msgid "Visibility"
 msgstr "視程"
 
-#: contents/ui/WeatherDetailsView.qml:250
+#: contents/ui/WeatherDetailsView.qml
 msgid "Dew Point"
 msgstr "露点"
 
-#: contents/ui/WeatherDetailsView.qml:361
+#: contents/ui/WeatherDetailsView.qml
 msgid "Click to close"
 msgstr "クリックして閉じる"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Default (Colorful SVG)"
 msgstr "デフォルト (カラーSVG)"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "System Theme"
 msgstr "システムテーマ"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v3 (Flat SVG)"
 msgstr "Google天気 v3 (フラットSVG)"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v2 (Realistic PNG)"
 msgstr "Google天気 v2 (リアルなPNG)"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v1 (Classic PNG)"
 msgstr "Google天気 v1 (クラシックPNG)"
 
-#: contents/ui/config/ConfigAppearance.qml:160
-msgid "Appearance"
-msgstr "外観"
-
-#: contents/ui/config/ConfigAppearance.qml:168
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Show Units in Forecast"
 msgstr "予報に単位を表示"
 
-#: contents/ui/config/ConfigAppearance.qml:176
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Layout Mode:"
 msgstr "レイアウトモード:"
 
-#: contents/ui/config/ConfigAppearance.qml:183
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Automatic"
 msgstr "自動"
 
-#: contents/ui/config/ConfigAppearance.qml:183
-#: contents/ui/config/ConfigAppearance.qml:241
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Small"
 msgstr "小"
 
-#: contents/ui/config/ConfigAppearance.qml:183
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Wide"
 msgstr "ワイド"
 
-#: contents/ui/config/ConfigAppearance.qml:183
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Large"
 msgstr "大"
 
-#: contents/ui/config/ConfigAppearance.qml:192
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Icon Pack:"
 msgstr "アイコンパック:"
 
-#: contents/ui/config/ConfigAppearance.qml:208
+#: contents/ui/config/ConfigAppearance.qml
 msgid ""
 "Select the visual style for weather icons. (Note: older packs like v1/v2 may "
 "have missing icons for some conditions)"
@@ -520,271 +376,283 @@ msgstr ""
 "天気アイコンのビジュアルスタイルを選択します。(注: v1/v2などの古いパックで"
 "は、一部の条件でアイコンが不足している場合があります)"
 
-#: contents/ui/config/ConfigAppearance.qml:209
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Select the visual style for weather icons."
 msgstr "天気アイコンのビジュアルスタイルを選択します。"
 
-#: contents/ui/config/ConfigAppearance.qml:217
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Widget Margin:"
 msgstr "ウィジェットのマージン:"
 
-#: contents/ui/config/ConfigAppearance.qml:224
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Normal (10px)"
 msgstr "標準 (10px)"
 
-#: contents/ui/config/ConfigAppearance.qml:224
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Less (5px)"
 msgstr "狭い (5px)"
 
-#: contents/ui/config/ConfigAppearance.qml:224
+#: contents/ui/config/ConfigAppearance.qml
 msgid "None (0px)"
 msgstr "なし (0px)"
 
-#: contents/ui/config/ConfigAppearance.qml:234
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Corner Radius:"
 msgstr "角の半径:"
 
-#: contents/ui/config/ConfigAppearance.qml:241
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Normal"
 msgstr "標準"
 
-#: contents/ui/config/ConfigAppearance.qml:241
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Square"
 msgstr "四角"
 
-#: contents/ui/config/ConfigAppearance.qml:253
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Font Settings"
 msgstr "フォント設定"
 
-#: contents/ui/config/ConfigAppearance.qml:262
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Use Default System Font"
 msgstr "システムのデフォルトフォントを使用"
 
-#: contents/ui/config/ConfigAppearance.qml:270
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Custom Font Family:"
 msgstr "カスタムフォントファミリー:"
 
-#: contents/ui/config/ConfigAppearance.qml:291
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Panel Settings"
 msgstr "パネル設定"
 
-#: contents/ui/config/ConfigAppearance.qml:301
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Representation:"
 msgstr "表示形式:"
 
-#: contents/ui/config/ConfigAppearance.qml:308
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Simple Panel"
 msgstr "シンプルパネル"
 
-#: contents/ui/config/ConfigAppearance.qml:308
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Detailed Panel"
 msgstr "詳細パネル"
 
-#: contents/ui/config/ConfigAppearance.qml:316
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Font Size (0 = Auto):"
 msgstr "フォントサイズ (0 = 自動):"
 
-#: contents/ui/config/ConfigAppearance.qml:334
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Icon Size (0 = Auto):"
 msgstr "アイコンサイズ (0 = 自動):"
 
-#: contents/ui/config/ConfigAppearance.qml:354
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Background Settings"
 msgstr "背景の設定"
 
-#: contents/ui/config/ConfigAppearance.qml:362
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Background Opacity:"
 msgstr "背景の不透明度:"
 
-#: contents/ui/config/ConfigAppearance.qml:369
+#: contents/ui/config/ConfigAppearance.qml
 msgid "0% (No Backgrounds)"
 msgstr "0% (背景なし)"
 
-#: contents/ui/config/ConfigGeneral.qml:161
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Weather Provider"
 msgstr "お天気プロバイダー"
 
-#: contents/ui/config/ConfigGeneral.qml:171
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Open-Meteo (Free, No Key Required)"
 msgstr "Open-Meteo (無料、キー不要)"
 
-#: contents/ui/config/ConfigGeneral.qml:171
+#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap (Key Required)"
 msgstr "OpenWeatherMap (キーが必要)"
 
-#: contents/ui/config/ConfigGeneral.qml:171
+#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com (Key Required)"
 msgstr "WeatherAPI.com (キーが必要)"
 
-#: contents/ui/config/ConfigGeneral.qml:179
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Best free option. No API key required."
 msgstr "最高の無料オプション。APIキーは不要です。"
 
-#: contents/ui/config/ConfigGeneral.qml:180
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Standard provider. API key required below."
 msgstr "標準プロバイダー。以下にAPIキーを入力してください。"
 
-#: contents/ui/config/ConfigGeneral.qml:180
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Alternative provider. API key required below."
 msgstr "代替プロバイダー。以下にAPIキーを入力してください。"
 
-#: contents/ui/config/ConfigGeneral.qml:188
+#: contents/ui/config/ConfigGeneral.qml
 msgid "API Keys"
 msgstr "APIキー"
 
-#: contents/ui/config/ConfigGeneral.qml:197
+#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap API Key:"
 msgstr "OpenWeatherMap APIキー:"
 
-#: contents/ui/config/ConfigGeneral.qml:204
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your OpenWeatherMap API key"
 msgstr "OpenWeatherMapのAPIキーを入力してください"
 
-#: contents/ui/config/ConfigGeneral.qml:209
+#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com API Key:"
 msgstr "WeatherAPI.com APIキー:"
 
-#: contents/ui/config/ConfigGeneral.qml:216
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your WeatherAPI.com key"
 msgstr "WeatherAPI.comのキーを入力してください"
 
-#: contents/ui/config/ConfigGeneral.qml:223
+#: contents/ui/config/ConfigGeneral.qml
+msgid ""
+"API keys are stored as plain text in your Plasma widget configuration and "
+"may be included in configuration backups."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Location"
 msgstr "場所"
 
-#: contents/ui/config/ConfigGeneral.qml:236
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Auto-detect from IP"
 msgstr "IPから自動検出"
 
-#: contents/ui/config/ConfigGeneral.qml:244
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter manually"
 msgstr "手動で入力"
 
-#: contents/ui/config/ConfigGeneral.qml:258
+#: contents/ui/config/ConfigGeneral.qml
 msgid "City 1:"
 msgstr "都市 1:"
 
-#: contents/ui/config/ConfigGeneral.qml:264
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Ex: Ankara, Istanbul, London"
 msgstr "例: 東京, 大阪, ロンドン"
 
-#: contents/ui/config/ConfigGeneral.qml:268
+#: contents/ui/config/ConfigGeneral.qml
 msgid "City 2:"
 msgstr "都市 2:"
 
-#: contents/ui/config/ConfigGeneral.qml:274
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Second city (optional)"
 msgstr "第2の都市 (任意)"
 
-#: contents/ui/config/ConfigGeneral.qml:278
+#: contents/ui/config/ConfigGeneral.qml
 msgid "City 3:"
 msgstr "都市 3:"
 
-#: contents/ui/config/ConfigGeneral.qml:284
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Third city (optional)"
 msgstr "第3の都市 (任意)"
 
-#: contents/ui/config/ConfigGeneral.qml:288
+#: contents/ui/config/ConfigGeneral.qml
 msgid "You can use City name, 'City,Country Code' or Zip Code."
 msgstr "都市名、'都市,国コード'、または郵便番号を使用できます。"
 
-#: contents/ui/config/ConfigGeneral.qml:298
-msgid "Location will be auto-detected based on your IP address."
-msgstr "場所はIPアドレスに基づいて自動的に検出されます。"
+#: contents/ui/config/ConfigGeneral.qml
+msgid ""
+"Automatic location sends your public IP address to ipinfo.io to determine a "
+"city. Choose manual location to avoid this request."
+msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml:308
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Settings"
 msgstr "設定"
 
-#: contents/ui/config/ConfigGeneral.qml:318
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Units:"
 msgstr "単位:"
 
-#: contents/ui/config/ConfigGeneral.qml:326
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Use system units"
 msgstr "システムの単位を使用する"
 
-#: contents/ui/config/ConfigGeneral.qml:339
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Metric (°C)"
 msgstr "メートル法 (°C)"
 
-#: contents/ui/config/ConfigGeneral.qml:339
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Imperial (°F)"
 msgstr "ヤード・ポンド法 (°F)"
 
-#: contents/ui/config/ConfigGeneral.qml:351
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Refresh Interval:"
 msgstr "更新の間隔:"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "15 minutes"
 msgstr "15分"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "30 minutes"
 msgstr "30分"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "45 minutes"
 msgstr "45分"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "1 hour"
 msgstr "1時間"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "2 hours"
 msgstr "2時間"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "3 hours"
 msgstr "3時間"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "4 hours"
 msgstr "4時間"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "6 hours"
 msgstr "6時間"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "8 hours"
 msgstr "8時間"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "12 hours"
 msgstr "12時間"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "1 day"
 msgstr "1日"
 
-#: contents/ui/config/ConfigGeneral.qml:368
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Forecast Days:"
 msgstr "予報日数:"
 
-#: contents/ui/config/ConfigNotifications.qml:173
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Test Notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:188
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Enable test mode"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:200
+#: contents/ui/config/ConfigNotifications.qml
 msgid "General"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:204
+#: contents/ui/config/ConfigNotifications.qml
+msgid "Test Notification"
+msgstr ""
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Weather notifications are functioning correctly."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:211
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Routine"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:218
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "08:00: ☀️ Sunny (12°C)\n"
 "11:00: ⛅ Partly Cloudy (15°C)\n"
@@ -793,11 +661,11 @@ msgid ""
 "20:00: 🌙 Clear (10°C)"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:224
+#: contents/ui/config/ConfigNotifications.qml
 msgid "📅 Today is SUNDAY, 10°C Cloudy"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:225
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "MON: 6°C 🌪️ Storm\n"
 "TUE: 15°C 🌧️ Rainy\n"
@@ -805,18 +673,22 @@ msgid ""
 "THU: 17°C ⛅ Partly Cloudy"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:234
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Storm"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:238
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Thunderstorm expected between 14:00 - 18:00\n"
 "Temperature: 22°C → 18°C\n"
 "Stay indoors and avoid open areas."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:249
+#: contents/ui/config/ConfigNotifications.qml contents/ui/main.qml
+msgid "Rain"
+msgstr "雨"
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Rain expected between 10:00 - 16:00\n"
 "Temperature: 15°C\n"
@@ -825,14 +697,22 @@ msgid ""
 "Don't forget your umbrella!"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:260
+#: contents/ui/config/ConfigNotifications.qml contents/ui/main.qml
+msgid "Snow"
+msgstr "雪"
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Snowfall expected between 06:00 - 12:00\n"
 "Temperature: -3°C → -5°C\n"
 "Roads may be slippery."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:271
+#: contents/ui/config/ConfigNotifications.qml contents/ui/main.qml
+msgid "Fog"
+msgstr "霧"
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Dense fog expected between 05:00 - 09:00\n"
 "Visibility: Low\n"
@@ -840,161 +720,276 @@ msgid ""
 "Drive carefully."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:282
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Wind speed: 65 km/h\n"
 "Secure loose objects."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:293
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Current UV Index: 8\n"
 "Use sunscreen and wear protective clothing."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:300
+#: contents/ui/config/ConfigNotifications.qml
 msgid "High Temp"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:304
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Current temperature: 35°C\n"
 "Stay hydrated."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:311
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Low Temp"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:315
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Current temperature: -5°C"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:323
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Click buttons to test individual notification types"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:333
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Weather Notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:348
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Enable weather notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:355
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "When enabled, the widget will send Plasma desktop notifications based on "
 "weather conditions."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:366
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Routine Notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:383
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Daily weather summary"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:396
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "Description:"
 msgstr "降水量"
 
-#: contents/ui/config/ConfigNotifications.qml:404
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "3-Day Forecast Summary"
 msgstr "日ごとの予報"
 
-#: contents/ui/config/ConfigNotifications.qml:405
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Today's Weather Changes"
 msgstr "今日の天気の変化"
 
-#: contents/ui/config/ConfigNotifications.qml:418
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Notification time 1:"
 msgstr "通知時刻 1:"
 
-#: contents/ui/config/ConfigNotifications.qml:455
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Enable second time"
 msgstr "2番目の時刻を有効にする"
 
-#: contents/ui/config/ConfigNotifications.qml:466
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Notification time 2:"
 msgstr "通知時刻 2:"
 
-#: contents/ui/config/ConfigNotifications.qml:488
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Duplicate time!"
 msgstr "重複した時刻！"
 
-#: contents/ui/config/ConfigNotifications.qml:495
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Receive a daily notification with current weather and today's forecast."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:506
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "Weather Alerts"
 msgstr "お天気プロバイダー"
 
-#: contents/ui/config/ConfigNotifications.qml:527
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Severe weather alerts"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:530
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Thunderstorm, heavy snow, dense fog"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:549
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "Rain forecast alert"
 msgstr "日ごとの予報"
 
-#: contents/ui/config/ConfigNotifications.qml:552
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Notify when rain is expected in the next few hours"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:571
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Strong wind alert"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:575
-#: contents/ui/config/ConfigNotifications.qml:615
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Threshold:"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:611
+#: contents/ui/config/ConfigNotifications.qml
 msgid "High UV Index alert"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:642
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Temperature Alerts"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:660
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Low temperature warning"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:672
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Alert when below:"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:699
+#: contents/ui/config/ConfigNotifications.qml
 msgid "High temperature warning"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:711
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Alert when above:"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:730
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Receive alerts when temperature goes beyond your thresholds."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:763
+#: contents/ui/config/ConfigNotifications.qml
 msgid "How it works"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:768
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Notifications are checked each time weather data is refreshed. To avoid "
 "spam, each alert type has a cooldown period."
 msgstr ""
+
+#: contents/ui/main.qml
+msgid "Refresh"
+msgstr "更新"
+
+#: contents/ui/main.qml
+msgid "Weather request timed out. Please check your connection and try again."
+msgstr ""
+
+#: contents/ui/main.qml
+msgid "Loading weather data..."
+msgstr "気象データを読み込み中..."
+
+#: contents/ui/main.qml
+msgid "Clear"
+msgstr "快晴"
+
+#: contents/ui/main.qml
+msgid "Mainly Clear"
+msgstr "晴れ"
+
+#: contents/ui/main.qml
+msgid "Partly Cloudy"
+msgstr "時々曇り"
+
+#: contents/ui/main.qml
+msgid "Overcast"
+msgstr "曇天"
+
+#: contents/ui/main.qml
+msgid "Drizzle"
+msgstr "霧雨"
+
+#: contents/ui/main.qml
+msgid "Freezing Drizzle"
+msgstr "着氷性の霧雨"
+
+#: contents/ui/main.qml
+msgid "Freezing Rain"
+msgstr "着氷性の雨"
+
+#: contents/ui/main.qml
+msgid "Snow Grains"
+msgstr "霧雪"
+
+#: contents/ui/main.qml
+msgid "Rain Showers"
+msgstr "にわか雨"
+
+#: contents/ui/main.qml
+msgid "Snow Showers"
+msgstr "にわか雪"
+
+#: contents/ui/main.qml
+msgid "Thunderstorm"
+msgstr "雷雨"
+
+#: contents/ui/main.qml
+msgid "Thunderstorm with Hail"
+msgstr "ひょうを伴う雷雨"
+
+#: contents/ui/main.qml
+msgid "Unknown"
+msgstr "不明"
+
+#: contents/ui/main.qml
+msgid "Cloudy"
+msgstr "曇り"
+
+#: contents/ui/main.qml
+msgid "Mist"
+msgstr "霞"
+
+#: contents/ui/main.qml
+msgid "Smoke"
+msgstr "煙"
+
+#: contents/ui/main.qml
+msgid "Haze"
+msgstr "煙霧"
+
+#: contents/ui/main.qml
+msgid "Dust"
+msgstr "砂塵"
+
+#: contents/ui/main.qml
+msgid "Sand"
+msgstr "砂"
+
+#: contents/ui/main.qml
+msgid "Ash"
+msgstr "火山灰"
+
+#: contents/ui/main.qml
+msgid "Squall"
+msgstr "スコール"
+
+#: contents/ui/main.qml
+msgid "Tornado"
+msgstr "竜巻"
+
+#~ msgid "Night"
+#~ msgstr "夜"
+
+#~ msgid "%1h %2m left"
+#~ msgstr "残り%1時間%2分"
+
+#, c-format
+#~ msgid "%1m left"
+#~ msgstr "残り%1分"
+
+#~ msgid "Temperature"
+#~ msgstr "温度"
+
+#~ msgid "Location will be auto-detected based on your IP address."
+#~ msgstr "場所はIPアドレスに基づいて自動的に検出されます。"

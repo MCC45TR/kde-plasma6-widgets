@@ -3,10 +3,8 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-Item {
+Kirigami.ScrollablePage {
     id: page
-
-    property string title: ""
 
     property string cfg_weatherProvider
     property string cfg_locationMode
@@ -77,13 +75,8 @@ Item {
     readonly property var unitValues: ["metric", "imperial"]
     readonly property var intervalValues: [15, 30, 45, 60, 120, 180, 240, 360, 720, 1440]
 
-    QQC2.ScrollView {
-        id: scrollView
-        anchors.fill: parent
-        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-
-        Kirigami.FormLayout {
-            width: scrollView.availableWidth
+    Kirigami.FormLayout {
+        width: page.availableWidth
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
@@ -221,7 +214,6 @@ Item {
             value: page.cfg_forecastDays || 5
             editable: true
             onValueModified: page.cfg_forecastDays = value
-        }
         }
     }
 }

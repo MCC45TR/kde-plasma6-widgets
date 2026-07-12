@@ -139,7 +139,7 @@ ColumnLayout {
                 spacing: 1
                 Text { text: "💨 " + i18n("Wind"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
-                    text: (forecastData && forecastData.wind_speed !== undefined) ? forecastData.wind_speed + " km/h" : "--"
+                    text: forecastData ? weatherRoot.displayWindSpeed(forecastData.wind_speed) : "--"
                     color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
@@ -262,21 +262,8 @@ ColumnLayout {
 
             property bool showSunset: {
                 if (!forecastData || !forecastData.sunrise || !forecastData.sunset) return false
-                var d = new Date()
-                var srVal = forecastData.sunrise
-                var ssVal = forecastData.sunset
-                var sr = (typeof srVal === "number") ? new Date(srVal * 1000) : new Date(srVal)
-                var ss = (typeof ssVal === "number") ? new Date(ssVal * 1000) : new Date(ssVal)
-
-                // If it's today, check time ranges
-                if (d.toDateString() === sr.toDateString()) {
-                    // Logic: If Sunrise < Now < Sunset -> Show Sunset (Next event is Sunset)
-                    // If Now > Sunset -> Sunset passed, show Sunrise (Loop)
-                    // If Now < Sunrise -> Sunrise hasn't happened, show Sunrise
-                    if (d > sr && d < ss) return true 
-                    return false
-                }
-                return false
+                var now = Date.now()
+                return now > forecastData.sunrise && now < forecastData.sunset
             }
 
             ColumnLayout {
@@ -292,8 +279,7 @@ ColumnLayout {
                         var val = parent.parent.showSunset ? forecastData.sunset : forecastData.sunrise
                         if (!val) return "--"
                         
-                        var dt = (typeof val === "number") ? new Date(val * 1000) : new Date(val)
-                        return Qt.formatTime(dt, "hh:mm")
+                        return weatherRoot.formatWeatherTime(val, forecastData.timezone_offset)
                     }
                     color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
@@ -329,39 +315,28 @@ ColumnLayout {
     
     function getSmartDateText(data) {
         if (!data) return "--"
-        
-        var date
-        if (data.timestamp) {
-            date = new Date(data.timestamp * 1000)
-        } else if (data.date) {
-            date = new Date(data.date)
-        } else {
-            return data.day 
-        }
-        
-        var today = new Date()
-        var targetDate = new Date(date)
-        
-        if (isNaN(targetDate.getTime())) return data.day
 
-        today.setHours(0,0,0,0)
-        targetDate.setHours(0,0,0,0)
-        
-        function getMonday(d) {
-            var d = new Date(d);
-            var day = d.getDay();
-            var diff = d.getDate() - day + (day == 0 ? -6 : 1); 
-            return new Date(d.setDate(diff));
+        var offset = data.timezone_offset || 0
+        var targetKey = data.date || ""
+        if (!targetKey && data.timestamp) {
+            var targetShifted = new Date(data.timestamp + offset * 1000)
+            targetKey = targetShifted.getUTCFullYear() + "-" + String(targetShifted.getUTCMonth() + 1).padStart(2, "0") + "-" + String(targetShifted.getUTCDate()).padStart(2, "0")
+        }
+        var parts = targetKey.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+        if (!parts) return data.day
+
+        var targetDay = Date.UTC(parseInt(parts[1]), parseInt(parts[2]) - 1, parseInt(parts[3]))
+        var nowShifted = new Date(Date.now() + offset * 1000)
+        var today = Date.UTC(nowShifted.getUTCFullYear(), nowShifted.getUTCMonth(), nowShifted.getUTCDate())
+
+        function mondayUtc(dayEpoch) {
+            var dayIndex = new Date(dayEpoch).getUTCDay()
+            return dayEpoch - ((dayIndex + 6) % 7) * 24 * 60 * 60 * 1000
         }
 
-        var currentMonday = getMonday(today)
-        var targetMonday = getMonday(targetDate)
-        
-        var diffTime = targetMonday.getTime() - currentMonday.getTime()
-        var diffWeeks = Math.round(diffTime / (1000 * 60 * 60 * 24 * 7))
-        
-        var longDayName = Qt.locale().dayName(targetDate.getDay(), Locale.LongFormat)
-        
+        var diffWeeks = Math.round((mondayUtc(targetDay) - mondayUtc(today)) / (7 * 24 * 60 * 60 * 1000))
+        var longDayName = Qt.locale().dayName(new Date(targetDay).getUTCDay(), Locale.LongFormat)
+
         if (diffWeeks <= 0) {
             return longDayName
         } else if (diffWeeks === 1) {

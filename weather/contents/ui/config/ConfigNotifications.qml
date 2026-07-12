@@ -109,10 +109,6 @@ Item {
     property bool cfg_useSystemUnitsDefault
     property int cfg_updateInterval
     property int cfg_updateIntervalDefault
-    property string cfg_cachedWeather
-    property string cfg_cachedWeatherDefault
-    property double cfg_lastUpdate
-    property double cfg_lastUpdateDefault
     property string cfg_iconPack
     property string cfg_iconPackDefault
     property bool cfg_useCustomFont
@@ -137,24 +133,6 @@ Item {
     property bool cfg_showForecastUnitsDefault
     property string cfg_cornerRadius
     property string cfg_cornerRadiusDefault
-    property string cfg_lastRoutineDate1
-    property string cfg_lastRoutineDate1Default
-    property string cfg_lastRoutineDate2
-    property string cfg_lastRoutineDate2Default
-    property double cfg_lastSevereNotify
-    property double cfg_lastSevereNotifyDefault
-    property double cfg_lastRainNotify
-    property double cfg_lastRainNotifyDefault
-    property double cfg_lastTempNotify
-    property double cfg_lastTempNotifyDefault
-    property double cfg_lastHighTempNotify
-    property double cfg_lastHighTempNotifyDefault
-    property double cfg_lastUvNotify
-    property double cfg_lastUvNotifyDefault
-    property double cfg_lastWindNotify
-    property double cfg_lastWindNotifyDefault
-    property double cfg_triggerTestNotification
-    property double cfg_triggerTestNotificationDefault
 
 
     ScrollView {

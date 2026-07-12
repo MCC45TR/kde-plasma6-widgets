@@ -1,6 +1,6 @@
 import QtQuick
 import org.kde.notification
-import org.kde.plasma.plasmoid
+import "NotificationRules.js" as NotificationRules
 
 // NotificationManager - Handles weather notification logic
 Item {
@@ -10,6 +10,7 @@ Item {
     required property var forecastHourly
     required property var forecastDaily
     required property string units
+    required property var stateStore
 
     // Config properties
     property bool enabled: false
@@ -33,14 +34,7 @@ Item {
     property bool notifyWind: true
     property int notifyWindThreshold: 50 // km/h
 
-    property double testNotificationTrigger: 0
     property double lastRoutineTimestamp: 0
-    
-    onTestNotificationTriggerChanged: {
-        if (testNotificationTrigger > 0) {
-            sendTestNotification()
-        }
-    }
 
     // Cooldown periods in milliseconds.
     readonly property int severeCooldown: 4 * 60 * 60 * 1000    // 4 hours
@@ -48,6 +42,7 @@ Item {
     readonly property int tempCooldown: 6 * 60 * 60 * 1000      // 6 hours for low/high temp
     readonly property int windCooldown: 6 * 60 * 60 * 1000      // 6 hours
     readonly property int uvCooldown: 12 * 60 * 60 * 1000       // 12 hours (UV is daily max usually)
+    readonly property int routineWindowMinutes: 10
 
     // Severe weather codes (WMO)
     readonly property var severeWeatherCodes: [
@@ -140,15 +135,15 @@ Item {
         var todayStr = Qt.formatDate(now, "yyyy-MM-dd")
 
         // Persistent timestamps
-        var lastRoutineDate1 = Plasmoid.configuration.lastRoutineDate1 || ""
-        var lastRoutineDate2 = Plasmoid.configuration.lastRoutineDate2 || ""
-        
-        var lastSevereNotify = Plasmoid.configuration.lastSevereNotify || 0
-        var lastRainNotify = Plasmoid.configuration.lastRainNotify || 0
-        var lastTempNotify = Plasmoid.configuration.lastTempNotify || 0
-        var lastHighTempNotify = Plasmoid.configuration.lastHighTempNotify || 0
-        var lastUvNotify = Plasmoid.configuration.lastUvNotify || 0
-        var lastWindNotify = Plasmoid.configuration.lastWindNotify || 0
+        var lastRoutineDate1 = stateStore.lastRoutineDate1 || ""
+        var lastRoutineDate2 = stateStore.lastRoutineDate2 || ""
+
+        var lastSevereNotify = stateStore.lastSevereNotify || 0
+        var lastRainNotify = stateStore.lastRainNotify || 0
+        var lastTempNotify = stateStore.lastTempNotify || 0
+        var lastHighTempNotify = stateStore.lastHighTempNotify || 0
+        var lastUvNotify = stateStore.lastUvNotify || 0
+        var lastWindNotify = stateStore.lastWindNotify || 0
 
         // 1. Routine Notifications
         if (routineEnabled) {
@@ -158,18 +153,18 @@ Item {
                  
                  // First routine time
                  if (lastRoutineDate1 !== todayStr) {
-                      if (nowMin >= routineTime1) {
+                      if (nowMin >= routineTime1 && nowMin < routineTime1 + routineWindowMinutes) {
                           sendRoutineNotification()
-                          Plasmoid.configuration.lastRoutineDate1 = todayStr
+                          stateStore.lastRoutineDate1 = todayStr
                           sentAny = true
                       }
                  }
                  
                  // Second routine time
                  if (!sentAny && routineTime2Enabled && lastRoutineDate2 !== todayStr) {
-                      if (nowMin >= routineTime2) {
+                      if (nowMin >= routineTime2 && nowMin < routineTime2 + routineWindowMinutes) {
                           sendRoutineNotification()
-                          Plasmoid.configuration.lastRoutineDate2 = todayStr
+                          stateStore.lastRoutineDate2 = todayStr
                           sentAny = true
                       }
                  }
@@ -183,18 +178,19 @@ Item {
         // 2. Severe Weather Alert
         var handledSevere = false
         if (severeWeatherEnabled) {
-            if (currentWeather.code !== undefined && severeWeatherCodes.indexOf(currentWeather.code) >= 0) {
-                 if (now - lastSevereNotify > severeCooldown) {
-                    sendSevereWeatherNotification(currentWeather.code, 0)
-                    Plasmoid.configuration.lastSevereNotify = now
+            var currentAlertCode = NotificationRules.weatherCode(currentWeather)
+            if (severeWeatherCodes.indexOf(currentAlertCode) >= 0) {
+                 if (nowTime - lastSevereNotify > severeCooldown) {
+                    sendSevereWeatherNotification(currentAlertCode, -1)
+                    stateStore.lastSevereNotify = nowTime
                     handledSevere = true
                 }
-            } 
+            }
             else if (forecastHourly && forecastHourly.length > 0) {
                 var upcomingSevere = checkUpcomingSevere()
-                if (upcomingSevere && (now - lastSevereNotify > severeCooldown)) {
+                if (upcomingSevere && (nowTime - lastSevereNotify > severeCooldown)) {
                      sendSevereWeatherNotification(upcomingSevere.code, upcomingSevere.startIndex)
-                     Plasmoid.configuration.lastSevereNotify = now
+                     stateStore.lastSevereNotify = nowTime
                      handledSevere = true
                 }
             }
@@ -202,11 +198,11 @@ Item {
 
         // 3. Rain Alert (only if not severe)
         if (rainEnabled && !handledSevere && forecastHourly && forecastHourly.length > 0) {
-            if (now - lastSevereNotify > severeCooldown) { // Still respect severe cooldown
+            if (nowTime - lastSevereNotify > severeCooldown) { // Still respect severe cooldown
                 var rainIncoming = checkUpcomingRain()
-                if (rainIncoming && now - lastRainNotify > rainCooldown) {
+                if (rainIncoming && nowTime - lastRainNotify > rainCooldown) {
                     sendRainNotification(rainIncoming)
-                    Plasmoid.configuration.lastRainNotify = now
+                    stateStore.lastRainNotify = nowTime
                 }
             }
         }
@@ -224,9 +220,9 @@ Item {
             }
 
             if (temp <= threshold) {
-                if (now - lastTempNotify > tempCooldown) {
+                if (nowTime - lastTempNotify > tempCooldown) {
                     sendLowTempNotification(temp)
-                    Plasmoid.configuration.lastTempNotify = now
+                    stateStore.lastTempNotify = nowTime
                 }
             }
         }
@@ -243,9 +239,9 @@ Item {
             }
 
             if (hTemp >= hThreshold) {
-                if (now - lastHighTempNotify > tempCooldown) {
+                if (nowTime - lastHighTempNotify > tempCooldown) {
                     sendHighTempNotification(hTemp)
-                    Plasmoid.configuration.lastHighTempNotify = now
+                    stateStore.lastHighTempNotify = nowTime
                 }
             }
         }
@@ -255,9 +251,9 @@ Item {
             var today = forecastDaily[0]
             if (today.uv_index !== undefined && today.uv_index !== null) {
                 if (today.uv_index >= notifyUvThreshold) {
-                    if (now - lastUvNotify > uvCooldown) {
+                    if (nowTime - lastUvNotify > uvCooldown) {
                         sendUvNotification(today.uv_index)
-                        Plasmoid.configuration.lastUvNotify = now
+                        stateStore.lastUvNotify = nowTime
                     }
                 }
             }
@@ -268,15 +264,10 @@ Item {
             var windSpeed = currentWeather.wind_speed
             var wThreshold = notifyWindThreshold
 
-            // Notification thresholds are stored in km/h.
-            if (units === "imperial") {
-                wThreshold = notifyWindThreshold * 0.621371
-            }
-
             if (windSpeed >= wThreshold) {
-                if (now - lastWindNotify > windCooldown) {
+                if (nowTime - lastWindNotify > windCooldown) {
                     sendWindNotification(windSpeed)
-                    Plasmoid.configuration.lastWindNotify = now
+                    stateStore.lastWindNotify = nowTime
                 }
             }
         }
@@ -295,15 +286,14 @@ Item {
         var today = forecastDaily[0]
         var temp = Math.round(today.temp_max) 
         var condition = today.condition
-        var dayName = Qt.locale().dayName(new Date().getDay(), Locale.LongFormat).toUpperCase()
+        var dayName = Qt.locale().dayName(today.day, Locale.LongFormat).toUpperCase()
         
         var title = i18n("📅 Today is %1 and %2° %3", dayName, temp, i18n(condition))
         var body = ""
         
         for (var i = 1; i <= 3 && i < forecastDaily.length; i++) {
             var day = forecastDaily[i]
-            var dIndex = (new Date().getDay() + i) % 7
-            var dName = Qt.locale().dayName(dIndex, Locale.ShortFormat).toUpperCase()
+            var dName = Qt.locale().dayName(day.day, Locale.ShortFormat).toUpperCase()
             
             var dTemp = Math.round(day.temp_max) + "°" + (units === "metric" ? "C" : "F")
             var dEmoji = getEmojiForIcon(day.icon || "", day.condition || "")
@@ -319,40 +309,7 @@ Item {
     function sendDailyChangeNotification() {
         if (!forecastHourly || forecastHourly.length === 0) return
 
-        var now = new Date()
-        var currentHour = now.getHours()
-        var changes = []
-        var lastCode = -1
-        
-        // Find changes for the rest of today
-        for (var i = 0; i < forecastHourly.length; i++) {
-            var item = forecastHourly[i]
-            var timeStr = item.time // "HH:mm"
-            
-            // Parse hour
-            var h = parseInt(timeStr.split(":")[0])
-            
-            // Stop at the next day boundary.
-            if (timeStr === "00:00" && i > 0) break
-            
-            // Only consider future hours (or current hour)
-            if (h >= currentHour) {
-                var code = item.code
-                var cond = item.condition
-                var temp = Math.round(item.temp)
-                
-                // If code changes (or it's the first relevant entry to show start state)
-                if (changes.length === 0 || code !== lastCode) {
-                    changes.push({
-                        time: timeStr,
-                        cond: cond,
-                        temp: temp,
-                        icon: item.icon
-                    })
-                    lastCode = code
-                }
-            }
-        }
+        var changes = NotificationRules.collectDailyChanges(forecastHourly, Date.now(), 6)
         
         // No entries remain when the hourly forecast is empty or entirely in the past.
         if (changes.length === 0) {
@@ -384,18 +341,15 @@ Item {
     }
 
     function checkUpcomingSevere() {
-        var lookahead = Math.min(6, forecastHourly.length)
-        for (var i = 0; i < lookahead; i++) {
-            var code = forecastHourly[i].code
-            if (severeWeatherCodes.indexOf(code) >= 0) {
-                return { code: code, startIndex: i }
-            }
-        }
-        return null
+        return NotificationRules.findUpcoming(forecastHourly, severeWeatherCodes, Date.now(), 6 * 60 * 60 * 1000)
     }
 
     function sendSevereWeatherNotification(code, startIndex) {
-        var info = analyzeEventDuration(code, startIndex, severeWeatherCodes)
+        var currentEvent = startIndex < 0
+        var info = currentEvent ? {
+            conditionName: currentWeather.condition,
+            startTemp: Math.round(currentWeather.temp)
+        } : analyzeEventDuration(startIndex, severeWeatherCodes)
         
         var title = i18n("⚠️ Weather Alert")
         var icon = "weather-storm"
@@ -413,9 +367,9 @@ Item {
              title = i18n("🌧️ Heavy Rain Warning")
         }
 
-        var body = i18n("%1 expected between %2 - %3", i18n(info.conditionName), info.startTime, info.endTime)
+        var body = currentEvent ? i18n("%1 is occurring now", i18n(info.conditionName)) : i18n("%1 expected between %2 - %3", i18n(info.conditionName), info.startTime, info.endTime)
         var unit = units === "metric" ? "°C" : "°F"
-        body += "\n" + i18n("Temperature: %1%2 → %3%4", info.startTemp, unit, info.endTemp, unit)
+        body += currentEvent ? "\n" + i18n("Temperature: %1%2", info.startTemp, unit) : "\n" + i18n("Temperature: %1%2 → %3%4", info.startTemp, unit, info.endTemp, unit)
         
         var advice = getAdviceForCode(code)
         if (advice) {
@@ -426,18 +380,11 @@ Item {
     }
 
     function checkUpcomingRain() {
-        var lookahead = Math.min(3, forecastHourly.length)
-        for (var i = 0; i < lookahead; i++) {
-            var code = forecastHourly[i].code
-            if (rainCodes.indexOf(code) >= 0) {
-                 return { code: code, startIndex: i }
-            }
-        }
-        return null
+        return NotificationRules.findUpcoming(forecastHourly, rainCodes, Date.now(), 3 * 60 * 60 * 1000)
     }
 
     function sendRainNotification(rainInfo) {
-        var info = analyzeEventDuration(rainInfo.code, rainInfo.startIndex, rainCodes)
+        var info = analyzeEventDuration(rainInfo.startIndex, rainCodes)
         var title = i18n("🌧️ Rain Forecast")
         var body = i18n("Rain expected between %1 - %2", info.startTime, info.endTime)
         var unit = units === "metric" ? "°C" : "°F"
@@ -456,53 +403,8 @@ Item {
         sendNotification(title, body, "weather-showers", true)
     }
 
-    function analyzeEventDuration(targetCode, startIndex, codeList) {
-        if (!forecastHourly || forecastHourly.length === 0) return { startTime: "--", endTime: "--", startTemp: 0, endTemp: 0, conditionName: "", totalPrecip: 0, maxProb: 0 }
-
-        var startItem = forecastHourly[startIndex]
-        var startTemp = Math.round(startItem.temp)
-        var conditionName = startItem.condition
-        var startTime = startItem.time 
-
-        var endIndex = startIndex
-        for (var i = startIndex + 1; i < forecastHourly.length; i++) {
-            var c = forecastHourly[i].code
-            if (codeList.indexOf(c) < 0) {
-                break
-            }
-            endIndex = i
-        }
-
-        var totalPrecip = 0.0
-        var maxProb = 0
-
-        for (var k = startIndex; k <= endIndex; k++) {
-            var item = forecastHourly[k]
-            if (item.precipitation !== undefined) totalPrecip += item.precipitation
-            if (item.precipitation_probability !== undefined) {
-                if (item.precipitation_probability > maxProb) maxProb = item.precipitation_probability
-            }
-        }
-
-        var endItem = forecastHourly[endIndex]
-        var endTemp = Math.round(endItem.temp)
-        var endTime = endItem.time
-        
-        if (startIndex === endIndex) {
-             var h = parseInt(endTime.split(":")[0])
-             var nextH = (h + 1) % 24
-             endTime = nextH + ":00"
-        }
-
-        return {
-            startTime: startTime,
-            endTime: endTime,
-            startTemp: startTemp,
-            endTemp: endTemp,
-            conditionName: conditionName,
-            totalPrecip: parseFloat(totalPrecip.toFixed(1)),
-            maxProb: maxProb
-        }
+    function analyzeEventDuration(startIndex, codeList) {
+        return NotificationRules.analyzeEventDuration(forecastHourly, startIndex, codeList)
     }
 
     function sendLowTempNotification(temp) {
@@ -529,20 +431,11 @@ Item {
 
     function sendWindNotification(speed) {
         var unit = units === "metric" ? "km/h" : "mph"
+        var displaySpeed = units === "imperial" ? speed * 0.621371 : speed
         var title = i18n("💨 Strong Wind Alert")
-        var body = i18n("Wind speed: %1 %2", Math.round(speed), unit)
+        var body = i18n("Wind speed: %1 %2", Math.round(displaySpeed), unit)
         body += "\n" + i18n("Secure loose objects and drive carefully.")
         sendNotification(title, body, "weather-wind", true)
-    }
-
-    function sendTestNotification() {
-        // Test the routine notification path with the current forecast.
-        sendRoutineNotification()
-        
-        // Visual feedback if routine didn't send (e.g. no daily forecast)
-        if (!forecastDaily || forecastDaily.length === 0) {
-            sendNotification(i18n("Test Notification"), i18n("Weather data is missing, cannot generate full report."), "weather-clear", false)
-        }
     }
 
     onRoutineEnabledChanged: checkNotifications()

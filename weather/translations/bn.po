@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MWeather 1.1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-09 22:02+0300\n"
+"POT-Creation-Date: 2026-07-12 21:51+0300\n"
 "PO-Revision-Date: 2026-01-22 03:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -12,507 +12,363 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contents/ui/DailyForecastView.qml:61
+#: contents/config/config.qml
+msgid "Weather"
+msgstr ""
+
+#: contents/config/config.qml contents/ui/config/ConfigAppearance.qml
+msgid "Appearance"
+msgstr "চেহারা"
+
+#: contents/config/config.qml
+msgid "Notifications"
+msgstr ""
+
+#: contents/ui/DailyForecastView.qml
 msgid "Today"
 msgstr "আজ"
 
-#: contents/ui/ForecastDetailsView.qml:102
-#: contents/ui/WeatherDetailsView.qml:101
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "Feels like"
 msgstr "অনুভূত হয়"
 
-#: contents/ui/ForecastDetailsView.qml:121
-#: contents/ui/WeatherDetailsView.qml:119
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "Humidity"
 msgstr "আর্দ্রতা"
 
-#: contents/ui/ForecastDetailsView.qml:140
-#: contents/ui/WeatherDetailsView.qml:137
-#: contents/ui/config/ConfigNotifications.qml:278
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Wind"
 msgstr "বাতাস"
 
-#: contents/ui/ForecastDetailsView.qml:159
+#: contents/ui/ForecastDetailsView.qml
 msgid "Rain Chance"
 msgstr "বৃষ্টির সম্ভাবনা"
 
-#: contents/ui/ForecastDetailsView.qml:185 contents/ui/TemperatureChart.qml:237
+#: contents/ui/ForecastDetailsView.qml
 msgid "Precipitation"
 msgstr "অধঃক্ষেপণ"
 
-#: contents/ui/ForecastDetailsView.qml:204
-#: contents/ui/config/ConfigNotifications.qml:289
+#: contents/ui/ForecastDetailsView.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "UV Index"
 msgstr "ইউভি সূচক"
 
-#: contents/ui/ForecastDetailsView.qml:231
-#: contents/ui/WeatherDetailsView.qml:281
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "Wind Direction"
 msgstr "বাতাসের দিক"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "North"
 msgstr "উত্তর"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "North East"
 msgstr "উত্তর-পূর্ব"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "East"
 msgstr "পূর্ব"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "South East"
 msgstr "দক্ষিণ-পূর্ব"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "South"
 msgstr "দক্ষিণ"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "South West"
 msgstr "দক্ষিণ-পশ্চিম"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "West"
 msgstr "পশ্চিম"
 
-#: contents/ui/ForecastDetailsView.qml:238
-#: contents/ui/WeatherDetailsView.qml:288
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "North West"
 msgstr "উত্তর-পশ্চিম"
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "N"
 msgstr "উ."
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "NE"
 msgstr "উ.পূ."
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "E"
 msgstr "পূ."
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "SE"
 msgstr "দ.পূ."
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "S"
 msgstr "দ."
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "SW"
 msgstr "দ.প."
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "W"
 msgstr "প."
 
-#: contents/ui/ForecastDetailsView.qml:247
-#: contents/ui/WeatherDetailsView.qml:297
+#: contents/ui/ForecastDetailsView.qml contents/ui/WeatherDetailsView.qml
 msgid "NW"
 msgstr "উ.প."
 
-#: contents/ui/ForecastDetailsView.qml:286 contents/ui/SunProgressGauge.qml:292
+#: contents/ui/ForecastDetailsView.qml
 msgid "Sunset"
 msgstr "সূর্যাস্ত"
 
-#: contents/ui/ForecastDetailsView.qml:286 contents/ui/SunProgressGauge.qml:243
+#: contents/ui/ForecastDetailsView.qml
 msgid "Sunrise"
 msgstr "সূর্যোদয়"
 
-#: contents/ui/ForecastDetailsView.qml:313
+#: contents/ui/ForecastDetailsView.qml
 msgid "Tap to close"
 msgstr "বন্ধ করতে আলতো চাপুন"
 
-#: contents/ui/ForecastDetailsView.qml:368
+#: contents/ui/ForecastDetailsView.qml
 msgid "Next week %1"
 msgstr "পরের সপ্তাহে %1"
 
-#: contents/ui/ForecastDetailsView.qml:370
+#: contents/ui/ForecastDetailsView.qml
 msgid "2 weeks later %1"
 msgstr "২ সপ্তাহ পরে %1"
 
-#: contents/ui/LargeModeLayout.qml:157 contents/ui/main.qml:116
-#: contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
+#: contents/ui/main.qml
 msgid "Hourly Forecast"
 msgstr "প্রতি ঘণ্টার পূর্বাভাস"
 
-#: contents/ui/LargeModeLayout.qml:157 contents/ui/main.qml:116
-#: contents/ui/WideModeLayout.qml:218
+#: contents/ui/LargeModeLayout.qml contents/ui/WideModeLayout.qml
+#: contents/ui/main.qml
 msgid "Daily Forecast"
 msgstr "দৈনিক পূর্বাভাস"
 
-#: contents/ui/main.qml:111 contents/ui/main.qml:331
-msgid "Refresh"
-msgstr "রিফ্রেশ"
-
-#: contents/ui/main.qml:321
-msgid "Loading weather data..."
-msgstr "আবহাওয়া তথ্য লোড হচ্ছে..."
-
-#: contents/ui/main.qml:363
-msgid "Clear"
-msgstr "পরিষ্কার"
-
-#: contents/ui/main.qml:364
-msgid "Mainly Clear"
-msgstr "প্রধানত পরিষ্কার"
-
-#: contents/ui/main.qml:365
-msgid "Partly Cloudy"
-msgstr "আংশিক মেঘলা"
-
-#: contents/ui/main.qml:366
-msgid "Overcast"
-msgstr "মেঘলা"
-
-#: contents/ui/main.qml:367 contents/ui/config/ConfigNotifications.qml:267
-msgid "Fog"
-msgstr "কুয়াশা"
-
-#: contents/ui/main.qml:368
-msgid "Drizzle"
-msgstr "গুঁড়ি গুঁড়ি বৃষ্টি"
-
-#: contents/ui/main.qml:369
-msgid "Freezing Drizzle"
-msgstr "হিমশীতল গুঁড়ি গুঁড়ি বৃষ্টি"
-
-#: contents/ui/main.qml:370 contents/ui/config/ConfigNotifications.qml:245
-msgid "Rain"
-msgstr "বৃষ্টি"
-
-#: contents/ui/main.qml:371
-msgid "Freezing Rain"
-msgstr "হিমশীতল বৃষ্টি"
-
-#: contents/ui/main.qml:372 contents/ui/config/ConfigNotifications.qml:256
-msgid "Snow"
-msgstr "তুষারপাত"
-
-#: contents/ui/main.qml:373
-msgid "Snow Grains"
-msgstr "তুষার দানা"
-
-#: contents/ui/main.qml:374
-msgid "Rain Showers"
-msgstr "বৃষ্টির ঝাপটা"
-
-#: contents/ui/main.qml:375
-msgid "Snow Showers"
-msgstr "তুষার ঝাপটা"
-
-#: contents/ui/main.qml:376
-msgid "Thunderstorm"
-msgstr "বজ্রবিদ্যুৎসহ ঝড়"
-
-#: contents/ui/main.qml:377
-msgid "Thunderstorm with Hail"
-msgstr "শিলাবৃষ্টিসহ ঝড়"
-
-#: contents/ui/main.qml:378
-msgid "Unknown"
-msgstr "অজানা"
-
-#: contents/ui/main.qml:379
-msgid "Cloudy"
-msgstr "মেঘলা"
-
-#: contents/ui/main.qml:380
-msgid "Mist"
-msgstr "কুয়াশা"
-
-#: contents/ui/main.qml:381
-msgid "Smoke"
-msgstr "ধোঁয়া"
-
-#: contents/ui/main.qml:382
-msgid "Haze"
-msgstr "কুয়াশাচ্ছন্ন"
-
-#: contents/ui/main.qml:383
-msgid "Dust"
-msgstr "ধুলো"
-
-#: contents/ui/main.qml:384
-msgid "Sand"
-msgstr "বালি"
-
-#: contents/ui/main.qml:385
-msgid "Ash"
-msgstr "ছাই"
-
-#: contents/ui/main.qml:386
-msgid "Squall"
-msgstr "দমকা হাওয়া"
-
-#: contents/ui/main.qml:387
-msgid "Tornado"
-msgstr "টর্নেডো"
-
-#: contents/ui/NotificationManager.qml:106
+#: contents/ui/NotificationManager.qml
 msgid "Visibility is low. Drive carefully."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:107
+#: contents/ui/NotificationManager.qml
 msgid "Roads may be slippery. Allow extra travel time."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:108
+#: contents/ui/NotificationManager.qml
 msgid "Stay indoors and avoid open areas."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:109
+#: contents/ui/NotificationManager.qml
 msgid "Heavy rain expected. Don't forget your umbrella!"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:110
+#: contents/ui/NotificationManager.qml
 msgid "Stay safe and check local updates."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:305
+#: contents/ui/NotificationManager.qml
 msgid "📅 Today is %1 and %2° %3"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:370
+#: contents/ui/NotificationManager.qml
 msgid "📅 Weather Update"
 msgstr "📅 আবহাওয়ার আপডেট"
 
-#: contents/ui/NotificationManager.qml:370
+#: contents/ui/NotificationManager.qml
 msgid "No significant changes for the rest of the day."
 msgstr "দিনের বাকি অংশে উল্লেখযোগ্য কোনো পরিবর্তন নেই।"
 
-#: contents/ui/NotificationManager.qml:374
-#: contents/ui/config/ConfigNotifications.qml:217
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "📅 Daily Weather Changes"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:410
+#: contents/ui/NotificationManager.qml
 msgid "⚠️ Weather Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:414
-#: contents/ui/config/ConfigNotifications.qml:237
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "⛈️ Thunderstorm Warning"
 msgstr "বজ্রবিদ্যুৎসহ ঝড়"
 
-#: contents/ui/NotificationManager.qml:417
-#: contents/ui/config/ConfigNotifications.qml:259
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "❄️ Snow Warning"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:420
-#: contents/ui/config/ConfigNotifications.qml:270
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "🌫️ Dense Fog Warning"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:423
+#: contents/ui/NotificationManager.qml
 msgid "🌧️ Heavy Rain Warning"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:426
+#: contents/ui/NotificationManager.qml
+msgid "%1 is occurring now"
+msgstr ""
+
+#: contents/ui/NotificationManager.qml
 msgid "%1 expected between %2 - %3"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:428
+#: contents/ui/NotificationManager.qml
+msgid "Temperature: %1%2"
+msgstr ""
+
+#: contents/ui/NotificationManager.qml
 msgid "Temperature: %1%2 → %3%4"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:451
-#: contents/ui/config/ConfigNotifications.qml:248
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "🌧️ Rain Forecast"
 msgstr "দৈনিক পূর্বাভাস"
 
-#: contents/ui/NotificationManager.qml:452
+#: contents/ui/NotificationManager.qml
 msgid "Rain expected between %1 - %2"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:455
-msgid "Temperature: %1%2"
-msgstr ""
-
-#: contents/ui/NotificationManager.qml:458
+#: contents/ui/NotificationManager.qml
 msgid "Chance of Rain: %1%"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:461
+#: contents/ui/NotificationManager.qml
 #, fuzzy
 msgid "Precipitation: %1 mm"
 msgstr "অধঃক্ষেপণ"
 
-#: contents/ui/NotificationManager.qml:464
+#: contents/ui/NotificationManager.qml
 msgid "Don't forget your umbrella!"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:520
-#: contents/ui/config/ConfigNotifications.qml:314
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "🥶 Low Temperature Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:521
-#: contents/ui/NotificationManager.qml:528
+#: contents/ui/NotificationManager.qml
 msgid "Current temperature: %1%2"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:527
-#: contents/ui/config/ConfigNotifications.qml:303
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "🔥 High Temperature Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:529
+#: contents/ui/NotificationManager.qml
 msgid "Stay hydrated and avoid direct sunlight."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:534
-#: contents/ui/config/ConfigNotifications.qml:292
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "☀️ High UV Index Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:535
+#: contents/ui/NotificationManager.qml
 msgid "Current UV Index: %1"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:536
+#: contents/ui/NotificationManager.qml
 msgid "Use sunscreen and wear protective clothing."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:545
-#: contents/ui/config/ConfigNotifications.qml:281
+#: contents/ui/NotificationManager.qml
+#: contents/ui/config/ConfigNotifications.qml
 msgid "💨 Strong Wind Alert"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:546
+#: contents/ui/NotificationManager.qml
 msgid "Wind speed: %1 %2"
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:547
+#: contents/ui/NotificationManager.qml
 msgid "Secure loose objects and drive carefully."
 msgstr ""
 
-#: contents/ui/NotificationManager.qml:558
-#: contents/ui/config/ConfigNotifications.qml:203
-msgid "Test Notification"
-msgstr ""
-
-#: contents/ui/NotificationManager.qml:558
-msgid "Weather data is missing, cannot generate full report."
-msgstr ""
-
-#: contents/ui/SunProgressGauge.qml:67
-msgid "Night"
-msgstr "রাত"
-
-#: contents/ui/SunProgressGauge.qml:78
-msgid "%1h %2m left"
-msgstr "%1 ঘণ্টা %2 মিনিট বাকি"
-
-#: contents/ui/SunProgressGauge.qml:80
-#, c-format
-msgid "%1m left"
-msgstr "%1 মিনিট বাকি"
-
-#: contents/ui/TemperatureChart.qml:220
-msgid "Temperature"
-msgstr "তাপমাত্রা"
-
-#: contents/ui/WeatherDetailsView.qml:155
+#: contents/ui/WeatherDetailsView.qml
 msgid "Pressure"
 msgstr "চাপ"
 
-#: contents/ui/WeatherDetailsView.qml:188
+#: contents/ui/WeatherDetailsView.qml
 msgid "Cloud Cover"
 msgstr "মেঘের আবরণ"
 
-#: contents/ui/WeatherDetailsView.qml:206
+#: contents/ui/WeatherDetailsView.qml
 msgid "UV"
 msgstr "ইউভি সূচক"
 
-#: contents/ui/WeatherDetailsView.qml:232
+#: contents/ui/WeatherDetailsView.qml
 msgid "Visibility"
 msgstr "দৃশ্যমানতা"
 
-#: contents/ui/WeatherDetailsView.qml:250
+#: contents/ui/WeatherDetailsView.qml
 msgid "Dew Point"
 msgstr "শিশিরাঙ্ক"
 
-#: contents/ui/WeatherDetailsView.qml:361
+#: contents/ui/WeatherDetailsView.qml
 msgid "Click to close"
 msgstr "বন্ধ করতে ক্লিক করুন"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Default (Colorful SVG)"
 msgstr "ডিফল্ট (রঙিন SVG)"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "System Theme"
 msgstr "সিস্টেম থিম"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v3 (Flat SVG)"
 msgstr "গুগল আবহাওয়া v3 (ফ্ল্যাট SVG)"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v2 (Realistic PNG)"
 msgstr "গুগল আবহাওয়া v2 (বাস্তবসম্মত PNG)"
 
-#: contents/ui/config/ConfigAppearance.qml:124
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Google Weather v1 (Classic PNG)"
 msgstr "গুগল আবহাওয়া v1 (ক্লাসিক PNG)"
 
-#: contents/ui/config/ConfigAppearance.qml:160
-msgid "Appearance"
-msgstr "চেহারা"
-
-#: contents/ui/config/ConfigAppearance.qml:168
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Show Units in Forecast"
 msgstr "পূর্বাভাসে একক দেখান"
 
-#: contents/ui/config/ConfigAppearance.qml:176
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Layout Mode:"
 msgstr "লেআউট মোড:"
 
-#: contents/ui/config/ConfigAppearance.qml:183
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Automatic"
 msgstr "স্বয়ংক্রিয়"
 
-#: contents/ui/config/ConfigAppearance.qml:183
-#: contents/ui/config/ConfigAppearance.qml:241
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Small"
 msgstr "ছোট"
 
-#: contents/ui/config/ConfigAppearance.qml:183
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Wide"
 msgstr "প্রশস্ত"
 
-#: contents/ui/config/ConfigAppearance.qml:183
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Large"
 msgstr "বড়"
 
-#: contents/ui/config/ConfigAppearance.qml:192
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Icon Pack:"
 msgstr "আইকন প্যাক:"
 
-#: contents/ui/config/ConfigAppearance.qml:208
+#: contents/ui/config/ConfigAppearance.qml
 msgid ""
 "Select the visual style for weather icons. (Note: older packs like v1/v2 may "
 "have missing icons for some conditions)"
@@ -520,271 +376,283 @@ msgstr ""
 "আবহাওয়া আইকনগুলির জন্য ভিজ্যুয়াল স্টাইল নির্বাচন করুন। (দ্রষ্টব্য: v1/v2 এর মতো পুরানো "
 "প্যাকগুলিতে কিছু অবস্থার জন্য আইকন অনুপস্থিত থাকতে পারে)"
 
-#: contents/ui/config/ConfigAppearance.qml:209
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Select the visual style for weather icons."
 msgstr "আবহাওয়া আইকনগুলির জন্য ভিজ্যুয়াল স্টাইল নির্বাচন করুন।"
 
-#: contents/ui/config/ConfigAppearance.qml:217
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Widget Margin:"
 msgstr "উইজেট মার্জিন:"
 
-#: contents/ui/config/ConfigAppearance.qml:224
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Normal (10px)"
 msgstr "স্বাভাবিক (10px)"
 
-#: contents/ui/config/ConfigAppearance.qml:224
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Less (5px)"
 msgstr "কম (5px)"
 
-#: contents/ui/config/ConfigAppearance.qml:224
+#: contents/ui/config/ConfigAppearance.qml
 msgid "None (0px)"
 msgstr "কোনোটিই না (0px)"
 
-#: contents/ui/config/ConfigAppearance.qml:234
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Corner Radius:"
 msgstr "কোণার ব্যাসার্ধ:"
 
-#: contents/ui/config/ConfigAppearance.qml:241
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Normal"
 msgstr "স্বাভাবিক"
 
-#: contents/ui/config/ConfigAppearance.qml:241
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Square"
 msgstr "বর্গক্ষেত্র"
 
-#: contents/ui/config/ConfigAppearance.qml:253
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Font Settings"
 msgstr "ফন্ট সেটিংস"
 
-#: contents/ui/config/ConfigAppearance.qml:262
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Use Default System Font"
 msgstr "সিস্টেমের ডিফল্ট ফন্ট ব্যবহার করুন"
 
-#: contents/ui/config/ConfigAppearance.qml:270
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Custom Font Family:"
 msgstr "কাস্টম ফন্ট ফ্যামিলি:"
 
-#: contents/ui/config/ConfigAppearance.qml:291
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Panel Settings"
 msgstr "প্যানেল সেটিংস"
 
-#: contents/ui/config/ConfigAppearance.qml:301
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Representation:"
 msgstr "উপস্থাপনা:"
 
-#: contents/ui/config/ConfigAppearance.qml:308
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Simple Panel"
 msgstr "সাধারণ প্যানেল"
 
-#: contents/ui/config/ConfigAppearance.qml:308
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Detailed Panel"
 msgstr "বিস্তারিত প্যানেল"
 
-#: contents/ui/config/ConfigAppearance.qml:316
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Font Size (0 = Auto):"
 msgstr "ফন্ট সাইজ (০ = অটো):"
 
-#: contents/ui/config/ConfigAppearance.qml:334
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Icon Size (0 = Auto):"
 msgstr "আইকন সাইজ (০ = অটো):"
 
-#: contents/ui/config/ConfigAppearance.qml:354
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Background Settings"
 msgstr "ব্যাকগ্রাউন্ড সেটিংস"
 
-#: contents/ui/config/ConfigAppearance.qml:362
+#: contents/ui/config/ConfigAppearance.qml
 msgid "Background Opacity:"
 msgstr "ব্যাকগ্রাউন্ডের অস্বচ্ছতা:"
 
-#: contents/ui/config/ConfigAppearance.qml:369
+#: contents/ui/config/ConfigAppearance.qml
 msgid "0% (No Backgrounds)"
 msgstr "০% (কোন প্যাকগ্রাউন্ড নেই)"
 
-#: contents/ui/config/ConfigGeneral.qml:161
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Weather Provider"
 msgstr "আবহাওয়া প্রদানকারী"
 
-#: contents/ui/config/ConfigGeneral.qml:171
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Open-Meteo (Free, No Key Required)"
 msgstr "Open-Meteo (বিনামূল্যে, কোনো কি প্রয়োজন নেই)"
 
-#: contents/ui/config/ConfigGeneral.qml:171
+#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap (Key Required)"
 msgstr "OpenWeatherMap (কি প্রয়োজন)"
 
-#: contents/ui/config/ConfigGeneral.qml:171
+#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com (Key Required)"
 msgstr "WeatherAPI.com (কি প্রয়োজন)"
 
-#: contents/ui/config/ConfigGeneral.qml:179
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Best free option. No API key required."
 msgstr "সেরা বিনামূল্যের বিকল্প। কোনো API কি প্রয়োজন নেই।"
 
-#: contents/ui/config/ConfigGeneral.qml:180
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Standard provider. API key required below."
 msgstr "স্ট্যান্ডার্ড প্রদানকারী। নিচে API কি প্রয়োজন।"
 
-#: contents/ui/config/ConfigGeneral.qml:180
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Alternative provider. API key required below."
 msgstr "বিকল্প প্রদানকারী। নিচে API কি প্রয়োজন।"
 
-#: contents/ui/config/ConfigGeneral.qml:188
+#: contents/ui/config/ConfigGeneral.qml
 msgid "API Keys"
 msgstr "API চাবি সমূহ"
 
-#: contents/ui/config/ConfigGeneral.qml:197
+#: contents/ui/config/ConfigGeneral.qml
 msgid "OpenWeatherMap API Key:"
 msgstr "OpenWeatherMap API কি:"
 
-#: contents/ui/config/ConfigGeneral.qml:204
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your OpenWeatherMap API key"
 msgstr "আপনার OpenWeatherMap API কি লিখুন"
 
-#: contents/ui/config/ConfigGeneral.qml:209
+#: contents/ui/config/ConfigGeneral.qml
 msgid "WeatherAPI.com API Key:"
 msgstr "WeatherAPI.com API কি:"
 
-#: contents/ui/config/ConfigGeneral.qml:216
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter your WeatherAPI.com key"
 msgstr "আপনার WeatherAPI.com কি লিখুন"
 
-#: contents/ui/config/ConfigGeneral.qml:223
+#: contents/ui/config/ConfigGeneral.qml
+msgid ""
+"API keys are stored as plain text in your Plasma widget configuration and "
+"may be included in configuration backups."
+msgstr ""
+
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Location"
 msgstr "অবস্থান"
 
-#: contents/ui/config/ConfigGeneral.qml:236
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Auto-detect from IP"
 msgstr "IP থেকে স্বয়ংক্রিয়ভাবে সনাক্ত করুন"
 
-#: contents/ui/config/ConfigGeneral.qml:244
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Enter manually"
 msgstr "ম্যানুয়ালি লিখুন"
 
-#: contents/ui/config/ConfigGeneral.qml:258
+#: contents/ui/config/ConfigGeneral.qml
 msgid "City 1:"
 msgstr "শহর ১:"
 
-#: contents/ui/config/ConfigGeneral.qml:264
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Ex: Ankara, Istanbul, London"
 msgstr "উদাঃ ঢাকা, কোলকাতা, লন্ডন"
 
-#: contents/ui/config/ConfigGeneral.qml:268
+#: contents/ui/config/ConfigGeneral.qml
 msgid "City 2:"
 msgstr "শহর ২:"
 
-#: contents/ui/config/ConfigGeneral.qml:274
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Second city (optional)"
 msgstr "দ্বিতীয় শহর (ঐচ্ছিক)"
 
-#: contents/ui/config/ConfigGeneral.qml:278
+#: contents/ui/config/ConfigGeneral.qml
 msgid "City 3:"
 msgstr "শহর ৩:"
 
-#: contents/ui/config/ConfigGeneral.qml:284
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Third city (optional)"
 msgstr "তৃতীয় শহর (ঐচ্ছিক)"
 
-#: contents/ui/config/ConfigGeneral.qml:288
+#: contents/ui/config/ConfigGeneral.qml
 msgid "You can use City name, 'City,Country Code' or Zip Code."
 msgstr "আপনি শহরের নাম, 'শহর, কান্ট্রি কোড' বা জিপ কোড ব্যবহার করতে পারেন।"
 
-#: contents/ui/config/ConfigGeneral.qml:298
-msgid "Location will be auto-detected based on your IP address."
-msgstr "আপনার IP ঠিকানার উপর ভিত্তি করে অবস্থান স্বয়ংক্রিয়ভাবে সনাক্ত করা হবে।"
+#: contents/ui/config/ConfigGeneral.qml
+msgid ""
+"Automatic location sends your public IP address to ipinfo.io to determine a "
+"city. Choose manual location to avoid this request."
+msgstr ""
 
-#: contents/ui/config/ConfigGeneral.qml:308
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Settings"
 msgstr "সেটিং"
 
-#: contents/ui/config/ConfigGeneral.qml:318
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Units:"
 msgstr "একক সমুহ:"
 
-#: contents/ui/config/ConfigGeneral.qml:326
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Use system units"
 msgstr "সিস্টেম একক ব্যবহার করুন"
 
-#: contents/ui/config/ConfigGeneral.qml:339
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Metric (°C)"
 msgstr "মেট্রিক (°C)"
 
-#: contents/ui/config/ConfigGeneral.qml:339
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Imperial (°F)"
 msgstr "ইম্পেরিয়াল (°F)"
 
-#: contents/ui/config/ConfigGeneral.qml:351
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Refresh Interval:"
 msgstr "রিফ্রেশ ব্যবধান:"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "15 minutes"
 msgstr "১৫ মিনিট"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "30 minutes"
 msgstr "৩০ মিনিট"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "45 minutes"
 msgstr "৪৫ মিনিট"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "1 hour"
 msgstr "১ ঘণ্টা"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "2 hours"
 msgstr "২ ঘণ্টা"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "3 hours"
 msgstr "৩ ঘণ্টা"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "4 hours"
 msgstr "৪ ঘণ্টা"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "6 hours"
 msgstr "৬ ঘণ্টা"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "8 hours"
 msgstr "৮ ঘণ্টা"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "12 hours"
 msgstr "১২ ঘণ্টা"
 
-#: contents/ui/config/ConfigGeneral.qml:357
+#: contents/ui/config/ConfigGeneral.qml
 msgid "1 day"
 msgstr "১ দিন"
 
-#: contents/ui/config/ConfigGeneral.qml:368
+#: contents/ui/config/ConfigGeneral.qml
 msgid "Forecast Days:"
 msgstr "পূর্বাভাস দিন:"
 
-#: contents/ui/config/ConfigNotifications.qml:173
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Test Notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:188
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Enable test mode"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:200
+#: contents/ui/config/ConfigNotifications.qml
 msgid "General"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:204
+#: contents/ui/config/ConfigNotifications.qml
+msgid "Test Notification"
+msgstr ""
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Weather notifications are functioning correctly."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:211
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Routine"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:218
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "08:00: ☀️ Sunny (12°C)\n"
 "11:00: ⛅ Partly Cloudy (15°C)\n"
@@ -793,11 +661,11 @@ msgid ""
 "20:00: 🌙 Clear (10°C)"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:224
+#: contents/ui/config/ConfigNotifications.qml
 msgid "📅 Today is SUNDAY, 10°C Cloudy"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:225
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "MON: 6°C 🌪️ Storm\n"
 "TUE: 15°C 🌧️ Rainy\n"
@@ -805,18 +673,22 @@ msgid ""
 "THU: 17°C ⛅ Partly Cloudy"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:234
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Storm"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:238
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Thunderstorm expected between 14:00 - 18:00\n"
 "Temperature: 22°C → 18°C\n"
 "Stay indoors and avoid open areas."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:249
+#: contents/ui/config/ConfigNotifications.qml contents/ui/main.qml
+msgid "Rain"
+msgstr "বৃষ্টি"
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Rain expected between 10:00 - 16:00\n"
 "Temperature: 15°C\n"
@@ -825,14 +697,22 @@ msgid ""
 "Don't forget your umbrella!"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:260
+#: contents/ui/config/ConfigNotifications.qml contents/ui/main.qml
+msgid "Snow"
+msgstr "তুষারপাত"
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Snowfall expected between 06:00 - 12:00\n"
 "Temperature: -3°C → -5°C\n"
 "Roads may be slippery."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:271
+#: contents/ui/config/ConfigNotifications.qml contents/ui/main.qml
+msgid "Fog"
+msgstr "কুয়াশা"
+
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Dense fog expected between 05:00 - 09:00\n"
 "Visibility: Low\n"
@@ -840,161 +720,276 @@ msgid ""
 "Drive carefully."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:282
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Wind speed: 65 km/h\n"
 "Secure loose objects."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:293
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Current UV Index: 8\n"
 "Use sunscreen and wear protective clothing."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:300
+#: contents/ui/config/ConfigNotifications.qml
 msgid "High Temp"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:304
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Current temperature: 35°C\n"
 "Stay hydrated."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:311
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Low Temp"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:315
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Current temperature: -5°C"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:323
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Click buttons to test individual notification types"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:333
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Weather Notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:348
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Enable weather notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:355
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "When enabled, the widget will send Plasma desktop notifications based on "
 "weather conditions."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:366
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Routine Notifications"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:383
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Daily weather summary"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:396
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "Description:"
 msgstr "অধঃক্ষেপণ"
 
-#: contents/ui/config/ConfigNotifications.qml:404
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "3-Day Forecast Summary"
 msgstr "দৈনিক পূর্বাভাস"
 
-#: contents/ui/config/ConfigNotifications.qml:405
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Today's Weather Changes"
 msgstr "আজকের আবহাওয়ার পরিবর্তন"
 
-#: contents/ui/config/ConfigNotifications.qml:418
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Notification time 1:"
 msgstr "বিজ্ঞপ্তির সময় ১:"
 
-#: contents/ui/config/ConfigNotifications.qml:455
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Enable second time"
 msgstr "দ্বিতীয় সময় সক্রিয় করুন"
 
-#: contents/ui/config/ConfigNotifications.qml:466
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Notification time 2:"
 msgstr "বিজ্ঞপ্তির সময় ২:"
 
-#: contents/ui/config/ConfigNotifications.qml:488
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Duplicate time!"
 msgstr "ডুপ্লিকেট সময়!"
 
-#: contents/ui/config/ConfigNotifications.qml:495
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Receive a daily notification with current weather and today's forecast."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:506
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "Weather Alerts"
 msgstr "আবহাওয়া প্রদানকারী"
 
-#: contents/ui/config/ConfigNotifications.qml:527
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Severe weather alerts"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:530
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Thunderstorm, heavy snow, dense fog"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:549
+#: contents/ui/config/ConfigNotifications.qml
 #, fuzzy
 msgid "Rain forecast alert"
 msgstr "দৈনিক পূর্বাভাস"
 
-#: contents/ui/config/ConfigNotifications.qml:552
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Notify when rain is expected in the next few hours"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:571
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Strong wind alert"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:575
-#: contents/ui/config/ConfigNotifications.qml:615
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Threshold:"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:611
+#: contents/ui/config/ConfigNotifications.qml
 msgid "High UV Index alert"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:642
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Temperature Alerts"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:660
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Low temperature warning"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:672
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Alert when below:"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:699
+#: contents/ui/config/ConfigNotifications.qml
 msgid "High temperature warning"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:711
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Alert when above:"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:730
+#: contents/ui/config/ConfigNotifications.qml
 msgid "Receive alerts when temperature goes beyond your thresholds."
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:763
+#: contents/ui/config/ConfigNotifications.qml
 msgid "How it works"
 msgstr ""
 
-#: contents/ui/config/ConfigNotifications.qml:768
+#: contents/ui/config/ConfigNotifications.qml
 msgid ""
 "Notifications are checked each time weather data is refreshed. To avoid "
 "spam, each alert type has a cooldown period."
 msgstr ""
+
+#: contents/ui/main.qml
+msgid "Refresh"
+msgstr "রিফ্রেশ"
+
+#: contents/ui/main.qml
+msgid "Weather request timed out. Please check your connection and try again."
+msgstr ""
+
+#: contents/ui/main.qml
+msgid "Loading weather data..."
+msgstr "আবহাওয়া তথ্য লোড হচ্ছে..."
+
+#: contents/ui/main.qml
+msgid "Clear"
+msgstr "পরিষ্কার"
+
+#: contents/ui/main.qml
+msgid "Mainly Clear"
+msgstr "প্রধানত পরিষ্কার"
+
+#: contents/ui/main.qml
+msgid "Partly Cloudy"
+msgstr "আংশিক মেঘলা"
+
+#: contents/ui/main.qml
+msgid "Overcast"
+msgstr "মেঘলা"
+
+#: contents/ui/main.qml
+msgid "Drizzle"
+msgstr "গুঁড়ি গুঁড়ি বৃষ্টি"
+
+#: contents/ui/main.qml
+msgid "Freezing Drizzle"
+msgstr "হিমশীতল গুঁড়ি গুঁড়ি বৃষ্টি"
+
+#: contents/ui/main.qml
+msgid "Freezing Rain"
+msgstr "হিমশীতল বৃষ্টি"
+
+#: contents/ui/main.qml
+msgid "Snow Grains"
+msgstr "তুষার দানা"
+
+#: contents/ui/main.qml
+msgid "Rain Showers"
+msgstr "বৃষ্টির ঝাপটা"
+
+#: contents/ui/main.qml
+msgid "Snow Showers"
+msgstr "তুষার ঝাপটা"
+
+#: contents/ui/main.qml
+msgid "Thunderstorm"
+msgstr "বজ্রবিদ্যুৎসহ ঝড়"
+
+#: contents/ui/main.qml
+msgid "Thunderstorm with Hail"
+msgstr "শিলাবৃষ্টিসহ ঝড়"
+
+#: contents/ui/main.qml
+msgid "Unknown"
+msgstr "অজানা"
+
+#: contents/ui/main.qml
+msgid "Cloudy"
+msgstr "মেঘলা"
+
+#: contents/ui/main.qml
+msgid "Mist"
+msgstr "কুয়াশা"
+
+#: contents/ui/main.qml
+msgid "Smoke"
+msgstr "ধোঁয়া"
+
+#: contents/ui/main.qml
+msgid "Haze"
+msgstr "কুয়াশাচ্ছন্ন"
+
+#: contents/ui/main.qml
+msgid "Dust"
+msgstr "ধুলো"
+
+#: contents/ui/main.qml
+msgid "Sand"
+msgstr "বালি"
+
+#: contents/ui/main.qml
+msgid "Ash"
+msgstr "ছাই"
+
+#: contents/ui/main.qml
+msgid "Squall"
+msgstr "দমকা হাওয়া"
+
+#: contents/ui/main.qml
+msgid "Tornado"
+msgstr "টর্নেডো"
+
+#~ msgid "Night"
+#~ msgstr "রাত"
+
+#~ msgid "%1h %2m left"
+#~ msgstr "%1 ঘণ্টা %2 মিনিট বাকি"
+
+#, c-format
+#~ msgid "%1m left"
+#~ msgstr "%1 মিনিট বাকি"
+
+#~ msgid "Temperature"
+#~ msgstr "তাপমাত্রা"
+
+#~ msgid "Location will be auto-detected based on your IP address."
+#~ msgstr "আপনার IP ঠিকানার উপর ভিত্তি করে অবস্থান স্বয়ংক্রিয়ভাবে সনাক্ত করা হবে।"

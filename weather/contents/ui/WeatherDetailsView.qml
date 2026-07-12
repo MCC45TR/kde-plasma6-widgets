@@ -136,7 +136,7 @@ ColumnLayout {
                 spacing: 1
                 Text { text: "💨 " + i18n("Wind"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
-                    text: (weatherRoot.currentWeather && weatherRoot.currentWeather.wind_speed !== undefined) ? weatherRoot.currentWeather.wind_speed + " km/h" : "--"
+                    text: weatherRoot.currentWeather ? weatherRoot.displayWindSpeed(weatherRoot.currentWeather.wind_speed) : "--"
                     color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
@@ -231,7 +231,7 @@ ColumnLayout {
                 spacing: 1
                 Text { text: "👁️ " + i18n("Visibility"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
                 Text {
-                    text: (weatherRoot.currentWeather && weatherRoot.currentWeather.visibility !== undefined && weatherRoot.currentWeather.visibility !== null) ? weatherRoot.currentWeather.visibility + " km" : "--"
+                    text: weatherRoot.currentWeather ? weatherRoot.displayVisibility(weatherRoot.currentWeather.visibility) : "--"
                     color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
@@ -320,15 +320,7 @@ ColumnLayout {
                     Text {
                         text: {
                             if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunrise) return "--"
-                            var sr = weatherRoot.currentWeather.sunrise
-                            if (typeof sr === "number") {
-                                var d = new Date(sr * 1000)
-                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
-                            } else if (typeof sr === "string") {
-                                var d2 = new Date(sr)
-                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
-                            }
-                            return "--"
+                            return weatherRoot.formatWeatherTime(weatherRoot.currentWeather.sunrise, weatherRoot.currentWeather.timezone_offset)
                         }
                         color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
                     }
@@ -340,15 +332,7 @@ ColumnLayout {
                     Text {
                         text: {
                             if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunset) return "--"
-                            var ss = weatherRoot.currentWeather.sunset
-                            if (typeof ss === "number") {
-                                var d = new Date(ss * 1000)
-                                return d.getHours().toString().padStart(2, '0') + ":" + d.getMinutes().toString().padStart(2, '0')
-                            } else if (typeof ss === "string") {
-                                var d2 = new Date(ss)
-                                return d2.getHours().toString().padStart(2, '0') + ":" + d2.getMinutes().toString().padStart(2, '0')
-                            }
-                            return "--"
+                            return weatherRoot.formatWeatherTime(weatherRoot.currentWeather.sunset, weatherRoot.currentWeather.timezone_offset)
                         }
                         color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
                     }

@@ -74,32 +74,6 @@ Item {
         eventId: "notification"
     }
 
-    function getEmojiForIcon(iconName, conditionText) {
-        if (iconName && iconName !== "") {
-            if (iconName.indexOf("storm") !== -1 || iconName.indexOf("thunder") !== -1) return "⛈️"
-            if (iconName.indexOf("rain") !== -1 || iconName.indexOf("showers") !== -1 || iconName.indexOf("drizzle") !== -1) return "🌧️"
-            if (iconName.indexOf("snow") !== -1) return "❄️"
-            if (iconName.indexOf("fog") !== -1 || iconName.indexOf("mist") !== -1) return "🌫️"
-            if (iconName.indexOf("clear") !== -1 || iconName.indexOf("sunny") !== -1) return "☀️"
-            if (iconName.indexOf("few-clouds") !== -1) return "⛅"
-            if (iconName.indexOf("clouds") !== -1 || iconName.indexOf("overcast") !== -1) return "☁️"
-        }
-        
-        // Fallback to condition text (useful for OpenMeteo which might have empty icons)
-        if (conditionText) {
-            var lowerCond = conditionText.toLowerCase()
-            if (lowerCond.indexOf("storm") !== -1 || lowerCond.indexOf("thunder") !== -1) return "⛈️"
-            if (lowerCond.indexOf("rain") !== -1 || lowerCond.indexOf("drizzle") !== -1 || lowerCond.indexOf("shower") !== -1) return "🌧️"
-            if (lowerCond.indexOf("snow") !== -1) return "❄️"
-            if (lowerCond.indexOf("fog") !== -1 || lowerCond.indexOf("mist") !== -1) return "🌫️"
-            if (lowerCond.indexOf("clear") !== -1 || lowerCond.indexOf("sunny") !== -1) return "☀️"
-            if (lowerCond.indexOf("partly") !== -1) return "⛅"
-            if (lowerCond.indexOf("cloud") !== -1 || lowerCond.indexOf("overcast") !== -1) return "☁️"
-        }
-        
-        return "🌡️"
-    }
-
     function getAdviceForCode(code) {
         if (code === 45 || code === 48) return i18n("Visibility is low. Drive carefully.")
         if ((code >= 71 && code <= 77) || code === 66 || code === 67 || code === 85 || code === 86) return i18n("Roads may be slippery. Allow extra travel time.")
@@ -297,7 +271,7 @@ Item {
         var condition = today.condition
         var dayName = Qt.locale().dayName(new Date().getDay(), Locale.LongFormat).toUpperCase()
         
-        var title = i18n("📅 Today is %1 and %2° %3", dayName, temp, i18n(condition))
+        var title = i18n("Today is %1 and %2° %3", dayName, temp, i18n(condition))
         var body = ""
         
         for (var i = 1; i <= 3 && i < forecastDaily.length; i++) {
@@ -357,11 +331,11 @@ Item {
         // No entries remain when the hourly forecast is empty or entirely in the past.
         if (changes.length === 0) {
              var today = forecastDaily[0]
-             sendNotification(i18n("📅 Weather Update"), i18n("No significant changes for the rest of the day."), today.icon, false)
+             sendNotification(i18n("Weather Update"), i18n("No significant changes for the rest of the day."), today.icon, false)
              return
         }
         
-        var title = i18n("📅 Daily Weather Changes")
+        var title = i18n("Daily Weather Changes")
         var body = ""
         var unit = units === "metric" ? "°C" : "°F"
         
@@ -370,8 +344,7 @@ Item {
         
         for (var j = 0; j < limit; j++) {
             var c = changes[j]
-            var emoji = getEmojiForIcon(c.icon, c.cond)
-            body += c.time + ": " + emoji + " " + i18n(c.cond) + " (" + c.temp + unit + ")"
+            body += c.time + ": " + i18n(c.cond) + " (" + c.temp + unit + ")"
             if (j < limit - 1) body += "\n"
         }
         
@@ -397,20 +370,20 @@ Item {
     function sendSevereWeatherNotification(code, startIndex) {
         var info = analyzeEventDuration(code, startIndex, severeWeatherCodes)
         
-        var title = i18n("⚠️ Weather Alert")
+        var title = i18n("Weather Alert")
         var icon = "weather-storm"
 
         if (code >= 95) {
-             title = i18n("⛈️ Thunderstorm Warning")
+             title = i18n("Thunderstorm Warning")
         } else if (code >= 71 || code === 85 || code === 86) {
              icon = "weather-snow"
-             title = i18n("❄️ Snow Warning")
+             title = i18n("Snow Warning")
         } else if (code === 45 || code === 48) {
              icon = "weather-fog"
-             title = i18n("🌫️ Dense Fog Warning")
+             title = i18n("Dense Fog Warning")
         } else if (code === 65 || code === 82) {
              icon = "weather-showers"
-             title = i18n("🌧️ Heavy Rain Warning")
+             title = i18n("Heavy Rain Warning")
         }
 
         var body = i18n("%1 expected between %2 - %3", i18n(info.conditionName), info.startTime, info.endTime)
@@ -438,7 +411,7 @@ Item {
 
     function sendRainNotification(rainInfo) {
         var info = analyzeEventDuration(rainInfo.code, rainInfo.startIndex, rainCodes)
-        var title = i18n("🌧️ Rain Forecast")
+        var title = i18n("Rain Forecast")
         var body = i18n("Rain expected between %1 - %2", info.startTime, info.endTime)
         var unit = units === "metric" ? "°C" : "°F"
         
@@ -507,21 +480,21 @@ Item {
 
     function sendLowTempNotification(temp) {
         var unit = units === "metric" ? "°C" : "°F"
-        var title = i18n("🥶 Low Temperature Alert")
+        var title = i18n("Low Temperature Alert")
         var body = i18n("Current temperature: %1%2", Math.round(temp), unit)
         sendNotification(title, body, "weather-freezing-rain", true)
     }
 
     function sendHighTempNotification(temp) {
         var unit = units === "metric" ? "°C" : "°F"
-        var title = i18n("🔥 High Temperature Alert")
+        var title = i18n("High Temperature Alert")
         var body = i18n("Current temperature: %1%2", Math.round(temp), unit)
         body += "\n" + i18n("Stay hydrated and avoid direct sunlight.")
         sendNotification(title, body, "weather-clear", true)
     }
 
     function sendUvNotification(uvIndex) {
-        var title = i18n("☀️ High UV Index Alert")
+        var title = i18n("High UV Index Alert")
         var body = i18n("Current UV Index: %1", uvIndex)
         body += "\n" + i18n("Use sunscreen and wear protective clothing.")
         sendNotification(title, body, "weather-clear", true)
@@ -529,7 +502,7 @@ Item {
 
     function sendWindNotification(speed) {
         var unit = units === "metric" ? "km/h" : "mph"
-        var title = i18n("💨 Strong Wind Alert")
+        var title = i18n("Strong Wind Alert")
         var body = i18n("Wind speed: %1 %2", Math.round(speed), unit)
         body += "\n" + i18n("Secure loose objects and drive carefully.")
         sendNotification(title, body, "weather-wind", true)

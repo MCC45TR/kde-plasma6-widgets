@@ -5,10 +5,8 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 
-Item {
+Kirigami.ScrollablePage {
     id: page
-
-    property string title: ""
 
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal
                                     || Plasmoid.formFactor === PlasmaCore.Types.Vertical
@@ -77,13 +75,8 @@ Item {
     readonly property var layoutValues: ["auto", "small", "wide", "large"]
     readonly property var iconPackValues: ["default", "system", "google_v3", "google_v2", "google_v1"]
 
-    QQC2.ScrollView {
-        id: scrollView
-        anchors.fill: parent
-        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-
-        Kirigami.FormLayout {
-            width: scrollView.availableWidth
+    Kirigami.FormLayout {
+        width: page.availableWidth
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
@@ -198,7 +191,6 @@ Item {
             type: Kirigami.MessageType.Information
             text: i18n("Background, corners, spacing, colors, and controls follow your active Plasma and Breeze settings.")
             visible: true
-        }
         }
     }
 }
