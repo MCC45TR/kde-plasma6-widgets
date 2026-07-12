@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtCore
 import org.kde.kirigami as Kirigami
-import "../js/PreviewUtils.js" as PreviewUtils
 import "../js/utils.js" as Utils
 
 // Primary Result Preview Component (Calculator, Unit Conversions, and files)
@@ -15,6 +14,7 @@ Rectangle {
     required property string searchText
     required property color accentColor
     required property color textColor
+    required property var logic
     property var flatSortedData: []
     property bool previewEnabled: true
     property var previewSettings: ({})
@@ -39,7 +39,17 @@ Rectangle {
     readonly property string firstMatchId: firstItem ? (firstItem.duplicateId || firstItem.display || "") : firstModelData(resultsModel && resultsModel.DuplicateRole !== undefined ? resultsModel.DuplicateRole : Qt.UserRole, firstDisplay)
     readonly property string firstFilePath: firstItem ? (firstItem.url || "") : ""
     readonly property int firstResultIndex: firstItem && firstItem.index !== undefined ? firstItem.index : 0
-    readonly property string previewSource: PreviewUtils.getPreviewSource(firstFilePath, previewEnabled, previewSettings, thumbnailCacheBase)
+    readonly property string previewSource: previewResolver.source
+
+    FilePreviewSource {
+        id: previewResolver
+        logic: root.logic
+        fileUrl: root.firstFilePath
+        category: root.firstCategory
+        active: root.previewEnabled && root.firstFilePath.length > 0
+        settings: root.previewSettings
+        freedesktopThumbnailBase: root.thumbnailCacheBase
+    }
 
     function firstModelData(role, fallback) {
         if (resultCount === 0 || !resultsModel || role === undefined)

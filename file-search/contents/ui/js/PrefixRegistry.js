@@ -9,13 +9,22 @@ var definitions = [
     { canonical: "clock:", aliases: [], localeKey: "clock", view: "clock" },
     { canonical: "power:", aliases: [], localeKey: "power", view: "power" },
     { canonical: "help:", aliases: [], localeKey: "help", view: "help" },
+    { canonical: "app:", aliases: [], stripPayload: true, resultFilter: "Apps" },
+    { canonical: "services:", aliases: [], stripPayload: true, resultFilter: "Apps" },
+    { canonical: "baloo:", aliases: [], stripPayload: true, resultFilter: "Files" },
+    { canonical: "documents:", aliases: [], stripPayload: true, resultFilter: "Docs" },
+    { canonical: "images:", aliases: [], stripPayload: true, resultFilter: "Images" },
+    { canonical: "calc:", aliases: [], stripPayload: true, resultFilter: "Calculator" },
+    { canonical: "b:", aliases: [], stripPayload: true, resultFilter: "Web" },
+    { canonical: "define:", aliases: [], localeKey: "define", aliasSuffix: " ", runnerTrigger: "define", runnerSuffix: " " },
     { canonical: "unit:", aliases: [], localeKey: "unit", setting: "prefixUnitEnabled", stripPayload: true },
-    { canonical: "shell:", aliases: [], localeKey: "shell", setting: "prefixShellEnabled" },
-    { canonical: "kill ", aliases: [], localeKey: "kill", setting: "prefixKillEnabled" },
-    { canonical: "spell ", aliases: [], localeKey: "spell", setting: "prefixSpellEnabled" },
+    { canonical: "shell:", aliases: [], localeKey: "shell", setting: "prefixShellEnabled", stripPayload: true },
+    { canonical: "kill ", aliases: [], localeKey: "kill", setting: "prefixKillEnabled", runnerTrigger: "kill", runnerSuffix: " " },
+    { canonical: "spell ", aliases: [], localeKey: "spell", setting: "prefixSpellEnabled", runnerTrigger: "spell", runnerSuffix: " " },
     { canonical: "timeline:/", aliases: [], setting: "prefixTimelineEnabled" },
     { canonical: "gg:", aliases: [], setting: "prefixWebSearchEnabled" },
-    { canonical: "dd:", aliases: [], setting: "prefixWebSearchEnabled" }
+    { canonical: "dd:", aliases: [], setting: "prefixWebSearchEnabled" },
+    { canonical: "wp:", aliases: [], setting: "prefixWebSearchEnabled" }
 ]
 
 function definitionFor(canonical) {
@@ -41,7 +50,7 @@ function aliasesFor(canonical, localized) {
     _appendUnique(result, def.canonical)
     for (var i = 0; i < def.aliases.length; ++i) _appendUnique(result, def.aliases[i])
     if (def.localeKey && localized && localized[def.localeKey]) {
-        var suffix = def.canonical.endsWith(" ") ? " " : (def.canonical.endsWith(":/") ? ":/" : ":")
+        var suffix = def.aliasSuffix || (def.canonical.endsWith(" ") ? " " : (def.canonical.endsWith(":/") ? ":/" : ":"))
         _appendUnique(result, String(localized[def.localeKey]).replace(/[:\/\s]+$/, "") + suffix)
     }
     return result
@@ -75,7 +84,19 @@ function canonicalize(text, localized, settings) {
     if (!found || !isEnabled(found.definition, settings)) return raw
     var payload = raw.trim().substring(found.alias.length).trim()
     if (found.definition.stripPayload) return payload
+    if (found.definition.runnerTrigger) {
+        var trigger = localized && localized[found.definition.runnerTrigger]
+            ? String(localized[found.definition.runnerTrigger]).replace(/[:\/\s]+$/, "")
+            : found.definition.runnerTrigger
+        return trigger + (found.definition.runnerSuffix || "") + payload
+    }
     return found.definition.canonical + payload
+}
+
+function resultFilter(text, localized, settings) {
+    var found = match(text, localized)
+    if (!found || !isEnabled(found.definition, settings)) return "All"
+    return found.definition.resultFilter || "All"
 }
 
 function opensInternalView(text, localized, settings) {

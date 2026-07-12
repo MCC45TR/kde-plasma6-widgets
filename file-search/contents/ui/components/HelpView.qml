@@ -21,9 +21,9 @@ Item {
         { prefix: "wp:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Wikipedia Search"), icon: "wikipedia", example: "wp:plasma -> 📖 Wikipedia", localeBase: "wikipedia" },
         { prefix: "b:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Bookmarks"), icon: "bookmarks", example: "b:kde -> 🔖 KDE.org", localeBase: "bookmarks" },
         { prefix: "man:/", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Man Pages"), icon: "help-contents", example: "man:ls -> 📄 ls(1)", localeBase: "man" },
-        { prefix: "kill ", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Kill Process"), icon: "process-stop", example: "kill firefox -> 🚫 Stop Process", key: "kill", localeBase: "kill" },
-        { prefix: "spell ", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Spell Check"), icon: "tools-check-spelling", example: "spell hello -> ✅ Correct", key: "spell", localeBase: "spell" },
-        { prefix: "define:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Dictionary Definition"), icon: "accessories-dictionary", example: "define:kernel -> 📕 Definition", localeBase: "define" },
+        { prefix: "kill ", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Kill Process"), icon: "process-stop", example: "kill firefox -> 🚫 Stop Process", key: "kill", runnerDomain: "plasma_runner_kill", runnerKey: "kill" },
+        { prefix: "spell ", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Spell Check"), icon: "tools-check-spelling", example: "spell hello -> ✅ Correct", key: "spell", runnerDomain: "plasma_runner_spellcheckrunner", runnerKey: "spell" },
+        { prefix: "define:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Dictionary Definition"), icon: "accessories-dictionary", example: "define:kernel -> 📕 Definition", runnerDomain: "plasma_runner_krunner_dictionary", runnerKey: "define" },
         { prefix: "unit:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unit Converter"), icon: "accessories-calculator", example: "10m to cm -> 1000 cm", key: "unit", localeBase: "unit" },
         { prefix: "shell:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Shell Commands"), icon: "utilities-terminal", example: "echo hi -> hi", key: "shell", localeBase: "shell" },
         { prefix: "power:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Power Management"), icon: "system-shutdown", key: "power", localeBase: "power" },
@@ -65,6 +65,10 @@ Item {
                 radius: Kirigami.Units.cornerRadius
 
                 property string displayPrefix: {
+                    if (modelData.runnerDomain) {
+                        var runnerTrigger = i18nd(modelData.runnerDomain, modelData.runnerKey)
+                        return runnerTrigger.toLowerCase() + " "
+                    }
                     if (modelData.localeBase) {
                         var loc = i18nd("plasma_applet_com.mcc45tr.filesearch", modelData.localeBase)
                         if (loc) {

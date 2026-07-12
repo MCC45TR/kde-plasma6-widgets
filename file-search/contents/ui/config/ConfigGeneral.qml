@@ -149,6 +149,8 @@ Item {
     property int cfg_panelHeight
     property int cfg_panelWidthStep
     property alias cfg_panelContentOpacity: panelContentOpacityCombo.currentIndex
+    property alias cfg_panelOrientationAutomatic: automaticPanelOrientationCheck.checked
+    property alias cfg_panelOrientation: panelOrientationCombo.currentIndex
     property alias cfg_showSearchButton: showSearchButtonCheck.checked
     property alias cfg_showSearchButtonBackground: showSearchButtonBackgroundCheck.checked
     property int cfg_userProfile
@@ -243,6 +245,8 @@ Item {
     property int cfg_panelHeightDefault
     property int cfg_panelWidthStepDefault
     property int cfg_panelContentOpacityDefault
+    property bool cfg_panelOrientationAutomaticDefault
+    property int cfg_panelOrientationDefault
     property bool cfg_showSearchButtonDefault
     property int cfg_userProfileDefault
     property int cfg_viewModeDefault
@@ -293,6 +297,11 @@ Item {
     // Internal
     property var previewSettings: ({})
     readonly property var iconSizeModel: [16, 22, 32, 48, 64, 128]
+    readonly property bool isInPanelConfiguration: {
+        if (typeof plasmoid === "undefined" || !plasmoid.rootItem)
+            return false
+        return plasmoid.rootItem.isInPanel === true
+    }
 
 
 
@@ -301,9 +310,9 @@ Item {
         queryPowerCapability("CanHibernate", function(available) { canHibernate = available })
         queryPowerCapability("CanReboot", function(available) { canReboot = available })
         try {
-            previewSettings = JSON.parse(cfg_previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
+            previewSettings = JSON.parse(cfg_previewSettings || '{"images": true, "videos": true, "audio": true, "text": true, "documents": true, "ebooks": true, "creative": true, "folders": true, "fonts": true, "executables": true, "applications": true}')
         } catch (e) {
-            previewSettings = {"images": false, "videos": false, "text": false, "documents": false, "applications": false}
+            previewSettings = {"images": true, "videos": true, "audio": true, "text": true, "documents": true, "ebooks": true, "creative": true, "folders": true, "fonts": true, "executables": true, "applications": true}
         }
         if (cfg_weatherApiKey || cfg_weatherApiKey2 || cfg_weatherProvider === "openweathermap" || cfg_weatherProvider === "weatherapi") {
             loadWeatherSecrets()
@@ -386,6 +395,28 @@ Item {
                         currentIndex: cfg_displayMode === 0 ? 0 : 1
                         onActivated: cfg_displayMode = currentIndex === 0 ? 0 : 2
                         Layout.fillWidth: true
+                    }
+
+                    ColumnLayout {
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Orientation")
+                        Layout.fillWidth: true
+                        visible: configGeneral.isInPanelConfiguration
+
+                        CheckBox {
+                            id: automaticPanelOrientationCheck
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Automatic")
+                        }
+
+                        ComboBox {
+                            id: panelOrientationCombo
+                            Layout.fillWidth: true
+                            enabled: !automaticPanelOrientationCheck.checked
+                            model: [
+                                i18nd("plasma_applet_com.mcc45tr.filesearch", "Horizontal"),
+                                i18nd("plasma_applet_com.mcc45tr.filesearch", "Left"),
+                                i18nd("plasma_applet_com.mcc45tr.filesearch", "Right")
+                            ]
+                        }
                     }
 
                     ColumnLayout {
@@ -1005,6 +1036,59 @@ Item {
                         opacity: 0.1
                         Layout.topMargin: Kirigami.Units.smallSpacing
                         Layout.bottomMargin: Kirigami.Units.smallSpacing
+                    }
+
+                    Repeater {
+                        model: [
+                            { key: "audio", title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Audio"), icon: "audio-x-generic", extensions: "mp3, flac, ogg, opus, wav, m4a, aac, wma" },
+                            { key: "ebooks", title: i18nd("plasma_applet_com.mcc45tr.filesearch", "eBooks and Comics"), icon: "application-epub+zip", extensions: "epub, mobi, azw3, fb2, cbz, cbr, djvu" },
+                            { key: "creative", title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Creative Files"), icon: "applications-graphics", extensions: "kra, ora, xcf, blend, exr" },
+                            { key: "folders", title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Folders"), icon: "folder", extensions: i18nd("plasma_applet_com.mcc45tr.filesearch", "Folder contents") },
+                            { key: "fonts", title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Fonts"), icon: "preferences-desktop-font", extensions: "ttf, otf, woff, woff2, pfb" },
+                            { key: "executables", title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Executable Files"), icon: "application-x-executable", extensions: "exe, msi, dll, AppImage" }
+                        ]
+
+                        delegate: ColumnLayout {
+                            required property var modelData
+                            Layout.fillWidth: true
+                            spacing: 0
+
+                            RowLayout {
+                                spacing: Kirigami.Units.largeSpacing
+                                Kirigami.Icon {
+                                    source: modelData.icon
+                                    Layout.preferredWidth: 32
+                                    Layout.preferredHeight: 32
+                                    Layout.alignment: Qt.AlignTop
+                                    Layout.topMargin: 4
+                                }
+                                ColumnLayout {
+                                    spacing: 0
+                                    CheckBox {
+                                        text: modelData.title
+                                        checked: previewSettings[modelData.key] || false
+                                        onToggled: updatePreviewSetting(modelData.key, checked)
+                                        enabled: masterPreviewSwitch.checked
+                                    }
+                                    Label {
+                                        text: modelData.extensions
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize * 0.9
+                                        color: Kirigami.Theme.textColor
+                                        opacity: 0.6
+                                        Layout.leftMargin: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                Layout.fillWidth: true
+                                height: 1
+                                color: Kirigami.Theme.textColor
+                                opacity: 0.1
+                                Layout.topMargin: Kirigami.Units.smallSpacing
+                                Layout.bottomMargin: Kirigami.Units.smallSpacing
+                            }
+                        }
                     }
 
                     // Applications

@@ -42,6 +42,10 @@ Item {
             dataManager.clearMetadataCache()
             refreshDebouncer.restart()
         }
+        function onDiscoverAvailableChanged() {
+            dataManager.settingsRevision++
+            refreshDebouncer.restart()
+        }
     }
 
     Connections {
@@ -72,6 +76,7 @@ Item {
     readonly property var fileOnlyCategories: ["Files", "Dosyalar", "Folders", "Klasörler", "Documents", "Belgeler", "Images", "Resimler", "Audio", "Ses", "Video", "Videolar", "Places", "Yerler"]
     // Cached i18n string to avoid calling i18nd() on every refresh cycle
     readonly property string _otherResultsLabel: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results")
+    readonly property string _applicationsLabel: i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications")
 
     function beginSearch(generation, startedAt) {
         activeQueryGeneration = generation;
@@ -132,6 +137,7 @@ Item {
         var display = (item.display || item.name || "").toString();
         var url = (item.url || "").toString();
         var decoration = (item.decoration || "").toString();
+        var subtext = (item.subtext || "").toString();
         var duplicateId = (item.duplicateId || "").toString();
         var indexedContent = (item.indexedContent || "").toString();
         var key = duplicateId || url || (category + "\u001f" + display);
@@ -144,6 +150,7 @@ Item {
                 && cached.sourceCategory === category
                 && cached.sourceUrl === url
                 && cached.sourceDecoration === decoration
+                && cached.sourceSubtext === subtext
                 && cached.indexedLength === indexedLength
                 && cached.indexedHead === indexedHead
                 && cached.indexedTail === indexedTail) {
@@ -161,6 +168,7 @@ Item {
             sourceCategory: category,
             sourceUrl: url,
             sourceDecoration: decoration,
+            sourceSubtext: subtext,
             indexedLength: indexedLength,
             indexedHead: indexedHead,
             indexedTail: indexedTail,
@@ -168,6 +176,7 @@ Item {
             lowerCategory: category.toLocaleLowerCase().replace(/\u0307/g, ""),
             lowerUrl: url.toLowerCase(),
             lowerDecoration: decoration.toLowerCase(),
+            lowerSubtext: subtext.toLocaleLowerCase().replace(/\u0307/g, ""),
             lowerIndexedContent: includeIndexedContent && indexedContent ? indexedContent.toLocaleLowerCase().replace(/\u0307/g, "") : "",
             indexedNormalized: !!includeIndexedContent || !indexedContent,
             extension: PreviewUtils.getExtension(url),
@@ -197,6 +206,7 @@ Item {
             searchAlgorithm,
             minResults,
             smartResultLimit,
+            logic.discoverAvailable,
             modelRevision,
             rssRevision,
             settingsRevision,
@@ -263,8 +273,12 @@ Item {
                     duplicateId: item.duplicateId || "",
                     index: item.itemIndex,
                     _normalizedDisplay: metadata.lowerDisplay,
+                    _normalizedUrl: metadata.lowerUrl,
+                    _normalizedSubtext: metadata.lowerSubtext,
+                    _normalizedCategory: metadata.lowerCategory,
                     _normalizedIndexedContent: metadata.lowerIndexedContent,
-                    _categoryPriority: metadata.categoryPriority
+                    _categoryPriority: metadata.categoryPriority,
+                    _isPinned: logic.isPinned(item.duplicateId || item.display || "")
                 });
             }
         }
@@ -349,6 +363,32 @@ Item {
         if (effectiveMaxResults > 0 && rawItems.length > effectiveMaxResults)
             rawItems = rawItems.slice(0, effectiveMaxResults);
 
+        var discoverQuery = searchText.trim();
+        var discoverFilterAllowed = activeFilterLower === "all" || activeFilterLower === "apps";
+        var discoverQueryAllowed = discoverQuery.length >= 2
+                && discoverQuery.length <= 80
+                && discoverQuery.indexOf(":") === -1
+                && !isFileOnlyMode
+                && !isRSSOnlyMode;
+        if (logic.discoverAvailable && discoverFilterAllowed && discoverQueryAllowed
+                && !hasStrongApplicationMatch(rawItems, discoverQuery)) {
+            var discoverResult = {
+                display: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search in Discover: %1", discoverQuery),
+                decoration: "plasmadiscover",
+                category: _applicationsLabel,
+                url: "",
+                urls: [],
+                subtext: i18nd("plasma_applet_com.mcc45tr.filesearch", "Download Software"),
+                duplicateId: "discover:" + Utils.normalized(discoverQuery),
+                index: -2,
+                _fixedRelevance: 0.08,
+                _categoryPriority: 10000
+            };
+            if (effectiveMaxResults > 0 && rawItems.length >= effectiveMaxResults)
+                rawItems = rawItems.slice(0, Math.max(0, effectiveMaxResults - 1));
+            rawItems.push(discoverResult);
+        }
+
         for (var j = 0; j < rawItems.length; j++) {
             var sortedItem = rawItems[j];
             var sortedCat = sortedItem.category;
@@ -423,8 +463,11 @@ Item {
             metadataCacheMisses: metadataCacheMisses - queryCacheMissesStart,
             metadataCacheSize: itemMetadataCacheSize,
             rssCacheRebuildCount: logic.rssCacheRebuildCount || 0,
-            previewQueueLength: logic.snippetQueue ? logic.snippetQueue.length : 0,
-            previewActiveRequests: logic.snippetActiveRequests || 0,
+            previewQueueLength: (logic.snippetQueue ? logic.snippetQueue.length : 0)
+                    + (logic.thumbnailQueue ? logic.thumbnailQueue.length : 0),
+            previewActiveRequests: (logic.snippetActiveRequests || 0) + (logic.thumbnailActiveRequests || 0),
+            thumbnailQueueLength: logic.thumbnailQueue ? logic.thumbnailQueue.length : 0,
+            thumbnailActiveRequests: logic.thumbnailActiveRequests || 0,
             inputToIssueMs: queryIssuedAt > 0 && searchStartTime > 0 ? queryIssuedAt - searchStartTime : -1,
             backendToFirstRowMs: firstModelEventAt > 0 && queryIssuedAt > 0 ? firstModelEventAt - queryIssuedAt : -1,
             modelSettleMs: lastModelEventAt > 0 && firstModelEventAt > 0 ? lastModelEventAt - firstModelEventAt : -1,
@@ -449,6 +492,19 @@ Item {
             logic.updateTelemetry(lastLatency);
             searchStartTime = 0;
         });
+    }
+
+    function hasStrongApplicationMatch(items, query) {
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (item.index === -2)
+                continue;
+            if (!Utils.isAppCategory(item.category || "", item.url || "", item.duplicateId || "", item.decoration || ""))
+                continue;
+            if (SimilarityUtils.advancedResultScore(query, item) >= 0.88)
+                return true;
+        }
+        return false;
     }
 
     // Debounce timer for refreshGroups to prevent excessive updates

@@ -1,17 +1,28 @@
 .import "utils.js" as Utils
 
-var IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"];
-var VIDEO_EXTENSIONS = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg", "m4v"];
+var IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tif", "tiff", "avif", "heic", "jxl", "exr"];
+var VIDEO_EXTENSIONS = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg", "m4v", "3gp", "ogv"];
+var AUDIO_EXTENSIONS = ["mp3", "flac", "ogg", "opus", "wav", "m4a", "aac", "wma", "aiff", "ape"];
 var TEXT_EXTENSIONS = ["txt", "md", "log", "ini", "cfg", "conf", "json", "xml", "yml", "yaml", "qml", "js", "ts", "py", "cpp", "c", "cc", "h", "hpp", "sh"];
-var DOCUMENT_EXTENSIONS = ["pdf", "odt", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "ods", "odp", "csv", "cbz", "epub"];
+var DOCUMENT_EXTENSIONS = ["pdf", "ps", "eps", "dvi", "odt", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "ods", "odp", "csv"];
+var EBOOK_EXTENSIONS = ["epub", "mobi", "azw", "azw3", "fb2", "cbz", "cbr", "djvu", "djv"];
+var CREATIVE_EXTENSIONS = ["kra", "ora", "xcf", "blend"];
+var FONT_EXTENSIONS = ["ttf", "otf", "woff", "woff2", "pfb"];
+var EXECUTABLE_EXTENSIONS = ["exe", "msi", "dll", "appimage"];
 var APPLICATION_EXTENSIONS = ["desktop"];
 
 function normalizeSettings(settings) {
     return {
         images: !!(settings && settings.images),
         videos: !!(settings && settings.videos),
+        audio: !!(settings && settings.audio),
         text: !!(settings && settings.text),
         documents: !!(settings && settings.documents),
+        ebooks: !!(settings && settings.ebooks),
+        creative: !!(settings && settings.creative),
+        folders: !!(settings && settings.folders),
+        fonts: !!(settings && settings.fonts),
+        executables: !!(settings && settings.executables),
         applications: !!(settings && settings.applications)
     };
 }
@@ -75,6 +86,10 @@ function isVideoExtension(ext) {
     return containsExt(VIDEO_EXTENSIONS, ext);
 }
 
+function isAudioExtension(ext) {
+    return containsExt(AUDIO_EXTENSIONS, ext);
+}
+
 function isTextExtension(ext) {
     return containsExt(TEXT_EXTENSIONS, ext);
 }
@@ -84,24 +99,40 @@ function isDocumentExtension(ext) {
 }
 
 function isDocumentLikeExtension(ext) {
-    return isDocumentExtension(ext) || isTextExtension(ext);
+    return isDocumentExtension(ext) || isTextExtension(ext) || containsExt(EBOOK_EXTENSIONS, ext);
 }
 
-function isPreviewTypeEnabled(ext, settings) {
-    var normalized = normalizeSettings(settings);
-    if (!ext)
-        return false;
+function previewKind(urlOrPath, category) {
+    var ext = getExtension(urlOrPath);
+    if (Utils.isFolderCategory(category, urlOrPath, ""))
+        return "folders";
     if (isImageExtension(ext))
-        return normalized.images;
+        return "images";
     if (isVideoExtension(ext))
-        return normalized.videos;
+        return "videos";
+    if (isAudioExtension(ext))
+        return "audio";
     if (isTextExtension(ext))
-        return normalized.text;
+        return "text";
     if (isDocumentExtension(ext))
-        return normalized.documents;
-    if (containsExt(APPLICATION_EXTENSIONS, ext))
-        return normalized.applications;
-    return false;
+        return "documents";
+    if (containsExt(EBOOK_EXTENSIONS, ext))
+        return "ebooks";
+    if (containsExt(CREATIVE_EXTENSIONS, ext))
+        return "creative";
+    if (containsExt(FONT_EXTENSIONS, ext))
+        return "fonts";
+    if (containsExt(EXECUTABLE_EXTENSIONS, ext))
+        return "executables";
+    if (containsExt(APPLICATION_EXTENSIONS, ext) || Utils.isAppCategory(category, urlOrPath, "", ""))
+        return "applications";
+    return "";
+}
+
+function isPreviewTypeEnabled(ext, settings, category, urlOrPath) {
+    var normalized = normalizeSettings(settings);
+    var kind = previewKind(urlOrPath || (ext ? "file." + ext : ""), category || "");
+    return kind ? normalized[kind] === true : false;
 }
 
 function isPreviewAvailable(urlOrPath, category, settings) {
@@ -110,11 +141,11 @@ function isPreviewAvailable(urlOrPath, category, settings) {
     if (!path && !isApplication)
         return false;
 
-    var ext = getExtension(path);
-    if (isApplication || ext === "desktop") {
-        return !!(settings && settings.applications);
-    }
-    return isPreviewTypeEnabled(ext, settings);
+    var kind = previewKind(path || urlOrPath, category);
+    if (isApplication && !kind)
+        kind = "applications";
+    var normalized = normalizeSettings(settings);
+    return !!kind && normalized[kind] === true;
 }
 
 function getThumbnailCacheSource(urlOrPath, thumbnailCacheBase) {
@@ -129,7 +160,7 @@ function getThumbnailCacheSource(urlOrPath, thumbnailCacheBase) {
     return "file://" + encodeURI(base + "/normal/" + Qt.md5(uri) + ".png").replace(/#/g, "%23").replace(/\?/g, "%3F");
 }
 
-function getPreviewSource(urlOrPath, previewEnabled, settings, thumbnailCacheBase) {
+function getPreviewSource(urlOrPath, previewEnabled, settings, thumbnailCacheBase, category) {
     if (!previewEnabled)
         return "";
 
@@ -138,15 +169,16 @@ function getPreviewSource(urlOrPath, previewEnabled, settings, thumbnailCacheBas
         return "";
 
     var ext = getExtension(path);
-    if (!isPreviewTypeEnabled(ext, settings))
+    if (!isPreviewTypeEnabled(ext, settings, category, path))
         return "";
 
     if (isImageExtension(ext))
         return toLocalFileUrl(path);
 
-    // KIO writes freedesktop thumbnails here for PDFs/videos and other heavy
-    // formats. If the cache entry is absent, QML Image falls back to the icon.
-    if (isVideoExtension(ext) || isDocumentExtension(ext))
+    // Reuse a freedesktop cache entry immediately when Dolphin has already
+    // generated one. FilePreviewSource requests a fresh KIO thumbnail in
+    // parallel for every other enabled type.
+    if (thumbnailCacheBase)
         return getThumbnailCacheSource(path, thumbnailCacheBase);
 
     return "";

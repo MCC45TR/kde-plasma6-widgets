@@ -489,9 +489,19 @@ FocusScope {
                                     property bool previewActive: resultsTileRoot.previewEnabled && isPreviewAvailable && (resultsTileRoot.previewInlineMode === 0 ? (tileContentLoader.item && tileContentLoader.item.hovered) : tileDelegate.isSelected)
                                     property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.url || "") : ""
                                     property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.url || "") : ""
-                                    property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings, resultsTileRoot.thumbnailCacheBase) : ""
+                                    property string previewSource: previewResolver.source
                                     property bool isTextFile: {
                                         return PreviewUtils.isTextExtension(PreviewUtils.getExtension(previewPath));
+                                    }
+
+                                    FilePreviewSource {
+                                        id: previewResolver
+                                        logic: resultsTileRoot.logic
+                                        fileUrl: (modelData.url || "").toString()
+                                        category: (modelData.category || "").toString()
+                                        active: tileDelegate.previewActive
+                                        settings: resultsTileRoot.previewSettings
+                                        freedesktopThumbnailBase: resultsTileRoot.thumbnailCacheBase
                                     }
 
                                     function resolvedFilePath() {

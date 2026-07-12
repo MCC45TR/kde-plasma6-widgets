@@ -30,6 +30,9 @@ msgstr "Ara..."
 msgid "Search"
 msgstr "Ara"
 
+msgid "Search for files"
+msgstr "Arama yapın"
+
 #: contents/ui/components/DebugOverlay.qml:41
 msgid "Saved!"
 msgstr "Kaydedildi!"
@@ -466,6 +469,9 @@ msgstr "Kabuk komutlarını doğrudan çalıştır"
 #: contents/ui/components/QueryHints.qml:59
 msgid "Calculator"
 msgstr "Hesap Makinesi"
+
+msgid "Calculate"
+msgstr "Hesapla"
 
 #: contents/ui/components/QueryHints.qml:59
 msgid "Perform mathematical calculations"
@@ -995,6 +1001,18 @@ msgstr "Panel Yüksekliği"
 #: contents/ui/config/ConfigGeneral.qml:291
 msgid "Automatic"
 msgstr "Otomatik"
+
+msgid "Panel Orientation"
+msgstr "Panel Yönü"
+
+msgid "Horizontal"
+msgstr "Yatay"
+
+msgid "Left"
+msgstr "Sol"
+
+msgid "Right"
+msgstr "Sağ"
 
 #: contents/ui/config/ConfigGeneral.qml:336
 msgid "Panel Preview"
@@ -1768,6 +1786,33 @@ msgstr "Ultra Geniş Mod (Maksimum Kapsama)"
 #, fuzzy
 #~ msgid "Exact"
 #~ msgstr "Tam Eşleşme"
+
+msgid "Audio"
+msgstr "Ses"
+
+msgid "eBooks and Comics"
+msgstr "e-Kitaplar ve Çizgi Romanlar"
+
+msgid "Creative Files"
+msgstr "Yaratıcı Dosyalar"
+
+msgid "Folder contents"
+msgstr "Klasör içerikleri"
+
+msgid "Fonts"
+msgstr "Yazıtipleri"
+
+msgid "Executable Files"
+msgstr "Çalıştırılabilir Dosyalar"
+
+msgid "Search in Discover: %1"
+msgstr "Discover'da ara: %1"
+
+msgid "Download Software"
+msgstr "Yazılımı İndir"
+
+msgid "Advanced Relevance"
+msgstr "Gelişmiş Alaka"
 
 #~ msgid "Files modified today"
 #~ msgstr "Bugün değiştirilen dosyalar"

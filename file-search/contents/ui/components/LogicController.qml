@@ -53,6 +53,8 @@ Item {
     readonly property string currentActivityName: currentActivityId === "global" ? "Global" : currentActivityId
     // ===== DEPENDENCY CHECKS =====
     property bool manInstalled: true
+    property bool discoverAvailable: false
+    property bool discoverCheckStarted: false
     // ===== RSS MANAGEMENT =====
     property var rssSources: []
     property var rssCache: []
@@ -72,6 +74,12 @@ Item {
         return path;
     }
     readonly property string weatherCachePath: weatherCacheBase + "/cache.json"
+    readonly property string thumbnailCacheBase: {
+        var path = StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.cache/com.mcc45tr.filesearch/previews";
+        if (path.indexOf("file://") === 0)
+            return path.replace(/^file:\/\/\/?/, "/");
+        return path;
+    }
     property string weatherCache: ""
     property bool weatherCacheLoaded: false
     property var syncQueue: []
@@ -85,7 +93,8 @@ Item {
     property bool rssMergeRequested: false
     property var rssMergeWaiters: []
     property string lastPersistedRssSources: ""
-    readonly property int rssMaxConcurrentSyncs: 2
+    property bool rssBatchWroteData: false
+    readonly property int rssMaxConcurrentSyncs: 3
 
     function completeRssBatchIfIdle() {
         if (!isSyncing || syncQueue.length !== 0 || pendingSyncs !== 0)
@@ -98,6 +107,23 @@ Item {
         var completedBatchQueued = rssBatchQueued;
         var completedBatchCount = rssBatchCompleted;
         persistRssSources();
+        // When every source answered 304 Not Modified there is nothing new to
+        // merge or re-parse on the plasmashell main thread.
+        if (!rssBatchWroteData && rssCache.length > 0) {
+            if (debugEnabled && completedBatchStartedAt > 0) {
+                console.info("FileSearch RSS batch:", JSON.stringify({
+                    id: completedBatchId,
+                    queued: completedBatchQueued,
+                    completed: completedBatchCount,
+                    merged: false,
+                    unchanged: true,
+                    durationMs: Date.now() - completedBatchStartedAt
+                }));
+            }
+            plasmoidConfig.rssLastSyncAll = new Date().getTime();
+            rssBatchStartedAt = 0;
+            return;
+        }
         mergeCombinedCache(function(success) {
             if (success)
                 updateCombinedCache(true);
@@ -133,6 +159,14 @@ Item {
     readonly property int snippetCacheLimit: 32
     readonly property int snippetMaxConcurrentRequests: 2
     readonly property int snippetCacheTtlMs: 60000
+    property var thumbnailCache: ({})
+    property var thumbnailCacheOrder: []
+    property var thumbnailPendingCallbacks: ({})
+    property var thumbnailQueue: []
+    property int thumbnailActiveRequests: 0
+    readonly property int thumbnailCacheLimit: 128
+    readonly property int thumbnailMaxConcurrentRequests: 2
+    readonly property int thumbnailCacheTtlMs: 30000
 
     // Config validation
     function validateConfig() {
@@ -248,6 +282,23 @@ Item {
 
     function runExecutable(cmd, callback) {
         return processRunner.run(cmd, callback);
+    }
+
+    function ensureDiscoverAvailability() {
+        if (discoverCheckStarted)
+            return;
+        discoverCheckStarted = true;
+        runExecutable("command -v plasma-discover", function(output, isFinished, exitCode) {
+            if (isFinished)
+                discoverAvailable = exitCode === 0 && String(output || "").trim().length > 0;
+        });
+    }
+
+    function openDiscoverSearch(query) {
+        var term = String(query || "").trim();
+        if (!discoverAvailable || !term)
+            return;
+        runShellCommand("plasma-discover --search " + shellEscape(term));
     }
 
     // ===== FILE OPERATIONS =====
@@ -584,9 +635,11 @@ Item {
         plasmoidConfig.rssCache = "";
         plasmoidConfig.rssLastSyncAll = 0;
 
-        // Reset lastSync for all sources
+        // Reset sync bookkeeping for all sources
         for (var i = 0; i < rssSources.length; i++) {
             rssSources[i].lastSync = 0;
+            rssSources[i].lastAttempt = 0;
+            rssSources[i].failCount = 0;
         }
         persistRssSources();
     }
@@ -733,9 +786,19 @@ Item {
             var interval = source.syncInterval || plasmoidConfig.rssSyncInterval || 60;
             var intervalMs = interval * 60 * 1000;
             var lastSync = source.lastSync || 0;
-            if (now - lastSync > intervalMs)
-                syncSource(i);
+            if (now - lastSync <= intervalMs)
+                continue;
 
+            // Exponential backoff keeps a failing feed from being retried on
+            // every scheduler tick: 2, 4, 8, 16 then 32 minutes, never longer
+            // than the source's own interval.
+            var failures = source.failCount || 0;
+            if (failures > 0) {
+                var backoffMs = Math.min(intervalMs, 60000 * Math.pow(2, Math.min(failures, 5)));
+                if (now - (source.lastAttempt || 0) < backoffMs)
+                    continue;
+            }
+            syncSource(i);
         }
     }
 
@@ -747,6 +810,7 @@ Item {
             rssBatchStartedAt = Date.now();
             rssBatchQueued = 0;
             rssBatchCompleted = 0;
+            rssBatchWroteData = false;
         }
         if (syncQueue.indexOf(source.url) === -1) {
             syncQueue.push(source.url);
@@ -782,13 +846,22 @@ Item {
 
         runExecutable(cmd, function(stdout, isFinished, exitCode) {
             if (isFinished) {
-                if (exitCode === 0) {
-                    for (var updateIndex = 0; updateIndex < rssSources.length; updateIndex++) {
-                        if (rssSources[updateIndex].url === sourceUrl) {
-                            rssSources[updateIndex].lastSync = new Date().getTime();
-                            break
-                        }
+                for (var updateIndex = 0; updateIndex < rssSources.length; updateIndex++) {
+                    if (rssSources[updateIndex].url !== sourceUrl)
+                        continue;
+
+                    rssSources[updateIndex].lastAttempt = new Date().getTime();
+                    if (exitCode === 0) {
+                        rssSources[updateIndex].lastSync = new Date().getTime();
+                        rssSources[updateIndex].failCount = 0;
+                        if (String(stdout || "").indexOf("NOT_MODIFIED") === -1)
+                            logicRoot.rssBatchWroteData = true;
+
+                    } else {
+                        rssSources[updateIndex].failCount = (rssSources[updateIndex].failCount || 0) + 1;
+                        console.warn("FileSearch RSS: sync failed for", sourceUrl, "exit", exitCode, String(stdout || "").split("\n")[0]);
                     }
+                    break;
                 }
                 logicRoot.rssBatchCompleted++;
                 logicRoot.pendingSyncs = Math.max(0, logicRoot.pendingSyncs - 1);
@@ -1017,6 +1090,101 @@ Item {
         snippetRequestStartedAt[path] = Date.now();
         snippetQueue.push({ path: path });
         pumpSnippetQueue();
+    }
+
+    function thumbnailerScriptPath() {
+        var path = Qt.resolvedUrl("../../tools/thumbnailer.sh").toString();
+        return path.indexOf("file://") === 0 ? path.replace(/^file:\/\/\/?/, "/") : path;
+    }
+
+    function touchThumbnailCacheKey(path) {
+        var order = thumbnailCacheOrder.slice();
+        var oldIndex = order.indexOf(path);
+        if (oldIndex !== -1)
+            order.splice(oldIndex, 1);
+        order.push(path);
+        while (order.length > thumbnailCacheLimit) {
+            var evicted = order.shift();
+            delete thumbnailCache[evicted];
+        }
+        thumbnailCacheOrder = order;
+    }
+
+    function finishThumbnailRequest(path, previewPath) {
+        if (previewPath) {
+            thumbnailCache[path] = {
+                path: previewPath,
+                cachedAt: Date.now()
+            };
+            touchThumbnailCacheKey(path);
+        }
+        var callbacks = thumbnailPendingCallbacks[path] || [];
+        delete thumbnailPendingCallbacks[path];
+        thumbnailActiveRequests = Math.max(0, thumbnailActiveRequests - 1);
+        for (var i = 0; i < callbacks.length; i++) {
+            try {
+                callbacks[i](previewPath);
+            } catch (e) {
+                console.warn("LogicController: thumbnail callback failed:", e);
+            }
+        }
+        pumpThumbnailQueue();
+    }
+
+    function startThumbnailRequest(request) {
+        var key = Qt.md5("file://" + encodeURI(request.path));
+        var command = "sh " + shellEscape(thumbnailerScriptPath())
+                + " " + shellEscape(request.path)
+                + " " + shellEscape(thumbnailCacheBase)
+                + " " + shellEscape(key);
+        runExecutable(command, function(output, isFinished, exitCode) {
+            if (!isFinished)
+                return;
+            var previewPath = "";
+            if (exitCode === 0) {
+                var lines = String(output || "").split("\n");
+                for (var i = lines.length - 1; i >= 0; i--) {
+                    if (lines[i].indexOf("READY:") === 0) {
+                        var candidate = lines[i].substring(6).trim();
+                        if (candidate.indexOf(thumbnailCacheBase + "/") === 0)
+                            previewPath = candidate;
+                        break;
+                    }
+                }
+            }
+            finishThumbnailRequest(request.path, previewPath);
+        });
+    }
+
+    function pumpThumbnailQueue() {
+        while (thumbnailActiveRequests < thumbnailMaxConcurrentRequests && thumbnailQueue.length > 0) {
+            var request = thumbnailQueue.shift();
+            if (!request || !thumbnailPendingCallbacks[request.path])
+                continue;
+            thumbnailActiveRequests++;
+            startThumbnailRequest(request);
+        }
+    }
+
+    function requestFileThumbnail(filePath, callback) {
+        var path = Utils.decodeLocalPath(filePath).trim();
+        if (path.indexOf("/") !== 0) {
+            callback("");
+            return;
+        }
+        var cached = thumbnailCache[path];
+        if (cached && Date.now() - cached.cachedAt < thumbnailCacheTtlMs) {
+            touchThumbnailCacheKey(path);
+            callback(cached.path);
+            return;
+        }
+        if (thumbnailPendingCallbacks[path]) {
+            thumbnailPendingCallbacks[path].push(callback);
+            return;
+        }
+        thumbnailPendingCallbacks[path] = [callback];
+        thumbnailQueue.push({ path: path });
+        pumpThumbnailQueue();
     }
 
     Timer {

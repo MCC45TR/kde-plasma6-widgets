@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import "../js/PanelLayoutUtils.js" as PanelLayoutUtils
 
 // Compact panel representation for the File Search widget
 Item {
@@ -23,6 +24,8 @@ Item {
     required property bool showSearchButton
     required property bool showSearchButtonBackground
     required property real contentOpacity
+    required property bool isVerticalPanel
+    required property int panelRotation
     // New properties for animated ticker
     property var logic: null
     property bool rssPlaceholderCycling: true
@@ -34,6 +37,39 @@ Item {
     required property int maxChars
 
     readonly property bool isMediumMode: !isButtonMode && !isWideMode && !isExtraWideMode && !isUltraWideMode
+    readonly property real availableTextWidth: Math.max(0, mainButton.width
+        - ((isWideMode || isExtraWideMode || isUltraWideMode) ? 20 : 8)
+        - (showSearchButton ? mainButton.height : 0))
+    readonly property string adaptivePlaceholder: PanelLayoutUtils.longestFittingText(
+        availableTextWidth,
+        [shortPlaceholderMetrics.text, compactPlaceholderMetrics.text, mediumPlaceholderMetrics.text, longPlaceholderMetrics.text],
+        [shortPlaceholderMetrics.width, compactPlaceholderMetrics.width, mediumPlaceholderMetrics.width, longPlaceholderMetrics.width]
+    )
+
+    TextMetrics {
+        id: shortPlaceholderMetrics
+        font.family: compactRoot.fontFamily
+        font.pixelSize: compactRoot.responsiveFontSize
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search")
+    }
+
+    TextMetrics {
+        id: compactPlaceholderMetrics
+        font: shortPlaceholderMetrics.font
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...")
+    }
+
+    TextMetrics {
+        id: mediumPlaceholderMetrics
+        font: shortPlaceholderMetrics.font
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search for files")
+    }
+
+    TextMetrics {
+        id: longPlaceholderMetrics
+        font: shortPlaceholderMetrics.font
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...")
+    }
 
     readonly property bool showMediumModeWeatherTicker: compactRoot.isMediumMode &&
         compactRoot.logic &&
@@ -73,10 +109,11 @@ Item {
     // Main Button Container (for non-button modes)
     Rectangle {
         id: mainButton
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        height: compactRoot.panelHeight > 0 ? compactRoot.panelHeight : parent.height
+        objectName: "mainButton"
+        anchors.centerIn: parent
+        width: compactRoot.isVerticalPanel ? parent.height : parent.width
+        height: compactRoot.isVerticalPanel ? parent.width : (compactRoot.panelHeight > 0 ? compactRoot.panelHeight : parent.height)
+        rotation: compactRoot.panelRotation
         radius: compactRoot.panelRadius === 0 ? height / 2 : (compactRoot.panelRadius === 1 ? 12 : (compactRoot.panelRadius === 2 ? 6 : 0))
         color: Qt.rgba(compactRoot.bgColor.r, compactRoot.bgColor.g, compactRoot.bgColor.b, mainMouse.containsMouse ? 1.0 : 0.95)
         visible: !compactRoot.isButtonMode
@@ -130,7 +167,7 @@ Item {
                 textColor: compactRoot.textColor
                 fontSize: compactRoot.responsiveFontSize
                 fontFamily: compactRoot.fontFamily
-                defaultText: (compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : (compactRoot.isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
+                defaultText: compactRoot.adaptivePlaceholder
                 horizontalAlignment: (compactRoot.isWideMode || compactRoot.isExtraWideMode || compactRoot.isUltraWideMode) ? Text.AlignLeft : Text.AlignHCenter
 
                 rightMarginValue: 0

@@ -1,0 +1,81 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPlugin": {
+        "Id": "com.mcc45tr.weatherbreeze",
+        "Name": "Weather Breeze",
+        "Version": "1.0.0",
+        "Category": "Utilities",
+        "Description": "A native Breeze-styled Plasma weather widget with daily and hourly forecasts",
+        "Icon": "weather",
+        "License": "GPL-3.0",
+        "Website": "https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/weather-breeze",
+        "Authors": [
+            {
+                "Name": "MCC45TR",
+                "Email": "mcc45tr@gmail.com"
+            }
+        ],
+        "Name[tr]": "Weather Breeze",
+        "Name[de]": "MWetter",
+        "Name[fr]": "MMétéo",
+        "Name[it]": "MMeteo",
+        "Name[el]": "Καιρός",
+        "Name[az]": "MHava",
+        "Name[ja]": "天気",
+        "Name[zh]": "天气",
+        "Name[hy]": "Եղանակ",
+        "Name[ru]": "Погода",
+        "Name[ro]": "MVremea",
+        "Name[es]": "MClima",
+        "Name[pt]": "MClima",
+        "Name[hi]": "मौसम",
+        "Name[bn]": "আবহাওয়া",
+        "Name[ur]": "موسم",
+        "Name[id]": "MCuaca",
+        "Name[fa]": "آب و هوا",
+        "Name[cs]": "MPočasí",
+        "Description[tr]": "Breeze görünümüne sahip yerel Plasma hava durumu araç takımı",
+        "Description[de]": "Modernes Wetter-Widget mit Google-Wettersymbolen",
+        "Description[fr]": "Widget météo moderne avec icônes Google Weather",
+        "Description[it]": "Widget meteo moderno con icone Google Weather",
+        "Description[el]": "Σύγχρονο widget καιρού με εικονίδια Google Weather",
+        "Description[az]": "Google Weather ikonları ilə müasir hava widget'ı",
+        "Description[ja]": "Googleウェザーアイコンを使用した最新の天気ウィジェット",
+        "Description[zh]": "带有谷歌天气图标的现代天气小部件",
+        "Description[ru]": "Современный виджет погоды с иконками Google Weather",
+        "Description[ro]": "Widget modern de vreme cu pictograme Google Weather",
+        "Description[es]": "Widget de clima moderno con iconos de Google Weather",
+        "Description[pt]": "Widget de clima moderno com ícones do Google Weather",
+        "Description[hi]": "Google Weather आइकन के साथ आधुनिक मौसम विजेट",
+        "Description[cs]": "Moderní widget počasí s ikonami Google Weather"
+    },
+    "X-Plasma-ConfigModel": [
+        {
+            "Key": "General",
+            "Name": "General",
+            "Name[tr]": "Genel",
+            "Name[de]": "Allgemein",
+            "Name[fr]": "Général",
+            "Source": "ui/config/ConfigGeneral.qml"
+        },
+        {
+            "Key": "Appearance",
+            "Name": "Appearance",
+            "Name[tr]": "Görünüm",
+            "Name[de]": "Erscheinungsbild",
+            "Name[fr]": "Apparence",
+            "Source": "ui/config/ConfigAppearance.qml"
+        },
+        {
+            "Key": "Notifications",
+            "Name": "Notifications",
+            "Name[tr]": "Bildirimler",
+            "Name[de]": "Benachrichtigungen",
+            "Name[fr]": "Notifications",
+            "Source": "ui/config/ConfigNotifications.qml"
+        }
+    ]
+}

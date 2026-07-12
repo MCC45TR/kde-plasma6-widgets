@@ -216,11 +216,21 @@ PlasmaComponents.ScrollView {
             property bool previewActive: resultsListRoot.previewEnabled && !isRSS && isPreviewAvailable && (resultsListRoot.previewInlineMode === 0 ? resultMouseArea.containsMouse : (resultsList.currentIndex === index))
             property bool showInlinePreview: resultsListRoot.previewEnabled && resultsListRoot.previewShowResults && resultsListRoot.previewInlineMode === 1 && !isRSS && isPreviewAvailable && (resultsList.currentIndex === index)
             property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.url || "") : ""
-            property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsListRoot.previewEnabled, resultsListRoot.previewSettings, resultsListRoot.thumbnailCacheBase) : ""
+            property string previewSource: previewResolver.source
             property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.url || "") : ""
             property int snippetRequestToken: 0
             property bool isTextFile: {
                 return PreviewUtils.isTextExtension(PreviewUtils.getExtension(previewPath));
+            }
+
+            FilePreviewSource {
+                id: previewResolver
+                logic: resultsListRoot.logic
+                fileUrl: (modelData.url || "").toString()
+                category: (modelData.category || "").toString()
+                active: delegateRoot.previewActive
+                settings: resultsListRoot.previewSettings
+                freedesktopThumbnailBase: resultsListRoot.thumbnailCacheBase
             }
 
             function loadTextSnippet() {

@@ -175,7 +175,7 @@ Item {
                             readonly property bool previewActive: historyList.previewEnabled && isPreviewAvailable && (historyList.previewInlineMode === 0 ? itemMouseArea.containsMouse : historyItemDelegate.isSelected)
                             readonly property bool showInlinePreview: historyList.previewEnabled && historyList.previewShowHistory && historyList.previewInlineMode === 1 && isPreviewAvailable && historyItemDelegate.isSelected
                             readonly property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.filePath || modelData.url || "") : ""
-                            readonly property string previewSource: previewActive ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyList.previewEnabled, historyList.previewSettings, historyList.thumbnailCacheBase) : ""
+                            readonly property string previewSource: previewResolver.source
                             readonly property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.filePath || modelData.url || "") : ""
 
                             onShowInlinePreviewChanged: {
@@ -189,6 +189,16 @@ Item {
 
                             readonly property bool isTextFile: {
                                 return PreviewUtils.isTextExtension(PreviewUtils.getExtension(previewPath));
+                            }
+
+                            FilePreviewSource {
+                                id: previewResolver
+                                logic: historyList.logic
+                                fileUrl: (modelData.filePath || modelData.url || "").toString()
+                                category: (modelData.category || "").toString()
+                                active: historyItemDelegate.previewActive
+                                settings: historyList.previewSettings
+                                freedesktopThumbnailBase: historyList.thumbnailCacheBase
                             }
                             property int snippetRequestToken: 0
 

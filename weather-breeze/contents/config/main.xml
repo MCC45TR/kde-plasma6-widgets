@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="apiKey" type="String">
+      <default></default>
+      <label>OpenWeatherMap API Key</label>
+    </entry>
+
+    <entry name="apiKey2" type="String">
+      <default></default>
+      <label>WeatherAPI.com API Key (Fallback)</label>
+    </entry>
+
+    <entry name="weatherProvider" type="String">
+      <default>openmeteo</default>
+      <label>Weather Provider</label>
+    </entry>
+
+    <entry name="locationMode" type="String">
+      <default>auto</default>
+      <label>Location Mode (auto or manual)</label>
+    </entry>
+
+    <entry name="location" type="String">
+      <default></default>
+      <label>Location 1</label>
+    </entry>
+
+    <entry name="location2" type="String">
+      <default></default>
+      <label>Location 2</label>
+    </entry>
+
+    <entry name="location3" type="String">
+      <default></default>
+      <label>Location 3</label>
+    </entry>
+
+    <entry name="units" type="String">
+      <default>metric</default>
+      <label>Units</label>
+    </entry>
+
+    <entry name="useSystemUnits" type="Bool">
+      <default>true</default>
+      <label>Use System Units</label>
+    </entry>
+
+    <entry name="updateInterval" type="Int">
+      <default>30</default>
+      <label>Update Interval (minutes)</label>
+    </entry>
+
+    <entry name="cachedWeather" type="String">
+      <default></default>
+      <label>Cached Weather Data</label>
+    </entry>
+
+    <entry name="lastUpdate" type="Double">
+      <default>0</default>
+      <label>Last Update Timestamp</label>
+    </entry>
+
+    <entry name="iconPack" type="String">
+      <default>default</default>
+      <label>Icon Pack</label>
+    </entry>
+
+    <entry name="useCustomFont" type="Bool">
+      <default>false</default>
+      <label>Use Custom Font</label>
+    </entry>
+
+    <entry name="customFontFamily" type="String">
+      <default></default>
+      <label>Custom Font Family</label>
+    </entry>
+
+    <entry name="backgroundOpacity" type="Double">
+      <default>1.0</default>
+      <label>Background Opacity</label>
+    </entry>
+
+    <entry name="panelMode" type="String">
+      <default>simple</default>
+      <label>Panel Representation Mode</label>
+    </entry>
+
+    <entry name="layoutMode" type="String">
+      <default>auto</default>
+      <label>Widget Layout Mode (auto, small, wide, large)</label>
+    </entry>
+
+    <entry name="panelFontSize" type="Int">
+      <default>0</default>
+      <label>Panel Font Size (0 for auto)</label>
+    </entry>
+
+    <entry name="panelIconSize" type="Int">
+      <default>0</default>
+      <label>Panel Icon Size (0 for auto)</label>
+    </entry>
+
+    <entry name="forecastDays" type="Int">
+      <default>12</default>
+      <label>Number of days to show in forecast</label>
+    </entry>
+
+    <entry name="edgeMargin" type="Int">
+      <default>10</default>
+      <label>Widget Edge Margin</label>
+    </entry>
+
+    <entry name="showForecastUnits" type="Bool">
+      <default>true</default>
+      <label>Show Units in Forecast</label>
+    </entry>
+
+    <entry name="cornerRadius" type="String">
+      <default>normal</default>
+      <label>Corner Radius Mode (normal, small, square)</label>
+    </entry>
+
+    <!-- Notifications -->
+    <entry name="notifyEnabled" type="Bool">
+      <default>false</default>
+      <label>Enable Weather Notifications</label>
+    </entry>
+
+    <entry name="notifyRoutineEnabled" type="Bool">
+      <default>false</default>
+      <label>Enable Routine Daily Notification</label>
+    </entry>
+
+    <entry name="notifyRoutineTime1" type="Int">
+      <default>480</default>
+      <label>Routine Notification Time 1 (Minutes from midnight)</label>
+    </entry>
+    
+    <entry name="notifyRoutineTime2" type="Int">
+      <default>1140</default>
+      <label>Routine Notification Time 2 (Minutes from midnight)</label>
+    </entry>
+
+    <entry name="notifyRoutineTime2Enabled" type="Bool">
+      <default>false</default>
+      <label>Enable Second Routine Notification</label>
+    </entry>
+
+    <entry name="lastRoutineDate1" type="String">
+      <default></default>
+      <label>Last Routine Notification Date 1</label>
+    </entry>
+
+    <entry name="lastRoutineDate2" type="String">
+      <default></default>
+      <label>Last Routine Notification Date 2</label>
+    </entry>
+
+    <entry name="notifyRoutineType" type="String">
+      <default>forecast_3day</default>
+      <label>Routine Notification Type (forecast_3day or daily_change)</label>
+    </entry>
+
+    <entry name="notifySevereWeather" type="Bool">
+      <default>true</default>
+      <label>Notify on Severe Weather (Thunderstorm, Snow, Fog)</label>
+    </entry>
+
+    <entry name="notifyRain" type="Bool">
+      <default>true</default>
+      <label>Notify on Upcoming Rain</label>
+    </entry>
+
+    <entry name="notifyTemperatureDrop" type="Bool">
+      <default>false</default>
+      <label>Notify on Temperature Drop Below Threshold</label>
+    </entry>
+
+    <entry name="notifyTemperatureThreshold" type="Int">
+      <default>0</default>
+      <label>Temperature Threshold for Alert (Celsius)</label>
+    </entry>
+
+    <entry name="lastRoutineNotify" type="Double">
+      <default>0</default>
+      <label>Last Routine Notification Timestamp</label>
+    </entry>
+
+    <entry name="lastSevereNotify" type="Double">
+      <default>0</default>
+      <label>Last Severe Weather Notification Timestamp</label>
+    </entry>
+
+    <entry name="lastRainNotify" type="Double">
+      <default>0</default>
+      <label>Last Rain Notification Timestamp</label>
+    </entry>
+
+    <entry name="lastTempNotify" type="Double">
+      <default>0</default>
+      <label>Last Temperature Notification Timestamp</label>
+    </entry>
+
+    <entry name="triggerTestNotification" type="Double">
+      <default>0</default>
+      <label>Trigger Test Notification</label>
+    </entry>
+
+    <entry name="notifyHighTemp" type="Bool">
+      <default>false</default>
+      <label>Notify on High Temperature</label>
+    </entry>
+
+    <entry name="notifyHighTempThreshold" type="Int">
+      <default>30</default>
+      <label>High Temperature Threshold (Celsius)</label>
+    </entry>
+
+    <entry name="lastHighTempNotify" type="Double">
+      <default>0</default>
+      <label>Last High Temperature Notification Timestamp</label>
+    </entry>
+
+    <entry name="notifyUvIndex" type="Bool">
+      <default>true</default>
+      <label>Notify on High UV Index</label>
+    </entry>
+
+    <entry name="notifyUvThreshold" type="Int">
+      <default>6</default>
+      <label>UV Index Threshold</label>
+    </entry>
+
+    <entry name="lastUvNotify" type="Double">
+      <default>0</default>
+      <label>Last UV Notification Timestamp</label>
+    </entry>
+
+    <entry name="notifyWind" type="Bool">
+      <default>true</default>
+      <label>Notify on Strong Wind</label>
+    </entry>
+
+    <entry name="notifyWindThreshold" type="Int">
+      <default>50</default>
+      <label>Wind Speed Threshold (km/h)</label>
+    </entry>
+
+    <entry name="lastWindNotify" type="Double">
+      <default>0</default>
+      <label>Last Wind Notification Timestamp</label>
+    </entry>
+  </group>
+</kcfg>

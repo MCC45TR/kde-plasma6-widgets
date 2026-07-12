@@ -34,8 +34,21 @@ available_widgets=(
     "dynamic-color-scheme"
 )
 
+# Widgets marked "Stable" in the Development Status table of README.md.
+# A plain './install_all.sh' installs only these; use --all for everything.
+stable_widgets=(
+    "file-search"
+    "analog-clock"
+    "music-player"
+    "weather"
+    "calendar"
+    "browser-search"
+    "plasma-mselectivereboot"
+)
+
 install_targets=()
 test_target=""
+install_all=false
 use_prasmoid_build=false
 compile_translations=true
 dry_run=false
@@ -73,13 +86,15 @@ Usage:
 Options:
   -h, --help             Show this help text
   -l, --list             List available widgets
+  -a, --all              Install every widget (default installs stable ones only)
   -t, --test <widget>    Install widget, then launch it with plasmawindowed
       --prasmoid         Run 'prasmoid build' before installing each widget
       --no-translations  Skip .po -> .mo compilation
       --dry-run          Validate and print planned actions without installing
 
 Examples:
-  ./${SCRIPT_NAME}
+  ./${SCRIPT_NAME}               # stable widgets only
+  ./${SCRIPT_NAME} --all         # everything, including WIP widgets
   ./${SCRIPT_NAME} weather battery
   ./${SCRIPT_NAME} --prasmoid file-search
   ./${SCRIPT_NAME} --test msi-control
@@ -130,6 +145,15 @@ has_widget() {
     return 1
 }
 
+is_stable_widget() {
+    local candidate="$1"
+    local widget
+    for widget in "${stable_widgets[@]}"; do
+        [[ "$widget" == "$candidate" ]] && return 0
+    done
+    return 1
+}
+
 append_unique_target() {
     local candidate="$1"
     local existing
@@ -140,8 +164,15 @@ append_unique_target() {
 }
 
 list_widgets() {
+    local widget
     log "${bold}Available widgets (${#available_widgets[@]}):${reset}"
-    printf '  %s\n' "${available_widgets[@]}"
+    for widget in "${available_widgets[@]}"; do
+        if is_stable_widget "$widget"; then
+            log "  $widget ${green}[stable]${reset}"
+        else
+            log "  $widget"
+        fi
+    done
 }
 
 require_command() {
@@ -184,6 +215,10 @@ parse_args() {
                 list_widgets
                 exit 0
                 ;;
+            -a|--all)
+                install_all=true
+                shift
+                ;;
             -t|--test)
                 [[ $# -ge 2 ]] || die "$1 requires a widget name."
                 test_target="$2"
@@ -224,9 +259,13 @@ validate_targets() {
     local validated=()
     local widget
 
-    if ((${#install_targets[@]} == 0)); then
-        info "No widgets specified; installing all widgets."
+    if [[ "$install_all" == true ]]; then
+        ((${#install_targets[@]} == 0)) || die "--all cannot be combined with explicit widget names."
+        info "Installing all ${#available_widgets[@]} widgets."
         install_targets=("${available_widgets[@]}")
+    elif ((${#install_targets[@]} == 0)); then
+        info "No widgets specified; installing stable widgets only (use --all for everything)."
+        install_targets=("${stable_widgets[@]}")
     else
         info "Requested widgets: $(join_words "${install_targets[@]}")"
     fi

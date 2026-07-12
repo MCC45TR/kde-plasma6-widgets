@@ -5,6 +5,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import "components" as Components
 import "components/WeatherService.js" as WeatherService
+import "js/PanelLayoutUtils.js" as PanelLayoutUtils
 
 PlasmoidItem {
     id: root
@@ -18,15 +19,30 @@ PlasmoidItem {
     property string searchText: ""
     property alias logic: controller
 
-    // Keep panel text at least as large as the desktop's normal UI text while
-    // still scaling gently with taller panels.
-    readonly property int responsiveFontSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, Math.round(height * 0.38))
+    readonly property real configuredPanelThickness: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 38
     
     // ===== PANEL DETECTION =====
     // Check if widget is in a panel (horizontal or vertical)
     // FormFactor: 0=Planar (Desktop), 1=Horizontal, 2=Vertical, 3=Application
     readonly property bool isInPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal || 
                                        Plasmoid.formFactor === PlasmaCore.Types.Vertical
+    readonly property bool detectedVerticalPanel: Plasmoid.formFactor === PlasmaCore.Types.Vertical
+    readonly property int panelPlacement: PanelLayoutUtils.effectivePlacement(
+        !isInPanel || Plasmoid.configuration.panelOrientationAutomatic !== false,
+        Plasmoid.configuration.panelOrientation,
+        detectedVerticalPanel,
+        Plasmoid.location,
+        PlasmaCore.Types.LeftEdge,
+        PlasmaCore.Types.RightEdge
+    )
+    readonly property bool isVerticalPanel: panelPlacement !== 0
+    readonly property int panelRotation: PanelLayoutUtils.rotationForPlacement(panelPlacement)
+    readonly property real panelThickness: isVerticalPanel
+        ? Math.max(width, configuredPanelThickness)
+        : Math.max(height, configuredPanelThickness)
+    // Keep panel text at least as large as the desktop's normal UI text while
+    // still scaling gently with the panel thickness on either orientation.
+    readonly property int responsiveFontSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, Math.round(panelThickness * 0.38))
     
     // ===== DISPLAY MODE CONFIGURATION =====
     // 0 = Button, 1 = Medium, 2 = Wide, 3 = Extra Wide
@@ -51,17 +67,17 @@ PlasmoidItem {
     }
 
     // ===== LAYOUT CALCULATIONS =====
-    readonly property real textContentWidth: isButtonMode ? 0 : (textMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (height + 30) : 20))
+    readonly property real textContentWidth: isButtonMode ? 0 : (textMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (panelThickness + 30) : 20))
     readonly property real minimumPanelWidth: 70
-    readonly property real maximumPanelWidth: height * 9
+    readonly property real maximumPanelWidth: panelThickness * 9
     readonly property real steppedPanelWidth: minimumPanelWidth
         + (maximumPanelWidth - minimumPanelWidth) * panelWidthStep / 12
-    readonly property real baseWidth: isButtonMode ? height : steppedPanelWidth
+    readonly property real baseWidth: isButtonMode ? panelThickness : steppedPanelWidth
     
-    Layout.preferredWidth: baseWidth
-    Layout.preferredHeight: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 38
-    Layout.minimumWidth: 50
-    Layout.minimumHeight: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 34
+    Layout.preferredWidth: isVerticalPanel ? configuredPanelThickness : baseWidth
+    Layout.preferredHeight: isVerticalPanel ? baseWidth : configuredPanelThickness
+    Layout.minimumWidth: isVerticalPanel ? 34 : 50
+    Layout.minimumHeight: isVerticalPanel ? 50 : 34
     
     // Character limits
     readonly property int maxCharsWide: 65
@@ -88,7 +104,7 @@ PlasmoidItem {
         text: root.placeholderText
     }
     
-    readonly property real placeholderContentWidth: isButtonMode ? 0 : (placeholderMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (height + 30) : 20))
+    readonly property real placeholderContentWidth: isButtonMode ? 0 : (placeholderMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (panelThickness + 30) : 20))
     
     // Keep the shell-provided frame disabled. Enabling StandardBackground adds
     // theme margins around our already rounded desktop surface, producing a
@@ -160,6 +176,8 @@ PlasmoidItem {
         showSearchButton: Plasmoid.configuration.showSearchButton
         showSearchButtonBackground: Plasmoid.configuration.showSearchButtonBackground
         contentOpacity: root.panelContentOpacity
+        isVerticalPanel: root.isVerticalPanel
+        panelRotation: root.panelRotation
         
         logic: controller
         rssPlaceholderCycling: Plasmoid.configuration.rssPlaceholderCycling
@@ -205,9 +223,9 @@ PlasmoidItem {
         previewSize: Plasmoid.configuration.previewSize !== undefined ? Plasmoid.configuration.previewSize : 1
         previewSettings: {
             try {
-                return JSON.parse(Plasmoid.configuration.previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
+                return JSON.parse(Plasmoid.configuration.previewSettings || '{"images": true, "videos": true, "audio": true, "text": true, "documents": true, "ebooks": true, "creative": true, "folders": true, "fonts": true, "executables": true, "applications": true}')
             } catch (e) {
-                return {"images": false, "videos": false, "text": false, "documents": false, "applications": false}
+                return {"images": true, "videos": true, "audio": true, "text": true, "documents": true, "ebooks": true, "creative": true, "folders": true, "fonts": true, "executables": true, "applications": true}
             }
         }
 

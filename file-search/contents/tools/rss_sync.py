@@ -27,9 +27,11 @@ import socket
 import sys
 import tempfile
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+import zlib
 
 
 MAX_RESPONSE_BYTES = 5 * 1024 * 1024
@@ -43,6 +45,8 @@ MAX_INDEXED_CHARS = 25_000
 MAX_URL_CHARS = 2048
 MAX_SOURCE_NAME_CHARS = 128
 MAX_DATE_CHARS = 128
+MAX_HTTP_META_CHARS = 512
+MAX_HTTP_META_FILE_BYTES = 4096
 READ_CHUNK_BYTES = 64 * 1024
 SOCKET_TIMEOUT_SECONDS = 10
 TOTAL_FETCH_SECONDS = 30
@@ -135,21 +139,67 @@ def read_bounded_response(response) -> bytes:
     return b"".join(chunks)
 
 
-def fetch_feed(url: str) -> str:
+def decode_body(payload: bytes, content_encoding: str) -> bytes:
+    encoding = (content_encoding or "").strip().lower()
+    if encoding in ("", "identity"):
+        return payload
+    if encoding != "gzip":
+        raise SyncError(f"unsupported content encoding: {encoding}")
+    decompressor = zlib.decompressobj(31)
+    try:
+        expanded = decompressor.decompress(payload, MAX_RESPONSE_BYTES + 1)
+    except zlib.error as exc:
+        raise SyncError("invalid gzip payload") from exc
+    # A partial decompression or leftover input means the decompressed body
+    # exceeds the cap; refuse instead of expanding a potential gzip bomb.
+    if len(expanded) > MAX_RESPONSE_BYTES or decompressor.unconsumed_tail:
+        raise SyncError("feed exceeds the response size limit")
+    return expanded
+
+
+def build_feed_request(url: str, cached_meta: dict | None = None) -> urllib.request.Request:
+    headers = {
+        "User-Agent": "MFileFinder/1.3 (+https://github.com/MCC45TR/Plasma6Widgets)",
+        "Accept": "application/rss+xml, application/atom+xml, application/xml;q=0.9, */*;q=0.8",
+        "Accept-Encoding": "gzip",
+    }
+    cached_meta = cached_meta or {}
+    if cached_meta.get("etag"):
+        headers["If-None-Match"] = cached_meta["etag"]
+    if cached_meta.get("last_modified"):
+        headers["If-Modified-Since"] = cached_meta["last_modified"]
+    return urllib.request.Request(url, headers=headers)
+
+
+def fetch_feed(url: str, cached_meta: dict | None = None) -> tuple[str | None, dict]:
+    """Fetch a feed body plus its HTTP validators.
+
+    Returns (body, meta). body is None when the server answered 304 Not
+    Modified for the validators in cached_meta, meaning the local cache for
+    this source is still current.
+    """
     validate_remote_url(url)
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": "MFileFinder/1.3 (+https://github.com/MCC45TR/Plasma6Widgets)"},
-    )
     opener = urllib.request.build_opener(ValidatingRedirectHandler())
-    with opener.open(request, timeout=SOCKET_TIMEOUT_SECONDS) as response:
+    try:
+        connection = opener.open(build_feed_request(url, cached_meta), timeout=SOCKET_TIMEOUT_SECONDS)
+    except urllib.error.HTTPError as exc:
+        if exc.code == 304:
+            return None, dict(cached_meta or {})
+        raise SyncError(f"feed returned HTTP {exc.code}") from exc
+    with connection as response:
         validate_remote_url(response.geturl())
         payload = read_bounded_response(response)
         charset = response.info().get_content_charset() or "utf-8"
+        content_encoding = response.headers.get("Content-Encoding", "")
+        fresh_meta = {
+            "etag": bounded(response.headers.get("ETag", ""), MAX_HTTP_META_CHARS),
+            "last_modified": bounded(response.headers.get("Last-Modified", ""), MAX_HTTP_META_CHARS),
+        }
+    payload = decode_body(payload, content_encoding)
     try:
-        return payload.decode(charset)
+        return payload.decode(charset), fresh_meta
     except (LookupError, UnicodeDecodeError):
-        return payload.decode("utf-8", errors="replace")
+        return payload.decode("utf-8", errors="replace"), fresh_meta
 
 
 def clean_html(raw_html: str) -> str:
@@ -263,6 +313,7 @@ def parse_rss(xml_text: str, source_name: str, source_url: str, max_entries: int
     source_host = urllib.parse.urlparse(source_url).hostname or ""
     source_name = bounded(source_name, MAX_SOURCE_NAME_CHARS)
     entries: list[dict] = []
+    seen_ids: set[str] = set()
     depth = 0
     try:
         for event, node in ET.iterparse(io.StringIO(cleaned), events=("start", "end")):
@@ -273,7 +324,8 @@ def parse_rss(xml_text: str, source_name: str, source_url: str, max_entries: int
                 continue
             if local_name(node.tag) in {"item", "entry"}:
                 parsed = parse_entry(node, source_name, source_host)
-                if parsed:
+                if parsed and parsed["duplicateId"] not in seen_ids:
+                    seen_ids.add(parsed["duplicateId"])
                     entries.append(parsed)
                 node.clear()
                 if len(entries) >= max_entries:
@@ -284,7 +336,7 @@ def parse_rss(xml_text: str, source_name: str, source_url: str, max_entries: int
     return entries
 
 
-def source_path(cache_dir: Path, url: str) -> Path:
+def cache_key(url: str) -> int:
     # Keep the historical name algorithm so existing QML cache lookups continue
     # to work; writes themselves are atomic and confined to the fixed cache dir.
     value = 0
@@ -292,7 +344,30 @@ def source_path(cache_dir: Path, url: str) -> Path:
         value = ((value << 5) - value + ord(char)) & 0xFFFFFFFF
     if value > 0x7FFFFFFF:
         value -= 0x100000000
-    return cache_dir / f"source_{abs(value)}.json"
+    return abs(value)
+
+
+def source_path(cache_dir: Path, url: str) -> Path:
+    return cache_dir / f"source_{cache_key(url)}.json"
+
+
+def meta_path(cache_dir: Path, url: str) -> Path:
+    # The meta_ prefix keeps HTTP validator files out of the source_*.json
+    # glob that merge_cache() consumes.
+    return cache_dir / f"meta_{cache_key(url)}.json"
+
+
+def load_http_meta(cache_dir: Path, url: str) -> dict:
+    path = meta_path(cache_dir, url)
+    try:
+        if path.is_symlink() or path.stat().st_size > MAX_HTTP_META_FILE_BYTES:
+            return {}
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, UnicodeDecodeError):
+        return {}
+    if not isinstance(value, dict):
+        return {}
+    return {key: bounded(value.get(key, ""), MAX_HTTP_META_CHARS) for key in ("etag", "last_modified")}
 
 
 def atomic_write(path: Path, text: str) -> None:
@@ -350,8 +425,19 @@ def merge_cache(cache_dir: Path) -> int:
             combined.extend(load_source_file(path))
         except OSError:
             continue
-    combined = combined[:MAX_COMBINED_ENTRIES]
     combined.sort(key=entry_timestamp, reverse=True)
+    # Sorting newest-first before deduplication keeps the freshest copy of an
+    # entry that appears in more than one feed (e.g. category + main feed).
+    seen_ids: set[str] = set()
+    unique: list[dict] = []
+    for entry in combined:
+        duplicate_id = str(entry.get("duplicateId") or "")
+        if duplicate_id:
+            if duplicate_id in seen_ids:
+                continue
+            seen_ids.add(duplicate_id)
+        unique.append(entry)
+    combined = unique[:MAX_COMBINED_ENTRIES]
     atomic_write(cache_dir / "combined.json", json.dumps(combined, ensure_ascii=False, separators=(",", ":")))
     print(f"MERGE: SUCCESS ({len(combined)} items)", flush=True)
     return 0
@@ -362,14 +448,26 @@ def sync_source(cache_dir: Path, url: str, name: str, max_entries_text: str) -> 
         max_entries = max(1, min(50, int(max_entries_text)))
     except ValueError as exc:
         raise SyncError("invalid entry limit") from exc
+    target = source_path(cache_dir, url)
+    # Only offer HTTP validators when a usable local copy exists; a 304
+    # answer without cached entries would leave the source empty.
+    cached_meta = load_http_meta(cache_dir, url) if target.is_file() and not target.is_symlink() else {}
     print("FETCHING: START", flush=True)
-    xml_text = fetch_feed(url)
+    xml_text, http_meta = fetch_feed(url, cached_meta)
+    if xml_text is None:
+        print("NOT_MODIFIED: feed unchanged, cached entries kept", flush=True)
+        print("SUCCESS", flush=True)
+        return 0
     print("FETCHING: OK", flush=True)
     print("PARSING: START", flush=True)
     entries = parse_rss(xml_text, name, url, max_entries)
     print(f"PARSING: OK ({len(entries)} items)", flush=True)
     encoded = base64.b64encode(json.dumps(entries, ensure_ascii=False, separators=(",", ":")).encode()).decode()
-    atomic_write(source_path(cache_dir, url), encoded)
+    atomic_write(target, encoded)
+    # Validators are persisted only after a successful parse and save, so a
+    # broken response is never remembered as "current".
+    if http_meta.get("etag") or http_meta.get("last_modified"):
+        atomic_write(meta_path(cache_dir, url), json.dumps(http_meta, separators=(",", ":")))
     print(f"SAVING: {len(entries)} entries saved OK", flush=True)
     print("SUCCESS", flush=True)
     return 0

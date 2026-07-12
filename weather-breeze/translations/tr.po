@@ -1,0 +1,1045 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Weather Breeze 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-09 22:02+0300\n"
+"PO-Revision-Date: 2026-01-22 03:00+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: contents/ui/DailyForecastView.qml:61
+msgid "Today"
+msgstr "Bugün"
+
+#: contents/ui/ForecastDetailsView.qml:102
+#: contents/ui/WeatherDetailsView.qml:101
+msgid "Feels like"
+msgstr "Hissedilen"
+
+#: contents/ui/ForecastDetailsView.qml:121
+#: contents/ui/WeatherDetailsView.qml:119
+msgid "Humidity"
+msgstr "Nem"
+
+#: contents/ui/ForecastDetailsView.qml:140
+#: contents/ui/WeatherDetailsView.qml:137
+#: contents/ui/config/ConfigNotifications.qml:278
+msgid "Wind"
+msgstr "Rüzgar"
+
+#: contents/ui/ForecastDetailsView.qml:159
+msgid "Rain Chance"
+msgstr "Yağmur Olasılığı"
+
+#: contents/ui/ForecastDetailsView.qml:185 contents/ui/TemperatureChart.qml:237
+msgid "Precipitation"
+msgstr "Yağış"
+
+#: contents/ui/ForecastDetailsView.qml:204
+#: contents/ui/config/ConfigNotifications.qml:289
+msgid "UV Index"
+msgstr "UV İndeksi"
+
+#: contents/ui/ForecastDetailsView.qml:231
+#: contents/ui/WeatherDetailsView.qml:281
+msgid "Wind Direction"
+msgstr "Rüzgar Yönü"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "North"
+msgstr "Kuzey"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "North East"
+msgstr "Kuzeydoğu"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "East"
+msgstr "Doğu"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "South East"
+msgstr "Güneydoğu"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "South"
+msgstr "Güney"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "South West"
+msgstr "Güneybatı"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "West"
+msgstr "Batı"
+
+#: contents/ui/ForecastDetailsView.qml:238
+#: contents/ui/WeatherDetailsView.qml:288
+msgid "North West"
+msgstr "Kuzeybatı"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "N"
+msgstr "K"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "NE"
+msgstr "KD"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "E"
+msgstr "D"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "SE"
+msgstr "GD"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "S"
+msgstr "G"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "SW"
+msgstr "GB"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "W"
+msgstr "B"
+
+#: contents/ui/ForecastDetailsView.qml:247
+#: contents/ui/WeatherDetailsView.qml:297
+msgid "NW"
+msgstr "KB"
+
+#: contents/ui/ForecastDetailsView.qml:286 contents/ui/SunProgressGauge.qml:292
+msgid "Sunset"
+msgstr "Gün Batımı"
+
+#: contents/ui/ForecastDetailsView.qml:286 contents/ui/SunProgressGauge.qml:243
+msgid "Sunrise"
+msgstr "Gün Doğumu"
+
+#: contents/ui/ForecastDetailsView.qml:313
+msgid "Tap to close"
+msgstr "Kapatmak için dokunun"
+
+#: contents/ui/ForecastDetailsView.qml:368
+msgid "Next week %1"
+msgstr "Gelecek hafta %1"
+
+#: contents/ui/ForecastDetailsView.qml:370
+msgid "2 weeks later %1"
+msgstr "2 hafta sonra %1"
+
+#: contents/ui/LargeModeLayout.qml:157 contents/ui/main.qml:116
+#: contents/ui/WideModeLayout.qml:218
+msgid "Hourly Forecast"
+msgstr "Saatlik Tahmin"
+
+#: contents/ui/LargeModeLayout.qml:157 contents/ui/main.qml:116
+#: contents/ui/WideModeLayout.qml:218
+msgid "Daily Forecast"
+msgstr "Günlük Tahmin"
+
+#: contents/ui/main.qml:111 contents/ui/main.qml:331
+msgid "Refresh"
+msgstr "Yenile"
+
+#: contents/ui/main.qml:321
+msgid "Loading weather data..."
+msgstr "Hava durumu verisi yükleniyor..."
+
+#: contents/ui/main.qml:363
+msgid "Clear"
+msgstr "Açık"
+
+#: contents/ui/main.qml:364
+msgid "Mainly Clear"
+msgstr "Çoğunlukla Açık"
+
+#: contents/ui/main.qml:365
+msgid "Partly Cloudy"
+msgstr "Parçalı Bulutlu"
+
+#: contents/ui/main.qml:366
+msgid "Overcast"
+msgstr "Kapalı"
+
+#: contents/ui/main.qml:367 contents/ui/config/ConfigNotifications.qml:267
+msgid "Fog"
+msgstr "Sisli"
+
+#: contents/ui/main.qml:368
+msgid "Drizzle"
+msgstr "Çiseleme"
+
+#: contents/ui/main.qml:369
+msgid "Freezing Drizzle"
+msgstr "Dondurucu Çiseleme"
+
+#: contents/ui/main.qml:370 contents/ui/config/ConfigNotifications.qml:245
+msgid "Rain"
+msgstr "Yağmurlu"
+
+#: contents/ui/main.qml:371
+msgid "Freezing Rain"
+msgstr "Dondurucu Yağmur"
+
+#: contents/ui/main.qml:372 contents/ui/config/ConfigNotifications.qml:256
+#, fuzzy
+msgid "Snow"
+msgstr ""
+"#-#-#-#-#  tr.po (Weather Breeze 1.0.0)  #-#-#-#-#\n"
+"Karlı\n"
+"#-#-#-#-#  tr.po (Weather Breeze 1.0.0)  #-#-#-#-#\n"
+"Kar"
+
+#: contents/ui/main.qml:373
+msgid "Snow Grains"
+msgstr "Kar Taneleri"
+
+#: contents/ui/main.qml:374
+msgid "Rain Showers"
+msgstr "Sağanak Yağış"
+
+#: contents/ui/main.qml:375
+msgid "Snow Showers"
+msgstr "Kar Sağanağı"
+
+#: contents/ui/main.qml:376
+msgid "Thunderstorm"
+msgstr "Gök Gürültülü Fırtına"
+
+#: contents/ui/main.qml:377
+msgid "Thunderstorm with Hail"
+msgstr "Dolu ile Gök Gürültülü Fırtına"
+
+#: contents/ui/main.qml:378
+msgid "Unknown"
+msgstr "Bilinmiyor"
+
+#: contents/ui/main.qml:379
+msgid "Cloudy"
+msgstr "Bulutlu"
+
+#: contents/ui/main.qml:380
+msgid "Mist"
+msgstr "Puslu"
+
+#: contents/ui/main.qml:381
+msgid "Smoke"
+msgstr "Dumanlı"
+
+#: contents/ui/main.qml:382
+msgid "Haze"
+msgstr "Hafif Pus"
+
+#: contents/ui/main.qml:383
+msgid "Dust"
+msgstr "Tozlu"
+
+#: contents/ui/main.qml:384
+msgid "Sand"
+msgstr "Kum Fırtınası"
+
+#: contents/ui/main.qml:385
+msgid "Ash"
+msgstr "Kül"
+
+#: contents/ui/main.qml:386
+msgid "Squall"
+msgstr "Sert Rüzgar"
+
+#: contents/ui/main.qml:387
+msgid "Tornado"
+msgstr "Hortum"
+
+#: contents/ui/NotificationManager.qml:106
+msgid "Visibility is low. Drive carefully."
+msgstr "Görüş mesafesi düşük. Dikkatli sürün."
+
+#: contents/ui/NotificationManager.qml:107
+msgid "Roads may be slippery. Allow extra travel time."
+msgstr "Yollar kaygan olabilir. Seyahat için ek süre ayırın."
+
+#: contents/ui/NotificationManager.qml:108
+msgid "Stay indoors and avoid open areas."
+msgstr "İçeride kalın ve açık alanlardan kaçının."
+
+#: contents/ui/NotificationManager.qml:109
+msgid "Heavy rain expected. Don't forget your umbrella!"
+msgstr "Şiddetli yağmur bekleniyor. Şemsiyenizi unutmayın!"
+
+#: contents/ui/NotificationManager.qml:110
+msgid "Stay safe and check local updates."
+msgstr "Güvende kalın ve yerel güncellemeleri kontrol edin."
+
+#: contents/ui/NotificationManager.qml:305
+msgid "📅 Today is %1 and %2° %3"
+msgstr "📅 Bugün %1 ve %2° %3"
+
+#: contents/ui/NotificationManager.qml:370
+msgid "📅 Weather Update"
+msgstr "📅 Hava Durumu Güncellemesi"
+
+#: contents/ui/NotificationManager.qml:370
+msgid "No significant changes for the rest of the day."
+msgstr "Günün geri kalanında önemli bir değişiklik yok."
+
+#: contents/ui/NotificationManager.qml:374
+#: contents/ui/config/ConfigNotifications.qml:217
+msgid "📅 Daily Weather Changes"
+msgstr "📅 Günlük Hava Değişimleri"
+
+#: contents/ui/NotificationManager.qml:410
+msgid "⚠️ Weather Alert"
+msgstr "⚠️ Hava Durumu Uyarısı"
+
+#: contents/ui/NotificationManager.qml:414
+#: contents/ui/config/ConfigNotifications.qml:237
+msgid "⛈️ Thunderstorm Warning"
+msgstr "⛈️ Fırtına Uyarısı"
+
+#: contents/ui/NotificationManager.qml:417
+#: contents/ui/config/ConfigNotifications.qml:259
+msgid "❄️ Snow Warning"
+msgstr "❄️ Kar Uyarısı"
+
+#: contents/ui/NotificationManager.qml:420
+#: contents/ui/config/ConfigNotifications.qml:270
+msgid "🌫️ Dense Fog Warning"
+msgstr "🌫️ Yoğun Sis Uyarısı"
+
+#: contents/ui/NotificationManager.qml:423
+msgid "🌧️ Heavy Rain Warning"
+msgstr "🌧️ Şiddetli Yağmur Uyarısı"
+
+#: contents/ui/NotificationManager.qml:426
+msgid "%1 expected between %2 - %3"
+msgstr "%2 - %3 arasında %1 bekleniyor"
+
+#: contents/ui/NotificationManager.qml:428
+msgid "Temperature: %1%2 → %3%4"
+msgstr "Sıcaklık: %1%2 → %3%4"
+
+#: contents/ui/NotificationManager.qml:451
+#: contents/ui/config/ConfigNotifications.qml:248
+msgid "🌧️ Rain Forecast"
+msgstr "🌧️ Yağmur Tahmini"
+
+#: contents/ui/NotificationManager.qml:452
+msgid "Rain expected between %1 - %2"
+msgstr "%1 - %2 arasında yağmur bekleniyor"
+
+#: contents/ui/NotificationManager.qml:455
+msgid "Temperature: %1%2"
+msgstr "Sıcaklık: %1%2"
+
+#: contents/ui/NotificationManager.qml:458
+msgid "Chance of Rain: %1%"
+msgstr "Yağmur Olasılığı: % %1"
+
+#: contents/ui/NotificationManager.qml:461
+msgid "Precipitation: %1 mm"
+msgstr "Yağış: %1 mm"
+
+#: contents/ui/NotificationManager.qml:464
+msgid "Don't forget your umbrella!"
+msgstr "Şemsiyenizi almayı unutmayın!"
+
+#: contents/ui/NotificationManager.qml:520
+#: contents/ui/config/ConfigNotifications.qml:314
+msgid "🥶 Low Temperature Alert"
+msgstr "🥶 Düşük Sıcaklık Uyarısı"
+
+#: contents/ui/NotificationManager.qml:521
+#: contents/ui/NotificationManager.qml:528
+msgid "Current temperature: %1%2"
+msgstr "Şu anki sıcaklık: %1%2"
+
+#: contents/ui/NotificationManager.qml:527
+#: contents/ui/config/ConfigNotifications.qml:303
+msgid "🔥 High Temperature Alert"
+msgstr "🔥 Yüksek Sıcaklık Uyarısı"
+
+#: contents/ui/NotificationManager.qml:529
+msgid "Stay hydrated and avoid direct sunlight."
+msgstr "Bol sıvı tüketin ve doğrudan güneş ışığından kaçının."
+
+#: contents/ui/NotificationManager.qml:534
+#: contents/ui/config/ConfigNotifications.qml:292
+msgid "☀️ High UV Index Alert"
+msgstr "☀️ Yüksek UV İndeksi Uyarısı"
+
+#: contents/ui/NotificationManager.qml:535
+msgid "Current UV Index: %1"
+msgstr "Şu anki UV İndeksi: %1"
+
+#: contents/ui/NotificationManager.qml:536
+msgid "Use sunscreen and wear protective clothing."
+msgstr "Güneş kremi kullanın ve koruyucu giysiler giyin."
+
+#: contents/ui/NotificationManager.qml:545
+#: contents/ui/config/ConfigNotifications.qml:281
+msgid "💨 Strong Wind Alert"
+msgstr "💨 Şiddetli Rüzgar Uyarısı"
+
+#: contents/ui/NotificationManager.qml:546
+msgid "Wind speed: %1 %2"
+msgstr "Rüzgar hızı: %1 %2"
+
+#: contents/ui/NotificationManager.qml:547
+msgid "Secure loose objects and drive carefully."
+msgstr "Gevşek nesneleri sabitleyin ve dikkatli sürün."
+
+#: contents/ui/NotificationManager.qml:558
+#: contents/ui/config/ConfigNotifications.qml:203
+msgid "Test Notification"
+msgstr "Test Bildirimi"
+
+#: contents/ui/NotificationManager.qml:558
+msgid "Weather data is missing, cannot generate full report."
+msgstr "Hava durumu verisi eksik, tam rapor oluşturulamıyor."
+
+#: contents/ui/SunProgressGauge.qml:67
+msgid "Night"
+msgstr "Gece"
+
+#: contents/ui/SunProgressGauge.qml:78
+msgid "%1h %2m left"
+msgstr "%1sa %2dk kaldı"
+
+#: contents/ui/SunProgressGauge.qml:80
+#, c-format
+msgid "%1m left"
+msgstr "%1dk kaldı"
+
+#: contents/ui/TemperatureChart.qml:220
+msgid "Temperature"
+msgstr "Sıcaklık"
+
+#: contents/ui/WeatherDetailsView.qml:155
+msgid "Pressure"
+msgstr "Basınç"
+
+#: contents/ui/WeatherDetailsView.qml:188
+msgid "Cloud Cover"
+msgstr "Bulutluluk"
+
+#: contents/ui/WeatherDetailsView.qml:206
+msgid "UV"
+msgstr "UV İndeksi"
+
+#: contents/ui/WeatherDetailsView.qml:232
+msgid "Visibility"
+msgstr "Görünürlük"
+
+#: contents/ui/WeatherDetailsView.qml:250
+msgid "Dew Point"
+msgstr "Çiy Noktası"
+
+#: contents/ui/WeatherDetailsView.qml:361
+msgid "Click to close"
+msgstr "Kapatmak için tıklayın"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Default (Colorful SVG)"
+msgstr "Varsayılan (Renkli SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "System Theme"
+msgstr "Sistem Teması"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Google Weather v3 (Flat SVG)"
+msgstr "Google Hava Durumu v3 (Düz SVG)"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Google Weather v2 (Realistic PNG)"
+msgstr "Google Hava Durumu v2 (Gerçekçi PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:124
+msgid "Google Weather v1 (Classic PNG)"
+msgstr "Google Hava Durumu v1 (Klasik PNG)"
+
+#: contents/ui/config/ConfigAppearance.qml:160
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: contents/ui/config/ConfigAppearance.qml:168
+msgid "Show Units in Forecast"
+msgstr "Tahminde Birimleri Göster"
+
+#: contents/ui/config/ConfigAppearance.qml:176
+msgid "Layout Mode:"
+msgstr "Düzen Modu:"
+
+#: contents/ui/config/ConfigAppearance.qml:183
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: contents/ui/config/ConfigAppearance.qml:183
+#: contents/ui/config/ConfigAppearance.qml:241
+msgid "Small"
+msgstr "Küçük"
+
+#: contents/ui/config/ConfigAppearance.qml:183
+msgid "Wide"
+msgstr "Geniş"
+
+#: contents/ui/config/ConfigAppearance.qml:183
+msgid "Large"
+msgstr "Büyük"
+
+#: contents/ui/config/ConfigAppearance.qml:192
+msgid "Icon Pack:"
+msgstr "İkon Paketi:"
+
+#: contents/ui/config/ConfigAppearance.qml:208
+msgid ""
+"Select the visual style for weather icons. (Note: older packs like v1/v2 may "
+"have missing icons for some conditions)"
+msgstr ""
+"Hava durumu ikonları için görsel stili seçin. (Not: v1/v2 gibi eski "
+"paketlerde bazı durumlar için eksik ikonlar olabilir)"
+
+#: contents/ui/config/ConfigAppearance.qml:209
+msgid "Select the visual style for weather icons."
+msgstr "Hava durumu simgeleri için görsel stili seçin."
+
+#: contents/ui/config/ConfigAppearance.qml:217
+msgid "Widget Margin:"
+msgstr "Widget Kenar Boşluğu:"
+
+#: contents/ui/config/ConfigAppearance.qml:224
+msgid "Normal (10px)"
+msgstr "Normal (10px)"
+
+#: contents/ui/config/ConfigAppearance.qml:224
+msgid "Less (5px)"
+msgstr "Az (5px)"
+
+#: contents/ui/config/ConfigAppearance.qml:224
+msgid "None (0px)"
+msgstr "Yok (0px)"
+
+#: contents/ui/config/ConfigAppearance.qml:234
+msgid "Corner Radius:"
+msgstr "Köşe Yuvarlama:"
+
+#: contents/ui/config/ConfigAppearance.qml:241
+msgid "Normal"
+msgstr "Normal"
+
+#: contents/ui/config/ConfigAppearance.qml:241
+msgid "Square"
+msgstr "Kare"
+
+#: contents/ui/config/ConfigAppearance.qml:253
+msgid "Font Settings"
+msgstr "Yazı Tipi Ayarları"
+
+#: contents/ui/config/ConfigAppearance.qml:262
+msgid "Use Default System Font"
+msgstr "Varsayılan Sistem Yazı Tipini Kullan"
+
+#: contents/ui/config/ConfigAppearance.qml:270
+msgid "Custom Font Family:"
+msgstr "Özel Yazı Tipi Ailesi:"
+
+#: contents/ui/config/ConfigAppearance.qml:291
+msgid "Panel Settings"
+msgstr "Panel Ayarları"
+
+#: contents/ui/config/ConfigAppearance.qml:301
+msgid "Representation:"
+msgstr "Görünüm:"
+
+#: contents/ui/config/ConfigAppearance.qml:308
+msgid "Simple Panel"
+msgstr "Basit Panel"
+
+#: contents/ui/config/ConfigAppearance.qml:308
+msgid "Detailed Panel"
+msgstr "Detaylı Panel"
+
+#: contents/ui/config/ConfigAppearance.qml:316
+msgid "Font Size (0 = Auto):"
+msgstr "Yazı Tipi Boyutu (0 = Oto):"
+
+#: contents/ui/config/ConfigAppearance.qml:334
+msgid "Icon Size (0 = Auto):"
+msgstr "Simge Boyutu (0 = Oto):"
+
+#: contents/ui/config/ConfigAppearance.qml:354
+msgid "Background Settings"
+msgstr "Arkaplan Ayarları"
+
+#: contents/ui/config/ConfigAppearance.qml:362
+msgid "Background Opacity:"
+msgstr "Arkaplan Opaklığı:"
+
+#: contents/ui/config/ConfigAppearance.qml:369
+msgid "0% (No Backgrounds)"
+msgstr "0% (Arkaplan Yok)"
+
+#: contents/ui/config/ConfigGeneral.qml:161
+msgid "Weather Provider"
+msgstr "Hava Durumu Sağlayıcısı"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "Open-Meteo (Free, No Key Required)"
+msgstr "Open-Meteo (Ücretsiz, Anahtar Gerekmez)"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "OpenWeatherMap (Key Required)"
+msgstr "OpenWeatherMap (Anahtar Gerekir)"
+
+#: contents/ui/config/ConfigGeneral.qml:171
+msgid "WeatherAPI.com (Key Required)"
+msgstr "WeatherAPI.com (Anahtar Gerekir)"
+
+#: contents/ui/config/ConfigGeneral.qml:179
+msgid "Best free option. No API key required."
+msgstr "En iyi ücretsiz seçenek. API anahtarı gerekmez."
+
+#: contents/ui/config/ConfigGeneral.qml:180
+msgid "Standard provider. API key required below."
+msgstr "Standart sağlayıcı. Aşağıda API anahtarı gerektirir."
+
+#: contents/ui/config/ConfigGeneral.qml:180
+msgid "Alternative provider. API key required below."
+msgstr "Alternatif sağlayıcı. Aşağıda API anahtarı gerektirir."
+
+#: contents/ui/config/ConfigGeneral.qml:188
+msgid "API Keys"
+msgstr "API Anahtarları"
+
+#: contents/ui/config/ConfigGeneral.qml:197
+msgid "OpenWeatherMap API Key:"
+msgstr "OpenWeatherMap API Anahtarı:"
+
+#: contents/ui/config/ConfigGeneral.qml:204
+msgid "Enter your OpenWeatherMap API key"
+msgstr "OpenWeatherMap API anahtarınızı girin"
+
+#: contents/ui/config/ConfigGeneral.qml:209
+msgid "WeatherAPI.com API Key:"
+msgstr "WeatherAPI.com API Anahtarı:"
+
+#: contents/ui/config/ConfigGeneral.qml:216
+msgid "Enter your WeatherAPI.com key"
+msgstr "WeatherAPI.com anahtarınızı girin"
+
+#: contents/ui/config/ConfigGeneral.qml:223
+msgid "Location"
+msgstr "Konum"
+
+#: contents/ui/config/ConfigGeneral.qml:236
+msgid "Auto-detect from IP"
+msgstr "IP adresinden otomatik algıla"
+
+#: contents/ui/config/ConfigGeneral.qml:244
+msgid "Enter manually"
+msgstr "Elle gir"
+
+#: contents/ui/config/ConfigGeneral.qml:258
+msgid "City 1:"
+msgstr "Şehir 1:"
+
+#: contents/ui/config/ConfigGeneral.qml:264
+msgid "Ex: Ankara, Istanbul, London"
+msgstr "Örn: Ankara, İstanbul, Londra"
+
+#: contents/ui/config/ConfigGeneral.qml:268
+msgid "City 2:"
+msgstr "Şehir 2:"
+
+#: contents/ui/config/ConfigGeneral.qml:274
+msgid "Second city (optional)"
+msgstr "İkinci şehir (isteğe bağlı)"
+
+#: contents/ui/config/ConfigGeneral.qml:278
+msgid "City 3:"
+msgstr "Şehir 3:"
+
+#: contents/ui/config/ConfigGeneral.qml:284
+msgid "Third city (optional)"
+msgstr "Üçüncü şehir (isteğe bağlı)"
+
+#: contents/ui/config/ConfigGeneral.qml:288
+msgid "You can use City name, 'City,Country Code' or Zip Code."
+msgstr "Şehir adı, 'Şehir,Ülke Kodu' veya Posta Kodu kullanabilirsiniz."
+
+#: contents/ui/config/ConfigGeneral.qml:298
+msgid "Location will be auto-detected based on your IP address."
+msgstr "Konum, IP adresinize göre otomatik olarak algılanacaktır."
+
+#: contents/ui/config/ConfigGeneral.qml:308
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: contents/ui/config/ConfigGeneral.qml:318
+msgid "Units:"
+msgstr "Birimler:"
+
+#: contents/ui/config/ConfigGeneral.qml:326
+msgid "Use system units"
+msgstr "Sistem birimlerini kullan"
+
+#: contents/ui/config/ConfigGeneral.qml:339
+msgid "Metric (°C)"
+msgstr "Metrik (°C)"
+
+#: contents/ui/config/ConfigGeneral.qml:339
+msgid "Imperial (°F)"
+msgstr "İmperyal (°F)"
+
+#: contents/ui/config/ConfigGeneral.qml:351
+msgid "Refresh Interval:"
+msgstr "Yenileme Sıklığı:"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "15 minutes"
+msgstr "15 dakika"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "30 minutes"
+msgstr "30 dakika"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "45 minutes"
+msgstr "45 dakika"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "1 hour"
+msgstr "1 saat"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "2 hours"
+msgstr "2 saat"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "3 hours"
+msgstr "3 saat"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "4 hours"
+msgstr "4 saat"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "6 hours"
+msgstr "6 saat"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "8 hours"
+msgstr "8 saat"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "12 hours"
+msgstr "12 saat"
+
+#: contents/ui/config/ConfigGeneral.qml:357
+msgid "1 day"
+msgstr "1 gün"
+
+#: contents/ui/config/ConfigGeneral.qml:368
+msgid "Forecast Days:"
+msgstr "Tahmin Gün Sayısı:"
+
+#: contents/ui/config/ConfigNotifications.qml:173
+msgid "Test Notifications"
+msgstr "Test Bildirimleri"
+
+#: contents/ui/config/ConfigNotifications.qml:188
+msgid "Enable test mode"
+msgstr "Test modunu etkinleştir"
+
+#: contents/ui/config/ConfigNotifications.qml:200
+msgid "General"
+msgstr "Genel"
+
+#: contents/ui/config/ConfigNotifications.qml:204
+msgid "Weather notifications are functioning correctly."
+msgstr "Hava durumu bildirimleri düzgün çalışıyor."
+
+#: contents/ui/config/ConfigNotifications.qml:211
+msgid "Routine"
+msgstr "Rutin"
+
+#: contents/ui/config/ConfigNotifications.qml:218
+msgid ""
+"08:00: ☀️ Sunny (12°C)\n"
+"11:00: ⛅ Partly Cloudy (15°C)\n"
+"14:00: 🌧️ Light Rain (14°C)\n"
+"17:00: ☁️ Cloudy (13°C)\n"
+"20:00: 🌙 Clear (10°C)"
+msgstr ""
+
+#: contents/ui/config/ConfigNotifications.qml:224
+msgid "📅 Today is SUNDAY, 10°C Cloudy"
+msgstr "📅 Bugün PAZAR, 10°C Bulutlu"
+
+#: contents/ui/config/ConfigNotifications.qml:225
+msgid ""
+"MON: 6°C 🌪️ Storm\n"
+"TUE: 15°C 🌧️ Rainy\n"
+"WED: 20°C ☀️ Sunny\n"
+"THU: 17°C ⛅ Partly Cloudy"
+msgstr ""
+"PZT: 6°C 🌪️ Fırtına\n"
+"SAL: 15°C 🌧️ Yağmurlu\n"
+"ÇAR: 20°C ☀️ Güneşli\n"
+"PER: 17°C ⛅ Parçalı Bulutlu"
+
+#: contents/ui/config/ConfigNotifications.qml:234
+msgid "Storm"
+msgstr "Fırtına"
+
+#: contents/ui/config/ConfigNotifications.qml:238
+msgid ""
+"Thunderstorm expected between 14:00 - 18:00\n"
+"Temperature: 22°C → 18°C\n"
+"Stay indoors and avoid open areas."
+msgstr ""
+"14:00 - 18:00 arasında fırtına bekleniyor\n"
+"Sıcaklık: 22°C → 18°C\n"
+"İçeride kalın ve açık alanlardan kaçının."
+
+#: contents/ui/config/ConfigNotifications.qml:249
+msgid ""
+"Rain expected between 10:00 - 16:00\n"
+"Temperature: 15°C\n"
+"Chance of Rain: 80%\n"
+"Precipitation: 4.5 mm\n"
+"Don't forget your umbrella!"
+msgstr ""
+"10:00 - 16:00 arasında yağmur bekleniyor\n"
+"Sıcaklık: 15°C\n"
+"Yağmur Olasılığı: % 80\n"
+"Yağış: 4.5 mm\n"
+"Şemsiyenizi almayı unutmayın!"
+
+#: contents/ui/config/ConfigNotifications.qml:260
+msgid ""
+"Snowfall expected between 06:00 - 12:00\n"
+"Temperature: -3°C → -5°C\n"
+"Roads may be slippery."
+msgstr ""
+"06:00 - 12:00 arasında kar yağışı bekleniyor\n"
+"Sıcaklık: -3°C → -5°C\n"
+"Yollar kaygan olabilir."
+
+#: contents/ui/config/ConfigNotifications.qml:271
+msgid ""
+"Dense fog expected between 05:00 - 09:00\n"
+"Visibility: Low\n"
+"Temperature: 8°C\n"
+"Drive carefully."
+msgstr ""
+"05:00 - 09:00 arasında yoğun sis bekleniyor\n"
+"Görüş: Düşük\n"
+"Sıcaklık: 8°C\n"
+"Dikkatli sürün."
+
+#: contents/ui/config/ConfigNotifications.qml:282
+msgid ""
+"Wind speed: 65 km/h\n"
+"Secure loose objects."
+msgstr ""
+"Rüzgar hızı: 65 km/h\n"
+"Gevşek nesneleri sabitleyin."
+
+#: contents/ui/config/ConfigNotifications.qml:293
+msgid ""
+"Current UV Index: 8\n"
+"Use sunscreen and wear protective clothing."
+msgstr ""
+"Mevcut UV İndeksi: 8\n"
+"Güneş kremi kullanın ve koruyucu giysiler giyin."
+
+#: contents/ui/config/ConfigNotifications.qml:300
+msgid "High Temp"
+msgstr "Yüksek Sıcaklık"
+
+#: contents/ui/config/ConfigNotifications.qml:304
+msgid ""
+"Current temperature: 35°C\n"
+"Stay hydrated."
+msgstr ""
+"Mevcut sıcaklık: 35°C\n"
+"Bol sıvı tüketin."
+
+#: contents/ui/config/ConfigNotifications.qml:311
+msgid "Low Temp"
+msgstr "Düşük Sıcaklık"
+
+#: contents/ui/config/ConfigNotifications.qml:315
+msgid "Current temperature: -5°C"
+msgstr "Mevcut sıcaklık: -5°C"
+
+#: contents/ui/config/ConfigNotifications.qml:323
+msgid "Click buttons to test individual notification types"
+msgstr "Bireysel bildirim türlerini test etmek için butonlara tıklayın"
+
+#: contents/ui/config/ConfigNotifications.qml:333
+msgid "Weather Notifications"
+msgstr "Hava Durumu Bildirimleri"
+
+#: contents/ui/config/ConfigNotifications.qml:348
+msgid "Enable weather notifications"
+msgstr "Hava durumu bildirimlerini etkinleştir"
+
+#: contents/ui/config/ConfigNotifications.qml:355
+msgid ""
+"When enabled, the widget will send Plasma desktop notifications based on "
+"weather conditions."
+msgstr ""
+"Etkinleştirildiğinde, widget hava koşullarına göre Plasma masaüstü "
+"bildirimleri gönderecektir."
+
+#: contents/ui/config/ConfigNotifications.qml:366
+msgid "Routine Notifications"
+msgstr "Rutin Bildirimler"
+
+#: contents/ui/config/ConfigNotifications.qml:383
+msgid "Daily weather summary"
+msgstr "Günlük hava durumu özeti"
+
+#: contents/ui/config/ConfigNotifications.qml:396
+msgid "Description:"
+msgstr "Açıklama:"
+
+#: contents/ui/config/ConfigNotifications.qml:404
+msgid "3-Day Forecast Summary"
+msgstr "3 Günlük Tahmin Özeti"
+
+#: contents/ui/config/ConfigNotifications.qml:405
+msgid "Today's Weather Changes"
+msgstr "Bugünün Hava Değişimleri"
+
+#: contents/ui/config/ConfigNotifications.qml:418
+msgid "Notification time 1:"
+msgstr "Bildirim saati 1:"
+
+#: contents/ui/config/ConfigNotifications.qml:455
+msgid "Enable second time"
+msgstr "İkinci saati etkinleştir"
+
+#: contents/ui/config/ConfigNotifications.qml:466
+msgid "Notification time 2:"
+msgstr "Bildirim saati 2:"
+
+#: contents/ui/config/ConfigNotifications.qml:488
+msgid "Duplicate time!"
+msgstr "Aynı saat seçildi!"
+
+#: contents/ui/config/ConfigNotifications.qml:495
+msgid "Receive a daily notification with current weather and today's forecast."
+msgstr "Mevcut hava durumu ve bugünün tahmini ile günlük bir bildirim alın."
+
+#: contents/ui/config/ConfigNotifications.qml:506
+msgid "Weather Alerts"
+msgstr "Hava Durumu Uyarıları"
+
+#: contents/ui/config/ConfigNotifications.qml:527
+msgid "Severe weather alerts"
+msgstr "Şiddetli hava durumu uyarıları"
+
+#: contents/ui/config/ConfigNotifications.qml:530
+msgid "Thunderstorm, heavy snow, dense fog"
+msgstr "Fırtına, yoğun kar, yoğun sis"
+
+#: contents/ui/config/ConfigNotifications.qml:549
+msgid "Rain forecast alert"
+msgstr "Yağmur tahmini uyarısı"
+
+#: contents/ui/config/ConfigNotifications.qml:552
+msgid "Notify when rain is expected in the next few hours"
+msgstr "Sonraki birkaç saat içinde yağmur beklendiğinde bildir"
+
+#: contents/ui/config/ConfigNotifications.qml:571
+msgid "Strong wind alert"
+msgstr "Şiddetli rüzgar uyarısı"
+
+#: contents/ui/config/ConfigNotifications.qml:575
+#: contents/ui/config/ConfigNotifications.qml:615
+msgid "Threshold:"
+msgstr "Eşik:"
+
+#: contents/ui/config/ConfigNotifications.qml:611
+msgid "High UV Index alert"
+msgstr "Yüksek UV İndeksi uyarısı"
+
+#: contents/ui/config/ConfigNotifications.qml:642
+msgid "Temperature Alerts"
+msgstr "Sıcaklık Uyarıları"
+
+#: contents/ui/config/ConfigNotifications.qml:660
+msgid "Low temperature warning"
+msgstr "Düşük sıcaklık uyarısı"
+
+#: contents/ui/config/ConfigNotifications.qml:672
+msgid "Alert when below:"
+msgstr "Şunun altındayken uyar:"
+
+#: contents/ui/config/ConfigNotifications.qml:699
+msgid "High temperature warning"
+msgstr "Yüksek sıcaklık uyarısı"
+
+#: contents/ui/config/ConfigNotifications.qml:711
+msgid "Alert when above:"
+msgstr "Şunun üzerindeyken uyar:"
+
+#: contents/ui/config/ConfigNotifications.qml:730
+msgid "Receive alerts when temperature goes beyond your thresholds."
+msgstr "Sıcaklık eşiklerinizin ötesine geçtiğinde uyarı alın."
+
+#: contents/ui/config/ConfigNotifications.qml:763
+msgid "How it works"
+msgstr "Nasıl çalışır"
+
+#: contents/ui/config/ConfigNotifications.qml:768
+msgid ""
+"Notifications are checked each time weather data is refreshed. To avoid "
+"spam, each alert type has a cooldown period."
+msgstr ""
+"Bildirimler hava durumu verileri her yenilendiğinde kontrol edilir. Spam'i "
+"önlemek için her uyarı türünün bir bekleme süresi vardır."
+
+#~ msgid "Notifications"
+#~ msgstr "Bildirimler"
+
+#~ msgid "(24-hour format)"
+#~ msgstr "(24 saat biçimi)"
+
+#~ msgid "(Celsius)"
+#~ msgstr "(Celsius)"
+
+#~ msgid ""
+#~ "Receive an alert when the current temperature drops below your set "
+#~ "threshold."
+#~ msgstr ""
+#~ "Mevcut sıcaklık ayarladığınız eşiğin altına düştüğünde bir uyarı alın."
+
+#~ msgid "Showers"
+#~ msgstr "Sağanak"

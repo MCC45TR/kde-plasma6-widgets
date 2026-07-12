@@ -11,6 +11,10 @@ Kirigami.FormLayout {
     property int cfg_panelWidthStepDefault
     property int cfg_panelContentOpacity
     property int cfg_panelContentOpacityDefault
+    property bool cfg_panelOrientationAutomatic
+    property bool cfg_panelOrientationAutomaticDefault
+    property int cfg_panelOrientation
+    property int cfg_panelOrientationDefault
 
     // Weather configuration
     property string cfg_weatherProvider
@@ -299,7 +303,7 @@ Kirigami.FormLayout {
     ComboBox {
         id: algorithmCombo
         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Algorithm")
-        model: [i18nd("plasma_applet_com.mcc45tr.filesearch", "Fuzzy Match"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Exact Match"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Starts With")]
+        model: [i18nd("plasma_applet_com.mcc45tr.filesearch", "Advanced Relevance"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Exact Match"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Starts With")]
         currentIndex: configCategories.cfg_searchAlgorithm
         onActivated: {
             configCategories.cfg_searchAlgorithm = currentIndex

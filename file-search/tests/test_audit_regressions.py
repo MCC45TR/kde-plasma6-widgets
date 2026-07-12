@@ -26,22 +26,39 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn("color: popupRoot.bgColor", desktop_background)
         self.assertIn("opacity: 0.95", desktop_background)
 
-    def test_plasma6_only_runtime_has_no_plasma5_compatibility_imports(self):
-        qml_sources = "\n".join(
+    def test_process_bridge_is_locale_independent_and_bounded(self):
+        # The earlier KRunner/Milou relay selected results by localized
+        # category names ("command"/"shell"), so every process silently failed
+        # with exit -1 on non-English systems. The plasma5support executable
+        # engine is the supported, locale-independent bridge in Plasma 6.
+        runner = read("contents/ui/components/AsyncProcess.qml")
+        self.assertIn("org.kde.plasma.plasma5support as Plasma5Support", runner)
+        self.assertIn('engine: "executable"', runner)
+        self.assertNotIn("import org.kde.milou", runner)
+        self.assertNotIn("Milou.ResultsModel", runner)
+        self.assertIn("maximumOutputChars", runner)
+        self.assertIn("timeoutMs", runner)
+        other_sources = "\n".join(
             path.read_text(encoding="utf-8")
             for path in (ROOT / "contents").rglob("*.qml")
+            if path.name != "AsyncProcess.qml"
         )
-        self.assertNotIn("org.kde.plasma.plasma5support", qml_sources)
-        runner = read("contents/ui/components/AsyncProcess.qml")
-        self.assertIn("org.kde.milou as Milou", runner)
-        self.assertIn("Milou.ResultsModel", runner)
-        self.assertNotIn("DataSource", runner)
+        self.assertNotIn("org.kde.plasma.plasma5support", other_sources)
 
     def test_all_config_pages_accept_shared_panel_properties(self):
         for name in ("ConfigCategories.qml", "ConfigRSS.qml", "ConfigDebug.qml", "ConfigHelp.qml"):
             page = read("contents/ui/config/" + name)
-            for prop in ("cfg_panelWidthStep", "cfg_panelWidthStepDefault", "cfg_panelContentOpacity", "cfg_panelContentOpacityDefault"):
-                self.assertIn("property int " + prop, page)
+            for prop, prop_type in (
+                ("cfg_panelWidthStep", "int"),
+                ("cfg_panelWidthStepDefault", "int"),
+                ("cfg_panelContentOpacity", "int"),
+                ("cfg_panelContentOpacityDefault", "int"),
+                ("cfg_panelOrientationAutomatic", "bool"),
+                ("cfg_panelOrientationAutomaticDefault", "bool"),
+                ("cfg_panelOrientation", "int"),
+                ("cfg_panelOrientationDefault", "int"),
+            ):
+                self.assertIn("property " + prop_type + " " + prop, page)
         general = read("contents/ui/config/ConfigGeneral.qml")
         self.assertNotIn("previewCurrentLabel.text =", general)
         self.assertNotIn("previewSwitchAnim", general)
@@ -61,14 +78,29 @@ class AuditRegressionTests(unittest.TestCase):
         compact = read("contents/ui/components/CompactView.qml")
         self.assertIn('name="panelWidthStep"', schema)
         self.assertIn('name="panelContentOpacity"', schema)
+        self.assertIn('name="panelOrientationAutomatic"', schema)
+        self.assertIn('name="panelOrientation"', schema)
+        self.assertRegex(schema, r'name="panelOrientationAutomatic"[\s\S]*?<default>true</default>')
         self.assertIn("to: 12", config)
         self.assertIn("stepSize: 1", config)
         self.assertIn("snapMode: Slider.SnapAlways", config)
-        self.assertIn("maximumPanelWidth: height * 9", main)
+        self.assertIn("maximumPanelWidth: panelThickness * 9", main)
         self.assertIn("minimumPanelWidth: 70", main)
+        self.assertIn("PlasmaCore.Types.LeftEdge", main)
+        self.assertIn("PlasmaCore.Types.RightEdge", main)
+        self.assertIn("PanelLayoutUtils.effectivePlacement", main)
+        self.assertIn("!isInPanel || Plasmoid.configuration.panelOrientationAutomatic !== false", main)
+        self.assertIn("panelPlacement !== 0", main)
+        self.assertIn("Layout.preferredHeight: isVerticalPanel ? baseWidth", main)
+        self.assertIn("rotation: compactRoot.panelRotation", compact)
+        self.assertIn("adaptivePlaceholder", compact)
+        self.assertIn('"Search for files"', compact)
         self.assertIn("color: compactRoot.textColor", compact)
         self.assertNotIn("showSearchButtonBackground ? Kirigami.Theme.highlightedTextColor", compact)
         self.assertIn('i18nd("plasma_applet_com.mcc45tr.filesearch", "Text Input Mode")', config)
+        self.assertIn('i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Orientation")', config)
+        self.assertIn("visible: configGeneral.isInPanelConfiguration", config)
+        self.assertIn("enabled: !automaticPanelOrientationCheck.checked", config)
         self.assertIn("visible: displayModeCombo.currentIndex === 1", config)
         mode_model = config[config.index("id: displayModeCombo"):config.index("id: panelWidthSlider")]
         self.assertNotIn("Medium Mode", mode_model)
@@ -111,6 +143,32 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn("Kirigami.Units.gridUnit * 2.4", hints)
         self.assertNotIn("id: prefixGrid", hints)
         self.assertNotIn("Available Search Prefixes", hints)
+        self.assertIn("text: modelData.label", popup)
+        self.assertNotIn('text: modelData.label + "  " + modelData.prefix', popup)
+        self.assertNotIn("icon.name: modelData.icon", popup[popup.index("id: startupPrefixStrip"):popup.index("// Result List View")])
+        self.assertIn("text: modelData.hint", hints)
+        prefix_delegate = hints[hints.index("id: prefixStrip"):hints.index("// Original Single Hint Content Layout")]
+        self.assertNotIn("Kirigami.Icon", prefix_delegate)
+
+    def test_prefix_selection_restores_input_focus_and_routes_filters(self):
+        popup = read("contents/ui/components/SearchPopup.qml")
+        registry = read("contents/ui/js/PrefixRegistry.js")
+        self.assertIn("function selectPrefix(text)", popup)
+        self.assertIn("searchBar.focusInput()", popup)
+        self.assertIn("searchBar.cursorPosition = searchBar.text.length", popup)
+        self.assertIn("PrefixRegistry.resultFilter", popup)
+        self.assertIn('prefixFilter !== "All" ? prefixFilter : activeFilter', popup)
+        for prefix_filter in ('canonical: "app:"', 'canonical: "documents:"', 'canonical: "images:"'):
+            self.assertIn(prefix_filter, registry)
+
+    def test_timeline_options_use_kio_machine_paths(self):
+        hints = read("contents/ui/components/QueryHints.qml")
+        self.assertIn('value: "timeline:/today"', hints)
+        self.assertIn('value: "timeline:/calendar"', hints)
+        self.assertIn('"-" + month', hints)
+        self.assertIn('normalizedBase + isoDate', hints)
+        for invalid_path in ("timeline:/yesterday", "timeline:/thisweek", "timeline:/thismonth"):
+            self.assertNotIn(invalid_path, hints)
 
     def test_weather_ui_strings_use_widget_domain_and_turkish_is_complete(self):
         for relative in (
@@ -157,6 +215,11 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn('allowed = {"https"}', sync)
         self.assertIn("MAX_RESPONSE_BYTES", sync)
         self.assertIn("ValidatingRedirectHandler", sync)
+        launcher = read("contents/tools/rss_sync.sh")
+        fallback = read("contents/tools/rss_sync_fallback.sh")
+        self.assertIn("rss_sync_fallback.sh", launcher)
+        self.assertIn("--proto '=https'", fallback)
+        self.assertIn("resolve_public_address", fallback)
 
     def test_secrets_do_not_cross_process_arguments(self):
         self.assertFalse((ROOT / "contents/tools/secret_store.sh").exists())
@@ -264,6 +327,30 @@ class AuditRegressionTests(unittest.TestCase):
             self.assertIn(setting, similarity)
         self.assertIn("normalTitle.indexOf(lowerSearch)", tile_data)
         self.assertIn("normalContent.indexOf(lowerSearch)", tile_data)
+        self.assertIn("advancedResultScore", similarity)
+        self.assertIn("boundedDamerauDistance", similarity)
+        self.assertIn("tokenCoverageScore", similarity)
+        self.assertIn("_normalizedUrl", tile_data)
+
+    def test_kio_previews_and_discover_fallback_are_integrated(self):
+        preview = read("contents/ui/js/PreviewUtils.js")
+        resolver = read("contents/ui/components/FilePreviewSource.qml")
+        logic = read("contents/ui/components/LogicController.qml")
+        thumbnailer = read("contents/tools/thumbnailer.sh")
+        popup = read("contents/ui/components/SearchPopup.qml")
+        tile_data = read("contents/ui/components/TileDataManager.qml")
+        config = read("contents/ui/config/ConfigGeneral.qml")
+        for key in ("audio", "ebooks", "creative", "folders", "fonts", "executables"):
+            self.assertIn(key, preview)
+            self.assertIn(f'key: "{key}"', config)
+        self.assertIn("requestFileThumbnail", resolver)
+        self.assertIn("thumbnailMaxConcurrentRequests", logic)
+        self.assertIn('cat "thumbnail:$thumbnail_path"', thumbnailer)
+        self.assertIn("89504e470d0a1a0a", thumbnailer)
+        self.assertIn("ensureDiscoverAvailability", popup)
+        self.assertIn("plasma-discover --search", logic)
+        self.assertIn("hasStrongApplicationMatch", tile_data)
+        self.assertIn('index: -2', tile_data)
 
     def test_live_category_reload_and_shared_classification(self):
         logic = read("contents/ui/components/LogicController.qml")

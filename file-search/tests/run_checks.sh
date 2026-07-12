@@ -8,12 +8,12 @@ QML_TEST_FILES=$(find tests -name 'tst_*.qml' | sort)
 
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 -m py_compile contents/tools/rss_sync.py tools/build_release.py tests/test_*.py
-sh -n contents/tools/rss_sync.sh tests/run_checks.sh
+sh -n contents/tools/rss_sync.sh contents/tools/rss_sync_fallback.sh contents/tools/thumbnailer.sh tests/run_checks.sh
 python3 -m json.tool metadata.json >/dev/null
 python3 tests/benchmark_rss.py --check
 
 if command -v shellcheck >/dev/null 2>&1; then
-    shellcheck contents/tools/rss_sync.sh tests/run_checks.sh
+    shellcheck contents/tools/rss_sync.sh contents/tools/rss_sync_fallback.sh contents/tools/thumbnailer.sh tests/run_checks.sh
 fi
 if command -v xmllint >/dev/null 2>&1; then
     xmllint --noout contents/config/main.xml

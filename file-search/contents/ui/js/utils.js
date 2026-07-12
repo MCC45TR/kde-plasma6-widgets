@@ -221,6 +221,11 @@ function matchesResultFilter(filter, category, filePath, matchId, decoration, ex
         return isFolderCategory(category, filePath, decoration)
     if (f === "apps")
         return isAppCategory(category, filePath, matchId, decoration)
+    if (f === "files")
+        return isFileLikeResult(category, filePath, matchId, decoration, extension)
+            && !isAppCategory(category, filePath, matchId, decoration)
+    if (f === "calculator")
+        return isPrimaryCategory(category, decoration, matchId)
     if (f === "web")
         return path.indexOf("http://") === 0 || path.indexOf("https://") === 0 || path.indexOf("www") === 0
             || icon.indexOf("web") !== -1 || icon.indexOf("globe") !== -1 || containsAny(category, WEB_TERMS)

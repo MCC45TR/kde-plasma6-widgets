@@ -352,9 +352,17 @@ FocusScope {
                             readonly property bool previewActive: historyTile.previewEnabled && isPreviewAvailable && (historyTile.previewInlineMode === 0 ? histTileMouseArea.containsMouse : histTileDelegate.isSelected)
                             readonly property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.filePath || modelData.url || "") : ""
                             readonly property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.filePath || modelData.url || "") : ""
-                            readonly property string previewSource: previewActive
-                                ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyTile.previewEnabled, historyTile.previewSettings, historyTile.thumbnailCacheBase)
-                                : ""
+                            readonly property string previewSource: previewResolver.source
+
+                            FilePreviewSource {
+                                id: previewResolver
+                                logic: historyTile.logic
+                                fileUrl: (modelData.filePath || modelData.url || "").toString()
+                                category: (modelData.category || "").toString()
+                                active: histTileDelegate.previewActive
+                                settings: historyTile.previewSettings
+                                freedesktopThumbnailBase: historyTile.thumbnailCacheBase
+                            }
 
                             onShowInlinePreviewChanged: {
                                 if (showInlinePreview) {

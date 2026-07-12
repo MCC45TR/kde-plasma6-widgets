@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>com.mcc45tr.weatherbreeze</id>
+  <extends>org.kde.plasmashell</extends>
+  <name>Weather Breeze</name>
+  <summary>Native Breeze-styled Plasma weather widget</summary>
+  <description>
+    <p>A stunning, responsive weather widget designed for KDE Plasma 6. It features smooth morphing animations, multiple data providers (Open-Meteo, OpenWeatherMap, WeatherAPI), and a detail-rich expandable interface.</p>
+    <ul>
+      <li>Adaptive layout: Small, Wide, and Large modes.</li>
+      <li>Morphing details animation for an immersive experience.</li>
+      <li>Includes 3 variations of Google Weather style icon packs.</li>
+      <li>Supports 20+ languages with reliable localization.</li>
+      <li>Cached data for optimized performance.</li>
+    </ul>
+  </description>
+  <url type="homepage">https://github.com/MCC45TR/kde-plasma6-widgets/tree/main/weather-breeze</url>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer id="io.github.mcc45tr">
+    <name>MCC45TR</name>
+  </developer>
+  <screenshots>
+    <screenshot type="default">
+      <caption>The Large Mode dashboard with detailed forecast</caption>
+      <image>https://raw.githubusercontent.com/MCC45TR/kde-plasma6-widgets/main/weather-breeze/preview.png</image>
+    </screenshot>
+  </screenshots>
+</component>

@@ -58,7 +58,7 @@ Item {
     property bool previewShowHistory: true
     property int previewInlineMode: 1
     property int previewSize: 1
-    property var previewSettings: ({"images": false, "videos": false, "text": false, "documents": false, "applications": false})
+    property var previewSettings: ({"images": true, "videos": true, "audio": true, "text": true, "documents": true, "ebooks": true, "creative": true, "folders": true, "fonts": true, "executables": true, "applications": true})
 
     // Prefix Settings
     property bool prefixDateShowClock: true
@@ -107,6 +107,9 @@ Item {
     readonly property string _locSpell: i18nd("plasma_applet_com.mcc45tr.filesearch", "spell").toLowerCase()
     readonly property string _locShell: i18nd("plasma_applet_com.mcc45tr.filesearch", "shell").toLowerCase()
     readonly property string _locCalendar: i18nd("plasma_applet_com.mcc45tr.filesearch", "Calendar").toLowerCase()
+    readonly property string _runnerSpell: i18nd("plasma_runner_spellcheckrunner", "spell").toLowerCase()
+    readonly property string _runnerKill: i18nd("plasma_runner_kill", "kill").toLowerCase()
+    readonly property string _runnerDefine: i18nd("plasma_runner_krunner_dictionary", "define").toLowerCase()
     readonly property bool _canShowWeather: plasmoidConfig && plasmoidConfig.weatherEnabled
     readonly property bool _prefixShellEnabled: plasmoidConfig ? (plasmoidConfig.prefixShellEnabled !== undefined ? plasmoidConfig.prefixShellEnabled : true) : true
     readonly property bool _prefixTimelineEnabled: plasmoidConfig ? (plasmoidConfig.prefixTimelineEnabled !== undefined ? plasmoidConfig.prefixTimelineEnabled : true) : true
@@ -117,8 +120,11 @@ Item {
     readonly property var _localizedPrefixes: ({
         date: _locDate, clock: _locClock, weather: _locWeather,
         power: _locPower, help: _locHelp, unit: _locUnit,
-        kill: _locKill, spell: _locSpell, shell: _locShell,
-        calendar: _locCalendar
+        shell: _locShell,
+        calendar: _locCalendar,
+        define: _runnerDefine,
+        kill: _runnerKill,
+        spell: _runnerSpell
     })
     readonly property var _prefixSettings: ({
         weatherEnabled: _canShowWeather,
@@ -132,6 +138,11 @@ Item {
 
     // ===== CACHED QUERY RESULTS (recomputed once per searchText change) =====
     readonly property string effectiveQuery: _computeEffectiveQuery(searchText)
+    readonly property string prefixFilter: PrefixRegistry.resultFilter(searchText, _localizedPrefixes, _prefixSettings)
+    // An explicit query prefix is authoritative; a stale category chip must
+    // not turn app:, documents:, images:, etc. into a different search.
+    readonly property string effectiveFilter: prefixFilter !== "All" ? prefixFilter : activeFilter
+    readonly property string resultSearchText: isRssOnlyQuery ? searchText : effectiveQuery
     readonly property bool isCommandOnly: _computeIsCommandOnly(searchText)
     readonly property bool queryMayHaveHint: {
         var value = searchText.trim();
@@ -180,12 +191,12 @@ Item {
         id: tileData
         resultsModel: resultsModel
         logic: popupRoot.logic
-        searchText: popupRoot.searchText
-        activeFilter: popupRoot.activeFilter
+        searchText: popupRoot.resultSearchText
+        activeFilter: popupRoot.effectiveFilter
         searchAlgorithm: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.searchAlgorithm || 0) : 0
         minResults: popupRoot.plasmoidConfig ? Math.max(0, popupRoot.plasmoidConfig.minResults || 0) : 3
         smartResultLimit: popupRoot.plasmoidConfig ? popupRoot.plasmoidConfig.smartResultLimit !== false : true
-        maxResults: popupRoot.activeFilter === "All"
+        maxResults: popupRoot.effectiveFilter === "All"
             ? (popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.maxResults || 20) : 20)
             : popupRoot.filteredResultLimit
 
@@ -199,7 +210,7 @@ Item {
         id: resultsModel
         // Use debounced query string to prevent stutter during rapid typing
         queryString: popupRoot.delayedQueryString
-        limit: popupRoot.activeFilter === "All"
+        limit: popupRoot.effectiveFilter === "All"
             ? (popupRoot.plasmoidConfig ? Math.max(10, popupRoot.plasmoidConfig.maxResults || 20) : 20)
             : popupRoot.filteredResultLimit
     }
@@ -211,7 +222,7 @@ Item {
         interval: 60
         repeat: false
         onTriggered: {
-            popupRoot.delayedQueryString = getBackendQuery(popupRoot.searchText, popupRoot.activeFilter)
+            popupRoot.delayedQueryString = getBackendQuery(popupRoot.searchText, popupRoot.effectiveFilter)
             tileData.markQueryIssued(popupRoot.searchGeneration)
         }
     }
@@ -230,6 +241,8 @@ Item {
         if (searchText.length > 0) loadingFallbackTimer.restart()
         else loadingFallbackTimer.stop()
         queryDebouncer.restart()
+        if (searchText.trim().length >= 2)
+            logic.ensureDiscoverAvailability()
         // If query is cleared, update immediately for responsive feel
         if (searchText.length === 0) {
             queryDebouncer.stop()
@@ -323,6 +336,12 @@ Item {
     function handleResultClick(index, display, decoration, category, matchId, filePath) {
         if (index !== -1 && !isQueryAllowed(popupRoot.searchText))
             return;
+        if (index === -2 || String(matchId || "").indexOf("discover:") === 0) {
+            logic.openDiscoverSearch(popupRoot.searchText);
+            requestSearchTextUpdate("");
+            requestExpandChange(false);
+            return;
+        }
         // Record to history
         logic.addToHistory(display, decoration, category, matchId, filePath, (index === -1 ? "rss" : null), popupRoot.searchText);
 
@@ -553,8 +572,8 @@ Item {
             webSearchEnabled: _prefixWebSearchEnabled,
             weatherEnabled: _canShowWeather,
             locShell: _locShell,
-            locKill: _locKill,
-            locSpell: _locSpell,
+            locKill: _runnerKill,
+            locSpell: _runnerSpell,
             locUnit: _locUnit,
             locWeather: _locWeather
         });
@@ -571,6 +590,24 @@ Item {
     // Legacy wrappers for backward compatibility (e.g. handleResultClick)
     function isCommandOnlyQuery(text) { return _computeIsCommandOnly(text) }
     function getEffectiveQuery(text) { return _computeEffectiveQuery(text) }
+
+    function selectPrefix(text) {
+        requestSearchTextUpdate(text)
+        if (!isButtonMode)
+            hiddenSearchInput.text = text
+        else
+            searchBar.setText(text)
+
+        Qt.callLater(function() {
+            if (!isButtonMode) {
+                hiddenSearchInput.forceActiveFocus()
+                hiddenSearchInput.cursorPosition = hiddenSearchInput.text.length
+            } else {
+                searchBar.focusInput()
+                searchBar.cursorPosition = searchBar.text.length
+            }
+        })
+    }
 
     // ===== UI COMPONENTS =====
 
@@ -712,6 +749,7 @@ Item {
             textColor: popupRoot.textColor
             previewEnabled: popupRoot.previewEnabled && popupRoot.previewShowResults
             previewSettings: popupRoot.previewSettings
+            logic: popupRoot.logic
 
             onResultClicked: (idx, display, decoration, category, matchId, filePath) => {
                 if (!isQueryAllowed(popupRoot.searchText))
@@ -744,9 +782,7 @@ Item {
             plasmoidConfig: popupRoot.plasmoidConfig
 
             onHintSelected: (text) => {
-                requestSearchTextUpdate(text)
-                if (!isButtonMode) hiddenSearchInput.text = text
-                else searchBar.setText(text)
+                selectPrefix(text)
             }
         }
     }
@@ -846,10 +882,10 @@ Item {
 
         property bool active: popupRoot.expanded && popupRoot.searchText.length === 0 && !popupRoot.isRssOnlyQuery
         property var prefixActions: [
-            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help"), prefix: "help:", icon: "help-contents" },
-            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather"), prefix: "weather:", icon: "weather-clear" },
-            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unit Converter"), prefix: "unit:", icon: "accessories-calculator" },
-            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date and Time"), prefix: "date:", icon: "view-calendar" }
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help"), prefix: "help:" },
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather"), prefix: "weather:" },
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Calculate"), prefix: "calc:" },
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date and Time"), prefix: "date:" }
         ]
 
         ListView {
@@ -865,13 +901,8 @@ Item {
             delegate: PlasmaComponents.Button {
                 width: implicitWidth
                 height: startupPrefixStrip.height
-                text: modelData.label + "  " + modelData.prefix
-                icon.name: modelData.icon
-                onClicked: {
-                    requestSearchTextUpdate(modelData.prefix)
-                    if (!isButtonMode) hiddenSearchInput.text = modelData.prefix
-                    else searchBar.setText(modelData.prefix)
-                }
+                text: modelData.label
+                onClicked: selectPrefix(modelData.prefix)
             }
         }
     }
@@ -1014,9 +1045,7 @@ Item {
 
             onAidSelected: (prefix) => {
                 // HelpView returns the prefix in the active locale.
-                requestSearchTextUpdate(prefix)
-                if (!isButtonMode) hiddenSearchInput.text = prefix
-                else searchBar.setText(prefix)
+                selectPrefix(prefix)
             }
             anchors.fill: parent
         }
@@ -1181,9 +1210,7 @@ Item {
                      onSearchAgainRequested: (item) => searchAgainFromHistory(item)
                      onClearClicked: logic.clearHistory()
                      onHintSelected: (text) => {
-                         requestSearchTextUpdate(text)
-                         if (!isButtonMode) hiddenSearchInput.text = text
-                         else searchBar.setText(text)
+                         selectPrefix(text)
                      }
                      onTabPressed: cycleFocusSection(true)
                      onShiftTabPressed: cycleFocusSection(false)

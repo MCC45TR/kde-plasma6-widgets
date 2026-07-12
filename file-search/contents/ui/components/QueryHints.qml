@@ -41,11 +41,8 @@ Rectangle {
             icon: "view-calendar",
             category: "Files",
             options: [
-                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Calendar"), value: "timeline:/calendar/" },
-                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Today"), value: "timeline:/today" },
-                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Yesterday"), value: "timeline:/yesterday" },
-                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "This Week"), value: "timeline:/thisweek" },
-                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "This Month"), value: "timeline:/thismonth" }
+                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Calendar"), value: "timeline:/calendar" },
+                { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Today"), value: "timeline:/today" }
             ]
         },
         { prefix: "file:/", hint: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Path"), desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search via absolute file path"), icon: "folder", category: "Files", localeBase: "file" },
@@ -122,9 +119,10 @@ Rectangle {
         power: i18nd("plasma_applet_com.mcc45tr.filesearch", "power"),
         help: i18nd("plasma_applet_com.mcc45tr.filesearch", "help"),
         unit: i18nd("plasma_applet_com.mcc45tr.filesearch", "unit"),
-        kill: i18nd("plasma_applet_com.mcc45tr.filesearch", "kill"),
-        spell: i18nd("plasma_applet_com.mcc45tr.filesearch", "spell"),
-        shell: i18nd("plasma_applet_com.mcc45tr.filesearch", "shell")
+        shell: i18nd("plasma_applet_com.mcc45tr.filesearch", "shell"),
+        define: i18nd("plasma_runner_krunner_dictionary", "define"),
+        kill: i18nd("plasma_runner_kill", "kill"),
+        spell: i18nd("plasma_runner_spellcheckrunner", "spell")
     })
     // Cached i18n strings used in detectHint error paths
     readonly property string _unknownPrefixText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unknown prefix")
@@ -149,7 +147,9 @@ Rectangle {
             // Capitalize first letter if needed (some locales don't)
             monthName = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
-            var val = "timeline:/calendar/" + monthName + "/";
+            var year = d.getFullYear().toString();
+            var month = (d.getMonth() + 1).toString().padStart(2, "0");
+            var val = "timeline:/calendar/" + year + "-" + month;
 
             options.push({
                 label: monthName,
@@ -161,41 +161,23 @@ Rectangle {
 
     function getTimelineDayOptions(baseQuery) {
         var options = [];
+        var monthMatch = baseQuery.match(/(\d{4})-(\d{2})$/);
+        if (!monthMatch) return options;
+        var year = Number(monthMatch[1]);
+        var month = Number(monthMatch[2]);
+        var daysInMonth = new Date(year, month, 0).getDate();
         var today = new Date();
+        var normalizedBase = baseQuery.endsWith("/") ? baseQuery : baseQuery + "/";
 
-        // If baseQuery doesn't end with /, add it
-        if (!baseQuery.endsWith("/")) baseQuery += "/";
-
-        for (var i = 0; i < 31; i++) {
-            var d = new Date();
-            d.setDate(today.getDate() - i);
-
-            // Format: "14 Ocak 2026 Çarşamba" to match folder structure
+        for (var day = daysInMonth; day >= 1; day--) {
+            var d = new Date(year, month - 1, day);
+            if (d > today) continue;
             var dayName = d.toLocaleDateString(currentLocale, "d MMMM yyyy dddd");
-
-            var val = baseQuery + dayName;
-
-            var label = "";
-
-            if (i === 0) {
-                label = "";
-            } else if (i === 1) {
-                label = "";
-            } else if (i === 2) {
-                label = "";
-            } else {
-                label = dayName;
-            }
-
-            if (i === 0) val = baseQuery + i18nd("plasma_applet_com.mcc45tr.filesearch", "Today");
-            else if (i === 1) val = baseQuery + i18nd("plasma_applet_com.mcc45tr.filesearch", "Yesterday");
-            else if (i === 2) val = baseQuery + i18nd("plasma_applet_com.mcc45tr.filesearch", "Two days ago");
+            var isoDate = year.toString() + "-" + month.toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0");
 
             options.push({
-                label: label,
-                value: val,
-                // These are used for button labels
-                displayLabel: (i===0 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Today") : (i===1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Yesterday") : (i===2 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Two days ago") : dayName)))
+                label: dayName,
+                value: normalizedBase + isoDate
             });
         }
         return options;
@@ -254,15 +236,23 @@ Rectangle {
                     icon: bestMatch.icon,
                     isError: false,
                     prefix: matchedPrefix,
-                    options: getTimelineMonthOptions()
+                    options: bestMatch.options
                  }
              }
 
              // Check calendar sub-path
-             if (lowerQuery.indexOf("/calendar/") !== -1) {
-                  // If slashes count >= 3, show days
-                  var slashes = (query.match(/\//g) || []).length;
-                  if (slashes >= 3) {
+             if (lowerQuery === "timeline:/calendar") {
+                  return {
+                       show: true,
+                       text: _browseCalendarText,
+                       icon: "view-calendar-month",
+                       isError: false,
+                       prefix: matchedPrefix,
+                       options: getTimelineMonthOptions()
+                  }
+             }
+
+             if (/^timeline:\/calendar\/\d{4}-\d{2}$/.test(lowerQuery)) {
                        return {
                             show: true,
                             text: _browseCalendarText,
@@ -271,16 +261,6 @@ Rectangle {
                             prefix: query,
                             options: getTimelineDayOptions(query)
                        }
-                  }
-
-                   return {
-                        show: true,
-                        text: _browseCalendarText,
-                        icon: "view-calendar-month",
-                        isError: false,
-                        prefix: matchedPrefix,
-                        options: getTimelineMonthOptions()
-                   }
              }
         }
 
@@ -412,15 +392,8 @@ Rectangle {
                 anchors.rightMargin: Kirigami.Units.smallSpacing
                 spacing: Kirigami.Units.smallSpacing
 
-                Kirigami.Icon {
-                    source: modelData.icon || "dialog-information"
-                    Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                    Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                    color: queryHints.textColor
-                }
-
                 Text {
-                    text: modelData.prefix + " " + modelData.hint
+                    text: modelData.hint
                     Layout.fillWidth: true
                     color: queryHints.textColor
                     font.family: Kirigami.Theme.smallFont.family

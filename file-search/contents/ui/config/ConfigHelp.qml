@@ -10,6 +10,10 @@ Kirigami.FormLayout {
     property int cfg_panelWidthStepDefault
     property int cfg_panelContentOpacity
     property int cfg_panelContentOpacityDefault
+    property bool cfg_panelOrientationAutomatic
+    property bool cfg_panelOrientationAutomaticDefault
+    property int cfg_panelOrientation
+    property int cfg_panelOrientationDefault
 
     // Weather configuration
     property string cfg_weatherProvider
