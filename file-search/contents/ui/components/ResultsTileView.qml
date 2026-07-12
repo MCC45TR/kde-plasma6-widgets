@@ -632,8 +632,8 @@ FocusScope {
                                                 width: tileDelegate.width - (Kirigami.Units.smallSpacing * 2)
                                                 text: modelData.display || ""
                                                 color: tileDelegate.contentColor
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 horizontalAlignment: Text.AlignHCenter
                                                 elide: Text.ElideRight
                                                 maximumLineCount: 1
@@ -665,8 +665,8 @@ FocusScope {
                                                     return modelData.subtext || "";
                                                 }
                                                 color: Qt.rgba(tileDelegate.contentColor.r, tileDelegate.contentColor.g, tileDelegate.contentColor.b, 0.75)
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 horizontalAlignment: Text.AlignHCenter
                                                 elide: Text.ElideRight
                                                 visible: true
@@ -717,8 +717,8 @@ FocusScope {
 
                                                     Text {
                                                         text: modelData.subtext || ""
-                                                        font.family: Kirigami.Theme.smallFont.family
-                                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                        font.family: Kirigami.Theme.defaultFont.family
+                                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                         color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                         Layout.fillWidth: true
                                                         elide: Text.ElideRight
@@ -801,8 +801,8 @@ FocusScope {
 
                                                     PlasmaComponents.Label {
                                                         text: modelData.subtext || ""
-                                                        font.family: Kirigami.Theme.smallFont.family
-                                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                        font.family: Kirigami.Theme.defaultFont.family
+                                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                         opacity: 0.6
                                                         Layout.fillWidth: true
                                                         horizontalAlignment: Text.AlignRight
@@ -891,16 +891,16 @@ FocusScope {
                                                         Text {
                                                             text: resultsTileRoot.locCategory + ": " + (modelData.category || "Other")
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
-                                                            font.family: Kirigami.Theme.smallFont.family
-                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                            font.family: Kirigami.Theme.defaultFont.family
+                                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                             textFormat: Text.PlainText
                                                         }
 
                                                         Text {
                                                             text: resultsTileRoot.locFileType + ": " + tileDelegate.previewFileType
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
-                                                            font.family: Kirigami.Theme.smallFont.family
-                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                            font.family: Kirigami.Theme.defaultFont.family
+                                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                             visible: tileDelegate.previewFileType.length > 0
                                                             textFormat: Text.PlainText
                                                         }
@@ -910,8 +910,8 @@ FocusScope {
 
                                                             text: ""
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
-                                                            font.family: Kirigami.Theme.smallFont.family
-                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                            font.family: Kirigami.Theme.defaultFont.family
+                                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                             visible: text.length > 0
                                                             textFormat: Text.PlainText
                                                         }
@@ -919,8 +919,8 @@ FocusScope {
                                                         Text {
                                                             text: resultsTileRoot.locPath + ": " + tileDelegate.previewPath
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
-                                                            font.family: Kirigami.Theme.smallFont.family
-                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                            font.family: Kirigami.Theme.defaultFont.family
+                                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                             wrapMode: Text.WrapAnywhere
                                                             Layout.fillWidth: true
                                                             textFormat: Text.PlainText
@@ -950,7 +950,7 @@ FocusScope {
                                                         text: ""
                                                         color: tileDelegate.contentColor
                                                         font.family: "Monospace"
-                                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                         wrapMode: Text.Wrap
                                                     }
 
@@ -1083,8 +1083,8 @@ FocusScope {
                                             // Category
                                             Text {
                                                 text: resultsTileRoot.locCategory + ": " + (modelData.category || "")
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                 visible: (modelData.category || "").length > 0
                                             }
@@ -1094,8 +1094,8 @@ FocusScope {
                                                 property string fileExt: tileDelegate.previewFileType
 
                                                 text: resultsTileRoot.locFileType + ": " + fileExt
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                 visible: fileExt.length > 0
                                             }
@@ -1103,8 +1103,8 @@ FocusScope {
                                             // Path
                                             Text {
                                                 text: resultsTileRoot.locPath + ": " + tileDelegate.previewPath
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                 wrapMode: Text.WrapAnywhere
                                                 width: Math.min(300, implicitWidth)
@@ -1114,8 +1114,8 @@ FocusScope {
                                             // Shortcut hint
                                             Text {
                                                 text: "💡 " + resultsTileRoot.locSpacePreview
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 font.italic: true
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
                                                 visible: !resultsTileRoot.previewForceVisible

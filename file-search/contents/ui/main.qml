@@ -9,19 +9,18 @@ import "components/WeatherService.js" as WeatherService
 PlasmoidItem {
     id: root
 
-    // Load bundled fonts with the root item so every lazily-created view can use
-    // them. Fall back to the desktop theme until the font is ready.
-    FontLoader { id: barlowMedium; source: "../fonts/BarlowCondensed-Medium.ttf" }
-    readonly property string uiFontFamily: barlowMedium.status === FontLoader.Ready
-        ? barlowMedium.name
-        : Kirigami.Theme.defaultFont.family
+    // Match Plasma's configured interface font. A bundled condensed font made
+    // the panel label and application names look noticeably smaller than
+    // Kickoff, even at the same pixel size.
+    readonly property string uiFontFamily: Kirigami.Theme.defaultFont.family
 
     // ===== CORE PROPERTIES =====
     property string searchText: ""
     property alias logic: controller
 
-    // Responsive font size based on height (40% of panel height)
-    readonly property int responsiveFontSize: Math.max(10, Math.round(height * 0.4))
+    // Keep panel text at least as large as the desktop's normal UI text while
+    // still scaling gently with taller panels.
+    readonly property int responsiveFontSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, Math.round(height * 0.38))
     
     // ===== PANEL DETECTION =====
     // Check if widget is in a panel (horizontal or vertical)
@@ -91,7 +90,9 @@ PlasmoidItem {
     
     readonly property real placeholderContentWidth: isButtonMode ? 0 : (placeholderMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (height + 30) : 20))
     
-    // No background - transparent
+    // Keep the shell-provided frame disabled. Enabling StandardBackground adds
+    // theme margins around our already rounded desktop surface, producing a
+    // visible double frame.
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     
     // Prevent closing when interacting with external dialogs (like auth)

@@ -369,8 +369,8 @@ Item {
                                 Text {
                                     text: modelData.version || " "
                                     visible: text !== " "
-                                    font.family: Kirigami.Theme.smallFont.family
-                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     color: Qt.alpha(root.textColor, 0.7)
                                     elide: Text.ElideRight
                                     Layout.fillWidth: true
@@ -582,8 +582,8 @@ Item {
                 opacity: visible ? 1.0 : 0.0
                 Behavior on opacity { NumberAnimation { duration: 200 } }
                 text: btn.confirmMessage
-                font.family: Kirigami.Theme.smallFont.family
-                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                font.family: Kirigami.Theme.defaultFont.family
+                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                 color: Qt.alpha(root.textColor, 0.8)
                 horizontalAlignment: Text.AlignHCenter
                 Layout.alignment: Qt.AlignHCenter

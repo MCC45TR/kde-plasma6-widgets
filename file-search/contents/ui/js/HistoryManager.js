@@ -149,3 +149,24 @@ function removeFromHistory(historyArray, uuid) {
         return item.uuid !== uuid
     })
 }
+
+// Remove every recent entry for one application.  Match the durable desktop
+// path/runner id first; the display text is only a last resort for older
+// history records that predate those fields.
+function removeApplicationFromHistory(historyArray, application) {
+    if (!application)
+        return Array.isArray(historyArray) ? historyArray.slice() : []
+
+    var matchId = application.matchId || ""
+    var filePath = application.filePath || ""
+    var display = application.display || ""
+    return historyArray.filter(function (item) {
+        if (!item || !item.isApplication)
+            return true
+        if (matchId && item.matchId === matchId)
+            return false
+        if (filePath && item.filePath === filePath)
+            return false
+        return !(!matchId && !filePath && display && item.display === display)
+    })
+}

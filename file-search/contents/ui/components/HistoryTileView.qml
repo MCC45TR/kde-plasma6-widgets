@@ -26,6 +26,7 @@ FocusScope {
 
     // Signals
     signal itemClicked(var item)
+    signal searchAgainRequested(var item)
     signal clearClicked()
     signal hintSelected(string text)
 
@@ -242,6 +243,7 @@ FocusScope {
     HistoryContextMenu {
         id: contextMenu
         logic: historyTile.logic
+        onSearchAgainRequested: (item) => historyTile.searchAgainRequested(item)
     }
 
     // Tile Grid
@@ -439,8 +441,8 @@ FocusScope {
                                         width: historyTile.textWidth
                                         text: modelData.display || ""
                                         color: histTileDelegate.contentColor
-                                        font.family: Kirigami.Theme.smallFont.family
-                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         horizontalAlignment: Text.AlignHCenter
                                         elide: Text.ElideRight
                                         maximumLineCount: 1
@@ -466,8 +468,8 @@ FocusScope {
                                             return "";
                                         }
                                         color: Qt.rgba(histTileDelegate.contentColor.r, histTileDelegate.contentColor.g, histTileDelegate.contentColor.b, 0.75)
-                                        font.family: Kirigami.Theme.smallFont.family
-                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         horizontalAlignment: Text.AlignHCenter
                                         elide: Text.ElideRight
                                         visible: true
@@ -520,8 +522,8 @@ FocusScope {
                                                     }
                                                     return "";
                                                 }
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                                 Layout.fillWidth: true
                                                 elide: Text.ElideRight
@@ -602,16 +604,16 @@ FocusScope {
                                                 Text {
                                                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "Other")
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
-                                                    font.family: Kirigami.Theme.smallFont.family
-                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                    font.family: Kirigami.Theme.defaultFont.family
+                                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                     textFormat: Text.PlainText
                                                 }
 
                                                 Text {
                                                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + histTileDelegate.previewFileType
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
-                                                    font.family: Kirigami.Theme.smallFont.family
-                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                    font.family: Kirigami.Theme.defaultFont.family
+                                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                     visible: histTileDelegate.previewFileType.length > 0
                                                     textFormat: Text.PlainText
                                                 }
@@ -620,8 +622,8 @@ FocusScope {
                                                     id: fileSizeText
                                                     text: ""
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
-                                                    font.family: Kirigami.Theme.smallFont.family
-                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                    font.family: Kirigami.Theme.defaultFont.family
+                                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                     visible: text.length > 0
                                                     textFormat: Text.PlainText
                                                 }
@@ -629,8 +631,8 @@ FocusScope {
                                                 Text {
                                                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + histTileDelegate.previewPath
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.5)
-                                                    font.family: Kirigami.Theme.smallFont.family
-                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                    font.family: Kirigami.Theme.defaultFont.family
+                                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                     wrapMode: Text.WrapAnywhere
                                                     Layout.fillWidth: true
                                                     textFormat: Text.PlainText
@@ -656,7 +658,7 @@ FocusScope {
                                                 text: ""
                                                 color: historyTile.textColor
                                                 font.family: "Monospace"
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 wrapMode: Text.Wrap
                                             }
                                         }
@@ -745,24 +747,24 @@ FocusScope {
 
                                         Text {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
-                                            font.family: Kirigami.Theme.smallFont.family
-                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                            font.family: Kirigami.Theme.defaultFont.family
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                             visible: (modelData.category || "").length > 0
                                         }
 
                                         Text {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + histTileDelegate.previewFileType
-                                            font.family: Kirigami.Theme.smallFont.family
-                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                            font.family: Kirigami.Theme.defaultFont.family
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                             visible: histTileDelegate.previewFileType.length > 0
                                         }
 
                                         Text {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + histTileDelegate.previewPath
-                                            font.family: Kirigami.Theme.smallFont.family
-                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                            font.family: Kirigami.Theme.defaultFont.family
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                             wrapMode: Text.WrapAnywhere
                                             width: 300

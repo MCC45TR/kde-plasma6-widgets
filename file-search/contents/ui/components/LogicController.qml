@@ -197,6 +197,11 @@ Item {
         saveHistory();
     }
 
+    function removeApplicationFromHistory(item) {
+        searchHistory = HistoryManager.removeApplicationFromHistory(searchHistory, item);
+        saveHistory();
+    }
+
     // Shell escape helper - delegates to Utils.shellEscape
     function shellEscape(str) {
         return Utils.shellEscape(str)
@@ -293,6 +298,68 @@ Item {
         runShellCommand(cmd);
     }
 
+    function localFilePath(url) {
+        var path = Utils.decodeLocalPath(url);
+        return path.indexOf("/") === 0 ? path : "";
+    }
+
+    function renameLocalFile(url) {
+        var source = localFilePath(url);
+        if (!source || source === "/")
+            return;
+
+        var currentName = source.substring(source.lastIndexOf("/") + 1);
+        var parentPath = source.substring(0, source.lastIndexOf("/")) || "/";
+        var dialog = "kdialog --title " + shellEscape(i18nd("plasma_applet_com.mcc45tr.filesearch", "Rename"))
+                + " --inputbox " + shellEscape(i18nd("plasma_applet_com.mcc45tr.filesearch", "New name:"))
+                + " " + shellEscape(currentName);
+        runExecutable(dialog, function(output, isFinished, exitCode) {
+            if (!isFinished || exitCode !== 0)
+                return;
+            var newName = String(output || "").trim();
+            if (!newName || newName === "." || newName === ".." || newName.indexOf("/") !== -1)
+                return;
+            var destination = parentPath === "/" ? "/" + newName : parentPath + "/" + newName;
+            if (destination !== source)
+                runShellCommand("kioclient move " + shellEscape(source) + " " + shellEscape(destination));
+        });
+    }
+
+    function duplicateLocalFile(url) {
+        var source = localFilePath(url);
+        if (!source || source === "/")
+            return;
+
+        // Use KIO for the copy itself so local files and directories retain
+        // KDE's normal progress/error handling. The shell only selects a free
+        // sibling name, and every user-controlled value is quoted.
+        var command = "source=" + shellEscape(source)
+                + "; parent=$(dirname -- \"$source\"); name=$(basename -- \"$source\")"
+                + "; target=\"$parent/$name (copy)\"; number=2"
+                + "; while test -e \"$target\"; do target=\"$parent/$name (copy $number)\"; number=$((number + 1)); done"
+                + "; kioclient copy \"$source\" \"$target\"";
+        runShellCommand(command);
+    }
+
+    function shareItem(url) {
+        var source = String(url || "");
+        if (!source)
+            return;
+
+        // KDE Connect is the Plasma-native, device-aware sharing route. It
+        // accepts both local files and https URLs and asks for a reachable
+        // device at action time.
+        var command = "if ! command -v kdeconnect-cli >/dev/null 2>&1; then "
+                + "kdialog --sorry " + shellEscape(i18nd("plasma_applet_com.mcc45tr.filesearch", "KDE Connect is not installed.")) + "; exit 0; fi"
+                + "; devices=$(kdeconnect-cli --list-available --id-only)"
+                + "; if test -z \"$devices\"; then kdialog --sorry "
+                + shellEscape(i18nd("plasma_applet_com.mcc45tr.filesearch", "No reachable KDE Connect devices found.")) + "; exit 0; fi"
+                + "; device=$(kdialog --title " + shellEscape(i18nd("plasma_applet_com.mcc45tr.filesearch", "Share / Send"))
+                + " --combobox " + shellEscape(i18nd("plasma_applet_com.mcc45tr.filesearch", "Choose a KDE Connect device:")) + " $devices)"
+                + "; if test -n \"$device\"; then kdeconnect-cli --device \"$device\" --share " + shellEscape(source) + "; fi";
+        runShellCommand(command);
+    }
+
     function openTerminal(url) {
         if (!url)
             return ;
@@ -355,6 +422,16 @@ Item {
     function pinItemToActivity(item, activityId) {
         pinnedItems = PinnedManager.pinItem(pinnedItems, item, activityId || "global");
         savePinned();
+    }
+
+    function isPinnedForActivity(matchId, activityId) {
+        var targetActivity = activityId || "global";
+        for (var i = 0; i < pinnedItems.length; i++) {
+            var item = pinnedItems[i];
+            if (item.matchId === matchId && item.activityId === targetActivity)
+                return true;
+        }
+        return false;
     }
 
     // ===== CATEGORY SETTINGS FUNCTIONS =====

@@ -289,17 +289,15 @@ Item {
         return getFilteredQuery(eq, filter)
     }
 
-    // Background for Desktop Mode (Matte)
+    // Desktop background keeps the original geometry and single rounded frame.
     Rectangle {
         anchors.fill: parent
-        // Extend slightly to cover margins if needed, or fill parent
         z: -100
         color: popupRoot.bgColor
         radius: 12
         visible: !popupRoot.isInPanel
-        opacity: 0.95 // Almost solid matte
+        opacity: 0.95
 
-        // Add a subtle border or shadow if needed for contrast
         border.color: Qt.rgba(textColor.r, textColor.g, textColor.b, 0.1)
         border.width: 1
     }
@@ -394,6 +392,21 @@ Item {
 
         queueHistoryRun(item)
         historyRunTimer.start();
+    }
+
+    function searchAgainFromHistory(item) {
+        var searchTerm = item && (item.queryText || item.display) ? (item.queryText || item.display).toString() : "";
+        if (!searchTerm)
+            return;
+        requestSearchTextUpdate(searchTerm);
+        if (!isButtonMode)
+            hiddenSearchInput.text = searchTerm;
+        else
+            searchBar.setText(searchTerm);
+        Qt.callLater(function() {
+            if (!isButtonMode)
+                hiddenSearchInput.forceActiveFocus();
+        });
     }
 
     Timer {
@@ -762,6 +775,7 @@ Item {
             accentColor: popupRoot.accentColor
             iconSize: popupRoot.iconSize
             isTileView: popupRoot.isTileView
+            logic: popupRoot.logic
             isSearching: popupRoot.searchText.length > 0 || popupRoot.isPrefixMenuOpen
             compactPinnedView: popupRoot.compactPinnedItems
 
@@ -1139,6 +1153,7 @@ Item {
                      previewSize: popupRoot.previewSize
                      previewSettings: popupRoot.previewSettings
                      onItemClicked: (item) => handleHistoryClick(item)
+                     onSearchAgainRequested: (item) => searchAgainFromHistory(item)
                      onClearClicked: logic.clearHistory()
                  }
              }
@@ -1163,6 +1178,7 @@ Item {
                      scrollBarStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.scrollBarStyle || 0) : 0
                      compactTileView: popupRoot.compactHistoryItems
                      onItemClicked: (item) => handleHistoryClick(item)
+                     onSearchAgainRequested: (item) => searchAgainFromHistory(item)
                      onClearClicked: logic.clearHistory()
                      onHintSelected: (text) => {
                          requestSearchTextUpdate(text)

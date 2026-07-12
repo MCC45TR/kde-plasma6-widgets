@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
+import "../js/utils.js" as Utils
 
 // PinnedSection - Displays pinned items at the top of results
 // Supports drag-and-drop reordering and context menu
@@ -14,6 +15,7 @@ Item {
     required property color accentColor
     required property int iconSize
     required property bool isTileView
+    property var logic: null
 
     // Collapsed state
     property bool isExpanded: true
@@ -209,8 +211,8 @@ Item {
                     sourceComponent: Text {
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Right-click items to pin them")
                         color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.8)
-                        font.family: Kirigami.Theme.smallFont.family
-                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         wrapMode: Text.Wrap
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -326,8 +328,8 @@ Item {
                                             width: pinnedSectionRoot.tileWidth - (Kirigami.Units.smallSpacing * 2)
                                             horizontalAlignment: Text.AlignHCenter
                                             color: pinnedSectionRoot.textColor
-                                            font.family: Kirigami.Theme.smallFont.family
-                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                            font.family: Kirigami.Theme.defaultFont.family
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             wrapMode: Text.NoWrap
                                             maximumLineCount: 1
                                             elide: Text.ElideRight
@@ -411,6 +413,20 @@ Item {
         property var currentItem: null
         property int selectedIndex: -1
 
+        readonly property string itemPath: currentItem && currentItem.filePath ? currentItem.filePath.toString() : ""
+        readonly property bool isWebLink: Utils.isHttpUrl(itemPath)
+        readonly property bool isLocalFile: Utils.decodeLocalPath(itemPath).indexOf("/") === 0
+        readonly property bool isFolder: currentItem && Utils.isFolderCategory(currentItem.category || "", itemPath, currentItem.decoration || "")
+
+        function moveCurrentTo(index) {
+            var items = pinnedSectionRoot.pinnedItems || []
+            if (!currentItem || index < 0 || index >= items.length || index === selectedIndex)
+                return
+            var target = items[index]
+            if (target && target.uuid)
+                pinnedSectionRoot.reorderRequested(currentItem.uuid, target.uuid)
+        }
+
         NativeContextMenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open")
             icon: "document-open"
@@ -418,6 +434,33 @@ Item {
                 if (pinnedContextMenu.currentItem) {
                     pinnedSectionRoot.itemClicked(pinnedContextMenu.currentItem)
                 }
+            }
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy File Name")
+            icon: "edit-copy"
+            visible: pinnedContextMenu.isLocalFile
+            onTriggered: {
+                var path = Utils.decodeLocalPath(pinnedContextMenu.itemPath).replace(/\/+$/, "")
+                pinnedSectionRoot.logic.copyToClipboard(path.substring(path.lastIndexOf("/") + 1))
+            }
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Link")
+            icon: "edit-copy"
+            visible: pinnedContextMenu.isWebLink
+            onTriggered: pinnedSectionRoot.logic.copyToClipboard(pinnedContextMenu.itemPath)
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Folder Path")
+            icon: "edit-copy"
+            visible: pinnedContextMenu.isLocalFile
+            onTriggered: {
+                var path = Utils.decodeLocalPath(pinnedContextMenu.itemPath).replace(/\/+$/, "")
+                pinnedSectionRoot.logic.copyToClipboard(pinnedContextMenu.isFolder ? path : Utils.getParentFolder(path))
             }
         }
 
@@ -435,12 +478,59 @@ Item {
         NativeContextMenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Containing Folder")
             icon: "folder-open"
-            visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
-            onTriggered: {
-                if (pinnedContextMenu.currentItem) {
-                    pinnedSectionRoot.openLocationRequested(pinnedContextMenu.currentItem)
-                }
-            }
+            visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath && !pinnedContextMenu.isFolder
+            onTriggered: pinnedSectionRoot.logic.openFolder(pinnedContextMenu.itemPath)
+        }
+
+        NativeContextMenuItem {
+            text: pinnedContextMenu.isFolder ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Terminal Here") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Terminal in Containing Folder")
+            icon: "utilities-terminal"
+            visible: pinnedContextMenu.isLocalFile
+            onTriggered: pinnedSectionRoot.logic.openTerminal(pinnedContextMenu.itemPath)
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Rename")
+            icon: "edit-rename"
+            visible: pinnedContextMenu.isLocalFile
+            onTriggered: pinnedSectionRoot.logic.renameLocalFile(pinnedContextMenu.itemPath)
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Create Copy")
+            icon: "edit-copy"
+            visible: pinnedContextMenu.isLocalFile
+            onTriggered: pinnedSectionRoot.logic.duplicateLocalFile(pinnedContextMenu.itemPath)
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Share / Send via KDE Connect...")
+            icon: "document-share"
+            visible: pinnedContextMenu.isLocalFile || pinnedContextMenu.isWebLink
+            onTriggered: pinnedSectionRoot.logic.shareItem(pinnedContextMenu.itemPath)
+        }
+
+        NativeContextMenuSeparator { visible: pinnedContextMenu.selectedIndex >= 0 }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move to Top")
+            icon: "go-top"
+            visible: pinnedContextMenu.selectedIndex > 0
+            onTriggered: pinnedContextMenu.moveCurrentTo(0)
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move Left")
+            icon: "go-previous"
+            visible: pinnedContextMenu.selectedIndex > 0
+            onTriggered: pinnedContextMenu.moveCurrentTo(pinnedContextMenu.selectedIndex - 1)
+        }
+
+        NativeContextMenuItem {
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move Right")
+            icon: "go-next"
+            visible: pinnedContextMenu.selectedIndex >= 0 && pinnedContextMenu.selectedIndex < pinnedSectionRoot.pinnedItems.length - 1
+            onTriggered: pinnedContextMenu.moveCurrentTo(pinnedContextMenu.selectedIndex + 1)
         }
 
         NativeContextMenuSeparator {}

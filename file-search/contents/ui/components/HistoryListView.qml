@@ -77,6 +77,8 @@ Item {
     // Signals
     signal itemClicked(var item)
 
+    signal searchAgainRequested(var item)
+
     signal clearClicked()
 
     // Localization removed
@@ -86,6 +88,7 @@ Item {
     HistoryContextMenu {
         id: contextMenu
         logic: historyList.logic
+        onSearchAgainRequested: (item) => historyList.searchAgainRequested(item)
     }
 
     // History List
@@ -272,8 +275,8 @@ Item {
                                             }
                                             visible: text.length > 0
                                             color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
-                                            font.family: Kirigami.Theme.smallFont.family
-                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                            font.family: Kirigami.Theme.defaultFont.family
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             elide: Text.ElideMiddle
                                             Layout.fillWidth: true
                                         }
@@ -282,8 +285,8 @@ Item {
                                     Text {
                                         text: historyList.formatTimeFunc(modelData.timestamp)
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
-                                        font.family: Kirigami.Theme.smallFont.family
-                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         Layout.alignment: Qt.AlignVCenter
                                     }
                                 }
@@ -361,16 +364,16 @@ Item {
                                             Text {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "Other")
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 textFormat: Text.PlainText
                                             }
 
                                             Text {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + historyItemDelegate.previewFileType
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 visible: historyItemDelegate.previewFileType.length > 0
                                                 textFormat: Text.PlainText
                                             }
@@ -379,8 +382,8 @@ Item {
                                                 id: fileSizeText
                                                 text: ""
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 visible: text.length > 0
                                                 textFormat: Text.PlainText
                                             }
@@ -388,8 +391,8 @@ Item {
                                             Text {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + historyItemDelegate.previewPath
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
-                                                font.family: Kirigami.Theme.smallFont.family
-                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 wrapMode: Text.WrapAnywhere
                                                 Layout.fillWidth: true
                                                 textFormat: Text.PlainText
@@ -415,7 +418,7 @@ Item {
                                             text: ""
                                             color: historyList.textColor
                                             font.family: "Monospace"
-                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             wrapMode: Text.Wrap
                                         }
                                     }
@@ -499,24 +502,24 @@ Item {
 
                                     Text {
                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
-                                        font.family: Kirigami.Theme.smallFont.family
-                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                         visible: (modelData.category || "").length > 0
                                     }
 
                                     Text {
                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + historyItemDelegate.previewFileType
-                                        font.family: Kirigami.Theme.smallFont.family
-                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                         visible: historyItemDelegate.previewFileType.length > 0
                                     }
 
                                     Text {
                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + historyItemDelegate.previewPath
-                                        font.family: Kirigami.Theme.smallFont.family
-                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                         wrapMode: Text.WrapAnywhere
                                         width: 300

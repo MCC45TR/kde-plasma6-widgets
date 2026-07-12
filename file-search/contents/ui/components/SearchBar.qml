@@ -20,6 +20,8 @@ PlasmaExtras.SearchField {
     property bool rssShowFullHeadline: true
     property bool rssShowSource: false
 
+    font: Kirigami.Theme.defaultFont
+
     placeholderText: "" // Hidden to use our animated labels
 
     // Animated Placeholder Logic

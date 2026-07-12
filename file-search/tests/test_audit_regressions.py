@@ -15,6 +15,17 @@ def read(relative: str) -> str:
 
 
 class AuditRegressionTests(unittest.TestCase):
+    def test_desktop_keeps_single_custom_background_frame(self):
+        main = read("contents/ui/main.qml")
+        popup = read("contents/ui/components/SearchPopup.qml")
+        self.assertIn("PlasmaCore.Types.NoBackground", main)
+        self.assertNotIn("PlasmaCore.Types.StandardBackground", main)
+        desktop_background = popup[popup.index("// Desktop background keeps"):popup.index("function cycleFocusSection")]
+        self.assertIn("radius: 12", desktop_background)
+        self.assertIn("border.width: 1", desktop_background)
+        self.assertIn("color: popupRoot.bgColor", desktop_background)
+        self.assertIn("opacity: 0.95", desktop_background)
+
     def test_plasma6_only_runtime_has_no_plasma5_compatibility_imports(self):
         qml_sources = "\n".join(
             path.read_text(encoding="utf-8")
@@ -191,7 +202,19 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn('text/uri-list', results_tile)
         self.assertIn('text/uri-list', pinned)
         self.assertIn('"Open With..."', menu)
+        self.assertIn('"Search Again"', menu)
+        self.assertIn('"Copy File Name"', menu)
+        self.assertIn('"Copy Folder Path"', menu)
+        self.assertIn('"Copy Link"', menu)
+        self.assertIn('"Rename"', menu)
+        self.assertIn('"Create Copy"', menu)
+        self.assertIn('"Share / Send via KDE Connect..."', menu)
+        self.assertIn('"Remove This Application from History"', menu)
         self.assertIn("function openWith(url)", logic)
+        self.assertIn("function renameLocalFile(url)", logic)
+        self.assertIn("function duplicateLocalFile(url)", logic)
+        self.assertIn("function shareItem(url)", logic)
+        self.assertIn("function removeApplicationFromHistory(item)", logic)
         self.assertIn("Qt.openUrlExternally(url.toString())", logic)
         self.assertIn("function openContainingFolder(url)", logic)
 
@@ -287,6 +310,9 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn("PlasmaExtras.Highlight", results)
         self.assertIn("Kirigami.Theme.highlightedTextColor", results)
         self.assertIn("NativeContextMenu {", pinned)
+        self.assertIn('"Move to Top"', pinned)
+        self.assertIn('"Move Left"', pinned)
+        self.assertIn('"Move Right"', pinned)
         self.assertIn("PlasmaExtras.Menu", native_menu)
         self.assertIn("NativeContextMenu {", history_menu)
         self.assertNotIn("PlasmaComponents.Menu", pinned)
@@ -311,6 +337,20 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertEqual(fixed_pixels, [])
         self.assertEqual(foreign_controls, [])
         self.assertEqual(quick_controls_imports, [])
+
+    def test_search_surfaces_use_readable_system_font_sizes(self):
+        main = read("contents/ui/main.qml")
+        self.assertIn("uiFontFamily: Kirigami.Theme.defaultFont.family", main)
+        self.assertNotIn("BarlowCondensed-Medium.ttf", main)
+        self.assertIn("Math.max(Kirigami.Theme.defaultFont.pixelSize", main)
+
+        for name in (
+            "HistoryListView.qml", "HistoryTileView.qml", "PinnedSection.qml",
+            "PrimaryResultPreview.qml", "ResultsListView.qml", "ResultsTileView.qml",
+            "PowerView.qml",
+        ):
+            source = read("contents/ui/components/" + name)
+            self.assertNotIn("Kirigami.Theme.smallFont", source, name)
 
     def test_dead_payload_is_removed(self):
         self.assertFalse((ROOT / "contents/fonts/BarlowCondensed-Light.ttf").exists())

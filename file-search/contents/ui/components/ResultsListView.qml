@@ -178,8 +178,8 @@ PlasmaComponents.ScrollView {
                 anchors.leftMargin: 4
                 anchors.verticalCenter: parent.verticalCenter
                 text: section === "RSS" ? resultsListRoot.locNews : section
-                font.family: Kirigami.Theme.smallFont.family
-                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                font.family: Kirigami.Theme.defaultFont.family
+                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                 font.bold: true
                 color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.6)
             }
@@ -370,8 +370,8 @@ PlasmaComponents.ScrollView {
                                     return path || modelData.subtext || "";
                                 }
                                 color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.6)
-                                font.family: Kirigami.Theme.smallFont.family
-                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                font.family: Kirigami.Theme.defaultFont.family
+                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                 elide: Text.ElideMiddle
                                 Layout.fillWidth: true
                             }
@@ -447,8 +447,8 @@ PlasmaComponents.ScrollView {
                         Text {
                             text: resultsListRoot.rssMetaLine(modelData)
                             color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
-                            font.family: Kirigami.Theme.smallFont.family
-                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                            font.family: Kirigami.Theme.defaultFont.family
+                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                             font.italic: true
                             wrapMode: Text.WrapAnywhere
                             Layout.fillWidth: true
@@ -481,8 +481,8 @@ PlasmaComponents.ScrollView {
                                         text: resultsListRoot.locReadNews
                                         color: resultsListRoot.textColor
                                         font.bold: true
-                                        font.family: Kirigami.Theme.smallFont.family
-                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     }
 
                                 }
@@ -624,16 +624,16 @@ PlasmaComponents.ScrollView {
                                 Text {
                                     text: resultsListRoot.locCategory + ": " + (modelData.category || "Other")
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
-                                    font.family: Kirigami.Theme.smallFont.family
-                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     textFormat: Text.PlainText
                                 }
 
                                 Text {
                                     text: resultsListRoot.locFileType + ": " + delegateRoot.previewFileType
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
-                                    font.family: Kirigami.Theme.smallFont.family
-                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     visible: delegateRoot.previewFileType.length > 0
                                     textFormat: Text.PlainText
                                 }
@@ -643,8 +643,8 @@ PlasmaComponents.ScrollView {
 
                                     text: ""
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
-                                    font.family: Kirigami.Theme.smallFont.family
-                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     visible: text.length > 0
                                     textFormat: Text.PlainText
                                 }
@@ -652,8 +652,8 @@ PlasmaComponents.ScrollView {
                                 Text {
                                     text: resultsListRoot.locPath + ": " + delegateRoot.previewPath
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
-                                    font.family: Kirigami.Theme.smallFont.family
-                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     wrapMode: Text.WrapAnywhere
                                     Layout.fillWidth: true
                                     textFormat: Text.PlainText
@@ -683,7 +683,7 @@ PlasmaComponents.ScrollView {
                                 text: ""
                                 color: resultsListRoot.textColor
                                 font.family: "Monospace"
-                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                 wrapMode: Text.Wrap
                             }
 
@@ -801,24 +801,24 @@ PlasmaComponents.ScrollView {
 
                     Text {
                         text: resultsListRoot.locCategory + ": " + (modelData.category || "")
-                        font.family: Kirigami.Theme.smallFont.family
-                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         visible: (modelData.category || "").length > 0
                     }
 
                     Text {
                         text: resultsListRoot.locFileType + ": " + delegateRoot.previewFileType
-                        font.family: Kirigami.Theme.smallFont.family
-                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         visible: delegateRoot.previewFileType.length > 0
                     }
 
                     Text {
                         text: resultsListRoot.locPath + ": " + delegateRoot.previewPath
-                        font.family: Kirigami.Theme.smallFont.family
-                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         wrapMode: Text.WrapAnywhere
                         width: 300

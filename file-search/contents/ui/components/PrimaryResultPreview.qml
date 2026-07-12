@@ -114,8 +114,8 @@ Rectangle {
                 text: root.previewSource.length > 0
                     ? Utils.decodeLocalPath(root.firstFilePath).replace(/^\/home\/[^\/]+\//, "")
                     : root.searchText
-                font.family: Kirigami.Theme.smallFont.family
-                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                font.family: Kirigami.Theme.defaultFont.family
+                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                 color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.6)
                 elide: Text.ElideRight
                 width: parent.width
