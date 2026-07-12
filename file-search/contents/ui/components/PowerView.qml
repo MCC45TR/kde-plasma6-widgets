@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
-import org.kde.plasma.plasma5support as Plasma5Support
 import org.kde.plasma.plasmoid
+import org.kde.plasma.workspace.dbus as DBus
 
 Item {
     id: root
@@ -21,53 +21,10 @@ Item {
     // Loading state
     property bool isLoading: false
 
-    // Buffer for accumulating data
-    property var cmdDataBuffer: ({})
-
     property var plasmoidConfig
 
-    // Data Source for executing commands
-    Plasma5Support.DataSource {
-        id: execSource
-        engine: "executable"
-        onNewData: (sourceName, data) => {
-            if (data["stdout"]) {
-                if (!root.cmdDataBuffer[sourceName]) root.cmdDataBuffer[sourceName] = ""
-                root.cmdDataBuffer[sourceName] += data["stdout"]
-            }
-
-            // Parse the accumulated response as soon as it is complete.
-            var fullData = root.cmdDataBuffer[sourceName]
-
-            if (sourceName && sourceName.indexOf("bootctl list") !== -1) {
-                // Auth successful
-                root.requestPreventClosing(false)
-                authSafetyTimer.stop()
-                try {
-                    // Boot entries captured
-                    var entries = JSON.parse(fullData)
-                    root.processEntries(entries)
-                    root.isLoading = false
-
-                    if (sourceName.indexOf("pkexec") !== -1) {
-                         // Saving to config cache
-                         if (root.plasmoidConfig) {
-                             root.plasmoidConfig.cachedBootEntries = fullData
-                         } else {
-                             try { Plasmoid.configuration.cachedBootEntries = fullData } catch(e) {}
-                         }
-                    }
-                    execSource.disconnectSource(sourceName)
-                    delete root.cmdDataBuffer[sourceName]
-                } catch(e) {
-                    // Wait for the remaining JSON payload.
-                }
-            } else if (sourceName && sourceName.indexOf("CanHibernate") !== -1 && data["stdout"]) {
-                var res = data["stdout"].trim()
-                root.canHibernate = (res === "yes")
-                execSource.disconnectSource(sourceName)
-            }
-        }
+    AsyncProcess {
+        id: processRunner
     }
 
     // Signal to main window to prevent closing during auth
@@ -114,9 +71,23 @@ Item {
         root.isLoading = true
         root.requestPreventClosing(true)
         authSafetyTimer.start()
-        // Reset buffer
-        root.cmdDataBuffer = {}
-        execSource.connectSource("pkexec bootctl list --json=short")
+        processRunner.run("pkexec bootctl list --json=short", function(stdout, isFinished, exitCode) {
+            root.requestPreventClosing(false)
+            authSafetyTimer.stop()
+            root.isLoading = false
+            if (!isFinished || exitCode !== 0)
+                return
+            try {
+                var entries = JSON.parse(stdout)
+                root.processEntries(entries)
+                if (root.plasmoidConfig)
+                    root.plasmoidConfig.cachedBootEntries = stdout
+                else
+                    Plasmoid.configuration.cachedBootEntries = stdout
+            } catch (error) {
+                console.warn("[PowerView] Could not parse boot entries")
+            }
+        })
     }
 
     // Auto-load if visible and empty (fail-safe)
@@ -177,7 +148,20 @@ Item {
     }
 
     function checkHibernate() {
-        execSource.connectSource("qdbus org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.CanHibernate")
+        var message = {
+            service: "org.freedesktop.login1",
+            path: "/org/freedesktop/login1",
+            iface: "org.freedesktop.login1.Manager",
+            member: "CanHibernate",
+            signature: "",
+            arguments: []
+        } as DBus.dbusMessage
+        var reply = DBus.SystemBus.asyncCall(message)
+        reply.finished.connect(function() {
+            var available = reply.isValid && !reply.isError ? String(reply.value || "") : ""
+            reply.destroy()
+            root.canHibernate = available === "yes" || available === "challenge"
+        })
     }
 
     Component.onCompleted: {
@@ -190,7 +174,7 @@ Item {
     }
 
     function executeCommand(cmd) {
-        execSource.connectSource(cmd)
+        processRunner.runDetached(cmd)
     }
 
     // Shell escape helper for safe command construction
@@ -499,7 +483,7 @@ Item {
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.negativeTextColor
                     confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to log out)")
-                    onTriggered: root.executeCommand("qdbus org.kde.ksmserver /KSMServer logout 0 0 0")
+                    onTriggered: root.executeCommand("qdbus-qt6 org.kde.ksmserver /KSMServer logout 0 0 0")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }
@@ -521,7 +505,7 @@ Item {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Save Session")
                     iconName: "system-save-session"
                     doubleClickRequired: false
-                    onTriggered: root.executeCommand("qdbus org.kde.ksmserver /KSMServer saveCurrentSession")
+                    onTriggered: root.executeCommand("qdbus-qt6 org.kde.ksmserver /KSMServer saveCurrentSession")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }

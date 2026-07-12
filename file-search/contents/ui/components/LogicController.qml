@@ -7,9 +7,6 @@ import "../js/TelemetryManager.js" as TelemetryManager
 import "../js/utils.js" as Utils
 import QtCore
 import QtQuick
-import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.plasma5support as Plasma5Support
-import org.kde.plasma.plasmoid
 import org.kde.plasma.workspace.dbus as DBus
 
 Item {
@@ -241,14 +238,11 @@ Item {
         if (!cmd)
             return ;
 
-        globalShellSource.connectSource(cmd);
+        processRunner.runDetached(cmd);
     }
 
     function runExecutable(cmd, callback) {
-        var uniqueCmd = cmd + " #uniq_" + Date.now() + "_" + Math.floor(Math.random() * 1000000);
-        executable.callbacks[uniqueCmd] = callback;
-        executable.connectSource(uniqueCmd);
-        return uniqueCmd;
+        return processRunner.run(cmd, callback);
     }
 
     // ===== FILE OPERATIONS =====
@@ -273,15 +267,7 @@ Item {
     function openWith(url) {
         if (!url)
             return ;
-
-        callSessionDBus(
-            "org.kde.klauncher5",
-            "/KLauncher",
-            "org.kde.KLauncher",
-            "openUrl",
-            "sss",
-            [url.toString(), "", ""]
-        );
+        Qt.openUrlExternally(url.toString());
     }
 
     function copyToClipboard(text) {
@@ -419,7 +405,13 @@ Item {
         if (manCheckCompleted || manCheckPending)
             return;
         manCheckPending = true;
-        manCheckSource.connectedSources = ["command -v man"];
+        runExecutable("command -v man", function(stdout, isFinished, exitCode) {
+            if (!isFinished)
+                return;
+            manInstalled = exitCode === 0;
+            manCheckCompleted = true;
+            manCheckPending = false;
+        });
     }
 
     function loadRSS() {
@@ -590,12 +582,34 @@ Item {
             callback("");
             return;
         }
-        var cmd = "cat " + shellEscape(path);
-        runExecutable(cmd, function(stdout, isFinished, exitCode) {
-            if (isFinished) {
-                callback(stdout);
+
+        // Qt can read local cache files asynchronously without spawning a
+        // process. Keep the runner fallback for environments that deny local
+        // XMLHttpRequest access.
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState !== XMLHttpRequest.DONE)
+                return;
+            if (xhr.status === 200 || xhr.status === 0) {
+                callback(xhr.responseText || "");
+                return;
             }
-        });
+            var cmd = "cat " + shellEscape(path);
+            runExecutable(cmd, function(stdout, isFinished) {
+                if (isFinished)
+                    callback(stdout);
+            });
+        };
+        try {
+            xhr.open("GET", "file://" + path + "?t=" + Date.now());
+            xhr.send();
+        } catch (error) {
+            var cmd = "cat " + shellEscape(path);
+            runExecutable(cmd, function(stdout, isFinished) {
+                if (isFinished)
+                    callback(stdout);
+            });
+        }
     }
 
     function loadWeatherCache() {
@@ -975,15 +989,8 @@ Item {
             });
         }
     }
-    // Global DataSource for shell commands
-    Plasma5Support.DataSource {
-        id: globalShellSource
-
-        engine: "executable"
-        connectedSources: []
-        onNewData: (source, data) => {
-            disconnectSource(source);
-        }
+    AsyncProcess {
+        id: processRunner
     }
 
     // ===== ICON CHECK TIMER =====
@@ -1017,48 +1024,6 @@ Item {
                     // Avoid spawning a shell process just to inspect .directory;
                     // the stable folder fallback is sufficient for history.
                 }
-            }
-        }
-    }
-
-    Plasma5Support.DataSource {
-        id: manCheckSource
-
-        engine: "executable"
-        connectedSources: []
-        onNewData: (source, data) => {
-            if (data["exit code"] !== undefined) {
-                logicRoot.manInstalled = (data["exit code"] === 0);
-                logicRoot.manCheckCompleted = true;
-                logicRoot.manCheckPending = false;
-                disconnectSource(source);
-            }
-        }
-    }
-
-    Plasma5Support.DataSource {
-        id: executable
-
-        property var callbacks: ({})
-
-        engine: "executable"
-        connectedSources: []
-        onNewData: (source, data) => {
-            var stdout = data["stdout"] || "";
-            var exitCode = data["exit code"];
-            var isFinished = (exitCode !== undefined);
-
-            var callback = callbacks[source];
-
-            if (callback) {
-                callback(stdout, isFinished, exitCode);
-
-                if (isFinished) {
-                    delete callbacks[source];
-                    disconnectSource(source);
-                }
-            } else if (isFinished) {
-                disconnectSource(source);
             }
         }
     }
@@ -1123,8 +1088,6 @@ Item {
         if (pendingHistoryJson !== "") plasmoidConfig.searchHistory = pendingHistoryJson
         if (pendingPinnedJson !== "") plasmoidConfig.pinnedItems = pendingPinnedJson
         flushTelemetry()
-        if (executable) {
-            executable.callbacks = {};
-        }
+        processRunner.cancelAll();
     }
 }

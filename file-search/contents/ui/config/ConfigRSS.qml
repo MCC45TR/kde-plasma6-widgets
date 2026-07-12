@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtCore
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasma5support as Plasma5Support
+import "../components" as Components
 import "../js/RSSManager.js" as RSSManager
 import "../js/utils.js" as Utils
 
@@ -232,52 +232,22 @@ Item {
     readonly property string rssCacheBase: (StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.cache/com.mcc45tr.filesearch/rss").replace(/^file:\/\/\/?/, "/")
 
     function runExecutable(cmd, callback) {
-        var uniqueCmd = cmd + " #uniq_" + Date.now() + "_" + Math.floor(Math.random() * 1000000);
-        executable.callbacks[uniqueCmd] = callback;
-        executable.connectSource(uniqueCmd);
-        return uniqueCmd;
+        var token = processRunner.run(cmd, function(stdout, isFinished, exitCode) {
+            var lines = String(stdout || "").split("\n")
+            if (callback) {
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i].trim()
+                    if (line)
+                        callback(line, token, false, exitCode)
+                }
+                callback("", token, isFinished, exitCode)
+            }
+        });
+        return token;
     }
 
-    Plasma5Support.DataSource {
-        id: executable
-        engine: "executable"
-        connectedSources: []
-        property var callbacks: ({})
-        property var processedIndex: ({})
-        onNewData: (source, data) => {
-            var stdout = (data["stdout"] || "") + (data["stderr"] || "") // Merge stderr for debugging
-            var exitCode = data["exit code"]
-            var isFinished = (exitCode !== undefined)
-            
-            var offset = processedIndex[source] || 0
-            if (stdout.length > offset) {
-                var newPart = stdout.substring(offset)
-                processedIndex[source] = stdout.length
-                
-                var lines = newPart.split("\n")
-                var callback = callbacks[source]
-
-                if (callback) {
-                    for (var i = 0; i < lines.length; i++) {
-                        var line = lines[i].trim()
-                        if (line) {
-                            callback(line, source, false, exitCode)
-                        }
-                    }
-                }
-            }
-            
-            if (isFinished) {
-                var cb = callbacks[source]
-                if (cb) {
-                    cb("", source, true, exitCode)
-                }
-                
-                delete callbacks[source]
-                delete processedIndex[source]
-                disconnectSource(source)
-            }
-        }
+    Components.AsyncProcess {
+        id: processRunner
     }
     
     Timer {
@@ -634,7 +604,7 @@ Item {
                 else if (line.indexOf("FAIL:") === 0) safeOnComplete(false)
             })
         } else {
-            // Standalone sync logic using local executable DataSource
+            // Standalone sync logic using the Plasma 6 runner bridge
             var scriptPath = getScriptPath()
             if (!scriptPath || scriptPath === "undefined" || scriptPath.indexOf("rss_sync.sh") === -1) {
                   addLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Script not found at: %1", scriptPath), "fail")

@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasma5support as PlasmaSupport
+import org.kde.plasma.workspace.dbus as DBus
 import "../js/utils.js" as Utils
 import "../js/ConfigManager.js" as ConfigManager
 import "../components" as Components
@@ -54,13 +54,6 @@ Item {
     property int maxHistoryItems
     property int maxHistoryItemsDefault
     
-    // Power Management Source
-    PlasmaSupport.DataSource {
-        id: pmSource
-        engine: "powermanagement"
-        connectedSources: ["PowerManagement"]
-    }
-
     Components.KWalletStore { id: secretStore }
 
     property string weatherApiKeyDraft: ""
@@ -122,8 +115,26 @@ Item {
         })
     }
     
-    readonly property bool canHibernate: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanHibernate"] : false
-    readonly property bool canReboot: (pmSource.data && pmSource.data["PowerManagement"]) ? pmSource.data["PowerManagement"]["CanReboot"] : true
+    property bool canHibernate: false
+    property bool canReboot: true
+
+    function queryPowerCapability(member, callback) {
+        var message = {
+            service: "org.freedesktop.login1",
+            path: "/org/freedesktop/login1",
+            iface: "org.freedesktop.login1.Manager",
+            member: member,
+            signature: "",
+            arguments: []
+        } as DBus.dbusMessage
+        var reply = DBus.SystemBus.asyncCall(message)
+        reply.finished.connect(function() {
+            var ok = reply.isValid && !reply.isError
+            var value = ok ? String(reply.value || "") : ""
+            reply.destroy()
+            callback(ok && (value === "yes" || value === "challenge"))
+        })
+    }
     
     // Appearance Title
     property string title: i18nd("plasma_applet_com.mcc45tr.filesearch", "Appearance")
@@ -287,6 +298,8 @@ Item {
 
     // Init Logic
     Component.onCompleted: {
+        queryPowerCapability("CanHibernate", function(available) { canHibernate = available })
+        queryPowerCapability("CanReboot", function(available) { canReboot = available })
         try {
             previewSettings = JSON.parse(cfg_previewSettings || '{"images": false, "videos": false, "text": false, "documents": false, "applications": false}')
         } catch (e) {

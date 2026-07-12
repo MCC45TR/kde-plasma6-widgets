@@ -975,8 +975,8 @@
     {
       "mode": "0644",
       "path": "contents/locale/en/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
-      "sha256": "b4ac6814816aa43330a7dbad9eaf87929f82153edda04af97ed94d1c2c52f0c3",
-      "size": 24088
+      "sha256": "80c7a45caeffe6f7bed98d8695919e8a391301835ee23c02df9913db5e82a533",
+      "size": 25560
     },
     {
       "mode": "0644",
@@ -1077,8 +1077,8 @@
     {
       "mode": "0644",
       "path": "contents/locale/tr/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
-      "sha256": "324b73586f0dba933dd56296746e25629d1d68bff276767abef780a188747512",
-      "size": 26428
+      "sha256": "0e60f7ec2d3dde6ecd6a10fba6038d879a9817286e9f0c21779dd607f8b9b880",
+      "size": 27945
     },
     {
       "mode": "0644",
@@ -1109,6 +1109,12 @@
       "path": "contents/tools/rss_sync.sh",
       "sha256": "8db95359e8bf8f7591ea22addb46d2b7a9a750b47a8840642655b37ad0f39fb4",
       "size": 379
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/AsyncProcess.qml",
+      "sha256": "306c31e35f752c468ad35e7c90e9d1867a60ff351afeb94da2961b46a2055f4c",
+      "size": 5953
     },
     {
       "mode": "0644",
@@ -1149,8 +1155,8 @@
     {
       "mode": "0644",
       "path": "contents/ui/components/DebugOverlay.qml",
-      "sha256": "fbb9a52b10137593ad604d08e42e983f6a5a51019bb4dc627df3132f5dc2e6de",
-      "size": 8342
+      "sha256": "2785ee7e007c3bdf51b08e3aa655360628e5e76b58a773b921410e52a22e89bc",
+      "size": 8249
     },
     {
       "mode": "0644",
@@ -1185,20 +1191,20 @@
     {
       "mode": "0644",
       "path": "contents/ui/components/HistoryContextMenu.qml",
-      "sha256": "09e960d5032ffcc837ffd3b84b40b1b8f62bd3529ec5dac7da9fc4643896d959",
-      "size": 5922
+      "sha256": "cd467457d08e3a215c5bdec58de119d86bfbcd8d719633caa42532b4d8eb5982",
+      "size": 5723
     },
     {
       "mode": "0644",
       "path": "contents/ui/components/HistoryListView.qml",
-      "sha256": "62d1204119d3cc59d348916e2d2bab7abb06254a99d4a26227b40a63c3f05932",
-      "size": 31041
+      "sha256": "5faad9ed7b61de7a1c7af871e5bc632b8d314778608c7f7d79fc0e6a653678bd",
+      "size": 31072
     },
     {
       "mode": "0644",
       "path": "contents/ui/components/HistoryTileView.qml",
-      "sha256": "aa6f87e19287eed354cec0e9abd0bcec267f5004abcaefd9a38387d74b944e03",
-      "size": 43551
+      "sha256": "27b82b9278d6daad5dbe29dabeee089cfb28e7abb18ba9269be8c9bd235b7c4e",
+      "size": 43586
     },
     {
       "mode": "0644",
@@ -1215,8 +1221,26 @@
     {
       "mode": "0644",
       "path": "contents/ui/components/LogicController.qml",
-      "sha256": "0c1bd3a194dd5957fcc17cc16d465b2cdaf114bd888a50e2058e7735309024f2",
-      "size": 38980
+      "sha256": "5a7bf01e3ddbb42a5d2bd754cdf533dbe1b35011f361accf02c7ebfdbff05ef4",
+      "size": 38134
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/NativeContextMenu.qml",
+      "sha256": "b46f551ef2240a84ef6583d68410328db8827910aa7351eb607552ea125a8315",
+      "size": 959
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/NativeContextMenuItem.qml",
+      "sha256": "af30528f4a82161e58005c8b46c1e561e0c9608c37f14c7aed7050c24af32342",
+      "size": 268
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/NativeContextMenuSeparator.qml",
+      "sha256": "5f5aa0cfdbda7f63dbad9cc871779d5cbc33955f084446dfa4b2d0e5b1323b58",
+      "size": 92
     },
     {
       "mode": "0644",
@@ -1233,14 +1257,14 @@
     {
       "mode": "0644",
       "path": "contents/ui/components/PinnedSection.qml",
-      "sha256": "6bd6042fee16ee16f3a2584615cec61f525d752ad5805e3135822beae638ddfd",
-      "size": 22314
+      "sha256": "e3c9a23cb2b91ef5b419ccb9fdf9e8997320be21982fc540bf8e2682ec81db24",
+      "size": 22833
     },
     {
       "mode": "0644",
       "path": "contents/ui/components/PowerView.qml",
-      "sha256": "a6f89d737ea65bdad2a21187d4094d38b28999bb940cc44eca716f44a2783458",
-      "size": 27560
+      "sha256": "b2c72b867d07d30b1b36077098c13f1333dec4eb2830fd24dd19720ae778b67b",
+      "size": 26748
     },
     {
       "mode": "0644",
@@ -1257,14 +1281,14 @@
     {
       "mode": "0644",
       "path": "contents/ui/components/ResultsListView.qml",
-      "sha256": "439530a049aed6c4e338cdf5ea0eefa612f28951bbc711d8d8719b1a35db424a",
-      "size": 39561
+      "sha256": "c447bd564c10af2e654758669919f7e2da4157e27022978af40f266cea1a2cb3",
+      "size": 39562
     },
     {
       "mode": "0644",
       "path": "contents/ui/components/ResultsTileView.qml",
-      "sha256": "dd591437ebd6f0ffbff9a14004f3c4dad144118677ca095e9aa58faf6555392f",
-      "size": 66944
+      "sha256": "8537620e04c1b10349fc7f34b34c0b0278abcb4f07260cfe9750c809448fecb9",
+      "size": 66943
     },
     {
       "mode": "0644",
@@ -1281,8 +1305,8 @@
     {
       "mode": "0644",
       "path": "contents/ui/components/SearchPopup.qml",
-      "sha256": "ecd90060b6c4e134c6e7f99cd496040db5eba67ca212ec4487126e8d132dceec",
-      "size": 51085
+      "sha256": "c2d19bde37b179c4eb52bb40e960ad303556f305db7c6b5e62777476f94799e8",
+      "size": 51149
     },
     {
       "mode": "0644",
@@ -1341,8 +1365,8 @@
     {
       "mode": "0644",
       "path": "contents/ui/config/ConfigGeneral.qml",
-      "sha256": "f2e948c6c873d544d5fc97e6362460469af147c368fe515d9f892540f3145615",
-      "size": 79578
+      "sha256": "814bca5de349efe4e830cf08581b1c09027bdbc27e6cb673f126b5311225bd17",
+      "size": 80020
     },
     {
       "mode": "0644",
@@ -1377,8 +1401,8 @@
     {
       "mode": "0644",
       "path": "contents/ui/config/ConfigRSS.qml",
-      "sha256": "f326735bf8a7e384ec056be55f3c9768afecf37242bf9e4c1f999391ac927083",
-      "size": 50730
+      "sha256": "379c0a96ff64907ea56c68e167f91f73283e5cc8960075ada1dd8e0e37e70c41",
+      "size": 49592
     },
     {
       "mode": "0644",
@@ -1461,11 +1485,11 @@
     {
       "mode": "0644",
       "path": "metadata.json",
-      "sha256": "477c542b8a4b3742d56c7f8409b440a0f101db3da319958b1f59487c4fa12cfc",
+      "sha256": "507afb0c6c5c9a9c274eb4eea104c67bcf4903c96c5101733e8e6f0990247b2d",
       "size": 2441
     }
   ],
   "package": "com.mcc45tr.filesearch",
   "schemaVersion": 1,
-  "version": "1.3.0"
+  "version": "1.3.1"
 }

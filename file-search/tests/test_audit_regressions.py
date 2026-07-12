@@ -15,6 +15,17 @@ def read(relative: str) -> str:
 
 
 class AuditRegressionTests(unittest.TestCase):
+    def test_plasma6_only_runtime_has_no_plasma5_compatibility_imports(self):
+        qml_sources = "\n".join(
+            path.read_text(encoding="utf-8")
+            for path in (ROOT / "contents").rglob("*.qml")
+        )
+        self.assertNotIn("org.kde.plasma.plasma5support", qml_sources)
+        runner = read("contents/ui/components/AsyncProcess.qml")
+        self.assertIn("org.kde.milou as Milou", runner)
+        self.assertIn("Milou.ResultsModel", runner)
+        self.assertNotIn("DataSource", runner)
+
     def test_all_config_pages_accept_shared_panel_properties(self):
         for name in ("ConfigCategories.qml", "ConfigRSS.qml", "ConfigDebug.qml", "ConfigHelp.qml"):
             page = read("contents/ui/config/" + name)
@@ -181,7 +192,7 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn('text/uri-list', pinned)
         self.assertIn('"Open With..."', menu)
         self.assertIn("function openWith(url)", logic)
-        self.assertIn("org.kde.KLauncher", logic)
+        self.assertIn("Qt.openUrlExternally(url.toString())", logic)
         self.assertIn("function openContainingFolder(url)", logic)
 
     def test_render_hot_paths_are_bounded(self):
@@ -257,6 +268,8 @@ class AuditRegressionTests(unittest.TestCase):
     def test_tile_surfaces_share_plasma_native_visual_language(self):
         header = read("contents/ui/components/CategoryHeader.qml")
         pinned = read("contents/ui/components/PinnedSection.qml")
+        native_menu = read("contents/ui/components/NativeContextMenu.qml")
+        history_menu = read("contents/ui/components/HistoryContextMenu.qml")
         history = read("contents/ui/components/HistoryTileView.qml")
         history_list = read("contents/ui/components/HistoryListView.qml")
         results = read("contents/ui/components/ResultsTileView.qml")
@@ -273,7 +286,13 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn("PlasmaExtras.Highlight", history)
         self.assertIn("PlasmaExtras.Highlight", results)
         self.assertIn("Kirigami.Theme.highlightedTextColor", results)
-        self.assertIn("PlasmaComponents.Menu", pinned)
+        self.assertIn("NativeContextMenu {", pinned)
+        self.assertIn("PlasmaExtras.Menu", native_menu)
+        self.assertIn("NativeContextMenu {", history_menu)
+        self.assertNotIn("PlasmaComponents.Menu", pinned)
+        self.assertNotIn("PlasmaComponents.Menu", history_menu)
+        for source in (pinned, history, history_list):
+            self.assertRegex(source, r"\.popup\([^,]+,\s*mouse\.x,\s*mouse\.y\)")
         self.assertNotRegex(compact, r"on(?:Entered|Exited):[^\n]*\.color\s*=")
 
     def test_component_fonts_follow_system_theme(self):
@@ -303,7 +322,7 @@ class AuditRegressionTests(unittest.TestCase):
 
     def test_version_and_release_evidence_agree(self):
         version = json.loads(read("metadata.json"))["KPlugin"]["Version"]
-        self.assertEqual(version, "1.3.0")
+        self.assertEqual(version, "1.3.1")
         if (ROOT / "release/source-manifest.json").exists():
             manifest = json.loads(read("release/source-manifest.json"))
             self.assertEqual(manifest["version"], version)

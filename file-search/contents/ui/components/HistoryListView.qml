@@ -458,7 +458,7 @@ Item {
                                 onClicked: (mouse) => {
                                     if (mouse.button === Qt.RightButton) {
                                         contextMenu.historyItem = modelData
-                                        contextMenu.popup()
+                                        contextMenu.popup(itemMouseArea, mouse.x, mouse.y)
                                     } else {
                                         historyList.itemClicked(modelData)
                                     }

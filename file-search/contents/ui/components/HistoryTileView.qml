@@ -699,7 +699,7 @@ FocusScope {
                                     onClicked: (mouse) => {
                                         if (mouse.button === Qt.RightButton) {
                                             contextMenu.historyItem = modelData
-                                            contextMenu.popup()
+                                            contextMenu.popup(histTileMouseArea, mouse.x, mouse.y)
                                         } else {
                                             historyTile.itemClicked(modelData)
                                         }

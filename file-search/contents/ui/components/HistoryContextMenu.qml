@@ -1,9 +1,7 @@
 import QtQuick
-import org.kde.kirigami as Kirigami
-import org.kde.plasma.components as PlasmaComponents
 import "../js/utils.js" as Utils
 
-PlasmaComponents.Menu {
+NativeContextMenu {
     id: root
 
     // Dependencies
@@ -23,9 +21,9 @@ PlasmaComponents.Menu {
     }
 
     // ===== PIN / UNPIN =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: logic && logic.isPinned(matchId) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Unpin") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Pin")
-        icon.name: logic && logic.isPinned(matchId) ? "window-unpin" : "pin"
+        icon: logic && logic.isPinned(matchId) ? "window-unpin" : "pin"
         enabled: historyItem
         onTriggered: {
             if (historyItem) {
@@ -45,12 +43,12 @@ PlasmaComponents.Menu {
         }
     }
 
-    PlasmaComponents.MenuSeparator {}
+    NativeContextMenuSeparator {}
 
     // ===== OPEN (Standard) =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open")
-        icon.name: "document-open"
+        icon: "document-open"
         onTriggered: {
             if (historyItem && historyItem.filePath) {
                 if (Utils.isDesktopEntry(historyItem.filePath)) {
@@ -62,19 +60,19 @@ PlasmaComponents.Menu {
         }
     }
 
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open With...")
-        icon.name: "application-menu"
+        icon: "application-menu"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
         onTriggered: if (logic) logic.openWith(historyItem.filePath)
     }
 
-    PlasmaComponents.MenuSeparator { visible: historyItem && !historyItem.isApplication && historyItem.filePath }
+    NativeContextMenuSeparator { visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath) }
 
     // ===== COPY PATH =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
-        icon.name: "edit-copy"
+        icon: "edit-copy"
         enabled: historyItem && historyItem.filePath
         onTriggered: {
             if (historyItem && historyItem.filePath) {
@@ -88,9 +86,9 @@ PlasmaComponents.Menu {
     }
 
     // ===== OPEN IN TERMINAL =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open in Terminal")
-        icon.name: "utilities-terminal"
+        icon: "utilities-terminal"
         visible: !!(historyItem && !historyItem.isApplication && (root.isFolder || (historyItem.filePath && historyItem.filePath.toString())))
         onTriggered: {
             if (historyItem && historyItem.filePath) {
@@ -100,19 +98,19 @@ PlasmaComponents.Menu {
     }
 
     // ===== OPEN CONTAINING FOLDER =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Containing Folder")
-        icon.name: "folder-open"
+        icon: "folder-open"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath && !root.isFolder)
         onTriggered: logic.openFolder(historyItem.filePath)
     }
 
-    PlasmaComponents.MenuSeparator { visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath) }
+    NativeContextMenuSeparator { visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath) }
 
     // ===== MOVE TO TRASH =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move to Trash")
-        icon.name: "user-trash"
+        icon: "user-trash"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
         onTriggered: {
             logic.moveToTrash(historyItem.filePath)
@@ -124,29 +122,29 @@ PlasmaComponents.Menu {
     }
 
     // ===== SHOW PROPERTIES =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Properties")
-        icon.name: "document-properties"
+        icon: "document-properties"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
         onTriggered: logic.showProperties(historyItem.filePath)
     }
 
-    PlasmaComponents.MenuSeparator { visible: !!(historyItem && historyItem.isApplication) }
+    NativeContextMenuSeparator { visible: !!(historyItem && historyItem.isApplication) }
 
     // ===== MANAGE APP =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Edit Application...")
-        icon.name: "configure"
+        icon: "configure"
         visible: !!(historyItem && historyItem.isApplication && historyItem.filePath)
         onTriggered: logic.showProperties(historyItem.filePath)
     }
 
-    PlasmaComponents.MenuSeparator { visible: !!(historyItem && historyItem.uuid) }
+    NativeContextMenuSeparator { visible: !!(historyItem && historyItem.uuid) }
 
     // ===== REMOVE FROM HISTORY =====
-    PlasmaComponents.MenuItem {
+    NativeContextMenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Remove from History")
-        icon.name: "edit-delete"
+        icon: "edit-delete"
         visible: !!(historyItem && historyItem.uuid)
         onTriggered: {
             if (historyItem && historyItem.uuid) {

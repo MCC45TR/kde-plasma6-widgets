@@ -50,7 +50,8 @@ if test -n "$qmllint_bin"; then
 fi
 python3 tools/build_release.py
 python3 tools/build_release.py --verify
-unzip -t build/com.mcc45tr.filesearch-1.3.0.plasmoid
+PACKAGE_VERSION=$(python3 -c 'import json; print(json.load(open("metadata.json", encoding="utf-8"))["KPlugin"]["Version"])')
+unzip -t "build/com.mcc45tr.filesearch-${PACKAGE_VERSION}.plasmoid"
 
 qmltestrunner_bin=""
 if command -v qmltestrunner6 >/dev/null 2>&1; then

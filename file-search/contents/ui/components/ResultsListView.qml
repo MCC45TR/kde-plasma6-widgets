@@ -76,7 +76,7 @@ PlasmaComponents.ScrollView {
 
     // Signals
     signal itemClicked(int index, string display, string decoration, string category, string matchId, string filePath)
-    signal itemRightClicked(var item, real x, real y)
+    signal itemRightClicked(var item, var visualParent, real x, real y)
 
     function rssMetaLine(item) {
         var parts = [];
@@ -748,7 +748,7 @@ PlasmaComponents.ScrollView {
                             "filePath": filePath,
                             "isApplication": Utils.isAppCategory(modelData.category, filePath, matchId, modelData.decoration || ""),
                             "uuid": ""
-                        }, mouse.x + delegateRoot.x, mouse.y + delegateRoot.y);
+                        }, resultMouseArea, mouse.x, mouse.y);
                     } else
                         delegateRoot.activateResult();
                 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.1 - 2026-07-12
+
+- Removed the Plasma 5 support module and migrated executable jobs to a queued Plasma 6 Milou/KRunner bridge.
+- Replaced the legacy power-management data engine with typed login1 D-Bus capability checks.
+- Reused one bounded process queue for RSS, preview, power, and debug jobs to reduce shell-engine signal churn.
+- Made release archive validation follow the package version declared in metadata.
+
 ## 1.3.0 - 2026-07-12
 
 - Replaced the legacy process/argv KWallet bridge with native session-bus calls.

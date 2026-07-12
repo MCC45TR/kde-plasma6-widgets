@@ -183,9 +183,16 @@ Item {
                                     anchors.rightMargin: 30
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
+                                    acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-                                    onClicked: {
-                                        pinnedSectionRoot.itemClicked(modelData)
+                                    onClicked: (mouse) => {
+                                        if (mouse.button === Qt.RightButton) {
+                                            pinnedContextMenu.currentItem = modelData
+                                            pinnedContextMenu.selectedIndex = index
+                                            pinnedContextMenu.popup(itemMouse, mouse.x, mouse.y)
+                                        } else {
+                                            pinnedSectionRoot.itemClicked(modelData)
+                                        }
                                     }
                                 }
                         }
@@ -379,7 +386,7 @@ Item {
                                         if (mouse.button === Qt.RightButton) {
                                             pinnedContextMenu.currentItem = modelData
                                             pinnedContextMenu.selectedIndex = index
-                                            pinnedContextMenu.popup()
+                                            pinnedContextMenu.popup(tileMouse, mouse.x, mouse.y)
                                         } else if (!drag.active) {
                                             pinnedSectionRoot.itemClicked(modelData)
                                         }
@@ -398,15 +405,15 @@ Item {
     }
 
     // Context Menu for pinned items
-    PlasmaComponents.Menu {
+    NativeContextMenu {
         id: pinnedContextMenu
 
         property var currentItem: null
         property int selectedIndex: -1
 
-        PlasmaComponents.MenuItem {
+        NativeContextMenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open")
-            icon.name: "document-open"
+            icon: "document-open"
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {
                     pinnedSectionRoot.itemClicked(pinnedContextMenu.currentItem)
@@ -414,9 +421,9 @@ Item {
             }
         }
 
-        PlasmaComponents.MenuItem {
+        NativeContextMenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
-            icon.name: "edit-copy"
+            icon: "edit-copy"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {
@@ -425,9 +432,9 @@ Item {
             }
         }
 
-        PlasmaComponents.MenuItem {
+        NativeContextMenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Containing Folder")
-            icon.name: "folder-open"
+            icon: "folder-open"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {
@@ -436,11 +443,11 @@ Item {
             }
         }
 
-        PlasmaComponents.MenuSeparator {}
+        NativeContextMenuSeparator {}
 
-        PlasmaComponents.MenuItem {
+        NativeContextMenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unpin")
-            icon.name: "window-unpin"
+            icon: "window-unpin"
             onTriggered: {
                 if (pinnedContextMenu.currentItem) {
                     pinnedSectionRoot.unpinClicked(pinnedContextMenu.currentItem.matchId)

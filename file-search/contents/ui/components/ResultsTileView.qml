@@ -120,7 +120,7 @@ FocusScope {
 
     // Signals
     signal itemClicked(int index, string display, string decoration, string category, string matchId, string filePath)
-    signal itemRightClicked(var item, real x, real y)
+    signal itemRightClicked(var item, var visualParent, real x, real y)
     // Signals for Tab navigation
     signal tabPressed()
     signal shiftTabPressed()
@@ -1018,7 +1018,7 @@ FocusScope {
                                                     "filePath": filePath,
                                                     "isApplication": isApp,
                                                     "uuid": ""
-                                                }, mouse.x + tileDelegate.x, mouse.y + tileDelegate.y);
+                                                }, tileMouseArea, mouse.x, mouse.y);
                                             } else
                                                 tileDelegate.activateResult();
                                         }

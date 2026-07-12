@@ -902,9 +902,9 @@ Item {
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
 
-             onItemRightClicked: (item, x, y) => {
+             onItemRightClicked: (item, visualParent, x, y) => {
                  resultsContextMenu.historyItem = item
-                 resultsContextMenu.popup()
+                 resultsContextMenu.popup(visualParent, x, y)
              }
              anchors.fill: parent
         }
@@ -946,9 +946,9 @@ Item {
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
 
-             onItemRightClicked: (item, x, y) => {
+             onItemRightClicked: (item, visualParent, x, y) => {
                  resultsContextMenu.historyItem = item
-                 resultsContextMenu.popup()
+                 resultsContextMenu.popup(visualParent, x, y)
              }
 
              onTabPressed: cycleFocusSection(true)

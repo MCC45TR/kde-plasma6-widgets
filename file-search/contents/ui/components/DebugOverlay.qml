@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
-import org.kde.plasma.plasma5support as Plasma5Support
 import "../js/RSSManager.js" as RSSManager
 
 Rectangle {
@@ -32,16 +31,17 @@ Rectangle {
     implicitWidth: layout.implicitWidth + 24
     implicitHeight: layout.implicitHeight + 24
 
-    // Data Source for file writing
-    Plasma5Support.DataSource {
-        id: executableDataSource
-        engine: "executable"
-        connectedSources: []
-        onNewData: (sourceName, data) => {
-            disconnectSource(sourceName)
+    AsyncProcess {
+        id: processRunner
+    }
+
+    function saveDump(command) {
+        processRunner.run(command, function(stdout, isFinished, exitCode) {
+            if (!isFinished || exitCode !== 0)
+                return
             saveBtn.text = i18nd("plasma_applet_com.mcc45tr.filesearch", "Saved!")
             saveBtnTimer.start()
-        }
+        })
     }
 
     Timer {
@@ -181,7 +181,7 @@ Rectangle {
                 var b64 = RSSManager.encodeBase64(content)
                 var cmd = 'sh -c "echo ' + b64 + ' | base64 -d > $HOME/' + filename + '"'
 
-                executableDataSource.connectedSources = [cmd]
+                root.saveDump(cmd)
             }
         }
     }

@@ -4,12 +4,12 @@
     "buildDefinition": {
       "buildType": "https://github.com/MCC45TR/Plasma6Widgets/file-search/deterministic-zip@v1",
       "externalParameters": {
-        "version": "1.3.0"
+        "version": "1.3.1"
       },
       "resolvedDependencies": [
         {
           "digest": {
-            "sha256": "2415bc2bff95f242fee1c97a638db9271b4241b11c093af373f0b0b04a3af99a"
+            "sha256": "8eb0239474100bd7f90dac46d26c71723d60e4b716371c02a752b0da146189f7"
           },
           "uri": "source-manifest.json"
         }
@@ -25,9 +25,9 @@
   "subject": [
     {
       "digest": {
-        "sha256": "3928caae866b00e0079f5e5df5d1ca0b44383501ccfe870f8c934aefccc10e17"
+        "sha256": "8fa35f60202c89319b6a7df79d8c177fcb9e7ae9443b701a457089c68f60b727"
       },
-      "name": "com.mcc45tr.filesearch-1.3.0.plasmoid"
+      "name": "com.mcc45tr.filesearch-1.3.1.plasmoid"
     }
   ]
 }
