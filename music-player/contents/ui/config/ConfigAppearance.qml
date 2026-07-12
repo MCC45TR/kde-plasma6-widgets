@@ -420,12 +420,12 @@ Item {
         font.pixelSize: 11
         text: configAppearance.cfg_preferredPlayer === ""
             ? i18n("Requires a locked (specific) player to work.")
-            : i18n("Disappears from panel when \"%1\" is not running.", configAppearance.cfg_preferredPlayer)
+            : i18n("Disappears when \"%1\" is not running.", configAppearance.cfg_preferredPlayer)
     }
 
     CheckBox {
         id: hideWhenNotPlayingCheckbox
-        text: i18n("Hide in panel when nothing is playing")
+        text: i18n("Hide when nothing is playing")
         checked: configAppearance.cfg_hideWhenNotPlaying
         onCheckedChanged: configAppearance.cfg_hideWhenNotPlaying = checked
     }
@@ -435,7 +435,7 @@ Item {
         wrapMode: Text.Wrap
         opacity: 0.6
         font.pixelSize: 11
-        text: i18n("Widget disappears from panel when paused or stopped.")
+        text: i18n("Widget disappears when paused or stopped.")
     }
 
     } // Kirigami.FormLayout
