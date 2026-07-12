@@ -10,6 +10,7 @@ import QtQuick
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support as Plasma5Support
 import org.kde.plasma.plasmoid
+import org.kde.plasma.workspace.dbus as DBus
 
 Item {
     id: logicRoot
@@ -74,6 +75,9 @@ Item {
     property int rssBatchQueued: 0
     property int rssBatchCompleted: 0
     property int rssCacheRebuildCount: 0
+    property bool rssMergeInProgress: false
+    property bool rssMergeRequested: false
+    property var rssMergeWaiters: []
     readonly property int rssMaxConcurrentSyncs: 2
 
     function completeRssBatchIfIdle() {
@@ -82,15 +86,23 @@ Item {
 
         isSyncing = false;
         processQueueTimer.stop();
-        updateCombinedCache(true);
-        if (debugEnabled && rssBatchStartedAt > 0) {
-            console.info("FileSearch RSS batch:", JSON.stringify({
-                id: rssBatchId,
-                queued: rssBatchQueued,
-                completed: rssBatchCompleted,
-                durationMs: Date.now() - rssBatchStartedAt
-            }));
-        }
+        var completedBatchId = rssBatchId;
+        var completedBatchStartedAt = rssBatchStartedAt;
+        var completedBatchQueued = rssBatchQueued;
+        var completedBatchCount = rssBatchCompleted;
+        mergeCombinedCache(function(success) {
+            if (success)
+                updateCombinedCache(true);
+            if (debugEnabled && completedBatchStartedAt > 0) {
+                console.info("FileSearch RSS batch:", JSON.stringify({
+                    id: completedBatchId,
+                    queued: completedBatchQueued,
+                    completed: completedBatchCount,
+                    merged: success,
+                    durationMs: Date.now() - completedBatchStartedAt
+                }));
+            }
+        });
         rssBatchStartedAt = 0;
     }
 
@@ -133,9 +145,15 @@ Item {
 
     // ===== HISTORY FUNCTIONS =====
     function loadHistory() {
-        // Debug: console.log("FileSearch [History]: Loading history...")
-        searchHistory = HistoryManager.loadHistory(plasmoidConfig.searchHistory).slice(0, maxHistoryItems);
-        saveHistory();
+        var original = plasmoidConfig.searchHistory || "";
+        searchHistory = HistoryManager.loadHistory(original).slice(0, maxHistoryItems);
+        var normalized = JSON.stringify(searchHistory);
+        // Persist only an actual migration/repair/truncation. A clean startup
+        // must not schedule a no-op KConfig write.
+        if (original && original !== normalized) {
+            pendingHistoryJson = normalized;
+            historySaveTimer.restart();
+        }
     }
 
     function saveHistory() {
@@ -185,7 +203,27 @@ Item {
     // Show file/app properties dialog safely
     function showProperties(filePath) {
         if (!filePath) return
-        runShellCommand("kioclient openProperties " + shellEscape(filePath.toString()))
+        callSessionDBus(
+            "org.freedesktop.FileManager1",
+            "/org/freedesktop/FileManager1",
+            "org.freedesktop.FileManager1",
+            "ShowItemProperties",
+            "ass",
+            [[filePath.toString()], ""]
+        )
+    }
+
+    function callSessionDBus(service, path, iface, member, signature, args) {
+        var message = {
+            service: service,
+            path: path,
+            iface: iface,
+            member: member,
+            signature: signature,
+            arguments: args || []
+        } as DBus.dbusMessage
+        var reply = DBus.SessionBus.asyncCall(message)
+        reply.finished.connect(function() { reply.destroy() })
     }
 
     function runShellCommand(cmd) {
@@ -207,20 +245,28 @@ Item {
         if (!url)
             return ;
 
-        var path = url.toString();
-        // Use D-Bus to open file manager and select the item
-        var cmd = "dbus-send --session --dest=org.freedesktop.FileManager1 /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems array:string:" + shellEscape(path) + " string:\"\"";
-        runShellCommand(cmd);
+        callSessionDBus(
+            "org.freedesktop.FileManager1",
+            "/org/freedesktop/FileManager1",
+            "org.freedesktop.FileManager1",
+            "ShowItems",
+            "ass",
+            [[url.toString()], ""]
+        );
     }
 
     function copyToClipboard(text) {
         if (!text)
             return ;
 
-        // Using a reliable shell command for clipboard since QML clipboard is restricted in some environments
-        var escaped = shellEscape(text);
-        var cmd = "printf '%s' " + escaped + " | xclip -selection clipboard || printf '%s' " + escaped + " | wl-copy";
-        runShellCommand(cmd);
+        callSessionDBus(
+            "org.kde.klipper",
+            "/klipper",
+            "org.kde.klipper.klipper",
+            "setClipboardContents",
+            "s",
+            [text.toString()]
+        );
     }
 
     function moveToTrash(url) {
@@ -243,38 +289,6 @@ Item {
 
         var cmd = "konsole --workdir " + shellEscape(path);
         runShellCommand(cmd);
-    }
-
-    function fetchDirectoryIcon(folderPath, uuid) {
-        if (!folderPath || folderPath.toString().indexOf("file://") !== 0)
-            return ;
-
-        var path = Utils.decodeLocalPath(folderPath);
-        if (path.slice(-1) === "/")
-            path = path.slice(0, -1);
-
-        var dotDirPath = path + "/.directory";
-        var cmd = "cat " + shellEscape(dotDirPath) + " 2>/dev/null";
-        
-        runExecutable(cmd, function(stdout, isFinished, exitCode) {
-            if (isFinished && exitCode === 0) {
-                var lines = stdout.split('\n');
-                for (var i = 0; i < lines.length; i++) {
-                    var line = lines[i].trim();
-                    if (line.indexOf("Icon=") === 0) {
-                        var iconName = line.substring(5).trim();
-                        if (iconName.length > 0) {
-                            var updatedHistory = HistoryManager.updateItemIcon(logicRoot.searchHistory, uuid, iconName)
-                            if (updatedHistory) {
-                                logicRoot.searchHistory = updatedHistory
-                                logicRoot.saveHistory();
-                            }
-                            return ;
-                        }
-                    }
-                }
-            }
-        });
     }
 
     // ===== PINNED FUNCTIONS =====
@@ -370,7 +384,13 @@ Item {
         telemetryDirty = false;
     }
 
-    function checkManAvailability() {
+    property bool manCheckCompleted: false
+    property bool manCheckPending: false
+
+    function ensureManAvailability() {
+        if (manCheckCompleted || manCheckPending)
+            return;
+        manCheckPending = true;
         manCheckSource.connectedSources = ["command -v man"];
     }
 
@@ -435,15 +455,10 @@ Item {
     }
 
     function finalizeUpdate(combined, markAsFresh) {
-        for (var i = 0; i < combined.length; i++) {
-            var entry = combined[i];
-            entry._sortTimestamp = entry.rawDate ? Date.parse(entry.rawDate) || 0 : 0;
-        }
-        combined.sort(function(a, b) {
-            return b._sortTimestamp - a._sortTimestamp;
-        });
-        
-        rssCache = combined;
+        // rss_sync.py is the single writer and already publishes a bounded,
+        // sorted combined cache. Avoid sorting/mutating the full set again on
+        // the plasmashell main thread.
+        rssCache = Array.isArray(combined) ? combined.slice(0, 1500) : [];
         // Optimization: Do NOT serialize the massive RSS cache string back to plasmoidConfig
         // to prevent Plasma shell stutters during synchronous KConfig writing.
         if (markAsFresh)
@@ -636,8 +651,6 @@ Item {
         var cmd = "sh " + shellEscape(scriptPath) + " " + shellEscape(rssCacheBase) + " " + shellEscape(source.url) + " " + shellEscape(source.name) + " " + shellEscape(String(max));
         
         var lastLength = 0;
-        var reportedSuccess = false;
-        
         runExecutable(cmd, function(stdout, isFinished, exitCode) {
             if (stdout.length > lastLength) {
                 var newPart = stdout.substring(lastLength);
@@ -646,19 +659,19 @@ Item {
                 var lines = newPart.split("\n");
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i].trim();
-                    if (line && callback) {
-                        if (line === "SUCCESS") {
-                            reportedSuccess = true;
-                        }
+                    if (line && line !== "SUCCESS" && callback) {
                         callback(line, cmd);
                     }
                 }
             }
             if (isFinished) {
                 if (exitCode === 0) {
-                    if (!reportedSuccess && callback) {
-                        callback("SUCCESS", cmd);
-                    }
+                    mergeCombinedCache(function(merged) {
+                        if (callback)
+                            callback(merged ? "SUCCESS" : "FAIL: Cache merge failed", cmd);
+                        if (merged)
+                            updateCombinedCache(true);
+                    });
                 } else {
                     if (callback) {
                         callback("FAIL: Sync failed with exit code " + exitCode, cmd);
@@ -674,6 +687,34 @@ Item {
             return path.replace(/^file:\/\/\/?/, "/");
         }
         return path;
+    }
+
+    function mergeCombinedCache(callback) {
+        if (callback)
+            rssMergeWaiters.push(callback);
+        if (rssMergeInProgress) {
+            // A source may have been atomically replaced after the active merge
+            // enumerated it. Coalesce all overlap into exactly one follow-up.
+            rssMergeRequested = true;
+            return;
+        }
+        rssMergeInProgress = true;
+        var command = "sh " + shellEscape(getScriptPath())
+                    + " --merge " + shellEscape(rssCacheBase);
+        runExecutable(command, function(stdout, isFinished, exitCode) {
+            if (!isFinished)
+                return;
+            rssMergeInProgress = false;
+            if (rssMergeRequested) {
+                rssMergeRequested = false;
+                mergeCombinedCache();
+                return;
+            }
+            var waiters = rssMergeWaiters.slice();
+            rssMergeWaiters = [];
+            for (var i = 0; i < waiters.length; i++)
+                waiters[i](exitCode === 0);
+        });
     }
 
     function syncAllRSS() {
@@ -855,8 +896,8 @@ Item {
         loadPinned();
         loadCategorySettings();
         loadRSS();
-        updateCombinedCache(false);
-        checkManAvailability();
+        if (rssEnabled || rssSources.length > 0)
+            updateCombinedCache(false);
         // Initial sync check
         Qt.callLater(() => {
             checkAndSyncRSS();
@@ -901,8 +942,8 @@ Item {
                             saveHistory();
                         }
                     }
-                    // Try to fetch custom icon from .directory file
-                    fetchDirectoryIcon(filePath, uuid);
+                    // Avoid spawning a shell process just to inspect .directory;
+                    // the stable folder fallback is sufficient for history.
                 }
             }
         }
@@ -916,6 +957,8 @@ Item {
         onNewData: (source, data) => {
             if (data["exit code"] !== undefined) {
                 logicRoot.manInstalled = (data["exit code"] === 0);
+                logicRoot.manCheckCompleted = true;
+                logicRoot.manCheckPending = false;
                 disconnectSource(source);
             }
         }
@@ -979,17 +1022,19 @@ Item {
             loadRSS();
             if (rssEnabled)
                 syncAllRSS();
-            else
-                updateCombinedCache(false);
-
+            else {
+                rssCache = [];
+                rssTickerEntries = [];
+            }
         }
 
         function onRssEnabledChanged() {
             if (rssEnabled)
                 syncAllRSS();
-            else
-                updateCombinedCache(false);
-
+            else {
+                rssCache = [];
+                rssTickerEntries = [];
+            }
         }
 
         target: plasmoidConfig

@@ -171,9 +171,12 @@ ScrollView {
                 if (!resultsList)
                     return false;
 
-                var dummy = resultsList.contentY; // Bind to scrolling
-                var globalY = delegateRoot.mapToItem(resultsListRoot, 0, 0).y;
-                return (globalY + delegateRoot.height >= 0) && (globalY <= resultsListRoot.height);
+                // Delegates are direct children of ListView.contentItem, so their y value and
+                // contentY share a coordinate system. Avoid mapToItem on every scroll frame.
+                var viewportTop = resultsList.contentY - resultsList.cacheBuffer;
+                var viewportBottom = resultsList.contentY + resultsList.height + resultsList.cacheBuffer;
+                return delegateRoot.y + delegateRoot.height >= viewportTop
+                        && delegateRoot.y <= viewportBottom;
             }
             property real cachedHeight: 0
             readonly property bool isRSS: modelData.category === "RSS" || modelData.category === resultsListRoot.locNews || (modelData.duplicateId && modelData.duplicateId.toString().startsWith("rss:"))

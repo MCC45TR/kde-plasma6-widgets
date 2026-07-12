@@ -45,6 +45,8 @@ Item {
     // Computed tile dimensions - match HistoryTileView when normal mode
     readonly property real tileWidth: compactPinnedView ? (iconSize + 16) : (iconSize + 40)
     readonly property real tileHeight: compactPinnedView ? (iconSize + 48) : (iconSize + 50)
+    readonly property int maxVisibleListRows: 8
+    readonly property int maxVisibleTileRows: 3
 
     // Height calculation
     implicitHeight: contentColumn.implicitHeight
@@ -149,15 +151,20 @@ Item {
                 Loader {
                     Layout.fillWidth: true
                     Layout.preferredHeight: item ? item.implicitHeight : 0
-                    active: !pinnedSectionRoot.isTileView && pinnedSectionRoot.pinnedItems.length > 0
+                    active: pinnedSectionRoot.isExpanded && !pinnedSectionRoot.isTileView && pinnedSectionRoot.pinnedItems.length > 0
                     
-                    sourceComponent: Column {
+                    sourceComponent: ListView {
+                        implicitHeight: pinnedSectionRoot.isSearching
+                            ? Math.min(contentHeight, pinnedSectionRoot.singleRowHeight)
+                            : Math.min(contentHeight, pinnedSectionRoot.maxVisibleListRows * 42)
+                        height: implicitHeight
                         spacing: 2
-                        
-                        Repeater {
-                            model: pinnedSectionRoot.pinnedItems
+                        clip: true
+                        reuseItems: true
+                        interactive: contentHeight > height
+                        model: pinnedSectionRoot.pinnedItems
                             
-                            delegate: Rectangle {
+                        delegate: Rectangle {
                                 width: parent.width
                                 height: 40
                                 color: itemMouse.containsMouse 
@@ -209,7 +216,6 @@ Item {
                                         pinnedSectionRoot.itemClicked(modelData)
                                     }
                                 }
-                            }
                         }
                     }
                 }
@@ -238,10 +244,11 @@ Item {
                 Loader {
                     Layout.fillWidth: true
                     Layout.preferredHeight: item ? item.implicitHeight : 0
-                    active: pinnedSectionRoot.isTileView && pinnedSectionRoot.pinnedItems.length > 0
+                    active: pinnedSectionRoot.isExpanded && pinnedSectionRoot.isTileView && pinnedSectionRoot.pinnedItems.length > 0
                     
-                    sourceComponent: Flow {
+                    sourceComponent: GridView {
                         id: tileFlow
+                        readonly property int columnCount: Math.max(1, Math.floor((width + 8) / cellWidth))
                         width: {
                             var avail = parent.width > 0 ? parent.width : (pinnedSectionRoot.width - 24);
                             var colW = pinnedSectionRoot.tileWidth + 8;
@@ -250,13 +257,19 @@ Item {
                             return cols * colW - 8;
                         }
                         x: (parent.width - width) / 2
-                        spacing: 8
-                        
-                        Repeater {
-                            id: tileRepeater
-                            model: pinnedSectionRoot.pinnedItems
+                        cellWidth: pinnedSectionRoot.tileWidth + 8
+                        cellHeight: pinnedSectionRoot.tileHeight + 8
+                        implicitHeight: pinnedSectionRoot.isSearching
+                            ? pinnedSectionRoot.tileHeight
+                            : Math.min(Math.max(0, Math.ceil(count / columnCount) * cellHeight - 8),
+                                       pinnedSectionRoot.maxVisibleTileRows * cellHeight - 8)
+                        height: implicitHeight
+                        clip: true
+                        reuseItems: true
+                        interactive: contentHeight > height
+                        model: pinnedSectionRoot.pinnedItems
                             
-                            delegate: Item {
+                        delegate: Item {
                                 id: tileDelegate
                                 width: pinnedSectionRoot.tileWidth
                                 height: pinnedSectionRoot.tileHeight
@@ -363,9 +376,9 @@ Item {
                                         if (drag.active) {
                                             // Calculate drop target based on mouse position
                                             var globalPos = mapToItem(tileFlow, mouse.x, mouse.y)
-                                            var cellWidth = pinnedSectionRoot.tileWidth + tileFlow.spacing
-                                            var cellHeight = pinnedSectionRoot.tileHeight + tileFlow.spacing
-                                            var columns = Math.max(1, Math.floor((tileFlow.width + tileFlow.spacing) / cellWidth))
+                                            var cellWidth = tileFlow.cellWidth
+                                            var cellHeight = tileFlow.cellHeight
+                                            var columns = tileFlow.columnCount
                                             var column = Math.max(0, Math.floor(globalPos.x / cellWidth))
                                             var row = Math.max(0, Math.floor(globalPos.y / cellHeight))
                                             var targetIndex = row * columns + column
@@ -390,7 +403,6 @@ Item {
                                     text: modelData.display + "\n" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Drag to reorder")
                                     delay: 500
                                 }
-                            }
                         }
                     }
                 }

@@ -256,7 +256,7 @@ Item {
                     for (var i = 0; i < lines.length; i++) {
                         var line = lines[i].trim()
                         if (line) {
-                            callback(line, source, isFinished, exitCode)
+                            callback(line, source, false, exitCode)
                         }
                     }
                 }
@@ -264,7 +264,7 @@ Item {
             
             if (isFinished) {
                 var cb = callbacks[source]
-                if (cb && stdout.length <= offset) {
+                if (cb) {
                     cb("", source, true, exitCode)
                 }
                 
@@ -370,8 +370,7 @@ Item {
                 { name: "El País", url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada" },
                 { name: "El Mundo", url: "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml" },
                 { name: "ABC.es", url: "https://www.abc.es/rss/2.0/portada/" },
-                { name: "RTVE", url: "https://www.rtve.es/api/noticias/rss" },
-                { name: "Xataka", url: "http://feeds.weblogssl.com/xataka2" }
+                { name: "RTVE", url: "https://www.rtve.es/api/noticias/rss" }
             ]});
         } else if (lang === "fa") {
             presets.push({ section: i18nd("plasma_applet_com.mcc45tr.filesearch", "Iran News"), items: [
@@ -411,7 +410,6 @@ Item {
             ]});
         } else if (lang === "it") {
             presets.push({ section: i18nd("plasma_applet_com.mcc45tr.filesearch", "Italy News"), items: [
-                { name: "Corriere della Sera", url: "http://xml2.corriereobjects.it/rss/homepage.xml" },
                 { name: "La Repubblica", url: "https://www.repubblica.it/rss/homepage/rss2.0.xml" },
                 { name: "ANSA", url: "https://www.ansa.it/sito/ansait_rss.xml" },
                 { name: "Il Sole 24 Ore", url: "https://www.ilsole24ore.com/rss/italia.xml" },
@@ -442,7 +440,7 @@ Item {
         } else if (lang === "ru") {
             presets.push({ section: i18nd("plasma_applet_com.mcc45tr.filesearch", "Russia News"), items: [
                 { name: "RIA Novosti", url: "https://ria.ru/export/rss2/archive/index.xml" },
-                { name: "TASS", url: "http://tass.ru/rss/v2.xml" },
+                { name: "TASS", url: "https://tass.ru/rss/v2.xml" },
                 { name: "Kommersant", url: "https://www.kommersant.ru/RSS/main.xml" },
                 { name: "Habr", url: "https://habr.com/ru/rss/all/all/" }
             ]});
@@ -455,24 +453,18 @@ Item {
             ]});
         } else if (lang === "zh") {
             presets.push({ section: i18nd("plasma_applet_com.mcc45tr.filesearch", "China News"), items: [
-                { name: "Xinhua", url: "http://www.news.cn/rss/top.xml" },
                 { name: "Caixin", url: "https://www.caixin.com/rss/" },
-                { name: "People's Daily", url: "http://www.people.com.cn/rss/politics.xml" },
                 { name: "36Kr", url: "https://36kr.com/feed" }
             ]});
         } else if (lang === "en") {
             presets.push({ section: i18nd("plasma_applet_com.mcc45tr.filesearch", "USA & UK News"), items: [
-                { name: "BBC News", url: "http://feeds.bbci.co.uk/news/rss.xml" },
                 { name: "NY Times", url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" },
                 { name: "The Guardian", url: "https://www.theguardian.com/uk/rss" },
-                { name: "CNNTürk", url: "http://rss.cnn.com/rss/edition.rss" },
                 { name: "Reuters", url: "https://www.reuters.com/arc/outboundfeeds/rss/?outputType=xml" },
                 { name: "The Verge", url: "https://www.theverge.com/rss/index.xml" }
             ]});
         } else {
             presets.push({ section: i18nd("plasma_applet_com.mcc45tr.filesearch", "World News"), items: [
-                { name: "BBC News", url: "http://feeds.bbci.co.uk/news/rss.xml" },
-                { name: "CNN", url: "http://rss.cnn.com/rss/edition.rss" },
                 { name: "Reuters", url: "https://www.reuters.com/arc/outboundfeeds/rss/?outputType=xml" },
                 { name: "Al Jazeera", url: "https://www.aljazeera.com/xml/rss/all.xml" }
             ]});
@@ -602,9 +594,17 @@ Item {
         }
     }
 
-    function syncSource(url, index, onComplete) {
-        if (!Utils.isHttpUrl(url)) {
-            addLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Invalid URL"), "fail")
+    function mergeStandaloneCache(callback) {
+        var command = "sh " + Utils.shellEscape(getScriptPath())
+                + " --merge " + Utils.shellEscape(rssCacheBase)
+        runExecutable(command, function(line, source, isFinished, exitCode) {
+            if (isFinished && callback) callback(exitCode === 0)
+        })
+    }
+
+    function syncSource(url, index, onComplete, deferMerge) {
+        if (!/^https:\/\//i.test(String(url || ""))) {
+            addLog(index, i18nd("plasma_applet_com.mcc45tr.filesearch", "Only HTTPS RSS URLs are allowed"), "fail")
             if (onComplete) onComplete(false, [])
             return
         }
@@ -647,12 +647,20 @@ Item {
                     + " " + Utils.shellEscape(String(max))
             
             runExecutable(cmd, function(line, source, isFinished, exitCode) {
-                if (line) {
+                if (line && line.trim() !== "SUCCESS") {
                     processSyncLine(index, line)
                 }
                 if (isFinished) {
                     if (exitCode === 0) {
-                        safeOnComplete(true)
+                        if (deferMerge) {
+                            processSyncLine(index, "SUCCESS")
+                            safeOnComplete(true)
+                        } else {
+                            mergeStandaloneCache(function(merged) {
+                                processSyncLine(index, merged ? "SUCCESS" : "FAIL: Cache merge failed")
+                                safeOnComplete(merged)
+                            })
+                        }
                     } else {
                         safeOnComplete(false)
                     }
@@ -669,7 +677,8 @@ Item {
             updateSource(index, "lastSync", Date.now())
             cfg_rssLastSyncAll = Date.now()
             if (useLogic && logic) {
-                logic.updateCombinedCache(true)
+                // LogicController reports SUCCESS only after its single atomic
+                // merge and cache reload have completed.
             }
             clearLogsTimer.indexToClear = index
             clearLogsTimer.restart()
@@ -701,19 +710,26 @@ Item {
             return
         }
 
+        if (logic && logic.syncAllRSS) {
+            logic.syncAllRSS();
+            return;
+        }
+
         var index = 0;
         function syncNext() {
-            if (index >= rssSources.length) return;
+            if (index >= rssSources.length) {
+                mergeStandaloneCache(function(merged) {
+                    if (merged) cfg_rssLastSyncAll = Date.now()
+                })
+                return;
+            }
             var sourceUrl = rssSources[index].url;
             var currentIndex = index;
             index++;
             
             syncSource(sourceUrl, currentIndex, function(success) {
-                if (success && logic) {
-                    logic.updateCombinedCache(true);
-                }
                 syncNext();
-            });
+            }, true);
         }
         syncNext();
     }

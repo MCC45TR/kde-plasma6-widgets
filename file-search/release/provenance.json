@@ -1,0 +1,33 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://github.com/MCC45TR/Plasma6Widgets/file-search/deterministic-zip@v1",
+      "externalParameters": {
+        "version": "1.3.0"
+      },
+      "resolvedDependencies": [
+        {
+          "digest": {
+            "sha256": "0d49fecb7b59f8a56976b7127a6511003526c40f2eb706dc992a7c47880cb0a3"
+          },
+          "uri": "source-manifest.json"
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": "file-search/tools/build_release.py"
+      }
+    }
+  },
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "c669b09777e641dc2be59f8ca79e95633062c143654d8f2330811a88d799722f"
+      },
+      "name": "com.mcc45tr.filesearch-1.3.0.plasmoid"
+    }
+  ]
+}

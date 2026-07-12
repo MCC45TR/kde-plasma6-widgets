@@ -12,8 +12,6 @@ PlasmoidItem {
     // Load bundled fonts with the root item so every lazily-created view can use
     // them. Fall back to the desktop theme until the font is ready.
     FontLoader { id: barlowMedium; source: "../fonts/BarlowCondensed-Medium.ttf" }
-    FontLoader { id: barlowLight; source: "../fonts/BarlowCondensed-Light.ttf" }
-    FontLoader { id: barlowLightItalic; source: "../fonts/BarlowCondensed-LightItalic.ttf" }
     readonly property string uiFontFamily: barlowMedium.status === FontLoader.Ready
         ? barlowMedium.name
         : Kirigami.Theme.defaultFont.family

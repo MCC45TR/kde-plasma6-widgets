@@ -1,0 +1,37 @@
+name: File Search Signed Release Gate
+
+on:
+  push:
+    tags:
+      - "file-search-v*"
+
+permissions:
+  contents: read
+
+jobs:
+  signed-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Import release signing key
+        env:
+          FILE_SEARCH_GPG_PRIVATE_KEY: ${{ secrets.FILE_SEARCH_GPG_PRIVATE_KEY }}
+        run: |
+          test -n "$FILE_SEARCH_GPG_PRIVATE_KEY"
+          printf '%s' "$FILE_SEARCH_GPG_PRIVATE_KEY" | gpg --batch --import
+          gpg --batch --with-colons --list-secret-keys | awk -F: '$1 == "fpr" { print $10; exit }' > /tmp/signing-key
+          test -s /tmp/signing-key
+
+      - name: Build, sign, and verify
+        run: |
+          version=$(python3 -c 'import json; print(json.load(open("file-search/metadata.json"))["KPlugin"]["Version"])')
+          test "$GITHUB_REF_NAME" = "file-search-v$version"
+          key=$(cat /tmp/signing-key)
+          python3 file-search/tools/build_release.py --gpg-key "$key"
+          python3 file-search/tools/build_release.py --verify
+          gpg --batch --verify file-search/build/com.mcc45tr.filesearch-1.3.0.plasmoid.asc file-search/build/com.mcc45tr.filesearch-1.3.0.plasmoid

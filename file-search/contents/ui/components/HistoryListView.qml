@@ -219,7 +219,8 @@ Item {
                         spacing: 2
                     
                     Repeater {
-                        model: modelData.items
+                        // Destroy delegates for collapsed categories instead of merely clipping them.
+                        model: histListCategoryDelegate.isCollapsed ? [] : modelData.items
                         
                         Rectangle {
                             id: historyItemDelegate
@@ -300,21 +301,22 @@ Item {
                                             anchors.fill: parent
                                             source: modelData.decoration || "application-x-executable"
                                             color: historyList.textColor
-                                            visible: previewImageHistory.status !== Image.Ready
+                                            visible: !previewImageHistory.item || previewImageHistory.item.status !== Image.Ready
                                         }
                                         
-                                        Image {
+                                        Loader {
                                             id: previewImageHistory
                                             anchors.fill: parent
-                                            asynchronous: true
-                                            fillMode: Image.PreserveAspectCrop
-                                            sourceSize.width: historyList.listIconSize
-                                            sourceSize.height: historyList.listIconSize
-                                            cache: true
-                                            source: historyList.listIconSize > 22
-                                                ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyList.previewEnabled, historyList.previewSettings)
-                                                : ""
-                                            visible: source.length > 0 && status === Image.Ready
+                                            active: historyList.listIconSize > 22 && historyItemDelegate.previewActive
+                                            sourceComponent: Image {
+                                                asynchronous: true
+                                                fillMode: Image.PreserveAspectCrop
+                                                sourceSize.width: historyList.listIconSize
+                                                sourceSize.height: historyList.listIconSize
+                                                cache: true
+                                                source: historyItemDelegate.previewSource
+                                                visible: source.length > 0 && status === Image.Ready
+                                            }
                                         }
                                     }
                                     
@@ -529,14 +531,18 @@ Item {
                                 }
                             }
 
-                            ToolTip {
-                                visible: historyList.previewInlineMode === 0 && historyItemDelegate.previewSource.length > 0
-                                delay: 400
-                                timeout: 10000
-                                x: historyItemDelegate.width + 4
-                                y: 0
+                            Loader {
+                                active: historyList.previewInlineMode === 0
+                                        && itemMouseArea.containsMouse
+                                        && historyItemDelegate.previewSource.length > 0
+                                sourceComponent: ToolTip {
+                                    visible: true
+                                    delay: 400
+                                    timeout: 10000
+                                    x: historyItemDelegate.width + 4
+                                    y: 0
 
-                                contentItem: Column {
+                                    contentItem: Column {
                                     spacing: 6
 
                                     Text {
@@ -578,13 +584,14 @@ Item {
                                         width: 300
                                         visible: historyItemDelegate.previewPath.length > 0
                                     }
-                                }
+                                    }
 
-                                background: Rectangle {
-                                    color: Kirigami.Theme.backgroundColor
-                                    border.color: historyList.accentColor
-                                    border.width: 1
-                                    radius: 6
+                                    background: Rectangle {
+                                        color: Kirigami.Theme.backgroundColor
+                                        border.color: historyList.accentColor
+                                        border.width: 1
+                                        radius: 6
+                                    }
                                 }
                             }
                         }

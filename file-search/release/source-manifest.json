@@ -1,0 +1,1441 @@
+{
+  "files": [
+    {
+      "mode": "0644",
+      "path": "contents/config/config.qml",
+      "sha256": "d72553659bca0feba69a29a16863b25b731e37347cfb06b80febfdfa720272f3",
+      "size": 721
+    },
+    {
+      "mode": "0644",
+      "path": "contents/config/main.xml",
+      "sha256": "dc7e318755640abd33f253672f5538d2df73267ac79363edd4d509e928460ccc",
+      "size": 11145
+    },
+    {
+      "mode": "0644",
+      "path": "contents/fonts/BarlowCondensed-Medium.ttf",
+      "sha256": "262bd143292ce479ee0cd09a42b47ab173fca8e9c6eb5ed0b5c8a845bc371d17",
+      "size": 103360
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/blizzard.svg",
+      "sha256": "58a77be9e6f2a8062743a867f52d96575e2e25abcf26806d8a8634b8372788b3",
+      "size": 713
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/blowing_snow.svg",
+      "sha256": "b8bd6a73b02490d08879f39c25627a799aff7acb51fd7e19b48d78cbae3f951b",
+      "size": 504
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/clear_day.svg",
+      "sha256": "c27e11329571c3a91d175d848f5cb4c68778b619fdfe0c69c6e2968934a17511",
+      "size": 806
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/clear_night.svg",
+      "sha256": "eca792c30b06a1dd7c8fc2844407fae103a4dff7724486351f1ecb40289b87e9",
+      "size": 576
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/cloudy.svg",
+      "sha256": "cd05116230d8d84216f5570a2ec72d3185ceead33535a2b0a2edeff341b421de",
+      "size": 605
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/cloudy_with_rain_dark.svg",
+      "sha256": "0591aeb8b9e19ba69e20b3b0d19725c313ca41cf9955e2b90f16270da1c8cdc1",
+      "size": 847
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/cloudy_with_rain_light.svg",
+      "sha256": "e346cdb3fceaaf9f175c637077c3b6e0bdb1dc174bc3c013f22319cbbdb6e1d2",
+      "size": 2176
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/cloudy_with_snow_dark.svg",
+      "sha256": "e9a8909ae11f95c4229f65b48635662db407e3168d400e87ab067df1cbb2eee9",
+      "size": 2325
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/cloudy_with_snow_light.svg",
+      "sha256": "f043827967786457b3bccff6c0b0de4b6d69b9edfb317c8ae49dfae3aab07f22",
+      "size": 3533
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/cloudy_with_sunny_dark.svg",
+      "sha256": "da5651f33cf20cb1121e34121b2293457197ba9769a862cde99e2205ca5744fa",
+      "size": 1381
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/cloudy_with_sunny_light.svg",
+      "sha256": "6ed085900f09423c1cae3d672cc55b001dfd1b42c523787bb573eceda7c7b835",
+      "size": 2506
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/drizzle.svg",
+      "sha256": "739bfb98a01c7b56f560627645823782923eee2c24ac8159abaab1fc97f728c7",
+      "size": 753
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/flurries.svg",
+      "sha256": "319ffd9c1312c7b660563d607f9418d96fe07d0b54a40fc65fee7398e577a193",
+      "size": 2390
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/cloudy.png",
+      "sha256": "3a80b17205f0cfa4c16dd82e15d698e3b62dc3a004ba57310e90d4caee42400c",
+      "size": 2539
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/cloudy_s_rain.png",
+      "sha256": "e8ab99781c8c8d99da21f0bad2eefb93fd176274ede43e29896c2263d73f8fac",
+      "size": 2657
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/cloudy_s_snow.png",
+      "sha256": "4e5b4e2459b9e57691a2f9d8d61fb02138e145d97cee1cb2483ac88a84e26a1e",
+      "size": 2512
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/cloudy_s_sunny.png",
+      "sha256": "3610c6be9362453463376f1dd093be8feb93b8ecbd9532cf976f225f2cf42a89",
+      "size": 2696
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/fog.png",
+      "sha256": "9f3ce9205d712385653d1f44ec11a49fac5fbdb03e61cbe79442fbb3d5bf55c2",
+      "size": 5741
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/partly_cloudy.png",
+      "sha256": "0ebb6ed0046f54a44f3baca1c1d8a07e306535c7b3763aa25b08d0dc4b6c466b",
+      "size": 2778
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/rain.png",
+      "sha256": "112ff162fdd1528947dea4b53effb29e2160a6dac2fc84d5a82343ac9a079bfb",
+      "size": 2145
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/rain_heavy.png",
+      "sha256": "f7908a6fd9ffc1490a562764a13bc9692ac0f33b944305762424651097af3654",
+      "size": 2357
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/rain_light.png",
+      "sha256": "87e4c83da51066f86347e9ddf14d06bd81e588fa60a66b4e51cade67152ac572",
+      "size": 2596
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/rain_s_cloudy.png",
+      "sha256": "ca7b8072a8f91437cea9d64aa1717be125865ae0ed2c89b83b627b16477c06e3",
+      "size": 2776
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/rain_s_snow.png",
+      "sha256": "88685c9b762fb29dc559a969f864a1e2a63d2a875c90d05a2677515c95c4f7ec",
+      "size": 2482
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/rain_s_sunny.png",
+      "sha256": "2c5845a5b3044e14b4ad64e29f3f034cab6cfac2b098f7002a7b7ef7ab1041f0",
+      "size": 2785
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/snow.png",
+      "sha256": "e5e0cd25e335d60c1b576c42841564df970ec1206a270e4c70fa02bada9d3f80",
+      "size": 3057
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/snow_heavy.png",
+      "sha256": "4e4e996b3db500be1e5df6044783a0469a66cd97c72a3803f8dd2486cdc0af2b",
+      "size": 4048
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/snow_light.png",
+      "sha256": "8ece856f8a20590d0302d3b1b8e31456a7aad08a46e2ddbc1641cf10de4c7bca",
+      "size": 2094
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/snow_s_cloudy.png",
+      "sha256": "d25377de1015f8cacde604d6e7620533d639bc5a9505f1d4af9fc3d67b376358",
+      "size": 2438
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/snow_s_rain.png",
+      "sha256": "3e9a8fdd9cea9f997a5c08548cbdb4f707e2018c64e0de6bb888eb7706bd3e91",
+      "size": 2219
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/sunny.png",
+      "sha256": "abcea8cd08137cd239df462185cd666eaf78309192e5e45e8497337d4597334c",
+      "size": 2208
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/sunny_s_cloudy.png",
+      "sha256": "1adfab0dff69c1801569d24de8fa987d4e3c2f6ca3290312853b8f956a7bfd9f",
+      "size": 2403
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/sunny_s_rain.png",
+      "sha256": "9995697601a81236aa5c9d64069f745e333bbd15071e56eb077c699ac04ad7c6",
+      "size": 2695
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v1/thunderstorms.png",
+      "sha256": "82630892d95cacbffb1c0af3a8a7bfc79d798ede311a5490a129c714810eb3f7",
+      "size": 3258
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/blizzard.png",
+      "sha256": "8973a0e6a38b1da36c23d3ded1b3f0ec6b138d3f0cc8ce9dd4e02b2aea9b7c22",
+      "size": 1897
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/blowing_snow.png",
+      "sha256": "64cc1719f38a476b29fc21a2032a8136840c8b998663357f14eb1b25551752bb",
+      "size": 1215
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/clear_night.png",
+      "sha256": "2711a47e5c6294109a23ac68154dd7bd86281ee1f5c135d7c1fc61f586839df3",
+      "size": 1615
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/cloudy.png",
+      "sha256": "07d6366ed391ee6618c249baa1f77342eda7e77f8c5c159b1eb7abb3ebe01415",
+      "size": 1544
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/drizzle.png",
+      "sha256": "c90bf4cc396014d1032fa9249421224ca42877450f87714360ca43578c782610",
+      "size": 1677
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/flurries.png",
+      "sha256": "fc4e91b165d7413efbe9ae1561cf760c7f2e3a57647948d6be937b41723408ab",
+      "size": 2111
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/haze_fog_dust_smoke.png",
+      "sha256": "1b7ce93ce02f42b1e046ba31787a563716bfb245818842e80f34bf7e23e81263",
+      "size": 1889
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/heavy_rain.png",
+      "sha256": "fbfca5465b73d5e561cf60edbca3533d67ce66f6f035dc46e149a97b8dd2ab85",
+      "size": 2232
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/heavy_snow.png",
+      "sha256": "fa5210637b693a9734a2ca1d72858c36803580f9ef5a935151a3753bed76a917",
+      "size": 2565
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/isolated_scattered_tstorms_day.png",
+      "sha256": "a2432cab1ebc0c891569249783099020a1390224431319e22fa6c2e76d6465f2",
+      "size": 3511
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/isolated_scattered_tstorms_night.png",
+      "sha256": "8b4526a287ee520fce1183419fc2bbaa18861cf4c1da46241520c73e3b4a555b",
+      "size": 3397
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/mostly_clear_night.png",
+      "sha256": "48650d9d56d5994b8c983a065aec0a3c1f8c047729ef35a9067a76592eac46e0",
+      "size": 2601
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/mostly_cloudy_day.png",
+      "sha256": "4426c2722240cc343b54741f6d012b98184c0a44d0eae4c1f9543933fe53255a",
+      "size": 2406
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/mostly_cloudy_night.png",
+      "sha256": "d444ef40870e0a66780ea0dfcb95bc19e7a50a49753182685f8d4e9db66a7295",
+      "size": 2384
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/mostly_sunny.png",
+      "sha256": "c05ca77bd03c4f8e3bc1e07a5fa56354ce34e5b93a0959a9cc08d551da65d5db",
+      "size": 3513
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/partly_cloudy.png",
+      "sha256": "54fe9b7c8faab7140dc553e5d872c8a3b1b490b3f521dff88c1a91b20f7917d3",
+      "size": 4147
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/partly_cloudy_night.png",
+      "sha256": "6308986eaeee6b71b5e9866d95acf71e86ce34f0581739d66b828a220ad637a5",
+      "size": 2371
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/scattered_showers_day.png",
+      "sha256": "29925ea7bb77dd19ef6d8b52958fb6ea677b85e3ff8267413f51d0631b3c3315",
+      "size": 2568
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/scattered_showers_night.png",
+      "sha256": "cf82b2fb3746f76c8b5891474f203edc06c9b0e1c8503ae7516e6a387dc35c9d",
+      "size": 2527
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/showers_rain.png",
+      "sha256": "e4354f10cab6665d1ef27d5e9fc2fdad357aba3637f184d8c93fa548a2fb505f",
+      "size": 2061
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/sleet_hail.png",
+      "sha256": "9484fcb7560c752e557bc93e9ef0e34fdf4cbdd3dec0094f6ca1e5fb27e1caf8",
+      "size": 1823
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/snow_showers_snow.png",
+      "sha256": "3800608de13030719aeca027e881883dd092d509ccdc6f4d65b46a8395065dc0",
+      "size": 2328
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/strong_tstorms.png",
+      "sha256": "3cb31f8d5c79ff6db38f8a7f42c983af3a111f00b23464f88e5eb46cd349b809",
+      "size": 3109
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/sunny.png",
+      "sha256": "ebb1cf21bb684f70ead9f7c236f8e38e00b0227593a3004d56cf271773451405",
+      "size": 2393
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/tornado.png",
+      "sha256": "48090996bdf4dd92237a71afc3f4c82d470f93f4a991cf3fe0816edf3fc1e326",
+      "size": 766
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v2/wintry_mix_rain_snow.png",
+      "sha256": "e18191b4aca99cfe450c3e4d636c558fd5be401e8848b2a40d57bc1c9c3de359",
+      "size": 2721
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/arrow.svg",
+      "sha256": "b7599a56ed9dd4ef6505b2842534eac60c87a358ae80a914ad3fffc19f659033",
+      "size": 208
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/arrow_2.svg",
+      "sha256": "baa0f505275e15f42163af70d4d5bc680a2cab8178247207749fe15540e1751e",
+      "size": 205
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/arrow_3.svg",
+      "sha256": "fc3b2cd9d1399e2e46e6e1d80fd4dd93013e376562cc630cb9b00736f5aca8a3",
+      "size": 208
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/arrow_4.svg",
+      "sha256": "473a523f7df0ec98c0e918fd5dcde329699d7c7ebfa7d01926c522d74adb7fb1",
+      "size": 150
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/arrow_5.svg",
+      "sha256": "20b20f1bda34f2edf1021e1699ff969ffe3597b7d46e37b3a351c7ca4b891a87",
+      "size": 150
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/blizzard.svg",
+      "sha256": "9208bf666775ab85e857b58d6565d5a55af9daa2b74e2e7b398db6b98c4b9353",
+      "size": 1526
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/blowing_snow.svg",
+      "sha256": "28542982d5bdde29cfd6413bd4fdd1da5a25d636aea21a74bbc6160cc1d8b16e",
+      "size": 963
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/clear.svg",
+      "sha256": "4254f349253474ac0c6a7d72a1e7ce70891bc3cce1b2d5715544b5cd47411cd9",
+      "size": 759
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/clear_alt.svg",
+      "sha256": "d673ff44d43887bb8c701b4b70f075dd36660740c9f992aa81335aeaea014759",
+      "size": 759
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/cloudy.svg",
+      "sha256": "71ac3bdec113246ac9840b4d07afb3ae93014bd0c208735a009d440c12cfc257",
+      "size": 555
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/drizzle.svg",
+      "sha256": "ed4d859432c2977f05921f486066e030ab2f3382f5017e22871308b633947003",
+      "size": 619
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/droplet_clear.svg",
+      "sha256": "2359873ea422d50ea52cf58e0df9321f68f2928553ae6d3093847c585f44a332",
+      "size": 344
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/droplet_drizzle.svg",
+      "sha256": "0c6047a157b8a363a25d1d65b32dabe31527a4ce82a5e667c93b4a5f2fee25f0",
+      "size": 464
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/droplet_heavy.svg",
+      "sha256": "e1cad539491bc50b5c73d882e7a5d2762bb75019200bc1a03f2796dfaa6f1320",
+      "size": 600
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/droplet_light.svg",
+      "sha256": "67b38b67c3a89b5c3ed1645188f1a460ba3c6af60f107540e6a2215450925382",
+      "size": 524
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/droplet_moderate.svg",
+      "sha256": "b545f39e579e29d3584086502c958a4634e21aa38389a1c5ccb866222358417c",
+      "size": 584
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/dust.svg",
+      "sha256": "9b801ffbc69da7d30109fe34c106489955c0c462f61156f1221ebb1ee405d80c",
+      "size": 1005
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/flurries.svg",
+      "sha256": "acf0e81f323ebd0f59977954fb704ceb476d36750f30d453e3daf41c654d762b",
+      "size": 645
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/fog.svg",
+      "sha256": "db76e04c05916bc04bc7b38747ce4215f1fd140fd5e765e7b778c1df3438b6dd",
+      "size": 1083
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/heavy_snow.svg",
+      "sha256": "bbf8beaa37420a0fe2de1a90e00ee0270705a48ce25666cbafd15a442f588366",
+      "size": 1132
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/icy.svg",
+      "sha256": "b75196e8d69bb3ee0cac7fededff6e22b3d4470053737bf1e925ae65e38a40c7",
+      "size": 919
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/isolated_tstorms.svg",
+      "sha256": "d14f1ee8eb657a2f9a76a232a1aaf5077bb2bccc0a3534fa7e0504fb76757df2",
+      "size": 965
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mist.svg",
+      "sha256": "65af62d1153e262584be3ecc9a44aa4ac17c690104647e03d2c8ccab105da50a",
+      "size": 644
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mixed_rain_hail_sleet.svg",
+      "sha256": "9a2f34c23080bc9b1a4c9ee969894c2be7de8f940c4fe4824013df7aff4f5c2f",
+      "size": 959
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mostly_clear.svg",
+      "sha256": "de80c8876eaebf711c1b81e7ff90db9d5a3e1b050915f1f673cc2fe893fc1044",
+      "size": 1728
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mostly_clear_alt.svg",
+      "sha256": "af0e04ea93aae9923a6a0e6ca448924aabe5a9608d9e09f39ad87d738b7fee4b",
+      "size": 1728
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mostly_cloudy.svg",
+      "sha256": "7f942b92f2d7566bb9f33dbfecde7b87c548e9028f4ae4cc2bc584690b914eb9",
+      "size": 1064
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mostly_cloudy_night.svg",
+      "sha256": "9dbec122385af6b27067fd87f1ef7310bfaf393ffbfbb3633177d0eab8b28be6",
+      "size": 1406
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mostly_cloudy_night_alt.svg",
+      "sha256": "105cf04e5ea6065ae170e827db285a4d5c386e71837663af1a7794b724189a82",
+      "size": 1406
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/mostly_sunny.svg",
+      "sha256": "b17f2eccd7779e701b99a996ce212a839e48f7a4878545feb0ffa32ae1fa44b0",
+      "size": 1121
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/partly_clear.svg",
+      "sha256": "776282370e52012c12cb3bc3005c0c1c457803db6b1ad3af8055154637a34615",
+      "size": 1523
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/partly_clear_alt.svg",
+      "sha256": "b8b6ab8f441f3966a4605d6757f1957a15db075b658fb47b9d0575b309256d03",
+      "size": 1523
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/partly_cloudy.svg",
+      "sha256": "f2bd0275e07ad6b9d241f5287f9ddeedb51f6127a1ca1fb6e2e10cb974e11283",
+      "size": 1122
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/scattered_showers.svg",
+      "sha256": "3b8b7d2bf96b8776338d7412b48223aced2783773937abefb7b91032b68dbff4",
+      "size": 907
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/scattered_snow.svg",
+      "sha256": "1d767776bd0e90b348fa144008925126ce249f13c71ab7a1492debecaf9e0d0c",
+      "size": 949
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/showers.svg",
+      "sha256": "d515712171c37c9d580eff62a4f82e23eebd5e7a77fee9913f1d0527d6236fec",
+      "size": 1057
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/sleet_hail.svg",
+      "sha256": "326888c67837adf92ffc1f4d0f4f6bd0aa89492c1795f10c7b4cc88a5c305c89",
+      "size": 979
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/smoke.svg",
+      "sha256": "ea1690642d91c4276e1acb5d55fc634fe254ed34acae34588b8847c8bbfee2fd",
+      "size": 1142
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/snow_showers.svg",
+      "sha256": "043751f609a87f29d1382e277808b2e72cab01f84e6c16802f47bf5bd0a62b18",
+      "size": 1509
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/strong_tstorms.svg",
+      "sha256": "cd9d466e7216a22c008e0cbb5253d680f236d2d55aff547cdca20214b2d51a3a",
+      "size": 1259
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/sunny.svg",
+      "sha256": "120a411761e8247d88c31d8d50f5a2174d8b000e93db4e397443bc80a38c4949",
+      "size": 1227
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/tornado.svg",
+      "sha256": "d5a2ed0625d8b39e3cabc441b2230b410ce286a42f0ae4bf4d58c469568323a9",
+      "size": 738
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/very_cold.svg",
+      "sha256": "c7e3baf6340137a0802bb30cbf30a6a8c7caa0aacb560c16137b2fe452922f6e",
+      "size": 1901
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/wind.svg",
+      "sha256": "391cd7ddd11dbf8bf3083bddf206f8ac2f321b0c4d688c427eede7fcfb623bcb",
+      "size": 1833
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/google_v3/wintry_mix.svg",
+      "sha256": "06851cb85852db51de5cf4761cf60a258416b7e67ce850e1f9efe680d7f50260",
+      "size": 1682
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/haze_fog_dust_smoke.svg",
+      "sha256": "9a488c2d98c2869cbb4ec5028deffc978055cef03fba20316e549a30c4bfc003",
+      "size": 1845
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/heavy_rain.svg",
+      "sha256": "dd658a175b59b139f77976730d2be9933de934646ebf287bd76fbdb424eac14a",
+      "size": 1227
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/heavy_snow.svg",
+      "sha256": "d080318d1ddfe2517a7e7df86bd42e2ce370e0c3cbcbae521d1a13c90a9e0249",
+      "size": 9557
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/icy.svg",
+      "sha256": "ab70d526185e3023dddce48aac46ee41f3909784d93788c723f22fcec9d619c5",
+      "size": 1289
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/isolated_scattered_thunderstorms_day.svg",
+      "sha256": "1982d84b41296d5368f934cbdfce3618562ad67da6e5b72fc6a96876e7a9d948",
+      "size": 1978
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/isolated_scattered_thunderstorms_night.svg",
+      "sha256": "426512d40bb7ee8af71e062a985332842ccc756c321bfae6a0ee557f8291188a",
+      "size": 1714
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/isolated_thunderstorms.svg",
+      "sha256": "2f0bce6e30d9bdd23dc14999bd9dc847c53c9bb4244059e2475bfebc0092826a",
+      "size": 1268
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/mixed_rain_hail_sleet.svg",
+      "sha256": "6d2e8962269efcf8a0da3ef5a72282bf5563359b0a95f4b9a6735b714b649bf0",
+      "size": 2016
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/mixed_rain_snow.svg",
+      "sha256": "5818ba799e5c0a90ff372de523a2b6b4bd623df4df3f6e9c3cf16a4974293462",
+      "size": 2604
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/mostly_clear_day.svg",
+      "sha256": "4c2bb164872bb5e883c723576c36c40aad2151e140eac879f871b764f2f535b4",
+      "size": 1382
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/mostly_clear_night.svg",
+      "sha256": "b316b9a493012cb98ab8ee21b08519bc4f06660d2d465acb38b3bc9b5f42edeb",
+      "size": 1095
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/mostly_cloudy_day.svg",
+      "sha256": "c70cdde3cd5195e4fe044871bfac3edcc468a099554d6bee20af07758f531de1",
+      "size": 1406
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/mostly_cloudy_night.svg",
+      "sha256": "b7e3489f4742874023762c31c910e7d22d5b9d765a553dd77f5935bedae2d3ff",
+      "size": 1089
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/mweather.png",
+      "sha256": "e4b31eeddc42c0404f4babe841ef333d6f6ff42be7f74007d3691652375bd05b",
+      "size": 15368
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/partly_cloudy_day.svg",
+      "sha256": "68ba882afd2e484d7a882523b435614acee70cc262f477db0828b201265cba2d",
+      "size": 1324
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/partly_cloudy_night.svg",
+      "sha256": "082767e76cc554fc89465cb5a81aec51afa7480457532cbd7c55f48078daefc2",
+      "size": 1073
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/rain_with_cloudy_dark.svg",
+      "sha256": "fe89caa38aa4b08bc8c159a589c04dd625dc23675cfd1f07f962a5313f66fa96",
+      "size": 876
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/rain_with_cloudy_light.svg",
+      "sha256": "5168d2b481c47eeda9a078dccd480ea0c79cbd265fbe972a5b7eef4a59332b80",
+      "size": 2468
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/rain_with_snow_dark.svg",
+      "sha256": "e8ee5ec85c424439b62f1db7373faf4a077cb16773c48c6678e05e1f15623b83",
+      "size": 2180
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/rain_with_snow_light.svg",
+      "sha256": "6a24bf9d454998357923ee0b16c59c0e6a32c767bb81634af8ce9d503a53d915",
+      "size": 2404
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/rain_with_sunny_dark.svg",
+      "sha256": "629daee706823f8e47ff8ee50c4155b7adec698396a78177efaaf625e989f535",
+      "size": 1170
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/rain_with_sunny_light.svg",
+      "sha256": "f1a5f8e322b7491259317ed5d8dc1cff3e400ac712555d543b5adaa7eb948f52",
+      "size": 1368
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/scattered_showers_day.svg",
+      "sha256": "0800115ccc428f9d37e4911515974293d7f5505945f0dd97a757b1423d84dedf",
+      "size": 1719
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/scattered_showers_night.svg",
+      "sha256": "3d0244143479d7e84ebd38e103275b8fd090ff26999f0d283f0c726059a38f37",
+      "size": 1455
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/scattered_snow_showers_day.svg",
+      "sha256": "5b978bbdb8210b4f3e7fd3b1daaa5b0084ded654543016f888b1fa37f379140c",
+      "size": 6710
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/scattered_snow_showers_night.svg",
+      "sha256": "8036338ee8b916fe37bd8c466fcace5f553087c4ff29b5b1c58867a53b3a2c73",
+      "size": 6450
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/showers_rain.svg",
+      "sha256": "151e6c5b63dff2d2660afde0cebaf2caeeee141005821c768180543eeb6ffce9",
+      "size": 991
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/showers_snow.svg",
+      "sha256": "a521f366b81a4a3fb8fe055d02d13bcbffd1a55548f7a0d7b690200399e48d5c",
+      "size": 5988
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/sleet_hail.svg",
+      "sha256": "712d9aec535e1f447473d30062cb77b45e94452a0d5a03c7a2e8b71d776de56d",
+      "size": 1389
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/snow_with_cloudy_dark.svg",
+      "sha256": "7129092f913913df5363486560553d4bb96ea1df4c1087cf04e9868b944f2bbc",
+      "size": 1496
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/snow_with_cloudy_light.svg",
+      "sha256": "a70d5baf8f3596244753e593b0db6aa863a30bd47430db4b4b3c98460de3a8d9",
+      "size": 3914
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/snow_with_rain_dark.svg",
+      "sha256": "3165999f20a0fdad6d4a31accea22fe9a5abaeeb4fa619c3129a6b85461cb090",
+      "size": 1322
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/snow_with_rain_light.svg",
+      "sha256": "24c558f88012d174645ae15a18a008589593f0728f75c93b530caab35c57879b",
+      "size": 2632
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/snow_with_sunny_dark.svg",
+      "sha256": "a7e9bc4a915eca5341cd08db0ca63bef2012e450c082f341c00ca0cee6de1f48",
+      "size": 1836
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/snow_with_sunny_light.svg",
+      "sha256": "7ad03f8ddcc32fed7a66ff5f255cf881adb4a96ffc4521804abc778f8e1ba541",
+      "size": 2946
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/strong_thunderstorms.svg",
+      "sha256": "a675c295795823b303b7d26fce53b1ae28bf12a95b0f946f41c7265a3e6827d2",
+      "size": 1904
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/sunny_with_cloudy_dark.svg",
+      "sha256": "da912855bfe10ffe57e243922ae45df0faf2170dcecfa45f049918aa4da2e4b4",
+      "size": 1572
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/sunny_with_cloudy_light.svg",
+      "sha256": "c64dd358ee143c993354954897801e343754b9a18d1e85c2d3260432ca0b3a09",
+      "size": 2908
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/sunny_with_rain_dark.svg",
+      "sha256": "819ec59df4be2bf2347e6852832a628717211aec39b1a12442b78cf1f8296f26",
+      "size": 1303
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/sunny_with_rain_light.svg",
+      "sha256": "5e2c80fb29962829c8cd1926a6644687fb3acd538ca4ea3c026796c336437569",
+      "size": 1516
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/sunny_with_snow_dark.svg",
+      "sha256": "12298016beb2695eea8220ad0479e110f163031b8ac8f7c4ea85578c7f691ddd",
+      "size": 2628
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/sunny_with_snow_light.svg",
+      "sha256": "9ac6921bd201597f37f916855df9a526233549b122361ac08afbf052533bde33",
+      "size": 2621
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/tornado.svg",
+      "sha256": "b327508c1efca1181434aaa8d5085e90e26429d0ef99054c0be07d8e1a590b27",
+      "size": 2309
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/tropical_storm_hurricane.svg",
+      "sha256": "4b1f0d937a3bd9cd3cb25f1649aaf6114c132ad5e871216eddbec000ef5d837c",
+      "size": 856
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/umbrella.svg",
+      "sha256": "3c31c7c1fca22aa0806fe0aaeef06eb811bef41406141ecfa63d11085141e474",
+      "size": 971
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/very_cold.svg",
+      "sha256": "30e6ed54204c84121bada8905b44e9c6a588afaf812f9b7a7fe71988508730f3",
+      "size": 2382
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/very_hot.svg",
+      "sha256": "e8b4cd6cec067ba3871e484b45aa5e78a4d8cc54949821c4b84231b145b24db1",
+      "size": 1555
+    },
+    {
+      "mode": "0644",
+      "path": "contents/images/windy.svg",
+      "sha256": "42cbf55a32dc55babce26d58accdbe3845ec7798d0c714c995ee12819c4955a9",
+      "size": 372
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/ar/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "9db9af1bf7d92e7ec6c165c2992ba729f20a6d38825fd9ee9d42ed77496290db",
+      "size": 29598
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/az/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "f7d2f6003271e9a914178fd2aad4fcab1ba548b0cc45242f2ac4fa9be0f1983f",
+      "size": 26132
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/bn/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "fa1b491a95ea47595231b2c18c4722c70419c2b5439a8cb4d9002cd0b725ee1d",
+      "size": 37342
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/cs/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "d97266df2d6dcb2508c7ca0822bb944e0f87a697a195dfdb0f54a5641936a779",
+      "size": 25414
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/de/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "652318ae73bc89b046a3206c52b9edddc043a08bc701155986ab83b8b3e081af",
+      "size": 25078
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/el/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "2be2913667ea2706fab79c9ab9ff90fdc86e14988b48904bbd5ac3503ebaf75e",
+      "size": 32951
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/en/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "6eddbe59381f976ed51e41063c85b4d19070b38ca5b0ae7827dd6a18603f89eb",
+      "size": 24235
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/es/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "182b87d8cfcb04ccbbe0faee7adec77fa4a6c99d60a51780f9feb783ed7cf5d5",
+      "size": 25554
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/fa/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "39ad52ff1101bed7fddaf02077ea179bba597fc00f07f37586248b015700386a",
+      "size": 29046
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/fi/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "86afacb6b847c109289e7dc07b0e682b61aeabc8c957e4fb371c292285627b16",
+      "size": 27117
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/fr/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "90b53198e5bb727ae4991a0fe32dd0e0b4176e33668d56b6ab4277be1b5793ed",
+      "size": 25719
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/hi/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "b7941014bc986e00d95b0924d875286fc14622231efdfd5c2a1af040c92a61f1",
+      "size": 35679
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/hy/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "d849dc060095e724bdc3962ed8fc176435b2092d3ea4951df6a925ef1775dded",
+      "size": 32013
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/id/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "780120a1a190c8a4961d7fba8659fc0a807f17ff3bbfe926b75db460b1defe00",
+      "size": 24255
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/it/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "eb23b1e48a641d61815bc101509cfb21ea60866ece820282439f1ec95743cf89",
+      "size": 24948
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/ja/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "b542b5df913d3a9d5b15a1587dd59dc1a991bdee74f2263ab167564f3893c950",
+      "size": 26591
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/ko/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "91e084d3fbfd682f4083d536d9a982f480583a67f87c581fee5a2f629872f979",
+      "size": 25664
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/nl/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "2feb346f787509e1d16bff81d4d90d3e04a549d36f46e6b5deabb8338d4f5570",
+      "size": 26777
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/pl/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "f7ca5e3d794d8c9439ad15107de237cb46ff9efdda4a7d6a9663c004b7ede46d",
+      "size": 26079
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/pt/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "32555adbcce8bab35e807cdf8219837b155bb46af5a10083bc22aa742be2a8cf",
+      "size": 25695
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/ro/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "00bc55326ec6322f8be7aaec9cf9e2e25ca47712f03d187678f9ad7d37d1ba95",
+      "size": 25307
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/ru/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "c9ed75431a4b9af501799ea989aed54036288ba7fcd4ee0de77834366df0e1dd",
+      "size": 31366
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/sv/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "b633c3cb43111efa528553c838e570fb8351d9d113a57b010f015748a9c41908",
+      "size": 2495
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/tr/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "957a2b18d064ecd4655b977953dc45a8703533bead752bceefb7effc80f14051",
+      "size": 26560
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/uk/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "e6cc7364fb1063905b4bac79b66b3c8438c671d2ed2ffbdc542746bd0f0dc095",
+      "size": 32973
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/ur/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "315db7688ebc8d17634c79688ab020228c03f12726ca2c155e4ca30c6aa32a89",
+      "size": 29803
+    },
+    {
+      "mode": "0644",
+      "path": "contents/locale/zh/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo",
+      "sha256": "ac8f8fe15db5db15f1f80a07b9610639db47d673bfe00abf57abd1857ca374a2",
+      "size": 23522
+    },
+    {
+      "mode": "0644",
+      "path": "contents/tools/rss_sync.py",
+      "sha256": "d9cfece5a7ad0e2bc620009c893770b2cc552e76369227d76431739694ae1df0",
+      "size": 13921
+    },
+    {
+      "mode": "0755",
+      "path": "contents/tools/rss_sync.sh",
+      "sha256": "8db95359e8bf8f7591ea22addb46d2b7a9a750b47a8840642655b37ad0f39fb4",
+      "size": 379
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/ButtonModeSearchInput.qml",
+      "sha256": "ff07fa264f1c133b65e7d35542c2775daaebbb91c9ccef946b19a7714ce6189b",
+      "size": 4363
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/CalendarView.qml",
+      "sha256": "9b6d30f0833c53ac679b3f191a7b27ae437f465cb9a6268e58fb07d4b2382c2a",
+      "size": 3240
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/CategoryHeader.qml",
+      "sha256": "2d7ad8d49fa4df1b63fb44af210df19815a6f4498a19c2336ce4a2981b1c8273",
+      "size": 678
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/CompactView.qml",
+      "sha256": "b39828c3683c9644b892b2b18a281d9945037d2a62017fad34d10b1d27e9b426",
+      "size": 8381
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/DailyForecastView.qml",
+      "sha256": "ddbb00e173061feb9ebecc8714d588c5b594b2d36d84578052d63c40c9836613",
+      "size": 3647
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/DateView.qml",
+      "sha256": "65d6f5190665aa5ad038476fcd868b02fd10e37613ecd536a32bedd0724197ed",
+      "size": 7769
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/DebugOverlay.qml",
+      "sha256": "185781f81bdf915e4ee17b3e734c5b240665a226f6cf55ababd63a594300dc7c",
+      "size": 7469
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/FilterChips.qml",
+      "sha256": "bd7df031ec8820088392184d81d021f306e0c7eb97364857d1ed52723a34e4b9",
+      "size": 4069
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/ForecastDetailsView.qml",
+      "sha256": "063a769a7262c9bb90f42d157249ea6cf6096a29184d628fea376ada6ac136c0",
+      "size": 16073
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/ForecastItem.qml",
+      "sha256": "f034999ccf27127ee982d13e76b180a19e96895a7f995a12a856ce7440a86232",
+      "size": 5993
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/HelpView.qml",
+      "sha256": "43862e832d87fa77277874460259d5d18265f8b0fc6a4d9dc9cc6e04ee16a17d",
+      "size": 8395
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/HiddenSearchInput.qml",
+      "sha256": "e0b2a529db73da6d923ee89bb927c18188501ae5b95460fe115696971234a6a3",
+      "size": 2181
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/HistoryContextMenu.qml",
+      "sha256": "590a8b63fac2e7675a02419b6f83a6020101a02ce73c05ed1bafd3375742cf50",
+      "size": 5547
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/HistoryListView.qml",
+      "sha256": "47e7b0d1092b39cf8d894a8a0251c45c3984a869337015fb681973bde509718f",
+      "size": 32775
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/HistoryTileView.qml",
+      "sha256": "5121c8aa24d03eecc6d005acbec3788f7005a7e5bf81c49a156360bc49fb902f",
+      "size": 47521
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/KWalletStore.qml",
+      "sha256": "8349e29642b307a98d08bd13820692953e8bf2728ec100acb34e9020cb092c51",
+      "size": 4643
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/LargeModeLayout.qml",
+      "sha256": "bd20ed804a6d6a657943fbbfc8f6782015582d36cd6f90f88366ed0ae938de91",
+      "size": 17001
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/LogicController.qml",
+      "sha256": "71ed3b7d7130fdf36827387f714610594ed3a93a83fbccf292251fba20b6e24c",
+      "size": 36036
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/NotificationManager.qml",
+      "sha256": "697eea3b696915ab3bb8c86d416c8115d0654f0238c10893d953b0a2859378d8",
+      "size": 22534
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/PinButton.qml",
+      "sha256": "51be5f0eaf60d24570ae53606ee27f7ace95949911ef87cb30c53513270f03ac",
+      "size": 2050
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/PinnedSection.qml",
+      "sha256": "f6a167709c0b06bdc5615b874827adc7261a187e241b75e584e111c80e3abf85",
+      "size": 23320
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/PowerView.qml",
+      "sha256": "203f40218384af061853b8d5829baef119e36c18407c1f66526253a3f5efe844",
+      "size": 27777
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/PrimaryResultPreview.qml",
+      "sha256": "8a088552e9f97957bde1761e7fe38d3f90c11e4689b3bb644ad3a87ae9e14449",
+      "size": 3790
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/QueryHints.qml",
+      "sha256": "fd5132ccd056802d976a80e1ba4403133b6ffcb3eb279fe210cdb6d515568241",
+      "size": 28834
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/ResultsListView.qml",
+      "sha256": "761f2c6f1c58460bb9e92215c3cfa107e45d6eb23023adac5975bf75d3b1ac44",
+      "size": 35787
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/ResultsTileView.qml",
+      "sha256": "81257f72dff8f31c44fb60315d038fb5c65bef148133ac877e23b6cbcd3ab8bc",
+      "size": 68322
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/RssTicker.qml",
+      "sha256": "809b9f7b61a39c9a39f4928b9849c0058a0d6113db23a0b6756f3358495e46a1",
+      "size": 31974
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/SearchBar.qml",
+      "sha256": "88a777e2637a5e89cb10ebf610448c288ebfd49e1f7f03c6d35915d04a3e86fc",
+      "size": 4166
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/SearchPopup.qml",
+      "sha256": "8ea798c5019ac12648e9146f30fde34a6e321c3170bb3e74cc962a143e27dac7",
+      "size": 52895
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/SmallModeLayout.qml",
+      "sha256": "19d676ecf113c18ebf67bc83163138a4e31b06b8c0bd3e8b38c2f2605900cfeb",
+      "size": 6732
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/TileDataManager.qml",
+      "sha256": "6b27d0f706c0eb7ea522ec3c14544219495d811ef34074bcf1f1a2437078df29",
+      "size": 22710
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/WeatherDetailsView.qml",
+      "sha256": "bd7528d05bbf45418642485d1eb1708bb7554dbe5fda82c2959f036adf2cd47b",
+      "size": 18183
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/WeatherIconMapper.js",
+      "sha256": "4638e5f84a44fbd42bfbb1e6d3b31b719dd727bacb4a2f085204e5855bb33c8f",
+      "size": 11612
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/WeatherService.js",
+      "sha256": "6065c09fd24dd7354043b1befa78cc696d5fdd8693fcc11ca746eea438707ed3",
+      "size": 29624
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/WeatherView.qml",
+      "sha256": "7224f68341507ca7c5b4982684178ff7149d7a95c839e568f5a5fd81ab495a1e",
+      "size": 16061
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/components/WideModeLayout.qml",
+      "sha256": "36ac119b085f3ac090decab4c3211d215d9ac7b04d08c4d95ef3ba9d8dfa2b97",
+      "size": 15646
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/config/ConfigCategories.qml",
+      "sha256": "845acb28fa7f68c838335acfa2fa9b817c255d79a4509fbe77bb05157d9ddb0d",
+      "size": 23510
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/config/ConfigDebug.qml",
+      "sha256": "f28ee154ce1aa78152ee1f86e493daadb2f8d6d792bb3926df136376a970a5a3",
+      "size": 16569
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/config/ConfigGeneral.qml",
+      "sha256": "ab6e2209793573e5733f83b8140961f78da0d3eff28537375d0939f59fae13b0",
+      "size": 83513
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/config/ConfigHelp.qml",
+      "sha256": "140db3d4a67b2e69c61b5199910857e1187e26aa03eb591d032659f8e93bcf88",
+      "size": 9950
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/config/ConfigRSS.qml",
+      "sha256": "ee3db7e9997f0f6f90d97d256c0126f7fac9f982078f13a293189e7a0dd24c6a",
+      "size": 50561
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/CategoryManager.js",
+      "sha256": "c8221af22cb0a52d3723d8b94c44fccfa1406057211a1ae9e347e311602d0e8b",
+      "size": 7815
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/ConfigManager.js",
+      "sha256": "ad3e7a2054cad3ecf4be0bc465d018d4b235751d39ff72a5ea70d67c1cc92de8",
+      "size": 5359
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/HistoryManager.js",
+      "sha256": "77caeaa0892f0720caa9cb82388e16671673d92b4b611f266c7488d2a2c35bfa",
+      "size": 6141
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/IconMapper.js",
+      "sha256": "094e46401c66fe2baa5b5a99798eb81e1643a3a121cab4740cab3b4300b5232b",
+      "size": 6247
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/PinnedManager.js",
+      "sha256": "21c0bf97b3b2d4e3c955963d10b0733104853a3eccccad7954e551c79044f681",
+      "size": 5047
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/PreviewUtils.js",
+      "sha256": "d92f2f9b2045c343e13a50039e4b455443ade7629dbb79c8660141b1c9137e3f",
+      "size": 3775
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/QueryPolicy.js",
+      "sha256": "392ff228a86b77377394623c591344b6dc814d0909e72e6698672c3c82d46cbc",
+      "size": 995
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/RSSManager.js",
+      "sha256": "8c0b6ae0e3f8624dfd5b1a07138a210b8b96817e6b2a67d7002d7b5b5ac6cce0",
+      "size": 2209
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/SimilarityUtils.js",
+      "sha256": "e42029d5afe6f5c6fb594045303659892b601669ce37f14bfcaed52adcf5c8ce",
+      "size": 7409
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/TelemetryManager.js",
+      "sha256": "52d629480464b8b5a3283b01d1ac3ffab445d2c6ec540334d37b604068b53a55",
+      "size": 1213
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/js/utils.js",
+      "sha256": "4304346de9c03cddeaa8848cc686ce342c04c6c311e0ad8b9b30535f2d382469",
+      "size": 5856
+    },
+    {
+      "mode": "0644",
+      "path": "contents/ui/main.qml",
+      "sha256": "c05d5ae2891fb5d38d558ae9fc5c94a80bfd28f21613914df90fc5fe080cfaf5",
+      "size": 12189
+    },
+    {
+      "mode": "0644",
+      "path": "metadata.json",
+      "sha256": "477c542b8a4b3742d56c7f8409b440a0f101db3da319958b1f59487c4fa12cfc",
+      "size": 2441
+    }
+  ],
+  "package": "com.mcc45tr.filesearch",
+  "schemaVersion": 1,
+  "version": "1.3.0"
+}

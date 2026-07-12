@@ -1,0 +1,43 @@
+name: File Search CI
+
+on:
+  push:
+    paths:
+      - "file-search/**"
+      - ".github/workflows/file-search-ci.yml"
+  pull_request:
+    paths:
+      - "file-search/**"
+      - ".github/workflows/file-search-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install Qt Quick test runner
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends gettext jq libxml2-utils shellcheck qt6-declarative-dev-tools qml6-module-qtquick qml6-module-qttest
+
+      - name: Run unit, policy, package, and integrity checks
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          chmod +x file-search/tests/run_checks.sh
+          file-search/tests/run_checks.sh
+          /usr/lib/qt6/bin/qmltestrunner -input file-search/tests/tst_QueryPolicy.qml
+
+      - name: Verify deterministic package output
+        run: |
+          cp file-search/build/com.mcc45tr.filesearch-1.3.0.plasmoid /tmp/first.plasmoid
+          python3 file-search/tools/build_release.py
+          cmp /tmp/first.plasmoid file-search/build/com.mcc45tr.filesearch-1.3.0.plasmoid

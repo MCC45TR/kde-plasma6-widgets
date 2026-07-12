@@ -436,7 +436,8 @@ FocusScope {
                         spacing: 8
                     
                     Repeater {
-                        model: modelData.items
+                        // Destroy preview-heavy delegates for collapsed categories.
+                        model: histCategoryDelegate.isCollapsed ? [] : modelData.items
                         
                         Item {
                             id: histTileDelegate
@@ -539,22 +540,23 @@ FocusScope {
                                             anchors.fill: parent
                                             source: modelData.decoration || "application-x-executable"
                                             color: historyTile.textColor
-                                            visible: previewImageTile.status !== Image.Ready
+                                            visible: !previewImageTile.item || previewImageTile.item.status !== Image.Ready
                                         }
                                         
                                         // 2. Preview Image
-                                        Image {
+                                        Loader {
                                             id: previewImageTile
                                             anchors.fill: parent
-                                            asynchronous: true
-                                            fillMode: Image.PreserveAspectCrop
-                                            sourceSize.width: historyTile.iconSize
-                                            sourceSize.height: historyTile.iconSize
-                                            cache: true
-                                            source: historyTile.iconSize > 22
-                                                ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyTile.previewEnabled, historyTile.previewSettings)
-                                                : ""
-                                            visible: source.length > 0 && status === Image.Ready
+                                            active: historyTile.iconSize > 22 && histTileDelegate.previewActive
+                                            sourceComponent: Image {
+                                                asynchronous: true
+                                                fillMode: Image.PreserveAspectCrop
+                                                sourceSize.width: historyTile.iconSize
+                                                sourceSize.height: historyTile.iconSize
+                                                cache: true
+                                                source: histTileDelegate.previewSource
+                                                visible: source.length > 0 && status === Image.Ready
+                                            }
                                         }
                                     }
                                     
@@ -818,14 +820,18 @@ FocusScope {
                                     }
                                 }
 
-                                ToolTip {
-                                    visible: historyTile.previewInlineMode === 0 && histTileDelegate.previewSource.length > 0 && histTileMouseArea.containsMouse
-                                    delay: 500
-                                    timeout: 10000
-                                    x: histTileDelegate.width + 4
-                                    y: 0
+                                Loader {
+                                    active: historyTile.previewInlineMode === 0
+                                            && histTileDelegate.previewSource.length > 0
+                                            && histTileMouseArea.containsMouse
+                                    sourceComponent: ToolTip {
+                                        visible: true
+                                        delay: 500
+                                        timeout: 10000
+                                        x: histTileDelegate.width + 4
+                                        y: 0
 
-                                    contentItem: Column {
+                                        contentItem: Column {
                                         spacing: 6
 
                                         Text {
@@ -867,13 +873,14 @@ FocusScope {
                                             width: 300
                                             visible: histTileDelegate.previewPath.length > 0
                                         }
-                                    }
+                                        }
 
-                                    background: Rectangle {
-                                        color: Kirigami.Theme.backgroundColor
-                                        border.color: historyTile.accentColor
-                                        border.width: 1
-                                        radius: 6
+                                        background: Rectangle {
+                                            color: Kirigami.Theme.backgroundColor
+                                            border.color: historyTile.accentColor
+                                            border.width: 1
+                                            radius: 6
+                                        }
                                     }
                                 }
                             }

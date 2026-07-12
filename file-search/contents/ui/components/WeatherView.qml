@@ -2,10 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasma5support as Plasma5Support
 import "WeatherService.js" as WeatherService
 import "WeatherIconMapper.js" as WeatherIcons
-import "../js/utils.js" as Utils
 
 // LogicController must be injected or accessible
 Item {
@@ -17,7 +15,15 @@ Item {
     property var currentWeather: null
     
     onQueryCityChanged: {
-        loadCachedWeatherOrFetch()
+        invalidateActiveRequest()
+        if (queryCity !== "") {
+            isLoading = true
+            errorMessage = ""
+            queryDebounce.restart()
+        } else {
+            queryDebounce.stop()
+            loadCachedWeatherOrFetch()
+        }
     }
     property var forecastDaily: []
     property var forecastHourly: []
@@ -30,27 +36,20 @@ Item {
     property string secureApiKey: ""
     property string secureApiKey2: ""
     property var secretWaiters: []
+    property int requestGeneration: 0
+    property var activeRequest: null
 
-    Plasma5Support.DataSource {
-        id: secretProcess
-        engine: "executable"
-        connectedSources: []
-        property var callbacks: ({})
-        onNewData: (source, data) => {
-            if (data["exit code"] === undefined) return
-            var callback = callbacks[source]
-            if (callback) callback(data["exit code"] === 0, (data["stdout"] || "").replace(/\n$/, ""))
-            delete callbacks[source]
-            disconnectSource(source)
-        }
+    Timer {
+        id: queryDebounce
+        interval: 300
+        repeat: false
+        onTriggered: weatherView.fetchWeatherData()
     }
 
+    KWalletStore { id: secretStore }
+
     function readSecret(entry, callback) {
-        var scriptPath = Utils.decodeLocalPath(Qt.resolvedUrl("../../tools/secret_store.sh"))
-        var command = "sh " + Utils.shellEscape(scriptPath) + " 'read' " + Utils.shellEscape(entry)
-                + " #secret_" + Date.now() + "_" + Math.floor(Math.random() * 1000000)
-        secretProcess.callbacks[command] = callback
-        secretProcess.connectSource(command)
+        secretStore.read(entry, callback)
     }
 
     function loadWeatherSecrets(callback) {
@@ -119,6 +118,15 @@ Item {
         loadCachedWeatherOrFetch()
     }
 
+    Component.onDestruction: invalidateActiveRequest()
+
+    function invalidateActiveRequest() {
+        requestGeneration++
+        if (activeRequest && activeRequest.cancel) activeRequest.cancel()
+        activeRequest = null
+        isFetching = false
+    }
+
     function loadCachedWeatherOrFetch() {
         if (queryCity !== "") {
             fetchWeatherData()
@@ -153,7 +161,10 @@ Item {
     }
     
     function fetchWeatherData() {
-        if (isFetching) return
+        queryDebounce.stop()
+        invalidateActiveRequest()
+        var generation = requestGeneration
+        var requestedCity = queryCity
         isFetching = true
         isLoading = true
         errorMessage = ""
@@ -184,11 +195,13 @@ Item {
         }
         
         function issueRequest() {
+            if (generation !== requestGeneration) return
             if (secretsLoaded) {
                 apiKey = secureApiKey
                 apiKey2 = secureApiKey2
             }
-            WeatherService.fetchWeather({
+            var completedSynchronously = false
+            var controller = WeatherService.fetchWeather({
                 location: locationMode === "auto" ? "" : loc,
                 autoDetect: locationMode === "auto",
                 units: units,
@@ -197,6 +210,9 @@ Item {
                 apiKey2: apiKey2,
                 refreshInterval: refreshInterval
             }, function(result) {
+                completedSynchronously = true
+                if (generation !== requestGeneration) return
+                activeRequest = null
                 isFetching = false
                 isLoading = false
                 if (result.success) {
@@ -205,7 +221,7 @@ Item {
                     forecastHourly = result.forecast.hourly || []
                     location = result.current.location
                     // Only save cache if this is not a temporary query city search
-                    if (plasmoidConfig && queryCity === "") {
+                    if (plasmoidConfig && requestedCity === "") {
                         plasmoidConfig.weatherCache = JSON.stringify(result)
                         if (!result.fromCache) plasmoidConfig.weatherLastUpdate = Date.now()
                     }
@@ -218,6 +234,11 @@ Item {
                     }
                 }
             })
+            if (!completedSynchronously && generation === requestGeneration) {
+                activeRequest = controller
+            } else if (generation !== requestGeneration && controller && controller.cancel) {
+                controller.cancel()
+            }
         }
 
         if ((provider === "openweathermap" || provider === "weatherapi") && !secretsLoaded) {

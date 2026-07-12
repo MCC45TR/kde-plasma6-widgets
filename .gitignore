@@ -6,6 +6,11 @@
 *.qmlc
 *.jsc
 *.py
+*.pyc
+__pycache__/
+!file-search/contents/tools/*.py
+!file-search/tests/*.py
+!file-search/tools/*.py
 
 # CMake / build
 build/

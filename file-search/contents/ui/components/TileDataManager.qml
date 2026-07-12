@@ -18,14 +18,15 @@ Item {
     property int maxResults: 20
     property string lastRefreshSignature: ""
     property var itemMetadataCache: ({})
+    property var itemMetadataCacheKeys: []
+    property int itemMetadataCacheHead: 0
     property int itemMetadataCacheSize: 0
-    property int metadataUseCounter: 0
     property int metadataCacheHits: 0
     property int metadataCacheMisses: 0
     property int queryCacheHitsStart: 0
     property int queryCacheMissesStart: 0
-    readonly property int itemMetadataCacheLimit: 768
-    readonly property int itemMetadataCacheSlack: 64
+    // Large enough for the bounded RSS cache plus the normal Milou result set.
+    readonly property int itemMetadataCacheLimit: 2048
     
     Connections {
         target: logic
@@ -83,7 +84,8 @@ Item {
         if (generation !== activeQueryGeneration)
             return;
         queryIssuedAt = Date.now();
-        refreshDebouncer.restart();
+        // Publish cached/local results immediately; subsequent model events are coalesced.
+        refreshGroups();
     }
 
     function noteModelEvent() {
@@ -97,8 +99,9 @@ Item {
 
     function clearMetadataCache() {
         itemMetadataCache = ({});
+        itemMetadataCacheKeys = [];
+        itemMetadataCacheHead = 0;
         itemMetadataCacheSize = 0;
-        metadataUseCounter = 0;
         metadataCacheHits = 0;
         metadataCacheMisses = 0;
         queryCacheHitsStart = 0;
@@ -106,18 +109,19 @@ Item {
     }
 
     function trimMetadataCache() {
-        if (itemMetadataCacheSize <= itemMetadataCacheLimit + itemMetadataCacheSlack)
-            return;
-
-        var entries = [];
-        for (var key in itemMetadataCache)
-            entries.push({ key: key, lastUsed: itemMetadataCache[key].lastUsed });
-        entries.sort(function(a, b) { return a.lastUsed - b.lastUsed; });
-
-        var removeCount = itemMetadataCacheSize - itemMetadataCacheLimit;
-        for (var i = 0; i < removeCount; i++)
-            delete itemMetadataCache[entries[i].key];
-        itemMetadataCacheSize -= removeCount;
+        while (itemMetadataCacheSize > itemMetadataCacheLimit && itemMetadataCacheHead < itemMetadataCacheKeys.length) {
+            var oldestKey = itemMetadataCacheKeys[itemMetadataCacheHead++];
+            if (itemMetadataCache[oldestKey] !== undefined) {
+                delete itemMetadataCache[oldestKey];
+                itemMetadataCacheSize--;
+            }
+        }
+        // Periodically compact the tombstoned prefix; eviction itself remains
+        // O(1) and compaction is amortized across hundreds of insertions.
+        if (itemMetadataCacheHead > 512 && itemMetadataCacheHead * 2 > itemMetadataCacheKeys.length) {
+            itemMetadataCacheKeys = itemMetadataCacheKeys.slice(itemMetadataCacheHead);
+            itemMetadataCacheHead = 0;
+        }
     }
 
     function metadataForItem(item, includeIndexedContent) {
@@ -145,7 +149,6 @@ Item {
                 cached.lowerIndexedContent = indexedContent.toLocaleLowerCase().replace(/\u0307/g, "");
                 cached.indexedNormalized = true;
             }
-            cached.lastUsed = ++metadataUseCounter;
             return cached;
         }
 
@@ -167,24 +170,17 @@ Item {
             extension: PreviewUtils.getExtension(url),
             categoryVisible: CategoryManager.isCategoryVisible(logic.categorySettings || {}, category),
             categoryPriority: CategoryManager.getCategoryPriority(logic.categorySettings || {}, category),
-            mappedDecoration: IconMapper.getIconForUrl(url, decoration, category),
-            lastUsed: ++metadataUseCounter
+            mappedDecoration: IconMapper.getIconForUrl(url, decoration, category)
         };
-        if (!cached)
+        if (!cached) {
             itemMetadataCacheSize++;
+            itemMetadataCacheKeys.push(key);
+        }
         itemMetadataCache[key] = metadata;
         trimMetadataCache();
         return metadata;
     }
 
-    function copyWithMetadata(item, metadata) {
-        var copy = Object.assign({}, item);
-        copy._normalizedDisplay = metadata.lowerDisplay;
-        copy._normalizedIndexedContent = metadata.lowerIndexedContent;
-        copy._categoryPriority = metadata.categoryPriority;
-        return copy;
-    }
-    
     function refreshGroups() {
         var refreshStartedAt = Date.now();
         var generation = activeQueryGeneration;
@@ -317,8 +313,14 @@ Item {
                         continue;
                 }
 
-                if (rssMetadata.categoryVisible)
-                    rawItems.push(copyWithMetadata(rssEntry, rssMetadata));
+                if (rssMetadata.categoryVisible) {
+                    // RSS entries are private cache objects; normalize them once in place so
+                    // a 1500-item feed does not allocate a second full object graph per query.
+                    rssEntry._normalizedDisplay = rssMetadata.lowerDisplay;
+                    rssEntry._normalizedIndexedContent = rssMetadata.lowerIndexedContent;
+                    rssEntry._categoryPriority = rssMetadata.categoryPriority;
+                    rawItems.push(rssEntry);
+                }
             }
         }
 
@@ -462,7 +464,7 @@ Item {
     // Debounce timer for refreshGroups to prevent excessive updates
     Timer {
         id: refreshDebouncer
-        interval: 60
+        interval: 24
         onTriggered: dataManager.refreshGroups()
     }
 

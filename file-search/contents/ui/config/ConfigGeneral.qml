@@ -4,9 +4,9 @@ import QtQuick.Controls
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as PlasmaSupport
-import "../js/SecretStore.js" as SecretStore
 import "../js/utils.js" as Utils
 import "../js/ConfigManager.js" as ConfigManager
+import "../components" as Components
 
 
 Item {
@@ -58,37 +58,20 @@ Item {
         connectedSources: ["PowerManagement"]
     }
 
-    PlasmaSupport.DataSource {
-        id: secretProcess
-        engine: "executable"
-        connectedSources: []
-        property var callbacks: ({})
-        onNewData: (source, data) => {
-            if (data["exit code"] === undefined) return
-            var callback = callbacks[source]
-            if (callback) callback(data["exit code"] === 0, (data["stdout"] || "").replace(/\n$/, ""))
-            delete callbacks[source]
-            disconnectSource(source)
-        }
-    }
+    Components.KWalletStore { id: secretStore }
 
     property string weatherApiKeyDraft: ""
     property string weatherApiKey2Draft: ""
     property string secretStorageError: ""
     property bool weatherSecretsRequested: false
 
-    function secretScriptPath() {
-        return Utils.decodeLocalPath(Qt.resolvedUrl("../../tools/secret_store.sh"))
-    }
-
     function runSecretAction(action, entry, value, callback) {
-        var command = "sh " + Utils.shellEscape(secretScriptPath())
-                + " " + Utils.shellEscape(action)
-                + " " + Utils.shellEscape(entry)
-        if (action === "write") command += " " + Utils.shellEscape(SecretStore.encodeUtf8(value))
-        command += " #secret_" + Date.now() + "_" + Math.floor(Math.random() * 1000000)
-        secretProcess.callbacks[command] = callback
-        secretProcess.connectSource(command)
+        if (action === "write")
+            secretStore.write(entry, value, callback)
+        else if (action === "read")
+            secretStore.read(entry, callback)
+        else if (callback)
+            Qt.callLater(function() { callback(false, "") })
     }
 
     function loadWeatherSecrets() {

@@ -11,20 +11,40 @@ var cache = {
 var currentProvider = "openweathermap"
 var REQUEST_TIMEOUT_MS = 15000
 
-function configureRequest(xhr, finish) {
+function createRequestController() {
+    return {
+        cancelled: false,
+        requests: [],
+        cancel: function () {
+            if (this.cancelled) return
+            this.cancelled = true
+            for (var i = 0; i < this.requests.length; i++) {
+                try { this.requests[i].abort() } catch (e) {}
+            }
+            this.requests = []
+        }
+    }
+}
+
+function configureRequest(xhr, finish, controller) {
+    controller.requests.push(xhr)
     xhr.timeout = REQUEST_TIMEOUT_MS
-    xhr.ontimeout = function () { finish({ success: false, error: "Weather request timed out" }) }
-    xhr.onerror = function () { finish({ success: false, error: "Weather network error" }) }
+    xhr.ontimeout = function () {
+        if (!controller.cancelled) finish({ success: false, error: "Weather request timed out" })
+    }
+    xhr.onerror = function () {
+        if (!controller.cancelled) finish({ success: false, error: "Weather network error" })
+    }
 }
 
 function getCacheKey(config) {
     return [config.provider || "openmeteo", config.autoDetect ? "auto" : (config.location || ""), config.units || "metric"].join("|")
 }
 
-function fetchOpenWeatherMap(apiKey, location, units, callback) {
+function fetchOpenWeatherMap(apiKey, location, units, callback, controller) {
     var completed = false
     function finish(result) {
-        if (completed) return
+        if (completed || controller.cancelled) return
         completed = true
         callback(result)
     }
@@ -34,8 +54,9 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
 
     var xhr = new XMLHttpRequest()
     xhr.open("GET", currentUrl)
-    configureRequest(xhr, finish)
+    configureRequest(xhr, finish, controller)
     xhr.onreadystatechange = function () {
+        if (controller.cancelled) return
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 try {
@@ -66,8 +87,9 @@ function fetchOpenWeatherMap(apiKey, location, units, callback) {
                     var forecastUrl = baseUrl + "forecast?q=" + encodeURIComponent(location) + "&appid=" + encodeURIComponent(apiKey) + "&units=" + units
                     var xhr2 = new XMLHttpRequest()
                     xhr2.open("GET", forecastUrl)
-                    configureRequest(xhr2, finish)
+                    configureRequest(xhr2, finish, controller)
                     xhr2.onreadystatechange = function () {
+                        if (controller.cancelled) return
                         if (xhr2.readyState === XMLHttpRequest.DONE) {
                             if (xhr2.status === 200) {
                                 try {
@@ -113,10 +135,10 @@ function parseAstroTime(dateStr, timeStr) {
     return d.getTime()
 }
 
-function fetchWeatherAPI(apiKey, location, units, callback) {
+function fetchWeatherAPI(apiKey, location, units, callback, controller) {
     var completed = false
     function finish(result) {
-        if (completed) return
+        if (completed || controller.cancelled) return
         completed = true
         callback(result)
     }
@@ -125,8 +147,9 @@ function fetchWeatherAPI(apiKey, location, units, callback) {
 
     var xhr = new XMLHttpRequest()
     xhr.open("GET", url)
-    configureRequest(xhr, finish)
+    configureRequest(xhr, finish, controller)
     xhr.onreadystatechange = function () {
+        if (controller.cancelled) return
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 try {
@@ -169,10 +192,10 @@ function fetchWeatherAPI(apiKey, location, units, callback) {
     xhr.send()
 }
 
-function fetchOpenMeteo(location, units, callback) {
+function fetchOpenMeteo(location, units, callback, controller) {
     var completed = false
     function finish(result) {
-        if (completed) return
+        if (completed || controller.cancelled) return
         completed = true
         callback(result)
     }
@@ -180,8 +203,9 @@ function fetchOpenMeteo(location, units, callback) {
 
     var xhr = new XMLHttpRequest()
     xhr.open("GET", geocodeUrl)
-    configureRequest(xhr, finish)
+    configureRequest(xhr, finish, controller)
     xhr.onreadystatechange = function () {
+        if (controller.cancelled) return
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 try {
@@ -208,8 +232,9 @@ function fetchOpenMeteo(location, units, callback) {
 
                     var xhr2 = new XMLHttpRequest()
                     xhr2.open("GET", weatherUrl)
-                    configureRequest(xhr2, finish)
+                    configureRequest(xhr2, finish, controller)
                     xhr2.onreadystatechange = function () {
+                        if (controller.cancelled) return
                         if (xhr2.readyState === XMLHttpRequest.DONE) {
                             if (xhr2.status === 200) {
                                 try {
@@ -265,18 +290,19 @@ function fetchOpenMeteo(location, units, callback) {
     xhr.send()
 }
 
-function fetchIpAndWeather(config, callback) {
+function fetchIpAndWeather(config, callback, controller) {
     var completed = false
     function finish(result) {
-        if (completed) return
+        if (completed || controller.cancelled) return
         completed = true
         callback(result)
     }
     var xhr = new XMLHttpRequest()
     var url = "https://ipinfo.io/json"
     xhr.open("GET", url)
-    configureRequest(xhr, finish)
+    configureRequest(xhr, finish, controller)
     xhr.onreadystatechange = function () {
+        if (controller.cancelled) return
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 try {
@@ -291,7 +317,7 @@ function fetchIpAndWeather(config, callback) {
                             forecastDays: config.forecastDays,
                             _cacheKey: config._cacheKey
                         }
-                        fetchWeatherInternal(newConfig, finish)
+                        fetchWeatherInternal(newConfig, finish, controller)
                     } else {
                         finish({ success: false, error: "Could not detect location from IP" })
                     }
@@ -308,7 +334,7 @@ function fetchIpAndWeather(config, callback) {
     xhr.send()
 }
 
-function fetchWeatherInternal(config, callback) {
+function fetchWeatherInternal(config, callback, controller) {
     var apiKey = config.apiKey || ""
     var apiKey2 = config.apiKey2 || ""
     var location = config.location || ""
@@ -331,7 +357,7 @@ function fetchWeatherInternal(config, callback) {
                 } else {
                     callback(result)
                 }
-            })
+            }, controller)
         } else {
             callback({ success: false, error: "OpenWeatherMap API Key missing" })
         }
@@ -350,7 +376,7 @@ function fetchWeatherInternal(config, callback) {
                 } else {
                     callback(result)
                 }
-            })
+            }, controller)
         } else {
             callback({ success: false, error: "WeatherAPI.com API Key missing" })
         }
@@ -379,10 +405,14 @@ function fetchWeatherInternal(config, callback) {
         } else {
             callback(result)
         }
-    })
+    }, controller)
 }
 
 function fetchWeather(config, callback) {
+    var controller = createRequestController()
+    function deliver(result) {
+        if (!controller.cancelled) callback(result)
+    }
     var now = Date.now()
     var requestedKey = getCacheKey(config)
     config._cacheKey = requestedKey
@@ -406,18 +436,19 @@ function fetchWeather(config, callback) {
                 },
                 fromCache: true
             }
-            callback(result)
-            return
+            deliver(result)
+            return controller
         }
     }
 
     if (config.autoDetect === true) {
-        fetchIpAndWeather(config, callback)
+        fetchIpAndWeather(config, deliver, controller)
     } else if (!config.location) {
-        callback({ success: false, error: "Location is required" })
+        deliver({ success: false, error: "Location is required" })
     } else {
-        fetchWeatherInternal(config, callback)
+        fetchWeatherInternal(config, deliver, controller)
     }
+    return controller
 }
 
 function parseForecastOpenWeather(data) {

@@ -285,7 +285,10 @@ Rectangle {
              // Known prefix found
              
              // Check for Man page installation
-             if (bestMatch.prefix === "man:/" && logic && !logic.manInstalled) {
+             if (bestMatch.prefix === "man:/" && logic && logic.ensureManAvailability) {
+                 logic.ensureManAvailability();
+             }
+             if (bestMatch.prefix === "man:/" && logic && logic.manCheckCompleted && !logic.manInstalled) {
                  return { show: true, text: _manNotInstalledText, icon: "dialog-error", isError: true, prefix: matchedPrefix }
              }
              

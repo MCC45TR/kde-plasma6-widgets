@@ -5,6 +5,7 @@ import QtQuick.Window
 import org.kde.kirigami as Kirigami
 import org.kde.milou as Milou
 import "../js/HistoryManager.js" as HistoryManager
+import "../js/QueryPolicy.js" as QueryPolicy
 import "../js/utils.js" as Utils
 import org.kde.plasma.plasmoid
 
@@ -195,8 +196,8 @@ Item {
         interval: 60
         repeat: false
         onTriggered: {
-            tileData.markQueryIssued(popupRoot.searchGeneration)
             popupRoot.delayedQueryString = getBackendQuery(popupRoot.searchText, popupRoot.activeFilter)
+            tileData.markQueryIssued(popupRoot.searchGeneration)
         }
     }
 
@@ -258,6 +259,8 @@ Item {
     }
 
     function getBackendQuery(text, filter) {
+        if (!isQueryAllowed(text))
+            return ""
         var eq = popupRoot.effectiveQuery
         if (!eq && filter === "All") return ""
 
@@ -305,6 +308,8 @@ Item {
     }
 
     function handleResultClick(index, display, decoration, category, matchId, filePath) {
+        if (index !== -1 && !isQueryAllowed(popupRoot.searchText))
+            return;
         // Record to history
         logic.addToHistory(display, decoration, category, matchId, filePath, (index === -1 ? "rss" : null), popupRoot.searchText);
         
@@ -323,16 +328,16 @@ Item {
         
         // FORCE RUN for command queries (gg:, help:, etc.) to avoid treating them as files
         if (isCommandOnlyQuery(popupRoot.searchText)) {
-             resultsModel.run(idx);
+             runResultSafely(idx);
         } 
         else if (isApp) {
-             resultsModel.run(idx);
+             runResultSafely(idx);
         } else if (filePath && filePath.length > 0 && filePath.toString().indexOf("http") !== 0) {
              // For files, open externally
              if (Utils.isSafeExternalUrl(filePath)) Qt.openUrlExternally(filePath);
         } else {
              // For bookmarks or others, use Milou run
-             resultsModel.run(idx);
+             runResultSafely(idx);
         }
         
         requestSearchTextUpdate("");
@@ -568,6 +573,32 @@ Item {
         return t
     }
 
+    // Feature flags are an execution policy, not merely hint visibility. This
+    // guard is used both before issuing a backend query and immediately before
+    // ResultsModel.run(), so stale model rows cannot bypass a disabled prefix.
+    function isQueryAllowed(text) {
+        return QueryPolicy.isAllowed(text, {
+            shellEnabled: _prefixShellEnabled,
+            killEnabled: _prefixKillEnabled,
+            spellEnabled: _prefixSpellEnabled,
+            unitEnabled: _prefixUnitEnabled,
+            timelineEnabled: _prefixTimelineEnabled,
+            webSearchEnabled: _prefixWebSearchEnabled,
+            locShell: _locShell,
+            locKill: _locKill,
+            locSpell: _locSpell,
+            locUnit: _locUnit
+        });
+    }
+
+    function runResultSafely(modelIndex, queryOverride) {
+        var query = queryOverride === undefined ? popupRoot.searchText : queryOverride;
+        if (!isQueryAllowed(query))
+            return false;
+        resultsModel.run(modelIndex);
+        return true;
+    }
+
     // Legacy wrappers for backward compatibility (e.g. handleResultClick)
     function isCommandOnlyQuery(text) { return _computeIsCommandOnly(text) }
     function getEffectiveQuery(text) { return _computeEffectiveQuery(text) }
@@ -656,7 +687,8 @@ Item {
         onSearchSubmitted: (text, idx) => {
              if (tileData.resultCount > 0) {
                  var modelIdx = resultsModel.index(idx, 0);
-                 resultsModel.run(modelIdx);
+                 if (!runResultSafely(modelIdx, text))
+                     return;
                  requestSearchTextUpdate("");
                  searchBar.clear();
                  requestExpandChange(false);
@@ -737,8 +769,10 @@ Item {
             textColor: popupRoot.textColor
             
             onResultClicked: (idx, display, decoration, category) => {
+                if (!isQueryAllowed(popupRoot.searchText))
+                    return;
                 logic.addToHistory(display, decoration, category, display, "", "calculator", popupRoot.searchText);
-                resultsModel.run(resultsModel.index(idx, 0));
+                runResultSafely(resultsModel.index(idx, 0));
                 requestSearchTextUpdate("");
                 requestExpandChange(false);
             }
@@ -815,7 +849,8 @@ Item {
                     requestSearchTextUpdate(item.display);
                     // delayed run...
                     Qt.callLater(() => {
-                        if (tileData.resultCount > 0) resultsModel.run(resultsModel.index(0, 0));
+                        if (tileData.resultCount > 0)
+                            runResultSafely(resultsModel.index(0, 0), item.display);
                     });
                 }
                 requestExpandChange(false);
