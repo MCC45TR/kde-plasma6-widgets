@@ -12,7 +12,7 @@ Item {
     required property string units
 
     // Config properties
-    property bool enabled: false
+    property bool notificationsEnabled: false
     property bool routineEnabled: false
     property string routineType: "forecast_3day"
     property int routineTime1: 480 // 08:00 default
@@ -132,7 +132,7 @@ Item {
 
     // Check and send notifications based on current data
     function checkNotifications() {
-        if (!enabled || !currentWeather) return
+        if (!notificationsEnabled || !currentWeather) return
 
         var now = new Date()
         var nowMin = now.getHours() * 60 + now.getMinutes()
@@ -553,7 +553,7 @@ Item {
     Timer {
         id: checkTimer
         interval: 30000 // Check every 30 seconds
-        running: notifManager.enabled
+        running: notifManager.notificationsEnabled
         repeat: true
         onTriggered: notifManager.checkNotifications()
     }

@@ -5,10 +5,11 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 
-Kirigami.ScrollablePage {
+Item {
     id: page
 
-    property var title
+    property string title: ""
+
     readonly property bool isPanel: Plasmoid.formFactor === PlasmaCore.Types.Horizontal
                                     || Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
@@ -64,6 +65,7 @@ Kirigami.ScrollablePage {
     property int cfg_notifyWindThreshold; property int cfg_notifyWindThresholdDefault
     property string cfg_lastRoutineDate1; property string cfg_lastRoutineDate1Default
     property string cfg_lastRoutineDate2; property string cfg_lastRoutineDate2Default
+    property double cfg_lastRoutineNotify; property double cfg_lastRoutineNotifyDefault
     property double cfg_lastSevereNotify; property double cfg_lastSevereNotifyDefault
     property double cfg_lastRainNotify; property double cfg_lastRainNotifyDefault
     property double cfg_lastTempNotify; property double cfg_lastTempNotifyDefault
@@ -75,8 +77,13 @@ Kirigami.ScrollablePage {
     readonly property var layoutValues: ["auto", "small", "wide", "large"]
     readonly property var iconPackValues: ["default", "system", "google_v3", "google_v2", "google_v1"]
 
-    Kirigami.FormLayout {
-        width: page.availableWidth
+    QQC2.ScrollView {
+        id: scrollView
+        anchors.fill: parent
+        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
+        Kirigami.FormLayout {
+            width: scrollView.availableWidth
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
@@ -191,6 +198,7 @@ Kirigami.ScrollablePage {
             type: Kirigami.MessageType.Information
             text: i18n("Background, corners, spacing, colors, and controls follow your active Plasma and Breeze settings.")
             visible: true
+        }
         }
     }
 }

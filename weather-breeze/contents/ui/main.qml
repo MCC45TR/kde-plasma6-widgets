@@ -11,6 +11,13 @@ import "IconMapper.js" as IconMapper
 PlasmoidItem {
     id: root
 
+    Timer {
+        interval: 2000
+        running: true
+        repeat: false
+        onTriggered: Plasmoid.internalAction("configure").trigger()
+    }
+
     Layout.preferredWidth: 400
     Layout.preferredHeight: 200
     Layout.minimumWidth: 200
@@ -76,7 +83,7 @@ PlasmoidItem {
             forecastHourly: root.forecastHourly
             forecastDaily: root.forecastDaily
             units: root.units
-            enabled: root.notifyEnabled
+            notificationsEnabled: root.notifyEnabled
             routineEnabled: root.notifyRoutineEnabled
             routineTime1: root.notifyRoutineTime1
             routineTime2: root.notifyRoutineTime2

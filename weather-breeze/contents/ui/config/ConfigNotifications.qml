@@ -4,10 +4,10 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.notification
 
-Kirigami.ScrollablePage {
+Item {
     id: page
 
-    property var title
+    property string title: ""
 
     Notification {
         id: demoNotification
@@ -104,6 +104,7 @@ Kirigami.ScrollablePage {
     property string cfg_cornerRadius; property string cfg_cornerRadiusDefault
     property string cfg_lastRoutineDate1; property string cfg_lastRoutineDate1Default
     property string cfg_lastRoutineDate2; property string cfg_lastRoutineDate2Default
+    property double cfg_lastRoutineNotify; property double cfg_lastRoutineNotifyDefault
     property double cfg_lastSevereNotify; property double cfg_lastSevereNotifyDefault
     property double cfg_lastRainNotify; property double cfg_lastRainNotifyDefault
     property double cfg_lastTempNotify; property double cfg_lastTempNotifyDefault
@@ -112,8 +113,13 @@ Kirigami.ScrollablePage {
     property double cfg_lastWindNotify; property double cfg_lastWindNotifyDefault
     property double cfg_triggerTestNotification; property double cfg_triggerTestNotificationDefault
 
-    Kirigami.FormLayout {
-        width: page.availableWidth
+    QQC2.ScrollView {
+        id: scrollView
+        anchors.fill: parent
+        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
+        Kirigami.FormLayout {
+            width: scrollView.availableWidth
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
@@ -327,6 +333,7 @@ Kirigami.ScrollablePage {
                                                  i18n("A thunderstorm is expected. Stay indoors and avoid open areas."),
                                                  "weather-storm", true)
             }
+        }
         }
     }
 }

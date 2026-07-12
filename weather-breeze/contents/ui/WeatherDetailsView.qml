@@ -8,14 +8,14 @@ ColumnLayout {
 
     property var weatherRoot
     property string weatherProvider: ""
-    readonly property var data: weatherRoot ? weatherRoot.currentWeather : null
+    readonly property var weatherData: weatherRoot ? weatherRoot.currentWeather : null
     readonly property string degreeUnit: weatherRoot && weatherRoot.units === "imperial" ? "°F" : "°C"
     readonly property string speedUnit: weatherRoot && weatherRoot.units === "imperial" ? " mph" : " km/h"
 
     spacing: Kirigami.Units.smallSpacing
 
     function has(key) {
-        return data && data[key] !== undefined && data[key] !== null
+        return weatherData && weatherData[key] !== undefined && weatherData[key] !== null
     }
 
     function timeText(value) {
@@ -36,7 +36,7 @@ ColumnLayout {
         spacing: Kirigami.Units.largeSpacing
 
         Kirigami.Icon {
-            source: detailsView.weatherRoot.getWeatherIcon(detailsView.data)
+            source: detailsView.weatherRoot.getWeatherIcon(detailsView.weatherData)
             Layout.preferredWidth: Kirigami.Units.iconSizes.huge
             Layout.preferredHeight: Kirigami.Units.iconSizes.huge
             isMask: false
@@ -49,13 +49,13 @@ ColumnLayout {
             Kirigami.Heading {
                 Layout.fillWidth: true
                 level: 3
-                text: detailsView.data ? detailsView.data.location : detailsView.weatherRoot.location
+                text: detailsView.weatherData ? detailsView.weatherData.location : detailsView.weatherRoot.location
                 elide: Text.ElideRight
             }
 
             PlasmaComponents.Label {
                 Layout.fillWidth: true
-                text: detailsView.data ? i18n(detailsView.data.condition) : ""
+                text: detailsView.weatherData ? i18n(detailsView.weatherData.condition) : ""
                 opacity: 0.7
                 elide: Text.ElideRight
             }
@@ -67,15 +67,15 @@ ColumnLayout {
             Kirigami.Heading {
                 Layout.alignment: Qt.AlignRight
                 level: 1
-                text: detailsView.data ? Math.round(detailsView.data.temp) + detailsView.degreeUnit : "--"
+                text: detailsView.weatherData ? Math.round(detailsView.weatherData.temp) + detailsView.degreeUnit : "--"
             }
 
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignRight
-                text: detailsView.data
+                text: detailsView.weatherData
                       ? i18n("High %1 · Low %2",
-                             Math.round(detailsView.data.temp_max) + "°",
-                             Math.round(detailsView.data.temp_min) + "°")
+                             Math.round(detailsView.weatherData.temp_max) + "°",
+                             Math.round(detailsView.weatherData.temp_min) + "°")
                       : ""
                 opacity: 0.7
                 font: Kirigami.Theme.smallFont
@@ -93,69 +93,69 @@ ColumnLayout {
 
         WeatherStatsCard {
             label: i18n("Feels like")
-            value: detailsView.has("feels_like") ? Math.round(detailsView.data.feels_like) + detailsView.degreeUnit : "--"
+            value: detailsView.has("feels_like") ? Math.round(detailsView.weatherData.feels_like) + detailsView.degreeUnit : "--"
             iconName: "temperature-symbolic"
             hasData: detailsView.has("feels_like")
         }
         WeatherStatsCard {
             label: i18n("Humidity")
-            value: detailsView.has("humidity") ? Math.round(detailsView.data.humidity) + "%" : "--"
+            value: detailsView.has("humidity") ? Math.round(detailsView.weatherData.humidity) + "%" : "--"
             iconName: "humidity-symbolic"
             hasData: detailsView.has("humidity")
         }
         WeatherStatsCard {
             label: i18n("Wind")
-            value: detailsView.has("wind_speed") ? detailsView.data.wind_speed + detailsView.speedUnit : "--"
+            value: detailsView.has("wind_speed") ? detailsView.weatherData.wind_speed + detailsView.speedUnit : "--"
             iconName: "weather-wind"
             hasData: detailsView.has("wind_speed")
         }
         WeatherStatsCard {
             label: i18n("Pressure")
-            value: detailsView.has("pressure") ? Math.round(detailsView.data.pressure) + " hPa" : "--"
+            value: detailsView.has("pressure") ? Math.round(detailsView.weatherData.pressure) + " hPa" : "--"
             iconName: "speedometer"
             hasData: detailsView.has("pressure")
         }
         WeatherStatsCard {
             label: i18n("Cloud cover")
-            value: detailsView.has("clouds") ? Math.round(detailsView.data.clouds) + "%" : "--"
+            value: detailsView.has("clouds") ? Math.round(detailsView.weatherData.clouds) + "%" : "--"
             iconName: "weather-clouds"
             hasData: detailsView.has("clouds")
         }
         WeatherStatsCard {
             label: i18n("UV index")
-            value: detailsView.has("uv_index") ? detailsView.data.uv_index.toString() : "--"
+            value: detailsView.has("uv_index") ? detailsView.weatherData.uv_index.toString() : "--"
             iconName: "weather-clear"
             hasData: detailsView.has("uv_index")
-            valueColor: detailsView.has("uv_index") && detailsView.data.uv_index >= 6
+            valueColor: detailsView.has("uv_index") && detailsView.weatherData.uv_index >= 6
                         ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
         }
         WeatherStatsCard {
             label: i18n("Visibility")
-            value: detailsView.has("visibility") ? detailsView.data.visibility + " km" : "--"
+            value: detailsView.has("visibility") ? detailsView.weatherData.visibility + " km" : "--"
             iconName: "visibility"
             hasData: detailsView.has("visibility")
         }
         WeatherStatsCard {
             label: i18n("Dew point")
-            value: detailsView.has("dew_point") ? Math.round(detailsView.data.dew_point) + detailsView.degreeUnit : "--"
+            value: detailsView.has("dew_point") ? Math.round(detailsView.weatherData.dew_point) + detailsView.degreeUnit : "--"
             iconName: "weather-freezing-rain"
             hasData: detailsView.has("dew_point")
         }
         WeatherStatsCard {
             label: i18n("Wind direction")
-            value: detailsView.windDirection(detailsView.data ? detailsView.data.wind_deg : undefined)
+            value: detailsView.windDirection(detailsView.weatherData ? detailsView.weatherData.wind_deg : undefined)
             iconName: "compass"
             hasData: detailsView.has("wind_deg")
         }
         WeatherStatsCard {
             label: i18n("Sunrise")
-            value: detailsView.timeText(detailsView.data ? detailsView.data.sunrise : null)
+            value: detailsView.timeText(detailsView.weatherData ? detailsView.weatherData.sunrise : null)
             iconName: "weather-clear-symbolic"
             hasData: detailsView.has("sunrise")
         }
         WeatherStatsCard {
             label: i18n("Sunset")
-            value: detailsView.timeText(detailsView.data ? detailsView.data.sunset : null)
+            value: detailsView.timeText(detailsView.weatherData ? detailsView.weatherData.sunset : null)
             iconName: "weather-clear-night-symbolic"
             hasData: detailsView.has("sunset")
         }

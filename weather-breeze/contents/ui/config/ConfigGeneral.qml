@@ -3,10 +3,10 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-Kirigami.ScrollablePage {
+Item {
     id: page
 
-    property var title
+    property string title: ""
 
     property string cfg_weatherProvider
     property string cfg_locationMode
@@ -64,6 +64,7 @@ Kirigami.ScrollablePage {
     property int cfg_notifyWindThreshold; property int cfg_notifyWindThresholdDefault
     property string cfg_lastRoutineDate1; property string cfg_lastRoutineDate1Default
     property string cfg_lastRoutineDate2; property string cfg_lastRoutineDate2Default
+    property double cfg_lastRoutineNotify; property double cfg_lastRoutineNotifyDefault
     property double cfg_lastSevereNotify; property double cfg_lastSevereNotifyDefault
     property double cfg_lastRainNotify; property double cfg_lastRainNotifyDefault
     property double cfg_lastTempNotify; property double cfg_lastTempNotifyDefault
@@ -76,8 +77,13 @@ Kirigami.ScrollablePage {
     readonly property var unitValues: ["metric", "imperial"]
     readonly property var intervalValues: [15, 30, 45, 60, 120, 180, 240, 360, 720, 1440]
 
-    Kirigami.FormLayout {
-        width: page.availableWidth
+    QQC2.ScrollView {
+        id: scrollView
+        anchors.fill: parent
+        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
+        Kirigami.FormLayout {
+            width: scrollView.availableWidth
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
@@ -215,6 +221,7 @@ Kirigami.ScrollablePage {
             value: page.cfg_forecastDays || 5
             editable: true
             onValueModified: page.cfg_forecastDays = value
+        }
         }
     }
 }
