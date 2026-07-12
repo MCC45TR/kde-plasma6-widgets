@@ -187,17 +187,20 @@ msgstr "Yardım ve Kısayollar"
 #: contents/ui/components/PinButton.qml:68
 #: contents/ui/components/PinnedSection.qml:436
 msgid "Unpin"
-msgstr "Unpin"
+msgstr "Sabitlemeyi kaldır"
 
 #: contents/ui/components/HistoryContextMenu.qml:27
 #: contents/ui/components/PinButton.qml:68
 msgid "Pin"
-msgstr "Pin"
+msgstr "Sabitle"
 
 #: contents/ui/components/HistoryContextMenu.qml:52
 #: contents/ui/components/PinnedSection.qml:402
 msgid "Open"
-msgstr "Open"
+msgstr "Aç"
+
+msgid "Open With..."
+msgstr "Birlikte Aç..."
 
 #: contents/ui/components/HistoryContextMenu.qml:69
 #: contents/ui/components/HistoryListView.qml:499
@@ -206,28 +209,28 @@ msgstr "Open"
 #: contents/ui/components/ResultsListView.qml:466
 #: contents/ui/components/ResultsTileView.qml:866
 msgid "Copy Path"
-msgstr "Copy Path"
+msgstr "Yolu Kopyala"
 
 #: contents/ui/components/HistoryContextMenu.qml:85
 msgid "Open in Terminal"
-msgstr "Open in Terminal"
+msgstr "Terminalde Aç"
 
 #: contents/ui/components/HistoryContextMenu.qml:97
 #: contents/ui/components/PinnedSection.qml:423
 msgid "Open Containing Folder"
-msgstr "Open Containing Folder"
+msgstr "İçeren Klasörü Aç"
 
 #: contents/ui/components/HistoryContextMenu.qml:107
 msgid "Move to Trash"
-msgstr "Move to Trash"
+msgstr "Çöpe Taşı"
 
 #: contents/ui/components/HistoryContextMenu.qml:120
 msgid "Properties"
-msgstr "Properties"
+msgstr "Özellikler"
 
 #: contents/ui/components/HistoryContextMenu.qml:130
 msgid "Edit Application..."
-msgstr "Edit Application..."
+msgstr "Uygulamayı Düzenle..."
 
 #: contents/ui/components/HistoryContextMenu.qml:140
 msgid "Remove from History"
@@ -2042,6 +2045,12 @@ msgstr "Konum"
 msgid "Auto-detect from IP"
 msgstr "IP adresinden otomatik algıla"
 
+msgid "Automatic location sends your IP address to ipinfo.io to determine your city. Choose manual location to avoid this request."
+msgstr "Otomatik konum, şehrinizi belirlemek için IP adresinizi ipinfo.io hizmetine gönderir. Bu isteği önlemek için konumu elle girin."
+
+msgid "Quick Commands"
+msgstr "Hızlı Komutlar"
+
 
 msgid "Enter manually"
 msgstr "Elle gir"
@@ -2219,3 +2228,63 @@ msgstr "Tarayıcıda Aç"
 
 msgid "Close"
 msgstr "Kapat"
+
+msgid "Daily Forecast"
+msgstr "Günlük Tahmin"
+
+msgid "Hourly Forecast"
+msgstr "Saatlik Tahmin"
+
+msgid "umbrella"
+msgstr "şemsiye"
+
+msgid "gloves"
+msgstr "eldiven"
+
+msgid "heavy coat"
+msgstr "kalın mont"
+
+msgid "coat"
+msgstr "mont"
+
+msgid "sweater"
+msgstr "kazak"
+
+msgid "sunglasses"
+msgstr "güneş gözlüğü"
+
+msgid "windbreaker"
+msgstr "rüzgârlık"
+
+msgid "Weather Info"
+msgstr "Hava Durumu Bilgisi"
+
+msgid "Show weather info in panel search bar"
+msgstr "Panel arama çubuğunda hava durumu bilgisini göster"
+
+msgid "Weather Frequency"
+msgstr "Hava Durumu Sıklığı"
+
+msgid "Custom height"
+msgstr "Özel yükseklik"
+
+msgid "Panel Width"
+msgstr "Panel Genişliği"
+
+msgid "Narrowest"
+msgstr "En dar"
+
+msgid "Widest"
+msgstr "En geniş"
+
+msgid "Text and Icon Opacity"
+msgstr "Metin ve Simge Matlığı"
+
+msgid "Low"
+msgstr "Az"
+
+msgid "Full"
+msgstr "Tam"
+
+msgid "Text Input Mode"
+msgstr "Metin Girişli"

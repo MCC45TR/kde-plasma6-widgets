@@ -33,18 +33,33 @@ PlasmoidItem {
     // 0 = Button, 1 = Medium, 2 = Wide, 3 = Extra Wide
     // If not in panel, force button mode
     readonly property int configDisplayMode: Plasmoid.configuration.displayMode
-    readonly property int displayMode: isInPanel ? configDisplayMode : 0
+    // Legacy values 1..4 all map to the single text-input representation.
+    readonly property int displayMode: isInPanel ? (configDisplayMode === 0 ? 0 : 2) : 0
     readonly property bool isButtonMode: displayMode === 0 || !isInPanel
-    readonly property bool isMediumMode: isInPanel && displayMode === 1
+    readonly property bool isMediumMode: false
     readonly property bool isWideMode: isInPanel && displayMode === 2
-    readonly property bool isExtraWideMode: isInPanel && displayMode === 3
-    readonly property bool isUltraWideMode: isInPanel && displayMode === 4
+    readonly property bool isExtraWideMode: false
+    readonly property bool isUltraWideMode: false
+
+    readonly property int legacyPanelWidthStep: configDisplayMode === 1 ? 0
+        : (configDisplayMode === 2 ? 4 : (configDisplayMode === 3 ? 7 : 12))
+    readonly property int panelWidthStep: Plasmoid.configuration.panelWidthStep >= 0
+        ? Math.max(0, Math.min(12, Plasmoid.configuration.panelWidthStep))
+        : legacyPanelWidthStep
+    readonly property real panelContentOpacity: {
+        var level = Plasmoid.configuration.panelContentOpacity
+        return level === 0 ? 0.45 : (level === 1 ? 0.7 : 1.0)
+    }
 
     // ===== LAYOUT CALCULATIONS =====
     readonly property real textContentWidth: isButtonMode ? 0 : (textMetrics.width + ((isWideMode || isExtraWideMode || isUltraWideMode) ? (height + 30) : 20))
-    readonly property real baseWidth: isButtonMode ? height : (isUltraWideMode ? (height * 9) : (isExtraWideMode ? (height * 6) : ((isWideMode) ? (height * 4) : 70)))
+    readonly property real minimumPanelWidth: 70
+    readonly property real maximumPanelWidth: height * 9
+    readonly property real steppedPanelWidth: minimumPanelWidth
+        + (maximumPanelWidth - minimumPanelWidth) * panelWidthStep / 12
+    readonly property real baseWidth: isButtonMode ? height : steppedPanelWidth
     
-    Layout.preferredWidth: Math.max(baseWidth, textContentWidth, placeholderContentWidth)
+    Layout.preferredWidth: baseWidth
     Layout.preferredHeight: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 38
     Layout.minimumWidth: 50
     Layout.minimumHeight: Plasmoid.configuration.panelHeight > 0 ? Plasmoid.configuration.panelHeight : 34
@@ -53,10 +68,10 @@ PlasmoidItem {
     readonly property int maxCharsWide: 65
     readonly property int maxCharsMedium: 35
     readonly property int maxCharsUltra: 110
-    readonly property int maxChars: isUltraWideMode ? maxCharsUltra : (isWideMode ? maxCharsWide : maxCharsMedium)
+    readonly property int maxChars: Math.round(maxCharsMedium + (maxCharsUltra - maxCharsMedium) * panelWidthStep / 12)
     
     // Truncated text for display
-    readonly property string placeholderText: (isExtraWideMode || isUltraWideMode) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : (isWideMode ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search"))
+    readonly property string placeholderText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...")
     readonly property string rawSearchText: searchText.length > 0 ? searchText : placeholderText
     readonly property string truncatedText: rawSearchText.length > maxChars ? rawSearchText.substring(0, maxChars) + "..." : rawSearchText
     
@@ -115,28 +130,10 @@ PlasmoidItem {
             onTriggered: Plasmoid.configuration.displayMode = 0
         },
         PlasmaCore.Action {
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium Mode (Button only)")
+            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Text Input Mode")
             checkable: true
-            checked: root.displayMode === 1
-            onTriggered: Plasmoid.configuration.displayMode = 1
-        },
-        PlasmaCore.Action {
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Wide Mode (Search bar + icon)")
-            checkable: true
-            checked: root.displayMode === 2
+            checked: !root.isButtonMode
             onTriggered: Plasmoid.configuration.displayMode = 2
-        },
-        PlasmaCore.Action {
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Extra Wide Mode (Wide + Long Placeholder)")
-            checkable: true
-            checked: root.displayMode === 3
-            onTriggered: Plasmoid.configuration.displayMode = 3
-        },
-        PlasmaCore.Action {
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Ultra Wide Mode (Maximum Coverage)")
-            checkable: true
-            checked: root.displayMode === 4
-            onTriggered: Plasmoid.configuration.displayMode = 4
         }
     ]
 
@@ -161,6 +158,7 @@ PlasmoidItem {
         panelHeight: Plasmoid.configuration.panelHeight
         showSearchButton: Plasmoid.configuration.showSearchButton
         showSearchButtonBackground: Plasmoid.configuration.showSearchButtonBackground
+        contentOpacity: root.panelContentOpacity
         
         logic: controller
         rssPlaceholderCycling: Plasmoid.configuration.rssPlaceholderCycling
@@ -190,8 +188,6 @@ PlasmoidItem {
         textColor: root.textColor
         accentColor: root.accentColor
         bgColor: root.bgColor
-        fontFamily: root.uiFontFamily
-        
         // Pass panel status for styling decisions
         isInPanel: root.isInPanel
         
@@ -223,7 +219,7 @@ PlasmoidItem {
 
     function refreshWeatherIfDue() {
         var config = Plasmoid.configuration;
-        if (!config || !config.weatherEnabled || !config.weatherCache || config.weatherCache === "{}")
+        if (!config || !config.weatherEnabled || !controller.weatherCacheLoaded || !controller.weatherCache)
             return;
 
         var lastUpdate = config.weatherLastUpdate || 0;
@@ -253,7 +249,7 @@ PlasmoidItem {
         }, function(result) {
             if (!result.success)
                 return;
-            config.weatherCache = JSON.stringify(result);
+            controller.saveWeatherCache(result);
             if (!result.fromCache)
                 config.weatherLastUpdate = Date.now();
             config.weatherUpdateTrigger = (config.weatherUpdateTrigger || 0) + 1;

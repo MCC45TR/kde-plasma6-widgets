@@ -8,14 +8,17 @@ import "../js/utils.js" as Utils
 
 Item {
     id: dataManager
-    
+
     required property var resultsModel
     required property var logic
-    
+
     // Search text for similarity scoring
     property string searchText: ""
     property string activeFilter: "All"
     property int maxResults: 20
+    property int searchAlgorithm: 0
+    property int minResults: 3
+    property bool smartResultLimit: true
     property string lastRefreshSignature: ""
     property var itemMetadataCache: ({})
     property var itemMetadataCacheKeys: []
@@ -27,7 +30,7 @@ Item {
     property int queryCacheMissesStart: 0
     // Large enough for the bounded RSS cache plus the normal Milou result set.
     readonly property int itemMetadataCacheLimit: 2048
-    
+
     Connections {
         target: logic
         function onRssCacheChanged() {
@@ -48,7 +51,7 @@ Item {
         function onModelReset() { dataManager.noteModelEvent() }
         function onDataChanged() { dataManager.noteModelEvent() }
     }
-    
+
     property var categorizedData: []
     property var flatSortedData: []
     property int resultCount: 0
@@ -63,13 +66,13 @@ Item {
     property real firstModelEventAt: 0
     property real lastModelEventAt: 0
     property var lastPerformanceTrace: ({})
-    
+
     // Internal state
     property real searchStartTime: 0
     readonly property var fileOnlyCategories: ["Files", "Dosyalar", "Folders", "Klasörler", "Documents", "Belgeler", "Images", "Resimler", "Audio", "Ses", "Video", "Videolar", "Places", "Yerler"]
     // Cached i18n string to avoid calling i18nd() on every refresh cycle
     readonly property string _otherResultsLabel: i18nd("plasma_applet_com.mcc45tr.filesearch", "Other Results")
-    
+
     function beginSearch(generation, startedAt) {
         activeQueryGeneration = generation;
         searchStartTime = startedAt || Date.now();
@@ -191,6 +194,9 @@ Item {
             searchText,
             activeFilter,
             maxResults,
+            searchAlgorithm,
+            minResults,
+            smartResultLimit,
             modelRevision,
             rssRevision,
             settingsRevision,
@@ -212,11 +218,11 @@ Item {
         var displayOrder = [];
         var categorySettings = logic.categorySettings || {};
         var rawItems = [];
-        var lowerSearch = searchText.toLowerCase();
+        var lowerSearch = Utils.normalized(searchText);
         var isFileOnlyMode = lowerSearch.startsWith("file:/");
         var isRSSOnlyMode = lowerSearch.startsWith("rss:");
         var activeFilterLower = (dataManager.activeFilter || "").toLowerCase();
-        
+
         // Extract RSS query: everything after 'rss:' prefix
         var rssQuery = "";
         if (isRSSOnlyMode) {
@@ -237,50 +243,13 @@ Item {
                 var urlString = (item.url || "").toString();
 
                 if (dataManager.activeFilter !== "All") {
-                    var lowerCategory = metadata.lowerCategory;
-                    var lowerDecoration = metadata.lowerDecoration;
-                    var lowerUrl = metadata.lowerUrl;
-                    var ext = metadata.extension;
-                    var shouldKeep = false;
-
-                    if (activeFilterLower === "docs") {
-                        shouldKeep = (lowerCategory.indexOf("belge") !== -1 || lowerCategory.indexOf("document") !== -1 || lowerCategory.indexOf("text") !== -1 ||
-                                     lowerDecoration.indexOf("document") !== -1 || lowerDecoration.indexOf("text") !== -1 || PreviewUtils.isDocumentLikeExtension(ext));
-                    } else if (activeFilterLower === "images") {
-                        shouldKeep = (lowerCategory.indexOf("resim") !== -1 || lowerCategory.indexOf("image") !== -1 || lowerCategory.indexOf("picture") !== -1 ||
-                                     lowerCategory.indexOf("photo") !== -1 || lowerCategory.indexOf("görsel") !== -1 || lowerCategory.indexOf("görüntü") !== -1 ||
-                                     lowerDecoration.indexOf("image") !== -1 || lowerDecoration.indexOf("photo") !== -1 || lowerDecoration.indexOf("picture") !== -1 ||
-                                     PreviewUtils.isImageExtension(ext));
-                    } else if (activeFilterLower === "folders") {
-                        shouldKeep = (lowerCategory.indexOf("klasör") !== -1 || lowerCategory.indexOf("folder") !== -1 || lowerCategory.indexOf("yerler") !== -1 ||
-                                     lowerCategory.indexOf("place") !== -1 || lowerDecoration.indexOf("folder") !== -1 || lowerUrl.endsWith("/"));
-                    } else if (activeFilterLower === "apps") {
-                        shouldKeep = (lowerCategory.indexOf("app") !== -1 || lowerCategory.indexOf("uygulama") !== -1 || lowerCategory.indexOf("program") !== -1 ||
-                                      lowerCategory.indexOf("ayar") !== -1 || lowerCategory.indexOf("setting") !== -1 ||
-                                      lowerCategory.indexOf("oyun") !== -1 || lowerCategory.indexOf("game") !== -1 ||
-                                      lowerCategory.indexOf("ofis") !== -1 || lowerCategory.indexOf("office") !== -1 ||
-                                      lowerCategory.indexOf("sistem") !== -1 || lowerCategory.indexOf("system") !== -1 ||
-                                      lowerCategory.indexOf("araç") !== -1 || lowerCategory.indexOf("util") !== -1 ||
-                                      lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("grafik") !== -1 || lowerCategory.indexOf("graphic") !== -1 ||
-                                      lowerCategory.indexOf("geliştirme") !== -1 || lowerCategory.indexOf("develop") !== -1 ||
-                                      lowerCategory.indexOf("ortam") !== -1 || lowerCategory.indexOf("multimedia") !== -1 ||
-                                      lowerCategory.indexOf("eğitim") !== -1 || lowerCategory.indexOf("educat") !== -1 ||
-                                      lowerUrl.endsWith(".desktop") || (item.duplicateId && item.duplicateId.toString().indexOf(".desktop") !== -1));
-                    } else if (activeFilterLower === "web") {
-                        shouldKeep = (lowerCategory.indexOf("web") !== -1 || lowerCategory.indexOf("bookmark") !== -1 || lowerCategory.indexOf("yer imi") !== -1 ||
-                                     lowerCategory.indexOf("internet") !== -1 || lowerCategory.indexOf("browser") !== -1 || lowerDecoration.indexOf("globe") !== -1 ||
-                                     lowerDecoration.indexOf("web") !== -1 || lowerUrl.startsWith("http") || lowerUrl.startsWith("www"));
-                    } else if (activeFilterLower === "rss") {
-                        shouldKeep = (lowerCategory.indexOf("haber") !== -1 || lowerCategory.indexOf("news") !== -1 || lowerCategory.indexOf("rss") !== -1 || lowerDecoration.indexOf("news") !== -1);
-                    }
-
-                    if (!shouldKeep)
+                    if (!Utils.matchesResultFilter(activeFilterLower, cat, urlString, item.duplicateId || "", item.decoration || "", metadata.extension))
                         continue;
                 }
 
                 if (isFileOnlyMode) {
                     var isFileUrl = urlString.indexOf("file://") === 0;
-                    if (!isFileUrl && fileOnlyCategories.indexOf(cat) === -1)
+                    if (!isFileUrl && !Utils.isFileLikeResult(cat, urlString, item.duplicateId || "", item.decoration || "", metadata.extension))
                         continue;
                 }
 
@@ -305,11 +274,17 @@ Item {
         if (isRSSOnlyMode || (logic.rssEnabled && (activeF === "All" || activeF === "Web" || activeF === "RSS"))) {
             for (var r = 0; r < rssItems.length; r++) {
                 var rssEntry = rssItems[r];
-                var rssMetadata = metadataForItem(rssEntry, isRSSOnlyMode);
+                var rssMetadata = metadataForItem(rssEntry, isRSSOnlyMode || lowerSearch.length > 0);
                 if (isRSSOnlyMode && rssQuery.length > 0) {
                     var title = rssMetadata.lowerDisplay;
                     var content = rssMetadata.lowerIndexedContent;
                     if (title.indexOf(rssQuery) === -1 && content.indexOf(rssQuery) === -1)
+                        continue;
+                }
+                if (!isRSSOnlyMode && lowerSearch.length > 0) {
+                    var normalTitle = rssMetadata.lowerDisplay;
+                    var normalContent = rssMetadata.lowerIndexedContent;
+                    if (normalTitle.indexOf(lowerSearch) === -1 && normalContent.indexOf(lowerSearch) === -1)
                         continue;
                 }
 
@@ -325,8 +300,13 @@ Item {
         }
 
         // Final fallback for empty RSS query results
-        if (isRSSOnlyMode && rssQuery.length === 0 && rawItems.length === 0)
-            rawItems = rssItems.slice();
+        if (isRSSOnlyMode && rssQuery.length === 0 && rawItems.length === 0) {
+            for (var fallbackIndex = 0; fallbackIndex < rssItems.length; fallbackIndex++) {
+                var fallbackItem = rssItems[fallbackIndex];
+                if (metadataForItem(fallbackItem, false).categoryVisible)
+                    rawItems.push(fallbackItem);
+            }
+        }
 
         var scanCompletedAt = Date.now();
 
@@ -339,7 +319,12 @@ Item {
                     categorySettings,
                     CategoryManager.getCategoryPriority,
                     effectiveMaxResults,
-                    true
+                    true,
+                    {
+                        searchAlgorithm: searchAlgorithm,
+                        minResults: minResults,
+                        smartResultLimit: smartResultLimit
+                    }
                 );
             }
         } else if (searchText && searchText.length > 0) {
@@ -349,7 +334,12 @@ Item {
                 categorySettings,
                 CategoryManager.getCategoryPriority,
                 effectiveMaxResults,
-                false
+                false,
+                {
+                    searchAlgorithm: searchAlgorithm,
+                    minResults: minResults,
+                    smartResultLimit: smartResultLimit
+                }
             );
         } else {
             rawItems = CategoryManager.applyPriorityToResults(rawItems, categorySettings);
@@ -377,7 +367,7 @@ Item {
             var catName = displayOrder[k];
             var items = groups[catName];
             var isAppCategory = Utils.isAppCategory(catName);
-            var isRSSCategory = (catName === "RSS" || catName.toLowerCase().indexOf("haber") !== -1 || catName.toLowerCase().indexOf("news") !== -1);
+            var isRSSCategory = Utils.getCategoryKind(catName) === "rss";
 
             // Don't merge RSS or Applications into "Other Results" even if there is only one
             if (items.length <= 1 && !isAppCategory && !isRSSCategory) {

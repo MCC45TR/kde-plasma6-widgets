@@ -1,12 +1,13 @@
 import "../js/PreviewUtils.js" as PreviewUtils
 import "../js/utils.js" as Utils
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
+import QtCore
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 // Results List View - Displays search results in list format
-ScrollView {
+PlasmaComponents.ScrollView {
     id: resultsListRoot
 
     // Required properties
@@ -58,6 +59,7 @@ ScrollView {
     readonly property string locShare: i18nd("plasma_applet_com.mcc45tr.filesearch", "Share")
     readonly property string locSearching: i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
     readonly property string locNoResults: i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
+    readonly property string thumbnailCacheBase: Utils.decodeLocalPath(StandardPaths.writableLocation(StandardPaths.HomeLocation)) + "/.cache/thumbnails"
     property int count: resultsList.count
 
     onFlatSortedDataChanged: {
@@ -99,8 +101,34 @@ ScrollView {
 
     }
 
+    function activateCurrentItem() {
+        if (currentIndex < 0 || currentIndex >= flatSortedData.length)
+            return false;
+
+        var data = flatSortedData[currentIndex];
+        if (!data)
+            return false;
+
+        var matchId = data.duplicateId || data.display || "";
+        var filePath = (data.url || "").toString();
+        var urls = data.urls || [];
+        if (!filePath && urls.length > 0 && urls[0])
+            filePath = urls[0].toString();
+        if (!filePath && data.subtext) {
+            var subtext = data.subtext.toString();
+            if (subtext.indexOf("/") === 0)
+                filePath = "file://" + subtext;
+            else if (subtext.indexOf("file://") === 0)
+                filePath = subtext;
+        }
+
+        var modelIndex = (data.index !== undefined && data.index !== null) ? data.index : currentIndex;
+        itemClicked(modelIndex, data.display || "", data.decoration || "application-x-executable", data.category || "Other", matchId, filePath);
+        return true;
+    }
+
     clip: true
-    ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+    PlasmaComponents.ScrollBar.vertical.policy: PlasmaComponents.ScrollBar.AlwaysOff
 
     ListView {
         id: resultsList
@@ -120,7 +148,7 @@ ScrollView {
             spacing: 10
             visible: resultsListRoot.flatSortedData.length === 0 && resultsListRoot.searchText.length > 0
 
-            BusyIndicator {
+            PlasmaComponents.BusyIndicator {
                 anchors.horizontalCenter: parent.horizontalCenter
                 running: resultsListRoot.isLoading
                 visible: resultsListRoot.isLoading
@@ -129,7 +157,8 @@ ScrollView {
             Text {
                 text: resultsListRoot.isLoading ? locSearching : locNoResults
                 color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
-                font.pixelSize: 12
+                font.family: Kirigami.Theme.defaultFont.family
+                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
             }
 
         }
@@ -149,7 +178,8 @@ ScrollView {
                 anchors.leftMargin: 4
                 anchors.verticalCenter: parent.verticalCenter
                 text: section === "RSS" ? resultsListRoot.locNews : section
-                font.pixelSize: 11
+                font.family: Kirigami.Theme.smallFont.family
+                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                 font.bold: true
                 color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.6)
             }
@@ -186,7 +216,7 @@ ScrollView {
             property bool previewActive: resultsListRoot.previewEnabled && !isRSS && isPreviewAvailable && (resultsListRoot.previewInlineMode === 0 ? resultMouseArea.containsMouse : (resultsList.currentIndex === index))
             property bool showInlinePreview: resultsListRoot.previewEnabled && resultsListRoot.previewShowResults && resultsListRoot.previewInlineMode === 1 && !isRSS && isPreviewAvailable && (resultsList.currentIndex === index)
             property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.url || "") : ""
-            property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsListRoot.previewEnabled, resultsListRoot.previewSettings) : ""
+            property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsListRoot.previewEnabled, resultsListRoot.previewSettings, resultsListRoot.thumbnailCacheBase) : ""
             property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.url || "") : ""
             property int snippetRequestToken: 0
             property bool isTextFile: {
@@ -324,7 +354,7 @@ ScrollView {
                             Text {
                                 text: modelData.display || ""
                                 color: resultsListRoot.textColor
-                                font.pixelSize: isRSS ? 15 : 13
+                                font.pixelSize: isRSS ? Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25) : Kirigami.Theme.defaultFont.pixelSize
                                 font.bold: isRSS
                                 elide: Text.ElideRight
                                 Layout.fillWidth: true
@@ -340,7 +370,8 @@ ScrollView {
                                     return path || modelData.subtext || "";
                                 }
                                 color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.6)
-                                font.pixelSize: isRSS ? 11 : 10
+                                font.family: Kirigami.Theme.smallFont.family
+                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                 elide: Text.ElideMiddle
                                 Layout.fillWidth: true
                             }
@@ -371,7 +402,8 @@ ScrollView {
                             text: (delegateRoot.isExpanded ? (modelData.fullContent || modelData.description) : modelData.description) || ""
                             textFormat: Text.PlainText
                             color: resultsListRoot.textColor
-                            font.pixelSize: 13
+                            font.family: Kirigami.Theme.defaultFont.family
+                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                             wrapMode: Text.WordWrap
                             Layout.fillWidth: true
                             maximumLineCount: delegateRoot.isExpanded ? 100 : 3
@@ -415,7 +447,8 @@ ScrollView {
                         Text {
                             text: resultsListRoot.rssMetaLine(modelData)
                             color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
-                            font.pixelSize: 10
+                            font.family: Kirigami.Theme.smallFont.family
+                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                             font.italic: true
                             wrapMode: Text.WrapAnywhere
                             Layout.fillWidth: true
@@ -448,7 +481,8 @@ ScrollView {
                                         text: resultsListRoot.locReadNews
                                         color: resultsListRoot.textColor
                                         font.bold: true
-                                        font.pixelSize: 11
+                                        font.family: Kirigami.Theme.smallFont.family
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                     }
 
                                 }
@@ -464,7 +498,7 @@ ScrollView {
 
                             }
 
-                            Button {
+                            PlasmaComponents.Button {
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Read in Window")
                                 icon.name: "window-new"
                                 flat: true
@@ -475,7 +509,7 @@ ScrollView {
                                 }
                             }
 
-                            Button {
+                            PlasmaComponents.Button {
                                 text: resultsListRoot.locShare
                                 icon.name: "edit-copy"
                                 flat: true
@@ -489,7 +523,7 @@ ScrollView {
                             }
 
                             // Genişlet/Daralt Butonu (Sağ Alt)
-                            Button {
+                            PlasmaComponents.Button {
                                 icon.name: delegateRoot.isExpanded ? "arrow-up" : "arrow-down"
                                 Layout.preferredWidth: 32
                                 Layout.preferredHeight: 32
@@ -581,7 +615,8 @@ ScrollView {
                                     text: modelData.display || ""
                                     color: resultsListRoot.textColor
                                     font.bold: true
-                                    font.pixelSize: 12
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     elide: Text.ElideRight
                                     Layout.fillWidth: true
                                 }
@@ -589,14 +624,16 @@ ScrollView {
                                 Text {
                                     text: resultsListRoot.locCategory + ": " + (modelData.category || "Other")
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
-                                    font.pixelSize: 10
+                                    font.family: Kirigami.Theme.smallFont.family
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                     textFormat: Text.PlainText
                                 }
 
                                 Text {
                                     text: resultsListRoot.locFileType + ": " + delegateRoot.previewFileType
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
-                                    font.pixelSize: 10
+                                    font.family: Kirigami.Theme.smallFont.family
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                     visible: delegateRoot.previewFileType.length > 0
                                     textFormat: Text.PlainText
                                 }
@@ -606,7 +643,8 @@ ScrollView {
 
                                     text: ""
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
-                                    font.pixelSize: 10
+                                    font.family: Kirigami.Theme.smallFont.family
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                     visible: text.length > 0
                                     textFormat: Text.PlainText
                                 }
@@ -614,7 +652,8 @@ ScrollView {
                                 Text {
                                     text: resultsListRoot.locPath + ": " + delegateRoot.previewPath
                                     color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.5)
-                                    font.pixelSize: 9
+                                    font.family: Kirigami.Theme.smallFont.family
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                     wrapMode: Text.WrapAnywhere
                                     Layout.fillWidth: true
                                     textFormat: Text.PlainText
@@ -644,7 +683,7 @@ ScrollView {
                                 text: ""
                                 color: resultsListRoot.textColor
                                 font.family: "Monospace"
-                                font.pixelSize: 10
+                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                 wrapMode: Text.Wrap
                             }
 
@@ -655,7 +694,7 @@ ScrollView {
                             Layout.fillWidth: true
                             spacing: 10
 
-                            Button {
+                            PlasmaComponents.Button {
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
                                 icon.name: "edit-copy"
                                 flat: true
@@ -667,7 +706,7 @@ ScrollView {
                                 }
                             }
 
-                            Button {
+                            PlasmaComponents.Button {
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Folder")
                                 icon.name: "folder-open"
                                 flat: true
@@ -695,6 +734,8 @@ ScrollView {
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
+                drag.target: dragProxy
+                drag.threshold: 10
                 onClicked: (mouse) => {
                     var matchId = modelData.duplicateId || modelData.display || "";
                     var filePath = delegateRoot.resolvedFilePath();
@@ -705,7 +746,7 @@ ScrollView {
                             "category": modelData.category || "",
                             "matchId": matchId,
                             "filePath": filePath,
-                            "isApplication": Utils.isAppCategory(modelData.category, filePath, matchId),
+                            "isApplication": Utils.isAppCategory(modelData.category, filePath, matchId, modelData.decoration || ""),
                             "uuid": ""
                         }, mouse.x + delegateRoot.x, mouse.y + delegateRoot.y);
                     } else
@@ -713,7 +754,22 @@ ScrollView {
                 }
             }
 
-            ToolTip {
+            Item {
+                id: dragProxy
+                width: 1
+                height: 1
+                Drag.active: resultMouseArea.drag.active
+                Drag.dragType: Drag.Automatic
+                Drag.mimeData: {
+                    var filePath = delegateRoot.resolvedFilePath();
+                    return {
+                        "text/uri-list": filePath,
+                        "text/plain": filePath || (modelData.display || "")
+                    };
+                }
+            }
+
+            PlasmaComponents.ToolTip {
                 visible: resultsListRoot.previewInlineMode === 0 && delegateRoot.previewSource.length > 0
                 delay: 400
                 timeout: 10000
@@ -726,7 +782,8 @@ ScrollView {
                     Text {
                         text: modelData.display || ""
                         font.bold: true
-                        font.pixelSize: 12
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         color: resultsListRoot.textColor
                     }
 
@@ -744,21 +801,24 @@ ScrollView {
 
                     Text {
                         text: resultsListRoot.locCategory + ": " + (modelData.category || "")
-                        font.pixelSize: 10
+                        font.family: Kirigami.Theme.smallFont.family
+                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         visible: (modelData.category || "").length > 0
                     }
 
                     Text {
                         text: resultsListRoot.locFileType + ": " + delegateRoot.previewFileType
-                        font.pixelSize: 10
+                        font.family: Kirigami.Theme.smallFont.family
+                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         visible: delegateRoot.previewFileType.length > 0
                     }
 
                     Text {
                         text: resultsListRoot.locPath + ": " + delegateRoot.previewPath
-                        font.pixelSize: 10
+                        font.family: Kirigami.Theme.smallFont.family
+                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         color: Qt.rgba(resultsListRoot.textColor.r, resultsListRoot.textColor.g, resultsListRoot.textColor.b, 0.7)
                         wrapMode: Text.WrapAnywhere
                         width: 300

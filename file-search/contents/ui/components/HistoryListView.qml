@@ -1,13 +1,14 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
+import QtCore
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import "../js/PreviewUtils.js" as PreviewUtils
 
 // History List View - Displays search history in list format
 Item {
     id: historyList
-    
+
     // Required properties
     required property var categorizedHistory
     required property int listIconSize
@@ -21,10 +22,11 @@ Item {
     property int previewSize: 1
     // Logic controller for context menu actions
     required property var logic
-    
+
     property int currentIndex: -1
     property var flatItems: []
-    
+    readonly property string thumbnailCacheBase: StandardPaths.writableLocation(StandardPaths.HomeLocation).toString().replace(/^file:\/\/\/?/, "/") + "/.cache/thumbnails"
+
     onCategorizedHistoryChanged: {
         var list = [];
         if (categorizedHistory) {
@@ -46,84 +48,40 @@ Item {
             currentIndex = flatItems.length - 1;
         }
     }
-    
+
     function isItemSelected(catIdx, itemIdx) {
         if (currentIndex < 0 || currentIndex >= flatItems.length) return false;
         var current = flatItems[currentIndex];
         return current.catIdx === catIdx && current.itemIdx === itemIdx;
     }
-    
+
     function moveUp() {
         if (currentIndex > 0) {
             currentIndex--;
         }
     }
-    
+
     function moveDown() {
         if (currentIndex > -1 ? (currentIndex < flatItems.length - 1) : (flatItems.length > 0)) {
             currentIndex++;
         }
     }
-    
+
     function activateCurrentItem() {
         if (currentIndex >= 0 && currentIndex < flatItems.length) {
             var item = flatItems[currentIndex].modelData;
             itemClicked(item);
         }
     }
-    
+
     // Signals
     signal itemClicked(var item)
 
     signal clearClicked()
-    
+
     // Localization removed
     // Use standard i18nd("plasma_applet_com.mcc45tr.filesearch", )
-    
-    // Header with title and clear button
-    RowLayout {
-        id: historyHeader
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: 24
-        
-        Text {
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Recent Searches")
-            font.pixelSize: 13
-            font.bold: true
-            color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
-            Layout.fillWidth: true
-        }
-        
-        // Clear History Button
-        Rectangle {
-            id: clearHistoryBtn
-            Layout.preferredWidth: clearBtnText.implicitWidth + 16
-            Layout.preferredHeight: 26
-            radius: 4
-            color: clearHistoryMouseArea.containsMouse ? Qt.rgba(historyList.accentColor.r, historyList.accentColor.g, historyList.accentColor.b, 0.2) : "transparent"
-            border.width: 1
-            border.color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.2)
-            
-            Text {
-                id: clearBtnText
-                anchors.centerIn: parent
-                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Clear History")
-                font.pixelSize: 11
-                color: historyList.textColor
-            }
-            
-            MouseArea {
-                id: clearHistoryMouseArea
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: historyList.clearClicked()
-            }
-        }
-    }
-    
+
     // Context Menu
     HistoryContextMenu {
         id: contextMenu
@@ -131,97 +89,65 @@ Item {
     }
 
     // History List
-    ScrollView {
+    PlasmaComponents.ScrollView {
         visible: historyList.categorizedHistory.length > 0
-        anchors.top: historyHeader.bottom
-        anchors.topMargin: 4
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         clip: true
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-        
+        PlasmaComponents.ScrollBar.vertical.policy: PlasmaComponents.ScrollBar.AlwaysOff
+
         Column {
             id: listView
             width: parent.width
             spacing: 8
-            
+
             Repeater {
                 model: historyList.categorizedHistory
-            
+
             delegate: Column {
                 id: histListCategoryDelegate
                 width: listView.width
                 spacing: 4
-                
+
                 property int catIdx: index
                 property bool isCollapsed: false
-                
-                // Category Header (Clickable - matches tile view style)
-                Rectangle {
+
+                CategoryHeader {
                     width: parent.width
-                    height: 28
-                    color: histListCategoryMouse.containsMouse ? Qt.rgba(historyList.accentColor.r, historyList.accentColor.g, historyList.accentColor.b, 0.1) : "transparent"
-                    radius: 4
-                    
-                    RowLayout {
-                        anchors.fill: parent
-                        anchors.leftMargin: 4
-                        anchors.rightMargin: 4
-                        spacing: 8
-                        
-                        Kirigami.Icon {
-                            source: histListCategoryDelegate.isCollapsed ? "arrow-right" : "arrow-down"
-                            Layout.preferredWidth: 16
-                            Layout.preferredHeight: 16
-                            color: historyList.textColor
-                            opacity: 0.6
-                        }
-                        
-                        Text {
-                            text: modelData.categoryName + " (" + modelData.items.length + ")"
-                            font.pixelSize: 13
-                            font.bold: true
-                            color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.6)
-                        }
-                        
-                        Rectangle {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 1
-                            color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.2)
-                        }
-                    }
-                    
-                    MouseArea {
-                        id: histListCategoryMouse
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: histListCategoryDelegate.isCollapsed = !histListCategoryDelegate.isCollapsed
-                    }
+                    categoryName: modelData.categoryName
+                    itemCount: modelData.items.length
+                    collapsed: histListCategoryDelegate.isCollapsed
+                    textColor: historyList.textColor
+                    accentColor: historyList.accentColor
+                    actionIcon: index === 0 ? "edit-clear-history" : ""
+                    actionText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Clear History")
+                    onToggleRequested: histListCategoryDelegate.isCollapsed = !histListCategoryDelegate.isCollapsed
+                    onActionTriggered: historyList.clearClicked()
                 }
-                
+
                 // Items container (Animated collapse/expand)
                 Item {
                     width: parent.width
                     height: histListCategoryDelegate.isCollapsed ? 0 : histListContent.implicitHeight
                     clip: true
-                    
+
                     Behavior on height {
                         NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
                     }
-                    
+
                     Column {
                         id: histListContent
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.top: parent.top
                         spacing: 2
-                    
+
                     Repeater {
                         // Destroy delegates for collapsed categories instead of merely clipping them.
                         model: histListCategoryDelegate.isCollapsed ? [] : modelData.items
-                        
+
                         Rectangle {
                             id: historyItemDelegate
                             width: listView.width
@@ -229,15 +155,15 @@ Item {
                             color: itemMouseArea.containsMouse || historyItemDelegate.isSelected || (contextMenu.visible && contextMenu.historyItem === modelData) ? Qt.rgba(historyList.accentColor.r, historyList.accentColor.g, historyList.accentColor.b, 0.15) : "transparent"
                             radius: 4
                             clip: true
-                            
+
                             property bool animateHeight: false
                             property bool isSelected: historyList.isItemSelected(catIdx, index)
 
                             Behavior on height {
                                 enabled: historyItemDelegate.animateHeight
-                                NumberAnimation { 
-                                    duration: 250; 
-                                    easing.type: Easing.InOutQuad 
+                                NumberAnimation {
+                                    duration: 250;
+                                    easing.type: Easing.InOutQuad
                                     onFinished: historyItemDelegate.animateHeight = false
                                 }
                             }
@@ -246,9 +172,9 @@ Item {
                             readonly property bool previewActive: historyList.previewEnabled && isPreviewAvailable && (historyList.previewInlineMode === 0 ? itemMouseArea.containsMouse : historyItemDelegate.isSelected)
                             readonly property bool showInlinePreview: historyList.previewEnabled && historyList.previewShowHistory && historyList.previewInlineMode === 1 && isPreviewAvailable && historyItemDelegate.isSelected
                             readonly property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.filePath || modelData.url || "") : ""
-                            readonly property string previewSource: previewActive ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyList.previewEnabled, historyList.previewSettings) : ""
+                            readonly property string previewSource: previewActive ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyList.previewEnabled, historyList.previewSettings, historyList.thumbnailCacheBase) : ""
                             readonly property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.filePath || modelData.url || "") : ""
-                            
+
                             onShowInlinePreviewChanged: {
                                 historyItemDelegate.animateHeight = true;
                                 if (showInlinePreview) {
@@ -292,18 +218,18 @@ Item {
                                 RowLayout {
                                     Layout.fillWidth: true
                                     spacing: 10
-                                    
+
                                     Item {
                                         Layout.preferredWidth: historyList.listIconSize
                                         Layout.preferredHeight: historyList.listIconSize
-                                        
+
                                         Kirigami.Icon {
                                             anchors.fill: parent
                                             source: modelData.decoration || "application-x-executable"
                                             color: historyList.textColor
                                             visible: !previewImageHistory.item || previewImageHistory.item.status !== Image.Ready
                                         }
-                                        
+
                                         Loader {
                                             id: previewImageHistory
                                             anchors.fill: parent
@@ -319,19 +245,20 @@ Item {
                                             }
                                         }
                                     }
-                                    
+
                                     ColumnLayout {
                                         Layout.fillWidth: true
                                         spacing: 2
-                                        
+
                                         Text {
                                             text: modelData.display || ""
                                             color: historyList.textColor
-                                            font.pixelSize: 14
+                                            font.family: Kirigami.Theme.defaultFont.family
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             elide: Text.ElideRight
                                             Layout.fillWidth: true
                                         }
-                                        
+
                                         Text {
                                             text: {
                                                 if (modelData.isApplication) return "";
@@ -345,16 +272,18 @@ Item {
                                             }
                                             visible: text.length > 0
                                             color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
-                                            font.pixelSize: 11
+                                            font.family: Kirigami.Theme.smallFont.family
+                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                             elide: Text.ElideMiddle
                                             Layout.fillWidth: true
                                         }
                                     }
-                                    
+
                                     Text {
                                         text: historyList.formatTimeFunc(modelData.timestamp)
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
-                                        font.pixelSize: 11
+                                        font.family: Kirigami.Theme.smallFont.family
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                         Layout.alignment: Qt.AlignVCenter
                                     }
                                 }
@@ -423,7 +352,8 @@ Item {
                                                 text: modelData.display || ""
                                                 color: historyList.textColor
                                                 font.bold: true
-                                                font.pixelSize: 12
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 elide: Text.ElideRight
                                                 Layout.fillWidth: true
                                             }
@@ -431,14 +361,16 @@ Item {
                                             Text {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "Other")
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
-                                                font.pixelSize: 10
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 textFormat: Text.PlainText
                                             }
 
                                             Text {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + historyItemDelegate.previewFileType
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
-                                                font.pixelSize: 10
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 visible: historyItemDelegate.previewFileType.length > 0
                                                 textFormat: Text.PlainText
                                             }
@@ -447,7 +379,8 @@ Item {
                                                 id: fileSizeText
                                                 text: ""
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
-                                                font.pixelSize: 10
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 visible: text.length > 0
                                                 textFormat: Text.PlainText
                                             }
@@ -455,7 +388,8 @@ Item {
                                             Text {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + historyItemDelegate.previewPath
                                                 color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
-                                                font.pixelSize: 9
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 wrapMode: Text.WrapAnywhere
                                                 Layout.fillWidth: true
                                                 textFormat: Text.PlainText
@@ -481,7 +415,7 @@ Item {
                                             text: ""
                                             color: historyList.textColor
                                             font.family: "Monospace"
-                                            font.pixelSize: 10
+                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                             wrapMode: Text.Wrap
                                         }
                                     }
@@ -491,7 +425,7 @@ Item {
                                         Layout.fillWidth: true
                                         spacing: 10
 
-                                        Button {
+                                        PlasmaComponents.Button {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
                                             icon.name: "edit-copy"
                                             flat: true
@@ -499,7 +433,7 @@ Item {
                                             onClicked: if (historyList.logic) historyList.logic.copyToClipboard(historyItemDelegate.previewPath)
                                         }
 
-                                        Button {
+                                        PlasmaComponents.Button {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Folder")
                                             icon.name: "folder-open"
                                             flat: true
@@ -514,7 +448,7 @@ Item {
                                     }
                                 }
                             }
-                            
+
                             MouseArea {
                                 id: itemMouseArea
                                 anchors.fill: parent
@@ -535,7 +469,7 @@ Item {
                                 active: historyList.previewInlineMode === 0
                                         && itemMouseArea.containsMouse
                                         && historyItemDelegate.previewSource.length > 0
-                                sourceComponent: ToolTip {
+                                sourceComponent: PlasmaComponents.ToolTip {
                                     visible: true
                                     delay: 400
                                     timeout: 10000
@@ -548,7 +482,8 @@ Item {
                                     Text {
                                         text: modelData.display || ""
                                         font.bold: true
-                                        font.pixelSize: 12
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         color: historyList.textColor
                                     }
 
@@ -564,21 +499,24 @@ Item {
 
                                     Text {
                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
-                                        font.pixelSize: 10
+                                        font.family: Kirigami.Theme.smallFont.family
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                         visible: (modelData.category || "").length > 0
                                     }
 
                                     Text {
                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + historyItemDelegate.previewFileType
-                                        font.pixelSize: 10
+                                        font.family: Kirigami.Theme.smallFont.family
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                         visible: historyItemDelegate.previewFileType.length > 0
                                     }
 
                                     Text {
                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + historyItemDelegate.previewPath
-                                        font.pixelSize: 10
+                                        font.family: Kirigami.Theme.smallFont.family
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                         color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.7)
                                         wrapMode: Text.WrapAnywhere
                                         width: 300
@@ -620,7 +558,7 @@ Item {
         Text {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
             color: Qt.rgba(historyList.textColor.r, historyList.textColor.g, historyList.textColor.b, 0.5)
-            font.pixelSize: 16
+            font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25)
             Layout.alignment: Qt.AlignHCenter
         }
     }

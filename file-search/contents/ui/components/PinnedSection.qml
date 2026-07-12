@@ -1,26 +1,26 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 // PinnedSection - Displays pinned items at the top of results
 // Supports drag-and-drop reordering and context menu
 Item {
     id: pinnedSectionRoot
-    
+
     // Required properties
     required property var pinnedItems
     required property color textColor
     required property color accentColor
     required property int iconSize
     required property bool isTileView
-    
+
     // Collapsed state
     property bool isExpanded: true
     property bool animateHeight: false
-    
+
     // Localization function removed (using global i18n)
-    
+
     // Signals
     signal itemClicked(var item)
     signal unpinClicked(string matchId)
@@ -28,87 +28,49 @@ Item {
     signal openRequested(var item)
     signal copyPathRequested(var item)
     signal openLocationRequested(var item)
-    
+
     // Drag state
     property int draggedIndex: -1
     property int dropTargetIndex: -1
-    
+
     // Search state
     property bool isSearching: false
-    
+
     // Compact vs Normal tile view. Normal = same size as history tiles
     property bool compactPinnedView: false
-    
-    // Breeze appearance toggle
-    property bool breezeStyle: false
-    
+
     // Computed tile dimensions - match HistoryTileView when normal mode
     readonly property real tileWidth: compactPinnedView ? (iconSize + 16) : (iconSize + 40)
-    readonly property real tileHeight: compactPinnedView ? (iconSize + 48) : (iconSize + 50)
+    readonly property real tileHeight: compactPinnedView ? (iconSize + 40) : (iconSize + 50)
+    readonly property real gridSideInset: Math.max(0, Kirigami.Units.largeSpacing - Kirigami.Units.smallSpacing)
     readonly property int maxVisibleListRows: 8
     readonly property int maxVisibleTileRows: 3
 
     // Height calculation
     implicitHeight: contentColumn.implicitHeight
     visible: true
-    
+
     // Calculate height of a single row (Item height + Top Margin + Bottom Padding)
     readonly property real singleRowHeight: (isTileView ? tileHeight : 40) + 12
 
     ColumnLayout {
         id: contentColumn
         anchors.fill: parent
-        spacing: 4
-        
-        // Section header - matches category header style
-        Rectangle {
+        spacing: Kirigami.Units.smallSpacing
+
+        CategoryHeader {
             Layout.fillWidth: true
-            Layout.preferredHeight: 28
-            color: headerMouse.containsMouse ? Qt.rgba(pinnedSectionRoot.accentColor.r, pinnedSectionRoot.accentColor.g, pinnedSectionRoot.accentColor.b, 0.1) : "transparent"
-            radius: 4
-            
-            RowLayout {
-                id: headerRow
-                anchors.fill: parent
-                anchors.leftMargin: 4
-                anchors.rightMargin: 4
-                spacing: 8
-                
-                // Collapse indicator
-                Kirigami.Icon {
-                    source: pinnedSectionRoot.isExpanded ? "arrow-down" : "arrow-right"
-                    Layout.preferredWidth: 16
-                    Layout.preferredHeight: 16
-                    color: pinnedSectionRoot.textColor
-                    opacity: 0.6
-                }
-                
-                Text {
-                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Pinned Items") + (pinnedSectionRoot.pinnedItems.length > 0 ? " (" + pinnedSectionRoot.pinnedItems.length + ")" : "")
-                    font.pixelSize: 13
-                    font.bold: true
-                    color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.7)
-                }
-                
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 1
-                    color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.2)
-                }
-            }
-            
-            MouseArea {
-                id: headerMouse
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    pinnedSectionRoot.animateHeight = true
-                    pinnedSectionRoot.isExpanded = !pinnedSectionRoot.isExpanded
-                }
+            categoryName: i18nd("plasma_applet_com.mcc45tr.filesearch", "Pinned Items")
+            itemCount: pinnedSectionRoot.pinnedItems.length
+            collapsed: !pinnedSectionRoot.isExpanded
+            textColor: pinnedSectionRoot.textColor
+            accentColor: pinnedSectionRoot.accentColor
+            onToggleRequested: {
+                pinnedSectionRoot.animateHeight = true
+                pinnedSectionRoot.isExpanded = !pinnedSectionRoot.isExpanded
             }
         }
-        
+
         // Pinned Container
         Rectangle {
             Layout.fillWidth: true
@@ -123,36 +85,45 @@ Item {
                 }
                 return fullHeight;
             }
-            radius: 10
-            color: pinnedSectionRoot.breezeStyle ? "transparent" : Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.05)
-            border.color: pinnedSectionRoot.breezeStyle ? Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.3) : "transparent"
-            border.width: pinnedSectionRoot.breezeStyle ? 1 : 0
+            radius: 0
+            color: "transparent"
+            border.width: 0
             clip: true
-            
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                width: 2
+                radius: 1
+                color: pinnedSectionRoot.accentColor
+                opacity: pinnedSectionRoot.pinnedItems.length > 0 ? 0.65 : 0
+            }
+
             Behavior on Layout.preferredHeight {
                 enabled: pinnedSectionRoot.animateHeight
-                NumberAnimation { 
+                NumberAnimation {
                     duration: Kirigami.Units.shortDuration
-                    easing.type: Easing.OutCubic 
+                    easing.type: Easing.OutCubic
                     onFinished: pinnedSectionRoot.animateHeight = false
                 }
             }
-            
+
             ColumnLayout {
                 id: pinnedContent
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: 8
-                anchors.rightMargin: 8
-                spacing: 4
-                
+                anchors.leftMargin: Kirigami.Units.smallSpacing
+                anchors.rightMargin: Kirigami.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
+
                 // Pinned items - List view
                 Loader {
                     Layout.fillWidth: true
                     Layout.preferredHeight: item ? item.implicitHeight : 0
                     active: pinnedSectionRoot.isExpanded && !pinnedSectionRoot.isTileView && pinnedSectionRoot.pinnedItems.length > 0
-                    
+
                     sourceComponent: ListView {
                         implicitHeight: pinnedSectionRoot.isSearching
                             ? Math.min(contentHeight, pinnedSectionRoot.singleRowHeight)
@@ -163,55 +134,56 @@ Item {
                         reuseItems: true
                         interactive: contentHeight > height
                         model: pinnedSectionRoot.pinnedItems
-                            
+
                         delegate: Rectangle {
                                 width: parent.width
                                 height: 40
-                                color: itemMouse.containsMouse 
+                                color: itemMouse.containsMouse
                                     ? Qt.rgba(pinnedSectionRoot.accentColor.r, pinnedSectionRoot.accentColor.g, pinnedSectionRoot.accentColor.b, 0.15)
                                     : "transparent"
-                                radius: 4
-                                
+                                radius: Kirigami.Units.cornerRadius
+
                                 RowLayout {
                                     anchors.fill: parent
-                                    anchors.leftMargin: 8
-                                    anchors.rightMargin: 8
-                                    spacing: 10
-                                    
+                                    anchors.leftMargin: Kirigami.Units.largeSpacing
+                                    anchors.rightMargin: Kirigami.Units.largeSpacing
+                                    spacing: Kirigami.Units.largeSpacing
+
                                     Kirigami.Icon {
                                         source: modelData.decoration || "application-x-executable"
                                         Layout.preferredWidth: 22
                                         Layout.preferredHeight: 22
                                         color: pinnedSectionRoot.textColor
                                     }
-                                    
+
                                     Text {
                                         text: modelData.display || ""
                                         Layout.fillWidth: true
                                         color: pinnedSectionRoot.textColor
-                                        font.pixelSize: 13
+                                        font.family: Kirigami.Theme.defaultFont.family
+                                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                         elide: Text.ElideRight
                                     }
-                                    
+
                                     // Unpin button
                                     PinButton {
                                         isPinned: true
                                         accentColor: pinnedSectionRoot.accentColor
                                         textColor: pinnedSectionRoot.textColor
-                                        
+
                                         onToggled: {
                                             pinnedSectionRoot.unpinClicked(modelData.matchId)
                                         }
                                     }
                                 }
-                                
+
                                 MouseArea {
                                     id: itemMouse
                                     anchors.fill: parent
                                     anchors.rightMargin: 30
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
-                                    
+
                                     onClicked: {
                                         pinnedSectionRoot.itemClicked(modelData)
                                     }
@@ -219,18 +191,19 @@ Item {
                         }
                     }
                 }
-                
+
                 // Empty state placeholder
                 Loader {
                     Layout.fillWidth: true
                     Layout.preferredHeight: active ? item.implicitHeight : 0
                     active: pinnedSectionRoot.pinnedItems.length === 0
                     visible: active
-                    
+
                     sourceComponent: Text {
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Right-click items to pin them")
                         color: Qt.rgba(pinnedSectionRoot.textColor.r, pinnedSectionRoot.textColor.g, pinnedSectionRoot.textColor.b, 0.8)
-                        font.pixelSize: 10
+                        font.family: Kirigami.Theme.smallFont.family
+                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         wrapMode: Text.Wrap
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -239,24 +212,29 @@ Item {
                         padding: 2
                     }
                 }
-                
+
                 // Pinned items - Tile view with drag-drop support
                 Loader {
                     Layout.fillWidth: true
                     Layout.preferredHeight: item ? item.implicitHeight : 0
                     active: pinnedSectionRoot.isExpanded && pinnedSectionRoot.isTileView && pinnedSectionRoot.pinnedItems.length > 0
-                    
+
                     sourceComponent: GridView {
                         id: tileFlow
                         readonly property int columnCount: Math.max(1, Math.floor((width + 8) / cellWidth))
                         width: {
-                            var avail = parent.width > 0 ? parent.width : (pinnedSectionRoot.width - 24);
+                            var baseWidth = parent.width > 0 ? parent.width : (pinnedSectionRoot.width - 24);
+                            var avail = Math.max(1, baseWidth - (pinnedSectionRoot.gridSideInset * 2));
                             var colW = pinnedSectionRoot.tileWidth + 8;
                             var cols = Math.floor(avail / colW);
                             if (cols <= 0) return avail;
                             return cols * colW - 8;
                         }
-                        x: (parent.width - width) / 2
+                        x: {
+                            var baseWidth = parent.width > 0 ? parent.width : (pinnedSectionRoot.width - 24);
+                            var alignedWidth = Math.max(1, baseWidth - (pinnedSectionRoot.gridSideInset * 2));
+                            return pinnedSectionRoot.gridSideInset + ((alignedWidth - width) / 2);
+                        }
                         cellWidth: pinnedSectionRoot.tileWidth + 8
                         cellHeight: pinnedSectionRoot.tileHeight + 8
                         implicitHeight: pinnedSectionRoot.isSearching
@@ -268,15 +246,15 @@ Item {
                         reuseItems: true
                         interactive: contentHeight > height
                         model: pinnedSectionRoot.pinnedItems
-                            
+
                         delegate: Item {
                                 id: tileDelegate
                                 width: pinnedSectionRoot.tileWidth
                                 height: pinnedSectionRoot.tileHeight
-                                
+
                                 property int visualIndex: index
                                 property bool isDragging: pinnedSectionRoot.draggedIndex === index
-                                
+
                                 // Drop indicator
                                 Rectangle {
                                     visible: pinnedSectionRoot.dropTargetIndex === index && pinnedSectionRoot.draggedIndex !== index
@@ -287,33 +265,42 @@ Item {
                                     radius: 1.5
                                     color: pinnedSectionRoot.accentColor
                                 }
-                                
+
                                 Rectangle {
                                     id: tileContent
                                     anchors.fill: parent
+                                    Drag.active: tileMouse.drag.active
+                                    Drag.dragType: Drag.Automatic
+                                    Drag.mimeData: {
+                                        var path = modelData.filePath || modelData.url || "";
+                                        return {
+                                            "text/uri-list": path,
+                                            "text/plain": path || (modelData.display || "")
+                                        };
+                                    }
                                     color: tileMouse.containsMouse || isDragging
                                         ? Qt.rgba(pinnedSectionRoot.accentColor.r, pinnedSectionRoot.accentColor.g, pinnedSectionRoot.accentColor.b, 0.15)
                                         : "transparent"
-                                    radius: 6
+                                    radius: Kirigami.Units.cornerRadius
                                     opacity: isDragging ? 0.6 : 1.0
-                                    
+
                                     Behavior on opacity { NumberAnimation { duration: 100 } }
-                                    
+
                                     Column {
                                         anchors.centerIn: parent
-                                        spacing: 4
-                                        
+                                        spacing: Kirigami.Units.smallSpacing
+
                                         Item {
                                             width: pinnedSectionRoot.iconSize
                                             height: pinnedSectionRoot.iconSize
                                             anchors.horizontalCenter: parent.horizontalCenter
-                                            
+
                                             Kirigami.Icon {
                                                 anchors.fill: parent
                                                 source: modelData.decoration || "application-x-executable"
                                                 color: pinnedSectionRoot.textColor
                                             }
-                                            
+
                                             // Pin indicator
                                             Kirigami.Icon {
                                                 source: "pin"
@@ -326,36 +313,37 @@ Item {
                                                 visible: true
                                             }
                                         }
-                                        
+
                                         Text {
                                             text: modelData.display || ""
-                                            width: pinnedSectionRoot.compactPinnedView ? (pinnedSectionRoot.iconSize + 8) : (pinnedSectionRoot.iconSize + 32)
+                                            width: pinnedSectionRoot.tileWidth - (Kirigami.Units.smallSpacing * 2)
                                             horizontalAlignment: Text.AlignHCenter
                                             color: pinnedSectionRoot.textColor
-                                            font.pixelSize: pinnedSectionRoot.compactPinnedView ? 10 : 11
-                                            wrapMode: Text.Wrap
-                                            maximumLineCount: 2
+                                            font.family: Kirigami.Theme.smallFont.family
+                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                                            wrapMode: Text.NoWrap
+                                            maximumLineCount: 1
                                             elide: Text.ElideRight
                                         }
                                     }
                                 }
-                                
+
                                 MouseArea {
                                     id: tileMouse
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     cursorShape: drag.active ? Qt.ClosedHandCursor : Qt.PointingHandCursor
                                     acceptedButtons: Qt.LeftButton | Qt.RightButton
-                                    
+
                                     drag.target: tileContent
                                     drag.axis: Drag.XAxis
-                                    
+
                                     onPressed: (mouse) => {
                                         if (mouse.button === Qt.LeftButton) {
                                             pinnedSectionRoot.draggedIndex = index
                                         }
                                     }
-                                    
+
                                     onReleased: (mouse) => {
                                         if (pinnedSectionRoot.draggedIndex !== -1 && pinnedSectionRoot.dropTargetIndex !== -1) {
                                             if (pinnedSectionRoot.draggedIndex !== pinnedSectionRoot.dropTargetIndex) {
@@ -371,7 +359,7 @@ Item {
                                             tileContent.y = 0
                                         }
                                     }
-                                    
+
                                     onPositionChanged: (mouse) => {
                                         if (drag.active) {
                                             // Calculate drop target based on mouse position
@@ -386,7 +374,7 @@ Item {
                                             pinnedSectionRoot.dropTargetIndex = targetIndex
                                         }
                                     }
-                                    
+
                                     onClicked: (mouse) => {
                                         if (mouse.button === Qt.RightButton) {
                                             pinnedContextMenu.currentItem = modelData
@@ -397,11 +385,10 @@ Item {
                                         }
                                     }
                                 }
-                                
-                                ToolTip {
+
+                                PlasmaComponents.ToolTip {
                                     visible: tileMouse.containsMouse && !tileMouse.drag.active
                                     text: modelData.display + "\n" + i18nd("plasma_applet_com.mcc45tr.filesearch", "Drag to reorder")
-                                    delay: 500
                                 }
                         }
                     }
@@ -409,15 +396,15 @@ Item {
             }
         }
     }
-    
+
     // Context Menu for pinned items
-    Menu {
+    PlasmaComponents.Menu {
         id: pinnedContextMenu
-        
+
         property var currentItem: null
         property int selectedIndex: -1
-        
-        MenuItem {
+
+        PlasmaComponents.MenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open")
             icon.name: "document-open"
             onTriggered: {
@@ -426,8 +413,8 @@ Item {
                 }
             }
         }
-        
-        MenuItem {
+
+        PlasmaComponents.MenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
             icon.name: "edit-copy"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
@@ -437,8 +424,8 @@ Item {
                 }
             }
         }
-        
-        MenuItem {
+
+        PlasmaComponents.MenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Containing Folder")
             icon.name: "folder-open"
             visible: pinnedContextMenu.currentItem && pinnedContextMenu.currentItem.filePath
@@ -448,10 +435,10 @@ Item {
                 }
             }
         }
-        
-        MenuSeparator {}
-        
-        MenuItem {
+
+        PlasmaComponents.MenuSeparator {}
+
+        PlasmaComponents.MenuItem {
             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unpin")
             icon.name: "window-unpin"
             onTriggered: {

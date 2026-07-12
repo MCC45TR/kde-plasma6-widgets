@@ -1,3 +1,5 @@
+.import "utils.js" as Utils
+
 var IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico", "tiff"];
 var VIDEO_EXTENSIONS = ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv", "mpg", "mpeg", "m4v"];
 var TEXT_EXTENSIONS = ["txt", "md", "log", "ini", "cfg", "conf", "json", "xml", "yml", "yaml", "qml", "js", "ts", "py", "cpp", "c", "cc", "h", "hpp", "sh"];
@@ -39,6 +41,13 @@ function getLocalPreviewPath(urlOrPath) {
     }
 
     return value;
+}
+
+function toLocalFileUrl(urlOrPath) {
+    var path = getLocalPreviewPath(urlOrPath);
+    if (!path)
+        return "";
+    return "file://" + encodeURI(path).replace(/#/g, "%23").replace(/\?/g, "%3F");
 }
 
 function getExtension(pathOrUrl) {
@@ -97,17 +106,30 @@ function isPreviewTypeEnabled(ext, settings) {
 
 function isPreviewAvailable(urlOrPath, category, settings) {
     var path = getLocalPreviewPath(urlOrPath);
-    if (!path && category !== "Applications")
+    var isApplication = Utils.isAppCategory(category, urlOrPath, "", "");
+    if (!path && !isApplication)
         return false;
 
     var ext = getExtension(path);
-    if (category === "Applications" || ext === "desktop") {
+    if (isApplication || ext === "desktop") {
         return !!(settings && settings.applications);
     }
     return isPreviewTypeEnabled(ext, settings);
 }
 
-function getPreviewSource(urlOrPath, previewEnabled, settings) {
+function getThumbnailCacheSource(urlOrPath, thumbnailCacheBase) {
+    var uri = toLocalFileUrl(urlOrPath);
+    var base = toStringValue(thumbnailCacheBase);
+    if (!uri || !base)
+        return "";
+    if (base.indexOf("file://") === 0)
+        base = getLocalPreviewPath(base);
+    if (base.charAt(base.length - 1) === "/")
+        base = base.substring(0, base.length - 1);
+    return "file://" + encodeURI(base + "/normal/" + Qt.md5(uri) + ".png").replace(/#/g, "%23").replace(/\?/g, "%3F");
+}
+
+function getPreviewSource(urlOrPath, previewEnabled, settings, thumbnailCacheBase) {
     if (!previewEnabled)
         return "";
 
@@ -119,8 +141,15 @@ function getPreviewSource(urlOrPath, previewEnabled, settings) {
     if (!isPreviewTypeEnabled(ext, settings))
         return "";
 
-    // Use file:// URL for local image previews (image://preview/ is not available in widget context)
-    return "file://" + encodeURI(path).replace(/#/g, "%23").replace(/\?/g, "%3F");
+    if (isImageExtension(ext))
+        return toLocalFileUrl(path);
+
+    // KIO writes freedesktop thumbnails here for PDFs/videos and other heavy
+    // formats. If the cache entry is absent, QML Image falls back to the icon.
+    if (isVideoExtension(ext) || isDocumentExtension(ext))
+        return getThumbnailCacheSource(path, thumbnailCacheBase);
+
+    return "";
 }
 
 function getFileTypeLabel(urlOrPath) {

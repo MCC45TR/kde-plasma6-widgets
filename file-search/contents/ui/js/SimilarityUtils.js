@@ -105,9 +105,13 @@ function sortBySimilarity(results, queryText) {
  * @param {function} getPriorityFunc - Function to get priority for a category
  * @returns {Array} - Sorted results
  */
-function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPriorityFunc, maxResults, includeRssContent) {
+function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPriorityFunc, maxResults, includeRssContent, options) {
     if (!results || results.length === 0) return results;
 
+    options = options || {};
+    var algorithm = Number(options.searchAlgorithm) || 0;
+    var smartLimit = options.smartResultLimit !== false;
+    var minimum = Math.max(0, Number(options.minResults) || 0);
     var hasQuery = queryText && queryText.length > 0;
     var q = hasQuery ? foldCase(queryText) : "";
 
@@ -125,10 +129,15 @@ function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPr
             var displayText = item._normalizedDisplay !== undefined
                 ? item._normalizedDisplay
                 : foldCase(item.display || item.name || "");
-            score = similarityScoreParsed(q, displayText);
+            if (algorithm === 1)
+                score = displayText === q ? 1 : 0;
+            else if (algorithm === 2)
+                score = displayText.indexOf(q) === 0 ? (displayText === q ? 1 : 0.95) : 0;
+            else
+                score = similarityScoreParsed(q, displayText);
 
             // For RSS feeds, also check indexed content (weighted less)
-            if (includeRssContent && cat === "RSS" && item.indexedContent) {
+            if (algorithm === 0 && includeRssContent && cat === "RSS" && item.indexedContent) {
                 var contentText = item._normalizedIndexedContent !== undefined
                     ? item._normalizedIndexedContent
                     : item.indexedContent.toLowerCase();
@@ -156,6 +165,25 @@ function sortByPriorityAndSimilarity(results, queryText, categorySettings, getPr
         if (a.score !== b.score)
             return b.score - a.score;
         return a.order - b.order;
+    }
+
+    if (hasQuery && (algorithm !== 0 || smartLimit)) {
+        var positiveCount = 0;
+        for (var p = 0; p < scored.length; p++) {
+            if (scored[p].score > 0)
+                positiveCount++;
+        }
+        var zeroBudget = algorithm === 0 ? Math.max(0, minimum - positiveCount) : 0;
+        var eligible = [];
+        for (var e = 0; e < scored.length; e++) {
+            if (scored[e].score > 0) {
+                eligible.push(scored[e]);
+            } else if (zeroBudget > 0) {
+                eligible.push(scored[e]);
+                zeroBudget--;
+            }
+        }
+        scored = eligible;
     }
 
     var limit = Number(maxResults) || 0;

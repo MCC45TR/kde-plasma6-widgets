@@ -1,17 +1,17 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.plasma5support as Plasma5Support
 import org.kde.plasma.plasmoid
 
 Item {
     id: root
-    
+
     required property color textColor
     property color accentColor: Kirigami.Theme.highlightColor
     property color bgColor: Kirigami.Theme.backgroundColor
-    
+
     property var bootEntries: []
     property bool bootEntriesVisible: false
     property bool canHibernate: false
@@ -20,12 +20,12 @@ Item {
     property bool showSleep: true
     // Loading state
     property bool isLoading: false
-    
+
     // Buffer for accumulating data
     property var cmdDataBuffer: ({})
 
     property var plasmoidConfig
-    
+
     // Data Source for executing commands
     Plasma5Support.DataSource {
         id: execSource
@@ -35,10 +35,10 @@ Item {
                 if (!root.cmdDataBuffer[sourceName]) root.cmdDataBuffer[sourceName] = ""
                 root.cmdDataBuffer[sourceName] += data["stdout"]
             }
-            
+
             // Parse the accumulated response as soon as it is complete.
             var fullData = root.cmdDataBuffer[sourceName]
-            
+
             if (sourceName && sourceName.indexOf("bootctl list") !== -1) {
                 // Auth successful
                 root.requestPreventClosing(false)
@@ -48,7 +48,7 @@ Item {
                     var entries = JSON.parse(fullData)
                     root.processEntries(entries)
                     root.isLoading = false
-                    
+
                     if (sourceName.indexOf("pkexec") !== -1) {
                          // Saving to config cache
                          if (root.plasmoidConfig) {
@@ -69,10 +69,10 @@ Item {
             }
         }
     }
-    
+
     // Signal to main window to prevent closing during auth
     signal requestPreventClosing(bool prevent)
-    
+
     // Release the popup if authentication does not complete in time.
     Timer {
          id: authSafetyTimer
@@ -86,7 +86,7 @@ Item {
              root.requestPreventClosing(false)
          }
     }
-    
+
     function loadEntries() {
         var cached
         if (root.plasmoidConfig) {
@@ -115,10 +115,10 @@ Item {
         root.requestPreventClosing(true)
         authSafetyTimer.start()
         // Reset buffer
-        root.cmdDataBuffer = {} 
+        root.cmdDataBuffer = {}
         execSource.connectSource("pkexec bootctl list --json=short")
     }
-    
+
     // Auto-load if visible and empty (fail-safe)
     onVisibleChanged: {
         if (visible && root.bootEntries.length === 0) {
@@ -131,9 +131,9 @@ Item {
         for (var k = 0; k < entries.length; k++) {
             var t = (entries[k].title || "").toLowerCase()
             var i = (entries[k].id || "").toLowerCase()
-            
-            if (entries[k].id === "auto-reboot-to-firmware-setup" || 
-                entries[k].title === "Reboot Into Firmware Interface" || 
+
+            if (entries[k].id === "auto-reboot-to-firmware-setup" ||
+                entries[k].title === "Reboot Into Firmware Interface" ||
                 t === "reboot into firmware interface") {
                 entries[k].title = "BIOS"
                 entries[k].iconName = "application-x-firmware"
@@ -175,7 +175,7 @@ Item {
         }
         root.bootEntries = entries
     }
-    
+
     function checkHibernate() {
         execSource.connectSource("qdbus org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.CanHibernate")
     }
@@ -184,11 +184,11 @@ Item {
         loadEntries()
         checkHibernate()
     }
-    
+
     Component.onDestruction: {
         root.requestPreventClosing(false)
     }
-    
+
     function executeCommand(cmd) {
         execSource.connectSource(cmd)
     }
@@ -226,14 +226,14 @@ Item {
             anchors.right: parent.right
             anchors.margins: 0
             spacing: 8 // Unified spacing
-            
+
             // --- TOP ROW: POWER ACTIONS (Double Click Required) ---
             GridLayout {
                 Layout.fillWidth: true
                 columns: 4
                 columnSpacing: 8
                 rowSpacing: 8
-                
+
                 // Hibernate (Derin Uyut) - Only if supported
                 PowerButton {
                     visible: root.canHibernate && root.showHibernate
@@ -246,7 +246,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }
-                
+
                 // Suspend (Uyut)
                 PowerButton {
                     visible: root.showSleep
@@ -259,7 +259,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }
-                
+
                 // Reboot (Yeniden Başlat) - Special Logic
                 PowerButton {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Reboot")
@@ -267,7 +267,7 @@ Item {
                     doubleClickRequired: true
                     confirmColor: Kirigami.Theme.positiveTextColor // Green
                     confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again to reboot)")
-                    
+
                     // Single Click toggles boot entries if enabled in settings
                     onSingleClicked: {
                         // Trust the user setting provided in config
@@ -278,12 +278,12 @@ Item {
                             root.bootEntriesVisible = !root.bootEntriesVisible
                         }
                     }
-                    
+
                     onTriggered: root.executeCommand("systemctl reboot")
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }
-                
+
                 // Shutdown (Kapat)
                 PowerButton {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Shutdown")
@@ -296,7 +296,7 @@ Item {
                     Layout.preferredHeight: 120
                 }
             }
-            
+
             // --- BOOT ENTRIES SECTION ---
             Item {
                 Layout.fillWidth: true
@@ -312,15 +312,15 @@ Item {
                 // Opacity animation as well for smoother look
                 opacity: shouldShow ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: 200 } }
-                
+
                 Rectangle {
                     anchors.fill: parent
                     color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.05)
                     radius: 8
                 }
-                
+
                 // Loading Indicator
-                BusyIndicator {
+                PlasmaComponents.BusyIndicator {
                     running: root.isLoading
                     visible: root.isLoading && root.bootEntriesVisible
                     anchors.centerIn: parent
@@ -336,12 +336,12 @@ Item {
                     spacing: 8 // Unified spacing
                     padding: 6
                     opacity: root.isLoading ? 0.3 : 1.0 // Dim content when loading
-                    
+
                     // Dynamic Width Calculation
                     property int minTileWidth: 140
                     property int columns: Math.max(1, Math.floor((width - 2 * padding) / minTileWidth))
                     property real tileWidth: ((width - 2 * padding) - (columns - 1) * spacing) / columns
-                    
+
                     Repeater {
                         model: root.bootEntries
                         delegate: Rectangle {
@@ -349,7 +349,7 @@ Item {
                             height: 80
                             color: entryMouse.containsMouse ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.15) : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1)
                             radius: 6
-                            
+
                             MouseArea {
                                 id: entryMouse
                                 anchors.fill: parent
@@ -357,22 +357,23 @@ Item {
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: root.rebootToEntry(modelData.id)
                             }
-                            
+
                             ColumnLayout {
                                 anchors.centerIn: parent
                                 spacing: 4
                                 width: parent.width - 10
-                                
+
                                 Kirigami.Icon {
                                     source: modelData.iconName
                                     Layout.preferredWidth: 32
                                     Layout.preferredHeight: 32
                                     Layout.alignment: Qt.AlignHCenter
                                 }
-                                
+
                                 Text {
                                     text: modelData.title || modelData.id
-                                    font.pixelSize: 13
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     font.bold: true
                                     color: root.textColor
                                     elide: Text.ElideRight
@@ -380,11 +381,12 @@ Item {
                                     horizontalAlignment: Text.AlignHCenter
                                     Layout.alignment: Qt.AlignHCenter
                                 }
-                                
+
                                 Text {
                                     text: modelData.version || " "
                                     visible: text !== " "
-                                    font.pixelSize: 11
+                                    font.family: Kirigami.Theme.smallFont.family
+                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                     color: Qt.alpha(root.textColor, 0.7)
                                     elide: Text.ElideRight
                                     Layout.fillWidth: true
@@ -394,7 +396,7 @@ Item {
                             }
                         }
                     }
-                    
+
                     // Refresh Tile (Appended to the end)
                     Rectangle {
                         visible: root.bootEntriesVisible && !root.isLoading && root.bootEntries.length > 0
@@ -402,7 +404,7 @@ Item {
                         height: 80
                         color: refreshTileMouse.containsMouse ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.15) : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1)
                         radius: 6
-                        
+
                         MouseArea {
                             id: refreshTileMouse
                             anchors.fill: parent
@@ -413,11 +415,11 @@ Item {
                                 root.loadEntriesWithAuth()
                             }
                         }
-                        
+
                         ColumnLayout {
                             anchors.centerIn: parent
                             spacing: 4
-                            
+
                             Kirigami.Icon {
                                 source: "view-refresh"
                                 Layout.preferredWidth: 24
@@ -425,10 +427,11 @@ Item {
                                 Layout.alignment: Qt.AlignHCenter
                                 color: root.textColor
                             }
-                            
+
                             Text {
                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh")
-                                font.pixelSize: 12
+                                font.family: Kirigami.Theme.defaultFont.family
+                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                 font.bold: true
                                 color: root.textColor
                                 Layout.alignment: Qt.AlignHCenter
@@ -444,7 +447,7 @@ Item {
                         color: scanMouse.containsMouse ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.1) : "transparent"
                         border.color: Qt.alpha(root.textColor, 0.3)
                         radius: 4
-                        
+
                         RowLayout {
                              anchors.centerIn: parent
                              spacing: 8
@@ -471,14 +474,14 @@ Item {
                     }
                 }
             }
-            
+
             // --- BOTTOM ROW: SESSION ACTIONS (Single Click) ---
             GridLayout {
                 Layout.fillWidth: true
                 columns: 4
                 columnSpacing: 8
                 rowSpacing: 8
-                
+
                 // Lock (Ekranı Kilitle)
                 PowerButton {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Lock Screen")
@@ -488,7 +491,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }
-                
+
                 // Logout (Oturumu Kapat)
                 PowerButton {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Log Out")
@@ -500,7 +503,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }
-                
+
                 // Switch User (Kullanıcı Değiştir)
                 PowerButton {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Switch User")
@@ -512,7 +515,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 120
                 }
-                
+
                 // Save Session (Oturumu Kaydet)
                 PowerButton {
                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Save Session")
@@ -525,23 +528,23 @@ Item {
             }
         }
     }
-    
+
     // --- INNER COMPONENT: POWER BUTTON ---
     component PowerButton : Rectangle {
         id: btn
-        
+
         property string text
         property string iconName
         property bool doubleClickRequired: false
         property color confirmColor: Kirigami.Theme.highlightColor
         property string confirmMessage: i18nd("plasma_applet_com.mcc45tr.filesearch", "(Press again)")
         property bool pendingConfirmation: false
-        
+
         signal triggered()
         signal singleClicked()
-        
+
         radius: 12
-        
+
         // Timer to reset confirmation state after 5 seconds
         Timer {
             id: resetTimer
@@ -550,7 +553,7 @@ Item {
             repeat: false
             onTriggered: btn.pendingConfirmation = false
         }
-        
+
         // Color Logic with Animation
         property color targetColor: {
             if (btn.pendingConfirmation) {
@@ -561,15 +564,15 @@ Item {
             }
             return Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.05)
         }
-        
+
         color: targetColor
         Behavior on color { ColorAnimation { duration: 200 } }
-        
+
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: 4 
+            spacing: 4
             width: parent.width - 10
-            
+
             Kirigami.Icon {
                 id: iconItem
                 Layout.alignment: Qt.AlignHCenter
@@ -577,10 +580,11 @@ Item {
                 Layout.preferredWidth: btn.height * 0.4
                 source: btn.iconName
             }
-            
+
             Text {
                 text: btn.text
-                font.pixelSize: 14
+                font.family: Kirigami.Theme.defaultFont.family
+                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                 font.bold: true
                 color: root.textColor
                 horizontalAlignment: Text.AlignHCenter
@@ -588,13 +592,14 @@ Item {
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
             }
-            
+
             Text {
                 visible: btn.pendingConfirmation
                 opacity: visible ? 1.0 : 0.0
                 Behavior on opacity { NumberAnimation { duration: 200 } }
                 text: btn.confirmMessage
-                font.pixelSize: 10
+                font.family: Kirigami.Theme.smallFont.family
+                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                 color: Qt.alpha(root.textColor, 0.8)
                 horizontalAlignment: Text.AlignHCenter
                 Layout.alignment: Qt.AlignHCenter
@@ -602,13 +607,13 @@ Item {
                 wrapMode: Text.Wrap
             }
         }
-        
+
         MouseArea {
             id: btnMouse
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
-            
+
             onClicked: {
                 if (btn.doubleClickRequired) {
                     if (btn.pendingConfirmation) {

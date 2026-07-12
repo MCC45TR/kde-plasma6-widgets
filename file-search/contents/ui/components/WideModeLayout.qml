@@ -1,11 +1,11 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 Item {
     id: wideLayoutContainer
-    
+
     required property var weatherRoot
 
     property var currentWeather: weatherRoot.currentWeather
@@ -23,10 +23,10 @@ Item {
         id: wideLayout
         anchors.fill: parent
         spacing: 8
-        
+
         opacity: weatherRoot.showForecastDetails ? 0 : 1
         Behavior on opacity { NumberAnimation { duration: 300; easing.type: Easing.OutQuad } }
-        
+
         transform: Translate {
             y: weatherRoot.showForecastDetails ? -wideLayoutContainer.height : 0
             Behavior on y { NumberAnimation { duration: 350; easing.type: Easing.InOutQuart } }
@@ -90,14 +90,15 @@ Item {
                     smooth: true
                 }
 
-                Text {
+                Kirigami.Heading {
                     id: conditionText
-                    text: currentWeather ? i18n(currentWeather.condition) : ""
+                    level: 5
+                    text: currentWeather ? i18nd("plasma_applet_com.mcc45tr.filesearch", currentWeather.condition) : ""
                     textFormat: Text.PlainText
                     color: Kirigami.Theme.textColor
                     opacity: 0.8
                     font.family: weatherRoot.activeFont.family
-                    font.pixelSize: Math.max(10, Math.min(14, wideLayout.height * 0.08))
+                    font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize * 1.2, wideLayout.height * 0.08))
                     Layout.alignment: Qt.AlignHCenter
                     wrapMode: Text.WordWrap
                     Layout.maximumWidth: parent.width - 10
@@ -114,14 +115,14 @@ Item {
                         color: Kirigami.Theme.textColor
                         font.family: weatherRoot.activeFont.family
                         font.bold: true
-                        font.pixelSize: conditionText.lineCount > 1 ? wideLayout.height * 0.2 : wideLayout.height * 0.25
+                        font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, conditionText.lineCount > 1 ? wideLayout.height * 0.2 : wideLayout.height * 0.25)
                     }
                     Text {
                         text: "°"
                         color: Kirigami.Theme.textColor
                         font.family: weatherRoot.activeFont.family
                         font.bold: true
-                        font.pixelSize: conditionText.lineCount > 1 ? wideLayout.height * 0.15 : wideLayout.height * 0.18
+                        font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, conditionText.lineCount > 1 ? wideLayout.height * 0.15 : wideLayout.height * 0.18)
                         Layout.alignment: Qt.AlignTop
                         Layout.topMargin: wideLayout.height * 0.01
                     }
@@ -132,13 +133,13 @@ Item {
                     spacing: 8
                     RowLayout {
                         spacing: 1
-                        Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: Math.max(9, Math.min(12, wideLayout.height * 0.07)); font.bold: true }
-                        Text { text: currentWeather ? currentWeather.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(9, Math.min(12, wideLayout.height * 0.07)); font.bold: true }
+                        Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize, wideLayout.height * 0.07)); font.bold: true }
+                        Text { text: currentWeather ? currentWeather.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize, wideLayout.height * 0.07)); font.bold: true }
                     }
                     RowLayout {
                         spacing: 1
-                        Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: Math.max(9, Math.min(12, wideLayout.height * 0.07)); font.bold: true }
-                        Text { text: currentWeather ? currentWeather.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(9, Math.min(12, wideLayout.height * 0.07)); font.bold: true }
+                        Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize, wideLayout.height * 0.07)); font.bold: true }
+                        Text { text: currentWeather ? currentWeather.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize, wideLayout.height * 0.07)); font.bold: true }
                     }
                 }
 
@@ -158,7 +159,7 @@ Item {
                 boundsBehavior: Flickable.StopAtBounds
 
                 Behavior on opacity { NumberAnimation { duration: 150 } }
-                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AlwaysOff; width: 0 }
+                PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar { policy: PlasmaComponents.ScrollBar.AlwaysOff; width: 0 }
 
                 WheelHandler {
                     target: expandedFlickable
@@ -196,47 +197,27 @@ Item {
                 Layout.fillWidth: true
                 spacing: 10
 
-                Text {
+                Kirigami.Heading {
+                    level: 3
                     text: currentWeather ? currentWeather.location : location
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
                     font.bold: true
-                    font.pixelSize: Math.min(22, wideLayout.width * 0.09)
+                    font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize * 2, wideLayout.width * 0.09))
                     elide: Text.ElideRight
                     Layout.fillWidth: true
                 }
 
-                Rectangle {
+                PlasmaComponents.TabBar {
                     Layout.alignment: Qt.AlignRight | Qt.AlignTop
-                    Layout.preferredWidth: toggleText.implicitWidth + 24
-                    Layout.preferredHeight: 28
-                    radius: 14 * weatherRoot.radiusMultiplier
-                    color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1) : "transparent"
+                    currentIndex: forecastMode ? 1 : 0
+                    onCurrentIndexChanged: weatherRoot.forecastMode = currentIndex === 1
 
-                    Text {
-                        id: toggleText
-                        anchors.centerIn: parent
-                        text: forecastMode ? i18n("Hourly Forecast") : i18n("Daily Forecast")
-                        color: Kirigami.Theme.textColor
-                        font.family: weatherRoot.activeFont.family
-                        font.pixelSize: 11
-                        font.bold: true
+                    PlasmaComponents.TabButton {
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Daily Forecast")
                     }
-
-                    MouseArea {
-                        id: toggleMouseArea
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        hoverEnabled: true
-                        onClicked: weatherRoot.forecastMode = !weatherRoot.forecastMode
-                    }
-
-                    Rectangle {
-                        anchors.fill: parent
-                        color: Kirigami.Theme.highlightColor
-                        opacity: toggleMouseArea.containsMouse ? 0.1 : 0
-                        radius: parent.radius
-                        Behavior on opacity { NumberAnimation { duration: 150 } }
+                    PlasmaComponents.TabButton {
+                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Hourly Forecast")
                     }
                 }
             }
@@ -258,11 +239,9 @@ Item {
                 readonly property real minCardWidth: 70
                 readonly property real minCardHeight: 100
                 readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
-                readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
-
-                cellWidth: width / cardsPerRow
-                cellHeight: height / visibleRows
-                flow: GridView.FlowLeftToRight
+                cellWidth: Math.max(minCardWidth, width / Math.max(1, Math.min(count, 7)))
+                cellHeight: height
+                flow: GridView.FlowTopToBottom
 
                 onItemClicked: function(data, idx, cardRect) {
                     if (!forecastMode) {
@@ -344,12 +323,12 @@ Item {
             boundsBehavior: Flickable.StopAtBounds
             opacity: forecastDetailsOverlay.contentOpacity
 
-            ScrollBar.vertical: ScrollBar { policy: forecastDetailsContent.height > parent.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff; width: 6 }
+            PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar { policy: forecastDetailsContent.height > parent.height ? PlasmaComponents.ScrollBar.AlwaysOn : PlasmaComponents.ScrollBar.AlwaysOff; width: 6 }
 
             Item {
                 width: parent.width
                 height: forecastFlickable.contentHeight
-                
+
                 // Click listener for empty space in Flickable
                 MouseArea {
                     anchors.fill: parent

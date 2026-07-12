@@ -9,8 +9,8 @@
   <!-- Tab 1: Panel Appearance -->
   <group name="Panel">
     <entry name="displayMode" type="Int">
-      <default>1</default>
-      <label>Display Mode: 0=Button, 1=Medium, 2=Wide, 3=Extra Wide, 4=Ultra Wide</label>
+      <default>2</default>
+      <label>Display Mode: 0=Button, 2=Text Input (legacy values 1-4 are treated as Text Input)</label>
     </entry>
     <entry name="showSearchButton" type="Bool">
       <default>true</default>
@@ -32,6 +32,14 @@
     <entry name="panelHeight" type="Int">
       <default>0</default>
       <label>Custom Panel Height in pixels (0=Automatic)</label>
+    </entry>
+    <entry name="panelWidthStep" type="Int">
+      <default>-1</default>
+      <label>Panel width step from 0 (narrowest) to 12 (widest); -1 preserves the legacy display mode width</label>
+    </entry>
+    <entry name="panelContentOpacity" type="Int">
+      <default>2</default>
+      <label>Panel text and search icon opacity: 0=Low, 1=Medium, 2=Full</label>
     </entry>
   </group>
 
@@ -165,7 +173,7 @@
 
   <group name="Weather">
     <entry name="weatherEnabled" type="Bool">
-      <default>true</default>
+      <default>false</default>
       <label>Enable Weather Prefix</label>
     </entry>
     <entry name="weatherUnits" type="String">

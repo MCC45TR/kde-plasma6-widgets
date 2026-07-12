@@ -1,23 +1,23 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 // Search Input Container for Button Mode
 Rectangle {
     id: root
-    
+
     // Required properties
     required property color bgColor
     required property color textColor
     required property color accentColor
     required property string placeholderText
-    
+
     // Bindable properties
     property string searchText: ""
     property int resultCount: 0
     property var resultsModel: null
-    
+
     // Signals
     signal searchSubmitted(string text, int selectedIndex)
     signal escapePressed()
@@ -28,63 +28,63 @@ Rectangle {
     signal leftPressed()
     signal rightPressed()
     signal viewModeChangeRequested(int mode)
-    
+
     height: 56
     color: Qt.rgba(bgColor.r, bgColor.g, bgColor.b, 0.95)
     radius: 12
-    
+
     // Focus the input field
     function focusInput() {
         searchInputField.forceActiveFocus()
     }
-    
+
     // Set text
     function setText(text) {
         searchInputField.text = text
     }
-    
+
     // Clear text
     function clear() {
         searchInputField.text = ""
     }
-    
+
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: 16
         anchors.rightMargin: 8
         spacing: 8
-        
+
         // Text Input Field
-        TextField {
+        PlasmaComponents.TextField {
             id: searchInputField
             Layout.fillWidth: true
             Layout.fillHeight: true
             placeholderText: root.placeholderText
             placeholderTextColor: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.5)
             color: root.textColor
-            font.pixelSize: 18
+            font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.5)
             background: Item {} // No background
-            
+
             onTextChanged: {
                 root.searchText = text
             }
-            
+
             onAccepted: {
                 root.searchSubmitted(text, 0)
             }
-            
+
             Keys.onEscapePressed: {
                 root.escapePressed()
             }
-            
+
             Keys.onDownPressed: {
                 root.downPressed()
             }
-            
+
             Keys.onUpPressed: {
                 root.upPressed()
             }
-            
+
             Keys.onLeftPressed: (event) => {
                 if (cursorPosition === 0) {
                     root.leftPressed()
@@ -93,7 +93,7 @@ Rectangle {
                     event.accepted = false
                 }
             }
-            
+
             Keys.onRightPressed: (event) => {
                 if (cursorPosition === text.length) {
                     root.rightPressed()
@@ -102,7 +102,7 @@ Rectangle {
                     event.accepted = false
                 }
             }
-            
+
             Keys.onTabPressed: (event) => {
                 if (event.modifiers & Qt.ShiftModifier) {
                     root.shiftTabPressedSignal()
@@ -111,7 +111,7 @@ Rectangle {
                 }
                 event.accepted = true
             }
-            
+
             Keys.onPressed: (event) => {
                 if (event.modifiers & Qt.ControlModifier) {
                     if (event.key === Qt.Key_1) {
@@ -124,7 +124,7 @@ Rectangle {
                 }
             }
         }
-        
+
         // Search Icon Button
         Rectangle {
             id: searchIconBtn
@@ -133,15 +133,15 @@ Rectangle {
             Layout.alignment: Qt.AlignVCenter
             radius: width / 2
             color: root.accentColor
-            
+
             Kirigami.Icon {
                 anchors.centerIn: parent
                 width: 22
                 height: 22
                 source: "search"
-                color: "white"
+                color: Kirigami.Theme.highlightedTextColor
             }
-            
+
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor

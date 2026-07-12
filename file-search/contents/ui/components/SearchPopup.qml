@@ -1,26 +1,27 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import QtQuick.Window
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import org.kde.milou as Milou
 import "../js/HistoryManager.js" as HistoryManager
 import "../js/QueryPolicy.js" as QueryPolicy
+import "../js/PrefixRegistry.js" as PrefixRegistry
 import "../js/utils.js" as Utils
 import org.kde.plasma.plasmoid
 
 Item {
     id: popupRoot
-    
+
     // Dependencies
-    required property var logic    
+    required property var logic
     property var plasmoidConfig // injected from main
-    
+
     // Properties synced with main
     property string searchText: ""
     property bool expanded: false
     property bool isInPanel: true // Default to true, overridden by Main
-    
+
     onExpandedChanged: {
         if (expanded) {
             // Force focus when popup opens
@@ -40,18 +41,16 @@ Item {
             pendingHistoryDisplay = ""
         }
     }
-    
+
     // Configuration
     property int displayMode: 0
     property int viewMode: 0
     property int iconSize: 32
     property int listIconSize: 22
-    
+
     property color textColor
     property color accentColor
     property color bgColor
-    property string fontFamily: Kirigami.Theme.defaultFont.family
-    
     property bool showDebug: false
     property bool showBootOptions: false
     property bool previewEnabled: true
@@ -60,7 +59,7 @@ Item {
     property int previewInlineMode: 1
     property int previewSize: 1
     property var previewSettings: ({"images": false, "videos": false, "text": false, "documents": false, "applications": false})
-    
+
     // Prefix Settings
     property bool prefixDateShowClock: true
     property bool prefixDateShowEvents: true
@@ -68,33 +67,34 @@ Item {
     property bool prefixPowerShowSleep: true
     property bool showPinnedBar: true
     property bool autoMinimizePinned: false
-    
+
     // Tile size mode: 0=Normal, 1=All Compact, 2=Only Pinned Compact, 3=Only History Compact
     property int compactTileMode: 0
-    
+
     // Computed compact properties based on mode
     readonly property bool compactPinnedItems: compactTileMode === 1 || compactTileMode === 2
     readonly property bool compactHistoryItems: compactTileMode === 1 || compactTileMode === 3
 
-    
+
     // Signals to Main
     signal requestSearchTextUpdate(string text)
     signal requestExpandChange(bool expanded)
     signal requestViewModeChange(int mode)
     signal requestPreventClosing(bool prevent)
-    
+
     // Prevent closing logic for popup
     property bool preventClosing: false
     // Plasmoid.hideOnWindowDeactivate assignment removed due to "non-existent property" error
-    
+
     // Read-only helpers
     readonly property bool isButtonMode: displayMode === 0
     readonly property bool isRssOnlyQuery: searchText.toLowerCase().startsWith("rss:")
+    readonly property bool isPrefixMenuOpen: searchText.trim() === ":"
     readonly property bool isTileView: {
         if (searchText.toLowerCase().startsWith("rss:")) return false;
         return plasmoidConfig ? (plasmoidConfig.viewMode === 1) : true
     }
-    
+
     // ===== CACHED LOCALIZED PREFIXES (computed once at startup) =====
     // These avoid calling i18nd() on every keystroke
     readonly property string _locDate: i18nd("plasma_applet_com.mcc45tr.filesearch", "date").toLowerCase()
@@ -114,6 +114,21 @@ Item {
     readonly property bool _prefixKillEnabled: plasmoidConfig ? (plasmoidConfig.prefixKillEnabled !== undefined ? plasmoidConfig.prefixKillEnabled : true) : true
     readonly property bool _prefixSpellEnabled: plasmoidConfig ? (plasmoidConfig.prefixSpellEnabled !== undefined ? plasmoidConfig.prefixSpellEnabled : true) : true
     readonly property bool _prefixUnitEnabled: plasmoidConfig ? (plasmoidConfig.prefixUnitEnabled !== undefined ? plasmoidConfig.prefixUnitEnabled : true) : true
+    readonly property var _localizedPrefixes: ({
+        date: _locDate, clock: _locClock, weather: _locWeather,
+        power: _locPower, help: _locHelp, unit: _locUnit,
+        kill: _locKill, spell: _locSpell, shell: _locShell,
+        calendar: _locCalendar
+    })
+    readonly property var _prefixSettings: ({
+        weatherEnabled: _canShowWeather,
+        prefixShellEnabled: _prefixShellEnabled,
+        prefixTimelineEnabled: _prefixTimelineEnabled,
+        prefixWebSearchEnabled: _prefixWebSearchEnabled,
+        prefixKillEnabled: _prefixKillEnabled,
+        prefixSpellEnabled: _prefixSpellEnabled,
+        prefixUnitEnabled: _prefixUnitEnabled
+    })
 
     // ===== CACHED QUERY RESULTS (recomputed once per searchText change) =====
     readonly property string effectiveQuery: _computeEffectiveQuery(searchText)
@@ -130,23 +145,20 @@ Item {
         if (tileData.resultCount <= 0)
             return false;
         var category = resultsModel.data(resultsModel.index(0, 0), resultsModel.CategoryRole) || "";
-        return category.indexOf("Calculate") >= 0
-            || category.indexOf("Hesapla") >= 0
-            || category.indexOf("Unit") >= 0
-            || category.indexOf("Birim") >= 0
-            || category.indexOf("Currency") >= 0
-            || category.indexOf("Döviz") >= 0;
+        var decoration = resultsModel.data(resultsModel.index(0, 0), Qt.DecorationRole) || "";
+        var matchId = resultsModel.data(resultsModel.index(0, 0), resultsModel.DuplicateRole) || "";
+        return Utils.isPrimaryCategory(category, decoration, matchId);
     }
 
     // Active filter from chips
     property string activeFilter: "All"
-    
+
     // Layout
     Layout.preferredWidth: 500
     Layout.preferredHeight: 380
     Layout.minimumWidth: 400
     Layout.minimumHeight: 250
-    
+
     // internal state
     property int focusSection: 0
     property string activeBackend: "Milou"
@@ -156,13 +168,13 @@ Item {
     property bool pendingHistoryRun: false
     property string pendingHistoryMatchId: ""
     property string pendingHistoryDisplay: ""
-    
+
     // Context Menu for Results
     HistoryContextMenu {
         id: resultsContextMenu
         logic: popupRoot.logic
     }
-    
+
     // ===== DATA MANAGER =====
     TileDataManager {
         id: tileData
@@ -170,15 +182,18 @@ Item {
         logic: popupRoot.logic
         searchText: popupRoot.searchText
         activeFilter: popupRoot.activeFilter
-        maxResults: popupRoot.activeFilter === "All" 
+        searchAlgorithm: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.searchAlgorithm || 0) : 0
+        minResults: popupRoot.plasmoidConfig ? Math.max(0, popupRoot.plasmoidConfig.minResults || 0) : 3
+        smartResultLimit: popupRoot.plasmoidConfig ? popupRoot.plasmoidConfig.smartResultLimit !== false : true
+        maxResults: popupRoot.activeFilter === "All"
             ? (popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.maxResults || 20) : 20)
             : popupRoot.filteredResultLimit
-        
+
         onCategorizedDataChanged: {
              // propagated automatically to bindings
         }
     }
-    
+
     // ===== SEARCH MODEL =====
     Milou.ResultsModel {
         id: resultsModel
@@ -188,7 +203,7 @@ Item {
             ? (popupRoot.plasmoidConfig ? Math.max(10, popupRoot.plasmoidConfig.maxResults || 20) : 20)
             : popupRoot.filteredResultLimit
     }
-    
+
     // Debounce the query string update to Milou
     property string delayedQueryString: ""
     Timer {
@@ -207,7 +222,7 @@ Item {
         repeat: false
         onTriggered: popupRoot.isLoadingResults = false
     }
-    
+
     onSearchTextChanged: {
         searchGeneration++
         tileData.beginSearch(searchGeneration, Date.now())
@@ -221,7 +236,7 @@ Item {
             delayedQueryString = ""
             popupRoot.isLoadingResults = false
         }
-        
+
         // Auto-minimize pinned items logic
         if (autoMinimizePinned && pinnedLoader.item) {
             if (searchText.length > 0) {
@@ -231,7 +246,7 @@ Item {
             }
         }
     }
-    
+
     onActiveFilterChanged: {
         searchGeneration++
         tileData.beginSearch(searchGeneration, Date.now())
@@ -248,13 +263,13 @@ Item {
             popupRoot.tryRunPendingHistory()
         }
     }
-    
+
     // ===== FUNCTIONS =====
-    
+
     function getFilteredQuery(text, filter) {
         // Backend prefixes (like "services:" or "baloo:") are unreliable across different Plasma versions and locales.
         // TileDataManager applies activeFilter locally.
-        // This ensures consistent results because Milou fetches up to 450 items when a filter is active.
+        // This ensures consistent results because Milou fetches up to 120 items when a filter is active.
         return text || "";
     }
 
@@ -273,7 +288,7 @@ Item {
 
         return getFilteredQuery(eq, filter)
     }
-    
+
     // Background for Desktop Mode (Matte)
     Rectangle {
         anchors.fill: parent
@@ -283,7 +298,7 @@ Item {
         radius: 12
         visible: !popupRoot.isInPanel
         opacity: 0.95 // Almost solid matte
-        
+
         // Add a subtle border or shadow if needed for contrast
         border.color: Qt.rgba(textColor.r, textColor.g, textColor.b, 0.1)
         border.width: 1
@@ -312,7 +327,7 @@ Item {
             return;
         // Record to history
         logic.addToHistory(display, decoration, category, matchId, filePath, (index === -1 ? "rss" : null), popupRoot.searchText);
-        
+
         // Handle non-milou results (like RSS)
         if (index === -1) {
             if (filePath && filePath.toString().length > 0) {
@@ -323,13 +338,13 @@ Item {
             return;
         }
 
-        var isApp = Utils.isAppCategory(category, filePath, matchId);
+        var isApp = Utils.isAppCategory(category, filePath, matchId, decoration);
         var idx = resultsModel.index(index, 0);
-        
+
         // FORCE RUN for command queries (gg:, help:, etc.) to avoid treating them as files
         if (isCommandOnlyQuery(popupRoot.searchText)) {
              runResultSafely(idx);
-        } 
+        }
         else if (isApp) {
              runResultSafely(idx);
         } else if (filePath && filePath.length > 0 && filePath.toString().indexOf("http") !== 0) {
@@ -339,11 +354,11 @@ Item {
              // For bookmarks or others, use Milou run
              runResultSafely(idx);
         }
-        
+
         requestSearchTextUpdate("");
         requestExpandChange(false);
     }
-    
+
     function handleHistoryClick(item) {
         // Move clicked item to top of history
         logic.addToHistory(item.display, item.decoration, item.category, item.matchId, item.filePath, item.sourceType, item.queryText);
@@ -351,7 +366,7 @@ Item {
         // If it's a known file or application path, open/run it directly and instantly
            var directPath = item.filePath || item.url || ""
            if (directPath && directPath.toString().length > 0) {
-               if (directPath.toString().indexOf(".desktop") !== -1) {
+               if (Utils.isDesktopEntry(directPath)) {
                   // Direct application launch via safe helper
                    logic.launchApp(directPath);
              } else {
@@ -363,7 +378,7 @@ Item {
              return;
         }
 
-           if (item.matchId && item.matchId.toString().indexOf(".desktop") !== -1) {
+           if (Utils.isDesktopEntry(item.matchId)) {
                logic.launchApp(item.matchId.toString())
                requestExpandChange(false);
                requestSearchTextUpdate("");
@@ -373,14 +388,14 @@ Item {
         // Only fall back to search-run-timer for pure search strings (without stored paths)
         var searchTerm = item.display || item.queryText || "";
         requestSearchTextUpdate(searchTerm);
-        
+
         if (!isButtonMode) hiddenSearchInput.text = searchTerm;
         else searchBar.setText(searchTerm);
-        
+
         queueHistoryRun(item)
         historyRunTimer.start();
     }
-    
+
     Timer {
         id: historyRunTimer
         interval: 400
@@ -466,7 +481,7 @@ Item {
              resultsListLoader.item.moveDown();
         }
     }
-    
+
     function moveSelectionLeft() {
         if (searchText.length === 0) {
             if (historyLoader.item) historyLoader.item.moveLeft();
@@ -477,7 +492,7 @@ Item {
              tileResultsLoader.item.moveLeft();
         }
     }
-    
+
     function moveSelectionRight() {
         if (searchText.length === 0) {
             if (historyLoader.item) historyLoader.item.moveRight();
@@ -488,89 +503,28 @@ Item {
              tileResultsLoader.item.moveRight();
         }
     }
-    
+
+    function activateCurrentResult() {
+        if (searchText.length === 0 && historyLoader.item && historyLoader.item.activateCurrentItem)
+            return historyLoader.item.activateCurrentItem();
+        if (isTileView && tileResultsLoader.item && tileResultsLoader.item.activateCurrentItem)
+            return tileResultsLoader.item.activateCurrentItem();
+        if (resultsListLoader.item && resultsListLoader.item.activateCurrentItem)
+            return resultsListLoader.item.activateCurrentItem();
+        return false;
+    }
+
     // Command Query Helper
     // Uses cached locale strings — no i18nd() calls per invocation
     function _computeIsCommandOnly(text) {
-        if (!text) return false;
-        var t = text.toLowerCase();
-        
-        var isWeather = _canShowWeather && (
-            t === "weather:" || t.startsWith("weather:") ||
-            (_locWeather && (t === _locWeather + ":" || t.startsWith(_locWeather + ":"))) ||
-            t === "hava:" || t.startsWith("hava:")
-        );
-        
-        var isCalendar = t === "calendar:" || (_locCalendar && t === _locCalendar + ":")
-        
-        return isWeather || isCalendar || t === "date:" || t === "clock:" || t === "power:" || t === "help:" || 
-               (_locDate && t === _locDate + ":") || 
-               (_locClock && t === _locClock + ":") || 
-               (_locPower && t === _locPower + ":") || 
-               (_locHelp && t === _locHelp + ":");
+        return PrefixRegistry.opensInternalView(text, _localizedPrefixes, _prefixSettings)
     }
 
     // Uses cached locale strings — no i18nd() calls per invocation
     function _computeEffectiveQuery(text) {
-        if (!text) return ""
-        var t = text
-        var lower = t.toLowerCase()
-        
-        // 1. Check for "unit:"
-        if (_prefixUnitEnabled) {
-            if (lower.startsWith("unit:")) return t.substring(5).trim()
-            if (_locUnit && lower.startsWith(_locUnit + ":")) return t.substring(_locUnit.length + 1).trim()
-        }
-        
-        // 2. Check for "clock:" then "date:" / "calendar:"
-        if (lower === "clock:" || (_locClock && lower === _locClock + ":")) return "clock:"
-        if (lower === "date:" || (_locDate && lower === _locDate + ":") || 
-            lower === "calendar:" || (_locCalendar && lower === _locCalendar + ":")) return "date:"
-        
-        // 3. Check for "weather:"
-        if (_canShowWeather) {
-            if (lower === "weather:" || lower.startsWith("weather:")) {
-                return "weather:" + t.substring(8).trim()
-            }
-            if (_locWeather && (lower === _locWeather + ":" || lower.startsWith(_locWeather + ":"))) {
-                return "weather:" + t.substring(_locWeather.length + 1).trim()
-            }
-            if (lower === "hava:" || lower.startsWith("hava:")) {
-                return "weather:" + t.substring(5).trim()
-            }
-        }
-        
-        // 4. Check for "help:"
-        if (lower === "help:" || (_locHelp && lower === _locHelp + ":")) return "help:"
-
-        // 5. Check for "kill"
-        if (_prefixKillEnabled) {
-            if (lower.startsWith("kill ") || (_locKill && lower.startsWith(_locKill + " "))) {
-                var killPrefix = lower.startsWith("kill ") ? "kill" : _locKill;
-                return "kill " + t.substring(killPrefix.length + 1).trim()
-            }
-        }
-
-        // 6. Check for "spell"
-        if (_prefixSpellEnabled) {
-            if (lower.startsWith("spell ") || (_locSpell && lower.startsWith(_locSpell + " "))) {
-                var spellPrefix = lower.startsWith("spell ") ? "spell" : _locSpell;
-                return "spell " + t.substring(spellPrefix.length + 1).trim()
-            }
-        }
-        
-        // 7. Check for "shell:"
-        if (_prefixShellEnabled) {
-            if (lower.startsWith("shell:") || (_locShell && lower.startsWith(_locShell + ":"))) {
-                var shellPrefix = lower.startsWith("shell:") ? "shell" : _locShell;
-                return "shell:" + t.substring(shellPrefix.length + 1).trim()
-            }
-        }
-        
-        // 8. Check for "power:"
-        if (lower === "power:" || (_locPower && lower === _locPower + ":")) return "power:"
-
-        return t
+        var canonical = PrefixRegistry.canonicalize(text, _localizedPrefixes, _prefixSettings)
+        if (canonical.startsWith("calendar:")) return "date:" + canonical.substring(9)
+        return canonical
     }
 
     // Feature flags are an execution policy, not merely hint visibility. This
@@ -584,10 +538,12 @@ Item {
             unitEnabled: _prefixUnitEnabled,
             timelineEnabled: _prefixTimelineEnabled,
             webSearchEnabled: _prefixWebSearchEnabled,
+            weatherEnabled: _canShowWeather,
             locShell: _locShell,
             locKill: _locKill,
             locSpell: _locSpell,
-            locUnit: _locUnit
+            locUnit: _locUnit,
+            locWeather: _locWeather
         });
     }
 
@@ -604,39 +560,19 @@ Item {
     function getEffectiveQuery(text) { return _computeEffectiveQuery(text) }
 
     // ===== UI COMPONENTS =====
-    
+
     // Hidden Input - Active in NON-BUTTON modes
     HiddenSearchInput {
         id: hiddenSearchInput
         visible: !isButtonMode
         resultCount: tileData.resultCount
-        currentIndex: resultsListLoader.active ? resultsListLoader.item.currentIndex : 0 // approximate
-        
+        currentIndex: resultsListLoader.active && resultsListLoader.item ? resultsListLoader.item.currentIndex : 0
+
         onTextUpdated: (newText) => {
             requestSearchTextUpdate(newText);
         }
         onSearchSubmitted: (idx) => {
-             // Dispatch to the active results view.
-             if (isTileView && tileResultsLoader.item) {
-                 tileResultsLoader.item.activateCurrentItem();
-                 return;
-             } else if (searchText.length === 0 && historyLoader.item) {
-                 if (historyLoader.item.activateCurrentItem) {
-                     historyLoader.item.activateCurrentItem();
-                     return;
-                 }
-             }
-
-             if (tileData.resultCount > 0) {
-                 var modelIdx = resultsModel.index(idx, 0);
-                 var display = resultsModel.data(modelIdx, Qt.DisplayRole) || "";
-                 var decoration = resultsModel.data(modelIdx, Qt.DecorationRole) || "";
-                 var category = resultsModel.data(modelIdx, resultsModel.CategoryRole) || "";
-                 var matchId = resultsModel.data(modelIdx, resultsModel.DuplicateRole) || display;
-                 var url = resultsModel.data(modelIdx, resultsModel.UrlRole) || ""; 
-                 
-                 handleResultClick(idx, display, decoration, category, matchId, url);
-             }
+             activateCurrentResult();
          }
         onEscapePressed: {
              requestSearchTextUpdate("");
@@ -667,13 +603,13 @@ Item {
         weatherFrequency: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.weatherFrequency !== undefined ? popupRoot.plasmoidConfig.weatherFrequency : 2) : 2
         rssShowFullHeadline: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssShowFullHeadline !== undefined ? popupRoot.plasmoidConfig.rssShowFullHeadline : true) : true
         rssShowSource: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssShowSource || false) : false
-        
+
         onTextUpdated: (newText) => {
              if (isButtonMode && newText !== popupRoot.searchText) {
                  requestSearchTextUpdate(newText);
              }
         }
-        
+
         // Manual binding for text (Popup -> Input)
         Connections {
              target: popupRoot
@@ -683,18 +619,11 @@ Item {
                  }
              }
         }
-        
+
         onSearchSubmitted: (text, idx) => {
-             if (tileData.resultCount > 0) {
-                 var modelIdx = resultsModel.index(idx, 0);
-                 if (!runResultSafely(modelIdx, text))
-                     return;
-                 requestSearchTextUpdate("");
-                 searchBar.clear();
-                 requestExpandChange(false);
-             }
+             activateCurrentResult();
          }
-        
+
         onEscapePressed: {
              requestSearchTextUpdate("");
              requestExpandChange(false);
@@ -716,22 +645,22 @@ Item {
         anchors.right: parent.right
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        
+
         property bool isVisible: {
             var hintsVisible = queryHintsLoader.active && queryHintsLoader.item && queryHintsLoader.item.visible;
             return popupRoot.expanded && popupRoot.searchText.length > 0 && !popupRoot.isRssOnlyQuery && !popupRoot.isCommandOnly && !hintsVisible;
         }
-        
+
         anchors.topMargin: isVisible ? 10 : 0
         height: isVisible ? 32 : 0
         opacity: isVisible ? 1 : 0
         clip: true
         visible: height > 0 || opacity > 0
-        
+
         Behavior on height { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
         Behavior on anchors.topMargin { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
         Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-        
+
         Loader {
             anchors.fill: parent
             active: filterChipsWrapper.visible
@@ -741,7 +670,7 @@ Item {
                 bgColor: popupRoot.bgColor
                 activeFilter: popupRoot.activeFilter
                 breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
-                
+
                 onFilterSelected: (name) => {
                     popupRoot.activeFilter = name;
                     queryDebouncer.restart();
@@ -759,22 +688,22 @@ Item {
         anchors.right: parent.right
         anchors.margins: 12
         asynchronous: true
-        active: popupRoot.expanded && popupRoot.hasPrimaryResult && !isTileView
-        
+        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !popupRoot.isCommandOnly && !popupRoot.isRssOnlyQuery
+
         sourceComponent: PrimaryResultPreview {
-            resultsModel: popupRoot.resultsModel
+            resultsModel: resultsModel
             resultCount: tileData.resultCount
+            flatSortedData: tileData.flatSortedData
             searchText: popupRoot.searchText
             accentColor: popupRoot.accentColor
             textColor: popupRoot.textColor
-            
-            onResultClicked: (idx, display, decoration, category) => {
+            previewEnabled: popupRoot.previewEnabled && popupRoot.previewShowResults
+            previewSettings: popupRoot.previewSettings
+
+            onResultClicked: (idx, display, decoration, category, matchId, filePath) => {
                 if (!isQueryAllowed(popupRoot.searchText))
                     return;
-                logic.addToHistory(display, decoration, category, display, "", "calculator", popupRoot.searchText);
-                runResultSafely(resultsModel.index(idx, 0));
-                requestSearchTextUpdate("");
-                requestExpandChange(false);
+                handleResultClick(idx, display, decoration, category, matchId || display, filePath || "");
             }
         }
     }
@@ -782,8 +711,8 @@ Item {
     // Query Hints (Loader)
     Loader {
         id: queryHintsLoader
-        anchors.top: (primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready) 
-                     ? primaryResultPreviewLoader.bottom 
+        anchors.top: (primaryResultPreviewLoader.active && primaryResultPreviewLoader.status === Loader.Ready)
+                     ? primaryResultPreviewLoader.bottom
                      : filterChipsWrapper.bottom
         anchors.topMargin: 8
         anchors.left: parent.left
@@ -800,7 +729,7 @@ Item {
 
             logic: popupRoot.logic
             plasmoidConfig: popupRoot.plasmoidConfig
-            
+
             onHintSelected: (text) => {
                 requestSearchTextUpdate(text)
                 if (!isButtonMode) hiddenSearchInput.text = text
@@ -808,7 +737,7 @@ Item {
             }
         }
     }
-    
+
 
 
     // Pinned Section (Loader)
@@ -821,26 +750,24 @@ Item {
         anchors.leftMargin: 12
         anchors.rightMargin: 12
         asynchronous: true
-        
+
         property var items: logic.visiblePinnedItems
         active: popupRoot.expanded && showPinnedBar && !popupRoot.isRssOnlyQuery
-        
+
         // Connections removed as binding handles updates now
-        
+
         sourceComponent: PinnedSection {
             pinnedItems: pinnedLoader.items
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
             iconSize: popupRoot.iconSize
             isTileView: popupRoot.isTileView
-            isSearching: popupRoot.searchText.length > 0
+            isSearching: popupRoot.searchText.length > 0 || popupRoot.isPrefixMenuOpen
             compactPinnedView: popupRoot.compactPinnedItems
-            breezeStyle: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.filterChipStyle === 1) : false
 
-            
             onItemClicked: (item) => {
                 if (item.filePath) {
-                     if (item.filePath.toString().indexOf(".desktop") !== -1) {
+                     if (Utils.isDesktopEntry(item.filePath)) {
                           logic.launchApp(item.filePath);
                      } else {
                           if (Utils.isSafeExternalUrl(item.filePath)) Qt.openUrlExternally(item.filePath);
@@ -856,12 +783,12 @@ Item {
                 requestExpandChange(false);
             }
             onUnpinClicked: (matchId) => logic.unpinItem(matchId)
-            
+
             // Drag-drop reorder
             onReorderRequested: (fromUuid, toUuid) => {
                 logic.reorderPinnedItems(fromUuid, toUuid)
             }
-            
+
             // Context menu actions
             onCopyPathRequested: (item) => {
                 if (item.filePath) {
@@ -869,7 +796,7 @@ Item {
                     logic.copyToClipboard(path)
                 }
             }
-            
+
             onOpenLocationRequested: (item) => {
                 if (item.filePath) {
                     var path = item.filePath.toString()
@@ -889,10 +816,56 @@ Item {
 
 
 
+    // Start screen prefix shortcuts. Keep them as a single horizontal strip so
+    // the history grid below stays visible and keeps its old structure.
+    Item {
+        id: startupPrefixStrip
+        anchors.top: pinnedLoader.bottom
+        anchors.topMargin: active ? Kirigami.Units.smallSpacing * 2 : 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: 12 + Kirigami.Units.largeSpacing
+        anchors.rightMargin: 12 + Kirigami.Units.largeSpacing
+        height: active ? Kirigami.Units.gridUnit * 1.8 : 0
+        visible: active
+        clip: true
+
+        property bool active: popupRoot.expanded && popupRoot.searchText.length === 0 && !popupRoot.isRssOnlyQuery
+        property var prefixActions: [
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Help"), prefix: "help:", icon: "help-contents" },
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Weather"), prefix: "weather:", icon: "weather-clear" },
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Unit Converter"), prefix: "unit:", icon: "accessories-calculator" },
+            { label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Date and Time"), prefix: "date:", icon: "view-calendar" }
+        ]
+
+        ListView {
+            id: startupPrefixList
+            anchors.fill: parent
+            orientation: ListView.Horizontal
+            spacing: Kirigami.Units.smallSpacing
+            clip: true
+            boundsBehavior: Flickable.StopAtBounds
+            interactive: contentWidth > width
+            model: startupPrefixStrip.prefixActions
+
+            delegate: PlasmaComponents.Button {
+                width: implicitWidth
+                height: startupPrefixStrip.height
+                text: modelData.label + "  " + modelData.prefix
+                icon.name: modelData.icon
+                onClicked: {
+                    requestSearchTextUpdate(modelData.prefix)
+                    if (!isButtonMode) hiddenSearchInput.text = modelData.prefix
+                    else searchBar.setText(modelData.prefix)
+                }
+            }
+        }
+    }
+
     // Result List View (Loader)
     Loader {
         id: resultsListLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: startupPrefixStrip.bottom
         anchors.topMargin: active ? 6 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -902,9 +875,9 @@ Item {
         asynchronous: true
         // Use bottom margin to simulate anchoring to top of buttonModeSearchInput
         anchors.bottomMargin: 12
-        
-        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !popupRoot.isCommandOnly
-        
+
+        active: popupRoot.expanded && !isTileView && searchText.length > 0 && !popupRoot.isCommandOnly && !popupRoot.isPrefixMenuOpen
+
         sourceComponent: ResultsListView {
              resultsModel: resultsModel
              flatSortedData: tileData.flatSortedData
@@ -920,15 +893,15 @@ Item {
              previewSize: popupRoot.previewSize
              previewSettings: popupRoot.previewSettings
              logic: popupRoot.logic
-             
+
              isPinnedFunc: logic.isPinned
              togglePinFunc: logic.togglePin
-             
+
              rssShowImages: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssShowImages !== undefined ? popupRoot.plasmoidConfig.rssShowImages : true) : true
              rssExpandableCards: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssExpandableCards !== undefined ? popupRoot.plasmoidConfig.rssExpandableCards : true) : true
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
-             
+
              onItemRightClicked: (item, x, y) => {
                  resultsContextMenu.historyItem = item
                  resultsContextMenu.popup()
@@ -936,11 +909,11 @@ Item {
              anchors.fill: parent
         }
     }
-    
+
     // Result Tile View (Loader)
     Loader {
         id: tileResultsLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: startupPrefixStrip.bottom
         anchors.topMargin: active ? 6 : 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -950,8 +923,8 @@ Item {
         anchors.bottomMargin: 12
 
         asynchronous: true
-        active: popupRoot.expanded && isTileView && searchText.length > 0 && !popupRoot.isCommandOnly
-        
+        active: popupRoot.expanded && isTileView && searchText.length > 0 && !popupRoot.isCommandOnly && !popupRoot.isPrefixMenuOpen
+
         sourceComponent: ResultsTileView {
              categorizedData: tileData.categorizedData
              iconSize: popupRoot.iconSize
@@ -972,12 +945,12 @@ Item {
              rssExpandableCards: popupRoot.plasmoidConfig ? (popupRoot.plasmoidConfig.rssExpandableCards !== undefined ? popupRoot.plasmoidConfig.rssExpandableCards : true) : true
 
              onItemClicked: (idx, disp, dec, cat, mid, path) => handleResultClick(idx, disp, dec, cat, mid, path)
-             
+
              onItemRightClicked: (item, x, y) => {
                  resultsContextMenu.historyItem = item
                  resultsContextMenu.popup()
              }
-             
+
              onTabPressed: cycleFocusSection(true)
              onShiftTabPressed: cycleFocusSection(false)
              onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
@@ -988,16 +961,16 @@ Item {
     // Date/Clock View (Special "date:" query)
     Loader {
         id: dateViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: startupPrefixStrip.bottom
         anchors.topMargin: active ? 6 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom // Anchor to parent bottom
         anchors.margins: 12
         anchors.bottomMargin: 12
-        
+
         active: popupRoot.expanded && (popupRoot.effectiveQuery === "date:" || popupRoot.effectiveQuery === "clock:")
-        
+
         sourceComponent: DateView {
             textColor: popupRoot.textColor
             viewMode: popupRoot.effectiveQuery === "clock:" ? "clock" : "date"
@@ -1010,21 +983,21 @@ Item {
     // Help View ("help:" query)
     Loader {
         id: helpViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: startupPrefixStrip.bottom
         anchors.topMargin: active ? 6 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 12
         anchors.bottomMargin: 12
-        
+
         active: popupRoot.expanded && popupRoot.effectiveQuery === "help:"
-        
+
         sourceComponent: HelpView {
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
 
-            
+
             onAidSelected: (prefix) => {
                 // HelpView returns the prefix in the active locale.
                 requestSearchTextUpdate(prefix)
@@ -1034,23 +1007,24 @@ Item {
             anchors.fill: parent
         }
     }
-    
+
     // Weather View ("weather:" query)
     Loader {
         id: weatherViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: startupPrefixStrip.bottom
         anchors.topMargin: active ? 6 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 12
         anchors.bottomMargin: 12
-        
+
         active: popupRoot.expanded && popupRoot.effectiveQuery.startsWith("weather:")
-        
+
         sourceComponent: WeatherView {
             // WeatherView handles its own fetching on visible
             plasmoidConfig: popupRoot.plasmoidConfig
+            logic: popupRoot.logic
             anchors.fill: parent
             queryCity: {
                 var eq = popupRoot.effectiveQuery;
@@ -1065,16 +1039,16 @@ Item {
     // Power View ("power:" query)
     Loader {
         id: powerViewLoader
-        anchors.top: pinnedLoader.bottom
+        anchors.top: startupPrefixStrip.bottom
         anchors.topMargin: active ? 6 : 0
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 12
         anchors.bottomMargin: 12
-        
+
         active: popupRoot.expanded && popupRoot.effectiveQuery === "power:"
-        
+
         sourceComponent: PowerView {
             textColor: popupRoot.textColor
             accentColor: popupRoot.accentColor
@@ -1083,7 +1057,7 @@ Item {
             bgColor: popupRoot.bgColor
             showBootOptions: popupRoot.showBootOptions
             plasmoidConfig: popupRoot.plasmoidConfig
-            
+
             onRequestPreventClosing: (prevent) => {
                 popupRoot.preventClosing = prevent
                 popupRoot.requestPreventClosing(prevent) // Forward to main just in case
@@ -1091,23 +1065,23 @@ Item {
             anchors.fill: parent
         }
     }
-    
+
     // History Container (Loader) - Show when no search text
     Loader {
          id: historyLoader
-         anchors.top: pinnedLoader.bottom
+         anchors.top: startupPrefixStrip.bottom
          anchors.left: parent.left
          anchors.right: parent.right
          anchors.bottom: parent.bottom // Anchor to parent bottom
          anchors.leftMargin: 12
          anchors.rightMargin: 12
          // History top margin is now fixed
-         anchors.topMargin: 6 
+         anchors.topMargin: 6
          asynchronous: true
          anchors.bottomMargin: 12
-         
-         active: popupRoot.expanded && searchText.length === 0
-         
+
+         active: popupRoot.expanded && (searchText.length === 0 || popupRoot.isPrefixMenuOpen)
+
          property var categorizedHistory: {
              if (logic.searchHistory.length === 0) return [];
              var hist = logic.searchHistory;
@@ -1116,39 +1090,29 @@ Item {
                  var filterLower = activeFilter.toLowerCase();
                  for (var i = 0; i < hist.length; i++) {
                      var item = hist[i];
-                     var catLower = (item.category || "").toLowerCase();
-                     var decLower = (item.decoration || "").toLowerCase();
-                     var urlLower = (item.filePath || "").toLowerCase();
-                     var shouldKeep = false;
-                     
-                     if (filterLower === "apps" && item.isApplication) shouldKeep = true;
-                     else if (filterLower === "docs" && (catLower.indexOf("belge") !== -1 || catLower.indexOf("doc") !== -1)) shouldKeep = true;
-                     else if (filterLower === "images" && (catLower.indexOf("resim") !== -1 || catLower.indexOf("image") !== -1 || decLower.indexOf("image") !== -1)) shouldKeep = true;
-                     else if (filterLower === "folders" && (catLower.indexOf("klasör") !== -1 || catLower.indexOf("folder") !== -1 || catLower.indexOf("place") !== -1)) shouldKeep = true;
-                     else if (filterLower === "web" && (catLower.indexOf("web") !== -1 || catLower.indexOf("internet") !== -1)) shouldKeep = true;
-                     
-                     if (shouldKeep) filtered.push(item);
+                     if (Utils.matchesResultFilter(filterLower, item.category || "", item.filePath || "", item.matchId || "", item.decoration || "", Utils.getPathExtension(item.filePath || "")))
+                         filtered.push(item);
                  }
                  hist = filtered;
              }
              return HistoryManager.categorizeHistory(hist, i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), i18nd("plasma_applet_com.mcc45tr.filesearch", "Other"));
          }
-         
+
          sourceComponent: Item {
              anchors.fill: parent
              // Helper to route navigation
-             function moveUp() { 
+             function moveUp() {
                  var view = isTileView ? histTileLoader.item : histListLoader.item;
                  if (view) view.moveUp();
              }
-             function moveDown() { 
+             function moveDown() {
                  var view = isTileView ? histTileLoader.item : histListLoader.item;
                  if (view) view.moveDown();
              }
-             function moveLeft() { 
+             function moveLeft() {
                  if (histTileLoader.item) histTileLoader.item.moveLeft();
              }
-             function moveRight() { 
+             function moveRight() {
                  if (histTileLoader.item) histTileLoader.item.moveRight();
              }
              function activateCurrentItem() {
@@ -1178,7 +1142,7 @@ Item {
                      onClearClicked: logic.clearHistory()
                  }
              }
-             
+
              // History Tile
              Loader {
                  id: histTileLoader
@@ -1200,6 +1164,11 @@ Item {
                      compactTileView: popupRoot.compactHistoryItems
                      onItemClicked: (item) => handleHistoryClick(item)
                      onClearClicked: logic.clearHistory()
+                     onHintSelected: (text) => {
+                         requestSearchTextUpdate(text)
+                         if (!isButtonMode) hiddenSearchInput.text = text
+                         else searchBar.setText(text)
+                     }
                      onTabPressed: cycleFocusSection(true)
                      onShiftTabPressed: cycleFocusSection(false)
                      onViewModeChangeRequested: (mode) => requestViewModeChange(mode)
@@ -1207,7 +1176,7 @@ Item {
              }
          }
     }
-    
+
     // Debug Overlay (Loader)
     Loader {
          id: debugOverlayLoader
@@ -1217,7 +1186,7 @@ Item {
          z: 9999
          asynchronous: true
          active: popupRoot.expanded && popupRoot.showDebug
-         
+
          sourceComponent: DebugOverlay {
               resultCount: tileData.resultCount
               activeBackend: popupRoot.activeBackend
@@ -1239,65 +1208,64 @@ Item {
             height: 550
             title: articleTitle
             visible: true
-            
+
             property string articleTitle: ""
             property string articleText: ""
             property string articleUrl: ""
-            
+
             color: popupRoot.bgColor
-            
+
             Shortcut {
                 sequence: "Escape"
                 onActivated: artWin.close()
             }
-            
+
             ColumnLayout {
                 anchors.fill: parent
                 anchors.margins: 16
                 spacing: 12
-                
+
                 Text {
                     text: artWin.articleTitle
                     color: popupRoot.textColor
                     font.bold: true
-                    font.pixelSize: 18
-                    font.family: popupRoot.fontFamily
+                    font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.5)
                     wrapMode: Text.WordWrap
                     Layout.fillWidth: true
                 }
-                
-                ScrollView {
+
+                PlasmaComponents.ScrollView {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     clip: true
-                    
-                    TextArea {
+
+                    PlasmaComponents.TextArea {
                         text: artWin.articleText
                         color: popupRoot.textColor
-                        font.pixelSize: 14
-                        font.family: popupRoot.fontFamily
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         wrapMode: Text.WordWrap
                         readOnly: true
                         selectByMouse: true
                         background: null
                     }
                 }
-                
+
                 RowLayout {
                     Layout.fillWidth: true
                     spacing: 8
-                    
-                    Button {
+
+                    PlasmaComponents.Button {
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open in Browser")
                         icon.name: "internet-services"
                         onClicked: {
                             if (Utils.isSafeExternalUrl(artWin.articleUrl)) Qt.openUrlExternally(artWin.articleUrl)
                         }
                     }
-                    
+
                     Item { Layout.fillWidth: true }
-                    
-                    Button {
+
+                    PlasmaComponents.Button {
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Close")
                         onClicked: artWin.close()
                     }

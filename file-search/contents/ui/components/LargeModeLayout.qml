@@ -1,7 +1,7 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import "WeatherService.js" as WeatherService
 
 Item {
@@ -25,7 +25,7 @@ Item {
     Item {
         id: contentContainer
         anchors.fill: parent
-        
+
         opacity: weatherRoot.showForecastDetails ? 0 : 1
         Behavior on opacity { NumberAnimation { duration: 300; easing.type: Easing.OutQuad } }
 
@@ -53,51 +53,54 @@ Item {
                     width: parent.width * 0.55
                     spacing: 2
 
-                    Text {
-                        text: currentWeather ? i18n(currentWeather.condition) : ""
+                    Kirigami.Heading {
+                        level: 1
+                        text: currentWeather ? i18nd("plasma_applet_com.mcc45tr.filesearch", currentWeather.condition) : ""
                         textFormat: Text.PlainText
                         color: Kirigami.Theme.textColor
                         font.family: weatherRoot.activeFont.family
-                        font.pixelSize: Math.min(32, largeLayout.height * 0.08)
+                        font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize * 2.5, largeLayout.height * 0.08))
                         font.bold: true
                         elide: Text.ElideRight
                         width: parent.width
                     }
 
-                    Text {
+                    Kirigami.Heading {
+                        level: 3
                         text: currentWeather ? currentWeather.location : location
                         color: Kirigami.Theme.textColor
                         font.family: weatherRoot.activeFont.family
-                        font.pixelSize: Math.min(20, largeLayout.height * 0.05)
+                        font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize * 1.5, largeLayout.height * 0.05))
                         font.bold: true
                         opacity: 0.7
                         elide: Text.ElideRight
                         width: parent.width
                     }
-                    
+
                     // Smart Clothing Suggestion
                     Row {
                         id: clothingSuggestionRow
                         spacing: 8
                         visible: clothingRepeater.count > 0
-                        
+
                         property var suggestions: currentWeather ? WeatherService.getClothingSuggestion(currentWeather, weatherRoot.units) : null
-                        
+
                         Repeater {
                             id: clothingRepeater
                             model: clothingSuggestionRow.suggestions || []
-                            
+
                             Row {
                                 spacing: 3
                                 Text {
                                     text: modelData.icon
-                                    font.pixelSize: 14
+                                    font.family: Kirigami.Theme.defaultFont.family
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                 }
                                 Text {
-                                    text: i18n(modelData.text)
+                                    text: i18nd("plasma_applet_com.mcc45tr.filesearch", modelData.text)
                                     color: Kirigami.Theme.textColor
                                     font.family: weatherRoot.activeFont.family
-                                    font.pixelSize: 12
+                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                     opacity: 0.6
                                 }
                             }
@@ -125,7 +128,7 @@ Item {
                     text: currentWeather ? currentWeather.temp + "°" : "--"
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
-                    font.pixelSize: Math.min(100, largeLayout.height * 0.22)
+                    font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize * 2, Math.min(Kirigami.Theme.defaultFont.pixelSize * 8, largeLayout.height * 0.22))
                     font.bold: true
                     lineHeight: 0.85
                 }
@@ -148,38 +151,15 @@ Item {
                     anchors.bottomMargin: 4
                     spacing: 4
 
-                    Rectangle {
-                        width: toggleTextLarge.implicitWidth + 24
-                        height: 28
-                        radius: 14 * weatherRoot.radiusMultiplier
-                        color: weatherRoot.showInnerBackgrounds ? Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1) : "transparent"
+                    PlasmaComponents.TabBar {
+                        currentIndex: forecastMode ? 1 : 0
+                        onCurrentIndexChanged: weatherRoot.forecastMode = currentIndex === 1
 
-                        Text {
-                            id: toggleTextLarge
-                            anchors.centerIn: parent
-                            text: forecastMode ? i18n("Hourly Forecast") : i18n("Daily Forecast")
-                            color: Kirigami.Theme.textColor
-                            font.family: weatherRoot.activeFont.family
-                            font.pixelSize: 12
-                            font.bold: true
+                        PlasmaComponents.TabButton {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Daily Forecast")
                         }
-
-                        MouseArea {
-                            id: toggleMouseAreaLarge
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            hoverEnabled: true
-                            onClicked: weatherRoot.forecastMode = !weatherRoot.forecastMode
-                        }
-
-                        Rectangle {
-                            anchors.fill: parent
-                            color: Kirigami.Theme.highlightColor
-                            opacity: toggleMouseAreaLarge.containsMouse ? 0.1 : 0
-                            radius: 14 * weatherRoot.radiusMultiplier
-                            topLeftRadius: 5
-                            bottomLeftRadius: 5
-                            Behavior on opacity { NumberAnimation { duration: 150 } }
+                        PlasmaComponents.TabButton {
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Hourly Forecast")
                         }
                     }
                 }
@@ -200,14 +180,10 @@ Item {
                 edgeMargins: 0
 
                 readonly property real minCardHeight: 100
-                readonly property int visibleRows: Math.max(1, Math.floor(height / minCardHeight))
-
                 readonly property real minCardWidth: 70
-                readonly property int cardsPerRow: Math.max(1, Math.floor(width / minCardWidth))
-
-                cellWidth: width / cardsPerRow
-                cellHeight: height / visibleRows
-                flow: GridView.FlowLeftToRight
+                cellWidth: Math.max(minCardWidth, width / Math.max(1, Math.min(count, 7)))
+                cellHeight: height
+                flow: GridView.FlowTopToBottom
 
                 onItemClicked: function(data, idx, cardRect) {
                     if (!forecastMode && data.hasDetails) {
@@ -282,7 +258,7 @@ Item {
             clip: true
             opacity: 0
 
-            ScrollBar.vertical: ScrollBar { policy: ScrollBar.AlwaysOff; width: 0 }
+            PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar { policy: PlasmaComponents.ScrollBar.AlwaysOff; width: 0 }
 
             MouseArea {
                 anchors.fill: parent
@@ -361,12 +337,12 @@ Item {
             boundsBehavior: Flickable.StopAtBounds
             opacity: forecastDetailsOverlayLarge.contentOpacity
 
-            ScrollBar.vertical: ScrollBar { policy: forecastDetailsContentLarge.height > parent.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff; width: 6 }
+            PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar { policy: forecastDetailsContentLarge.height > parent.height ? PlasmaComponents.ScrollBar.AlwaysOn : PlasmaComponents.ScrollBar.AlwaysOff; width: 6 }
 
             Item {
                 width: parent.width
                 height: forecastFlickableLarge.contentHeight
-                
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: weatherRoot.showForecastDetails = false

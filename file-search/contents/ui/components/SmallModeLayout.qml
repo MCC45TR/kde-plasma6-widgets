@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 Item {
     id: smallLayout
@@ -12,7 +12,7 @@ Item {
     property string location: weatherRoot.location
 
     function getWeatherIcon(item) { return weatherRoot.getWeatherIcon(item) }
-    
+
     Timer {
         id: autoReturnTimer
         interval: 5000
@@ -20,7 +20,7 @@ Item {
         onTriggered: swipeView.currentIndex = 0
     }
 
-    SwipeView {
+    PlasmaComponents.SwipeView {
         id: swipeView
         anchors.fill: parent
         clip: true
@@ -39,7 +39,7 @@ Item {
                     textFormat: Text.PlainText
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
-                    font.pixelSize: Math.max(16, Math.min(24, smallLayout.height * 0.12))
+                    font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize * 2, smallLayout.height * 0.12))
                     wrapMode: Text.WordWrap
                     maximumLineCount: 2
                     elide: Text.ElideRight
@@ -49,7 +49,7 @@ Item {
                     text: currentWeather ? currentWeather.location : location
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
-                    font.pixelSize: Math.max(14, Math.min(20, smallLayout.height * 0.1))
+                    font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, Math.min(Kirigami.Theme.defaultFont.pixelSize * 1.5, smallLayout.height * 0.1))
                     font.bold: true
                     elide: Text.ElideRight
                     Layout.fillWidth: true
@@ -79,7 +79,7 @@ Item {
                 text: currentWeather ? currentWeather.temp : "--"
                 color: Kirigami.Theme.textColor
                 font.family: weatherRoot.activeFont.family
-                font.pixelSize: smallLayout.height * 0.45
+                font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize * 2, smallLayout.height * 0.45)
                 font.bold: true
                 lineHeight: 0.8
             }
@@ -103,17 +103,17 @@ Item {
 
                 RowLayout {
                     spacing: 2
-                    Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: Math.max(12, smallLayout.height * 0.08); font.bold: true }
-                    Text { text: currentWeather ? currentWeather.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(12, smallLayout.height * 0.08); font.bold: true }
+                    Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, smallLayout.height * 0.08); font.bold: true }
+                    Text { text: currentWeather ? currentWeather.temp_max + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, smallLayout.height * 0.08); font.bold: true }
                 }
 
                 RowLayout {
                     spacing: 2
-                    Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: Math.max(12, smallLayout.height * 0.08); font.bold: true }
-                    Text { text: currentWeather ? currentWeather.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(12, smallLayout.height * 0.08); font.bold: true }
+                    Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, smallLayout.height * 0.08); font.bold: true }
+                    Text { text: currentWeather ? currentWeather.temp_min + "°" : "--"; color: Kirigami.Theme.textColor; font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, smallLayout.height * 0.08); font.bold: true }
                 }
             }
-            
+
             // Navigation Button
             Rectangle {
                 anchors.right: parent.right
@@ -123,7 +123,7 @@ Item {
                 height: 24
                 radius: width / 2
                 color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.1)
-                
+
                 Kirigami.Icon {
                     anchors.centerIn: parent
                     width: 16
@@ -148,11 +148,11 @@ Item {
                 anchors.fill: parent
                 anchors.margins: 10
                 weatherRoot: smallLayout.weatherRoot
-                
+
                 // Layout params for 1x2 grid (2 vertical tiles)
                 cellWidth: width
                 cellHeight: height / 2
-                
+
                 // Appearance for Small Mode
                 showUnits: false
                 showBackground: true
@@ -163,7 +163,7 @@ Item {
                 isHourly: false // Explicitly set to daily mode for small view
                 // Model inherited from DailyForecastView (weatherRoot.forecastDaily)
             }
-            
+
             // Hover detection for auto-return
             MouseArea {
                 anchors.fill: parent
@@ -174,6 +174,6 @@ Item {
             }
         }
     }
-    
+
 
 }

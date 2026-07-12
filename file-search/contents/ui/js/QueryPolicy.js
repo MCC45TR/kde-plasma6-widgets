@@ -1,20 +1,20 @@
 .pragma library
-
-function startsCommand(lower, englishPrefix, localizedPrefix, separator) {
-    var english = englishPrefix + separator
-    if (lower.startsWith(english)) return true
-    if (localizedPrefix && lower.startsWith(localizedPrefix + separator)) return true
-    return false
-}
+.import "PrefixRegistry.js" as PrefixRegistry
 
 function isAllowed(text, policy) {
-    var lower = String(text || "").trim().toLowerCase()
-    if (!lower) return true
-    if (!policy.shellEnabled && startsCommand(lower, "shell", policy.locShell, ":")) return false
-    if (!policy.killEnabled && startsCommand(lower, "kill", policy.locKill, " ")) return false
-    if (!policy.spellEnabled && startsCommand(lower, "spell", policy.locSpell, " ")) return false
-    if (!policy.unitEnabled && startsCommand(lower, "unit", policy.locUnit, ":")) return false
-    if (!policy.timelineEnabled && lower.startsWith("timeline:/")) return false
-    if (!policy.webSearchEnabled && (lower.startsWith("gg:") || lower.startsWith("dd:"))) return false
-    return true
+    return PrefixRegistry.isAllowed(text, {
+        shell: policy.locShell,
+        kill: policy.locKill,
+        spell: policy.locSpell,
+        unit: policy.locUnit,
+        weather: policy.locWeather
+    }, {
+        prefixShellEnabled: policy.shellEnabled,
+        prefixKillEnabled: policy.killEnabled,
+        prefixSpellEnabled: policy.spellEnabled,
+        prefixUnitEnabled: policy.unitEnabled,
+        prefixTimelineEnabled: policy.timelineEnabled,
+        prefixWebSearchEnabled: policy.webSearchEnabled,
+        weatherEnabled: policy.weatherEnabled
+    })
 }

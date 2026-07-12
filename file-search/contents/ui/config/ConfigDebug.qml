@@ -6,6 +6,11 @@ import org.kde.kirigami as Kirigami
 Kirigami.FormLayout {
     id: debugPage
 
+    property int cfg_panelWidthStep
+    property int cfg_panelWidthStepDefault
+    property int cfg_panelContentOpacity
+    property int cfg_panelContentOpacityDefault
+
     // Weather configuration
     property string cfg_weatherProvider
     property string cfg_weatherProviderDefault

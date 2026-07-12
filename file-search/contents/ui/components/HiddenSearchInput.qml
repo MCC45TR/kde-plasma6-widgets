@@ -1,10 +1,10 @@
 import QtQuick
-import QtQuick.Controls
+import org.kde.plasma.components as PlasmaComponents
 
 // Hidden Search Input - Captures keyboard focus in non-button modes
-TextField {
+PlasmaComponents.TextField {
     id: hiddenInput
-    
+
     // Signals (renamed to avoid conflict with property change signals)
     signal textUpdated(string newText)
     signal searchSubmitted(int selectedIndex)
@@ -16,47 +16,47 @@ TextField {
     signal leftPressed()
     signal rightPressed()
     signal viewModeChangeRequested(int mode)
-    
+
     // For referencing result count
     property int resultCount: 0
     property int currentIndex: 0
-    
+
     width: 1
     height: 1
     opacity: 0
     activeFocusOnPress: true
-    
+
     onTextChanged: {
         hiddenInput.textUpdated(text)
     }
-    
+
     onAccepted: {
         if (resultCount > 0) {
             var idx = currentIndex >= 0 ? currentIndex : 0
             hiddenInput.searchSubmitted(idx)
         }
     }
-    
+
     Keys.onEscapePressed: {
         hiddenInput.escapePressed()
     }
-    
+
     Keys.onDownPressed: {
         hiddenInput.downPressed()
     }
-    
+
     Keys.onUpPressed: {
         hiddenInput.upPressed()
     }
-    
+
     Keys.onLeftPressed: {
         hiddenInput.leftPressed()
     }
-    
+
     Keys.onRightPressed: {
         hiddenInput.rightPressed()
     }
-    
+
     Keys.onTabPressed: (event) => {
         if (event.modifiers & Qt.ShiftModifier) {
             hiddenInput.shiftTabPressedSignal()
@@ -65,7 +65,7 @@ TextField {
         }
         event.accepted = true
     }
-    
+
     Keys.onPressed: (event) => {
         if (event.modifiers & Qt.ControlModifier) {
             if (event.key === Qt.Key_1) {
@@ -77,12 +77,12 @@ TextField {
             }
         }
     }
-    
+
     // Force focus
     function focusInput() {
         forceActiveFocus()
     }
-    
+
     // Clear and focus
     function clearAndFocus() {
         text = ""

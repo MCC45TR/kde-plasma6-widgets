@@ -1,19 +1,20 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import "WeatherService.js" as WeatherService
 import "WeatherIconMapper.js" as WeatherIcons
 
 // LogicController must be injected or accessible
 Item {
     id: weatherView
-    
+
     // Properties
     property var plasmoidConfig: null // injected from SearchPopup
+    property var logic: null
     property string queryCity: ""
     property var currentWeather: null
-    
+
     onQueryCityChanged: {
         invalidateActiveRequest()
         if (queryCity !== "") {
@@ -79,19 +80,19 @@ Item {
             completed()
         })
     }
-    
+
     // UI Layout Properties expected by mweather sub-components
     property bool forecastMode: false
     property bool largeDetailsOpen: false
     property var selectedForecast: null
     property bool showForecastDetails: false
-    
+
     readonly property font activeFont: Kirigami.Theme.defaultFont
     readonly property real radiusMultiplier: 1.0
     readonly property bool showInnerBackgrounds: true
     readonly property double backgroundOpacity: 0.9
     readonly property bool showForecastUnits: true
-    
+
     readonly property string weatherProvider: plasmoidConfig ? (plasmoidConfig.weatherProvider || "openmeteo") : "openmeteo"
     readonly property string iconPack: plasmoidConfig ? (plasmoidConfig.weatherIconPack || "default") : "default"
     readonly property string units: {
@@ -101,12 +102,12 @@ Item {
         }
         return plasmoidConfig.weatherUnits || "metric";
     }
-    
+
     readonly property string layoutMode: plasmoidConfig ? (plasmoidConfig.weatherViewMode || "large") : "large"
     readonly property bool isWideMode: layoutMode === "wide"
     readonly property bool isLargeMode: layoutMode === "large"
     readonly property bool isSmallMode: layoutMode === "small"
-    
+
     // Auto-fetch on visible
     onVisibleChanged: {
         if (visible && !currentWeather) {
@@ -116,6 +117,14 @@ Item {
 
     Component.onCompleted: {
         loadCachedWeatherOrFetch()
+    }
+
+    Connections {
+        target: weatherView.logic
+        function onWeatherCacheLoadedChanged() {
+            if (weatherView.logic.weatherCacheLoaded && !weatherView.currentWeather)
+                weatherView.loadCachedWeatherOrFetch()
+        }
     }
 
     Component.onDestruction: invalidateActiveRequest()
@@ -132,7 +141,9 @@ Item {
             fetchWeatherData()
             return
         }
-        var cached = (plasmoidConfig && plasmoidConfig.weatherCache) ? plasmoidConfig.weatherCache : ""
+        if (logic && !logic.weatherCacheLoaded)
+            return
+        var cached = logic ? logic.weatherCache : ((plasmoidConfig && plasmoidConfig.weatherCache) ? plasmoidConfig.weatherCache : "")
         if (cached && cached !== "{}" && cached !== "") {
             try {
                 var result = JSON.parse(cached)
@@ -143,7 +154,7 @@ Item {
                     location = result.current.location
                     isLoading = false
                     errorMessage = ""
-                    
+
                     // Check if stale
                     var lastUpdate = (plasmoidConfig && plasmoidConfig.weatherLastUpdate) ? plasmoidConfig.weatherLastUpdate : 0
                     var refreshInterval = (plasmoidConfig && plasmoidConfig.weatherRefreshInterval !== undefined) ? plasmoidConfig.weatherRefreshInterval : 15
@@ -159,7 +170,7 @@ Item {
         }
         fetchWeatherData()
     }
-    
+
     function fetchWeatherData() {
         queryDebounce.stop()
         invalidateActiveRequest()
@@ -168,7 +179,7 @@ Item {
         isFetching = true
         isLoading = true
         errorMessage = ""
-        
+
         var units = "metric"
         var refreshInterval = 15
         var provider = "openmeteo"
@@ -176,7 +187,7 @@ Item {
         var loc = ""
         var apiKey = ""
         var apiKey2 = ""
-        
+
         if (plasmoidConfig) {
              if (plasmoidConfig.weatherUseSystemUnits) {
                   units = Qt.locale().measurementSystem === Locale.MetricSystem ? "metric" : "imperial"
@@ -188,12 +199,12 @@ Item {
              locationMode = plasmoidConfig.weatherLocationMode || "auto"
              loc = plasmoidConfig.weatherLocation || ""
         }
-        
+
         if (queryCity !== "") {
             locationMode = "manual"
             loc = queryCity
         }
-        
+
         function issueRequest() {
             if (generation !== requestGeneration) return
             if (secretsLoaded) {
@@ -222,7 +233,8 @@ Item {
                     location = result.current.location
                     // Only save cache if this is not a temporary query city search
                     if (plasmoidConfig && requestedCity === "") {
-                        plasmoidConfig.weatherCache = JSON.stringify(result)
+                        if (logic && logic.saveWeatherCache)
+                            logic.saveWeatherCache(result)
                         if (!result.fromCache) plasmoidConfig.weatherLastUpdate = Date.now()
                     }
                 } else {
@@ -255,7 +267,7 @@ Item {
             weatherView.fetchWeatherData()
         }
     }
-    
+
     function calculateIsNight(item) {
         if (!item) return false
 
@@ -319,8 +331,8 @@ Item {
             anchors.centerIn: parent
             visible: weatherView.isLoading
             spacing: 10
-            BusyIndicator { running: weatherView.isLoading; Layout.alignment: Qt.AlignHCenter }
-            Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Loading weather data..."); color: Kirigami.Theme.textColor; font.pixelSize: 14; Layout.alignment: Qt.AlignHCenter }
+            PlasmaComponents.BusyIndicator { running: weatherView.isLoading; Layout.alignment: Qt.AlignHCenter }
+            PlasmaComponents.Label { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Loading weather data..."); color: Kirigami.Theme.textColor; font: Kirigami.Theme.defaultFont; Layout.alignment: Qt.AlignHCenter }
         }
 
         // Error State
@@ -330,8 +342,8 @@ Item {
             spacing: 10
             width: parent.width * 0.8
             Kirigami.Icon { source: "dialog-error"; Layout.preferredWidth: 32; Layout.preferredHeight: 32; Layout.alignment: Qt.AlignHCenter }
-            Label { text: weatherView.errorMessage; color: Kirigami.Theme.textColor; font.pixelSize: 13; Layout.alignment: Qt.AlignHCenter; horizontalAlignment: Text.AlignHCenter; wrapMode: Text.Wrap; Layout.fillWidth: true }
-            Button { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh"); Layout.alignment: Qt.AlignHCenter; onClicked: weatherView.fetchWeatherData() }
+            PlasmaComponents.Label { text: weatherView.errorMessage; color: Kirigami.Theme.textColor; font: Kirigami.Theme.defaultFont; Layout.alignment: Qt.AlignHCenter; horizontalAlignment: Text.AlignHCenter; wrapMode: Text.Wrap; Layout.fillWidth: true }
+            PlasmaComponents.Button { text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Refresh"); Layout.alignment: Qt.AlignHCenter; onClicked: weatherView.fetchWeatherData() }
         }
 
         // Content State - Dynamic loaders for different view modes

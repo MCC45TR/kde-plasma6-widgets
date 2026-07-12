@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 
 ColumnLayout {
@@ -31,7 +30,7 @@ ColumnLayout {
                 color: Kirigami.Theme.textColor
                 font.family: weatherRoot.activeFont.family
                 font.bold: true
-                font.pixelSize: 16
+                font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25)
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
@@ -41,7 +40,8 @@ ColumnLayout {
                 textFormat: Text.PlainText
                 color: Kirigami.Theme.textColor
                 opacity: 0.7
-                font.pixelSize: 12
+                font.family: Kirigami.Theme.defaultFont.family
+                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
             }
         }
 
@@ -55,14 +55,14 @@ ColumnLayout {
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
                     font.bold: true
-                    font.pixelSize: 36
+                    font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 3)
                 }
                 Text {
                     text: weatherRoot.units === "imperial" ? "°F" : "°C"
                     color: Kirigami.Theme.textColor
                     font.family: weatherRoot.activeFont.family
                     font.bold: true
-                    font.pixelSize: 36
+                    font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 3)
                     Layout.alignment: Qt.AlignTop
                 }
             }
@@ -72,13 +72,13 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignHCenter
                 RowLayout {
                     spacing: 2
-                    Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font.pixelSize: 11 }
-                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_max + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                    Text { text: "▲"; color: Kirigami.Theme.positiveTextColor; font: Kirigami.Theme.smallFont }
+                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_max + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font: Kirigami.Theme.smallFont }
                 }
                 RowLayout {
                     spacing: 2
-                    Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font.pixelSize: 11 }
-                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_min + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font.pixelSize: 11 }
+                    Text { text: "▼"; color: Kirigami.Theme.negativeTextColor; font: Kirigami.Theme.smallFont }
+                    Text { text: weatherRoot.currentWeather ? weatherRoot.currentWeather.temp_min + (weatherRoot.units === "imperial" ? "°F" : "°C") : "--"; color: Kirigami.Theme.textColor; font: Kirigami.Theme.smallFont }
                 }
             }
         }
@@ -99,10 +99,10 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: i18n("Feels like"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: i18n("Feels like"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.feels_like !== undefined) ? weatherRoot.currentWeather.feels_like + "°" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    color: Kirigami.Theme.textColor; font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25); font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -117,10 +117,10 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "💧 " + i18n("Humidity"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "💧 " + i18n("Humidity"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.humidity !== undefined) ? weatherRoot.currentWeather.humidity + "%" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    color: Kirigami.Theme.textColor; font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25); font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -135,10 +135,10 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "💨 " + i18n("Wind"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "💨 " + i18n("Wind"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.wind_speed !== undefined) ? weatherRoot.currentWeather.wind_speed + (weatherRoot.units === "imperial" ? " mph" : " km/h") : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    color: Kirigami.Theme.textColor; font.family: Kirigami.Theme.defaultFont.family; font.pixelSize: Kirigami.Theme.defaultFont.pixelSize; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -153,10 +153,10 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: i18n("Pressure"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: i18n("Pressure"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.pressure !== undefined && weatherRoot.currentWeather.pressure !== null) ? weatherRoot.currentWeather.pressure + " hPa" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 11; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    color: Kirigami.Theme.textColor; font.family: Kirigami.Theme.smallFont.family; font.pixelSize: Kirigami.Theme.smallFont.pixelSize; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -186,10 +186,10 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "☁️ " + i18n("Cloud Cover"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "☁️ " + i18n("Cloud Cover"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.clouds !== undefined) ? weatherRoot.currentWeather.clouds + "%" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    color: Kirigami.Theme.textColor; font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25); font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -204,7 +204,7 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "☀️ " + i18n("UV"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "☀️ " + i18n("UV"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.uv_index !== undefined && weatherRoot.currentWeather.uv_index !== null) ? weatherRoot.currentWeather.uv_index.toString() : "--"
                     color: {
@@ -215,7 +215,7 @@ ColumnLayout {
                         if (uv >= 3) return "#F7E400"
                         return Kirigami.Theme.textColor
                     }
-                    font.pixelSize: 15; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25); font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -230,10 +230,10 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "👁️ " + i18n("Visibility"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "👁️ " + i18n("Visibility"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.visibility !== undefined && weatherRoot.currentWeather.visibility !== null) ? weatherRoot.currentWeather.visibility + (weatherRoot.units === "imperial" ? " mi" : " km") : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    color: Kirigami.Theme.textColor; font.family: Kirigami.Theme.defaultFont.family; font.pixelSize: Kirigami.Theme.defaultFont.pixelSize; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -248,10 +248,10 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "💧 " + i18n("Dew Point"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "💧 " + i18n("Dew Point"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     text: (weatherRoot.currentWeather && weatherRoot.currentWeather.dew_point !== undefined) ? weatherRoot.currentWeather.dew_point + "°" : "--"
-                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
+                    color: Kirigami.Theme.textColor; font.family: Kirigami.Theme.defaultFont.family; font.pixelSize: Kirigami.Theme.defaultFont.pixelSize; font.bold: true; Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -263,8 +263,8 @@ ColumnLayout {
         Layout.fillWidth: true
         spacing: 6
         visible: weatherRoot.currentWeather && (
-            weatherRoot.currentWeather.wind_deg !== undefined || 
-            weatherRoot.currentWeather.sunrise !== undefined || 
+            weatherRoot.currentWeather.wind_deg !== undefined ||
+            weatherRoot.currentWeather.sunrise !== undefined ||
             weatherRoot.currentWeather.sunset !== undefined
         )
 
@@ -279,7 +279,7 @@ ColumnLayout {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 1
-                Text { text: "🧭 " + i18n("Wind Direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font.pixelSize: 9; Layout.alignment: Qt.AlignHCenter }
+                Text { text: "🧭 " + i18n("Wind Direction"); color: Kirigami.Theme.textColor; opacity: 0.6; font: Kirigami.Theme.smallFont; Layout.alignment: Qt.AlignHCenter }
                 Text {
                     id: windDirText
                     text: {
@@ -289,8 +289,8 @@ ColumnLayout {
                         var fullDirs = [i18n("North"), i18n("North East"), i18n("East"), i18n("South East"), i18n("South"), i18n("South West"), i18n("West"), i18n("North West")]
                         return fullDirs[idx]
                     }
-                    color: Kirigami.Theme.textColor; font.pixelSize: 13; font.bold: true; Layout.alignment: Qt.AlignHCenter
-                    
+                    color: Kirigami.Theme.textColor; font.family: Kirigami.Theme.defaultFont.family; font.pixelSize: Kirigami.Theme.defaultFont.pixelSize; font.bold: true; Layout.alignment: Qt.AlignHCenter
+
                     onContentWidthChanged: {
                         if (weatherRoot.currentWeather && weatherRoot.currentWeather.wind_deg !== undefined && parent && windDirText.contentWidth > parent.width - 20) {
                             var deg = weatherRoot.currentWeather.wind_deg
@@ -314,10 +314,10 @@ ColumnLayout {
             RowLayout {
                 anchors.centerIn: parent
                 spacing: 15
-                
+
                 RowLayout {
                     spacing: 4
-                    Text { text: "🌅"; font.pixelSize: 12 }
+                    Text { text: "🌅"; font: Kirigami.Theme.defaultFont }
                     Text {
                         text: {
                             if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunrise) return "--"
@@ -331,13 +331,13 @@ ColumnLayout {
                             }
                             return "--"
                         }
-                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
+                        color: Kirigami.Theme.textColor; font.family: Kirigami.Theme.defaultFont.family; font.pixelSize: Kirigami.Theme.defaultFont.pixelSize; font.bold: true
                     }
                 }
 
                 RowLayout {
                     spacing: 4
-                    Text { text: "🌇"; font.pixelSize: 12 }
+                    Text { text: "🌇"; font: Kirigami.Theme.defaultFont }
                     Text {
                         text: {
                             if (!weatherRoot.currentWeather || !weatherRoot.currentWeather.sunset) return "--"
@@ -351,7 +351,7 @@ ColumnLayout {
                             }
                             return "--"
                         }
-                        color: Kirigami.Theme.textColor; font.pixelSize: 12; font.bold: true
+                        color: Kirigami.Theme.textColor; font.family: Kirigami.Theme.defaultFont.family; font.pixelSize: Kirigami.Theme.defaultFont.pixelSize; font.bold: true
                     }
                 }
             }
@@ -362,7 +362,8 @@ ColumnLayout {
         text: i18n("Click to close")
         color: Kirigami.Theme.textColor
         opacity: 0.4
-        font.pixelSize: 10
+        font.family: Kirigami.Theme.smallFont.family
+        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
         Layout.alignment: Qt.AlignHCenter
         Layout.topMargin: 5
     }

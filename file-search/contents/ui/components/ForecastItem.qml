@@ -15,11 +15,11 @@ Item {
     property string units: "metric"
     property bool showUnits: true
     property string fontFamily: Kirigami.Theme.defaultFont.family
-    
+
     property var forecastData: null
     property int itemIndex: 0
     property bool hasDetails: forecastData && forecastData.hasDetails === true
-    
+
     signal clicked(var data, int index, rect cardRect)
 
     property real availableWidth: 300
@@ -106,7 +106,7 @@ Item {
             color: Kirigami.Theme.textColor
             font.family: itemRoot.fontFamily
             font.bold: true
-            font.pixelSize: 13
+            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
             Layout.alignment: Qt.AlignHCenter
             elide: Text.ElideRight
             Layout.maximumWidth: parent.width - 8
@@ -117,7 +117,7 @@ Item {
             color: Kirigami.Theme.textColor
             font.family: itemRoot.fontFamily
             font.bold: true
-            font.pixelSize: 18
+            font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.5)
             Layout.alignment: Qt.AlignHCenter
         }
     }
@@ -131,11 +131,11 @@ Item {
         Item {
             Layout.preferredHeight: parent.height
             Layout.preferredWidth: parent.height // Square aspect ratio
-            
+
             Kirigami.Icon {
                 anchors.centerIn: parent
                 width: parent.width - 20
-                height: parent.height - 20           
+                height: parent.height - 20
                 source: itemRoot.iconPath
                 isMask: false
                 smooth: true
@@ -147,35 +147,35 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             spacing: 0
-            
+
             // Day label
             Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                
+
                 Text {
                     anchors.centerIn: parent
                     text: itemRoot.label
                     color: Kirigami.Theme.textColor
                     font.family: itemRoot.fontFamily
                     font.bold: true
-                    font.pixelSize: parent.height * 0.4
+                    font.pixelSize: Math.max(Kirigami.Theme.smallFont.pixelSize, parent.height * 0.4)
                     elide: Text.ElideRight
                 }
             }
-            
+
             // Temperature
             Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                
+
                 Text {
                     anchors.centerIn: parent
                     text: itemRoot.temp + "°"
                     color: Kirigami.Theme.textColor
                     font.family: itemRoot.fontFamily
                     font.bold: true
-                    font.pixelSize: parent.height * 0.5
+                    font.pixelSize: Math.max(Kirigami.Theme.defaultFont.pixelSize, parent.height * 0.5)
                 }
             }
         }

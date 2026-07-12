@@ -3,6 +3,8 @@ set -eu
 
 ROOT=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$ROOT"
+QML_FILES=$(find contents tests -name '*.qml' | sort)
+QML_TEST_FILES=$(find tests -name 'tst_*.qml' | sort)
 
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 -m py_compile contents/tools/rss_sync.py tools/build_release.py tests/test_*.py
@@ -27,25 +29,37 @@ elif test -x /usr/lib/qt6/bin/qmlformat; then
     qmlformat_bin=/usr/lib/qt6/bin/qmlformat
 fi
 if test -n "$qmlformat_bin"; then
-    formatted=$(mktemp)
-    if ! "$qmlformat_bin" tests/tst_QueryPolicy.qml >"$formatted" || ! cmp -s tests/tst_QueryPolicy.qml "$formatted"; then
+    for file in $QML_FILES; do
+        formatted=$(mktemp)
+        if ! "$qmlformat_bin" "$file" >"$formatted" || ! cmp -s "$file" "$formatted"; then
+            rm -f "$formatted"
+            echo "$file is not qmlformat-clean" >&2
+            exit 1
+        fi
         rm -f "$formatted"
-        echo "tests/tst_QueryPolicy.qml is not qmlformat-clean" >&2
-        exit 1
-    fi
-    rm -f "$formatted"
+    done
 fi
+qmllint_bin=""
 if command -v qmllint >/dev/null 2>&1; then
-    qmllint tests/tst_QueryPolicy.qml
+    qmllint_bin=$(command -v qmllint)
 elif test -x /usr/lib/qt6/bin/qmllint; then
-    /usr/lib/qt6/bin/qmllint tests/tst_QueryPolicy.qml
+    qmllint_bin=/usr/lib/qt6/bin/qmllint
+fi
+if test -n "$qmllint_bin"; then
+    "$qmllint_bin" -I contents/ui -I contents/ui/components $QML_FILES
 fi
 python3 tools/build_release.py
 python3 tools/build_release.py --verify
 unzip -t build/com.mcc45tr.filesearch-1.3.0.plasmoid
 
+qmltestrunner_bin=""
 if command -v qmltestrunner6 >/dev/null 2>&1; then
-    qmltestrunner6 -input tests/tst_QueryPolicy.qml
+    qmltestrunner_bin=$(command -v qmltestrunner6)
 elif command -v qmltestrunner >/dev/null 2>&1; then
-    qmltestrunner -input tests/tst_QueryPolicy.qml
+    qmltestrunner_bin=$(command -v qmltestrunner)
+fi
+if test -n "$qmltestrunner_bin"; then
+    for test_file in $QML_TEST_FILES; do
+        "$qmltestrunner_bin" -input "$test_file"
+    done
 fi

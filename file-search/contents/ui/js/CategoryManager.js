@@ -1,22 +1,18 @@
+.import "utils.js" as Utils
+
 // CategoryManager.js - Category settings management for File Search Widget
 // Handles visibility, priority, and custom icons for categories
 
 // Dynamic priority matching (lower = higher priority)
 function getDefaultPriority(cat) {
-    var lower = (cat || "").toLowerCase()
-    if (lower.indexOf("app") !== -1 || lower.indexOf("uygulama") !== -1 || lower.indexOf("program") !== -1 ||
-        lower.indexOf("ayar") !== -1 || lower.indexOf("setting") !== -1 || lower.indexOf("oyun") !== -1 ||
-        lower.indexOf("game") !== -1 || lower.indexOf("ofis") !== -1 || lower.indexOf("office") !== -1 ||
-        lower.indexOf("sistem") !== -1 || lower.indexOf("system") !== -1 || lower.indexOf("araç") !== -1 ||
-        lower.indexOf("util") !== -1 || lower.indexOf("grafik") !== -1 || lower.indexOf("graphic") !== -1 ||
-        lower.indexOf("geliştirme") !== -1 || lower.indexOf("develop") !== -1 || lower.indexOf("ortam") !== -1 ||
-        lower.indexOf("multimedia") !== -1 || lower.indexOf("eğitim") !== -1 || lower.indexOf("educat") !== -1) return 1
-    if (lower.indexOf("file") !== -1 || lower.indexOf("dosya") !== -1) return 2
-    if (lower.indexOf("doc") !== -1 || lower.indexOf("belge") !== -1) return 3
-    if (lower.indexOf("folder") !== -1 || lower.indexOf("klasör") !== -1 || lower.indexOf("place") !== -1 || lower.indexOf("yerler") !== -1) return 4
-    if (lower.indexOf("calc") !== -1 || lower.indexOf("hesap") !== -1 || lower.indexOf("math") !== -1) return 5
-    if (lower.indexOf("web") !== -1 || lower.indexOf("browser") !== -1 || lower.indexOf("internet") !== -1) return 6
-    if (lower.indexOf("other") !== -1 || lower.indexOf("diğer") !== -1) return 100
+    var kind = Utils.getCategoryKind(cat)
+    if (kind === "app") return 1
+    if (kind === "file") return 2
+    if (kind === "document") return 3
+    if (kind === "folder") return 4
+    if (kind === "primary") return 5
+    if (kind === "web" || kind === "rss") return 6
+    if (kind === "other") return 100
     return 50
 }
 
@@ -29,6 +25,20 @@ function loadCategorySettings(configValue) {
         console.log("CategoryManager: Error loading category settings:", e)
         return {}
     }
+}
+
+function getSettingsKey(settings, categoryName) {
+    if (settings[categoryName])
+        return categoryName
+    var canonical = {
+        app: "Applications",
+        file: "Files",
+        document: "Documents",
+        folder: "Folders",
+        web: "Web",
+        primary: "Calculator"
+    }[Utils.getCategoryKind(categoryName)]
+    return canonical && settings[canonical] ? canonical : categoryName
 }
 
 // Save category settings to JSON string
@@ -57,10 +67,11 @@ function setCategoryVisibility(settings, categoryName, visible) {
 
 // Get category visibility
 function isCategoryVisible(settings, categoryName) {
-    if (!settings[categoryName]) {
+    var key = getSettingsKey(settings, categoryName)
+    if (!settings[key]) {
         return true // Default visible
     }
-    return settings[categoryName].visible !== false
+    return settings[key].visible !== false
 }
 
 // Set category merged status (for "Show Together" feature)
@@ -72,10 +83,11 @@ function setCategoryMerged(settings, categoryName, merged) {
 
 // Get category merged status
 function isCategoryMerged(settings, categoryName) {
-    if (!settings[categoryName]) {
+    var key = getSettingsKey(settings, categoryName)
+    if (!settings[key]) {
         return false // Default not merged
     }
-    return settings[categoryName].merged === true
+    return settings[key].merged === true
 }
 
 // Set category priority (lower number = higher priority)
@@ -87,8 +99,9 @@ function setCategoryPriority(settings, categoryName, priority) {
 
 // Get category priority
 function getCategoryPriority(settings, categoryName) {
-    if (settings[categoryName] && typeof settings[categoryName].priority === 'number') {
-        return settings[categoryName].priority
+    var key = getSettingsKey(settings, categoryName)
+    if (settings[key] && typeof settings[key].priority === 'number') {
+        return settings[key].priority
     }
     return getDefaultPriority(categoryName)
 }
@@ -102,8 +115,9 @@ function setCategoryIcon(settings, categoryName, iconName) {
 
 // Get effective icon (custom or default)
 function getEffectiveIcon(settings, categoryName, defaultIcon) {
-    if (settings[categoryName] && settings[categoryName].icon) {
-        return settings[categoryName].icon
+    var key = getSettingsKey(settings, categoryName)
+    if (settings[key] && settings[key].icon) {
+        return settings[key].icon
     }
     return defaultIcon
 }

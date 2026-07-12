@@ -204,6 +204,9 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+msgid "Open With..."
+msgstr ""
+
 #: contents/ui/components/HistoryContextMenu.qml:69
 #: contents/ui/components/HistoryListView.qml:499
 #: contents/ui/components/HistoryTileView.qml:791
@@ -1734,6 +1737,10 @@ msgstr ""
 msgid "Auto-detect from IP"
 msgstr ""
 
+#: contents/ui/config/ConfigGeneral.qml:1269
+msgid "Automatic location sends your IP address to ipinfo.io to determine your city. Choose manual location to avoid this request."
+msgstr ""
+
 
 msgid "Enter manually"
 msgstr ""
@@ -1848,4 +1855,72 @@ msgstr ""
 
 
 msgid "Tornado"
+msgstr ""
+
+#: contents/ui/components/HistoryTileView.qml
+msgid "Quick Commands"
+msgstr ""
+
+#: contents/ui/components/HistoryTileView.qml
+msgid "Weather"
+msgstr ""
+
+msgid "Daily Forecast"
+msgstr ""
+
+msgid "Hourly Forecast"
+msgstr ""
+
+msgid "umbrella"
+msgstr ""
+
+msgid "gloves"
+msgstr ""
+
+msgid "heavy coat"
+msgstr ""
+
+msgid "coat"
+msgstr ""
+
+msgid "sweater"
+msgstr ""
+
+msgid "sunglasses"
+msgstr ""
+
+msgid "windbreaker"
+msgstr ""
+
+msgid "Weather Info"
+msgstr ""
+
+msgid "Show weather info in panel search bar"
+msgstr ""
+
+msgid "Weather Frequency"
+msgstr ""
+
+msgid "Custom height"
+msgstr ""
+
+msgid "Panel Width"
+msgstr ""
+
+msgid "Narrowest"
+msgstr ""
+
+msgid "Widest"
+msgstr ""
+
+msgid "Text and Icon Opacity"
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
+msgid "Full"
+msgstr ""
+
+msgid "Text Input Mode"
 msgstr ""

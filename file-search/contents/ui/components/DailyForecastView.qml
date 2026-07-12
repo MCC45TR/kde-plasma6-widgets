@@ -1,12 +1,11 @@
 import QtQuick
-import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 
 GridView {
     id: root
 
     required property var weatherRoot
-    
+
     property bool useTodayLabel: false
 
     // Properties to customize appearance per view
@@ -18,7 +17,7 @@ GridView {
     property real edgeMargins: 0
     property bool isHorizontalLayout: false
     property bool flushEdges: false
-    
+
     // Default model auto-switches based on mode, but can be overridden
     model: isHourly ? weatherRoot.forecastHourly : weatherRoot.forecastDaily
 
@@ -26,7 +25,7 @@ GridView {
     snapMode: GridView.SnapToRow
     boundsBehavior: Flickable.StopAtBounds
     clip: true
-    
+
     anchors.margins: edgeMargins
 
     delegate: ForecastItem {
@@ -38,7 +37,7 @@ GridView {
         readonly property int row: Math.floor(index / cols)
         readonly property int col: index % cols
         readonly property int totalRows: Math.ceil(root.count / cols)
-        
+
         readonly property bool isFirstCol: col === 0
         readonly property bool isLastCol: col === cols - 1 || index === root.count - 1
         readonly property bool isFirstRow: row === 0
@@ -49,7 +48,7 @@ GridView {
         readonly property real rightGap: (root.flushEdges && isLastCol) ? 0 : root.itemSpacing / 2
         readonly property real topGap: (root.flushEdges && isFirstRow) ? 0 : root.itemSpacing / 2
         readonly property real bottomGap: (root.flushEdges && isLastRow) ? 0 : root.itemSpacing / 2
-        
+
         x: leftGap
         y: topGap
         width: root.cellWidth - leftGap - rightGap
@@ -64,17 +63,17 @@ GridView {
         iconPath: root.weatherRoot.getWeatherIcon(modelData)
         // Daily forecasts use the maximum; hourly forecasts use the current temperature.
         temp: root.isHourly ? Math.round(modelData.temp) : Math.round(modelData.temp_max)
-        
+
         isHourly: root.isHourly
         units: root.weatherRoot.units
         showUnits: root.showUnits
         fontFamily: root.weatherRoot.activeFont.family
         showBackground: root.showBackground
         isHorizontalLayout: root.isHorizontalLayout
-        
+
         forecastData: modelData
         itemIndex: index
-        
+
         // Click Handling
         onClicked: function(data, idx, cardRect) {
             root.itemClicked(data, idx, cardRect)
@@ -88,6 +87,6 @@ GridView {
         radiusBL: ((isLastRow && isFirstCol) ? root.cornerRadius : innerRadius)
         radiusBR: ((isLastRow && isLastCol) ? root.cornerRadius : innerRadius)
     }
-    
+
     signal itemClicked(var data, int index, rect cardRect)
 }

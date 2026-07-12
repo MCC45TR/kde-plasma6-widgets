@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.extras as PlasmaExtras
@@ -10,7 +9,7 @@ import org.kde.plasma.extras as PlasmaExtras
  */
 PlasmaExtras.SearchField {
     id: root
-    
+
     // Properties for compatibility with file-search logic
     property int resultCount: 0
     property var resultsModel: null
@@ -20,9 +19,9 @@ PlasmaExtras.SearchField {
     property int weatherFrequency: 2
     property bool rssShowFullHeadline: true
     property bool rssShowSource: false
-    
+
     placeholderText: "" // Hidden to use our animated labels
-    
+
     // Animated Placeholder Logic
     RssTicker {
         id: placeholderContainer
@@ -30,7 +29,7 @@ PlasmaExtras.SearchField {
         anchors.leftMargin: 36 // Space for search icon
         anchors.rightMargin: 32
         visible: root.text.length === 0
-        
+
         logic: root.logic
         rssFrequency: root.rssFrequency
         weatherFrequency: root.weatherFrequency
@@ -38,18 +37,18 @@ PlasmaExtras.SearchField {
         rssShowFullHeadline: root.rssShowFullHeadline
         rssShowSource: root.rssShowSource
         maxChars: 100 // fallback
-        
+
         textColor: Kirigami.Theme.textColor
         fontSize: root.font.pixelSize
         fontFamily: root.font.family
         defaultText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...")
         horizontalAlignment: Text.AlignLeft
-        
+
         rightMarginValue: searchIconRight.width + 24
         textOpacity: 0.35
         isSearching: root.text.length > 0
     }
-    
+
     Kirigami.Icon {
         id: searchIconRight
         anchors.right: parent.right
@@ -62,7 +61,7 @@ PlasmaExtras.SearchField {
         opacity: root.text.length === 0 ? 0.35 : 0.7
         Behavior on opacity { NumberAnimation { duration: 250 } }
     }
-    
+
     // Signals for navigation and control
     signal textUpdated(string newText)
     signal searchSubmitted(string text, int selectedIndex)
@@ -74,31 +73,31 @@ PlasmaExtras.SearchField {
     signal tabPressedSignal()
     signal shiftTabPressedSignal()
     signal viewModeChangeRequested(int mode)
-    
+
     // Ensure text is synced
     onTextChanged: {
         root.textUpdated(text)
     }
-    
+
     onAccepted: {
         if (text.length > 0) {
             root.searchSubmitted(text, 0)
         }
     }
-    
+
     // Keyboard navigation
     Keys.onEscapePressed: {
         root.escapePressed()
     }
-    
+
     Keys.onDownPressed: {
         root.downPressed()
     }
-    
+
     Keys.onUpPressed: {
         root.upPressed()
     }
-    
+
     Keys.onLeftPressed: (event) => {
         if (cursorPosition === 0) {
             root.leftPressed()
@@ -107,7 +106,7 @@ PlasmaExtras.SearchField {
             event.accepted = false
         }
     }
-    
+
     Keys.onRightPressed: (event) => {
         if (cursorPosition === text.length) {
             root.rightPressed()
@@ -116,7 +115,7 @@ PlasmaExtras.SearchField {
             event.accepted = false
         }
     }
-    
+
     Keys.onTabPressed: (event) => {
         if (event.modifiers & Qt.ShiftModifier) {
             root.shiftTabPressedSignal()
@@ -125,7 +124,7 @@ PlasmaExtras.SearchField {
         }
         event.accepted = true
     }
-    
+
     Keys.onPressed: (event) => {
         if (event.modifiers & Qt.ControlModifier) {
             if (event.key === Qt.Key_1) {
@@ -137,16 +136,16 @@ PlasmaExtras.SearchField {
             }
         }
     }
-    
+
     // Focus helper
     function focusInput() {
         forceActiveFocus()
     }
-    
+
     function setText(newText) {
         text = newText
     }
-    
+
     function clear() {
         text = ""
     }

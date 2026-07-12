@@ -12,6 +12,9 @@ import "../components" as Components
 Item {
     id: configGeneral
 
+    property int initialPage: 0
+    property bool showInternalNavigation: true
+
     // Weather configuration
     property string cfg_weatherProvider
     property string cfg_weatherProviderDefault
@@ -130,9 +133,11 @@ Item {
     // =========================================================================
     
     // Panel Group
-    property alias cfg_displayMode: displayModeCombo.currentIndex
+    property int cfg_displayMode
     property alias cfg_panelRadius: panelRadiusCombo.currentIndex
     property int cfg_panelHeight
+    property int cfg_panelWidthStep
+    property alias cfg_panelContentOpacity: panelContentOpacityCombo.currentIndex
     property alias cfg_showSearchButton: showSearchButtonCheck.checked
     property alias cfg_showSearchButtonBackground: showSearchButtonBackgroundCheck.checked
     property int cfg_userProfile
@@ -225,6 +230,8 @@ Item {
     property int cfg_displayModeDefault
     property int cfg_panelRadiusDefault
     property int cfg_panelHeightDefault
+    property int cfg_panelWidthStepDefault
+    property int cfg_panelContentOpacityDefault
     property bool cfg_showSearchButtonDefault
     property int cfg_userProfileDefault
     property int cfg_viewModeDefault
@@ -305,6 +312,8 @@ Item {
         TabBar {
             id: navBar
             Layout.fillWidth: true
+            visible: configGeneral.showInternalNavigation
+            currentIndex: configGeneral.initialPage
             
             TabButton {
                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel")
@@ -334,7 +343,7 @@ Item {
             
             StackLayout {
                 anchors.fill: parent
-                currentIndex: navBar.currentIndex
+                currentIndex: configGeneral.showInternalNavigation ? navBar.currentIndex : configGeneral.initialPage
                 
                 // TAB 1: PANEL
                 Kirigami.FormLayout {
@@ -358,11 +367,58 @@ Item {
                         id: displayModeCombo
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Display Mode")
                         model: [
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Button Mode (Icon only)"), 
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium Mode (Text)"), 
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Wide Mode (Search Bar)"), 
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Extra Wide Mode"),
-                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Ultra Wide Mode")
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Button Mode (Icon only)"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Text Input Mode")
+                        ]
+                        currentIndex: cfg_displayMode === 0 ? 0 : 1
+                        onActivated: cfg_displayMode = currentIndex === 0 ? 0 : 2
+                        Layout.fillWidth: true
+                    }
+
+                    ColumnLayout {
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Panel Width")
+                        Layout.fillWidth: true
+                        enabled: displayModeCombo.currentIndex !== 0
+                        visible: displayModeCombo.currentIndex === 1
+
+                        Slider {
+                            id: panelWidthSlider
+                            Layout.fillWidth: true
+                            from: 0
+                            to: 12
+                            stepSize: 1
+                            snapMode: Slider.SnapAlways
+                            value: cfg_panelWidthStep >= 0 ? cfg_panelWidthStep
+                                : (cfg_displayMode === 1 ? 0
+                                   : (cfg_displayMode === 2 ? 4
+                                      : (cfg_displayMode === 3 ? 7 : 12)))
+                            onMoved: cfg_panelWidthStep = Math.round(value)
+                        }
+
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Text {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Narrowest")
+                                color: Kirigami.Theme.disabledTextColor
+                                font: Kirigami.Theme.smallFont
+                            }
+                            Item { Layout.fillWidth: true }
+                            Text {
+                                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Widest")
+                                color: Kirigami.Theme.disabledTextColor
+                                font: Kirigami.Theme.smallFont
+                            }
+                        }
+                    }
+
+                    ComboBox {
+                        id: panelContentOpacityCombo
+                        Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Text and Icon Opacity")
+                        enabled: displayModeCombo.currentIndex !== 0
+                        model: [
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Low"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Medium"),
+                            i18nd("plasma_applet_com.mcc45tr.filesearch", "Full")
                         ]
                         Layout.fillWidth: true
                     }
@@ -384,14 +440,14 @@ Item {
                         id: showSearchButtonCheck
                         Kirigami.FormData.label: i18nd("plasma_applet_com.mcc45tr.filesearch", "Search Icon")
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show search icon and button in panel")
-                        enabled: displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4
+                        enabled: displayModeCombo.currentIndex === 1
                     }
 
                     CheckBox {
                         id: showSearchButtonBackgroundCheck
                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Show background tile (colored square)")
                         leftPadding: 32
-                        enabled: showSearchButtonCheck.checked && (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4)
+                        enabled: showSearchButtonCheck.checked && displayModeCombo.currentIndex === 1
                         opacity: enabled ? 1.0 : 0.5
                     }
 
@@ -449,14 +505,14 @@ Item {
                         Layout.fillWidth: true
                         
                         CheckBox {
-                            id: autoHeightCheck
-                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Automatic")
-                            checked: cfg_panelHeight === 0
+                            id: customHeightCheck
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Custom height")
+                            checked: cfg_panelHeight > 0
                             onToggled: {
                                 if (checked) {
-                                    cfg_panelHeight = 0
-                                } else {
                                     cfg_panelHeight = panelHeightSpin.value
+                                } else {
+                                    cfg_panelHeight = 0
                                 }
                             }
                         }
@@ -467,7 +523,7 @@ Item {
                             to: 96
                             stepSize: 1
                             editable: true
-                            enabled: !autoHeightCheck.checked
+                            enabled: customHeightCheck.checked
                             Layout.fillWidth: true
                             
                             Component.onCompleted: {
@@ -479,7 +535,7 @@ Item {
                             }
                             
                             onValueModified: {
-                                if (!autoHeightCheck.checked) {
+                                if (customHeightCheck.checked) {
                                     cfg_panelHeight = value
                                 }
                             }
@@ -522,7 +578,7 @@ Item {
                         // Text/Bar Mode
                         Rectangle {
                             anchors.left: parent.left
-                            width: displayModeCombo.currentIndex === 1 ? 70 : (displayModeCombo.currentIndex === 4 ? 340 : (displayModeCombo.currentIndex === 3 ? 260 : 180))
+                            width: 70 + (340 - 70) * Math.round(panelWidthSlider.value) / 12
                             height: 36
                             radius: panelRadiusCombo.currentIndex === 0 ? height / 2 : (panelRadiusCombo.currentIndex === 1 ? 12 : (panelRadiusCombo.currentIndex === 2 ? 6 : 0))
                             color: Kirigami.Theme.backgroundColor
@@ -537,128 +593,39 @@ Item {
                                 anchors.leftMargin: 12
                                 anchors.rightMargin: cfg_showSearchButton ? 6 : 12
                                 spacing: 8
+                                opacity: panelContentOpacityCombo.currentIndex === 0 ? 0.45
+                                    : (panelContentOpacityCombo.currentIndex === 1 ? 0.7 : 1.0)
                                 
                                 Item {
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
                                     clip: true
-                                    
-                                    property string defaultTxt: displayModeCombo.currentIndex === 1 ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Search") : ((displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Search..."))
-                                    property string rssMockTxt: i18nd("plasma_applet_com.mcc45tr.filesearch", "News Headline")
-                                    property int currentIndex: 0
-                                    property var allTitles: ["", ""]
-                                    
-                                    onDefaultTxtChanged: {
-                                        allTitles = [defaultTxt, rssMockTxt];
-                                    }
-                                    
-                                    Component.onCompleted: {
-                                        allTitles = [defaultTxt, rssMockTxt];
-                                    }
-                                    
+
                                     Text {
-                                        id: previewCurrentLabel
                                         anchors.left: parent.left
                                         anchors.right: parent.right
                                         height: parent.height
                                         verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: displayModeCombo.currentIndex === 1 ? Text.AlignHCenter : Text.AlignLeft
-                                        text: parent.allTitles[parent.currentIndex] || parent.defaultTxt
+                                        horizontalAlignment: Text.AlignLeft
+                                        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Start searching...")
                                         color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
-                                        font.pixelSize: displayModeCombo.currentIndex !== 1 ? 14 : 12
+                                        font.pixelSize: 14
                                         elide: Text.ElideRight
-                                    }
-                                    
-                                    Text {
-                                        id: previewNextLabel
-                                        anchors.left: parent.left
-                                        anchors.right: parent.right
-                                        height: parent.height
-                                        y: -height
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: previewCurrentLabel.horizontalAlignment
-                                        text: ""
-                                        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.6)
-                                        font.pixelSize: previewCurrentLabel.font.pixelSize
-                                        elide: Text.ElideRight
-                                        opacity: 0
-                                    }
-                                    
-                                    ParallelAnimation {
-                                        id: previewSwitchAnim
-                                        property string targetText: ""
-                                        
-                                        SequentialAnimation {
-                                            PropertyAction { target: previewNextLabel; property: "text"; value: previewSwitchAnim.targetText }
-                                            PropertyAction { target: previewNextLabel; property: "y"; value: -previewNextLabel.parent.height }
-                                            PropertyAction { target: previewNextLabel; property: "opacity"; value: 0 }
-                                            
-                                            ParallelAnimation {
-                                                NumberAnimation { target: previewCurrentLabel; property: "y"; to: previewCurrentLabel.parent.height; duration: 600; easing.type: Easing.InOutCubic }
-                                                NumberAnimation { target: previewCurrentLabel; property: "opacity"; to: 0; duration: 600 }
-                                                
-                                                NumberAnimation { target: previewNextLabel; property: "y"; to: 0; duration: 600; easing.type: Easing.InOutCubic }
-                                                NumberAnimation { target: previewNextLabel; property: "opacity"; to: 1; duration: 600 }
-                                            }
-                                        }
-                                        
-                                        onFinished: {
-                                            previewCurrentLabel.text = previewNextLabel.text
-                                            previewCurrentLabel.y = 0
-                                            previewCurrentLabel.opacity = 1
-                                            previewNextLabel.y = -previewNextLabel.parent.height
-                                            previewNextLabel.opacity = 0
-                                        }
-                                    }
-                                    
-                                    Timer {
-                                        id: previewTimer
-                                        interval: {
-                                            var f = rssFreqCombo.currentIndex;
-                                            if (parent.currentIndex === 0) {
-                                                if (f === 0) return 500; // instantaneous jump to rss
-                                                if (f === 1) return 10000;
-                                                if (f === 2) return 15000;
-                                                if (f === 3) return 20000;
-                                                if (f === 4) return 50000;
-                                                if (f === 5) return 300000;
-                                                return 10000; // f==6 or unknown
-                                            } else {
-                                                return 5000; // Mock rss duration 5s
-                                            }
-                                        }
-                                        running: navBar.currentIndex === 0
-                                        repeat: true
-                                        onTriggered: {
-                                            if (!rssPlaceholderCyclingCheck.checked) {
-                                                parent.currentIndex = 0;
-                                                previewCurrentLabel.text = parent.defaultTxt;
-                                                previewCurrentLabel.y = 0;
-                                                return;
-                                            }
-                                            if (rssFreqCombo.currentIndex === 0) {
-                                                parent.currentIndex = 1; // force stay at RSS mock and just animate
-                                            } else {
-                                                parent.currentIndex = (parent.currentIndex + 1) % 2;
-                                            }
-                                            previewSwitchAnim.targetText = parent.allTitles[parent.currentIndex];
-                                            previewSwitchAnim.restart();
-                                        }
                                     }
                                 }
                                                                 Rectangle {
-                                        Layout.preferredWidth: ((displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4) && cfg_showSearchButton) ? 28 : 0
+                                        Layout.preferredWidth: (displayModeCombo.currentIndex === 1 && cfg_showSearchButton) ? 28 : 0
                                         Layout.preferredHeight: 28
                                         radius: panelRadiusCombo.currentIndex === 0 ? height / 2 : (panelRadiusCombo.currentIndex === 1 ? 8 : (panelRadiusCombo.currentIndex === 2 ? 4 : 0))
                                         color: cfg_showSearchButtonBackground ? Kirigami.Theme.highlightColor : "transparent"
-                                        visible: (displayModeCombo.currentIndex === 2 || displayModeCombo.currentIndex === 3 || displayModeCombo.currentIndex === 4) && cfg_showSearchButton
+                                        visible: displayModeCombo.currentIndex === 1 && cfg_showSearchButton
                                         
                                         Kirigami.Icon {
                                             anchors.centerIn: parent
                                             width: 16
                                             height: 16
                                             source: "search"
-                                            color: cfg_showSearchButtonBackground ? "#ffffff" : Kirigami.Theme.textColor
+                                            color: Kirigami.Theme.textColor
                                         }
                                     }                          }
                         }
@@ -1261,6 +1228,14 @@ Item {
                                     if (checked) cfg_weatherLocationMode = "manual"
                                 }
                             }
+                        }
+
+                        Label {
+                            Layout.fillWidth: true
+                            visible: weatherAutoRadio.checked
+                            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Automatic location sends your IP address to ipinfo.io to determine your city. Choose manual location to avoid this request.")
+                            wrapMode: Text.WordWrap
+                            opacity: 0.7
                         }
 
                         // Manual Location input

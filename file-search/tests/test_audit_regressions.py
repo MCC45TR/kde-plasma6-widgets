@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import gettext
 from pathlib import Path
 import re
 import unittest
@@ -14,14 +15,116 @@ def read(relative: str) -> str:
 
 
 class AuditRegressionTests(unittest.TestCase):
+    def test_all_config_pages_accept_shared_panel_properties(self):
+        for name in ("ConfigCategories.qml", "ConfigRSS.qml", "ConfigDebug.qml", "ConfigHelp.qml"):
+            page = read("contents/ui/config/" + name)
+            for prop in ("cfg_panelWidthStep", "cfg_panelWidthStepDefault", "cfg_panelContentOpacity", "cfg_panelContentOpacityDefault"):
+                self.assertIn("property int " + prop, page)
+        general = read("contents/ui/config/ConfigGeneral.qml")
+        self.assertNotIn("previewCurrentLabel.text =", general)
+        self.assertNotIn("previewSwitchAnim", general)
+
+    def test_filter_chip_font_is_not_assigned_twice(self):
+        components = "\n".join(path.read_text(encoding="utf-8") for path in (ROOT / "contents/ui/components").glob("*.qml"))
+        self.assertNotRegex(components, r"font:\s*Kirigami\.Theme\.[A-Za-z]+Font\s*\n\s*font\.")
+        self.assertNotRegex(components, r"font\s*:[^;\n}]+;[^\n}]*font\.")
+        self.assertNotRegex(components, r"font\.[A-Za-z]+\s*:[^;\n}]+;[^\n}]*font\s*:")
+        chips = read("contents/ui/components/FilterChips.qml")
+        self.assertIn("font.bold: chip.isActive", chips)
+
+    def test_panel_width_is_stepped_and_icon_matches_text(self):
+        schema = read("contents/config/main.xml")
+        config = read("contents/ui/config/ConfigGeneral.qml")
+        main = read("contents/ui/main.qml")
+        compact = read("contents/ui/components/CompactView.qml")
+        self.assertIn('name="panelWidthStep"', schema)
+        self.assertIn('name="panelContentOpacity"', schema)
+        self.assertIn("to: 12", config)
+        self.assertIn("stepSize: 1", config)
+        self.assertIn("snapMode: Slider.SnapAlways", config)
+        self.assertIn("maximumPanelWidth: height * 9", main)
+        self.assertIn("minimumPanelWidth: 70", main)
+        self.assertIn("color: compactRoot.textColor", compact)
+        self.assertNotIn("showSearchButtonBackground ? Kirigami.Theme.highlightedTextColor", compact)
+        self.assertIn('i18nd("plasma_applet_com.mcc45tr.filesearch", "Text Input Mode")', config)
+        self.assertIn("visible: displayModeCombo.currentIndex === 1", config)
+        mode_model = config[config.index("id: displayModeCombo"):config.index("id: panelWidthSlider")]
+        self.assertNotIn("Medium Mode", mode_model)
+        self.assertNotIn("Extra Wide Mode", mode_model)
+        self.assertNotIn("Ultra Wide Mode", mode_model)
+        self.assertIn("configDisplayMode === 0 ? 0 : 2", main)
+        with (ROOT / "contents/locale/tr/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo").open("rb") as handle:
+            catalog = gettext.GNUTranslations(handle)
+        self.assertEqual(catalog.gettext("Panel Width"), "Panel Genişliği")
+        self.assertEqual(catalog.gettext("Text and Icon Opacity"), "Metin ve Simge Matlığı")
+
+    def test_prefix_registry_is_shared_and_weather_alias_is_canonical(self):
+        registry = read("contents/ui/js/PrefixRegistry.js")
+        self.assertIn('{ canonical: "weather:", aliases: ["hava:"]', registry)
+        for relative in (
+            "contents/ui/components/SearchPopup.qml",
+            "contents/ui/components/QueryHints.qml",
+            "contents/ui/js/QueryPolicy.js",
+        ):
+            self.assertIn("PrefixRegistry", read(relative))
+        self.assertNotIn('t === "hava:"', read("contents/ui/components/SearchPopup.qml"))
+
+    def test_prefix_menu_is_a_single_strip_and_preserves_history(self):
+        popup = read("contents/ui/components/SearchPopup.qml")
+        hints = read("contents/ui/components/QueryHints.qml")
+        history = read("contents/ui/components/HistoryTileView.qml")
+        pinned = read("contents/ui/components/PinnedSection.qml")
+        self.assertIn('readonly property bool isPrefixMenuOpen: searchText.trim() === ":"', popup)
+        self.assertIn("searchText.length === 0 || popupRoot.isPrefixMenuOpen", popup)
+        self.assertIn("!popupRoot.isPrefixMenuOpen", popup)
+        self.assertIn("id: startupPrefixStrip", popup)
+        self.assertIn("anchors.top: startupPrefixStrip.bottom", popup)
+        self.assertIn("orientation: ListView.Horizontal", popup)
+        self.assertIn("history grid below stays visible", popup)
+        self.assertNotIn("Quick Commands", history)
+        self.assertIn("gridSideInset", pinned)
+        self.assertIn("Kirigami.Units.largeSpacing - Kirigami.Units.smallSpacing", pinned)
+        self.assertIn("ListView {\n        id: prefixStrip", hints)
+        self.assertIn("orientation: ListView.Horizontal", hints)
+        self.assertIn("Kirigami.Units.gridUnit * 2.4", hints)
+        self.assertNotIn("id: prefixGrid", hints)
+        self.assertNotIn("Available Search Prefixes", hints)
+
+    def test_weather_ui_strings_use_widget_domain_and_turkish_is_complete(self):
+        for relative in (
+            "contents/ui/components/LargeModeLayout.qml",
+            "contents/ui/components/WideModeLayout.qml",
+        ):
+            source = read(relative)
+            self.assertNotRegex(source, r'i18n\("(?:Daily|Hourly) Forecast"\)')
+            self.assertIn('i18nd("plasma_applet_com.mcc45tr.filesearch"', source)
+
+        tr = read("translations/tr.po")
+        required = {
+            "Daily Forecast": "Günlük Tahmin", "Hourly Forecast": "Saatlik Tahmin",
+            "umbrella": "şemsiye", "gloves": "eldiven", "heavy coat": "kalın mont",
+            "coat": "mont", "sweater": "kazak", "sunglasses": "güneş gözlüğü",
+            "windbreaker": "rüzgârlık", "Weather Info": "Hava Durumu Bilgisi",
+            "Weather Frequency": "Hava Durumu Sıklığı",
+        }
+        for msgid, msgstr in required.items():
+            self.assertIn(f'msgid "{msgid}"\nmsgstr "{msgstr}"', tr)
+
+        with (ROOT / "contents/locale/tr/LC_MESSAGES/plasma_applet_com.mcc45tr.filesearch.mo").open("rb") as handle:
+            catalog = gettext.GNUTranslations(handle)
+        for msgid, msgstr in required.items():
+            self.assertEqual(catalog.gettext(msgid), msgstr)
+
     def test_disabled_prefix_policy_guards_query_and_run(self):
         popup = read("contents/ui/components/SearchPopup.qml")
         self.assertIn("if (!isQueryAllowed(text))", popup)
         self.assertIn("if (!isQueryAllowed(query))", popup)
         self.assertEqual(popup.count("resultsModel.run("), 1)
         policy = read("contents/ui/js/QueryPolicy.js")
+        registry = read("contents/ui/js/PrefixRegistry.js")
         for prefix in ("shell", "kill", "spell", "unit", "timeline:/", "gg:", "dd:"):
-            self.assertIn(prefix, policy)
+            self.assertIn(prefix, registry)
+        self.assertIn("PrefixRegistry.isAllowed", policy)
 
     def test_rss_presets_and_sync_are_https_only(self):
         config = read("contents/ui/config/ConfigRSS.qml")
@@ -50,9 +153,36 @@ class AuditRegressionTests(unittest.TestCase):
 
     def test_startup_work_is_feature_gated(self):
         logic = read("contents/ui/components/LogicController.qml")
+        schema = read("contents/config/main.xml")
         completed = logic[logic.index("Component.onCompleted"):logic.index("Connections {", logic.index("Component.onCompleted"))]
         self.assertIn("rssEnabled || rssSources.length > 0", completed)
+        self.assertIn("if (rssEnabled && rssSources.length > 0)", completed)
         self.assertNotIn("ensureManAvailability", completed)
+        weather_entry = schema[schema.index('name="weatherEnabled"'):schema.index('name="weatherUnits"')]
+        self.assertIn("<default>false</default>", weather_entry)
+
+    def test_real_previews_context_actions_and_drag_payloads(self):
+        preview = read("contents/ui/js/PreviewUtils.js")
+        primary = read("contents/ui/components/PrimaryResultPreview.qml")
+        popup = read("contents/ui/components/SearchPopup.qml")
+        menu = read("contents/ui/components/HistoryContextMenu.qml")
+        logic = read("contents/ui/components/LogicController.qml")
+        results_list = read("contents/ui/components/ResultsListView.qml")
+        results_tile = read("contents/ui/components/ResultsTileView.qml")
+        pinned = read("contents/ui/components/PinnedSection.qml")
+
+        self.assertIn("getThumbnailCacheSource", preview)
+        self.assertIn('"/normal/" + Qt.md5(uri) + ".png"', preview)
+        self.assertIn("flatSortedData: tileData.flatSortedData", popup)
+        self.assertIn("previewSource.length > 0", primary)
+        self.assertIn("source: root.previewSource", primary)
+        self.assertIn('text/uri-list', results_list)
+        self.assertIn('text/uri-list', results_tile)
+        self.assertIn('text/uri-list', pinned)
+        self.assertIn('"Open With..."', menu)
+        self.assertIn("function openWith(url)", logic)
+        self.assertIn("org.kde.KLauncher", logic)
+        self.assertIn("function openContainingFolder(url)", logic)
 
     def test_render_hot_paths_are_bounded(self):
         tile_data = read("contents/ui/components/TileDataManager.qml")
@@ -69,7 +199,7 @@ class AuditRegressionTests(unittest.TestCase):
         for history_view in ("HistoryListView.qml", "HistoryTileView.qml"):
             history = read("contents/ui/components/" + history_view)
             self.assertIn("isCollapsed ? [] : modelData.items", history)
-            self.assertIn("sourceComponent: ToolTip", history)
+            self.assertRegex(history, r"sourceComponent: (?:PlasmaComponents\.)?ToolTip")
 
     def test_weather_coalesces_and_cancels(self):
         view = read("contents/ui/components/WeatherView.qml")
@@ -79,6 +209,89 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn("activeRequest.cancel()", view)
         self.assertIn("requests[i].abort()", service)
         self.assertIn("controller.cancelled", service)
+
+    def test_keyboard_activation_uses_sorted_view_identity(self):
+        popup = read("contents/ui/components/SearchPopup.qml")
+        results = read("contents/ui/components/ResultsListView.qml")
+        self.assertIn("function activateCurrentResult()", popup)
+        self.assertGreaterEqual(popup.count("activateCurrentResult();"), 2)
+        self.assertIn("function activateCurrentItem()", results)
+        self.assertIn("var data = flatSortedData[currentIndex]", results)
+        self.assertIn("data.index !== undefined", results)
+        self.assertNotIn("currentIndex: resultsListLoader.active ?", popup)
+
+    def test_search_settings_and_rss_relevance_are_enforced(self):
+        popup = read("contents/ui/components/SearchPopup.qml")
+        tile_data = read("contents/ui/components/TileDataManager.qml")
+        similarity = read("contents/ui/js/SimilarityUtils.js")
+        for setting in ("searchAlgorithm", "minResults", "smartResultLimit"):
+            self.assertIn(setting + ":", popup)
+            self.assertIn("property " + ("bool" if setting == "smartResultLimit" else "int") + " " + setting, tile_data)
+            self.assertIn(setting, similarity)
+        self.assertIn("normalTitle.indexOf(lowerSearch)", tile_data)
+        self.assertIn("normalContent.indexOf(lowerSearch)", tile_data)
+
+    def test_live_category_reload_and_shared_classification(self):
+        logic = read("contents/ui/components/LogicController.qml")
+        history = read("contents/ui/js/HistoryManager.js")
+        categories = read("contents/ui/js/CategoryManager.js")
+        utils = read("contents/ui/js/utils.js")
+        self.assertIn("function onCategorySettingsChanged()", logic)
+        self.assertIn('.import "utils.js" as Utils', history)
+        self.assertIn('.import "utils.js" as Utils', categories)
+        self.assertNotIn("function detectSourceType", history)
+        self.assertIn("function matchesResultFilter", utils)
+        self.assertIn("function isDesktopEntry", utils)
+
+    def test_rss_timestamps_and_weather_cache_are_persistent(self):
+        logic = read("contents/ui/components/LogicController.qml")
+        main = read("contents/ui/main.qml")
+        weather = read("contents/ui/components/WeatherService.js")
+        self.assertIn("persistRssSources();", logic)
+        self.assertIn('weatherCachePath: weatherCacheBase + "/cache.json"', logic)
+        self.assertIn("function saveWeatherCache(value)", logic)
+        self.assertIn("controller.saveWeatherCache(result)", main)
+        self.assertNotIn("forceRefresh", weather)
+        self.assertEqual(weather.count("DEFAULT_FORECAST_DAYS"), 3)
+
+    def test_tile_surfaces_share_plasma_native_visual_language(self):
+        header = read("contents/ui/components/CategoryHeader.qml")
+        pinned = read("contents/ui/components/PinnedSection.qml")
+        history = read("contents/ui/components/HistoryTileView.qml")
+        history_list = read("contents/ui/components/HistoryListView.qml")
+        results = read("contents/ui/components/ResultsTileView.qml")
+        compact = read("contents/ui/components/CompactView.qml")
+        self.assertIn("PlasmaComponents.ToolButton", header)
+        for source in (pinned, history, history_list, results):
+            self.assertIn("CategoryHeader {", source)
+        self.assertNotIn('"Recent Searches"', history)
+        self.assertNotIn('"Recent Searches"', history_list)
+        self.assertIn('actionIcon: index === 0 ? "edit-clear-history"', history)
+        self.assertIn("readonly property real textWidth: tileWidth", history)
+        self.assertIn("maximumLineCount: 1", history)
+        self.assertIn("maximumLineCount: 1", pinned)
+        self.assertIn("PlasmaExtras.Highlight", history)
+        self.assertIn("PlasmaExtras.Highlight", results)
+        self.assertIn("Kirigami.Theme.highlightedTextColor", results)
+        self.assertIn("PlasmaComponents.Menu", pinned)
+        self.assertNotRegex(compact, r"on(?:Entered|Exited):[^\n]*\.color\s*=")
+
+    def test_component_fonts_follow_system_theme(self):
+        components = ROOT / "contents/ui/components"
+        fixed_pixels = []
+        foreign_controls = []
+        quick_controls_imports = []
+        for path in components.glob("*.qml"):
+            source = path.read_text(encoding="utf-8")
+            if "import QtQuick.Controls" in source:
+                quick_controls_imports.append(path.name)
+            for match in re.finditer(r"font\.pixelSize:\s*\d+", source):
+                fixed_pixels.append(f"{path.name}:{match.group(0)}")
+            for match in re.finditer(r"(?<![\w.])(Menu|MenuItem|MenuSeparator|ToolTip|ScrollBar|ScrollView|Button|ToolButton|BusyIndicator)\s*\{", source):
+                foreign_controls.append(f"{path.name}:{match.group(1)}")
+        self.assertEqual(fixed_pixels, [])
+        self.assertEqual(foreign_controls, [])
+        self.assertEqual(quick_controls_imports, [])
 
     def test_dead_payload_is_removed(self):
         self.assertFalse((ROOT / "contents/fonts/BarlowCondensed-Light.ttf").exists())

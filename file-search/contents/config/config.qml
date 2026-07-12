@@ -3,9 +3,24 @@ import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-        name: i18n("Appearance")
-        icon: "preferences-desktop-display-color"
-        source: "config/ConfigGeneral.qml"
+        name: i18n("Panel")
+        icon: "dashboard-show"
+        source: "config/ConfigPanel.qml"
+    }
+    ConfigCategory {
+        name: i18n("Popup")
+        icon: "window-new"
+        source: "config/ConfigPopup.qml"
+    }
+    ConfigCategory {
+        name: i18n("Preview")
+        icon: "view-preview"
+        source: "config/ConfigPreview.qml"
+    }
+    ConfigCategory {
+        name: i18n("Prefixes")
+        icon: "code-context"
+        source: "config/ConfigPrefixes.qml"
     }
     ConfigCategory {
         name: i18n("Search")

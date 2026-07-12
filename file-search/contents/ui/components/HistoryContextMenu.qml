@@ -1,9 +1,9 @@
 import QtQuick
-import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 import "../js/utils.js" as Utils
 
-QQC.Menu {
+PlasmaComponents.Menu {
     id: root
 
     // Dependencies
@@ -13,8 +13,7 @@ QQC.Menu {
     // Helper: Check if item is a folder
     readonly property bool isFolder: {
         if (!historyItem) return false
-        var cat = (historyItem.category || "").toLowerCase()
-        return (cat.indexOf("place") !== -1 || cat.indexOf("folder") !== -1 || cat.indexOf("yerler") !== -1 || cat.indexOf("klasör") !== -1)
+        return Utils.isFolderCategory(historyItem.category || "", historyItem.filePath || "", historyItem.decoration || "")
     }
 
     // Helper: Get Match ID for pinning
@@ -22,9 +21,9 @@ QQC.Menu {
         if (!historyItem) return ""
         return historyItem.matchId || historyItem.display || ""
     }
-    
+
     // ===== PIN / UNPIN =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: logic && logic.isPinned(matchId) ? i18nd("plasma_applet_com.mcc45tr.filesearch", "Unpin") : i18nd("plasma_applet_com.mcc45tr.filesearch", "Pin")
         icon.name: logic && logic.isPinned(matchId) ? "window-unpin" : "pin"
         enabled: historyItem
@@ -34,7 +33,7 @@ QQC.Menu {
                 var dec = historyItem.decoration || "application-x-executable"
                 var cat = historyItem.category || "Other"
                 var path = historyItem.filePath || ""
-                
+
                 logic.togglePin({
                     display: disp,
                     decoration: dec,
@@ -45,16 +44,16 @@ QQC.Menu {
             }
         }
     }
-    
-    QQC.MenuSeparator {}
+
+    PlasmaComponents.MenuSeparator {}
 
     // ===== OPEN (Standard) =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open")
         icon.name: "document-open"
         onTriggered: {
             if (historyItem && historyItem.filePath) {
-                if (historyItem.filePath.toString().indexOf(".desktop") !== -1) {
+                if (Utils.isDesktopEntry(historyItem.filePath)) {
                     logic.launchApp(historyItem.filePath)
                 } else {
                     if (Utils.isSafeExternalUrl(historyItem.filePath)) Qt.openUrlExternally(historyItem.filePath)
@@ -62,11 +61,18 @@ QQC.Menu {
             }
         }
     }
-    
-    QQC.MenuSeparator { visible: historyItem && !historyItem.isApplication && historyItem.filePath }
-    
+
+    PlasmaComponents.MenuItem {
+        text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open With...")
+        icon.name: "application-menu"
+        visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
+        onTriggered: if (logic) logic.openWith(historyItem.filePath)
+    }
+
+    PlasmaComponents.MenuSeparator { visible: historyItem && !historyItem.isApplication && historyItem.filePath }
+
     // ===== COPY PATH =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
         icon.name: "edit-copy"
         enabled: historyItem && historyItem.filePath
@@ -80,9 +86,9 @@ QQC.Menu {
             }
         }
     }
-    
+
     // ===== OPEN IN TERMINAL =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open in Terminal")
         icon.name: "utilities-terminal"
         visible: !!(historyItem && !historyItem.isApplication && (root.isFolder || (historyItem.filePath && historyItem.filePath.toString())))
@@ -92,19 +98,19 @@ QQC.Menu {
             }
         }
     }
-    
+
     // ===== OPEN CONTAINING FOLDER =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Containing Folder")
         icon.name: "folder-open"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath && !root.isFolder)
         onTriggered: logic.openFolder(historyItem.filePath)
     }
-    
-    QQC.MenuSeparator { visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath) }
-    
+
+    PlasmaComponents.MenuSeparator { visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath) }
+
     // ===== MOVE TO TRASH =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Move to Trash")
         icon.name: "user-trash"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
@@ -116,29 +122,29 @@ QQC.Menu {
             }
         }
     }
-    
+
     // ===== SHOW PROPERTIES =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Properties")
         icon.name: "document-properties"
         visible: !!(historyItem && !historyItem.isApplication && historyItem.filePath)
         onTriggered: logic.showProperties(historyItem.filePath)
     }
 
-    QQC.MenuSeparator { visible: !!(historyItem && historyItem.isApplication) }
+    PlasmaComponents.MenuSeparator { visible: !!(historyItem && historyItem.isApplication) }
 
     // ===== MANAGE APP =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Edit Application...")
         icon.name: "configure"
         visible: !!(historyItem && historyItem.isApplication && historyItem.filePath)
         onTriggered: logic.showProperties(historyItem.filePath)
     }
 
-    QQC.MenuSeparator { visible: !!(historyItem && historyItem.uuid) }
-    
+    PlasmaComponents.MenuSeparator { visible: !!(historyItem && historyItem.uuid) }
+
     // ===== REMOVE FROM HISTORY =====
-    QQC.MenuItem {
+    PlasmaComponents.MenuItem {
         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Remove from History")
         icon.name: "edit-delete"
         visible: !!(historyItem && historyItem.uuid)

@@ -1,14 +1,16 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
+import QtCore
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.extras as PlasmaExtras
 import "../js/PreviewUtils.js" as PreviewUtils
 
 // History Tile View - Displays search history in tile/grid format
 // Features: Keyboard navigation, Category collapse/expand
 FocusScope {
     id: historyTile
-    
+
     // Required properties
     required property var categorizedHistory
     required property int iconSize
@@ -20,19 +22,21 @@ FocusScope {
     property int previewInlineMode: 1
     property int previewSize: 1
     required property var logic
-    
+    readonly property string thumbnailCacheBase: StandardPaths.writableLocation(StandardPaths.HomeLocation).toString().replace(/^file:\/\/\/?/, "/") + "/.cache/thumbnails"
+
     // Signals
     signal itemClicked(var item)
     signal clearClicked()
-    
+    signal hintSelected(string text)
+
     // Localization removed
     // Use standard i18nd("plasma_applet_com.mcc45tr.filesearch", )
-    
+
     // Navigation state
     property var collapsedCategories: ({})
     property int selectedFlatIndex: 0
     property string selectedUuid: ""
-    
+
     // Computed flat list for keyboard navigation
     property var flatItemList: {
         var list = []
@@ -50,16 +54,16 @@ FocusScope {
         }
         return list
     }
-    
+
     property int totalItems: flatItemList.length
-    
+
     // Signals for Tab navigation
     signal tabPressed()
     signal shiftTabPressed()
     signal viewModeChangeRequested(int mode)
-    
+
     focus: true
-    
+
     // Keyboard handling
     Keys.onUpPressed: smartMoveVertical(-1)
     Keys.onDownPressed: smartMoveVertical(1)
@@ -92,12 +96,12 @@ FocusScope {
             }
         }
     }
-    
+
     function columnsInRow() {
         var itemWidth = tileWidth + 8 // tile width + spacing
         return Math.max(1, Math.floor(historyTile.width / itemWidth))
     }
-    
+
     // Calculate current column position
     function getCurrentColumn() {
         if (totalItems === 0) return 0
@@ -106,7 +110,7 @@ FocusScope {
         if (!item) return 0
         return item.itemIndex % cols
     }
-    
+
     // Navigation methods
     function moveUp() { smartMoveVertical(-1) }
     function moveDown() { smartMoveVertical(1) }
@@ -118,39 +122,39 @@ FocusScope {
     // Smart vertical movement that maintains column position
     function smartMoveVertical(direction) {
         if (totalItems === 0) return
-        
+
         var cols = columnsInRow()
         var currentItem = flatItemList[selectedFlatIndex]
         if (!currentItem) return
-        
+
         var currentCatIdx = currentItem.catIndex
         var currentItemIdx = currentItem.itemIndex
         var currentCol = currentItemIdx % cols
-        
+
         var targetGlobalIndex = -1
-        
+
         if (direction === 1) { // Down
              var nextRowIndex = currentItemIdx + cols
-             
+
              for (var i = selectedFlatIndex + 1; i < totalItems; i++) {
                  var nextItem = flatItemList[i]
-                 
+
                  if (nextItem.catIndex === currentCatIdx) {
                     if (nextItem.itemIndex === nextRowIndex) {
                         targetGlobalIndex = i
                         break
                     }
-                 } 
+                 }
                  else {
                      // Preserve the column when entering the next category.
                      var newCatIdx = nextItem.catIndex
                      var bestMatch = i // default to first item
-                     
+
                      for (var j = i; j < totalItems; j++) {
                          var cand = flatItemList[j]
-                         if (cand.catIndex !== newCatIdx) break; 
+                         if (cand.catIndex !== newCatIdx) break;
                          if (cand.itemIndex >= cols) break;
-                         
+
                          if ((cand.itemIndex % cols) === currentCol) {
                              targetGlobalIndex = j
                              break
@@ -163,7 +167,7 @@ FocusScope {
              }
         } else { // Up
              var prevRowIndex = currentItemIdx - cols
-             
+
              if (prevRowIndex >= 0) {
                  // Move to the previous row in the current category.
                  for (var i = selectedFlatIndex - 1; i >= 0; i--) {
@@ -172,7 +176,7 @@ FocusScope {
                          targetGlobalIndex = i
                          break
                      }
-                     if (prevItem.catIndex !== currentCatIdx) break; 
+                     if (prevItem.catIndex !== currentCatIdx) break;
                  }
              } else {
                  // Preserve the column in the final row of the previous category.
@@ -182,7 +186,7 @@ FocusScope {
                          var prevCatIdx = prevItem.catIndex
                          var endpointRow = Math.floor(prevItem.itemIndex / cols)
                          var desiredIndex = endpointRow * cols + currentCol
-                         
+
                          if (desiredIndex > prevItem.itemIndex) {
                              // Column doesn't exist in last row, pick last item
                              targetGlobalIndex = i
@@ -190,7 +194,7 @@ FocusScope {
                              // Find exact match
                              for (var j = i; j >= 0; j--) {
                                  var cand = flatItemList[j]
-                                 if (cand.catIndex !== prevCatIdx) break 
+                                 if (cand.catIndex !== prevCatIdx) break
                                  if (cand.itemIndex === desiredIndex) {
                                      targetGlobalIndex = j
                                      break
@@ -202,18 +206,18 @@ FocusScope {
                  }
              }
         }
-        
+
         if (targetGlobalIndex !== -1) {
             selectedFlatIndex = targetGlobalIndex
         }
     }
-    
+
     function moveSelection(delta) {
         if (totalItems === 0) return
         var newIndex = Math.max(0, Math.min(totalItems - 1, selectedFlatIndex + delta))
         selectedFlatIndex = newIndex
     }
-    
+
     function activateCurrentItem() {
         if (totalItems === 0) return
         var item = flatItemList[selectedFlatIndex]
@@ -221,63 +225,19 @@ FocusScope {
             historyTile.itemClicked(item.data)
         }
     }
-    
+
     function toggleCategory(categoryName) {
         var newCollapsed = Object.assign({}, collapsedCategories)
         newCollapsed[categoryName] = !newCollapsed[categoryName]
         collapsedCategories = newCollapsed
     }
-    
+
     function isItemSelected(catIdx, itemIdx) {
         if (totalItems === 0) return false
         var item = flatItemList[selectedFlatIndex]
         return item && item.catIndex === catIdx && item.itemIndex === itemIdx
     }
-    
-    // Header with title and clear button
-    RowLayout {
-        id: historyHeader
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: 24
-        
-        Text {
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Recent Searches")
-            font.pixelSize: 13
-            font.bold: true
-            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
-            Layout.fillWidth: true
-        }
-        
-        // Clear History Button
-        Rectangle {
-            id: clearHistoryBtn
-            Layout.preferredWidth: clearBtnText.implicitWidth + 16
-            Layout.preferredHeight: 26
-            radius: 4
-            color: clearHistoryMouseArea.containsMouse ? Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.2) : "transparent"
-            border.width: 1
-            border.color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.2)
-            
-            Text {
-                id: clearBtnText
-                anchors.centerIn: parent
-                text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Clear History")
-                font.pixelSize: 11
-                color: historyTile.textColor
-            }
-            
-            MouseArea {
-                id: clearHistoryMouseArea
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: historyTile.clearClicked()
-            }
-        }
-    }
-    
+
     // Context Menu
     HistoryContextMenu {
         id: contextMenu
@@ -286,142 +246,74 @@ FocusScope {
 
     // Tile Grid
     property int scrollBarStyle: 0
-    
+
     // Compact tile view mode
     property bool compactTileView: false
-    
+
     // Computed tile dimensions
     readonly property real tileWidth: compactTileView ? (iconSize + 16) : (iconSize + 40)
     readonly property real tileHeight: compactTileView ? (iconSize + 40) : (iconSize + 50)
-    readonly property real textWidth: compactTileView ? (iconSize + 8) : (iconSize + 32)
-    readonly property int textFontSize: compactTileView ? 9 : (iconSize > 32 ? 11 : 9)
+    readonly property real textWidth: tileWidth - (Kirigami.Units.smallSpacing * 2)
 
-    Component {
-        id: systemScrollBarComp
-        ScrollBar {
-            policy: historyTile.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-        }
-    }
-
-    Component {
-        id: minimalScrollBarComp
-        ScrollBar {
-            policy: historyTile.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
-            width: 4
-            active: hovered || pressed
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            
-            contentItem: Rectangle {
-                implicitWidth: 2
-                radius: 1
-                color: parent.pressed ? historyTile.accentColor : Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.3)
-            }
-            background: Item {
-                implicitWidth: 4
-            }
-        }
-    }
-
-    Loader {
-        id: scrollBarLoader
-        active: true
-        sourceComponent: historyTile.scrollBarStyle === 1 ? minimalScrollBarComp : systemScrollBarComp
-    }
-
-    ScrollView {
-        visible: historyTile.categorizedHistory.length > 0
-        anchors.top: historyHeader.bottom
-        anchors.topMargin: 4
+    PlasmaComponents.ScrollView {
+        visible: true
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         clip: true
-        ScrollBar.vertical: scrollBarLoader.item
-        
+        PlasmaComponents.ScrollBar.vertical.policy: historyTile.scrollBarStyle === 2
+            ? PlasmaComponents.ScrollBar.AlwaysOff
+            : PlasmaComponents.ScrollBar.AsNeeded
+
         Column {
             id: tileView
             width: historyTile.width - 24
-            spacing: 8
-            
+            spacing: Kirigami.Units.smallSpacing * 2
+
             Repeater {
                 model: historyTile.categorizedHistory
-            
+
             delegate: Column {
                 id: histCategoryDelegate
                 width: tileView.width
-                spacing: 4
-                
+                spacing: Kirigami.Units.smallSpacing
+
                 property int catIdx: index
                 property bool isCollapsed: historyTile.collapsedCategories[modelData.categoryName] || false
                 property bool animateHeight: false
-                
-                // Category Header (Clickable)
-                Rectangle {
+
+                CategoryHeader {
                     width: parent.width
-                    height: 28
-                    color: histCategoryHeaderMouse.containsMouse ? Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.1) : "transparent"
-                    radius: 4
-                    
-                    RowLayout {
-                        anchors.fill: parent
-                        anchors.leftMargin: 4
-                        anchors.rightMargin: 4
-                        spacing: 8
-                        
-                        Kirigami.Icon {
-                            source: histCategoryDelegate.isCollapsed ? "arrow-right" : "arrow-down"
-                            Layout.preferredWidth: 16
-                            Layout.preferredHeight: 16
-                            color: historyTile.textColor
-                            opacity: 0.6
-                        }
-                        
-                        Text {
-                            text: modelData.categoryName + " (" + modelData.items.length + ")"
-                            font.pixelSize: 13
-                            font.bold: true
-                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.6)
-                        }
-                        
-                        Rectangle {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 1
-                            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.2)
-                        }
+                    categoryName: modelData.categoryName
+                    itemCount: modelData.items.length
+                    collapsed: histCategoryDelegate.isCollapsed
+                    textColor: historyTile.textColor
+                    accentColor: historyTile.accentColor
+                    actionIcon: index === 0 ? "edit-clear-history" : ""
+                    actionText: i18nd("plasma_applet_com.mcc45tr.filesearch", "Clear History")
+                    onToggleRequested: {
+                        histCategoryDelegate.animateHeight = true
+                        historyTile.toggleCategory(modelData.categoryName)
                     }
-                    
-                    MouseArea {
-                        id: histCategoryHeaderMouse
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            histCategoryDelegate.animateHeight = true
-                            historyTile.toggleCategory(modelData.categoryName)
-                        }
-                    }
+                    onActionTriggered: historyTile.clearClicked()
                 }
-                
+
                 // Tile Flow (Animated collapse/expand - matches PinnedSection style)
                 Item {
                     width: histCategoryDelegate.width
                     height: histCategoryDelegate.isCollapsed ? 0 : histCategoryFlow.implicitHeight
                     clip: true
-                    
+
                     Behavior on height {
                         enabled: histCategoryDelegate.animateHeight
-                        NumberAnimation { 
-                            duration: 200; 
+                        NumberAnimation {
+                            duration: 200;
                             easing.type: Easing.InOutQuad
                             onFinished: histCategoryDelegate.animateHeight = false
                         }
                     }
-                    
+
                     Flow {
                         id: histCategoryFlow
                         width: {
@@ -433,32 +325,33 @@ FocusScope {
                         }
                         x: (parent.width - width) / 2
                         anchors.top: parent.top
-                        spacing: 8
-                    
+                        spacing: Kirigami.Units.smallSpacing * 2
+
                     Repeater {
                         // Destroy preview-heavy delegates for collapsed categories.
                         model: histCategoryDelegate.isCollapsed ? [] : modelData.items
-                        
+
                         Item {
                             id: histTileDelegate
                             property bool isPreviewAvailable: PreviewUtils.isPreviewAvailable(modelData.filePath || modelData.url || "", modelData.category || "", historyTile.previewSettings)
                             property bool showInlinePreview: historyTile.previewEnabled && historyTile.previewShowHistory && historyTile.previewInlineMode === 1 && isPreviewAvailable && histTileDelegate.isSelected
-                            
+
                             // Wide vs Grid sizing
                             width: showInlinePreview ? parent.width : historyTile.tileWidth
                             height: showInlinePreview ? (wideContent.implicitHeight + 16) : historyTile.tileHeight
-                            
+
                             Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
                             Behavior on height { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
-                            
+
                             property int itemIdx: index
                             property bool isSelected: historyTile.isItemSelected(histCategoryDelegate.catIdx, itemIdx)
-                            
+                            readonly property color contentColor: isSelected ? Kirigami.Theme.highlightedTextColor : historyTile.textColor
+
                             readonly property bool previewActive: historyTile.previewEnabled && isPreviewAvailable && (historyTile.previewInlineMode === 0 ? histTileMouseArea.containsMouse : histTileDelegate.isSelected)
                             readonly property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.filePath || modelData.url || "") : ""
                             readonly property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.filePath || modelData.url || "") : ""
                             readonly property string previewSource: previewActive
-                                ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyTile.previewEnabled, historyTile.previewSettings)
+                                ? PreviewUtils.getPreviewSource((modelData.filePath || modelData.url || "").toString(), historyTile.previewEnabled, historyTile.previewSettings, historyTile.thumbnailCacheBase)
                                 : ""
 
                             onShowInlinePreviewChanged: {
@@ -491,58 +384,40 @@ FocusScope {
                                 })
                             }
                             Component.onDestruction: snippetRequestToken++
-                            
+
                             Rectangle {
                                 id: histTileBg
                                 anchors.fill: parent
-                                radius: 8
-                                color: {
-                                    if (histTileDelegate.isSelected)
-                                        return Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.3)
-                                    if (histTileMouseArea.containsMouse || (contextMenu.visible && contextMenu.historyItem === modelData)) 
-                                        return Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.15)
-                                    return "transparent"
-                                }
-                                border.width: histTileDelegate.isSelected ? 2 : 0
-                                border.color: historyTile.accentColor
-                                
-                                Behavior on border.width { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                                
-                                // Focus glow effect for accessibility
-                                Rectangle {
-                                    id: histFocusGlow
+                                radius: Kirigami.Units.cornerRadius
+                                color: "transparent"
+
+                                PlasmaExtras.Highlight {
                                     anchors.fill: parent
-                                    anchors.margins: -3
-                                    radius: parent.radius + 3
-                                    color: "transparent"
-                                    border.width: histTileDelegate.isSelected ? 2 : 0
-                                    border.color: Qt.rgba(historyTile.accentColor.r, historyTile.accentColor.g, historyTile.accentColor.b, 0.4)
-                                    visible: histTileDelegate.isSelected
-                                    opacity: visible ? 1 : 0
-                                    
-                                    Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
+                                    visible: histTileDelegate.isSelected || histTileMouseArea.containsMouse || (contextMenu.visible && contextMenu.historyItem === modelData)
+                                    active: histTileDelegate.isSelected
+                                    hovered: histTileMouseArea.containsMouse
+                                    pressed: histTileDelegate.isSelected
                                 }
-                                
+
                                 Column {
                                     anchors.centerIn: parent
-                                    spacing: 6
+                                    spacing: Kirigami.Units.smallSpacing
                                     visible: !histTileDelegate.showInlinePreview
-                                    
+
                                     // Icon Container
                                     Item {
                                         width: historyTile.iconSize
                                         height: historyTile.iconSize
                                         anchors.horizontalCenter: parent.horizontalCenter
-                                        
+
                                         // 1. Fallback Icon
                                         Kirigami.Icon {
                                             anchors.fill: parent
                                             source: modelData.decoration || "application-x-executable"
-                                            color: historyTile.textColor
+                                            color: histTileDelegate.contentColor
                                             visible: !previewImageTile.item || previewImageTile.item.status !== Image.Ready
                                         }
-                                        
+
                                         // 2. Preview Image
                                         Loader {
                                             id: previewImageTile
@@ -559,24 +434,25 @@ FocusScope {
                                             }
                                         }
                                     }
-                                    
+
                                     Text {
                                         width: historyTile.textWidth
                                         text: modelData.display || ""
-                                        color: historyTile.textColor
-                                        font.pixelSize: historyTile.textFontSize
+                                        color: histTileDelegate.contentColor
+                                        font.family: Kirigami.Theme.smallFont.family
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                         horizontalAlignment: Text.AlignHCenter
-                                        elide: Text.ElideMiddle
-                                        maximumLineCount: 2
-                                        wrapMode: Text.Wrap
+                                        elide: Text.ElideRight
+                                        maximumLineCount: 1
+                                        wrapMode: Text.NoWrap
                                     }
-                                    
+
                                     // Parent folder name (Grid mode)
                                     Text {
                                         width: historyTile.textWidth
                                         text: {
                                             if (modelData.isApplication) return "";
-                                            
+
                                             var path = modelData.filePath ? modelData.filePath.toString() : (modelData.url ? modelData.url.toString() : "");
                                             if (path && path.length > 0) {
                                                 path = path.replace("file://", "");
@@ -589,11 +465,13 @@ FocusScope {
                                             }
                                             return "";
                                         }
-                                        color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.6)
-                                        font.pixelSize: 9
+                                        color: Qt.rgba(histTileDelegate.contentColor.r, histTileDelegate.contentColor.g, histTileDelegate.contentColor.b, 0.75)
+                                        font.family: Kirigami.Theme.smallFont.family
+                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                         horizontalAlignment: Text.AlignHCenter
-                                        elide: Text.ElideMiddle
-                                        visible: text.length > 0
+                                        elide: Text.ElideRight
+                                        visible: true
+                                        opacity: text.length > 0 ? 1 : 0
                                     }
                                 }
 
@@ -602,19 +480,19 @@ FocusScope {
                                     anchors.left: parent.left
                                     anchors.right: parent.right
                                     anchors.top: parent.top
-                                    anchors.margins: 8
-                                    spacing: 8
+                                    anchors.margins: Kirigami.Units.largeSpacing
+                                    spacing: Kirigami.Units.smallSpacing * 2
                                     visible: histTileDelegate.showInlinePreview
 
                                     RowLayout {
                                         Layout.fillWidth: true
-                                        spacing: 12
+                                        spacing: Kirigami.Units.largeSpacing
 
                                         Kirigami.Icon {
                                             source: modelData.decoration || "application-x-executable"
                                             Layout.preferredWidth: historyTile.iconSize
                                             Layout.preferredHeight: historyTile.iconSize
-                                            color: historyTile.textColor
+                                            color: histTileDelegate.contentColor
                                         }
 
                                         ColumnLayout {
@@ -623,9 +501,10 @@ FocusScope {
 
                                             Text {
                                                 text: modelData.display || ""
-                                                font.pixelSize: 14
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                 font.bold: true
-                                                color: historyTile.textColor
+                                                color: histTileDelegate.contentColor
                                                 Layout.fillWidth: true
                                                 elide: Text.ElideRight
                                             }
@@ -641,11 +520,13 @@ FocusScope {
                                                     }
                                                     return "";
                                                 }
-                                                font.pixelSize: 11
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                                 Layout.fillWidth: true
-                                                elide: Text.ElideMiddle
-                                                visible: text.length > 0
+                                                elide: Text.ElideRight
+                                                visible: true
+                                                opacity: text.length > 0 ? 1 : 0
                                             }
                                         }
                                     }
@@ -653,8 +534,8 @@ FocusScope {
                                     // Inline Preview Card
                                     ColumnLayout {
                                         Layout.fillWidth: true
-                                        spacing: 8
-                                        Layout.topMargin: 8
+                                        spacing: Kirigami.Units.smallSpacing * 2
+                                        Layout.topMargin: Kirigami.Units.largeSpacing
 
                                         Rectangle {
                                             Layout.fillWidth: true
@@ -664,9 +545,9 @@ FocusScope {
 
                                         RowLayout {
                                             Layout.fillWidth: true
-                                            spacing: 12
-                                            Layout.leftMargin: 4
-                                            Layout.rightMargin: 4
+                                            spacing: Kirigami.Units.largeSpacing
+                                            Layout.leftMargin: Kirigami.Units.smallSpacing
+                                            Layout.rightMargin: Kirigami.Units.smallSpacing
 
                                             // Left Column: Thumbnail or large icon
                                             Item {
@@ -679,7 +560,7 @@ FocusScope {
                                                 Rectangle {
                                                     anchors.fill: parent
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.05)
-                                                    radius: 4
+                                                    radius: Kirigami.Units.cornerRadius
                                                 }
 
                                                 Kirigami.Icon {
@@ -706,13 +587,14 @@ FocusScope {
                                             // Right Column: Metadata
                                             ColumnLayout {
                                                 Layout.fillWidth: true
-                                                spacing: 4
+                                                spacing: Kirigami.Units.smallSpacing
 
                                                 Text {
                                                     text: modelData.display || ""
                                                     color: historyTile.textColor
                                                     font.bold: true
-                                                    font.pixelSize: 12
+                                                    font.family: Kirigami.Theme.defaultFont.family
+                                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                     elide: Text.ElideRight
                                                     Layout.fillWidth: true
                                                 }
@@ -720,14 +602,16 @@ FocusScope {
                                                 Text {
                                                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "Other")
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
-                                                    font.pixelSize: 10
+                                                    font.family: Kirigami.Theme.smallFont.family
+                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                     textFormat: Text.PlainText
                                                 }
 
                                                 Text {
                                                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + histTileDelegate.previewFileType
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
-                                                    font.pixelSize: 10
+                                                    font.family: Kirigami.Theme.smallFont.family
+                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                     visible: histTileDelegate.previewFileType.length > 0
                                                     textFormat: Text.PlainText
                                                 }
@@ -736,7 +620,8 @@ FocusScope {
                                                     id: fileSizeText
                                                     text: ""
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
-                                                    font.pixelSize: 10
+                                                    font.family: Kirigami.Theme.smallFont.family
+                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                     visible: text.length > 0
                                                     textFormat: Text.PlainText
                                                 }
@@ -744,7 +629,8 @@ FocusScope {
                                                 Text {
                                                     text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + histTileDelegate.previewPath
                                                     color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.5)
-                                                    font.pixelSize: 9
+                                                    font.family: Kirigami.Theme.smallFont.family
+                                                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                     wrapMode: Text.WrapAnywhere
                                                     Layout.fillWidth: true
                                                     textFormat: Text.PlainText
@@ -758,7 +644,7 @@ FocusScope {
                                             Layout.fillWidth: true
                                             Layout.preferredHeight: textSnippet.implicitHeight + 12
                                             color: Qt.rgba(0, 0, 0, 0.2)
-                                            radius: 4
+                                            radius: Kirigami.Units.cornerRadius
                                             border.width: 1
                                             border.color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.1)
                                             visible: histTileDelegate.isTextFile && textSnippet.text.length > 0
@@ -766,11 +652,11 @@ FocusScope {
                                             Text {
                                                 id: textSnippet
                                                 anchors.fill: parent
-                                                anchors.margins: 6
+                                                anchors.margins: Kirigami.Units.smallSpacing
                                                 text: ""
                                                 color: historyTile.textColor
                                                 font.family: "Monospace"
-                                                font.pixelSize: 10
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 wrapMode: Text.Wrap
                                             }
                                         }
@@ -778,9 +664,9 @@ FocusScope {
                                         // Quick Actions
                                         RowLayout {
                                             Layout.fillWidth: true
-                                            spacing: 10
+                                            spacing: Kirigami.Units.largeSpacing
 
-                                            Button {
+                                            PlasmaComponents.Button {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
                                                 icon.name: "edit-copy"
                                                 flat: true
@@ -788,7 +674,7 @@ FocusScope {
                                                 onClicked: if (historyTile.logic) historyTile.logic.copyToClipboard(histTileDelegate.previewPath)
                                             }
 
-                                            Button {
+                                            PlasmaComponents.Button {
                                                 text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Folder")
                                                 icon.name: "folder-open"
                                                 flat: true
@@ -803,7 +689,7 @@ FocusScope {
                                         }
                                     }
                                 }
-                                
+
                                 MouseArea {
                                     id: histTileMouseArea
                                     anchors.fill: parent
@@ -820,11 +706,16 @@ FocusScope {
                                     }
                                 }
 
+                                PlasmaComponents.ToolTip {
+                                    visible: histTileMouseArea.containsMouse && histTileDelegate.previewSource.length === 0
+                                    text: (modelData.display || "") + (modelData.filePath ? "\n" + modelData.filePath.toString().replace("file://", "") : "")
+                                }
+
                                 Loader {
                                     active: historyTile.previewInlineMode === 0
                                             && histTileDelegate.previewSource.length > 0
                                             && histTileMouseArea.containsMouse
-                                    sourceComponent: ToolTip {
+                                    sourceComponent: PlasmaComponents.ToolTip {
                                         visible: true
                                         delay: 500
                                         timeout: 10000
@@ -832,12 +723,13 @@ FocusScope {
                                         y: 0
 
                                         contentItem: Column {
-                                        spacing: 6
+                                        spacing: Kirigami.Units.smallSpacing
 
                                         Text {
                                             text: modelData.display || ""
                                             font.bold: true
-                                            font.pixelSize: 12
+                                            font.family: Kirigami.Theme.defaultFont.family
+                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                             color: historyTile.textColor
                                         }
 
@@ -853,21 +745,24 @@ FocusScope {
 
                                         Text {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Category") + ": " + (modelData.category || "")
-                                            font.pixelSize: 10
+                                            font.family: Kirigami.Theme.smallFont.family
+                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                             visible: (modelData.category || "").length > 0
                                         }
 
                                         Text {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "File Type") + ": " + histTileDelegate.previewFileType
-                                            font.pixelSize: 10
+                                            font.family: Kirigami.Theme.smallFont.family
+                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                             visible: histTileDelegate.previewFileType.length > 0
                                         }
 
                                         Text {
                                             text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Path") + ": " + histTileDelegate.previewPath
-                                            font.pixelSize: 10
+                                            font.family: Kirigami.Theme.smallFont.family
+                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                             color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.7)
                                             wrapMode: Text.WrapAnywhere
                                             width: 300
@@ -879,7 +774,7 @@ FocusScope {
                                             color: Kirigami.Theme.backgroundColor
                                             border.color: historyTile.accentColor
                                             border.width: 1
-                                            radius: 6
+                                            radius: Kirigami.Units.cornerRadius
                                         }
                                     }
                                 }
@@ -892,7 +787,7 @@ FocusScope {
             }
         }
     }
-    
+
     onSelectedFlatIndexChanged: {
         var selected = flatItemList[selectedFlatIndex]
         selectedUuid = selected && selected.data ? (selected.data.uuid || "") : ""
@@ -912,25 +807,4 @@ FocusScope {
         selectedFlatIndex = Math.min(nextIndex, Math.max(0, flatItemList.length - 1))
     }
 
-    // Empty State
-    ColumnLayout {
-        anchors.centerIn: parent
-        visible: historyTile.categorizedHistory.length === 0
-        spacing: 16
-
-        Kirigami.Icon {
-            source: "search"
-            Layout.preferredWidth: 64
-            Layout.preferredHeight: 64
-            Layout.alignment: Qt.AlignHCenter
-            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.3)
-        }
-
-        Text {
-            text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
-            color: Qt.rgba(historyTile.textColor.r, historyTile.textColor.g, historyTile.textColor.b, 0.5)
-            font.pixelSize: 16
-            Layout.alignment: Qt.AlignHCenter
-        }
-    }
 }

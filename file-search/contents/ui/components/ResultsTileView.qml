@@ -1,9 +1,11 @@
 import "../js/PreviewUtils.js" as PreviewUtils
 import "../js/utils.js" as Utils
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
+import QtCore
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.extras as PlasmaExtras
 
 // Tile-based search results with keyboard navigation and inline previews.
 FocusScope {
@@ -74,11 +76,11 @@ FocusScope {
     readonly property string locSearching: i18nd("plasma_applet_com.mcc45tr.filesearch", "Searching...")
     readonly property string locNoResults: i18nd("plasma_applet_com.mcc45tr.filesearch", "No results found")
     readonly property string locTypeToSearch: i18nd("plasma_applet_com.mcc45tr.filesearch", "Type to search")
+    readonly property string thumbnailCacheBase: Utils.decodeLocalPath(StandardPaths.writableLocation(StandardPaths.HomeLocation)) + "/.cache/thumbnails"
     // Computed tile dimensions for grid items
     readonly property real tileWidth: compactTileView ? (iconSize + 16) : (iconSize + 40)
     readonly property real tileHeight: compactTileView ? (iconSize + 40) : (iconSize + 50)
     readonly property real textWidth: compactTileView ? (iconSize + 8) : (iconSize + 32)
-    readonly property int textFontSize: compactTileView ? 9 : (iconSize > 32 ? 11 : 9)
     readonly property int virtualColumnCount: Math.max(1, Math.floor(Math.max(1, width - 24) / (tileWidth + 8)))
 
     // Flatten categories into small, virtualizable rows. A row contains at most
@@ -330,11 +332,7 @@ FocusScope {
     }
 
     function isWideCategory(cat) {
-        if (!cat)
-            return false;
-
-        var c = cat.toLowerCase();
-        return c.includes("date") || c.includes("tarih") || c.includes("calculator") || c.includes("hesap") || c.includes("dictionary") || c.includes("sözlük") || c.includes("shell") || c.includes("komut") || c.includes("man page") || c.includes("kılavuz") || c.includes("unit") || c.includes("birim") || c.includes("power") || c.includes("güç");
+        return Utils.isWideCategory(cat);
     }
 
     focus: true
@@ -402,62 +400,22 @@ FocusScope {
         onTriggered: resultsTileRoot.resultAnimationsEnabled = true
     }
 
-    Component {
-        id: systemScrollBarComp
-
-        ScrollBar {
-            policy: resultsTileRoot.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-        }
-
-    }
-
-    Component {
-        id: minimalScrollBarComp
-
-        ScrollBar {
-            policy: resultsTileRoot.scrollBarStyle === 2 ? ScrollBar.AlwaysOff : ScrollBar.AsNeeded
-            width: 4
-            active: hovered || pressed
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-
-            contentItem: Rectangle {
-                implicitWidth: 2
-                radius: 1
-                color: parent.pressed ? resultsTileRoot.accentColor : Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.3)
-            }
-
-            background: Item {
-                implicitWidth: 4
-            }
-
-        }
-
-    }
-
-    Loader {
-        id: scrollBarLoader
-
-        active: true
-        sourceComponent: resultsTileRoot.scrollBarStyle === 1 ? minimalScrollBarComp : systemScrollBarComp
-    }
-
     ListView {
         id: resultsTileList
 
         anchors.fill: parent
-        anchors.leftMargin: 12
-        anchors.rightMargin: 12
+        anchors.leftMargin: Kirigami.Units.largeSpacing
+        anchors.rightMargin: Kirigami.Units.largeSpacing
         clip: true
-        spacing: 8
+        spacing: Kirigami.Units.smallSpacing * 2
         cacheBuffer: Math.max(height * 0.5, resultsTileRoot.tileHeight * 2)
         model: resultsTileRoot.virtualRows
         reuseItems: true
-        ScrollBar.vertical: scrollBarLoader.item
+        PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
+            policy: resultsTileRoot.scrollBarStyle === 2
+                ? PlasmaComponents.ScrollBar.AlwaysOff
+                : PlasmaComponents.ScrollBar.AsNeeded
+        }
 
         delegate: Item {
                     id: categoryDelegate
@@ -468,57 +426,19 @@ FocusScope {
                     readonly property bool isWide: !!rowData.isWide
 
                     width: resultsTileList.width
-                    height: isHeader ? 28 : Math.max(resultsTileRoot.tileHeight, categoryFlow.implicitHeight)
+                    height: isHeader
+                        ? Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+                        : Math.max(resultsTileRoot.tileHeight, categoryFlow.implicitHeight)
 
-                    // Category Header (Clickable to collapse/expand)
-                    Rectangle {
+                    CategoryHeader {
                         visible: categoryDelegate.isHeader
                         width: parent.width
-                        height: 28
-                        color: categoryHeaderMouse.containsMouse ? Qt.rgba(resultsTileRoot.accentColor.r, resultsTileRoot.accentColor.g, resultsTileRoot.accentColor.b, 0.1) : "transparent"
-                        radius: 4
-
-                        RowLayout {
-                            anchors.fill: parent
-                            anchors.leftMargin: 4
-                            anchors.rightMargin: 4
-                            spacing: 8
-
-                            // Collapse indicator
-                            Kirigami.Icon {
-                                source: resultsTileRoot.collapsedCategories[categoryDelegate.rowData.categoryName] ? "arrow-right" : "arrow-down"
-                                Layout.preferredWidth: 16
-                                Layout.preferredHeight: 16
-                                color: resultsTileRoot.textColor
-                                opacity: 0.6
-                            }
-
-                            Text {
-                                text: categoryDelegate.rowData.categoryName + " (" + categoryDelegate.rowData.itemCount + ")"
-                                font.pixelSize: 13
-                                font.bold: true
-                                color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
-                            }
-
-                            Rectangle {
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 1
-                                color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.2)
-                            }
-
-                        }
-
-                        MouseArea {
-                            id: categoryHeaderMouse
-
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                resultsTileRoot.toggleCategory(categoryDelegate.rowData.categoryName);
-                            }
-                        }
-
+                        categoryName: categoryDelegate.rowData.categoryName || ""
+                        itemCount: categoryDelegate.rowData.itemCount === undefined ? -1 : categoryDelegate.rowData.itemCount
+                        collapsed: !!resultsTileRoot.collapsedCategories[categoryDelegate.rowData.categoryName]
+                        textColor: resultsTileRoot.textColor
+                        accentColor: resultsTileRoot.accentColor
+                        onToggleRequested: resultsTileRoot.toggleCategory(categoryDelegate.rowData.categoryName)
                     }
 
                     // Grid Flow (Animated collapse/expand - matches PinnedSection style)
@@ -543,7 +463,7 @@ FocusScope {
                             }
                             x: (parent.width - width) / 2
                             anchors.top: parent.top
-                            spacing: 8
+                            spacing: Kirigami.Units.smallSpacing * 2
 
                             Repeater {
                                 model: categoryDelegate.isHeader ? [] : categoryDelegate.rowData.items
@@ -565,10 +485,11 @@ FocusScope {
                                     property bool isExpanded: (isRSS && resultsTileRoot.rssExpandableCards && !!resultsTileRoot.expandedItems[modelData.duplicateId]) || showInlinePreview
                                     property int itemIdx: categoryDelegate.rowData.startIndex + index
                                     property bool isSelected: resultsTileRoot.isItemSelected(categoryDelegate.catIdx, itemIdx)
+                                    readonly property color contentColor: isSelected ? Kirigami.Theme.highlightedTextColor : resultsTileRoot.textColor
                                     property bool previewActive: resultsTileRoot.previewEnabled && isPreviewAvailable && (resultsTileRoot.previewInlineMode === 0 ? (tileContentLoader.item && tileContentLoader.item.hovered) : tileDelegate.isSelected)
                                     property string previewPath: previewActive ? PreviewUtils.getLocalPreviewPath(modelData.url || "") : ""
                                     property string previewFileType: previewActive ? PreviewUtils.getFileTypeLabel(modelData.url || "") : ""
-                                    property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings) : ""
+                                    property string previewSource: previewActive ? PreviewUtils.getPreviewSource(modelData.url || "", resultsTileRoot.previewEnabled, resultsTileRoot.previewSettings, resultsTileRoot.thumbnailCacheBase) : ""
                                     property bool isTextFile: {
                                         return PreviewUtils.isTextExtension(PreviewUtils.getExtension(previewPath));
                                     }
@@ -639,41 +560,15 @@ FocusScope {
 
                                         anchors.fill: parent
                                         anchors.bottomMargin: (categoryDelegate.isWide || tileDelegate.isExpanded) ? 8 : 0
-                                        radius: 8
-                                        color: {
-                                            if (tileDelegate.isSelected)
-                                                return Qt.rgba(resultsTileRoot.accentColor.r, resultsTileRoot.accentColor.g, resultsTileRoot.accentColor.b, 0.3);
+                                        radius: Kirigami.Units.cornerRadius
+                                        color: "transparent"
 
-                                            if (tileMouseArea.containsMouse)
-                                                return Qt.rgba(resultsTileRoot.accentColor.r, resultsTileRoot.accentColor.g, resultsTileRoot.accentColor.b, 0.15);
-
-                                            return "transparent";
-                                        }
-                                        border.width: tileDelegate.isSelected ? 2 : 0
-                                        border.color: resultsTileRoot.accentColor
-
-                                        // Focus glow effect for accessibility
-                                        Rectangle {
-                                            id: focusGlow
-
+                                        PlasmaExtras.Highlight {
                                             anchors.fill: parent
-                                            anchors.margins: -3
-                                            radius: parent.radius + 3
-                                            color: "transparent"
-                                            border.width: tileDelegate.isSelected ? 2 : 0
-                                            border.color: Qt.rgba(resultsTileRoot.accentColor.r, resultsTileRoot.accentColor.g, resultsTileRoot.accentColor.b, 0.4)
-                                            visible: tileDelegate.isSelected
-                                            opacity: visible ? 1 : 0
-
-                                            Behavior on opacity {
-                                                enabled: resultsTileRoot.resultAnimationsEnabled
-                                                NumberAnimation {
-                                                    duration: 200
-                                                    easing.type: Easing.OutQuad
-                                                }
-
-                                            }
-
+                                            visible: tileDelegate.isSelected || tileMouseArea.containsMouse
+                                            active: tileDelegate.isSelected
+                                            hovered: tileMouseArea.containsMouse
+                                            pressed: tileDelegate.isSelected
                                         }
 
                                         // Content Loader (Grid vs Horizontal Layout)
@@ -681,7 +576,7 @@ FocusScope {
                                             id: tileContent
 
                                             anchors.fill: parent
-                                            anchors.margins: 8
+                                            anchors.margins: Kirigami.Units.largeSpacing
                                             implicitHeight: loader.item ? loader.item.implicitHeight : 50
 
                                             Loader {
@@ -697,30 +592,13 @@ FocusScope {
 
                                         }
 
-                                        Behavior on border.width {
-                                            enabled: resultsTileRoot.resultAnimationsEnabled
-                                            NumberAnimation {
-                                                duration: 150
-                                                easing.type: Easing.OutQuad
-                                            }
-
-                                        }
-
-                                        Behavior on color {
-                                            enabled: resultsTileRoot.resultAnimationsEnabled
-                                            ColorAnimation {
-                                                duration: 150
-                                            }
-
-                                        }
-
                                     }
 
                                     Component {
                                         id: gridLayoutComp
 
                                         Column {
-                                            spacing: 6
+                                            spacing: Kirigami.Units.smallSpacing
                                             anchors.centerIn: parent
 
                                             Item {
@@ -731,7 +609,7 @@ FocusScope {
                                                 Kirigami.Icon {
                                                     anchors.fill: parent
                                                     source: (tileDelegate.isRSS && modelData.sourceIcon) ? modelData.sourceIcon : (modelData.decoration || "application-x-executable")
-                                                    color: resultsTileRoot.textColor
+                                                    color: tileDelegate.contentColor
                                                     visible: previewImageGrid.status !== Image.Ready
                                                 }
 
@@ -751,21 +629,22 @@ FocusScope {
                                             }
 
                                             Text {
-                                                width: tileDelegate.width - 16
+                                                width: tileDelegate.width - (Kirigami.Units.smallSpacing * 2)
                                                 text: modelData.display || ""
-                                                color: resultsTileRoot.textColor
-                                                font.pixelSize: resultsTileRoot.textFontSize
+                                                color: tileDelegate.contentColor
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 horizontalAlignment: Text.AlignHCenter
-                                                elide: Text.ElideMiddle
-                                                maximumLineCount: 2
-                                                wrapMode: Text.Wrap
+                                                elide: Text.ElideRight
+                                                maximumLineCount: 1
+                                                wrapMode: Text.NoWrap
                                             }
 
                                             Text {
                                                 width: tileDelegate.width - 16
                                                 text: {
                                                     var cat = modelData.category || "";
-                                                    var isApp = Utils.isAppCategory(cat, tileDelegate.resolvedFilePath(), modelData.duplicateId || modelData.display || "");
+                                                    var isApp = Utils.isAppCategory(cat, tileDelegate.resolvedFilePath(), modelData.duplicateId || modelData.display || "", modelData.decoration || "");
                                                     if (isApp)
                                                         return modelData.subtext || "";
 
@@ -785,11 +664,13 @@ FocusScope {
                                                     }
                                                     return modelData.subtext || "";
                                                 }
-                                                color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.6)
-                                                font.pixelSize: 9
+                                                color: Qt.rgba(tileDelegate.contentColor.r, tileDelegate.contentColor.g, tileDelegate.contentColor.b, 0.75)
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 horizontalAlignment: Text.AlignHCenter
-                                                elide: Text.ElideMiddle
-                                                visible: text.length > 0
+                                                elide: Text.ElideRight
+                                                visible: true
+                                                opacity: text.length > 0 ? 1 : 0
                                             }
 
                                         }
@@ -804,17 +685,17 @@ FocusScope {
                                             property alias snippetText: textSnippet.text
                                             property alias sizeText: fileSizeText.text
 
-                                            spacing: 12
+                                            spacing: Kirigami.Units.largeSpacing
 
                                             RowLayout {
-                                                spacing: 12
+                                                spacing: Kirigami.Units.largeSpacing
                                                 Layout.fillWidth: true
 
                                                 Kirigami.Icon {
                                                     source: (tileDelegate.isRSS && modelData.sourceIcon) ? modelData.sourceIcon : (modelData.decoration || "application-x-executable")
                                                     Layout.preferredWidth: resultsTileRoot.iconSize
                                                     Layout.preferredHeight: resultsTileRoot.iconSize
-                                                    color: resultsTileRoot.textColor
+                                                    color: tileDelegate.contentColor
                                                     visible: !tileDelegate.isExpanded || !tileDelegate.isRSS
                                                 }
 
@@ -824,9 +705,11 @@ FocusScope {
 
                                                     Text {
                                                         text: modelData.display || ""
-                                                        font.pixelSize: tileDelegate.isExpanded ? 16 : 14
+                                                        font.pixelSize: tileDelegate.isExpanded
+                                                            ? Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25)
+                                                            : Kirigami.Theme.defaultFont.pixelSize
                                                         font.bold: true
-                                                        color: resultsTileRoot.textColor
+                                                        color: tileDelegate.contentColor
                                                         Layout.fillWidth: true
                                                         elide: tileDelegate.isExpanded ? Text.ElideNone : Text.ElideRight
                                                         wrapMode: tileDelegate.isExpanded ? Text.Wrap : Text.NoWrap
@@ -834,7 +717,8 @@ FocusScope {
 
                                                     Text {
                                                         text: modelData.subtext || ""
-                                                        font.pixelSize: 11
+                                                        font.family: Kirigami.Theme.smallFont.family
+                                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                         color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                         Layout.fillWidth: true
                                                         elide: Text.ElideRight
@@ -848,7 +732,7 @@ FocusScope {
                                                     source: "window-restore"
                                                     Layout.preferredWidth: 16
                                                     Layout.preferredHeight: 16
-                                                    color: resultsTileRoot.textColor
+                                                    color: tileDelegate.contentColor
                                                     opacity: 0.5
                                                     visible: tileDelegate.isExpanded && tileDelegate.isRSS
                                                 }
@@ -859,7 +743,7 @@ FocusScope {
                                             ColumnLayout {
                                                 Layout.fillWidth: true
                                                 visible: tileDelegate.isExpanded && tileDelegate.isRSS
-                                                spacing: 12
+                                                spacing: Kirigami.Units.largeSpacing
 
                                                 // Image
                                                 Image {
@@ -890,8 +774,9 @@ FocusScope {
                                                     textFormat: Text.PlainText
                                                     Layout.fillWidth: true
                                                     wrapMode: Text.Wrap
-                                                    font.pixelSize: 13
-                                                    color: resultsTileRoot.textColor
+                                                    font.family: Kirigami.Theme.defaultFont.family
+                                                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
+                                                    color: tileDelegate.contentColor
                                                     opacity: 0.9
                                                     visible: text.length > 0
                                                 }
@@ -899,13 +784,13 @@ FocusScope {
                                                 RowLayout {
                                                     Layout.fillWidth: true
 
-                                                    Button {
+                                                    PlasmaComponents.Button {
                                                         text: resultsTileRoot.locReadBrowser
                                                         icon.name: "internet-services"
                                                         onClicked: resultsTileRoot.activateCurrentItem()
                                                     }
 
-                                                    Button {
+                                                    PlasmaComponents.Button {
                                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Read in Window")
                                                         icon.name: "window-new"
                                                         flat: true
@@ -914,9 +799,10 @@ FocusScope {
                                                         }
                                                     }
 
-                                                    Label {
+                                                    PlasmaComponents.Label {
                                                         text: modelData.subtext || ""
-                                                        font.pixelSize: 10
+                                                        font.family: Kirigami.Theme.smallFont.family
+                                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                         opacity: 0.6
                                                         Layout.fillWidth: true
                                                         horizontalAlignment: Text.AlignRight
@@ -932,8 +818,8 @@ FocusScope {
 
                                                 Layout.fillWidth: true
                                                 visible: tileDelegate.showInlinePreview
-                                                spacing: 8
-                                                Layout.topMargin: 8
+                                                spacing: Kirigami.Units.smallSpacing * 2
+                                                Layout.topMargin: Kirigami.Units.largeSpacing
 
                                                 Rectangle {
                                                     Layout.fillWidth: true
@@ -943,9 +829,9 @@ FocusScope {
 
                                                 RowLayout {
                                                     Layout.fillWidth: true
-                                                    spacing: 12
-                                                    Layout.leftMargin: 4
-                                                    Layout.rightMargin: 4
+                                                    spacing: Kirigami.Units.largeSpacing
+                                                    Layout.leftMargin: Kirigami.Units.smallSpacing
+                                                    Layout.rightMargin: Kirigami.Units.smallSpacing
 
                                                     // Left Column: Thumbnail or large icon
                                                     Item {
@@ -959,7 +845,7 @@ FocusScope {
                                                         Rectangle {
                                                             anchors.fill: parent
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.05)
-                                                            radius: 4
+                                                            radius: Kirigami.Units.cornerRadius
                                                         }
 
                                                         Kirigami.Icon {
@@ -967,7 +853,7 @@ FocusScope {
                                                             implicitWidth: 32
                                                             implicitHeight: 32
                                                             source: modelData.decoration || "application-x-executable"
-                                                            color: resultsTileRoot.textColor
+                                                            color: tileDelegate.contentColor
                                                             opacity: 0.3
                                                             visible: imgPreview.status !== Image.Ready
                                                         }
@@ -990,13 +876,14 @@ FocusScope {
                                                     // Right Column: Metadata
                                                     ColumnLayout {
                                                         Layout.fillWidth: true
-                                                        spacing: 4
+                                                        spacing: Kirigami.Units.smallSpacing
 
                                                         Text {
                                                             text: modelData.display || ""
-                                                            color: resultsTileRoot.textColor
+                                                            color: tileDelegate.contentColor
                                                             font.bold: true
-                                                            font.pixelSize: 12
+                                                            font.family: Kirigami.Theme.defaultFont.family
+                                                            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                                                             elide: Text.ElideRight
                                                             Layout.fillWidth: true
                                                         }
@@ -1004,14 +891,16 @@ FocusScope {
                                                         Text {
                                                             text: resultsTileRoot.locCategory + ": " + (modelData.category || "Other")
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
-                                                            font.pixelSize: 10
+                                                            font.family: Kirigami.Theme.smallFont.family
+                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                             textFormat: Text.PlainText
                                                         }
 
                                                         Text {
                                                             text: resultsTileRoot.locFileType + ": " + tileDelegate.previewFileType
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
-                                                            font.pixelSize: 10
+                                                            font.family: Kirigami.Theme.smallFont.family
+                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                             visible: tileDelegate.previewFileType.length > 0
                                                             textFormat: Text.PlainText
                                                         }
@@ -1021,7 +910,8 @@ FocusScope {
 
                                                             text: ""
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
-                                                            font.pixelSize: 10
+                                                            font.family: Kirigami.Theme.smallFont.family
+                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                             visible: text.length > 0
                                                             textFormat: Text.PlainText
                                                         }
@@ -1029,7 +919,8 @@ FocusScope {
                                                         Text {
                                                             text: resultsTileRoot.locPath + ": " + tileDelegate.previewPath
                                                             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
-                                                            font.pixelSize: 9
+                                                            font.family: Kirigami.Theme.smallFont.family
+                                                            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                             wrapMode: Text.WrapAnywhere
                                                             Layout.fillWidth: true
                                                             textFormat: Text.PlainText
@@ -1046,7 +937,7 @@ FocusScope {
                                                     Layout.fillWidth: true
                                                     Layout.preferredHeight: textSnippet.implicitHeight + 12
                                                     color: Qt.rgba(0, 0, 0, 0.2)
-                                                    radius: 4
+                                                    radius: Kirigami.Units.cornerRadius
                                                     border.width: 1
                                                     border.color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.1)
                                                     visible: tileDelegate.isTextFile && textSnippet.text.length > 0
@@ -1055,11 +946,11 @@ FocusScope {
                                                         id: textSnippet
 
                                                         anchors.fill: parent
-                                                        anchors.margins: 6
+                                                        anchors.margins: Kirigami.Units.smallSpacing
                                                         text: ""
-                                                        color: resultsTileRoot.textColor
+                                                        color: tileDelegate.contentColor
                                                         font.family: "Monospace"
-                                                        font.pixelSize: 10
+                                                        font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                         wrapMode: Text.Wrap
                                                     }
 
@@ -1068,9 +959,9 @@ FocusScope {
                                                 // Quick Actions
                                                 RowLayout {
                                                     Layout.fillWidth: true
-                                                    spacing: 10
+                                                    spacing: Kirigami.Units.largeSpacing
 
-                                                    Button {
+                                                    PlasmaComponents.Button {
                                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Copy Path")
                                                         icon.name: "edit-copy"
                                                         flat: true
@@ -1082,7 +973,7 @@ FocusScope {
                                                         }
                                                     }
 
-                                                    Button {
+                                                    PlasmaComponents.Button {
                                                         text: i18nd("plasma_applet_com.mcc45tr.filesearch", "Open Folder")
                                                         icon.name: "folder-open"
                                                         flat: true
@@ -1118,7 +1009,7 @@ FocusScope {
                                             var filePath = tileDelegate.resolvedFilePath();
                                             if (mouse.button === Qt.RightButton) {
                                                 var cat = modelData.category || "";
-                                                var isApp = Utils.isAppCategory(cat, filePath, matchId);
+                                                var isApp = Utils.isAppCategory(cat, filePath, matchId, modelData.decoration || "");
                                                 resultsTileRoot.itemRightClicked({
                                                     "display": modelData.display || "",
                                                     "decoration": modelData.decoration || "application-x-executable",
@@ -1133,6 +1024,11 @@ FocusScope {
                                         }
                                     }
 
+                                    PlasmaComponents.ToolTip {
+                                        visible: tileMouseArea.containsMouse && tileDelegate.previewSource.length === 0
+                                        text: (modelData.display || "") + (modelData.subtext ? "\n" + modelData.subtext : "")
+                                    }
+
                                     Item {
                                         id: dragProxy
                                         width: 1
@@ -1140,12 +1036,15 @@ FocusScope {
                                         Drag.active: tileMouseArea.drag.active
                                         Drag.dragType: Drag.Automatic
                                         Drag.mimeData: {
-                                            "text/uri-list": modelData.url || "",
-                                            "text/plain": modelData.url || ""
+                                            var filePath = tileDelegate.resolvedFilePath();
+                                            return {
+                                                "text/uri-list": filePath,
+                                                "text/plain": filePath || (modelData.display || "")
+                                            };
                                         }
                                     }
 
-                                    ToolTip {
+                                    PlasmaComponents.ToolTip {
                                         id: previewTooltip
 
                                         visible: resultsTileRoot.previewInlineMode === 0 && tileDelegate.previewSource.length > 0 && (tileMouseArea.containsMouse || (tileDelegate.isSelected && resultsTileRoot.previewForceVisible))
@@ -1155,14 +1054,15 @@ FocusScope {
                                         y: 0
 
                                         contentItem: Column {
-                                            spacing: 6
+                                            spacing: Kirigami.Units.smallSpacing
 
                                             // Title
                                             Text {
                                                 text: modelData.display || ""
                                                 font.bold: true
-                                                font.pixelSize: 12
-                                                color: resultsTileRoot.textColor
+                                                font.family: Kirigami.Theme.defaultFont.family
+                                                font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
+                                                color: tileDelegate.contentColor
                                             }
 
                                             // Thumbnail for images
@@ -1183,7 +1083,8 @@ FocusScope {
                                             // Category
                                             Text {
                                                 text: resultsTileRoot.locCategory + ": " + (modelData.category || "")
-                                                font.pixelSize: 10
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                 visible: (modelData.category || "").length > 0
                                             }
@@ -1193,7 +1094,8 @@ FocusScope {
                                                 property string fileExt: tileDelegate.previewFileType
 
                                                 text: resultsTileRoot.locFileType + ": " + fileExt
-                                                font.pixelSize: 10
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                 visible: fileExt.length > 0
                                             }
@@ -1201,7 +1103,8 @@ FocusScope {
                                             // Path
                                             Text {
                                                 text: resultsTileRoot.locPath + ": " + tileDelegate.previewPath
-                                                font.pixelSize: 10
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.7)
                                                 wrapMode: Text.WrapAnywhere
                                                 width: Math.min(300, implicitWidth)
@@ -1211,7 +1114,8 @@ FocusScope {
                                             // Shortcut hint
                                             Text {
                                                 text: "💡 " + resultsTileRoot.locSpacePreview
-                                                font.pixelSize: 9
+                                                font.family: Kirigami.Theme.smallFont.family
+                                                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                                                 font.italic: true
                                                 color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
                                                 visible: !resultsTileRoot.previewForceVisible
@@ -1223,7 +1127,7 @@ FocusScope {
                                             color: Kirigami.Theme.backgroundColor
                                             border.color: resultsTileRoot.accentColor
                                             border.width: 1
-                                            radius: 6
+                                            radius: Kirigami.Units.cornerRadius
                                         }
 
                                     }
@@ -1263,10 +1167,10 @@ FocusScope {
     // Empty state
     Column {
         anchors.centerIn: parent
-        spacing: 10
+        spacing: Kirigami.Units.largeSpacing
         visible: resultsTileRoot.categorizedData.length === 0 && resultsTileRoot.searchText.length > 0
 
-        BusyIndicator {
+        PlasmaComponents.BusyIndicator {
             anchors.horizontalCenter: parent.horizontalCenter
             running: resultsTileRoot.isLoading && resultsTileRoot.searchText.length > 0
             visible: running
@@ -1275,7 +1179,8 @@ FocusScope {
         Text {
             text: resultsTileRoot.searchText.length > 0 ? (resultsTileRoot.isLoading ? resultsTileRoot.locSearching : resultsTileRoot.locNoResults) : resultsTileRoot.locTypeToSearch
             color: Qt.rgba(resultsTileRoot.textColor.r, resultsTileRoot.textColor.g, resultsTileRoot.textColor.b, 0.5)
-            font.pixelSize: 12
+            font.family: Kirigami.Theme.defaultFont.family
+            font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
         }
 
     }

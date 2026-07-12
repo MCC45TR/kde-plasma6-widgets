@@ -10,6 +10,7 @@ var cache = {
 
 var currentProvider = "openweathermap"
 var REQUEST_TIMEOUT_MS = 15000
+var DEFAULT_FORECAST_DAYS = 5
 
 function createRequestController() {
     return {
@@ -340,7 +341,7 @@ function fetchWeatherInternal(config, callback, controller) {
     var location = config.location || ""
     var units = config.units || "metric"
     var provider = config.provider || "openmeteo"
-    var forecastDays = config.forecastDays || 12
+    var forecastDays = config.forecastDays || DEFAULT_FORECAST_DAYS
     var resultCacheKey = config._cacheKey || getCacheKey(config)
 
     console.log("Fetching weather using provider: " + provider + ", days: " + forecastDays)
@@ -417,14 +418,9 @@ function fetchWeather(config, callback) {
     var requestedKey = getCacheKey(config)
     config._cacheKey = requestedKey
 
-    var forceRefresh = false
-    if (cache.current && cache.current.location && cache.current.location.indexOf(",") !== -1) {
-        forceRefresh = true
-    }
-
     var allowMemoryCache = config.refreshInterval !== 0
-    if (allowMemoryCache && !forceRefresh && cache.key === requestedKey && cache.current && cache.forecast && (now - cache.timestamp) < cache.ttl) {
-        var requestedDays = config.forecastDays || 5
+    if (allowMemoryCache && cache.key === requestedKey && cache.current && cache.forecast && (now - cache.timestamp) < cache.ttl) {
+        var requestedDays = config.forecastDays || DEFAULT_FORECAST_DAYS
 
         if (cache.forecast.daily && cache.forecast.daily.length >= requestedDays) {
             var result = {

@@ -1,18 +1,19 @@
 import QtQuick
 import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 ColumnLayout {
     id: calendarLayout
-    
+
     property string monthLabel
     property var calendarCells: []
     property var weekdayLabels: []
-    
+
     // Configurable colors/fonts
-    property color textColor: "#ffffff"
-    property color accentColor: "#d71921"
-    property color completedColor: "#808080"
-    
+    property color textColor: Kirigami.Theme.textColor
+    property color accentColor: Kirigami.Theme.highlightColor
+    property color completedColor: Kirigami.Theme.disabledTextColor
+
     spacing: 6
 
     property int displayYear: 0
@@ -29,8 +30,7 @@ ColumnLayout {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             text: monthLabel
-            font.family: "Barlow Condensed"
-            font.pixelSize: 24
+            font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 2)
             font.bold: true
             font.letterSpacing: 2
             color: calendarLayout.accentColor
@@ -40,8 +40,7 @@ ColumnLayout {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             text: displayYear
-            font.family: "Barlow Condensed"
-            font.pixelSize: 15
+            font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.25)
             font.bold: true
             font.italic: true
             font.letterSpacing: 1
@@ -67,8 +66,8 @@ ColumnLayout {
                 Text {
                     anchors.centerIn: parent
                     text: modelData
-                    font.family: "Barlow Condensed"
-                    font.pixelSize: 11
+                    font.family: Kirigami.Theme.smallFont.family
+                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                     font.bold: true
                     color: calendarLayout.completedColor
                     opacity: 0.7
@@ -88,21 +87,21 @@ ColumnLayout {
                 Rectangle {
                     id: highlightRect
                     anchors.centerIn: parent
-                    
+
                     width: 24
                     height: 24
                     radius: 6
-                    
+
                     color: calendarLayout.accentColor
                     visible: cellData.isToday
                 }
 
                 // --- TEXT ---
                 Text {
-                    anchors.centerIn: highlightRect 
+                    anchors.centerIn: highlightRect
                     text: cellData.day
-                    font.family: "Barlow Condensed"
-                    font.pixelSize: 13
+                    font.family: Kirigami.Theme.defaultFont.family
+                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                     font.bold: cellData.isToday
                     color: cellData.isToday ? calendarLayout.textColor : Qt.alpha(calendarLayout.textColor, 0.7)
                     opacity: cellData.currentMonth ? 1 : 0.2

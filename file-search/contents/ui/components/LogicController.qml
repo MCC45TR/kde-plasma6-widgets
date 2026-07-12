@@ -68,6 +68,15 @@ Item {
         }
         return path;
     }
+    readonly property string weatherCacheBase: {
+        var path = StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.cache/com.mcc45tr.filesearch/weather";
+        if (path.indexOf("file://") === 0)
+            return path.replace(/^file:\/\/\/?/, "/");
+        return path;
+    }
+    readonly property string weatherCachePath: weatherCacheBase + "/cache.json"
+    property string weatherCache: ""
+    property bool weatherCacheLoaded: false
     property var syncQueue: []
     property bool isSyncing: false
     property int rssBatchId: 0
@@ -78,6 +87,7 @@ Item {
     property bool rssMergeInProgress: false
     property bool rssMergeRequested: false
     property var rssMergeWaiters: []
+    property string lastPersistedRssSources: ""
     readonly property int rssMaxConcurrentSyncs: 2
 
     function completeRssBatchIfIdle() {
@@ -90,6 +100,7 @@ Item {
         var completedBatchStartedAt = rssBatchStartedAt;
         var completedBatchQueued = rssBatchQueued;
         var completedBatchCount = rssBatchCompleted;
+        persistRssSources();
         mergeCombinedCache(function(success) {
             if (success)
                 updateCombinedCache(true);
@@ -162,7 +173,7 @@ Item {
     }
 
     function addToHistory(display, decoration, category, matchId, filePath, sourceType, queryText) {
-        var isApp = Utils.isAppCategory(category, filePath, matchId);
+        var isApp = Utils.isAppCategory(category, filePath, matchId, decoration);
         searchHistory = HistoryManager.addToHistory(searchHistory, display, decoration, category, matchId, filePath, sourceType, queryText, maxHistoryItems, isApp);
         saveHistory();
         // Schedule delayed icon check (1s)
@@ -255,6 +266,24 @@ Item {
         );
     }
 
+    function openContainingFolder(url) {
+        openFolder(url);
+    }
+
+    function openWith(url) {
+        if (!url)
+            return ;
+
+        callSessionDBus(
+            "org.kde.klauncher5",
+            "/KLauncher",
+            "org.kde.KLauncher",
+            "openUrl",
+            "sss",
+            [url.toString(), "", ""]
+        );
+    }
+
     function copyToClipboard(text) {
         if (!text)
             return ;
@@ -283,11 +312,10 @@ Item {
             return ;
 
         var path = Utils.decodeLocalPath(url);
-        // If it's a file, get its directory
-        if (path.indexOf(".") !== -1 && path.lastIndexOf("/") < path.lastIndexOf("."))
-            path = path.substring(0, path.lastIndexOf("/"));
-
-        var cmd = "konsole --workdir " + shellEscape(path);
+        var escapedPath = shellEscape(path);
+        var cmd = "target=" + escapedPath
+                + "; if test -d \"$target\"; then workdir=$target; else workdir=$(dirname -- \"$target\"); fi"
+                + "; konsole --workdir \"$workdir\"";
         runShellCommand(cmd);
     }
 
@@ -405,6 +433,12 @@ Item {
         rssTickerEntries = [];
     }
 
+    function persistRssSources() {
+        var serialized = JSON.stringify(rssSources || []);
+        lastPersistedRssSources = serialized;
+        plasmoidConfig.rssSources = serialized;
+    }
+
     function rebuildRssTickerEntries() {
         var cache = Array.isArray(rssCache) ? rssCache : [];
         if (cache.length === 0) {
@@ -463,7 +497,7 @@ Item {
         // to prevent Plasma shell stutters during synchronous KConfig writing.
         if (markAsFresh)
             plasmoidConfig.rssLastSyncAll = new Date().getTime();
-        
+
         rebuildRssTickerEntries();
     }
 
@@ -480,12 +514,12 @@ Item {
         // Set to empty string instead of writing JSON array representation to KConfig
         plasmoidConfig.rssCache = "";
         plasmoidConfig.rssLastSyncAll = 0;
-        
+
         // Reset lastSync for all sources
         for (var i = 0; i < rssSources.length; i++) {
             rssSources[i].lastSync = 0;
         }
-        plasmoidConfig.rssSources = JSON.stringify(rssSources);
+        persistRssSources();
     }
 
     function loadSourceEntries(url, callback) {
@@ -494,7 +528,7 @@ Item {
             return ;
         }
         var path = getSourceFilePath(url);
-        
+
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -508,7 +542,7 @@ Item {
                 readLocalTextSnippetFallback();
             }
         };
-        
+
         function tryParseRaw(raw) {
             try {
                 var decodedJson = RSSManager.decodeBase64(raw);
@@ -529,7 +563,7 @@ Item {
                 }
             }
         }
-        
+
         function readLocalTextSnippetFallback() {
             readFullLocalFile(path, function(content) {
                 var raw = (content || "").trim();
@@ -561,6 +595,40 @@ Item {
             if (isFinished) {
                 callback(stdout);
             }
+        });
+    }
+
+    function loadWeatherCache() {
+        readFullLocalFile(weatherCachePath, function(content) {
+            var cached = (content || "").trim();
+            if (!cached || cached === "{}") {
+                // One-time migration from older releases that stored the full
+                // forecast JSON synchronously in KConfig.
+                cached = (plasmoidConfig.weatherCache || "").trim();
+                if (cached && cached !== "{}")
+                    saveWeatherCache(cached);
+            }
+            weatherCache = cached && cached !== "{}" ? cached : "";
+            weatherCacheLoaded = true;
+            if (plasmoidConfig.weatherCache && plasmoidConfig.weatherCache !== "{}")
+                plasmoidConfig.weatherCache = "{}";
+        });
+    }
+
+    function saveWeatherCache(value) {
+        var serialized = typeof value === "string" ? value : JSON.stringify(value || {});
+        weatherCache = serialized && serialized !== "{}" ? serialized : "";
+        weatherCacheLoaded = true;
+        var temporaryPath = weatherCachePath + ".tmp." + Date.now() + "." + Math.floor(Math.random() * 1000000);
+        var cmd = "mkdir -p " + shellEscape(weatherCacheBase)
+                + " && chmod 700 " + shellEscape(weatherCacheBase)
+                + " && printf '%s' " + shellEscape(serialized)
+                + " > " + shellEscape(temporaryPath)
+                + " && chmod 600 " + shellEscape(temporaryPath)
+                + " && mv -f " + shellEscape(temporaryPath) + " " + shellEscape(weatherCachePath);
+        runExecutable(cmd, function(stdout, isFinished, exitCode) {
+            if (isFinished && exitCode !== 0)
+                console.warn("LogicController: Failed to persist weather cache");
         });
     }
 
@@ -618,9 +686,9 @@ Item {
         var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
         var cmd = "sh " + shellEscape(scriptPath) + " " + shellEscape(rssCacheBase) + " " + shellEscape(source.url) + " " + shellEscape(source.name) + " " + shellEscape(String(max));
-        
+
         logicRoot.pendingSyncs++;
-        
+
         runExecutable(cmd, function(stdout, isFinished, exitCode) {
             if (isFinished) {
                 if (exitCode === 0) {
@@ -649,13 +717,13 @@ Item {
         var scriptPath = getScriptPath();
         var max = source.maxEntries || plasmoidConfig.rssMaxEntries || 10;
         var cmd = "sh " + shellEscape(scriptPath) + " " + shellEscape(rssCacheBase) + " " + shellEscape(source.url) + " " + shellEscape(source.name) + " " + shellEscape(String(max));
-        
+
         var lastLength = 0;
         runExecutable(cmd, function(stdout, isFinished, exitCode) {
             if (stdout.length > lastLength) {
                 var newPart = stdout.substring(lastLength);
                 lastLength = stdout.length;
-                
+
                 var lines = newPart.split("\n");
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i].trim();
@@ -680,7 +748,7 @@ Item {
             }
         });
     }
-    
+
     function getScriptPath() {
         var path = Qt.resolvedUrl("../../tools/rss_sync.sh").toString();
         if (path.indexOf("file://") === 0) {
@@ -896,12 +964,16 @@ Item {
         loadPinned();
         loadCategorySettings();
         loadRSS();
+        loadWeatherCache();
         if (rssEnabled || rssSources.length > 0)
             updateCombinedCache(false);
-        // Initial sync check
-        Qt.callLater(() => {
-            checkAndSyncRSS();
-        });
+        // Initial sync check is feature-gated; a disabled RSS setup should not
+        // schedule even a no-op maintenance turn at startup.
+        if (rssEnabled && rssSources.length > 0) {
+            Qt.callLater(() => {
+                checkAndSyncRSS();
+            });
+        }
     }
     // Global DataSource for shell commands
     Plasma5Support.DataSource {
@@ -934,7 +1006,7 @@ Item {
                 // If decoration is broken (QIcon()) or missing
                 if (decoration === "QIcon()" || decoration === "") {
                     // Use the folder icon until richer metadata is available.
-                    var isFolder = (category.toLowerCase().indexOf("place") !== -1 || category.toLowerCase().indexOf("folder") !== -1 || category.toLowerCase().indexOf("yerler") !== -1 || category.toLowerCase().indexOf("klasör") !== -1);
+                    var isFolder = Utils.isFolderCategory(category, filePath, decoration);
                     if (isFolder) {
                         var updatedHistory = HistoryManager.updateItemIcon(searchHistory, uuid, "folder");
                         if (updatedHistory) {
@@ -975,12 +1047,12 @@ Item {
             var stdout = data["stdout"] || "";
             var exitCode = data["exit code"];
             var isFinished = (exitCode !== undefined);
-            
+
             var callback = callbacks[source];
-            
+
             if (callback) {
                 callback(stdout, isFinished, exitCode);
-                
+
                 if (isFinished) {
                     delete callbacks[source];
                     disconnectSource(source);
@@ -1005,9 +1077,7 @@ Item {
 
         // One wake-up services both RSS and weather maintenance.
         interval: 60000
-        running: rssEnabled || (!!plasmoidConfig.weatherEnabled
-                 && !!plasmoidConfig.weatherCache
-                 && plasmoidConfig.weatherCache !== "{}")
+        running: rssEnabled || !!plasmoidConfig.weatherEnabled
         repeat: true
         onTriggered: {
             if (rssEnabled)
@@ -1018,7 +1088,16 @@ Item {
 
     // Watch for config changes (source addition/removal)
     Connections {
+        function onCategorySettingsChanged() {
+            loadCategorySettings();
+        }
+
         function onRssSourcesChanged() {
+            if (lastPersistedRssSources && plasmoidConfig.rssSources === lastPersistedRssSources) {
+                lastPersistedRssSources = "";
+                loadRSS();
+                return;
+            }
             loadRSS();
             if (rssEnabled)
                 syncAllRSS();

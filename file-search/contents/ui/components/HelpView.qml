@@ -1,17 +1,17 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 Item {
     id: root
-    
+
     required property color textColor
     required property color accentColor
-    
+
     // Signal when a help item is clicked
     signal aidSelected(string prefix)
-    
+
     readonly property var helpItems: [
         { prefix: "timeline:/", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Timeline View"), icon: "view-calendar", example: "timeline:/today -> 📅", key: "timeline" },
         { prefix: "app:", desc: i18nd("plasma_applet_com.mcc45tr.filesearch", "Applications"), icon: "applications-all", example: "app:Code -> VS Code", localeBase: "app" },
@@ -43,7 +43,7 @@ Item {
         color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.05)
         radius: 12
         clip: true
-        
+
         ListView {
             id: helpList
             anchors.fill: parent
@@ -51,17 +51,19 @@ Item {
             model: root.helpItems
             spacing: 4
             boundsBehavior: Flickable.StopAtBounds
-            
-            ScrollBar.vertical: ScrollBar {
+
+            PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
                 active: helpList.moving || helpList.contentHeight > helpList.height
             }
-            
+
             delegate: Rectangle {
                 width: ListView.view.width
                 height: 36
-                color: model.index % 2 === 0 ? "transparent" : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.03)
-                radius: 6
-                
+                color: helpMouse.containsMouse
+                    ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.1)
+                    : (model.index % 2 === 0 ? "transparent" : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.03))
+                radius: Kirigami.Units.cornerRadius
+
                 property string displayPrefix: {
                     if (modelData.localeBase) {
                         var loc = i18nd("plasma_applet_com.mcc45tr.filesearch", modelData.localeBase)
@@ -70,7 +72,7 @@ Item {
                             if (modelData.prefix.endsWith(":")) suffix = ":"
                             if (modelData.prefix.endsWith(" ")) suffix = " "
                             if (modelData.prefix.endsWith(":/")) suffix = ":/"
-                            
+
                             return (loc + suffix).toLowerCase()
                         }
                     }
@@ -82,53 +84,52 @@ Item {
                     anchors.leftMargin: 12
                     anchors.rightMargin: 12
                     spacing: 12
-                    
+
                     Kirigami.Icon {
                         source: modelData.icon
                         Layout.preferredWidth: 20
                         Layout.preferredHeight: 20
                         color: root.accentColor
                     }
-                    
+
                     Text {
                         text: displayPrefix
                         font.bold: true
-                        font.pixelSize: 14
-                        font.family: "Barlow Condensed" 
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         color: root.textColor
                     }
-                    
+
                     Text {
                         text: "(" + modelData.desc + ")"
-                        font.pixelSize: 13
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         font.italic: true
-                        font.family: "Barlow Condensed"
                         color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.6)
                         elide: Text.ElideRight
                     }
-                    
+
                     // Spacer to push example to right
-                    Item { 
-                        Layout.fillWidth: true 
+                    Item {
+                        Layout.fillWidth: true
                     }
-                    
+
                     Text {
                         text: modelData.example ? i18nd("plasma_applet_com.mcc45tr.filesearch", modelData.example) : ""
                         visible: !!modelData.example
-                        font.pixelSize: 13
-                        font.family: "Barlow Condensed"
+                        font.family: Kirigami.Theme.defaultFont.family
+                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         color: Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.4)
                         horizontalAlignment: Text.AlignRight
                         elide: Text.ElideRight
                     }
                 }
-                
+
                 MouseArea {
+                    id: helpMouse
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
-                    onEntered: parent.color = Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.1)
-                    onExited: parent.color = model.index % 2 === 0 ? "transparent" : Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, 0.03)
                     onClicked: root.aidSelected(displayPrefix)
                 }
             }

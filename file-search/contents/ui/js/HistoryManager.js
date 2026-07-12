@@ -1,32 +1,6 @@
+.import "utils.js" as Utils
+
 // HistoryManager.js - History management functions for File Search Widget
-// Self-contained module with inline utility functions
-//
-// NOTE: generateUUID and detectSourceType are duplicated from utils.js.
-// This is intentional - QML does not support imports between JS modules.
-// If updating these functions, also update utils.js.
-
-// UUID Generator (duplicated from utils.js)
-function generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
-
-// Detect source type from category (duplicated from utils.js)
-// NOTE: Keep in sync with utils.js detectSourceType
-function detectSourceType(category, isApp, filePath) {
-    if (isApp) {
-        return "app"
-    } else if (category && (category.indexOf("Calculate") >= 0 || category.indexOf("Hesapla") >= 0 ||
-               category.toLowerCase().indexOf("calc") >= 0 || category.toLowerCase().indexOf("hesap") >= 0)) {
-        return "calculator"
-    } else if (filePath && filePath.length > 0) {
-        return "file"
-    } else {
-        return "krunner"
-    }
-}
 
 // Load history from configuration with migration support
 function loadHistory(configValue) {
@@ -36,7 +10,7 @@ function loadHistory(configValue) {
         // Migrate old entries to new format
         return loaded.map(function (item) {
             if (!item.uuid) {
-                item.uuid = generateUUID()
+                item.uuid = Utils.generateUUID()
             }
             if (!item.sourceType) {
                 item.sourceType = item.isApplication ? "app" : "krunner"
@@ -61,7 +35,7 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
 
     // Fix missing or invalid filePath for apps if matchId contains .desktop
     // This fixes the issue where apps appear in history but don't launch directly
-    if (isApp && (!filePath || filePath === "applications") && matchId && matchId.toString().indexOf(".desktop") !== -1) {
+    if (isApp && (!filePath || filePath === "applications") && Utils.isDesktopEntry(matchId)) {
         // If matchId looks like a path or a valid URL, use it as filePath
         if (matchId.indexOf("/") !== -1 || matchId.indexOf("applications:") === 0 || matchId.indexOf("file://") === 0) {
             filePath = matchId
@@ -69,7 +43,7 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
     }
 
     // Determine source type
-    var detectedSourceType = sourceType || detectSourceType(category, isApp, filePath)
+    var detectedSourceType = sourceType || Utils.detectSourceType(category, isApp, filePath)
 
     // Deduplicate by stable identity. Display text is only a fallback when
     // neither side has an identity/path; same-named files may be distinct.
@@ -99,7 +73,7 @@ function addToHistory(historyArray, display, decoration, category, matchId, file
 
     // Create new item object
     var newItem = {
-        uuid: generateUUID(),
+        uuid: Utils.generateUUID(),
         display: display,
         decoration: decoration || "application-x-executable",
         category: category || "Other",
