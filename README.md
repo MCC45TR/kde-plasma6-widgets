@@ -11,8 +11,8 @@
 <p align="center">
   <a href="#installation"><img src="https://img.shields.io/badge/Platform-KDE_Plasma_6-1d99f3?style=for-the-badge&logo=kde" alt="Platform"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="License"></a>
-  <a href="#widget-catalog"><img src="https://img.shields.io/badge/Widgets-19+-success?style=for-the-badge" alt="Widgets"></a>
-  <a href="#key-features"><img src="https://img.shields.io/badge/Languages-20-orange?style=for-the-badge" alt="Languages"></a>
+  <a href="#widget-catalog"><img src="https://img.shields.io/badge/Widgets-23-success?style=for-the-badge" alt="Widgets"></a>
+  <a href="#key-features"><img src="https://img.shields.io/badge/Languages-20+-orange?style=for-the-badge" alt="Languages"></a>
 </p>
 
 <p align="center">
@@ -20,14 +20,15 @@
   <a href="#widget-catalog">Widgets</a> •
   <a href="#installation">Installation</a> •
   <a href="#configuration">Configuration</a> •
-  <a href="#contribution">Contribute</a>
+  <a href="#troubleshooting">Troubleshooting</a> •
+  <a href="#contributing">Contributing</a>
 </p>
 
 ---
 
 ## Overview
 
-This repository contains a suite of plasmoids ranging from advanced system tools (**File Search**, **System Monitor**) to essential desktop utilities (**Clock**, **Calendar**, **Notes**), all re-engineered for **performance**, **visual consistency**, and **ease of use**.
+This repository contains a suite of plasmoids ranging from advanced system tools (**File Search**, **MSI Control**, **System Monitor**) to essential desktop utilities (**Clock**, **Calendar**, **Weather**, **Notes**), all engineered for **performance**, **visual consistency**, and **ease of use**.
 
 > **If you find this collection useful, please consider starring the repository!**
 
@@ -39,15 +40,16 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 |---------|-------------|
 | **Plasma 6 Native** | Built fully on Qt6 and QML, optimized for the latest KDE Plasma desktop. |
 | **Unified Design** | All widgets share a consistent look using system theme icons (`breeze-icons`). |
-| **Localization** | Standard Gettext-based localization (.po/.mo) supporting 20+ languages including English, Turkish, German, French, Spanish, Russian, Portuguese, Italian, and more. |
+| **Localization** | Standard Gettext-based localization (`.po`/`.mo`) supporting 20+ languages including English, Turkish, German, French, Spanish, Russian, Portuguese, and Italian. |
 | **Modular Architecture** | Clean code with reusable components and logic separated into JavaScript modules. |
-| **Power User Features** | Smart Query in File Finder, dynamic MPRIS discovery, offline-first Calendar, and more. |
+| **Power User Features** | Smart Query in File Search, dynamic MPRIS discovery, offline-first Calendar, hardware control for MSI laptops, and more. |
+| **Unified Installer** | A single script installs, updates, and test-launches any widget, with dry-run and translation compilation support. |
 
 ---
 
 ## Widget Catalog
 
-### MFile Search
+### MFile Search `v1.3.1`
 > A powerful **Spotlight/Raycast** alternative for Plasma.
 
 <p align="center">
@@ -63,14 +65,14 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 
 - **Smart Query**: Understands KRunner prefixes (`timeline:/`, `gg:`) with **interactive hint buttons**
 - **Pinned Items**: Pin favorite apps or files to the top for instant access
-- **Customizable Appearance**: Select corner radius (Square to Round) and adjust panel height (18-96px)
-- **Localized**: Full support for 20 languages including interactive prefix suggestions
+- **Customizable Appearance**: Select corner radius (Square to Round) and adjust panel height (18–96 px)
 - **View Profiles**: Minimal, Developer (with live telemetry), and Power User modes
 - **Rich Previews**: Instant hover previews with async thumbnail caching
+- **Localized**: Full support for 20 languages including interactive prefix suggestions
 - *[Read detailed documentation](./file-search/README.md)*
 
-### MWeather
-> A responsive, multi-provider weather dashboard with stunning animations.
+### MWeather `v1.2.2`
+> A responsive, multi-provider weather dashboard with fluid animations.
 
 <p align="center">
   <img src="./.Samples/MWeather-Small.png" alt="MWeather Small" height="225" style="margin: 5px;">
@@ -82,19 +84,12 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 
 - **Adaptive Layouts**: Morphs between Small, Wide (Card), and Large (Grid) modes
 - **Morphing Details**: Unique overlay that expands smoothly from UI elements
+- **Automatic Location**: Detects your location without manual configuration
 - **Widget Edge Margin**: Customizable margins (Normal, Less, None) for better panel integration
-- **Zero Config**: Works out-of-the-box with Open-Meteo (no API key required)
+- **Zero Config**: Works out of the box with Open-Meteo (no API key required)
 - *[Read detailed documentation](./weather/README.md)*
 
-### MBrowser Search
-> A minimalist browser search bar with quick access to history and settings.
-
-- **Multi-Engine**: Support for Google, DuckDuckGo, Bing, and more
-- **Quick Access**: Dedicated buttons for browser history and settings
-- **Widget Edge Margin**: Adjustable spacing for a perfect panel fit
-- *[Read detailed documentation](./browser-search/README.md)*
-
-### Music Player
+### MMusic Player `v1.2.6`
 > A dynamic media controller that adapts to your workflow.
 
 <p align="center">
@@ -104,12 +99,12 @@ This repository contains a suite of plasmoids ranging from advanced system tools
   <img src="./.Samples/MMusic-Player-Big.png" alt="MMusic Player Large" height="350" style="margin: 5px;">
 </p>
 
-- **Universal Control**: Automatically finds active media players (Spotify, VLC, browser, etc.)
-- **Smart Discovery**: Scans all active MPRIS services
+- **Universal Control**: Automatically finds active media players (Spotify, VLC, browsers, etc.)
+- **Smart Discovery**: Scans all active MPRIS services in real time
 - **Visual Polish**: Squeeze animations, dynamic pill-shaped badge, themed icons
 - *[Read detailed documentation](./music-player/README.md)*
 
-### MCalendar
+### MCalendar `v1.6`
 > A clean, offline-focused calendar widget.
 
 <p align="center">
@@ -120,18 +115,12 @@ This repository contains a suite of plasmoids ranging from advanced system tools
 </p>
 
 - **Privacy-First**: No external dependencies for a fast, local experience
-- **System Integration**: Uses system locale for date formats
+- **System Integration**: Uses the system locale for date formats
 - **Modern UI**: Fluid animations and improved event markers
 - *[Read detailed documentation](./calendar/README.md)*
 
-### Battery
-> A multi-device power monitor.
-
-- **Peripheral Support**: Up to 4 devices (Mouse, Keyboard, Headphones, etc.)
-- **Dynamic UI**: Charging indicators adapt to available space
-
-### Clocks
-> Analog & Digital clock widgets.
+### MAnalog Clock `v1.3.1`
+> A sophisticated minimal analog clock with adaptive squircle layout.
 
 <p align="center">
   <img src="./.Samples/MAnalog-Clock-Small.png" alt="MAnalog Clock Small" height="225" style="margin: 5px;">
@@ -142,34 +131,63 @@ This repository contains a suite of plasmoids ranging from advanced system tools
   <img src="./.Samples/MAnalog-Clock-Large-Alt.png" alt="MAnalog Clock Large Alt" height="225" style="margin: 5px;">
 </p>
 
-- **Analog**: Minimalist design with dynamic opacity and hand smoothing
-- **Digital**: Configurable fonts (Roboto Condensed Variable) and hover-reveal seconds
+- **Minimalist Design**: Dynamic opacity and smooth hand movement
+- **Adaptive Layout**: Squircle geometry that scales with the widget size
 
-### Advanced Reboot
+### MBrowser Search `v1.1.0`
+> A minimalist browser search bar with quick access to history and settings.
+
+- **Multi-Engine**: Support for Google, DuckDuckGo, Bing, and more
+- **Quick Access**: Dedicated buttons for incognito mode, new tab, and browser history
+- **Widget Edge Margin**: Adjustable spacing for a perfect panel fit
+- *[Read detailed documentation](./browser-search/README.md)*
+
+### MBattery `v1.0.3`
+> A multi-device power monitor.
+
+- **Peripheral Support**: Up to 4 Bluetooth devices (mouse, keyboard, headphones, etc.)
+- **Dynamic UI**: Charging indicators adapt to available space and use dynamic icons
+
+### MSelective Reboot `v1.1`
 > Power management with granular control.
 
-- **Boot Options**: List and select UEFI/BIOS entries directly (requires `bootctl`)
+- **Boot Options**: List and select UEFI/BIOS boot entries directly (requires `bootctl`)
 - **Safe UI**: Confirmation interface to prevent accidental actions
+
+### MSI Control Center `v1.0.0`
+> A premium control center for MSI laptops.
+
+- **Hardware Control**: Temperatures, fan curves, and shift modes via the `msi-ec` kernel module
+- **Native Look**: Follows the Plasma theme for seamless desktop integration
+
+### AFAD Earthquake Reports `v1.0`
+> Live earthquake monitoring for Türkiye.
+
+- **Official Data**: Lists earthquakes reported by AFAD (Disaster and Emergency Management Authority of the Republic of Türkiye)
+
+### Dynamic Color Scheme `v1.0`
+> Automated desktop theming.
+
+- **Time-Based Switching**: Automatically switches Plasma color schemes and Konsole profiles based on the time of day
 
 ### Other Utilities
 
 | Widget | Description |
 |--------|-------------|
-| **Browser Search** | Multi-engine search bar with history access |
-| **System Monitor** | CPU, RAM, and Disk visualization |
+| **App Menu** | Modern app menu with pinned apps and an app library |
+| **Digital Clock** | Configurable digital clock with hover-reveal seconds |
+| **Minimal Analog Clock** | Ultra-minimal analog clock variant |
+| **System Monitor** | CPU, RAM, and disk visualization |
 | **Notes** | List-based notes with drag-and-drop reordering |
 | **Control Center** | Quick toggles for system settings |
-| **AUR Updates** | (Arch Linux) Update monitoring |
+| **AUR Updates** | Update monitoring for Arch Linux |
 | **World Clock** | Multiple timezone display |
 | **Photos** | Photo frame widget |
 | **Spotify** | Dedicated Spotify controller |
 | **Events** | Event reminder widget |
 | **Alarms** | Alarm clock widget |
-| **MSI Control** | MSI laptop control (temps, fan, shift modes) |
-
 
 ---
-
 
 ## Installation
 
@@ -189,24 +207,25 @@ git clone https://github.com/MCC45TR/Plasma6Widgets.git
 cd Plasma6Widgets
 
 # Install all widgets
-chmod +x install_all.sh
 ./install_all.sh
 ```
 
-### Install & Test Single Widget
+### Installer Options
+
+The installer supports selective installation, test launches, and dry runs:
 
 ```bash
-# Install only a specific widget
-./install_all.sh weather
-
-# Install AND launch test window immediately
-./install_all.sh -t weather
+./install_all.sh --list                # List all available widgets
+./install_all.sh weather battery      # Install specific widgets only
+./install_all.sh --test weather       # Install AND launch in a test window
+./install_all.sh --dry-run file-search # Preview planned actions without installing
+./install_all.sh --no-translations    # Skip .po -> .mo compilation
 ```
 
 ### Manual Installation
 
 ```bash
-cd widget-directory-name
+cd <widget-directory>
 kpackagetool6 --type Plasma/Applet --install .
 
 # To update an existing widget:
@@ -221,10 +240,11 @@ Most widgets have a rich configuration panel accessible via **Right Click → Co
 
 | Widget | Configuration Options |
 |--------|----------------------|
-| **File Search** | View Profile (Minimal/Developer/Power User), Search History |
+| **File Search** | View profile (Minimal / Developer / Power User), search history, corner radius, panel height |
+| **Weather** | Provider selection, location (manual or automatic), units, icon pack |
 | **Music Player** | Default player selection |
-| **Weather** | Provider selection, Location, Units, Icon Pack |
-| **Clocks** | Font, Size, Format options |
+| **Clocks** | Font, size, and format options |
+| **Battery** | Tracked Bluetooth devices |
 
 ---
 
@@ -250,44 +270,46 @@ journalctl --user -f -g plasmashell
 </details>
 
 <details>
-<summary><b>Missing Icons?</b></summary>
+<summary><b>Missing icons?</b></summary>
 
 Ensure you have `breeze-icon-theme` or a compatible system icon theme installed.
 </details>
 
 ---
 
-## Contribution
+## Contributing
 
 Contributions are welcome! Please follow these guidelines:
 
-1. **Localization**: Add new strings to `template.pot` or relevant `.po` files in the widget's `translations/` folder using Gettext
+1. **Localization**: Add new strings to `template.pot` or the relevant `.po` files in the widget's `translations/` folder using Gettext
 2. **Icons**: Prefer system icons over local assets
-3. **Versioning**: Update `metadata.json` version when making changes
-
----
-
-## License
-
-This project is licensed under the **GPL-3.0 License** - see the [LICENSE](./LICENSE) file for details.
+3. **Versioning**: Update the `metadata.json` version when making changes
+4. **Changelogs**: Document notable changes in the widget's file under [Changelogs/](./Changelogs/)
 
 ---
 
 ## Development Status
 
-| Widget | Status | Widget | Status |
-| :--- | :---: | :--- | :---: |
-| **Analog Clock** | Stable | **Control Center** | Planned |
-| **Calendar** | Stable | **Digital Clock** | Planned |
-| **File Search** | Stable | **Events** | Planned |
-| **Music Player** | Stable | **Minimal Analog Clock** | Planned |
-| **Weather** | Stable | **Notes** | Planned |
-| **App Menu** | WIP | **Photos** | Planned |
-| **Browser Search** | WIP | **Spotify** | Planned |
-| **Plasma Advanced Reboot** | Stable | **System Monitor** | Planned |
-| **Alarms** | Planned | **World Clock** | Planned |
-| **AUR Updates** | Planned | **MSI Control** | WIP |
-| **Battery** | WIP | **AFAD-Earthquake** | WIP |
+| Widget | Version | Status | | Widget | Version | Status |
+| :--- | :---: | :---: | --- | :--- | :---: | :---: |
+| **File Search** | 1.3.1 | Stable | | **App Menu** | 1.0 | WIP |
+| **Analog Clock** | 1.3.1 | Stable | | **MSI Control** | 1.0.0 | WIP |
+| **Music Player** | 1.2.6 | Stable | | **AFAD Earthquake** | 1.0 | WIP |
+| **Weather** | 1.2.2 | Stable | | **Dynamic Color Scheme** | 1.0 | WIP |
+| **Calendar** | 1.6 | Stable | | **Digital Clock** | 1.0 | Planned |
+| **Browser Search** | 1.1.0 | Stable | | **Notes** | 1.0 | Planned |
+| **MSelective Reboot** | 1.1 | Stable | | **System Monitor** | 1.0 | Planned |
+| **Battery** | 1.0.3 | WIP | | **Control Center** | 1.0 | Planned |
+| **Minimal Analog Clock** | 1.0 | Planned | | **World Clock** | 1.0 | Planned |
+| **Photos** | 1.0 | Planned | | **Spotify** | 1.0 | Planned |
+| **Events** | 1.0 | Planned | | **Alarms** | 1.0 | Planned |
+| **AUR Updates** | 1.0 | Planned | | | | |
+
+---
+
+## License
+
+This project is licensed under the **GPL-3.0 License** — see the [LICENSE](./LICENSE) file for details.
 
 ---
 
