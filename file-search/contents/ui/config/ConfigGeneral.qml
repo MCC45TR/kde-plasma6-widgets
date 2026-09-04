@@ -15,6 +15,14 @@ Item {
     property int initialPage: 0
     property bool showInternalNavigation: true
 
+    // Plasma may inject these generic applet-layout keys while constructing a
+    // configuration page. Accept them as compatibility sinks so opening the
+    // dialog does not generate repeated initial-property failures.
+    property bool cfg_expanding
+    property bool cfg_expandingDefault
+    property int cfg_length
+    property int cfg_lengthDefault
+
     // Weather configuration
     property string cfg_weatherProvider
     property string cfg_weatherProviderDefault

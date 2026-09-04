@@ -30,6 +30,18 @@ function createRequestController() {
 function configureRequest(xhr, finish, controller) {
     controller.requests.push(xhr)
     xhr.timeout = REQUEST_TIMEOUT_MS
+    xhr.onloadend = function () {
+        var index = controller.requests.indexOf(xhr)
+        if (index !== -1)
+            controller.requests.splice(index, 1)
+        // Break the XMLHttpRequest/closure cycle once the response has been
+        // consumed. Repeated background refreshes must not retain response
+        // bodies for the lifetime of plasmashell.
+        xhr.onreadystatechange = null
+        xhr.ontimeout = null
+        xhr.onerror = null
+        xhr.onloadend = null
+    }
     xhr.ontimeout = function () {
         if (!controller.cancelled) finish({ success: false, error: "Weather request timed out" })
     }
