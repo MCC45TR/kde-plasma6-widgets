@@ -23,6 +23,15 @@ class RuntimeLifetimeRegressions(unittest.TestCase):
             self.assertIn(key, source)
             self.assertIn(key + "Default", source)
 
+    def test_background_maintenance_tracks_real_deadlines(self):
+        source = (ROOT / "contents/ui/components/LogicController.qml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("function backgroundMaintenanceInterval()", source)
+        self.assertIn("interval: logicRoot.backgroundMaintenanceInterval()", source)
+        self.assertNotIn("id: backgroundSchedulerTimer\n\n        // One wake-up", source)
+        self.assertIn("Math.max(30000", source)
+
 
 if __name__ == "__main__":
     unittest.main()

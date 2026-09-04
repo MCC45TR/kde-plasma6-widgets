@@ -802,6 +802,41 @@ Item {
         }
     }
 
+    function backgroundMaintenanceInterval() {
+        var now = Date.now();
+        var nextDelay = Number.MAX_VALUE;
+
+        if (rssEnabled && rssSources.length > 0) {
+            for (var i = 0; i < rssSources.length; i++) {
+                var source = rssSources[i];
+                var intervalMinutes = source.syncInterval || plasmoidConfig.rssSyncInterval || 60;
+                var intervalMs = intervalMinutes * 60 * 1000;
+                var dueAt = (source.lastSync || 0) + intervalMs;
+                var failures = source.failCount || 0;
+                if (failures > 0) {
+                    var backoffMs = Math.min(intervalMs, 60000 * Math.pow(2, Math.min(failures, 5)));
+                    dueAt = Math.max(dueAt, (source.lastAttempt || 0) + backoffMs);
+                }
+                nextDelay = Math.min(nextDelay, dueAt - now);
+            }
+        }
+
+        if (plasmoidConfig.weatherEnabled) {
+            var weatherMinutes = plasmoidConfig.weatherRefreshInterval !== undefined
+                    ? plasmoidConfig.weatherRefreshInterval : 15;
+            var weatherIntervalMs = Math.max(1, weatherMinutes) * 60 * 1000;
+            var weatherDelay = weatherCacheLoaded && weatherCache
+                    ? (plasmoidConfig.weatherLastUpdate || 0) + weatherIntervalMs - now
+                    : weatherIntervalMs;
+            nextDelay = Math.min(nextDelay, weatherDelay);
+        }
+
+        // Avoid retry storms while an asynchronous RSS or weather request is
+        // still completing. There is no periodic wake-up when both features
+        // are disabled.
+        return Math.max(30000, Math.min(nextDelay, 24 * 60 * 60 * 1000));
+    }
+
     function syncSource(index) {
         var source = rssSources[index]
         if (!source || !source.url) return
@@ -1285,9 +1320,10 @@ Item {
     Timer {
         id: backgroundSchedulerTimer
 
-        // One wake-up services both RSS and weather maintenance.
-        interval: 60000
-        running: rssEnabled || !!plasmoidConfig.weatherEnabled
+        // Wake at the next real RSS/weather deadline instead of polling every
+        // minute for work that normally runs every 15 to 60 minutes.
+        interval: logicRoot.backgroundMaintenanceInterval()
+        running: (rssEnabled && rssSources.length > 0) || !!plasmoidConfig.weatherEnabled
         repeat: true
         onTriggered: {
             if (rssEnabled)
