@@ -32,6 +32,16 @@ class RuntimeLifetimeRegressions(unittest.TestCase):
         self.assertNotIn("id: backgroundSchedulerTimer\n\n        // One wake-up", source)
         self.assertIn("Math.max(30000", source)
 
+    def test_local_cache_reads_do_not_create_blocked_xhr_objects(self):
+        source = (ROOT / "contents/ui/components/LogicController.qml").read_text(
+            encoding="utf-8"
+        )
+        start = source.index("function readFullLocalFile")
+        end = source.index("function loadWeatherCache", start)
+        reader = source[start:end]
+        self.assertNotIn("new XMLHttpRequest", reader)
+        self.assertIn('var cmd = "cat " + shellEscape(path)', reader)
+
 
 if __name__ == "__main__":
     unittest.main()

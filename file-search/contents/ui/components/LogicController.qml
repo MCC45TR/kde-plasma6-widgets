@@ -651,20 +651,6 @@ Item {
         }
         var path = getSourceFilePath(url);
 
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 || xhr.status === 0) {
-                    var raw = xhr.responseText.trim();
-                    if (raw) {
-                        tryParseRaw(raw);
-                        return;
-                    }
-                }
-                readLocalTextSnippetFallback();
-            }
-        };
-
         function tryParseRaw(raw) {
             try {
                 var decodedJson = RSSManager.decodeBase64(raw);
@@ -686,23 +672,13 @@ Item {
             }
         }
 
-        function readLocalTextSnippetFallback() {
-            readFullLocalFile(path, function(content) {
-                var raw = (content || "").trim();
-                if (raw) {
-                    tryParseRaw(raw);
-                } else {
-                    callback([]);
-                }
-            });
-        }
-
-        try {
-            xhr.open("GET", "file://" + path);
-            xhr.send();
-        } catch (e) {
-            readLocalTextSnippetFallback();
-        }
+        readFullLocalFile(path, function(content) {
+            var raw = (content || "").trim();
+            if (raw)
+                tryParseRaw(raw);
+            else
+                callback([]);
+        });
     }
 
     function readFullLocalFile(filePath, callback) {
@@ -713,33 +689,14 @@ Item {
             return;
         }
 
-        // Qt can read local cache files asynchronously without spawning a
-        // process. Keep the runner fallback for environments that deny local
-        // XMLHttpRequest access.
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState !== XMLHttpRequest.DONE)
-                return;
-            if (xhr.status === 200 || xhr.status === 0) {
-                callback(xhr.responseText || "");
-                return;
-            }
-            var cmd = "cat " + shellEscape(path);
-            runExecutable(cmd, function(stdout, isFinished) {
-                if (isFinished)
-                    callback(stdout);
-            });
-        };
-        try {
-            xhr.open("GET", "file://" + path + "?t=" + Date.now());
-            xhr.send();
-        } catch (error) {
-            var cmd = "cat " + shellEscape(path);
-            runExecutable(cmd, function(stdout, isFinished) {
-                if (isFinished)
-                    callback(stdout);
-            });
-        }
+        // Local XMLHttpRequest is disabled by default in modern Qt. Use the
+        // existing asynchronous process runner directly, avoiding two failed
+        // XHR objects and their warning spam for every cache read.
+        var cmd = "cat " + shellEscape(path);
+        runExecutable(cmd, function(stdout, isFinished) {
+            if (isFinished)
+                callback(stdout);
+        });
     }
 
     function loadWeatherCache() {
